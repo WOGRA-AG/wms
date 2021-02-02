@@ -1,0 +1,464 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>CwmsObjectListViewConfiguratorDlgClass</class>
+ <widget class="QDialog" name="CwmsObjectListViewConfiguratorDlgClass">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>591</width>
+    <height>376</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Spaltenkonfigurator</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout_2">
+   <property name="leftMargin">
+    <number>3</number>
+   </property>
+   <property name="topMargin">
+    <number>3</number>
+   </property>
+   <property name="rightMargin">
+    <number>3</number>
+   </property>
+   <property name="bottomMargin">
+    <number>3</number>
+   </property>
+   <item row="0" column="0" colspan="3">
+    <widget class="QLabel" name="m_pqlArticleType">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>30</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>30</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <family>MS Shell Dlg 2</family>
+       <pointsize>15</pointsize>
+       <weight>50</weight>
+       <italic>false</italic>
+       <bold>false</bold>
+       <underline>false</underline>
+       <strikeout>false</strikeout>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(85, 170, 255, 255), stop:1 rgba(232, 232, 232, 255));</string>
+     </property>
+     <property name="text">
+      <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MS Shell Dlg 2'; font-size:15pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Darstellungskonfiguration&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+     </property>
+     <property name="wordWrap">
+      <bool>false</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="0">
+    <widget class="QGroupBox" name="groupBox_2">
+     <property name="title">
+      <string>Spaltenauswahl</string>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_2">
+      <property name="leftMargin">
+       <number>3</number>
+      </property>
+      <property name="topMargin">
+       <number>3</number>
+      </property>
+      <property name="rightMargin">
+       <number>3</number>
+      </property>
+      <property name="bottomMargin">
+       <number>3</number>
+      </property>
+      <item>
+       <widget class="QTreeWidget" name="m_pqlvColumnSource">
+        <column>
+         <property name="text">
+          <string notr="true">1</string>
+         </property>
+        </column>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="1" column="1">
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <item>
+      <spacer name="verticalSpacer">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>40</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="m_pqpbAddColumn">
+       <property name="toolTip">
+        <string>Spalte zur Darstellung hinzufÃ¼gen</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="../../../WMSadmin/resources/emresources.qrc">
+         <normaloff>:/icons/arrow-right24.png</normaloff>:/icons/arrow-right24.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>24</width>
+         <height>24</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="m_pqpbRemoveColumn">
+       <property name="toolTip">
+        <string>Spalte aus Darstellung entfernen</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="../../../WMSadmin/resources/emresources.qrc">
+         <normaloff>:/icons/arrow-left24.png</normaloff>:/icons/arrow-left24.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>24</width>
+         <height>24</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="verticalSpacer_2">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>40</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
+   </item>
+   <item row="1" column="2">
+    <widget class="QGroupBox" name="groupBox">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="title">
+      <string>Spaltendarstellung</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout">
+      <property name="leftMargin">
+       <number>3</number>
+      </property>
+      <property name="topMargin">
+       <number>3</number>
+      </property>
+      <property name="rightMargin">
+       <number>3</number>
+      </property>
+      <property name="bottomMargin">
+       <number>3</number>
+      </property>
+      <item row="1" column="0">
+       <widget class="QPushButton" name="m_pqpbUp">
+        <property name="toolTip">
+         <string>Spalte nach oben verschieben</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset resource="../../../WMSadmin/resources/emresources.qrc">
+          <normaloff>:/icons/arrow-up24.png</normaloff>:/icons/arrow-up24.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>24</width>
+          <height>24</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QPushButton" name="m_pqpbDown">
+        <property name="toolTip">
+         <string>Spalte nach unten verschieben</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset resource="../../../WMSadmin/resources/emresources.qrc">
+          <normaloff>:/icons/arrow-down24.png</normaloff>:/icons/arrow-down24.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>24</width>
+          <height>24</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="2">
+       <widget class="QPushButton" name="m_pqpbChangeName">
+        <property name="toolTip">
+         <string>Dargestellter Spaltenname Ã¤ndern</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset resource="../../../WMSadmin/resources/emresources.qrc">
+          <normaloff>:/icons/edit24.png</normaloff>:/icons/edit24.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>24</width>
+          <height>24</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="3">
+       <spacer name="horizontalSpacer_2">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item row="0" column="0" colspan="4">
+       <widget class="QTreeWidget" name="m_pqlvColumnTarget">
+        <column>
+         <property name="text">
+          <string notr="true">1</string>
+         </property>
+        </column>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="2" column="0" colspan="3">
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="m_pqpbCancel">
+       <property name="toolTip">
+        <string>Abbrechen</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="../../../WMSadmin/resources/emresources.qrc">
+         <normaloff>:/icons/cancel24.png</normaloff>:/icons/cancel24.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>24</width>
+         <height>24</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="m_pqpbOK">
+       <property name="toolTip">
+        <string>OK</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="../../../WMSadmin/resources/emresources.qrc">
+         <normaloff>:/icons/ok24.png</normaloff>:/icons/ok24.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>24</width>
+         <height>24</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources>
+  <include location="../../../WMSadmin/resources/emresources.qrc"/>
+ </resources>
+ <connections>
+  <connection>
+   <sender>m_pqpbCancel</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsObjectListViewConfiguratorDlgClass</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>459</x>
+     <y>357</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>469</x>
+     <y>450</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqpbOK</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsObjectListViewConfiguratorDlgClass</receiver>
+   <slot>accept()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>542</x>
+     <y>353</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>563</x>
+     <y>446</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqpbAddColumn</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsObjectListViewConfiguratorDlgClass</receiver>
+   <slot>AddColumnClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>299</x>
+     <y>161</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>660</x>
+     <y>130</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqpbRemoveColumn</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsObjectListViewConfiguratorDlgClass</receiver>
+   <slot>RemoveColumnClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>287</x>
+     <y>189</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>721</x>
+     <y>239</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqpbUp</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsObjectListViewConfiguratorDlgClass</receiver>
+   <slot>UpClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>372</x>
+     <y>312</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>334</x>
+     <y>426</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqpbDown</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsObjectListViewConfiguratorDlgClass</receiver>
+   <slot>DownClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>440</x>
+     <y>317</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>423</x>
+     <y>460</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqpbChangeName</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsObjectListViewConfiguratorDlgClass</receiver>
+   <slot>ChangeNameClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>519</x>
+     <y>312</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>711</x>
+     <y>310</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>AddColumnClickedSlot()</slot>
+  <slot>RemoveColumnClickedSlot()</slot>
+  <slot>ChangeNameClickedSlot()</slot>
+  <slot>UpClickedSlot()</slot>
+  <slot>DownClickedSlot()</slot>
+ </slots>
+</ui>

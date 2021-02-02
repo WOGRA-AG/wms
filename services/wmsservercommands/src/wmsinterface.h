@@ -1,0 +1,12 @@
+#ifndef BMSINTERFACE_GLOBAL_H
+#define BMSINTERFACE_GLOBAL_H
+
+#include <QtCore/qglobal.h>
+
+#ifdef BMSINTERFACE_LIB
+# define WMSINTERFACE_API Q_DECL_EXPORT
+#else
+# define WMSINTERFACE_API Q_DECL_IMPORT
+#endif //
+
+#endif // // BMSINTERFACE_GLOBAL_H

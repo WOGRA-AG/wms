@@ -1,0 +1,460 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>CwmsQueryEditorWidget</class>
+ <widget class="QWidget" name="CwmsQueryEditorWidget">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>824</width>
+    <height>523</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>WQL Editor</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout_2">
+   <property name="leftMargin">
+    <number>3</number>
+   </property>
+   <property name="topMargin">
+    <number>3</number>
+   </property>
+   <property name="rightMargin">
+    <number>3</number>
+   </property>
+   <property name="bottomMargin">
+    <number>3</number>
+   </property>
+   <item>
+    <widget class="QLabel" name="m_pqlArticleType">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>30</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>30</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <family>MS Shell Dlg 2</family>
+       <pointsize>15</pointsize>
+       <weight>50</weight>
+       <italic>false</italic>
+       <bold>false</bold>
+       <underline>false</underline>
+       <strikeout>false</strikeout>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(85, 170, 255, 255), stop:1 rgba(232, 232, 232, 255));</string>
+     </property>
+     <property name="text">
+      <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MS Shell Dlg 2'; font-size:15pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;WQL Abfrageeditor&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+     </property>
+     <property name="wordWrap">
+      <bool>false</bool>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QSplitter" name="splitter">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <widget class="QGroupBox" name="groupBox">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="title">
+       <string>WQL Editor</string>
+      </property>
+      <layout class="QGridLayout" name="gridLayout">
+       <property name="leftMargin">
+        <number>3</number>
+       </property>
+       <property name="topMargin">
+        <number>3</number>
+       </property>
+       <property name="rightMargin">
+        <number>3</number>
+       </property>
+       <property name="bottomMargin">
+        <number>3</number>
+       </property>
+       <item row="1" column="0">
+        <widget class="QPushButton" name="m_pqpbExecute">
+         <property name="toolTip">
+          <string>Execute Query (Alt + Enter)</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset resource="wmsgui.qrc">
+           <normaloff>:/icons/settings24.png</normaloff>:/icons/settings24.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>24</width>
+           <height>24</height>
+          </size>
+         </property>
+         <property name="shortcut">
+          <string>Alt+Return</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QPushButton" name="m_pqpbClearEditor">
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset resource="wmsgui.qrc">
+           <normaloff>:/icons/delete24.png</normaloff>:/icons/delete24.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>24</width>
+           <height>24</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="3">
+        <spacer name="horizontalSpacer">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="1" column="2">
+        <widget class="QPushButton" name="m_pqpbSaveWql">
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset resource="wmsgui.qrc">
+           <normaloff>:/icons/save24.png</normaloff>:/icons/save24.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>24</width>
+           <height>24</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0" colspan="4">
+        <widget class="JSEdit" name="m_pqteEditor"/>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QTabWidget" name="tabWidget">
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+      <widget class="QWidget" name="tab_2">
+       <attribute name="title">
+        <string>Ergebnis</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout_2">
+        <item row="0" column="0" colspan="4">
+         <widget class="QTreeView" name="m_pqtvResult">
+          <property name="itemsExpandable">
+           <bool>false</bool>
+          </property>
+          <property name="sortingEnabled">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="0">
+         <widget class="QPushButton" name="m_pqpbClearResult">
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset resource="wmsgui.qrc">
+            <normaloff>:/icons/delete24.png</normaloff>:/icons/delete24.png</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>24</width>
+            <height>24</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="2">
+         <widget class="QPushButton" name="m_pqpbSaveResult">
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset resource="wmsgui.qrc">
+            <normaloff>:/icons/save24.png</normaloff>:/icons/save24.png</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>24</width>
+            <height>24</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="3">
+         <spacer name="horizontalSpacer_2">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>645</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="2" column="1">
+         <widget class="QPushButton" name="m_pqpbEdit">
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset resource="wmsgui.qrc">
+            <normaloff>:/icons/EditDocument.png</normaloff>:/icons/EditDocument.png</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>24</width>
+            <height>24</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tab">
+       <attribute name="title">
+        <string>Abfrageanalyse</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout">
+        <property name="leftMargin">
+         <number>3</number>
+        </property>
+        <property name="topMargin">
+         <number>3</number>
+        </property>
+        <property name="rightMargin">
+         <number>3</number>
+        </property>
+        <property name="bottomMargin">
+         <number>3</number>
+        </property>
+        <item>
+         <widget class="QTreeWidget" name="m_pqtwQueryAnalyzer">
+          <column>
+           <property name="text">
+            <string>Abfrage</string>
+           </property>
+          </column>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QLabel" name="label">
+       <property name="text">
+        <string>Staus</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="m_pqleState">
+       <property name="readOnly">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_3">
+       <property name="text">
+        <string>Ergebnisse</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="m_pqleResultCount">
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+       <property name="readOnly">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_2">
+       <property name="text">
+        <string>Dauer</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="m_pqleDuration">
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+       <property name="readOnly">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>JSEdit</class>
+   <extends>QPlainTextEdit</extends>
+   <header location="global">jsedit.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources>
+  <include location="wmsgui.qrc"/>
+ </resources>
+ <connections>
+  <connection>
+   <sender>m_pqpbExecute</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsQueryEditorWidget</receiver>
+   <slot>ExecuteClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>45</x>
+     <y>295</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>823</x>
+     <y>175</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqpbSaveWql</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsQueryEditorWidget</receiver>
+   <slot>SaveClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>133</x>
+     <y>295</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>823</x>
+     <y>138</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqpbClearResult</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsQueryEditorWidget</receiver>
+   <slot>ClearResultClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>52</x>
+     <y>473</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>68</x>
+     <y>340</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqpbSaveResult</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsQueryEditorWidget</receiver>
+   <slot>SaveResultClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>140</x>
+     <y>473</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>154</x>
+     <y>340</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqpbEdit</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsQueryEditorWidget</receiver>
+   <slot>EditClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>81</x>
+     <y>464</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>159</x>
+     <y>690</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqtvResult</sender>
+   <signal>doubleClicked(QModelIndex)</signal>
+   <receiver>CwmsQueryEditorWidget</receiver>
+   <slot>EditClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>424</x>
+     <y>394</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>938</x>
+     <y>403</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>ExecuteClickedSlot()</slot>
+  <slot>SaveClickedSlot()</slot>
+  <slot>ClearResultClickedSlot()</slot>
+  <slot>SaveResultClickedSlot()</slot>
+  <slot>EditClickedSlot()</slot>
+ </slots>
+</ui>

@@ -1,0 +1,260 @@
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "qtopiamail", "src\libraries\qtopiamail\qtopiamail.vcproj", "{2B5D5FD7-0CB0-328C-8B8C-DD3C63F761BF}"
+	GlobalSection(Qt) = preSolution
+		Integration = True
+	EndGlobalSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "messageserver", "src\libraries\messageserver\messageserver.vcproj", "{06D3B801-2D3B-3B61-A811-0C129491BC95}"
+	GlobalSection(Qt) = preSolution
+		Integration = True
+	EndGlobalSection
+	ProjectSection(ProjectDependencies) = postProject
+		{2B5D5FD7-0CB0-328C-8B8C-DD3C63F761BF} = {2B5D5FD7-0CB0-328C-8B8C-DD3C63F761BF}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "qmfutil", "src\libraries\qmfutil\qmfutil.vcproj", "{063FDC47-41E2-39BA-BB2C-58DF0ACB70B3}"
+	GlobalSection(Qt) = preSolution
+		Integration = True
+	EndGlobalSection
+	ProjectSection(ProjectDependencies) = postProject
+		{2B5D5FD7-0CB0-328C-8B8C-DD3C63F761BF} = {2B5D5FD7-0CB0-328C-8B8C-DD3C63F761BF}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "imap", "src\plugins\messageservices\imap\imap.vcproj", "{C4329D2F-52AE-3EC1-BE53-BED9399EFE2D}"
+	GlobalSection(Qt) = preSolution
+		Integration = True
+	EndGlobalSection
+	ProjectSection(ProjectDependencies) = postProject
+		{2B5D5FD7-0CB0-328C-8B8C-DD3C63F761BF} = {2B5D5FD7-0CB0-328C-8B8C-DD3C63F761BF}
+		{06D3B801-2D3B-3B61-A811-0C129491BC95} = {06D3B801-2D3B-3B61-A811-0C129491BC95}
+		{063FDC47-41E2-39BA-BB2C-58DF0ACB70B3} = {063FDC47-41E2-39BA-BB2C-58DF0ACB70B3}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "pop", "src\plugins\messageservices\pop\pop.vcproj", "{5FB9FD22-439C-3F78-A2C1-A8102B2B3C86}"
+	GlobalSection(Qt) = preSolution
+		Integration = True
+	EndGlobalSection
+	ProjectSection(ProjectDependencies) = postProject
+		{2B5D5FD7-0CB0-328C-8B8C-DD3C63F761BF} = {2B5D5FD7-0CB0-328C-8B8C-DD3C63F761BF}
+		{06D3B801-2D3B-3B61-A811-0C129491BC95} = {06D3B801-2D3B-3B61-A811-0C129491BC95}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "smtp", "src\plugins\messageservices\smtp\smtp.vcproj", "{A1A9A7E7-52D1-3225-A682-049C7E8115AD}"
+	GlobalSection(Qt) = preSolution
+		Integration = True
+	EndGlobalSection
+	ProjectSection(ProjectDependencies) = postProject
+		{2B5D5FD7-0CB0-328C-8B8C-DD3C63F761BF} = {2B5D5FD7-0CB0-328C-8B8C-DD3C63F761BF}
+		{06D3B801-2D3B-3B61-A811-0C129491BC95} = {06D3B801-2D3B-3B61-A811-0C129491BC95}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "qtopiamailfile", "src\plugins\messageservices\qtopiamailfile\qtopiamailfile.vcproj", "{D4F3F663-F049-3C57-92F3-6E4F18CD1829}"
+	GlobalSection(Qt) = preSolution
+		Integration = True
+	EndGlobalSection
+	ProjectSection(ProjectDependencies) = postProject
+		{2B5D5FD7-0CB0-328C-8B8C-DD3C63F761BF} = {2B5D5FD7-0CB0-328C-8B8C-DD3C63F761BF}
+		{06D3B801-2D3B-3B61-A811-0C129491BC95} = {06D3B801-2D3B-3B61-A811-0C129491BC95}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "qtopiamailfilemanager", "src\plugins\contentmanagers\qtopiamailfile\qtopiamailfilemanager.vcproj", "{668158AF-3398-3F20-A607-B7DBBDF79854}"
+	GlobalSection(Qt) = preSolution
+		Integration = True
+	EndGlobalSection
+	ProjectSection(ProjectDependencies) = postProject
+		{2B5D5FD7-0CB0-328C-8B8C-DD3C63F761BF} = {2B5D5FD7-0CB0-328C-8B8C-DD3C63F761BF}
+		{06D3B801-2D3B-3B61-A811-0C129491BC95} = {06D3B801-2D3B-3B61-A811-0C129491BC95}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "genericviewer", "src\plugins\viewers\generic\genericviewer.vcproj", "{239E7926-B744-3E2C-979C-B5436B16A814}"
+	GlobalSection(Qt) = preSolution
+		Integration = True
+	EndGlobalSection
+	ProjectSection(ProjectDependencies) = postProject
+		{2B5D5FD7-0CB0-328C-8B8C-DD3C63F761BF} = {2B5D5FD7-0CB0-328C-8B8C-DD3C63F761BF}
+		{063FDC47-41E2-39BA-BB2C-58DF0ACB70B3} = {063FDC47-41E2-39BA-BB2C-58DF0ACB70B3}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "emailcomposer", "src\plugins\composers\email\emailcomposer.vcproj", "{68D81F88-0D30-35DB-A9CE-6A3F2432FE37}"
+	GlobalSection(Qt) = preSolution
+		Integration = True
+	EndGlobalSection
+	ProjectSection(ProjectDependencies) = postProject
+		{2B5D5FD7-0CB0-328C-8B8C-DD3C63F761BF} = {2B5D5FD7-0CB0-328C-8B8C-DD3C63F761BF}
+		{063FDC47-41E2-39BA-BB2C-58DF0ACB70B3} = {063FDC47-41E2-39BA-BB2C-58DF0ACB70B3}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "qtmail", "examples\applications\qtmail\qtmail.vcproj", "{4DC8925A-337A-3A15-A994-A6F8728EA719}"
+	GlobalSection(Qt) = preSolution
+		Integration = True
+	EndGlobalSection
+	ProjectSection(ProjectDependencies) = postProject
+		{2B5D5FD7-0CB0-328C-8B8C-DD3C63F761BF} = {2B5D5FD7-0CB0-328C-8B8C-DD3C63F761BF}
+		{063FDC47-41E2-39BA-BB2C-58DF0ACB70B3} = {063FDC47-41E2-39BA-BB2C-58DF0ACB70B3}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "messagingaccounts", "examples\settings\messagingaccounts\messagingaccounts.vcproj", "{1C5EF4A4-B013-3D88-B483-3417DC93DA8A}"
+	GlobalSection(Qt) = preSolution
+		Integration = True
+	EndGlobalSection
+	ProjectSection(ProjectDependencies) = postProject
+		{2B5D5FD7-0CB0-328C-8B8C-DD3C63F761BF} = {2B5D5FD7-0CB0-328C-8B8C-DD3C63F761BF}
+		{06D3B801-2D3B-3B61-A811-0C129491BC95} = {06D3B801-2D3B-3B61-A811-0C129491BC95}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "tst_python_email", "tests\tst_python_email\tst_python_email.vcproj", "{70AF3392-3150-3CBF-AC0F-68FD3B7E3974}"
+	GlobalSection(Qt) = preSolution
+		Integration = True
+	EndGlobalSection
+	ProjectSection(ProjectDependencies) = postProject
+		{2B5D5FD7-0CB0-328C-8B8C-DD3C63F761BF} = {2B5D5FD7-0CB0-328C-8B8C-DD3C63F761BF}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "tst_qmailaddress", "tests\tst_qmailaddress\tst_qmailaddress.vcproj", "{195C043D-8098-3901-917D-DEE7F9B2E279}"
+	GlobalSection(Qt) = preSolution
+		Integration = True
+	EndGlobalSection
+	ProjectSection(ProjectDependencies) = postProject
+		{2B5D5FD7-0CB0-328C-8B8C-DD3C63F761BF} = {2B5D5FD7-0CB0-328C-8B8C-DD3C63F761BF}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "tst_qmailcodec", "tests\tst_qmailcodec\tst_qmailcodec.vcproj", "{5D9F9A79-6979-3FAC-9483-57189CC06E07}"
+	GlobalSection(Qt) = preSolution
+		Integration = True
+	EndGlobalSection
+	ProjectSection(ProjectDependencies) = postProject
+		{2B5D5FD7-0CB0-328C-8B8C-DD3C63F761BF} = {2B5D5FD7-0CB0-328C-8B8C-DD3C63F761BF}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "tst_qmailmessage", "tests\tst_qmailmessage\tst_qmailmessage.vcproj", "{9C421097-1FA1-3CA5-9817-AE8E38BE8757}"
+	GlobalSection(Qt) = preSolution
+		Integration = True
+	EndGlobalSection
+	ProjectSection(ProjectDependencies) = postProject
+		{2B5D5FD7-0CB0-328C-8B8C-DD3C63F761BF} = {2B5D5FD7-0CB0-328C-8B8C-DD3C63F761BF}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "tst_qmailmessagebody", "tests\tst_qmailmessagebody\tst_qmailmessagebody.vcproj", "{2F403587-FA2D-3D2C-AF9B-2DFFD1C3A19B}"
+	GlobalSection(Qt) = preSolution
+		Integration = True
+	EndGlobalSection
+	ProjectSection(ProjectDependencies) = postProject
+		{2B5D5FD7-0CB0-328C-8B8C-DD3C63F761BF} = {2B5D5FD7-0CB0-328C-8B8C-DD3C63F761BF}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "tst_qmailmessageheader", "tests\tst_qmailmessageheader\tst_qmailmessageheader.vcproj", "{1ED66CAF-D170-343F-92DD-E0B3EA4B8AB4}"
+	GlobalSection(Qt) = preSolution
+		Integration = True
+	EndGlobalSection
+	ProjectSection(ProjectDependencies) = postProject
+		{2B5D5FD7-0CB0-328C-8B8C-DD3C63F761BF} = {2B5D5FD7-0CB0-328C-8B8C-DD3C63F761BF}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "tst_qmailmessagepart", "tests\tst_qmailmessagepart\tst_qmailmessagepart.vcproj", "{B29CD484-F37D-39C3-8444-4352A14644A3}"
+	GlobalSection(Qt) = preSolution
+		Integration = True
+	EndGlobalSection
+	ProjectSection(ProjectDependencies) = postProject
+		{2B5D5FD7-0CB0-328C-8B8C-DD3C63F761BF} = {2B5D5FD7-0CB0-328C-8B8C-DD3C63F761BF}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "tst_qmailstore", "tests\tst_qmailstore\tst_qmailstore.vcproj", "{0D21EAD8-303E-32D2-A2FE-F40397125F18}"
+	GlobalSection(Qt) = preSolution
+		Integration = True
+	EndGlobalSection
+	ProjectSection(ProjectDependencies) = postProject
+		{2B5D5FD7-0CB0-328C-8B8C-DD3C63F761BF} = {2B5D5FD7-0CB0-328C-8B8C-DD3C63F761BF}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "tst_qmailstorekeys", "tests\tst_qmailstorekeys\tst_qmailstorekeys.vcproj", "{043A8F02-AD29-3397-918D-0FB0C01BD4DE}"
+	GlobalSection(Qt) = preSolution
+		Integration = True
+	EndGlobalSection
+	ProjectSection(ProjectDependencies) = postProject
+		{2B5D5FD7-0CB0-328C-8B8C-DD3C63F761BF} = {2B5D5FD7-0CB0-328C-8B8C-DD3C63F761BF}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "tst_qprivateimplementation", "tests\tst_qprivateimplementation\tst_qprivateimplementation.vcproj", "{E7DCAC23-86B2-3095-9C6C-F317F01568FC}"
+	GlobalSection(Qt) = preSolution
+		Integration = True
+	EndGlobalSection
+	ProjectSection(ProjectDependencies) = postProject
+		{2B5D5FD7-0CB0-328C-8B8C-DD3C63F761BF} = {2B5D5FD7-0CB0-328C-8B8C-DD3C63F761BF}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "tst_longstring", "tests\tst_longstring\tst_longstring.vcproj", "{A520BFDD-0FAF-3097-8BFA-2E60A4F55CD4}"
+	GlobalSection(Qt) = preSolution
+		Integration = True
+	EndGlobalSection
+	ProjectSection(ProjectDependencies) = postProject
+		{2B5D5FD7-0CB0-328C-8B8C-DD3C63F761BF} = {2B5D5FD7-0CB0-328C-8B8C-DD3C63F761BF}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "tst_messageserver", "benchmarks\tst_messageserver\tst_messageserver.vcproj", "{5F25D9CF-4049-35FD-82B7-A353E1C88984}"
+	GlobalSection(Qt) = preSolution
+		Integration = True
+	EndGlobalSection
+	ProjectSection(ProjectDependencies) = postProject
+		{06D3B801-2D3B-3B61-A811-0C129491BC95} = {06D3B801-2D3B-3B61-A811-0C129491BC95}
+		{2B5D5FD7-0CB0-328C-8B8C-DD3C63F761BF} = {2B5D5FD7-0CB0-328C-8B8C-DD3C63F761BF}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2B5D5FD7-0CB0-328C-8B8C-DD3C63F761BF}.Debug|Win32.ActiveCfg = Debug|Win32
+		{2B5D5FD7-0CB0-328C-8B8C-DD3C63F761BF}.Debug|Win32.Build.0 = Debug|Win32
+		{06D3B801-2D3B-3B61-A811-0C129491BC95}.Debug|Win32.ActiveCfg = Debug|Win32
+		{06D3B801-2D3B-3B61-A811-0C129491BC95}.Debug|Win32.Build.0 = Debug|Win32
+		{063FDC47-41E2-39BA-BB2C-58DF0ACB70B3}.Debug|Win32.ActiveCfg = Debug|Win32
+		{063FDC47-41E2-39BA-BB2C-58DF0ACB70B3}.Debug|Win32.Build.0 = Debug|Win32
+		{C4329D2F-52AE-3EC1-BE53-BED9399EFE2D}.Debug|Win32.ActiveCfg = Debug|Win32
+		{C4329D2F-52AE-3EC1-BE53-BED9399EFE2D}.Debug|Win32.Build.0 = Debug|Win32
+		{5FB9FD22-439C-3F78-A2C1-A8102B2B3C86}.Debug|Win32.ActiveCfg = Debug|Win32
+		{5FB9FD22-439C-3F78-A2C1-A8102B2B3C86}.Debug|Win32.Build.0 = Debug|Win32
+		{A1A9A7E7-52D1-3225-A682-049C7E8115AD}.Debug|Win32.ActiveCfg = Debug|Win32
+		{A1A9A7E7-52D1-3225-A682-049C7E8115AD}.Debug|Win32.Build.0 = Debug|Win32
+		{D4F3F663-F049-3C57-92F3-6E4F18CD1829}.Debug|Win32.ActiveCfg = Debug|Win32
+		{D4F3F663-F049-3C57-92F3-6E4F18CD1829}.Debug|Win32.Build.0 = Debug|Win32
+		{668158AF-3398-3F20-A607-B7DBBDF79854}.Debug|Win32.ActiveCfg = Debug|Win32
+		{668158AF-3398-3F20-A607-B7DBBDF79854}.Debug|Win32.Build.0 = Debug|Win32
+		{239E7926-B744-3E2C-979C-B5436B16A814}.Debug|Win32.ActiveCfg = Debug|Win32
+		{239E7926-B744-3E2C-979C-B5436B16A814}.Debug|Win32.Build.0 = Debug|Win32
+		{68D81F88-0D30-35DB-A9CE-6A3F2432FE37}.Debug|Win32.ActiveCfg = Debug|Win32
+		{68D81F88-0D30-35DB-A9CE-6A3F2432FE37}.Debug|Win32.Build.0 = Debug|Win32
+		{4DC8925A-337A-3A15-A994-A6F8728EA719}.Debug|Win32.ActiveCfg = Debug|Win32
+		{4DC8925A-337A-3A15-A994-A6F8728EA719}.Debug|Win32.Build.0 = Debug|Win32
+		{1C5EF4A4-B013-3D88-B483-3417DC93DA8A}.Debug|Win32.ActiveCfg = Debug|Win32
+		{1C5EF4A4-B013-3D88-B483-3417DC93DA8A}.Debug|Win32.Build.0 = Debug|Win32
+		{70AF3392-3150-3CBF-AC0F-68FD3B7E3974}.Debug|Win32.ActiveCfg = Debug|Win32
+		{70AF3392-3150-3CBF-AC0F-68FD3B7E3974}.Debug|Win32.Build.0 = Debug|Win32
+		{195C043D-8098-3901-917D-DEE7F9B2E279}.Debug|Win32.ActiveCfg = Debug|Win32
+		{195C043D-8098-3901-917D-DEE7F9B2E279}.Debug|Win32.Build.0 = Debug|Win32
+		{5D9F9A79-6979-3FAC-9483-57189CC06E07}.Debug|Win32.ActiveCfg = Debug|Win32
+		{5D9F9A79-6979-3FAC-9483-57189CC06E07}.Debug|Win32.Build.0 = Debug|Win32
+		{9C421097-1FA1-3CA5-9817-AE8E38BE8757}.Debug|Win32.ActiveCfg = Debug|Win32
+		{9C421097-1FA1-3CA5-9817-AE8E38BE8757}.Debug|Win32.Build.0 = Debug|Win32
+		{2F403587-FA2D-3D2C-AF9B-2DFFD1C3A19B}.Debug|Win32.ActiveCfg = Debug|Win32
+		{2F403587-FA2D-3D2C-AF9B-2DFFD1C3A19B}.Debug|Win32.Build.0 = Debug|Win32
+		{1ED66CAF-D170-343F-92DD-E0B3EA4B8AB4}.Debug|Win32.ActiveCfg = Debug|Win32
+		{1ED66CAF-D170-343F-92DD-E0B3EA4B8AB4}.Debug|Win32.Build.0 = Debug|Win32
+		{B29CD484-F37D-39C3-8444-4352A14644A3}.Debug|Win32.ActiveCfg = Debug|Win32
+		{B29CD484-F37D-39C3-8444-4352A14644A3}.Debug|Win32.Build.0 = Debug|Win32
+		{0D21EAD8-303E-32D2-A2FE-F40397125F18}.Debug|Win32.ActiveCfg = Debug|Win32
+		{0D21EAD8-303E-32D2-A2FE-F40397125F18}.Debug|Win32.Build.0 = Debug|Win32
+		{043A8F02-AD29-3397-918D-0FB0C01BD4DE}.Debug|Win32.ActiveCfg = Debug|Win32
+		{043A8F02-AD29-3397-918D-0FB0C01BD4DE}.Debug|Win32.Build.0 = Debug|Win32
+		{E7DCAC23-86B2-3095-9C6C-F317F01568FC}.Debug|Win32.ActiveCfg = Debug|Win32
+		{E7DCAC23-86B2-3095-9C6C-F317F01568FC}.Debug|Win32.Build.0 = Debug|Win32
+		{A520BFDD-0FAF-3097-8BFA-2E60A4F55CD4}.Debug|Win32.ActiveCfg = Debug|Win32
+		{A520BFDD-0FAF-3097-8BFA-2E60A4F55CD4}.Debug|Win32.Build.0 = Debug|Win32
+		{5F25D9CF-4049-35FD-82B7-A353E1C88984}.Debug|Win32.ActiveCfg = Debug|Win32
+		{5F25D9CF-4049-35FD-82B7-A353E1C88984}.Debug|Win32.Build.0 = Debug|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>CwmsQmlLibraryEditorClass</class>
+ <widget class="QWidget" name="CwmsQmlLibraryEditorClass">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>660</width>
+    <height>400</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <property name="leftMargin">
+    <number>3</number>
+   </property>
+   <property name="topMargin">
+    <number>3</number>
+   </property>
+   <property name="rightMargin">
+    <number>3</number>
+   </property>
+   <property name="bottomMargin">
+    <number>3</number>
+   </property>
+   <item row="0" column="2">
+    <widget class="QLabel" name="label_2">
+     <property name="text">
+      <string>Version</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="0">
+    <widget class="QLabel" name="label">
+     <property name="text">
+      <string>Name</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="1">
+    <widget class="QLineEdit" name="m_pqleName"/>
+   </item>
+   <item row="0" column="3">
+    <widget class="QLineEdit" name="m_pqleVersion"/>
+   </item>
+   <item row="2" column="0" colspan="4">
+    <widget class="QGroupBox" name="groupBox">
+     <property name="title">
+      <string>Code</string>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout">
+      <property name="leftMargin">
+       <number>3</number>
+      </property>
+      <property name="topMargin">
+       <number>3</number>
+      </property>
+      <property name="rightMargin">
+       <number>3</number>
+      </property>
+      <property name="bottomMargin">
+       <number>3</number>
+      </property>
+      <item>
+       <widget class="JSEdit" name="m_pqteCode"/>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="3" column="0" colspan="4">
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QPushButton" name="m_pqpbOpenInExternalEditor">
+       <property name="toolTip">
+        <string>In externem Editor öffnen</string>
+       </property>
+       <property name="statusTip">
+        <string>In externem Editor öffnen</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="../../../WMSadmin/resources/emresources.qrc">
+         <normaloff>:/icons/noticetypes.png</normaloff>:/icons/noticetypes.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>24</width>
+         <height>24</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>JSEdit</class>
+   <extends>QPlainTextEdit</extends>
+   <header location="global">jsedit.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources>
+  <include location="../../../WMSadmin/resources/emresources.qrc"/>
+ </resources>
+ <connections>
+  <connection>
+   <sender>m_pqpbOpenInExternalEditor</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsQmlLibraryEditorClass</receiver>
+   <slot>OpenInExternalEditorClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>69</x>
+     <y>379</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>163</x>
+     <y>421</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>PreviewClickedSlot()</slot>
+  <slot>OpenInExternalEditorClickedSlot()</slot>
+ </slots>
+</ui>

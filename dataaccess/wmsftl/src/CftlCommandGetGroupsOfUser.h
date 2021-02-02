@@ -1,0 +1,25 @@
+#ifndef CDBCOMMANDGETGROUPSOFUSER_H
+#define CDBCOMMANDGETGROUPSOFUSER_H
+
+// Own Includes
+#include "CftlAbstractCommand.h"
+
+// Forwards
+class CftlDataAccess;
+
+class CftlCommandGetGroupsOfUser : public CftlAbstractCommand
+{
+private:
+    long m_lUserId;
+    QLinkedList<CumUserGroup*> m_qllGroups;
+
+public:
+    CftlCommandGetGroupsOfUser(long p_lUser, CftlDataAccess* p_pDataAccess);
+    virtual ~CftlCommandGetGroupsOfUser();
+    QLinkedList<CumUserGroup*> GetResult();
+protected:
+    virtual int Execute();
+    bool CheckValid();
+};
+
+#endif // CDBCOMMANDGETGROUPSOFUSER_H

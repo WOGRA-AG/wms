@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>CwmsDataSearchDlgClass</class>
+ <widget class="QDialog" name="CwmsDataSearchDlgClass">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>442</width>
+    <height>238</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Datensuche nach Containern und Objekten</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QGroupBox" name="groupBox">
+     <property name="title">
+      <string>Suche</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout">
+      <item row="0" column="0">
+       <widget class="QRadioButton" name="m_pqrbContainer">
+        <property name="text">
+         <string>Container</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QRadioButton" name="m_pqrbObject">
+        <property name="text">
+         <string>Objekt</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0" colspan="2">
+       <widget class="QGroupBox" name="groupBox_2">
+        <property name="title">
+         <string>Suchmodus</string>
+        </property>
+        <layout class="QHBoxLayout" name="horizontalLayout_2">
+         <item>
+          <widget class="QRadioButton" name="m_pqrbId">
+           <property name="text">
+            <string>ID</string>
+           </property>
+           <property name="checked">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QRadioButton" name="m_pqrbKeyname">
+           <property name="text">
+            <string>Keyname</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QRadioButton" name="m_pqrbUri">
+           <property name="text">
+            <string>URI</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QLabel" name="m_pqlContainer">
+        <property name="text">
+         <string>Container</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QLineEdit" name="m_pqleContainer"/>
+      </item>
+      <item row="3" column="0">
+       <widget class="QLabel" name="m_pqlObject">
+        <property name="text">
+         <string>Objekt</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="1">
+       <widget class="QLineEdit" name="m_pqleObject"/>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QPushButton" name="m_pqpbStartSearch">
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="../../../guilibraries/wmsgui/src/misc/wmsgui.qrc">
+         <normaloff>:/icons/Search.png</normaloff>:/icons/Search.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>24</width>
+         <height>24</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="m_pqpbCancel">
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="../../../guilibraries/wmsusermanagerlib/resources/usermanagerresources.qrc">
+         <normaloff>:/png/cancel.png</normaloff>:/png/cancel.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>24</width>
+         <height>24</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources>
+  <include location="../../../guilibraries/wmsgui/src/misc/wmsgui.qrc"/>
+  <include location="../../../guilibraries/wmsusermanagerlib/resources/usermanagerresources.qrc"/>
+ </resources>
+ <connections>
+  <connection>
+   <sender>m_pqpbCancel</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsDataSearchDlgClass</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>411</x>
+     <y>177</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>591</x>
+     <y>287</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqpbStartSearch</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsDataSearchDlgClass</receiver>
+   <slot>SearchClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>34</x>
+     <y>178</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>125</x>
+     <y>352</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqrbContainer</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsDataSearchDlgClass</receiver>
+   <slot>SearchTypeChangedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>77</x>
+     <y>51</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>163</x>
+     <y>380</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqrbObject</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsDataSearchDlgClass</receiver>
+   <slot>SearchTypeChangedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>190</x>
+     <y>46</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>568</x>
+     <y>41</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqrbKeyname</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsDataSearchDlgClass</receiver>
+   <slot>SearchModeChangedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>54</x>
+     <y>72</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>140</x>
+     <y>300</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqrbId</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsDataSearchDlgClass</receiver>
+   <slot>SearchModeChangedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>203</x>
+     <y>70</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>181</x>
+     <y>315</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqrbUri</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsDataSearchDlgClass</receiver>
+   <slot>SearchModeChangedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>346</x>
+     <y>79</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>352</x>
+     <y>321</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>SearchClickedSlot()</slot>
+  <slot>SearchTypeChangedSlot()</slot>
+  <slot>SearchModeChangedSlot()</slot>
+ </slots>
+</ui>

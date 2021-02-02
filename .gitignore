@@ -1,4 +1,5 @@
 # C++ objects and libs
+
 *.slo
 *.lo
 *.o
@@ -6,14 +7,11 @@
 *.la
 *.lai
 *.so
-*.so.*
 *.dll
 *.dylib
 
 # Qt-es
-object_script.*.Release
-object_script.*.Debug
-*_plugin_import.cpp
+
 /.qmake.cache
 /.qmake.stash
 *.pro.user
@@ -22,31 +20,55 @@ object_script.*.Debug
 *.qbs.user.*
 *.moc
 moc_*.cpp
-moc_*.h
 qrc_*.cpp
 ui_*.h
-*.qmlc
-*.jsc
 Makefile*
-*build-*
-*.qm
-*.prl
-
-# Qt unit tests
-target_wrapper.*
+*-build-*
+bin/
+*.Debug
+*.Release
 
 # QtCreator
+
 *.autosave
 
-# QtCreator Qml
+#QtCtreator Qml
 *.qmlproject.user
 *.qmlproject.user.*
+*.qmfutil
 
-# QtCreator CMake
-CMakeLists.txt.user*
+**/debug/
+**/release/
 
-# QtCreator 4.8< compilation database 
-compile_commands.json
+# CVS
+CVS
 
-# QtCreator local machine specific files for imported projects
-*creator.user*
+# Java
+*.class
+target
+*widgetsets
+*.idea
+*.iml
+.metadata
+.classpath
+.project
+.settings
+.log
+.css
+/.m2
+
+#AsciiDoc
+asciidoc-temp*.xml
+doku/src/main/asciidoc/*.pdf
+doku/src/main/asciidoc/*.html
+doku/src/main/asciidoc/*.odt
+*.stash
+*.opt
+
+#Reports
+/reports
+
+#Other
+java-wmsdb-dump.wdf
+wms/dataaccess/wmsdb/project/_src_wmsdb_qmlcache.qrc
+wms/guilibraries/wmsqml/project/_src_wmsqml_qmlcache.qrc

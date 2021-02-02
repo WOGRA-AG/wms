@@ -1,0 +1,720 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>CwmsImportSettingsDlg</class>
+ <widget class="QDialog" name="CwmsImportSettingsDlg">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>675</width>
+    <height>452</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Import</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <property name="leftMargin">
+    <number>3</number>
+   </property>
+   <property name="topMargin">
+    <number>3</number>
+   </property>
+   <property name="rightMargin">
+    <number>3</number>
+   </property>
+   <property name="bottomMargin">
+    <number>3</number>
+   </property>
+   <item row="1" column="2" colspan="2">
+    <widget class="QGroupBox" name="groupBox_4">
+     <property name="title">
+      <string>Eigenschaften der CSV Datei</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_3">
+      <property name="leftMargin">
+       <number>3</number>
+      </property>
+      <property name="topMargin">
+       <number>3</number>
+      </property>
+      <property name="rightMargin">
+       <number>3</number>
+      </property>
+      <property name="bottomMargin">
+       <number>3</number>
+      </property>
+      <item row="0" column="0">
+       <widget class="QLabel" name="textLabel1">
+        <property name="text">
+         <string>Csv Trennzeichen</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLabel" name="textLabel4">
+        <property name="text">
+         <string>Zeichenketten Trennzeichen</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLineEdit" name="m_pqleCsvSeperator">
+        <property name="text">
+         <string>;</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QLineEdit" name="m_pqleStringSeperator">
+        <property name="text">
+         <string>&quot;</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="5" column="0" colspan="4">
+    <widget class="QGroupBox" name="groupBox_2">
+     <property name="title">
+      <string>Importspaltenbeschreibung</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_2">
+      <property name="leftMargin">
+       <number>3</number>
+      </property>
+      <property name="topMargin">
+       <number>3</number>
+      </property>
+      <property name="rightMargin">
+       <number>3</number>
+      </property>
+      <property name="bottomMargin">
+       <number>3</number>
+      </property>
+      <item row="0" column="0" colspan="5">
+       <widget class="QTreeWidget" name="m_pqlvImportColumns">
+        <column>
+         <property name="text">
+          <string>Spalte</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Ignorieren</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Position Start</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Position Ende</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Update relevant</string>
+         </property>
+        </column>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QPushButton" name="m_pqpbAdd">
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset resource="wmsgui.qrc">
+          <normaloff>:/icons/new24.png</normaloff>:/icons/new24.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>24</width>
+          <height>24</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QPushButton" name="m_pqpbRemove">
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset resource="wmsgui.qrc">
+          <normaloff>:/icons/delete24.png</normaloff>:/icons/delete24.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>24</width>
+          <height>24</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="2">
+       <widget class="QPushButton" name="m_pqpbMoveUp">
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset resource="wmsgui.qrc">
+          <normaloff>:/icons/arrow-up24.png</normaloff>:/icons/arrow-up24.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>24</width>
+          <height>24</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="3">
+       <widget class="QPushButton" name="m_pqpbMoveDown">
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset resource="wmsgui.qrc">
+          <normaloff>:/icons/arrow-down24.png</normaloff>:/icons/arrow-down24.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>24</width>
+          <height>24</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="4">
+       <spacer>
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeType">
+         <enum>QSizePolicy::Expanding</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>374</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="1" column="1" rowspan="2">
+    <widget class="QGroupBox" name="groupBox_3">
+     <property name="title">
+      <string>Importmodus</string>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_2">
+      <property name="leftMargin">
+       <number>3</number>
+      </property>
+      <property name="topMargin">
+       <number>3</number>
+      </property>
+      <property name="rightMargin">
+       <number>3</number>
+      </property>
+      <property name="bottomMargin">
+       <number>3</number>
+      </property>
+      <item>
+       <widget class="QRadioButton" name="m_pqrbUpdate">
+        <property name="text">
+         <string>Aktualisieren</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QRadioButton" name="m_pqrbAppend">
+        <property name="text">
+         <string>Anhängen</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QRadioButton" name="m_pqrbOverwrite">
+        <property name="text">
+         <string>Überschreiben</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="verticalSpacer_3">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>40</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="1" column="0" rowspan="2">
+    <widget class="QGroupBox" name="groupBox">
+     <property name="title">
+      <string>Typ der Quelle</string>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout">
+      <property name="leftMargin">
+       <number>3</number>
+      </property>
+      <property name="topMargin">
+       <number>3</number>
+      </property>
+      <property name="rightMargin">
+       <number>3</number>
+      </property>
+      <property name="bottomMargin">
+       <number>3</number>
+      </property>
+      <item>
+       <widget class="QRadioButton" name="m_pqrbCsvFile">
+        <property name="text">
+         <string>CSV Datei</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QRadioButton" name="m_pqrbTextFile">
+        <property name="text">
+         <string>Textdatei mit Längenbegrenzung</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="verticalSpacer_2">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>40</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="2" column="2">
+    <widget class="QCheckBox" name="m_pqchbIgnoreFirstLine">
+     <property name="text">
+      <string>Erste Zeile ignorieren</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="3">
+    <widget class="QCheckBox" name="m_pqchbIgnoreLastLine">
+     <property name="text">
+      <string>Letzte Zeile ignorieren</string>
+     </property>
+    </widget>
+   </item>
+   <item row="6" column="0" colspan="4">
+    <layout class="QHBoxLayout">
+     <property name="spacing">
+      <number>6</number>
+     </property>
+     <property name="leftMargin">
+      <number>0</number>
+     </property>
+     <property name="topMargin">
+      <number>0</number>
+     </property>
+     <property name="rightMargin">
+      <number>0</number>
+     </property>
+     <property name="bottomMargin">
+      <number>0</number>
+     </property>
+     <item>
+      <spacer>
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Expanding</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>231</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="m_pqpbLoad">
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="wmsgui.qrc">
+         <normaloff>:/icons/OpenDocument.png</normaloff>:/icons/OpenDocument.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>24</width>
+         <height>24</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="m_pqpbSave">
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="wmsgui.qrc">
+         <normaloff>:/icons/save24.png</normaloff>:/icons/save24.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>24</width>
+         <height>24</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="m_pqpbCancel">
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="wmsgui.qrc">
+         <normaloff>:/icons/cancel24.png</normaloff>:/icons/cancel24.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>24</width>
+         <height>24</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="m_pqpbOk">
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="wmsgui.qrc">
+         <normaloff>:/icons/import24.png</normaloff>:/icons/import24.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>24</width>
+         <height>24</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="0" column="0" colspan="4">
+    <widget class="QLabel" name="m_pqlArticleType">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>30</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>30</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <family>MS Shell Dlg 2</family>
+       <pointsize>15</pointsize>
+       <weight>50</weight>
+       <italic>false</italic>
+       <bold>false</bold>
+       <underline>false</underline>
+       <strikeout>false</strikeout>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(85, 170, 255, 255), stop:1 rgba(232, 232, 232, 255));</string>
+     </property>
+     <property name="text">
+      <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MS Shell Dlg 2'; font-size:15pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Importeinstellungen&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+     </property>
+     <property name="wordWrap">
+      <bool>false</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="0" colspan="4">
+    <layout class="QHBoxLayout">
+     <property name="spacing">
+      <number>3</number>
+     </property>
+     <property name="leftMargin">
+      <number>0</number>
+     </property>
+     <property name="topMargin">
+      <number>0</number>
+     </property>
+     <property name="rightMargin">
+      <number>0</number>
+     </property>
+     <property name="bottomMargin">
+      <number>0</number>
+     </property>
+     <item>
+      <widget class="QLabel" name="textLabel2">
+       <property name="text">
+        <string>Quelldatei</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="m_pqleFilename"/>
+     </item>
+     <item>
+      <widget class="QPushButton" name="m_pqpbSelectFile">
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="wmsgui.qrc">
+         <normaloff>:/icons/search24.png</normaloff>:/icons/search24.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>24</width>
+         <height>24</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="3" column="2">
+    <widget class="QLabel" name="label">
+     <property name="text">
+      <string>Encoding</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="3">
+    <widget class="QComboBox" name="m_pqcbEncoding"/>
+   </item>
+  </layout>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources>
+  <include location="wmsgui.qrc"/>
+ </resources>
+ <connections>
+  <connection>
+   <sender>m_pqpbSelectFile</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>CwmsImportSettingsDlg</receiver>
+   <slot>ChooseSourceFileClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>670</x>
+     <y>167</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>674</x>
+     <y>100</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqpbAdd</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsImportSettingsDlg</receiver>
+   <slot>AddColumnClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>39</x>
+     <y>393</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>0</x>
+     <y>451</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqpbRemove</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsImportSettingsDlg</receiver>
+   <slot>RemoveColumnClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>84</x>
+     <y>393</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>0</x>
+     <y>425</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqpbSave</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsImportSettingsDlg</receiver>
+   <slot>SaveClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>569</x>
+     <y>436</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>53</x>
+     <y>451</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqpbLoad</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsImportSettingsDlg</receiver>
+   <slot>LoadClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>544</x>
+     <y>447</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>167</x>
+     <y>451</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqpbCancel</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsImportSettingsDlg</receiver>
+   <slot>CancelClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>628</x>
+     <y>447</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>506</x>
+     <y>451</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqpbOk</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsImportSettingsDlg</receiver>
+   <slot>OKClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>670</x>
+     <y>447</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>674</x>
+     <y>451</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqpbMoveUp</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsImportSettingsDlg</receiver>
+   <slot>MoveUpClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>126</x>
+     <y>393</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>221</x>
+     <y>451</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqpbMoveDown</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsImportSettingsDlg</receiver>
+   <slot>MoveDownClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>168</x>
+     <y>393</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>328</x>
+     <y>451</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqlvImportColumns</sender>
+   <signal>doubleClicked(QModelIndex)</signal>
+   <receiver>CwmsImportSettingsDlg</receiver>
+   <slot>RemoveColumnClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>289</x>
+     <y>264</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>318</x>
+     <y>451</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>ChooseSourceFileClickedSlot()</slot>
+  <slot>AddColumnClickedSlot()</slot>
+  <slot>RemoveColumnClickedSlot()</slot>
+  <slot>MoveColumnUpClickedSlot()</slot>
+  <slot>MoveColumnDownClickedSlot()</slot>
+  <slot>CancelClickedSlot()</slot>
+  <slot>OKClickedSlot()</slot>
+  <slot>SaveClickedSlot()</slot>
+  <slot>LoadClickedSlot()</slot>
+  <slot>MoveUpClickedSlot()</slot>
+  <slot>MoveDownClickedSlot()</slot>
+  <slot>SelectFunctionCallClickedSlot()</slot>
+  <slot>DeleteFunctionCallClickedSlot()</slot>
+ </slots>
+</ui>

@@ -1,0 +1,34 @@
+/*!
+
+\page index.html
+
+\title Messaging Framework Developer Resources
+
+\table 100%
+
+\header 
+\o Reference Documentation
+\o Using Messaging Framework 
+\o
+\row
+\o 
+\list
+   \o \l {Class Index}{Classes }
+   \o \l {Grouped Classes}{Grouped Classes}
+   \o \l {Messaging Framework Namespaces}{Namespace List}
+   \o \l {Messaging Framework Class Inheritance Hierarchy}{Class Hierarchy}
+   \o \l {Annotated Class List}{Annotated Classes }
+\endlist
+\o
+\list
+   \o \l {Messaging}{Introduction}
+   \o \l {Building and Compiling}{Building and Running}
+   \o \l {Testing the Messaging Framework}{Test Results}
+   \o \l {Changes Between Messaging Framework Versions}
+   \o \l {Messaging Framework Client Library#Examples}{Examples}
+\endlist
+ 
+\endtable 
+
+*/
+

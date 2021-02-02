@@ -1,0 +1,278 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>CwmsObjectEditorClass</class>
+ <widget class="QWidget" name="CwmsObjectEditorClass">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>970</width>
+    <height>550</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Daten bearbeiten</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <property name="leftMargin">
+    <number>3</number>
+   </property>
+   <property name="topMargin">
+    <number>3</number>
+   </property>
+   <property name="rightMargin">
+    <number>3</number>
+   </property>
+   <property name="bottomMargin">
+    <number>3</number>
+   </property>
+   <item row="0" column="0">
+    <widget class="QGroupBox" name="m_pqgbGroups">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>180</width>
+       <height>16777215</height>
+      </size>
+     </property>
+     <property name="title">
+      <string>Kategorien</string>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout">
+      <property name="leftMargin">
+       <number>3</number>
+      </property>
+      <property name="topMargin">
+       <number>3</number>
+      </property>
+      <property name="rightMargin">
+       <number>3</number>
+      </property>
+      <property name="bottomMargin">
+       <number>3</number>
+      </property>
+      <item>
+       <widget class="QListWidget" name="m_pqlwGroups"/>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="0" column="1">
+    <widget class="QFrame" name="m_pqfData">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::StyledPanel</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Raised</enum>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="0" colspan="2">
+    <layout class="QHBoxLayout" name="m_pqhbFunctions">
+     <item>
+      <widget class="QPushButton" name="m_pqpbPrint">
+       <property name="toolTip">
+        <string>Drucken die Daten</string>
+       </property>
+       <property name="statusTip">
+        <string>Drucken</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="../misc/wmsgui.qrc">
+         <normaloff>:/icons/print24.png</normaloff>:/icons/print24.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>24</width>
+         <height>24</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="m_pqpbJournal">
+       <property name="toolTip">
+        <string>Zeigt die Änderungshistorie am Datenobjekt.</string>
+       </property>
+       <property name="statusTip">
+        <string>Journal</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="../misc/wmsgui.qrc">
+         <normaloff>:/icons/print-preview.png</normaloff>:/icons/print-preview.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>24</width>
+         <height>24</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="m_pqpbReset">
+       <property name="toolTip">
+        <string>Stellt den Zustand des Objekts von der DB wieder her.</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="../misc/wmsgui.qrc">
+         <normaloff>:/icons/refresh24.png</normaloff>:/icons/refresh24.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>24</width>
+         <height>24</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="m_pqpbSave">
+       <property name="toolTip">
+        <string>Speichert die vorgenommenen Änderungen und läst das Fenster geöffnet</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="../misc/wmsgui.qrc">
+         <normaloff>:/icons/save24.png</normaloff>:/icons/save24.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>24</width>
+         <height>24</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources>
+  <include location="../misc/wmsgui.qrc"/>
+ </resources>
+ <connections>
+  <connection>
+   <sender>m_pqpbPrint</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsObjectEditorClass</receiver>
+   <slot>PrintClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>21</x>
+     <y>381</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>47</x>
+     <y>464</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqpbJournal</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsObjectEditorClass</receiver>
+   <slot>JournalClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>70</x>
+     <y>379</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>96</x>
+     <y>477</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqlwGroups</sender>
+   <signal>clicked(QModelIndex)</signal>
+   <receiver>CwmsObjectEditorClass</receiver>
+   <slot>GroupChangedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>101</x>
+     <y>148</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>287</x>
+     <y>508</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqpbReset</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsObjectEditorClass</receiver>
+   <slot>ResetClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>625</x>
+     <y>394</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>622</x>
+     <y>515</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqpbSave</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsObjectEditorClass</receiver>
+   <slot>SaveClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>672</x>
+     <y>403</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>685</x>
+     <y>545</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>PrintClickedSlot()</slot>
+  <slot>JournalClickedSlot()</slot>
+  <slot>GroupChangedSlot()</slot>
+  <slot>ResetClickedSlot()</slot>
+  <slot>SaveClickedSlot()</slot>
+ </slots>
+</ui>

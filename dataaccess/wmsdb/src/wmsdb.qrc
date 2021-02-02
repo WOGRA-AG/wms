@@ -1,0 +1,12 @@
+<RCC>
+    <qresource prefix="/wmsdbqml">
+        <file>WmsdbDataAccessPlugin.qml</file>
+        <file>WmsComboBox.qml</file>
+        <file>WmsSpinBox.qml</file>
+        <file>WmsComboBoxStyle.qml</file>
+        <file>WmsSpinBoxStyle.qml</file>
+    </qresource>
+    <qresource prefix="/icons">
+        <file>arrowdown.png</file>
+    </qresource>
+</RCC>

@@ -1,0 +1,2036 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>CwmsClassEditor</class>
+ <widget class="QWidget" name="CwmsClassEditor">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>776</width>
+    <height>572</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>WMS Klasseneditor</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout_2">
+   <property name="leftMargin">
+    <number>3</number>
+   </property>
+   <property name="topMargin">
+    <number>3</number>
+   </property>
+   <property name="rightMargin">
+    <number>3</number>
+   </property>
+   <property name="bottomMargin">
+    <number>3</number>
+   </property>
+   <item>
+    <widget class="QTabWidget" name="tabWidget">
+     <property name="currentIndex">
+      <number>0</number>
+     </property>
+     <widget class="QWidget" name="tab">
+      <attribute name="title">
+       <string>Allgemeine Klasseninformationen</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_9">
+       <property name="leftMargin">
+        <number>3</number>
+       </property>
+       <property name="topMargin">
+        <number>3</number>
+       </property>
+       <property name="rightMargin">
+        <number>3</number>
+       </property>
+       <property name="bottomMargin">
+        <number>3</number>
+       </property>
+       <item>
+        <widget class="QGroupBox" name="groupBox_6">
+         <property name="title">
+          <string>Eindeutigkeit</string>
+         </property>
+         <layout class="QHBoxLayout" name="horizontalLayout_3">
+          <property name="spacing">
+           <number>6</number>
+          </property>
+          <property name="leftMargin">
+           <number>3</number>
+          </property>
+          <property name="topMargin">
+           <number>3</number>
+          </property>
+          <property name="rightMargin">
+           <number>3</number>
+          </property>
+          <property name="bottomMargin">
+           <number>3</number>
+          </property>
+          <item>
+           <widget class="QLabel" name="textLabel3">
+            <property name="text">
+             <string>Schlüssel</string>
+            </property>
+            <property name="wordWrap">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="m_pqleKeyname">
+            <property name="readOnly">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_3">
+            <property name="text">
+             <string>Paket</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QComboBox" name="m_pqcbPackage"/>
+          </item>
+          <item>
+           <widget class="QLabel" name="textLabel1">
+            <property name="text">
+             <string>ID</string>
+            </property>
+            <property name="wordWrap">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="m_pqleId">
+            <property name="readOnly">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="groupBox_7">
+         <property name="title">
+          <string>Darstellung und änderbare Eigenschaften</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_2">
+          <property name="leftMargin">
+           <number>3</number>
+          </property>
+          <property name="topMargin">
+           <number>3</number>
+          </property>
+          <property name="bottomMargin">
+           <number>3</number>
+          </property>
+          <property name="spacing">
+           <number>6</number>
+          </property>
+          <item row="0" column="3">
+           <widget class="QCheckBox" name="m_pqchbImmutable">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="text">
+             <string>Unveränderbar</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QLineEdit" name="m_pqleCaption">
+            <property name="readOnly">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="0">
+           <widget class="QLabel" name="textLabel2">
+            <property name="text">
+             <string>Name</string>
+            </property>
+            <property name="wordWrap">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="4">
+           <widget class="QCheckBox" name="m_pqchbAbstract">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="text">
+             <string>Abstrakt</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="label_2">
+            <property name="text">
+             <string>Darstellende Membervariable</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1" colspan="4">
+           <widget class="QComboBox" name="m_pqcbCaptionMember">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="2">
+           <widget class="QCheckBox" name="m_pqchbSingleton">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="text">
+             <string>Singleton</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="groupBox_2">
+         <property name="title">
+          <string>Kommentar</string>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_6">
+          <property name="leftMargin">
+           <number>3</number>
+          </property>
+          <property name="topMargin">
+           <number>3</number>
+          </property>
+          <property name="rightMargin">
+           <number>3</number>
+          </property>
+          <property name="bottomMargin">
+           <number>3</number>
+          </property>
+          <item>
+           <widget class="QPlainTextEdit" name="m_pqteComment">
+            <property name="readOnly">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="groupBox_5">
+         <property name="title">
+          <string>Letzte Änderungen</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout">
+          <item row="0" column="0">
+           <widget class="QLabel" name="textLabel8">
+            <property name="text">
+             <string>Ersteller</string>
+            </property>
+            <property name="wordWrap">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QLabel" name="textLabel10">
+            <property name="text">
+             <string>Letzter Änderer</string>
+            </property>
+            <property name="wordWrap">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="2">
+           <widget class="QLabel" name="textLabel9">
+            <property name="text">
+             <string>Änderungsdatum</string>
+            </property>
+            <property name="wordWrap">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLineEdit" name="m_pqleCreator">
+            <property name="readOnly">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QLineEdit" name="m_pqleLastChanger">
+            <property name="readOnly">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="2">
+           <widget class="QLineEdit" name="m_pqleLastChangeDate">
+            <property name="readOnly">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="3">
+           <widget class="QLineEdit" name="m_pqleVersion">
+            <property name="readOnly">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="3">
+           <widget class="QLabel" name="label">
+            <property name="text">
+             <string>Version</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <layout class="QHBoxLayout">
+         <item>
+          <widget class="QPushButton" name="m_pqpbEdit">
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset resource="../../../guilibraries/wmsqml/src/wmsqml.qrc">
+             <normaloff>:/icons/edit24.png</normaloff>:/icons/edit24.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>24</width>
+             <height>24</height>
+            </size>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="spacer1">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeType">
+            <enum>QSizePolicy::Expanding</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>71</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QPushButton" name="m_pqpbCancel">
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset resource="../../../guilibraries/wmsqml/src/wmsqml.qrc">
+             <normaloff>:/icons/cancel24.png</normaloff>:/icons/cancel24.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>24</width>
+             <height>24</height>
+            </size>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="m_pqpbUpdate">
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset resource="../../../guilibraries/wmsqml/src/wmsqml.qrc">
+             <normaloff>:/icons/ok24.png</normaloff>:/icons/ok24.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>24</width>
+             <height>24</height>
+            </size>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab_3">
+      <attribute name="title">
+       <string>Membervariablen</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_4">
+       <property name="leftMargin">
+        <number>3</number>
+       </property>
+       <property name="topMargin">
+        <number>3</number>
+       </property>
+       <property name="rightMargin">
+        <number>3</number>
+       </property>
+       <property name="bottomMargin">
+        <number>3</number>
+       </property>
+       <item>
+        <widget class="QTreeWidget" name="m_pqlvMembers">
+         <property name="sortingEnabled">
+          <bool>true</bool>
+         </property>
+         <property name="expandsOnDoubleClick">
+          <bool>false</bool>
+         </property>
+         <column>
+          <property name="text">
+           <string>ID</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Bezeichnung</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Schlüssel</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Datentyp</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Zugriff</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Systemmember</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Standardwert</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Eigentümer</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Eindeutig</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Referenzklasse</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Kommentar</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Gruppe</string>
+          </property>
+         </column>
+        </widget>
+       </item>
+       <item>
+        <layout class="QHBoxLayout">
+         <item>
+          <widget class="QPushButton" name="m_pqpbAddMember">
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset resource="../../../guilibraries/wmsqml/src/wmsqml.qrc">
+             <normaloff>:/icons/new24.png</normaloff>:/icons/new24.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>24</width>
+             <height>24</height>
+            </size>
+           </property>
+           <property name="shortcut">
+            <string>Ctrl+N</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="m_pqpbEditMember">
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset resource="../../../guilibraries/wmsqml/src/wmsqml.qrc">
+             <normaloff>:/icons/edit24.png</normaloff>:/icons/edit24.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>24</width>
+             <height>24</height>
+            </size>
+           </property>
+           <property name="shortcut">
+            <string>Ctrl+E</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="m_pqpbDeleteMember">
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset resource="../../../guilibraries/wmsqml/src/wmsqml.qrc">
+             <normaloff>:/icons/delete24.png</normaloff>:/icons/delete24.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>24</width>
+             <height>24</height>
+            </size>
+           </property>
+           <property name="shortcut">
+            <string>Ctrl+L</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="m_pqpbSequence">
+           <property name="toolTip">
+            <string>Reihenfolge</string>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset resource="../../../guilibraries/wmsqml/src/wmsqml.qrc">
+             <normaloff>:/icons/LinkDocument.png</normaloff>:/icons/LinkDocument.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>24</width>
+             <height>24</height>
+            </size>
+           </property>
+           <property name="shortcut">
+            <string>Ctrl+R</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="spacer3">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeType">
+            <enum>QSizePolicy::Expanding</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>161</width>
+             <height>21</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab_2">
+      <attribute name="title">
+       <string>Basisklassen und Gruppen</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_5">
+       <property name="leftMargin">
+        <number>3</number>
+       </property>
+       <property name="topMargin">
+        <number>3</number>
+       </property>
+       <property name="rightMargin">
+        <number>3</number>
+       </property>
+       <property name="bottomMargin">
+        <number>3</number>
+       </property>
+       <item>
+        <widget class="QGroupBox" name="groupBox">
+         <property name="title">
+          <string>Basisklassen</string>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout">
+          <property name="leftMargin">
+           <number>3</number>
+          </property>
+          <property name="topMargin">
+           <number>3</number>
+          </property>
+          <property name="rightMargin">
+           <number>3</number>
+          </property>
+          <property name="bottomMargin">
+           <number>3</number>
+          </property>
+          <item>
+           <widget class="QListWidget" name="m_pqlbBaseClasses"/>
+          </item>
+          <item>
+           <layout class="QHBoxLayout">
+            <item>
+             <widget class="QPushButton" name="m_pqpbAddBaseClass">
+              <property name="text">
+               <string/>
+              </property>
+              <property name="icon">
+               <iconset resource="../../../guilibraries/wmsqml/src/wmsqml.qrc">
+                <normaloff>:/icons/new24.png</normaloff>:/icons/new24.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>24</width>
+                <height>24</height>
+               </size>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="m_pqpbRemoveBaseClass">
+              <property name="text">
+               <string/>
+              </property>
+              <property name="icon">
+               <iconset resource="../../../guilibraries/wmsqml/src/wmsqml.qrc">
+                <normaloff>:/icons/delete24.png</normaloff>:/icons/delete24.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>24</width>
+                <height>24</height>
+               </size>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="spacer2">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeType">
+               <enum>QSizePolicy::Expanding</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>141</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="groupBox_4">
+         <property name="title">
+          <string>Gruppen</string>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_3">
+          <property name="leftMargin">
+           <number>3</number>
+          </property>
+          <property name="topMargin">
+           <number>3</number>
+          </property>
+          <property name="rightMargin">
+           <number>3</number>
+          </property>
+          <property name="bottomMargin">
+           <number>3</number>
+          </property>
+          <item>
+           <widget class="QTreeWidget" name="m_pqtwGroups">
+            <column>
+             <property name="text">
+              <string>Position</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Name</string>
+             </property>
+            </column>
+           </widget>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout">
+            <item>
+             <widget class="QPushButton" name="m_pqpbAddGroup">
+              <property name="text">
+               <string/>
+              </property>
+              <property name="icon">
+               <iconset resource="../../../guilibraries/wmsqml/src/wmsqml.qrc">
+                <normaloff>:/icons/new.png</normaloff>:/icons/new.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>24</width>
+                <height>24</height>
+               </size>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="m_pqpbEditGroup">
+              <property name="text">
+               <string/>
+              </property>
+              <property name="icon">
+               <iconset resource="../../../guilibraries/wmsqml/src/wmsqml.qrc">
+                <normaloff>:/icons/edit24.png</normaloff>:/icons/edit24.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>24</width>
+                <height>24</height>
+               </size>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="m_pqpbDeleteGroup">
+              <property name="text">
+               <string/>
+              </property>
+              <property name="icon">
+               <iconset resource="../../../guilibraries/wmsqml/src/wmsqml.qrc">
+                <normaloff>:/icons/delete24.png</normaloff>:/icons/delete24.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>24</width>
+                <height>24</height>
+               </size>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="m_pqpbUp">
+              <property name="text">
+               <string/>
+              </property>
+              <property name="icon">
+               <iconset resource="../../../guilibraries/wmsqml/src/wmsqml.qrc">
+                <normaloff>:/icons/arrow-up24.png</normaloff>:/icons/arrow-up24.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>24</width>
+                <height>24</height>
+               </size>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="m_pqpbDown">
+              <property name="text">
+               <string/>
+              </property>
+              <property name="icon">
+               <iconset resource="../../../guilibraries/wmsqml/src/wmsqml.qrc">
+                <normaloff>:/icons/arrow-down24.png</normaloff>:/icons/arrow-down24.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>24</width>
+                <height>24</height>
+               </size>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="horizontalSpacer">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="m_pqwFunctions">
+      <attribute name="title">
+       <string>Funktionen</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_8">
+       <property name="leftMargin">
+        <number>3</number>
+       </property>
+       <property name="topMargin">
+        <number>3</number>
+       </property>
+       <property name="rightMargin">
+        <number>3</number>
+       </property>
+       <property name="bottomMargin">
+        <number>3</number>
+       </property>
+       <item>
+        <widget class="QTreeWidget" name="m_pqtwMethods">
+         <column>
+          <property name="text">
+           <string>Name</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Parameter</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Zugriff</string>
+          </property>
+         </column>
+        </widget>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_2">
+         <item>
+          <widget class="QPushButton" name="m_pqpbNewFunction">
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset resource="../../../guilibraries/wmsqml/src/wmsqml.qrc">
+             <normaloff>:/icons/new24.png</normaloff>:/icons/new24.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>24</width>
+             <height>24</height>
+            </size>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="m_pqpbEditFunction">
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset resource="../../../guilibraries/wmsqml/src/wmsqml.qrc">
+             <normaloff>:/icons/edit24.png</normaloff>:/icons/edit24.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>24</width>
+             <height>24</height>
+            </size>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="m_pqpbDeleteFunction">
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset resource="../../../guilibraries/wmsqml/src/wmsqml.qrc">
+             <normaloff>:/icons/delete24.png</normaloff>:/icons/delete24.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>24</width>
+             <height>24</height>
+            </size>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="m_pqpbExecuteFunction">
+           <property name="toolTip">
+            <string>Ausführen</string>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset resource="../../../guilibraries/wmsqml/src/wmsqml.qrc">
+             <normaloff>:/icons/settingswizard.png</normaloff>:/icons/settingswizard.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>24</width>
+             <height>24</height>
+            </size>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="m_pqpbDebugger">
+           <property name="toolTip">
+            <string>Debuggen</string>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset resource="../../../guilibraries/wmsqml/src/wmsqml.qrc">
+             <normaloff>:/icons/stats24.png</normaloff>:/icons/stats24.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>24</width>
+             <height>24</height>
+            </size>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_2">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>278</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="m_pqwValidation">
+      <attribute name="title">
+       <string>Validierungen</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_10">
+       <property name="leftMargin">
+        <number>3</number>
+       </property>
+       <property name="topMargin">
+        <number>3</number>
+       </property>
+       <property name="rightMargin">
+        <number>3</number>
+       </property>
+       <property name="bottomMargin">
+        <number>3</number>
+       </property>
+       <item>
+        <widget class="QTreeWidget" name="m_pqtwValidations">
+         <column>
+          <property name="text">
+           <string>Name</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Fehlermeldung</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Validierungsart</string>
+          </property>
+         </column>
+        </widget>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_5">
+         <item>
+          <widget class="QPushButton" name="m_pqpbNewValidation">
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset resource="../../../guilibraries/wmsqml/src/wmsqml.qrc">
+             <normaloff>:/icons/new24.png</normaloff>:/icons/new24.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>24</width>
+             <height>24</height>
+            </size>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="m_pqpbEditValidation">
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset resource="../../../guilibraries/wmsqml/src/wmsqml.qrc">
+             <normaloff>:/icons/edit24.png</normaloff>:/icons/edit24.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>24</width>
+             <height>24</height>
+            </size>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="m_pqpbDeleteValidation">
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset resource="../../../guilibraries/wmsqml/src/wmsqml.qrc">
+             <normaloff>:/icons/delete24.png</normaloff>:/icons/delete24.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>24</width>
+             <height>24</height>
+            </size>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_3">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="m_pqwEventSourcing">
+      <attribute name="title">
+       <string>EventSourcing</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_7">
+       <item>
+        <widget class="QGroupBox" name="m_pqgbEventMode">
+         <property name="title">
+          <string>Eventmode</string>
+         </property>
+         <layout class="QHBoxLayout" name="horizontalLayout_11">
+          <item>
+           <widget class="QRadioButton" name="m_pqrbDefault">
+            <property name="text">
+             <string>None</string>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QRadioButton" name="m_pqrbEventClass">
+            <property name="text">
+             <string>Event Klasse</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QRadioButton" name="m_pqrbEventSourcing">
+            <property name="text">
+             <string>Eventsourcing aktiviert</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="horizontalSpacer_5">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="m_pqgbChooseEvents">
+         <property name="title">
+          <string>Bitte Events eintragen</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_4">
+          <item row="0" column="0">
+           <widget class="QTextEdit" name="m_pqteCreateEvents">
+            <property name="documentTitle">
+             <string/>
+            </property>
+            <property name="readOnly">
+             <bool>true</bool>
+            </property>
+            <property name="placeholderText">
+             <string>Erstellen Events</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QTextEdit" name="m_pqteDeleteEvents">
+            <property name="readOnly">
+             <bool>true</bool>
+            </property>
+            <property name="placeholderText">
+             <string>Löschen Events</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="2">
+           <widget class="QTextEdit" name="m_pqteUpdateEvents">
+            <property name="readOnly">
+             <bool>true</bool>
+            </property>
+            <property name="placeholderText">
+             <string>Editieren Events</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <spacer name="verticalSpacer_3">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="m_pqgbShowEvents">
+         <property name="title">
+          <string>Darstellung der Events</string>
+         </property>
+         <property name="checkable">
+          <bool>false</bool>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_3">
+          <item row="5" column="1" colspan="3">
+           <widget class="QStackedWidget" name="m_pqswWUpdateEvent">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="currentIndex">
+             <number>0</number>
+            </property>
+            <widget class="QWidget" name="m_pqWLEUpdateEvent">
+             <layout class="QHBoxLayout" name="horizontalLayout_9">
+              <property name="spacing">
+               <number>0</number>
+              </property>
+              <property name="leftMargin">
+               <number>0</number>
+              </property>
+              <property name="topMargin">
+               <number>0</number>
+              </property>
+              <property name="rightMargin">
+               <number>0</number>
+              </property>
+              <property name="bottomMargin">
+               <number>0</number>
+              </property>
+              <item>
+               <widget class="QLineEdit" name="m_pqleUpdateEventClass">
+                <property name="enabled">
+                 <bool>true</bool>
+                </property>
+                <property name="readOnly">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+            <widget class="QWidget" name="m_pqWCBUpdateEvent">
+             <layout class="QHBoxLayout" name="horizontalLayout_10">
+              <property name="spacing">
+               <number>0</number>
+              </property>
+              <property name="leftMargin">
+               <number>0</number>
+              </property>
+              <property name="topMargin">
+               <number>0</number>
+              </property>
+              <property name="rightMargin">
+               <number>0</number>
+              </property>
+              <property name="bottomMargin">
+               <number>0</number>
+              </property>
+              <item>
+               <widget class="QComboBox" name="m_pqcbUpdateEventClass">
+                <property name="enabled">
+                 <bool>false</bool>
+                </property>
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="editable">
+                 <bool>false</bool>
+                </property>
+                <property name="maxVisibleItems">
+                 <number>20</number>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="m_pqlCreateEvents">
+            <property name="enabled">
+             <bool>true</bool>
+            </property>
+            <property name="text">
+             <string>Erzeugen Event Funktion</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="0">
+           <widget class="QLabel" name="m_pqlDeleteEvents">
+            <property name="enabled">
+             <bool>true</bool>
+            </property>
+            <property name="text">
+             <string>Löschen Event Funktion</string>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="0">
+           <widget class="QLabel" name="m_pqlUpdateEvents">
+            <property name="enabled">
+             <bool>true</bool>
+            </property>
+            <property name="text">
+             <string>Aktualisieren Event Funktion</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1" colspan="3">
+           <widget class="QStackedWidget" name="m_pqswWCreateEvent">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="currentIndex">
+             <number>0</number>
+            </property>
+            <widget class="QWidget" name="m_pqWLECreateEvent">
+             <layout class="QHBoxLayout" name="horizontalLayout_7">
+              <property name="spacing">
+               <number>0</number>
+              </property>
+              <property name="leftMargin">
+               <number>0</number>
+              </property>
+              <property name="topMargin">
+               <number>0</number>
+              </property>
+              <property name="rightMargin">
+               <number>0</number>
+              </property>
+              <property name="bottomMargin">
+               <number>0</number>
+              </property>
+              <item>
+               <widget class="QLineEdit" name="m_pqleCreateEventClass">
+                <property name="enabled">
+                 <bool>true</bool>
+                </property>
+                <property name="readOnly">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+            <widget class="QWidget" name="m_pqWCBCreateEvent">
+             <layout class="QHBoxLayout" name="horizontalLayout_8">
+              <property name="spacing">
+               <number>0</number>
+              </property>
+              <property name="leftMargin">
+               <number>0</number>
+              </property>
+              <property name="topMargin">
+               <number>0</number>
+              </property>
+              <property name="rightMargin">
+               <number>0</number>
+              </property>
+              <property name="bottomMargin">
+               <number>0</number>
+              </property>
+              <item>
+               <widget class="QComboBox" name="m_pqcbCreateEventClass">
+                <property name="enabled">
+                 <bool>false</bool>
+                </property>
+                <property name="editable">
+                 <bool>false</bool>
+                </property>
+                <property name="maxVisibleItems">
+                 <number>20</number>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </widget>
+          </item>
+          <item row="4" column="1" colspan="3">
+           <widget class="QStackedWidget" name="m_pqswWDeleteEvent">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="currentIndex">
+             <number>0</number>
+            </property>
+            <widget class="QWidget" name="m_pqWLEDeleteEvent">
+             <layout class="QVBoxLayout" name="verticalLayout_11">
+              <property name="spacing">
+               <number>0</number>
+              </property>
+              <property name="leftMargin">
+               <number>0</number>
+              </property>
+              <property name="topMargin">
+               <number>0</number>
+              </property>
+              <property name="rightMargin">
+               <number>0</number>
+              </property>
+              <property name="bottomMargin">
+               <number>0</number>
+              </property>
+              <item>
+               <widget class="QLineEdit" name="m_pqleDeleteEventClass">
+                <property name="enabled">
+                 <bool>true</bool>
+                </property>
+                <property name="readOnly">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+            <widget class="QWidget" name="m_pqWCBDeleteEvent">
+             <layout class="QHBoxLayout" name="horizontalLayout_4">
+              <property name="spacing">
+               <number>0</number>
+              </property>
+              <property name="leftMargin">
+               <number>0</number>
+              </property>
+              <property name="topMargin">
+               <number>0</number>
+              </property>
+              <property name="rightMargin">
+               <number>0</number>
+              </property>
+              <property name="bottomMargin">
+               <number>0</number>
+              </property>
+              <item>
+               <widget class="QComboBox" name="m_pqcbDeleteEventClass">
+                <property name="enabled">
+                 <bool>false</bool>
+                </property>
+                <property name="editable">
+                 <bool>false</bool>
+                </property>
+                <property name="maxVisibleItems">
+                 <number>20</number>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <spacer name="verticalSpacer">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_3">
+         <item>
+          <widget class="QPushButton" name="m_pqpbEditEvent">
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset resource="../resources/emresources.qrc">
+             <normaloff>:/icons/edit24.png</normaloff>:/icons/edit24.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>24</width>
+             <height>24</height>
+            </size>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_4">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QPushButton" name="m_pqpbCancelEvent">
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset resource="../resources/emresources.qrc">
+             <normaloff>:/icons/cancel24.png</normaloff>:/icons/cancel24.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>24</width>
+             <height>24</height>
+            </size>
+           </property>
+           <property name="checkable">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="m_pqpbUpdateEvent">
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset resource="../resources/emresources.qrc">
+             <normaloff>:/icons/ok24.png</normaloff>:/icons/ok24.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>24</width>
+             <height>24</height>
+            </size>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <pixmapfunction>qPixmapFromMimeSource</pixmapfunction>
+ <tabstops>
+  <tabstop>m_pqpbEdit</tabstop>
+  <tabstop>m_pqpbAddBaseClass</tabstop>
+  <tabstop>m_pqpbRemoveBaseClass</tabstop>
+  <tabstop>m_pqpbAddMember</tabstop>
+  <tabstop>m_pqpbEditMember</tabstop>
+  <tabstop>m_pqpbDeleteMember</tabstop>
+ </tabstops>
+ <resources>
+  <include location="../../../guilibraries/wmsqml/src/wmsqml.qrc"/>
+ </resources>
+ <connections>
+  <connection>
+   <sender>m_pqpbEditGroup</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsClassEditor</receiver>
+   <slot>EditGroupClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>90</x>
+     <y>638</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>184</x>
+     <y>434</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqpbAddGroup</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsClassEditor</receiver>
+   <slot>NewGroupClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>48</x>
+     <y>638</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>89</x>
+     <y>467</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqpbEditMember</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsClassEditor</receiver>
+   <slot>EditMemberClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>86</x>
+     <y>642</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqpbDeleteMember</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsClassEditor</receiver>
+   <slot>DeleteMemberClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>128</x>
+     <y>642</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqpbDown</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsClassEditor</receiver>
+   <slot>MoveGroupDownClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>216</x>
+     <y>638</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>393</x>
+     <y>452</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqpbNewFunction</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsClassEditor</receiver>
+   <slot>NewFunctionClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>44</x>
+     <y>642</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>39</x>
+     <y>576</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqpbDeleteGroup</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsClassEditor</receiver>
+   <slot>DeleteGroupClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>132</x>
+     <y>638</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>249</x>
+     <y>459</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqpbEditFunction</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsClassEditor</receiver>
+   <slot>EditFunctionClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>86</x>
+     <y>642</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>141</x>
+     <y>563</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqpbDeleteFunction</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsClassEditor</receiver>
+   <slot>DeleteFunctionClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>128</x>
+     <y>642</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>228</x>
+     <y>563</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqpbCancelEvent</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsClassEditor</receiver>
+   <slot>CancelEventClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>704</x>
+     <y>600</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>822</x>
+     <y>400</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqpbUp</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsClassEditor</receiver>
+   <slot>MoveGroupUpClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>174</x>
+     <y>638</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>314</x>
+     <y>443</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqtwMethods</sender>
+   <signal>doubleClicked(QModelIndex)</signal>
+   <receiver>CwmsClassEditor</receiver>
+   <slot>EditFunctionClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>101</x>
+     <y>36</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>528</x>
+     <y>582</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqtwGroups</sender>
+   <signal>doubleClicked(QModelIndex)</signal>
+   <receiver>CwmsClassEditor</receiver>
+   <slot>EditGroupClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>116</x>
+     <y>410</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>677</x>
+     <y>581</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqpbSequence</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsClassEditor</receiver>
+   <slot>SequenceClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>170</x>
+     <y>642</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>276</x>
+     <y>575</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqpbNewValidation</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsClassEditor</receiver>
+   <slot>NewValidationClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>44</x>
+     <y>642</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>-17</x>
+     <y>391</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqpbDeleteValidation</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsClassEditor</receiver>
+   <slot>DeleteValidationClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>128</x>
+     <y>642</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>825</x>
+     <y>493</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqtwValidations</sender>
+   <signal>doubleClicked(QModelIndex)</signal>
+   <receiver>CwmsClassEditor</receiver>
+   <slot>EditValidationClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>101</x>
+     <y>36</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>504</x>
+     <y>570</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqpbEditValidation</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsClassEditor</receiver>
+   <slot>EditValidationClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>86</x>
+     <y>642</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>829</x>
+     <y>132</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqpbEditEvent</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsClassEditor</receiver>
+   <slot>EditEventClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>30</x>
+     <y>607</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>-1</x>
+     <y>9</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqpbExecuteFunction</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsClassEditor</receiver>
+   <slot>ExecuteFunctionClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>170</x>
+     <y>642</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>630</x>
+     <y>591</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>tabWidget</sender>
+   <signal>currentChanged(int)</signal>
+   <receiver>CwmsClassEditor</receiver>
+   <slot>CurrentTabChangedSlot(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>545</x>
+     <y>12</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>880</x>
+     <y>17</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqpbDebugger</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsClassEditor</receiver>
+   <slot>DebugClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>212</x>
+     <y>642</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>437</x>
+     <y>597</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqpbUpdateEvent</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsClassEditor</receiver>
+   <slot>UpdateEventClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>751</x>
+     <y>603</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>775</x>
+     <y>5</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqpbRemoveBaseClass</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsClassEditor</receiver>
+   <slot>RemoveBaseClassClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>90</x>
+     <y>327</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqpbAddMember</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsClassEditor</receiver>
+   <slot>AddMemberClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>44</x>
+     <y>642</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqpbCancel</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsClassEditor</receiver>
+   <slot>CancelClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>722</x>
+     <y>642</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqpbUpdate</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsClassEditor</receiver>
+   <slot>UpdateClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>764</x>
+     <y>642</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqlvMembers</sender>
+   <signal>doubleClicked(QModelIndex)</signal>
+   <receiver>CwmsClassEditor</receiver>
+   <slot>EditMemberClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>101</x>
+     <y>36</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>428</x>
+     <y>481</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqpbEdit</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsClassEditor</receiver>
+   <slot>EditClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>44</x>
+     <y>642</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqpbAddBaseClass</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsClassEditor</receiver>
+   <slot>AddBaseClassClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>48</x>
+     <y>327</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>EditMemberClickedSlot()</slot>
+  <slot>NewGroupClickedSlot()</slot>
+  <slot>EditGroupClickedSlot()</slot>
+  <slot>DeleteGroupClickedSlot()</slot>
+  <slot>MoveGroupUpClickedSlot()</slot>
+  <slot>MoveGroupDownClickedSlot()</slot>
+  <slot>NewFunctionClickedSlot()</slot>
+  <slot>EditFunctionClickedSlot()</slot>
+  <slot>DeleteFunctionClickedSlot()</slot>
+  <slot>SequenceClickedSlot()</slot>
+  <slot>NewValidationClickedSlot()</slot>
+  <slot>EditValidationClickedSlot()</slot>
+  <slot>DeleteValidationClickedSlot()</slot>
+  <slot>ExecuteFunctionClickedSlot()</slot>
+  <slot>DebugClickedSlot()</slot>
+  <slot>CurrentTabChangedSlot(int)</slot>
+  <slot>EditEventClickedSlot()</slot>
+  <slot>UpdateEventClickedSlot()</slot>
+  <slot>CancelEventClickedSlot()</slot>
+ </slots>
+</ui>

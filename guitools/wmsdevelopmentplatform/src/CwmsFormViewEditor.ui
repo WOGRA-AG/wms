@@ -1,0 +1,395 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>CwmsFormViewEditorClass</class>
+ <widget class="QDialog" name="CwmsFormViewEditorClass">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>609</width>
+    <height>291</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Editor fÃ¼r View Objektlisten Formular</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout_3">
+   <property name="margin">
+    <number>3</number>
+   </property>
+   <item>
+    <widget class="QTabWidget" name="tabWidget">
+     <property name="currentIndex">
+      <number>0</number>
+     </property>
+     <widget class="QWidget" name="m_pqwData">
+      <attribute name="title">
+       <string>Allgemeine Daten</string>
+      </attribute>
+      <layout class="QGridLayout" name="gridLayout_2">
+       <item row="0" column="0" colspan="2">
+        <widget class="QGroupBox" name="groupBox_3">
+         <property name="title">
+          <string>Formulardaten</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout">
+          <item row="0" column="0">
+           <widget class="QLabel" name="label">
+            <property name="text">
+             <string>Name</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QLineEdit" name="m_pqleName"/>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="label_4">
+            <property name="text">
+             <string>Druckvorlage</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QLineEdit" name="m_pqlePrintingTemplate">
+            <property name="readOnly">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="2">
+           <widget class="QPushButton" name="m_pqpbPrintingTemplate">
+            <property name="text">
+             <string>Auswahl</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QGroupBox" name="groupBox">
+         <property name="title">
+          <string>Standardkonfiguration</string>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout">
+          <property name="margin">
+           <number>3</number>
+          </property>
+          <item>
+           <widget class="QCheckBox" name="m_pqchbDefault">
+            <property name="text">
+             <string>Standard</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="m_pqchbReadOnly">
+            <property name="text">
+             <string>Nur lesender Zugriff</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="m_pqchbJournal">
+            <property name="text">
+             <string>Journal Abfrage zulassen</string>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="m_pqchbPrint">
+            <property name="text">
+             <string>Drucken zulassen</string>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QGroupBox" name="groupBox_2">
+         <property name="title">
+          <string>Objektlistenkonfiguration</string>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_2">
+          <property name="margin">
+           <number>3</number>
+          </property>
+          <item>
+           <widget class="QCheckBox" name="m_pqchbExport">
+            <property name="text">
+             <string>Export zulassen</string>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="m_pqchbImport">
+            <property name="text">
+             <string>Import zulassen</string>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="m_pqchbSearch">
+            <property name="text">
+             <string>Suche zulassen</string>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item row="2" column="1">
+        <spacer name="verticalSpacer">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="m_pqwViews">
+      <attribute name="title">
+       <string>Sichten</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_5">
+       <property name="margin">
+        <number>3</number>
+       </property>
+       <item>
+        <widget class="QListWidget" name="m_pqlwViews"/>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_2">
+         <item>
+          <widget class="QPushButton" name="m_pqpbAddView">
+           <property name="text">
+            <string>HinzufÃ¼gen</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="m_pqpbRemoveView">
+           <property name="text">
+            <string>Entfernen</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="m_pqpbViewUp">
+           <property name="text">
+            <string>Hoch</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="m_pqpbViewDown">
+           <property name="text">
+            <string>Runter</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_2">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout">
+     <property name="spacing">
+      <number>6</number>
+     </property>
+     <property name="margin">
+      <number>0</number>
+     </property>
+     <item>
+      <spacer>
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>131</width>
+         <height>31</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="m_pqcbCancel">
+       <property name="text">
+        <string>Abbrechen</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="m_pqpbOk">
+       <property name="text">
+        <string>OK</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>m_pqcbCancel</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsFormViewEditorClass</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>523</x>
+     <y>282</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>179</x>
+     <y>282</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqpbOk</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsFormViewEditorClass</receiver>
+   <slot>OKClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>604</x>
+     <y>282</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>608</x>
+     <y>290</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqpbPrintingTemplate</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsFormViewEditorClass</receiver>
+   <slot>SelectPrintingTemplateClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>582</x>
+     <y>105</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>608</x>
+     <y>229</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqpbAddView</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsFormViewEditorClass</receiver>
+   <slot>AddViewClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>48</x>
+     <y>229</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>72</x>
+     <y>397</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqpbRemoveView</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsFormViewEditorClass</receiver>
+   <slot>RemoveViewClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>111</x>
+     <y>231</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>152</x>
+     <y>368</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqpbViewUp</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsFormViewEditorClass</receiver>
+   <slot>ViewUpClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>210</x>
+     <y>231</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>253</x>
+     <y>449</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqpbViewDown</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsFormViewEditorClass</receiver>
+   <slot>ViewDownClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>274</x>
+     <y>228</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>327</x>
+     <y>381</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>OKClickedSlot()</slot>
+  <slot>SelectPrintingTemplateClickedSlot()</slot>
+  <slot>AddViewClickedSlot()</slot>
+  <slot>RemoveViewClickedSlot()</slot>
+  <slot>ViewUpClickedSlot()</slot>
+  <slot>ViewDownClickedSlot()</slot>
+ </slots>
+</ui>

@@ -1,0 +1,690 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>CwmsScriptingEnvironmentClass</class>
+ <widget class="QMainWindow" name="CwmsScriptingEnvironmentClass">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1076</width>
+    <height>664</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>WMS Development Platform - Skriptumgebung</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="verticalLayout_3">
+    <property name="spacing">
+     <number>0</number>
+    </property>
+    <property name="leftMargin">
+     <number>0</number>
+    </property>
+    <property name="topMargin">
+     <number>0</number>
+    </property>
+    <property name="rightMargin">
+     <number>0</number>
+    </property>
+    <property name="bottomMargin">
+     <number>0</number>
+    </property>
+    <item>
+     <widget class="QMdiArea" name="m_pqMdi">
+      <property name="background">
+       <brush brushstyle="Dense4Pattern">
+        <color alpha="255">
+         <red>85</red>
+         <green>170</green>
+         <blue>255</blue>
+        </color>
+       </brush>
+      </property>
+      <property name="viewMode">
+       <enum>QMdiArea::TabbedView</enum>
+      </property>
+      <property name="tabsClosable">
+       <bool>true</bool>
+      </property>
+      <property name="tabsMovable">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1076</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuDatei">
+    <property name="title">
+     <string>Datei</string>
+    </property>
+    <addaction name="m_pqaNew"/>
+    <addaction name="m_pqaSave"/>
+    <addaction name="m_pqaSaveAll"/>
+    <addaction name="separator"/>
+    <addaction name="m_pqaRefresh"/>
+    <addaction name="separator"/>
+    <addaction name="m_pqaExit"/>
+   </widget>
+   <widget class="QMenu" name="menuBearbeiten">
+    <property name="title">
+     <string>Bearbeiten</string>
+    </property>
+    <addaction name="m_pqaEdit"/>
+    <addaction name="m_pqaCopy"/>
+    <addaction name="m_pqaCut"/>
+    <addaction name="m_pqaInsert"/>
+    <addaction name="m_pqaDelete"/>
+   </widget>
+   <widget class="QMenu" name="menuExtras">
+    <property name="title">
+     <string>Extras</string>
+    </property>
+    <addaction name="m_pqaExecute"/>
+    <addaction name="m_pqaDebug"/>
+   </widget>
+   <widget class="QMenu" name="m_pqmView">
+    <property name="title">
+     <string>Ansicht</string>
+    </property>
+    <addaction name="m_pqaClose"/>
+    <addaction name="m_pqaCloseAll"/>
+   </widget>
+   <addaction name="menuDatei"/>
+   <addaction name="menuBearbeiten"/>
+   <addaction name="menuExtras"/>
+   <addaction name="m_pqmView"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <widget class="QDockWidget" name="m_pqdwClasses">
+   <property name="windowTitle">
+    <string>Klassen</string>
+   </property>
+   <attribute name="dockWidgetArea">
+    <number>1</number>
+   </attribute>
+   <widget class="QWidget" name="dockWidgetContents">
+    <layout class="QVBoxLayout" name="verticalLayout_2">
+     <property name="leftMargin">
+      <number>3</number>
+     </property>
+     <property name="topMargin">
+      <number>3</number>
+     </property>
+     <property name="rightMargin">
+      <number>3</number>
+     </property>
+     <property name="bottomMargin">
+      <number>3</number>
+     </property>
+     <item>
+      <widget class="QCheckBox" name="m_pqchbShowTechnicalClasses">
+       <property name="text">
+        <string>Technische Klassen darstellen</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QTreeWidget" name="m_pqtwClasses">
+       <column>
+        <property name="text">
+         <string>Name</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>Schlüssel</string>
+        </property>
+       </column>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+  <widget class="QDockWidget" name="m_pqdwUIs">
+   <property name="windowTitle">
+    <string>Benutzeroberflächen</string>
+   </property>
+   <attribute name="dockWidgetArea">
+    <number>2</number>
+   </attribute>
+   <widget class="QWidget" name="dockWidgetContents_2">
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <property name="leftMargin">
+      <number>3</number>
+     </property>
+     <property name="topMargin">
+      <number>3</number>
+     </property>
+     <property name="rightMargin">
+      <number>3</number>
+     </property>
+     <property name="bottomMargin">
+      <number>3</number>
+     </property>
+     <item>
+      <widget class="QTreeWidget" name="m_pqtwUis">
+       <column>
+        <property name="text">
+         <string>Name</string>
+        </property>
+       </column>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+  <widget class="QToolBar" name="toolBar">
+   <property name="windowTitle">
+    <string>toolBar</string>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="m_pqaNew"/>
+   <addaction name="m_pqaSave"/>
+   <addaction name="m_pqaRefresh"/>
+   <addaction name="separator"/>
+   <addaction name="m_pqaEdit"/>
+   <addaction name="m_pqaCopy"/>
+   <addaction name="m_pqaCut"/>
+   <addaction name="m_pqaInsert"/>
+   <addaction name="separator"/>
+   <addaction name="m_pqaExecute"/>
+   <addaction name="m_pqaDebug"/>
+  </widget>
+  <action name="m_pqaSave">
+   <property name="icon">
+    <iconset resource="../resources/emresources.qrc">
+     <normaloff>:/icons/save.png</normaloff>:/icons/save.png</iconset>
+   </property>
+   <property name="text">
+    <string>Speichern</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+S</string>
+   </property>
+  </action>
+  <action name="m_pqaSaveAll">
+   <property name="icon">
+    <iconset resource="../resources/emresources.qrc">
+     <normaloff>:/icons/stockreceipt32.png</normaloff>:/icons/stockreceipt32.png</iconset>
+   </property>
+   <property name="text">
+    <string>Alles Speichern</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Shift+S</string>
+   </property>
+  </action>
+  <action name="m_pqaClose">
+   <property name="icon">
+    <iconset resource="../resources/emresources.qrc">
+     <normaloff>:/icons/close.png</normaloff>:/icons/close.png</iconset>
+   </property>
+   <property name="text">
+    <string>Schließe aktuelles Fenster</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+B</string>
+   </property>
+  </action>
+  <action name="m_pqaExit">
+   <property name="icon">
+    <iconset resource="../resources/emresources.qrc">
+     <normaloff>:/icons/exit32.png</normaloff>:/icons/exit32.png</iconset>
+   </property>
+   <property name="text">
+    <string>Beenden</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Q</string>
+   </property>
+  </action>
+  <action name="m_pqaInsert">
+   <property name="icon">
+    <iconset resource="../resources/emresources.qrc">
+     <normaloff>:/icons/insert.png</normaloff>:/icons/insert.png</iconset>
+   </property>
+   <property name="text">
+    <string>Einfügen</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+V</string>
+   </property>
+  </action>
+  <action name="m_pqaCut">
+   <property name="icon">
+    <iconset resource="../resources/emresources.qrc">
+     <normaloff>:/icons/cut.png</normaloff>:/icons/cut.png</iconset>
+   </property>
+   <property name="text">
+    <string>Ausschneiden</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+X</string>
+   </property>
+  </action>
+  <action name="m_pqaCopy">
+   <property name="icon">
+    <iconset resource="../resources/emresources.qrc">
+     <normaloff>:/icons/copy.png</normaloff>:/icons/copy.png</iconset>
+   </property>
+   <property name="text">
+    <string>Kopieren</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+C</string>
+   </property>
+  </action>
+  <action name="m_pqaNew">
+   <property name="icon">
+    <iconset resource="../resources/emresources.qrc">
+     <normaloff>:/icons/NewDocument.png</normaloff>:/icons/NewDocument.png</iconset>
+   </property>
+   <property name="text">
+    <string>Neu</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+N</string>
+   </property>
+  </action>
+  <action name="m_pqaExecute">
+   <property name="icon">
+    <iconset resource="../resources/emresources.qrc">
+     <normaloff>:/icons/task-accepted.png</normaloff>:/icons/task-accepted.png</iconset>
+   </property>
+   <property name="text">
+    <string>Ausführen</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+R</string>
+   </property>
+  </action>
+  <action name="m_pqaDebug">
+   <property name="icon">
+    <iconset resource="../resources/emresources.qrc">
+     <normaloff>:/icons/printpreview32.png</normaloff>:/icons/printpreview32.png</iconset>
+   </property>
+   <property name="text">
+    <string>Debuggen</string>
+   </property>
+   <property name="shortcut">
+    <string>F5</string>
+   </property>
+  </action>
+  <action name="m_pqaDelete">
+   <property name="icon">
+    <iconset resource="../resources/emresources.qrc">
+     <normaloff>:/icons/delete32.png</normaloff>:/icons/delete32.png</iconset>
+   </property>
+   <property name="text">
+    <string>Löschen</string>
+   </property>
+  </action>
+  <action name="m_pqaCloseAll">
+   <property name="text">
+    <string>Schließe alle Fenster</string>
+   </property>
+  </action>
+  <action name="m_pqaRefresh">
+   <property name="icon">
+    <iconset resource="../resources/emresources.qrc">
+     <normaloff>:/icons/refresh.png</normaloff>:/icons/refresh.png</iconset>
+   </property>
+   <property name="text">
+    <string>Aktualisieren</string>
+   </property>
+   <property name="shortcut">
+    <string>F5</string>
+   </property>
+  </action>
+  <action name="m_pqaEdit">
+   <property name="icon">
+    <iconset resource="../resources/emresources.qrc">
+     <normaloff>:/icons/EditDocument.png</normaloff>:/icons/EditDocument.png</iconset>
+   </property>
+   <property name="text">
+    <string>Bearbeiten</string>
+   </property>
+  </action>
+ </widget>
+ <resources>
+  <include location="../resources/emresources.qrc"/>
+ </resources>
+ <connections>
+  <connection>
+   <sender>m_pqaExit</sender>
+   <signal>triggered()</signal>
+   <receiver>CwmsScriptingEnvironmentClass</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>537</x>
+     <y>331</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqaClose</sender>
+   <signal>triggered()</signal>
+   <receiver>CwmsScriptingEnvironmentClass</receiver>
+   <slot>CloseSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>537</x>
+     <y>331</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqaCopy</sender>
+   <signal>triggered()</signal>
+   <receiver>CwmsScriptingEnvironmentClass</receiver>
+   <slot>CopySlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>537</x>
+     <y>331</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqaCut</sender>
+   <signal>triggered()</signal>
+   <receiver>CwmsScriptingEnvironmentClass</receiver>
+   <slot>CutSolt()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>537</x>
+     <y>331</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqaDebug</sender>
+   <signal>triggered()</signal>
+   <receiver>CwmsScriptingEnvironmentClass</receiver>
+   <slot>DebugSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>537</x>
+     <y>331</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqaExecute</sender>
+   <signal>triggered()</signal>
+   <receiver>CwmsScriptingEnvironmentClass</receiver>
+   <slot>ExecuteSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>537</x>
+     <y>331</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqaInsert</sender>
+   <signal>triggered()</signal>
+   <receiver>CwmsScriptingEnvironmentClass</receiver>
+   <slot>InsertSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>537</x>
+     <y>331</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqaNew</sender>
+   <signal>triggered()</signal>
+   <receiver>CwmsScriptingEnvironmentClass</receiver>
+   <slot>NewSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>537</x>
+     <y>331</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqaSave</sender>
+   <signal>triggered()</signal>
+   <receiver>CwmsScriptingEnvironmentClass</receiver>
+   <slot>SaveSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>537</x>
+     <y>331</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqaSaveAll</sender>
+   <signal>triggered()</signal>
+   <receiver>CwmsScriptingEnvironmentClass</receiver>
+   <slot>SaveAllSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>537</x>
+     <y>331</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqtwClasses</sender>
+   <signal>doubleClicked(QModelIndex)</signal>
+   <receiver>CwmsScriptingEnvironmentClass</receiver>
+   <slot>EditClicked()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>159</x>
+     <y>161</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1127</x>
+     <y>113</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqtwUis</sender>
+   <signal>doubleClicked(QModelIndex)</signal>
+   <receiver>CwmsScriptingEnvironmentClass</receiver>
+   <slot>EditClicked()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1028</x>
+     <y>444</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1154</x>
+     <y>443</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqaDelete</sender>
+   <signal>triggered()</signal>
+   <receiver>CwmsScriptingEnvironmentClass</receiver>
+   <slot>DeleteSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>537</x>
+     <y>331</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqaCloseAll</sender>
+   <signal>triggered()</signal>
+   <receiver>CwmsScriptingEnvironmentClass</receiver>
+   <slot>CloseAllSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>537</x>
+     <y>331</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqtwClasses</sender>
+   <signal>itemSelectionChanged()</signal>
+   <receiver>CwmsScriptingEnvironmentClass</receiver>
+   <slot>TreeViewSelectionChangedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>156</x>
+     <y>220</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1221</x>
+     <y>182</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqtwUis</sender>
+   <signal>itemSelectionChanged()</signal>
+   <receiver>CwmsScriptingEnvironmentClass</receiver>
+   <slot>TreeViewSelectionChangedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>991</x>
+     <y>313</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1174</x>
+     <y>287</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqaRefresh</sender>
+   <signal>triggered()</signal>
+   <receiver>CwmsScriptingEnvironmentClass</receiver>
+   <slot>RefreshSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>537</x>
+     <y>331</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqaEdit</sender>
+   <signal>triggered()</signal>
+   <receiver>CwmsScriptingEnvironmentClass</receiver>
+   <slot>EditClicked()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>537</x>
+     <y>331</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqchbShowTechnicalClasses</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsScriptingEnvironmentClass</receiver>
+   <slot>ShowTechnicalClassesChangedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>82</x>
+     <y>91</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>228</x>
+     <y>726</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>SaveSlot()</slot>
+  <slot>SaveAllSlot()</slot>
+  <slot>CloseSlot()</slot>
+  <slot>InsertSlot()</slot>
+  <slot>CopySlot()</slot>
+  <slot>CutSolt()</slot>
+  <slot>NewSlot()</slot>
+  <slot>ExecuteSlot()</slot>
+  <slot>DebugSlot()</slot>
+  <slot>EditClicked()</slot>
+  <slot>DeleteSlot()</slot>
+  <slot>CloseAllSlot()</slot>
+  <slot>TreeViewSelectionChangedSlot()</slot>
+  <slot>RefreshSlot()</slot>
+  <slot>ShowTechnicalClassesChangedSlot()</slot>
+ </slots>
+</ui>

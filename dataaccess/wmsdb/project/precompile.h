@@ -1,0 +1,56 @@
+#if defined __cplusplus
+
+#include "CdmQueryElement.h"
+#include "CdmSettings.h"
+#include <QObject>
+#include "CdmClassManager.h"
+#include "CdmValueBool.h"
+#include "CdmValueCharacterDocument.h"
+#include "CdmValueContainerRef.h"
+#include "CdmValueDate.h"
+#include "CdmValueDateTime.h"
+#include "CdmValueDictIntDouble.h"
+#include "CdmValueDictIntInt.h"
+#include "CdmValueDictIntString.h"
+#include "CdmValueDictStringDouble.h"
+#include "CdmValueDictStringInt.h"
+#include "CdmValueDictStringString.h"
+#include "CdmValueDouble.h"
+#include "CdmValueEnum.h"
+#include "CdmValueFloat.h"
+#include "CdmValueInt.h"
+#include "CdmValueListDouble.h"
+#include "CdmValueListInt.h"
+#include "CdmValueListObjects.h"
+#include "CdmValueListString.h"
+#include "CdmValueLong.h"
+#include "CdmValueObjectRef.h"
+#include "CdmValueString.h"
+#include "CdmValueTime.h"
+#include "CdmValueUserGroup.h"
+#include "CdmValueUser.h"
+#include <QDateTime>
+#include <QSqlDatabase>
+#include <qstring.h>
+#include "CdmPackage.h"
+#include "CdmValueCounter.h"
+#include <qsqlquery.h>
+#include <qvariant.h>
+#include "CdmValueBinaryDocument.h"
+#include "CdmScheme.h"
+#include "CdmValue.h"
+#include "CumUserGroup.h"
+#include "CumUser.h"
+#include "CdmDataProvider.h"
+#include "CwmsUtilities.h"
+#include "CdmObject.h"
+#include "CdmSessionManager.h"
+#include "CdmMember.h"
+#include "CdmClass.h"
+#include "CdmObjectContainer.h"
+#include <QSqlQuery>
+#include "CdmDataAccessHelper.h"
+#include "CdmLogging.h"
+#include <QLinkedList>
+
+#endif

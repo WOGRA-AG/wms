@@ -1,0 +1,433 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>CwmsRuntimeClass</class>
+ <widget class="QMainWindow" name="CwmsRuntimeClass">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>900</width>
+    <height>700</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>wmsruntime</string>
+  </property>
+  <widget class="QWidget" name="centralWidget"/>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>900</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="m_pqmFile">
+    <property name="title">
+     <string>Datei</string>
+    </property>
+    <addaction name="separator"/>
+    <addaction name="separator"/>
+    <addaction name="separator"/>
+    <addaction name="m_pqaExit"/>
+   </widget>
+   <widget class="QMenu" name="m_pqpmExtras">
+    <property name="title">
+     <string>Extras</string>
+    </property>
+    <addaction name="m_pqaClientSettings"/>
+    <addaction name="m_pqaLdapSettings"/>
+    <addaction name="m_pqaUserManager"/>
+    <addaction name="m_pqaChangePassword"/>
+    <addaction name="m_pqaPlugins"/>
+    <addaction name="separator"/>
+    <addaction name="m_pqaLanguage"/>
+    <addaction name="separator"/>
+    <addaction name="m_pqaSmtp"/>
+   </widget>
+   <widget class="QMenu" name="m_pqmHelp">
+    <property name="title">
+     <string>Hilfe</string>
+    </property>
+    <addaction name="m_pqaInfo"/>
+    <addaction name="m_pqaHelp"/>
+   </widget>
+   <addaction name="m_pqmFile"/>
+   <addaction name="m_pqpmExtras"/>
+   <addaction name="m_pqmHelp"/>
+  </widget>
+  <widget class="QStatusBar" name="statusBar"/>
+  <widget class="QToolBar" name="m_pqtbModules">
+   <property name="windowTitle">
+    <string>toolBar</string>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+  </widget>
+  <action name="m_pqaNew">
+   <property name="icon">
+    <iconset resource="wmsgui.qrc">
+     <normaloff>:/icons/new24.png</normaloff>:/icons/new24.png</iconset>
+   </property>
+   <property name="text">
+    <string>Neu</string>
+   </property>
+  </action>
+  <action name="m_pqaPrint">
+   <property name="icon">
+    <iconset resource="wmsgui.qrc">
+     <normaloff>:/icons/print.png</normaloff>:/icons/print.png</iconset>
+   </property>
+   <property name="text">
+    <string>Drucken</string>
+   </property>
+  </action>
+  <action name="m_pqaExport">
+   <property name="icon">
+    <iconset resource="wmsgui.qrc">
+     <normaloff>:/icons/export32.png</normaloff>:/icons/export32.png</iconset>
+   </property>
+   <property name="text">
+    <string>Export</string>
+   </property>
+  </action>
+  <action name="m_pqaImport">
+   <property name="icon">
+    <iconset resource="wmsgui.qrc">
+     <normaloff>:/icons/import32.png</normaloff>:/icons/import32.png</iconset>
+   </property>
+   <property name="text">
+    <string>Import</string>
+   </property>
+  </action>
+  <action name="m_pqaExit">
+   <property name="icon">
+    <iconset resource="wmsgui.qrc">
+     <normaloff>:/icons/cancel24.png</normaloff>:/icons/cancel24.png</iconset>
+   </property>
+   <property name="text">
+    <string>Beenden</string>
+   </property>
+  </action>
+  <action name="m_pqaEdit">
+   <property name="icon">
+    <iconset resource="wmsgui.qrc">
+     <normaloff>:/icons/edit24.png</normaloff>:/icons/edit24.png</iconset>
+   </property>
+   <property name="text">
+    <string>Bearbeiten</string>
+   </property>
+  </action>
+  <action name="m_pqaDelete">
+   <property name="icon">
+    <iconset resource="wmsgui.qrc">
+     <normaloff>:/icons/delete24.png</normaloff>:/icons/delete24.png</iconset>
+   </property>
+   <property name="text">
+    <string>LÃ¶schen</string>
+   </property>
+  </action>
+  <action name="m_pqaClientSettings">
+   <property name="icon">
+    <iconset resource="wmsgui.qrc">
+     <normaloff>:/icons/clientsettings.png</normaloff>:/icons/clientsettings.png</iconset>
+   </property>
+   <property name="text">
+    <string>Clienteinstellungen</string>
+   </property>
+  </action>
+  <action name="m_pqaLicenceManager">
+   <property name="icon">
+    <iconset resource="wmsgui.qrc">
+     <normaloff>:/icons/licencemanager32.png</normaloff>:/icons/licencemanager32.png</iconset>
+   </property>
+   <property name="text">
+    <string>Lizenzverwaltung</string>
+   </property>
+  </action>
+  <action name="m_pqaUserManager">
+   <property name="icon">
+    <iconset resource="wmsgui.qrc">
+     <normaloff>:/icons/usermanager24.png</normaloff>:/icons/usermanager24.png</iconset>
+   </property>
+   <property name="text">
+    <string>Benutzerverwaltung</string>
+   </property>
+  </action>
+  <action name="m_pqaInfo">
+   <property name="icon">
+    <iconset resource="wmsgui.qrc">
+     <normaloff>:/icons/about24.png</normaloff>:/icons/about24.png</iconset>
+   </property>
+   <property name="text">
+    <string>Info</string>
+   </property>
+  </action>
+  <action name="m_pqaHelp">
+   <property name="icon">
+    <iconset resource="wmsgui.qrc">
+     <normaloff>:/icons/help24.png</normaloff>:/icons/help24.png</iconset>
+   </property>
+   <property name="text">
+    <string>Hilfe</string>
+   </property>
+  </action>
+  <action name="m_pqaSearch">
+   <property name="icon">
+    <iconset resource="wmsgui.qrc">
+     <normaloff>:/icons/search24.png</normaloff>:/icons/search24.png</iconset>
+   </property>
+   <property name="text">
+    <string>Suchen</string>
+   </property>
+  </action>
+  <action name="m_pqaChangePassword">
+   <property name="icon">
+    <iconset resource="wmsgui.qrc">
+     <normaloff>:/icons/companyaddresses.png</normaloff>:/icons/companyaddresses.png</iconset>
+   </property>
+   <property name="text">
+    <string>Passwort ändern</string>
+   </property>
+  </action>
+  <action name="m_pqaLanguage">
+   <property name="icon">
+    <iconset resource="wmsgui.qrc">
+     <normaloff>:/icons/languages.png</normaloff>:/icons/languages.png</iconset>
+   </property>
+   <property name="text">
+    <string>Sprache</string>
+   </property>
+  </action>
+  <action name="m_pqaJournal">
+   <property name="icon">
+    <iconset resource="wmsgui.qrc">
+     <normaloff>:/icons/printpreview24.png</normaloff>:/icons/printpreview24.png</iconset>
+   </property>
+   <property name="text">
+    <string>Journal</string>
+   </property>
+  </action>
+  <action name="m_pqaSmtp">
+   <property name="icon">
+    <iconset resource="wmsgui.qrc">
+     <normaloff>:/icons/mail24.png</normaloff>:/icons/mail24.png</iconset>
+   </property>
+   <property name="text">
+    <string>Mail Einstellungen</string>
+   </property>
+  </action>
+  <action name="m_pqaPlugins">
+   <property name="icon">
+    <iconset resource="wmsgui.qrc">
+     <normaloff>:/icons/order-archive24.png</normaloff>:/icons/order-archive24.png</iconset>
+   </property>
+   <property name="text">
+    <string>Plugins</string>
+   </property>
+   <property name="toolTip">
+    <string>Plugins</string>
+   </property>
+  </action>
+  <action name="m_pqaLdapSettings">
+   <property name="icon">
+    <iconset resource="wmsgui.qrc">
+     <normaloff>:/icons/mainsettings.png</normaloff>:/icons/mainsettings.png</iconset>
+   </property>
+   <property name="text">
+    <string>LDAP Einstellungen</string>
+   </property>
+  </action>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources>
+  <include location="wmsgui.qrc"/>
+ </resources>
+ <connections>
+  <connection>
+   <sender>m_pqaClientSettings</sender>
+   <signal>triggered()</signal>
+   <receiver>CwmsRuntimeClass</receiver>
+   <slot>ClientSettingsSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>252</x>
+     <y>284</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqaExit</sender>
+   <signal>triggered()</signal>
+   <receiver>CwmsRuntimeClass</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>252</x>
+     <y>284</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqaHelp</sender>
+   <signal>triggered()</signal>
+   <receiver>CwmsRuntimeClass</receiver>
+   <slot>HelpSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>252</x>
+     <y>284</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqaInfo</sender>
+   <signal>triggered()</signal>
+   <receiver>CwmsRuntimeClass</receiver>
+   <slot>InfoSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>252</x>
+     <y>284</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqaUserManager</sender>
+   <signal>triggered()</signal>
+   <receiver>CwmsRuntimeClass</receiver>
+   <slot>UserManagerSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>252</x>
+     <y>284</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqaChangePassword</sender>
+   <signal>triggered()</signal>
+   <receiver>CwmsRuntimeClass</receiver>
+   <slot>ChangePasswordSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>350</x>
+     <y>284</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqaLanguage</sender>
+   <signal>triggered()</signal>
+   <receiver>CwmsRuntimeClass</receiver>
+   <slot>LanguageSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>350</x>
+     <y>284</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqaSmtp</sender>
+   <signal>triggered()</signal>
+   <receiver>CwmsRuntimeClass</receiver>
+   <slot>SmtpSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>350</x>
+     <y>284</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqaPlugins</sender>
+   <signal>triggered()</signal>
+   <receiver>CwmsRuntimeClass</receiver>
+   <slot>PluginsSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>405</x>
+     <y>284</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqaLdapSettings</sender>
+   <signal>triggered()</signal>
+   <receiver>CwmsRuntimeClass</receiver>
+   <slot>LdapSettingsSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>405</x>
+     <y>284</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>ImportSlot()</slot>
+  <slot>ExitSlot()</slot>
+  <slot>EditSlot()</slot>
+  <slot>DeleteSlot()</slot>
+  <slot>ClientSettingsSlot()</slot>
+  <slot>LicenceManagerSlot()</slot>
+  <slot>UserManagerSlot()</slot>
+  <slot>InfoSlot()</slot>
+  <slot>HelpSlot()</slot>
+  <slot>NewSlot()</slot>
+  <slot>PrintSlot()</slot>
+  <slot>ExportSlot()</slot>
+  <slot>ModuleChangedSlot()</slot>
+  <slot>ChangePasswordSlot()</slot>
+  <slot>LanguageSlot()</slot>
+  <slot>SmtpSlot()</slot>
+  <slot>PluginsSlot()</slot>
+  <slot>LdapSettingsSlot()</slot>
+ </slots>
+</ui>

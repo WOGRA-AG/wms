@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>CwmsContainerEditorDlgClass</class>
+ <widget class="QDialog" name="CwmsContainerEditorDlgClass">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>740</width>
+    <height>640</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="CwmsObjectListEditorWidgetIf" name="m_pContainerEditor" native="true">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="m_pqpbClose">
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="../../wmsusermanagerlib/resources/usermanagerresources.qrc">
+         <normaloff>:/png/cancel.png</normaloff>:/png/cancel.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>24</width>
+         <height>24</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>CwmsObjectListEditorWidgetIf</class>
+   <extends>QWidget</extends>
+   <header>CwmsObjectListEditorWidgetIf.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <resources>
+  <include location="../../wmsusermanagerlib/resources/usermanagerresources.qrc"/>
+ </resources>
+ <connections>
+  <connection>
+   <sender>m_pqpbClose</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsContainerEditorDlgClass</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>716</x>
+     <y>612</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>877</x>
+     <y>666</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

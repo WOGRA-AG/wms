@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>CwmsGroupEditorDlgClass</class>
+ <widget class="QDialog" name="CwmsGroupEditorDlgClass">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>638</width>
+    <height>298</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Gruppen bearbeiten</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <property name="leftMargin">
+    <number>3</number>
+   </property>
+   <property name="topMargin">
+    <number>3</number>
+   </property>
+   <property name="rightMargin">
+    <number>3</number>
+   </property>
+   <property name="bottomMargin">
+    <number>3</number>
+   </property>
+   <item row="0" column="0">
+    <widget class="QLabel" name="label">
+     <property name="text">
+      <string>Name</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="1">
+    <widget class="QLineEdit" name="m_pqleName"/>
+   </item>
+   <item row="1" column="0" colspan="2">
+    <widget class="QGroupBox" name="groupBox_4">
+     <property name="title">
+      <string>Übersetzungen</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_3">
+      <property name="leftMargin">
+       <number>3</number>
+      </property>
+      <property name="topMargin">
+       <number>3</number>
+      </property>
+      <property name="rightMargin">
+       <number>3</number>
+      </property>
+      <property name="bottomMargin">
+       <number>3</number>
+      </property>
+      <item row="0" column="0" colspan="4">
+       <widget class="QTreeWidget" name="m_pqtwTranslations">
+        <column>
+         <property name="text">
+          <string>Sprache</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Name</string>
+         </property>
+        </column>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QPushButton" name="m_pqpbAddTranslation">
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset resource="../resources/emresources.qrc">
+          <normaloff>:/icons/new24.png</normaloff>:/icons/new24.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>24</width>
+          <height>24</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="2">
+       <widget class="QPushButton" name="m_pqpbRemoveTransaltions">
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset resource="../resources/emresources.qrc">
+          <normaloff>:/icons/delete24.png</normaloff>:/icons/delete24.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>24</width>
+          <height>24</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="3">
+       <spacer name="horizontalSpacer_3">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>325</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item row="1" column="1">
+       <widget class="QPushButton" name="m_pqpbEditTranslation">
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset resource="../resources/emresources.qrc">
+          <normaloff>:/icons/edit24.png</normaloff>:/icons/edit24.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>24</width>
+          <height>24</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="2" column="0" colspan="2">
+    <layout class="QHBoxLayout">
+     <property name="spacing">
+      <number>6</number>
+     </property>
+     <property name="leftMargin">
+      <number>0</number>
+     </property>
+     <property name="topMargin">
+      <number>0</number>
+     </property>
+     <property name="rightMargin">
+      <number>0</number>
+     </property>
+     <property name="bottomMargin">
+      <number>0</number>
+     </property>
+     <item>
+      <widget class="QPushButton" name="m_pqpbRights">
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="../resources/emresources.qrc">
+         <normaloff>:/icons/usermanager32.png</normaloff>:/icons/usermanager32.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>24</width>
+         <height>24</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer>
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>131</width>
+         <height>31</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="m_pqpbCancel">
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="../resources/emresources.qrc">
+         <normaloff>:/icons/cancel24.png</normaloff>:/icons/cancel24.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>24</width>
+         <height>24</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="m_pqpbOk">
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="../resources/emresources.qrc">
+         <normaloff>:/icons/ok24.png</normaloff>:/icons/ok24.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>24</width>
+         <height>24</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources>
+  <include location="../resources/emresources.qrc"/>
+ </resources>
+ <connections>
+  <connection>
+   <sender>m_pqpbCancel</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsGroupEditorDlgClass</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>552</x>
+     <y>289</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>179</x>
+     <y>282</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqpbOk</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsGroupEditorDlgClass</receiver>
+   <slot>OKClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>633</x>
+     <y>289</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>418</x>
+     <y>297</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqpbRights</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsGroupEditorDlgClass</receiver>
+   <slot>RightsClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>60</x>
+     <y>281</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>64</x>
+     <y>362</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqpbAddTranslation</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsGroupEditorDlgClass</receiver>
+   <slot>AddTranslationClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>27</x>
+     <y>238</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>30</x>
+     <y>385</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqpbEditTranslation</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsGroupEditorDlgClass</receiver>
+   <slot>EditTranslationClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>119</x>
+     <y>244</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>118</x>
+     <y>374</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqpbRemoveTransaltions</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsGroupEditorDlgClass</receiver>
+   <slot>RemoveTranslationClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>215</x>
+     <y>241</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>215</x>
+     <y>362</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqtwTranslations</sender>
+   <signal>doubleClicked(QModelIndex)</signal>
+   <receiver>CwmsGroupEditorDlgClass</receiver>
+   <slot>EditTranslationClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>446</x>
+     <y>160</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>430</x>
+     <y>480</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>OKClickedSlot()</slot>
+  <slot>RightsClickedSlot()</slot>
+  <slot>AddTranslationClickedSlot()</slot>
+  <slot>EditTranslationClickedSlot()</slot>
+  <slot>RemoveTranslationClickedSlot()</slot>
+ </slots>
+</ui>

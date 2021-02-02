@@ -1,0 +1,10 @@
+<RCC>
+    <qresource prefix="/icons">
+        <file>configuration.png</file>
+        <file>EXIT.png</file>
+        <file>Logfile.png</file>
+        <file>start.png</file>
+        <file>stop.png</file>
+        <file>wmsserver.png</file>
+    </qresource>
+</RCC>

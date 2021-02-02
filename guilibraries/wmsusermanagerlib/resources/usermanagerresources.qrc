@@ -1,0 +1,19 @@
+<RCC>
+    <qresource lang="DE" prefix="/png">
+        <file>WT_Logo.png</file>
+        <file>about.png</file>
+        <file>cancel.png</file>
+        <file>change-password.png</file>
+        <file>exit.png</file>
+        <file>ok.png</file>
+        <file>user-add.png</file>
+        <file>user-delete.png</file>
+        <file>user-edit.png</file>
+        <file>user-refresh.png</file>
+        <file>usergroup-add.png</file>
+        <file>usergroup-delete.png</file>
+        <file>usergroup-edit.png</file>
+        <file>usergroup-refresh.png</file>
+        <file>WOGRAConsulting-Logo.png</file>
+    </qresource>
+</RCC>

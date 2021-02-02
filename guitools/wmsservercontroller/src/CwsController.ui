@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>CbmswsControllerClass</class>
+ <widget class="QDialog" name="CbmswsControllerClass">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>429</width>
+    <height>102</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>WOGRA Application Server</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <property name="leftMargin">
+    <number>3</number>
+   </property>
+   <property name="topMargin">
+    <number>3</number>
+   </property>
+   <property name="rightMargin">
+    <number>3</number>
+   </property>
+   <property name="bottomMargin">
+    <number>3</number>
+   </property>
+   <item row="0" column="3">
+    <widget class="QPushButton" name="m_pqpbStop">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="toolTip">
+      <string>Stops the server</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="icon">
+      <iconset resource="servercontroller.qrc">
+       <normaloff>:/icons/stop.png</normaloff>:/icons/stop.png</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>24</width>
+       <height>24</height>
+      </size>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="2">
+    <widget class="QPushButton" name="m_pqpbStart">
+     <property name="toolTip">
+      <string>Starts the server</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="icon">
+      <iconset resource="servercontroller.qrc">
+       <normaloff>:/icons/start.png</normaloff>:/icons/start.png</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>24</width>
+       <height>24</height>
+      </size>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="4">
+    <widget class="QPushButton" name="m_pqpbConfiguration">
+     <property name="toolTip">
+      <string>Opens the configuration for the server</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="icon">
+      <iconset resource="servercontroller.qrc">
+       <normaloff>:/icons/configuration.png</normaloff>:/icons/configuration.png</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>24</width>
+       <height>24</height>
+      </size>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="5">
+    <widget class="QPushButton" name="m_pqpbOpenLogfile">
+     <property name="toolTip">
+      <string>Opens the default Logfileviewer from operating system with logfile</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="icon">
+      <iconset resource="servercontroller.qrc">
+       <normaloff>:/icons/Logfile.png</normaloff>:/icons/Logfile.png</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>24</width>
+       <height>24</height>
+      </size>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="6">
+    <widget class="QPushButton" name="m_pqpbExit">
+     <property name="toolTip">
+      <string>Hides the server command bar.</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="icon">
+      <iconset resource="../../WMSadmin/resources/emresources.qrc">
+       <normaloff>:/icons/EXIT.png</normaloff>:/icons/EXIT.png</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>24</width>
+       <height>24</height>
+      </size>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="1">
+    <widget class="QPushButton" name="m_pqpbUninstall">
+     <property name="text">
+      <string/>
+     </property>
+     <property name="icon">
+      <iconset resource="../../WMSadmin/resources/emresources.qrc">
+       <normaloff>:/icons/goodsissue32.png</normaloff>:/icons/goodsissue32.png</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>24</width>
+       <height>24</height>
+      </size>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="0">
+    <widget class="QPushButton" name="m_pqpbInstall">
+     <property name="text">
+      <string/>
+     </property>
+     <property name="icon">
+      <iconset resource="../../WMSadmin/resources/emresources.qrc">
+       <normaloff>:/icons/scan.png</normaloff>:/icons/scan.png</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>24</width>
+       <height>24</height>
+      </size>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="0" colspan="7">
+    <widget class="QGroupBox" name="groupBox">
+     <property name="title">
+      <string>Status</string>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_2">
+      <property name="leftMargin">
+       <number>3</number>
+      </property>
+      <property name="topMargin">
+       <number>3</number>
+      </property>
+      <property name="rightMargin">
+       <number>3</number>
+      </property>
+      <property name="bottomMargin">
+       <number>3</number>
+      </property>
+      <item>
+       <widget class="QLineEdit" name="m_pqleState"/>
+      </item>
+     </layout>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources>
+  <include location="../../WMSadmin/resources/emresources.qrc"/>
+  <include location="servercontroller.qrc"/>
+ </resources>
+ <connections>
+  <connection>
+   <sender>m_pqpbStop</sender>
+   <signal>clicked()</signal>
+   <receiver>CbmswsControllerClass</receiver>
+   <slot>StopClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>211</x>
+     <y>34</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>150</x>
+     <y>101</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqpbStart</sender>
+   <signal>clicked()</signal>
+   <receiver>CbmswsControllerClass</receiver>
+   <slot>StartClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>157</x>
+     <y>34</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>74</x>
+     <y>101</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqpbConfiguration</sender>
+   <signal>clicked()</signal>
+   <receiver>CbmswsControllerClass</receiver>
+   <slot>ConfigurationClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>264</x>
+     <y>34</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>291</x>
+     <y>48</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqpbOpenLogfile</sender>
+   <signal>clicked()</signal>
+   <receiver>CbmswsControllerClass</receiver>
+   <slot>OpenLogFileClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>371</x>
+     <y>34</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>428</x>
+     <y>101</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqpbInstall</sender>
+   <signal>clicked()</signal>
+   <receiver>CbmswsControllerClass</receiver>
+   <slot>InstallClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>7</x>
+     <y>20</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>81</x>
+     <y>101</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqpbUninstall</sender>
+   <signal>clicked()</signal>
+   <receiver>CbmswsControllerClass</receiver>
+   <slot>UninstallClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>101</x>
+     <y>24</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>106</x>
+     <y>101</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqpbExit</sender>
+   <signal>clicked()</signal>
+   <receiver>CbmswsControllerClass</receiver>
+   <slot>QuitClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>395</x>
+     <y>17</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>568</x>
+     <y>34</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>ClearClickedSlot()</slot>
+  <slot>StartClickedSlot()</slot>
+  <slot>StopClickedSlot()</slot>
+  <slot>DescribeClickedSlot()</slot>
+  <slot>RefreshClickedSlot()</slot>
+  <slot>QuitClickedSlot()</slot>
+  <slot>DataSourceClickedSlot()</slot>
+  <slot>ErrorsClickedSlot()</slot>
+  <slot>ConfigurationClickedSlot()</slot>
+  <slot>OpenLogFileClickedSlot()</slot>
+  <slot>ServerPluginsSlot()</slot>
+  <slot>InstallClickedSlot()</slot>
+  <slot>UninstallClickedSlot()</slot>
+ </slots>
+</ui>

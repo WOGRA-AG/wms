@@ -1,0 +1,447 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>CwmsSearchWindowClass</class>
+ <widget class="QWidget" name="CwmsSearchWindowClass">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>695</width>
+    <height>519</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout_2">
+   <property name="spacing">
+    <number>3</number>
+   </property>
+   <property name="leftMargin">
+    <number>3</number>
+   </property>
+   <property name="topMargin">
+    <number>3</number>
+   </property>
+   <property name="rightMargin">
+    <number>3</number>
+   </property>
+   <property name="bottomMargin">
+    <number>3</number>
+   </property>
+   <item>
+    <widget class="QSplitter" name="splitter">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <widget class="CwmsSearchWidgetIf" name="m_pCwmsSearchWidget" native="true">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+     </widget>
+     <widget class="QGroupBox" name="groupBox_2">
+      <property name="title">
+       <string>Ergebnis</string>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <property name="leftMargin">
+        <number>3</number>
+       </property>
+       <property name="topMargin">
+        <number>3</number>
+       </property>
+       <property name="rightMargin">
+        <number>3</number>
+       </property>
+       <property name="bottomMargin">
+        <number>3</number>
+       </property>
+       <item>
+        <widget class="QTreeView" name="m_pqtvResult">
+         <property name="alternatingRowColors">
+          <bool>true</bool>
+         </property>
+         <property name="selectionMode">
+          <enum>QAbstractItemView::ExtendedSelection</enum>
+         </property>
+         <property name="rootIsDecorated">
+          <bool>false</bool>
+         </property>
+         <property name="itemsExpandable">
+          <bool>false</bool>
+         </property>
+         <property name="sortingEnabled">
+          <bool>true</bool>
+         </property>
+         <property name="expandsOnDoubleClick">
+          <bool>false</bool>
+         </property>
+         <attribute name="headerShowSortIndicator" stdset="0">
+          <bool>true</bool>
+         </attribute>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QPushButton" name="m_pqpbNew">
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="wmsgui.qrc">
+         <normaloff>:/icons/new24.png</normaloff>:/icons/new24.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>24</width>
+         <height>24</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="m_pqpbEdit">
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="wmsgui.qrc">
+         <normaloff>:/icons/edit24.png</normaloff>:/icons/edit24.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>24</width>
+         <height>24</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="m_pqpbDelete">
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="wmsgui.qrc">
+         <normaloff>:/icons/delete32.png</normaloff>:/icons/delete32.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>24</width>
+         <height>24</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="m_pqpbCopy">
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="wmsgui.qrc">
+         <normaloff>:/icons/copy24.png</normaloff>:/icons/copy24.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>24</width>
+         <height>24</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="m_pqpbPrint">
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="wmsgui.qrc">
+         <normaloff>:/icons/print24.png</normaloff>:/icons/print24.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>24</width>
+         <height>24</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="m_pqpbExport">
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="wmsgui.qrc">
+         <normaloff>:/icons/export24.png</normaloff>:/icons/export24.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>24</width>
+         <height>24</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="m_pqpbImport">
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="wmsgui.qrc">
+         <normaloff>:/icons/import24.png</normaloff>:/icons/import24.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>24</width>
+         <height>24</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="m_pqpbSaveAsCsv">
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="wmsgui.qrc">
+         <normaloff>:/icons/save24.png</normaloff>:/icons/save24.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>24</width>
+         <height>24</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer>
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>131</width>
+         <height>31</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QLabel" name="label">
+       <property name="text">
+        <string>Dauer</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="m_pqleDuration">
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+       <property name="readOnly">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_2">
+       <property name="text">
+        <string>Ergebnisse</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="m_pqleResultCount">
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+       <property name="readOnly">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>CwmsSearchWidgetIf</class>
+   <extends>QWidget</extends>
+   <header location="global">CwmsSearchWidgetIf.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <resources>
+  <include location="wmsgui.qrc"/>
+ </resources>
+ <connections>
+  <connection>
+   <sender>m_pqpbEdit</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsSearchWindowClass</receiver>
+   <slot>EditClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>120</x>
+     <y>514</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>98</x>
+     <y>594</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqtvResult</sender>
+   <signal>doubleClicked(QModelIndex)</signal>
+   <receiver>CwmsSearchWindowClass</receiver>
+   <slot>EditClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>117</x>
+     <y>357</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>270</x>
+     <y>608</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqpbPrint</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsSearchWindowClass</receiver>
+   <slot>PrintClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>285</x>
+     <y>514</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>148</x>
+     <y>558</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqpbExport</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsSearchWindowClass</receiver>
+   <slot>ExportClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>327</x>
+     <y>514</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>237</x>
+     <y>562</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqpbImport</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsSearchWindowClass</receiver>
+   <slot>ImportClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>369</x>
+     <y>514</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>746</x>
+     <y>501</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqpbDelete</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsSearchWindowClass</receiver>
+   <slot>DeleteClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>162</x>
+     <y>514</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>73</x>
+     <y>702</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqpbNew</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsSearchWindowClass</receiver>
+   <slot>NewClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>50</x>
+     <y>497</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>76</x>
+     <y>566</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqpbCopy</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsSearchWindowClass</receiver>
+   <slot>CopyClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>200</x>
+     <y>499</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>219</x>
+     <y>574</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqpbSaveAsCsv</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsSearchWindowClass</receiver>
+   <slot>SaveAsCsvClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>430</x>
+     <y>506</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>482</x>
+     <y>584</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>EditClickedSlot()</slot>
+  <slot>PrintClickedSlot()</slot>
+  <slot>ExportClickedSlot()</slot>
+  <slot>ImportClickedSlot()</slot>
+  <slot>DeleteClickedSlot()</slot>
+  <slot>NewClickedSlot()</slot>
+  <slot>CopyClickedSlot()</slot>
+  <slot>SaveAsCsvClickedSlot()</slot>
+ </slots>
+</ui>

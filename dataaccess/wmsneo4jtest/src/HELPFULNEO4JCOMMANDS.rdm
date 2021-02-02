@@ -1,0 +1,153 @@
+MATCH (ol:WMS_DM_OBJECTLIST)-[:hasObjects]->(o:WMS_DM_OBJECT)-[:Object_value]->(v:WMS_VALUE) WHERE id(ol)=3881 AND id(o)=3883 WITH ol,v,o
+MATCH (m:WMS_CLASS_MEMBER)<-[:WMS_Member]-(c:Class)-[:hasObjectContainer]->(ol) WITH o,v,m
+
+MATCH (m:WMS_CLASS_MEMBER)-[:member_to_value]->(v:WMS_VALUE) WHERE (v)-[:objectRefValue]->()-[:Object_value]->(:WMS_VALUE{val:'0'})<-[:member_to_value]-(WMS_CLASS_MEMBER {Keyname:'a'}) RETURN m.Keyname,p.val
+
+
+qstrQuery = QString("MATCH (rcm {Keyname:'Hersteller'})-[:member_to_value]->(rwv{val:'Fiat'})<-[:Object_value]-(:WMS_DM_OBJECT)<-[:objectRefValue]-(:WMS_VALUE)<-[:Object_value]-(o:WMS_DM_OBJECT) RETURN ro,o;";
+   
+
+MATCH (c:Class)-[:WMS_Member]->(:WMS_CLASS_MEMBER)-[:member_to_value]->(:WMS_VALUE)-[:objectRefValue]->(ro:WMS_DM_OBJECT)-[:Object_value]->(rwv:WMS_VALUE)<-[:member_to_value]-(rcm:WMS_CLASS_MEMBER) WHERE id(c)=2605 WITH c,ro,rcm,rwv
+MATCH (c)-[wm:WMS_Member]->(wcm:WMS_CLASS_MEMBER)-[mtv:member_to_value]->(wv:WMS_VALUE) RETURN wcm,wv,ro,rcm,rwv;
+
+AND (o)-[:Object_value]->(wv)-[:objectRefValue]->(ro)-[:Object_value]->(rwv {val:'Ferrari'})<-[:member_to_value]-(rcm {Keyname:'Hersteller'})
+
+MATCH (c:Class)-[:hasObjectContainer]->(objl:WMS_DM_OBJECTLIST)-[:hasObjects]->(o:WMS_DM_OBJECT)-[:Object_value]->(wv:WMS_VALUE)<-[:member_to_value]-(wcm:WMS_CLASS_MEMBER) WHERE id(c)=2605 WITH objl,o,wcm,wv OPTIONAL MATCH (wv)-[:objectRefValue]->(ro:WMS_DM_OBJECT)-[:Object_value]->(rwv:WMS_VALUE)<-[:member_to_value]-(rcm:WMS_CLASS_MEMBER) WITH objl,o,wv,wcm,ro,rcm,rwv 
+MATCH (wcm)-[:member_to_value]->(wv)<-[:Object_value]-(o:WMS_DM_OBJECT) WHERE (wcm.Keyname='Zielort' AND wv.val=~'(?i)augsburg') OR (o)-[:Object_value]->(wv)-[:objectRefValue]->(ro)-[:Object_value]->(rwv {val:'Ferrari'})<-[:member_to_value]-(rcm {Keyname:'Hersteller'}) RETURN o,objl,wcm,wv;
+
+MATCH (c:Class)-[:hasObjectContainer]->(objl:WMS_DM_OBJECTLIST)-[:hasObjects]->(o:WMS_DM_OBJECT)-[:Object_value]->(wv:WMS_VALUE)<-[:member_to_value]-(wcm:WMS_CLASS_MEMBER) WHERE id(c)=2605 WITH objl,o,wcm,wv OPTIONAL MATCH (wv)-[:objectRefValue]->(ro:WMS_DM_OBJECT)-[:Object_value]->(rwv:WMS_VALUE)<-[:member_to_value]-(rcm:WMS_CLASS_MEMBER) WITH objl,o,wv,wcm,ro,rcm,rwv 
+
+MATCH (wcm {Keyname:'Kilometer'})-[:member_to_value]->(wv {val:'60'})<-[:Object_value]-(:WMS_DM_OBJECT) WITH o
+
+OPTIONAL MATCH (:Class)-[:hasObjectContainer]->(objl1:WMS_DM_OBJECTLIST)-[:hasObjects]->(o:WMS_DM_OBJECT)-[:Object_value]->(v1:WMS_VALUE)<-[:member_to_value]-(m1:WMS_CLASS_MEMBER) WITH objl1,o,v1,m1 OPTIONAL MATCH (v1)-[:objectRefValue]->(ro1:WMS_DM_OBJECT)-[:Object_value]->(rv1:WMS_VALUE)<-[:member_to_value]-(rm1:WMS_CLASS_MEMBER) WITH objl1,o,v1,m1,ro1,rm1,rv1
+
+MATCH (m1 {Keyname:'Zielort'})-[:member_to_value]->(v1 {val:'Augsburg'})<-[:Object_value]-(:WMS_DM_OBJECT)
+
+RETURN o
+
+
+MATCH (c:Class)-[:hasObjectContainer]->(ol:WMS_DM_OBJECTLIST)-[:hasObjects]->(o:WMS_DM_OBJECT)-[:Object_value]->(v:WMS_VALUE)<-[:member_to_value]-(m:WMS_CLASS_MEMBER) WHERE id(c)=2605 WITH ol,o,m,v OPTIONAL MATCH (v)-[:objectRefValue]->(ro:WMS_DM_OBJECT)-[:Object_value]->(rv:WMS_VALUE)<-[:member_to_value]-(rm:WMS_CLASS_MEMBER) WITH ol,o,v,m,ro,rm,rv   
+MATCH (m)-[:member_to_value]->(v)<-[:Object_value]-(:WMS_DM_OBJECT) WHERE m.Keyname='Zielort' AND v.val=~'(?i)münchen' RETURN o 
+
+UNION
+
+OPTIONAL MATCH (c:Class)-[:hasObjectContainer]->(ol:WMS_DM_OBJECTLIST)-[:hasObjects]->(o:WMS_DM_OBJECT)-[:Object_value]->(v:WMS_VALUE)<-[:member_to_value]-(m:WMS_CLASS_MEMBER) WHERE id(c)=2605 WITH o,v,m OPTIONAL MATCH (v)-[:objectRefValue]->(ro:WMS_DM_OBJECT)-[:Object_value]->(rv:WMS_VALUE)<-[:member_to_value]-(rm:WMS_CLASS_MEMBER) WITH o,v,m,ro,rm,rv 
+MATCH (m)-[:member_to_value]->(v)<-[:Object_value]-(:WMS_DM_OBJECT) WHERE m.Keyname='Kilometer' AND v.val= '60' WITH o 
+
+OPTIONAL MATCH (c:Class)-[:hasObjectContainer]->(ol:WMS_DM_OBJECTLIST)-[:hasObjects]->(o:WMS_DM_OBJECT)-[:Object_value]->(v:WMS_VALUE)<-[:member_to_value]-(m:WMS_CLASS_MEMBER) WHERE id(c)=2605 WITH ol,o,m,v OPTIONAL MATCH (v)-[:objectRefValue]->(ro:WMS_DM_OBJECT)-[:Object_value]->(rv:WMS_VALUE)<-[:member_to_value]-(rm:WMS_CLASS_MEMBER) WITH ol,o,v,m,ro,rm,rv   
+MATCH (m)-[:member_to_value]->(v)<-[:Object_value]-(:WMS_DM_OBJECT) WHERE m.Keyname='Zielort' AND v.val=~ '(?i)augsburg' RETURN o
+
+
+compute_rpn(input)
+  stack_init
+  foreach (o in input)
+     switch o
+       isnumber
+         push o
+       isbinoperator
+         right = pop
+         left = pop
+         t = compute(left, o, right)
+         push t
+  return pop
+
+MATCH (m:WMS_CLASS_MEMBER)-[:member_to_value]->(v:WMS_VALUE)<-[:Object_value]-(o:WMS_DM_OBJECT) WHERE (({Keyname:'Zielort'})-[:member_to_value]->({val:'Augsburg'})<-[:Object_value]-(o) OR ({Keyname:'Kilometer'})-[:member_to_value]->({val:'60'})<-[:Object_value]-(o)) RETURN o,v,m
+
+
+MATCH (c:Class)-[:hasObjectContainer]->(ol:WMS_DM_OBJECTLIST)-[:hasObjects]->(o:WMS_DM_OBJECT)-[:Object_value]->(v:WMS_VALUE)<-[:member_to_value]-(m:WMS_CLASS_MEMBER) WHERE id(c)=3162 AND  
+(  
+	( 
+		({Keyname:'Zielort'})-[:member_to_value]->({val:'Augsburg'})<-[:Object_value]-(o)
+		AND 
+		({Keyname:'Kilometer'})-[:member_to_value]->({val:'60'})<-[:Object_value]-(o) 
+	)  
+	OR  
+	( 
+		({Keyname:'Zielort'})-[:member_to_value]->({val:'München'})<-[:Object_value]-(o) 
+		AND 
+		({Keyname:'Kilometer'})-[:member_to_value]->({val:'60'})<-[:Object_value]-(o) 
+	)  
+) 
+RETURN o,m,v
+
+MATCH (c:Class)-[:hasObjectContainer]->(ol:WMS_DM_OBJECTLIST)-[:hasObjects]->(o:WMS_DM_OBJECT)-[:Object_value]->(v1:WMS_VALUE)<-[:member_to_value]-(m1:WMS_CLASS_MEMBER),(v1)-[:objectRefValue]->(ro1:WMS_DM_OBJECT)-[:Object_value]->(rv1:WMS_VALUE)<-[:member_to_value]-(rm1:WMS_CLASS_MEMBER) WHERE id(c)=3162  AND (rm1.Keyname='Hersteller' AND rv1.val='Fiat') RETURN o
+
+MATCH (c:Class)-[:hasObjectContainer]->(ol:WMS_DM_OBJECTLIST)-[:hasObjects]->(o:WMS_DM_OBJECT)-[:Object_value]->(v1:WMS_VALUE)<-[:member_to_value]-(m1:WMS_CLASS_MEMBER),(v1)-[:objectRefValue]->(ro1:WMS_DM_OBJECT)-[:Object_value]->(rv1:WMS_VALUE)<-[:member_to_value]-(rm1:WMS_CLASS_MEMBER)
+MATCH (n) WHERE id(c)=3162  AND (m1.Keyname='Fahrzeug' AND rm1.Keyname='Hersteller' AND NOT(rv1.val=~'(?i)fiat')) RETURN o
+
+MATCH (c:Class)-[:hasObjectContainer]->(ol:WMS_DM_OBJECTLIST)-[:hasObjects]->(o:WMS_DM_OBJECT) MATCH (o)-[:Object_value]->(v1:WMS_VALUE)<-[:member_to_value]-(m1:WMS_CLASS_MEMBER) ,(v1)-[:userValue]->(u1:User) WHERE id(c)=3064 AND (m1.Keyname='Halter' AND id(u1)=toInt(2790))
+OPTIONAL MATCH (o)-[:Object_value]->(v:WMS_VALUE)<-[:member_to_value]-(k:WMS_CLASS_MEMBER) WHERE k.Keyname='Hersteller' OR k.Keyname='Kennzeichen'
+RETURN DISTINCT k.Keyname as Keyname, collect(v.val) as Value 
+
+MATCH (c:Class)-[:hasObjectContainer]->(ol:WMS_DM_OBJECTLIST)-[:hasObjects]->(o:WMS_DM_OBJECT)-[:Object_value]->(v1:WMS_VALUE)<-[:member_to_value]-(m1:WMS_CLASS_MEMBER), (v1)-[:objectRefValue]->(ro:WMS_DM_OBJECT)-[:Object_value]->(rv1:WMS_VALUE)<-[:member_to_value]-(rm1:WMS_CLASS_MEMBER)
+MATCH (o)-[:Object_value]->(v2:WMS_VALUE)<-[:member_to_value]-(m2:WMS_CLASS_MEMBER), (v2)-[:objectRefValue]->(ro:WMS_DM_OBJECT)-[:Object_value]->(rv2:WMS_VALUE)<-[:member_to_value]-(rm2:WMS_CLASS_MEMBER)
+WHERE id(c)=3011 AND ((m1.Keyname='Fahrzeug' AND rm1.Keyname='Hersteller' AND rv1.val=~'(?i)fiat') OR (m2.Keyname='Fahrzeug' AND rm2.Keyname='Hersteller' AND rv2.val=~'(?i)ferrari'))
+MATCH (o)-[:Object_value]->(v:WMS_VALUE)-[objectRefValue]->(ro)-[:Object_value]->(rv:WMS_VALUE)<-[:member_to_value]-(rm:WMS_CLASS_MEMBER) 
+OPTIONAL MATCH (o)-[:Object_value]->(vv:WMS_VALUE)<-[:member_to_value]-(m:WMS_CLASS_MEMBER)  RETURN DISTINCT (o)-->(v)-->(ro)-->(rv)<--(rm{Keyname:'Kennzeichen'}),(o)-->(vv)<--(m{Keyname:'Kilometer'}),(o)-->(vv)<--(m{Keyname:'Zielort'}) 
+
+MATCH (c:Class)-[:hasObjectContainer]->(ol:WMS_DM_OBJECTLIST)-[:hasObjects]->(o:WMS_DM_OBJECT)-[:Object_value]->(v1:WMS_VALUE)<-[:member_to_value]-(m1:WMS_CLASS_MEMBER), (m1{Keyname:'Fahrzeug'})-[:member_to_value]->(vc:WMS_VALUE)-[:objectRefValue]->(ro:WMS_DM_OBJECT)-[:Object_value]->(rv1:WMS_VALUE)<-[:member_to_value]-(rm1:WMS_CLASS_MEMBER)
+WHERE id(c)=3011 AND (rm1.Keyname='Hersteller' AND rv1.val=~'(?i)fiat') 
+RETURN ol,o,ro
+
+
+void CdmQueryElement::CreateSubQueryFromMember(const CdmMember* p_pCdmMember,
+                                               QString p_qstrSubMemberName)
+{
+   if (CHKPTR(p_pCdmMember) && !p_qstrSubMemberName.isEmpty())
+   {
+      
+      CdmClass* pCdmClass = NULL;
+      long lClassId = p_pCdmMember->GetClassReference();
+
+      CdmClassManager* pCdmClassManager = p_pCdmMember->GetClassManager();
+
+      if (CHKPTR(pCdmClassManager))
+      {
+         pCdmClass = pCdmClassManager->FindClassById(lClassId);
+      }
+
+      if (CHKPTR(pCdmClass))
+      {
+         // First step create the subquery for the IN element with class instett of objectlist
+         m_bAutomaticSubqueryCreation = true;
+         m_rpCdmSubQuery = new CdmQuery(pCdmClass);
+
+         //  change of ownership in the constructor m_qVariant set to NULL is enough
+         CdmQueryElement* pCdmQueryElement = new CdmQueryElement(m_rpCdmSubQuery, 
+                                                                 eDmQueryElementTypeCompare, 
+                                                                 m_eDmCompareType,
+                                                                 m_qVariant,
+                                                                 p_qstrSubMemberName);
+
+         m_rpCdmSubQuery->SetQueryElement(pCdmQueryElement);
+
+         // second step change the current queryelement to an IN element
+         m_eDmCompareType = eDmQueryCompareTypeIn;
+         // must not be deleted because there is a change of ownership in the constructor above
+         m_qVariant = QVariant();
+      }
+   }
+}
+
+MATCH (o)-[:Object_value]->(v1:WMS_VALUE:OBJECTREF)<-[:member_to_value]-(m1:WMS_CLASS_MEMBER) , (v1)-[:objectRefValue]->(or1:WMS_DM_OBJECT)-[:Object_value]->(rv1:WMS_VALUE:DOUBLE)<-[:member_to_value]-(rm1:WMS_CLASS_MEMBER) 
+MATCH (o)-[:Object_value]->(v2:WMS_VALUE:OBJECTREF)<-[:member_to_value]-(m2:WMS_CLASS_MEMBER) , (v2)-[:objectRefValue]->(or1)-[:Object_value]->(rv2:WMS_VALUE:STRING)<-[:member_to_value]-(rm2:WMS_CLASS_MEMBER) 
+MATCH (o)-[:Object_value]->(v3:WMS_VALUE:STRING)<-[:member_to_value]-(m3:WMS_CLASS_MEMBER) 
+WHERE id(c)=3831 AND  ( (m1.Keyname='Fahrzeug' AND rm1.Keyname='BruttoAnschaffungspreis' AND rv1.val>=toFloat(300001))  AND (m2.Keyname='Fahrzeug' AND rm2.Keyname='Kennzeichen' AND rv2.val='A-$$ 1337')  OR ( m3.Keyname='Zielort' AND v3.val=~'(?i)münchen')  ) RETURN ol,o,(o)-->()<--({Keyname:'Zielort'}),(o)-->()<--({Keyname:'Kilometer'}), (or1)-->()<--({Keyname:'BruttoAnschaffungspreis'})
+
+MATCH (c:Class)-[:hasObjectContainer]->(ol:WMS_DM_OBJECTLIST)-[:hasObjects]->(o:WMS_DM_OBJECT) MATCH (o)-[:Object_value]->(v1:WMS_VALUE:OBJECTREF)<-[:member_to_value]-(m1:WMS_CLASS_MEMBER) , (v1)-[:objectRefValue]->(or1:WMS_DM_OBJECT)-[:Object_value]->(rv1:WMS_VALUE:USER)<-[:member_to_value]-(rm1:WMS_CLASS_MEMBER) ,(rv1)-[:userValue]->(u1:User) WHERE id(c)=3738 AND (m1.Keyname='Fahrzeug' AND rm1.Keyname='Halter' AND id(u1)=toInt(3715))  OPTIONAL MATCH p1=(o)-->()<--({Keyname:'Kommentar'}) OPTIONAL MATCH (o)-->()<-[:member_to_value]-({Keyname:'Fahrzeug'})-[:ClassRef]->(var2), p2=(var2)-->({Keyname:'Kennzeichen'})-->() OPTIONAL MATCH (o)-->()<-[:member_to_value]-({Keyname:'Fahrzeug'})-[:ClassRef]->(var3), p3=(var3)-->({Keyname:'Fabrikat'})-->() RETURN id(ol),id(o), [x IN COLLECT(DISTINCT EXTRACT(n IN NODES(p1)|n.val))| x[1]] AS KOMMENTAR, [x IN COLLECT(DISTINCT EXTRACT(n IN NODES(p2)|n.val)) | x[2]] AS FAHRZEUGKENNZEICHEN, [x IN COLLECT(DISTINCT EXTRACT(n IN NODES(p3)|n.val)) | x[2]] AS FAHRZEUGFABRIKAT
+
+
+
+MATCH (s:Scheme) WHERE s.schemename='SchemaNeo4jFahrtenBuch' OPTIONAL MATCH (s)-[:hasClass]->(c:Class) WHERE NOT(c.Keyname STARTS WITH 'Technical') AND NOT(c.Keyname STARTS WITH 'Workflow') OPTIONAL MATCH (c)-[:class_group]->(g) OPTIONAL MATCH (c)-[:WMS_Member]->(m) OPTIONAL MATCH (m)-[:member_to_value]->(v) OPTIONAL MATCH (v)<-[:Object_value]-(o) OPTIONAL MATCH (o)<-[:hasObjects]-(ol) OPTIONAL MATCH (c)-[:Class_Validator]->(valid) RETURN s,c,g,m,v,o,ol,valid
+
+
+
+MATCH (s:Scheme) WHERE s.schemename='SchemaNeo4jFahrtenBuch' OPTIONAL MATCH (s)-[:hasClass]->(c:Class) WHERE NOT(c.Keyname STARTS WITH 'Technical') AND NOT(c.Keyname STARTS WITH 'Workflow') OPTIONAL MATCH (c)-[:class_group]->(g) OPTIONAL MATCH (c)-[:WMS_Member]->(m) OPTIONAL MATCH (m)-[:member_to_value]->(v) OPTIONAL MATCH (v)<-[:Object_value]-(o) OPTIONAL MATCH (c)-[:Class_Validator]->(valid) OPTIONAL MATCH (c)-[:hasObjectContainer]->(ol) OPTIONAL MATCH (s)-[:pkglevel *]->(p) OPTIONAL MATCH (s)-[:languages]->(l) OPTIONAL MATCH (k)-[:rights]->(r:RIGHTS) OPTIONAL MATCH (r)-[:accessor_rights]->(u) RETURN s,c,g,m,v,o,ol,valid,p,l,r,u;
+
+
+
+
+
+
+
+

@@ -1,0 +1,594 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>CwmsClassEditor</class>
+ <widget class="QWidget" name="CwmsClassEditor">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>776</width>
+    <height>843</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>WMS Klasseneditor</string>
+  </property>
+  <layout class="QVBoxLayout">
+   <property name="spacing">
+    <number>3</number>
+   </property>
+   <property name="margin">
+    <number>3</number>
+   </property>
+   <item>
+    <widget class="Q3GroupBox" name="groupBox1">
+     <property name="title">
+      <string>Allgemeine Klasseninformation</string>
+     </property>
+     <layout class="QVBoxLayout">
+      <property name="spacing">
+       <number>3</number>
+      </property>
+      <property name="margin">
+       <number>3</number>
+      </property>
+      <item>
+       <layout class="QGridLayout">
+        <item row="3" column="2" colspan="2">
+         <widget class="QLineEdit" name="m_pqleLastChanger">
+          <property name="readOnly">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1" colspan="2">
+         <widget class="QLineEdit" name="m_pqleCaption">
+          <property name="readOnly">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="0">
+         <widget class="QLabel" name="textLabel8">
+          <property name="text">
+           <string>Ersteller</string>
+          </property>
+          <property name="wordWrap">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="0">
+         <widget class="QLineEdit" name="m_pqleCreator">
+          <property name="readOnly">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="3" colspan="2">
+         <widget class="QLineEdit" name="m_pqleKeyname">
+          <property name="readOnly">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QLineEdit" name="m_pqleId">
+          <property name="readOnly">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="4">
+         <widget class="QLabel" name="textLabel9">
+          <property name="text">
+           <string>Letzte Ã„nderung</string>
+          </property>
+          <property name="wordWrap">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="3">
+         <widget class="QLabel" name="textLabel3">
+          <property name="text">
+           <string>SchlÃ¼ssel</string>
+          </property>
+          <property name="wordWrap">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="1">
+         <widget class="QLineEdit" name="m_pqleCreatorDate">
+          <property name="readOnly">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="1">
+         <widget class="QLabel" name="textLabel7">
+          <property name="text">
+           <string>Erstellungsdatum</string>
+          </property>
+          <property name="wordWrap">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QLabel" name="textLabel2">
+          <property name="text">
+           <string>Name</string>
+          </property>
+          <property name="wordWrap">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="0">
+         <widget class="QLabel" name="textLabel1">
+          <property name="text">
+           <string>ID</string>
+          </property>
+          <property name="wordWrap">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="2" colspan="2">
+         <widget class="QLabel" name="textLabel10">
+          <property name="text">
+           <string>Letzter Ã„nderer</string>
+          </property>
+          <property name="wordWrap">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="4">
+         <widget class="QLineEdit" name="m_pqleLastChangeDate">
+          <property name="readOnly">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <widget class="QLabel" name="textLabel4">
+        <property name="text">
+         <string>Kommentar</string>
+        </property>
+        <property name="wordWrap">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="Q3TextEdit" name="m_pqteComment">
+        <property name="readOnly">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <layout class="QHBoxLayout">
+        <item>
+         <spacer name="spacer1">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeType">
+           <enum>QSizePolicy::Expanding</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>71</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+         <widget class="QPushButton" name="m_pqpbCancel">
+          <property name="text">
+           <string>Abbrechen</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="m_pqpbUpdate">
+          <property name="text">
+           <string>Ãœbernehmen</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="m_pqpbEdit">
+          <property name="text">
+           <string>Bearbeiten</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="Q3GroupBox" name="groupBox2">
+     <property name="title">
+      <string>Basisklassen</string>
+     </property>
+     <layout class="QVBoxLayout">
+      <property name="spacing">
+       <number>3</number>
+      </property>
+      <property name="margin">
+       <number>3</number>
+      </property>
+      <item>
+       <widget class="Q3ListBox" name="m_pqlbBaseClasses"/>
+      </item>
+      <item>
+       <layout class="QHBoxLayout">
+        <item>
+         <widget class="QPushButton" name="m_pqpbAddBaseClass">
+          <property name="text">
+           <string>HinzufÃ¼gen</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="m_pqpbRemoveBaseClass">
+          <property name="text">
+           <string>Entfernen</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="spacer2">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeType">
+           <enum>QSizePolicy::Expanding</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>141</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="Q3GroupBox" name="groupBox3">
+     <property name="title">
+      <string>Membervariablen</string>
+     </property>
+     <layout class="QVBoxLayout">
+      <property name="spacing">
+       <number>3</number>
+      </property>
+      <property name="margin">
+       <number>3</number>
+      </property>
+      <item>
+       <widget class="Q3ListView" name="m_pqlvMembers">
+        <column>
+         <property name="text">
+          <string>ID</string>
+         </property>
+         <property name="clickable">
+          <bool>true</bool>
+         </property>
+         <property name="resizable">
+          <bool>true</bool>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Name</string>
+         </property>
+         <property name="clickable">
+          <bool>true</bool>
+         </property>
+         <property name="resizable">
+          <bool>true</bool>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>SchlÃ¼ssel</string>
+         </property>
+         <property name="clickable">
+          <bool>true</bool>
+         </property>
+         <property name="resizable">
+          <bool>true</bool>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Datentyp</string>
+         </property>
+         <property name="clickable">
+          <bool>true</bool>
+         </property>
+         <property name="resizable">
+          <bool>true</bool>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Standardwert</string>
+         </property>
+         <property name="clickable">
+          <bool>true</bool>
+         </property>
+         <property name="resizable">
+          <bool>true</bool>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>EigentÃ¼mer</string>
+         </property>
+         <property name="clickable">
+          <bool>true</bool>
+         </property>
+         <property name="resizable">
+          <bool>true</bool>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Eindeutig</string>
+         </property>
+         <property name="clickable">
+          <bool>true</bool>
+         </property>
+         <property name="resizable">
+          <bool>true</bool>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Referenzklasse</string>
+         </property>
+         <property name="clickable">
+          <bool>true</bool>
+         </property>
+         <property name="resizable">
+          <bool>true</bool>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Kommentar</string>
+         </property>
+         <property name="clickable">
+          <bool>true</bool>
+         </property>
+         <property name="resizable">
+          <bool>true</bool>
+         </property>
+        </column>
+       </widget>
+      </item>
+      <item>
+       <layout class="QHBoxLayout">
+        <item>
+         <widget class="QPushButton" name="m_pqpbAddMember">
+          <property name="text">
+           <string>HinzufÃ¼gen</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="m_pqpbEditMember">
+          <property name="text">
+           <string>Bearbeiten</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="m_pqpbDeleteMember">
+          <property name="text">
+           <string>Entfernen</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="spacer3">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeType">
+           <enum>QSizePolicy::Expanding</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>161</width>
+            <height>21</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <pixmapfunction>qPixmapFromMimeSource</pixmapfunction>
+ <customwidgets>
+  <customwidget>
+   <class>Q3GroupBox</class>
+   <extends>QGroupBox</extends>
+   <header>Qt3Support/Q3GroupBox</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>Q3Frame</class>
+   <extends>QFrame</extends>
+   <header>Qt3Support/Q3Frame</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>Q3ListBox</class>
+   <extends>Q3Frame</extends>
+   <header>q3listbox.h</header>
+  </customwidget>
+  <customwidget>
+   <class>Q3ListView</class>
+   <extends>Q3Frame</extends>
+   <header>q3listview.h</header>
+  </customwidget>
+  <customwidget>
+   <class>Q3TextEdit</class>
+   <extends>Q3Frame</extends>
+   <header>q3textedit.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>m_pqpbCancel</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsClassEditor</receiver>
+   <slot>CancelClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqpbUpdate</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsClassEditor</receiver>
+   <slot>UpdateClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqpbEdit</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsClassEditor</receiver>
+   <slot>EditClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqpbAddBaseClass</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsClassEditor</receiver>
+   <slot>AddBaseClassClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqpbRemoveBaseClass</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsClassEditor</receiver>
+   <slot>RemoveBaseClassClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqpbAddMember</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsClassEditor</receiver>
+   <slot>AddMemberClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqpbEditMember</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsClassEditor</receiver>
+   <slot>EditMemberClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqpbDeleteMember</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsClassEditor</receiver>
+   <slot>DeleteMemberClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

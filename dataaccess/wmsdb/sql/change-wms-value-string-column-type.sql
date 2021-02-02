@@ -1,0 +1,1 @@
+ALTER TABLE wms_value_string CHANGE COLUMN `Val` `Val` TEXT NULL DEFAULT NULL ;

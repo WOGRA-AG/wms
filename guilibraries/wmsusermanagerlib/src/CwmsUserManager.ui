@@ -1,0 +1,579 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>CwmsUserManager</class>
+ <widget class="QMainWindow" name="CwmsUserManager">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>815</width>
+    <height>529</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>WMS Benutzer &amp; Rechte Manager</string>
+  </property>
+  <widget class="QWidget" name="widget">
+   <layout class="QVBoxLayout" name="verticalLayout_3">
+    <property name="leftMargin">
+     <number>3</number>
+    </property>
+    <property name="topMargin">
+     <number>3</number>
+    </property>
+    <property name="rightMargin">
+     <number>3</number>
+    </property>
+    <property name="bottomMargin">
+     <number>3</number>
+    </property>
+    <item>
+     <widget class="QSplitter" name="splitter">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <widget class="QTabWidget" name="m_pqlvUserAndGroups">
+       <property name="mouseTracking">
+        <bool>false</bool>
+       </property>
+       <property name="currentIndex">
+        <number>0</number>
+       </property>
+       <widget class="QWidget" name="m_pqtUserManagement">
+        <attribute name="title">
+         <string>Benutzer</string>
+        </attribute>
+        <layout class="QVBoxLayout" name="verticalLayout">
+         <property name="leftMargin">
+          <number>3</number>
+         </property>
+         <property name="topMargin">
+          <number>3</number>
+         </property>
+         <property name="rightMargin">
+          <number>3</number>
+         </property>
+         <property name="bottomMargin">
+          <number>3</number>
+         </property>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout">
+           <item>
+            <widget class="QLineEdit" name="m_pqTfSearchforUser">
+             <property name="inputMask">
+              <string/>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+             <property name="placeholderText">
+              <string>Nach Benutzer suchen</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="m_bttnSearchForUser">
+             <property name="text">
+              <string/>
+             </property>
+             <property name="icon">
+              <iconset resource="../../wmsqml/src/wmsqml.qrc">
+               <normaloff>:/icons/Search.png</normaloff>:/icons/Search.png</iconset>
+             </property>
+             <property name="iconSize">
+              <size>
+               <width>30</width>
+               <height>30</height>
+              </size>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <widget class="QTreeWidget" name="m_pqlvUsers">
+           <column>
+            <property name="text">
+             <string>ID</string>
+            </property>
+           </column>
+           <column>
+            <property name="text">
+             <string>Nachname</string>
+            </property>
+           </column>
+           <column>
+            <property name="text">
+             <string>Vorname</string>
+            </property>
+           </column>
+           <column>
+            <property name="text">
+             <string>Login</string>
+            </property>
+           </column>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+       <widget class="QWidget" name="m_pqtUserGroupManagement">
+        <attribute name="title">
+         <string>Benutzergruppen</string>
+        </attribute>
+        <layout class="QVBoxLayout" name="verticalLayout_2">
+         <property name="leftMargin">
+          <number>3</number>
+         </property>
+         <property name="topMargin">
+          <number>3</number>
+         </property>
+         <property name="rightMargin">
+          <number>3</number>
+         </property>
+         <property name="bottomMargin">
+          <number>3</number>
+         </property>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_2">
+           <item>
+            <widget class="QLineEdit" name="m_pqTfSearchforUserGroup">
+             <property name="inputMask">
+              <string/>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+             <property name="maxLength">
+              <number>32767</number>
+             </property>
+             <property name="placeholderText">
+              <string>Nach Benutzergruppe suchen...</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="m_bttnSearchForUserGroup">
+             <property name="text">
+              <string/>
+             </property>
+             <property name="icon">
+              <iconset resource="../../wmsqml/src/wmsqml.qrc">
+               <normaloff>:/icons/Search.png</normaloff>:/icons/Search.png</iconset>
+             </property>
+             <property name="iconSize">
+              <size>
+               <width>30</width>
+               <height>30</height>
+              </size>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <widget class="QTreeWidget" name="m_pqlvGroups">
+           <column>
+            <property name="text">
+             <string>ID</string>
+            </property>
+           </column>
+           <column>
+            <property name="text">
+             <string>Name</string>
+            </property>
+           </column>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="m_pqframeEditor" native="true">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+      </widget>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QToolBar" name="Toolbar">
+   <property name="styleSheet">
+    <string notr="true">background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0.011, y2:0.971591, stop:0 rgba(85, 170, 255, 255), stop:1 rgba(211, 211, 211, 255));</string>
+   </property>
+   <property name="label" stdset="0">
+    <string>Toolbar</string>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="m_pqaNewUser"/>
+   <addaction name="m_pqaNewGroup"/>
+   <addaction name="m_pqaDeleteGroup"/>
+   <addaction name="m_pqaDeleteUser"/>
+  </widget>
+  <widget class="QMenuBar" name="MenuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>815</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="Datei">
+    <property name="title">
+     <string>&amp;Datei</string>
+    </property>
+    <widget class="QMenu" name="menuNeu">
+     <property name="title">
+      <string>Neu</string>
+     </property>
+     <addaction name="m_pqaNewUser"/>
+     <addaction name="m_pqaNewGroup"/>
+    </widget>
+    <addaction name="menuNeu"/>
+    <addaction name="separator"/>
+    <addaction name="separator"/>
+    <addaction name="m_pqaExit"/>
+   </widget>
+   <widget class="QMenu" name="Bearbeiten">
+    <property name="title">
+     <string>Bearbeiten</string>
+    </property>
+    <addaction name="m_pqaDeleteUser"/>
+    <addaction name="m_pqaDeleteGroup"/>
+   </widget>
+   <widget class="QMenu" name="Hilfe">
+    <property name="title">
+     <string>&amp;Hilfe</string>
+    </property>
+    <addaction name="m_pqaAbout"/>
+   </widget>
+   <addaction name="Datei"/>
+   <addaction name="Bearbeiten"/>
+   <addaction name="Hilfe"/>
+  </widget>
+  <action name="m_pqaNewUser">
+   <property name="icon">
+    <iconset resource="../resources/usermanagerresources.qrc">
+     <normaloff>:/png/user-add.png</normaloff>:/png/user-add.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Neuer Benutzer</string>
+   </property>
+   <property name="iconText">
+    <string>Neuer Benutzer</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+U</string>
+   </property>
+   <property name="name" stdset="0">
+    <string>m_pqaNewUser</string>
+   </property>
+  </action>
+  <action name="m_pqaNewGroup">
+   <property name="icon">
+    <iconset resource="../resources/usermanagerresources.qrc">
+     <normaloff>:/png/usergroup-add.png</normaloff>:/png/usergroup-add.png</iconset>
+   </property>
+   <property name="text">
+    <string>Neue Gruppe</string>
+   </property>
+   <property name="iconText">
+    <string>Neue Gruppe</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+G</string>
+   </property>
+   <property name="name" stdset="0">
+    <string>m_pqaNewGroup</string>
+   </property>
+  </action>
+  <action name="m_pqaDeleteUser">
+   <property name="icon">
+    <iconset resource="../resources/usermanagerresources.qrc">
+     <normaloff>:/png/user-delete.png</normaloff>:/png/user-delete.png</iconset>
+   </property>
+   <property name="text">
+    <string>Benutzer löschen</string>
+   </property>
+   <property name="iconText">
+    <string>Benutzer löschen</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+D</string>
+   </property>
+   <property name="name" stdset="0">
+    <string>m_pqaDeleteUser</string>
+   </property>
+  </action>
+  <action name="m_pqaDeleteGroup">
+   <property name="icon">
+    <iconset resource="../resources/usermanagerresources.qrc">
+     <normaloff>:/png/usergroup-delete.png</normaloff>:/png/usergroup-delete.png</iconset>
+   </property>
+   <property name="text">
+    <string>Gruppe löschen</string>
+   </property>
+   <property name="iconText">
+    <string>Gruppe löschen</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+E</string>
+   </property>
+   <property name="name" stdset="0">
+    <string>m_pqaDeleteGroup</string>
+   </property>
+  </action>
+  <action name="m_pqaExit">
+   <property name="icon">
+    <iconset resource="../resources/usermanagerresources.qrc">
+     <normaloff>:/png/exit.png</normaloff>:/png/exit.png</iconset>
+   </property>
+   <property name="text">
+    <string>Beenden</string>
+   </property>
+   <property name="iconText">
+    <string>Beenden</string>
+   </property>
+   <property name="shortcut">
+    <string/>
+   </property>
+   <property name="name" stdset="0">
+    <string>m_pqaExit</string>
+   </property>
+  </action>
+  <action name="m_pqaAbout">
+   <property name="icon">
+    <iconset resource="../resources/usermanagerresources.qrc">
+     <normaloff>:/png/about.png</normaloff>:/png/about.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Über</string>
+   </property>
+   <property name="iconText">
+    <string>Über</string>
+   </property>
+   <property name="shortcut">
+    <string/>
+   </property>
+   <property name="name" stdset="0">
+    <string>m_pqaAbout</string>
+   </property>
+  </action>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources>
+  <include location="../../wmsqml/src/wmsqml.qrc"/>
+  <include location="../resources/usermanagerresources.qrc"/>
+ </resources>
+ <connections>
+  <connection>
+   <sender>m_pqaNewUser</sender>
+   <signal>triggered()</signal>
+   <receiver>CwmsUserManager</receiver>
+   <slot>NewUserSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqaNewGroup</sender>
+   <signal>triggered()</signal>
+   <receiver>CwmsUserManager</receiver>
+   <slot>NewGroupSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqaDeleteUser</sender>
+   <signal>triggered()</signal>
+   <receiver>CwmsUserManager</receiver>
+   <slot>DeleteUserSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqaDeleteGroup</sender>
+   <signal>triggered()</signal>
+   <receiver>CwmsUserManager</receiver>
+   <slot>DeleteGroupSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqaExit</sender>
+   <signal>triggered()</signal>
+   <receiver>CwmsUserManager</receiver>
+   <slot>ExitSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqaAbout</sender>
+   <signal>triggered()</signal>
+   <receiver>CwmsUserManager</receiver>
+   <slot>AboutSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqlvGroups</sender>
+   <signal>clicked(QModelIndex)</signal>
+   <receiver>CwmsUserManager</receiver>
+   <slot>UserGroupChangedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>135</x>
+     <y>222</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>241</x>
+     <y>537</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqTfSearchforUser</sender>
+   <signal>returnPressed()</signal>
+   <receiver>CwmsUserManager</receiver>
+   <slot>SearchForUserSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>705</x>
+     <y>104</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>939</x>
+     <y>68</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_bttnSearchForUser</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsUserManager</receiver>
+   <slot>SearchForUserSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>774</x>
+     <y>110</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>888</x>
+     <y>111</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqTfSearchforUserGroup</sender>
+   <signal>returnPressed()</signal>
+   <receiver>CwmsUserManager</receiver>
+   <slot>SearchForUserGroupSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>486</x>
+     <y>111</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>907</x>
+     <y>83</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_bttnSearchForUserGroup</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsUserManager</receiver>
+   <slot>SearchForUserGroupSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>781</x>
+     <y>108</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>870</x>
+     <y>115</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqlvUsers</sender>
+   <signal>clicked(QModelIndex)</signal>
+   <receiver>CwmsUserManager</receiver>
+   <slot>UserChangedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>52</x>
+     <y>147</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>74</x>
+     <y>538</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>UserGroupChangedSlot()</slot>
+  <slot>UserChangedSlot()</slot>
+  <slot>SearchForUserSlot()</slot>
+  <slot>SearchForUserGroupSlot()</slot>
+ </slots>
+</ui>

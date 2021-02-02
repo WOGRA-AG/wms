@@ -1,0 +1,1044 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>CwmsApplicationEditorClass</class>
+ <widget class="QWidget" name="CwmsApplicationEditorClass">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>713</width>
+    <height>616</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Applikationseditor</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout_2">
+   <property name="leftMargin">
+    <number>3</number>
+   </property>
+   <property name="topMargin">
+    <number>3</number>
+   </property>
+   <property name="rightMargin">
+    <number>3</number>
+   </property>
+   <property name="bottomMargin">
+    <number>3</number>
+   </property>
+   <item>
+    <widget class="QTabWidget" name="tabWidget">
+     <property name="currentIndex">
+      <number>0</number>
+     </property>
+     <widget class="QWidget" name="m_pqwDetails">
+      <attribute name="title">
+       <string>Applikationsinformation</string>
+      </attribute>
+      <layout class="QGridLayout" name="gridLayout_2">
+       <property name="leftMargin">
+        <number>3</number>
+       </property>
+       <property name="topMargin">
+        <number>3</number>
+       </property>
+       <property name="rightMargin">
+        <number>3</number>
+       </property>
+       <property name="bottomMargin">
+        <number>3</number>
+       </property>
+       <item row="0" column="0" colspan="5">
+        <widget class="QGroupBox" name="m_pqgbBaseData">
+         <property name="title">
+          <string>Basisinformation</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout">
+          <property name="leftMargin">
+           <number>3</number>
+          </property>
+          <property name="topMargin">
+           <number>3</number>
+          </property>
+          <property name="rightMargin">
+           <number>3</number>
+          </property>
+          <property name="bottomMargin">
+           <number>3</number>
+          </property>
+          <item row="7" column="0">
+           <widget class="QLabel" name="label_12">
+            <property name="text">
+             <string>Icon</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="0">
+           <widget class="QLabel" name="label">
+            <property name="text">
+             <string>Name</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="label_5">
+            <property name="text">
+             <string>Hersteller</string>
+            </property>
+           </widget>
+          </item>
+          <item row="8" column="0">
+           <widget class="QCheckBox" name="m_pqchbLicenceCheck">
+            <property name="text">
+             <string>Lizenzprüfung</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="0">
+           <widget class="QLabel" name="label_8">
+            <property name="text">
+             <string>Web</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="label_6">
+            <property name="text">
+             <string>Support Hotline</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="0">
+           <widget class="QLabel" name="label_7">
+            <property name="text">
+             <string>Support Email</string>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="2">
+           <widget class="QLineEdit" name="m_pqleMainWindow">
+            <property name="readOnly">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="3">
+           <widget class="QPushButton" name="m_pqpbSelectMainWindow">
+            <property name="text">
+             <string/>
+            </property>
+            <property name="icon">
+             <iconset resource="wmsgui.qrc">
+              <normaloff>:/icons/Search.png</normaloff>:/icons/Search.png</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>24</width>
+              <height>24</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item row="8" column="2">
+           <widget class="QCheckBox" name="m_pqchbActive">
+            <property name="text">
+             <string>Aktiv</string>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="0">
+           <widget class="QLabel" name="label_10">
+            <property name="text">
+             <string>Hauptfenster</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="2" colspan="2">
+           <widget class="QLineEdit" name="m_pqleEmail"/>
+          </item>
+          <item row="4" column="2" colspan="2">
+           <widget class="QLineEdit" name="m_pqleWeb"/>
+          </item>
+          <item row="6" column="2" colspan="2">
+           <widget class="QLineEdit" name="m_pqleMain"/>
+          </item>
+          <item row="6" column="0">
+           <widget class="QLabel" name="label_11">
+            <property name="text">
+             <string>Main Funktion</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="2" colspan="2">
+           <widget class="QLineEdit" name="m_pqleName"/>
+          </item>
+          <item row="2" column="2" colspan="2">
+           <widget class="QLineEdit" name="m_pqleHotline"/>
+          </item>
+          <item row="1" column="2" colspan="2">
+           <widget class="QLineEdit" name="m_pqleManufacturer"/>
+          </item>
+          <item row="7" column="2" colspan="2">
+           <widget class="QPushButton" name="m_pqpbIcon">
+            <property name="text">
+             <string>...</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item row="2" column="0" colspan="5">
+        <widget class="QGroupBox" name="m_pqgbDescription">
+         <property name="title">
+          <string>Beschreibung</string>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout">
+          <property name="leftMargin">
+           <number>3</number>
+          </property>
+          <property name="topMargin">
+           <number>3</number>
+          </property>
+          <property name="rightMargin">
+           <number>3</number>
+          </property>
+          <property name="bottomMargin">
+           <number>3</number>
+          </property>
+          <item>
+           <widget class="QPlainTextEdit" name="m_pqteDescription"/>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item row="3" column="0" colspan="5">
+        <widget class="QGroupBox" name="m_pqgbVersion">
+         <property name="title">
+          <string>Version</string>
+         </property>
+         <layout class="QHBoxLayout" name="horizontalLayout">
+          <property name="leftMargin">
+           <number>3</number>
+          </property>
+          <property name="topMargin">
+           <number>3</number>
+          </property>
+          <property name="rightMargin">
+           <number>3</number>
+          </property>
+          <property name="bottomMargin">
+           <number>3</number>
+          </property>
+          <item>
+           <widget class="QLabel" name="label_2">
+            <property name="text">
+             <string>Major</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QSpinBox" name="m_pqsbMajor"/>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_3">
+            <property name="text">
+             <string>Minor</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QSpinBox" name="m_pqsbMinor"/>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_4">
+            <property name="text">
+             <string>Bugfix</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QSpinBox" name="m_pqsbBugfix"/>
+          </item>
+          <item>
+           <spacer name="horizontalSpacer_4">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item row="4" column="0">
+        <widget class="QPushButton" name="m_pqpbEditApplication">
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset resource="wmsgui.qrc">
+           <normaloff>:/icons/edit24.png</normaloff>:/icons/edit24.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>24</width>
+           <height>24</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="1">
+        <widget class="QPushButton" name="m_pqpbUpdateApplication">
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset resource="wmsgui.qrc">
+           <normaloff>:/icons/ok24.png</normaloff>:/icons/ok24.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>24</width>
+           <height>24</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="2">
+        <widget class="QPushButton" name="m_pqpbCancelApplication">
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset resource="wmsgui.qrc">
+           <normaloff>:/icons/cancel24.png</normaloff>:/icons/cancel24.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>24</width>
+           <height>24</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="4">
+        <spacer name="horizontalSpacer">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>449</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="1" column="0" colspan="5">
+        <widget class="QGroupBox" name="m_pqgbApplicationType">
+         <property name="title">
+          <string>Anwendungsart</string>
+         </property>
+         <layout class="QHBoxLayout" name="horizontalLayout_2">
+          <property name="leftMargin">
+           <number>3</number>
+          </property>
+          <property name="topMargin">
+           <number>3</number>
+          </property>
+          <property name="rightMargin">
+           <number>3</number>
+          </property>
+          <property name="bottomMargin">
+           <number>3</number>
+          </property>
+          <item>
+           <widget class="QCheckBox" name="m_pqchbDesktop">
+            <property name="text">
+             <string>Desktop</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="m_pqchbWeb">
+            <property name="text">
+             <string>Web</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="m_pqchbMobile">
+            <property name="text">
+             <string>Mobile / Tablet Endgeräte</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="horizontalSpacer_5">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item row="4" column="3">
+        <widget class="QPushButton" name="m_pqpbRights">
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset resource="wmsgui.qrc">
+           <normaloff>:/icons/usermanager24.png</normaloff>:/icons/usermanager24.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>24</width>
+           <height>24</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="m_pqwModules">
+      <attribute name="title">
+       <string>Module</string>
+      </attribute>
+      <layout class="QGridLayout" name="gridLayout_3">
+       <property name="leftMargin">
+        <number>3</number>
+       </property>
+       <property name="topMargin">
+        <number>3</number>
+       </property>
+       <property name="rightMargin">
+        <number>3</number>
+       </property>
+       <property name="bottomMargin">
+        <number>3</number>
+       </property>
+       <item row="1" column="2">
+        <widget class="QPushButton" name="m_pqpbMoveUp">
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset resource="wmsgui.qrc">
+           <normaloff>:/icons/arrow-up24.png</normaloff>:/icons/arrow-up24.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>24</width>
+           <height>24</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0" colspan="6">
+        <widget class="QTreeView" name="m_pqtvModules">
+         <property name="rootIsDecorated">
+          <bool>false</bool>
+         </property>
+         <property name="expandsOnDoubleClick">
+          <bool>false</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QPushButton" name="m_pqpbAddModule">
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset resource="wmsgui.qrc">
+           <normaloff>:/icons/new24.png</normaloff>:/icons/new24.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>24</width>
+           <height>24</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QPushButton" name="pushButton">
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset resource="wmsgui.qrc">
+           <normaloff>:/icons/edit24.png</normaloff>:/icons/edit24.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>24</width>
+           <height>24</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="5">
+        <spacer name="horizontalSpacer_2">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>530</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="1" column="4">
+        <widget class="QPushButton" name="m_pqpbDeleteModule">
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset resource="wmsgui.qrc">
+           <normaloff>:/icons/delete24.png</normaloff>:/icons/delete24.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>24</width>
+           <height>24</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="3">
+        <widget class="QPushButton" name="m_pqpbMoveDown">
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset resource="wmsgui.qrc">
+           <normaloff>:/icons/arrow-down24.png</normaloff>:/icons/arrow-down24.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>24</width>
+           <height>24</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="m_pqwPlugins">
+      <attribute name="title">
+       <string>Plugins</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_4">
+       <property name="leftMargin">
+        <number>3</number>
+       </property>
+       <property name="topMargin">
+        <number>3</number>
+       </property>
+       <property name="rightMargin">
+        <number>3</number>
+       </property>
+       <property name="bottomMargin">
+        <number>3</number>
+       </property>
+       <item>
+        <widget class="CwmsPluginsIf" name="m_pCwmsPlugins" native="true"/>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="m_pqwHelp">
+      <attribute name="title">
+       <string>Hilfe</string>
+      </attribute>
+      <layout class="QGridLayout" name="gridLayout_4">
+       <property name="leftMargin">
+        <number>3</number>
+       </property>
+       <property name="topMargin">
+        <number>3</number>
+       </property>
+       <property name="rightMargin">
+        <number>3</number>
+       </property>
+       <property name="bottomMargin">
+        <number>3</number>
+       </property>
+       <item row="0" column="0" colspan="2">
+        <widget class="QTextEdit" name="m_pqteHelp">
+         <property name="readOnly">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QPushButton" name="m_pqpbEditHelp">
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset resource="wmsgui.qrc">
+           <normaloff>:/icons/edit24.png</normaloff>:/icons/edit24.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>24</width>
+           <height>24</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <spacer name="horizontalSpacer_3">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>611</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="m_pqwLicence">
+      <attribute name="title">
+       <string>Lizenz</string>
+      </attribute>
+      <layout class="QGridLayout" name="gridLayout_5">
+       <property name="leftMargin">
+        <number>3</number>
+       </property>
+       <property name="topMargin">
+        <number>3</number>
+       </property>
+       <property name="rightMargin">
+        <number>3</number>
+       </property>
+       <property name="bottomMargin">
+        <number>3</number>
+       </property>
+       <item row="0" column="0" colspan="2">
+        <widget class="QTextEdit" name="m_pqteLicence">
+         <property name="readOnly">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QPushButton" name="m_pqpbEditLicence">
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset resource="wmsgui.qrc">
+           <normaloff>:/icons/edit24.png</normaloff>:/icons/edit24.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>24</width>
+           <height>24</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <spacer name="horizontalSpacer_6">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>611</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="m_pqwTranslations">
+      <attribute name="title">
+       <string>Übersetzungen</string>
+      </attribute>
+      <layout class="QGridLayout" name="gridLayout_6">
+       <property name="leftMargin">
+        <number>3</number>
+       </property>
+       <property name="topMargin">
+        <number>3</number>
+       </property>
+       <property name="rightMargin">
+        <number>3</number>
+       </property>
+       <property name="bottomMargin">
+        <number>3</number>
+       </property>
+       <item row="0" column="0">
+        <widget class="QLabel" name="label_9">
+         <property name="text">
+          <string>Sprache</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QComboBox" name="m_pqcbLanguage"/>
+       </item>
+       <item row="1" column="0" colspan="2">
+        <widget class="QGroupBox" name="m_pqgbTranslations">
+         <property name="title">
+          <string>Übersetzungen</string>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_3">
+          <property name="leftMargin">
+           <number>3</number>
+          </property>
+          <property name="topMargin">
+           <number>3</number>
+          </property>
+          <property name="rightMargin">
+           <number>3</number>
+          </property>
+          <property name="bottomMargin">
+           <number>3</number>
+          </property>
+          <item>
+           <widget class="CwmsObjectListEditorWidgetIf" name="m_pCwmsEditor" native="true"/>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>CwmsObjectListEditorWidgetIf</class>
+   <extends>QWidget</extends>
+   <header location="global">CwmsObjectListEditorWidgetIf.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>CwmsPluginsIf</class>
+   <extends>QWidget</extends>
+   <header location="global">CwmsPluginsIf.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <tabstops>
+  <tabstop>m_pqleName</tabstop>
+  <tabstop>m_pqleManufacturer</tabstop>
+  <tabstop>m_pqleHotline</tabstop>
+  <tabstop>m_pqleEmail</tabstop>
+  <tabstop>m_pqleWeb</tabstop>
+  <tabstop>m_pqleMainWindow</tabstop>
+  <tabstop>m_pqpbSelectMainWindow</tabstop>
+  <tabstop>m_pqchbLicenceCheck</tabstop>
+  <tabstop>m_pqchbActive</tabstop>
+  <tabstop>m_pqchbDesktop</tabstop>
+  <tabstop>m_pqchbWeb</tabstop>
+  <tabstop>m_pqchbMobile</tabstop>
+  <tabstop>m_pqteDescription</tabstop>
+  <tabstop>m_pqsbMajor</tabstop>
+  <tabstop>m_pqsbMinor</tabstop>
+  <tabstop>m_pqsbBugfix</tabstop>
+  <tabstop>m_pqtvModules</tabstop>
+  <tabstop>m_pqteHelp</tabstop>
+  <tabstop>m_pqpbEditHelp</tabstop>
+  <tabstop>m_pqteLicence</tabstop>
+  <tabstop>m_pqpbEditLicence</tabstop>
+  <tabstop>m_pqcbLanguage</tabstop>
+  <tabstop>m_pqpbEditApplication</tabstop>
+  <tabstop>m_pqpbUpdateApplication</tabstop>
+  <tabstop>m_pqpbCancelApplication</tabstop>
+  <tabstop>m_pqpbRights</tabstop>
+  <tabstop>tabWidget</tabstop>
+  <tabstop>pushButton</tabstop>
+  <tabstop>m_pqpbMoveDown</tabstop>
+  <tabstop>m_pqpbMoveUp</tabstop>
+  <tabstop>m_pqpbAddModule</tabstop>
+  <tabstop>m_pqpbDeleteModule</tabstop>
+ </tabstops>
+ <resources>
+  <include location="wmsgui.qrc"/>
+ </resources>
+ <connections>
+  <connection>
+   <sender>m_pqpbEditHelp</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsApplicationEditorClass</receiver>
+   <slot>EditHelpClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>43</x>
+     <y>607</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>51</x>
+     <y>587</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqpbAddModule</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsApplicationEditorClass</receiver>
+   <slot>AddModuleClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>43</x>
+     <y>607</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>64</x>
+     <y>595</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqpbDeleteModule</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsApplicationEditorClass</receiver>
+   <slot>DeleteModuleClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>211</x>
+     <y>607</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>756</x>
+     <y>536</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqpbEditApplication</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsApplicationEditorClass</receiver>
+   <slot>EditApplicationClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>43</x>
+     <y>607</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>774</x>
+     <y>326</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqpbUpdateApplication</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsApplicationEditorClass</receiver>
+   <slot>UpdateApplicationClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>85</x>
+     <y>607</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>765</x>
+     <y>396</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqpbCancelApplication</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsApplicationEditorClass</receiver>
+   <slot>CancelChangesClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>127</x>
+     <y>607</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>790</x>
+     <y>454</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsApplicationEditorClass</receiver>
+   <slot>EditModuleClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>85</x>
+     <y>607</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>-22</x>
+     <y>582</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqtvModules</sender>
+   <signal>doubleClicked(QModelIndex)</signal>
+   <receiver>CwmsApplicationEditorClass</receiver>
+   <slot>EditModuleClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>101</x>
+     <y>36</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>459</x>
+     <y>581</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqpbEditLicence</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsApplicationEditorClass</receiver>
+   <slot>EditLicenceClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>43</x>
+     <y>607</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>742</x>
+     <y>512</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqpbRights</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsApplicationEditorClass</receiver>
+   <slot>RightsClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>169</x>
+     <y>607</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>717</x>
+     <y>595</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqcbLanguage</sender>
+   <signal>activated(QString)</signal>
+   <receiver>CwmsApplicationEditorClass</receiver>
+   <slot>LanguageChangedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>542</x>
+     <y>34</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>604</x>
+     <y>-54</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqpbSelectMainWindow</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsApplicationEditorClass</receiver>
+   <slot>SelectMainWindowClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>698</x>
+     <y>223</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>798</x>
+     <y>196</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqpbMoveUp</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsApplicationEditorClass</receiver>
+   <slot>MoveModuleUpClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>127</x>
+     <y>607</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>158</x>
+     <y>641</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqpbMoveDown</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsApplicationEditorClass</receiver>
+   <slot>MoveModuleDownClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>169</x>
+     <y>607</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>164</x>
+     <y>622</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqpbIcon</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsApplicationEditorClass</receiver>
+   <slot>SelectIconSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>678</x>
+     <y>269</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>886</x>
+     <y>281</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>EditHelpClickedSlot()</slot>
+  <slot>EditApplicationClickedSlot()</slot>
+  <slot>UpdateApplicationClickedSlot()</slot>
+  <slot>CancelChangesClickedSlot()</slot>
+  <slot>AddModuleClickedSlot()</slot>
+  <slot>DeleteModuleClickedSlot()</slot>
+  <slot>EditModuleClickedSlot()</slot>
+  <slot>EditLicenceClickedSlot()</slot>
+  <slot>RightsClickedSlot()</slot>
+  <slot>LanguageChangedSlot()</slot>
+  <slot>SelectMainWindowClickedSlot()</slot>
+  <slot>MoveModuleDownClickedSlot()</slot>
+  <slot>MoveModuleUpClickedSlot()</slot>
+  <slot>SelectIconSlot()</slot>
+ </slots>
+</ui>

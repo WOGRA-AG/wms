@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>CwmsObjectObjectListEditorWidgetClass</class>
+ <widget class="QWidget" name="CwmsObjectObjectListEditorWidgetClass">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>737</width>
+    <height>429</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Editor Widget</string>
+  </property>
+  <layout class="QHBoxLayout" name="horizontalLayout">
+   <item>
+    <widget class="QSplitter" name="splitter">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <widget class="QGroupBox" name="m_pqgbSelection">
+      <property name="title">
+       <string>Auswahl</string>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <property name="margin">
+        <number>3</number>
+       </property>
+       <item>
+        <widget class="QTreeView" name="m_pqtvSelection"/>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QGroupBox" name="m_pqgbData">
+      <property name="title">
+       <string>Datensicht</string>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_2">
+       <property name="margin">
+        <number>3</number>
+       </property>
+       <item>
+        <widget class="CwmsObjectListEditorWidgetIf" name="m_pCwmsEditor" native="true"/>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>CwmsObjectListEditorWidgetIf</class>
+   <extends>QWidget</extends>
+   <header>CwmsObjectListEditorWidgetIf.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>m_pqtvSelection</sender>
+   <signal>clicked(QModelIndex)</signal>
+   <receiver>CwmsObjectObjectListEditorWidgetClass</receiver>
+   <slot>TreeViewSelectionChangedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>173</x>
+     <y>218</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>269</x>
+     <y>508</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>TreeViewSelectionChangedSlot()</slot>
+ </slots>
+</ui>

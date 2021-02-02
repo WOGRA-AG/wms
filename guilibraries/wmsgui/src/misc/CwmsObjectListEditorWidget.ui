@@ -1,0 +1,516 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>CwmsObjectListEditorWidget</class>
+ <widget class="QWidget" name="CwmsObjectListEditorWidget">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>709</width>
+    <height>470</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>WMS Objectcontainer Editor</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <property name="leftMargin">
+    <number>3</number>
+   </property>
+   <property name="topMargin">
+    <number>3</number>
+   </property>
+   <property name="rightMargin">
+    <number>3</number>
+   </property>
+   <property name="bottomMargin">
+    <number>3</number>
+   </property>
+   <item>
+    <widget class="QSplitter" name="splitter">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <widget class="QTreeView" name="m_pCwmsObjectListListView">
+      <property name="alternatingRowColors">
+       <bool>true</bool>
+      </property>
+      <property name="selectionMode">
+       <enum>QAbstractItemView::ExtendedSelection</enum>
+      </property>
+      <property name="rootIsDecorated">
+       <bool>true</bool>
+      </property>
+      <property name="itemsExpandable">
+       <bool>true</bool>
+      </property>
+      <property name="sortingEnabled">
+       <bool>true</bool>
+      </property>
+      <property name="wordWrap">
+       <bool>true</bool>
+      </property>
+      <property name="expandsOnDoubleClick">
+       <bool>true</bool>
+      </property>
+      <attribute name="headerHighlightSections">
+       <bool>true</bool>
+      </attribute>
+      <attribute name="headerShowSortIndicator" stdset="0">
+       <bool>true</bool>
+      </attribute>
+     </widget>
+    </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="m_pqhbFunctions">
+     <item>
+      <widget class="QPushButton" name="m_pqpbNew">
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="wmsgui.qrc">
+         <normaloff>:/icons/new24.png</normaloff>:/icons/new24.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>24</width>
+         <height>24</height>
+        </size>
+       </property>
+       <property name="shortcut">
+        <string>Alt+N</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="m_pqpbEdit">
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="wmsgui.qrc">
+         <normaloff>:/icons/edit24.png</normaloff>:/icons/edit24.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>24</width>
+         <height>24</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="m_pqpbDelete">
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="wmsgui.qrc">
+         <normaloff>:/icons/delete24.png</normaloff>:/icons/delete24.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>24</width>
+         <height>24</height>
+        </size>
+       </property>
+       <property name="shortcut">
+        <string>Alt+L</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="m_pqpbCopy">
+       <property name="toolTip">
+        <string>Kopiere Objekt</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset>
+         <normaloff>:/png24/copy24.png</normaloff>:/png24/copy24.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>24</width>
+         <height>24</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="m_pqpbPrint">
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="wmsgui.qrc">
+         <normaloff>:/icons/print.png</normaloff>:/icons/print.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>24</width>
+         <height>24</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="m_pqpbJournal">
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="wmsgui.qrc">
+         <normaloff>:/icons/print-preview.png</normaloff>:/icons/print-preview.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>24</width>
+         <height>24</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="m_pqpbExport">
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="wmsgui.qrc">
+         <normaloff>:/icons/export24.png</normaloff>:/icons/export24.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>24</width>
+         <height>24</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="m_pqpbImport">
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="wmsgui.qrc">
+         <normaloff>:/icons/import24.png</normaloff>:/icons/import24.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>24</width>
+         <height>24</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="m_pqpbSearch">
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="wmsgui.qrc">
+         <normaloff>:/icons/search24.png</normaloff>:/icons/search24.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>24</width>
+         <height>24</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="m_pqpbSaveAsCsv">
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="wmsgui.qrc">
+         <normaloff>:/icons/save24.png</normaloff>:/icons/search24.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>24</width>
+         <height>24</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="m_pqpbRefresh">
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="wmsgui.qrc">
+         <normaloff>:/icons/refresh24.png</normaloff>:/icons/refresh24.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>24</width>
+         <height>24</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="qmlGenerator">
+       <property name="text">
+        <string>QML Generator</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="spacer2">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Expanding</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>331</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources>
+  <include location="wmsgui.qrc"/>
+ </resources>
+ <connections>
+  <connection>
+   <sender>m_pqpbDelete</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsObjectListEditorWidget</receiver>
+   <slot>DeleteClicekdSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>123</x>
+     <y>465</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqpbNew</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsObjectListEditorWidget</receiver>
+   <slot>NewClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>39</x>
+     <y>465</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqpbEdit</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsObjectListEditorWidget</receiver>
+   <slot>EditClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>81</x>
+     <y>465</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>139</x>
+     <y>514</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqpbPrint</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsObjectListEditorWidget</receiver>
+   <slot>PrintClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>207</x>
+     <y>465</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>231</x>
+     <y>529</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqpbJournal</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsObjectListEditorWidget</receiver>
+   <slot>JournalClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>249</x>
+     <y>465</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>759</x>
+     <y>451</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqpbSearch</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsObjectListEditorWidget</receiver>
+   <slot>SearchClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>375</x>
+     <y>465</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>362</x>
+     <y>500</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pCwmsObjectListListView</sender>
+   <signal>doubleClicked(QModelIndex)</signal>
+   <receiver>CwmsObjectListEditorWidget</receiver>
+   <slot>EditClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>483</x>
+     <y>293</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>546</x>
+     <y>542</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqpbExport</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsObjectListEditorWidget</receiver>
+   <slot>ExportClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>291</x>
+     <y>465</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>250</x>
+     <y>538</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqpbImport</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsObjectListEditorWidget</receiver>
+   <slot>ImportClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>333</x>
+     <y>465</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>354</x>
+     <y>537</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>qmlGenerator</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsObjectListEditorWidget</receiver>
+   <slot>QMLGeneratorClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>504</x>
+     <y>460</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>757</x>
+     <y>381</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqpbRefresh</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsObjectListEditorWidget</receiver>
+   <slot>RefreshClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>455</x>
+     <y>465</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>399</x>
+     <y>583</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqpbCopy</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsObjectListEditorWidget</receiver>
+   <slot>CopyObjectClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>155</x>
+     <y>453</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>244</x>
+     <y>568</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqpbSaveAsCsv</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsObjectListEditorWidget</receiver>
+   <slot>SaveAsCsvClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>404</x>
+     <y>457</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>479</x>
+     <y>580</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>EditClickedSlot()</slot>
+  <slot>PrintClickedSlot()</slot>
+  <slot>JournalClickedSlot()</slot>
+  <slot>ImportClickedSlot()</slot>
+  <slot>ExportClickedSlot()</slot>
+  <slot>SearchClickedSlot()</slot>
+  <slot>QMLGeneratorClickedSlot()</slot>
+  <slot>RefreshClickedSlot()</slot>
+  <slot>CopyObjectClickedSlot()</slot>
+  <slot>SaveAsCsvClickedSlot()</slot>
+ </slots>
+</ui>

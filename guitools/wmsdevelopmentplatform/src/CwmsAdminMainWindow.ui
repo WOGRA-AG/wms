@@ -1,0 +1,3075 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <author>Wolfgang Graßhof</author>
+ <comment>The Admin Mainwindow</comment>
+ <class>CwmsAdminMainWindow</class>
+ <widget class="QMainWindow" name="CwmsAdminMainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1071</width>
+    <height>1167</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>WMS Development Platform</string>
+  </property>
+  <property name="documentMode">
+   <bool>false</bool>
+  </property>
+  <property name="dockNestingEnabled">
+   <bool>false</bool>
+  </property>
+  <property name="dockOptions">
+   <set>QMainWindow::AllowTabbedDocks|QMainWindow::AnimatedDocks</set>
+  </property>
+  <property name="unifiedTitleAndToolBarOnMac">
+   <bool>false</bool>
+  </property>
+  <widget class="QWidget" name="m_pqwMain">
+   <layout class="QGridLayout" name="gridLayout">
+    <property name="leftMargin">
+     <number>0</number>
+    </property>
+    <property name="topMargin">
+     <number>0</number>
+    </property>
+    <property name="rightMargin">
+     <number>0</number>
+    </property>
+    <property name="bottomMargin">
+     <number>0</number>
+    </property>
+    <property name="spacing">
+     <number>0</number>
+    </property>
+    <item row="0" column="0">
+     <widget class="QMdiArea" name="m_pqMdiArea">
+      <property name="background">
+       <brush brushstyle="Dense4Pattern">
+        <color alpha="255">
+         <red>85</red>
+         <green>170</green>
+         <blue>255</blue>
+        </color>
+       </brush>
+      </property>
+      <property name="activationOrder">
+       <enum>QMdiArea::ActivationHistoryOrder</enum>
+      </property>
+      <property name="viewMode">
+       <enum>QMdiArea::TabbedView</enum>
+      </property>
+      <property name="documentMode">
+       <bool>false</bool>
+      </property>
+      <property name="tabsClosable">
+       <bool>true</bool>
+      </property>
+      <property name="tabsMovable">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="MenuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1071</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="m_qmFile">
+    <property name="title">
+     <string>&amp;Datei</string>
+    </property>
+    <widget class="QMenu" name="menuNeu">
+     <property name="title">
+      <string>Neu</string>
+     </property>
+     <property name="icon">
+      <iconset resource="../../../guilibraries/wmsgui/src/misc/wmsgui.qrc">
+       <normaloff>:/icons/new24.png</normaloff>:/icons/new24.png</iconset>
+     </property>
+     <widget class="QMenu" name="menuFormular">
+      <property name="title">
+       <string>Formular</string>
+      </property>
+      <property name="icon">
+       <iconset resource="../../../guilibraries/wmsgui/src/misc/wmsgui.qrc">
+        <normaloff>:/icons/order-invoicing24.png</normaloff>:/icons/order-invoicing24.png</iconset>
+      </property>
+      <addaction name="m_pqaNewGenericObjectForm"/>
+      <addaction name="m_pqaNewStandardObjectListForm"/>
+      <addaction name="m_pqaNewViewObjectListForm"/>
+      <addaction name="m_pqaNewObjectObjectListForm"/>
+      <addaction name="m_pqaNewUserDefinedForm"/>
+      <addaction name="m_pqaNewFormSearch"/>
+      <addaction name="m_pqaInteractiveComponent"/>
+      <addaction name="m_pqaNewFormLibrary"/>
+      <addaction name="m_pqaNewResource"/>
+     </widget>
+     <addaction name="m_pqaCreateDatabase"/>
+     <addaction name="m_pqaNewPackage"/>
+     <addaction name="m_pqaCreateClass"/>
+     <addaction name="m_pqaCreateObjectList"/>
+     <addaction name="m_pqaNewView"/>
+     <addaction name="menuFormular"/>
+     <addaction name="m_pqaNewReport"/>
+     <addaction name="m_pqaNewWorkflow"/>
+     <addaction name="m_pqaNewApplication"/>
+    </widget>
+    <addaction name="menuNeu"/>
+    <addaction name="separator"/>
+    <addaction name="m_pqaRefresh"/>
+    <addaction name="separator"/>
+    <addaction name="m_pqaExit"/>
+    <addaction name="m_pqaLogoutExit"/>
+   </widget>
+   <widget class="QMenu" name="m_pqmExtras">
+    <property name="title">
+     <string>Extras</string>
+    </property>
+    <addaction name="m_pqaClientSettings"/>
+    <addaction name="m_pqaServerPlugins"/>
+    <addaction name="separator"/>
+    <addaction name="m_pqaUserManager"/>
+    <addaction name="m_pqaSmtp"/>
+    <addaction name="m_pqaLDAPConfig"/>
+    <addaction name="separator"/>
+    <addaction name="m_pqaLogger"/>
+    <addaction name="separator"/>
+    <addaction name="m_pqaReplayEvents"/>
+    <addaction name="m_pqaDeleteAllExistingEvents"/>
+    <addaction name="separator"/>
+   </widget>
+   <widget class="QMenu" name="menuBearbeiten">
+    <property name="title">
+     <string>Bearbeiten</string>
+    </property>
+    <widget class="QMenu" name="menuDatenbank">
+     <property name="title">
+      <string>Schema</string>
+     </property>
+     <property name="icon">
+      <iconset resource="../../../guilibraries/wmsgui/src/misc/wmsgui.qrc">
+       <normaloff>:/icons/order-archive.png</normaloff>:/icons/order-archive.png</iconset>
+     </property>
+     <addaction name="m_pqaLanguages"/>
+     <addaction name="m_pqaCreateDocumentation"/>
+     <addaction name="m_pqaDbRights_2"/>
+     <addaction name="m_pqaDatabaseJournal"/>
+     <addaction name="separator"/>
+     <addaction name="m_pqaExportJson"/>
+     <addaction name="m_pqaGenerateDeployment"/>
+     <addaction name="separator"/>
+     <addaction name="m_pqaImportDeployment"/>
+     <addaction name="separator"/>
+     <addaction name="m_pqaDeleteDatabase"/>
+     <addaction name="m_pqaAdminPlugins"/>
+    </widget>
+    <widget class="QMenu" name="menuCodegenerierung">
+     <property name="title">
+      <string>Codegenerierung</string>
+     </property>
+     <property name="icon">
+      <iconset resource="../../../guilibraries/wmsgui/src/misc/wmsgui.qrc">
+       <normaloff>:/icons/article.png</normaloff>:/icons/article.png</iconset>
+     </property>
+     <addaction name="m_pqaCreateDbCode"/>
+     <addaction name="m_pqaGenerateCode"/>
+    </widget>
+    <widget class="QMenu" name="menuObjektliste">
+     <property name="title">
+      <string>Objektcontainer</string>
+     </property>
+     <property name="icon">
+      <iconset resource="../../../guilibraries/wmsgui/src/misc/wmsgui.qrc">
+       <normaloff>:/icons/Folder.png</normaloff>:/icons/Folder.png</iconset>
+     </property>
+     <addaction name="m_pqaObjectListProperties"/>
+     <addaction name="m_pqaObjectListJournal"/>
+     <addaction name="separator"/>
+     <addaction name="m_pqaExport"/>
+     <addaction name="separator"/>
+     <addaction name="m_pqaDeleteAllObjects"/>
+    </widget>
+    <addaction name="m_pqaEdit_2"/>
+    <addaction name="m_pqaDelete"/>
+    <addaction name="separator"/>
+    <addaction name="menuDatenbank"/>
+    <addaction name="menuObjektliste"/>
+    <addaction name="m_pqaScriptEnvironment"/>
+    <addaction name="separator"/>
+    <addaction name="m_pqaReportProperties"/>
+    <addaction name="separator"/>
+    <addaction name="menuCodegenerierung"/>
+    <addaction name="separator"/>
+    <addaction name="m_pqaCreateDbQueries"/>
+    <addaction name="m_pqaDataSearch"/>
+    <addaction name="separator"/>
+    <addaction name="m_pqaExecuteApplication"/>
+    <addaction name="separator"/>
+    <addaction name="m_pqaWorkflowTeams"/>
+   </widget>
+   <widget class="QMenu" name="menuFenster">
+    <property name="title">
+     <string>Fenster</string>
+    </property>
+    <widget class="QMenu" name="m_pqmViews">
+     <property name="title">
+      <string>Sichten</string>
+     </property>
+    </widget>
+    <addaction name="m_pqaShowOpenWindowsCascaded"/>
+    <addaction name="m_pqaTileOpenWindows"/>
+    <addaction name="m_pqaOpenNextWindow"/>
+    <addaction name="m_pqaOpenPreviousSubWindow"/>
+    <addaction name="m_pqaCloseWindow"/>
+    <addaction name="m_pqaCloseAllWindows"/>
+    <addaction name="separator"/>
+    <addaction name="m_pqmViews"/>
+    <addaction name="separator"/>
+    <addaction name="m_pqaRestoreWindows"/>
+   </widget>
+   <widget class="QMenu" name="menuHilfe">
+    <property name="title">
+     <string>Hilfe</string>
+    </property>
+    <addaction name="m_pqaAbout"/>
+   </widget>
+   <addaction name="m_qmFile"/>
+   <addaction name="separator"/>
+   <addaction name="menuBearbeiten"/>
+   <addaction name="m_pqmExtras"/>
+   <addaction name="menuFenster"/>
+   <addaction name="menuHilfe"/>
+  </widget>
+  <widget class="QDockWidget" name="m_pqdwDatabase">
+   <property name="windowTitle">
+    <string>Schema</string>
+   </property>
+   <attribute name="dockWidgetArea">
+    <number>1</number>
+   </attribute>
+   <widget class="QWidget" name="dockWidgetContents">
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <property name="spacing">
+      <number>6</number>
+     </property>
+     <property name="leftMargin">
+      <number>3</number>
+     </property>
+     <property name="topMargin">
+      <number>3</number>
+     </property>
+     <property name="rightMargin">
+      <number>3</number>
+     </property>
+     <property name="bottomMargin">
+      <number>3</number>
+     </property>
+     <item>
+      <widget class="QGroupBox" name="groupBox_2">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Maximum">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>16777215</height>
+        </size>
+       </property>
+       <property name="title">
+        <string>Auswahl</string>
+       </property>
+       <layout class="QGridLayout" name="gridLayout_4">
+        <item row="0" column="0">
+         <widget class="QLabel" name="label">
+          <property name="text">
+           <string>Schema</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QComboBox" name="m_pqcbDatabases">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>0</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QLabel" name="label_2">
+          <property name="text">
+           <string>Sprache</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="QComboBox" name="m_pqcbLanguage">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </item>
+     <item>
+      <widget class="QCheckBox" name="m_pqchbShowTechnicalItems">
+       <property name="text">
+        <string>Technische Datenstrukturen anzeigen</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="verticalSpacer">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>40</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+  <widget class="QDockWidget" name="m_pqdwInformation">
+   <property name="floating">
+    <bool>false</bool>
+   </property>
+   <property name="windowTitle">
+    <string>Information</string>
+   </property>
+   <attribute name="dockWidgetArea">
+    <number>8</number>
+   </attribute>
+   <widget class="QWidget" name="dockWidgetContents_2">
+    <layout class="QVBoxLayout" name="verticalLayout_2">
+     <property name="leftMargin">
+      <number>3</number>
+     </property>
+     <property name="topMargin">
+      <number>3</number>
+     </property>
+     <property name="rightMargin">
+      <number>3</number>
+     </property>
+     <property name="bottomMargin">
+      <number>3</number>
+     </property>
+     <item>
+      <widget class="QTextBrowser" name="m_pqtbInfo">
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>16777215</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_3">
+       <property name="minimumSize">
+        <size>
+         <width>201</width>
+         <height>30</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>201</width>
+         <height>30</height>
+        </size>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="pixmap">
+        <pixmap resource="../../../guilibraries/wmsgui/src/misc/wmsgui.qrc">:/icons/WOGRAConsulting-Logo.png</pixmap>
+       </property>
+       <property name="scaledContents">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+  <widget class="QToolBar" name="m_pqtbNew">
+   <property name="windowTitle">
+    <string>Neu</string>
+   </property>
+   <property name="toolTip">
+    <string>Neu</string>
+   </property>
+   <property name="statusTip">
+    <string>Neu</string>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="m_pqaCreateDatabase"/>
+   <addaction name="m_pqaNewPackage"/>
+   <addaction name="m_pqaCreateClass"/>
+   <addaction name="m_pqaCreateObjectList"/>
+   <addaction name="m_pqaNewView"/>
+   <addaction name="m_pqaNewReport"/>
+   <addaction name="m_pqaNewWorkflow"/>
+   <addaction name="m_pqaNewApplication"/>
+  </widget>
+  <widget class="QToolBar" name="m_pqtbEdit">
+   <property name="windowTitle">
+    <string>Bearbeiten</string>
+   </property>
+   <property name="toolTip">
+    <string>Bearbeiten</string>
+   </property>
+   <property name="statusTip">
+    <string>Bearbeiten</string>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="m_pqaEdit_2"/>
+   <addaction name="m_pqaDelete"/>
+   <addaction name="m_pqaCreateDbQueries"/>
+   <addaction name="m_pqaScriptEnvironment"/>
+  </widget>
+  <widget class="QDockWidget" name="m_pqdwModel">
+   <property name="windowTitle">
+    <string>Modell</string>
+   </property>
+   <attribute name="dockWidgetArea">
+    <number>1</number>
+   </attribute>
+   <widget class="QWidget" name="dockWidgetContents_4">
+    <layout class="QVBoxLayout" name="verticalLayout_3">
+     <property name="leftMargin">
+      <number>3</number>
+     </property>
+     <property name="topMargin">
+      <number>3</number>
+     </property>
+     <property name="rightMargin">
+      <number>3</number>
+     </property>
+     <property name="bottomMargin">
+      <number>3</number>
+     </property>
+     <item>
+      <widget class="QTreeWidget" name="m_pqlvModel">
+       <property name="selectionMode">
+        <enum>QAbstractItemView::ExtendedSelection</enum>
+       </property>
+       <property name="sortingEnabled">
+        <bool>true</bool>
+       </property>
+       <attribute name="headerShowSortIndicator" stdset="0">
+        <bool>true</bool>
+       </attribute>
+       <column>
+        <property name="text">
+         <string>Name</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>Schlüssel</string>
+        </property>
+       </column>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+  <widget class="QDockWidget" name="m_pqdwData">
+   <property name="windowTitle">
+    <string>Daten</string>
+   </property>
+   <attribute name="dockWidgetArea">
+    <number>1</number>
+   </attribute>
+   <widget class="QWidget" name="dockWidgetContents_5">
+    <layout class="QVBoxLayout" name="verticalLayout_4">
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout">
+       <item>
+        <widget class="QPushButton" name="m_pqpbClearFilter">
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset resource="../../../guilibraries/wmsgui/src/misc/wmsgui.qrc">
+           <normaloff>:/icons/cancel16.png</normaloff>:/icons/cancel16.png</iconset>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="m_pqlabClassFilter">
+         <property name="text">
+          <string>Klassenfilter</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QComboBox" name="m_pqcbClassFilter">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="editable">
+          <bool>true</bool>
+         </property>
+         <property name="currentText">
+          <string>Objektcontainer aller Klassen</string>
+         </property>
+         <property name="maxVisibleItems">
+          <number>30</number>
+         </property>
+         <item>
+          <property name="text">
+           <string>Objektcontainer aller Klassen</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <widget class="QTreeWidget" name="m_pqlvData">
+       <property name="selectionMode">
+        <enum>QAbstractItemView::ExtendedSelection</enum>
+       </property>
+       <property name="sortingEnabled">
+        <bool>true</bool>
+       </property>
+       <attribute name="headerShowSortIndicator" stdset="0">
+        <bool>true</bool>
+       </attribute>
+       <column>
+        <property name="text">
+         <string>Name</string>
+        </property>
+       </column>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+  <widget class="QDockWidget" name="m_pqdwApplications">
+   <property name="windowTitle">
+    <string>Applikationen</string>
+   </property>
+   <attribute name="dockWidgetArea">
+    <number>2</number>
+   </attribute>
+   <widget class="QWidget" name="dockWidgetContents_9">
+    <layout class="QVBoxLayout" name="verticalLayout_9">
+     <property name="leftMargin">
+      <number>3</number>
+     </property>
+     <property name="topMargin">
+      <number>3</number>
+     </property>
+     <property name="rightMargin">
+      <number>3</number>
+     </property>
+     <property name="bottomMargin">
+      <number>3</number>
+     </property>
+     <item>
+      <widget class="QTreeWidget" name="m_pqlvApplications">
+       <property name="selectionMode">
+        <enum>QAbstractItemView::ExtendedSelection</enum>
+       </property>
+       <property name="sortingEnabled">
+        <bool>true</bool>
+       </property>
+       <attribute name="headerShowSortIndicator" stdset="0">
+        <bool>true</bool>
+       </attribute>
+       <column>
+        <property name="text">
+         <string>Name</string>
+        </property>
+       </column>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+  <widget class="QDockWidget" name="m_pqdwPrint">
+   <property name="windowTitle">
+    <string>Druckausgabe</string>
+   </property>
+   <attribute name="dockWidgetArea">
+    <number>2</number>
+   </attribute>
+   <widget class="QWidget" name="dockWidgetContents_6">
+    <layout class="QVBoxLayout" name="verticalLayout_6">
+     <property name="leftMargin">
+      <number>3</number>
+     </property>
+     <property name="topMargin">
+      <number>3</number>
+     </property>
+     <property name="rightMargin">
+      <number>3</number>
+     </property>
+     <property name="bottomMargin">
+      <number>3</number>
+     </property>
+     <item>
+      <widget class="QTreeWidget" name="m_pqlvPrint">
+       <property name="selectionMode">
+        <enum>QAbstractItemView::ExtendedSelection</enum>
+       </property>
+       <property name="sortingEnabled">
+        <bool>true</bool>
+       </property>
+       <attribute name="headerShowSortIndicator" stdset="0">
+        <bool>true</bool>
+       </attribute>
+       <column>
+        <property name="text">
+         <string>Name</string>
+        </property>
+       </column>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+  <widget class="QDockWidget" name="m_pqdwWorkflows">
+   <property name="windowTitle">
+    <string>Geschäftsprozesse</string>
+   </property>
+   <attribute name="dockWidgetArea">
+    <number>2</number>
+   </attribute>
+   <widget class="QWidget" name="dockWidgetContents_7">
+    <layout class="QVBoxLayout" name="verticalLayout_7">
+     <property name="leftMargin">
+      <number>3</number>
+     </property>
+     <property name="topMargin">
+      <number>3</number>
+     </property>
+     <property name="rightMargin">
+      <number>3</number>
+     </property>
+     <property name="bottomMargin">
+      <number>3</number>
+     </property>
+     <item>
+      <widget class="QTreeWidget" name="m_pqlvWorkflows">
+       <property name="selectionMode">
+        <enum>QAbstractItemView::ExtendedSelection</enum>
+       </property>
+       <property name="sortingEnabled">
+        <bool>true</bool>
+       </property>
+       <attribute name="headerShowSortIndicator" stdset="0">
+        <bool>true</bool>
+       </attribute>
+       <column>
+        <property name="text">
+         <string>Name</string>
+        </property>
+       </column>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+  <widget class="QDockWidget" name="m_pqdwUi">
+   <property name="windowTitle">
+    <string>Benutzeroberflächen</string>
+   </property>
+   <attribute name="dockWidgetArea">
+    <number>2</number>
+   </attribute>
+   <widget class="QWidget" name="dockWidgetContents_8">
+    <layout class="QVBoxLayout" name="verticalLayout_8">
+     <property name="leftMargin">
+      <number>3</number>
+     </property>
+     <property name="topMargin">
+      <number>3</number>
+     </property>
+     <property name="rightMargin">
+      <number>3</number>
+     </property>
+     <property name="bottomMargin">
+      <number>3</number>
+     </property>
+     <item>
+      <widget class="QTreeWidget" name="m_pqlvUis">
+       <property name="selectionMode">
+        <enum>QAbstractItemView::ExtendedSelection</enum>
+       </property>
+       <property name="sortingEnabled">
+        <bool>true</bool>
+       </property>
+       <attribute name="headerShowSortIndicator" stdset="0">
+        <bool>true</bool>
+       </attribute>
+       <column>
+        <property name="text">
+         <string>Name</string>
+        </property>
+       </column>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+  <widget class="QDockWidget" name="m_pqdwSearch">
+   <property name="windowTitle">
+    <string>Suche</string>
+   </property>
+   <attribute name="dockWidgetArea">
+    <number>8</number>
+   </attribute>
+   <widget class="QWidget" name="dockWidgetContents_10">
+    <layout class="QGridLayout" name="gridLayout_3">
+     <property name="leftMargin">
+      <number>3</number>
+     </property>
+     <property name="topMargin">
+      <number>3</number>
+     </property>
+     <property name="rightMargin">
+      <number>3</number>
+     </property>
+     <property name="bottomMargin">
+      <number>3</number>
+     </property>
+     <item row="2" column="0" colspan="2">
+      <widget class="QPushButton" name="m_pqpbSearch">
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="../../../guilibraries/wmsgui/src/misc/wmsgui.qrc">
+         <normaloff>:/icons/search24.png</normaloff>:/icons/search24.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>24</width>
+         <height>24</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="0">
+      <widget class="QLabel" name="label_5">
+       <property name="text">
+        <string>Suchbegriff</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="2">
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item row="1" column="0" colspan="3">
+      <widget class="QGroupBox" name="groupBox">
+       <property name="title">
+        <string>Suche nach bzw. in</string>
+       </property>
+       <layout class="QVBoxLayout" name="verticalLayout_5">
+        <item>
+         <widget class="QCheckBox" name="m_pqchbClasses">
+          <property name="text">
+           <string>Klassen</string>
+          </property>
+          <property name="checked">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="m_pqchbMembers">
+          <property name="text">
+           <string>Members</string>
+          </property>
+          <property name="checked">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="m_pqchbMethods">
+          <property name="text">
+           <string>Funktionen</string>
+          </property>
+          <property name="checked">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </item>
+     <item row="0" column="1" colspan="2">
+      <widget class="QLineEdit" name="m_pqleSearch"/>
+     </item>
+     <item row="3" column="0" colspan="3">
+      <widget class="QTreeWidget" name="m_pqtwSearchResults">
+       <column>
+        <property name="text">
+         <string>Ergebnisse</string>
+        </property>
+       </column>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+  <widget class="QDockWidget" name="m_pqdwViews">
+   <property name="windowTitle">
+    <string>Sichten</string>
+   </property>
+   <attribute name="dockWidgetArea">
+    <number>2</number>
+   </attribute>
+   <widget class="QWidget" name="dockWidgetContents_11">
+    <layout class="QVBoxLayout" name="verticalLayout_10">
+     <property name="leftMargin">
+      <number>3</number>
+     </property>
+     <property name="topMargin">
+      <number>3</number>
+     </property>
+     <property name="rightMargin">
+      <number>3</number>
+     </property>
+     <property name="bottomMargin">
+      <number>3</number>
+     </property>
+     <item>
+      <widget class="QTreeWidget" name="m_pqlvViews">
+       <property name="selectionMode">
+        <enum>QAbstractItemView::ExtendedSelection</enum>
+       </property>
+       <property name="sortingEnabled">
+        <bool>true</bool>
+       </property>
+       <attribute name="headerShowSortIndicator" stdset="0">
+        <bool>true</bool>
+       </attribute>
+       <column>
+        <property name="text">
+         <string>Name</string>
+        </property>
+       </column>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+  <action name="m_pqaExit">
+   <property name="icon">
+    <iconset resource="../../../guilibraries/wmsgui/src/misc/wmsgui.qrc">
+     <normaloff>:/icons/exit24.png</normaloff>:/icons/exit24.png</iconset>
+   </property>
+   <property name="iconText">
+    <string>Beenden</string>
+   </property>
+   <property name="name" stdset="0">
+    <cstring>m_pqaExit</cstring>
+   </property>
+  </action>
+  <action name="m_pqaCreateDatabase">
+   <property name="icon">
+    <iconset resource="../../../guilibraries/wmsgui/src/misc/wmsgui.qrc">
+     <normaloff>:/icons/order-archiv32.png</normaloff>:/icons/order-archiv32.png</iconset>
+   </property>
+   <property name="text">
+    <string>Neues Schema</string>
+   </property>
+   <property name="iconText">
+    <string>Schema anlegen</string>
+   </property>
+   <property name="name" stdset="0">
+    <cstring>m_pqaCreateDatabase</cstring>
+   </property>
+  </action>
+  <action name="m_pqaDeleteDatabase">
+   <property name="icon">
+    <iconset resource="../../../guilibraries/wmsgui/src/misc/wmsgui.qrc">
+     <normaloff>:/icons/delete24.png</normaloff>:/icons/delete24.png</iconset>
+   </property>
+   <property name="text">
+    <string>Löschen...</string>
+   </property>
+   <property name="iconText">
+    <string>Datenbank lÃ¶schen</string>
+   </property>
+   <property name="name" stdset="0">
+    <cstring>m_pqaDeleteDatabase</cstring>
+   </property>
+  </action>
+  <action name="m_pqaCreateClass">
+   <property name="icon">
+    <iconset resource="../../../guilibraries/wmsgui/src/misc/wmsgui.qrc">
+     <normaloff>:/icons/deliverynote-new32.png</normaloff>:/icons/deliverynote-new32.png</iconset>
+   </property>
+   <property name="text">
+    <string>Neue Klasse</string>
+   </property>
+   <property name="iconText">
+    <string>Klasse anlegen</string>
+   </property>
+   <property name="name" stdset="0">
+    <cstring>m_pqaCreateClass</cstring>
+   </property>
+  </action>
+  <action name="m_pqaCreateObjectList">
+   <property name="icon">
+    <iconset resource="../../../guilibraries/wmsgui/src/misc/wmsgui.qrc">
+     <normaloff>:/icons/article-new.png</normaloff>:/icons/article-new.png</iconset>
+   </property>
+   <property name="text">
+    <string>Neuer Objektcontainer</string>
+   </property>
+   <property name="iconText">
+    <string>Objektcontainer anlegen</string>
+   </property>
+   <property name="name" stdset="0">
+    <cstring>m_pqaCreateObjectList</cstring>
+   </property>
+  </action>
+  <action name="m_pqaDeleteAllObjects">
+   <property name="icon">
+    <iconset resource="../../../guilibraries/wmsgui/src/misc/wmsgui.qrc">
+     <normaloff>:/icons/DeleteFolder.png</normaloff>:/icons/DeleteFolder.png</iconset>
+   </property>
+   <property name="text">
+    <string>Alle Objekte löschen...</string>
+   </property>
+   <property name="iconText">
+    <string>Alle Objekte löschen</string>
+   </property>
+   <property name="name" stdset="0">
+    <cstring>m_pqaDeleteAllObjects</cstring>
+   </property>
+  </action>
+  <action name="m_pqaExport">
+   <property name="icon">
+    <iconset resource="../../../guilibraries/wmsgui/src/misc/wmsgui.qrc">
+     <normaloff>:/icons/export24.png</normaloff>:/icons/export24.png</iconset>
+   </property>
+   <property name="iconText">
+    <string>Daten exportieren...</string>
+   </property>
+   <property name="name" stdset="0">
+    <cstring>m_pqaExport</cstring>
+   </property>
+  </action>
+  <action name="m_pqaCreateDocumentation">
+   <property name="icon">
+    <iconset resource="../../../guilibraries/wmsgui/src/misc/wmsgui.qrc">
+     <normaloff>:/icons/taxtypes.png</normaloff>:/icons/taxtypes.png</iconset>
+   </property>
+   <property name="text">
+    <string>Schema Dokumentation erzeugen...</string>
+   </property>
+   <property name="iconText">
+    <string>DB Dokumentation erzeugen</string>
+   </property>
+   <property name="name" stdset="0">
+    <cstring>m_pqaCreateDocumentation</cstring>
+   </property>
+  </action>
+  <action name="m_pqaGenerateCode">
+   <property name="icon">
+    <iconset resource="../../../guilibraries/wmsgui/src/misc/wmsgui.qrc">
+     <normaloff>:/icons/deliverynote.png</normaloff>:/icons/deliverynote.png</iconset>
+   </property>
+   <property name="text">
+    <string>Klasse...</string>
+   </property>
+   <property name="iconText">
+    <string>Klassencode generieren</string>
+   </property>
+  </action>
+  <action name="m_pqaCreateDbCode">
+   <property name="icon">
+    <iconset resource="../../../guilibraries/wmsgui/src/misc/wmsgui.qrc">
+     <normaloff>:/icons/order-archiv32.png</normaloff>:/icons/order-archiv32.png</iconset>
+   </property>
+   <property name="text">
+    <string>Schema...</string>
+   </property>
+   <property name="iconText">
+    <string>Datenbankcode erzeugen</string>
+   </property>
+  </action>
+  <action name="m_pqaCreateDbQueries">
+   <property name="icon">
+    <iconset resource="../../../guilibraries/wmsgui/src/misc/wmsgui.qrc">
+     <normaloff>:/icons/articleunit.png</normaloff>:/icons/articleunit.png</iconset>
+   </property>
+   <property name="text">
+    <string>Abfragen erstellen...</string>
+   </property>
+  </action>
+  <action name="m_pqaRefresh">
+   <property name="icon">
+    <iconset resource="../../../guilibraries/wmsgui/src/misc/wmsgui.qrc">
+     <normaloff>:/icons/refresh24.png</normaloff>:/icons/refresh24.png</iconset>
+   </property>
+   <property name="text">
+    <string>Aktualisieren</string>
+   </property>
+   <property name="shortcut">
+    <string>F5</string>
+   </property>
+  </action>
+  <action name="m_pqaUserManager">
+   <property name="icon">
+    <iconset resource="../../../guilibraries/wmsgui/src/misc/wmsgui.qrc">
+     <normaloff>:/icons/usermanager32.png</normaloff>:/icons/usermanager32.png</iconset>
+   </property>
+   <property name="text">
+    <string>Benutzerverwaltung...</string>
+   </property>
+  </action>
+  <action name="m_pqaDbRights_2">
+   <property name="icon">
+    <iconset resource="../../../guilibraries/wmsgui/src/misc/wmsgui.qrc">
+     <normaloff>:/icons/Customer.png</normaloff>:/icons/Customer.png</iconset>
+   </property>
+   <property name="text">
+    <string>Berechtigungen...</string>
+   </property>
+  </action>
+  <action name="m_pqaLanguages">
+   <property name="icon">
+    <iconset resource="../../../guilibraries/wmsgui/src/misc/wmsgui.qrc">
+     <normaloff>:/icons/languages.png</normaloff>:/icons/languages.png</iconset>
+   </property>
+   <property name="text">
+    <string>Sprachen...</string>
+   </property>
+  </action>
+  <action name="m_pqaClientSettings">
+   <property name="icon">
+    <iconset resource="../../../guilibraries/wmsgui/src/misc/wmsgui.qrc">
+     <normaloff>:/icons/clientsettings24.png</normaloff>:/icons/clientsettings24.png</iconset>
+   </property>
+   <property name="text">
+    <string>Konfiguration...</string>
+   </property>
+  </action>
+  <action name="m_pqaLicenceManager">
+   <property name="icon">
+    <iconset resource="../../../guilibraries/wmsgui/src/misc/wmsgui.qrc">
+     <normaloff>:/icons/licencemanager24.png</normaloff>:/icons/licencemanager24.png</iconset>
+   </property>
+   <property name="text">
+    <string>Lizenzverwaltung...</string>
+   </property>
+  </action>
+  <action name="m_pqaNewView">
+   <property name="icon">
+    <iconset resource="../../../guilibraries/wmsgui/src/misc/wmsgui.qrc">
+     <normaloff>:/icons/stats32.png</normaloff>:/icons/stats32.png</iconset>
+   </property>
+   <property name="text">
+    <string>Neue Sicht</string>
+   </property>
+   <property name="iconText">
+    <string>Sicht anlegen</string>
+   </property>
+  </action>
+  <action name="m_pqaNewReport">
+   <property name="icon">
+    <iconset resource="../../../guilibraries/wmsgui/src/misc/wmsgui.qrc">
+     <normaloff>:/icons/reports32.png</normaloff>:/icons/reports32.png</iconset>
+   </property>
+   <property name="text">
+    <string>Neuer Bericht</string>
+   </property>
+   <property name="iconText">
+    <string>Bericht anlegen</string>
+   </property>
+  </action>
+  <action name="m_pqaReportProperties">
+   <property name="icon">
+    <iconset resource="../../../guilibraries/wmsgui/src/misc/wmsgui.qrc">
+     <normaloff>:/icons/settings32.png</normaloff>:/icons/settings32.png</iconset>
+   </property>
+   <property name="text">
+    <string>Berichtseigenschaften...</string>
+   </property>
+  </action>
+  <action name="m_pqaDatabaseJournal">
+   <property name="icon">
+    <iconset resource="../../../guilibraries/wmsgui/src/misc/wmsgui.qrc">
+     <normaloff>:/icons/printpreview24.png</normaloff>:/icons/printpreview24.png</iconset>
+   </property>
+   <property name="text">
+    <string>Journal...</string>
+   </property>
+  </action>
+  <action name="m_pqaObjectListJournal">
+   <property name="icon">
+    <iconset resource="../../../guilibraries/wmsgui/src/misc/wmsgui.qrc">
+     <normaloff>:/icons/printpreview24.png</normaloff>:/icons/printpreview24.png</iconset>
+   </property>
+   <property name="text">
+    <string>Journal...</string>
+   </property>
+  </action>
+  <action name="m_pqaNewApplication">
+   <property name="icon">
+    <iconset resource="../../../guilibraries/wmsgui/src/misc/wmsgui.qrc">
+     <normaloff>:/icons/NewVersionedDocument.png</normaloff>:/icons/NewVersionedDocument.png</iconset>
+   </property>
+   <property name="text">
+    <string>Neue Applikation</string>
+   </property>
+   <property name="iconText">
+    <string>Applikation anlegen</string>
+   </property>
+  </action>
+  <action name="m_pqaExecuteApplication">
+   <property name="icon">
+    <iconset resource="../../../guilibraries/wmsgui/src/misc/wmsgui.qrc">
+     <normaloff>:/icons/NewVersionedDocument.png</normaloff>:/icons/NewVersionedDocument.png</iconset>
+   </property>
+   <property name="text">
+    <string>Applikation ausführen</string>
+   </property>
+  </action>
+  <action name="m_pqaExportJson">
+   <property name="icon">
+    <iconset resource="../../../guilibraries/wmsgui/src/misc/wmsgui.qrc">
+     <normaloff>:/icons/orderconfirmation24.png</normaloff>:/icons/orderconfirmation24.png</iconset>
+   </property>
+   <property name="text">
+    <string>Exportiere JSoN...</string>
+   </property>
+  </action>
+  <action name="m_pqaNewStandardObjectListForm">
+   <property name="text">
+    <string>Standard Objektcontainerformular</string>
+   </property>
+   <property name="iconText">
+    <string>Neues Standard Objektcontainerformular anlegen</string>
+   </property>
+  </action>
+  <action name="m_pqaNewViewObjectListForm">
+   <property name="text">
+    <string>Sicht Objektcontainerformular</string>
+   </property>
+   <property name="iconText">
+    <string>Neues Sicht Objektcontainerformular anlegen</string>
+   </property>
+  </action>
+  <action name="m_pqaNewObjectObjectListForm">
+   <property name="text">
+    <string>Objekt Objektcontainerformular</string>
+   </property>
+  </action>
+  <action name="m_pqaNewGenericObjectForm">
+   <property name="text">
+    <string>Generisches Objektformular</string>
+   </property>
+  </action>
+  <action name="m_pqaNewUserDefinedForm">
+   <property name="text">
+    <string>Benutzerdefiniertes Formular</string>
+   </property>
+  </action>
+  <action name="m_pqaEdit_2">
+   <property name="icon">
+    <iconset resource="../../../guilibraries/wmsgui/src/misc/wmsgui.qrc">
+     <normaloff>:/icons/edit32.png</normaloff>:/icons/edit32.png</iconset>
+   </property>
+   <property name="text">
+    <string>Bearbeiten...</string>
+   </property>
+  </action>
+  <action name="m_pqaDelete">
+   <property name="icon">
+    <iconset resource="../../../guilibraries/wmsgui/src/misc/wmsgui.qrc">
+     <normaloff>:/icons/delete32.png</normaloff>:/icons/delete32.png</iconset>
+   </property>
+   <property name="text">
+    <string>Löschen</string>
+   </property>
+  </action>
+  <action name="m_pqaNewFormSearch">
+   <property name="text">
+    <string>Suchformular</string>
+   </property>
+  </action>
+  <action name="m_pqaNewWorkflow">
+   <property name="icon">
+    <iconset resource="../../../guilibraries/wmsgui/src/misc/wmsgui.qrc">
+     <normaloff>:/icons/LinkDocument.png</normaloff>:/icons/LinkDocument.png</iconset>
+   </property>
+   <property name="text">
+    <string>Neuer Geschäftsprozess</string>
+   </property>
+   <property name="iconText">
+    <string>Neuen Geschäftsprozess anlegen</string>
+   </property>
+  </action>
+  <action name="m_pqaWorkflowTeams">
+   <property name="icon">
+    <iconset resource="../../../guilibraries/wmsgui/src/misc/wmsgui.qrc">
+     <normaloff>:/icons/task-delegated.png</normaloff>:/icons/task-delegated.png</iconset>
+   </property>
+   <property name="text">
+    <string>Geschäftsprozess Teams...</string>
+   </property>
+  </action>
+  <action name="m_pqaSmtp">
+   <property name="icon">
+    <iconset resource="../../../guilibraries/wmsgui/src/misc/wmsgui.qrc">
+     <normaloff>:/icons/mail24.png</normaloff>:/icons/mail24.png</iconset>
+   </property>
+   <property name="text">
+    <string>Smtp Konfiguration...</string>
+   </property>
+  </action>
+  <action name="m_pqaGenerateDeployment">
+   <property name="icon">
+    <iconset resource="../../../guilibraries/wmsgui/src/misc/wmsgui.qrc">
+     <normaloff>:/icons/export24.png</normaloff>:/icons/export24.png</iconset>
+   </property>
+   <property name="text">
+    <string>Exportiere Deployment Datei...</string>
+   </property>
+   <property name="statusTip">
+    <string>Erzeugt eine Deploymentdatei, die in andere Datenbanken eingespielt werden kann.</string>
+   </property>
+  </action>
+  <action name="m_pqaImportDeployment">
+   <property name="icon">
+    <iconset resource="../../../guilibraries/wmsgui/src/misc/wmsgui.qrc">
+     <normaloff>:/icons/import24.png</normaloff>:/icons/import24.png</iconset>
+   </property>
+   <property name="text">
+    <string>Importiere Deployment Datei...</string>
+   </property>
+  </action>
+  <action name="m_pqaObjectListProperties">
+   <property name="icon">
+    <iconset resource="../../../guilibraries/wmsgui/src/misc/wmsgui.qrc">
+     <normaloff>:/icons/Layoutsettings.png</normaloff>:/icons/Layoutsettings.png</iconset>
+   </property>
+   <property name="text">
+    <string>Eigenschaften...</string>
+   </property>
+  </action>
+  <action name="m_pqaLogger">
+   <property name="text">
+    <string>Logger...</string>
+   </property>
+  </action>
+  <action name="m_pqaModelDataVisibility">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Modell und Inhalte</string>
+   </property>
+  </action>
+  <action name="m_pqaModelVisibility">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Modell</string>
+   </property>
+  </action>
+  <action name="m_pqaDataVisibility">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Daten</string>
+   </property>
+  </action>
+  <action name="m_pqaUiVisibility">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Benutzeroberflächen</string>
+   </property>
+  </action>
+  <action name="m_pqaDatabaseVisibility">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Datenbank</string>
+   </property>
+  </action>
+  <action name="m_pqaInformationVisibility">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Informationen</string>
+   </property>
+  </action>
+  <action name="m_pqaPrintOutputVisibility">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Druckausgabe</string>
+   </property>
+  </action>
+  <action name="m_pqaWorkflowsVisibility">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Geschäftsprozesse</string>
+   </property>
+  </action>
+  <action name="m_pqaApplicationVisibility">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Applikationen</string>
+   </property>
+  </action>
+  <action name="m_pqaRestoreWindows">
+   <property name="text">
+    <string>Layout wiederherstellen</string>
+   </property>
+  </action>
+  <action name="m_pqaShowOpenWindowsCascaded">
+   <property name="text">
+    <string>Offene Fenster kaskadieren</string>
+   </property>
+  </action>
+  <action name="m_pqaTileOpenWindows">
+   <property name="text">
+    <string>Offene Fenster anordnen</string>
+   </property>
+  </action>
+  <action name="m_pqaOpenNextWindow">
+   <property name="text">
+    <string>Nächstes Fenster</string>
+   </property>
+  </action>
+  <action name="m_pqaOpenPreviousSubWindow">
+   <property name="text">
+    <string>Vorheriges Fenster</string>
+   </property>
+  </action>
+  <action name="m_pqaCloseAllWindows">
+   <property name="text">
+    <string>Alle Fenster schließen</string>
+   </property>
+  </action>
+  <action name="m_pqaCloseWindow">
+   <property name="text">
+    <string>Aktuelles Fenster schließen</string>
+   </property>
+  </action>
+  <action name="m_pqaServerSettings">
+   <property name="text">
+    <string>Konfiguration...</string>
+   </property>
+  </action>
+  <action name="m_pqaServerPlugins">
+   <property name="text">
+    <string>Server Plugins...</string>
+   </property>
+  </action>
+  <action name="m_pqaAdminPlugins">
+   <property name="text">
+    <string>Development Platform Plugins...</string>
+   </property>
+  </action>
+  <action name="m_pqaNewPackage">
+   <property name="icon">
+    <iconset resource="../../../guilibraries/wmsgui/src/misc/wmsgui.qrc">
+     <normaloff>:/icons/newfolder.png</normaloff>:/icons/newfolder.png</iconset>
+   </property>
+   <property name="text">
+    <string>Neues Package</string>
+   </property>
+  </action>
+  <action name="m_pqaNewFormLibrary">
+   <property name="text">
+    <string>Bibliothek</string>
+   </property>
+  </action>
+  <action name="m_pqaNewResource">
+   <property name="text">
+    <string>Ressource</string>
+   </property>
+  </action>
+  <action name="m_pqaScriptEnvironment">
+   <property name="icon">
+    <iconset resource="../../../guilibraries/wmsgui/src/misc/wmsgui.qrc">
+     <normaloff>:/icons/letterhead.png</normaloff>:/icons/letterhead.png</iconset>
+   </property>
+   <property name="text">
+    <string>Skriptumgebung</string>
+   </property>
+  </action>
+  <action name="m_pqaLDAPConfig">
+   <property name="text">
+    <string>LDAP Konfiguration</string>
+   </property>
+  </action>
+  <action name="m_pqaAbout">
+   <property name="text">
+    <string>Info</string>
+   </property>
+  </action>
+  <action name="m_pqaInteractiveComponent">
+   <property name="text">
+    <string>Interactive Component</string>
+   </property>
+  </action>
+  <action name="m_pqaReplayEvents">
+   <property name="text">
+    <string>Events erneut abspielen</string>
+   </property>
+  </action>
+  <action name="m_pqaDeleteAllExistingEvents">
+   <property name="text">
+    <string>Alle existierenden Events löschen</string>
+   </property>
+  </action>
+  <action name="m_pqaDataSearch">
+   <property name="text">
+    <string>Datensuche</string>
+   </property>
+  </action>
+  <action name="m_pqaLogoutExit">
+   <property name="text">
+    <string>Logout und Beenden</string>
+   </property>
+  </action>
+ </widget>
+ <layoutdefault spacing="3" margin="3"/>
+ <resources>
+  <include location="../../../guilibraries/wmsgui/src/misc/wmsgui.qrc"/>
+ </resources>
+ <connections>
+  <connection>
+   <sender>m_pqaCreateClass</sender>
+   <signal>triggered()</signal>
+   <receiver>CwmsAdminMainWindow</receiver>
+   <slot>CreateClassSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqaCreateDatabase</sender>
+   <signal>triggered()</signal>
+   <receiver>CwmsAdminMainWindow</receiver>
+   <slot>CreateDatabaseSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqaCreateObjectList</sender>
+   <signal>triggered()</signal>
+   <receiver>CwmsAdminMainWindow</receiver>
+   <slot>CreateObjectListSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqaDeleteDatabase</sender>
+   <signal>triggered()</signal>
+   <receiver>CwmsAdminMainWindow</receiver>
+   <slot>DeleteDatabaseSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqaDeleteAllObjects</sender>
+   <signal>triggered()</signal>
+   <receiver>CwmsAdminMainWindow</receiver>
+   <slot>DeleteAllObjectsSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqaExport</sender>
+   <signal>triggered()</signal>
+   <receiver>CwmsAdminMainWindow</receiver>
+   <slot>DataExportSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqaExit</sender>
+   <signal>triggered()</signal>
+   <receiver>CwmsAdminMainWindow</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqaCreateDocumentation</sender>
+   <signal>triggered()</signal>
+   <receiver>CwmsAdminMainWindow</receiver>
+   <slot>CreateDocumentationSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqcbDatabases</sender>
+   <signal>activated(int)</signal>
+   <receiver>CwmsAdminMainWindow</receiver>
+   <slot>DatabaseSelectedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>260</x>
+     <y>123</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqaGenerateCode</sender>
+   <signal>triggered()</signal>
+   <receiver>CwmsAdminMainWindow</receiver>
+   <slot>GenerateClassCodeSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>434</x>
+     <y>310</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqaCreateDbCode</sender>
+   <signal>triggered()</signal>
+   <receiver>CwmsAdminMainWindow</receiver>
+   <slot>GenerateDbCodeSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>434</x>
+     <y>310</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqaRefresh</sender>
+   <signal>triggered()</signal>
+   <receiver>CwmsAdminMainWindow</receiver>
+   <slot>RefreshClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>289</x>
+     <y>273</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqaUserManager</sender>
+   <signal>triggered()</signal>
+   <receiver>CwmsAdminMainWindow</receiver>
+   <slot>UserManagerSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>289</x>
+     <y>273</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqaCreateDbQueries</sender>
+   <signal>triggered()</signal>
+   <receiver>CwmsAdminMainWindow</receiver>
+   <slot>OpenQueryEditorSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>289</x>
+     <y>273</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqaDbRights_2</sender>
+   <signal>triggered()</signal>
+   <receiver>CwmsAdminMainWindow</receiver>
+   <slot>SchemeRightsSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>289</x>
+     <y>273</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqaLanguages</sender>
+   <signal>triggered()</signal>
+   <receiver>CwmsAdminMainWindow</receiver>
+   <slot>SchemeLanguagesSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>289</x>
+     <y>273</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqaNewView</sender>
+   <signal>triggered()</signal>
+   <receiver>CwmsAdminMainWindow</receiver>
+   <slot>NewViewSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>399</x>
+     <y>273</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqcbLanguage</sender>
+   <signal>currentIndexChanged(int)</signal>
+   <receiver>CwmsAdminMainWindow</receiver>
+   <slot>LanguageChangedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>260</x>
+     <y>149</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>771</x>
+     <y>115</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqaNewReport</sender>
+   <signal>triggered()</signal>
+   <receiver>CwmsAdminMainWindow</receiver>
+   <slot>NewReportSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>395</x>
+     <y>273</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqaReportProperties</sender>
+   <signal>triggered()</signal>
+   <receiver>CwmsAdminMainWindow</receiver>
+   <slot>ReportPropertiesSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>395</x>
+     <y>273</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqaDatabaseJournal</sender>
+   <signal>triggered()</signal>
+   <receiver>CwmsAdminMainWindow</receiver>
+   <slot>DatabaseJournalSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>395</x>
+     <y>273</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqaObjectListJournal</sender>
+   <signal>triggered()</signal>
+   <receiver>CwmsAdminMainWindow</receiver>
+   <slot>ObjectListJournalSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>395</x>
+     <y>273</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqaExecuteApplication</sender>
+   <signal>triggered()</signal>
+   <receiver>CwmsAdminMainWindow</receiver>
+   <slot>ExecuteApplicationSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>395</x>
+     <y>273</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqaNewApplication</sender>
+   <signal>triggered()</signal>
+   <receiver>CwmsAdminMainWindow</receiver>
+   <slot>NewApplicationSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>395</x>
+     <y>273</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqaExportJson</sender>
+   <signal>triggered()</signal>
+   <receiver>CwmsAdminMainWindow</receiver>
+   <slot>ExportJsonSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>395</x>
+     <y>273</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqaNewGenericObjectForm</sender>
+   <signal>triggered()</signal>
+   <receiver>CwmsAdminMainWindow</receiver>
+   <slot>NewGenericObjectFormSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>395</x>
+     <y>273</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqaNewObjectObjectListForm</sender>
+   <signal>triggered()</signal>
+   <receiver>CwmsAdminMainWindow</receiver>
+   <slot>NewObjectObjectListFormSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>395</x>
+     <y>273</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqaNewStandardObjectListForm</sender>
+   <signal>triggered()</signal>
+   <receiver>CwmsAdminMainWindow</receiver>
+   <slot>NewStandardObjectListFormSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>395</x>
+     <y>273</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqaNewUserDefinedForm</sender>
+   <signal>triggered()</signal>
+   <receiver>CwmsAdminMainWindow</receiver>
+   <slot>NewUserDefinedFormSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>395</x>
+     <y>273</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqaNewViewObjectListForm</sender>
+   <signal>triggered()</signal>
+   <receiver>CwmsAdminMainWindow</receiver>
+   <slot>NewViewObjectListFormSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>395</x>
+     <y>273</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqaEdit_2</sender>
+   <signal>triggered()</signal>
+   <receiver>CwmsAdminMainWindow</receiver>
+   <slot>EditSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>395</x>
+     <y>273</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqaDelete</sender>
+   <signal>triggered()</signal>
+   <receiver>CwmsAdminMainWindow</receiver>
+   <slot>DeleteSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>395</x>
+     <y>273</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqaNewFormSearch</sender>
+   <signal>triggered()</signal>
+   <receiver>CwmsAdminMainWindow</receiver>
+   <slot>NewSearchFormSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>395</x>
+     <y>273</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqaNewWorkflow</sender>
+   <signal>triggered()</signal>
+   <receiver>CwmsAdminMainWindow</receiver>
+   <slot>NewWorkflowSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>395</x>
+     <y>273</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqaWorkflowTeams</sender>
+   <signal>triggered()</signal>
+   <receiver>CwmsAdminMainWindow</receiver>
+   <slot>WorkflowTeamsSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>414</x>
+     <y>273</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqchbShowTechnicalItems</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsAdminMainWindow</receiver>
+   <slot>RefreshClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>41</x>
+     <y>181</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>169</x>
+     <y>618</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqaSmtp</sender>
+   <signal>triggered()</signal>
+   <receiver>CwmsAdminMainWindow</receiver>
+   <slot>SmtpSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>414</x>
+     <y>273</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqaImportDeployment</sender>
+   <signal>triggered()</signal>
+   <receiver>CwmsAdminMainWindow</receiver>
+   <slot>ImportDeploymentFileSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>414</x>
+     <y>273</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqaGenerateDeployment</sender>
+   <signal>triggered()</signal>
+   <receiver>CwmsAdminMainWindow</receiver>
+   <slot>ExportDeploymentFileSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>414</x>
+     <y>273</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqaObjectListProperties</sender>
+   <signal>triggered()</signal>
+   <receiver>CwmsAdminMainWindow</receiver>
+   <slot>ObjectListPropertiesSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>414</x>
+     <y>273</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqaClientSettings</sender>
+   <signal>triggered()</signal>
+   <receiver>CwmsAdminMainWindow</receiver>
+   <slot>ClientSettingsSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>551</x>
+     <y>334</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqaLogger</sender>
+   <signal>triggered()</signal>
+   <receiver>CwmsAdminMainWindow</receiver>
+   <slot>LoggerClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>385</x>
+     <y>334</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqaRestoreWindows</sender>
+   <signal>triggered()</signal>
+   <receiver>CwmsAdminMainWindow</receiver>
+   <slot>RestoreWindowsSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>437</x>
+     <y>416</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqaApplicationVisibility</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>m_pqdwApplications</receiver>
+   <slot>setVisible(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1070</x>
+     <y>153</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqaDataVisibility</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>m_pqdwData</receiver>
+   <slot>setVisible(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>130</x>
+     <y>765</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqaDatabaseVisibility</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>m_pqdwDatabase</receiver>
+   <slot>setVisible(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>130</x>
+     <y>104</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqaInformationVisibility</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>m_pqdwInformation</receiver>
+   <slot>setVisible(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>437</x>
+     <y>1166</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqaModelVisibility</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>m_pqdwModel</receiver>
+   <slot>setVisible(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>130</x>
+     <y>338</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqaShowOpenWindowsCascaded</sender>
+   <signal>triggered()</signal>
+   <receiver>m_pqMdiArea</receiver>
+   <slot>cascadeSubWindows()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>529</x>
+     <y>313</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqaTileOpenWindows</sender>
+   <signal>triggered()</signal>
+   <receiver>m_pqMdiArea</receiver>
+   <slot>tileSubWindows()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>529</x>
+     <y>313</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqaOpenNextWindow</sender>
+   <signal>triggered()</signal>
+   <receiver>m_pqMdiArea</receiver>
+   <slot>activateNextSubWindow()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>529</x>
+     <y>313</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqaOpenPreviousSubWindow</sender>
+   <signal>triggered()</signal>
+   <receiver>m_pqMdiArea</receiver>
+   <slot>activatePreviousSubWindow()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>529</x>
+     <y>313</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqaCloseAllWindows</sender>
+   <signal>triggered()</signal>
+   <receiver>m_pqMdiArea</receiver>
+   <slot>closeAllSubWindows()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>529</x>
+     <y>313</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqaCloseWindow</sender>
+   <signal>triggered()</signal>
+   <receiver>m_pqMdiArea</receiver>
+   <slot>closeActiveSubWindow()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>529</x>
+     <y>313</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqlvModel</sender>
+   <signal>itemSelectionChanged()</signal>
+   <receiver>CwmsAdminMainWindow</receiver>
+   <slot>SchemeContentSelectedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>10</x>
+     <y>335</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>0</x>
+     <y>368</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqlvData</sender>
+   <signal>itemSelectionChanged()</signal>
+   <receiver>CwmsAdminMainWindow</receiver>
+   <slot>SchemeContentSelectedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>71</x>
+     <y>762</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>0</x>
+     <y>493</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqlvWorkflows</sender>
+   <signal>itemSelectionChanged()</signal>
+   <receiver>CwmsAdminMainWindow</receiver>
+   <slot>SchemeContentSelectedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1067</x>
+     <y>479</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1070</x>
+     <y>360</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqlvApplications</sender>
+   <signal>itemSelectionChanged()</signal>
+   <receiver>CwmsAdminMainWindow</receiver>
+   <slot>SchemeContentSelectedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>990</x>
+     <y>140</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1070</x>
+     <y>141</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqcbClassFilter</sender>
+   <signal>currentTextChanged(QString)</signal>
+   <receiver>CwmsAdminMainWindow</receiver>
+   <slot>ClassFilterChangedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>275</x>
+     <y>543</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>195</x>
+     <y>834</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqtwSearchResults</sender>
+   <signal>itemSelectionChanged()</signal>
+   <receiver>CwmsAdminMainWindow</receiver>
+   <slot>SchemeContentSelectedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1067</x>
+     <y>1163</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1070</x>
+     <y>785</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqlvUis</sender>
+   <signal>itemSelectionChanged()</signal>
+   <receiver>CwmsAdminMainWindow</receiver>
+   <slot>SchemeContentSelectedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1067</x>
+     <y>620</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1070</x>
+     <y>412</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqlvPrint</sender>
+   <signal>itemSelectionChanged()</signal>
+   <receiver>CwmsAdminMainWindow</receiver>
+   <slot>SchemeContentSelectedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1067</x>
+     <y>338</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1070</x>
+     <y>219</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqlvModel</sender>
+   <signal>itemSelectionChanged()</signal>
+   <receiver>CwmsAdminMainWindow</receiver>
+   <slot>CurrentTreeWidgetChangedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>24</x>
+     <y>335</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>0</x>
+     <y>380</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqlvData</sender>
+   <signal>itemSelectionChanged()</signal>
+   <receiver>CwmsAdminMainWindow</receiver>
+   <slot>CurrentTreeWidgetChangedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>17</x>
+     <y>762</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>0</x>
+     <y>518</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqlvViews</sender>
+   <signal>itemSelectionChanged()</signal>
+   <receiver>CwmsAdminMainWindow</receiver>
+   <slot>CurrentTreeWidgetChangedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1067</x>
+     <y>762</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1070</x>
+     <y>519</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqlvViews</sender>
+   <signal>itemSelectionChanged()</signal>
+   <receiver>CwmsAdminMainWindow</receiver>
+   <slot>SchemeContentSelectedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1067</x>
+     <y>762</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1070</x>
+     <y>531</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqlvUis</sender>
+   <signal>itemSelectionChanged()</signal>
+   <receiver>CwmsAdminMainWindow</receiver>
+   <slot>CurrentTreeWidgetChangedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1067</x>
+     <y>620</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1070</x>
+     <y>422</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqlvWorkflows</sender>
+   <signal>itemSelectionChanged()</signal>
+   <receiver>CwmsAdminMainWindow</receiver>
+   <slot>CurrentTreeWidgetChangedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1067</x>
+     <y>479</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1070</x>
+     <y>322</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqlvPrint</sender>
+   <signal>itemSelectionChanged()</signal>
+   <receiver>CwmsAdminMainWindow</receiver>
+   <slot>CurrentTreeWidgetChangedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1067</x>
+     <y>338</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1070</x>
+     <y>234</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqlvApplications</sender>
+   <signal>itemSelectionChanged()</signal>
+   <receiver>CwmsAdminMainWindow</receiver>
+   <slot>CurrentTreeWidgetChangedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1067</x>
+     <y>185</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1070</x>
+     <y>102</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqlvModel</sender>
+   <signal>doubleClicked(QModelIndex)</signal>
+   <receiver>CwmsAdminMainWindow</receiver>
+   <slot>EditSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>68</x>
+     <y>335</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>0</x>
+     <y>348</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqlvData</sender>
+   <signal>doubleClicked(QModelIndex)</signal>
+   <receiver>CwmsAdminMainWindow</receiver>
+   <slot>EditSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>131</x>
+     <y>762</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>0</x>
+     <y>543</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqtwSearchResults</sender>
+   <signal>doubleClicked(QModelIndex)</signal>
+   <receiver>CwmsAdminMainWindow</receiver>
+   <slot>EditSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1067</x>
+     <y>1163</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1070</x>
+     <y>813</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqlvViews</sender>
+   <signal>doubleClicked(QModelIndex)</signal>
+   <receiver>CwmsAdminMainWindow</receiver>
+   <slot>EditSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1067</x>
+     <y>762</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1070</x>
+     <y>569</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqlvUis</sender>
+   <signal>doubleClicked(QModelIndex)</signal>
+   <receiver>CwmsAdminMainWindow</receiver>
+   <slot>EditSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1067</x>
+     <y>620</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1070</x>
+     <y>463</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqlvWorkflows</sender>
+   <signal>doubleClicked(QModelIndex)</signal>
+   <receiver>CwmsAdminMainWindow</receiver>
+   <slot>EditSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1067</x>
+     <y>479</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1070</x>
+     <y>337</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqlvPrint</sender>
+   <signal>doubleClicked(QModelIndex)</signal>
+   <receiver>CwmsAdminMainWindow</receiver>
+   <slot>EditSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1067</x>
+     <y>338</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1070</x>
+     <y>271</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqlvApplications</sender>
+   <signal>doubleClicked(QModelIndex)</signal>
+   <receiver>CwmsAdminMainWindow</receiver>
+   <slot>EditSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>959</x>
+     <y>124</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1070</x>
+     <y>128</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqaServerSettings</sender>
+   <signal>triggered()</signal>
+   <receiver>CwmsAdminMainWindow</receiver>
+   <slot>ServerSettingsSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>535</x>
+     <y>417</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqpbSearch</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsAdminMainWindow</receiver>
+   <slot>SearchClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>599</x>
+     <y>965</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>478</x>
+     <y>925</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqaAdminPlugins</sender>
+   <signal>triggered()</signal>
+   <receiver>CwmsAdminMainWindow</receiver>
+   <slot>AdminPluginsSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>535</x>
+     <y>417</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqaServerPlugins</sender>
+   <signal>triggered()</signal>
+   <receiver>CwmsAdminMainWindow</receiver>
+   <slot>ServerPluginsSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>535</x>
+     <y>417</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqaNewPackage</sender>
+   <signal>triggered()</signal>
+   <receiver>CwmsAdminMainWindow</receiver>
+   <slot>NewPackageSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>535</x>
+     <y>583</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqaNewFormLibrary</sender>
+   <signal>triggered()</signal>
+   <receiver>CwmsAdminMainWindow</receiver>
+   <slot>NewLibrarySlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>535</x>
+     <y>583</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqaNewResource</sender>
+   <signal>triggered()</signal>
+   <receiver>CwmsAdminMainWindow</receiver>
+   <slot>NewResourceSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>535</x>
+     <y>583</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqaScriptEnvironment</sender>
+   <signal>triggered()</signal>
+   <receiver>CwmsAdminMainWindow</receiver>
+   <slot>ScriptEnvironmentSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>535</x>
+     <y>583</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqaLDAPConfig</sender>
+   <signal>triggered()</signal>
+   <receiver>CwmsAdminMainWindow</receiver>
+   <slot>LdapSettingsSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>535</x>
+     <y>583</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqaAbout</sender>
+   <signal>triggered()</signal>
+   <receiver>CwmsAdminMainWindow</receiver>
+   <slot>AboutSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>535</x>
+     <y>583</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqaInteractiveComponent</sender>
+   <signal>triggered()</signal>
+   <receiver>CwmsAdminMainWindow</receiver>
+   <slot>NewInteractiveComponentFormSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>535</x>
+     <y>583</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqaReplayEvents</sender>
+   <signal>triggered()</signal>
+   <receiver>CwmsAdminMainWindow</receiver>
+   <slot>ReplayEventsClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>-2</x>
+     <y>8</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqaDeleteAllExistingEvents</sender>
+   <signal>triggered()</signal>
+   <receiver>CwmsAdminMainWindow</receiver>
+   <slot>DeleteAllEventsClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>147</x>
+     <y>-10</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqaDataSearch</sender>
+   <signal>triggered()</signal>
+   <receiver>CwmsAdminMainWindow</receiver>
+   <slot>DataSearchClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>535</x>
+     <y>583</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqpbClearFilter</sender>
+   <signal>clicked()</signal>
+   <receiver>m_pqcbClassFilter</receiver>
+   <slot>clearEditText()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>30</x>
+     <y>545</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>146</x>
+     <y>543</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>GenerateClassCodeSlot()</slot>
+  <slot>GenerateDbCodeSlot()</slot>
+  <slot>SchemeContentSelectedSlot()</slot>
+  <slot>RefreshClickedSlot()</slot>
+  <slot>UserManagerSlot()</slot>
+  <slot>OpenQueryEditorSlot()</slot>
+  <slot>SchemeRightsSlot()</slot>
+  <slot>SchemeLanguagesSlot()</slot>
+  <slot>NewViewSlot()</slot>
+  <slot>LanguageChangedSlot()</slot>
+  <slot>NewReportSlot()</slot>
+  <slot>ReportPropertiesSlot()</slot>
+  <slot>NewFormSlot()</slot>
+  <slot>DatabaseJournalSlot()</slot>
+  <slot>ObjectListJournalSlot()</slot>
+  <slot>NewApplicationSlot()</slot>
+  <slot>ExecuteApplicationSlot()</slot>
+  <slot>ExportJsonSlot()</slot>
+  <slot>NewStandardObjectListFormSlot()</slot>
+  <slot>NewViewObjectListFormSlot()</slot>
+  <slot>NewObjectObjectListFormSlot()</slot>
+  <slot>NewGenericObjectFormSlot()</slot>
+  <slot>NewUserDefinedFormSlot()</slot>
+  <slot>EditSlot()</slot>
+  <slot>DeleteSlot()</slot>
+  <slot>NewSearchFormSlot()</slot>
+  <slot>NewWorkflowSlot()</slot>
+  <slot>WorkflowTeamsSlot()</slot>
+  <slot>LicenceManagerSlot()</slot>
+  <slot>SmtpSlot()</slot>
+  <slot>ExportDeploymentFileSlot()</slot>
+  <slot>ImportDeploymentFileSlot()</slot>
+  <slot>ObjectListPropertiesSlot()</slot>
+  <slot>ClientSettingsSlot()</slot>
+  <slot>LoggerClickedSlot()</slot>
+  <slot>RestoreWindowsSlot()</slot>
+  <slot>ClassFilterChangedSlot()</slot>
+  <slot>CurrentTreeWidgetChangedSlot()</slot>
+  <slot>ServerSettingsSlot()</slot>
+  <slot>SearchClickedSlot()</slot>
+  <slot>AdminPluginsSlot()</slot>
+  <slot>ServerPluginsSlot()</slot>
+  <slot>NewPackageSlot()</slot>
+  <slot>NewLibrarySlot()</slot>
+  <slot>NewResourceSlot()</slot>
+  <slot>ScriptEnvironmentSlot()</slot>
+  <slot>LdapSettingsSlot()</slot>
+  <slot>AboutSlot()</slot>
+  <slot>NewInteractiveComponentFormSlot()</slot>
+  <slot>ReplayEventsClickedSlot()</slot>
+  <slot>DeleteAllEventsClickedSlot()</slot>
+  <slot>DataSearchClickedSlot()</slot>
+ </slots>
+</ui>

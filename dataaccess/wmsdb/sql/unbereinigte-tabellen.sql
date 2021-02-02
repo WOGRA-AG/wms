@@ -1,0 +1,16 @@
+select count(*) from wms_dm_object s left join wms_dm_objectlist v on v.ObjectListId = s.objectlistid where v.ObjectListId is null;
+select count(*) from wms_value v left join wms_dm_object o on o.ObjectId = v.ObjectId where o.ObjectId is null;
+select count(*) from wms_value_string s left join wms_value v on v.ValueId = s.StringId where v.valueid is null;
+select count(*) from wms_value_double s left join wms_value v on v.ValueId = s.DoubleId where v.valueid is null;
+select count(*) from wms_value_int s left join wms_value v on v.ValueId = s.intId where v.valueid is null;
+select count(*) from wms_value_long s left join wms_value v on v.ValueId = s.longId where v.valueid is null;
+select count(*) from wms_value_float s left join wms_value v on v.ValueId = s.floatId where v.valueid is null;
+select count(*) from wms_value_counter s left join wms_value v on v.ValueId = s.counterId where v.valueid is null;
+select count(*) from wms_value_date s left join wms_value v on v.ValueId = s.dateId where v.valueid is null;
+select count(*) from wms_value_time s left join wms_value v on v.ValueId = s.timeId where v.valueid is null;
+select count(*) from wms_value_datetime s left join wms_value v on v.ValueId = s.datetimeId where v.valueid is null;
+select count(*) from wms_value_bool s left join wms_value v on v.ValueId = s.boolId where v.valueid is null;
+select count(*) from wms_value_binarydocument s left join wms_value v on v.ValueId = s.binarydocumentid where v.valueid is null;
+select count(*) from wms_value_characterdocument s left join wms_value v on v.ValueId = s.characterdocumentid where v.valueid is null;
+select count(*) from wms_value_objectreference s left join wms_value v on v.ValueId = s.objectreferenceid where v.valueid is null;
+select count(*) from wms_value_objectlistreference s left join wms_value v on v.ValueId = s.objectlistreferenceid where v.valueid is null;

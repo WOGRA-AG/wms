@@ -1,0 +1,4 @@
+
+
+
+SOURCES += ../src/main.cpp 

@@ -1,0 +1,398 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>CoeTextEditMainWindowClass</class>
+ <widget class="QWidget" name="CoeTextEditMainWindowClass">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>890</width>
+    <height>491</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>CoeTextEditMainWindow</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <property name="leftMargin">
+    <number>3</number>
+   </property>
+   <property name="topMargin">
+    <number>3</number>
+   </property>
+   <property name="rightMargin">
+    <number>3</number>
+   </property>
+   <property name="bottomMargin">
+    <number>3</number>
+   </property>
+   <item row="0" column="0" colspan="2">
+    <widget class="QMenuBar" name="menuBar">
+     <widget class="QMenu" name="menuDatei">
+      <property name="title">
+       <string>Datei</string>
+      </property>
+      <addaction name="m_pqaImport"/>
+      <addaction name="separator"/>
+      <addaction name="m_pqaPrint"/>
+      <addaction name="m_pqaprintPreview"/>
+      <addaction name="separator"/>
+      <addaction name="m_pqaSave"/>
+      <addaction name="separator"/>
+      <addaction name="m_pqaPdfExport"/>
+     </widget>
+     <widget class="QMenu" name="menuBearbeiten">
+      <property name="title">
+       <string>Bearbeiten</string>
+      </property>
+      <addaction name="m_pqaUndo"/>
+      <addaction name="m_pqaRedo"/>
+      <addaction name="separator"/>
+      <addaction name="m_pqaCopy"/>
+      <addaction name="m_pqaCut"/>
+      <addaction name="m_pqaPaste"/>
+      <addaction name="separator"/>
+      <addaction name="m_pqaZoomIn"/>
+      <addaction name="m_pqaZoomOut"/>
+      <addaction name="separator"/>
+      <addaction name="m_pqaSelectAll"/>
+     </widget>
+     <widget class="QMenu" name="menuFormat">
+      <property name="title">
+       <string>Format</string>
+      </property>
+      <addaction name="m_pqaFontTypeSize"/>
+      <addaction name="m_pqaBold"/>
+      <addaction name="m_pqaItalic"/>
+      <addaction name="m_pqaUnderlined"/>
+      <addaction name="separator"/>
+      <addaction name="m_pqaAlignLeft"/>
+      <addaction name="m_pqaAlignCenter"/>
+      <addaction name="m_pqaAlignRight"/>
+      <addaction name="m_pqaAlignJustify"/>
+      <addaction name="separator"/>
+      <addaction name="m_pqaColor"/>
+      <addaction name="separator"/>
+      <addaction name="m_pqaInsertTable"/>
+     </widget>
+     <addaction name="menuDatei"/>
+     <addaction name="menuBearbeiten"/>
+     <addaction name="menuFormat"/>
+    </widget>
+   </item>
+   <item row="1" column="0">
+    <widget class="QToolBar" name="m_pqtbEdit">
+     <property name="contextMenuPolicy">
+      <enum>Qt::DefaultContextMenu</enum>
+     </property>
+     <property name="windowTitle">
+      <string>Bearbeiten und Drucken</string>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(85, 170, 255, 255), stop:1 rgba(232, 232, 232, 255));</string>
+     </property>
+     <property name="toolButtonStyle">
+      <enum>Qt::ToolButtonIconOnly</enum>
+     </property>
+     <addaction name="m_pqaPrint"/>
+     <addaction name="separator"/>
+     <addaction name="m_pqaUndo"/>
+     <addaction name="m_pqaRedo"/>
+     <addaction name="separator"/>
+     <addaction name="m_pqaCopy"/>
+     <addaction name="m_pqaCut"/>
+     <addaction name="m_pqaPaste"/>
+    </widget>
+   </item>
+   <item row="1" column="1">
+    <widget class="QToolBar" name="m_pqtbFormat">
+     <property name="windowTitle">
+      <string>Format</string>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(85, 170, 255, 255), stop:1 rgba(232, 232, 232, 255));</string>
+     </property>
+     <property name="toolButtonStyle">
+      <enum>Qt::ToolButtonIconOnly</enum>
+     </property>
+     <addaction name="m_pqaAlignLeft"/>
+     <addaction name="m_pqaAlignCenter"/>
+     <addaction name="m_pqaAlignRight"/>
+     <addaction name="m_pqaAlignJustify"/>
+     <addaction name="separator"/>
+     <addaction name="m_pqaBold"/>
+     <addaction name="m_pqaItalic"/>
+     <addaction name="m_pqaUnderlined"/>
+    </widget>
+   </item>
+   <item row="2" column="0" colspan="2">
+    <widget class="QToolBar" name="m_pqtbText">
+     <property name="windowTitle">
+      <string>Format</string>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(85, 170, 255, 255), stop:1 rgba(232, 232, 232, 255));</string>
+     </property>
+     <property name="toolButtonStyle">
+      <enum>Qt::ToolButtonIconOnly</enum>
+     </property>
+     <addaction name="separator"/>
+    </widget>
+   </item>
+   <item row="3" column="0" colspan="2">
+    <widget class="QTextEdit" name="m_pqteTextEdit"/>
+   </item>
+   <item row="4" column="0" colspan="2">
+    <widget class="QStatusBar" name="statusBar"/>
+   </item>
+  </layout>
+  <action name="m_pqaPrint">
+   <property name="icon">
+    <iconset resource="../misc/wmsgui.qrc">
+     <normaloff>:/icons/print.png</normaloff>:/icons/print.png</iconset>
+   </property>
+   <property name="text">
+    <string>Drucken</string>
+   </property>
+   <property name="iconText">
+    <string>Drucken</string>
+   </property>
+   <property name="toolTip">
+    <string>Druckt den in Bearbeitung befindlichen Text aus.</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+P</string>
+   </property>
+  </action>
+  <action name="m_pqaAlignCenter">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="../misc/wmsgui.qrc">
+     <normaloff>:/icons/align-center.png</normaloff>:/icons/align-center.png</iconset>
+   </property>
+   <property name="text">
+    <string>Zentrieren</string>
+   </property>
+   <property name="toolTip">
+    <string>Zentriert den ausgewÃ¤hlten Text oder die aktuelle Zeile</string>
+   </property>
+  </action>
+  <action name="m_pqaAlignLeft">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="../misc/wmsgui.qrc">
+     <normaloff>:/icons/align-left.png</normaloff>:/icons/align-left.png</iconset>
+   </property>
+   <property name="text">
+    <string>Linksbündig</string>
+   </property>
+   <property name="toolTip">
+    <string>Schaltet den ausgewÃ¤hlten Text oder die aktuelle Zeile auf LinksbÃ¼ndig</string>
+   </property>
+  </action>
+  <action name="m_pqaAlignJustify">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="../misc/wmsgui.qrc">
+     <normaloff>:/icons/align-justify.png</normaloff>:/icons/align-justify.png</iconset>
+   </property>
+   <property name="text">
+    <string>Blocksatz</string>
+   </property>
+  </action>
+  <action name="m_pqaAlignRight">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="../misc/wmsgui.qrc">
+     <normaloff>:/icons/align-right.png</normaloff>:/icons/align-right.png</iconset>
+   </property>
+   <property name="text">
+    <string>Rechtsbündig</string>
+   </property>
+  </action>
+  <action name="m_pqaBold">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="../misc/wmsgui.qrc">
+     <normaloff>:/icons/bold.png</normaloff>:/icons/bold.png</iconset>
+   </property>
+   <property name="text">
+    <string>Fett</string>
+   </property>
+  </action>
+  <action name="m_pqaColor">
+   <property name="icon">
+    <iconset resource="../misc/wmsgui.qrc">
+     <normaloff>:/icons/color.png</normaloff>:/icons/color.png</iconset>
+   </property>
+   <property name="text">
+    <string>Farbe</string>
+   </property>
+  </action>
+  <action name="m_pqaCopy">
+   <property name="icon">
+    <iconset resource="../misc/wmsgui.qrc">
+     <normaloff>:/icons/copy.png</normaloff>:/icons/copy.png</iconset>
+   </property>
+   <property name="text">
+    <string>Kopieren</string>
+   </property>
+  </action>
+  <action name="m_pqaCut">
+   <property name="icon">
+    <iconset resource="../misc/wmsgui.qrc">
+     <normaloff>:/icons/cut.png</normaloff>:/icons/cut.png</iconset>
+   </property>
+   <property name="text">
+    <string>Ausschneiden</string>
+   </property>
+  </action>
+  <action name="m_pqaFontTypeSize">
+   <property name="icon">
+    <iconset resource="../misc/wmsgui.qrc">
+     <normaloff>:/icons/fontsettings.png</normaloff>:/icons/fontsettings.png</iconset>
+   </property>
+   <property name="text">
+    <string>Schriftart &amp; Größe</string>
+   </property>
+  </action>
+  <action name="m_pqaItalic">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="../misc/wmsgui.qrc">
+     <normaloff>:/icons/italic.png</normaloff>:/icons/italic.png</iconset>
+   </property>
+   <property name="text">
+    <string>Kursiv</string>
+   </property>
+  </action>
+  <action name="m_pqaPaste">
+   <property name="icon">
+    <iconset resource="../misc/wmsgui.qrc">
+     <normaloff>:/icons/insert.png</normaloff>:/icons/insert.png</iconset>
+   </property>
+   <property name="text">
+    <string>Einfügen</string>
+   </property>
+  </action>
+  <action name="m_pqaRedo">
+   <property name="icon">
+    <iconset resource="../misc/wmsgui.qrc">
+     <normaloff>:/icons/redo.png</normaloff>:/icons/redo.png</iconset>
+   </property>
+   <property name="text">
+    <string>Wiederholen</string>
+   </property>
+  </action>
+  <action name="m_pqaSave">
+   <property name="icon">
+    <iconset resource="../misc/wmsgui.qrc">
+     <normaloff>:/icons/save.png</normaloff>:/icons/save.png</iconset>
+   </property>
+   <property name="text">
+    <string>Speichern</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+S</string>
+   </property>
+  </action>
+  <action name="m_pqaUnderlined">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="../misc/wmsgui.qrc">
+     <normaloff>:/icons/underlined.png</normaloff>:/icons/underlined.png</iconset>
+   </property>
+   <property name="text">
+    <string>Unterstrichen</string>
+   </property>
+  </action>
+  <action name="m_pqaUndo">
+   <property name="icon">
+    <iconset resource="../misc/wmsgui.qrc">
+     <normaloff>:/icons/undo.png</normaloff>:/icons/undo.png</iconset>
+   </property>
+   <property name="text">
+    <string>Rückgängig</string>
+   </property>
+  </action>
+  <action name="m_pqaZoomIn">
+   <property name="icon">
+    <iconset resource="../misc/wmsgui.qrc">
+     <normaloff>:/icons/Larger.png</normaloff>:/icons/Larger.png</iconset>
+   </property>
+   <property name="text">
+    <string>Vergrößern</string>
+   </property>
+  </action>
+  <action name="m_pqaZoomOut">
+   <property name="icon">
+    <iconset resource="../misc/wmsgui.qrc">
+     <normaloff>:/icons/smaller.png</normaloff>:/icons/smaller.png</iconset>
+   </property>
+   <property name="text">
+    <string>Verkleinern</string>
+   </property>
+   <property name="iconText">
+    <string>Verkleinern</string>
+   </property>
+   <property name="toolTip">
+    <string>Verkleinern</string>
+   </property>
+  </action>
+  <action name="m_pqaSelectAll">
+   <property name="text">
+    <string>Alles auswählen</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+A</string>
+   </property>
+  </action>
+  <action name="m_pqaprintPreview">
+   <property name="icon">
+    <iconset resource="../misc/wmsgui.qrc">
+     <normaloff>:/icons/print-preview.png</normaloff>:/icons/print-preview.png</iconset>
+   </property>
+   <property name="text">
+    <string>Druckvorschau</string>
+   </property>
+  </action>
+  <action name="m_pqaPdfExport">
+   <property name="text">
+    <string>PDF Export</string>
+   </property>
+  </action>
+  <action name="m_pqaInsertTable">
+   <property name="text">
+    <string>Tabelle einfügen</string>
+   </property>
+  </action>
+  <action name="m_pqaImport">
+   <property name="text">
+    <string>Importieren</string>
+   </property>
+  </action>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources>
+  <include location="../misc/wmsgui.qrc"/>
+ </resources>
+ <connections/>
+ <slots>
+  <slot>InsertTableSlot()</slot>
+  <slot>ImportSlot()</slot>
+ </slots>
+</ui>
