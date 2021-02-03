@@ -1,0 +1,94 @@
+==== File
+
+File provides the Jaavscript engine with function and access to the filesystem. It has functions for reading, saving and changing files and directories. The Functions can be access over the file object in the script engine.
+   
+[source,javascript]
+----
+String loadFile(String filename);
+----
+
+loads the given file and returns the content as string.
+
+[source,javascript]
+----
+bool saveFile(String filename, ByteArray content);
+----
+
+saves the given content to file (overrides it complete) and returns a successflag.
+
+[source,javascript]
+----
+bool deleteFile(String filename);
+----
+
+deletes the given file and returns a success flag.
+
+[source,javascript]
+----
+bool existFile(String filename);
+----
+
+returns if a file exists.
+
+[source,javascript]
+----
+bool renameFile(String oldFilename, String newFilename);
+----
+
+renames a file from odlFilename to newFilename and returns a success flag.
+
+[source,javascript]
+----
+bool copyFile(String sourceFilename, String targetFilename);
+----
+
+copies the sourcefile to targetfile and returns the success flag
+
+[source,javascript]
+----
+bool createDirectory(String dir);
+----
+
+creates the given directory (the complete path if needed) and returns the success flag.
+
+[source,javascript]
+----
+bool existDirectory(String dir);
+----
+
+returns if the given directory exists.
+
+[source,javascript]
+----
+bool deleteDirectory(String dir);
+----
+
+deletes the given directory and returns the success flag.
+
+[source,javascript]
+----
+String getCurrentPath();
+----
+
+returns the current path.
+
+[source,javascript]
+----
+String getHomePath();
+----
+
+returns the path of current users home directory
+
+[source,javascript]
+----
+String getTempPath();
+----
+
+returns the path of the temp directory
+
+[source,javascript]
+----
+String getRootPath();
+----
+
+returns the path of the root directory.

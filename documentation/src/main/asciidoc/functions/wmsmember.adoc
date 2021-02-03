@@ -1,0 +1,148 @@
+==== WmsMember
+
+The WmsMember is a class which defines one class member. You can access a member over the findMember function in WmsClass.
+
+*Baseclasses* 
+WmsModelElement
+
+===== Function Reference
+
+[source, java]
+----
+Number getType()
+----
+
+returns the Id of the membertype.
+
+Unknown           = 0,
+Bool              = 1,
+Int               = 2,
+Long              = 3,
+Float             = 4,
+Double            = 5,
+String            = 6,
+Date              = 7,
+Time              = 8,
+DateTime          = 9,
+ObjectRef         = 10,
+ContainerRef      = 11,
+Counter           = 12,
+BinaryDocument    = 13,
+CharacterDocument = 14,
+ListInt           = 15,
+ListDouble        = 16,
+ListString        = 17,
+DictStringInt     = 18,
+DictStringString  = 19,
+DictStringDouble  = 20,
+DictIntInt        = 21,
+DictIntString     = 22,
+DictIntDouble     = 23,
+ListObjects       = 24,
+ObjectTree        = 25,
+Formula           = 26,
+User              = 27,
+Enum              = 28,
+UserGroup         = 29,
+
+[source, java]
+----
+String getTypeAsString()
+----
+
+returns the type of the Member as string.
+
+[source, java]
+----
+Number getAccessMode()
+----
+
+returns the AccessMode of the Member.
+
+Public = 0,
+Protected = 1,
+Private = 2
+
+[source, java]
+----
+Boolean isPrivate()
+----
+
+returns if the member is Private.
+
+[source, java]
+----
+Boolean isProtected()
+----
+
+returns if the member is Protected.
+
+[source, java]
+----
+Boolean isPublic()
+----
+
+returns if the member is Public.
+
+[source, java]
+----
+Boolean isMust()
+----
+
+returns if the member is a Must Member and needs a value for saving the object.
+
+[source, java]
+----
+Boolean isTree()
+----
+
+returns if the objectcontainer ref member is a tree structure.
+
+[source, java]
+----
+Boolean isPersistent()
+----
+
+returns if the member will be saved to database or not.
+
+[source, java]
+----
+Boolean isUnique()
+----
+
+returns if the member must be unique for the container
+
+[source, java]
+----
+Boolean isSystemMember()
+----
+
+returns if the member is a system member. (If this is true, the deletion of a member can lead to system instability).
+
+[source, java]
+----
+Number getSize()
+----
+
+returns the maximum size of the member (works only by strings with defined maximum length).
+
+[source, java]
+----
+Number getCounterStart()
+----
+
+returns the start value for the counter if the member is a counter.
+
+[source, java]
+----
+String getGroupName()
+----
+
+returns the name of the class group in which this member is.
+
+[source, java]
+----
+Value getDefault()
+----  
+
+returns the default value of the member.

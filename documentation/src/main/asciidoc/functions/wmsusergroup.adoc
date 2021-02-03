@@ -1,0 +1,27 @@
+==== WmsUserGroup
+
+*Baseclasses* WmsLocatedElement
+
+===== Function Reference
+
+[source, java]
+----
+Number getId()
+----
+
+returns the id of the group.
+
+[source, java]
+----
+String getName()
+----
+
+returns the name of the group.
+
+[source, java]
+----
+Array<WmsUser> getUsers()
+----
+
+
+returns the member list of users of the group.

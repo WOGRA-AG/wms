@@ -1,0 +1,61 @@
+==== WmsUser
+
+*Baseclasses* WmsLocatedElement
+
+===== Function Reference
+
+[source, java]
+----
+Number getId()
+----
+
+returns the user id.
+
+[source, java]
+----
+String getFirstName()
+----
+
+returns the first name of the user.
+
+[source, java]
+----
+String getLastName()
+----
+
+returns the last name of the user.
+
+[source, java]
+----
+String getLogin()
+----
+
+returns the login of the user.
+
+[source, java]
+----
+String getEmail()
+----
+
+returns the email of the user.
+
+[source, java]
+----
+Boolean isActive()
+----
+
+returns if the user is active. Only active user can log in to WMS.
+
+[source, java]
+----
+Boolean isAdmin()
+----
+
+returns if the user is an Administrator.
+
+[source, java]
+----
+Array<WmsUserGroup> getGroups()
+----
+
+returns the groups of the user in which he's a member.

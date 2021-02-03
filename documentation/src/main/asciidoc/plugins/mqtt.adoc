@@ -1,0 +1,58 @@
+===== WMS MQTT Plugin
+
+The WMS MQTT Plugin enables you to receive and send messages to IoT (Internet of things) Devices. So you can manage your devices thru WMS and you can store, analyze and continue processing received messages. WMS MQTT allows not only to connect to one MQTT Broker but to many different which different topics. So you are able to get messages from multiple devices and brokers and can work with it.
+
+====== Installation
+
+Usually the needed libraries for the plugins are already there, but if not you have to do following steps:
+
+1. Copy the wmsmqtt library or dll (dependent on your OS) in the functions directory under your WMS installation directory. 
+2. Then you have to copy the qmqtt library or dll in your WMS directory. 
+
+After you have checked if the libraries or dll are on the right place you have to activate the plugin in your WMS Development Platform.
+
+1. Open the scheme in which you want to use WMS MQTT
+2. Open the WMS DP Plugin Manager in the menu under Edit/Scheme/Development Platform Plugins
+3. The WMS MQTT Client Plugin must be listed as inactive
+4. Activate the plugin over the checkbox.
+
+====== Usage
+
+======= Publish Messages
+
+You have two choices to publish messages over mqtt. The first one is to test a mqtt services. This is possible over the MQTT Menu. 
+
+======= Publish Messager over User Interface.
+
+Open the MQTT Menu and click the push messages menu item. Then you are able to select an active connection, insert a message and click the send button. The message will be send as utf-8 bytearray to the message broker of the selected connection.
+
+======= Publish Messages over Javascript function
+If you only want to push messages to the broker it is enough to create an new MQTT Config. To do that open the MQTT Config view over the WMS MQTT Menu (after activating the pluginit must be appear). and create a new configuration. the click the start button and then the connection to the broker will be established. Now you are able to push messages to the broker.
+
+To do this you can create a class with a new function which calls the MQTT plugin interface and push the message. Look at the sample code below:
+
+[source,javascript]
+----
+var pluginName = "WMS MQTT Client";
+var functionClassName = "<Configname of your MQTT Configuration>";
+var callerName = pluginName + "." + "functionClassName;
+var mqttConnection = plugin.getPlugin(callerName);
+
+if (mqttConnection !== null) {
+    mpqttConnection.push("My message");
+}
+----
+
+====== Subscribe to Messages
+You can subscribe the MQTT client to messages from the message broker.
+
+====== Storing Messages
+Subscribing to receive messages from a broker is very simple, too. The first step is to create a new class in WMS DP. This class has to derive from mqtt.MqttMessage. For just receiving and storing messages you don't have to do anything more in this class. Then create an objectcontainer for this class.
+
+Finally go to the MQTT Config Editor and create a new config. Select in the message container field your new created object container. and start your configuration. The received messages will be stored in this container.
+
+That's all for storing MQTT messages in WMS for a specific topic from a specific container. In WMS the messages will be stored in Base64 format, so you can easily convert the result in the expected format.
+
+====== Listen to Messages and do something specific
+
+If you want to react to specific messages, you can do that with overriding the onCommit Method in your created method class. you caparse the message and extract data, or you can call other functions or start processes.

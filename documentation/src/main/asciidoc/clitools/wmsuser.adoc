@@ -1,0 +1,147 @@
+=== WMS User Command Line Interface (CLI)
+Over the WMSUser CLI you are able to mange users and groups of WMS.
+
+==== Feature Overview
+
+* Create User
+* Edit User
+* Delete User
+* Query User data (optional)
+* Deactivate User
+* Activate User
+* List Users  (optional)
+* Create Group
+* Edit Group
+* Delete Group
+* Add User to Group
+* Remove User from Group
+* List Users of Group (optional)
+* List Groups (optional)
+
+===== Feature Descriptions
+
+====== Create User
+
+Creates a new user.
+* Login
+* Password
+* First name
+* Last name
+* E-Mail Address
+* Admin flag
+
+
+*Call:*
+[source,]
+----
+wmsuser -login=<Admin Username> -password=<Passwort> -command="createUser" -firstname="Willy" -lastname="Mustermann" -userlogin="wmuster" -userpassword="111" -mail="w.mustermann@test.de" -admin="false"
+----
+
+====== Edit User
+
+Edits user date.
+
+*Call:*
+[source,]
+----
+wmsuser -login=<Admin Username> -password=<Passwort>  -command="updateUser" -firstname="Willy" -lastname="Mustermann" -userlogin="wmuster" -userpassword="111" -mail="w.mustermann@test.de" 
+----
+
+====== Delete User 
+
+deletes the user and all of his informations in wms.
+
+*Call:*
+[source,]
+----
+wmsuser -login=<Admin Username> -password=<Passwort>  -command="deleteUser" -userlogin="wmuster"
+----
+====== Deactivate User
+
+Deactivates an active user.
+*Call:*
+[source,]
+----
+wmsuser -login=<Admin Username> -password=<Passwort>  -command="deactivateUser" -userlogin="wmuster"
+----
+====== Activate User
+
+Activates an user which was deactivated.
+
+*Call:*
+[source,]
+----
+wmsuser -login=<Admin Username> -password=<Passwort>  -command="activateUser" -userlogin="wmuster"
+----
+====== Query User data
+
+You can retrieve the data from the specified user.
+*Call:*
+[source,]
+----
+wmsuser -login=<Admin Username> -password=<Passwort>  -command="getUserData" -userlogin="wmuster"
+----
+====== List Users
+
+Lists all users
+
+*Call:*
+[source,]
+----
+wmsuser -login=<Admin Username> -password=<Passwort>  -command="listUsers"
+----
+====== Create Group
+
+Creates a new group.
+
+*Call:*
+[source,]
+----
+wmsuser -login=<Admin Username> -password=<Passwort>  -command="createGroup" -group="Gruppenname"
+----
+====== Rename Group
+
+renames the group.
+
+*Call:*
+[source,]
+----
+wmsuser -login=<Admin Username> -password=<Passwort>  -command="renameGroup" -group="Gruppenname" -name="neuer Gruppenname"
+----
+
+====== Delete Group
+
+deletes the group.
+
+*Call:*
+[source,]
+----
+wmsuser -login=<Admin Username> -password=<Passwort>  -command="deleteGroup" -group="Gruppenname"
+----
+====== List Groups
+
+Lists all Groups.
+
+*Call:*
+[source,]
+----
+wmsuser -login=<Admin Username> -password=<Passwort>  -command="listGroups"
+----
+====== Add User to Group
+
+adds the specified user to group.
+
+*Call:*
+[source,]
+----
+wmsuser -login=<Admin Username> -password=<Passwort>  -command="addUserToGroup" -userlogin="wmuster" -group="Gruppenname"
+----
+====== Remove User from Group
+
+Removes the specified user from group.
+
+*Call:*
+[source,]
+----
+wmsuser -login=<Admin Username> -password=<Passwort>  -command="removeUserFromGroup" -userlogin="wmuster"" -group="Gruppenname"
+----

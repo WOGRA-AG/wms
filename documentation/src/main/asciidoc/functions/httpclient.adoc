@@ -1,0 +1,252 @@
+==== WMS Http Client
+
+This scriptable add on implements a http client to send request over http to servers. You can access the mthod over the objectname "httpClient".
+
+*Sample:*
+
+[source,jaavscript]
+----
+var client = httpClient.createHttpClient();
+var request = httpClient.createHttpRequest();
+
+if (client != null && request != null) {
+	client.SetHostAddress(homepage);
+	request.SetUrl(homepage + "/" + path);
+	request.SetMethod("Get");
+	var response = httpClient.sendRequest(client, request);
+
+	if (response != null) {
+		var statusCode = response.GetStatusCodeValue();
+		if (statusCode < 400) {
+			return true;			
+		} else {
+			return false;
+		}
+	}
+	else {
+		log.error("No response returned!");
+	}
+}
+else {
+	log.error("client or request is null!");
+}
+----
+
+[source,]
+----
+HttpClient createHttpClient()
+----
+
+returns a new httpclient object which can be used to make the http request.
+
+[source,]
+----
+HttpRequest createHttpRequest()
+----
+
+reurns a new http request object in which you can define the request.
+
+[source,]
+----
+HttpResponse sendRequest(HttpClient client, HttpRequest request)
+----
+
+starts the request with the given client and request and returns the response object, which can be used to interpret the answer.
+
+===== HttpClient
+
+[source,]
+----
+void SetPort(Number p_iPort)
+----
+
+set's the port for the request
+
+[source,]
+----
+void SetProxy(Proxy p_pProxy)
+----
+
+set's the proxy object with configuration for the request.
+
+[source,]
+----
+void SetHostAddress(String address)
+----
+
+set's the host address for the request
+
+[source,]
+----
+void SetRequestTimeout(Number msecs)
+----
+
+set's the timeout for the request.
+
+===== HttpRequest
+
+[source,]
+----
+void SetUrl(String url)
+----
+
+set's the request url.
+
+[source,]
+----
+void SetAuthtype(String authtype)
+----
+
+Set's the authtype of the request.
+
+
+[source,]
+----
+String GetAuthType()
+----
+
+returns the auth type of the request if there is one. Otherways it returns an emtpy string.
+
+[source,]
+----
+void SetMethod(String method)
+----
+
+Set's the method id. Possile values are:
+
+"Get"
+"Put"
+"Delete"
+"Post"
+"Trace"
+"Connect"
+
+[source,]
+----
+Number GetMethod()
+----
+
+returns the method id. Possile values are:
+
+0 = Get
+1 = Put
+2 = Delete
+3 = Post
+4 = Trace
+5 = Connect
+
+
+[source,]
+----
+String GetPathInfo()
+----
+
+returns the path info of the request.
+
+[source,]
+----
+String GetPathVariable(String key)
+----
+
+returns the path variable value of key.
+
+[source,]
+----
+String GetContextPath()
+----
+
+returns the context path of the request.
+
+[source,]
+----
+void AddPathVariable(String key, String value)
+----
+
+adds a path variable to the request.
+
+
+===== HttpResponse
+
+[source,]
+----
+Number GetStatusCodeValue()
+----
+
+returns the http status code.
+
+[source,]
+----
+String GetContentType()
+----
+
+returns the content type.
+
+[source,]
+----
+String GetAllowOrigin()
+----
+
+returns the AlLowOrigin flag.
+
+[source,]
+----
+String GetServer()
+----
+
+returns the server address.
+
+[source,]
+----
+String GetConnectionMode()
+----
+
+returns the connection mode.
+
+[source,]
+----
+QString GetHeader(String key)
+----
+
+returns header values.
+
+[source,]
+----
+Number GetIntHeader(String key)
+----
+
+returns the Header value as Number if it is convertable.
+
+[source,]
+----
+Number GetHeaderCount()
+----
+
+returns the number of header entries.
+
+[source,]
+----
+String GetBody()
+----
+
+returns the body content.
+
+[source,]
+----
+Number GetContentLength()
+----
+
+returns the content length.
+
+[source,]
+----
+Number GetDocumentLength()
+----
+
+returns the length of the document.
+
+[source,]
+----
+bool IsBodyEmpty()
+----
+
+returns if the body is empty.

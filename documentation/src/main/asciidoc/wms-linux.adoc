@@ -1,0 +1,149 @@
+=== System Requirements:
+
+* OpenLDAP installed
+* Maria or MySQL DB installed
+* mysqlclient Library and header installed
+* QT 5.7.0 installed
+* Java 8 installed
+
+==== Apt-get Commands for Ubuntu or Debian
+
+* sudo apt-get update
+* sudo apt-get upgrade
+* sudo apt-get install subversion g++ qt5-default qttools5-dev-tools slapd ldap-utils libldap2-dev
+
+Optional qtcreator (works only with installed X11)
+sudo apt-get build-dep qtcreator
+
+
+=== Installing Database (in this case MySQL)
+
+1. Adapt the Database configuration 
+    in 
+[source,]
+----
+/etc/mysql/my.cnf
+----
+die Zeile 
+[source,]
+----
+lower_case_table_names = 1
+----
+einfügen
+
+2. create new database scheme
+3. Install SQL script for MySQL
+    
+
+=== Compile C++ WMS Server System 
+
+1. Unzip source code directory of WMS.
+
+2. Go to the source code directory
+
+3. execute "qmake -o Makefile wms.pro" 
+
+4. call make 
+    it will be built a bin/linux/release directory parrallel to the source code directory with all libs and executables.
+5. Rename the release directory in wmsserver and copy or move it to /usr/local.
+    The /usr/local/wmsserver directory contains all wmsserver components (libraries and executables).
+
+6. Enhance LD_LIBRARY_PATH for /usr/local/wmsserver .
+    [source,]
+    ----
+    export LD_LIBRARY_PATH=/usr/local/wmsserver:$LD_LIBRARY_PATH
+    ----
+7. Enhanced PATH  for /usr/local/wmsserver
+    [source,]
+    ----
+    export PATH=/usr/local/wmsserver:$PATH
+    ----
+
+=== Configure WMS
+
+Create directory /usr/local/wmsserver/conf/WMS/ and create the file "WMS.ini". Copy following content to the file:
+
+[source,]
+----
+[DataAccessConfigurations]
+wms\dataAccessPluginName=Relational Database Access [1.0.0] 
+wms\dataAccessPluginFile=libwmsdb.so
+wms\ConnectOptions=
+wms\Database=<Schema Name>
+wms\Driver=QMYSQL
+wms\Password=<Password>
+wms\Port=<Port (for MySQL usually 3306)>
+wms\Server=localhost
+wms\User=<DB User>
+
+[Client]
+dataAccessConfig=wms
+StoreWmsLogin=false
+WmsLogin=
+Password=
+
+[Server]
+dataAccessConfig=wms
+simulateProcessManagement=false
+Config_Compression=false
+Server=wmsserver
+Logging_Path=/var/log/wmsas.log
+daemonLoggingPath=/var/log/wmsdaemon.log
+Server_User=admin
+Server_Password=admin
+serverPort=8383
+bestSwitchingHourStart=1
+bestSwitchingHourEnd=3
+maintenancePort=8181
+maxConnections=10
+maxMemUsage=100000
+maxServerAge=48
+primaryPort=8585
+maintenanceActivePort=8182
+healtCheckIntervall=5
+secondaryPort=8586
+maintenanceBackupPort=8183
+Config_MaxThreadCount=4
+sessionTimeout=30
+Logging_Active=true
+Daemon_Logging_Active=true
+Logging_Error=true
+Logging_Fatal=true
+Logging_Information=false
+Logging_Warning=false
+Daemon_Logging_Error=true
+Daemon_Logging_Fatal=true
+Daemon_Logging_Information=false
+Daemon_Logging_Warning=false
+----
+
+and adapt it to your environment.
+
+
+
+=== Build WebWMS Jar
+
+got to the com.wogra.wms.webwms and run maven clean install -dSkipTests aufruft. You can call maven without -dSkipTests if your wmsserver is up and running. Before you start maven you have to check and adapt the webwms configuration. You will find the configuration in the ? directory.
+
+If you want to use webwms plugins you have to build them aswell. and put it to the /target/plugins/ directory.
+
+*Sample*
+[source,]
+----
+/usr/local/webwms/target/plugins
+----
+
+The plugins will be loaded automatically.
+
+Start the Java Jar with
+
+[source,]
+----
+java -jar wms-webwms.vaadin7-<Version>.jar -start > /var/log/webwms.log 2>&1 &
+----
+
+
+=== Webapplication test
+
+You can start the webapplication with following http request: http://localhost:8080[http://localhost:8080]. if you have changed the port you have to change it in the request.
+

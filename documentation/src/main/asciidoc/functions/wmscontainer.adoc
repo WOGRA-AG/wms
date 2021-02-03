@@ -1,0 +1,92 @@
+==== WmsContainer
+
+The WMsContainer manages objects of a specific type.
+
+*Baseclasses:* WmsModelElement
+
+[source, java]
+----
+QObject* findObjectById(int p_iId);
+----
+
+[source, java]
+----
+WmsObject copyObject(WmsObject p_pObject);
+----
+
+[source, java]
+----
+WmsObject createObject();
+----
+
+[source, java]
+----
+WmsObject createObject(QString p_qstrKeyname);
+----
+
+[source, java]
+----
+int commit();
+----
+
+[source, java]
+----
+int countOverallObjects();
+----
+
+[source, java]
+----
+int countLocalObjects();
+----
+
+[source, java]
+----
+QVariantList getObjectList();
+----
+
+[source, java]
+----
+void deleteObject(CsaObject* p_pObject);
+----
+
+[source, java]
+----
+void clearContainer();
+----
+
+[source, java]
+----
+void clearContainerLocal();
+----
+
+[source, java]
+----
+bool isTree();
+----
+
+[source, java]
+----
+void setTree(bool p_bTree);
+----
+
+[source, java]
+----
+bool hasOwner();
+----
+
+[source, java]
+----
+void loadContainerComplete();
+----
+
+[source, java]
+----
+CsaObject *getOwner();
+----
+
+[source, java]
+----
+Boolean isImmutable()
+----
+
+returns if this class is configured as immutable class. This means all objects created by this class are only editable if the object is new. After the first commit of the object, the object is not changeable.

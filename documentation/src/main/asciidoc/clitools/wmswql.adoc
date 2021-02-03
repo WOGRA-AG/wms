@@ -1,0 +1,9 @@
+=== WMSWql Command Line Interface (CLI)
+
+WMSWql is a commandline tool to request data from WMS and storing it to a file. The difference to wmsdatainterface is, that you can define your own wql for requesting data.
+
+[source,]
+----
+wmswql -login=<admin login> -password=<admin password> -wql="<the wql>" -scheme=<the scheme name> -file=<the output filename>
+----
+

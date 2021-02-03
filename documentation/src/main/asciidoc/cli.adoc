@@ -1,0 +1,23 @@
+== Command Line Interfaces
+
+For administration without user interface support there are several cli application which will be shipped with WMS.
+
+For all client tools you need admin privileges to use them. You have to set the login and password stored in wms, to use this tools. Between argument and value you have to set a "=" without spaces.
+
+correct: login=admin
+wrong: login = admin
+
+if you set values to argument with white spaces you have to encapsulate the value with """.
+
+
+include::clitools/wmsplugins.adoc[]
+
+include::clitools/wmsuser.adoc[]
+
+include::clitools/wmswql.adoc[]
+
+include::clitools/wmsdatainterface.adoc[]
+
+include::clitools/wmsdeploy.adoc[]
+
+include::clitools/wmsexec.adoc[]

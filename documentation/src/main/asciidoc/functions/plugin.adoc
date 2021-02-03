@@ -1,0 +1,27 @@
+==== Plugin
+
+delivers the installed plugin with the corresponding plugin name as argument. The function returns an object of interface IwmsPluginInterface.
+
+===== Function Reference
+
+[source, java]
+----
+Object plugin.getPlugin(String pluginNameAndFunctionClass)
+----
+
+*Arguments*
+
+* PluginName - String: The name of the plugin
+
+*return* object - The Pluginobject which can be used.
+
+===== Sample
+
+[source,java]
+----
+var pluginObj = plugin.getPlugin("myPluginName.PluginFunctionClassName");
+if (pluginObj != null) {
+      // call the functions
+}
+----
+  

@@ -1,0 +1,46 @@
+==== Timer
+
+Timer provides timer operations for the script engine so you can call automatically javascript function after a specified amount of time. The timer function can be accessed over the "timer" object.
+
+[source,javascript]
+----
+String startTimer(String name, WmsObject object, String function, int intervall);
+----
+
+starts the timer gives the timer the name "name". The function "function" will be called on Object "object" in the given intervall in msecs. The startTimer function returns a unique name if the given name was already used. So you should work with the returned name. The timer repeats every intervall msecs until stoptimer is called.
+
+[source,javascript]
+----
+String startSingleShotTimer(String name, WmsObject object, String function, int intervall);
+----
+
+starts a singleshot timer with the name "name". The function "function" will be called on Object "object" in the given intervall in msecs. The startTimer function returns a unique name if the given name was already used. So you should work with the returned name. After the first call of the timer the timer will stop and deleted.
+
+[source,javascript]
+----
+String startTimer(String name, String function, int intervall);
+----
+
+starts the timer gives the timer the name "name". The function "function" is expected as static function and must be set as full qualified name. The intervall is set in msecs. The startTimer function returns a unique name if the given name was already used. So you should work with the returned name. The timer repeats every intervall msecs until stoptimer is called.
+
+[source,javascript]
+----
+String startSingleShotTimer(String name, String function, int intervall);
+----
+
+starts a singleshot timer gives the timer the name "name". The function "function" is expected as static function and must be set as full qualified name. The intervall is set in msecs. The startTimer function returns a unique name if the given name was already used. So you should work with the returned name. After the first call of the timer the timer will stop and deleted.
+
+
+[source,javascript]
+----
+bool stopTimer(String name);
+----
+
+stops the running timer with the name "name"
+
+[source,javascript]
+----
+bool stopAllTimers();
+----
+
+stops all timers which are running at the moment.

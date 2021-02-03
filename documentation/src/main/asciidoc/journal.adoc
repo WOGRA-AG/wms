@@ -1,0 +1,17 @@
+=== Journal
+
+==== Querying User changes
+
+If your application is in productive use. It may happens that you want to find out which user has changed something. All changes of application datas will be recorded and can be requested for the complete scheme, an selected objectcontainer or an selected object.
+
+==== Requesting changes on Schemes
+
+To request changes on the complete scheme open the “Edit” Menu call the “Scheme” Sub Menu and run “Journal”. It opens a windows which displays all changes of the complete scheme in the configured timespan in the dialog. You can change the timespan and display it again. Because of calling the journal for the complete scheme, it is possible that there is a huge amount of data. So displaying the information can be slow. That's the reason why we recommend to call the journal to specific objectcontainer or object, to find the needed modification faster.
+
+==== Requesting changes on Objectcontainers
+
+To request changes on an objectcontainer open the objectcontainer editor and click the “Journal” button in the button row under the objectlist. It opens a windows which displays all changes of the container in the configured timespan in the dialog. You can change the timespan and display it again. Because of calling the journal for the complete scheme, it is possible that there is a huge amount of data. So displaying the information can be slow. That's the reason why we recommend to call the journal to specific objectcontainer or object, to find the needed modification faster.
+
+==== Requesting changes on Objects
+
+To request changes on an object edit the and lick the “Journal” button in the button row of the object editor. It opens a windows which displays all changes of the object in the configured timespan in the dialog. You can change the timespan and display it again. Because of calling the journal for the complete scheme, it is possible that there is a huge amount of data. So displaying the information can be slow. That's the reason why we recommend to call the journal to specific objectcontainer or object, to find the needed modification faster.

@@ -1,0 +1,143 @@
+==== WmsObject
+
+The WmsObject are created objects. WMS injects the Member properties of the object in the script engine, so you can read and change the values directly without accessing the functions below. The functions below are for accessing WMS Model core functions of the object.
+
+*Baseclasses* WmsModelElement
+
+[source, java]
+----
+WmsValue findValue(String keyname)
+----
+
+finds the value with the given name. It returns the value object, which has a richer features set than the injected properties. This is usefull for lists and maps.
+
+*arguments*
+
+* *keyname*:  String - the value keyname
+
+*return* WmsValue - the found value or null if it was not found.
+
+[source, java]
+----
+WmsObjectContainer getContainer()
+----
+
+returns the WmsContainer of this object.
+
+[source, java]
+----
+WmsClass getClass()
+----
+
+returns the WmsClass of this object.
+
+[source, java]
+----
+Number commit()
+----
+
+stores the current object state and all modified values to database.
+
+
+*returns* Number - Success flag if the code is larger 0 it was successfull. it is smaller 0 an error occurred. Look in the logfiles for further informations.
+
+[source, java]
+----
+void refreshObject()
+----
+
+reloads the object from database. all local modifications get lost.
+
+[source, java]
+----
+void addValueListObjectItem(QString p_qstrKeyname, QObject* p_qObject)
+----
+
+adds an item to a value list with the given keyname. Can be used by Objectlists, Stringlists, Intlists, DoubleLists.
+
+*Arguments*
+
+* *p_qstrKeyname*: String - the keyname of the value   
+* *p_qObject*: Value - the value to add must be of the corresponding type of the member behind the value.
+
+[source, java]
+----
+void removeValueListObjectItem(String keyname, Value value)
+----
+
+removes an item from a value list with the given keyname. can be used by Objectlists, Stringlists, Intlists, DoubleLists.
+
+*Arguments*
+
+* *keyname*: String - the keyname of the value   
+* *value*: Value - the value to remove must be of the corresponding type of the member behind the value.
+
+[source, java]
+----
+String getJson()
+----
+
+generates the json code of the object.
+
+[source, java]
+----
+Value execute(String p_qstrMethod, ArgumentList arguments)
+----
+
+executes the given fucntion/method with the given arguments and returns the return value of the function.
+
+*Arguments*
+
+* *p_qstrMethod*: String - the name of the function ArgumentList 
+* *arguments*: The list of arguments (max 10).
+
+
+*return* Value - the returnvalue of the function.
+
+[source, java]
+----
+String getValueDisplayString(String keyname)
+----
+
+returns the given value as formatted string. Dependent on system language settings.
+
+*Arguments*
+
+* *keyname*: String - the value keyname
+
+*Return* String - The formatted string
+
+[source, java]
+----
+void setDeleted()
+----
+
+sets the objected to deleted. after calling commit the object will be deleted locally and on the database.
+
+[source, java]
+----
+Bool hasOwner()
+----
+
+returns if the Object has an objectreference which owns this object.
+
+[source, java]
+----
+WmsObject getOwner()
+----
+
+returns the object which owns this object or null if this Object has no owner.
+
+[source, java]
+----
+Boolean isImmutable()
+----
+
+returns if this class is configured as immutable class. This means all objects created by this class are only editable if the object is new. After the first commit of the object, the object is not changeable.
+
+[source, java]
+----
+void setImmutable(bool immutable)
+----
+
+set's the immutable flag on the object. This has no effect if class or container are immutable. Then the object is still immutable.

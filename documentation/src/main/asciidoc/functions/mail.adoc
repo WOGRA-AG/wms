@@ -1,0 +1,31 @@
+==== Mail
+
+Class for creating a mail object which can be used to send emails. This class only returns an valid object if the mail configuration was configured in “Smtp Configuration” of the “misc” menu.
+
+===== Function Reference
+
+[source, java]
+----
+MailMessage CreateMailObjec()
+----
+
+This method creates a mail object in which you can place your mail informations. After you placed your information you can send the mail.
+
+
+*Return* Object of type MailMessage.
+
+===== Sample
+
+[source,java]
+----
+var mailObject = mail.CreateMailObject();
+
+if (mailObject != null) {
+   mailObject.AddRecipients("test@test.de"); // one recipient of the mail
+   mailObject.AddCopy("cc@test.de"); // one cc recipient of the mail
+   mailObject.AddBlindCopy("bcc@test.de"); // one bcc recipient of the mail
+   mailObject.SetSubject("Testmail"); // the mail subject
+   mailObject.SetBody("This is the text content of the Mail"); // the mail content
+   mailObject.SendMail(); // starts sending mail.
+}
+----

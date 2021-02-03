@@ -1,0 +1,144 @@
+==== GeoService
+
+Geo provides you with geoservices in the script- and qml engine. Before you can use it the geo engine must be initialized. Services of the geo engine are distance calculation, reading current geo position, converting address to geo position, converting geo position to address and a range search.
+
+   
+
+[source,javascript]
+----
+Boolean initGeoService();
+----
+
+inits the geo service with open street map as default.
+
+
+[source,javascript]
+----
+GeoPos getCurrentPosition();
+----
+
+reads the current position from the device (Mobile, Desktop) and returns it. If the devices has no gps module the internet connection will be used. The init function must be called before you can use this function.
+
+
+[source,javascript]
+----
+Number calculateDistanceKm(Number latFrom, Number lonFrom, Number latTo, Number lonTo);
+----
+
+calculates the distance in km between latFrom, lonFrom to latTo, lonTo. The init function must be called before you can use this function.
+
+[source,javascript]
+----
+Route calculateRoute(Number latFrom, Number lonFrom, Number latTo, Number lonTo);
+----
+
+calculates the route on streets with car between latFrom, lonFrom and latTo, lonTo. The init function must be called before you can use this function.
+
+[source,javascript]
+----
+Array getGeoServiceList();
+----
+
+returns the list of geo services which were delivered with WMS (OSM = Open Street Map). The function can be called before you have called the init function.
+
+[source,javascript]
+----
+Boolean initGeoService(String service);
+----
+
+Inits the geoservice with a specific service provider. use getGeoServiceList to find out which one are provided by WMS.
+
+[source,javascript]
+----
+Array rangeSearch(Number latPoint, Number lonPoint, Number rangeKm, String ContainerKeyname, String LatFieldName, String LonFieldName);
+----
+
+Searches for objects in a range around latPoint, lonPoint and returns them. The init function must be called before you can use this function.
+
+[source,javascript]
+----
+Number getCurrentVerticalSpeed();
+----
+
+Reads the current vertical speed from gps module. The init function must be called before you can use this function.
+
+[source,javascript]
+----
+Number getCurrentGroundSpeed();
+----
+
+Reads the current ground speed from gps module. The init function must be called before you can use this function.
+
+[source,javascript]
+----
+Number getCurrentAltitude();
+----
+
+Reads the current altitude from gps module. The init function must be called before you can use this function.
+
+[source,javascript]
+----
+AddressData geoCodeToAddress(Number latitude, Number longitude);
+----
+
+Looks for the address of the geopos and returns it. The init function must be called before you can use this function.
+
+[source,javascript]
+----
+GeoPos geoCodeToCoordinate(String street, String postcode, String city, String country);
+----
+reads the geopos to the given address. some or more arguments can be left by an empty string, but the result can be bad. The init function must be called before you can use this function.
+
+[source,javascript]
+----
+Boolean isInitialized();
+----
+
+returns if the geopos module was already initialized.
+ 
+[source,javascript]
+----
+Boolean reinitGeoService(String service);
+----
+
+reinitialises the geoservice module with service "service".
+ 
+
+===== GeoPos Object
+
+latitude (Number): latitude of the geopos.
+longitude (Number): longitude of the geopos.
+altitude (Number): can be 0 because not every provider supoorts this information.
+
+===== AddressData Object
+
+city (String): the city of the address.
+country (String): the country of the address.
+countryCode (String): the countrycode of the address.
+postcode (String): the postcode of the address.
+street (String): the street of the address.
+state (String): the state of the address.
+text (String): the address text.
+district (String): the district of the address.
+
+===== Route Object
+
+distance (Number): the complete distance of the route
+path (Array<GeoPos>): the path of the route
+segments (GeoSegments): the geosegments of the route.
+
+===== GeoSegment Object
+
+distance (Number): the complete distance of the segment
+path (Array<GeoPos>): the path of the route
+maneuver (GeoManeuver): the maneuver which must be done to follow the route.
+
+===== GeoManeuver Object
+
+distance (Number): the complete distance of the maneuver.
+direction (Number): the direction of the maneuver. 
+
+(NoDirection = 0, DirectionForward = 1, DirectionBearRight = 2, DirectionLightRight = 3, DirectionRight = 4, DirectionHardRight = 5, DirectionUTurnRight = 6, DirectionUTurnLeft = 7, DirectionHardLeft = 8, DirectionLeft = 9, DirectionLightLeft = 10, DirectionBearLeft = 11)
+
+instruction (String): textual instruction for the maneuver.
+position (GeoPos): the geoposition for the instruction.

@@ -1,0 +1,22 @@
+=== WMSDeploy Command Line Interface (CLI)
+
+The WMS Deploy tool deploys an wdf file in an existing or new scheme. You are also able to generate deployment files from wms. You need WMS administrator privileges to do this. WDF Files are deployment files in which the complete model is defined and implemented.
+
+
+==== Deploy WDF File
+
+You can deploy a wdf file to a scheme. If the scheme name does not exist, a new scheme will be created. If you want to delete the scheme before inserting the new deployment file you can add the additional argument -deleteScheme.
+
+[source,]
+----
+wmsdeploy -login=<admin login> -password=<admin password> -scheme=<scheme name> -file=<filepath to wdf file> -mode=install (-deleteScheme)
+----
+
+==== Generate WDF File
+
+Generates the deployment file from the given scheme.
+
+[source,]
+----
+wmsdeploy -login=<admin login> -password=<admin password> -scheme=<scheme name> -file=<target filename> -mode=generate 
+----

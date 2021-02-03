@@ -1,0 +1,168 @@
+=== Functions
+
+To make learning WMS as much simple as possible we decided us to introduce JavaScript as programming language for functions. The JavaScript code will be interpreted at runtime in the WMS Runtime or on the WMS Server. You have all possibilities JavaScript offers in modern software development. We enhanced JavaScript with object oriented functionalities such as access control (public, protected or private) overwriting functions and the automatic call of constructors and destructors. Last but not least you can define member functions and static functions.
+
+==== Constructor development
+
+A constructor is a function which will be called automatically, when an object of a class will be instantiated. Has the class further base classes, then the constructors of the base classes will be called first and at last the constructor of the class to instantiate. This process will be execuded recusively for all base classes in the inheritance tree.
+
+In WMS a constructor has no arguments and must be implemented with the name “onCreate”. You can create a constructor like every other function in the function editor. The accesstype of the constructor will be ignored, because it will be called internally and is not accessible over scriptcode.
+
+A class without constructor will be instantiated with its default values defined in the class editor.
+
+==== Destructor development
+
+The destructor will be called automatically, when a object will be deleted in WMS. Has the class of the object multiple base classes so the destructors of these classes will be called, too. At frist the destructor of the object class will be called and after this recursively all destructors of all base classes. After calling the destructor WMS deletes the object in the database. The destructor must be named “onDelete” and has no arguments. You can create the destructor like every other function over the function editor. If the class has no destructors nothing will be called. The accesstype of the destructor plays no role, because it will be called internally and can not be called over implemented functions.
+
+==== Develop onCommit Function
+
+If you want to do functional staff on storing time of the object, you can implement the “onCommit” method. It will be called automatically if the system wants to store an object. You can implement the method with the function editor. “onCommit” functions overrides the same functions in baseclasses. So only the “onCommit” function will be called which is found first in the function stack of a class. To prevent you from strange behavior we recommend you to implement the “onCommit” function in every class (at leats if this class has baseclasses).
+
+===== Storing object cycle
+
+1. System want to save object (user interaction or implementation)  
+2. onCommit function of class will be called.   
+3. Validation will be executed.   
+4. If validation was successful object will be stored.
+
+If validation was not successful changes made by the “onCommit” function won't be undone but are unsaved.
+
+==== Implementing Functions
+
+In WMS functions will be implemented with JavaScript. An internal ScriptEngine interprets and executes the functions. WMS enhances JavaScript for object oriented programming like in Java or C++ (We know that JavaScript as objectoriented capabilities, but we don't use them). So you can use inheritance, polymorphism and access types as you are used it in C++, Java, C#.
+
+===== Accesstypes
+
+While developing functions you have the same access types with the same meaning like member variables. You find a detailed description in the Access Types section.
+
+===== Function names
+
+You have two names of a function. The function name (which is used to call the function from other code parts) and the caption. The caption is used for displaying the function in user interfaces. It can also be translated for different languages. There are no rules for the caption except that the maximum length is 200 characters.
+
+The function name must start with a letter as first character. After this you can use alphanumeric characters and underline “_”. All other characters are forbidden. The maximum length of the function name is 200 characters.
+
+===== Function context
+
+You have two possibilities to define your function context. These are static or Member function. If you define your function as member function you can only call it if you have a instantiated object of the function class. On the opposite you have static function which can be called without an instantiated object. But in static functions your are not able to access member variables.
+
+A member function can access all member variables of the object on which this function was called. The this object and it's from wms provided system function can be accessed over “currentObject”. So you are able to store all modified data with following example:
+
+----
+me.commit();
+----
+
+===== Syntax (JavaScript)
+
+You can use the JavaScript syntax to develop functions in WMS. We have integrated the ECMA standard with some enhancements. A detailed reference you will in thJavascript section.
+
+===== WMS Functional Enhancements
+
+*   Logging
+*   E-Mail
+*   Printing (only possible with installed printing plugin)
+*   WQL
+* Plugins You will find a detailed description to the enhancements in the "Built In Class and Function Reference" section.
+
+==== Development in Teams
+
+In WMS code won't be saved in repositories like CVS, SVN or GIT. It will be stored direct on the database per default (Of course you can store it in repositories and this makes sense, too (doku.php?id=repositories[see using repositories]). To ensure that no one overrides changes in function from other developers. We added a locking mechanism to the function editor. You can only edit a function if no one else edit it. This plays no role for executing or debugging functions because you always use the function code loaded on selection time of your scheme (Until you want to change the code). So it is ensured that no ones overrides changes of other developers and you get at opening time of the function editor the latest version of the code.
+
+==== Developing Function plugins
+
+You can enhance your JavScript implementation with own implemented C++ Qt plugins for aditional functions. For example if you want to access a soap webservice, there is no JavaScript support. But you can implement the webservice with C++ implement the function interface and copy the compiled library to the functions directory. The plugin manager finds the function and you can use the interface.
+
+At the first sight this sounds not so easy, but with a little training and viewing our samples, an experienced developer will learn it very fast. For further information of developing plugins see the Plugins section.
+
+==== Function Execution
+
+In this chapter you will find a small description how the execution of functions work. While you write code and you start the syntax check it won't be checked if you are allowed to call methods or not. This will be done at runtime and you will get an error message if you call an method which is in the wrong scope (consider accesstypes, objects and so on). If you call an method in you code, the method won't be called directly over JavaScript. there is a proxy in wms, which receives the method call executes the object oriented tests if this method call is allowed and if yes, the function will be injected into the running script and executed. the result value (if one exists) will be returned to the calling function. If you start a function in WMS a new Runtime will be created which is responsible for managing the call stack, checking which object must be updated und makes sure everything will be called in the right way. If the function call is finished, every modification will be stored in the database.
+
+===== Uncaught Exceptions
+
+If an uncaught exception occurs, the execution of the complete function tree will be canceled.
+
+Sample:
+
+[source,javascript]
+----
+class Test {
+   int memberA;
+   int memberB;
+
+function A() {
+   me.memberA = 42; // A member in the class
+   me.execute("B");
+}
+
+function B() {
+   var a = 89;
+   me.memberB = 42; // A member in the class
+   me.callANotExistingFunction(); // throws an uncaught exception
+}
+
+}
+----
+
+In the above example If you start function A() the call of function B() will lead to an exception because you want to call a not existing function in function B(). This will lead to cancel the execution not only of function B(), but of the complete tree starting at function A().
+
+===== Value of members
+
+In the above example there are also two member variables of the class (MemberA and MemberB). In the above example the value of memberA will be stored in the object (but without storing the data to database) and the value of memberB too. The reason of this behavior is, that while a method is called WMS updates the values of the this (me or currentObject) object to the WMS internal data structures. In function B() the exception will be thrown and so all operations done on the this (me or currentObject) object are stored to the data structure. But this changed values won't be stored to database because an exception was thrown. After throwing an exception the changes will stay local. So use try catch blocks to prevent undefined behavior.
+
+===== This Object
+
+If you run a member function the this object will be injected by WMS. The this object will appear in two names “me” and
+“currentObject”. It plays no role which one you are using for your development. So all member variables and member functions can be used over the “me” or “currentObject” object. After finishing the called function the modified object will be stored in database if no uncaught exception has occurred.
+
+Storing to the database will only occur by the end if the method called directly by the user or system. all methods or function called in the user called method won't lead to storing to database.
+
+==== Scripting Environment
+
+The scripting environment is used for developing member functions und user interfaces with qml. It has a editor designed for developing JavaScript and qml with syntax highlighting, indentation and auto completion. The script environment is part of the wms development platform nad can be opened while double click to a function in the modeltree, creating a new function in the class editor or open it over the menu bar in the edit menu. While you are working in the script environment the development platform mainwindow is disabled
+
+==== Limitations
+
+===== Following features are not implemented and are not planned to implement
+
+* Reference chains. It is not possible to make function calls over
+    reference chains (function1().function2().function3();). This
+    makes code better readable and prevents NULL pointer exceptions.
+
+===== Following features are not available yet but are planned
+
+* Function overloading (Overriding works, but functions with the same
+    name and different argument lists are forbidden at the moment)
+*   Interfaces
+*   Abstract Functions
+
+==== Lessons learned
+
+===== overriding member variables
+
+Because we have JavaScript, it is possible to override each member variable and each function object and so on. If you do this, this can lead to big problems.
+
+**Description:**
+
+You have a class with an int member a and function funcA() and funcB().
+
+The code of funcA() looks like this:
+
+[source,javascript]
+----
+var a = 56;
+funcB();
+----
+
+The code of funcB() looks like that:
+
+[source,javascript]
+----
+a = a + 5;
+----
+
+In this example the member a will be overridden in function funcA() as a local variable. The code in funcB() expects the variable as the defined member, but because the variable was overridden in funcA(), the variable a is undefined in funcB(). This leads to a exception.
+
+include::./functions/function_reference.adoc[]
+
+include::javascript_reference.adoc[]
+

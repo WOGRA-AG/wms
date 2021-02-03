@@ -1,0 +1,221 @@
+== Plugins
+
+If you need specific functions especially function which you can not implement with javascript, or you need functions which are really fast, or you want to develop your own data access layer you can do that in implementing your own plugin.
+
+Plugins can be easily called by the software and can be deployed with the runtime or on the server.
+
+=== Technology to implement Plugins
+
+Plugins in WMS will be implemented in C++ on Base of WMS and Qt. We are using the builtin mechanism of Qt to provide the implementation of plugins. In WMS you will find the Interface which must be implemented to make sure you can use your plugins.
+
+One exception is the implementing of user interface plugins for the webfrontend. Here you have to use our Java Interface for implementing Ui interfaces and Vaadin for implementing the user interface.
+
+=== Plugin types
+
+There are different types of plugins which you can develop.
+
+*   Function, User Interface or Server Plugins
+*   Data Access Plugins
+*   Printing Plugins
+
+==== Function Plugins
+
+Function plugins will be used to implement enhancements which can not be done with JavaScript or QML inside WMS Development Platform. So you are able to provide your application with special features. Usually the plugins will be called directly on the running platform. For using the webfrontend you have to provide the plugins on the server, because functions will be executed over the http rest server and not directly in the web application. A function plugin must support multithreading.
+
+To implement function enhancements you have to implement the interface “IwmsPluginInterface”. You will find the definition in the wmsmanager project in the “src/datamanager” directory. The filename is “IwmsPluginInterface.h”. You have to implement following functions:
+
+*   QStringList functionClasses();
+*   QObject* getFunctionClass(QString functionClassName);
+*   QString getVersion();
+*   QString getName();
+*   QList<QAction*> getWmsDpActions();
+*   QList<QAction*> getWmsRuntimeActions();
+*   void init();
+
+**QStringList functionClasses()**
+
+This method returns a list of the names of the implemented
+functionclasses which can be called by WMS functions.
+
+**QObject* getFunctionClass(QString functionClassName)**
+
+This method returns the QObject which delivers the function which can
+be called by your WMS functions.
+
+**QString getVersion()**
+
+This method returns the version of the plugin.
+
+**QString getName()**
+
+This method returns the name of the plugin which will be displayed in
+the plugin manager.
+
+**QList<QAction*> getWmsDpActions()**
+
+Here you can return a list of action which will be placed in the development platform menubar. If you don't need it return an empty list.
+
+
+**QList<QAction*> getWmsRuntimeActions()**
+
+Here you can return a list of action which will be placed in the runtime menubar. If you don't need it return an empty list.
+
+**void init()**
+
+This method will automatically called by the plugin mechanismn after loading the plugin. You can override this function to do some stuff at startup of the plugin. 
+
+===== Target directory for plugin
+
+WMSDP and WMS Runtime will find the plugin if it is stored in the functions directory under the application directory.
+
+===== Calling the plugin from WMS
+
+The way to call a function plugin in your javascript is described in the "Function Reference" section.
+
+==== Data Access Plugins
+
+WMS provides many different types of data access plugins. For example one for SQLite File databases (wmssqlite), or one for relational Database (Wmsdb). They all implement one interface which will provided by WMS Core. If you want to implement your own dataaccess plugin to accessing another datasource like NoSQL databases, other backends or other servers you can do that.
+
+The first step is to implement the IwmsDataAccessPlugin interface. This interface is used to delivery all needed informations
+to run the dataaccess plugin. 
+
+The next step is to implement the IdmDataAccess interface which will be used to communicate directly with the datasource. The easiest way to start implementing a data access plugin is to take a look on wmswebclient.
+
+===== Target directory for plugin
+
+WMSDP and WMS Runtime will find the plugin if it is stored in the dataaccess directory under the application directory.
+
+===== Calling the plugin from WMS
+
+The plugin will be read automatically at startup of WMSDP or WMS Runtime. You can configure it over the menu “Misc” in the client settings menu item. In the dialog your implemented plugin will appear if the loading of the plugin at startup was successful. Over the configuration button your configuration dialog will appear which you have to implement in the interface (Function “openConfigurationEditor”).
+
+**Important!**
+
+Data Access Plugins will be configured through the Clientsettings. It is not possible to configure data access plugins through the PluginManager. The reason for this is that Data Access Plugin Configuration will be stored in the local filesystem, but all other Plugin types will be stored in the configured database.
+
+===== Sample plugin
+
+Download WMS from Website and look at the wmswebclient. This is a data access plugin
+
+=== User Interface Plugins
+
+If you want to develop a WEB WMS plugin do these 5 steps.
+
+1. Create an new MavenProject in your Workspace and add the archetype of Vaadin.
+2. You have to extend the class „ComponentBasedPlugin“ and implement the interface „IPlugable“ in your Main Class.
+3. Create a Folder called: „src/main/resources→META-INF→services“ in your source directory. In this folder is you create a text file. This naming follows: „com.wogra.wms.frontend.emf.vaadin.plugin.interfaces.IPlugable“ and there you write the fully qualified name of the main application. „com.wogra.webwms.plugin.generic.<NameOfPlugin>“ „com.wogra.webwms.plugin.generic.HelloWorld“ (⇐example)
+4. Configure these dependecy for your pom like here.  
+5. Run the Project as a maven install.
+
+[source,xml]
+----
+<dependency>
+  <groupId>com.wogra</groupId>
+  <artifactId>wms.webwms.vaadin7</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <scope>compile</scope>
+</dependency>
+----
+
+Web WMS is a Modular Software. You have 5 Modules:
+
+-Application: Contains the Complete View and the related components  
+-Menu: The MenuBar of the Application  
+-Module: Contains the Module/s (Objects and Querys) of your Application  
+-Container: Shows the Content of your Module/s  
+-Object: Contains and shows Attributes, Options,… of the Object in your Container  
+
+The Modules are separated in component and view.
+
+Following is an example how you can use the Components and the Views. You just have to create a new component of the module and override the associated view. Then set the new Component.
+
+[source,java]
+----
+ContainerViewComponent containerViewComponent = new ContainerViewComponent() {
+  @Override
+  public ContainerView createOrGetContainerView() {
+	ContainerView containerView = (ContainerView) super.createOrGetContainerView();  
+        return containerView;
+  }
+};
+setContainerViewComponent(containerViewComponent);
+----
+
+The public Method getApplicationName() you have to name after your Plugin to find it with the URL.
+
+[source,java]
+----
+public String getApplicationName() {
+  return "HelloWorld"; // HelloWorld is the name of the Plugin
+}
+----
+
+You can access the plugin via the URL:
+
+[source,java]
+----
+<server>/<theme>/<database>/plugin/<NameOfPlugin> 	
+localhost:8080/wms/test/plugin/HelloWorld			
+----
+
+Then run wms and you can use your plugin. (Example Project follows)
+
+=== Printing Plugins
+
+If you want to create printouts or reports you can develop your own plugin or use the commercial plugin which was developed by WOGRA as interface for NC Report. The reason why this plugin is not open source and not available for public is that the license for NC Report has some limitation which forbids the delivery of code. If you need the plugin please contact us on
+mailto:info@wms-project.com[info@wms-project.com].
+
+For creating a printing plugin you have to implement the “IwmsPrinting” interface and the “IwmsPrintingPlugin” interface. You
+will find both interfaces in the wmsbasetools project in the “src” directory.
+
+WMSDP and WMS Runtime will find the plugin if it is stored in the “printing” directory under the application directory. A printing plugin must support multithreading.
+
+==== Calling the plugin from WMS
+
+The plugin will be called automatically and offers it's functionality in WMS Runtime and WMS DP. Both will only use the first found active plugin and ignores all others. So take a look in the Plugin manager to make sure that your application is using the right plugin.
+
+==== Sample plugin
+
+At the moment there is only the commercial NC Report Interface plugin. But we are planning to implement another plugin with an
+open source software which has similar functions. 
+
+=== Installing Plugins
+
+It is very easy to install plugins. Just copy the binary to the right folder. The right folder is different depending of plugin type. 
+
+Data Access Plugins: <Application Dir>/dataaccess   
+Function Plugins: <Application Dir>/functions   
+Printing Plugins: <Application Dir>/printing   
+
+=== Configuring Plugins in Applications
+
+Plugins can be configured for different purposes. The first purpose is using plugins while you implement your software using WMS DP. The second purpose is to configure your runtimes and your application. And the last purpose is to configure the server which plugins should be used.
+
+==== Configure WMS DP Plugins
+
+You can configure WMS DP for each scheme different. To make sure that all plugins are availbale start the plugin manager in WMS DP. You will find the WMS DP Plugin Manager in the “Edit/Scheme” menu. If you open the Pluginmanager you will find a view which displays all detected plugins grouped by the type of the plugins. Over the checkboxes you can configure which plugin is active and which not. So you are able to change the plugin configuration at runtime.
+
+**Important!**
+
+If you run the WMS Runtime from WMS DP for testing, the WMS DP configuration will be used for running the application instead of the application configuration.
+
+==== Configure Application Plugins for Runtimes
+
+In WMS you are able to configure the plugins different for each application. Beside you mark which plugin is active you can also mark which plugin is required for starting the application and which not. Is a required plugin missing at application startup. The user gets a message that the required plugin is missing in the directory and stops the execution of the application. So you can make sure that the user only executes the application if it is correct installed.
+
+**Important!**
+
+If you run the WMS Runtime from WMS DP for testing, the WMS DP configuration will be used for running the application instead of the application configuration.
+
+==== Configure Server Plugins
+
+You can configure the server plugins over the “Misc/Server” menu. Open the PluginManager and configure the server plugins. The server must be restartet to update the configuration. The server only reads the Plugins for Functions, Printing and Server. User interface Plugins will be ignored.
+
+The configuration of the server plugins will be stored in an own scheme for server configuration. The scheme is only over WMS DP available and should not be used for anything else as configuring the server. If you develop applications or some other things, they won't be available in Runtimes. Don't change anything manual.
+
+
+=== With WMS shipped Function Plugins
+
+Here you will find plugins shipped with WMS.
+
+include::plugins/mqtt.adoc[]

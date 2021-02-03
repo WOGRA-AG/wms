@@ -1,0 +1,229 @@
+==== Printing
+
+The Printing class is for generating printoutput. It can only be used, if a printengine plugin is installed and active for your application.
+
+At the moment (April 2015) WOGRA implemented only one print engine which is derived from a commercial solution. So WOGRA is not able to deliver this plugin with WMS in an Open Source way. If you want to use the print engine, contact WOGRA and you can purchase this plugin.
+
+===== Function Reference
+
+[source, java]
+----
+void print(Object objectToPrint)
+----
+
+creates the printoutput for the given object. There muste be a default printing template for the class of the given object defined.
+
+Example:
+
+[source, java]
+----
+printing.print(obj);
+----
+
+[source, java]
+----
+void print(Object objectToPrint, Object template)
+----
+
+creates the printoutput for the given object with the given template object. The template object must be configured for the class of the object to print.
+
+Example:
+
+[source, java]
+----
+printing.print(obj, template);
+----
+
+[source, java]
+----
+void print(ObjectContainer objectContainer)
+----
+
+creates the printoutput for the given objectcontainer. There muste be a default printing template for the class of the given objectcontainer defined.
+
+Example:
+
+[source, java]
+----
+printing.print(container);
+----
+
+[source, java]
+----
+void print(ObjectContainer containerToPrint, Object template)
+----
+
+creates the printoutput for the given objectcontainer with the given template object. The template object must be configured for the class of the objectcontainer to print.
+
+Example:
+
+[source, java]
+----
+printing.print(container, template);
+----
+
+[source, java]
+----
+void print(Object objectToPrint, String templateName)
+----
+
+creates the printoutput for the given object with the given template. The template will be searched by the given unique template name.
+
+Example:
+
+[source, java]
+----
+printing.print(obj, "myTemplate");
+----
+
+[source, java]
+----
+=== void print(ObjectContainer containerToPrint, String template)
+----
+
+creates the printoutput for the given container with the given template. The template will be searched by the given unique template name.
+
+Example:
+
+[source, java]
+----
+printing.print(container, "myContainerTemplate");
+----
+
+[source, java]
+----
+void printInLanguage(Object object, int languageId)
+----
+
+creates the printoutput for the given object in the given language. There must be a default template defined for the class of the object and the given language.
+
+Example:
+
+[source, java]
+----
+printing.printInLanguage(container, 1);
+----
+
+[source, java]
+----
+void printInLanguage(Object object, String languageName)
+----
+
+creates the printoutput for the given object in the given language. There must be a default template defined for the class of the object and the given language.
+
+Example:
+
+[source, java]
+----
+printing.printInLanguage(object, "english");
+----
+
+[source, java]
+----
+String printPdfToBase64(ObjectContainer container, String templateName)
+----
+
+generates the printoutput as base64 string for the given container and the given template.
+
+Example:
+
+[source, java]
+----
+var base64 = printing.printPdfToBase64(container, "myContainerTemplate");
+----
+
+[source, java]
+----
+String printPdfToBase64(ObjectContainer container, Object template)
+----
+
+generates the printoutput as base64 string for the given container and the given template.
+
+Example:
+
+[source, java]
+----
+var base64 = printing.printPdfToBase64(container, containerTemplate);
+----
+
+[source, java]
+----
+String printPdfToBase64(ObjectContainer container)
+----
+
+generates the printoutput as base64 string for the given container. A default template must be defined for the class of the container.
+
+Example:
+
+[source, java]
+----
+var base64 = printing.printPdfToBase64(container);
+----
+
+[source, java]
+----
+String printPdfToBase64(Object objectToPrint, Object template)
+----
+
+generates the printoutput as base64 string for the given object and the given template.
+
+Example:
+
+[source, java]
+----
+var base64 = printing.printPdfToBase64(container);
+----
+
+[source, java]
+----
+String printPdfToBase64(Object objectToPrint, String templateName)
+----
+
+generates the printoutput as base64 string for the given object and the given template.
+
+Example:
+
+[source, java]
+----
+var base64 = printing.printPdfToBase64(obj, "myTemplate");
+----
+
+[source, java]
+----
+String printInLanguagePdfToBase64(Object object, int languageId)
+----
+
+generates the printoutput as base64 string for the given object and the given language. There must be a default template defined for the class of the object and the given language.
+
+Example:
+
+[source, java]
+----
+var base64 = printing.printInLanguagePdfToBase64(obj, 1);
+----
+
+[source, java]
+----
+String printInLanguagePdfToBase64(Object object, String languageName)
+----
+
+generates the printoutput as base64 string for the given object and the given language. There must be a default template defined for the class of the object and the given language.
+
+Example:
+
+[source, java]
+----
+var base64 = printing.printInLanguagePdfToBase64(obj, "english");
+----
+
+=== String printPdfToBase64(Object object)
+
+generates the printoutput as base64 string for the given object. A default template must be defined for the class of the object.
+
+Example:
+
+[source, java]
+----
+var base64 = printing.printInLanguagePdfToBase64(obj);
+----
+  

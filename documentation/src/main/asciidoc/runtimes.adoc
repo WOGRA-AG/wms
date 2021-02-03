@@ -1,0 +1,98 @@
+== WMS Runtimes
+
+WMS offers for all officially supported operating systems runtimes. These runtimes are making it possible to run the developed
+application on these devices. The most runtimes were development with C++ and the Qt framework. The Webruntime is a exception which was built with Java Vaadin.
+
+We officially support runtimes for following devices:
+
+PC (Windows und Linux) Macintosh (MacOS) Smartphones (iOS and Android)
+Tablets (iOS and Android) Web (Java Application)
+
+The runtimes are native software, which are interpreting your models, ui's and functions and runtime. The runtimes can be used with built in data access plugins or with your own developed data access plugin.
+
+=== Authentification
+
+After starting the runtime the first step is to insert your credentials for authentification. After you have installed WMS on your database you have two users for login. The admin user (Login: “admin”, password: “admin”) with admin rights and the test user (Login: “test”, password: “test”) without admin rights.
+
+=== First start of Runtime
+
+If you start your runtime the first time you have to configure the runtime. Click the “Client settings” button on the left bottom side Configure your database configuration like the way you already did for WMS DP. You will find the description
+in the Installation section. 
+
+=== Scheme and Application selection
+
+If only one scheme exists in your database, a scheme selection by the user won't be appear. The existing scheme will be taken. Otherwise a dialog open in which the user is able to select the scheme. Select the scheme and click the “OK” button.
+
+After you clicked the “OK” button the runtime loads from data access which applications are for the user available. If only one application is available the next step will be skipped automatically by the application and the application will be opened. If there is more than one application the user has to select the wished application. This application will be opened and is ready to use.
+
+=== Desktop Runtimes
+
+The runtimes are native programs, which interprets your models, user interfaces and functions. After successful login the application will be displayed in native look and feel.
+
+==== Command Line Parameters
+
+There are several command line parameters for running wmsruntime on desktop.
+
+==== Simulation Mode
+
+You can simulate a specific device on desktop such as android mobile phone or tablet or ios Mobile or tablet. following simulations modes can be used:
+
+* iOsMobile
+* iOsTablet
+* AndroidMobile
+* AndroidTablet
+* OthersMobile
+* OthersTablet
+* NonGuiApp
+
+Sample:
+
+----
+wmsruntime simmode=AndroidMobile
+----
+
+==== Application Name
+
+You can add the application name you wish to run with your application. you can easily start it with
+
+----
+wmsruntime MyApp
+----
+
+Sample with Simulation mode:
+
+----
+wmsruntime simmode=AndroidTablet MyApp
+----
+
+==== Running non GUI Apps
+
+with simmode=NonGuiApp you are able wms application which have no gui representations and runs until der function calls are finished or in background. With this simmode you need additional arguments to login, select scheme and select application. All these arguments are mandantory.
+
+Sample call for non gui apps:
+
+----
+wmsruntime simmode=NonGuiApp login="<login>" password = "<password>" scheme="<scheme>" app="<application name>"
+----
+
+Is one of these arguments are missung the start of the application fails.
+
+
+
+**Note:**
+
+An unknown parameter will always be interpreted as application name. If you add more than one simulation mode as command line
+parameter, the last one wins. 
+
+=== Mobile Runtimes
+
+TODO
+
+=== Tablet Runtimes
+
+TODO
+
+=== Web Runtime
+
+TODO
+  

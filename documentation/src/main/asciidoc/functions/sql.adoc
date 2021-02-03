@@ -1,0 +1,68 @@
+==== SQL
+
+SQL provides the Jaavscript engine with function and access to SQL Databases. It has functions for executing sql commands. The Functions can be access over the "sql" object in the script engine.
+
+[source,javascript]
+----
+StringList getDriver();
+----
+
+returns a list of supported SQL drivers. please not that you have to copy the driver dlls to the application dir to support this drivers.
+For example you need libmysql.dll on windows in the wms application directory to use the QMYSQL driver. All driver names start with Q because WMS is using the built in Qt technology to access Sql databases.
+
+[source,javascript]
+----
+bool createDbConnection(String name, String driver, String dbName, String host, int port, String login, String password, String connectionParams);
+----
+
+creates and opens the db connection. 
+name: the unique name of this connection which must be used in executeSql and close connection.
+driver: the name of the driver which should be used to access databases.
+dbName: the name of the database
+host: the hostname of the database
+port: the port number for accessing the database
+login: the database user login
+password: the database user password
+connectionParams: additional connection params.
+
+
+[source,javascript]
+----
+ResultSet executeSql(String name, String sql);
+----
+
+executes the given sql command on the database connection with the name "name" and returns the ResultSet. The ResultSet contains the result of queries.
+
+[source,javascript]
+----
+void closeDbConnection(String name);
+----
+
+closes the db connection with the name "name". After closing the connection you are not able to executeSql commands on this db conenctions.
+
+===== ResultSet
+
+The resultSet is a object structure to get the results from a database query. It is a list with n ResultRecordSets.
+
+
+[source,javascript]
+----
+int size();
+----
+
+returns the number of ResultRecordSets in this ResultSet.
+
+[source,javascript]
+----
+ResultRecordSet at(int pos);
+----
+
+returns the ResultRecordSet at pos.
+
+
+
+===== ResultRecordSet
+
+ToDo
+
+

@@ -1,0 +1,201 @@
+===== WMS Server
+
+The WMS Server is a HTTP Rest Server. It can be used as a communication and business logic layer between the datastore and the clients. So you can prevent direct access to your database over the internet.
+
+===== Linux Installation Documentation
+
+This section gives a detailed description how to install the wms server on linux operating systems.
+
+include::wms-linux.adoc[]
+
+===== Dataaccess Plugins to use with WMS Server
+
+Do not use the SQLite Plugin for your WMS Server as backend. This will lead to deadlocks on the db. You can use the RDB Plugin (Relational Database) and the webclient Plugin. The webclient Plugin communicates with another WMS Server. So you are able to build a server chain. The configuration of the dataaccess layer is described in doku.php?id=dataaccess[Data Access Plugins]. The dataaccess configuration can be opened over the server configuration.
+
+===== Server configuration
+
+The WMS Server and it's ecosystem is highly configurable to fits administration needs. The configuration can be started over the server gui, which is part of WMS Server Controller.
+
+
+====== General Configs
+
+*Service Access*
+	
+Application Server Port
+The daemon port which accepts all request for the WMS Application Server. All Application requests will be redirected to the current active WMS Application Server.
+Default: 8383
+
+*Maintenance Port*
+
+The port which accepts requests from maintenance port. These requests will be redirected to the current active WMS Application Server on the Maintenance Port.
+Default: 8181
+
+*Maximum Thread Count*
+
+The maximum count of threads which will be processed in parallel. Usally you take the number of cores for the maximum thread count.
+Default: 4
+
+*Server User*
+
+The user which will be used by the server for internal requests which needs authentication.
+
+*Server Password*
+
+The password of the user which will be used by the server for internal requests which needs authentication.
+
+*Maximum Connection Count*
+
+The maximum count of connection which can be open in parallel.
+Default: 10
+
+*Session Timeout*
+
+The time in minutes a session gets an timeout and will be deactivated by WMS.
+
+*Zip Compression*
+
+If this checkbox is activated, the server answers will be sent zip compressed.
+
+Default: false
+	
+===== Logging		
+Logging is a built in feature of WMS. All applications can be logged.
+
+===== Application Server Logging
+
+If this is activated the logging mechanismn of the application server is activated. In this log file all message will be stored, which have the
+activated severities. The Log file contains WMS logs and application logs added by the function development or plugins.
+
+Default: true
+
+*Path*
+
+The path of the application server log file.
+
+*Severity*
+
+The logging severity configuration. If you activate all checkboxes, all messages will be written to file. This will slow down the system a lot. 
+
+Default: Error, Fatal are activated
+
+===== Daemon Logging
+
+*Daemon Log Path*
+
+The path of the application server log file.
+
+*Daemon Logging Severity*
+
+The logging severity configuration. If you activate all checkboxes, all messages will be written to file. This will slow down the system a lot. 
+
+Default: Error, Fatal are activated	
+
+==== Server Management	
+
+*Primary Port Application Service*
+
+The primary port which is used by the WMS Application server for redirecting request from daemon.
+
+Default: 8384
+
+*Primary Port Maintenance Service*
+
+The primary port which is used by the WMS Application Server for redirecting request from daemon for the maintenance service.
+
+Default: 8182
+
+*Secondary Port Application Service*
+
+The secondary port which is used by the WMS Application server for redirecting request from daemon.
+
+Default: 8385
+
+*Secondary Port Maintenance Service*
+
+The secondary port which is used by the WMS Application Server for redirecting request from daemon for the maintenance service.
+
+Default: 8183
+
+*Server Application Executable*
+
+The path and name of the server executable.
+
+*Process health Check Intervall*
+
+The intervall in minutes which the health check for the current active process will be called. 
+
+Default: 5
+
+*Max Server Age*
+
+The maximum age of a server in hours until the server will be switched and restarted. This is an automatic mechanismn
+Which makes sure that the WMS Application Server will be refreshed in defined periods. This restarts only the application
+server and not the daemon.
+
+Default: 48
+
+*Best Switching Hour Start*
+
+The starting time a server can be switched. Usually it should be done in periods with low traffic. You can select the
+start hour from 0 to 24. If the max server age is execeeded the health check waits until it reaches this start time and
+is before end time.
+
+
+*Best Switiching Hour End*
+
+The end hour of the best switching time for sever which exceeded the maximum age. You can select the start hour from 0 to 24. If the max server age is execeeded the health check waits until it reaches this start time and
+is before end time.
+
+*Max Process Memory Usage*
+
+The server daemon executes in an specific intervall an application server health check. Here you can define if the application server will be switched to the backup application server und restartet if to much memory will be consumed by the server. the application server needs without any action round about 32 MB. A good value is about 100 MB.
+
+*Simulate Process Management*
+
+This flag is only for technical tests necessary. Set it always to false. 
+	
+==== Use WMS Server as Service (Windows) or Daemon (Daemon Linux, MacOS)
+
+===== Windows
+
+You can install and configure the server over the wmsservercontroller Application. This application is a small GUI Application which enables you to install the wmsserver as service, configure the server and start it as service. You have to start the application as administrator. to install and start the service.
+
+
+===== Linux
+If your server has a GUI you can start the wmsservercontroller Application as root and install the service like on Windows. If you have only the command line you can you following commands:
+
+===== Install the Service
+
+[source,]
+----
+wmsserverd -install
+----
+
+===== Start the Service
+
+[source,]
+----
+wmsserverd -start
+----
+
+===== Stop the Service
+
+[source,]
+----
+wmsserverd -stop
+----
+
+You need root privileges to do this.
+
+==== Use WMS Server as App without service installation
+
+===== Linux and Windows
+
+You can start the server without administration privileges and without installing the server as service.
+
+start the server over commandling with following call:
+
+[source,]
+----
+wmsserverd -exec
+----

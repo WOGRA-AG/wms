@@ -1,0 +1,167 @@
+==== WmsContainerManager
+
+The containerManager manages all containers of the current scheme. it can be access over the wmsFacotry with the wmsFactory.getContainerManager function call.
+
+*Baseclasses* WmsLocatedElement
+
+[source, java]
+----
+WmsObjectContainer findContainerById(Number id)
+----
+
+finds the container by id. This is a two step search. first it will be searched in memory if container was already loaded. if not the database will be asked. If the container was loaded from database all objects will be loaded as well. This might take while if a large amount of object is in the container. There is no guarantee that the container has really all objects.
+
+*Arguments*
+
+* id the Id of the container
+
+*returns* WmsObjectContainer - The container if found or null
+
+[source, java]
+----
+WmsObjectContainer findContainerByKeyname(String keyname)
+----
+
+finds the container by keyname. This is a two step search. first it will be searched in memory if container was already loaded. if not the database will be asked. If the container was loaded from database all objects will be loaded as well. This might take while if a large amount of object is in the container. There is no guarantee that the container has really all objects.
+
+*Arguments*
+
+* keyname - the keyname of the container.
+
+*returns* WmsObjectContainer - The container if found or null
+
+[source, java]
+----
+WmsObjectContainer findEmptyContainerById(Number id)
+----
+
+finds the container by id. This is a two step search. first it will be searched in memory if container was already loaded. if not the database will be asked. With this command no objects will be loaded and the container is empty or has only object which were laoded before. There is no guarantee that the container is really empty.
+
+*Arguments*
+
+* *id* - the container Id.
+
+*returns* WmsObjectContainer - The container if found or null
+
+[source, java]
+----
+WmsObjectContainer findEmptyContainerByKeyname(String keyname)
+----
+
+finds the container by keyname. This is a two step search. first it will be searched in memory if container was already loaded. if not the database will be asked. With this command no objects will be loaded and the container is empty or has only object which were laoded before. There is no guarantee that the container is really empty.
+
+*Arguments*
+
+* *keyname* - the keyname of the container
+
+*returns* WmsObjectContainer - The container if found or null
+
+[source, java]
+----
+WmsObjectContainer createContainer(String classKeyname)
+----
+
+creates a new container of type classKeyname
+
+*Arguments*
+
+* *classKeyName* String - the class keyname of the new container.
+
+*returns* WmsObjectContainer - The new container or null if class was not found.
+
+[source, java]
+----
+WmsObjectContainer createContainer(String keyname, String classKeyname)
+----
+
+creates a new container with the given keyname and of type class.
+
+*Arguments*
+
+* *keyname* (must be unique if not the keyname will be changed by WMS to make it unique) String - the class keyname of the new container.
+
+*Returns* WmsObjectContainer - The new container or null if class was not found.
+
+[source, java]
+----
+WmsObjectContainer createContainer(String keyname, WmsClass class)
+----
+
+creates a new container with the given keyname and of type class.
+
+*Arguments*
+
+* *keyname* (must be unique if not the keyname will be changed by WMS to make it unique) 
+* *class* the class of the new container.
+
+*Returns* WmsObjectContainer - The new container
+
+[source, java]
+----
+WmsObjectContainer createContainer(WmsClass wmsClass)
+----
+
+Creates a new container of type class and returns it.
+
+*Arguments*
+
+* *WmsClass* the class of the new container.
+
+*Returns* WmsObjectContainer - The new container
+
+[source, java]
+----
+WmsObjectContainer copyContainer(WmsObjectContainer* container, Boolean complete)
+----
+
+Copies the given container and returns it. If complete is true, all object will be copied. if it is false only the local loaded objects will be copied.
+
+*Arguments*
+
+* *WmsObjectContainer* - the container to copy Boolean - copy all objects or the local one.
+
+*Returns* WmsObjectContainer - The new container
+
+[source, java]
+----
+Array<String> getContainerList(String className)
+----
+
+loads all containers which are of type of the given class. returns only the container which type matches exact the given class. if the class is a baseclass the container won't be returned.
+
+*Arguments*
+
+String className - the class keyname of which type the containers must be.
+
+*Returns* Array<WmsObjectContainer> - The list of containers
+
+[source, java]
+----
+WmsObjectContainer reloadContainerComplete(WmsObjectContainer wmsobjectcontainer)
+----
+
+Reloads the container completly. All local modifications will be reverted.
+
+*Arguments*
+
+* *WmsObjectContainer* - the container which must be reloaded. reloads all objects.
+
+*Returns* WmsObjectContainer - the new loaded container reference
+
+[source, java]
+----
+void removeContainerLocal(WmsObjectContainer container)
+----
+
+removes the container locally. The container still exists in the database.
+
+*Arguments*
+
+* *wmsobjectcontainer* - the container to remove after calling this method the reference is invalid!!!
+
+[source, java]
+----
+void deleteContainer(WmsObjectContainer container)
+----
+
+deletes the container locally and on the database.

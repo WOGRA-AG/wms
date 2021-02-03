@@ -1,0 +1,79 @@
+==== Log
+
+class for logging events in the application. The global logger of WMSDP will be used for logging. This means every log message you post will be displayed there if the configuration and the log level is set correctly.
+
+===== Function Reference
+
+[spurce, java]
+----
+info
+----
+
+If you want to add info messages to make it easier to debug something without running the debugger.
+
+*Arguments*
+
+* String Message: The message you want to deliver to the logger
+
+
+===== Sample
+
+[source, java]
+----
+log.info("An error occurred.");
+----
+
+[source, java]
+----
+warning
+----
+
+A warning should be sent if an unexpected behavior of the system occures. There is something strange if this codeline will be reached, but it must not be an error.
+
+*Arguments*
+
+* String Message: The message you want to deliver to the logger
+
+===== Sample
+
+[source, java]
+----
+log.warning("An error occurred.");
+----
+
+[source, java]
+----
+error
+----
+
+This log message should be used to display that an error occurred in the system. The stability of the system is not endangered and the user can continue his/her work with the system.
+
+*Arguments*
+
+String Message: The message you want to deliver to the logger
+
+===== Sample
+
+[source, java]
+----
+log.error("An error occurred.");
+----
+
+[source, java]
+----
+fatal
+----
+
+Fatal errors are errors which endanger the stability of the system and the user can not expect after a fatal message was send. The user should stop or restart the system before he continues work.
+
+*Arguments*
+
+String Message: The message you want to deliver to the logger
+
+===== Sample
+
+[source, java]
+----
+log.fatal("A fatal error occured");
+----
+  

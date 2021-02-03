@@ -1,0 +1,197 @@
+== WMS Product Backlog
+
+===  WMS Core
+
+==== Planned:
+
+|====
+| Feature Name | Description | Priority | Status
+| Proxy Container | Developing a special type of container in which you can store proxied objects. A proxy object is a placeholder to a real object in an other objectcontainer | Middle | idea
+| AOP | Integrating AOP functionality in WMS calling static aop methods with the functionname and function object as parameter before and after a memberfunction call. This should be defined for all classes for specific classes and for specific members | Middle | idea
+| Context Dependency Injection | Defining on container level which member has which value assigning objects automatically to object references and the same with containers. | Middle | idea
+| Interfaces | Enable the user to model interfaces | High | in Progress
+| Abstract Functions | Enable the user to model abstract functions | Low | idea
+| New roles Developer and Designer for users | A better way for defining default rights in WMSDP | Middle | idea
+| Function overloading | Implement functions with the same name and different arguments | Low | idea
+| Const Functions | Implement functions which can be const and they can not modify member data | Low | idea
+| Versioning of classes | Versioning of classes and all what belongs to (members, methods, validators,…). To be able to use WMS as repository like SVN or GIT | Low | idea
+| Enhancing Logging feature | At the moment you can only define the severity of logging but you can not choose which messages should be logged. This lead to a large number of logging messages in Information or Warning mode which don't want to have. The Idea is to expand the configuration possibilities. Divide system messages from development output, specifying output files and logging modes. | Low | idea
+| Defining display format for members | At the moment the member will be displayed dependent of it's type which could be ugly in generic dialogs. For a better user experience user defined formating should be added | Low | idea
+| Configurable Journal | At the moment all changes of all objectcontainers will be logged. it should be possible to deactivate logging of changes for specific objectcontainers | Low | idea
+| Undo/Redo | Implementing Undo Redo in WMS | Low | idea
+| Integrating JavaScript Libraries | At the moment you can only use the default functions of jaavscript enhanced by WMS Plugins. We need a way to make it possible to call JavaScript libraries. With this we get many possibilities like webservice calls and so on. | High | idea
+| PythonQt | Integrating PythonQt Script Environment as alternative to JS | Low | idea
+| Enhance Testcases | Complete Test cases for the backend | High | in Progress
+| WQL Update Command | Enrich the wql language with an update command (inspired by SQL) | Medium | Planned
+| WQL Insert Command | Enrich the wql language with an insert command (inspired by SQL) | Medium | Planned
+| WQL Delete Command | Enrich the wql language with a delete command (inspired by SQL) | Medium | Planned
+| Support Event Sourcing | To support offline mode on client devices a Event Sourcing mechanism should be integrated to the persitence layer | Medium | Planned
+
+| Unify Server/DB Config | All Wms Application should read the server and db configuration at the same settings location | Medium Finished
+| Encrypted string and chardoc fields | Optional encrypt chardoc and string fields | Medium | Idea
+|====
+
+==== Finished
+
+|====
+| Feature Name | Description | Priority | Status
+| New Datatype URI | A new Datatype URI which can be easily migrated through WDF Files | Low | Finished
+| Introduce Packages for classes | Introduce Packages for classes to reduce class name conflicts in a scheme | High | Finished
+| WMS WDF Deploy App | console application for deploying wms wdf files in scheme. | High | Finished
+|====
+
+=== WMS Development Platform
+
+==== Planned:
+
+|====
+| Feature Name | Description | Priority | Status
+| UML Class Diagram designer and viewer | Create, edit and view class diagrams and convert it to WMS models | Low | idea
+| Add search replace in CodeEditor | In the code editor a search and replace mechanism is missing | High | idea
+| graphML Generation | generate the class model as graphML | High | idea
+| plantML Generation | generate the class model as plantUML | High | idea
+| Test center | Support Test Center where test data creation and test execution is supported | Medium | Idea
+|====
+
+==== Finished:
+
+|====
+| Feature Name | Description | Priority | Status
+| Plugin Manager | Managing installed plugins | High | 02.05.2014
+| Enhancement to cloud platform | Autodeploy of WDF's for new customers or tester | High | 30.11.2015
+| Search in WMSDP | Searching for symbols like classes members, containers | High | 31.03.2014
+| QML Library | to reduce code redundancy create the possibility to store qml snippets in a library and load it on demand | High | Done
+| LDAP Support | Connect User Manager to LDAP as aditional option | High | Done
+| Enhance Export Filter | Make it possible to define filters or exports with WQL | Medium | Done
+| Add auto completion | Add autocompletion in function editor | High | Done
+|====
+
+=== WMS Runtimes
+
+==== Desktop
+
+|====
+| Feature Name | Description | Priority | Status
+| Move to QML | Switch UI from QWidget to QML | High | in Progress
+| Working Offline | Continuing work if you loose your connection to the server | Low | n Progress
+
+| WQL Tree View | Based on layered WQLs a tree component can be used to select an object container | High | In Progress
+|====
+
+=== Finished
+
+|====
+| Feature Name | Description | Priority | Status
+| LDAP Login | WMS Authentification over LDAP | High | Finished
+| Add Userdefined MainWindow support | Adding Userdefined MainWindow support to the runtime | High | Finished
+| Single Sign On | WMS Authentification thru Single Sign ON | High |Finished
+|====
+
+==== Tablet
+
+|====
+| Feature Name | Description | Priority | Status
+| Move to QML | Switch UI from QWidget to QML | High | in Progress
+| Working Offline | Continuing work if you loose your connection to the server | Low | Idea
+| Custom Styles | Make it possible to define custom styles of the app in QML | Low | Idea
+| OAuth | WMS Authentification over OAuth | Middle | In Progress
+| WQL Tree View | Based on layered WQLs a tree component can be used to select an object container | High | Planned
+|====
+
+=== Finished
+
+|====
+| Feature Name | Description | Priority | Status
+| LDAP Login | WMS Authentification over LDAP | High | Finished
+| Single Sign On | WMS Authentification thru Single Sign ON | High | In Progress
+|====
+
+==== Mobile
+
+|====
+| Feature Name | Description | Priority | Status
+| Move to QML | Switch UI from QWidget to QML | High | in Progress
+| Working Offline | Continuing work if you loose your connection to the server | Low | Idea
+| Custom Styles | Make it possible to define custom styles of the app in QML | Low | in Progress
+| OAuth | WMS Authentification over OAuth | Middle | In Progress
+| WQL Tree View | Based on layered WQLs a tree component can be used to select an object container | High | Planned
+|====
+
+=== Finished
+
+|====
+| Feature Name | Description | Priority | Status
+| LDAP Login | WMS Authentification over LDAP | High | Finished
+| Single Sign On | WMS Authentification thru Single Sign ON | High | In Progress
+|====
+
+==== Web
+
+|====
+| Feature Name | Description | Priority | Status
+| Simple API | Hiding EMF behind a simple to use api for implement user interfaces and enhancements for web applications | High | in Progress
+| Web QML | use QML to create WEB UI's | High | In Progress
+| Direct Database Access | at the moment Web WMS needs the WMS Server for running. In the future a direct access to database could be a better solution | Low | Idea
+| Alternative Web Approach | generate HTML code on server side and add content over a template engine, and sending the page to the frontend (springmvc or JFS approach) | Low | Idea
+| OAuth | WMS Authentification over OAuth | Middle | Idea
+| im-/Export over web frontend | at the moment data exports are only possible in wms dp, wmsruntime or wmsdatainterface. It must be possible to import and export data over the webfrontend. | High | Planned
+| Mobile Browser App | besides native apps for mobile devices it must be possible to use the webruntime on mobile devices. | High | in Progess
+| WQL Tree View | Based on layered WQLs a tree component can be used to select an object container | High | Planned
+|====
+
+=== Finished:
+
+|====
+| Feature Name | Description | Priority | Status
+| Web UI Plugins | Plugin mechanism to implement user defined UI's for webcontext | High | 31.8.2015
+| Move from Vaadin 6 to 7 | Move from Vaadin 6 to 7 to add further functions and make development easier | High | Finished
+| Web App without Login | At the moment you have to login to the server to get the application. In many cases the application must be accessable without login or with login while executing the app (like shop systems) | High | 31.8.2015
+| Remote Function Calls | Implementing the interface for functions calls on the WMSServer | High | Finished
+| Generic UI's | Implement all possible generic UI's like on desktops such as search, views, … | High | Finished
+| Generate Java Source | Generate Java Source Files for a scheme to work with WMS Models in a non generic manner | High | 31.10.2015
+| I18N | at the moment Web WMS all texts in WMS are in German language there must be a translation mechanism to get the translations from backend or add translations | High | Finished
+| White Labelinig | White Labeled Web Applications | High | Finished
+| PDF Printoutput | Implementing the interface for PDF Printoutput | High | Done
+| Frontend for Server Configuration | at the moment the server will be configured directly over the server app user interface. This is difficult if the server has to run on systems without user interfaces. So a web interface for configuring the server is required. The gui parts in the server will be eliminated. and the complete management will be solved over the webfrontend. | Middle | Done
+| LDAP Login | WMS Authentification over LDAP | High | Done
+|====
+
+== WMS Server
+
+|====
+| Feature Name | Description | Priority | Status
+| Application Server Enhancements | Upload applications which can be installed for user in their defined schemes | High | Planned
+| Cloud App Store | Let users or groups register to the server which generates their own scheme. In this scheme the y can install apps which are provided by the app store of the user. | High | In Progress
+| REST API | Add a “real” REST API which can be used by JS-Clients and mobile Devices | High | Planned
+| JNI Connector | Java-WebServer should also be able to connect to the server via JNI | Medium | Planned
+|====
+
+=== Finished
+
+|====
+| Feature Name | Description | Priority | Status
+| Multiple Instance Server | Resilient Server System which switches processes automatically | High | 5.12.2015
+| Web Admin for Server | Development of a web admin tool for the server | High | Done
+| Configurable Function Execution | At the moment only the webfrontend can execute functions on the server, it should be configurable if any client can use the server for executing function so it must no plugin deployed together with the runtimes | Low | Done
+|====
+
+== WMS Plugins
+
+=== Data Access Plugins
+
+|====
+| Feature Name | Description | Priority | Status
+| Fast DB Plugin | Develop a plugin with one object table per class and not so many values tables this would improve datarequest speed a lot. and would make it possible too process a large amount of data in WMS. | High | in Porgress
+| Neo4J Plugin | Develop a plugin for No SQL database (NEO4J). | High | in Progress
+| SAP HANA Plugin | Develop a plugin for SAP HANA database. | High | in Progress
+|====
+
+=== Class Function Plugins
+
+|====
+| Feature Name | Description | Priority | Status
+| Clipboard access | Implement plugin to read data from and store data to clipboard | High | Idea
+| Export Plugin | Implement plugin to export data over WMS Export | High | Idea
+| Import Plugin | Implement plugin to import data over WMS Import | High | Idea
+| Payment Plugins | implement plugins to create payments for paypal or giropay | High | Idea
+|====

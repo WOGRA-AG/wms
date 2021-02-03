@@ -1,0 +1,43 @@
+==== WmsManager
+
+The WmsManager can be accessed of the wmsFactory.getManager() function. it contains session information of the current logged in user wms version information.
+
+*Baseclasses*: WmsLocatedElement
+
+===== Function Reference
+
+[source, java]
+----
+String getWmsVersion()
+----
+
+returns the wms version as string
+
+[source,java]
+----
+=== String getWmsBuild()
+----
+
+returns the wms buildid as string the WMS build id will be generated completly new with each complete compiling of wms. So if you compile wms by yourself you get another build id than the binary download.
+
+
+[source, java]
+----
+String getApplicationVersion()
+----
+
+returns the WMS Application version. (The version of the runtime).
+
+[source, java]
+----
+WmsUser getCurrentUser()
+----
+
+returns the user of the session.
+
+[source, java]
+----
+Number getSessionId()
+----
+
+returns the sessionid of the current session.

@@ -1,0 +1,98 @@
+=== User Interfaces
+
+Easy to understand, effective to use and good looking user interfaces are they key for user acceptance of an application. In WMS you have great flexibility to create great user interfaces. The range goes from generic user interfaces which will automatically created by WMS through the definition of classes, to create your own user interfaces with great animations. Developing user interfaces is strictly divided from developing business logic in WMS. So if a class was defined by an architect or developer, the designer can great the User interfaces to this class and the developer can create the business logic. While the business logic is developed using JavaScript and C++ Plugins the user interfaces will be developed with an user interface language called “QML”. QML is a JSON like description language of user interfaces which allows you to create great looking animated user interfaces and call the business logic. This approach works for all runtimes (Desktop, Mobile, Tablet) except the Web Runtime because there is no interpretor for QML in Web applications. If you want to develop custom
+user interfaces for your webfrontend you have to do this as Vaadin User Interface for WMS.
+
+==== Types of User Interfaces
+
+In WMS exists different types of user interfaces. There are plenty of generic user interfaces which are easily customizable and ready to use without any programming effort. This user interfaces can be used for prototyping or simple object which can be displayed without any additional features.
+
+===== Generic User Interfaces
+
+Here you will find a description to all generic types of user interfaces.
+
+Each generic form needs a unique name and the class for which it should be used. You can edit or select this values in the “Misc Data” tab.
+
+====== Configuration for all generic User Interfaces
+
+Every generic user interface has some configurations in common. These are the unique name of the user interface, the class/object/container for user interface usage and the printing template if printing should be possible. Additionally you can define if this user interfaces offers only read only features.
+
+====== Object Editor
+
+The Object Editor displays the data of an object in an user interface. This editor will always be shown if you double click or
+edit an object in an objectcontainer over the object container subwindow. If you define your object editor for a specific class you have the possibility to change which members will be shown and you can change the sequence of the members. Additionally you can define which feature are available after opening the editor like print or journal. You can define if the access is only read only and if printing activated you can set the printing template for this editor. 
+
+====== WQL
+
+With the WQL input field you can define a query with returns one single object. TRhis object will be displayed in the object editor. So you are able to display object dependent from their status as module. If the query does not return an oject, an error message will be displayed. If the query finds more than one object a warning will be displayed (if warnings are enabled in logging) and the first object will be displayed.
+
+====== Visible Members
+
+In the Visible members tab you can define which members should be visible for the corresponding class. additionally you can change the display sequence over the “Up”- and “Down”- buttons.
+
+====== Functions
+
+Here you can add implemented functions which will be available in the user interface. The functions must be public. If you select a function with arguments, and you want to start the function The runtime will ask for the argument values before the function will be executed. 
+
+====== Display Types
+
+In the object editor you can change the display types for each visible member. So you can override the configuration you have done in the class at the member.
+
+====== Assigning References
+
+Over the “Assign References” tab you have the possibility to assign object references at opening time to the object to be edited.
+
+====== Default values
+
+In the “Default values” tab you can override the default values settings at the class member. This is possible for visible and
+invisible members.
+
+====== Default Objectcontainer Editor
+
+The Default objectcontainer editor displays a list or tree of objects. The editor will also be displayed if you click on an
+objectcontainer in the “Data” subwindow. If you want to define a specific objectcontainer editor with further features or restriction in your container view you have to create a “Default Objectcontainer Editor”. Here you can restrict the default features such as printing, journal, export, import and search. in the “Misc Data” tab. Additional functions can be added in the “Functions” tab. and int the “Visible Members” tab you can define which members are visible. if search is activated, you can define the members which are available for search in the “Search” tab.
+
+====== View Objectcontainer Editor
+
+A View Objectcontainer editor is an user interface which is divided into two parts. On the left side you will find a list of defined views. on the rights side you will find the list display of the current selected view. if change your selection in the view list on the left the displayed data on the right will change to the specified view. This user interfaces is intended to be used to display different views on data. It is up to you to display views every time to the same object container or to different object containers.
+
+A sample use case is to display list of object from a specific container in different states. For example you will display bills in different state you can use this editor to define your views with specific states (unpaid, paid, needs reminder, …). And you are able to switch between the states in your list.
+
+To configure the user interface you can select the views which should be displayed in the left list. The sequence of members and the corresponding objectcontainers are part of the view, so you don't be able to change it in the user interface configuration. But you can define if you allow export, import, search, printing and journal.
+
+====== Object Objectcontainer Editor
+
+An Object object container is for end users very similar to the view objectcontainer. But the configuration is much more powerful. The user interface is divided in two lists. the list of the left side is a selection list. This list can be filled by a view or by selecting an objectcontainer. If you select an objectcontainer you can additionally configure which members (you can add more than one and configure the sequence) of the container class should be used to display each object. The next step is configuring the keymember by adding the “Keyname” in the field. dependent on the value in the keyname you are able to create a WQL which will be called. So the information of the list on the right changes by selecting different values in the left list. Additionally you can add function of the class and you can define if the left list is read only or editable (Default: read only).
+
+====== Search View
+
+The search user interface allows the user to search for data. You can define which members are available for search and which members are visible in the search result. Additionally you can add functions to the search user interface.
+
+===== Custom User Interface
+
+To develop you need knowledge in developing user interfaces with QML. QML is JSON like language which will be used to develop user interfaces. QML is easy to learn and powerful. So you can add animations to your user interfaces and make sure that a great user experience can be exceeded.
+
+QML will be interpreted at runtime like JavaScript in our classes. The user interfaces will be stored in the database and loaded if needed. You also have the possibility to added code snippets in a library so you don't have to copy them into your user interface each time. QML can be used for desktop, tablet and mobile devices at the moment. An interpreter for our webruntime is missing at the moment. 
+
+====== Main Window
+
+In the WMS Runtimes you have a default mainwindow, that will be displayed after application start. If you want your own MainWindow, you can develop one with QML. After you have finished development you can set the MainWindow in the Application configuration. 
+
+====== Object Editor
+
+You can develop user interfaces with displays data of one or more specific objects. 
+
+====== Container Editor
+
+You can develop user interfaces which displays container data in a specific way you want.
+
+====== User Interface without specific Context
+
+Here you can develop an user itnerface without specific context. You can use WQL to get Data to display or any other data source you want.
+
+====== Knowledgebase QML
+
+Here you will find links to good introduction sites for developing with qml.
+
+*   http://qt-project.org/doc/qt-5/gettingstartedqml.html#qml-to-build-user-interfaces[http://qt-project.org/doc/qt-5/gettingstartedqml.html#qml-to-build-user-interfaces]
+*   http://qmlbook.org/index.html[http://qmlbook.org/index.html]

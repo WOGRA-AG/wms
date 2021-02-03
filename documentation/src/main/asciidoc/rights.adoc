@@ -1,0 +1,27 @@
+=== Rights
+
+==== Defining Access Rights
+
+You can define which user or usergroup can access a model or data object. If the definition is empty (the default) every user and every usergroup has access. An administrator has always write access to a model or data object independent how you configure the rights. 
+
+==== The Rights Manager
+
+The Rightsmanager ist divided in two parts. On the left side you will find all users and all usergroups. So you are able to define access rights for complete groups and for single users. To keep system administration simple, it is better to give rights to user groups and not to single users. So you can define groups with the needed rights and add the user to the groups over the user manager. On the rights side you will find the list of rights. If it is empty every user can access or change the model or data object.
+
+==== Add Rights
+
+To add a specific right select a user or usergroup and click the “add” button. Now you will find the user or usergroup in the rights list. If you add a user or group it has automatically write access. If you want to change it to read access double click the user or usergroup in the rights list. The right changes from write to read access. If you want to change it back double the group or user again.
+
+==== Remove Rights
+
+If you want to remove the complete rights of an user or group mark the user or group and click the “Remove” Button. Now the user or the group has no rights on the model or data object, except the rightslist is complete empty.
+
+==== Meaning of Rights
+
+===== Write Access
+
+With write access you can create, edit, delete and view all possible datas in a scheme.
+
+===== Read Access
+
+With read access you can only view the data and you are not able to edit anything in a scheme.

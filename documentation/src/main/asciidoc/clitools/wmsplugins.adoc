@@ -1,0 +1,42 @@
+=== WMSPluginManager Command Line Interface (CLI)
+
+The WMSPluginManager is a CLI tool which enables you to install activate, deactivate and deinstall WMS plugins.
+If you want to use this tool you need administrator privileges., die über Adminrechte verfügen durchgeführt werden.
+
+==== Features
+
+Following Features will be supported by the tool:
+
+* List installed plugins and their state.
+* Activating plugins
+* Deactivating plugins
+
+===== List installed plugins and their state
+
+This command lists the found plugins and their states
+
+*Call:*
+[source,]
+----
+wmsplugin -login=<Admin Username> -password=<Passwort> -command="list"
+----
+
+===== Activating Plugins
+
+This command activates an installed plugin which is currently deactivated.
+
+*Call:*
+[source,]
+----
+wmsplugin -login=<Admin Username> -password=<Passwort> --command="activate" -name="Plugin Name" -version="Plugin version"
+----
+
+===== Deactivating Plugins
+
+With this command you can deactivate an active plugin.
+
+*Call:*
+[source,]
+----
+wmsplugin -login=<Admin Username> -password=<Passwort> -command="deactivate" -name="Plugin Name" -version="Plugin version"
+----

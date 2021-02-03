@@ -1,0 +1,159 @@
+
+=== Class
+
+The main modeling construct of WMS is a class. A class has a unique keyname, a caption and a description. A class can have base classes, members, functions, member groups, validators and further properties. You have nearly all object oriented possibilities by using classes you know from programming languages like Java or C++.
+
+==== Members
+
+For each class you can define up to 1024 members **(don't do it)**. In WMS exists 28 different types of member which makes it possible to model and develop every usecase you need. A detailed member description you will find in the Member section.
+
+==== Member groups
+
+This feature you won't find in object oriented programming languages. In WMS you can group members together to a member group. This feature enables you to define user rights for a complete group and you don't have to do this for every single member. The second advantage is the groups are displayed in generic UI's as own group. This makes the usage of the generic UI's simpler for the end users.
+
+To create a new member group go to the “Groups” tab and click the “New” Button. Enter the name of the group add some translations and change the rights for this group if you want. After this click the “OK” Button. You will see the new group in the groups list. The next step is to add members to a group. To do this go to the members tab double click a member and switch in the member editor to the “Group & Translations” Tab. Here you can select the group you have created before.
+
+==== Base classes
+
+If you created more than one class, you can add base classes to your class. Similar to C++ or many other programming languages WMS allows multi inheritance. This means that one class can have multiple base classes. But be careful this can result in the “Diamond problem” which is described in the wiki.
+
+WMS forbids circle dependencies of classes it is not allowed the class A is the base class of class B and class B is the base class of class A. If you want to try this an error message will be displayed. 
+
+To add a base class go to the “groups and base classes” tab and click the “Add” button under the base class list. Select the wanted base class and click the “OK” button. Now you will see the base class in the base class list.
+
+===== Multiple inheritance
+
+WMS supports Multiple inheritance which means that a class can have more than one base class. How to add base classes to your class is described in chapter “Base classes”. But be careful, you have to know what you do if you use mutitple base classes. Multiple base classes can lead to the so called “http://en.wikipedia.org/wiki/Diamond_problem#The_diamond_problem[Diamond
+problem]”.
+
+There are some specific rules in WMS to reduce the severity of this problem. We implemented an internal diamond check which will inform you if you add members or base classes or functions which make classes invalid
+
+====== Members
+
+* If you have members with the same name and the same type. Only one     member will be created for storing values in an object.
+* Members with the same name and different type lead to an error in WMS.
+
+====== Functions
+
+* Functions with the same name and different arguments (function overloading) is forbidden in WMS. This will lead to an error message.
+* Function with the same name and same arguments (function overriding) is allowed. The first function found will be called. The search for the functions starts from the object class. (This can result in a wrong function call if two base classes have a function with the same name.)
+
+====== Diamond Problem
+
+As described above multiple inheritance may result in the diamond problem. In this chapter is described on examples how we solved the problem.
+
+**Samples:**
+
+The easy way without conflicts in base classes:
+
+[source,java]
+----
+class A
+{
+	int a;
+}
+class B : A
+{
+	int b;
+}
+class C : A
+{
+	int c;
+}
+class D : B, C
+{
+	int d;
+}
+----
+
+Results in:
+
+----
+Objekt a = new D();
+----
+
+Instantiated Member of Object:
+
+*   a
+*   b
+*   c
+*   d
+Sample Using same members with the same type
+
+[source,java]
+----
+class A
+{
+	int a;
+}
+class B : A
+{
+	int b;
+}
+class C : A
+{
+	int c;
+}
+class D : B, C
+{
+	int c;
+}
+----
+
+Results in:
+
+----
+Objekt a = new D();
+----
+
+Instantiated Member of Object:
+
+*   a
+*   b
+*   c
+[source,java]
+----
+class A
+{
+	int a;
+}
+class B : A
+{
+	int b;
+	int y;
+}
+class C : A
+{
+	int c;
+	double y;
+}
+class D : B, C
+{
+	int d;
+}
+----
+
+Result:
+
+This results in a conflict situation. The internal diamond checks will return an error to the WMS Development Platform.
+
+----
+Objekt a = new D();
+----
+
+Conflict of instantiated Member of Object:
+
+*   a
+*   b
+*   y –> is from class B as int
+*   c
+*   y –> is from class C as double
+*   d
+
+==== Functions
+
+You can implement functions for business logic to each class. To make the introduction in WMS as simple as possible we use JavaScript as programming language with some enhancement. A detailed description how functions will be implemented you will find in the function section.
+
+==== Validators
+
+In classes you can implement validators which will be called at time of storing objects. There are different kind of validators described in Validators section.

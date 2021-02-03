@@ -1,0 +1,82 @@
+== Built In Class and Function Reference
+
+WMS has a couple of built in classes and global functions to improve development experience. We are thankful for every idea to enhance this classes or built new classes.
+
+=== WMS Model Class
+
+WMS Model classes which can be used in functions and in QML code.
+
+include::wmslocatedelement.adoc[]
+
+include::wmsmodelelement.adoc[]
+
+===== WMS Model Global Classes
+
+This classes are global singleton objects which can be accessed over the script engine. Over these classes you can access the model and the data of the scheme.
+
+include::wmsfactory.adoc[]
+
+include::wmsmanager.adoc[]
+
+include::wmsclassmanager.adoc[]
+
+include::wmscontainermanager.adoc[]
+
+=== WMS Data Containing Classes
+
+This classes contains the real application data which will be stored to database.
+
+include::wmsobjectcontainer.adoc[]
+
+include::wmsobject.adoc[]
+
+include::wmsvalue.adoc[]
+
+==== WMS Reflection Classes
+
+These classes can be used to access class and member data of objects and containers.
+
+include::wmsclass.adoc[]
+
+include::wmsmember.adoc[]
+
+==== WMS User Management
+
+Classes for User Management. You are not able to change user data or groups. you only can read it.
+
+include::wmsuser.adoc[]
+
+include::wmsusergroup.adoc[]
+
+=== Additional Scripting Enhancement Classes
+
+additional classes added to the script engine to provide additional WMS features beside Javascript core functions like Math …
+
+include::message.adoc[]
+
+include::mail.adoc[]
+
+include::printings.adoc[]
+
+include::wql.adoc[]
+
+include::workflow.adoc[]
+
+include::log.adoc[]
+
+include::plugin.adoc[]
+
+include::geo.adoc[]
+
+include::httpclient.adoc[]
+
+include::staticcall.adoc[]
+
+include::file.adoc[]
+
+include::timer.adoc[]
+
+include::sql.adoc[]
+
+
+  

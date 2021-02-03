@@ -1,0 +1,20 @@
+==== Static Function Call Interface
+
+with the static function call interface you are able to call static class funtions in WMS.
+
+[source,]
+----
+staticExec.call(class key name, methodname, arguments....)
+----
+
+it must be the full qualified class keyname with all packages in the name. Else the class won't be found and the method cann't be called. The class keyname and the method name must be casesensitive. A maximum of 20 arguments are allowed. 
+
+
+*Sample:*
+
+[source,javascript]
+----
+staticExec.call("Car", "calculateCosts");
+staticExec.call("com.Configuration", "getActiveConfiguration");
+staticExec.call("com.calc", "addition", 1, 2);
+----

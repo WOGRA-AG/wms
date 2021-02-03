@@ -1,0 +1,31 @@
+=== Deployment
+
+One of the most important aims of WMS is a simple deployment of the applications and if you don't have implemented your own plugins it is very simple.
+
+==== Deployment without Plugins
+
+Deployment of WMS Application is very simple. If you finished your development create a deployment file (Menu “Edit” submenu “Scheme” command “Export Deployment File”). A WDF (WMS Deployment File) will be created on your local file system. This deployment file contains everything you need to deploy your application on another computer. It is a JSON file and can be used out of the box. To deploy it on another computer just open WMSDP on the computer create a new scheme and call the “Import Deployment File” command from “Edit/Scheme” menu. The deployment file will be imported and the application you wanted is
+there. Nothing else to do.
+
+If you want to update an already deployed application, you can do it on the same way. A new deployment does not delete your data which you created in the application. it updates obly application functionality. Important to note is that a deployment never deletes data. So if you want to delete function members and other stuff which you do not need in your application you have to do this by hand.
+
+===== Which Data will be deployed
+
+A deployment file contains the data of the scheme. But a deployment file contains only the items which will be needed to create one or more new application on a server or update an already existing applications on the server. This means:
+
+* All class informations will be deployed
+* All containers you created will be deployed empty
+* All containers created by the system (to classes which names starts     with “Technical” and “Workflow”) will be deployed with all contained objects
+* All containers with user data will be deployed with class keynames starts with “Permanent” will be deployed including the objects created by the developers and all containers with objects which are children of this containers. (Children means there are ownership dependency between the classes and objects.
+
+==== Deployment with Plugins for server execution
+
+If you developed one or more plugins and you are running your application over the WMS HTTP Rest Server you only have to copy the plugins in the right directory of your server application and stop and restart the server. All plugins will be loaded at startup of the server and can be used over the HTTP Rest Interface.
+
+If you are using a web interface the exported deployment file must be added over the WMSDP in the database which will be used by the server. After this the web interface can access all functions which were developed.
+
+==== Deployment with Plugins for local execution
+
+If you have developed your own plugins for additional features you need to run it locally (on a local database for example, or file database) you have to deploy the complete runtime to this computer. The easiest way is running the installer of WMS on this computer and after this copying the plugins in the plugins subdirectories. After this run WMS DP and import the WMS Deployment file like described in the first chapter.
+
+If you have devices where you can not simply copy executables (like Smartphones or Tablets) you have to build a complete Deplyoment for the executable. After this you have to add your application in the app store and then you can use it. WMS recommends the easier server way (chapter 2) for running apps on devices like smartphones or tablets.

@@ -1,0 +1,58 @@
+=== From UML to WMS
+
+In object oriented programming is an aggregation a special kind of a relation between objects or classes. It describes a stronger relationship between objects as a common relation because the relationship between object equivalent, but one object is a part of another object. In opposite to a composition (which describes “Is a part of”, too) can every object exists by itselves without existing of the other part object. In UML an aggregation will be signed with an empty diamond. A composition with a filled diamond.
+
+==== Sample Aggregation
+
+Aggregation: A marriage consist of two marriage partner, which live on if they get divorced.
+
+[source,java]
+----
+class Marriage // Sample for aggregation
+{
+private:
+    Person& _partner1; // Partial object
+    Person& _partner2; // Partial object
+
+public:
+    // Construktor.
+    Marriage (Person& partner1, Person& partner2)
+        : _partner1(partner1), _partner2(partner2)
+    { }
+};
+----
+
+==== Sample Composition
+
+In difference to the above example consists a building of floors. After demolishing the building all floors are
+demolished too. A floor can not exist without a building.
+
+[source,cpp]
+----
+class Building // Sample composition
+{
+private:
+    std::vector<Floor> _floor;
+
+public:
+    // Construktor.
+    Building(std::size_t floorCount)
+        : _floor(floorCount)
+    {
+        if (floorCount < 1)
+            throw std::logic_error("The building needs minimum 1 floor.");
+    }
+};
+----
+
+==== Relations in WMS
+
+Relations can be set in WMS over the Membertype Object reference or container reference. You can define the type of the class in the relation. 
+
+==== Aggregation in WMS
+
+Aggregations can be set like relations over the membertype Object and Container reference. Additionally you have to set the Must flag for the member, so an object of type marriage must have Partner1 and Partner2. You can define the type of the class in the relation. 
+
+==== Composition in WMS
+  
+As well as relations and aggregations compositions will also be set over over the membertype Object and Container reference. Here you have to set the owner flag. This means when the object Building was created automatically objects for floor will be created. When building will be destroyed the floor object will also be destroyed.

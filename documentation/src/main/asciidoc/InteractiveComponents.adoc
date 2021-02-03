@@ -1,0 +1,255 @@
+== Interactive Components (IC)
+WMS-Developentplattform is capable of, modeling Applikations in Modell Driven Software Development Style, however it lacks of the possibility to develop a GUI-Model in a https://de.wikipedia.org/w/index.php?title=Platform_Independent_Model&action=edit&redlink=1[Platform Independent Model] (PIM) manner. So interactive Components extend WMS to solve this lack of  functionality.
+
+=== Declaring interactive Components
+
+The Declaration, of IC is adapted to the MVVM-Design-Pattern, seperated in Model (WMS-Model), V (View), VM (View-Model). The WMS-Model is developed in the WMS-Developmentplatform as usual. To define an interactive GUI, you have to take care of the View-Definition, witch describes the Layout and Visible Components. Also, you have to take care of the ViewModel-Definition, which describes a Binding between <<interactiveViewDefinitino>> and <<interactiveViewModelDefinitino>>. 
+
+[[interactiveViewModelDefinitino]]
+=== ViewModel-Definition
+
+The ViewModel-Definition simply cosists of numerous 'Variables' which can define Dependencys between each others. Also they are able to refer Data, or execute Functions of the WMS-Datamodel. The Definition of a Variable is defined by the following simple JSON-Structure. 
+
+*   name:   unique Name without special characters
+*   type:   only WMS-Datatypes accepted
+*   uses:   numerous Names of other declared Variables
+*   value-Type: for this Field there is a Limitation of some pre-defined value-types, as following.
+
+[[VariableValue]]
+==== Simple Value-Type (value)
+only one of the following keynames, is allowed.
+[width="100%",options="header",cols="1,1,3,4"]
+|====================
+| Name  | Typ | Beschreibung | Beispiel 
+| value |  String    | String | "value" : "Hello Var" 
+| valueBool  |  Boolean    | Boolean-Variable | "valueBool" : "true" 
+| valueFloat  |  Double    | Float-Variable | "valueFloat" : "3.1415" 
+| valueInt  |  Integer    | Integer-Variable | "valueInt" : "42" 
+|====================
+
+Example Simple Variable: 
+
+[source,json]
+--------------------------------------
+ 
+      "name": "HalloVar",
+      "type": "EString",
+      "uses": [],
+      "value": {
+        "value": "Hello"
+      }
+--------------------------------------
+
+[[DerivedVariableValue]]
+==== Derived Value-Type (valueImmutableDerivedDto)
+This Variable can derive from other Variables and can be Im-/Mutable.
+
+[width="100%",options="header",cols="1,1,3,4"]
+|====================
+| Name  | Typ | Beschreibung | Beispiel 
+| expression |  String    | Expression | "expression": "hcmWql.selected.stunden"
+|====================
+
+Example Derived Variable: 
+
+[source,json]
+--------------------------------------
+      "name": "selectedHours",
+      "type": "EString",
+      "uses": ["hcmWql"],
+      "valueImmutableDerivedDto": {
+        "expression": "hcmWql.selected.stunden"
+      }
+--------------------------------------
+
+[[VariableWqlValue]]
+==== WQL Value-Type (valueWql)
+You can define a WQL to select data from the WMS-Datamodel or a WQL-Template which refers to values of other variables.
+
+Field 'wqlTemplate' is required, 'mapping' is optional.
+[width="100%",options="header",cols="0,0,7,9"]
+|====================
+| Name  |  Typ    | Beschreibung | Beispiel
+| wqlTemplate | String |  With ${...} you mark Placeholder to refere to other Variabels    | select projekt.name from stundenbuchung where AND(mitarbeiter.user=${USER}, 
+datum='${selectedDate}') 
+| mapping  |  Map<String, String> | Mapping der Template-Parameter. | 
+{selectedDate = selectedDate}
+|====================
+
+Exampel WqlVariable:
+
+[source,json]
+--------------------------------------
+"name": "Projekte",
+"type": "EEList_EObject_",
+"uses": ["Projekt"],
+"valueWql": {
+    "wqlTemplate" : "select from projekt where name="${Projekt}"",
+    "mapping" : {"Projekt": "Projekt.selected.name"}
+}
+--------------------------------------
+
+[[FunctionVariableValue]]
+==== Function Value-Type (valueFunctionDto)
+You can define a function call Variable, which executes static WMS-Functions.
+
+[width="100%",options="header",cols="0,0,7,9"]
+|====================
+| Name  |  Typ    | Beschreibung | Beispiel
+| parameterMap | Map<String,WmsType> |  paramterValue which will be resolved by a ScriptEngine and DataType    | "${Name}": "EString"  
+| functionName  |  String | Function Name | 
+bookHoursFunction
+|className | String | Implementing Class Name | HourBookingClass
+|====================
+
+Exampel FunctionVariable:
+
+[source,json]
+--------------------------------------
+      "name": "FunktionBookHours",
+      "uses": [],
+      "valueFunctionDto": {
+        "parameterMap": {
+          "${Bis.getHour() - Von.getHour() - Pause}": "EDouble",
+          "${Datum}": "EDate"
+        },
+        "functionName": "bookHours",
+        "className": "Stundenbuchung.class"
+      }
+--------------------------------------
+
+[[ScriptFunctionVariableValue]]
+==== ScriptFunction Value-Type (valueScriptDto)
+You can define a function call Variable, which executes static WMS-Functions.
+
+[width="100%",options="header",cols="0,0,7,9"]
+|====================
+| Name  |  Typ    | Beschreibung | Beispiel
+| scriptExpression | List<String> |  executable JavaScript Expressions    | Bis.getHour() - Von.getHour() - Pause  
+| 
+|====================
+
+Exampel ScriptFunctionVariable:
+
+[source,json]
+--------------------------------------
+      "name": "UpdateVariable",
+      "uses": [],
+      "valueScriptDto": {
+        "scriptExrpession": [
+          "hcmWql.selected.commit()"
+        ]
+      }
+--------------------------------------
+
+
+
+[[interactiveViewDefinitino]]
+=== View-Definition
+The View-Definition emit's a Grid. So you can define Cells and their position. However, its not allowed to overlie Cells. <<GridCell>>'s containing a <<GridCellLayout>> and a <<GridCellComponent>>, the second one inheres all Information needed to select a GUI-Component and which Variables, from the ViewModel Definition bind to it. 
+
+The JSON-Notation for a Grid is defined as following. 
+
+
+[[Grid]]
+=== Grid
+[width="100%",options="header", cols="1,1,1,4"]
+|====================
+| Name  |  Typ    | Beschreibung | Beispiel
+| marginLeft, marginRight, marginBottom, marginTop  |  String   | Margin | "20px"
+| cellSpacingVertical, cellSpacingHorizontal  |  String    | Horizontal- / Vertikal Space between Components | "20px"
+| cells  |  List<GridCellDto>    | List of Cells  |  <<GridCell>>
+|====================
+
+[[GridCell]]
+=== Grid-Cell
+[width="100%",options="header",cols="1,1,4,4"]
+|====================
+| Name  |  Typ    | Beschreibung | Beispiel
+| layout  |  GridCellLayout   | Layout and Position of the Cell | see <<GridCellLayout>>
+| component |  Component    | UI-Component Definition | see <<GridCellComponent>>
+| componentGroup | String | Defines semantic associated Components | "HourBookingComponents"
+|====================
+
+
+[[GridCellLayout]]
+=== Grid-Cell-Layout
+[width="100%",options="header",cols="1,1,4,1"]
+|====================
+| Name  |  Typ    | Beschreibung | Beispiel
+| layout  |  String   | Cellposition (columnStart, rowStart, coloumnEnd, rowEnd) | "1,1,2,1"
+
+| alignmentEnum | String | Component Alignment: LT (Left-Top), LM (Left-Middle), LB (Left-Bottom), MT (Middle-Top), MM (Middle-Middle), MB (Middle-Botom), RT (Right-Top), RM (Right-Middle), RB (Right-Bottom) | LT 
+| sizePolicy |  String | Component-Size-Policy der Komponente (F=Fixed, P=Preffered, E=Expanding) for X and Y  | PE
+|====================
+
+[[GridCellComponent]]
+=== GUI-Component
+[width="100%",options="header",cols="1,1,4,1"]
+|====================
+| Name  |  Typ    | Beschreibung | Beispiel
+| variables  |  Map<String, String>   | Mapping between which slot the Variable addresses, and which variable to bind | {value=employeeListVariable} and {preSelectValue=currentUserVariable}
+| type |  String    | Type to select Matching GUI-Component | e.g. "EDate" leads normaly to a DateInputField 
+|<optional> stringAddition| String | Addition to specify GUI-Component further | "calendar" selects a Calendar component which supports EDate values
+| <optional> componentName | String |  Specifys further which adapter to use  | "DefaultWqlAdapterComponent" 
+|====================
+
+Example View Definition: 
+
+[source,json]
+------
+"cells": [
+      {
+        "layout": {
+          "layout": "1, 2, -1, -1",
+          "alignmentEnum": "LT",
+          "sizePolicy": "EE"
+        },
+        "component": {
+          "variables": {
+            "value": "Workingpackage",
+            "select": "hcmSelectedPackage"
+          },
+          "type": "EEList_EString_"
+        },
+        "componentGroup": "GroupBookHours"
+      },
+      {
+        "layout": {
+          "layout": "1, 3, -1, -1",
+          "alignmentEnum": "LT",
+          "sizePolicy": "EE"
+        },
+        "component": {
+          "variables": {
+            "value": "Status"
+          },
+          "type": "Eenum"
+        },
+        "componentGroup": "GroupBookHours"
+      }
+    ],
+    "marginLeft": "5mm",
+    "marginRight": "5mm",
+    "marginTop": "5mm",
+    "marginBottom": "5mm",
+    "cellSpacingVertical": "1mm",
+    "cellSpacingHorizontal": "1mm"
+  }
+------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,13 @@
+=== Logging
+
+WMS has it's own logging mechanism which will be used by WMS itselves and in your implemented functions if you use the Log class.
+
+You can configure your logging in WMSDP for all implemented applications and WMSDP itselves. In the “Misc” menu you have the entry “Logger”. If you click this entry the logger window appears. It displays all logging messages in a list. and at the bottom of the window you can configure the severity of logging. The default ist set to log every message which has the severity “Error” or “Fatal”. You can activate “Info” and “Warning” over the checkboxes. After you checked or unchecked an checkbox WMS uses it without the need of clicking an “OK” button.
+
+With the button on the left bottom side you can delete all messages in the list.
+
+If you want detailed information you can select a log message. In the textfield under the list the complete message will be displayed.
+
+**Keep in Mind:**
+
+If you activate “Info” and/or “Warning” the system will slow down significantly.

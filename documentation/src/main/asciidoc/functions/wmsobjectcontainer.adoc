@@ -1,0 +1,133 @@
+==== WmsContainer
+
+The WMsContainer manages objects of a specific type.
+
+*Baseclasses:* WmsModelElement
+
+
+===== Function Reference
+
+[source, java]
+----
+WmsObject findObjectById(Number id)
+----
+
+returns the object with Id p_iId or null;
+
+[source, java]
+----
+WmsObject copyObject(WmsObject object)
+----
+
+copies the given object and returns the copy.
+
+[source, java]
+----
+WmsObject createObject()
+----
+
+creates a new object.
+
+[source, java]
+----
+WmsObject createObject(String keyname)
+----
+
+creates a new object with given keyname.
+
+[source, java]
+----
+Number commit()
+----
+
+saves all changed date from the object. If successfull a value > 0 will be returned. If not an errorcode < 0 will returned.
+
+[source, java]
+----
+Number countOverallObjects()
+----
+
+counts the number of objects in this container. This request will be sent to DB.
+
+[source, java]
+----
+Number countLocalObjects()
+----
+
+counts the number of object currently loaded to memory. The count is not the complete count of objects, but the used part in the current session. Use countOverallObjects to get the complete count.
+
+[source, java]
+----
+Array<WmsObject> getObjectList()
+----
+
+returns the List of currently loaded object in the container.
+
+[source, java]
+----
+void deleteObject(WmsObject object)
+----
+
+deletes the given objects from DB and memory.
+
+[source, java]
+----
+void clearContainer()
+----
+
+removes all loaded objects from container. This will delete all objects on DB as well.
+
+[source, java]
+----
+void clearContainerLocal()
+----
+
+removes all loaded objects locally. On DB you will still find all objects.
+
+[source, java]
+----
+Boolean isTree()
+----
+
+returns if this container is a tree structure.
+
+[source, java]
+----
+void setTree(Boolean tree)
+----
+
+set's the Tree Property to the container, now you can create a container in which objects can have parents and children.
+[source, java]
+----
+Boolean hasOwner()
+----
+
+returns if this object has an owner. if this is true, the object was created by an objectreference with owner flag.
+
+[source, java]
+----
+WmsObject getOwner()
+----
+
+returns the owner object of the object, if it has one.
+
+[source, java]
+----
+void loadContainerComplete()
+----
+
+loads the complete container with all objects. This can be slow by large containers.
+
+[source, java]
+----
+Boolean isImmutable()
+----
+
+returns if this class is configured as immutable class. This means all objects created by this class are only editable if the object is new. After the first commit of the object, the object is not changeable.
+
+[source, java]
+----
+void setImmutable(bool immutable)
+----
+
+set's the immutable flag on the object. This has no effect if class is immutable. Then the object is still immutable.

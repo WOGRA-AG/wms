@@ -1,0 +1,137 @@
+=== WMS User Manager
+
+WMS offers an extensive set an possibilities in user and rights management. The user Manager is th administration to create, edit and delete users and usergroups. The user manaer exists in two versions. The desktop version for desktop applications and the web version for Web applications running in browsers. In the desktop version the user manager can be started as stand alone application over an executable and is integrated in the wms development platform as well as in the wms runtime for application. You are only able to start the User Manager with administration privileges.
+
+==== User and Groups
+
+User management is for the most systems a very important aspect. In WMS it enables you to define access rights to Ui Components Data Container, Data Objects, Data groups and even single values of an object. So it is a very powerfull mechanismn to allow admins to control which user is able to do something. Groups are thought for role concepts, so it is easier to administrate the users. You don't have to set the rights for every siingle users but for one or more groups containing an amount of users.  
+
+
+==== Main Window
+
+The WMS User Manager Mainwindow is divided into three parts. On the top you will find the menu and toolbar. Below on the left side you will find the search and selection windows and on the right side opens the user or group editor, dependent on your selection on the left side. 
+
+Over the Menu or Toolbar you are able to call following commands:
+
+* Create User
+* Delete User
+* Refresh Users
+* Create User Group
+* Delete User Group
+* Refresh User groups
+
+Of course you can edit an user or usergroup as well, but to do this you have to select the wished user or group.
+
+===== Create User
+
+You can create a new user over the command create user. It opens a User Editor in which you can enter the needed data for the user. You need login, password, email, firstname, lastname and admin flag. After you entered the data and clicked the OK button the entries will be checked (Login must be unique as well as e-mail and the password must be correct reppeated) the user will be created. After this the user will be displayed in the user list.
+
+
+===== Find User
+
+WMS is designed to manage a large amount of users and groups. This is the reason why we don't display all users per defualt because if you have a lot, this operation can take long. If you want to display all users just use the search with an empty entry in the search field. If you want to search a specific user enter the search string in the search field an hit the enter key or click the search button. The search user the search entry in firstname, lastname, e-mail and login of the user and displays all matching users. Then you can edit the user by clicking him and change his data on the right side.
+
+===== Edit User
+
+As described above first you have to search for the user over the search field. If you have found him, select him and change the data you want to change. Finally you have to click the OK button on the bottom right side. If you uncheck the active checkbox the user is still stored as user in the system but he can not login to any wms application. This way is better than deleting the user because with the deletion every history of the user in WMS get lost. You will find more details in the delete user section. The group membership can be edited in the groups section.
+
+===== Delete User
+
+First of all deleting users is not recommended. The better way is deactivating users.There can be many consequences of deleting a user. If you delete an user the complete history what he changed in tthe WMS applications get lost. The changes are still there but you lost the information which user made the changes. The second consequence is that all referencing in WMS objects get lost. If the user was assinged to an object, the assignment chenges to an null value. This could change display data in views and ui's. So be carefull if you want to delete a user. 
+
+Because this feature is very dangerous it is marked as deprecated and will be removed in future WMS versions. We will change the behavior to deactivating users and are providing special views for displaying deactivated users.
+
+===== Refresh Users
+
+refreshes the result list of users, if something has changed in the backend. Because this feature has the same effect as starting a new search this feature is marked as deprecated and will be removed in future versions.
+
+===== Create Group
+
+You can create a new group in klicking the toolbar button and adding a name. After validating your input (The name must be uunique). The group will be created and you can edit it in the group editor. To edit group you have to switch from the user selection to the group selection. You will find the created group in the search result. Now you are able to add users to the group. If you are finished, click the ok button to save your changes.
+
+===== Find Groups
+
+Like users WMS Groups can be a large number in the system. To enable this we developed a way to handle a large amount of groups over the search mechanismn. First you won't see an groups button if you enter a search string the fitting groups will be displayed. It is enough to enter a part of the group name and you will find all matching groups. If you leave the search field empty all groups will be displayed. if you found one or more group you can select them in the result list and edit them in the edit window.
+
+===== Edit Group
+
+If you select a group in the result list, the edit window opens on the right side. Here you are able to rename the group and add or remove users to or from the group. With the click of the OK button you save your changes.
+
+
+===== Delete Group
+
+As as users groups can be assigned to values in objects. If you delete the group the assignment changes to a null Value. So you can damage data if you delete groups. Think about it very well, before you delete the group. The group will be deleted from Database.
+
+===== Refresh Groups
+
+Refreshes the result list of groups, if something has changed in the backend. Because this feature has the same effect as starting a new search this feature is marked as deprecated and will be removed in future versions.
+
+===== Authentifiaction in WMS  
+
+Dependent
+ on the usage of WMS there are different ways for Authentification. In 
+Desktop Application you get the login screen and you can enter login and
+ password to start the application. If you entered wrong credentials 3 
+times in a row, the application exits with the message too many trials.   
+
+WebWMS
+ offers the login screen as a well and works like the Desktop component.
+ Enter the credentials and you can start the application. Developers can
+ activate the password forgotten functionality to enable the user to get
+ a new password over mail or SMS.  
+
+If you use WMS as Rest Backend 
+you can use Basic Authentification to get access to the services. Set 
+the Base Auth header with defined encryption and you are able to call 
+all REST services. If the credntials are wrong the REST API returns a 
+HTTP 401 answer. Use this mechanismn only with encrypted connection 
+(https) else the password is not protected.  
+
+Without LDAP configured the credentials in the WMS User manager are relevant. The password will be stored encrypted in WMS.  
+
+==== LDAP Configuration  
+
+In
+ WMS you are able to use LDAP as central for your user management. This 
+makes it quite easier if you have an existing active directory or LDAP 
+Service for managing your user. In the WMS Development Platform you can 
+enable the LDAP Configuration. of the Misc Menu.  
+
+===== Steps for configuring LDAP and WMS  
+
+1. Create two Groups in your LDAP Service  
+
+For
+ WMS we need two groups in your LDAP/Active Driectory service. One group
+ is for adding users with WMS Administration privileges and the other 
+one for normal WMS users. You can define the Name you wish for it. Add 
+the Admin and normal WMS Users to the fitting groups.  
+
+2. Open the Configuration in WMS Dp and start the LDAP Konfiguration Dialog over the Misc Menu.  
+
+3. Set the Activate LDAP Checkbox.  
+
+4. Enter Servername and Host of your LDAP Server and enter the Base DN: which will be used in WMS for searching the users.  
+
+5. Set the LDAP Accountinformation. We need read only rights to the LDAP Service WMS does not write to LDAP.  
+
+6. Enter the groupnames you created in the first step to group names.  
+
+7. Test the LDAP Connection. If successfull. Everything was Done for connecting WMS to LDAP.  
+
+===== How WMS works with LDAP  
+
+If
+ LDAP Authefication is enabled in WMS, the authentifiaction mechanismn 
+works a little different. The LDAP service will be the leading service 
+for WMS. If a user starts a WMS Application the login screen still 
+appears and the user has to enter his credentials. But WMS won't look in
+ the own user tables to detect if the user is there, but WMS will ask 
+LDAP if the user exists and if the entered passwordis valid. If it is 
+valid, the user will be created in the WMS table and set to active. Data
+ like firstname, lastname or e-mail will be read from the LDAP Server 
+and stored. if the user will be removed from the WMS groups in LDAP, the
+ user will be deactivated in WMS and the login won't be possible. If the
+ user was moved from the admin group to the normal WMS user group the 
+admin flag will be removed in WMS, so that the user looses his admin 
+privileges in WMS. LDAP Passwords won't be stored in WMS.

@@ -1,0 +1,28 @@
+=== WMSDataInterface Command Line Interface (CLI)
+
+The WMS Data Interface imports data from file to WMS or exports data from WMS to file. You can use this to for batch processing with WMS. The Data Interface is based on the import and export configuration of WMS. To use this tool you need to configure an import or export for specific classes or containers. 
+
+**Note:**
+You must have administrator privileges to run this tool.
+
+==== Features
+
+* Import Data to WMS
+* Export Data from WMS
+
+
+==== Import Data
+importing data to wms.
+
+[source,]
+----
+wmsdatainterface login=<admin login> password=<admin password> filename=<path to import file> config=<import name of config in WMS> mode=import scheme=<name of scheme>
+----
+
+==== Export Data
+
+
+[source,]
+----
+wmsdatainterface login=<admin login> password=<admin password> filename=<target filename> config=<export name of config in WMS> mode=import scheme=<name of scheme>
+----

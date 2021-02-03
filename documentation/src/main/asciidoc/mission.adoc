@@ -1,0 +1,18 @@
+
+== Mission of WMS
+
+WOGRA Consulting developed WMS to be faster and better in developing software than our competitors. The aim was to develop a tool which makes software development much faster and is easy to use, powerful enough to fulfill the requirements of our customers and delivers a great user experience. Our customers uses our software on many different platforms web, pc, mobile, tablet and so the system must be able to deliver software for this platforms or better we develop the software once and can bring it to every platform the customer wants. 
+
+To be faster than our competitors we developed a modeling tool for data structure (with persistence), data export and import tools, user managers and UI development. This tool is called the WMS Development Platform. To provide each platform with our developed software we developed a runtime which is available for each platform. To make development of methods and functions as simple as possible we integrated JavaScript with additional object oriented features in WMS. 
+
+Another requirement to WMS is that it must be open for enhancements. So we added a powerful plugin mechanism which makes it
+possible to develop new data access plugins (e.g. for databases, webservices, nosql and so on) user interfaces and functional
+plugins. So everyone uses this platform is free to develop plugins to it.
+
+We use WMS for our customer for nearly two years now and the results are breathtaking. We reduced our development time for customer project to maximum 50 - 60% and reduced our error rate dramatically.
+
+== Declarative Development
+
+With WMS, most of coding is declarative. That means that no code is generated or compiled. You interact with wizards and property sheets. If business logic is needed, you can write functions of code using object oriented JavaScript. Declarative code yields fewer differences between developers and this consistency makes WMS applications easy to maintain and manage.
+
+The WMS engine renders applications in real time from data stored in databases. When you create or extend an application, WMS creates or modifies metadata. When the application runs, the WMS Runtime then displays the page or processes the page submission based on the metadata. This means that multiple developers can edit the same page and changes can be seen immediately when running the application. No compilation or deployment is necessary.

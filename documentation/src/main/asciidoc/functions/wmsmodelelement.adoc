@@ -1,0 +1,127 @@
+==== WmsModelElement
+
+Base class for all wms model objects like WmsClass, WmsObjectContainer, WmsValue, WmsMember and WmsObject. It contains functionality which applied to all model elements.
+
+*Baseclasses:* 
+WmsLocatedElement
+
+
+===== Function Reference
+
+[source, java]
+----
+String getKeyname()
+----
+
+returns the keyname of the element.
+
+[source, java]
+----
+String getCaption()
+----
+
+returns the caption of the element.
+
+[source, java]
+----
+void setCaption(String caption)
+----
+
+sets a new caption of the element.
+
+[source, java]
+----
+Boolean isModified()
+----
+
+returns if the element is modified
+
+*return*: Boolean - modified flag (usally classes and members returns always false)
+
+[source, java]
+----
+Boolean isDeleted()
+----
+
+returns if somebody has deleted the object. Makes only sense for WmsObject and WmsObjectContainer.
+
+*return* Boolean - deleted flag (usally classes, members, values returns always false)
+
+[source, java]
+----
+Date getLastChanged()
+----
+
+*return* returns the last modification date of this element.
+
+[source, java]
+----
+Number getCreatorId()
+----
+
+*return* the UserId of the creator of this element.
+
+[source, java]
+----
+Number getModifierId()
+----
+
+returns the user id of the last modifier.
+
+*return* Number - The UserId
+
+[source, java]
+----
+QString getUri()
+----
+
+returns the uri of the element
+
+*return* String - the Uri
+
+[source, java]
+----
+Boolean isObject()
+----
+
+returns true if this element is an object.
+
+*return* Boolean - returns true if it is an object.
+
+[source, java]
+----
+Boolean isContainer()
+----
+
+returns true if this element is an objectcontainer.
+
+*return* Boolean - returns true if it is an objectcontainer.
+
+[source, java]
+----
+Boolean isClass()
+----
+
+returns true if this element is a class.
+
+[source, java]
+----
+Boolean isMember()
+----
+
+returns true if this element is a member.
+
+[source, java]
+----
+Boolean isValue()
+----
+
+returns true if this element is a value.
+
+[source, java]
+----
+Number getId()
+----
+
+returns the unique Id of the element. The Id is unique relating to it's type.
+

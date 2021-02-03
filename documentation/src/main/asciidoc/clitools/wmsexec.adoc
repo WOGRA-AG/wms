@@ -1,0 +1,9 @@
+=== WMSExec Command Line Interface (CLI)
+
+WMSExec is a commandline tool which executes a public static function in wms. This is usefull to start an internal process in WMS Application for example to request data calculating new stuff and so on. You can use it in batch processing queues. The public static method which shall be called must not have arguments.
+
+[source,]
+----
+wmsexec -login=<admin login> -password=<admin password> -class=<class keyname> -scheme=<scheme name> -function=<function name>
+----
+

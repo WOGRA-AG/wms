@@ -1,0 +1,123 @@
+==== Message
+
+Class for create user messages which will be displayed to inform the user. If you start this on the server the message will be delivered in the Json object to the client.
+
+
+===== Function Reference
+
+[source, java]
+----
+information(String caption, String message)
+----
+
+Displays an information message as modal dialog. The message won't be logged from the logging mechanismn.
+
+Example:
+
+----
+message.information("Message","This is a message");
+----
+
+[source, java]
+----
+warning(String caption, String message)
+----
+
+Displays a warning message as modal dialog. The message won't be logged from the logging mechanismn.
+
+Example:
+
+----
+message.warning("Message","This is a message");
+----
+
+[source, java]
+----
+critical(String caption, String message)
+----
+
+Displays a critical message as modal dialog. The message won't be logged from the logging mechanismn.
+
+Example:
+
+----
+message.critical("Message","This is a message");
+----
+
+[source, java]
+----
+ask(String caption, String message)
+----
+
+Displays a question the user can answer with yes or no. returns a boolean value yes =true and no = false
+
+Example:
+
+----
+var answer = message.aks("Question","This is a Question");
+----
+
+[source, java]
+----
+showResult(String, String, String)
+----
+
+[source, java]
+----
+startProgressBar(String id, String caption, String message, int steps)
+----
+
+Displays a progressbar with caption and message. the id argument is used for identifying the progressbar. The steps argument is used to set the complete number of steps.
+
+Example:
+
+----
+message.startProgressBar("myProgessBar", "Progressbar", "Do something", 5);
+----
+
+[source, java]
+----
+setProgress(String id, String message, int progress)
+----
+
+Updates the progessbar with a new message and a new progress. To identify the progressbar you have to set the correct id.
+
+Example:
+
+----
+message.setProgress("myProgessBar", "Do something other", 2);
+----
+
+[source, java]
+----
+closeProgressBar(String id)
+----
+
+closes the corresponding progessbar.
+
+Example:
+
+----
+message.closeProgressBar("myProgessBar");
+----
+
+[source, java]
+----
+startAsyncMessageCollection();
+----
+
+collects all message while executing the code. The message won't be displayed until endAndShowAsyncMessageCollection is called.
+
+Example:
+
+----
+startAsyncMessageCollection();
+----
+
+[source, java]
+----
+endAndShowAsyncMessageCollection();
+----
+
+ends the collection auf messages and shows it in a list of messages. The list will only be shown if it is not empty. Before you can call this method startAsyncMessageCollection must be called.
+  

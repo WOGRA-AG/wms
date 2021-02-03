@@ -1,0 +1,87 @@
+=== Export
+
+With the data export you have the possibility to export all data contained in WMS Object containers. For the export you can use several file formats.
+
+==== File Encoding
+
+All generated files are “UTF-8” encoded.
+
+==== Fileformats
+
+The integrated export tool is able to export data in CSV, XML, HTML and JSON format. All formats can be used in other applications or as interchange format with other tools or systems.
+
+==== CSV Format
+
+The CSV export creates a file which can be used in spreadsheets applications like MS Excel or Open Office Calc. You can also use it for importing it in other databases. You can define the separator in the export.
+
+==== XML Format
+
+The XML format can be used as interface for another software systems. Every modern programming language has libraries to read and interpret XML.
+
+==== HTML Format
+
+This format can be used for displaying data in webbrowsers. The exported file can be uploaded to a webserver and is accessible for all users which has rights to this server. Of course this is readonly.
+
+==== JSON Format
+The JSON Format is like XML a file format for data interchange. it is easier to read than xml and smaller in size. It can easily be used in JavaScript.
+
+==== Additional configuration for CSV Format
+
+If you want to export a CSV file, you have the possibility the enter additional configurations. The Member separator defines how each data member will be separated. Usually it is a semicolon (;). MS Excel and Open Office calc expect per default semicolon, but you can change it to comma or pipe or some other characters. Additional you can define if string should be surrounded by quotation marks or other characters. This will be defined by text separator. This makes sense if you expect your member separator in strings. Then the target system can have trouble to read the fields in a correct way.
+
+**Sample:**  
+Member separator= ;  
+Text separator = „  
+
+**Sample Result:**  
+
+----
+1;“This is a test“;56;789
+----
+
+===== Adding Headline
+
+You can check the “Add Headline” checkbox to insert a headline in your export file.
+
+**Sample:**  
+Member separator = ; Text separator = „
+
+**Sample Result:**
+
+[source,java]
+----
+Nr;Text;Age;Retirementage
+1;“Das ist ein Test“;56;65
+----
+
+==== Selecting Member for Export
+
+Dependent on the container you want to export, you can define which members should be exported. For the selection of members WMS offers a tree which displays the members. You can select members per double click. After you double clicked a member it will be displayed in the export list. The selectionlist offers a tree so you are able to export data from referenced objects to. but the maximum tree step size is limited to three. If you have container as reference they can not be exported at the moment, because CSV files are not able to offer built in tables.
+
+==== Filtering Export Data
+
+You do not need to export the complete container. If you only want to export specific data, you can do this, too. Select “Filter” button and you get a dialog such the WMS search without result area. Here you can specify the criterias of your export. This is not as powerful as WQL but it helps you to export only needed data.
+
+==== Change member sequence in export
+
+Through the “up”- and “down”- buttons below the selected export member list you can change the sequence of exported members. Mark your member and click the “up”- or “down”- button to change the member.
+
+==== Removing export member
+
+If you don't want a member in your export anymore select him and click the “arrow left”- button. The member will be removed in the export list.
+
+==== Configure Export data
+
+In the export tool of WMS you can configure which conditions the data must fulfill to be exported.
+
+===== Select target filename
+
+For the export you have to define the target filename in your local file system. You can enter filename by hand in editing the filename field or you can select a filename over the search button on the right of the edit field.
+
+==== Saving or loading export configurations
+
+If you want to repeat the export, you don't have to configure the export again. You can save the export in the database and can use it at anytime. Click the “Save”- button and enter a unique name for the export. If you have done this the objectcontainer view offers you for the export an drop down box in which you will find the export configuration. Just click it and the export will be started and stored in the file you defined before.
+
+==== Starting the Export
+
+If you have saved the export configuration you can start the export over the objectcontainer through the drop down box. In the export editor you can click the “Export”- button on the bottom right position of the dialog.

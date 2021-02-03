@@ -1,0 +1,69 @@
+=== Objectcontainer
+
+An objectcontainer manages object of a specific class. If you want to create an objectcontainer you have to select a non abstract class. in the objectcontainer itselves you can only create object of the selected class type.
+
+==== Types of Objectcontainers
+
+An objectcontainer can be of type list or tree. If it is a list, all created objects will be arranged in a flat list. if it is a tree, the container will be displayed as tree. Objects in an tree objectcontainer can return their parent object. Is it a root object “null” will be returned. In a list all objects returning “null” as parent object.
+
+==== Create a new Objectcontainer
+
+Open the “File” Menu and call the “New” sub menu. Finally click the “New Objectcontainer” menu item. The objecontainer creator form opens. Here you have to define the keyname, the caption, the description and you have to select the class of this container. All fields are required and the keyname must be unique in scheme context. After clicking the “OK” button you will see the container in the Data Window. You will find it under the class name in the tree. If you click the container the objectcontainer editor opens with several functions like “New”, “Edit”, “Delete” ,…. After creation the container is empty.
+
+==== The Objectcontainer editor
+
+If you select an objectcontainer in the data window, the objectcontainer editor will be opened. It displays all created objects in the container. Dependent on the container configuration (list or tree) the objects will be displayed in a list or in a tree.
+
+===== Creating objects
+
+You can create a new object over the “New” button on the bottom of the container list. If you have defined your own UI for the objecteditor, this UI will be opened. Otherwise the generic object editor which will be created from the system dependent on class configuration (groups, member sequence) will be displayed. Here you can enter all data you needed for your object. To save your object you have to click the “OK” Button. This starts the function call “onCommit” (if implemented) and executes all validators you implemented. If the validation succeed the object will be saved and the editor closed. Otherwise an error message will be prompted and the editor stays open.
+
+If your objectcontainer is a tree, the object will be inserted under the selected item in the objectcontainer list. If nothing is selected it will be inserted as a new root object.
+
+===== Editing objects
+
+To edit object double click it in the containerlist or mark it in the container list and click the “Edit” button. Dependent of your configuration your implemented User Interface will be opened, or the generic object editor will be displayed with all data. Now you can edit the data of the object.
+
+===== Deleting objects
+
+To delete an object you have to mark it in the container list and click the “Delete” button. A security question will appear and if you answer it with “yes” the object will be deleted.
+
+===== Import data in objectcontainer
+
+If you want to import data from another datasources you can do that with the import function. Here you can import text and csv files into WMS. You can configure the import specific to your needs and can define which column of your datasource should be stored and in which member is the right one. You will find the detailed description for data import in the Import section.
+
+===== Export data from objectcontainer
+
+If you open the objectcontainer editor you will find an “Export” button in the button row. You can define your own exports for each objectcontainer. How to do this is described in the Export section.
+
+===== Journal
+
+Often in business application you have the requirement that the application must be audit proof. So every changes must be recorded on the system. In WMS this requirement is integrated per default. You can follow all changes over the “Journal” function. A detailed description of the Journal function is described in the Journal section.
+
+===== Printoutput
+
+You want to create nice reports or documents based of obejctcontainer and object data. WMS has a built in print engine which enables you to do this. you have a report generator for designing you print documents and a report engine for printing and export support. The print engine offers you direct print to a installed printer or PDF export. So you are able to design beautiful documents you need for your customers, suppliers, bosses and so on. You will find the detailed description
+here: http://wiki.wms-project.com/doku.php?id=print_engine[Print Engine]
+
+===== Search
+
+If you have a large amount of objects in your container you can slightly lost the overview and you won't find the right object. There are two possibilities to find objects. Using WQL in the WQL Query Module or the simpler way is using the “search” in the objectcontainer editor. Click the “Search” button in the buttonrow and the search form opens for your objectcontainer. The search form is a generic UI which display you all members you can search for. Enter your conditions for
+each member and then click the search button. 
+
+The result will be displayed in the view below the button. You have the new, edit and delete button under the result list to edit the objects.
+
+==== WMS Development Platform specific functions
+
+In WMSDP you have several function for editing objectcontainers you don't have in Runtimes. These functions can be accessed over the “Edit” menu in the “Objectcontainer” submenu and will be described in following chapters.
+
+===== Delete all objects
+
+This functions deletes all objects contained in the objectlist.
+
+===== Delete objectcontainer
+
+This function deletes the complete container. The changing history will be kept in the Journal.
+
+===== Properties
+
+Here you can change the properties of the container. For example if the container will be displayed as a list or treeview. If you change this, the parent informations won't be lost. So you can switch the display without losing informations. If you change from a tree to a list and back the treeview will be displayed as before.

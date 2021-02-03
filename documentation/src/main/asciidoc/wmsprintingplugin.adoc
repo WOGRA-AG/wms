@@ -1,0 +1,13 @@
+= WMS NC Report Printing Plugin
+
+With this plugin you are able to generate PDF and Printoutput from your Object and Container data. This plugin is a commercial solution and is not part of the opensource WMS Project.
+
+== Accessing Object Data
+
+The object as base of the report will be injected with the name "Object". You can access all members you need over the "Object" parameter. All you have to do is add an value to the form change the "Data field Type" to parameter and add the field into the text field.
+
+*Sample*
+[source,]
+----
+Object.firstName
+----

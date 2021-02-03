@@ -174,7 +174,7 @@
             <string/>
            </property>
            <property name="icon">
-            <iconset resource="../../wmsqml/src/wmsqml.qrc">
+            <iconset resource="../../wmsgui/src/misc/wmsgui.qrc">
              <normaloff>:/icons/new24.png</normaloff>:/icons/new24.png</iconset>
            </property>
            <property name="iconSize">
@@ -191,7 +191,7 @@
             <string/>
            </property>
            <property name="icon">
-            <iconset resource="../../wmsqml/src/wmsqml.qrc">
+            <iconset resource="../../wmsgui/src/misc/wmsgui.qrc">
              <normaloff>:/icons/delete24.png</normaloff>:/icons/delete24.png</iconset>
            </property>
            <property name="iconSize">
@@ -247,7 +247,7 @@
             <string/>
            </property>
            <property name="icon">
-            <iconset resource="../../wmsqml/src/wmsqml.qrc">
+            <iconset resource="../../wmsgui/src/misc/wmsgui.qrc">
              <normaloff>:/icons/new.png</normaloff>:/icons/new.png</iconset>
            </property>
            <property name="iconSize">
@@ -264,7 +264,7 @@
             <string/>
            </property>
            <property name="icon">
-            <iconset resource="../../wmsqml/src/wmsqml.qrc">
+            <iconset resource="../../wmsgui/src/misc/wmsgui.qrc">
              <normaloff>:/icons/delete24.png</normaloff>:/icons/delete24.png</iconset>
            </property>
            <property name="iconSize">
@@ -296,31 +296,6 @@
    </item>
    <item>
     <layout class="QHBoxLayout">
-     <item>
-      <widget class="QLabel" name="label">
-       <property name="minimumSize">
-        <size>
-         <width>201</width>
-         <height>30</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>201</width>
-         <height>30</height>
-        </size>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="pixmap">
-        <pixmap resource="../resources/usermanagerresources.qrc">:/png/WOGRAConsulting-Logo.png</pixmap>
-       </property>
-       <property name="scaledContents">
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
      <item>
       <spacer name="spacer1">
        <property name="orientation">
@@ -383,8 +358,8 @@
   <tabstop>m_pqpbUpdate</tabstop>
  </tabstops>
  <resources>
+  <include location="../../wmsgui/src/misc/wmsgui.qrc"/>
   <include location="../resources/usermanagerresources.qrc"/>
-  <include location="../../wmsqml/src/wmsqml.qrc"/>
  </resources>
  <connections>
   <connection>

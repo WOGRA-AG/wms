@@ -1,0 +1,24 @@
+=== Development in Teams
+
+In larger projects it is very important to develop in teams. So WMS development takes places not on the file system, but in database, the development in teams plays an important role here too. You have two possibilities to develop in teams. You can still use a repository and export the project as deployment file to filesystem and merge it with the repository or you are developing on the database together. Both approaches have their advantages and disadvantages.
+
+==== Developing together on one central Database
+
+A central database is installed and every developers is developing in it. This approaches works fine but you have to consider some points.
+
+* If somebody edits a method of a class, nobody else can edit it until the editors finished development (pessimistic lock).
+* The of change history in classes are missing (Will be solved in the future).
+* You have to refresh you workspace from time to time (pressing F5) to get the status quo of development.  If you using this approach it has the opportunity that you never have conflicts like in subversion. You don't have source files on your local disk and the source code will be backed up with database content. Loss of data is nearly impossible.
+
+==== Creating branches
+
+Creating a branch is very easy just export a deployment file create a new scheme and import the deployment file. But merging is
+difficult. If you have finished the development on your branch scheme the merge back will be very difficult. You can export the deployment file of your branch and import it in the main development scheme. New classes, members, functions, … will be added without problems, but existing methods will be overridden without warnings. So you will loose all your changes on the “trunk” scheme.
+
+==== Each developers using it's own database and a repository is used
+
+If each developer uses it's own database for developing the user can export a deployment file from wms and add it to the source code repository. If every developer uses the same deployment file in the repository all changes will be updated and merged there. The disadvantage is, that the deployment file consists on a single file which will be edited by every developer. The chances to create conflicts are very high and there is a lot to do to solve them. The deployment file is JSON and easy readable, but editing a lot of conflicts can led to frustrations.
+
+==== Recommendation
+
+We have to work an proper solution to find a way for smooth development in teams. But until then we recommend you that you develop in team on one central database. and after finishing development create a deployment file and add it to a repository like svn, git or csv. If you want to branch and merging it afterwards you can do this over deployment files. This will hurt you doing it once, but you don't have to do it every day.

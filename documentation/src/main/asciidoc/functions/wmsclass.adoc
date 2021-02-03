@@ -1,0 +1,56 @@
+==== WmsClass
+
+The WMSClass object defines the a class used from container and objects. You can ask the class for members and base classes.
+
+*Baseclasses* WmsModelElement
+
+===== Function Reference
+
+[source, java]
+----
+Object findMember(String keyname)
+----
+
+finds the member of the given keyname
+
+[source, java]
+----
+Array<WmsMember> getMembers()
+----
+
+returns all members of the class
+
+[source, java]
+----
+Array<WmsClass> getBaseClasses()
+----
+
+returns all baseclasses of the class
+
+[source, java]
+----
+Boolean isTypeOf(WmsClass class)
+----
+
+checks if the class has the given class as base class.
+
+[source, java]
+----
+Boolean isSingleton()
+----
+
+returns if this class is a singleton. a singleton class has only exact one object and nothing more.
+
+[source, java]
+----
+WmsObject getSingletonObject()
+----
+
+returns the singleton object of the singleton class. if this class is not a singleton null will be returned.
+
+[source, java]
+----
+Boolean isImmutable()
+----
+
+returns if this class is configured as immutable class. This means all objects created by this class are only editable if the object is new. After the first commit of the object, the object is not changeable.

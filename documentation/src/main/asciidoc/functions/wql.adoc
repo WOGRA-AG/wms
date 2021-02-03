@@ -1,0 +1,40 @@
+==== Wql
+
+Class for creating data requests and evaluation results. How you can build WQL's is described in the WQL section.
+
+===== Function Reference
+
+[source, java]
+----
+WqlResultObject execute(String query)
+----
+
+executes an wql and returns the result object. if the result object is null, an error occurred in the execution. You will find logger otuput in the doku.php?id=logging[logger].
+
+*Arguments*
+
+* String query: The wql query which should be executed.
+
+===== Return value
+
+*return* The WqlResultObject which can be used like in the sample.
+
+===== Example
+
+[source,java]
+----
+var query = "select firstName, lastName from Addresses";
+var result = wql.execute(query); // the wql result object and it's mehtods are described below
+
+if (result != null) {
+   var rows = result.getResultCount();
+   var firstNames = new Array(rows);
+   var lastNames = new Array(rows);
+
+   for (var counter = 0; counter < rows; ++counter) {
+      firstNames[counter] = result.getResultAt(0, counter);
+      lastNames[counter] = result.getResultAt(1, counter);      
+   }
+}
+----
+  

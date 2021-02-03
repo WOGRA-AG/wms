@@ -1,0 +1,39 @@
+=== Views
+
+Views offers you the possibility to filter object containers and display the result. In view you can define which members of an object should be displayed and which conditions the object have to fulfill. You can define views with the help of WQL.
+
+A view must have a unique name to ensure that wms uses the correct view in it's applications. Views can be used as own modules in runtimes or in the backend for data analysis or function execution.
+
+==== Creating a View
+
+Select in the “File” menu the “New” submenu and click the “New View” item. The view editor will be opend and you can create your view. Enter a unique name and a description for the documentation of your system and insert the WQL for your view. Then you can test your view with a click on the “Test” button. In the preview subwindow below the WQL Editor you can see the result. If something is not expected you can switch to the second tab and see how your WQL is interpreted by WMS. Here you are able to find out your mistakes. The last step is clicking the “OK” button to store the view in WMS database. Now you
+can see your view in the “Views” subwindow (if not press the F5 key) and use it in your modules, user interfaces and so on.
+
+==== Edit Views
+
+To edit a view mark it in the “Views” sub window open the context menu (right mouse button) and click the edit command. The view editor opens and you can edit your view.
+
+==== Delete views
+
+You can delete a view in marking it in the sub window, open the context menu and click the delete command.
+
+==== Usage of Views
+
+You can use views of different ways. You can use them in backends to do data analysis, you can add the to user interfaces and you can add them to modules for the user.
+
+===== In WMS Development Platform
+
+You can open a view in WMSDP over the “Views” subwindow. A single click on a view opens a new tab with the data in the WMSDP main area.
+
+===== In User Interfaces
+
+There are two ways to add views to user interfaces. You can use a view in a existing default form which consists of a view selector and the view display. Here you can define which views should be offered to the user of the application. Another way is to integrate a view in user defined user interface.
+
+===== In Application Modules
+
+Beside the usage in user interface a view can be displayed as a single module in an application. How to do this is described in
+the application section.
+
+==== The View Editor
+
+TODO

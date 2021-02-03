@@ -1,0 +1,284 @@
+=== JavaScript Reference
+
+This reference contains a list of built-in objects, functions and properties supported by WMS Java Script. For a detailed description, see the ECMA-262 specification. If you want to learn how the syntax of JavaScript works you will find a lot of information in the internet.
+
+Here are a list of good JavaScript resources:
+
+* http://www.w3schools.com/js/DEFAULT.asp[http://www.w3schools.com/js/DEFAULT.asp]
+* http://www.codecademy.com/tracks/javascript[http://www.codecademy.com/tracks/javascript]
+* http://code.tutsplus.com/tutorials/the-best-way-to-learn-javascript--net-21954[http://code.tutsplus.com/tutorials/the-best-way-to-learn-javascript--net-21954]
+But keep in mind in WMS we have no HTML documents and we have some enhancements to normal JavaScript.
+
+==== The Global Object
+List of functions for the global object.
+
+==== Value Properties
+
+NaN   
+Infinity  
+undefined  
+
+===== Function Properties
+
+eval(x)   
+parseInt(string, radix)   
+parseFloat(string)   
+isNaN(number)   
+isFinite(number)   
+decodeURI(encodedURI)   
+decodeURIComponent(encodedURIComponent)   
+encodeURI(uri)   
+encodeURIComponent(uriComponent)   
+
+===== Constructor Properties
+
+Object   
+Function   
+Array   
+String   
+Boolean  
+Number  
+Date  
+RegExp  
+Error  
+EvalError  
+RangeError  
+ReferenceError  
+SyntaxError  
+TypeError  
+URIError  
+
+===== Other Properties
+
+Math  
+JSON  
+
+==== Object Objects
+
+The object functions.
+
+===== Value Properties
+none
+
+===== Function Properties
+
+getPrototypeOf(O)  
+getOwnPropertyDescriptor(O, P)  
+getOwnPropertyNames(O)  
+create(O [, Properties])  
+defineProperty(O, P, Attributes)  
+defineProperties(O, Properties)  
+keys(O)  
+toString()  
+toLocaleString()  
+valueOf()  
+hasOwnProperty(V)  
+isPrototypeOf(V)  
+propertyIsEnumerable(V)  
+toString()  
+apply(thisArg, argArray)  
+call(thisArg [, arg1 [, arg2, …]])  
+
+
+==== Array Objects
+
+The Array Object functions.
+
+===== Value Properties
+none
+
+===== Function Properties
+
+isArray(arg)  
+toString()  
+toLocaleString()  
+concat([item1 [, item2 [, …]]])  
+join(separator)  
+pop()  
+push([item1 [, item2 [, …]]])  
+reverse()  
+shift()  
+slice(start, end)  
+sort(comparefn)  
+splice(start, deleteCount[, item1 [, item2 [, …]]])  
+unshift([item1 [, item2 [, …]]])  
+indexOf(searchElement [, fromIndex])  
+lastIndexOf(searchElement [, fromIndex])  
+every(callbackfn [, thisArg])  
+some(callbackfn [, thisArg])  
+forEach(callbackfn [, thisArg])  
+map(callbackfn [, thisArg])  
+filter(callbackfn [, thisArg])  
+reduce(callbackfn [, initialValue])  
+reduceRight(callbackfn [, initialValue])  
+
+==== String Objects
+The String Object functions.
+
+===== Value Properties
+none
+
+===== Function Properties
+fromCharCode([char0 [, char1 [,…]]])
+toString()  
+valueOf()  
+charAt(pos)  
+charCodeAt(pos)  
+concat([string1 [, string2 [, …]]])  
+indexOf(searchString ,position)  
+lastIndexOf(searchString, position)  
+localeCompare(that)  
+match(regexp)  
+replace(searchValue, replaceValue)  
+search(regexp)  
+slice(start, end)  
+split(separator, limit)  
+substring(start, end)  
+toLowerCase()  
+toLocaleLowerCase()  
+toUpperCase()  
+toLocaleUpperCase()  
+trim()  
+
+==== Boolean Objects
+The Boolean Object functions.
+
+===== Value Properties
+none
+
+===== Function Properties
+toString()  
+valueOf()  
+
+==== Number Objects
+
+toString(radix)  
+toLocaleString()  
+toFixed(fractionDigits)  
+toExponential(fractionDigits)  
+toPrecision(precision)  
+
+==== The Math Object
+
+The math object functions.
+
+===== Value Properties
+
+E  
+LN10  
+LN2  
+LOG2E  
+LOG10E  
+PI  
+SQRT1_2  
+SQRT2  
+
+===== Function Properties
+
+abs(x)  
+acos(x)  
+asin(x)  
+atan(x)  
+atan2(y, x)  
+ceil(x)  
+cos(x)  
+exp(x)  
+floor(x)  
+log(x)  
+max([value1 [, value2 [, …]]])  
+min([value1 [, value2 [, …]]])  
+pow(x, y)  
+random()  
+round(x)  
+sin(x)  
+sqrt(x)  
+tan(x)  
+
+==== Date Objects
+The Date Object functions.
+
+===== Value Properties
+none
+
+===== Function Properties
+
+now()  
+parse(string)  
+UTC(year, month [, date [, hours [, minutes [, seconds [, ms]]]]])  
+toString()  
+toDateString()  
+toTimeString()  
+toLocaleString()  
+toLocaleDateString()  
+toLocaleTimeString()  
+valueOf()  
+getTime()  
+getFullYear()  
+getUTCFullYear()  
+getMonth()  
+getUTCMonth()  
+getDate()  
+getUTCDate()  
+getDay()  
+getUTCDay()  
+getHours()  
+getUTCHours()  
+getMinutes()  
+getUTCMinutes()  
+getSeconds()  
+getUTCSeconds()  
+getMilliseconds()  
+getUTCMilliseconds()  
+getTimeZoneOffset()  
+setTime(time)  
+setMilliseconds(ms)  
+setUTCMilliseconds(ms)  
+setSeconds(sec [, ms])  
+setUTCSeconds(sec [, ms])  
+setMinutes(min [, sec [, ms]])  
+setUTCMinutes(min [, sec [, ms]])  
+setHours(hour [, min [, sec [, ms]]])  
+setUTCHours(hour [, min [, sec [, ms]]])  
+setDate(date)  
+setUTCDate(date)  
+setMonth(month [, date])  
+setUTCMonth(month [, date])  
+setFullYear(year [, month [, date]])  
+setUTCFullYear(year [, month [, date]])  
+toUTCString()  
+toISOString()  
+toJSON()  
+
+==== RegExp Objects
+The RegExp Object functions.
+
+===== Value Properties
+none
+
+===== Function Properties
+exec(string)  
+test(string)  
+toString()  
+
+==== Error Objects
+The error object functions.
+
+====== Value Properties
+
+name  
+message  
+
+==== Function Properties
+
+toString()
+
+==== The JSON Object
+The JSON Object functions.
+
+===== Value Properties
+none
+
+===== Function Properties
+
+parse(text [, reviver])  
+stringify(value [, replacer [, space]])

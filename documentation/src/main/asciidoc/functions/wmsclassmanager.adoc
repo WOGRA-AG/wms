@@ -1,0 +1,41 @@
+==== WmsClassManager
+
+The WMsClassManager manages all classes of a scheme in WMS. For the Scriptengine only read functions are available. it is not possible to change class structure in the scriptengine.
+
+*Baseclasses:* WmsLocatedElement
+
+[source,java]
+----
+WmsClass findClass(String keyname)
+----
+
+finds the class with the given keyname and returns it.
+
+*Arguments*
+
+* *keyname* - the full qualified class keyname with all packages e.g.: “com.wogra.address”
+
+*return*: the found class or null if no class was found.
+
+[source,java]
+----
+Array<WmsClass> getClassList() 
+----
+
+returns an array with all existing classes in the scheme.
+
+*return*: the array of classes.
+
+[source,java]
+----
+Boolean existClass(String keyname)
+----
+
+checks if a class with the given keyname exists in the scheme.
+
+*Arguments*
+
+**keyname* - the full qualified class keyname with all packages e.g.: “com.wogra.address”
+
+*return*: Boolean - true if the class exists else false.
+  

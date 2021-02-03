@@ -1,0 +1,44 @@
+==== Workflow
+
+Class to start or update workflows
+
+===== Function Reference
+
+[source, java]
+----
+startWorkflow
+----
+
+starts the Workflow
+
+*Arguments*
+
+Object Workflow: The Workflow object
+
+*return* Nothing
+
+===== Sample
+
+[source, java]
+----
+workflow.startWorkflow(workflow);
+----
+
+[source, java]
+----
+updateWorkflow
+----
+
+Calls the update function of the workflow which checks the current state of the workflow and start new steps or escalates if needed.
+
+*Arguments*
+
+Object Workflow: The Workflow object
+
+*return* Nothing
+
+===== Sample
+
+----
+workflow.updateWorkflow(workflow);
+----

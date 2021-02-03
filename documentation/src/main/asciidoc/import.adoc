@@ -1,0 +1,163 @@
+=== Import
+
+With the help of the Import feature you are able to import data in different formats. At the moment WMS supports CSV files and text files with static column width. With the import of WMS you have the possibility to override data, to append data and to update data. So you are able to built interfaces to other systems.
+
+==== Which data can be imported?
+
+With WMS you can import data in any object container. You must fulfill your configured requirements of must fields and validations in your import file and then you can import data.
+
+==== File Encoding
+
+All files are expected as “UTF-8” encoded.
+
+==== Steps to successful Import
+
+To import data successfully you have to map the datasource to the WMS class definition.
+
+===== Configuring Import type
+
+The first step is to configure which type of import you want. You the choice between “Override”, “Update” and “Append”. You can make your selection over the radio buttons.
+
+====== Override
+
+If you select Override, all data in the container will be deleted and afterwards the import will be started. You will loose all changes made in WMS and the new data will be added.
+
+====== Update
+
+If you select Update the import will be started and the system is looking for already existing objects. If an existing object was found, this one will be updated. If not a new object will be created. By defining the Import members you have to define the members which must be compared by the system to find an existing object.
+
+====== Append
+
+This mode appends the data from import file to the existing data in the container. There is no check if data already exists, so this import mode could lead to redundancy.
+
+===== Defining Datasource
+
+The datasource is the file, which contains the data to be imported. Insert the complete path to the file in the input
+field. Over the “Search” button you can select the file through file selection box.
+
+===== Defining Datasource format
+
+The next step is to define the format of the file. You can choose between CSV and Text file with fixed column width.
+
+In both formats every line contains data for one object. If you have an CSV file every member will be separated by an separator character like “;”. If it is no “;” in your case you can change it to the character you need in the separator input field. If you have texts in your source file which are surrounded by “”“ this is no problem for the parser. If oyu have other character than ”“” as text surrounding character you can set it in the text separator input field.
+
+===== Sample CSV File:
+
+[source,java]
+----
+12345;“Willy“;“Mustermann“;“Augsburger Str. 34“;“86152“;“Augsburg“
+678910;“Arnold“;“Pfifferling“;“Donaustr. 32“;“86343“;“Königsbrunn“
+----
+
+===== Sample Text files with fixed column width:
+
+Number 10 Characters   
+Firstname 20 Characters   
+Lastname 20 Characters  
+Street 20 Characters  
+Postcode 6 Characters  
+City 20 Characters  
+
+[source,java]
+----
+12345     Willy               Mustermann          Augsburger Str. 34 86152 Augsburg
+678910    Arnold              Pfifferling         Donaustr. 32       86343 Königsbrunn
+----
+
+===== Configuring data structure
+
+The next step is to configure the data structure we have to read and assign them to members in WMS. You also have the possibility to ignore fields in your source file.
+
+You can add and edit the importing fields over the “Import column description”.
+
+====== Add Column descriptions
+
+To add an import column you have to click the “Add” button. A form opens in which you can select the member from the class tree structure. If you uncheck the Memberassignment checkbox, tho field in your source file will be ignored. If you import data from a source file with fixed column width you can enter the start position of the column and the end position of the column. This is not needed by CSV file an can be kept empty.
+
+If you want to import data in the “Update” mode, you have also to define which fields are for finding data in WMS (In database language you would name it primary key). This can be done over the checkbox “Update relevant”. This members won't be updated, they will be used to find the right object for update. Every other member without the “Update relevant” checked checkbox will be updated.
+
+**Sample:**
+
+You want to import a source file with customer data:
+
+Number 10 Characters  
+Firstname 20 Characters  
+Lastname 20 Characters  
+Street 20 Characters  
+Postcode 6 Characters  
+City 20 Characters  
+
+[source,java]
+----
+12345     Willy               Mustermann          Augsburger Str. 34 86152 Augsburg
+678910    Arnold              Pfifferling         Donaustr. 32       86343 Königsbrunn
+----
+
+You don't want to update the object because they are already in use in the database and referenced by another obejcts. The unique key of the object is the number. In your database there is the customer “Willy Mustermann” already saved with another address because he's moved in another street.
+
+**Content of WMS Database**  
+Number 12345  
+Firstname Willy  
+Lastname Mustermann  
+Street Maxstr. 12  
+Postcode 86152  
+City Augsburg  
+
+**To Import these data following steps are to do:**  
+
+1.  The type of the datasource must be Text with fixed column width
+2.  Import mode must be set to “Update”
+3.  Separators are not relevant and can be leaved empty or with default configuration
+4.  Select the Member Number from tree structure and set the Checkbox “Update relevant” checked. The start position is column 1 and the end position is column 10.
+5.  Select the member firstName from tree structure. The start position is column 11, the end is column 31. The checkbox “Update relevant” must be unchecked because it is no identification member for the customer.
+6.  Select the member lastName from tree structure. The start position is column 32, the end is column 52. The checkbox “Update relevant” must be unchecked because it is no identification member for the customer.
+7.  Select the member street from tree structure. The start position is column 53, the End is column 73. The checkbox “Update relevant” must be unchecked because it is no identification member for the customer.
+8.  Select the member postcode from tree structure. The start position is column 74, the end is column 79. The checkbox “Update relevant” must be unchecked because it is no identification member for the customer.
+9.  Select the member city from tree structure. The start position is column 80, the end is column 100. The checkbox “Update relevant” must be unchecked because it is no identification member for the customer. 
+10.  Select the datasource
+11.  Start the import
+**Result in WMS Object container**
+
+The objectcontainer will contains following objects:
+
+[source,java]
+----
+Number     12345              678910
+firstName  Willy              Arnold
+lastName   Mustermann         Pfifferling
+Street     Augsburger Str. 34 Donaustr. 32
+Postcode   86152              86343
+City       Augsburg           Königsbrunn
+----
+
+==== Datatype representation
+
+For same datatypes you have to make sure to get the right format. For example date or datetime datatypes must be in the right format to get the correct data in your container.
+
+|====
+| Datatype | Expected format
+| Date | yyyy-mm-dd
+| Timestamp | yyyy-MM-dd hh:mm:ss
+| Bool | true or false as text or 1 as number for true and any other value for false
+| Enum | Selection number starting at 1
+| Float / Double | (-)xxx.xxxx for example -6868.567
+| User | User Id as number
+| User Group | User Group Id as number
+|====
+
+==== Not importable datatypes
+
+There are some other dataypes which can not be imported to containers
+The following dataypes can not be imported:
+
+*   Formula
+*   Object Ref
+*   Object Container Ref
+*   Counter
+*   Binary Document
+*   Lists
+*   Maps
+
+==== Import Tricks
+
+If you want to work with the data after the import immediately, create a onCommit method in the import class. The method will be called automatically for each object which will be imported before saving the object. So you are able to call additional logic while importing data. 

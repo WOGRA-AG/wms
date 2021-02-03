@@ -1,0 +1,39 @@
+==== WmsFactory
+
+The WmsFactory is injected to the script engine as “wmsFactory” The wmsFactory is the central element of the script engine and all object can be accessed over the factory. The factory is also responsible for garbage collection in the engine. The wmsFactory is a singleton.
+
+
+[source, java]
+----
+WmsClassManager getClassManager()
+----
+
+returns the global ClassManager instance of the current scheme.
+
+[source, java]
+----
+WmsContainerManager getContainerManager()
+----
+
+returns the global containermanager instance of the scheme.
+
+[source, java]
+----
+WmsManager getManager()
+----
+
+returns the global manager instance of the scheme.
+
+[source, java]
+----
+void collectGarbage()
+----
+
+starts the garbage collector of the scriptengine manually.
+
+[source, java]
+----
+StringList getArguments();
+----
+
+returns the commandline arguments while starting the application or runtime.

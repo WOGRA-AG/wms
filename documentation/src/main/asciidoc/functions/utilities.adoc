@@ -1,0 +1,44 @@
+==== Utilities
+
+Class for utilities functions you sometimes need.
+
+===== Function Reference
+
+[source, java]
+----
+convertFromByteArrayToBase64
+----
+
+starts the Workflow
+
+*Arguments*
+
+ByteArray: the data which should be converted to a base64 string.
+
+*return* String
+
+===== Sample
+
+[source, java]
+----
+utilites.convertFromByteArrayToBase64(bytearray);
+----
+
+[source, java]
+----
+convertFromBase64ToByteArray
+----
+
+converts a base64 string to a human readbale bytearray.
+
+*Arguments*
+
+String base64String: the base64 encoded string.
+
+*return* String
+
+===== Sample
+
+----
+utilites.convertFromBase64ToByteArray(base64String);
+----

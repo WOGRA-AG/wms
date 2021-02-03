@@ -1,0 +1,231 @@
+==== WmsValue
+
+The WmsValue delivers detailed information about values of an object. The most values are directly added to the object. But lists and references are not. so you have to use the wmsValue class to get further informations.
+
+
+*Baseclasses* WmsModelElement
+
+===== Function Reference
+
+[source,java]
+----
+Object getMember()
+----
+
+returns the member behind the value which defines the value.
+
+[source,java]
+----
+Value getValue()
+----
+
+returns the value. This works for all primitive types. For date, datetime, time and objectref you have to use the special
+
+[source, java]
+----
+Number getType()
+----
+
+returns the type of the value.
+
+[source, java]
+----
+Boolean getValueAsBool()
+----
+
+returns the boolean value. Works only if the value is of type bool.
+
+[source, java]
+----
+void setValueBool(Boolean value)
+----
+
+sets the boolean value. Works only if the value is of type bool.
+
+[source, java]
+----
+String toString()
+----
+
+converts the value to a displayable string.
+
+[source, java]
+----
+void setValue(Value value)
+----
+sets a value. This works for all primitive types. For date, datetime, time and objectref you have to use the special implementation setters below.
+
+[source, java]
+----
+Boolean isDate()
+----
+
+returns if this value is of type Date.
+
+[source, java]
+----
+Boolean isTime()
+----
+
+returns if this value is of type Time.
+[source, java]
+----
+Boolean isDateTime()
+----
+
+returns if this value is of type DateTime or Timestamp.
+
+[source, java]
+----
+Date getValueDateTime()
+----
+
+returns the value as datetime. Works only if this value is of type date.
+
+[source, java]
+----
+Date getValueDate()
+----
+
+returns the value as date. Works only if this value is of type date. The time of this date is 00:00:00.
+
+[source, java]
+----
+Date getValueTime()
+----
+
+returns the time.Works only if this value is of type time. The  date is 1.1.1970.
+
+[source, java]
+----
+void setValueDate(Date date)
+----
+
+sets the date to the value. Works only if this value is a date.
+
+[source, java]
+----
+void setValueDateTime(Date dateTime)
+----
+
+sets the datetime to the value. Works only if this value is a date.
+
+[source, java]
+----
+void setValueTime(Date time)
+----
+
+sets the time to the value. Works only if this value is a date.
+
+[source, java]
+----
+String getBinDocFileName()
+----
+
+returns the filename of a binary document. Works only or binary documents.
+
+[source, java]
+----
+void openBinDoc()
+----
+
+opens a binary document on filesystem. The application which opens the file must be defined thru the operating system.
+
+[source, java]
+----
+Boolean isReadOnly()
+----
+
+returns if this value is set to readonly.
+
+[source, java]
+----
+String getSelectionModel()
+----
+
+generates from list a selection model for QML
+
+
+[source, java]
+----
+void setSelectionValue(Number id)
+----
+
+sets userids, user group ids or enum values.
+
+[source, java]
+----
+Number getSelectionValueIndex()
+----
+
+returns the current index in QML selection models
+
+[source, java]
+----
+String getJson()
+----
+
+returns the value as json document.
+
+[source, java]
+----
+Array getListStrings()
+----
+
+returns the list of string if it is a string list.
+
+[source, java]
+----
+Array getListInts()
+----
+
+returns the list of ints if it is a int list.
+
+[source, java]
+----
+Array getListDoubles()
+----
+
+returns the list of doubles if it is a double list.
+
+[source, java]
+----
+Array getListObjects()
+----
+
+returns the list of objects if it is a object list.
+
+[source, java]
+----
+Boolean removeListValue(String value)
+----
+
+removes a string value from list. If the list is of other types than string the string will be converted.
+
+[source, java]
+----
+Boolean addListValue(String value)
+----
+
+adds a string value to the list. If the list is of other types than string the string will be converted.
+
+[source, java]
+----
+Boolean isListOfObjects()
+----
+
+returns if the value is a list of objects.
+
+[source, java]
+----
+Value getValueReference()
+----
+
+returns the valuereference this could be a container or object dependent on the value type.
+
+[source, java]
+----
+void setValueReference(Object object)
+---- 
+
+sets the value reference. It can be a object or a container dependent on the value type.

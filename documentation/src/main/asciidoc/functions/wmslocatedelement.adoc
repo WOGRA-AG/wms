@@ -1,0 +1,42 @@
+
+==== WmsLocatedElement
+
+Base class of all WMS Model classes to access to global scheme objects.
+
+===== Function Reference
+
+[source, java]
+----
+WmsFactory getFactory()
+----
+
+returns the global factory of the Scripting Engine.
+
+[source, java]
+----
+WmsManager getManager()
+----
+
+returns the global Manager of the Scripting Engine.
+
+[source, java]
+----
+WmsContainerManager getContainerManager()
+----
+
+returns the ContainerManager of the current scheme
+
+[source, java]
+----
+WmsClassManager getClassManager()
+----
+
+returns the classmanager of the current scheme
+
+[source, java]
+----
+WmsScheme getScheme()
+----
+
+returns the current scheme.
+
