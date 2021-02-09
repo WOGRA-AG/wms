@@ -132,7 +132,7 @@ p, li { white-space: pre-wrap; }
          <string/>
         </property>
         <property name="icon">
-         <iconset resource="../../../WMSadmin/resources/emresources.qrc">
+         <iconset resource="wmsgui.qrc">
           <normaloff>:/icons/refresh24.png</normaloff>:/icons/refresh24.png</iconset>
         </property>
         <property name="iconSize">
@@ -165,9 +165,30 @@ p, li { white-space: pre-wrap; }
       <string>Änderungen</string>
      </property>
      <layout class="QGridLayout" name="gridLayout">
+      <property name="leftMargin">
+       <number>3</number>
+      </property>
+      <property name="topMargin">
+       <number>3</number>
+      </property>
+      <property name="rightMargin">
+       <number>3</number>
+      </property>
+      <property name="bottomMargin">
+       <number>3</number>
+      </property>
       <item row="0" column="0">
        <widget class="QTreeWidget" name="m_pqtwJournal">
         <property name="alternatingRowColors">
+         <bool>true</bool>
+        </property>
+        <property name="selectionBehavior">
+         <enum>QAbstractItemView::SelectRows</enum>
+        </property>
+        <property name="textElideMode">
+         <enum>Qt::ElideRight</enum>
+        </property>
+        <property name="sortingEnabled">
          <bool>true</bool>
         </property>
         <column>
@@ -198,6 +219,26 @@ p, li { white-space: pre-wrap; }
       <number>0</number>
      </property>
      <item>
+      <widget class="QPushButton" name="pushButton">
+       <property name="toolTip">
+        <string>Wert in Zwischenablage kopieren</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="wmsgui.qrc">
+         <normaloff>:/icons/OpenDocument.png</normaloff>:/icons/OpenDocument.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>24</width>
+         <height>24</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item>
       <spacer>
        <property name="orientation">
         <enum>Qt::Horizontal</enum>
@@ -216,7 +257,7 @@ p, li { white-space: pre-wrap; }
         <string/>
        </property>
        <property name="icon">
-        <iconset resource="../../../WMSadmin/resources/emresources.qrc">
+        <iconset resource="wmsgui.qrc">
          <normaloff>:/icons/cancel24.png</normaloff>:/icons/cancel24.png</iconset>
        </property>
        <property name="iconSize">
@@ -232,7 +273,7 @@ p, li { white-space: pre-wrap; }
   </layout>
  </widget>
  <resources>
-  <include location="../../../WMSadmin/resources/emresources.qrc"/>
+  <include location="wmsgui.qrc"/>
  </resources>
  <connections>
   <connection>
@@ -242,8 +283,8 @@ p, li { white-space: pre-wrap; }
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>532</x>
-     <y>285</y>
+     <x>538</x>
+     <y>431</y>
     </hint>
     <hint type="destinationlabel">
      <x>179</x>
@@ -258,8 +299,8 @@ p, li { white-space: pre-wrap; }
    <slot>RefreshClickedSlot()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>258</x>
-     <y>43</y>
+     <x>251</x>
+     <y>87</y>
     </hint>
     <hint type="destinationlabel">
      <x>593</x>
@@ -267,8 +308,41 @@ p, li { white-space: pre-wrap; }
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>m_pqtwJournal</sender>
+   <signal>doubleClicked(QModelIndex)</signal>
+   <receiver>CwmsJournalViewerClass</receiver>
+   <slot>CopyToClipboardClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>413</x>
+     <y>202</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>710</x>
+     <y>216</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsJournalViewerClass</receiver>
+   <slot>CopyToClipboardClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>18</x>
+     <y>416</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>57</x>
+     <y>470</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>RefreshClickedSlot()</slot>
+  <slot>CopyToClipboardClickedSlot()</slot>
  </slots>
 </ui>

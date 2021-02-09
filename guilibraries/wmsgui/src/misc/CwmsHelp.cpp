@@ -20,35 +20,25 @@
 // own Includes
 #include "CwmsHelp.h"
 
-/** +-=---------------------------------------------------------Mi 5. Sep 11:48:11 2012-----------*
- * @method  CwmsHelp::CwmsHelp                               // public                            *
- * @return                                                   //                                   *
- * @param   QWidget* p_pqwParent                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mi 5. Sep 11:48:11 2012-----------*/
 CwmsHelp::CwmsHelp(QWidget* p_pqwParent)
 : QDialog(p_pqwParent)
 {
    setupUi(this);
 }
 
-/** +-=---------------------------------------------------------Mi 5. Sep 11:49:20 2012-----------*
- * @method  CwmsHelp::~CwmsHelp                              // public, virtual                   *
- * @return  void                                             //                                   *
- * @comment The Destructor of Class CwmsHelp                                                      *
- *----------------last changed: --------------------------------Mi 5. Sep 11:49:20 2012-----------*/
 CwmsHelp::~CwmsHelp()
 {
 }
 
-/** +-=---------------------------------------------------------Mi 5. Sep 11:49:44 2012-----------*
- * @method  CwmsHelp::ShowHelp                               // public, static                    *
- * @return  void                                             //                                   *
- * @param   QString p_qstrHelp                               //                                   *
- * @param   QWidget* p_pqwParent                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mi 5. Sep 11:49:44 2012-----------*/
-void CwmsHelp::ShowHelp(QString p_qstrHelp, QWidget* p_pqwParent)
+void CwmsHelp::ShowTextHelp(QString p_qstrHelp, QWidget* p_pqwParent)
+{
+   CwmsHelp* pHelp = new CwmsHelp(p_pqwParent);
+   pHelp->m_pqtbContent->setPlainText(p_qstrHelp);
+   pHelp->exec();
+   DELPTR(pHelp);
+}
+
+void CwmsHelp::ShowHtmlHelp(QString p_qstrHelp, QWidget* p_pqwParent)
 {
    CwmsHelp* pHelp = new CwmsHelp(p_pqwParent);
    pHelp->m_pqtbContent->setHtml(p_qstrHelp);
@@ -56,13 +46,6 @@ void CwmsHelp::ShowHelp(QString p_qstrHelp, QWidget* p_pqwParent)
    DELPTR(pHelp);
 }
 
-/** +-=---------------------------------------------------------Mi 5. Sep 11:50:50 2012-----------*
- * @method  CwmsHelp::ShowLicence                            // public, static                    *
- * @return  void                                             //                                   *
- * @param   QString p_qstrHelp                               //                                   *
- * @param   QWidget* p_pqwParent                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mi 5. Sep 11:50:50 2012-----------*/
 void CwmsHelp::ShowLicence(QString p_qstrHelp, QWidget* p_pqwParent)
 {
    CwmsHelp* pHelp = new CwmsHelp(p_pqwParent);

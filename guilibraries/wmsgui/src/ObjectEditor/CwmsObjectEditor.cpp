@@ -19,6 +19,7 @@
 #include <QSpacerItem>
 #include <QMargins>
 #include <QComboBox>
+#include <CdmSessionManager.h>
 
 
 // WMS Includes
@@ -32,6 +33,7 @@
 #include <CdmClass.h>
 #include "CdmClassGroup.h"
 #include <CdmValue.h>
+#include "CdmDataProvider.h"
 #include <CdmMember.h>
 #include <CdmContainerManager.h>
 #include <CdmObjectContainer.h>
@@ -41,6 +43,7 @@
 #include "CwmsListWidgetHelper.h"
 #include "CwmsFormObject.h"
 #include "CwmsRuntime.h"
+#include "CwmsHelp.h"
 #include "IwmsPrinting.h"
 #include "CwmsReportManager.h"
 #include "CwmsPrintingTemplate.h"
@@ -59,7 +62,6 @@
 CwmsObjectEditor::CwmsObjectEditor(CdmObject* p_pCdmObject, QWidget* p_pqwParent)
     : QWidget(p_pqwParent),
       m_pqwContainter(nullptr),
-      m_pqContainerLayout(nullptr),
       m_cCdmObjectAdaptor(p_pCdmObject),
       m_bReadOnly(false),
       m_bShowEditButton(true),
@@ -74,7 +76,12 @@ CwmsObjectEditor::CwmsObjectEditor(CdmObject* p_pCdmObject, QWidget* p_pqwParent
       m_bIsUpdateEvent(false)
 {
     setupUi(this);
-    m_pqContainerLayout = new QVBoxLayout(m_pqfData);
+
+    if (!CdmSessionManager::GetDataProvider()->IsLoggedInUserAdmin())
+    {
+        m_pqpbMetaData->hide();
+    }
+
 }
 
 /** +-=---------------------------------------------------------Mi 22. Aug 10:06:04 2012----------*
@@ -86,7 +93,6 @@ CwmsObjectEditor::CwmsObjectEditor(CdmObject* p_pCdmObject, QWidget* p_pqwParent
 CwmsObjectEditor::CwmsObjectEditor(QWidget* p_pqwParent)
     : QWidget(p_pqwParent),
       m_pqwContainter(nullptr),
-      m_pqContainerLayout(nullptr),
       m_cCdmObjectAdaptor(),
       m_bReadOnly(false),
       m_bShowEditButton(true),
@@ -98,7 +104,11 @@ CwmsObjectEditor::CwmsObjectEditor(QWidget* p_pqwParent)
       m_bIsObjEventEditor(false)
 {
     setupUi(this);
-    m_pqContainerLayout = new QVBoxLayout(m_pqfData);
+
+    if (!CdmSessionManager::GetDataProvider()->IsLoggedInUserAdmin())
+    {
+        m_pqpbMetaData->hide();
+    }
 }
 
 /** +-=---------------------------------------------------------Fri Dec 5 14:36:55 2003-----------*
@@ -494,8 +504,7 @@ void CwmsObjectEditor::BuildContainerWidget()
 {
     DELPTR(m_pqwContainter)
     m_pqwContainter = new QWidget(m_pqfData);
-    m_pqContainerLayout->addWidget(m_pqwContainter);
-    m_pqContainerLayout->setContentsMargins(0,0,0,0);
+    m_pqfData->setWidget(m_pqwContainter);
 }
 
 /** +-=---------------------------------------------------------Mo 5. Nov 09:19:48 2012-----------*
@@ -1946,6 +1955,11 @@ void CwmsObjectEditor::SaveClickedSlot()
     GetObject()->Commit();
 }
 
+void CwmsObjectEditor::MetaDataClickedSlot()
+{
+    QString qstrInfo = GetObject()->GetInfo();
+    CwmsHelp::ShowTextHelp(qstrInfo, nullptr);
+}
 
 /** +-=---------------------------------------------------------Mo 17. Sep 16:21:08 2012----------*
  * @method  CwmsObjectEditor::JournalClickedSlot              // private, slots                    *

@@ -108,7 +108,9 @@ void RefreshClickedSlot( );
 
 
 
-   private:
+public slots:
+    void CopyToClipboardClickedSlot();
+private:
    /** +-=---------------------------------------------------------Mi 29. Aug 16:16:51 2012-------*
     * @method  CwmsJournalViewer::AddObjectListHeader        // private                           *
     * @return  void                                          //                                   *

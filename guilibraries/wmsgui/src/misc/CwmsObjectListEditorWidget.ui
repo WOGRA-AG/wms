@@ -233,7 +233,7 @@
        </property>
        <property name="icon">
         <iconset resource="wmsgui.qrc">
-         <normaloff>:/icons/save24.png</normaloff>:/icons/search24.png</iconset>
+         <normaloff>:/icons/save24.png</normaloff>:/icons/save24.png</iconset>
        </property>
        <property name="iconSize">
         <size>
@@ -251,6 +251,23 @@
        <property name="icon">
         <iconset resource="wmsgui.qrc">
          <normaloff>:/icons/refresh24.png</normaloff>:/icons/refresh24.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>24</width>
+         <height>24</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="m_pqpbMetaData">
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="wmsgui.qrc">
+         <normaloff>:/icons/about.png</normaloff>:/icons/about.png</iconset>
        </property>
        <property name="iconSize">
         <size>
@@ -443,7 +460,7 @@
    <slot>QMLGeneratorClickedSlot()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>504</x>
+     <x>588</x>
      <y>460</y>
     </hint>
     <hint type="destinationlabel">
@@ -500,6 +517,22 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>m_pqpbMetaData</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsObjectListEditorWidget</receiver>
+   <slot>MetaDataClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>489</x>
+     <y>457</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>551</x>
+     <y>495</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>EditClickedSlot()</slot>
@@ -512,5 +545,6 @@
   <slot>RefreshClickedSlot()</slot>
   <slot>CopyObjectClickedSlot()</slot>
   <slot>SaveAsCsvClickedSlot()</slot>
+  <slot>MetaDataClickedSlot()</slot>
  </slots>
 </ui>

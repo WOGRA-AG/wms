@@ -174,19 +174,7 @@ void DeleteClickedSlot( );
     CdmObjectContainer* GetObjectList();
 
 public slots:
-         /** +-=---------------------------------------------------------Mo 27. Aug 11:34:03 2012-------*
-    * @method  CwmsObjectListEditorIf::NewClickedSlot        // public, slots                     *
-    * @return  void                                          //                                   *
-    * @comment                                                                                    *
-    *----------------last changed: -----------------------------Mo 27. Aug 11:34:03 2012----------*/
 void NewClickedSlot( );
-
-    public slots:
-         /** +-=---------------------------------------------------------Mo 27. Aug 11:34:29 2012-------*
-    * @method  CwmsObjectListEditorIf::EditClickedSlot       // public, slots                     *
-    * @return  void                                          //                                   *
-    * @comment                                                                                    *
-    *----------------last changed: -----------------------------Mo 27. Aug 11:34:29 2012----------*/
 void EditClickedSlot();
 };
 

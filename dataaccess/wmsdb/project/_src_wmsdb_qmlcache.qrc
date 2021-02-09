@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<RCC>
+    <qresource prefix="/wmsdbqml"/>
+    <qresource prefix="/icons">
+        <file alias="arrowdown.png">../src/arrowdown.png</file>
+    </qresource>
+</RCC>

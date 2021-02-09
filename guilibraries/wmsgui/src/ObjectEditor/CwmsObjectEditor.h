@@ -69,7 +69,6 @@ class WMSGUI_API CwmsObjectEditor : public QWidget, public Ui::CwmsObjectEditorC
    Q_OBJECT
    private:
       QWidget* m_pqwContainter;
-      QVBoxLayout* m_pqContainerLayout;
       CdmObjectAdaptor m_cCdmObjectAdaptor;
       bool m_bReadOnly;
       bool m_bShowEditButton;
@@ -604,20 +603,10 @@ void GroupChangedSlot(CdmClass* pClass);
 
     int CountAditionalTabsforNoneGroupMembers(CdmClass *pEventClass);
 private slots:
-   /** +-=---------------------------------------------------------Fr 14. Dez 10:44:49 2012-------*
-    * @method  CwmsObjectEditor::FunctionClickedSlot         // private, slots                    *
-    * @return  void                                          //                                   *
-    * @comment                                                                                    *
-    *----------------last changed: -----------------------------Fr 14. Dez 10:44:49 2012----------*/
 void FunctionClickedSlot( );
 
    public:
-   /** +-=---------------------------------------------------------Fr 14. Dez 14:47:26 2012-------*
-    * @method  CwmsObjectEditor::SetFormConfiguration        // public                            *
-    * @return  void                                          //                                   *
-    * @param   CdmObject* p_pObject                          //                                   *
-    * @comment                                                                                    *
-    *----------------last changed: -----------------------------Fr 14. Dez 14:47:26 2012----------*/
+
     void SetFormConfiguration(CdmObject* p_pObject);
 
     void setIsObjectEventEditor(bool bIsObjEEditor);
@@ -628,6 +617,7 @@ void FunctionClickedSlot( );
 public slots:
     void SaveClickedSlot();
     void ResetClickedSlot();
+    void MetaDataClickedSlot();
 };
 
 #endif //

@@ -17,6 +17,7 @@
 #include "CdmValue.h"
 #include "CdmObjectContainer.h"
 #include "CdmLogging.h"
+#include "CwmsHelp.h"
 #include "CwmsObjectListEditorIf.h"
 #include "CwmsguiObjectEditorSelector.h"
 #include "CwmsguiValidator.h"

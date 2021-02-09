@@ -12,6 +12,7 @@
  *****************************************************************************/
 
 // System and QT Includes
+#include <QClipboard>
 #include <QDate>
 #include <QList>
 
@@ -265,6 +266,19 @@ void CwmsJournalViewer::SetFromToDefaultData()
 {
    m_pqdeTo->setDate(QDate::currentDate());
    m_pqdeFrom->setDate(QDate::currentDate().addDays(-30));
+}
+
+void CwmsJournalViewer::CopyToClipboardClickedSlot()
+{
+    QTreeWidgetItem* pItem = m_pqtwJournal->selectedItems().first();
+
+    if (CHKPTR(pItem))
+    {
+        QString qstrText = QString("%s = %s").arg(pItem->text(3)).arg(pItem->text(4));
+
+        QClipboard *clipboard = QGuiApplication::clipboard();
+        clipboard->setText(qstrText);
+    }
 }
 
 /** +-=---------------------------------------------------------Mi 29. Aug 16:04:19 2012----------*

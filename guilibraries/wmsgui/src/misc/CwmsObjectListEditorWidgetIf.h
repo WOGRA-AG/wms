@@ -111,6 +111,7 @@ public slots:
     void RefreshClickedSlot();
     void CopyObjectClickedSlot();
     void SaveAsCsvClickedSlot();
+    void MetaDataClickedSlot();
 
 
 private slots:

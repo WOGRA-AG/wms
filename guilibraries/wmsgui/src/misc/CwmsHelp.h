@@ -39,41 +39,11 @@ class WMSGUI_API CwmsHelp : public QDialog, public Ui::CwmsHelpClass
    Q_OBJECT
 
    public:
-   /** +-=---------------------------------------------------------Mi 5. Sep 11:48:11 2012--------*
-    * @method  CwmsHelp::CwmsHelp                            // public                            *
-    * @return                                                //                                   *
-    * @param   QWidget* p_pqwParent                          //                                   *
-    * @comment                                                                                    *
-    *----------------last changed: -----------------------------Mi 5. Sep 11:48:11 2012-----------*/
-    CwmsHelp( QWidget* p_pqwParent);
-
-   public:
-   /** +-=---------------------------------------------------------Mi 5. Sep 11:49:20 2012--------*
-    * @method  CwmsHelp::~CwmsHelp                           // public, virtual                   *
-    * @return  void                                          //                                   *
-    * @comment The Destructor of Class CwmsHelp                                                   *
-    *----------------last changed: -----------------------------Mi 5. Sep 11:49:20 2012-----------*/
-    virtual ~CwmsHelp( );
-
-   public:
-   /** +-=---------------------------------------------------------Mi 5. Sep 11:49:44 2012--------*
-    * @method  CwmsHelp::ShowHelp                            // public, static                    *
-    * @return  void                                          //                                   *
-    * @param   QString p_qstrHelp                            //                                   *
-    * @param   QWidget* p_pqwParent                          //                                   *
-    * @comment                                                                                    *
-    *----------------last changed: -----------------------------Mi 5. Sep 11:49:44 2012-----------*/
-    static void ShowHelp(QString p_qstrHelp, QWidget* p_pqwParent);
-
-   public:
-   /** +-=---------------------------------------------------------Mi 5. Sep 11:50:50 2012--------*
-    * @method  CwmsHelp::ShowLicence                         // public, static                    *
-    * @return  void                                          //                                   *
-    * @param   QString p_qstrHelp                            //                                   *
-    * @param   QWidget* p_pqwParent                          //                                   *
-    * @comment                                                                                    *
-    *----------------last changed: -----------------------------Mi 5. Sep 11:50:50 2012-----------*/
+    CwmsHelp(QWidget* p_pqwParent);
+    virtual ~CwmsHelp();
+    static void ShowTextHelp(QString p_qstrHelp, QWidget* p_pqwParent);
     static void ShowLicence(QString p_qstrHelp, QWidget* p_pqwParent);
+    static void ShowHtmlHelp(QString p_qstrHelp, QWidget *p_pqwParent);
 };
 
 #endif // CWMSHELP_H

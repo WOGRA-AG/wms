@@ -237,7 +237,7 @@ void CwmsRuntime::LanguageSlot()
 
 void CwmsRuntime::HelpSlot()
 {
-   CwmsHelp::ShowHelp(m_cApp.GetHelp(), this);
+   CwmsHelp::ShowHtmlHelp(m_cApp.GetHelp(), this);
 }
 
 void CwmsRuntime::InfoSlot()

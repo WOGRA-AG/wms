@@ -125,7 +125,7 @@ p, li { white-space: pre-wrap; }
         <string/>
        </property>
        <property name="icon">
-        <iconset resource="../../../WMSadmin/resources/emresources.qrc">
+        <iconset resource="wmsgui.qrc">
          <normaloff>:/icons/ok24.png</normaloff>:/icons/ok24.png</iconset>
        </property>
        <property name="iconSize">
@@ -150,7 +150,7 @@ p, li { white-space: pre-wrap; }
   </customwidget>
  </customwidgets>
  <resources>
-  <include location="../../../WMSadmin/resources/emresources.qrc"/>
+  <include location="wmsgui.qrc"/>
  </resources>
  <connections>
   <connection>

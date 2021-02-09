@@ -60,6 +60,7 @@
 #include "CwmsView.h"
 #include "CwmsRuntime.h"
 #include "CwmsJournalViewer.h"
+#include "CwmsHelp.h"
 #include "CwmsReportManager.h"
 #include "CwmsPrintingTemplate.h"
 #include "IwmsPrinting.h"
@@ -80,6 +81,12 @@ CwmsObjectListEditorWidgetIf::CwmsObjectListEditorWidgetIf(QWidget* parent)
       m_pEventClassEditor(nullptr)
 {
     setupUi(this);
+
+    if (!CdmSessionManager::GetDataProvider()->IsLoggedInUserAdmin())
+    {
+        m_pqpbMetaData->hide();
+    }
+
     qmlGenerator->hide();
     m_pModel = new CdmQueryModel();
     m_pCwmsObjectListListView->setContextMenuPolicy(Qt::CustomContextMenu);
@@ -983,7 +990,6 @@ void CwmsObjectListEditorWidgetIf::SetView(CwmsView p_cCwmsView)
                 m_pqpbNew->hide();
                 m_pqpbEdit->hide();
                 m_pqpbDelete->hide();
-
             }
 
             CwmsTreeWidgetHelper::ResizeColumnsToContent(m_pCwmsObjectListListView);
@@ -1489,7 +1495,6 @@ void CwmsObjectListEditorWidgetIf::HideSaveAsCsvButton()
     m_pqpbSaveAsCsv->hide();
 }
 
-
 void CwmsObjectListEditorWidgetIf::SaveAsCsvClickedSlot()
 {
     CwmsQueryModelExportCsv::SaveModel(*m_pModel);
@@ -1511,6 +1516,18 @@ void CwmsObjectListEditorWidgetIf::QMLGeneratorClickedSlot()
 
     }
     }
+}
+
+void CwmsObjectListEditorWidgetIf::MetaDataClickedSlot()
+{
+    CdmObjectContainer* pContainer = GetContainer();
+
+    if (CHKPTR(pContainer))
+    {
+        QString qstrText = pContainer->GetInfo();
+        CwmsHelp::ShowTextHelp(qstrText, this);
+    }
+
 }
 
 void CwmsObjectListEditorWidgetIf::RefreshClickedSlot()
