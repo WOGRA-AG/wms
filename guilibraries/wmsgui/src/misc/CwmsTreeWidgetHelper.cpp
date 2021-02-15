@@ -253,13 +253,10 @@ void CwmsTreeWidgetHelper::ResizeColumnsToContent(QTreeView* p_pView)
 
       if (iColumns > 0)
       {
-         /**/
          for (int iCounter = 0; iCounter < iColumns; ++iCounter)
          {
             p_pView->resizeColumnToContents(iCounter);
          }
-         /**/
-         //p_pView->sortByColumn(0, Qt::AscendingOrder);
       }
    }
 }
