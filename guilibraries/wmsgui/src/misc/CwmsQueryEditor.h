@@ -105,7 +105,10 @@ void EditClickedSlot();
     *----------------last changed: -----------------------------Fr 24. Aug 13:29:13 2012----------*/
     static void FillQueryAnalyzer(QTreeWidget* p_pqTreeWidget, CdmQuery* p_pQuery);
 
-   private:
+public slots:
+    void SystemVariablesChangedSlot(QString);
+    void QueryChangedSlot();
+private:
    /** +-=---------------------------------------------------------Fr 24. Aug 13:53:43 2012-------*
     * @method  CwmsQueryEditor::AddQueryElement              // private, static                   *
     * @return  void                                          //                                   *

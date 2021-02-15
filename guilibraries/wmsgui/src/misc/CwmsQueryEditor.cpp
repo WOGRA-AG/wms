@@ -7,7 +7,7 @@
  ** Implements the ui of the queryeditor
  **
  ** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
- ** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. 
+ ** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
  **(C) copyright by WOGRA technologies GmbH & Co. KG All rights reserved
  *****************************************************************************/
 
@@ -18,11 +18,14 @@
 #include <QCursor>
 #include <QFileDialog>
 #include <QTextStream>
-#include <CwmsTimeMeassurement.h>
-#include <CwmsQueryModelExportCsv.h>
+
 //#include <QAbstractItemModel>
 
 // WMS Includes
+#include <CdmSystemVariables.h>
+#include <CdmSessionManager.h>
+#include <CdmContainerManager.h>
+#include "CdmDataProvider.h"
 #include "CdmMessageManager.h"
 #include "CdmLogging.h"
 #include "CdmObjectContainer.h"
@@ -32,9 +35,11 @@
 #include "CdmQueryEnhanced.h"
 
 // Basetools includes
+#include <CwmsTimeMeassurement.h>
 #include "CwmsErrorCollector.h"
 
 // own Includes
+#include <CwmsQueryModelExportCsv.h>
 #include "CwmsguiObjectEditorSelector.h"
 #include "CwmsTreeWidgetHelper.h"
 #include "jshighlighter.h"
@@ -42,256 +47,270 @@
 #include "CwmsViewEditor.h"
 #include "CwmsQueryEditor.h"
 
-/** +-=---------------------------------------------------------Do 26. Jul 11:26:32 2012----------*
- * @method  CwmsQueryEditor::CwmsQueryEditor                 // public                            *
- * @return                                                   //                                   *
- * @param   QWidget* p_pqwParent                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Do 26. Jul 11:26:32 2012----------*/
 CwmsQueryEditor::CwmsQueryEditor(QWidget* p_pqwParent)
-: QWidget(p_pqwParent),
-  m_pCdmQuery(nullptr)
+    : QWidget(p_pqwParent),
+      m_pCdmQuery(nullptr)
 {
-   setupUi(this);
+    setupUi(this);
 
-   m_pqtvResult->setSelectionBehavior(QAbstractItemView::SelectRows);
-   m_pqtvResult->setSelectionMode(QAbstractItemView::ContiguousSelection);
-   m_pqteEditor->setTextWrapEnabled(false);
-   m_pqteEditor->setCodeFoldingEnabled(true);
-   m_pqteEditor->setLineNumbersVisible(true);
-   
+    m_pqtvResult->setSelectionBehavior(QAbstractItemView::SelectRows);
+    m_pqtvResult->setSelectionMode(QAbstractItemView::ContiguousSelection);
+    m_pqteEditor->setTextWrapEnabled(false);
+    m_pqteEditor->setCodeFoldingEnabled(true);
+    m_pqteEditor->setLineNumbersVisible(true);
+
+    QStringList qstrlSystemVariables = CdmSystemVariables::GetSystemVariables();
+    m_pqcbSystemVariables->addItems(qstrlSystemVariables);
+    m_pqteEditor->clear();
 }
 
-/** +-=---------------------------------------------------------Do 26. Jul 11:27:00 2012----------*
- * @method  CwmsQueryEditor::~CwmsQueryEditor                // public, virtual                   *
- * @return  void                                             //                                   *
- * @comment The Destructor of Class CwmsQueryEditor                                               *
- *----------------last changed: --------------------------------Do 26. Jul 11:27:00 2012----------*/
 CwmsQueryEditor::~CwmsQueryEditor()
 {
 }
 
-/** +-=---------------------------------------------------------Do 26. Jul 11:39:27 2012----------*
- * @method  CwmsQueryEditor::ExecuteClickedSlot              // private, slots                    *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Do 26. Jul 11:39:27 2012----------*/
 void CwmsQueryEditor::ExecuteClickedSlot()
 {
-   CdmMessageManager::StartAsyncMessageCollection();
-   CwmsTimeMeassurement cTimeMeassure(false,"Wql");
-   QString qstrQuery = m_pqteEditor->toPlainText();
-   qstrQuery = qstrQuery.replace("\n", " ");
-   CwmsErrorCollector cErrorCollector;
-   CdmLogging::AddAdaptor(&cErrorCollector);
-   m_cCdmModel.Execute(qstrQuery);
-   CdmLogging::RemoveAdaptor(&cErrorCollector);
+    CdmMessageManager::StartAsyncMessageCollection();
+    CwmsTimeMeassurement cTimeMeassure(false,"Wql");
+    QString qstrQuery = m_pqteEditor->toPlainText();
+    qstrQuery = qstrQuery.replace("\n", " ");
+    CwmsErrorCollector cErrorCollector;
+    CdmLogging::AddAdaptor(&cErrorCollector);
+    m_cCdmModel.Execute(qstrQuery);
+    CdmLogging::RemoveAdaptor(&cErrorCollector);
 
-   if (cErrorCollector.HasEntries())
-   {
-      m_pqtwQueryAnalyzer->clear();
-      m_pqtvResult->setModel(nullptr);
-   }
-   else
-   {
-      FillQueryAnalyzer(m_pqtwQueryAnalyzer, m_cCdmModel.GetQuery());
-      m_pqtvResult->setModel(&m_cCdmModel);
-   }
+    if (cErrorCollector.HasEntries())
+    {
+        m_pqtwQueryAnalyzer->clear();
+        m_pqtvResult->setModel(nullptr);
+    }
+    else
+    {
+        FillQueryAnalyzer(m_pqtwQueryAnalyzer, m_cCdmModel.GetQuery());
+        m_pqtvResult->setModel(&m_cCdmModel);
+    }
 
-   QLocale loc;
-   cTimeMeassure.finished();
-   m_pqleDuration->setText(loc.toString(cTimeMeassure.GetCompleteDuration()) + " " + tr("msecs"));
+    QLocale loc;
+    cTimeMeassure.finished();
+    m_pqleDuration->setText(loc.toString(cTimeMeassure.GetCompleteDuration()) + " " + tr("msecs"));
 
-   if (m_cCdmModel.GetQuery() && m_cCdmModel.GetQuery()->IsValid())
-   {
-       m_pqleState->setText(tr("OK"));
-       m_pqleResultCount->setText(QString::number(m_cCdmModel.GetQuery()->GetResultCount()));
-   }
-   else
-   {
-       m_pqleState->setText(tr("Invalid Query"));
-       m_pqleResultCount->setText("0");
-   }
+    if (m_cCdmModel.GetQuery() && m_cCdmModel.GetQuery()->IsValid())
+    {
+        m_pqleState->setText(tr("OK"));
+        m_pqleResultCount->setText(QString::number(m_cCdmModel.GetQuery()->GetResultCount()));
+    }
+    else
+    {
+        m_pqleState->setText(tr("Invalid Query"));
+        m_pqleResultCount->setText("0");
+    }
 
-   CdmMessageManager::EndAndShowAsyncMessageCollection();
+    CdmMessageManager::EndAndShowAsyncMessageCollection();
 }
 
-/** +-=---------------------------------------------------------Fr 24. Aug 13:29:13 2012----------*
- * @method  CwmsQueryEditor::FillQueryAnalyzer               // public, static                    *
- * @return  void                                             //                                   *
- * @param   QTreeWidget* p_pqTreeWidget                      //                                   *
- * @param   CdmQueryEnhanced* p_pQuery                       //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Fr 24. Aug 13:29:13 2012----------*/
 void CwmsQueryEditor::FillQueryAnalyzer(QTreeWidget* p_pqTreeWidget, CdmQuery* p_pQuery)
 {
-   p_pqTreeWidget->clear();
+    p_pqTreeWidget->clear();
 
-   if (CHKPTR(p_pQuery) && CHKPTR(p_pqTreeWidget))
-   {
-      QVector<QString> qvElements = p_pQuery->GetResultElements();
+    if (CHKPTR(p_pQuery) && CHKPTR(p_pqTreeWidget))
+    {
+        QVector<QString> qvElements = p_pQuery->GetResultElements();
 
-      QTreeWidgetItem* pqFields = new QTreeWidgetItem(p_pqTreeWidget);
-      pqFields->setText(0, tr("Felder"));
+        QTreeWidgetItem* pqFields = new QTreeWidgetItem(p_pqTreeWidget);
+        pqFields->setText(0, tr("Felder"));
 
-      for (int iCounter = 0; iCounter < qvElements.count(); ++iCounter)
-      {
-         QTreeWidgetItem* pqItem = new QTreeWidgetItem(pqFields);
-         pqItem->setText(0, qvElements[iCounter]);
-      }
-      
-      QTreeWidgetItem* pqConditions = new QTreeWidgetItem(p_pqTreeWidget);
-      pqConditions->setText(0, tr("Bedingungen"));
+        for (int iCounter = 0; iCounter < qvElements.count(); ++iCounter)
+        {
+            QTreeWidgetItem* pqItem = new QTreeWidgetItem(pqFields);
+            pqItem->setText(0, qvElements[iCounter]);
+        }
 
-      CdmQueryElement*  pCdmRoot = p_pQuery->GetQueryElement();
+        QTreeWidgetItem* pqConditions = new QTreeWidgetItem(p_pqTreeWidget);
+        pqConditions->setText(0, tr("Bedingungen"));
 
-	  if (pCdmRoot)
-	  {
-		AddQueryElement(pCdmRoot, pqConditions);
-	  }
+        CdmQueryElement*  pCdmRoot = p_pQuery->GetQueryElement();
 
-      if (pqConditions->childCount() == 0)
-      {
-         DELPTR(pqConditions)
-      }
-      
-      CdmObjectContainer* pContainer = p_pQuery->GetContainer();
+        if (pCdmRoot)
+        {
+            AddQueryElement(pCdmRoot, pqConditions);
+        }
 
-      if (pContainer)
-      {
-         QTreeWidgetItem* pqObjectList = new QTreeWidgetItem(p_pqTreeWidget);
-         pqObjectList->setText(0, tr("Objektcontainer"));
+        if (pqConditions->childCount() == 0)
+        {
+            DELPTR(pqConditions)
+        }
 
-         QTreeWidgetItem* pqItem = new QTreeWidgetItem(pqObjectList);
-         pqItem->setText(0, pContainer->GetKeyname());
-      }
-      else if(p_pQuery->GetClass())
-      {
-          const CdmClass* pClass = p_pQuery->GetClass();
-          QTreeWidgetItem* pqObjectList = new QTreeWidgetItem(p_pqTreeWidget);
-          pqObjectList->setText(0, tr("Klasse"));
+        CdmObjectContainer* pContainer = p_pQuery->GetContainer();
 
-          QTreeWidgetItem* pqItem = new QTreeWidgetItem(pqObjectList);
-          pqItem->setText(0, pClass->GetKeyname());
-      }
+        if (pContainer)
+        {
+            QTreeWidgetItem* pqObjectList = new QTreeWidgetItem(p_pqTreeWidget);
+            pqObjectList->setText(0, tr("Objektcontainer"));
 
-      QString qstrSorting = p_pQuery->GetOrderBy().join(", ");
+            QTreeWidgetItem* pqItem = new QTreeWidgetItem(pqObjectList);
+            pqItem->setText(0, pContainer->GetKeyname());
+        }
+        else if(p_pQuery->GetClass())
+        {
+            const CdmClass* pClass = p_pQuery->GetClass();
+            QTreeWidgetItem* pqObjectList = new QTreeWidgetItem(p_pqTreeWidget);
+            pqObjectList->setText(0, tr("Klasse"));
 
-      if (!qstrSorting.isEmpty())
-      {
-         QTreeWidgetItem* pqSorting = new QTreeWidgetItem(p_pqTreeWidget);
-         pqSorting->setText(0, tr("Sortierung"));
+            QTreeWidgetItem* pqItem = new QTreeWidgetItem(pqObjectList);
+            pqItem->setText(0, pClass->GetKeyname());
+        }
 
-         QTreeWidgetItem* pqItem = new QTreeWidgetItem(pqSorting);
-         pqItem->setText(0, qstrSorting);
-      }
-   }
+        QString qstrSorting = p_pQuery->GetOrderBy().join(", ");
+
+        if (!qstrSorting.isEmpty())
+        {
+            QTreeWidgetItem* pqSorting = new QTreeWidgetItem(p_pqTreeWidget);
+            pqSorting->setText(0, tr("Sortierung"));
+
+            QTreeWidgetItem* pqItem = new QTreeWidgetItem(pqSorting);
+            pqItem->setText(0, qstrSorting);
+        }
+    }
 }
 
-/** +-=---------------------------------------------------------Fr 24. Aug 13:53:43 2012----------*
- * @method  CwmsQueryEditor::AddQueryElement                 // private, static                   *
- * @return  void                                             //                                   *
- * @param   CdmQueryElement* p_pCdmElement                   //                                   *
- * @param   QTreeWidgetItem* p_pqParent                      //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Fr 24. Aug 13:53:43 2012----------*/
 void CwmsQueryEditor::AddQueryElement(CdmQueryElement* p_pCdmElement, QTreeWidgetItem* p_pqParent)
 {
-   if (CHKPTR(p_pCdmElement) && CHKPTR(p_pqParent))
-   {
-      QTreeWidgetItem* pqItem = new QTreeWidgetItem(p_pqParent);
+    if (CHKPTR(p_pCdmElement) && CHKPTR(p_pqParent))
+    {
+        QTreeWidgetItem* pqItem = new QTreeWidgetItem(p_pqParent);
 
-      if (p_pCdmElement->GetQueryElementType() == eDmQueryElementTypeAnd)
-      {
-         pqItem->setText(0, tr("UND"));
-      }
-      else if (p_pCdmElement->GetQueryElementType() == eDmQueryElementTypeOr)
-      {
-         pqItem->setText(0, tr("ODER"));
-      }
-      else
-      {
-         pqItem->setText(0, p_pCdmElement->GetConditionAsString());
-      }
+        if (p_pCdmElement->GetQueryElementType() == eDmQueryElementTypeAnd)
+        {
+            pqItem->setText(0, tr("UND"));
+        }
+        else if (p_pCdmElement->GetQueryElementType() == eDmQueryElementTypeOr)
+        {
+            pqItem->setText(0, tr("ODER"));
+        }
+        else
+        {
+            pqItem->setText(0, p_pCdmElement->GetConditionAsString());
+        }
 
-      if (p_pCdmElement->GetQueryElementType() != eDmQueryElementTypeCompare)
-      {
-         QLinkedList<CdmQueryElement*> qlChilds;
-         p_pCdmElement->GetChildList(qlChilds);
+        if (p_pCdmElement->GetQueryElementType() != eDmQueryElementTypeCompare)
+        {
+            QLinkedList<CdmQueryElement*> qlChilds;
+            p_pCdmElement->GetChildList(qlChilds);
 
-         QLinkedList<CdmQueryElement*>::iterator qllIt = qlChilds.begin();
-         QLinkedList<CdmQueryElement*>::iterator qllItEnd = qlChilds.end();
+            QLinkedList<CdmQueryElement*>::iterator qllIt = qlChilds.begin();
+            QLinkedList<CdmQueryElement*>::iterator qllItEnd = qlChilds.end();
 
-         for (; qllIt != qllItEnd; ++qllIt)
-         {
-            AddQueryElement(*qllIt, pqItem); 
-         }
-      }
-   }
+            for (; qllIt != qllItEnd; ++qllIt)
+            {
+                AddQueryElement(*qllIt, pqItem);
+            }
+        }
+    }
 }
 
-/** +-=---------------------------------------------------------Do 26. Jul 11:39:42 2012----------*
- * @method  CwmsQueryEditor::SaveClickedSlot                 // private, slots                    *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Do 26. Jul 11:39:42 2012----------*/
 void CwmsQueryEditor::SaveClickedSlot()
 {
-   QMenu* pqMenu = new QMenu(this);
-   pqMenu->addAction(tr("Datei"));
-   pqMenu->addAction(tr("Sicht"));
-   QAction* pqAction = pqMenu->exec(QCursor::pos());
+    QMenu* pqMenu = new QMenu(this);
+    pqMenu->addAction(tr("Datei"));
+    pqMenu->addAction(tr("Sicht"));
+    QAction* pqAction = pqMenu->exec(QCursor::pos());
 
-   if (pqAction)
-   {
-      if (pqAction->text() == tr("Datei"))
-      {
-         QString qstrFilename = CwmsQueryModelExportCsv::AskForFilename(".wql");
+    if (pqAction)
+    {
+        if (pqAction->text() == tr("Datei"))
+        {
+            QString qstrFilename = CwmsQueryModelExportCsv::AskForFilename(".wql");
 
-         if (!qstrFilename.isEmpty())
-         {
-            CwmsQueryModelExportCsv::SaveContent(qstrFilename, m_pqteEditor->toPlainText());
-         }
-      }
-      else
-      {
-         CwmsView cView = CwmsView::Create();
+            if (!qstrFilename.isEmpty())
+            {
+                CwmsQueryModelExportCsv::SaveContent(qstrFilename, m_pqteEditor->toPlainText());
+            }
+        }
+        else
+        {
+            CwmsView cView = CwmsView::Create();
 
-         if (cView.IsValid())
-         {
-            cView.SetViewCommand(m_pqteEditor->toPlainText());
-            CwmsViewEditor::Edit(cView, true, this);
-         }
-      }
-   }
+            if (cView.IsValid())
+            {
+                cView.SetViewCommand(m_pqteEditor->toPlainText());
+                CwmsViewEditor::Edit(cView, true, this);
+            }
+        }
+    }
 }
 
 void CwmsQueryEditor::EditClickedSlot()
 {
-   CdmObject* pObject = m_cCdmModel.GetObject(m_pqtvResult);
+    CdmObject* pObject = m_cCdmModel.GetObject(m_pqtvResult);
 
-   if (pObject)
-   {
-      CwmsguiObjectEditorSelector::Edit(pObject, this);
-   }
+    if (pObject)
+    {
+        CwmsguiObjectEditorSelector::Edit(pObject, this);
+    }
 }
 
-/** +-=---------------------------------------------------------Do 26. Jul 11:39:53 2012----------*
- * @method  CwmsQueryEditor::SaveResultClickedSlot           // private, slots                    *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Do 26. Jul 11:39:53 2012----------*/
 void CwmsQueryEditor::SaveResultClickedSlot()
 {
     CwmsQueryModelExportCsv::SaveModel(m_cCdmModel);
 }
 
-/** +-=---------------------------------------------------------Do 26. Jul 11:40:05 2012----------*
- * @method  CwmsQueryEditor::ClearResultClickedSlot          // private, slots                    *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Do 26. Jul 11:40:05 2012----------*/
 void CwmsQueryEditor::ClearResultClickedSlot()
 {
-   m_cCdmModel.Execute("");
+    m_cCdmModel.Execute("");
+}
+
+
+void CwmsQueryEditor::SystemVariablesChangedSlot(QString p_qstrText)
+{
+    m_pqteEditor->insertPlainText("${" + p_qstrText + "}");
+}
+
+
+void CwmsQueryEditor::QueryChangedSlot()
+{
+    QTextCursor cur = m_pqteEditor->textCursor();
+    cur.movePosition(QTextCursor::PreviousCharacter,QTextCursor::KeepAnchor);
+    QString qstrLastInsertedChar = cur.selectedText();
+
+    if(qstrLastInsertedChar == " ")
+    {
+        QString qstrQuery = m_pqteEditor->toPlainText();
+        QString qstrFromValue = qstrQuery.section("from",1,1);
+        qstrFromValue = qstrFromValue.section(" ",1,1);
+        const CdmClass* pClass = nullptr;
+
+        if (!qstrFromValue.isEmpty())
+        {
+            if (qstrFromValue.contains(".class"))
+            {
+                QString qstrClassKeyname = qstrFromValue.section(".class",-1);
+                CdmClassManager* pClassManager = CdmSessionManager::GetDataProvider()->GetClassManager();
+
+                if (CHKPTR(pClassManager))
+                {
+                    pClass = pClassManager->FindClassByKeyname(qstrClassKeyname);
+                }
+            }
+            else
+            {
+                QString qstrContainerKeyname = qstrFromValue;
+                CdmContainerManager* pContainerManager = CdmSessionManager::GetDataProvider()->GetContainerManager();
+
+                if (CHKPTR(pContainerManager))
+                {
+                    CdmObjectContainer* pContainer = pContainerManager->FindEmptyContainerByKeyname(qstrContainerKeyname);
+
+                    if (pContainer)
+                    {
+                        pClass = pContainer->GetClass();
+                    }
+                }
+            }
+        }
+
+        if (pClass)
+        {
+            m_pqteEditor->SetClass(pClass);
+        }
+    }
 }

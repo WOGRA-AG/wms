@@ -1234,15 +1234,8 @@ void JSEdit::setupCompletionModel()
 
     if (m_rpClass)
     {
-        m_pCompletionModel->setupModelData(m_rpClass, m_pCompletionModel->GetRootItem());
+        m_pCompletionModel->setupModelData(m_rpClass, m_pCompletionModel->GetRootItem(), 0);
     }
-
-    /*
-    for (int iCounter = 0; iCounter < m_qlCompletionObject.count(); ++iCounter)
-    {
-        m_pCompletionModel->setupModelData(m_qlCompletionObject[iCounter], m_pCompletionModel->GetRootItem());
-    }
-    */
 }
 
 void JSEdit::insertCompletion( const QString& completion )
@@ -1274,7 +1267,7 @@ QString JSEdit::textUnderCursor() const
     return qstrContent;
 }
 
-void JSEdit::SetClass(CdmClass* p_pClass)
+void JSEdit::SetClass(const CdmClass* p_pClass)
 {
     m_rpClass = p_pClass;
 }

@@ -91,7 +91,7 @@ public:
     bool isFolded(int line) const;
 
     void AddCompletionObject(QObject *p_pObject);
-    void SetClass(CdmClass *p_pClass);
+    void SetClass(const CdmClass *p_pClass);
 public slots:
     void updateSidebar();
     void mark(const QString &str, Qt::CaseSensitivity sens = Qt::CaseInsensitive);
@@ -125,7 +125,7 @@ private:
     QSet<Qt::Key> m_qKeysPressed;
 
 
-    CdmClass* m_rpClass;
+    const CdmClass* m_rpClass;
     QList<QObject*> m_qlCompletionObject;
     bool m_bFirstRelease;
     void processMultiKeys();

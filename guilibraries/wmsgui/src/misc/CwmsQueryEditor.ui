@@ -97,6 +97,19 @@ p, li { white-space: pre-wrap; }
        <property name="bottomMargin">
         <number>3</number>
        </property>
+       <item row="1" column="4">
+        <spacer name="horizontalSpacer">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
        <item row="1" column="0">
         <widget class="QPushButton" name="m_pqpbExecute">
          <property name="toolTip">
@@ -120,6 +133,26 @@ p, li { white-space: pre-wrap; }
          </property>
         </widget>
        </item>
+       <item row="1" column="2">
+        <widget class="QPushButton" name="m_pqpbSaveWql">
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset resource="wmsgui.qrc">
+           <normaloff>:/icons/save24.png</normaloff>:/icons/save24.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>24</width>
+           <height>24</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0" colspan="5">
+        <widget class="JSEdit" name="m_pqteEditor"/>
+       </item>
        <item row="1" column="1">
         <widget class="QPushButton" name="m_pqpbClearEditor">
          <property name="text">
@@ -138,37 +171,7 @@ p, li { white-space: pre-wrap; }
         </widget>
        </item>
        <item row="1" column="3">
-        <spacer name="horizontalSpacer">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>40</width>
-           <height>20</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item row="1" column="2">
-        <widget class="QPushButton" name="m_pqpbSaveWql">
-         <property name="text">
-          <string/>
-         </property>
-         <property name="icon">
-          <iconset resource="wmsgui.qrc">
-           <normaloff>:/icons/save24.png</normaloff>:/icons/save24.png</iconset>
-         </property>
-         <property name="iconSize">
-          <size>
-           <width>24</width>
-           <height>24</height>
-          </size>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="0" colspan="4">
-        <widget class="JSEdit" name="m_pqteEditor"/>
+        <widget class="QComboBox" name="m_pqcbSystemVariables"/>
        </item>
       </layout>
      </widget>
@@ -360,8 +363,8 @@ p, li { white-space: pre-wrap; }
    <slot>ExecuteClickedSlot()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>45</x>
-     <y>295</y>
+     <x>42</x>
+     <y>285</y>
     </hint>
     <hint type="destinationlabel">
      <x>823</x>
@@ -376,8 +379,8 @@ p, li { white-space: pre-wrap; }
    <slot>SaveClickedSlot()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>133</x>
-     <y>295</y>
+     <x>126</x>
+     <y>285</y>
     </hint>
     <hint type="destinationlabel">
      <x>823</x>
@@ -392,8 +395,8 @@ p, li { white-space: pre-wrap; }
    <slot>ClearResultClickedSlot()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>52</x>
-     <y>473</y>
+     <x>49</x>
+     <y>478</y>
     </hint>
     <hint type="destinationlabel">
      <x>68</x>
@@ -408,8 +411,8 @@ p, li { white-space: pre-wrap; }
    <slot>SaveResultClickedSlot()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>140</x>
-     <y>473</y>
+     <x>133</x>
+     <y>478</y>
     </hint>
     <hint type="destinationlabel">
      <x>154</x>
@@ -449,6 +452,38 @@ p, li { white-space: pre-wrap; }
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>m_pqcbSystemVariables</sender>
+   <signal>currentTextChanged(QString)</signal>
+   <receiver>CwmsQueryEditorWidget</receiver>
+   <slot>SystemVariablesChangedSlot(QString)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>173</x>
+     <y>270</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1098</x>
+     <y>392</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqteEditor</sender>
+   <signal>textChanged()</signal>
+   <receiver>CwmsQueryEditorWidget</receiver>
+   <slot>QueryChangedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>681</x>
+     <y>107</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1073</x>
+     <y>121</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>ExecuteClickedSlot()</slot>
@@ -456,5 +491,7 @@ p, li { white-space: pre-wrap; }
   <slot>ClearResultClickedSlot()</slot>
   <slot>SaveResultClickedSlot()</slot>
   <slot>EditClickedSlot()</slot>
+  <slot>SystemVariablesChangedSlot(QString)</slot>
+  <slot>QueryChangedSlot()</slot>
  </slots>
 </ui>

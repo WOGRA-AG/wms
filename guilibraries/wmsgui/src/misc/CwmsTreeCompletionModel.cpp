@@ -220,8 +220,13 @@ CwmsTreeCompletionItem *CwmsTreeCompletionModel::GetRootItem()
     return rootItem;
 }
 
-void CwmsTreeCompletionModel::setupModelData(CdmClass* p_pClass, CwmsTreeCompletionItem *parent)
+void CwmsTreeCompletionModel::setupModelData(const CdmClass* p_pClass, CwmsTreeCompletionItem *parent, int iDepth)
 {
+    if (iDepth > 3)
+    {
+        return;
+    }
+
     if (p_pClass && parent)
     {
         CwmsTreeCompletionItem* pClassItem = new CwmsTreeCompletionItem("me", parent);
@@ -235,11 +240,20 @@ void CwmsTreeCompletionModel::setupModelData(CdmClass* p_pClass, CwmsTreeComplet
 
         for (; qmIt != qmItEnd; ++qmIt)
         {
-            CwmsTreeCompletionItem* pMemberItem = new CwmsTreeCompletionItem(qmIt.value(), pClassItem);
+            CdmMember* pMember = qmIt.value();
+            CwmsTreeCompletionItem* pMemberItem = new CwmsTreeCompletionItem(pMember, pClassItem);
             pClassItem->appendChild(pMemberItem);
+            pMemberItem = new CwmsTreeCompletionItem(pMember, parent);
+            parent->appendChild(pMemberItem);
+
+            if (pMember->GetClassReference() > 0)
+            {
+
+            }
+
         }
 
-        QMap<QString, CdmClassMethod*> qmMethods = p_pClass->GetAllMethods();
+        QMap<QString, CdmClassMethod*> qmMethods = const_cast<CdmClass*>(p_pClass)->GetAllMethods();
         QMap<QString, CdmClassMethod*>::iterator qmMethodIt = qmMethods.begin();
         QMap<QString, CdmClassMethod*>::iterator qmItMethodEnd = qmMethods.end();
 

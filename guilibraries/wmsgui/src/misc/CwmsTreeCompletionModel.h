@@ -29,7 +29,7 @@ public:
 
     void setupModelData(QString p_qstrName, const QObject *p_pObject, CwmsTreeCompletionItem *parent);
     CwmsTreeCompletionItem * GetRootItem();
-    void setupModelData(CdmClass *p_pClass, CwmsTreeCompletionItem *parent);
+    void setupModelData(const CdmClass *p_pClass, CwmsTreeCompletionItem *parent, int iDepth);
     void clearModel();
 private:
 

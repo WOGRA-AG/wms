@@ -28,20 +28,6 @@ QString CdmSystemVariables::m_sqstrOpen = "${";
 QString CdmSystemVariables::m_sqstrClose = "}";
 
 
-/** +-=---------------------------------------------------------Do 13. Sep 14:52:32 2012----------*
- * @method  CdmSystemVariables::CdmSystemVariables           // public                            *
- * @return                                                   //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Do 13. Sep 14:52:32 2012----------*/
-CdmSystemVariables::CdmSystemVariables()
-{
-}
-
-/** +-=---------------------------------------------------------So 21. Okt 12:42:56 2012----------*
- * @method  CdmSystemVariables::FillVariablesInList          // private, static                   *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------So 21. Okt 12:42:56 2012----------*/
 void CdmSystemVariables::FillVariablesInList()
 {
    m_sqstrlVariables.append("USER");
@@ -58,12 +44,16 @@ void CdmSystemVariables::FillVariablesInList()
    m_sqstrlVariables.append("CURRENTDATABASE");
 }
 
-/** +-=---------------------------------------------------------So 21. Okt 12:37:43 2012----------*
- * @method  CdmSystemVariables::IsSystemValue                // public, static                    *
- * @return  bool                                             //                                   *
- * @param   QString p_qstrValue                              //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------So 21. Okt 12:37:43 2012----------*/
+QStringList CdmSystemVariables::GetSystemVariables()
+{
+    if (m_sqstrlVariables.isEmpty())
+    {
+       FillVariablesInList();
+    }
+
+    return m_sqstrlVariables;
+}
+
 bool CdmSystemVariables::IsSystemValue(QString p_qstrValue)
 {
    bool bRet = false;
@@ -84,12 +74,6 @@ bool CdmSystemVariables::IsSystemValue(QString p_qstrValue)
    return bRet;
 }
 
-/** +-=---------------------------------------------------------So 21. Okt 12:50:53 2012----------*
- * @method  CdmSystemVariables::RemoveBraces                 // private, static                   *
- * @return  bool                                             //                                   *
- * @param   QString& p_qstrValue                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------So 21. Okt 12:50:53 2012----------*/
 bool CdmSystemVariables::RemoveBraces(QString& p_qstrValue)
 {
    bool bRet = false;
@@ -104,12 +88,6 @@ bool CdmSystemVariables::RemoveBraces(QString& p_qstrValue)
    return bRet;
 }
 
-/** +-=---------------------------------------------------------Do 13. Sep 15:51:49 2012----------*
- * @method  CdmSystemVariables::GetValueAsString             // public, static                    *
- * @return  QString                                          //                                   *
- * @param   QString p_qstrVariable                           //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Do 13. Sep 15:51:49 2012----------*/
 QString CdmSystemVariables::GetValueAsString(QString p_qstrVariable)
 {
    QString qstrRet;
