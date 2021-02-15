@@ -456,7 +456,7 @@ QVariant CsaFactory::convertToResultVariant(const QVariant& p_rQVariant)
         try
         {
             CsaLocatedElement* csaLocatedElement = dynamic_cast<CsaLocatedElement*> (qObj);
-            if(CHKPTR(csaLocatedElement) && !csaLocatedElement->getUri().isEmpty())
+            if(csaLocatedElement && !csaLocatedElement->getUri().isEmpty())
             {
                 if(csaLocatedElement->isContainer())
                 {
