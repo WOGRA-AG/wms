@@ -41,13 +41,14 @@ class WMSGUI_API CwmsQueryResultViewer : public QWidget, public Ui::CwmsQueryRes
    Q_OBJECT
 
    private:
-      CdmQueryModel m_cCdmQueryModel;
+      QAbstractItemModel* m_pModel;
 
    public:
     CwmsQueryResultViewer( QWidget* p_pqwParent);
     virtual ~CwmsQueryResultViewer( );
     void SetQuery(QString p_qstrQuery);
     void SetQuery(CdmQueryEnhanced* p_pQuery);
+    void SetModel(QAbstractItemModel *p_pModel);
 public slots:
     void SaveAsCsvClickedSlot();
 };
