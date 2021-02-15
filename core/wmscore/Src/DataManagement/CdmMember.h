@@ -263,5 +263,6 @@ public:
     static bool IsExportType(EdmValueType p_eType);
     void SetDisplayConfig(QString p_qstrPrefix);
     QString GetDisplayConfig() const;
+    CdmClass *GetClassReferencePtr() const;
 };
 #endif
