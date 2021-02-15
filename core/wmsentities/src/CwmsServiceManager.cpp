@@ -522,7 +522,7 @@ void CwmsServiceManager::RegisterServiceManager()
     WMS_TECHNICALSCHEME_SWITCH;
     CdmObjectContainer* pContainer = GetServiceInstanceContainer();
 
-    if (CHKPTR(pContainer))
+    if (pContainer)
     {
         CdmObject* pObject = pContainer->CreateNewObject();
 
