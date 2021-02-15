@@ -16,6 +16,7 @@
 #include <QFileInfo>
 #include <QLinkedList>
 #include <QMdiArea>
+#include <QStandardItemModel>
 #include <QMdiSubWindow>
 #include <QMenu>
 #include <QPluginLoader>
@@ -1141,7 +1142,16 @@ void CwmsAdminMainWindowIf::OpenViewViewer(QTreeWidgetItem* p_pItem)
          {
             m_pqtbInfo->setText(cView.GetComment());
             CwmsQueryResultViewer* pEditor = new CwmsQueryResultViewer(m_pqMdiArea);
-            pEditor->SetQuery(cView.GetViewCommand());
+
+            if (cView.IsWql())
+            {
+                pEditor->SetQuery(cView.GetViewCommand());
+            }
+            else if (cView.IsModel())
+            {
+                pEditor->SetModel(cView.GetModel());
+            }
+
             QMdiSubWindow* pSubWindow = AddMdiWindow(pEditor);    
 
             if (CHKPTR(pSubWindow))

@@ -2,7 +2,7 @@
 #include "CdmMessageManager.h"
 #include "CdmLogging.h"
 
-
+#include "CsaQuery.h"
 #include "CwmsScriptableModel.h"
 
 CwmsScriptableModel::CwmsScriptableModel()
@@ -14,7 +14,72 @@ CwmsScriptableModel::~CwmsScriptableModel()
 {
 }
 
-void CwmsScriptableModel::CopyHeaderData(QAbstractItemModel &p_rModel, Qt::Orientation orientation, QMap<int,QString>& qmHeader, int count)
+void CwmsScriptableModel::copyFromQuery(QObject* p_pQuery)
+{
+    CsaQuery* pQuery = dynamic_cast<CsaQuery*>(p_pQuery);
+
+    if (CHKPTR(pQuery))
+    {
+        m_qmData.clear();
+        int iRowCount    = pQuery->getResultCount();
+        int iColumnCount = pQuery->getColumnCount();
+
+        copyHeaderData(pQuery, m_qstrlColumnHeaders, iColumnCount);
+
+        for (int iRowCounter = 0; iRowCounter < iRowCount; ++iRowCounter)
+        {
+            for(int iColumnCounter = 0; iColumnCounter < iColumnCount; ++iColumnCounter)
+            {
+                QVariant qValue = pQuery->getResultAt(iColumnCounter, iRowCounter);
+                addValue(iRowCounter, iColumnCounter, Qt::DisplayRole, qValue);
+            }
+        }
+    }
+}
+
+void CwmsScriptableModel::appendFromQuery(QObject* p_pQuery)
+{
+    CsaQuery* pQuery = dynamic_cast<CsaQuery*>(p_pQuery);
+
+    if (CHKPTR(pQuery))
+    {
+        int iOriginalRowCount = rowCount();
+        int iRowCount    = pQuery->getResultCount() + iOriginalRowCount;
+        int iColumnCount = pQuery->getColumnCount();
+        setRowCount(iRowCount);
+
+        if (iColumnCount == columnCount())
+        {
+            int iCurrentRow = 0;
+            for (int iRowCounter = rowCount(); iRowCounter < iRowCount; ++iRowCounter)
+            {
+                for(int iColumnCounter = 0; iColumnCounter < iColumnCount; ++iColumnCounter)
+                {
+                    QVariant qValue = pQuery->getResultAt(iColumnCounter, iCurrentRow);
+                    addValue(iRowCounter, iColumnCounter, Qt::DisplayRole, qValue);
+                }
+
+                ++iCurrentRow;
+            }
+        }
+        else
+        {
+            CdmMessageManager::critical("Fehler im Modell", "Die Spaltenanzahl entspricht nicht dem Originalmodell");
+        }
+    }
+}
+
+void CwmsScriptableModel::copyHeaderData(CsaQuery* pQuery, QMap<int,QString>& qmHeader, int count)
+{
+    setHeaderCount(qmHeader, count);
+    for(int iCounter = 0; iCounter < count; ++iCounter)
+    {
+        QString qstrHeader = pQuery->getKeynameAt(iCounter);
+        insertHeader(qmHeader, iCounter, qstrHeader);
+    }
+}
+
+void CwmsScriptableModel::copyHeaderData(QAbstractItemModel &p_rModel, Qt::Orientation orientation, QMap<int,QString>& qmHeader, int count)
 {
     setHeaderCount(qmHeader, count);
     for(int iCounter = 0; iCounter < count; ++iCounter)
@@ -30,8 +95,8 @@ void CwmsScriptableModel::CopyFromItemModel(QAbstractItemModel &p_rModel, int p_
     int iRowCount    = p_rModel.rowCount();
     int iColumnCount = p_rModel.columnCount();
 
-    CopyHeaderData(p_rModel, Qt::Vertical, m_qstrlRowHeaders, iRowCount);
-    CopyHeaderData(p_rModel, Qt::Horizontal, m_qstrlColumnHeaders, iColumnCount);
+    copyHeaderData(p_rModel, Qt::Vertical, m_qstrlRowHeaders, iRowCount);
+    copyHeaderData(p_rModel, Qt::Horizontal, m_qstrlColumnHeaders, iColumnCount);
 
     for (int iRowCounter = 0; iRowCounter < iRowCount; ++iRowCounter)
     {
@@ -54,14 +119,17 @@ void CwmsScriptableModel::appendFromItemModel(QAbstractItemModel &p_rModel, int 
 
     if (iColumnCount == columnCount())
     {
+        int iCurrentRow = 0;
         for (int iRowCounter = rowCount(); iRowCounter < iRowCount; ++iRowCounter)
         {
             for(int iColumnCounter = 0; iColumnCounter < iColumnCount; ++iColumnCounter)
             {
-                QModelIndex qIndex = p_rModel.index(iRowCounter - iOriginalRowCount, iColumnCounter);
+                QModelIndex qIndex = p_rModel.index(iCurrentRow, iColumnCounter);
                 QVariant qValue = p_rModel.data(qIndex, p_iDisplayType);
                 addValue(iRowCounter, iColumnCounter, p_iDisplayType, qValue);
             }
+
+            ++iCurrentRow;
         }
     }
     else
@@ -118,7 +186,7 @@ void CwmsScriptableModel::getDisplayTypeMap(int p_iRow, int p_iColumn, QMap<int,
     }
 }
 
-void CwmsScriptableModel::addValue(int p_iRow, int p_iColumn, int p_iDisplayType, QVariant &p_rValue)
+void CwmsScriptableModel::addValue(int p_iRow, int p_iColumn, int p_iDisplayType, QVariant p_rValue)
 {
     if (checkRowColumn(p_iRow, p_iColumn))
     {
@@ -171,19 +239,19 @@ bool CwmsScriptableModel::checkRowColumn(int p_iRow, int p_iColumn)
     return bRet;
 }
 
-void CwmsScriptableModel::insertColumnHeader(int iPos, QString &p_qstrHeader)
+void CwmsScriptableModel::insertColumnHeader(int iPos, QString p_qstrHeader)
 {
     insertHeader(m_qstrlColumnHeaders, iPos, p_qstrHeader);
 }
 
-void CwmsScriptableModel::insertRowHeader(int iPos, QString &p_qstrHeader)
+void CwmsScriptableModel::insertRowHeader(int iPos, QString p_qstrHeader)
 {
     insertHeader(m_qstrlRowHeaders, iPos, p_qstrHeader);
 }
 
 void CwmsScriptableModel::insertHeader(QMap<int,QString>& qmHeader, int iPos, QString &p_qstrHeader)
 {
-    m_qstrlRowHeaders[iPos] = p_qstrHeader;
+    qmHeader[iPos] = p_qstrHeader;
 }
 
 QString CwmsScriptableModel::rowHeader(int p_iPos)
@@ -194,6 +262,10 @@ QString CwmsScriptableModel::rowHeader(int p_iPos)
     {
         qstrHeader = m_qstrlRowHeaders[p_iPos];
     }
+    else
+    {
+        qstrHeader = QString::number(p_iPos);
+    }
 
 
     return qstrHeader;
@@ -203,7 +275,7 @@ bool CwmsScriptableModel::existRowHeader(int p_iPos)
 {
     bool bRet = true;
 
-    if (m_qstrlRowHeaders.contains(p_iPos))
+    if (m_qmData.contains(p_iPos))
     {
          bRet = true;
     }
@@ -260,7 +332,7 @@ void CwmsScriptableModel::setColumnCount(int p_iCount)
 
 int CwmsScriptableModel::rowCount()
 {
-    return m_qstrlRowHeaders.count();
+    return m_qmData.count();
 }
 
 int CwmsScriptableModel::columnCount()

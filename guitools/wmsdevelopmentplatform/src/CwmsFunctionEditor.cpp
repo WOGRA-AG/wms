@@ -183,6 +183,7 @@ void CwmsFunctionEditor::AddTypesToTypeBox(QComboBox* p_pComboBox)
     p_pComboBox->addItem(tr("Benutzer"), eDmValueUser);
     p_pComboBox->addItem(tr("Benutzergruppe"), eDmValueUserGroup);
     p_pComboBox->addItem(tr("Array"), eDmValueArray);
+    p_pComboBox->addItem(tr("QObject"), eDmValueQObject);
 }
 
 

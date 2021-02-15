@@ -100,6 +100,7 @@ bool CwmsView::IsWql()
 
 QStandardItemModel* CwmsView::GetModel()
 {
+    QStandardItemModel* pStandardItemModel = nullptr;
     CdmClassMethod* pMethod = FindModelMethod();
 
     if (CHKPTR(pMethod))
@@ -117,13 +118,14 @@ QStandardItemModel* CwmsView::GetModel()
 
                 if (CHKPTR(pModel))
                 {
-                    return pModel->generateItemModel();
+                    pStandardItemModel = pModel->generateItemModel();
+                    DELPTR(pModel);
                 }
             }
         }
     }
 
-    return nullptr;
+    return pStandardItemModel;
 }
 
 CdmClassMethod* CwmsView::FindModelMethod()
