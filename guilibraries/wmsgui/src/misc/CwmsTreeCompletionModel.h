@@ -29,13 +29,17 @@ public:
 
     void setupModelData(QString p_qstrName, const QObject *p_pObject, CwmsTreeCompletionItem *parent);
     CwmsTreeCompletionItem * GetRootItem();
-    void setupModelData(const CdmClass *p_pClass, CwmsTreeCompletionItem *parent, int iDepth);
+    void setupModelData(const CdmClass *p_pClass, CwmsTreeCompletionItem *parent);
     void clearModel();
 private:
 
 
     CwmsTreeCompletionItem *rootItem;
     void addDefaultJsFunctions();
+    void addMembersToModel(const CdmClass* p_pClass, CwmsTreeCompletionItem *parent, CwmsTreeCompletionItem* pClassItem, int iDepth);
+    void addMethodsToModel(const CdmClass* p_pClass, CwmsTreeCompletionItem *parent, CwmsTreeCompletionItem* pClassItem);
+    void addObjectFunctions(CwmsTreeCompletionItem *pClassItem);
+    void addGlobalFunctionObjects(CwmsTreeCompletionItem *parent);
 };
 
 #endif // CWMSTREECOMPLETIONMODEL_H

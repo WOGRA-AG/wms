@@ -220,139 +220,157 @@ CwmsTreeCompletionItem *CwmsTreeCompletionModel::GetRootItem()
     return rootItem;
 }
 
-void CwmsTreeCompletionModel::setupModelData(const CdmClass* p_pClass, CwmsTreeCompletionItem *parent, int iDepth)
+void CwmsTreeCompletionModel::addMembersToModel(const CdmClass* p_pClass, CwmsTreeCompletionItem *parent, CwmsTreeCompletionItem* pClassItem, int iDepth)
 {
     if (iDepth > 3)
     {
         return;
     }
 
+    QMap<long, CdmMember*> qmMembers;
+    p_pClass->GetMemberMap(qmMembers);
+
+    QMap<long, CdmMember*>::iterator qmIt = qmMembers.begin();
+    QMap<long, CdmMember*>::iterator qmItEnd = qmMembers.end();
+
+    for (; qmIt != qmItEnd; ++qmIt)
+    {
+        CdmMember* pMember = qmIt.value();
+        if (pClassItem)
+        {
+            CwmsTreeCompletionItem* pMemberItem = new CwmsTreeCompletionItem(pMember, pClassItem);
+            pClassItem->appendChild(pMemberItem);
+        }
+
+        CwmsTreeCompletionItem* pMemberItem = new CwmsTreeCompletionItem(pMember, parent);
+        parent->appendChild(pMemberItem);
+
+        if (pMember->GetClassReferencePtr() != nullptr)
+        {
+            addMembersToModel(pMember->GetClassReferencePtr(), pMemberItem, nullptr, ++iDepth);
+        }
+    }
+}
+
+void CwmsTreeCompletionModel::addMethodsToModel(const CdmClass* p_pClass, CwmsTreeCompletionItem *parent, CwmsTreeCompletionItem* pClassItem)
+{
+    QMap<QString, CdmClassMethod*> qmMethods = const_cast<CdmClass*>(p_pClass)->GetAllMethods();
+    QMap<QString, CdmClassMethod*>::iterator qmMethodIt = qmMethods.begin();
+    QMap<QString, CdmClassMethod*>::iterator qmItMethodEnd = qmMethods.end();
+
+    for (; qmMethodIt != qmItMethodEnd; ++qmMethodIt)
+    {
+        CwmsTreeCompletionItem* pMethodItem = new CwmsTreeCompletionItem(qmMethodIt.value()->GetMethodName(), pClassItem);
+        pClassItem->appendChild(pMethodItem);
+    }
+}
+
+void CwmsTreeCompletionModel::addObjectFunctions(CwmsTreeCompletionItem* pClassItem)
+{
+    CwmsTreeCompletionItem* pMemberItem = new CwmsTreeCompletionItem("findValue(", pClassItem);
+    pClassItem->appendChild(pMemberItem);
+    pMemberItem = new CwmsTreeCompletionItem("getContainer()", pClassItem);
+    pClassItem->appendChild(pMemberItem);
+    pMemberItem = new CwmsTreeCompletionItem("commit()", pClassItem);
+    pClassItem->appendChild(pMemberItem);
+    pMemberItem = new CwmsTreeCompletionItem("refreshObject()", pClassItem);
+    pClassItem->appendChild(pMemberItem);
+    pMemberItem = new CwmsTreeCompletionItem("addValueListObjectItem(", pClassItem);
+    pClassItem->appendChild(pMemberItem);
+    pMemberItem = new CwmsTreeCompletionItem("removeValueListObjectItem(", pClassItem);
+    pClassItem->appendChild(pMemberItem);
+    pMemberItem = new CwmsTreeCompletionItem("setValueBinaryDocument(", pClassItem);
+    pClassItem->appendChild(pMemberItem);
+    pMemberItem = new CwmsTreeCompletionItem("getJson()", pClassItem);
+    pClassItem->appendChild(pMemberItem);
+    pMemberItem = new CwmsTreeCompletionItem("execute(", pClassItem);
+    pClassItem->appendChild(pMemberItem);
+    pMemberItem = new CwmsTreeCompletionItem("getValueDisplayString(", pClassItem);
+    pClassItem->appendChild(pMemberItem);
+    pMemberItem = new CwmsTreeCompletionItem("setDeleted(", pClassItem);
+    pClassItem->appendChild(pMemberItem);
+    pMemberItem = new CwmsTreeCompletionItem("isDeleted()", pClassItem);
+    pClassItem->appendChild(pMemberItem);
+    pMemberItem = new CwmsTreeCompletionItem("isModified()", pClassItem);
+    pClassItem->appendChild(pMemberItem);
+    pMemberItem = new CwmsTreeCompletionItem("getKeyname()", pClassItem);
+    pClassItem->appendChild(pMemberItem);
+    pMemberItem = new CwmsTreeCompletionItem("getCaption()", pClassItem);
+    pClassItem->appendChild(pMemberItem);
+    pMemberItem = new CwmsTreeCompletionItem("setCaption(", pClassItem);
+    pClassItem->appendChild(pMemberItem);
+    pMemberItem = new CwmsTreeCompletionItem("getLastChanged()", pClassItem);
+    pClassItem->appendChild(pMemberItem);
+    pMemberItem = new CwmsTreeCompletionItem("getCreatorId()", pClassItem);
+    pClassItem->appendChild(pMemberItem);
+    pMemberItem = new CwmsTreeCompletionItem("getModifierId()", pClassItem);
+    pClassItem->appendChild(pMemberItem);
+    pMemberItem = new CwmsTreeCompletionItem("getUri()", pClassItem);
+    pClassItem->appendChild(pMemberItem);
+    pMemberItem = new CwmsTreeCompletionItem("isObject()", pClassItem);
+    pClassItem->appendChild(pMemberItem);
+    pMemberItem = new CwmsTreeCompletionItem("isContainer()", pClassItem);
+    pClassItem->appendChild(pMemberItem);
+    pMemberItem = new CwmsTreeCompletionItem("isClass()", pClassItem);
+    pClassItem->appendChild(pMemberItem);
+    pMemberItem = new CwmsTreeCompletionItem("isMember()", pClassItem);
+    pClassItem->appendChild(pMemberItem);
+    pMemberItem = new CwmsTreeCompletionItem("isValue()", pClassItem);
+    pClassItem->appendChild(pMemberItem);
+    pMemberItem = new CwmsTreeCompletionItem("getId()", pClassItem);
+    pClassItem->appendChild(pMemberItem);
+    pMemberItem = new CwmsTreeCompletionItem("getFactory()", pClassItem);
+    pClassItem->appendChild(pMemberItem);
+    pMemberItem = new CwmsTreeCompletionItem("getManager()", pClassItem);
+    pClassItem->appendChild(pMemberItem);
+    pMemberItem = new CwmsTreeCompletionItem("getContainerManager()", pClassItem);
+    pClassItem->appendChild(pMemberItem);
+    pMemberItem = new CwmsTreeCompletionItem("getClassManager()", pClassItem);
+    pClassItem->appendChild(pMemberItem);
+    pMemberItem = new CwmsTreeCompletionItem("getScheme()", pClassItem);
+    pClassItem->appendChild(pMemberItem);
+}
+
+void CwmsTreeCompletionModel::addGlobalFunctionObjects(CwmsTreeCompletionItem *parent)
+{
+    CwmsScriptableLogger logger;
+    setupModelData("log", &logger, parent);
+    CwmsScriptableMailer mailer;
+    setupModelData("mail", &mailer, parent);
+    CwmsScriptableMessage message;
+    setupModelData("message", &message, parent);
+    CwmsScriptablePlugin plugin;
+    setupModelData("plugin", &plugin, parent);
+    CwmsScriptablePrinter printer;
+    setupModelData("printing", &plugin, parent);
+    CwmsScriptableStatic staticexec;
+    setupModelData("staticExec", &staticexec, parent);
+    CwmsScriptableWorkflow workflow;
+    setupModelData("workflow", &workflow, parent);
+    CwmsScriptableWql wql;
+    setupModelData("wql", &wql, parent);
+    CwmsScriptableFile file;
+    setupModelData("file", &file, parent);
+    CwmsScriptableGeoServices geo;
+    setupModelData("geo", &geo, parent);
+    CwmsScriptableHttpClient http;
+    setupModelData("httpClient", &http, parent);
+    CwmsScriptableSql sql;
+    setupModelData("sql", &sql, parent);
+    CwmsScriptableTimer timer;
+    setupModelData("timer", &timer, parent);
+}
+
+void CwmsTreeCompletionModel::setupModelData(const CdmClass* p_pClass, CwmsTreeCompletionItem *parent)
+{
     if (p_pClass && parent)
     {
         CwmsTreeCompletionItem* pClassItem = new CwmsTreeCompletionItem("me", parent);
         parent->appendChild(pClassItem);
-
-        QMap<long, CdmMember*> qmMembers;
-        p_pClass->GetMemberMap(qmMembers);
-
-        QMap<long, CdmMember*>::iterator qmIt = qmMembers.begin();
-        QMap<long, CdmMember*>::iterator qmItEnd = qmMembers.end();
-
-        for (; qmIt != qmItEnd; ++qmIt)
-        {
-            CdmMember* pMember = qmIt.value();
-            CwmsTreeCompletionItem* pMemberItem = new CwmsTreeCompletionItem(pMember, pClassItem);
-            pClassItem->appendChild(pMemberItem);
-            pMemberItem = new CwmsTreeCompletionItem(pMember, parent);
-            parent->appendChild(pMemberItem);
-
-            if (pMember->GetClassReference() > 0)
-            {
-
-            }
-
-        }
-
-        QMap<QString, CdmClassMethod*> qmMethods = const_cast<CdmClass*>(p_pClass)->GetAllMethods();
-        QMap<QString, CdmClassMethod*>::iterator qmMethodIt = qmMethods.begin();
-        QMap<QString, CdmClassMethod*>::iterator qmItMethodEnd = qmMethods.end();
-
-        for (; qmMethodIt != qmItMethodEnd; ++qmMethodIt)
-        {
-            CwmsTreeCompletionItem* pMethodItem = new CwmsTreeCompletionItem(qmMethodIt.value()->GetMethodName(),pClassItem);
-            pClassItem->appendChild(pMethodItem);
-        }
-
-        CwmsTreeCompletionItem* pMemberItem = new CwmsTreeCompletionItem("findValue(", pClassItem);
-        pClassItem->appendChild(pMemberItem);
-        pMemberItem = new CwmsTreeCompletionItem("getContainer()", pClassItem);
-        pClassItem->appendChild(pMemberItem);
-        pMemberItem = new CwmsTreeCompletionItem("commit()", pClassItem);
-        pClassItem->appendChild(pMemberItem);
-        pMemberItem = new CwmsTreeCompletionItem("refreshObject()", pClassItem);
-        pClassItem->appendChild(pMemberItem);
-        pMemberItem = new CwmsTreeCompletionItem("addValueListObjectItem(", pClassItem);
-        pClassItem->appendChild(pMemberItem);
-        pMemberItem = new CwmsTreeCompletionItem("removeValueListObjectItem(", pClassItem);
-        pClassItem->appendChild(pMemberItem);
-        pMemberItem = new CwmsTreeCompletionItem("setValueBinaryDocument(", pClassItem);
-        pClassItem->appendChild(pMemberItem);
-        pMemberItem = new CwmsTreeCompletionItem("getJson()", pClassItem);
-        pClassItem->appendChild(pMemberItem);
-        pMemberItem = new CwmsTreeCompletionItem("execute(", pClassItem);
-        pClassItem->appendChild(pMemberItem);
-        pMemberItem = new CwmsTreeCompletionItem("getValueDisplayString(", pClassItem);
-        pClassItem->appendChild(pMemberItem);
-        pMemberItem = new CwmsTreeCompletionItem("setDeleted(", pClassItem);
-        pClassItem->appendChild(pMemberItem);
-        pMemberItem = new CwmsTreeCompletionItem("isDeleted()", pClassItem);
-        pClassItem->appendChild(pMemberItem);
-        pMemberItem = new CwmsTreeCompletionItem("isModified()", pClassItem);
-        pClassItem->appendChild(pMemberItem);
-        pMemberItem = new CwmsTreeCompletionItem("getKeyname()", pClassItem);
-        pClassItem->appendChild(pMemberItem);
-        pMemberItem = new CwmsTreeCompletionItem("getCaption()", pClassItem);
-        pClassItem->appendChild(pMemberItem);
-        pMemberItem = new CwmsTreeCompletionItem("setCaption(", pClassItem);
-        pClassItem->appendChild(pMemberItem);
-        pMemberItem = new CwmsTreeCompletionItem("getLastChanged()", pClassItem);
-        pClassItem->appendChild(pMemberItem);
-        pMemberItem = new CwmsTreeCompletionItem("getCreatorId()", pClassItem);
-        pClassItem->appendChild(pMemberItem);
-        pMemberItem = new CwmsTreeCompletionItem("getModifierId()", pClassItem);
-        pClassItem->appendChild(pMemberItem);
-        pMemberItem = new CwmsTreeCompletionItem("getUri()", pClassItem);
-        pClassItem->appendChild(pMemberItem);
-        pMemberItem = new CwmsTreeCompletionItem("isObject()", pClassItem);
-        pClassItem->appendChild(pMemberItem);
-        pMemberItem = new CwmsTreeCompletionItem("isContainer()", pClassItem);
-        pClassItem->appendChild(pMemberItem);
-        pMemberItem = new CwmsTreeCompletionItem("isClass()", pClassItem);
-        pClassItem->appendChild(pMemberItem);
-        pMemberItem = new CwmsTreeCompletionItem("isMember()", pClassItem);
-        pClassItem->appendChild(pMemberItem);
-        pMemberItem = new CwmsTreeCompletionItem("isValue()", pClassItem);
-        pClassItem->appendChild(pMemberItem);
-        pMemberItem = new CwmsTreeCompletionItem("getId()", pClassItem);
-        pClassItem->appendChild(pMemberItem);
-        pMemberItem = new CwmsTreeCompletionItem("getFactory()", pClassItem);
-        pClassItem->appendChild(pMemberItem);
-        pMemberItem = new CwmsTreeCompletionItem("getManager()", pClassItem);
-        pClassItem->appendChild(pMemberItem);
-        pMemberItem = new CwmsTreeCompletionItem("getContainerManager()", pClassItem);
-        pClassItem->appendChild(pMemberItem);
-        pMemberItem = new CwmsTreeCompletionItem("getClassManager()", pClassItem);
-        pClassItem->appendChild(pMemberItem);
-        pMemberItem = new CwmsTreeCompletionItem("getScheme()", pClassItem);
-        pClassItem->appendChild(pMemberItem);
-
-
-        CwmsScriptableLogger logger;
-        setupModelData("log", &logger, parent);
-        CwmsScriptableMailer mailer;
-        setupModelData("mail", &mailer, parent);
-        CwmsScriptableMessage message;
-        setupModelData("message", &message, parent);
-        CwmsScriptablePlugin plugin;
-        setupModelData("plugin", &plugin, parent);
-        CwmsScriptablePrinter printer;
-        setupModelData("printing", &plugin, parent);
-        CwmsScriptableStatic staticexec;
-        setupModelData("staticExec", &staticexec, parent);
-        CwmsScriptableWorkflow workflow;
-        setupModelData("workflow", &workflow, parent);
-        CwmsScriptableWql wql;
-        setupModelData("wql", &wql, parent);
-        CwmsScriptableFile file;
-        setupModelData("file", &file, parent);
-        CwmsScriptableGeoServices geo;
-        setupModelData("geo", &geo, parent);
-        CwmsScriptableHttpClient http;
-        setupModelData("httpClient", &http, parent);
-        CwmsScriptableSql sql;
-        setupModelData("sql", &sql, parent);
-        CwmsScriptableTimer timer;
-        setupModelData("timer", &timer, parent);
+        addMembersToModel(p_pClass, parent, pClassItem, 0);
+        addMethodsToModel(p_pClass, parent, pClassItem);
+        addObjectFunctions(pClassItem);
+        addGlobalFunctionObjects(parent);
     }
 }
 

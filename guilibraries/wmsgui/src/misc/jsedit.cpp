@@ -1234,7 +1234,7 @@ void JSEdit::setupCompletionModel()
 
     if (m_rpClass)
     {
-        m_pCompletionModel->setupModelData(m_rpClass, m_pCompletionModel->GetRootItem(), 0);
+        m_pCompletionModel->setupModelData(m_rpClass, m_pCompletionModel->GetRootItem());
     }
 }
 
