@@ -1134,7 +1134,7 @@ void CwmsAdminMainWindowIf::OpenViewViewer(QTreeWidgetItem* p_pItem)
    if (p_pItem)
    {
       CwmsViewManager cCViewManager;
-      CwmsView cView = cCViewManager.GetView(p_pItem->text(0));
+      CwmsView cView = cCViewManager.GetViewByName(p_pItem->text(0));
 
       if (cView.IsValid())
       {
@@ -1947,7 +1947,7 @@ void CwmsAdminMainWindowIf::NewViewSlot()
 {
    CwmsView cView = CwmsView::Create();
    CwmsViewEditor::Edit(cView, true, this);
-   RefreshClickedSlot();
+   FillViews();
 }
 
 /** +-=---------------------------------------------------------Fr 24. Aug 15:46:45 2012----------*
@@ -1962,7 +1962,7 @@ void CwmsAdminMainWindowIf::EditViewSlot()
    if (pqItem)
    {
       CwmsViewManager cViewManager;
-      CwmsView cView = cViewManager.GetView(pqItem->text(0));
+      CwmsView cView = cViewManager.GetViewByName(pqItem->text(0));
 
       if (cView.IsValid())
       {
@@ -1970,6 +1970,8 @@ void CwmsAdminMainWindowIf::EditViewSlot()
          pqItem->setText(0, cView.GetName());
       }
    }
+
+   FillViews();
 }
 
 /** +-=---------------------------------------------------------Fr 24. Aug 15:46:54 2012----------*
@@ -1984,7 +1986,7 @@ void CwmsAdminMainWindowIf::DeleteViewSlot()
    if (pqItem && static_cast<EwmsTreeItemType>(pqItem->data(1, Qt::UserRole).toInt()) == eWmsTreeItemTypeView)
    {
       CwmsViewManager cViewManager;
-      CwmsView cView = cViewManager.GetView(pqItem->text(0));
+      CwmsView cView = cViewManager.GetViewByName(pqItem->text(0));
 
       if (cView.IsValid())
       {
@@ -1993,6 +1995,11 @@ void CwmsAdminMainWindowIf::DeleteViewSlot()
          DELPTR(pqItem)
       }
    }
+}
+
+void CwmsAdminMainWindowIf::RefreshViewsClickedSlot()
+{
+    FillViews();
 }
 
 /** +-=---------------------------------------------------------Mo 27. Aug 15:15:05 2012----------*
@@ -2036,7 +2043,7 @@ void CwmsAdminMainWindowIf::NewReportSlot()
           if (CHKPTR(pCdmObject))
           {
              CwmsPrintingTemplateProperties::EditProperties(this, pCdmObject, true);
-             RefreshClickedSlot();
+             FillReports();
           }
        }
     }
@@ -2259,7 +2266,7 @@ void CwmsAdminMainWindowIf::NewApplicationSlot()
        CwmsApplication cApp = CwmsApplication::Create();
        cApp.SetName(qstrApplicationName);
        cApp.CommitObject();
-       RefreshClickedSlot();
+       FillApplications();
        OpenApplicationEditor(cApp);
    }
 }
@@ -2440,7 +2447,7 @@ void CwmsAdminMainWindowIf::NewGenericObjectFormSlot()
       {
          CwmsFormObject cForm(pCdmObject);
          CwmsFormGenericObjectEditor::EditForm(cForm, true, this);
-         RefreshClickedSlot();
+         FillForms();
       }
    }
 }
@@ -2511,7 +2518,7 @@ void CwmsAdminMainWindowIf::NewObjectObjectListFormSlot()
       {
          CwmsFormObjectContainer cForm(pCdmObject);
          CwmsFormObjectContainerEditor::EditForm(cForm, true, this);
-         RefreshClickedSlot();
+         FillForms();
       }
    }
 }
@@ -2582,7 +2589,7 @@ void CwmsAdminMainWindowIf::NewStandardObjectListFormSlot()
       {
          CwmsFormStandardContainer cForm(pCdmObject);
          CwmsFormStandardContainerEditor::EditForm(cForm, true, this);
-         RefreshClickedSlot();
+         FillForms();
       }
    }
 }
@@ -2732,7 +2739,7 @@ void CwmsAdminMainWindowIf::NewViewObjectListFormSlot()
       {
          CwmsFormView cForm(pCdmObject);
          CwmsFormViewEditor::EditForm(cForm, true, this);
-		 CwmsMiscDataFiller::FillForms(m_pqlvUis);
+         FillForms();
       }
    }
 }
@@ -2803,7 +2810,7 @@ void CwmsAdminMainWindowIf::NewSearchFormSlot()
       {
          CwmsFormSearch cForm(pCdmObject);
          CwmsFormSearchEditor::EditForm(cForm, true, this);
-		 CwmsMiscDataFiller::FillForms(m_pqlvUis);
+         FillForms();
       }
    }
 }
@@ -2873,7 +2880,7 @@ void CwmsAdminMainWindowIf::NewWorkflowSlot()
       if (CHKPTR(pCdmObject))
       {
          CwmsguiObjectEditorSelector::Create(pCdmObject, this);
-         RefreshClickedSlot();
+         FillWorkflows();
       }
    }
 }
@@ -3744,7 +3751,7 @@ void CwmsAdminMainWindowIf::NewResourceSlot()
         CdmObject* pObject = pContainer->CreateNewObject();
         if (CwmsguiObjectEditorSelector::Create(pObject, this))
         {
-            CwmsMiscDataFiller::FillForms(m_pqlvUis);
+            FillForms();
         }
     }
 }
@@ -3798,7 +3805,7 @@ void CwmsAdminMainWindowIf::DeleteLibrarySlot()
                 {
                     pObject->SetDeleted();
                     pObject->Commit();
-                    CwmsMiscDataFiller::FillForms(m_pqlvUis);
+                    FillForms();
                 }
             }
         }
@@ -3827,7 +3834,7 @@ void CwmsAdminMainWindowIf::DeleteResourceSlot()
                 {
                     pObject->SetDeleted();
                     pObject->Commit();
-                    CwmsMiscDataFiller::FillForms(m_pqlvUis);
+                    FillForms();
                 }
             }
         }
@@ -3900,7 +3907,7 @@ void CwmsAdminMainWindowIf::NewInteractiveComponentFormSlot()
        {
           CwmsFormInteractiveComponent cForm(pCdmObject);
           CwmsFormInteractiveComponentEditorIf::EditInteractiveComponent(this, cForm, true);
-          CwmsMiscDataFiller::FillForms(m_pqlvUis);
+          FillForms();
        }
     }
 }

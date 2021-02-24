@@ -33,30 +33,15 @@
 #include "CwmsViewManager.h"
 
 
-/** +-=---------------------------------------------------------Fr 24. Aug 10:08:34 2012----------*
- * @method  CwmsViewManager::CwmsViewManager                 // public                            *
- * @return                                                   //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Fr 24. Aug 10:08:34 2012----------*/
 CwmsViewManager::CwmsViewManager()
 {
    CheckViewDataStructure();
 }
 
-/** +-=---------------------------------------------------------Fr 24. Aug 10:08:44 2012----------*
- * @method  CwmsViewManager::~CwmsViewManager                // public, virtual                   *
- * @return  void                                             //                                   *
- * @comment The Destructor of Class CwmsViewManager                                               *
- *----------------last changed: --------------------------------Fr 24. Aug 10:08:44 2012----------*/
 CwmsViewManager::~CwmsViewManager()
 {
 }
 
-/** +-=---------------------------------------------------------Fr 24. Aug 10:09:13 2012----------*
- * @method  CwmsViewManager::CheckViewDataStructure          // private                           *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Fr 24. Aug 10:09:13 2012----------*/
 void CwmsViewManager::CheckViewDataStructure()
 {
    CdmDataProvider* pCdmManager = CdmSessionManager::GetDataProvider();
@@ -77,12 +62,6 @@ void CwmsViewManager::CheckViewDataStructure()
    }
 }
 
-/** +-=---------------------------------------------------------Fr 24. Aug 10:09:29 2012----------*
- * @method  CwmsViewManager::CreateViewClass                 // private                           *
- * @return  void                                             //                                   *
- * @param   CdmClassManager* p_pCdmClassManager              //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Fr 24. Aug 10:09:29 2012----------*/
 void CwmsViewManager::CreateViewClass(CdmClassManager* p_pCdmClassManager)
 {
    if (CHKPTR(p_pCdmClassManager))
@@ -168,25 +147,14 @@ void CwmsViewManager::CreateViewClass(CdmClassManager* p_pCdmClassManager)
    }
 }
 
-/** +-=---------------------------------------------------------Fr 24. Aug 10:10:31 2012----------*
- * @method  CwmsViewManager::GetObjectList                   // public                            *
- * @return  CdmObjectContainer*                                   //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Fr 24. Aug 10:10:31 2012----------*/
-CdmObjectContainer* CwmsViewManager::GetObjectList()
+CdmObjectContainer* CwmsViewManager::GetContainer()
 {
    return CdmDataProvider::GetObjectContainer("TechnicalViews");
 }
 
-/** +-=---------------------------------------------------------Fr 24. Aug 10:15:45 2012----------*
- * @method  CwmsViewManager::GetViewList                     // public                            *
- * @return  void                                             //                                   *
- * @param   QLinkedList<CdmObject*>& p_rqlViews              //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Fr 24. Aug 10:15:45 2012----------*/
 void CwmsViewManager::GetViewList(QLinkedList<CdmObject*>& p_rqlViews)
 {
-   CdmObjectContainer* pContainer = GetObjectList();
+   CdmObjectContainer* pContainer = GetContainer();
 
    if (CHKPTR(pContainer))
    {
@@ -194,16 +162,10 @@ void CwmsViewManager::GetViewList(QLinkedList<CdmObject*>& p_rqlViews)
    }
 }
 
-/** +-=---------------------------------------------------------Fr 24. Aug 11:06:02 2012----------*
- * @method  CwmsViewManager::GetView                         // public                            *
- * @return  CwmsView                                         //                                   *
- * @param   long p_lObjectId                                 //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Fr 24. Aug 11:06:02 2012----------*/
-CwmsView CwmsViewManager::GetView(long p_lObjectId)
+CwmsView CwmsViewManager::GetViewById(long p_lObjectId)
 {
    CwmsView cView;
-   CdmObjectContainer* pContainer = GetObjectList();
+   CdmObjectContainer* pContainer = GetContainer();
 
    if (CHKPTR(pContainer))
    {
@@ -214,13 +176,7 @@ CwmsView CwmsViewManager::GetView(long p_lObjectId)
    return cView;
 }
 
-/** +-=---------------------------------------------------------Fr 24. Aug 11:06:21 2012----------*
- * @method  CwmsViewManager::GetView                         // public                            *
- * @return  CwmsView                                         //                                   *
- * @param   QString p_qstrName                               //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Fr 24. Aug 11:06:21 2012----------*/
-CwmsView CwmsViewManager::GetView(QString p_qstrName)
+CwmsView CwmsViewManager::GetViewByName(QString p_qstrName)
 {
    CwmsView cView;
    QString qstrQuery = "select from TechnicalViews where Name = \"" + p_qstrName +"\"";
@@ -232,11 +188,25 @@ CwmsView CwmsViewManager::GetView(QString p_qstrName)
 
       if (qllResults.count() > 0)
       {
-         cView = GetView(*(qllResults.begin()));
+         cView = GetViewById(*(qllResults.begin()));
       }
 
       DELPTR(pQuery);
    }
 
    return cView;
+}
+
+CwmsView CwmsViewManager::GetViewByUri(QString p_qstrUri)
+{
+    CwmsView cView;
+    CdmDataProvider* pCdmManager = CdmSessionManager::GetDataProvider();
+
+    if (CHKPTR(pCdmManager))
+    {
+       auto pViewObject = dynamic_cast<CdmObject*> (pCdmManager->GetUriObject(p_qstrUri));
+       cView.SetObject(pViewObject);
+    }
+
+    return cView;
 }

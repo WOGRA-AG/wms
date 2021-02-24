@@ -1089,6 +1089,7 @@ public slots:
     void ReplayEventsClickedSlot();
     void DeleteAllEventsClickedSlot();
     void LogoutAndExitSlot();
+    void RefreshViewsClickedSlot();
 };
 
 #endif //

@@ -135,6 +135,9 @@
      </item>
      <item>
       <widget class="QTreeWidget" name="m_pqtwClasses">
+       <property name="sortingEnabled">
+        <bool>true</bool>
+       </property>
        <column>
         <property name="text">
          <string>Name</string>
@@ -207,7 +210,7 @@
   </widget>
   <action name="m_pqaSave">
    <property name="icon">
-    <iconset resource="../resources/emresources.qrc">
+    <iconset resource="../../../guilibraries/wmsgui/src/misc/wmsgui.qrc">
      <normaloff>:/icons/save.png</normaloff>:/icons/save.png</iconset>
    </property>
    <property name="text">
@@ -219,7 +222,7 @@
   </action>
   <action name="m_pqaSaveAll">
    <property name="icon">
-    <iconset resource="../resources/emresources.qrc">
+    <iconset resource="../../../guilibraries/wmsgui/src/misc/wmsgui.qrc">
      <normaloff>:/icons/stockreceipt32.png</normaloff>:/icons/stockreceipt32.png</iconset>
    </property>
    <property name="text">
@@ -231,7 +234,7 @@
   </action>
   <action name="m_pqaClose">
    <property name="icon">
-    <iconset resource="../resources/emresources.qrc">
+    <iconset resource="../../../guilibraries/wmsgui/src/misc/wmsgui.qrc">
      <normaloff>:/icons/close.png</normaloff>:/icons/close.png</iconset>
    </property>
    <property name="text">
@@ -243,7 +246,7 @@
   </action>
   <action name="m_pqaExit">
    <property name="icon">
-    <iconset resource="../resources/emresources.qrc">
+    <iconset resource="../../../guilibraries/wmsgui/src/misc/wmsgui.qrc">
      <normaloff>:/icons/exit32.png</normaloff>:/icons/exit32.png</iconset>
    </property>
    <property name="text">
@@ -255,7 +258,7 @@
   </action>
   <action name="m_pqaInsert">
    <property name="icon">
-    <iconset resource="../resources/emresources.qrc">
+    <iconset resource="../../../guilibraries/wmsgui/src/misc/wmsgui.qrc">
      <normaloff>:/icons/insert.png</normaloff>:/icons/insert.png</iconset>
    </property>
    <property name="text">
@@ -267,7 +270,7 @@
   </action>
   <action name="m_pqaCut">
    <property name="icon">
-    <iconset resource="../resources/emresources.qrc">
+    <iconset resource="../../../guilibraries/wmsgui/src/misc/wmsgui.qrc">
      <normaloff>:/icons/cut.png</normaloff>:/icons/cut.png</iconset>
    </property>
    <property name="text">
@@ -279,7 +282,7 @@
   </action>
   <action name="m_pqaCopy">
    <property name="icon">
-    <iconset resource="../resources/emresources.qrc">
+    <iconset resource="../../../guilibraries/wmsgui/src/misc/wmsgui.qrc">
      <normaloff>:/icons/copy.png</normaloff>:/icons/copy.png</iconset>
    </property>
    <property name="text">
@@ -291,7 +294,7 @@
   </action>
   <action name="m_pqaNew">
    <property name="icon">
-    <iconset resource="../resources/emresources.qrc">
+    <iconset resource="../../../guilibraries/wmsgui/src/misc/wmsgui.qrc">
      <normaloff>:/icons/NewDocument.png</normaloff>:/icons/NewDocument.png</iconset>
    </property>
    <property name="text">
@@ -303,7 +306,7 @@
   </action>
   <action name="m_pqaExecute">
    <property name="icon">
-    <iconset resource="../resources/emresources.qrc">
+    <iconset resource="../../../guilibraries/wmsgui/src/misc/wmsgui.qrc">
      <normaloff>:/icons/task-accepted.png</normaloff>:/icons/task-accepted.png</iconset>
    </property>
    <property name="text">
@@ -315,7 +318,7 @@
   </action>
   <action name="m_pqaDebug">
    <property name="icon">
-    <iconset resource="../resources/emresources.qrc">
+    <iconset resource="../../../guilibraries/wmsgui/src/misc/wmsgui.qrc">
      <normaloff>:/icons/printpreview32.png</normaloff>:/icons/printpreview32.png</iconset>
    </property>
    <property name="text">
@@ -327,7 +330,7 @@
   </action>
   <action name="m_pqaDelete">
    <property name="icon">
-    <iconset resource="../resources/emresources.qrc">
+    <iconset resource="../../../guilibraries/wmsgui/src/misc/wmsgui.qrc">
      <normaloff>:/icons/delete32.png</normaloff>:/icons/delete32.png</iconset>
    </property>
    <property name="text">
@@ -341,7 +344,7 @@
   </action>
   <action name="m_pqaRefresh">
    <property name="icon">
-    <iconset resource="../resources/emresources.qrc">
+    <iconset resource="../../../guilibraries/wmsgui/src/misc/wmsgui.qrc">
      <normaloff>:/icons/refresh.png</normaloff>:/icons/refresh.png</iconset>
    </property>
    <property name="text">
@@ -353,7 +356,7 @@
   </action>
   <action name="m_pqaEdit">
    <property name="icon">
-    <iconset resource="../resources/emresources.qrc">
+    <iconset resource="../../../guilibraries/wmsgui/src/misc/wmsgui.qrc">
      <normaloff>:/icons/EditDocument.png</normaloff>:/icons/EditDocument.png</iconset>
    </property>
    <property name="text">
@@ -362,7 +365,7 @@
   </action>
  </widget>
  <resources>
-  <include location="../resources/emresources.qrc"/>
+  <include location="../../../guilibraries/wmsgui/src/misc/wmsgui.qrc"/>
  </resources>
  <connections>
   <connection>

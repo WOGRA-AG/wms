@@ -135,13 +135,14 @@ void CwmsFormViewEditor::SelectPrintingTemplateClickedSlot()
 void CwmsFormViewEditor::AddViewClickedSlot()
 {
    CwmsViewManager cManager;
-   CdmObject* pCdmObject = CwmsObjectSelectionIf::GetObject(cManager.GetObjectList(), nullptr, this, "Name");
+   CdmObject* pCdmObject = CwmsObjectSelectionIf::GetObject(cManager.GetContainer(), nullptr, this, "Name");
 
    if (pCdmObject)
    {
       CwmsView cView(pCdmObject);
       QListWidgetItem* pItem = new QListWidgetItem(m_pqlwViews);
       pItem->setText(cView.GetName());
+      pItem->setData(Qt::UserRole, cView.GetUri());
    }
 }
 

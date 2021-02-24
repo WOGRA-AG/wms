@@ -80,7 +80,7 @@ void CwmsViewObjectListEditorWidget::AddView(QString p_qstrViewName)
 CwmsView CwmsViewObjectListEditorWidget::LoadView(QString p_qstrName)
 {
    CwmsViewManager cManager;
-   CwmsView cView = cManager.GetView(p_qstrName);
+   CwmsView cView = cManager.GetViewByName(p_qstrName);
    return cView;
 }
 

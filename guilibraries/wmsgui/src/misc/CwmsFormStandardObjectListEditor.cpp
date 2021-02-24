@@ -285,7 +285,7 @@ void CwmsFormStandardContainerEditor::SetClass(const CdmClass* p_pCdmClass)
 void CwmsFormStandardContainerEditor::SelectViewClickedSlot()
 {
    CwmsViewManager cManager;
-   CdmObject* pCdmObject = CwmsObjectSelectionIf::GetObject(cManager.GetObjectList(), nullptr, this, "Name");
+   CdmObject* pCdmObject = CwmsObjectSelectionIf::GetObject(cManager.GetContainer(), nullptr, this, "Name");
    FillView(pCdmObject);
 }
 
@@ -493,7 +493,7 @@ void CwmsFormStandardContainerEditor::SearchMemberDownClickedSlot()
 void CwmsFormStandardContainerEditor::SelectSelectionViewClickedSlot()
 {
    CwmsViewManager cManager;
-   CdmObject* pCdmObject = CwmsObjectSelectionIf::GetObject(cManager.GetObjectList(), nullptr, this, "Name");
+   CdmObject* pCdmObject = CwmsObjectSelectionIf::GetObject(cManager.GetContainer(), nullptr, this, "Name");
 
    if (pCdmObject)
    {

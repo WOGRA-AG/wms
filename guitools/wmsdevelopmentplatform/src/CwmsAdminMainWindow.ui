@@ -80,7 +80,7 @@
      <x>0</x>
      <y>0</y>
      <width>1071</width>
-     <height>22</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="m_qmFile">
@@ -873,7 +873,7 @@
     <number>2</number>
    </attribute>
    <widget class="QWidget" name="dockWidgetContents_11">
-    <layout class="QVBoxLayout" name="verticalLayout_10">
+    <layout class="QGridLayout" name="gridLayout_2">
      <property name="leftMargin">
       <number>3</number>
      </property>
@@ -886,7 +886,7 @@
      <property name="bottomMargin">
       <number>3</number>
      </property>
-     <item>
+     <item row="0" column="0" colspan="2">
       <widget class="QTreeWidget" name="m_pqlvViews">
        <property name="selectionMode">
         <enum>QAbstractItemView::ExtendedSelection</enum>
@@ -903,6 +903,36 @@
         </property>
        </column>
       </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QPushButton" name="m_pqpbRefreshViews">
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="../../../guilibraries/wmsgui/src/misc/wmsgui.qrc">
+         <normaloff>:/icons/refresh24.png</normaloff>:/icons/refresh24.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>24</width>
+         <height>24</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <spacer name="horizontalSpacer_2">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>211</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
      </item>
     </layout>
    </widget>
@@ -1664,8 +1694,8 @@
    <slot>DatabaseSelectedSlot()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>260</x>
-     <y>123</y>
+     <x>269</x>
+     <y>122</y>
     </hint>
     <hint type="destinationlabel">
      <x>20</x>
@@ -1808,8 +1838,8 @@
    <slot>LanguageChangedSlot()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>260</x>
-     <y>149</y>
+     <x>269</x>
+     <y>148</y>
     </hint>
     <hint type="destinationlabel">
      <x>771</x>
@@ -2464,7 +2494,7 @@
    <slot>ClassFilterChangedSlot()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>275</x>
+     <x>272</x>
      <y>543</y>
     </hint>
     <hint type="destinationlabel">
@@ -2561,7 +2591,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>1067</x>
-     <y>762</y>
+     <y>738</y>
     </hint>
     <hint type="destinationlabel">
      <x>1070</x>
@@ -2577,7 +2607,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>1067</x>
-     <y>762</y>
+     <y>738</y>
     </hint>
     <hint type="destinationlabel">
      <x>1070</x>
@@ -2705,7 +2735,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>1067</x>
-     <y>762</y>
+     <y>738</y>
     </hint>
     <hint type="destinationlabel">
      <x>1070</x>
@@ -3017,6 +3047,22 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>m_pqpbRefreshViews</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsAdminMainWindow</receiver>
+   <slot>RefreshViewsClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>829</x>
+     <y>762</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1113</x>
+     <y>772</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>GenerateClassCodeSlot()</slot>
@@ -3071,5 +3117,6 @@
   <slot>ReplayEventsClickedSlot()</slot>
   <slot>DeleteAllEventsClickedSlot()</slot>
   <slot>DataSearchClickedSlot()</slot>
+  <slot>RefreshViewsClickedSlot()</slot>
  </slots>
 </ui>
