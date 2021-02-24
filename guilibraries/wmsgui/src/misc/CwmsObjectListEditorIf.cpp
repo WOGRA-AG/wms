@@ -46,6 +46,12 @@ CwmsObjectListEditorIf::CwmsObjectListEditorIf(CdmObjectContainer* p_pContainer,
 {
    setupUi(this);
    m_pCwmsObjectListListView->SetContainer(p_pContainer);
+
+   if (p_pContainer)
+   {
+       setWindowTitle(p_pContainer->GetCaption());
+   }
+
 }
 
 /** +-=---------------------------------------------------------Fr 6. Jan 15:02:19 2006-----------*
@@ -66,7 +72,26 @@ CwmsObjectListEditorIf::~CwmsObjectListEditorIf(  )
  *----------------last changed: --------------------------------Di 25. Sep 15:08:27 2012----------*/
 void CwmsObjectListEditorIf::SetModel(CdmQueryModel* p_pModel)
 {
-   m_pCwmsObjectListListView->SetModel(p_pModel);
+    m_pCwmsObjectListListView->SetModel(p_pModel);
+
+    if (p_pModel)
+    {
+        auto pContainer = p_pModel->GetContainer();
+
+        if (pContainer)
+        {
+            setWindowTitle(pContainer->GetCaption());
+        }
+        else
+        {
+            auto pClass = p_pModel->GetClass();
+
+            if (pClass)
+            {
+                setWindowTitle(pClass->GetCaption());
+            }
+        }
+    }
 }
 
 /** +-=---------------------------------------------------------So 8. Jan 12:03:22 2006-----------*
@@ -78,6 +103,11 @@ void CwmsObjectListEditorIf::SetModel(CdmQueryModel* p_pModel)
 void CwmsObjectListEditorIf::SetContainer(  CdmObjectContainer* p_pContainer )
 {
    m_pCwmsObjectListListView->SetContainer(p_pContainer);
+
+   if (p_pContainer)
+   {
+       setWindowTitle(p_pContainer->GetCaption());
+   }
 }
 
 /** +-=---------------------------------------------------------Fr 6. Jan 16:16:53 2006-----------*

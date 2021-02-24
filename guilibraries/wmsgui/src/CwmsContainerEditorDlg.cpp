@@ -20,4 +20,9 @@ void CwmsContainerEditorDlg::SetContainer(CdmObjectContainer* p_pContainer)
 {
     ui->m_pContainerEditor->SetContainer(p_pContainer);
     ui->m_pContainerEditor->FillDialog();
+
+    if (p_pContainer)
+    {
+        setWindowTitle(p_pContainer->GetCaption());
+    }
 }
