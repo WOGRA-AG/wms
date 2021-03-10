@@ -1412,6 +1412,7 @@ QString CdmMember::ConvertValueToDisplayString(QVariant p_qvValue) const
 
         break;
     case eDmValueInt:
+        qstrRet = GetPrefix();
 
         if (!GetDisplayConfig().isEmpty())
         {
@@ -1419,9 +1420,10 @@ QString CdmMember::ConvertValueToDisplayString(QVariant p_qvValue) const
         }
         else
         {
-            qstrRet = p_qvValue.toString();
+            qstrRet += p_qvValue.toString();
         }
 
+        qstrRet += GetSuffix();
         break;
     case eDmValueFloat:
     case eDmValueDouble:
