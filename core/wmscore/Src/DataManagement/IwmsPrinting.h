@@ -13,7 +13,7 @@
 class CdmObject;
 class CdmObjectContainer;
 class CdmClass;
-class QStandardItemModel;
+class QAbstractItemModel;
 
 class IwmsPrinting
 {
@@ -31,7 +31,7 @@ public:
     virtual void AddObjectContainer(QString p_qstrKey, CdmObjectContainer* p_pContainer) = 0;
     virtual void AddParameter(QString p_qstrKey, QVariant p_qvValue) = 0;
     virtual void ClearData() = 0;
-    virtual void AddStandardItemModel(QString p_qstrKey, QStandardItemModel* p_pqModel) = 0;
+    virtual void AddItemModel(QString p_qstrKey, QAbstractItemModel* p_pqModel) = 0;
     virtual void AddStringList( QString p_qstrKey, QStringList p_qstrlValues) = 0;
     virtual void AddModel( QString p_qstrKeyname, CdmQueryModel& p_rCdmModel) = 0;
     virtual void SetTemplate(CwmsPrintingTemplate p_Template) = 0;
