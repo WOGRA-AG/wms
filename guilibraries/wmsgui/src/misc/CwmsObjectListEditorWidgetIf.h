@@ -114,6 +114,8 @@ public slots:
     void MetaDataClickedSlot();
 
 
+    void HideNewButton();
+    void HideDeleteButton();
 private slots:
     void PrintClickedSlot( );
     void JournalClickedSlot( );

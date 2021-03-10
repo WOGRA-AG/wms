@@ -1490,6 +1490,16 @@ void CwmsObjectListEditorWidgetIf::HideCopyButton()
     m_pqpbCopy->hide();
 }
 
+void CwmsObjectListEditorWidgetIf::HideNewButton()
+{
+    m_pqpbNew->hide();
+}
+
+void CwmsObjectListEditorWidgetIf::HideDeleteButton()
+{
+    m_pqpbDelete->hide();
+}
+
 void CwmsObjectListEditorWidgetIf::HideSaveAsCsvButton()
 {
     m_pqpbSaveAsCsv->hide();
