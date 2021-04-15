@@ -182,20 +182,6 @@ CdmObject::CdmObject(CdmObjectContainer* p_pContainer, CdmObject* p_pCdmObject, 
     CopyFromSourceObject(*p_pCdmObject);
 }
 
-CdmObject::CdmObject(QDomElement& p_rqDomElelement)
-    : CdmModelElement(p_rqDomElelement),
-      m_iValueIdCounter(0),
-      m_lClassId(0),
-      m_rpContainer(nullptr),
-      m_lContainerId(0),
-      m_bIsInitialized(false),
-      m_lParentId(0),
-      m_bIsImmutable(false),
-      m_bCommitRunning(false)
-{
-    XmlImportObject(p_rqDomElelement);
-}
-
 CdmObject::CdmObject()
     : CdmModelElement(),
       m_iValueIdCounter(0),
@@ -842,6 +828,23 @@ int CdmObject::AddObjectValue(CdmValue* p_pCdmValue)
     }
 
     return iRet;
+}
+
+CdmValue* CdmObject::GetValue(int p_iMemberId)
+{
+    QMapIterator<QString,CdmValue*> qmIt(m_qmValues);
+
+    while (qmIt.hasNext())
+    {
+        qmIt.next();
+
+        if (qmIt.value()->GetMemberId() == p_iMemberId)
+        {
+            return qmIt.value();
+        }
+    }
+
+    return nullptr;
 }
 
 CdmValue* CdmObject::GetValue(const QString& p_qstrKeyname)
@@ -2042,117 +2045,6 @@ int CdmObject::MoveToObjectList(CdmObjectContainer* p_pContainer)
     return iRet;
 }
 
-int CdmObject::XmlExport(QDomElement& p_rqdeObject) const
-{
-    int iRet = CdmLogging::eDmUnknownObjectError;
-
-    QDomDocument qddDocument = p_rqdeObject.ownerDocument();
-
-    QDomElement qdeRoot = qddDocument.createElement(WMS_OBJECT);
-    p_rqdeObject.appendChild(qdeRoot);
-
-    XmlExportBase(qdeRoot);
-
-    qdeRoot.setAttribute(WMS_CLASSID,        QString::number(m_lClassId));
-    qdeRoot.setAttribute(WMS_CONTAINERID,   QString::number(m_lContainerId));
-
-
-    QDomElement qdeTag = qddDocument.createElement(WMS_VALUES);
-    qdeRoot.appendChild(qdeTag);
-
-    QMap<QString,CdmValue*>::const_iterator qmIt    = m_qmValues.begin();
-    QMap<QString,CdmValue*>::const_iterator qmItEnd = m_qmValues.end();
-
-    for(; qmIt != qmItEnd; ++qmIt)
-    {
-        CdmValue* pCdmValue = qmIt.value();
-
-        if(CHKPTR(pCdmValue))
-        {
-            QDomElement qdeValueTag = qddDocument.createElement(WMS_VALUE);
-            qdeTag.appendChild(qdeValueTag);
-            pCdmValue->XmlExport(qdeValueTag);
-        }
-    }
-
-    return iRet;
-}
-
-void CdmObject::XmlImportObject(QDomElement& p_rqDomElement)
-{
-    m_lClassId = p_rqDomElement.attribute(WMS_CLASSID, "-1").toInt();
-    m_lContainerId = p_rqDomElement.attribute(WMS_CONTAINERID,  "-1").toInt();
-
-    QDomNode qDomNode = p_rqDomElement.firstChild();
-
-    while(!qDomNode.isNull())
-    {
-        QDomElement qDomElement = qDomNode.toElement(); // try to convert the node to an element.
-
-        if(!qDomElement.isNull() && qDomElement.tagName() == WMS_VALUE)
-        {
-            QString qstrKeyname = qDomElement.attribute(WMS_KEYNAME, "");
-
-            if(!qstrKeyname.isEmpty())
-            {
-                CdmValue* pCdmValue = GetValue(qstrKeyname);
-
-                if(!pCdmValue)
-                {
-                    pCdmValue = CdmValue::CreateValue(qDomElement, this);
-
-                    if(CHKPTR(pCdmValue))
-                    {
-                        m_qmValues.insert(pCdmValue->GetKeyname(), pCdmValue);
-                    }
-                }
-                else
-                {
-                    pCdmValue->XmlImport(qDomElement);
-                }
-            }
-            else
-            {
-                ERR("Invalid Keyname in XML File!!!");
-            }
-        }
-        else
-        {
-            ERR("Wrong XML Child on this position.");
-        }
-
-        qDomNode = qDomNode.nextSibling();
-    }
-
-}
-
-void CdmObject::XmlImportValues(  QDomElement& p_rqDomElement )
-{
-    QDomNode qDomNode = p_rqDomElement.firstChild();
-
-    while(!qDomNode.isNull())
-    {
-        QDomElement qDomElement = qDomNode.toElement(); // try to convert the node to an element.
-
-        if(!qDomElement.isNull() && qDomElement.tagName() == "ValueList")
-        {
-            XmlImportValues(qDomElement);
-        }
-        else
-        {
-            ERR("Wrong XML Child on this position.");
-        }
-
-        qDomNode = qDomNode.nextSibling();
-    }
-}
-
-void CdmObject::XmlImport(QDomElement& p_rqDomElement)
-{
-    XmlImportBase(p_rqDomElement);
-    XmlImportObject(p_rqDomElement);
-}
-
 QString CdmObject::GetCaption() const
 {
     QString qstrDisplayString;
@@ -2632,6 +2524,23 @@ void CdmObject::SetImmutable(bool p_bImmutable)
 {
     m_bIsImmutable = p_bImmutable;
     SetModified();
+}
+
+void CdmObject::RestoreValue(int p_iMemberId, QString p_qstrValueAsString)
+{
+    // todo
+    auto pValue = GetValue(p_iMemberId);
+
+    if (pValue)
+    {
+        pValue->Restore(p_qstrValueAsString);
+        Commit();
+        INFO("Restore successfully finished");
+    }
+    else
+    {
+        ERR("Value which should be restored not found");
+    }
 }
 
 bool CdmObject::IsReadOnly() const

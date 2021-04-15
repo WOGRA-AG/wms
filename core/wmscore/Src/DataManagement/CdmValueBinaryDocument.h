@@ -49,17 +49,9 @@ public:
                            QString p_qstrType,
                            CdmObject* p_pCdmObject);
     CdmValueBinaryDocument(QVariantMap& p_qVariant, CdmObject* p_pCdmObject);
-    CdmValueBinaryDocument(QDomElement& p_rqDomElement, CdmObject* p_pCdmObject);
     virtual ~CdmValueBinaryDocument();
 
-
     void SetDefaultValue(const CdmMember* p_pCdmMember);
-    int IsEqual(QVariant* p_pqVariant) const;
-    int IsSmaller(QVariant* p_pqVariant) const;
-    int IsSmallerEqual(QVariant* p_pqVariant) const;
-    int IsLarger(QVariant* p_pqVariant) const;
-    int IsLargerEqual(QVariant* p_pqVariant) const;
-    int IsNotEqual(QVariant* p_pqVariant) const;
     QString GetFilename() const;
     void SetValue(QString p_qstrFilename, QString p_qstrType);
     void ExecuteFile();
@@ -67,11 +59,8 @@ public:
     void GetValue(QString& p_qstrFilename, QString& p_qstrType) const;
     void GetBinaryDocumentDirectory();
     QString GetFileType() const;
-    virtual void XmlExport(QDomElement& p_rqdeValue) const;
-    void XmlImport(QDomElement& p_rqDomElement);
     QString GetDisplayString() const;
-    virtual void CheckUnique();
-    QString GetBase64() const;
+     QString GetBase64() const;
     QString StoreToLocalFileSystem();
     void SaveFileTo(QString p_qstrPath);
     virtual QVariant GetVariant() const;
@@ -87,7 +76,6 @@ public:
 
     QString GetCurrentDirectory();
 private:
-    void XmlImportBinaryDocument(  QDomElement& p_rqDomElement );
     void WriteByteArrayToFile(QByteArray& p_qByteArray);
     void WriteByteArrayToFile(QByteArray &p_qByteArray, QString p_qstrFilename);
     QByteArray GetByteArrayByMembers() const;

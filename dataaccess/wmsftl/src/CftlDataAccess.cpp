@@ -1499,7 +1499,7 @@ int CftlDataAccess::GetObjectModifications(const CdmObject* p_pObject, QDate p_q
 {
     ++m_iInterfaceCallCounter;
     INFO("GetObjectModifications Call");
-    return m_pCftlJournal->GetObjectModifications(p_pObject->GetId(), p_qdFrom, p_qdTo, p_qlItems);
+    return m_pCftlJournal->GetObjectModifications(p_pObject, p_qdFrom, p_qdTo, p_qlItems);
 }
 
 bool CftlDataAccess::GetOwner(const CdmObject* p_pObject, CdmObject*& p_pOwnerObject)

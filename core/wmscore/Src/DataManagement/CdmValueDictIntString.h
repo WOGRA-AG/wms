@@ -119,15 +119,7 @@ QMap<int, QString> GetDict( ) const;
     *----------------last changed: -----------------------------Di 20. Nov 09:32:19 2012----------*/
 void RemoveValue( int p_iKey);
 
-   public:
-   /** +-=---------------------------------------------------------Mo 13. Aug 16:20:54 2007-------*
-    * @method  CdmValueDictIntString::CdmValueDictIntString            // public                            *
-    * @return                                                //                                   *
-    * @param   QDomElement& p_rqDomElement                   //                                   *
-    * @param   CdmObject* p_pCdmObject                       //                                   *
-    * @comment The constructor.                                                                   *
-    *----------------last changed: -----------------------------Mo 13. Aug 16:20:54 2007----------*/
-    CdmValueDictIntString( QDomElement& p_rqDomElement, CdmObject* p_pCdmObject);
+
 
     public slots:
          /** +-=---------------------------------------------------------Di 20. Nov 09:32:27 2012-------*

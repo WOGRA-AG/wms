@@ -36,18 +36,6 @@ CdmValueDictIntString::CdmValueDictIntString(long p_lDatabaseId,
 {
 }
 
-/** +-=---------------------------------------------------------Mo 13. Aug 16:20:54 2007----------*
- * @method  CdmValueDictIntString::CdmValueDictIntString               // public                            *
- * @return                                                   //                                   *
- * @param   QDomElement& p_rqDomElement                      //                                   *
- * @param   CdmObject* p_pCdmObject                          //                                   *
- * @comment The constructor.                                                                      *
- *----------------last changed: --------------------------------Mo 13. Aug 16:20:54 2007----------*/
-CdmValueDictIntString::CdmValueDictIntString(QDomElement& p_rqDomElement, CdmObject* p_pCdmObject)
-   : CdmValueCharacterDocument(p_rqDomElement, p_pCdmObject)
-{
-}
-
 /** +-=---------------------------------------------------------Mo 16. Apr 11:31:25 2012----------*
  * @method  CdmValueDictIntString::CdmValueDictIntString     // public                            *
  * @return                                                   //                                   *

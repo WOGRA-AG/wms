@@ -30,6 +30,9 @@
 
 // Enumerations
 
+// defines
+#define SCOPED_ENHANCE_QUERY(a,b) QScopedPointer<CdmQueryEnhanced> a(dynamic_cast<CdmQueryEnhanced*>(CdmQueryBuilder::ExecuteQuery(b)));
+
 /* 
  * This class implements the enhanced query for reading single values.
  */

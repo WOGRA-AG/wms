@@ -37,7 +37,7 @@ class CdbJournal
     long ObjectListModified(CdmObjectContainer*);
     long GetDatabaseModifications(int p_iDatabaseId, QDate p_qdFrom, QDate p_qdTo, QList<CdmJournalItem*>& p_rqlItems);
     long GetContainerModifications(int p_iObjectListId, QDate p_qdFrom, QDate p_qdTo, QList<CdmJournalItem*>& p_rqlItems);
-    long GetObjectModifications(int p_iObjectId, QDate p_qdFrom, QDate p_qdTo, QList<CdmJournalItem*>& p_rqlItems);
+    long GetObjectModifications(const CdmObject *p_pObject, QDate p_qdFrom, QDate p_qdTo, QList<CdmJournalItem*>& p_rqlItems);
     long ObjectListDeleted(int p_iObjectListId);
     long ObjectDeleted(int p_iObjectId);
 

@@ -239,6 +239,26 @@ p, li { white-space: pre-wrap; }
       </widget>
      </item>
      <item>
+      <widget class="QPushButton" name="m_pqpbRestore">
+       <property name="toolTip">
+        <string>Gewählten Wert wiederherstellen</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="wmsgui.qrc">
+         <normaloff>:/icons/undo24.png</normaloff>:/icons/undo24.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>24</width>
+         <height>24</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item>
       <spacer>
        <property name="orientation">
         <enum>Qt::Horizontal</enum>
@@ -340,9 +360,26 @@ p, li { white-space: pre-wrap; }
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>m_pqpbRestore</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsJournalViewerClass</receiver>
+   <slot>RestoreClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>57</x>
+     <y>417</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>136</x>
+     <y>502</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>RefreshClickedSlot()</slot>
   <slot>CopyToClipboardClickedSlot()</slot>
+  <slot>RestoreClickedSlot()</slot>
  </slots>
 </ui>

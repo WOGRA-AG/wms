@@ -311,107 +311,6 @@ CdmValue* CdmValue::CreateValue(CdmMember* p_pCdmMember, CdmObject* p_pCdmObject
    return pCdmValue;
 }
 
-CdmValue* CdmValue::CreateValue(QDomElement& p_rqDomElement, CdmObject* p_pCdmObject)
-{
-   CdmValue* pCdmValue = nullptr;
-   EdmValueType eDmValue  = static_cast<EdmValueType>(p_rqDomElement.attribute(WMS_VALUETYPE, "-1").toInt());
-   
-   switch(eDmValue)
-   {
-   case eDmValueBool:
-      pCdmValue = new CdmValueBool(p_rqDomElement, p_pCdmObject);
-      break;
-   case eDmValueInt:
-      pCdmValue = new CdmValueInt(p_rqDomElement, p_pCdmObject);
-      break;
-   case eDmValueLong:        
-      pCdmValue = new CdmValueLong(p_rqDomElement, p_pCdmObject);
-      break;
-   case eDmValueFloat:             
-      pCdmValue = new CdmValueFloat(p_rqDomElement, p_pCdmObject);
-      break;
-   case eDmValueDouble:            
-      pCdmValue = new CdmValueDouble(p_rqDomElement, p_pCdmObject);
-      break;
-   case eDmValueString:            
-      pCdmValue = new CdmValueString(p_rqDomElement, p_pCdmObject);
-      break;
-   case eDmValueDate:              
-      pCdmValue = new CdmValueDate(p_rqDomElement, p_pCdmObject);
-      break;
-   case eDmValueTime:              
-      pCdmValue = new CdmValueTime(p_rqDomElement, p_pCdmObject);
-      break;
-   case eDmValueDateTime:          
-      pCdmValue = new CdmValueDateTime(p_rqDomElement, p_pCdmObject);
-      break;
-   case eDmValueObjectRef:         
-      pCdmValue = new CdmValueObjectRef(p_rqDomElement, p_pCdmObject);
-      break;
-   case eDmValueContainerRef:    
-      pCdmValue = new CdmValueContainerRef(p_rqDomElement, p_pCdmObject);
-      break;
-   case eDmValueCounter:           
-      pCdmValue = new CdmValueCounter(p_rqDomElement, p_pCdmObject);
-      break;
-   case eDmValueBinaryDocument:    
-      pCdmValue = new CdmValueBinaryDocument(p_rqDomElement, p_pCdmObject);
-      break;
-   case eDmValueCharacterDocument:
-      pCdmValue = new CdmValueCharacterDocument(p_rqDomElement, p_pCdmObject);
-      break;
-   case eDmValueListInt:
-      pCdmValue = new CdmValueListInt(p_rqDomElement, p_pCdmObject);
-      break;
-   case eDmValueListDouble:
-      pCdmValue = new CdmValueListDouble(p_rqDomElement, p_pCdmObject);
-      break;
-   case eDmValueListString:
-      pCdmValue = new CdmValueListString(p_rqDomElement, p_pCdmObject);
-      break;
-   case eDmValueDictStringInt:
-      pCdmValue = new CdmValueDictStringInt(p_rqDomElement, p_pCdmObject);
-      break;
-   case eDmValueDictStringString:
-      pCdmValue = new CdmValueDictStringString(p_rqDomElement, p_pCdmObject);
-      break;
-   case eDmValueDictStringDouble:
-      pCdmValue = new CdmValueDictStringDouble(p_rqDomElement, p_pCdmObject);
-      break;
-   case eDmValueDictIntInt:
-      pCdmValue = new CdmValueDictIntInt(p_rqDomElement, p_pCdmObject);
-      break;
-   case eDmValueDictIntString:
-      pCdmValue = new CdmValueDictIntString(p_rqDomElement, p_pCdmObject);
-      break;
-   case eDmValueDictIntDouble:
-      pCdmValue = new CdmValueDictIntDouble(p_rqDomElement, p_pCdmObject);
-      break;
-   case eDmValueUser:
-      pCdmValue = new CdmValueUser(p_rqDomElement, p_pCdmObject);
-      break;
-   case eDmValueListObjects:
-      pCdmValue = new CdmValueListObjects(p_rqDomElement, p_pCdmObject);
-      break;
-   case eDmValueEnum:
-      pCdmValue = new CdmValueEnum(p_rqDomElement, p_pCdmObject);
-      break;
-   case eDmValueUserGroup:
-      pCdmValue = new CdmValueUserGroup(p_rqDomElement, p_pCdmObject);
-      break;
-   default:
-      FATAL("Value does not exist in this switch operation");
-      break;
-   }
-
-   if (CHKPTR(pCdmValue))
-   {
-//       pCdmValue->setParent(p_pCdmObject);
-   }
-
-   return pCdmValue;
-}
-
 CdmValue* CdmValue::CreateDeployValue(QVariantMap& p_rqvHash, CdmObject* p_pCdmObject)
 {
    CdmValue* pCdmValue = nullptr;
@@ -1567,6 +1466,13 @@ bool CdmValue::IsOwner() const
    }
 
    return bRet;
+}
+
+void CdmValue::Restore(QString p_qstrValue)
+{
+    // todo error message that this value type is not restorable
+    ERR("This type of values is not restorable. " + GetKeyname());
+    Q_UNUSED(p_qstrValue);
 }
 
 bool CdmValue::IsUnique() const

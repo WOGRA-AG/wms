@@ -102,16 +102,6 @@ CdmObjectContainer::CdmObjectContainer(long p_lDatabaseId, long p_lId, QString p
 }
 
 
-CdmObjectContainer::CdmObjectContainer(  QDomElement& p_rqDomElement )
-    : CdmModelElement(p_rqDomElement),
-      m_lClassId(0),
-      m_bIsAccessorListModified(false),
-      m_bIsTree(false),
-      m_bImportMode(false),
-      m_bIsImmutable(false)
-{
-    XmlImportObjectList(p_rqDomElement);
-}
 
 CdmObjectContainer::CdmObjectContainer(QVariantMap& p_rqvHash)
     : CdmModelElement(p_rqvHash),
@@ -290,7 +280,6 @@ QVariant CdmObjectContainer::GetContainerDataVariant() const
 
     if (CHKPTR(pCdmManager))
     {
-        QVariantMap qvhAccessorRights;
         qvHash.insert(WMS_CLASSID,static_cast<int>(m_lClassId));
         qvHash.insert(WMS_COMMENT, m_qstrComment);
         qvHash.insert(WMS_TREE, m_bIsTree);
@@ -1695,150 +1684,6 @@ void CdmObjectContainer::RemoveObjectFactory(CdmContainerAdaptor* p_pCdmObjectFa
     }
 }
 
-int CdmObjectContainer::XmlExport(QDomElement& p_rqdeObjectListManager) const
-{
-    SYNCHRONIZED;
-    int iRet = CdmLogging::eDmUnknownObjectListError;
-
-    QDomDocument qddDocument = p_rqdeObjectListManager.ownerDocument();
-
-    QDomElement qdeRoot = qddDocument.createElement(WMS_CONTAINER);
-    p_rqdeObjectListManager.appendChild(qdeRoot);
-
-    XmlExportBase(qdeRoot);
-
-    qdeRoot.setAttribute(WMS_CLASSID, QString::number(m_lClassId));
-    qdeRoot.setAttribute(WMS_COMMENT, m_qstrComment);
-
-
-    QDomElement qdeTag = qddDocument.createElement(WMS_ACCESSORRIGHTS);
-    qdeRoot.appendChild(qdeTag);
-
-    QMap<int, EdmRight> qmRights = m_cCdmRights.GetRights();
-
-    QMap<int, EdmRight>::const_iterator qmIt = qmRights.begin();
-    QMap<int, EdmRight>::const_iterator qmItEnd = qmRights.end();
-
-    for(; qmIt != qmItEnd; ++qmIt)
-    {
-        QDomElement qdeRoot = qddDocument.createElement("AccessorRight");
-        qdeTag.appendChild(qdeRoot);
-
-        qdeRoot.setAttribute("Accessor Id", QString::number(qmIt.key()));
-        qdeRoot.setAttribute("Right", QString::number(qmIt.value()));
-    }
-
-    qdeTag = qddDocument.createElement(WMS_OBJECTS);
-    qdeRoot.appendChild(qdeTag);
-
-    QMap<long,CdmObject*>::const_iterator qmObjectIt    = m_qmObjects.begin();
-    QMap<long,CdmObject*>::const_iterator qmObjectItEnd = m_qmObjects.end();
-
-    CdmObject* pCdmObject = nullptr;
-
-    for(; qmObjectIt != qmObjectItEnd; ++qmIt)
-    {
-        pCdmObject = qmObjectIt.value();
-        if(CHKPTR(pCdmObject))
-        {
-            pCdmObject->XmlExport(qdeTag);
-        }
-    }
-
-    return iRet;
-}
-
-void CdmObjectContainer::XmlImportObjectList(  QDomElement& p_rqDomElement )
-{
-    m_lClassId = p_rqDomElement.attribute(WMS_CLASSID, "-1").toInt();
-    m_qstrComment = p_rqDomElement.attribute(WMS_COMMENT, "");
-
-    QDomNode qDomNode = p_rqDomElement.firstChild();
-
-    while(!qDomNode.isNull())
-    {
-        QDomElement qDomElement = qDomNode.toElement(); // try to convert the node to an element.
-
-        if(!qDomElement.isNull() && qDomElement.tagName() == WMS_ACCESSORRIGHTS)
-        {
-            XmlImportAccessorRights(qDomElement);
-        }
-        else if(!qDomElement.isNull() && qDomElement.tagName() == WMS_OBJECTS)
-        {
-            XmlImportObjects(qDomElement);
-        }
-        else
-        {
-            ERR("Wrong XML Child on this position.");
-        }
-
-        qDomNode = qDomNode.nextSibling();
-    }
-}
-
-void CdmObjectContainer::XmlImportAccessorRights(  QDomElement& p_rqDomElement )
-{
-    QDomNode qDomNode = p_rqDomElement.firstChild();
-
-    while(!qDomNode.isNull())
-    {
-        QDomElement qDomElement = qDomNode.toElement(); // try to convert the node to an element.
-
-        if(!qDomElement.isNull() && qDomElement.tagName() == WMS_ACCESSORRIGHTS)
-        {
-            long lAccessorId = qDomElement.attribute(WMS_ACCESSORID, "-1").toInt();
-            EdmRight eRight = static_cast<EdmRight>(qDomElement.attribute(WMS_RIGHT, "-1").toInt());
-            m_cCdmRights.AddRight(lAccessorId, eRight);
-        }
-        else
-        {
-            ERR("Wrong XML Child on this position.");
-        }
-
-        qDomNode = qDomNode.nextSibling();
-    }
-}
-
-
-void CdmObjectContainer::XmlImportObjects(  QDomElement& p_rqDomElement )
-{
-    QDomNode qDomNode = p_rqDomElement.firstChild();
-
-    while(!qDomNode.isNull())
-    {
-        QDomElement qDomElement = qDomNode.toElement(); // try to convert the node to an element.
-
-        if(!qDomElement.isNull() && qDomElement.tagName() == WMS_OBJECT)
-        {
-            long lId = qDomElement.attribute(WMS_ID, "-1").toInt();
-
-            // this method searches also in db for this object.
-            // if this object is not locally in the memory this could be take while
-            CdmObject* pCdmObject = FindObjectById(lId);
-
-            if(!pCdmObject) // object was not found, so a new object must be created
-            {
-
-            }
-            else
-            {
-            }
-        }
-        else
-        {
-            ERR("Wrong XML Child on this position.");
-        }
-
-        qDomNode = qDomNode.nextSibling();
-    }
-}
-
-void CdmObjectContainer::XmlImport(QDomElement& p_rqDomElement)
-{
-    XmlImportBase(p_rqDomElement);
-    XmlImportObjectList(p_rqDomElement);
-}
-
 QString CdmObjectContainer::GetInfo() const
 {
     QString qstrRet;
@@ -1998,8 +1843,6 @@ bool CdmObjectContainer::IsDeploymentRelevant()
 
     if (pClass)
     {
-        QString qstrKeyname = pClass->GetKeyname();
-
         if (IsTechnicalDeploymentRelevant() ||
             HasDeploymentRelevantOwner())
         {

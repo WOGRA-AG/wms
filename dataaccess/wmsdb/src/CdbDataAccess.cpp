@@ -1623,7 +1623,7 @@ int CdbDataAccess::GetObjectModifications(const CdmObject* p_pObject,
     long lRet = -1;
     ++m_iInterfaceCallCounter;
     INFO("GetObjectModifications Call");
-    lRet = m_pCdbJournal->GetObjectModifications(p_pObject->GetId(), p_qdFrom, p_qdTo, p_qlItems);
+    lRet = m_pCdbJournal->GetObjectModifications(p_pObject, p_qdFrom, p_qdTo, p_qlItems);
     return lRet;
 }
 

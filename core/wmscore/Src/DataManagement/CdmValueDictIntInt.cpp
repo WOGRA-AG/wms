@@ -56,18 +56,6 @@ CdmValueDictIntInt::CdmValueDictIntInt(EdmValueType p_eDmValue,
 
 }
 
-/** +-=---------------------------------------------------------Mo 13. Aug 16:20:23 2007----------*
- * @method  CdmValueDictIntInt::CdmValueDictIntInt                     // public                            *
- * @return                                                   //                                   *
- * @param   QDomElement& p_rqDomElement                      //                                   *
- * @param   CdmObject* p_pCdmObject                          //                                   *
- * @comment The constructor.                                                                      *
- *----------------last changed: --------------------------------Mo 13. Aug 16:20:23 2007----------*/
-CdmValueDictIntInt::CdmValueDictIntInt(QDomElement& p_rqDomElement, CdmObject* p_pCdmObject)
-   : CdmValueCharacterDocument(p_rqDomElement, p_pCdmObject)
-{
-}
-
 /** +-=---------------------------------------------------------Mo 16. Apr 11:30:03 2012----------*
  * @method  CdmValueDictIntInt::CdmValueDictIntInt           // public                            *
  * @return                                                   //                                   *

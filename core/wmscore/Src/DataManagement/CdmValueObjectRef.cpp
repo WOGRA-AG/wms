@@ -1,16 +1,4 @@
-﻿/******************************************************************************
- ** WOGRA Middleware Server Communication Module
- **
- ** @Author Wolfgang Graßhof 
- **
- ** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
- ** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. 
- **(C) copyright by WOGRA technologies All rights reserved
- ******************************************************************************/
-
-
-
-// System and QT Includes
+﻿// System and QT Includes
 #include <qstring.h>
 #include <qdatetime.h>
 #include <qdom.h>
@@ -33,15 +21,6 @@
 #include "CdmValueObjectRef.h"
 
 
-/** +-=---------------------------------------------------------Sa 20. Aug 10:48:01 2005----------*
- * @method  CdmValueObjectRef::CdmValueObjectRef                       // public                            *
- * @return                                                   //                                   *
- * @param   long p_lDatabaseId                               //                                   *
- * @param   long p_lId                                       //                                   *
- * @param   QString p_qstrKeyname                            //                                   *
- * @param   CdmObject* p_pCdmObject                          //                                   *
- * @comment The constructor of the object reference.                                              *
- *----------------last changed: --------------------------------Sa 20. Aug 10:48:01 2005----------*/
 CdmValueObjectRef::CdmValueObjectRef(  long p_lDatabaseId,
                             long p_lId,
                             QString p_qstrKeyname,
@@ -52,29 +31,6 @@ CdmValueObjectRef::CdmValueObjectRef(  long p_lDatabaseId,
 {
 }
 
-
-/** +-=---------------------------------------------------------Sa 20. Aug 10:48:24 2005----------*
- * @method  CdmValueObjectRef::CdmValueObjectRef                       // public                            *
- * @return                                                   //                                   *
- * @param   QDomElement& p_rqDomElement                      //                                   *
- * @param   CdmObject* p_pCdmObject                          //                                   *
- * @comment The constructor of the object reference.                                              *
- *----------------last changed: --------------------------------Sa 20. Aug 10:48:24 2005----------*/
-CdmValueObjectRef::CdmValueObjectRef(  QDomElement& p_rqDomElement, CdmObject* p_pCdmObject )
-   : CdmValueLong(p_rqDomElement, p_pCdmObject),
-  m_lObjectListId(0),
-  m_bObjectConnected(false)
-{
-   XmlImportObjectRef(p_rqDomElement);
-}
-
-/** +-=---------------------------------------------------------Mo 16. Apr 13:52:42 2012----------*
- * @method  CdmValueObjectRef::CdmValueObjectRef             // public                            *
- * @return                                                   //                                   *
- * @param   QVariantMap& p_rqvHash                          //                                   *
- * @param   CdmObject* p_pCdmObject                          //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mo 16. Apr 13:52:42 2012----------*/
 CdmValueObjectRef::CdmValueObjectRef(QVariantMap& p_rqvHash, CdmObject* p_pCdmObject)
 : CdmValueLong(p_rqvHash, p_pCdmObject),
    m_lObjectListId(0),
@@ -83,22 +39,11 @@ CdmValueObjectRef::CdmValueObjectRef(QVariantMap& p_rqvHash, CdmObject* p_pCdmOb
    m_lObjectListId = p_rqvHash[WMS_CONTAINERID].toInt();
 }
 
-/** +-=---------------------------------------------------------Sa 20. Aug 12:48:17 2005----------*
- * @method  CdmValueObjectRef::~CdmValueObjectRef                      // public, virtual                   *
- * @return  void                                             //                                   *
- * @comment The Destructor of Class CdmValueObjectRef                                                  *
- *----------------last changed: --------------------------------Sa 20. Aug 12:48:17 2005----------*/
 CdmValueObjectRef::~CdmValueObjectRef(  )
 {
    // nothing to do
 }
 
-/** +-=---------------------------------------------------------Mo 3. Dez 15:41:06 2012-----------*
- * @method  CdmValueObjectRef::Deploy                        // public, virtual                   *
- * @return  void                                             //                                   *
- * @param   QVariantMap& p_rqvHash                          //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mo 3. Dez 15:41:06 2012-----------*/
 void CdmValueObjectRef::Deploy(QVariantMap& p_rqvHash)
 {
     QString qstrClassUri = p_rqvHash[WMS_CLASSURI].toString();
@@ -137,13 +82,6 @@ void CdmValueObjectRef::Deploy(QVariantMap& p_rqvHash)
     }
 }
 
-/** +-=---------------------------------------------------------Di 20. Nov 10:45:44 2012----------*
- * @method  CdmValueObjectRef::SetValue                      // public, slots                     *
- * @return  void                                             //                                   *
- * @param   long p_lObjectListId                             //                                   *
- * @param   long p_lObjectId                                 //                                   *
- * @comment This emthod sets the object value.                                                    *
- *----------------last changed: --------------------------------Di 20. Nov 10:45:44 2012----------*/
 void CdmValueObjectRef::SetValue(long p_lObjectListId, long p_lObjectId,
                                  QString p_qstrObjectKeyname, QString p_qstrContainerKeyname)
 {
@@ -151,41 +89,8 @@ void CdmValueObjectRef::SetValue(long p_lObjectListId, long p_lObjectId,
    m_lObjectListId = p_lObjectListId;
    m_qstrObjectKeyname = p_qstrObjectKeyname;
    m_qstrContainerKeyname = p_qstrContainerKeyname;
-
-   // TODO Strings filling
-   /*
-   CdmObject* pObject = GetObject();
-
-   if (pObject)
-   {
-       m_qstrObjectKeyname = pObject->GetKeyname();
-
-       CdmObjectContainer* pContainer = pObject->GetObjectContainer();
-
-       if (CHKPTR(pContainer))
-       {
-           m_qstrContainerKeyname = pContainer->GetKeyname();
-       }
-   }
-   else
-   {
-       m_lObjectListId = 0;
-       CdmValueLong::SetValue(0);
-       m_qstrObjectKeyname = "";
-       m_qstrContainerKeyname = "";
-   }
-   */
 }
 
-
-/** +-=---------------------------------------------------------So 18. Jun 18:48:00 2006----------*
- * @method  CdmValueObjectRef::SetValue                           // public, virtual                   *
- * @return  void                                             //                                   *
- * @param   QString p_qstrValue                              //                                   *
- * @param   QString p_qstrValue2                             // needed for object values          *
- *                                                           //  (objectlistid, objectid)         *
- * @comment This method sets the value for an datatype as string.                                 *
- *----------------last changed: Wolfgang Graßhof----------------So 18. Jun 18:48:00 2006----------*/
 void CdmValueObjectRef::SetValue(QString p_qstrValue, QString p_qstrValue2)
 {
     CdmObject* pObject = nullptr;
@@ -219,11 +124,6 @@ void CdmValueObjectRef::SetValue(QString p_qstrValue, QString p_qstrValue2)
     SetValue(pObject);
 }
 
-/** +-=---------------------------------------------------------Fr 8. Feb 16:01:17 2013-----------*
- * @method  CdmValueObjectRef::HasValue                      // public, const, virtual, slots     *
- * @return  bool                                             //                                   *
- * @comment This method returns if this Values has an value.                                      *
- *----------------last changed: --------------------------------Fr 8. Feb 16:01:17 2013-----------*/
 bool CdmValueObjectRef::HasValue() const
 {
    bool bRet = false;
@@ -236,12 +136,6 @@ bool CdmValueObjectRef::HasValue() const
    return bRet;
 }
 
-/** +-=---------------------------------------------------------So 10. Feb 18:36:25 2013----------*
- * @method  CdmValueObjectRef::SetValue                      // public, slots                     *
- * @return  void                                             //                                   *
- * @param   const CdmObject* p_pCdmObject                    //                                   *
- * @comment This method sets the value over the object itselves.                                  *
- *----------------last changed: --------------------------------So 10. Feb 18:36:25 2013----------*/
 void CdmValueObjectRef::SetValue(const CdmObject* p_pCdmObject)
 {
     if (p_pCdmObject)
@@ -312,11 +206,6 @@ void CdmValueObjectRef::SetEventValue(const CdmObject *p_pCdmObject, const CdmOb
     }
 }
 
-/** +-=---------------------------------------------------------Mo 11. Feb 09:55:39 2013----------*
- * @method  CdmValueObjectRef::GetObject                     // public, slots                     *
- * @return  CdmObject*                                       //                                   *
- * @comment returns the object of this object ref or nullptr if this object was not found.           *
- *----------------last changed: --------------------------------Mo 11. Feb 09:55:39 2013----------*/
 CdmObject* CdmValueObjectRef::GetObject()
 {
    CdmObject* pCdmObject = nullptr;
@@ -649,12 +538,6 @@ CdmObject *CdmValueObjectRef::TryToGetOwnerObjectByEventObject(CdmObject *pEvent
     return pCdmObject;
 }
 
-/** +-=---------------------------------------------------------So 10. Feb 10:00:01 2013----------*
- * @method  CdmValueObjectRef::IsTypeOf                      // public, const, slots              *
- * @return  bool                                             //                                   *
- * @param   QString p_qstrClassName                          //                                   *
- * @comment This method checks if this is object is type of the overgiven classname.              *
- *----------------last changed: --------------------------------So 10. Feb 10:00:01 2013----------*/
 bool CdmValueObjectRef::IsTypeOf(QString p_qstrClassName) const
 {
    bool bRet = false;
@@ -689,123 +572,22 @@ bool CdmValueObjectRef::IsTypeOf(QString p_qstrClassName) const
    return bRet;
 }
 
-
-/** +-=---------------------------------------------------------So 9. Mrz 15:51:21 2008-----------*
- * @method  CdmValueObjectRef::ObjectRefModifiedSlot         // private, slots                    *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: Wolfgang Graßhof----------------So 9. Mrz 15:51:21 2008-----------*/
 void CdmValueObjectRef::ObjectRefModifiedSlot()
 {
    emit ObjectRefModifiedSignal(GetObject(), this);
 }
 
-/** +-=---------------------------------------------------------Di 20. Nov 10:47:16 2012----------*
- * @method  CdmValueObjectRef::GetObjectListId               // public, slots                     *
- * @return  long                                             //                                   *
- * @comment returns the Objectlist Id of this ObjectRef                                           *
- *----------------last changed: --------------------------------Di 20. Nov 10:47:16 2012----------*/
 long CdmValueObjectRef::GetObjectListId()
 {
    return m_lObjectListId;
 }
 
-/** +-=---------------------------------------------------------Mi 15. Sep 14:33:30 2010----------*
- * @method  CdmValueObjectRef::SetDefaultValue               // public                            *
- * @return  void                                             //                                   *
- * @param   const CdmMember*# p_pCdmMember                   //                                   *
- * @comment This method sets the default value.                                                   *
- *----------------last changed: --------------------------------Mi 15. Sep 14:33:30 2010----------*/
 void CdmValueObjectRef::SetDefaultValue(const CdmMember*)
 {
-
    // has no default value will be ignored here
    INFO("This ValueType does not know default values.");
 }
 
-/** +-=---------------------------------------------------------Mi 15. Sep 14:33:41 2010----------*
- * @method  CdmValueObjectRef::IsSmaller                     // public, const, virtual            *
- * @return  int                                              // invalid = -1 false = 0 true = 1   *
- * @param   QVariant* #p_pqVariant                           //                                   *
- * @comment returns if the overgiven Value is smaller then this.                                  *
- *----------------last changed: --------------------------------Mi 15. Sep 14:33:41 2010----------*/
-int CdmValueObjectRef::IsSmaller(QVariant* ) const
-{
-
-   ERR( "Not Comparable" );
-   return EC(eDmInvalidCompareType);
-}
-
-/** +-=---------------------------------------------------------Mi 15. Sep 14:33:50 2010----------*
- * @method  CdmValueObjectRef::IsSmallerEqual                // public, const, virtual            *
- * @return  int                                              // invalid = -1 false = 0 true = 1   *
- * @param   QVariant* #p_pqVariant                           //                                   *
- * @comment returns if the overgiven Value is smaller or equal then this.                         *
- *----------------last changed: --------------------------------Mi 15. Sep 14:33:50 2010----------*/
-int CdmValueObjectRef::IsSmallerEqual(QVariant* ) const
-{
-
-   ERR( "Not Comparable" );
-   return EC(eDmInvalidCompareType);
-}
-
-/** +-=---------------------------------------------------------Mi 15. Sep 14:34:00 2010----------*
- * @method  CdmValueObjectRef::IsLarger                      // public, const, virtual            *
- * @return  int                                              // invalid = -1 false = 0 true = 1   *
- * @param   QVariant* #p_pqVariant                           //                                   *
- * @comment returns if the overgiven Value is larger then this.                                   *
- *----------------last changed: --------------------------------Mi 15. Sep 14:34:00 2010----------*/
-int CdmValueObjectRef::IsLarger(QVariant* ) const
-{
-
-   ERR( "Not Comparable" );
-   return EC(eDmInvalidCompareType);
-}
-
-/** +-=---------------------------------------------------------Mi 15. Sep 14:34:15 2010----------*
- * @method  CdmValueObjectRef::IsLargerEqual                 // public, const, virtual            *
- * @return  int                                              // invalid = -1 false = 0 true = 1   *
- * @param   QVariant* #p_pqVariant                           //                                   *
- * @comment returns if the overgiven Value is larger or equal then this.                          *
- *----------------last changed: --------------------------------Mi 15. Sep 14:34:15 2010----------*/
-int CdmValueObjectRef::IsLargerEqual(QVariant* ) const
-{
-
-   ERR( "Not Comparable" );
-   return EC(eDmInvalidCompareType);
-}
-
-/** +-=---------------------------------------------------------Mi 15. Sep 14:34:23 2010----------*
- * @method  CdmValueObjectRef::Add                           // public, virtual                   *
- * @return  void                                             //                                   *
- * @param   long# p_lAdd                                     //                                   *
- * @comment Adds p_dAdd to Value.                                                                 *
- *----------------last changed: --------------------------------Mi 15. Sep 14:34:23 2010----------*/
-void CdmValueObjectRef::Add(long)
-{
-
-   // does nothing
-   ERR( "Makes no sense for this ValueType." );
-}
-
-/** +-=---------------------------------------------------------Mi 15. Sep 14:34:31 2010----------*
- * @method  CdmValueObjectRef::Subtract                      // public, virtual                   *
- * @return  void                                             //                                   *
- * @param   long #p_lSubtract                                //                                   *
- * @comment subtracts p_dSubtract from value.                                                     *
- *----------------last changed: --------------------------------Mi 15. Sep 14:34:31 2010----------*/
-void CdmValueObjectRef::Subtract(long )
-{
-
-   // does nothing
-   ERR( "Makes no sense for this ValueType." );
-}
-
-/** +-=---------------------------------------------------------So 10. Feb 17:48:56 2013----------*
- * @method  CdmValueObjectRef::GetClass                      // public, const                     *
- * @return  CdmClass*                                        //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------So 10. Feb 17:48:56 2013----------*/
 CdmClass* CdmValueObjectRef::GetClass() const
 {
    CdmClass* pClass = nullptr;
@@ -819,11 +601,6 @@ CdmClass* CdmValueObjectRef::GetClass() const
    return pClass;
 }
 
-/** +-=---------------------------------------------------------So 10. Feb 17:48:34 2013----------*
- * @method  CdmValueObjectRef::GetClassId                    // public, const, slots              *
- * @return  long                                             //                                   *
- * @comment This method returns the Class id for this ref Value.o                                 *
- *----------------last changed: --------------------------------So 10. Feb 17:48:34 2013----------*/
 long CdmValueObjectRef::GetClassId() const
 {
    long lRet = 0;
@@ -836,60 +613,6 @@ long CdmValueObjectRef::GetClassId() const
    return lRet;
 }
 
-/** +-=---------------------------------------------------------Sa 7. Jan 14:29:22 2006-----------*
- * @method  CdmValueObjectRef::CheckUnique                        // public, virtual                   *
- * @return  void                                             //                                   *
- * @comment This method checks if the value complies with the unique rule.                        *
- *----------------last changed: Wolfgang Graßhof----------------Sa 7. Jan 14:29:22 2006-----------*/
-void CdmValueObjectRef::CheckUnique(  )
-{
-   // todo
-}
-
-/** +-=---------------------------------------------------------So 10. Feb 10:00:30 2013----------*
- * @method  CdmValueObjectRef::XmlExport                     // public, const, virtual            *
- * @return  void                                             //                                   *
- * @param   QDomElement& p_rqdeValue                         //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------So 10. Feb 10:00:30 2013----------*/
-void CdmValueObjectRef::XmlExport(QDomElement& p_rqdeValue) const
-{
-   XmlExportValue(p_rqdeValue);
-
-   p_rqdeValue.setAttribute(WMS_CONTAINERID, QString::number(m_lObjectListId));
-   p_rqdeValue.setAttribute(WMS_OBJECTID,     QString::number(GetValue()));
-}
-
-/** +-=---------------------------------------------------------Sa 20. Aug 10:49:59 2005----------*
- * @method  CdmValueObjectRef::XmlImportObjectRef                 // private                           *
- * @return  void                                             //                                   *
- * @param   QDomElement& p_rqDomElement                      //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Sa 20. Aug 10:49:59 2005----------*/
-void CdmValueObjectRef::XmlImportObjectRef(  QDomElement& p_rqDomElement )
-{
-   m_lObjectListId = p_rqDomElement.attribute(WMS_CONTAINERID, "-1").toInt();
-   SetValue(m_lObjectListId, p_rqDomElement.attribute(WMS_OBJECTID, "-1").toInt(),"","");
-}
-
-/** +-=---------------------------------------------------------Sa 20. Aug 10:50:02 2005----------*
- * @method  CdmValueObjectRef::XmlImport                          // public                            *
- * @return  void                                             //                                   *
- * @param   QDomElement& p_rqDomElement                      //                                   *
- * @comment This method is the abstract method to which must be implemented in each derived class.*
- *----------------last changed: --------------------------------Sa 20. Aug 10:50:02 2005----------*/
-void CdmValueObjectRef::XmlImport(  QDomElement& p_rqDomElement )
-{
-   XmlImportBase(p_rqDomElement);
-   XmlImportValue(p_rqDomElement);
-   XmlImportObjectRef(p_rqDomElement);
-}
-
-/** +-=---------------------------------------------------------So 10. Feb 10:00:39 2013----------*
- * @method  CdmValueObjectRef::GetDisplayString              // public, const, slots              *
- * @return  QString                                          //                                   *
- * @comment This method returns the value as string for displaying information.                   *
- *----------------last changed: --------------------------------So 10. Feb 10:00:39 2013----------*/
 QString CdmValueObjectRef::GetDisplayString() const
 {
    QString qstrDisplayString;
@@ -903,11 +626,6 @@ QString CdmValueObjectRef::GetDisplayString() const
    return qstrDisplayString;
 }
 
-/** +-=---------------------------------------------------------So 10. Feb 10:00:58 2013----------*
- * @method  CdmValueObjectRef::GetVariant                    // public, const, virtual            *
- * @return  QVariant                                         //                                   *
- * @comment This method returns the value as string for displaying information.                   *
- *----------------last changed: --------------------------------So 10. Feb 10:00:58 2013----------*/
 QVariant CdmValueObjectRef::GetVariant() const
 {
    QVariantMap qmVariant = CdmValueLong::GetVariant().toMap();
@@ -936,23 +654,12 @@ QVariant CdmValueObjectRef::GetVariant() const
    return qmVariant;
 }
 
-/** +-=---------------------------------------------------------Mo 13. Mai 14:13:39 2013----------*
- * @method  CdmValueObjectRef::SetVariant                    // public, virtual                   *
- * @return  void                                             //                                   *
- * @param   QVariantMap& p_rqvHash                          //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mo 13. Mai 14:13:39 2013----------*/
 void CdmValueObjectRef::SetVariant(QVariantMap& p_rqvHash)
 {
    CdmValueLong::SetVariant(p_rqvHash);
    m_lObjectListId = p_rqvHash[WMS_CONTAINERID].toInt();
 }
 
-/** +-=---------------------------------------------------------So 10. Feb 10:01:06 2013----------*
- * @method  CdmValueObjectRef::GetValueVariant               // public, const, virtual            *
- * @return  QVariant                                         //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------So 10. Feb 10:01:06 2013----------*/
 QVariant CdmValueObjectRef::GetValueVariant() const
 {
    QString qstrUri;
@@ -1063,11 +770,6 @@ void CdmValueObjectRef::SetValueVariant(QVariant& p_rqVariant)
     }
 }
 
-/** +-=---------------------------------------------------------Mi 7. Nov 13:59:58 2012-----------*
- * @method  CdmValueObjectRef::TryToCreateOwnerObject        // private                           *
- * @return  CdmObject*                                       // if nut successfull nullptr will be returned*
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mi 7. Nov 13:59:58 2012-----------*/
 CdmObject* CdmValueObjectRef::TryToCreateOwnerObject()
 {
    CdmObject* pCdmObject = nullptr;
@@ -1145,11 +847,6 @@ CdmObject* CdmValueObjectRef::TryToCreateOwnerObject()
   return pCdmObject;
 }
 
-/** +-=---------------------------------------------------------Do 13. Dez 08:19:29 2012----------*
- * @method  CdmValueObjectRef::ResolveValue                  // public, virtual                   *
- * @return  bool                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Do 13. Dez 08:19:29 2012----------*/
 bool CdmValueObjectRef::ResolveValue()
 {
    bool bRet = false;
@@ -1182,10 +879,30 @@ bool CdmValueObjectRef::ResolveValue()
    return bRet;
 }
 
-/** +-=---------------------------------------------------------Mo 11. Feb 11:34:12 2013----------*
- * @method  CdmValueObjectRef::ObjectRefModifiedSignal       // private, signals                  *
- * @return  void                                             //                                   *
- * @param   CdmObject*                                       //                                   *
- * @param   CdmValue*                                        //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mo 11. Feb 11:34:12 2013----------*/
+
+void CdmValueObjectRef::Restore(QString p_qstrValue)
+{
+    CdmDataProvider* pDataProvider = CdmSessionManager::GetDataProvider();
+
+    if (CHKPTR(pDataProvider))
+    {
+        auto pUriObject = pDataProvider->GetUriObject(p_qstrValue);
+
+        if (pUriObject)
+        {
+            if (pUriObject->IsObject())
+            {
+                auto pObject = dynamic_cast<CdmObject*>(pUriObject);
+
+                if (CHKPTR(pObject))
+                {
+                    SetValue(pObject);
+                }
+            }
+        }
+        else
+        {
+            ERR("Object which should be restored does not exist.")
+        }
+    }
+}

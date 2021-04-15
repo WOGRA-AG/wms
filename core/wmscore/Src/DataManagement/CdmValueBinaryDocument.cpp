@@ -43,12 +43,6 @@ CdmValueBinaryDocument::CdmValueBinaryDocument(long p_lDatabaseId,
    // nothing to do here :-)
 }
 
-CdmValueBinaryDocument::CdmValueBinaryDocument(  QDomElement& p_rqDomElement, CdmObject* p_pCdmObject )
- : CdmValue(p_rqDomElement, p_pCdmObject)
-{
-   XmlImportBinaryDocument(p_rqDomElement);
-}
-
 CdmValueBinaryDocument::CdmValueBinaryDocument(QVariantMap& p_qVariant, CdmObject* p_pCdmObject)
 : CdmValue(p_qVariant, p_pCdmObject)
 {
@@ -357,68 +351,6 @@ void CdmValueBinaryDocument::SetDefaultValue(const CdmMember*)
    // there are no default values for this Value it must be ignored
 }
 
-int CdmValueBinaryDocument::IsEqual(QVariant*) const
-{
-   ERR( "Is Not possible to compare" );
-   return EC(eDmInvalidCompareType);
-}
-
-int CdmValueBinaryDocument::IsSmaller(QVariant*) const
-{
-   ERR( "Is Not possible to compare" );
-   return EC(eDmInvalidCompareType);
-}
-
-int CdmValueBinaryDocument::IsSmallerEqual(QVariant*) const
-{
-   ERR( "Is Not possible to compare" );
-   return EC(eDmInvalidCompareType);
-}
-
-int CdmValueBinaryDocument::IsLarger(QVariant*) const
-{
-   ERR( "Is Not possible to compare" );
-   return EC(eDmInvalidCompareType);
-}
-
-int CdmValueBinaryDocument::IsLargerEqual(QVariant*) const
-{
-   ERR( "Is Not possible to compare" );
-   return EC(eDmInvalidCompareType);
-}
-
-int CdmValueBinaryDocument::IsNotEqual(QVariant*) const
-{
-   ERR( "Is Not possible to compare" );
-   return EC(eDmInvalidCompareType);
-}
-
-void CdmValueBinaryDocument::CheckUnique()
-{
-   // does nothing
-}
-
-void CdmValueBinaryDocument::XmlExport(QDomElement& p_rqdeValue) const
-{
-   XmlExportValue(p_rqdeValue);
-   p_rqdeValue.setAttribute("Filename",         m_qstrFilename);
-   p_rqdeValue.setAttribute("CurrentDirectory", m_qstrCurrentDirectory);
-   p_rqdeValue.setAttribute("Type",             m_qstrType);
-}
-
-void CdmValueBinaryDocument::XmlImportBinaryDocument(  QDomElement& p_rqDomElement )
-{
-   m_qstrFilename         = p_rqDomElement.attribute("Filename", "");       
-   m_qstrCurrentDirectory = p_rqDomElement.attribute("CurrentDirectory", "");
-   m_qstrType             = p_rqDomElement.attribute("Type", "");            
-}
-
-void CdmValueBinaryDocument::XmlImport(  QDomElement& p_rqDomElement )
-{
-   XmlImportBase(p_rqDomElement);
-   XmlImportValue(p_rqDomElement);
-   XmlImportBinaryDocument(p_rqDomElement);
-}
 
 QVariant CdmValueBinaryDocument::GetVariant() const
 {

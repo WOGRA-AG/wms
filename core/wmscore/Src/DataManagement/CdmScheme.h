@@ -68,8 +68,6 @@ public:
     virtual ~CdmScheme();
     IdmDataAccess* GetDataAccess(  );
     void SetVersion(int p_iVersion);
-    int XmlExport(QTextStream& p_rqtsXml) const;
-    static int XmlImport(QDomElement& p_rqdeDatabase);
     QVariant GetVariant() const;
     CdmScheme(QVariantMap& p_rqvHash);
     void SetCurrentLanguage(QString& p_qstrName);

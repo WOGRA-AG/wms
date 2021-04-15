@@ -36,18 +36,6 @@ CdmValueDictIntDouble::CdmValueDictIntDouble(long p_lDatabaseId,
 {
 }
 
-/** +-=---------------------------------------------------------Mo 13. Aug 16:19:51 2007----------*
- * @method  CdmValueDictIntDouble::CdmValueDictIntDouble               // public                            *
- * @return                                                   //                                   *
- * @param   QDomElement& p_rqDomElement                      //                                   *
- * @param   CdmObject* p_pCdmObject                          //                                   *
- * @comment The constructor.                                                                      *
- *----------------last changed: --------------------------------Mo 13. Aug 16:19:51 2007----------*/
-CdmValueDictIntDouble::CdmValueDictIntDouble(QDomElement& p_rqDomElement, CdmObject* p_pCdmObject)
-   : CdmValueCharacterDocument(p_rqDomElement, p_pCdmObject)
-{
-}
-
 /** +-=---------------------------------------------------------Mo 16. Apr 11:25:37 2012----------*
  * @method  CdmValueDictIntDouble::CdmValueDictIntDouble     // public                            *
  * @return                                                   //                                   *

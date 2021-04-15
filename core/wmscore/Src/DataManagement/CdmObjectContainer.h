@@ -61,7 +61,6 @@ private:
     CdmObjectContainer(long p_lDatabaseId, long p_lId, QString p_qstrKeyname, CdmClass* p_pCdmClass);
     CdmObjectContainer(long p_lDatabaseId, long p_lId, QString p_qstrKeyname, long p_lClassId);
     CdmObjectContainer(long p_lId, CdmObjectContainer* p_pContainer);
-    CdmObjectContainer(QDomElement& p_rqDomElement);
     CdmObjectContainer(QVariantMap& p_rqvHash);
     virtual ~CdmObjectContainer();
 
@@ -138,9 +137,6 @@ public:
     long CountObjects() const;
     long Refresh();
     QMap<int, EdmRight> GetAccessorMap() const;
-    void XmlImport(QDomElement& p_rqDomElement);
-    virtual int XmlExport(QDomElement& p_rqdeObjectListManager) const;
-
     CdmObject *CreateObject(long p_lObjectId);
     QLinkedList<CdmContainerAdaptor *> GetObjectFactoryList();
 protected:
@@ -159,9 +155,6 @@ public:
     void TriggerObjectCommittedEventAfterDbReload();
 
 private:
-    void XmlImportObjectList(QDomElement& p_rqDomElement);
-    void XmlImportAccessorRights(QDomElement& p_rqDomElement);
-    void XmlImportObjects(QDomElement& p_rqDomElement);
     void CopyRights(CdmObjectContainer* p_pCdmSourceObjectList);
     void LoadChildrenObjects(const QLinkedList<long>& p_rqvlObjectIds);
     void LoadObjectRefs(QMap<long,long>& p_rqmObjectRefs);

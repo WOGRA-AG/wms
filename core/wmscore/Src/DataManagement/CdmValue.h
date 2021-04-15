@@ -40,15 +40,54 @@ class WMSMANAGER_API CdmValue : public CdmModelElement
     friend class CdmDataAccessHelper;
 
 private:
-    /*
-       * The member reference
-       */
     long m_lMemberId;
-
-    /*
-        * The Object to which his object belongs to
-        */
     CdmObject* m_rpCdmObject;
+
+public:
+    EdmValueType GetValueType() const;
+    EdmValueType GetEvenValueType(const CdmObject *pEventObject) const;
+    bool IsMustValue() const;
+    long GetSize() const;
+    long GetMemberId() const;
+    const CdmMember* GetMember() const;
+    const CdmMember* GetEventMember(const CdmObject *pEventObject) const;
+    bool IsUnique() const;
+    bool IsOwner() const;
+    int DeleteValue();
+    void SetMemberId(long p_lId);
+    int FromStringToValue(QString p_qstrValue);
+    const CdmObject* GetObject() const;
+    const CdmObject* GetDataObject() const;
+    QString GetUriInternal() const;
+    virtual void Restore(QString p_qstrValue);
+    virtual bool IsValue() const;
+    virtual QString GetUri() const;
+    virtual QString GetKeyname() const;
+    virtual QString GetEventValueKeyname(CdmValue *pCdmEventValue) const;
+    virtual QString GetInfo() const;
+    virtual QVariant GetValueVariant() const= 0;
+    virtual QVariant GetVariant() const;
+    virtual void SetVariant(QVariantMap& p_rqvHash);
+    virtual void Deploy(QVariantMap& p_rqvHash);
+    virtual void SetModified();
+    virtual bool ResolveValue();
+    virtual bool HasValue() const;
+    virtual void SetValueVariant(QVariant& p_rqVariant) = 0;
+    virtual void SetDefaultValue(const CdmMember* p_pCdmMember) = 0;
+    virtual QString GetDisplayString() const = 0;
+    virtual void SetValue(QString p_qstrValue, QString p_qstrValue2) = 0;
+    virtual void XmlExport(QDomElement& p_rqdeValue) const { Q_UNUSED(p_rqdeValue)};
+    virtual void XmlImport(QDomElement& p_rqDomElement) {Q_UNUSED(p_rqDomElement)};
+    virtual QString GetValueAsString() const= 0;
+
+
+    static CdmValue* CreateValue(CdmMember* p_pCdmMember, CdmObject* p_pCdmObject);
+    static CdmValue* CreateValue(QVariantMap& p_rqvHash, CdmObject* p_pCdmObject);
+    static CdmValue* CopyValue(const CdmValue* p_pCdmValue, CdmObject* p_pCdmObject);
+    static CdmValue *CopyEventValue(const CdmValue *p_pCdmEventValue, CdmObject *pEventObject, CdmObject* p_pCdmObject, CdmValue *p_pCdmObjectValue);
+    static CdmValue *CopyObjectValueToEventValue(const CdmValue *p_pCdmEventValue, const CdmObject *pEventObject, CdmObject *p_pCdmObject, CdmValue *p_pCdmObjectValue);
+    static CdmValue* CreateDeployValue(QVariantMap& p_rqvHash, CdmObject* p_pCdmObject);
+
 
 protected:
     CdmValue(long p_lDatabaseId,
@@ -59,7 +98,6 @@ protected:
     CdmValue(QVariantMap& p_rqvVaraint, CdmObject* p_pCdmObject);
     CdmValue(QDomElement& p_rqDomElement, CdmObject* p_pCdmObject);
     virtual ~CdmValue();
-
     void ValueChanged();
     void XmlExportValue(QDomElement& p_rqdeValue) const;
     void XmlImportValue(QDomElement& p_rqDomElement);
@@ -67,56 +105,10 @@ protected:
     virtual void SetEventValueNew(const CdmObject *pEventObject);
     virtual void SetKeyname(QString p_qstrKeyname);
 
+
 signals:
     void ValueChanged(CdmValue*);
 
-public:
-    EdmValueType GetValueType() const;
-    EdmValueType GetEvenValueType(const CdmObject *pEventObject) const;
-    bool IsMustValue() const;
-    long GetSize() const;
-    virtual bool HasValue() const;
-    long GetMemberId() const;
-    const CdmMember* GetMember() const;
-    const CdmMember* GetEventMember(const CdmObject *pEventObject) const;
-    bool IsUnique() const;
-    bool IsOwner() const;
-
-    virtual bool IsValue() const;
-    virtual QString GetUri() const;
-    virtual QString GetKeyname() const;
-    virtual QString GetEventValueKeyname(CdmValue *pCdmEventValue) const;
-    virtual QString GetInfo() const;
-    virtual QVariant GetValueVariant() const= 0;
-    virtual void SetValueVariant(QVariant& p_rqVariant)= 0;
-    virtual void SetDefaultValue(const CdmMember* p_pCdmMember)= 0;
-    virtual QString GetDisplayString() const= 0;
-    virtual void SetValue(QString p_qstrValue, QString p_qstrValue2)= 0;
-    virtual void XmlExport(QDomElement& p_rqdeValue) const= 0;
-    virtual void XmlImport(  QDomElement& p_rqDomElement )= 0;
-    virtual QString GetValueAsString() const= 0;
-    virtual QVariant GetVariant() const;
-    virtual void SetVariant(QVariantMap& p_rqvHash);
-    virtual void Deploy(QVariantMap& p_rqvHash);
-    virtual void SetModified();
-    virtual bool ResolveValue();
-
-    int DeleteValue();
-    void SetMemberId(long p_lId);
-    int FromStringToValue(QString p_qstrValue);
-
-    const CdmObject* GetObject() const;
-    const CdmObject* GetDataObject() const;
-
-    QString GetUriInternal() const;
-
-    static CdmValue* CreateValue(CdmMember* p_pCdmMember, CdmObject* p_pCdmObject);
-    static CdmValue* CreateValue(QVariantMap& p_rqvHash, CdmObject* p_pCdmObject);
-    static CdmValue* CreateValue(QDomElement& p_rqDomElement, CdmObject* p_pCdmObject);
-    static CdmValue* CopyValue(const CdmValue* p_pCdmValue, CdmObject* p_pCdmObject);
-    static CdmValue *CopyEventValue(const CdmValue *p_pCdmEventValue, CdmObject *pEventObject, CdmObject* p_pCdmObject, CdmValue *p_pCdmObjectValue);
-    static CdmValue *CopyObjectValueToEventValue(const CdmValue *p_pCdmEventValue, const CdmObject *pEventObject, CdmObject *p_pCdmObject, CdmValue *p_pCdmObjectValue);
-    static CdmValue* CreateDeployValue(QVariantMap& p_rqvHash, CdmObject* p_pCdmObject);
 };
 
 #endif

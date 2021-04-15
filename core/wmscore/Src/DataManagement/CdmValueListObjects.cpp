@@ -1,17 +1,4 @@
-﻿/******************************************************************************
- ** WOGRA technologies Modul Information
- ** Modulename: CdmValueListObjects.cpp
- ** Started Implementation: 2009/04/10
- ** Description:
- ** 
- ** implements the list of objects
- **
- ** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
- ** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. 
- **(C) copyright by WOGRA technologies All rights reserved
- *****************************************************************************/ 
-
-// System and QT Includes
+﻿// System and QT Includes
 #include <QDomDocument>
 #include <QDomNode>
 #include <QDomElement>
@@ -26,18 +13,6 @@
 #include "CdmLogging.h"
 #include "CdmValueListObjects.h"
 
-
-
-
-/** +-=---------------------------------------------------------Fr 10. Apr 19:54:08 2009----------*
- * @method  CdmValueListObjects::CdmValueListObjects         // public                            *
- * @return  void                                             //                                   *
- * @param   long p_lDatabaseId                               // The Database Id                   *
- * @param   long p_lId                                       // The Value Id                      *
- * @param   QString p_qstrKeyname                            // the value keyname                 *
- * @param   CdmObject* p_pCdmObject                          // the parent object                 *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Fr 10. Apr 19:54:08 2009----------*/
 CdmValueListObjects::CdmValueListObjects(long p_lDatabaseId,
                                          long p_lId,
                                          QString p_qstrKeyname,
@@ -47,37 +22,12 @@ CdmValueListObjects::CdmValueListObjects(long p_lDatabaseId,
    // NOTHING TO DO
 }
 
-/** +-=---------------------------------------------------------Sa 11. Apr 20:21:10 2009----------*
- * @method  CdmValueListObjects::CdmValueListObjects         // public                            *
- * @return                                                   //                                   *
- * @param   QDomElement& p_rqDomElement                      //                                   *
- * @param   CdmObject* p_pCdmObject                          //                                   *
- * @comment The constructor.                                                                      *
- *----------------last changed: --------------------------------Sa 11. Apr 20:21:10 2009----------*/
-CdmValueListObjects::CdmValueListObjects(QDomElement& p_rqDomElement, CdmObject* p_pCdmObject)
-    : CdmValueCharacterDocument(p_rqDomElement, p_pCdmObject)
-{
-   // NOTHING TO DO
-}
-
-/** +-=---------------------------------------------------------Mo 16. Apr 14:12:17 2012----------*
- * @method  CdmValueListObjects::CdmValueListObjects         // public                            *
- * @return                                                   //                                   *
- * @param   QVariantMap& p_rqvHash                          //                                   *
- * @param   CdmObject* p_pCdmObject                          //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mo 16. Apr 14:12:17 2012----------*/
 CdmValueListObjects::CdmValueListObjects(QVariantMap& p_rqvHash, CdmObject* p_pCdmObject)
     : CdmValueCharacterDocument(p_rqvHash, p_pCdmObject)
 {
     Deserialize();
 }
 
-/** +-=---------------------------------------------------------Fr 10. Apr 19:54:36 2009----------*
- * @method  CdmValueListObjects::~CdmValueListObjects        // public, virtual                   *
- * @return  void                                             //                                   *
- * @comment The Destructor of Class CdmValueListObjects                                           *
- *----------------last changed: --------------------------------Fr 10. Apr 19:54:36 2009----------*/
 CdmValueListObjects::~CdmValueListObjects()
 {
 }
@@ -100,12 +50,6 @@ QString CdmValueListObjects::GetValue() const
     return m_qstrDocument;
 }
 
-/** +-=---------------------------------------------------------Mi 9. Jan 15:06:09 2013-----------*
- * @method  CdmValueListObjects::SetList                     // public                            *
- * @return  void                                             //                                   *
- * @param   QLinkedList<CdmObject*>& p_rqvlObjects           //                                   *
- * @comment fills the list of objects                                                             *
- *----------------last changed: --------------------------------Mi 9. Jan 15:06:09 2013-----------*/
 void CdmValueListObjects::SetList(QLinkedList<CdmObject*>& p_rqvlObjects)
 {
     ClearList();
@@ -119,12 +63,6 @@ void CdmValueListObjects::SetList(QLinkedList<CdmObject*>& p_rqvlObjects)
    }
 }
 
-/** +-=---------------------------------------------------------So 10. Feb 11:40:24 2013----------*
- * @method  CdmValueListObjects::GetList                     // public, const                     *
- * @return  void                                             //                                   *
- * @param   QLinkedList<CdmObject*>& p_rqvlObjects           //                                   *
- * @comment fills the list of objects                                                             *
- *----------------last changed: --------------------------------So 10. Feb 11:40:24 2013----------*/
 void CdmValueListObjects::GetList(QLinkedList<CdmObject*>& p_rqvlObjects) const
 {
    const CdmObject* pCdmObject = GetObject();
@@ -159,12 +97,6 @@ void CdmValueListObjects::GetList(QLinkedList<CdmObject*>& p_rqvlObjects) const
    }
 }
 
-/** +-=---------------------------------------------------------Mi 9. Jan 15:09:20 2013-----------*
- * @method  CdmValueListObjects::AddValue                    // public                            *
- * @return  void                                             //                                   *
- * @param   CdmObject* p_pCmObject                           //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mi 9. Jan 15:09:20 2013-----------*/
 void CdmValueListObjects::AddValue(CdmObject* p_pCmObject)
 {
    if (CHKPTR(p_pCmObject))
@@ -204,12 +136,6 @@ void CdmValueListObjects::AddEventValue(CdmObject *pCdmObject, CdmClass *pObject
     }
 }
 
-/** +-=---------------------------------------------------------Mi 9. Jan 15:09:31 2013-----------*
- * @method  CdmValueListObjects::RemoveValue                 // public                            *
- * @return  void                                             //                                   *
- * @param   CdmObject* p_pCdmObject                          //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mi 9. Jan 15:09:31 2013-----------*/
 void CdmValueListObjects::RemoveValue(CdmObject* p_pCdmObject)
 {
    if (CHKPTR(p_pCdmObject))
@@ -218,12 +144,6 @@ void CdmValueListObjects::RemoveValue(CdmObject* p_pCdmObject)
    }
 }
 
-/** +-=---------------------------------------------------------Di 20. Nov 12:01:17 2012----------*
- * @method  CdmValueListObjects::FindObjectById              // public, slots                     *
- * @return  CdmObject*                                       //                                   *
- * @param   int p_iId                                        //                                   *
- * @comment finds the object in the list. if it is not in the list nullptr will returned.            *
- *----------------last changed: --------------------------------Di 20. Nov 12:01:17 2012----------*/
 CdmObject* CdmValueListObjects::FindObjectById(int p_iId)
 {
     CdmObject* pResult = nullptr;

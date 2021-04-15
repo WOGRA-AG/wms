@@ -1,13 +1,3 @@
-/******************************************************************************
- ** WOGRA Middleware Server Data Manager Module
- **
- ** @Author Wolfgang Graßhof
- **
- ** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
- ** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
- **(C) copyright by WOGRA technologies All rights reserved
- ******************************************************************************/
-
 #ifndef CDMOBJECT_H
 #define CDMOBJECT_H
 
@@ -33,11 +23,6 @@ class CdmJournalItem;
 class CdmMember;
 class CdmObjectContainer;
 
-/*
- * This class implements the framework objects.
- * These objects are storing values. The values
- * can be accessed by this object.
- */
 class WMSMANAGER_API CdmObject : public CdmModelElement
 {
     Q_OBJECT
@@ -49,8 +34,6 @@ class WMSMANAGER_API CdmObject : public CdmModelElement
 private:
     int                        m_iValueIdCounter;
     QMap<QString,CdmValue*>    m_qmValues;
-    // QMap<QString,QString>      m_qmObjectCache;
-    // QString                    m_qstrCache;
     long                       m_lClassId;
     CdmObjectContainer*        m_rpContainer;
     mutable long               m_lContainerId;
@@ -76,6 +59,7 @@ private:
               QString p_qstrKeyname,
               const CdmClass* p_pCdmClass,
               CdmObjectContainer* p_pContainer);
+    CdmObject();
     virtual ~CdmObject();
 
 public:
@@ -85,7 +69,6 @@ public:
     void SetObjectContainer(long lObjectContainerId);
     QString GetUri() const;
     int SetValue(const wchar_t* p_pKeyname, const double p_dValue);
-    CdmObject(QDomElement& p_rqDomElelement);
     void ClearValuesFromObject();
     CdmValue* GetEventValue(const QString& p_qstrKeyname, CdmObject *pEventObject);
     QString GetDisplayString(QString p_qstrKeyname) const;
@@ -98,7 +81,6 @@ public:
     void SetParentObject(CdmObject* p_pCdmObject);
     void SetParent(long p_lObjectId);
     void ClearPersistentValuesFromObject();
-    CdmObject();
     bool IsExactTypeOf(QString p_qstrClassName) const;
     bool IsExactTypeOf(CdmClass *p_pClass) const;
     QString GetConfig() const;
@@ -144,8 +126,6 @@ public:
     int GetValue(const QString& p_qstrKeyname, QTime& p_qtValue);
     void GetValueMap(QMap<QString, CdmValue*>& p_qmValues) const;
     int Commit();
-    virtual int XmlExport(QDomElement& p_rqdeObject) const;
-    void XmlImport(QDomElement& p_rqDomElement);
     int LockObjectOnDb();
     int UnlockObjectOnDb();
     void GetCounterValues();
@@ -172,6 +152,9 @@ public:
     virtual QString GetCaption() const;
 
     QString GetObjectContainerKeyname() const;
+    void RestoreValue(int p_iMemberId, QString p_qstrValueAsString);
+    CdmValue *GetValue(int p_iMemberId);
+
 protected slots:
     void ObjectModifiedSlot();
 
@@ -188,9 +171,7 @@ private:
     int InitObject(const CdmClass* p_pCdmClass);
     int AddObjectValue(CdmValue* p_pCdmValue);
     int RemoveValue(QString p_qstrKeyname);
-    void XmlImportObject(QDomElement& p_rqDomElement);
     int InitObject();
-    void XmlImportValues(QDomElement& p_rqDomElement);
     void DeleteOwnerRefs();
     void CommitOwnRefs();
     void CopyFromSourceObject(const CdmObject& p_rCdmObject);

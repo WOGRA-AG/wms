@@ -66,8 +66,6 @@ private:
 
 private:
     CdmDataProvider(IdmDataAccess* p_pIdmDataAccess);
-    int XmlImport(QString& p_qstrFilename);
-    int XmlStartImport(QDomDocument& p_rqDomDocument);
     // only added for neo4J testcases, so it is not neccessary to regulary login and load scheme
     void AddCurrentScheme(CdmScheme* p_pScheme);
     CdmLocatedElement* GetUriObjectInCurrentScheme(QString& p_qstrUri);
@@ -84,7 +82,6 @@ public:
     void SetSystemApplicationName(QString& p_qstrName);
     void SetApplicationVersion(QString p_qstrVersion);
     void CreateSettings(EdmSettingsMode p_eDmSettingsMode);
-    int XmlExport(QString p_qstrFilename, QString& p_qstrDatabase) const;
     long LoadClassManager(QString& p_qstrSchemeKeyname);
     long LoadScheme(QString& p_qstrDatabaseName);
     long LoadScheme(int p_iSchemeId);

@@ -130,7 +130,7 @@ protected:
     * @param   QList<CdmJournalItem*>& p_rqlItems            //                                   *
     * @comment                                                                                    *
     *----------------last changed: -----------------------------Mi 29. Aug 13:57:31 2012----------*/
-    long GetObjectModifications(int p_iObjectId,
+    long GetObjectModifications(const CdmObject *p_pObject,
                                 QDate p_qdFrom,
                                 QDate p_qdTo,
                                 QList<CdmJournalItem*>& p_rqlItems);

@@ -47,8 +47,6 @@ private:
 
 public:
     virtual ~CdmContainerManager(); // can not be private because qthreadstorage deletes this pointer
-    virtual int XmlExport(QDomElement& p_rqdeObjectListManager) const;
-    int XmlImport(QDomElement& p_rqdeObjectListManager);
     QVariant GetVariant() const;
     void Commit();
     CdmObjectContainer* FindContainerByIdLocal(long p_lObjectListId);

@@ -211,14 +211,14 @@ long CdbJournal::ObjectListDeleted(int p_iObjectListId)
    return lRet;
 }
 
-long CdbJournal::GetObjectModifications(int p_iObjectId,
+long CdbJournal::GetObjectModifications(const CdmObject* p_pObject,
                                           QDate p_qdFrom,
                                           QDate p_qdTo,
                                           QList<CdmJournalItem*>& p_rqlItems)
 {
    long lRet = CdmLogging::eDmObjectAccessError;
 
-   if (p_iObjectId > 0)
+   if (CHKPTR(p_pObject))
    {
       QDateTime qdFrom;
       qdFrom.setDate(p_qdFrom);
@@ -232,7 +232,7 @@ long CdbJournal::GetObjectModifications(int p_iObjectId,
       QString qstrQuery = "select UserId, SessionId, DateTime, ChangeMode, `Member`, Json_CHanges, DisplayValue ";
       qstrQuery += "from WMS_JOURNAL ";
       qstrQuery += QString("where objectId = %1 and DateTime >= %2 and DateTime <= %3")
-         .arg(p_iObjectId)
+         .arg(p_pObject->GetId())
          .arg(CwmsUtilities::ChangeDateToString(qdFrom))
          .arg(CwmsUtilities::ChangeDateToString(qdTo));
       lRet = m_rpCdbDataAccess->ExecuteQuery(qstrQuery, cQSqlQuery);
@@ -259,6 +259,8 @@ long CdbJournal::GetObjectModifications(int p_iObjectId,
                pCdmItem->SetModified(qdtModified);
                pCdmItem->SetChangeMode((EdmChangeMode) iChangeMode);
                pCdmItem->SetMemberId(iMemberId);
+               pCdmItem->SetObjectId(p_pObject->GetId());
+               pCdmItem->SetObjectListId(p_pObject->GetObjectContainerId());
                pCdmItem->SetChanges(qstrChanges);
                pCdmItem->SetDisplayString(qstrDisplayValue);
                p_rqlItems.append(pCdmItem);
@@ -303,7 +305,7 @@ long CdbJournal::GetContainerModifications(int p_iObjectListId,
 
          if (cQSqlQuery.isValid())
          {
-            do // reading each bool
+            do
             {
                int       iUserId           = cQSqlQuery.value(0).toInt();
                int       iSessionId        = cQSqlQuery.value(1).toInt();
@@ -321,6 +323,7 @@ long CdbJournal::GetContainerModifications(int p_iObjectListId,
                pCdmItem->SetChangeMode((EdmChangeMode) iChangeMode);
                pCdmItem->SetMemberId(iMemberId);
                pCdmItem->SetObjectId(iObjectId);
+               pCdmItem->SetObjectListId(p_iObjectListId);
                pCdmItem->SetChanges(qstrChanges);
                pCdmItem->SetDisplayString(qstrDisplayValue);
                p_rqlItems.append(pCdmItem);

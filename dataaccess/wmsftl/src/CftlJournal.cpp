@@ -254,23 +254,14 @@ long CftlJournal::ObjectListDeleted(int p_iObjectListId)
    return lRet;
 }
 
-/** +-=---------------------------------------------------------Mi 29. Aug 13:57:31 2012----------*
- * @method  CftlJournal::GetObjectModifications             // public                            *
- * @return  long                                             //                                   *
- * @param   int p_iObjectId                                  //                                   *
- * @param   QDate p_qdFrom                                   //                                   *
- * @param   QDate p_qdTo                                     //                                   *
- * @param   QList<CdmJournalItem*>& p_rqlItems               //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mi 29. Aug 13:57:31 2012----------*/
-long CftlJournal::GetObjectModifications(int p_iObjectId,
+long CftlJournal::GetObjectModifications(const CdmObject* p_pObject,
                                           QDate p_qdFrom,
                                           QDate p_qdTo,
                                           QList<CdmJournalItem*>& p_rqlItems)
 {
    long lRet = CdmLogging::eDmObjectAccessError;
 
-   if (p_iObjectId > 0)
+   if (p_pObject)
    {
       QDateTime qdFrom;
       qdFrom.setDate(p_qdFrom);
@@ -284,7 +275,7 @@ long CftlJournal::GetObjectModifications(int p_iObjectId,
       QString qstrQuery = "select UserId, SessionId, DateTime, ChangeMode, Member, Json_CHanges, DisplayValue ";
       qstrQuery += "from WMS_JOURNAL ";
       qstrQuery += QString("where objectId = %1 and DateTime >= %2 and DateTime <= %3")
-         .arg(p_iObjectId)
+         .arg(p_pObject->GetId())
          .arg(CwmsUtilities::ChangeDateToString(qdFrom))
          .arg(CwmsUtilities::ChangeDateToString(qdTo));
       lRet = m_rpCftlDataAccess->ExecuteQuery(qstrQuery, cQSqlQuery);
@@ -311,6 +302,8 @@ long CftlJournal::GetObjectModifications(int p_iObjectId,
                pCdmItem->SetModified(qdtModified);
                pCdmItem->SetChangeMode((EdmChangeMode) iChangeMode);
                pCdmItem->SetMemberId(iMemberId);
+               pCdmItem->SetObjectId(p_pObject->GetId());
+               pCdmItem->SetObjectListId(p_pObject->GetObjectContainerId());
                pCdmItem->SetChanges(qstrChanges);
                pCdmItem->SetDisplayString(qstrDisplayValue);
                p_rqlItems.append(pCdmItem);
@@ -383,6 +376,7 @@ long CftlJournal::GetObjectListModifications(int p_iObjectListId,
                pCdmItem->SetMemberId(iMemberId);
                pCdmItem->SetObjectId(iObjectId);
                pCdmItem->SetChanges(qstrChanges);
+               pCdmItem->SetObjectListId(p_iObjectListId);
                pCdmItem->SetDisplayString(qstrDisplayValue);
                p_rqlItems.append(pCdmItem);
             }  
@@ -457,7 +451,7 @@ long CftlJournal::GetDatabaseModifications(int p_iSchemeId,
                pCdmItem->SetObjectId(iObjectId);
                pCdmItem->SetObjectListId(iObjectLIstId);
                pCdmItem->SetChanges(qstrChanges);
-               pCdmItem->SetDisplayString(qstrDisplayValue);
+
                p_rqlItems.append(pCdmItem);
             }  
             while(cQSqlQuery.next());
