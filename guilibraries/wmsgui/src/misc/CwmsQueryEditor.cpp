@@ -33,6 +33,7 @@
 #include "CdmQueryBuilder.h"
 #include "CdmQueryElement.h"
 #include "CdmQueryEnhanced.h"
+#include "CdmObject.h"
 
 // Basetools includes
 #include <CwmsTimeMeassurement.h>
@@ -249,6 +250,19 @@ void CwmsQueryEditor::EditClickedSlot()
     }
 }
 
+void CwmsQueryEditor::DeleteClickedSlot()
+{
+    CdmObject* pObject = m_cCdmModel.GetObject(m_pqtvResult);
+
+    if (pObject)
+    {
+        pObject->SetDeleted();
+        pObject->Commit();
+        ExecuteClickedSlot();
+    }
+}
+
+
 void CwmsQueryEditor::SaveResultClickedSlot()
 {
     CwmsQueryModelExportCsv::SaveModel(m_cCdmModel);
@@ -256,7 +270,7 @@ void CwmsQueryEditor::SaveResultClickedSlot()
 
 void CwmsQueryEditor::ClearResultClickedSlot()
 {
-    m_cCdmModel.Execute("");
+    m_cCdmModel.Clear();
 }
 
 

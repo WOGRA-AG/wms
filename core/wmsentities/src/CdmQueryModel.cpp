@@ -1,16 +1,3 @@
-/******************************************************************************
- ** WOGRA technologies Gmbh & Co KG Modul Information
- ** Modulename: CdmEnhancedQueryProxy.cpp
- ** Started Implementation: 2010/11/11
- ** Description:
- **
- ** This class implements the proxy for tableviews of enhanced queries
- **
- ** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
- ** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
- **(C) copyright by WOGRA technologies Gmbh & Co KG All rights reserved
- *****************************************************************************/
-
 // System and QT Includes
 #include <QVector>
 #include <QByteArray>
@@ -35,11 +22,6 @@
 // defines
 #define EXECUTIONTIMEOUT 500
 
-/** +-=---------------------------------------------------------Do 26. Jul 16:33:42 2012----------*
- * @method  CdmQueryModel::CdmQueryModel                     // public                            *
- * @return                                                   //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Do 26. Jul 16:33:42 2012----------*/
 CdmQueryModel::CdmQueryModel()
     : QAbstractItemModel(nullptr),
       m_iRowToInsert(0),
@@ -50,21 +32,11 @@ CdmQueryModel::CdmQueryModel()
     m_pCdmQuery = new CdmQueryEnhanced(this);
 }
 
-/** +-=---------------------------------------------------------Do 26. Jul 16:56:39 2012----------*
- * @method  CdmQueryModel::~CdmQueryModel                    // public, virtual                   *
- * @return  void                                             //                                   *
- * @comment The Destructor of Class CdmQueryModel                                                 *
- *----------------last changed: --------------------------------Do 26. Jul 16:56:39 2012----------*/
 CdmQueryModel::~CdmQueryModel()
 {
     DELPTR(m_pCdmQuery)
 }
 
-/** +-=---------------------------------------------------------Do 26. Jul 16:45:12 2012----------*
- * @method  CdmQueryModel::rowCount                          // public, const                     *
- * @return  int                                              //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Do 26. Jul 16:45:12 2012----------*/
 int CdmQueryModel::rowCount() const
 {
     int iRet = 0;
@@ -77,12 +49,6 @@ int CdmQueryModel::rowCount() const
     return iRet;
 }
 
-/** +-=---------------------------------------------------------Do 11. Okt 11:54:59 2012----------*
- * @method  CdmQueryModel::rowCount                          // public, const                     *
- * @return  int                                              //                                   *
- * @param   const QModelIndex & p_rParent                    //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Do 11. Okt 11:54:59 2012----------*/
 int CdmQueryModel::rowCount(const QModelIndex & p_rParent) const
 {
     int iRet = 0;
@@ -97,7 +63,7 @@ int CdmQueryModel::rowCount(const QModelIndex & p_rParent) const
     }
     else
     {
-        if (CHKPTR(m_pCdmQuery))
+        if (m_pCdmQuery)
         {
             CdmObjectContainer* pCdmObjectContainer = m_pCdmQuery->GetContainer();
 
@@ -116,11 +82,6 @@ int CdmQueryModel::rowCount(const QModelIndex & p_rParent) const
     return iRet;
 }
 
-/** +-=---------------------------------------------------------Do 26. Jul 16:45:39 2012----------*
- * @method  CdmQueryModel::columnCount                       // public, const                     *
- * @return  int                                              //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Do 26. Jul 16:45:39 2012----------*/
 int CdmQueryModel::columnCount() const
 {
     int iRet = 0;
@@ -133,23 +94,11 @@ int CdmQueryModel::columnCount() const
     return iRet;
 }
 
-/** +-=---------------------------------------------------------Do 26. Jul 16:45:50 2012----------*
- * @method  CdmQueryModel::columnCount                       // public, const                     *
- * @return  int                                              //                                   *
- * @param   const QModelIndex &                              //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Do 26. Jul 16:45:50 2012----------*/
 int CdmQueryModel::columnCount(const QModelIndex &) const
 {
     return columnCount();
 }
 
-/** +-=---------------------------------------------------------Mi 13. Mrz 13:07:24 2013----------*
- * @method  CdmQueryModel::AddColumn                         // public, slots                     *
- * @return  void                                             //                                   *
- * @param   QString p_qstrKeyname                            //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mi 13. Mrz 13:07:24 2013----------*/
 void CdmQueryModel::AddColumn(QString p_qstrKeyname)
 {
     if (m_pCdmQuery)
@@ -158,11 +107,6 @@ void CdmQueryModel::AddColumn(QString p_qstrKeyname)
     }
 }
 
-/** +-=---------------------------------------------------------Mi 13. Mrz 13:07:27 2013----------*
- * @method  CdmQueryModel::ClearColumns                      // public, slots                     *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mi 13. Mrz 13:07:27 2013----------*/
 void CdmQueryModel::ClearColumns()
 {
     if (m_pCdmQuery)
@@ -171,13 +115,14 @@ void CdmQueryModel::ClearColumns()
     }
 }
 
-/** +-=---------------------------------------------------------Mi 15. Aug 12:43:36 2012----------*
- * @method  CdmQueryModel::data                              // public, const, virtual            *
- * @return  QVariant                                         //                                   *
- * @param   const QModelIndex & p_qmIndex                    //                                   *
- * @param   int p_iRole = Qt::DisplayRole                    //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mi 15. Aug 12:43:36 2012----------*/
+void CdmQueryModel::Clear()
+{
+    if (m_pCdmQuery)
+    {
+        DELPTR(m_pCdmQuery);
+    }
+}
+
 QVariant CdmQueryModel::data(const QModelIndex & p_qmIndex, int p_iRole) const
 {
     QVariant qVariant;
@@ -263,14 +208,6 @@ QVariant CdmQueryModel::data(const QModelIndex & p_qmIndex, int p_iRole) const
     return qVariant;
 }
 
-/** +-=---------------------------------------------------------Mo 17. Dez 13:52:26 2012----------*
- * @method  CdmQueryModel::data                              // public, const, virtual            *
- * @return  QVariant                                         //                                   *
- * @param   int p_iRow                                       //                                   *
- * @param   int p_iColumn                                    //                                   *
- * @param   int p_iRole = Qt::DisplayRole                    //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mo 17. Dez 13:52:26 2012----------*/
 QVariant CdmQueryModel::data(int p_iRow, int p_iColumn, int p_iRole) const
 {
     Q_UNUSED(p_iRole)
@@ -286,14 +223,6 @@ QVariant CdmQueryModel::data(int p_iRow, int p_iColumn, int p_iRole) const
     return qVariant;
 }
 
-/** +-=---------------------------------------------------------Mo 17. Dez 13:36:42 2012----------*
- * @method  CdmQueryModel::data                              // public, const, virtual            *
- * @return  QVariant                                         //                                   *
- * @param   int p_iRow                                       //                                   *
- * @param   QString p_qstrColumnName                         //                                   *
- * @param   int p_iRole = Qt::DisplayRole                    //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mo 17. Dez 13:36:42 2012----------*/
 QVariant CdmQueryModel::data(int p_iRow, QString p_qstrColumnName, int p_iRole) const
 {
     Q_UNUSED(p_iRole)
@@ -314,12 +243,6 @@ QVariant CdmQueryModel::data(int p_iRow, QString p_qstrColumnName, int p_iRole) 
     return qVariant;
 }
 
-/** +-=---------------------------------------------------------Do 26. Jul 16:46:21 2012----------*
- * @method  CdmQueryModel::GetObject                         // public                            *
- * @return  CdmObject*                                       //                                   *
- * @param   QAbstractItemView* p_pqItemView                  //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Do 26. Jul 16:46:21 2012----------*/
 CdmObject* CdmQueryModel::GetObject(QAbstractItemView* p_pqItemView)
 {
     CdmObject* pCdmObject = nullptr;
@@ -398,12 +321,6 @@ QModelIndexList CdmQueryModel::getSelection(QAbstractItemView* p_pqItemView, QMo
     return list;
 }
 
-/** +-=---------------------------------------------------------Do 26. Jul 16:46:31 2012----------*
- * @method  CdmQueryModel::GetObject                         // public                            *
- * @return  CdmObject*                                       //                                   *
- * @param   const QModelIndex & p_qmIndex                    //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Do 26. Jul 16:46:31 2012----------*/
 CdmObject* CdmQueryModel::GetObject(const QModelIndex & p_qmIndex)
 {
     CdmObject* pCdmObject = nullptr;
@@ -466,14 +383,6 @@ CdmObject* CdmQueryModel::GetObject(const int p_iRow)
     }
 }
 
-/** +-=---------------------------------------------------------Mi 15. Aug 12:43:18 2012----------*
- * @method  CdmQueryModel::headerData                        // public, const, virtual            *
- * @return  QVariant                                         //                                   *
- * @param   int p_iSection                                   //                                   *
- * @param   Qt::Orientation p_iOrientation                   //                                   *
- * @param   int p_iRole = Qt::DisplayRole                    //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mi 15. Aug 12:43:18 2012----------*/
 QVariant CdmQueryModel::headerData(int p_iSection, Qt::Orientation p_iOrientation, int p_iRole) const
 {
     QVariant qVariant;
@@ -532,24 +441,11 @@ QVariant CdmQueryModel::headerData(int p_iSection, Qt::Orientation p_iOrientatio
     return qVariant;
 }
 
-/** +-=---------------------------------------------------------Fr 5. Okt 11:45:45 2012-----------*
- * @method  CdmQueryModel::AddDisplayHeader                  // public                            *
- * @return  void                                             //                                   *
- * @param   QString p_qstrKeyname                            //                                   *
- * @param   QString p_qstrDisplayString                      //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Fr 5. Okt 11:45:45 2012-----------*/
 void CdmQueryModel::AddDisplayHeader(QString p_qstrKeyname, QString p_qstrDisplayString)
 {
     m_qmDisplayHeader.insert(p_qstrKeyname, p_qstrDisplayString);
 }
 
-/** +-=---------------------------------------------------------Do 26. Jul 16:55:00 2012----------*
- * @method  CdmQueryModel::Execute                           // public                            *
- * @return  void                                             //                                   *
- * @param   QString p_qstrQuery                              //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Do 26. Jul 16:55:00 2012----------*/
 void CdmQueryModel::Execute(QString p_qstrQuery)
 {
     CdmQuery* pCdmQuery = CdmQueryBuilder::BuildQuery(p_qstrQuery);
@@ -565,12 +461,6 @@ void CdmQueryModel::Execute(QString p_qstrQuery)
     }
 }
 
-/** +-=---------------------------------------------------------Do 26. Jul 16:54:05 2012----------*
- * @method  CdmQueryModel::Execute                           // public                            *
- * @return  void                                             //                                   *
- * @param   CdmQueryEnhanced* p_pCdmQuery                    //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Do 26. Jul 16:54:05 2012----------*/
 void CdmQueryModel::Execute(CdmQuery* p_pCdmQuery)
 {
     if (CHKPTR(p_pCdmQuery) && (p_pCdmQuery != m_pCdmQuery))
@@ -587,11 +477,6 @@ void CdmQueryModel::Execute(CdmQuery* p_pCdmQuery)
     Execute();
 }
 
-/** +-=---------------------------------------------------------Mo 24. Sep 18:51:53 2012----------*
- * @method  CdmQueryModel::Execute                           // public, virtual                   *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mo 24. Sep 18:51:53 2012----------*/
 void CdmQueryModel::Execute()
 {
     if (CHKPTR(m_pCdmQuery) && (m_pCdmQuery->GetClass() || m_pCdmQuery->GetContainer()))
@@ -623,11 +508,6 @@ void CdmQueryModel::Execute()
     emit UpdateSignal();
 }
 
-/** +-=---------------------------------------------------------Mi 15. Aug 12:45:28 2012----------*
- * @method  CdmQueryModel::UpdateSlot                        // protected, slots                  *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mi 15. Aug 12:45:28 2012----------*/
 void CdmQueryModel::UpdateSlot()
 {
     BODY_TRY
@@ -670,13 +550,6 @@ QHash<int, QByteArray> CdmQueryModel::roleNames() const
     return roles;
 }
 
-
-/** +-=---------------------------------------------------------Do 26. Jul 16:48:23 2012----------*
- * @method  CdmQueryModel::GetColumnAlignment                // private, const                    *
- * @return  QVariant                                         //                                   *
- * @param   QString p_qstrKeyname                            //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Do 26. Jul 16:48:23 2012----------*/
 QVariant CdmQueryModel::GetColumnAlignment(QString p_qstrKeyname) const
 {
     QVariant qVariant;
@@ -694,12 +567,6 @@ QVariant CdmQueryModel::GetColumnAlignment(QString p_qstrKeyname) const
     return qVariant;
 }
 
-/** +-=---------------------------------------------------------Do 26. Jul 16:48:33 2012----------*
- * @method  CdmQueryModel::GetColumnTooltip                  // private, const                    *
- * @return  QVariant                                         //                                   *
- * @param   QString p_qstrKeyname                            //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Do 26. Jul 16:48:33 2012----------*/
 QVariant CdmQueryModel::GetColumnTooltip(QString p_qstrKeyname) const
 {
     QVariant qVariant;
@@ -713,13 +580,6 @@ QVariant CdmQueryModel::GetColumnTooltip(QString p_qstrKeyname) const
     return qVariant;
 }
 
-/** +-=---------------------------------------------------------Do 26. Jul 16:49:00 2012----------*
- * @method  CdmQueryModel::GetDisplayString                  // private, const                    *
- * @return  QString                                          //                                   *
- * @param   QString p_qstrMember                             //                                   *
- * @param   QVariant p_qvValue                               //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Do 26. Jul 16:49:00 2012----------*/
 QString CdmQueryModel::GetDisplayString(QString p_qstrMember, QVariant p_qvValue) const
 {
     QString qstrRet;
@@ -737,13 +597,6 @@ QString CdmQueryModel::GetDisplayString(QString p_qstrMember, QVariant p_qvValue
     return qstrRet;
 }
 
-/** +-=---------------------------------------------------------Do 26. Jul 16:49:12 2012----------*
- * @method  CdmQueryModel::sort                              // private                           *
- * @return  void                                             //                                   *
- * @param   int p_iColumn                                    //                                   *
- * @param   Qt::SortOrder p_eSortOrder                       //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Do 26. Jul 16:49:12 2012----------*/
 void CdmQueryModel::sort(int p_iColumn, Qt::SortOrder p_eSortOrder)
 {
     if (m_pCdmQuery)
@@ -765,12 +618,6 @@ void CdmQueryModel::sort(int p_iColumn, Qt::SortOrder p_eSortOrder)
     }
 }
 
-/** +-=---------------------------------------------------------Mo 11. Feb 09:26:08 2013----------*
- * @method  CdmQueryModel::FindMemberByKeyname               // private, const                    *
- * @return  const CdmMember*                                 //                                   *
- * @param   QString p_qstrKeyname                            //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mo 11. Feb 09:26:08 2013----------*/
 const CdmMember* CdmQueryModel::FindMemberByKeyname(QString p_qstrKeyname) const
 {
     const CdmMember* pCdmMember = nullptr;
@@ -798,22 +645,11 @@ const CdmMember* CdmQueryModel::FindMemberByKeyname(QString p_qstrKeyname) const
     return pCdmMember;
 }
 
-/** +-=---------------------------------------------------------Do 23. Aug 15:07:52 2012----------*
- * @method  CdmQueryModel::GetQuery                          // public                            *
- * @return  CdmQueryEnhanced*                                //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Do 23. Aug 15:07:52 2012----------*/
 CdmQuery* CdmQueryModel::GetQuery()
 {
     return m_pCdmQuery;
 }
 
-/** +-=---------------------------------------------------------Di 25. Sep 16:05:40 2012----------*
- * @method  CdmQueryModel::SetProxy                          // public                            *
- * @return  void                                             //                                   *
- * @param   CdmProxyBase* p_pProxy                           //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Di 25. Sep 16:05:40 2012----------*/
 void CdmQueryModel::SetProxy(CdmEnhancedQueryProxy* p_pProxy)
 {
     if (p_pProxy && m_pCdmQuery)
@@ -823,12 +659,6 @@ void CdmQueryModel::SetProxy(CdmEnhancedQueryProxy* p_pProxy)
     }
 }
 
-/** +-=---------------------------------------------------------Di 25. Sep 15:38:05 2012----------*
- * @method  CdmQueryModel::SetObjectList                     // public                            *
- * @return  void                                             //                                   *
- * @param   CdmObjectContainer* p_pList                           //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Di 25. Sep 15:38:05 2012----------*/
 void CdmQueryModel::SetContainer(CdmObjectContainer* p_pList)
 {
     if (p_pList != nullptr)
@@ -842,12 +672,6 @@ void CdmQueryModel::SetContainer(CdmObjectContainer* p_pList)
     }
 }
 
-/** +-=---------------------------------------------------------Di 25. Sep 15:48:50 2012----------*
- * @method  CdmQueryModel::SetObjectList                     // public                            *
- * @return  void                                             //                                   *
- * @param   QString p_qstrObjectListKeyname                  //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Di 25. Sep 15:48:50 2012----------*/
 void CdmQueryModel::SetContainer(QString p_qstrObjectListKeyname)
 {
     CdmDataProvider* pCdmManager = CdmSessionManager::GetDataProvider();
@@ -866,11 +690,6 @@ void CdmQueryModel::SetContainer(QString p_qstrObjectListKeyname)
     }
 }
 
-/** +-=---------------------------------------------------------Di 25. Sep 15:38:18 2012----------*
- * @method  CdmQueryModel::GetContainer                     // public                            *
- * @return  CdmObjectContainer*                                   //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Di 25. Sep 15:38:18 2012----------*/
 CdmObjectContainer* CdmQueryModel::GetContainer()
 {
     CdmObjectContainer* pList = nullptr;
@@ -883,13 +702,6 @@ CdmObjectContainer* CdmQueryModel::GetContainer()
     return pList;
 }
 
-/** +-=---------------------------------------------------------Di 25. Jun 16:05:59 2013----------*
- * @method  CdmQueryModel::AddViewProxy                      // public                            *
- * @return  void                                             //                                   *
- * @param   int p_iColumn                                    //                                   *
- * @param   IwmsViewProxy* p_pProxy                          //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Di 25. Jun 16:05:59 2013----------*/
 void CdmQueryModel::AddViewProxy(int p_iColumn, IwmsViewProxy* p_pProxy)
 {
     BODY_TRY
@@ -915,22 +727,11 @@ void CdmQueryModel::AddViewProxy(int p_iColumn, IwmsViewProxy* p_pProxy)
     BODY_CATCH
 }
 
-/** +-=---------------------------------------------------------Mi 20. Feb 16:41:47 2013----------*
- * @method  CdmQueryModel::GetClass                          // public                            *
- * @return  const CdmClass*                                  //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mi 20. Feb 16:41:47 2013----------*/
 const CdmClass* CdmQueryModel::GetClass()
 {
     return GetContainer()->GetClass();
 }
 
-/** +-=---------------------------------------------------------Mi 10. Okt 17:42:14 2012----------*
- * @method  CdmQueryModel::parent                            // private, const                    *
- * @return  QModelIndex                                      //                                   *
- * @param   const QModelIndex & index                        //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mi 10. Okt 17:42:14 2012----------*/
 QModelIndex CdmQueryModel::parent(const QModelIndex & index) const
 {
     QModelIndex qRet;
@@ -954,12 +755,6 @@ QModelIndex CdmQueryModel::parent(const QModelIndex & index) const
     return qRet;
 }
 
-/** +-=---------------------------------------------------------Do 11. Okt 11:53:33 2012----------*
- * @method  CdmQueryModel::hasChildren                       // public, const                     *
- * @return  bool                                             //                                   *
- * @param   const QModelIndex & parent = QModelIndex()       //                                   *
- * @comment reimplemented                                                                         *
- *----------------last changed: --------------------------------Do 11. Okt 11:53:33 2012----------*/
 bool CdmQueryModel::hasChildren(const QModelIndex & parent) const
 {
     bool bRet = false;
@@ -972,28 +767,12 @@ bool CdmQueryModel::hasChildren(const QModelIndex & parent) const
     return bRet;
 }
 
-
-/** +-=---------------------------------------------------------Mi 26. Sep 11:58:29 2012----------*
- * @method  CdmQueryModel::ObjectCommitedEvent               // protected, virtual                *
- * @return  void                                             //                                   *
- * @param   long #p_lObjectId                                //                                   *
- * @comment This mehtod will be called if a object was modified.                                  *
- *----------------last changed: --------------------------------Mi 26. Sep 11:58:29 2012----------*/
-void CdmQueryModel::ObjectCommitedEvent(long )
+void CdmQueryModel::ObjectCommitedEvent(long)
 {
     UpdateSlot();
 }
 
 
-/** +-=---------------------------------------------------------Do 11. Okt 15:45:11 2012----------*
- * @method  CdmQueryModel::index                             // public, const                     *
- * @return  QModelIndex                                      //                                   *
- * @param   int p_iRow                                       //                                   *
- * @param   int p_iColumn                                    //                                   *
- * @param   const QModelIndex & parent = QModelIndex()       //                                   *
- * @comment QModelIndex QAbstractItemModel::index ( int row, int column, const QModelIndex &      *
- *          parent = QModelIndex() ) const                                                        *
- *----------------last changed: --------------------------------Do 11. Okt 15:45:11 2012----------*/
 QModelIndex CdmQueryModel::index(int p_iRow, int p_iColumn, const QModelIndex & parent) const
 {
     QModelIndex qmIndex;
@@ -1017,7 +796,7 @@ QModelIndex CdmQueryModel::index(int p_iRow, int p_iColumn, const QModelIndex & 
             CdmQueryResultObject* pObject = pParent->GetChildAtRow(p_iRow);
             qmIndex = createIndex(p_iRow, p_iColumn, pObject);
         }
-        else if (m_pCdmQuery->IsEnhancedQuery() == false)
+        else if (m_pCdmQuery->HasResultElements() == false)
         {
             qmIndex = createIndex(p_iRow, p_iColumn);
         }

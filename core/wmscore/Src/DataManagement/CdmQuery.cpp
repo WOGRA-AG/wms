@@ -1,15 +1,3 @@
-/******************************************************************************
- ** WOGRA Middleware Server Communication Module
- **
- ** @Author Wolfgang Graßhof 
- **
- ** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
- ** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. 
- **(C) copyright by WOGRA technologies All rights reserved
- ******************************************************************************/
-
-
-
 // System and QT Includes
 #include <qdom.h>
 #include <QModelIndex>
@@ -38,23 +26,15 @@
 static int HIGHCOMPLEXITY = 14;
 
 
-/** +-=---------------------------------------------------------Mi 10. Nov 18:43:42 2010----------*
- * @method  CdmQuery::CdmQuery                               // public                            *
- * @return                                                   //                                   *
- * @comment The Default constructor.                                                              *
- *----------------last changed: --------------------------------Mi 10. Nov 18:43:42 2010----------*/
 CdmQuery::CdmQuery(QObject* parent)
 : QObject(parent),
   m_qmResultElements(),
   m_qlResultElementsPos(),
   m_qvAddedSequence(),
-  m_bForceEnhanced(false),
   m_pRoot(nullptr),
   m_rpResultLastResultObject(nullptr),
   m_bIsObjectNeededInResult(true),
   m_pCdmQueryElement(nullptr),
-  m_bLocal(false),
-  m_qstrScheme(),
   m_lContainerId(0),
   m_rpCdmClass(nullptr),
   m_lClassId(0),
@@ -69,25 +49,12 @@ CdmQuery::CdmQuery(QObject* parent)
     m_pRoot = new CdmQueryResultObject(-1, -1, nullptr, this);
 }
 
-/** +-=---------------------------------------------------------Sa 20. Aug 10:51:08 2005----------*
- * @method  CdmQuery::CdmQuery                               // public                            *
- * @return                                                   //                                   *
- * @param   CdmObjectContainer* p_pContainer                  //                                   *
- * @comment The constructor of the query. this query searches for object specified in the         *
- *          query element.                                                                        *
- *----------------last changed: --------------------------------Sa 20. Aug 10:51:08 2005----------*/
 CdmQuery::CdmQuery(CdmObjectContainer* p_pContainer, QObject* parent)
 : CdmQuery(parent)
 {
     SetContainer(p_pContainer);
 }
 
-/** +-=---------------------------------------------------------So 11. Nov 10:40:53 2007----------*
- * @method  CdmQuery::CdmQuery                               // public                            *
- * @return                                                   //                                   *
- * @param   CdmClass* p_pCdmClass                            //                                   *
- * @comment The Default constructor.                                                              *
- *----------------last changed: Wolfgang Graßhof----------------So 11. Nov 10:40:53 2007----------*/
 CdmQuery::CdmQuery(CdmClass* p_pCdmClass, QObject* parent)
 : CdmQuery(parent)
 {
@@ -107,11 +74,6 @@ CdmQuery::CdmQuery(const CdmQuery &p_rQuery, QObject* parent)
    SetVariant(qvHash);
 }
 
-/** +-=---------------------------------------------------------Sa 20. Aug 12:48:29 2005----------*
- * @method  CdmQuery::~CdmQuery                              // public, virtual                   *
- * @return  void                                             //                                   *
- * @comment The Destructor of Class CdmQuery                                                      *
- *----------------last changed: --------------------------------Sa 20. Aug 12:48:29 2005----------*/
 CdmQuery::~CdmQuery(  )
 {
     ClearAll();
@@ -125,9 +87,7 @@ void CdmQuery::SetVariant(QVariantMap &p_rqvHash)
     m_lClassId = p_rqvHash.value("ClassId", 0).toInt();
     m_lContainerId = p_rqvHash.value("ObjectListId", 0).toInt();
     m_bExecuted = p_rqvHash.value("Executed", false).toBool();
-    m_bLocal = p_rqvHash.value("Local", false).toBool();
     m_bOrderAsc = p_rqvHash.value("OrderAsc", true).toBool();
-    m_qstrScheme = p_rqvHash.value("Database").toString();
     m_qstrlOrderBy = p_rqvHash.value("OrderBy").toStringList();
     m_iResultStart = p_rqvHash.value("ResultStart", 0).toInt();
     m_iMaxResults = p_rqvHash.value("MaxResults", 0).toInt();
@@ -138,16 +98,8 @@ void CdmQuery::SetVariant(QVariantMap &p_rqvHash)
 
     if (m_lClassId > 0)
     {
-        if (m_qstrScheme.isEmpty())
-        {
-            SetClassId(m_lClassId);
-        }
-        else
-        {
-            SetClassId(m_lClassId, m_qstrScheme);
-        }
+        SetClassId(m_lClassId);
     }
-
 
     if (p_rqvHash.contains("RootElement"))
     {
@@ -192,15 +144,12 @@ QVariant CdmQuery::GetVariant() const
     QVariantMap qvHash;
     qvHash.insert("OrderBy", m_qstrlOrderBy);
     qvHash.insert("OrderAsc", m_bOrderAsc);
-    qvHash.insert("Database", m_qstrScheme);
-    qvHash.insert("Local", m_bLocal);
     qvHash.insert("Executed", m_bExecuted);
     qvHash.insert("ResultStart", m_iResultStart);
     qvHash.insert("MaxResults", m_iMaxResults);
     qvHash.insert("Valid", m_bValid);
     qvHash.insert("GroupBy", QStringList(m_qlGroupBy));
     qvHash.insert("IsObjectNeededInResult", m_bIsObjectNeededInResult);
-    qvHash.insert("ForceEnhanced", m_bForceEnhanced);
 
     if (m_lContainerId > 0)
     {
@@ -247,19 +196,7 @@ QVariant CdmQuery::GetVariant() const
     }
 
     qvHash.insert("Sequence", qlSequence);
-
-
     return qvHash;
-}
-
-void CdmQuery::SetLocalSearch()
-{
-    m_bLocal = true;
-}
-
-void CdmQuery::SetSchemeSearch()
-{
-    m_bLocal = false;
 }
 
 void CdmQuery::SetSubQuery(bool p_bSubQuery)
@@ -346,8 +283,6 @@ void CdmQuery::ClearAll()
     DeleteQueryElement();
 
     m_bIsObjectNeededInResult = true;
-    m_bLocal = false;
-    m_qstrScheme.clear();
     m_lContainerId = 0;
     m_rpCdmClass = nullptr;
     m_lClassId = 0;
@@ -547,15 +482,7 @@ void CdmQuery::DeleteResultElements()
     m_qvAddedSequence.clear();
 }
 
-void CdmQuery::SetScheme(QString p_qstrDatabase)
-{
-    m_qstrScheme = p_qstrDatabase;
-}
 
-QString CdmQuery::GetScheme() const
-{
-    return m_qstrScheme;
-}
 
 /** +-=---------------------------------------------------------Di 20. Nov 10:59:04 2012----------*
  * @method  CdmQuery::SetQueryElement                        // public                            *
@@ -627,7 +554,7 @@ int CdmQuery::GetLimitResultCount() const
 
 void CdmQuery::SetSorting(int p_iColumn, Qt::SortOrder p_eSortOrder)
 {
-    if (IsEnhancedQuery())
+    if (HasResultElements())
     {
         if (0 <= p_iColumn && p_iColumn < GetColumnCount())
         {
@@ -712,13 +639,6 @@ void CdmQuery::SetContainer(CdmObjectContainer* p_pContainer)
         m_lContainerId = p_pContainer->GetId();
         m_rpCdmClass = p_pContainer->GetClass();
         m_lClassId = p_pContainer->GetClassId();
-
-        CdmScheme* pCdmDatabase = p_pContainer->GetScheme();
-
-        if (CHKPTR(pCdmDatabase))
-        {
-            SetScheme(pCdmDatabase->GetSchemeName());
-        }
     }
     else
     {
@@ -750,24 +670,6 @@ CdmObjectContainer* CdmQuery::GetContainer() const
     return pContainer;
 }
 
-/** +-=---------------------------------------------------------Di 20. Nov 10:58:36 2012----------*
- * @method  CdmQuery::SetContainerId                         // public, slots                     *
- * @return  void                                             //                                   *
- * @param   long p_lId                                       //                                   *
- * @param   QString p_qstrDatabase                           //                                   *
- * @comment This method sets the ObjectList ID if no pointer of the objectlist is                 *
- *          availlable.                                                                           *
- *----------------last changed: --------------------------------Di 20. Nov 10:58:36 2012----------*/
-void CdmQuery::SetContainerId(long p_lId, QString p_qstrDatabase)
-{
-    SetContainerId(p_lId);
-
-    if (GetContainer())
-    {
-        SetScheme(p_qstrDatabase);
-    }
-}
-
 void CdmQuery::SetContainerId(long p_lId)
 {
     m_lContainerId = p_lId;
@@ -794,32 +696,6 @@ void CdmQuery::SetClass(CdmClass* p_pClass)
 const CdmClass* CdmQuery::GetClass() const
 {
     return m_rpCdmClass;
-}
-
-/** +-=---------------------------------------------------------Di 20. Nov 10:56:19 2012----------*
- * @method  CdmQuery::SetClassId                             // public, slots                     *
- * @return  void                                             //                                   *
- * @param   long p_lId                                       //                                   *
- * @param   QString p_qstrDatabase                           //                                   *
- * @comment This method sets the ObjectList ID if no pointer of the objectlist is                 *
- *          availlable.                                                                           *
- *----------------last changed: --------------------------------Di 20. Nov 10:56:19 2012----------*/
-void CdmQuery::SetClassId(long p_lId, QString p_qstrDatabase)
-{
-    m_rpCdmClass = nullptr;
-    m_lClassId = p_lId;
-
-    CdmDataProvider* pCdmManager = CdmSessionManager::GetDataProvider();
-
-    if (CHKPTR(pCdmManager))
-    {
-        CdmClassManager* pCdmClassManager = pCdmManager->GetClassManager(p_qstrDatabase);
-
-        if (CHKPTR(pCdmClassManager))
-        {
-            m_rpCdmClass = pCdmClassManager->FindClassById(m_lClassId);
-        }
-    }
 }
 
 void CdmQuery::SetClassId(long p_lId)
@@ -910,7 +786,7 @@ int CdmQuery::GetColumnCount() const
 {
     int iColumns = 0;
 
-    if (IsEnhancedQuery())
+    if (HasResultElements())
     {
         iColumns = m_qvAddedSequence.size();
     }
@@ -938,7 +814,7 @@ bool CdmQuery::IsObjectListTree() const
 
 bool CdmQuery::IsEnhancedQuery() const
 {
-    return (m_bForceEnhanced || HasResultElements());
+    return HasResultElements();
 }
 
 bool CdmQuery::HasResultElements() const
@@ -1006,7 +882,7 @@ QString CdmQuery::GetKeynameAt(int p_iSection) const
 {
     QString qstrName;
 
-    if (IsEnhancedQuery())
+    if (HasResultElements())
     {
         if (0 <= p_iSection && p_iSection < GetColumnCount())
         {
@@ -1104,7 +980,7 @@ QString CdmQuery::GetResultAsStringAt(int p_iRow) const
 
     if (pResult)
     {
-        if (IsEnhancedQuery())
+        if (HasResultElements())
         {
             qstrRet = pResult->GetResultAsString();
         }
@@ -1611,81 +1487,6 @@ bool CdmQuery::IsWql(QString qstrWql)
     bool bFrom = qstrString.contains(QStringLiteral("from"));
 
     return (bSelect && bWhitespace && bFrom);
-}
-
-/** +-=---------------------------------------------------------Sa 20. Aug 10:52:10 2005----------*
- * @method  CdmQuery::XmlImport                              // public, static                    *
- * @return  CdmQuery*                                        //                                   *
- * @param   QString p_qstrXmlSource                          //                                   *
- * @comment This static method reads an xml string and creates from it the xml query object.      *
- *----------------last changed: --------------------------------Sa 20. Aug 10:52:10 2005----------*/
-CdmQuery* CdmQuery::XmlImport(QString p_qstrXmlSource)
-{
-    CdmQuery* pCdmQuery = nullptr;
-
-    BODY_TRY
-    QDomDocument qDomDocument;
-    QString qstrError;
-    int iLine = 0;
-    int iColumn = 0;
-
-    qDomDocument.setContent(p_qstrXmlSource, false, &qstrError, &iLine, &iColumn);
-
-    if (qstrError.isEmpty())
-    {
-       QDomElement qdeRoot = qDomDocument.documentElement();
-
-       if (qdeRoot.tagName() == QStringLiteral("WMS_QUERY_ML"))
-       {
-           pCdmQuery = new CdmQuery();
-
-           // Database
-           pCdmQuery->SetScheme(qdeRoot.attribute(QStringLiteral("Database")));
-
-           // ObjectListId
-           pCdmQuery->SetContainerId(qdeRoot.attribute(QStringLiteral("ObjectListId")).toInt(), pCdmQuery->GetScheme());
-
-           // Local
-           bool bLocal = CdmModelElement::ChangeStringToBool(qdeRoot.attribute(QStringLiteral("Local")));
-
-           if (bLocal)
-           {
-               pCdmQuery->SetLocalSearch();
-           }
-
-           // now it is time to read the query elements
-           QDomNode qDomNode = qdeRoot.firstChild();
-
-           if (!qDomNode.isNull())
-           {
-               QDomElement qDomElement = qDomNode.toElement(); // try to convert the node to an element.
-
-               if (!qDomElement.isNull() && (qDomElement.tagName() == QStringLiteral("Query Elements")))
-               {
-                   CdmQueryElement* pCdmQueryElement = new CdmQueryElement(pCdmQuery, qDomElement);
-                   pCdmQuery->SetQueryElement(pCdmQueryElement);
-               }
-           }
-           else
-           {
-               ERR("Query Elements are missing, how to use this query???")
-           }
-       }
-       else
-       {
-           ERR("Wrong Routeelement tagname!!!")
-       }
-    }
-    else
-    {
-        ERR("Error happened while try to read XML String.\n"
-            "Error Message: " + qstrError + "\n" +
-            "Line Number: " + QString::number(iLine) + "\n" +
-            "Column: " + QString::number(iColumn) + "\n")
-    }
-    BODY_CATCH
-
-   return pCdmQuery;
 }
 
 void CdmQuery::IndexOutOfRangeError(int p_iPos, int p_iResultCount) const

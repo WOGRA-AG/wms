@@ -1,17 +1,4 @@
-﻿/******************************************************************************
- ** WOGRA technologies Gmbh & Co KG Modul Information
- ** Modulename: CdmEnhancedQueryProxy.h
- ** Started Implementation: 2010/11/11
- ** Description:
- **
- ** This class implements the model for tableviews of queries
- **
- ** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
- ** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
- **(C) copyright by WOGRA technologies Gmbh & Co KG All rights reserved
- *****************************************************************************/
-
-#ifndef CDMQUERYMODEL_H
+﻿#ifndef CDMQUERYMODEL_H
 #define CDMQUERYMODEL_H
 
 #ifdef WURZELBLA
@@ -106,6 +93,7 @@ public slots:
     virtual void SetContainer(QString p_qstrObjectListKeyname);
     void AddDisplayHeader(QString p_qstrKeyname, QString p_qstrDisplayString);
 
+    void Clear();
 protected:
     virtual void sort(int p_iColumn, Qt::SortOrder p_eSortOrder);
     virtual void ObjectCommitedEvent(long p_lObjectId);

@@ -89,7 +89,7 @@ long CdbQuery::Execute()
 {
     long lRet = CdmLogging::eDmUnknownDBQueryError;
 
-    if (m_rpCdmQuery->IsEnhancedQuery())
+    if (m_rpCdmQuery->HasResultElements())
     {
         lRet = ExecuteEnhanced();
     }
@@ -199,7 +199,7 @@ QString CdbQuery::GenerateSql()
     if(CHKPTR(m_rpCdbDataAccess) &&
             CHKPTR(m_rpCdmQuery))
     {
-        if (m_rpCdmQuery->IsEnhancedQuery())
+        if (m_rpCdmQuery->HasResultElements())
         {
             CdbQueryEnhancedNew cCdbQueryEnhanced((CdmQueryEnhanced*)m_rpCdmQuery, m_rpCdbDataAccess);
             qstrRet = cCdbQueryEnhanced.GenerateSql();
@@ -260,7 +260,7 @@ QString CdbQuery::GenerateQuerySql()
             }
         }
 
-        if (!m_rpCdmQuery->GetOrderBy().isEmpty() && !m_rpCdmQuery->IsEnhancedQuery())
+        if (!m_rpCdmQuery->GetOrderBy().isEmpty() && !m_rpCdmQuery->HasResultElements())
         {
             SortResults(qstrRet);
         }

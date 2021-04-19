@@ -54,12 +54,11 @@ public slots:
    bool isObjectInResultTree(long p_lObejctId);
    void addGroupByElement(QString p_qstrElement);
    CsaObject* getFirstResultObject();
-   QString getSchemeName();
    int execute();
    void setContainer(CsaObjectContainer* p_pContainer);
    void clear();
    CsaObjectContainer* getContainer();
-   void setContainerId(long p_lId, QString p_qstrScheme);
+   void setContainerId(long p_lId);
    const QVariantList getResultList();
    bool containsResultObject(CsaObject* p_pObject);
    bool containsResultObject(long p_lObjectId);

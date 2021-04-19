@@ -640,7 +640,6 @@ QString CdbQueryElement::GetListCompareValueAsString()
             && m_rpCdmQueryElement->HasSubQuery())
         {
             CdmQuery* pCdmQuery = m_rpCdmQueryElement->GetSubQuery();
-            pCdmQuery->SetSchemeSearch();
             CdbQuery cCdbQuery(m_rpCdbDataAccess, pCdmQuery);
             qstrValueList = "(" + cCdbQuery.GenerateSql() + ")";
         }

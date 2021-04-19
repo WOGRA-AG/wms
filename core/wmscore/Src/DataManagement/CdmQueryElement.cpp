@@ -555,7 +555,7 @@ bool CdmQueryElement::IsSubQueryEnhanced() const
 {
     bool bRet = false;
 
-    if (m_rpCdmSubQuery && m_rpCdmSubQuery->IsEnhancedQuery())
+    if (m_rpCdmSubQuery && m_rpCdmSubQuery->HasResultElements())
     {
         bRet = true;
     }

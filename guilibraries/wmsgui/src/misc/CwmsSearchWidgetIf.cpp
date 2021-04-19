@@ -297,8 +297,6 @@ void CwmsSearchWidgetIf::CreateQuery(CdmQuery& p_rCdmQuery)
 {
     if (m_rpClass)
     {
-        p_rCdmQuery.SetSchemeSearch();
-        p_rCdmQuery.SetScheme(m_rpClass->GetSchemeName());
         p_rCdmQuery.SetClass(m_rpClass);
 
         if (m_rpContainer != nullptr)

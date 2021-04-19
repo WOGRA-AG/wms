@@ -607,7 +607,6 @@ QString CftlCommandQueryElement::GetListCompareValueAsStringFromDecimals()
 
     if (pCdmQuery)
     {
-        pCdmQuery->SetSchemeSearch();
         CftlCommandQuery cCftlQuery(m_rpCftlDataAccess, pCdmQuery);
         qstrValueList = "(" + cCftlQuery.GenerateSql() + ")";
     }

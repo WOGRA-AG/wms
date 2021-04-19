@@ -108,6 +108,7 @@ void EditClickedSlot();
 public slots:
     void SystemVariablesChangedSlot(QString);
     void QueryChangedSlot();
+    void DeleteClickedSlot();
 private:
    /** +-=---------------------------------------------------------Fr 24. Aug 13:53:43 2012-------*
     * @method  CwmsQueryEditor::AddQueryElement              // private, static                   *

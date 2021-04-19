@@ -123,11 +123,6 @@ CsaObject* CsaQuery::getFirstResultObject()
    return pObject;
 }
 
-QString CsaQuery::getSchemeName()
-{
-   return m_pQuery->GetScheme();
-}
-
 int CsaQuery::execute()
 {
    return m_pQuery->Execute();
@@ -161,9 +156,9 @@ CsaObjectContainer* CsaQuery::getContainer()
    return pContainer;
 }
 
-void CsaQuery::setContainerId(long p_lId, QString p_qstrScheme)
+void CsaQuery::setContainerId(long p_lId)
 {
-   m_pQuery->SetContainerId(p_lId, p_qstrScheme);
+   m_pQuery->SetContainerId(p_lId);
 }
 
 const QVariantList CsaQuery::getResultList()
@@ -224,7 +219,7 @@ void CsaQuery::setQuery(CdmQuery* p_pEnhanced)
 
 QVariant CsaQuery::getDetailedVariant()
 {
-    if (m_pQuery->IsEnhancedQuery())
+    if (m_pQuery->HasResultElements())
     {
       return dynamic_cast<CdmQueryEnhanced*>(m_pQuery)->GetResultElementsAsVariant();
     }

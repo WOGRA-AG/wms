@@ -130,8 +130,8 @@
         <string/>
        </property>
        <property name="icon">
-        <iconset>
-         <normaloff>:/png24/copy24.png</normaloff>:/png24/copy24.png</iconset>
+        <iconset resource="wmsgui.qrc">
+         <normaloff>:/icons/copy.png</normaloff>:/icons/copy.png</iconset>
        </property>
        <property name="iconSize">
         <size>

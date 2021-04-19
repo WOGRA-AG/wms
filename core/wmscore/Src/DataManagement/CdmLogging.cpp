@@ -1,14 +1,3 @@
-/******************************************************************************
- ** WOGRA Middleware Server Communication Module
- **
- ** @Author Wolfgang Graßhof 
- **
- ** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
- ** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. 
- **(C) copyright by WOGRA technologies All rights reserved
- ******************************************************************************/
-
-
 // System and QT Includes
 #include <qstring.h>
 #include <qfile.h>
@@ -29,7 +18,7 @@ CdmLogging::CdmLogging()
 {
 }
 
-CdmLogging::~CdmLogging(  )
+CdmLogging::~CdmLogging()
 {
     QLinkedList<CdmLoggingAdaptor*>::iterator qllIt = m_qvlAdaptors.begin();
     QLinkedList<CdmLoggingAdaptor*>::iterator qllItEnd = m_qvlAdaptors.end();
@@ -96,7 +85,7 @@ void CdmLogging::CreateLoggingManager()
    }
 }
 
-void CdmLogging::DestroyLoggingManager(  )
+void CdmLogging::DestroyLoggingManager()
 {
    if (ms_pCdmLogger)
    {
@@ -122,11 +111,11 @@ void CdmLogging::AddLog(EdmErrorSeverity p_eDmErrorSeverity,
        }
       
        CdmLogEntry entry(lSessionId,
-                           QDateTime::currentDateTime(),
-                           p_eDmErrorSeverity,
-                           p_qstrErrorModule,
-                           p_qstrEventText,
-                           p_iLine);
+                         QDateTime::currentDateTime(),
+                         p_eDmErrorSeverity,
+                         p_qstrErrorModule,
+                         p_qstrEventText,
+                         p_iLine);
        SYNCHRONIZED
        QLinkedList<CdmLoggingAdaptor*>::iterator qvlIt = m_qvlAdaptors.begin();
        QLinkedList<CdmLoggingAdaptor*>::iterator qvlItEnd = m_qvlAdaptors.end();
@@ -205,12 +194,6 @@ bool CdmLogging::Deprecated(QString p_qstrFile, int p_iLine)
     return false;
 }
 
-/** +-=---------------------------------------------------------Fr 19. Aug 23:29:54 2005----------*
- * @method  CdmError::AddErrorCode                           // public, static                    *
- * @return  int                                              //                                   *
- * @param   EdmErrorCode p_eDmErrorCode                      //                                   *
- * @comment This method adds a error code to the error list.                                      *
- *----------------last changed: --------------------------------Fr 19. Aug 23:29:54 2005----------*/
 int CdmLogging::AddErrorCode(EdmErrorCode p_eDmErrorCode)
 {
    return p_eDmErrorCode;

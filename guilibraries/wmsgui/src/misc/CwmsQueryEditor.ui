@@ -184,24 +184,42 @@ p, li { white-space: pre-wrap; }
         <string>Ergebnis</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_2">
-        <item row="0" column="0" colspan="4">
-         <widget class="QTreeView" name="m_pqtvResult">
-          <property name="itemsExpandable">
-           <bool>false</bool>
+        <property name="leftMargin">
+         <number>3</number>
+        </property>
+        <property name="topMargin">
+         <number>3</number>
+        </property>
+        <property name="rightMargin">
+         <number>3</number>
+        </property>
+        <property name="bottomMargin">
+         <number>3</number>
+        </property>
+        <item row="2" column="4">
+         <spacer name="horizontalSpacer_2">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
           </property>
-          <property name="sortingEnabled">
-           <bool>true</bool>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>645</width>
+            <height>20</height>
+           </size>
           </property>
-         </widget>
+         </spacer>
         </item>
         <item row="2" column="0">
          <widget class="QPushButton" name="m_pqpbClearResult">
+          <property name="toolTip">
+           <string>Ergebnisliste leeren</string>
+          </property>
           <property name="text">
            <string/>
           </property>
           <property name="icon">
            <iconset resource="wmsgui.qrc">
-            <normaloff>:/icons/delete24.png</normaloff>:/icons/delete24.png</iconset>
+            <normaloff>:/icons/cancel24.png</normaloff>:/icons/cancel24.png</iconset>
           </property>
           <property name="iconSize">
            <size>
@@ -211,7 +229,7 @@ p, li { white-space: pre-wrap; }
           </property>
          </widget>
         </item>
-        <item row="2" column="2">
+        <item row="2" column="3">
          <widget class="QPushButton" name="m_pqpbSaveResult">
           <property name="text">
            <string/>
@@ -228,18 +246,15 @@ p, li { white-space: pre-wrap; }
           </property>
          </widget>
         </item>
-        <item row="2" column="3">
-         <spacer name="horizontalSpacer_2">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
+        <item row="0" column="0" colspan="5">
+         <widget class="QTreeView" name="m_pqtvResult">
+          <property name="itemsExpandable">
+           <bool>false</bool>
           </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>645</width>
-            <height>20</height>
-           </size>
+          <property name="sortingEnabled">
+           <bool>true</bool>
           </property>
-         </spacer>
+         </widget>
         </item>
         <item row="2" column="1">
          <widget class="QPushButton" name="m_pqpbEdit">
@@ -249,6 +264,26 @@ p, li { white-space: pre-wrap; }
           <property name="icon">
            <iconset resource="wmsgui.qrc">
             <normaloff>:/icons/EditDocument.png</normaloff>:/icons/EditDocument.png</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>24</width>
+            <height>24</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="2">
+         <widget class="QPushButton" name="m_pqpbDelete">
+          <property name="toolTip">
+           <string>Gewähltes Objekt löschen</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset resource="wmsgui.qrc">
+            <normaloff>:/icons/delete24.png</normaloff>:/icons/delete24.png</iconset>
           </property>
           <property name="iconSize">
            <size>
@@ -395,8 +430,8 @@ p, li { white-space: pre-wrap; }
    <slot>ClearResultClickedSlot()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>49</x>
-     <y>478</y>
+     <x>43</x>
+     <y>484</y>
     </hint>
     <hint type="destinationlabel">
      <x>68</x>
@@ -411,8 +446,8 @@ p, li { white-space: pre-wrap; }
    <slot>SaveResultClickedSlot()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>133</x>
-     <y>478</y>
+     <x>169</x>
+     <y>484</y>
     </hint>
     <hint type="destinationlabel">
      <x>154</x>
@@ -484,6 +519,22 @@ p, li { white-space: pre-wrap; }
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>m_pqpbDelete</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsQueryEditorWidget</receiver>
+   <slot>DeleteClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>116</x>
+     <y>467</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>208</x>
+     <y>588</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>ExecuteClickedSlot()</slot>
@@ -493,5 +544,6 @@ p, li { white-space: pre-wrap; }
   <slot>EditClickedSlot()</slot>
   <slot>SystemVariablesChangedSlot(QString)</slot>
   <slot>QueryChangedSlot()</slot>
+  <slot>DeleteClickedSlot()</slot>
  </slots>
 </ui>

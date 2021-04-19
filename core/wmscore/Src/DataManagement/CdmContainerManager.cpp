@@ -1,14 +1,3 @@
-/******************************************************************************
- ** WOGRA Middleware Server Communication Module
- **
- ** @Author Wolfgang Graßhof
- **
- ** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
- ** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
- **(C) copyright by WOGRA technologies All rights reserved
- ******************************************************************************/
-
-
 
 // System and QT Includes
 #include <qstring.h>
@@ -445,13 +434,6 @@ CdmObjectContainer* CdmContainerManager::FindContainerByKeyname(QString p_qstrKe
     return pContainer;
 }
 
-
-/** +-=---------------------------------------------------------Di 20. Nov 10:39:23 2012----------*
- * @method  CdmContainerManager::FindEmptyContainerByKeyname // public, slots                   *
- * @return  CdmObjectContainer*                                   //                                   *
- * @param   QString p_qstrKeyname                            //                                   *
- * @comment This method finds the objectlist by keyname. If not found nullptr will returned. It      *
- *----------------last changed: --------------------------------Di 20. Nov 10:39:23 2012----------*/
 CdmObjectContainer* CdmContainerManager::FindEmptyContainerByKeyname(QString p_qstrKeyname)
 {
     CdmObjectContainer* pContainer = nullptr;
@@ -500,40 +482,45 @@ CdmObjectContainer* CdmContainerManager::FindEmptyContainerByKeyname(QString p_q
     return pContainer;
 }
 
-/** +-=---------------------------------------------------------Di 20. Nov 10:39:34 2012----------*
- * @method  CdmContainerManager::FindEmptyObjectListById    // public, slots                     *
- * @return  CdmObjectContainer*                                   //                                   *
- * @param   long p_lId                                       //                                   *
- * @comment This method finds the objectlist by keyname. If not found nullptr will returned. It      *
- *----------------last changed: --------------------------------Di 20. Nov 10:39:34 2012----------*/
 CdmObjectContainer* CdmContainerManager::FindEmptyContainerById(long p_lId)
 {
-    CdmObjectContainer* pContainer = FindContainerByIdLocal(p_lId);
-    bool bContinueSearch = true;
-
-    if(!pContainer && bContinueSearch)
+    if (p_lId > 0)
     {
-        INFO("Objectlist locally not found, now it will be searched on the db!!!");
-        IdmDataAccess* pIdmDataAccess = GetDataAccess();
+        CdmObjectContainer* pContainer = FindContainerByIdLocal(p_lId);
 
-        if(CHKPTR(pIdmDataAccess))
+        if(!pContainer)
         {
-            pIdmDataAccess->LoadEmptyObjectContainer(GetSchemeId(), p_lId, pContainer);
+            INFO("Container locally not found, now it will be searched on the db!!!");
+            IdmDataAccess* pIdmDataAccess = GetDataAccess();
 
-            if(pContainer)
+            if(CHKPTR(pIdmDataAccess))
             {
-                INFO("Objectlist found!!!");
-                SYNCHRONIZED;
-                m_qmContainer.insert(pContainer->GetId(), pContainer);
-            }
-            else
-            {
-                INFO("Objectlist not found on the db!!!");
+                pIdmDataAccess->LoadEmptyObjectContainer(GetSchemeId(), p_lId, pContainer);
+
+                if(pContainer)
+                {
+                    INFO("Container found!!!");
+                    SYNCHRONIZED;
+                    m_qmContainer.insert(pContainer->GetId(), pContainer);
+                    return pContainer;
+                }
+                else
+                {
+                    INFO("Container not found on the db!!!");
+                }
             }
         }
+        else
+        {
+            return pContainer;
+        }
+    }
+    else
+    {
+        WARNING("Invalid Id for Container search. Id: " + QString::number(p_lId));
     }
 
-    return pContainer;
+    return nullptr;
 }
 
 /** +-=---------------------------------------------------------Di 20. Nov 10:39:55 2012----------*
@@ -882,12 +869,12 @@ void CdmContainerManager::GetDeploymentVariant(CdmClass* p_pClass, QVariantList&
             {
                 if (pContainer->IsDeploymentRelevant())
                 {
-                     if (pContainer->IsTechnicalDeploymentRelevant())
-                     {
+                    if (pContainer->IsTechnicalDeploymentRelevant())
+                    {
                         const_cast<CdmContainerManager*>(this)->ReloadContainerComplete(pContainer);
-                     }
+                    }
 
-                     p_rqvObjectContainers.append(pContainer->GetVariant());
+                    p_rqvObjectContainers.append(pContainer->GetVariant());
                 }
                 else
                 {

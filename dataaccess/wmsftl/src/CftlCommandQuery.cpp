@@ -86,7 +86,7 @@ long CftlCommandQuery::ExecuteQueryP()
     int iColumnCount = 0;
     CdmQueryEnhanced* pQuery = nullptr;
 
-    if (m_rpCdmQuery->IsEnhancedQuery())
+    if (m_rpCdmQuery->HasResultElements())
     {
         pQuery = dynamic_cast<CdmQueryEnhanced*>(m_rpCdmQuery);
 
@@ -141,7 +141,7 @@ long CftlCommandQuery::ExecuteQueryP()
 
 bool CftlCommandQuery::IsObjectNeededInResult()
 {
-    if (m_rpCdmQuery->IsEnhancedQuery())
+    if (m_rpCdmQuery->HasResultElements())
     {
         CdmQueryEnhanced* pQuery = dynamic_cast<CdmQueryEnhanced*>(m_rpCdmQuery);
 
@@ -294,7 +294,7 @@ QString CftlCommandQuery::GenerateSql()
     {
         CdmQueryElement* pCdmQueryElement = m_rpCdmQuery->GetQueryElement();
 
-        if (m_rpCdmQuery->IsEnhancedQuery())
+        if (m_rpCdmQuery->HasResultElements())
         {
             qstrSelectMembers += AddSelectMembers();
         }
@@ -347,7 +347,7 @@ QString CftlCommandQuery::AddSelectMembers()
 {
     QString qstrRet;
 
-    if (m_rpCdmQuery->IsEnhancedQuery())
+    if (m_rpCdmQuery->HasResultElements())
     {
         CdmQueryEnhanced* pQuery = dynamic_cast<CdmQueryEnhanced*>(m_rpCdmQuery);
 

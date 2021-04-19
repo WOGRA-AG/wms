@@ -274,8 +274,6 @@ CdmObject* CwmsImport::ExecuteObjectQuery(QStringList p_rqstrlParseData)
    {
       CdmQuery cCdmQuery;
       cCdmQuery.SetContainer(pContainer);
-      cCdmQuery.SetScheme(pContainer->GetSchemeName());
-      cCdmQuery.SetSchemeSearch();
       CreateQuery(cCdmQuery, p_rqstrlParseData);
 
       if (cCdmQuery.Execute() > 0)

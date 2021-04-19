@@ -408,8 +408,6 @@ bool CdmQueryFactory::CheckQueryPointer(bool p_bEnhanced)
             AddFromClause();
         }
 
-        m_pCdmQuery->SetSchemeSearch();
-
         bRet = m_pCdmQuery->IsValid();
     }
 
