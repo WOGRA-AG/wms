@@ -1,15 +1,3 @@
-/******************************************************************************
- ** WOGRA Middleware Server Data Manager Module
- **
- ** @Author Wolfgang Graßof
- **
- ** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
- ** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
- **(C) copyright by WOGRA technologies All rights reserved
- ******************************************************************************/
-
-
-
 // System and QT Includes
 #include <QString>
 #include <qfile.h>
@@ -18,6 +6,7 @@
 #include <QSqlQuery>
 
 #include "CwmsUtilities.h"
+#include "CwmsCleanupMacros.h"
 
 // own Includes
 #include "CdmQuery.h"
@@ -50,11 +39,11 @@ CdbQueryElement::CdbQueryElement(CdbDataAccess* p_pCdbDataAccess,
 
 CdbQueryElement::~CdbQueryElement()
 {
+    CLEANUP_LINKEDLIST_PTR(CdbQueryElement, m_qvlChilds);
 }
 
 long CdbQueryElement::Execute(QMap<long,long> &p_rqvlResultList)
 {
-
     int lRet = CdmLogging::eDmUnknownDBQueryError;
     lRet = ExecuteValue(p_rqvlResultList);
 
@@ -66,7 +55,7 @@ long CdbQueryElement::ExecuteValue(QMap<long, long> &p_rqvlResults)
     long lRet = CdmLogging::eDmUnknownDBQueryError;
 
     if (m_rpCdmQueryElement->GetCompareKeyname().toUpper() == "OBJECT_ID" &&
-        m_rpCdmQueryElement->GetValueType() == eDmValueObjectRef)
+            m_rpCdmQueryElement->GetValueType() == eDmValueObjectRef)
     {
         if (m_rpCdmQueryElement->GetSubQuery() != nullptr)
         {
@@ -280,7 +269,7 @@ QString CdbQueryElement::GenerateValueQuery()
     if(pCdmQuery)
     {
         if (m_rpCdmQueryElement->GetCompareKeyname().toUpper() == "OBJECT_ID" &&
-            m_rpCdmQueryElement->GetValueType() == eDmValueObjectRef)
+                m_rpCdmQueryElement->GetValueType() == eDmValueObjectRef)
         {
             if (m_rpCdmQueryElement->GetSubQuery() != nullptr)
             {
@@ -600,7 +589,7 @@ QString CdbQueryElement::GetCompareValueAsString()
                 case eDmValueTime:
                     qstrValue = "'" + qVariant.toTime().toString(Qt::ISODate) + "'";
                     break;
-                // for this values queries are not possible
+                    // for this values queries are not possible
                 case eDmValueBinaryDocument:
                 case eDmValueListInt:
                 case eDmValueListDouble:
@@ -632,12 +621,12 @@ QString CdbQueryElement::GetListCompareValueAsString()
         EdmValueType eDmValueType = m_rpCdmQueryElement->GetValueType();
 
         if ((eDmValueType == eDmValueLong ||
-                eDmValueType == eDmValueInt ||
-                eDmValueType == eDmValueObjectRef ||
-                eDmValueType == eDmValueCounter ||
-                eDmValueType == eDmValueUserGroup ||
-                eDmValueType == eDmValueEnum)
-            && m_rpCdmQueryElement->HasSubQuery())
+             eDmValueType == eDmValueInt ||
+             eDmValueType == eDmValueObjectRef ||
+             eDmValueType == eDmValueCounter ||
+             eDmValueType == eDmValueUserGroup ||
+             eDmValueType == eDmValueEnum)
+                && m_rpCdmQueryElement->HasSubQuery())
         {
             CdmQuery* pCdmQuery = m_rpCdmQueryElement->GetSubQuery();
             CdbQuery cCdbQuery(m_rpCdbDataAccess, pCdmQuery);

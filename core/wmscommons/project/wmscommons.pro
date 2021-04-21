@@ -47,6 +47,7 @@ DEFINES += WMSCOMMONS_LIB
 include(wmscommons.pri)
 
 HEADERS += \
+    ../src/CwmsCleanupMacros.h \
     ../src/CwmsCrypt.h \
     ../src/IwmsModel.h
 
