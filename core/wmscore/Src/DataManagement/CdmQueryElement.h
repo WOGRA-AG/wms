@@ -12,7 +12,7 @@
 #define CDMQUERYELEMENT_H
 
 // Systemm and QT Includes
-#include <QLinkedList>
+#include <QList>
 #include <QVariant>
 #include <qstring.h>
 #include <QObject>
@@ -83,7 +83,7 @@ private:
     /*
      * The Child Query Elements
      */
-    QLinkedList<CdmQueryElement*> m_lChildQuerys;
+    QList<CdmQueryElement*> m_lChildQuerys;
 
     /*
      * The Query Element Type
@@ -119,7 +119,7 @@ private:
      * A In  or Not In List for Value Compares (In or NotIn)
      * with Variants
      */
-    QLinkedList<QVariant>          m_qvlInOrNotInList;
+    QList<QVariant>          m_qvlInOrNotInList;
 
     /*
      * The Type of the value which will be compared
@@ -244,10 +244,10 @@ public slots:
     /** +-=---------------------------------------------------------So 10. Feb 10:07:32 2013-------*
      * @method  CdmQueryElement::GetChildList                 // public, const, slots              *
      * @return  void                                          //                                   *
-     * @param   QLinkedList<CdmQueryElement*>& p_rqvlChilds   //                                   *
+     * @param   QList<CdmQueryElement*>& p_rqvlChilds   //                                   *
      * @comment This method fills the refernece with childs.                                       *
      *----------------last changed: -----------------------------So 10. Feb 10:07:32 2013----------*/
-    void GetChildList(QLinkedList<CdmQueryElement*> &p_rqvlChilds) const;
+    void GetChildList(QList<CdmQueryElement*> &p_rqvlChilds) const;
 
     /** +-=---------------------------------------------------------So 10. Feb 10:07:40 2013-------*
      * @method  CdmQueryElement::GetCompareKeyname            // public, const, slots              *
@@ -289,10 +289,10 @@ public slots:
      * @method  CdmQueryElement::SetComparisonValue           // public, slots                     *
      * @return  void                                          //                                   *
      * @param   QString p_qstrKeyname                         //                                   *
-     * @param   QLinkedList<QVariant> p_qvlList               //                                   *
+     * @param   QList<QVariant> p_qvlList               //                                   *
      * @comment                                                                                    *
      *----------------last changed: -----------------------------Di 20. Nov 11:20:47 2012----------*/
-    void SetComparisonValue(QString p_qstrKeyname, QLinkedList<QVariant> p_qvlList);
+    void SetComparisonValue(QString p_qstrKeyname, QList<QVariant> p_qvlList);
 
     /** +-=---------------------------------------------------------Di 20. Nov 11:17:34 2012-------*
      * @method  CdmQueryElement::SetVariant                   // public, slots                     *
@@ -354,10 +354,10 @@ public slots:
 
     /** +-=---------------------------------------------------------Di 20. Nov 11:21:55 2012-------*
      * @method  CdmQueryElement::GetList                      // public, slots                     *
-     * @return  QLinkedList<QVariant>&                        //                                   *
+     * @return  QList<QVariant>&                        //                                   *
      * @comment This method returns the stringlist of the element.                                 *
      *----------------last changed: -----------------------------Di 20. Nov 11:21:55 2012----------*/
-    QLinkedList<QVariant>& GetList();
+    QList<QVariant>& GetList();
 
     /** +-=---------------------------------------------------------Di 20. Nov 11:18:55 2012-------*
      * @method  CdmQueryElement::IsValueMember                // public, slots                     *

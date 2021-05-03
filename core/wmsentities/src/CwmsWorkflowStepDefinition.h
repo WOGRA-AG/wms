@@ -101,35 +101,35 @@ class BASETOOLS_API CwmsWorkflowStepDefinition: public CwmsWorkflowBase
    /** +-=---------------------------------------------------------Do 25. Okt 14:15:10 2012-------*
     * @method  CwmsWorkflowStepDefinition::SetReadOnlyMembers // public                     *
     * @return  void                                          //                                   *
-    * @param   QLinkedList<QString> p_qstrlKeynames          //                                   *
+    * @param   QList<QString> p_qstrlKeynames          //                                   *
     * @comment                                                                                    *
     *----------------last changed: -----------------------------Do 25. Okt 14:15:10 2012----------*/
-    void SetReadOnlyMembers(QLinkedList<QString> p_qstrlKeynames);
+    void SetReadOnlyMembers(QList<QString> p_qstrlKeynames);
 
    public:
    /** +-=---------------------------------------------------------Do 25. Okt 14:15:14 2012-------*
     * @method  CwmsWorkflowStepDefinition::GetReadOnlyMembers // public                     *
-    * @return  QLinkedList<QString>                          //                                   *
+    * @return  QList<QString>                          //                                   *
     * @comment                                                                                    *
     *----------------last changed: -----------------------------Do 25. Okt 14:15:14 2012----------*/
-    QLinkedList<QString> GetReadOnlyMembers();
+    QList<QString> GetReadOnlyMembers();
 
    public:
    /** +-=---------------------------------------------------------Do 25. Okt 14:15:18 2012-------*
     * @method  CwmsWorkflowStepDefinition::SetHiddenMembers // public                       *
     * @return  void                                          //                                   *
-    * @param   QLinkedList<QString> p_qstrlKeynames          //                                   *
+    * @param   QList<QString> p_qstrlKeynames          //                                   *
     * @comment                                                                                    *
     *----------------last changed: -----------------------------Do 25. Okt 14:15:18 2012----------*/
-    void SetHiddenMembers(QLinkedList<QString> p_qstrlKeynames);
+    void SetHiddenMembers(QList<QString> p_qstrlKeynames);
 
    public:
    /** +-=---------------------------------------------------------Do 25. Okt 14:15:30 2012-------*
     * @method  CwmsWorkflowStepDefinition::GetHiddenMembers // public                       *
-    * @return  QLinkedList<QString>                          //                                   *
+    * @return  QList<QString>                          //                                   *
     * @comment                                                                                    *
     *----------------last changed: -----------------------------Do 25. Okt 14:15:30 2012----------*/
-    QLinkedList<QString> GetHiddenMembers();
+    QList<QString> GetHiddenMembers();
 
    public:
    /** +-=---------------------------------------------------------Do 18. Jul 16:41:07 2013-------*

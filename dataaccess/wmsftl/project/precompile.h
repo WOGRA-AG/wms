@@ -47,7 +47,7 @@
 #include "CdmDataAccessHelper.h"
 #include "CwmsUtilities.h"
 #include <QSqlQuery>
-#include <QLinkedList>
+#include <QList>
 #include "CdmClass.h"
 #include "CdmObjectContainer.h"
 #include "CdmMember.h"

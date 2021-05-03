@@ -71,7 +71,7 @@ void CwmsbtMailMessage::AddRecipients(QString& p_qstrRecipient)
    m_qvlRecipients.append(p_qstrRecipient);
 }
 
-void CwmsbtMailMessage::AddRecipients(QLinkedList<QString>& p_qstrRecipient)
+void CwmsbtMailMessage::AddRecipients(QList<QString>& p_qstrRecipient)
 {
 
    m_qvlRecipients = p_qstrRecipient;
@@ -362,10 +362,10 @@ QString CwmsbtMailMessage::GetRecipientsAsString()
 
 /** +-=---------------------------------------------------------Sa 9. Jan 14:54:10 2010-----------*
  * @method  CwmsbtMailMessage::GetRecipients                    // public                            *
- * @return  QLinkedList<QString>&                            //                                   *
+ * @return  QList<QString>&                            //                                   *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------Sa 9. Jan 14:54:10 2010-----------*/
-QLinkedList<QString>& CwmsbtMailMessage::GetRecipients()
+QList<QString>& CwmsbtMailMessage::GetRecipients()
 {
    return m_qvlRecipients;
 }
@@ -399,14 +399,14 @@ QString CwmsbtMailMessage::GetBlindCopiesAsString()
 /** +-=---------------------------------------------------------Sa 9. Jan 11:06:00 2010-----------*
  * @method  CwmsbtMailMessage::GetMailAddressesAsString         // private                           *
  * @return  QString                                          //                                   *
- * @param   QLinkedList<QString>& p_rqllAddresses            //                                   *
+ * @param   QList<QString>& p_rqllAddresses            //                                   *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------Sa 9. Jan 11:06:00 2010-----------*/
-QString CwmsbtMailMessage::GetMailAddressesAsString(QLinkedList<QString>& p_rqllAddresses)
+QString CwmsbtMailMessage::GetMailAddressesAsString(QList<QString>& p_rqllAddresses)
 {
    QString qstrMailAddresses;
-   QLinkedList<QString>::iterator qvlIt    = p_rqllAddresses.begin();
-   QLinkedList<QString>::iterator qvlItEnd = p_rqllAddresses.end();
+   QList<QString>::iterator qvlIt    = p_rqllAddresses.begin();
+   QList<QString>::iterator qvlItEnd = p_rqllAddresses.end();
 
    for(; qvlIt != qvlItEnd; ++qvlIt)
    {
@@ -435,16 +435,16 @@ QStringList CwmsbtMailMessage::GetRecipientsAsStringList()
  * @method  CwmsbtMailMessage::GetMailAddressesAsStringList     // private                           *
  * @return  QStringList                                      //                                   *
  * @param   QString p_qstrPreString                          //                                   *
- * @param   QLinkedList<QString>& p_rqllAddresses            //                                   *
+ * @param   QList<QString>& p_rqllAddresses            //                                   *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------Sa 9. Jan 14:40:36 2010-----------*/
 QStringList CwmsbtMailMessage::GetMailAddressesAsStringList(QString p_qstrPreString,
-                                                         QLinkedList<QString>& p_rqllAddresses)
+                                                         QList<QString>& p_rqllAddresses)
 {
 
    QStringList qstrMailAddresses;
-   QLinkedList<QString>::iterator qvlIt    = p_rqllAddresses.begin();
-   QLinkedList<QString>::iterator qvlItEnd = p_rqllAddresses.end();
+   QList<QString>::iterator qvlIt    = p_rqllAddresses.begin();
+   QList<QString>::iterator qvlItEnd = p_rqllAddresses.end();
 
    for(; qvlIt != qvlItEnd; ++qvlIt)
    {
@@ -527,10 +527,10 @@ void CwmsbtMailMessage::BuildAllRecipients()
 
 /** +-=---------------------------------------------------------So 10. Jan 11:48:08 2010----------*
  * @method  CwmsbtMailMessage::GetAllRecipients                 // public                            *
- * @return  QLinkedList<QString>                             //                                   *
+ * @return  QList<QString>                             //                                   *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------So 10. Jan 11:48:08 2010----------*/
-QLinkedList<QString> CwmsbtMailMessage::GetAllRecipients()
+QList<QString> CwmsbtMailMessage::GetAllRecipients()
 {
    return m_qvlAllRecipients;
 }

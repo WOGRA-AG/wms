@@ -5,7 +5,7 @@
 #include <QFile>
 #include <QTextStream>
 #include <qdatetime.h>
-#include <QLinkedList>
+#include <QList>
 
 
 // own Includes
@@ -713,13 +713,13 @@ CdmObjectContainer* CdmContainerManager::CopyContainer(QString p_qstrKeyname, bo
 
 /** +-=---------------------------------------------------------Di 20. Nov 10:41:21 2012----------*
  * @method  CdmContainerManager::GetContainerList          // public, slots                     *
- * @return  QLinkedList<QString>                             //                                   *
+ * @return  QList<QString>                             //                                   *
  * @param   QString p_qstrClassKeyName                       //                                   *
  * @comment Returns the list of objectlists of the current database.                              *
  *----------------last changed: --------------------------------Di 20. Nov 10:41:21 2012----------*/
-QLinkedList<QString> CdmContainerManager::GetContainerList(QString p_qstrClassKeyName)
+QList<QString> CdmContainerManager::GetContainerList(QString p_qstrClassKeyName)
 {
-    QLinkedList<QString> qvlRet;
+    QList<QString> qvlRet;
     CdmClassManager* pCdmClassManager = GetClassManager();
 
     if (CHKPTR(pCdmClassManager))
@@ -737,14 +737,14 @@ QLinkedList<QString> CdmContainerManager::GetContainerList(QString p_qstrClassKe
 
 /** +-=---------------------------------------------------------Di 20. Nov 10:41:32 2012----------*
  * @method  CdmContainerManager::GetContainerList          // public, slots                     *
- * @return  QLinkedList<QString>                             //                                   *
+ * @return  QList<QString>                             //                                   *
  * @param   long p_lClassId                                  //                                   *
  * @comment Returns the list of objectlists of the current database.                              *
  *----------------last changed: --------------------------------Di 20. Nov 10:41:32 2012----------*/
-QLinkedList<QString> CdmContainerManager::GetContainerList(long p_lClassId)
+QList<QString> CdmContainerManager::GetContainerList(long p_lClassId)
 {
     SYNCHRONIZED;
-    QLinkedList<QString> qvlRet;
+    QList<QString> qvlRet;
     IdmDataAccess* pIdmDataAccess = GetDataAccess();
 
     if (CHKPTR(pIdmDataAccess))
@@ -854,11 +854,11 @@ void CdmContainerManager::GetDeploymentVariant(CdmClass* p_pClass, QVariantList&
     if (CHKPTR(p_pClass))
     {
         QString qstrKeyname = p_pClass->GetKeyname();
-        QLinkedList<QString> qllObjectLists;
+        QList<QString> qllObjectLists;
         qllObjectLists = const_cast<CdmContainerManager*>(this)->GetContainerList(p_pClass->GetId());
 
-        QLinkedList<QString>::iterator qllItOL = qllObjectLists.begin();
-        QLinkedList<QString>::iterator qllItOLEnd = qllObjectLists.end();
+        QList<QString>::iterator qllItOL = qllObjectLists.begin();
+        QList<QString>::iterator qllItOLEnd = qllObjectLists.end();
 
         for (; qllItOL != qllItOLEnd; ++qllItOL)
         {

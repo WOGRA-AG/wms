@@ -80,7 +80,7 @@ bool CwnCommandGetUserGroupList::CheckValid()
     return true;
 }
 
-QLinkedList<CumUserGroup*> CwnCommandGetUserGroupList::getResult()
+QList<CumUserGroup*> CwnCommandGetUserGroupList::getResult()
 {
     return this->p_rqvlUserGroups;
 }

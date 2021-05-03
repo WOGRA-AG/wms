@@ -19,7 +19,7 @@
 #endif //
 
 // System and QT Includes
-#include <QLinkedList>
+#include <QList>
 #include <QString>
 #include <QSet>
 

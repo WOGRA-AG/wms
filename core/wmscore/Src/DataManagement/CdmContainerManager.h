@@ -14,7 +14,7 @@
 
 // System and QT Includes
 #include <qmap.h>
-#include <QLinkedList>
+#include <QList>
 #include <QVariantList>
 
 
@@ -74,8 +74,8 @@ public:
     CdmObjectContainer* CopyContainer(QString p_qstrKeyname, bool p_bComplete);
     int CreateContainer(QString p_qstrClassKeyname, QString& p_qstrObjectListKeyname);
     CdmObjectContainer* FindEmptyContainerById(long p_lId);
-    QLinkedList<QString> GetContainerList(long p_lClassId);
-    QLinkedList<QString> GetContainerList(QString p_qstrClassKeyName);
+    QList<QString> GetContainerList(long p_lClassId);
+    QList<QString> GetContainerList(QString p_qstrClassKeyName);
     int CreateContainer(QString p_qstrClassKeyname,
                         QString& p_qstrObjectListKeyname,
                         QString p_qstrObjectListCaption,

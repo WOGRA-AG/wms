@@ -20,8 +20,8 @@ CdmLogging::CdmLogging()
 
 CdmLogging::~CdmLogging()
 {
-    QLinkedList<CdmLoggingAdaptor*>::iterator qllIt = m_qvlAdaptors.begin();
-    QLinkedList<CdmLoggingAdaptor*>::iterator qllItEnd = m_qvlAdaptors.end();
+    QList<CdmLoggingAdaptor*>::iterator qllIt = m_qvlAdaptors.begin();
+    QList<CdmLoggingAdaptor*>::iterator qllItEnd = m_qvlAdaptors.end();
 
     for (; qllIt != qllItEnd; ++qllIt)
     {
@@ -117,8 +117,8 @@ void CdmLogging::AddLog(EdmErrorSeverity p_eDmErrorSeverity,
                          p_qstrEventText,
                          p_iLine);
        SYNCHRONIZED
-       QLinkedList<CdmLoggingAdaptor*>::iterator qvlIt = m_qvlAdaptors.begin();
-       QLinkedList<CdmLoggingAdaptor*>::iterator qvlItEnd = m_qvlAdaptors.end();
+       QList<CdmLoggingAdaptor*>::iterator qvlIt = m_qvlAdaptors.begin();
+       QList<CdmLoggingAdaptor*>::iterator qvlItEnd = m_qvlAdaptors.end();
 
        for (; qvlIt != qvlItEnd; ++qvlIt)
        {

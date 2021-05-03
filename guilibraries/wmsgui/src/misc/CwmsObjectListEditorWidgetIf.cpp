@@ -13,7 +13,7 @@
 #include <QPushButton>
 #include <QCursor>
 #include <QModelIndex>
-#include <QLinkedList>
+#include <QList>
 #include <QMenu>
 #include <qtoolbar.h>
 #include <QAction>
@@ -692,8 +692,8 @@ void CwmsObjectListEditorWidgetIf::SearchClickedSlot()
     {
         CwmsSearchWindowDlg* pSearch = new CwmsSearchWindowDlg(this);
 
-        QLinkedList<QString>::iterator qllIt = m_qllSearchMembers.begin();
-        QLinkedList<QString>::iterator qllItEnd = m_qllSearchMembers.end();
+        QList<QString>::iterator qllIt = m_qllSearchMembers.begin();
+        QList<QString>::iterator qllItEnd = m_qllSearchMembers.end();
 
         for (; qllIt != qllItEnd; ++qllIt)
         {
@@ -1272,10 +1272,10 @@ void CwmsObjectListEditorWidgetIf::SetFormConfiguration(CdmObject* p_pCdmObejct)
         SetFormBase(cForm);
         SetFormStandard(cForm);
 
-        QLinkedList<QString> qllFucntions = cForm.GetFunctions();
+        QList<QString> qllFucntions = cForm.GetFunctions();
 
-        QLinkedList<QString>::iterator qllIt = qllFucntions.begin();
-        QLinkedList<QString>::iterator qllItEnd = qllFucntions.end();
+        QList<QString>::iterator qllIt = qllFucntions.begin();
+        QList<QString>::iterator qllItEnd = qllFucntions.end();
 
         for (; qllIt != qllItEnd; ++qllIt)
         {
@@ -1300,10 +1300,10 @@ void CwmsObjectListEditorWidgetIf::SetFormStandard(CwmsFormStandardContainer p_c
         }
         else
         {
-            QLinkedList<QString> qllDisplayMembers = p_cForm.GetDisplayMembers();
+            QList<QString> qllDisplayMembers = p_cForm.GetDisplayMembers();
 
-            QLinkedList<QString>::iterator qllIt = qllDisplayMembers.begin();
-            QLinkedList<QString>::iterator qllItEnd = qllDisplayMembers.end();
+            QList<QString>::iterator qllIt = qllDisplayMembers.begin();
+            QList<QString>::iterator qllItEnd = qllDisplayMembers.end();
 
             for (; qllIt != qllItEnd; ++qllIt)
             {

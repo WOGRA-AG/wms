@@ -44,7 +44,7 @@
 #include <QDateTime>
 #include <QDate>
 
-CwnCommandLoadObjects::CwnCommandLoadObjects(CdmObjectContainer* p_pContainer, QLinkedList<long> &p_qlObjectIds, CwnDataAccess* p_pDataAccess)
+CwnCommandLoadObjects::CwnCommandLoadObjects(CdmObjectContainer* p_pContainer, QList<long> &p_qlObjectIds, CwnDataAccess* p_pDataAccess)
 : CwnCommandBase(p_pDataAccess),
   m_rpContainer(p_pContainer),
   m_qvlObjectIds(p_qlObjectIds)

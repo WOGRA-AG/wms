@@ -32,7 +32,7 @@
 #include <QFontDialog>
 #include <QColorDialog>
 #include <QPainter>
-#include <QLinkedList>
+#include <QList>
 #include <QPixmap>
 #include <QTextStream>
 

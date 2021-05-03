@@ -100,7 +100,7 @@ bool CwnCommandGetListOfUsersInList::CheckValid()
     return bRet;
 }
 
-QLinkedList<CumUser*> CwnCommandGetListOfUsersInList::getResult()
+QList<CumUser*> CwnCommandGetListOfUsersInList::getResult()
 {
     return this->p_qvlUsers;
 }

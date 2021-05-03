@@ -10,11 +10,11 @@ class CftlDataAccess;
 class CftlCommandGetUserGroupList : public CftlAbstractCommand
 {
 private:
-    QLinkedList<CumUserGroup*> m_qllUserGroups;
+    QList<CumUserGroup*> m_qllUserGroups;
 public:
     CftlCommandGetUserGroupList(CftlDataAccess* p_pDataAccess);
     virtual ~CftlCommandGetUserGroupList();
-    QLinkedList<CumUserGroup*> GetResult();
+    QList<CumUserGroup*> GetResult();
 
 protected:
     virtual int Execute();

@@ -16,7 +16,7 @@
 #include <qmap.h>
 #include <QSettings>
 #include <qdatetime.h>
-#include <QLinkedList>
+#include <QList>
 
 
 

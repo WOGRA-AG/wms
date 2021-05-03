@@ -42,14 +42,14 @@
 #include "CftlContainerTableSelect.h"
 #include "CftlCommandLoadObjects.h"
 
-CftlCommandLoadObjects::CftlCommandLoadObjects(CdmObjectContainer* p_pContainer, QLinkedList<long>& p_qlObjectIds, CftlDataAccess* p_pDataAccess)
+CftlCommandLoadObjects::CftlCommandLoadObjects(CdmObjectContainer* p_pContainer, QList<long>& p_qlObjectIds, CftlDataAccess* p_pDataAccess)
     : CftlAbstractCommand(p_pDataAccess),
       m_rpContainer(p_pContainer),
       m_qvlObjectIds(p_qlObjectIds)
 {
 }
 
-CftlCommandLoadObjects::CftlCommandLoadObjects(CdmObjectContainer *p_pContainer, QLinkedList<QString> &p_qlObjectKeynames, CftlDataAccess *p_pDataAccess)
+CftlCommandLoadObjects::CftlCommandLoadObjects(CdmObjectContainer *p_pContainer, QList<QString> &p_qlObjectKeynames, CftlDataAccess *p_pDataAccess)
     : CftlAbstractCommand(p_pDataAccess),
       m_rpContainer(p_pContainer),
       m_qvlObjectKeynames(p_qlObjectKeynames)

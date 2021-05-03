@@ -67,7 +67,7 @@ int CftlCommandLoadContainer::Execute()
 {
     long lRet = CdmLogging::eDmObjectAccessError;
     QDateTime qdtLastChange;
-    QLinkedList<long> qvlObjects;
+    QList<long> qvlObjects;
     QSqlQuery cQSqlQuery(GetSqlDatabase());
     QString qstrQuery;
 

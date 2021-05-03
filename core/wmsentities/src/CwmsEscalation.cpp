@@ -26,7 +26,7 @@ CwmsEscalation::~CwmsEscalation()
 {
 }
 
-QLinkedList<int> CwmsEscalation::GetEmployees()
+QList<int> CwmsEscalation::GetEmployees()
 {
    return GetIntList("Employees");
 }

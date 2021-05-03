@@ -271,7 +271,7 @@ void CwiUserGroupList::GetMembersOfGroup(CwmscomData *p_pData)
 {
     CwiCommandGetGroupUserList command(p_pData);
     command.Execute();
-    QLinkedList<CumUser*> qll_Members = command.GetResult();
+    QList<CumUser*> qll_Members = command.GetResult();
 }
 
 

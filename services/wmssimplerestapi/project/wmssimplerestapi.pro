@@ -35,13 +35,13 @@ UICIMPLS = $$OUT_PWD/$$WMS_ARCH/uic/$$WMS_MODE
 DESTDIR = $$DESTDIR/servercommands
 message("WMSINTERFACE DESTDIR: "$$DESTDIR)
 
-CONFIG(gcc, gcc|clang) {
-    QMAKE_CXXFLAGS += -Werror -Wall -Wextra
+#CONFIG(gcc, gcc|clang) {
+#    QMAKE_CXXFLAGS += -Werror -Wall -Wextra
 
-    IGNORE_ERRORS += -Wno-error=unused-parameter -Wno-error=return-type -Wno-error=unused-variable
-    message("WMSCOMMONS Ignored Errors: "$$IGNORE_ERRORS)
-    QMAKE_CXXFLAGS += $$IGNORE_ERRORS
-}
+#    IGNORE_ERRORS += -Wno-error=unused-parameter -Wno-error=return-type -Wno-error=unused-variable
+#    message("WMSCOMMONS Ignored Errors: "$$IGNORE_ERRORS)
+#    QMAKE_CXXFLAGS += $$IGNORE_ERRORS
+#}
 
 QT += core sql xml script widgets gui qml
 DEFINES += BMSINTERFACE_LIB

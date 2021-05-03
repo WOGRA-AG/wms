@@ -44,10 +44,10 @@ void CwmsWorkflowStepDefinition::SetEscalation(CdmObjectContainer* p_pCdmOLValue
 
 /** +-=---------------------------------------------------------Do 25. Okt 14:15:30 2012----------*
  * @method  CwmsWorkflowStepDefinition::GetHiddenMembers // public                          *
- * @return  QLinkedList<QString>                             //                                   *
+ * @return  QList<QString>                             //                                   *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------Do 25. Okt 14:15:30 2012----------*/
-QLinkedList<QString> CwmsWorkflowStepDefinition::GetHiddenMembers()
+QList<QString> CwmsWorkflowStepDefinition::GetHiddenMembers()
 {
    return GetStringList("Hidden_Members");
 }
@@ -55,20 +55,20 @@ QLinkedList<QString> CwmsWorkflowStepDefinition::GetHiddenMembers()
 /** +-=---------------------------------------------------------Do 25. Okt 14:15:18 2012----------*
  * @method  CwmsWorkflowStepDefinition::SetHiddenMembers // public                          *
  * @return  void                                             //                                   *
- * @param   QLinkedList<QString> p_qstrlKeynames             //                                   *
+ * @param   QList<QString> p_qstrlKeynames             //                                   *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------Do 25. Okt 14:15:18 2012----------*/
-void CwmsWorkflowStepDefinition::SetHiddenMembers(QLinkedList<QString> p_qstrlKeynames)
+void CwmsWorkflowStepDefinition::SetHiddenMembers(QList<QString> p_qstrlKeynames)
 {
    SetStringList("Hidden_Members", p_qstrlKeynames);
 }
 
 /** +-=---------------------------------------------------------Do 25. Okt 14:15:14 2012----------*
  * @method  CwmsWorkflowStepDefinition::GetReadOnlyMembers // public                        *
- * @return  QLinkedList<QString>                             //                                   *
+ * @return  QList<QString>                             //                                   *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------Do 25. Okt 14:15:14 2012----------*/
-QLinkedList<QString> CwmsWorkflowStepDefinition::GetReadOnlyMembers()
+QList<QString> CwmsWorkflowStepDefinition::GetReadOnlyMembers()
 {
    return GetStringList("ReadOnly_Members");
 }
@@ -76,10 +76,10 @@ QLinkedList<QString> CwmsWorkflowStepDefinition::GetReadOnlyMembers()
 /** +-=---------------------------------------------------------Do 25. Okt 14:15:10 2012----------*
  * @method  CwmsWorkflowStepDefinition::SetReadOnlyMembers // public                        *
  * @return  void                                             //                                   *
- * @param   QLinkedList<QString> p_qstrlKeynames             //                                   *
+ * @param   QList<QString> p_qstrlKeynames             //                                   *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------Do 25. Okt 14:15:10 2012----------*/
-void CwmsWorkflowStepDefinition::SetReadOnlyMembers(QLinkedList<QString> p_qstrlKeynames)
+void CwmsWorkflowStepDefinition::SetReadOnlyMembers(QList<QString> p_qstrlKeynames)
 {
    SetStringList("ReadOnly_Members", p_qstrlKeynames);
 }
@@ -177,11 +177,11 @@ QList<CdmObject*> CwmsWorkflowStepDefinition::GetNextSteps(CdmObject* p_pCdmWork
       if (CHKPTR(pOLManager))
       {
          pOLManager->ReloadContainerComplete(pList);
-         QLinkedList<CdmObject*> qlObjects;
+         QList<CdmObject*> qlObjects;
          pList->GetObjectList(qlObjects);
 
-         QLinkedList<CdmObject*>::iterator qllIt = qlObjects.begin();
-         QLinkedList<CdmObject*>::iterator qllItEnd = qlObjects.end();
+         QList<CdmObject*>::iterator qllIt = qlObjects.begin();
+         QList<CdmObject*>::iterator qllItEnd = qlObjects.end();
 
          for (; qllIt != qllItEnd; ++qllIt)
          {

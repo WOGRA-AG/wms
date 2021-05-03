@@ -41,7 +41,6 @@
 #define MODE_ARG "mode"
 #define SCHEME_ARG "scheme"
 
-
 QString g_qstrMajor   = WMS_LIB_VERSION_MAJOR;
 QString g_qstrMinor   = WMS_LIB_VERSION_MINOR;
 QString g_qstrRelease = WMS_LIB_VERSION_BUGFIX;

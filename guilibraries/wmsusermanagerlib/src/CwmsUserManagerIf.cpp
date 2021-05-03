@@ -304,8 +304,8 @@ void CwmsUserManagerIf::SearchForUserSlot()
 
 void CwmsUserManagerIf::ClearUsers()
 {
-    QLinkedList<CumUser*>::iterator qlIt = m_qlUsers.begin();
-    QLinkedList<CumUser*>::iterator qlItEnd = m_qlUsers.end();
+    QList<CumUser*>::iterator qlIt = m_qlUsers.begin();
+    QList<CumUser*>::iterator qlItEnd = m_qlUsers.end();
 
     for(; qlIt != qlItEnd; ++qlIt)
     {
@@ -313,9 +313,9 @@ void CwmsUserManagerIf::ClearUsers()
     }
 }
 
-QLinkedList<CumUser*> CwmsUserManagerIf::FindUserByWildCard(QString qstrSearchstring)
+QList<CumUser*> CwmsUserManagerIf::FindUserByWildCard(QString qstrSearchstring)
 {
-    QLinkedList<CumUser*> qlUsers;
+    QList<CumUser*> qlUsers;
 
     if(CHKPTR(m_rpCumUserManager))
     {
@@ -328,8 +328,8 @@ void CwmsUserManagerIf::getSearchedUsersToList()
 {
     ClearUserList();
 
-    QLinkedList<CumUser*>::iterator qlIt = m_qlUsers.begin();
-    QLinkedList<CumUser*>::iterator qlItEnd = m_qlUsers.end();
+    QList<CumUser*>::iterator qlIt = m_qlUsers.begin();
+    QList<CumUser*>::iterator qlItEnd = m_qlUsers.end();
 
     for(; qlIt != qlItEnd; ++qlIt)
     {
@@ -363,9 +363,9 @@ void CwmsUserManagerIf::SearchForUserGroupSlot()
     ClearUserList();
 }
 
-QLinkedList<CumUserGroup*> CwmsUserManagerIf::FindUserGroupByWildCard(QString qstrSearch)
+QList<CumUserGroup*> CwmsUserManagerIf::FindUserGroupByWildCard(QString qstrSearch)
 {
-    QLinkedList<CumUserGroup*> qlUsergroups;
+    QList<CumUserGroup*> qlUsergroups;
 
     if(CHKPTR(m_rpCumUserManager))
     {
@@ -378,8 +378,8 @@ void CwmsUserManagerIf::getSearchedUserGroupToList()
 {
     ClearGroupList();
 
-    QLinkedList<CumUserGroup*>::iterator qlIt = m_qlUsergroups.begin();
-    QLinkedList<CumUserGroup*>::iterator qlItEnd = m_qlUsergroups.end();
+    QList<CumUserGroup*>::iterator qlIt = m_qlUsergroups.begin();
+    QList<CumUserGroup*>::iterator qlItEnd = m_qlUsergroups.end();
 
     QTreeWidgetItem* pUserGroupItem = nullptr;
     bool bFirst = true;

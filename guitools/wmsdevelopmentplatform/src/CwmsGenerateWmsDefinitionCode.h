@@ -126,10 +126,10 @@ class CwmsGenerateWmsDefinitionCode : public CwmsCodeGeneratorCBase
    /** +-=---------------------------------------------------------Mi 23. Nov 10:47:35 2011-------*
     * @method  CwmsGenerateWmsDefinitionCode::GenerateCreateClassesByNameCode // private          *
     * @return  void                                          //                                   *
-    * @param   QLinkedList<CdmClass*>& p_rqllClasses         //                                   *
+    * @param   QList<CdmClass*>& p_rqllClasses         //                                   *
     * @comment                                                                                    *
     *----------------last changed: -----------------------------Mi 23. Nov 10:47:35 2011----------*/
-    void GenerateCreateClassesByNameCode(QLinkedList<CdmClass*>& p_rqllClasses);
+    void GenerateCreateClassesByNameCode(QList<CdmClass*>& p_rqllClasses);
 
    private:
    /** +-=---------------------------------------------------------Mi 23. Nov 10:59:32 2011-------*

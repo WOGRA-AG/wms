@@ -309,7 +309,7 @@ long LoadObjectListRights(  CdmObjectContainer*& p_pContainer );
     * @param   QValueList<long>& p_rqvlObjectIds             //                                   *
     * @comment This method loads all objects overgiven in the objectid list.                      *
     *----------------last changed: Wolfgang Gra�hof-------------Do 17. Mai 15:37:35 2007----------*/
-    long LoadObjects(CdmObjectContainer* p_pContainer, QLinkedList<long>& p_rqvlObjectIds);
+    long LoadObjects(CdmObjectContainer* p_pContainer, QList<long>& p_rqvlObjectIds);
 
 
    public:
@@ -357,24 +357,24 @@ long LoadObjectListRights(  CdmObjectContainer*& p_pContainer );
     * @return  long                                          //                                   *
     * @param   long p_lDbId                                  //                                   *
     * @param   QString p_qstrKeynameObjectList               //                                   *
-    * @param   QLinkedList<long>& p_rqvlIds                  //                                   *
+    * @param   QList<long>& p_rqvlIds                  //                                   *
     * @comment Finds the objectId's of the objectlist.                                            *
     *----------------last changed: -----------------------------Sa 8. Nov 11:12:25 2008-----------*/
     long FindObjectIdToObjectList(long p_lDbId,
                                   QString p_qstrKeynameObjectList,
-                                  QLinkedList<long>& p_rqvlIds);
+                                  QList<long>& p_rqvlIds);
 
    private:
    /** +-=---------------------------------------------------------Di 21. Jul 19:07:15 2009-------*
     * @method  CdbObjectAccess::UpdateObjects              // private                           *
     * @return  long                                          //                                   *
     * @param   CdmObjectContainer* p_pContainer               //                                   *
-    * @param   QLinkedList<CdmObject*>& p_rqlObjects         //                                   *
+    * @param   QList<CdmObject*>& p_rqlObjects         //                                   *
     * @param   long p_lSessionId                             //                                   *
     * @comment                                                                                    *
     *----------------last changed: -----------------------------Di 21. Jul 19:07:15 2009----------*/
     long UpdateObjects(CdmObjectContainer* p_pContainer,
-                       QLinkedList<CdmObject*>& p_rqlObjects,
+                       QList<CdmObject*>& p_rqlObjects,
                        long p_lSessionId);
 
    private:
@@ -382,12 +382,12 @@ long LoadObjectListRights(  CdmObjectContainer*& p_pContainer );
     * @method  CdbObjectAccess::DeleteObjects              // private                           *
     * @return  long                                          //                                   *
     * @param   CdmObjectContainer* p_pContainer               //                                   *
-    * @param   QLinkedList<CdmObject*>& p_rqlObjects         //                                   *
+    * @param   QList<CdmObject*>& p_rqlObjects         //                                   *
     * @param   long p_lSessionId                             //                                   *
     * @comment                                                                                    *
     *----------------last changed: -----------------------------Di 21. Jul 19:08:28 2009----------*/
     long DeleteObjects(CdmObjectContainer* p_pContainer,
-                       QLinkedList<CdmObject*>& p_rqlObjects,
+                       QList<CdmObject*>& p_rqlObjects,
                        long p_lSessionId);
 
 

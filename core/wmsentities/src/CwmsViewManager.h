@@ -42,7 +42,7 @@ public:
     CwmsViewManager();
     virtual ~CwmsViewManager();
     CdmObjectContainer* GetContainer();
-    void GetViewList(QLinkedList<CdmObject*>& p_rqlViews);
+    void GetViewList(QList<CdmObject*>& p_rqlViews);
     CwmsView GetViewById(long p_lObjectId);
     CwmsView GetViewByName(QString p_qstrName);
 

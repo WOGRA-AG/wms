@@ -13,7 +13,7 @@
 
 // System and QT Includes
 #include <QMap>
-#include <QLinkedList>
+#include <QList>
 
 
 // own Includes
@@ -101,7 +101,7 @@ public:
     virtual long GetCounterValue(const CdmObjectContainer* p_pContainer, CdmValue* p_pValue);
 
     long LoadEmptyObjectList(long p_lDbId, long p_lId, CdmObjectContainer*& p_pContainer);
-    long LoadObjects(CdmObjectContainer* p_pContainer, QLinkedList<long>& p_rqvlObjectIds);
+    long LoadObjects(CdmObjectContainer* p_pContainer, QList<long>& p_rqvlObjectIds);
     int IsObjectUsed(const CdmObject* p_pObject);
     virtual long CountObjectsOnDb(CdmObjectContainer* p_pContainer);
     virtual long RefreshObjectList(CdmObjectContainer* p_pContainer);

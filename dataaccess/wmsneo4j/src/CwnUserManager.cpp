@@ -27,7 +27,7 @@
 
 #include "CwnUserManager.h"
 
-#include <QLinkedList>
+#include <QList>
 
 
 CwnUserManager::CwnUserManager(CwnDataAccess* p_pCwnDataAccess)
@@ -110,7 +110,7 @@ long CwnUserManager::UpdateUser(CumUser* p_pUser)
     return updateU.Run();
 }
 
-long CwnUserManager::GetUserList(QLinkedList<CumUser *> &p_qvlUsers)
+long CwnUserManager::GetUserList(QList<CumUser *> &p_qvlUsers)
 {
     CwnCommandGetUserList getUserList(m_pCwnDataAccess);
 
@@ -175,7 +175,7 @@ long CwnUserManager::RemoveUserFromGroup(long p_lUserId, long p_lUserGroupId)
     return RemoveFromGroup.Run();
 }
 
-long CwnUserManager::GetUserGroupList(QLinkedList<CumUserGroup *> &p_rqvlUserGroups)
+long CwnUserManager::GetUserGroupList(QList<CumUserGroup *> &p_rqvlUserGroups)
 {
     CwnCommandGetUserGroupList getGroupList(m_pCwnDataAccess);
 
@@ -189,7 +189,7 @@ long CwnUserManager::GetUserGroupList(QLinkedList<CumUserGroup *> &p_rqvlUserGro
     return val;
 }
 
-long CwnUserManager::GetListOfUsersInList(long p_lUserGroupId, QLinkedList<CumUser *> &p_rqvlUserList)
+long CwnUserManager::GetListOfUsersInList(long p_lUserGroupId, QList<CumUser *> &p_rqvlUserList)
 {
     CwnCommandGetListOfUsersInList getListOfUsersInList(m_pCwnDataAccess);
 
@@ -204,7 +204,7 @@ long CwnUserManager::GetListOfUsersInList(long p_lUserGroupId, QLinkedList<CumUs
     return val;
 }
 
-long CwnUserManager::GetUserGroupMemberList(long p_lUserId, QLinkedList<CumUserGroup *> &p_qvlUserGroups)
+long CwnUserManager::GetUserGroupMemberList(long p_lUserId, QList<CumUserGroup *> &p_qvlUserGroups)
 {
     CwnCommandGetUserGroupMemberList getGroupMemberList(m_pCwnDataAccess);
 
@@ -313,9 +313,9 @@ CumUserGroup* CwnUserManager::FindUserGroupByName(QString p_qstrName)
     return command.GetResult();
 }
 
-QLinkedList<CumUser*> CwnUserManager::FindUser(QString p_qstrUserLoginNameEmail)
+QList<CumUser*> CwnUserManager::FindUser(QString p_qstrUserLoginNameEmail)
 {
-    QLinkedList<CumUser*> lUsers;
+    QList<CumUser*> lUsers;
     CwnCommandGetUserList command(p_qstrUserLoginNameEmail, m_pCwnDataAccess);
     command.Run();
     lUsers = command.getResult();
@@ -338,7 +338,7 @@ CumUser *CwnUserManager::FindUserByIdentKey(QString p_qstridentKey)
     return pCumUser;
 }
 
-QLinkedList<CumUserGroup *> CwnUserManager::FindUserGroups(QString p_qstrName, QString p_qstrSchemeUri)
+QList<CumUserGroup *> CwnUserManager::FindUserGroups(QString p_qstrName, QString p_qstrSchemeUri)
 {
     CwnCommandFindGroups command(p_qstrName, p_qstrSchemeUri, m_pCwnDataAccess);
     command.Run();

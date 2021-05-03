@@ -3,7 +3,7 @@
 
 // Sytsem and QT Includes
 #include <QString>
-#include <QLinkedList>
+#include <QList>
 #include <QTextStream>
 #include <QFile>
 #include <QMutex>

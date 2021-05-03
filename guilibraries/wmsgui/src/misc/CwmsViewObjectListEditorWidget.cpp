@@ -146,10 +146,10 @@ void CwmsViewObjectListEditorWidget::SetModule(CwmsApplicationModule p_cModule)
       CdmObject* pCdmObject = p_cModule.GetUserInterface();
       CwmsFormView cForm(pCdmObject);
       m_pCwmsEditor->SetFormBase(cForm);
-      QLinkedList<QString> qllViews = cForm.GetViews();
+      QList<QString> qllViews = cForm.GetViews();
 
-      QLinkedList<QString>::iterator qllIt = qllViews.begin();
-      QLinkedList<QString>::iterator qllItEnd = qllViews.end();
+      QList<QString>::iterator qllIt = qllViews.begin();
+      QList<QString>::iterator qllItEnd = qllViews.end();
 
       for (; qllIt != qllItEnd; ++qllIt)
       {

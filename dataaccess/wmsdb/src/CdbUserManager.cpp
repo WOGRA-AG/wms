@@ -13,7 +13,7 @@
 // System and QT Includes
 #include <qsqlquery.h>
 #include <qvariant.h>
-#include <QLinkedList>
+#include <QList>
 #include <QCryptographicHash>
 
 // WMS Includes
@@ -221,7 +221,7 @@ long CdbUserManager::UpdateUser(CumUser* p_pUser)
    return command.Run();
 }
 
-long CdbUserManager::GetUserList(QLinkedList<CumUser*>& p_qvlUsers)
+long CdbUserManager::GetUserList(QList<CumUser*>& p_qvlUsers)
 {
     long lRet = 0;
     CdbCommandGetUserList command(m_pCdbDataAccess);
@@ -305,7 +305,7 @@ long CdbUserManager::RemoveUserFromGroup(long p_lUserId, long p_lUserGroupId)
     return command.Run();
 }
 
-long CdbUserManager::GetUserGroupList(QLinkedList<CumUserGroup*>& p_rqvlUserGroups, QString p_qstrSchemeUri)
+long CdbUserManager::GetUserGroupList(QList<CumUserGroup*>& p_rqvlUserGroups, QString p_qstrSchemeUri)
 {
    long lRet = CdmLogging::eDmUnknownUserQueryError;
    CdbCommandGetUserGroupList command(m_pCdbDataAccess, p_qstrSchemeUri);
@@ -322,7 +322,7 @@ long CdbUserManager::GetUserGroupList(QLinkedList<CumUserGroup*>& p_rqvlUserGrou
  * @comment This method returns a list of User in usergroup p_lUserGroupId.                       *
  *----------------last changed: --------------------------------Sa 20. Aug 12:17:33 2005----------*/
 long CdbUserManager::GetListOfUsersInList(long p_lUserGroupId,
-                                          QLinkedList<CumUser*>& p_rqvlUserList)
+                                          QList<CumUser*>& p_rqvlUserList)
 {
    CdbCommandGetGroupUserList command(p_lUserGroupId, m_pCdbDataAccess);
    long lRet = command.Run();
@@ -338,7 +338,7 @@ long CdbUserManager::GetListOfUsersInList(long p_lUserGroupId,
  * @comment This method returns a list of groups in which a is member.                            *
  *----------------last changed: --------------------------------Sa 20. Aug 12:17:37 2005----------*/
 long CdbUserManager::GetUserGroupMemberList(long p_lUserId,
-                                            QLinkedList<CumUserGroup*>& p_qvlUserGroups)
+                                            QList<CumUserGroup*>& p_qvlUserGroups)
 {
    long lRet = CdmLogging::eDmUnknownUserQueryError;
    CdbCommandGetGroupsOfUser command(p_lUserId, m_pCdbDataAccess);
@@ -374,16 +374,16 @@ CumUserGroup* CdbUserManager::FindUserGroupById(int p_iId)
     return command.GetResult();
 }
 
-QLinkedList<CumUser*> CdbUserManager::FindUser(QString p_qstrUserLoginNameEmail, QString p_qstrSchemeUri)
+QList<CumUser*> CdbUserManager::FindUser(QString p_qstrUserLoginNameEmail, QString p_qstrSchemeUri)
 {
-    QLinkedList<CumUser*> lUsers;
+    QList<CumUser*> lUsers;
     CdbCommandGetUserList command(p_qstrUserLoginNameEmail, p_qstrSchemeUri, m_pCdbDataAccess);
     command.Run();
     lUsers = command.GetResult();
     return lUsers;
 }
 
-QLinkedList<CumUserGroup*> CdbUserManager::FindUserGroups(QString p_qstrName, QString p_qstrSchemeUri)
+QList<CumUserGroup*> CdbUserManager::FindUserGroups(QString p_qstrName, QString p_qstrSchemeUri)
 {
     CdbCommandFindGroups command(p_qstrName, p_qstrSchemeUri, m_pCdbDataAccess);
     command.Run();

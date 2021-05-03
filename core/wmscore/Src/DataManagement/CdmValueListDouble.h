@@ -7,7 +7,7 @@
 // own Includes
 #include "CdmMember.h"
 #include "CdmValueCharacterDocument.h"
-#include <QLinkedList>
+#include <QList>
 
 // forwards
 class QString;
@@ -20,7 +20,7 @@ class WMSMANAGER_API CdmValueListDouble : public CdmValueCharacterDocument
     Q_OBJECT
 
 private:
-    QLinkedList<double> m_qvlDoubles;
+    QList<double> m_qvlDoubles;
 
 public:
     CdmValueListDouble(long p_lDatabaseId, long p_lId, QString p_qstrKeyname, CdmObject* p_pCdmObject);
@@ -30,13 +30,13 @@ public:
     CdmValueListDouble(QVariantMap& p_rqvHash, CdmObject* p_pCdmObject);
     virtual void Deploy(QVariantMap& p_rqvHash);
     virtual QVariant GetValueVariant() const;
-    static void DeserializeXmlToDoubleList(QString &p_qstrXml, QLinkedList<double> &p_qllList);
+    static void DeserializeXmlToDoubleList(QString &p_qstrXml, QList<double> &p_qllList);
 
 public slots:
     void AddValue(double p_dValue);
     void RemoveValue(double p_dValue);
-    QLinkedList<double> GetList() const;
-    void SetList( QLinkedList<double> p_qllDoubles);
+    QList<double> GetList() const;
+    void SetList( QList<double> p_qllDoubles);
     virtual QString GetValueAsString() const;
     virtual void SetValueVariant(QVariant& p_rVariant);
 

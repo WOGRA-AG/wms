@@ -48,7 +48,7 @@ private:
     QMap<QString, int> m_qmKeynames;
     QMap<QString, QString> m_qmKeynamesSave;
     QMap<EdmValueType, QList<const CdmMember*> > m_qmTypesResults;
-    QMultiMap<int, QPair<QLinkedList<const CdmMember*>, QList<const CdmMember*>>> m_qmmObjectRefMembers;
+    QMultiMap<int, QPair<QList<const CdmMember*>, QList<const CdmMember*>>> m_qmmObjectRefMembers;
 
 
 public:

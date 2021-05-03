@@ -39,13 +39,13 @@ UICIMPLS = $$OUT_PWD/$$WMS_ARCH/uic/$$WMS_MODE
 DESTDIR = $$DESTDIR/dataaccess
 message("WMSFTL DESTDIR: "$$DESTDIR)
 
-CONFIG(gcc, gcc|clang) {
-    QMAKE_CXXFLAGS += -Werror -Wall -Wextra
+#CONFIG(gcc, gcc|clang) {
+#    QMAKE_CXXFLAGS += -Werror -Wall -Wextra
 
-    IGNORE_ERRORS += -Wno-error=unused-parameter
-    message("WMSCOMMONS Ignored Errors: "$$IGNORE_ERRORS)
-    QMAKE_CXXFLAGS += $$IGNORE_ERRORS
-}
+#    IGNORE_ERRORS += -Wno-error=unused-parameter
+#    message("WMSCOMMONS Ignored Errors: "$$IGNORE_ERRORS)
+#    QMAKE_CXXFLAGS += $$IGNORE_ERRORS
+#}
 
 QT += core sql script gui quick qml
 DEFINES += WMSDB_EXPORTS

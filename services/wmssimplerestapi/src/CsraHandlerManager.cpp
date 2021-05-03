@@ -69,11 +69,11 @@ void CsraHandlerManager::findUser(CsaLocatedElement *p_pElement, CwsHttpRequest 
 
                 if (CHKPTR(pUserManager))
                 {
-                    QLinkedList<CumUser*> qllUsers = pUserManager->FindUsersUnmanaged(qstrName);
+                    QList<CumUser*> qllUsers = pUserManager->FindUsersUnmanaged(qstrName);
                     QVariantList qvlUsers;
 
-                    QLinkedList<CumUser*>::iterator qllIt = qllUsers.begin();
-                    QLinkedList<CumUser*>::iterator qllItEnd = qllUsers.end();
+                    QList<CumUser*>::iterator qllIt = qllUsers.begin();
+                    QList<CumUser*>::iterator qllItEnd = qllUsers.end();
 
                     for (; qllIt != qllItEnd; ++qllIt)
                     {
@@ -110,11 +110,11 @@ void CsraHandlerManager::findUserGroup(CsaLocatedElement *p_pElement, CwsHttpReq
 
                 if (CHKPTR(pUserManager))
                 {
-                    QLinkedList<CumUserGroup*> qllUsers = pUserManager->FindUserGroupsByNameUnmanaged(qstrName);
+                    QList<CumUserGroup*> qllUsers = pUserManager->FindUserGroupsByNameUnmanaged(qstrName);
                     QVariantList qvlUserGroupss;
 
-                    QLinkedList<CumUserGroup*>::iterator qlIt = qllUsers.begin();
-                    QLinkedList<CumUserGroup*>::iterator qlItEnd = qllUsers.end();
+                    QList<CumUserGroup*>::iterator qlIt = qllUsers.begin();
+                    QList<CumUserGroup*>::iterator qlItEnd = qllUsers.end();
 
                     for(; qlIt != qlItEnd; ++qlIt)
                     {
@@ -145,11 +145,11 @@ void CsraHandlerManager::getSchemeList(CsaLocatedElement *p_pElement, CwsHttpReq
         if (CHKPTR(pDataProvider))
         {
             QVariantList qvlSchemes;
-            QLinkedList<QString> qllSchemes;
+            QList<QString> qllSchemes;
             pDataProvider->GetSchemeList(qllSchemes);
 
-            QLinkedList<QString>::iterator qllIt = qllSchemes.begin();
-            QLinkedList<QString>::iterator qllItEnd = qllSchemes.end();
+            QList<QString>::iterator qllIt = qllSchemes.begin();
+            QList<QString>::iterator qllItEnd = qllSchemes.end();
 
             for (; qllIt != qllItEnd; ++qllIt)
             {

@@ -495,12 +495,12 @@ bool CdmScheme::GenerateDeploymentFile(QString& p_qstrFilename)
     CwmsJson cJson;
     QVariant qvClass = GetClassManager()->GetVariant();
     QVariantList qvObjectLists;
-    QLinkedList<CdmClass*> qllClasses;
+    QList<CdmClass*> qllClasses;
     CdmDataProvider* pManager = CdmSessionManager::GetDataProvider();
     GetClassManager()->GetClassList(qllClasses);
     CdmContainerManager* pContainerManager = GetContainerManager();
-    QLinkedList<CdmClass*>::iterator qllIt = qllClasses.begin();
-    QLinkedList<CdmClass*>::iterator qllItEnd = qllClasses.end();
+    QList<CdmClass*>::iterator qllIt = qllClasses.begin();
+    QList<CdmClass*>::iterator qllItEnd = qllClasses.end();
 
     if (CHKPTR(pContainerManager))
     {

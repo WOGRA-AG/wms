@@ -12,7 +12,7 @@
  *****************************************************************************/ 
 
 // System and QT Includes
-#include <QLinkedList>
+#include <QList>
 
 // Own Includes
 #include "CdmLogging.h"
@@ -60,7 +60,7 @@ QString CdmContainerServices::EvaluateSum(CdmObjectContainer* p_pContainer, QStr
 
    if (CHKPTR(p_pContainer))
    {
-      QLinkedList<CdmObject*> qllList;
+      QList<CdmObject*> qllList;
       p_pContainer->GetObjectList(qllList);
       qstrRet = EvaluateSum(qllList, p_qstrMember);
    }
@@ -71,11 +71,11 @@ QString CdmContainerServices::EvaluateSum(CdmObjectContainer* p_pContainer, QStr
 /** +-=---------------------------------------------------------Di 7. Apr 19:14:39 2009-----------*
  * @method  CdmContainerServices::EvaluateSum               // public, static                    *
  * @return  QString                                          // value as string for conversion issues*
- * @param   QLinkedList<CdmObject*>& p_rqvlObjects           //                                   *
+ * @param   QList<CdmObject*>& p_rqvlObjects           //                                   *
  * @param   QString p_qstrMember                             //                                   *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------Di 7. Apr 19:14:39 2009-----------*/
-QString CdmContainerServices::EvaluateSum(QLinkedList<CdmObject*>& p_rqvlObjects,
+QString CdmContainerServices::EvaluateSum(QList<CdmObject*>& p_rqvlObjects,
                                            QString p_qstrMember)
 {
    QString qstrRet;
@@ -87,8 +87,8 @@ QString CdmContainerServices::EvaluateSum(QLinkedList<CdmObject*>& p_rqvlObjects
    QDateTime m_qdtValue;
    QTime m_qtValue;
 
-   QLinkedList<CdmObject*>::iterator qllIt = p_rqvlObjects.begin();
-   QLinkedList<CdmObject*>::iterator qllItEnd = p_rqvlObjects.end();
+   QList<CdmObject*>::iterator qllIt = p_rqvlObjects.begin();
+   QList<CdmObject*>::iterator qllItEnd = p_rqvlObjects.end();
 
    for(; qllIt != qllItEnd; ++qllIt)
    {
@@ -174,7 +174,7 @@ QString CdmContainerServices::EvaluateAverage(CdmObjectContainer* p_pContainer,
 
    if (CHKPTR(p_pContainer))
    {
-      QLinkedList<CdmObject*> qllList;
+      QList<CdmObject*> qllList;
       p_pContainer->GetObjectList(qllList);
       qstrRet = EvaluateAverage(qllList, p_qstrMember);
    }
@@ -185,11 +185,11 @@ QString CdmContainerServices::EvaluateAverage(CdmObjectContainer* p_pContainer,
 /** +-=---------------------------------------------------------Di 7. Apr 20:33:56 2009-----------*
  * @method  CdmContainerServices::EvaluateAverage           // public, static                    *
  * @return  QString                                          // value as string for conversion issues*
- * @param   QLinkedList<CdmObject*>& p_rqvlObjects           //                                   *
+ * @param   QList<CdmObject*>& p_rqvlObjects           //                                   *
  * @param   QString p_qstrMember                             //                                   *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------Di 7. Apr 20:33:56 2009-----------*/
-QString CdmContainerServices::EvaluateAverage(QLinkedList<CdmObject*>& p_rqvlObjects,
+QString CdmContainerServices::EvaluateAverage(QList<CdmObject*>& p_rqvlObjects,
                                                QString p_qstrMember)
 {
    QString qstrRet;
@@ -213,7 +213,7 @@ QString CdmContainerServices::EvaluateMin(CdmObjectContainer* p_pContainer, QStr
 
    if (CHKPTR(p_pContainer))
    {
-      QLinkedList<CdmObject*> qllList;
+      QList<CdmObject*> qllList;
       p_pContainer->GetObjectList(qllList);
       qstrRet = EvaluateMin(qllList, p_qstrMember);
    }
@@ -224,11 +224,11 @@ QString CdmContainerServices::EvaluateMin(CdmObjectContainer* p_pContainer, QStr
 /** +-=---------------------------------------------------------Di 7. Apr 19:16:30 2009-----------*
  * @method  CdmContainerServices::EvaluateMin               // public, static                    *
  * @return  QString                                          // value as string for conversion issues*
- * @param   QLinkedList<CdmObject*>& p_rqvlObjects           //                                   *
+ * @param   QList<CdmObject*>& p_rqvlObjects           //                                   *
  * @param   QString p_qstrMember                             //                                   *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------Di 7. Apr 19:16:30 2009-----------*/
-QString CdmContainerServices::EvaluateMin(QLinkedList<CdmObject*>& p_rqvlObjects,
+QString CdmContainerServices::EvaluateMin(QList<CdmObject*>& p_rqvlObjects,
                                            QString p_qstrMember)
 {
    QString qstrRet;
@@ -241,8 +241,8 @@ QString CdmContainerServices::EvaluateMin(QLinkedList<CdmObject*>& p_rqvlObjects
    QDateTime m_qdtValue;
    QTime m_qtValue;
 
-   QLinkedList<CdmObject*>::iterator qllIt = p_rqvlObjects.begin();
-   QLinkedList<CdmObject*>::iterator qllItEnd = p_rqvlObjects.end();
+   QList<CdmObject*>::iterator qllIt = p_rqvlObjects.begin();
+   QList<CdmObject*>::iterator qllItEnd = p_rqvlObjects.end();
 
    for(; qllIt != qllItEnd; ++qllIt)
    {
@@ -408,7 +408,7 @@ QString CdmContainerServices::EvaluateMax(CdmObjectContainer* p_pContainer, QStr
 
    if (CHKPTR(p_pContainer))
    {
-      QLinkedList<CdmObject*> qllList;
+      QList<CdmObject*> qllList;
       p_pContainer->GetObjectList(qllList);
       qstrRet = EvaluateMax(qllList, p_qstrMember);
    }
@@ -420,11 +420,11 @@ QString CdmContainerServices::EvaluateMax(CdmObjectContainer* p_pContainer, QStr
 /** +-=---------------------------------------------------------Di 7. Apr 19:17:30 2009-----------*
  * @method  CdmContainerServices::EvaluateMax               // public, static                    *
  * @return  QString                                          // value as string for conversion issues*
- * @param   QLinkedList<CdmObject*>& p_rqvlObjects           //                                   *
+ * @param   QList<CdmObject*>& p_rqvlObjects           //                                   *
  * @param   QString p_qstrMember                             //                                   *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------Di 7. Apr 19:17:30 2009-----------*/
-QString CdmContainerServices::EvaluateMax(QLinkedList<CdmObject*>& p_rqvlObjects,
+QString CdmContainerServices::EvaluateMax(QList<CdmObject*>& p_rqvlObjects,
                                            QString p_qstrMember)
 {
    QString qstrRet;
@@ -437,8 +437,8 @@ QString CdmContainerServices::EvaluateMax(QLinkedList<CdmObject*>& p_rqvlObjects
    QDateTime m_qdtValue;
    QTime m_qtValue;
 
-   QLinkedList<CdmObject*>::iterator qllIt = p_rqvlObjects.begin();
-   QLinkedList<CdmObject*>::iterator qllItEnd = p_rqvlObjects.end();
+   QList<CdmObject*>::iterator qllIt = p_rqvlObjects.begin();
+   QList<CdmObject*>::iterator qllItEnd = p_rqvlObjects.end();
 
    for(; qllIt != qllItEnd; ++qllIt)
    {

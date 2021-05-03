@@ -37,9 +37,9 @@ UI_DIR = $$OUT_PWD/$$WMS_ARCH/ui/$$WMS_MODE
 
 message("WMSUSERMANAGERDLL DESTDIR: "$$DESTDIR)
 
-CONFIG(gcc, gcc|clang) {
-    QMAKE_CXXFLAGS += -Werror -Wall -Wextra
-}
+#CONFIG(gcc, gcc|clang) {
+#    QMAKE_CXXFLAGS += -Werror -Wall -Wextra
+#}
 
 QT += core script widgets gui
 DEFINES += WMSUSERMANAGERDLL_LIB

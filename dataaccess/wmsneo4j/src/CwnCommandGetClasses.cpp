@@ -19,7 +19,7 @@
 
 #include "CwnCommandStdHeader.h"
 
-CwnCommandGetClasses::CwnCommandGetClasses(CdmClassManager *p_ppClassManager, QLinkedList<long> &p_lClassIds, CwnDataAccess *p_pDataAccess):
+CwnCommandGetClasses::CwnCommandGetClasses(CdmClassManager *p_ppClassManager, QList<long> &p_lClassIds, CwnDataAccess *p_pDataAccess):
     CwnCommandBase(p_pDataAccess),
     m_rpClass(nullptr),
     m_rpClassManager(p_ppClassManager)

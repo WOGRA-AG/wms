@@ -89,7 +89,7 @@ void CwmsScriptableModel::copyHeaderData(QAbstractItemModel &p_rModel, Qt::Orien
     }
 }
 
-void CwmsScriptableModel::CopyFromItemModel(QAbstractItemModel &p_rModel, int p_iDisplayType)
+void CwmsScriptableModel::copyFromItemModel(QAbstractItemModel &p_rModel, int p_iDisplayType)
 {
     m_qmData.clear();
     int iRowCount    = p_rModel.rowCount();
@@ -190,6 +190,14 @@ void CwmsScriptableModel::addValue(int p_iRow, int p_iColumn, int p_iDisplayType
 {
     if (checkRowColumn(p_iRow, p_iColumn))
     {
+        bool bOk = true;
+        double dValue = p_rValue.toDouble(&bOk);
+        if (bOk)
+        {
+            QLocale loc;
+            p_rValue = loc.toString(dValue, 'f', 2);
+        }
+
         QMap<int, QMap<int, QVariant>> qmRow;
         QMap<int, QVariant> qmData;
 

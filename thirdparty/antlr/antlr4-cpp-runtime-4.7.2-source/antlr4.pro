@@ -27,6 +27,8 @@ else:CONFIG(debug, debug|release): {
    WMS_MODE = debug
 }
 
+!CONFIG(no_precompile_header):CONFIG += precompile_header
+
 DESTDIR = $$OUT_PWD/../../../../bin/$$WMS_ARCH/$$WMS_MODE
 MOC_DIR = $$OUT_PWD/$$WMS_ARCH/moc/$$WMS_MODE
 OBJECTS_DIR = $$OUT_PWD/$$WMS_ARCH/obj/$$WMS_MODE

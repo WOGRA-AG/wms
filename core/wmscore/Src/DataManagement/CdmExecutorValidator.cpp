@@ -394,7 +394,7 @@ bool CdmExecutorValidator::CheckUnique(CdmValue* p_pCdmValue)
 
                    if(CHKPTR(pCdmQuery))
                    {
-                       QLinkedList<long> qllResult = pCdmQuery->GetResultList();
+                       QList<long> qllResult = pCdmQuery->GetResultList();
 
                        if (qllResult.count() > 1)
                        {
@@ -437,9 +437,9 @@ bool CdmExecutorValidator::Validate(CdmObjectContainer* p_pCdmObjectList)
 
       if (CHKPTR(pCdmClass))
       {
-         QLinkedList<CdmObject*> qllList = p_pCdmObjectList->GetNewModifiedList();
-         QLinkedList<CdmObject*>::iterator qllIt = qllList.begin();
-         QLinkedList<CdmObject*>::iterator qllItEnd = qllList.end();
+         QList<CdmObject*> qllList = p_pCdmObjectList->GetNewModifiedList();
+         QList<CdmObject*>::iterator qllIt = qllList.begin();
+         QList<CdmObject*>::iterator qllItEnd = qllList.end();
 
          for (; qllIt != qllItEnd; ++qllIt)
          {

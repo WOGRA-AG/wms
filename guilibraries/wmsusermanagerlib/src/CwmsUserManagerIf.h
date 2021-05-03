@@ -10,7 +10,7 @@
 
 // System and QT INcludes
 #include <QMainWindow>
-#include <QLinkedList>
+#include <QList>
 #include <QCloseEvent>
 
 // own Includes
@@ -30,10 +30,10 @@ class WMSUSERMANAGER_API CwmsUserManagerIf : public QMainWindow, public Ui::Cwms
 
    private:
       CumUserManager*           m_rpCumUserManager;
-      QLinkedList<CumUserGroup*> m_qvlUserGroups; 
-      QLinkedList<CumUser*>      m_qvlUsers;
-      QLinkedList<CumUser*>     m_qlUsers;
-      QLinkedList<CumUserGroup*> m_qlUsergroups;
+      QList<CumUserGroup*> m_qvlUserGroups; 
+      QList<CumUser*>      m_qvlUsers;
+      QList<CumUser*>     m_qlUsers;
+      QList<CumUserGroup*> m_qlUsergroups;
       QVBoxLayout*              m_pqvbLayout;
       QWidget*                  m_pqwEditor;
 
@@ -199,8 +199,8 @@ void closeEvent(  QCloseEvent* p_pqCloseEvent );
     * @comment                                                                                    *
     *----------------last changed: -----------------------------Mo 29. Okt 14:57:13 2012----------*/
     CumUser* FindUserById(int p_iId);
-    QLinkedList<CumUser*> FindUserByWildCard(QString qstrSearch);
-    QLinkedList<CumUserGroup*> FindUserGroupByWildCard(QString qstrSearch);
+    QList<CumUser*> FindUserByWildCard(QString qstrSearch);
+    QList<CumUserGroup*> FindUserGroupByWildCard(QString qstrSearch);
 
     void ClearUsers();
 private slots:

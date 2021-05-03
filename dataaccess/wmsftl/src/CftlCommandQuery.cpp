@@ -11,7 +11,7 @@
 
 // System and QT Includes
 #include <QSqlQuery>
-#include <QLinkedList>
+#include <QList>
 #include <QQueue>
 #include <qvariant.h>
 
@@ -403,7 +403,7 @@ bool CftlCommandQuery::IsQueryElementValid(CdmQueryElement* p_pElement)
         }
         else
         {
-            QLinkedList<CdmQueryElement*> qllChilds;
+            QList<CdmQueryElement*> qllChilds;
             p_pElement->GetChildList(qllChilds);
 
             if (qllChilds.count() > 0)

@@ -114,9 +114,9 @@ void CwmsFormObjectContainerEditor::FillDialog(CwmsFormObjectContainer p_cForm, 
 void CwmsFormObjectContainerEditor::FillSelectionMembers()
 {
 	m_pqlwSelectionMembers->clear();
-	QLinkedList<QString> qllSelectionMembers = m_cForm.GetSelectionDisplayMembers();
-	QLinkedList<QString>::iterator qllIt = qllSelectionMembers.begin();
-	QLinkedList<QString>::iterator qllItEnd = qllSelectionMembers.end();
+	QList<QString> qllSelectionMembers = m_cForm.GetSelectionDisplayMembers();
+	QList<QString>::iterator qllIt = qllSelectionMembers.begin();
+	QList<QString>::iterator qllItEnd = qllSelectionMembers.end();
 
 	for (; qllIt != qllItEnd; ++qllIt)
 	{
@@ -150,7 +150,7 @@ void CwmsFormObjectContainerEditor::SaveData()
       m_cForm.SetSelectionView(m_cSelectionView.GetObject());
 	  m_cForm.SetEditorWql(m_pqteEditorWql->toPlainText());
 
-	  QLinkedList<QString> qllSelectionMembers;
+	  QList<QString> qllSelectionMembers;
 
 	  for (int iPos = 0; iPos < m_pqlwSelectionMembers->count(); ++iPos)
 	  {

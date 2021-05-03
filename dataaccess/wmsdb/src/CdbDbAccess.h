@@ -12,7 +12,7 @@
 #define CODBCDBACCESS_H
 
 // System and QT Includes
-#include <QLinkedList>
+#include <QList>
 
 // own Includes
 #include "CdbDataAccess.h"
@@ -100,7 +100,7 @@ long FindScheme(  QString p_qstrKeyname, CdmScheme*& p_pCdmDatabaseManager );
     * @param   QValueList<QString>& p_rqvlDatabases          //                                   *
     * @comment This method fills the list of all virutal databases.                               *
     *----------------last changed: -----------------------------Sa 20. Aug 11:51:56 2005----------*/
-long GetDatabaseList(  QLinkedList<QString>& p_rqvlDatabases );
+long GetDatabaseList(  QList<QString>& p_rqvlDatabases );
 
    public:
    /** +-=---------------------------------------------------------Mo 25. Jun 15:46:44 2012-------*

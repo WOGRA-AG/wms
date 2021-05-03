@@ -10,7 +10,7 @@
 #include "CumUser.h"
 #include "CdmScheme.h"
 
-#include <QLinkedList>
+#include <QList>
 
 #include "CwnCommandStdHeader.h"
 
@@ -60,7 +60,7 @@ void CwnCommandLoadClassManager::interpretAnswer(QVariant &Ret)
             CwnCommandLoadPackages commandLoadPackages(m_pClassManager, GetDataAccess(), m_pClassManager->GetScheme()->GetSchemeName());
             commandLoadPackages.Run();
 
-            QLinkedList<long> notLoadedClasses;
+            QList<long> notLoadedClasses;
 
             QList<QVariant>::ConstIterator it;
             for(it=dataListCon->begin();it!=dataListCon->end();it++) // loading each class

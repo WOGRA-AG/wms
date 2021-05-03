@@ -277,7 +277,7 @@ CdmObject* CwmsSmtpManager::GetSmtpObject()
          if (CHKPTR(pManager))
          {
             pManager->ReloadContainerComplete(pContainer);
-            QLinkedList<CdmObject*> qllObjects;
+            QList<CdmObject*> qllObjects;
             pContainer->GetObjectList(qllObjects);
             pCdmObject = *qllObjects.begin();
          }

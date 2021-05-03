@@ -29,8 +29,8 @@ class BASETOOLS_API CwmsFormObjectContainer : public CwmsFormStandardContainer
    public:
       virtual ~CwmsFormObjectContainer();
    public:
-      QLinkedList<QString> GetSelectionDisplayMembers();
-	  void SetSelectionDisplayMembers(QLinkedList<QString> p_qllMembers);
+      QList<QString> GetSelectionDisplayMembers();
+	  void SetSelectionDisplayMembers(QList<QString> p_qllMembers);
 public:
       void SetSelectionDisplayMembers(QString p_qstrValue);
    public:

@@ -15,7 +15,7 @@
 #include <qstring.h>
 #include <qmap.h>
 #include <qdatetime.h>
-#include <QLinkedList>
+#include <QList>
 #include <QVariant>
 
 
@@ -109,7 +109,7 @@ public:
 
     virtual int DeleteScheme(QString p_qstrKeyname )= 0;
     virtual int DeleteObjectContainer(long p_lObjectListId)= 0;
-    virtual int GetUserList(QLinkedList<CumUser*>& p_rqvlUser)= 0;
+    virtual int GetUserList(QList<CumUser*>& p_rqvlUser)= 0;
     virtual int GetContainerList(long p_lDbId,
                                  long lClassId,
                                  QMap<long,
@@ -159,14 +159,14 @@ public:
     virtual long RemoveUserFromGroup(long p_lChangeUserId,
                                      long p_lUserGroupId)= 0;
 
-    virtual long GetUserGroupList(QLinkedList<CumUserGroup*>& p_rqvlUserGroups,
+    virtual long GetUserGroupList(QList<CumUserGroup*>& p_rqvlUserGroups,
                                   QString p_qstrSchemeUri)= 0;
 
     virtual long GetListOfUsersInList(long p_lUserGroupId,
-                                      QLinkedList<CumUser*>& p_rqvlUserList)= 0;
+                                      QList<CumUser*>& p_rqvlUserList)= 0;
 
     virtual long GetUserGroupMemberList(long p_lChangeUserId,
-                                        QLinkedList<CumUserGroup*>& p_qvlUserGroups)= 0;
+                                        QList<CumUserGroup*>& p_qvlUserGroups)= 0;
 
     virtual long AddLicense(QString p_qstrApplication,
                             QString p_qstrLicensee,
@@ -174,7 +174,7 @@ public:
 
     virtual long FreeLicense()= 0;
 
-    virtual long GetSchemeList(QLinkedList<QString>& p_qvlDatabases)= 0;
+    virtual long GetSchemeList(QList<QString>& p_qvlDatabases)= 0;
 
     virtual long UpdateScheme(CdmScheme* p_pCdmDatabase)= 0;
 
@@ -189,7 +189,7 @@ public:
                                          long p_lId,
                                          CdmObjectContainer*& p_pContainer)= 0;
 
-    virtual int LoadObjects(QLinkedList<long>& p_rqvlObjects,
+    virtual int LoadObjects(QList<long>& p_rqvlObjects,
                             CdmObjectContainer*& p_pCdmObject)= 0;
 
     virtual int IsDemo(QString p_qstrApplication, QString p_qstrVersion)= 0;
@@ -211,8 +211,8 @@ public:
     virtual CumUser* FindUserByIdentKey(QString p_qstridentKey, QString p_qstrSchemeUri) = 0;
     virtual CumUserGroup* FindUserGroupById(int p_iId) = 0;
     virtual CumUserGroup* FindUserGroupByName(QString p_qstrName, QString p_qstrSchemeUri) = 0;
-    virtual QLinkedList<CumUser*> FindUser(QString p_qstrUserLoginNameEmail, QString p_qstrSchemeUri) = 0;
-    virtual QLinkedList<CumUserGroup*> FindUserGroups(QString p_qstrName, QString p_qstrSchemeUri) = 0;
+    virtual QList<CumUser*> FindUser(QString p_qstrUserLoginNameEmail, QString p_qstrSchemeUri) = 0;
+    virtual QList<CumUserGroup*> FindUserGroups(QString p_qstrName, QString p_qstrSchemeUri) = 0;
     virtual long RefreshObject(CdmObject* p_pCdmObject)= 0;
     virtual long RefreshObjectContainer(CdmObjectContainer* p_pCdmObject)= 0;
     virtual long CountObjectsOnDb(CdmObjectContainer* p_pCdmObject)= 0;

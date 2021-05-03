@@ -92,11 +92,11 @@ void CwmsUserGroupChoiceIf::SearchGroupClickedSlot()
     CdmDataProvider* pCdmManager = CdmSessionManager::GetDataProvider();
     CumUserManager* pCumUserManager = pCdmManager->GetUserManager();
     QString qstrSearchString = m_pqleInputSearch->text();
-    QLinkedList<CumUserGroup*> qlGroups = pCumUserManager->FindUserGroupsByNameUnmanaged(qstrSearchString);
+    QList<CumUserGroup*> qlGroups = pCumUserManager->FindUserGroupsByNameUnmanaged(qstrSearchString);
     m_pqlvGroups->clear();
 
-    QLinkedList<CumUserGroup*>::iterator qllIt = qlGroups.begin();
-    QLinkedList<CumUserGroup*>::iterator qllItEnd = qlGroups.end();
+    QList<CumUserGroup*>::iterator qllIt = qlGroups.begin();
+    QList<CumUserGroup*>::iterator qllItEnd = qlGroups.end();
 
     for(; qllIt != qllItEnd; ++qllIt)
     {

@@ -2,7 +2,7 @@
 #define CDBCOMMANDEXISTUSER_H
 
 // System and Qt Includes
-#include <QLinkedList>
+#include <QList>
 // WMS Includes
 
 // own Includes

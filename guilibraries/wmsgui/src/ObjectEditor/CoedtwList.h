@@ -173,28 +173,28 @@ void EditClickedSlot( );
    /** +-=---------------------------------------------------------Do 4. Sep 19:17:37 2008--------*
     * @method  CoedtwList::FillTreeWidget                    // private                           *
     * @return  void                                          //                                   *
-    * @param   QLinkedList<double> p_rqvlList                //                                   *
+    * @param   QList<double> p_rqvlList                //                                   *
     * @comment This method fills the treewidget.                                                  *
     *----------------last changed: -----------------------------Do 4. Sep 19:17:37 2008-----------*/
-    void FillTreeWidget(QLinkedList<double> p_rqvlList);
+    void FillTreeWidget(QList<double> p_rqvlList);
 
    private:
    /** +-=---------------------------------------------------------Do 4. Sep 19:17:23 2008--------*
     * @method  CoedtwList::FillTreeWidget                    // private                           *
     * @return  void                                          //                                   *
-    * @param   QLinkedList<QString> p_rqvlList               //                                   *
+    * @param   QList<QString> p_rqvlList               //                                   *
     * @comment This method fills the treewidget.                                                  *
     *----------------last changed: -----------------------------Do 4. Sep 19:17:23 2008-----------*/
-    void FillTreeWidget(QLinkedList<QString> p_rqvlList);
+    void FillTreeWidget(QList<QString> p_rqvlList);
 
    private:
    /** +-=---------------------------------------------------------Do 4. Sep 19:17:31 2008--------*
     * @method  CoedtwList::FillTreeWidget                    // private                           *
     * @return  void                                          //                                   *
-    * @param   QLinkedList<int> p_rqvlList                   //                                   *
+    * @param   QList<int> p_rqvlList                   //                                   *
     * @comment This method fills the treewidget.                                                  *
     *----------------last changed: -----------------------------Do 4. Sep 19:17:31 2008-----------*/
-    void FillTreeWidget(QLinkedList<int> p_rqvlList);
+    void FillTreeWidget(QList<int> p_rqvlList);
 
    public:
    /** +-=---------------------------------------------------------Mi 22. Aug 11:00:35 2012-------*
@@ -218,10 +218,10 @@ void EditClickedSlot( );
    /** +-=---------------------------------------------------------Mi 9. Jan 14:53:12 2013--------*
     * @method  CoedtwList::FillTreeWidget                    // private                           *
     * @return  void                                          //                                   *
-    * @param   QLinkedList<CdmObject*> p_rqvlList            //                                   *
+    * @param   QList<CdmObject*> p_rqvlList            //                                   *
     * @comment This method fills the treewidget.                                                  *
     *----------------last changed: -----------------------------Mi 9. Jan 14:53:12 2013-----------*/
-    void FillTreeWidget(QLinkedList<CdmObject*> p_rqvlList);
+    void FillTreeWidget(QList<CdmObject*> p_rqvlList);
     CdmClass *getListObjectClass(CdmValue *pCdmValue);
     void FillValueList(CdmClass *pListObjectClass);
     CdmClass *findListObjectClassInPackage(QString qstrClassKeyname);

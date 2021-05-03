@@ -22,15 +22,15 @@ CwiCommandGetGroupUserList::~CwiCommandGetGroupUserList()
 
 }
 
-QLinkedList<CumUser*> CwiCommandGetGroupUserList::GetResult()
+QList<CumUser*> CwiCommandGetGroupUserList::GetResult()
 {
     return m_qlUserList;
 }
 
-QVariantList CwiCommandGetGroupUserList::GetResultToVariant(QLinkedList<CumUser*> ql_userList)
+QVariantList CwiCommandGetGroupUserList::GetResultToVariant(QList<CumUser*> ql_userList)
 {
-    QLinkedList<CumUser*>::iterator qlIt = ql_userList.begin();
-    QLinkedList<CumUser*>::iterator qlItEnd = ql_userList.end();
+    QList<CumUser*>::iterator qlIt = ql_userList.begin();
+    QList<CumUser*>::iterator qlItEnd = ql_userList.end();
 
     for(; qlIt != qlItEnd; ++qlIt)
     {
@@ -43,11 +43,11 @@ QVariantList CwiCommandGetGroupUserList::GetResultToVariant(QLinkedList<CumUser*
 long CwiCommandGetGroupUserList::ReadAllUsers()
 {
     long lRet = CdmLogging::eDmUnknownUserQueryError;
-    QLinkedList<CumUser*> qll_userList;
+    QList<CumUser*> qll_userList;
     lRet = pCumUserManager->GetUserListUnmanaged(qll_userList);
 
-    QLinkedList<CumUser*>::iterator qllIt = qll_userList.begin();
-    QLinkedList<CumUser*>::iterator qllItEnd = qll_userList.end();
+    QList<CumUser*>::iterator qllIt = qll_userList.begin();
+    QList<CumUser*>::iterator qllItEnd = qll_userList.end();
 
     for(; qllIt != qllItEnd; ++qllIt)
     {
@@ -73,8 +73,8 @@ void CwiCommandGetGroupUserList::Execute()
             long lRetAllUsers = ReadAllUsers();
             if(lRetAllUsers > 0)
             {
-                //QLinkedList<CumUser*> qll_UserList = GetResult();
-                QLinkedList<CumUser*> qll_UserList;
+                //QList<CumUser*> qll_UserList = GetResult();
+                QList<CumUser*> qll_UserList;
                 pCumUserManager->GetListOfUsersInList(iGroupId, qll_UserList);
                 QVariantList qvlUsersInGroup = GetResultToVariant(qll_UserList);
                 if(!qvlUsersInGroup.isEmpty())

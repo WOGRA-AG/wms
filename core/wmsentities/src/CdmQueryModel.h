@@ -57,7 +57,7 @@ public:
     virtual ~CdmQueryModel( );
 
     QModelIndex parent(const QModelIndex & index) const;
-    QLinkedList<CdmObject *> GetObjects(QAbstractItemView *p_pqItemView);
+    QList<CdmObject *> GetObjects(QAbstractItemView *p_pqItemView);
     void SetInitialDisplayHandler(IdmHandleDisplayData *pDisplayHandler);
     QString GetDisplayString(QString p_qstrMember, QVariant p_qvValue) const;
 

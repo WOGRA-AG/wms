@@ -34,9 +34,9 @@ UICIMPLS = $$OUT_PWD/$$WMS_ARCH/uic/$$WMS_MODE
 
 message("WMSQML DESTDIR: "$$DESTDIR)
 
-CONFIG(gcc, gcc|clang) {
-    QMAKE_CXXFLAGS += -Werror -Wall -Wextra
-}
+#CONFIG(gcc, gcc|clang) {
+#    QMAKE_CXXFLAGS += -Werror -Wall -Wextra
+#}
 
 QT += core script widgets gui qml quick positioning location
 DEFINES += WMSQML_LIB

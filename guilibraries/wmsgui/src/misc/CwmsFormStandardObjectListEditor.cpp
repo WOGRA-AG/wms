@@ -159,10 +159,10 @@ void CwmsFormStandardContainerEditor::FillView(CdmObject* p_pCdmObject)
 void CwmsFormStandardContainerEditor::FillFunctions()
 {
    m_pqlwFunctions->clear();
-   QLinkedList<QString> qllFunctions = m_cForm.GetFunctions();
+   QList<QString> qllFunctions = m_cForm.GetFunctions();
 
-   QLinkedList<QString>::iterator qllIt = qllFunctions.begin();
-   QLinkedList<QString>::iterator qllItEnd = qllFunctions.end();
+   QList<QString>::iterator qllIt = qllFunctions.begin();
+   QList<QString>::iterator qllItEnd = qllFunctions.end();
 
    for (; qllIt != qllItEnd; ++qllIt)
    {
@@ -181,9 +181,9 @@ void CwmsFormStandardContainerEditor::FillSearchMembers()
 	if (m_pqwSearchMembers)
 	{
 	   m_pqlwSearchMembers->clear();
-	   QLinkedList<QString> qllSearchMembers = m_cForm.GetSearchMembers();
-	   QLinkedList<QString>::iterator qllIt = qllSearchMembers.begin();
-	   QLinkedList<QString>::iterator qllItEnd = qllSearchMembers.end();
+	   QList<QString> qllSearchMembers = m_cForm.GetSearchMembers();
+	   QList<QString>::iterator qllIt = qllSearchMembers.begin();
+	   QList<QString>::iterator qllItEnd = qllSearchMembers.end();
 
 	   for (; qllIt != qllItEnd; ++qllIt)
 	   {
@@ -203,9 +203,9 @@ void CwmsFormStandardContainerEditor::FillVisibleMembers()
 	if (m_pqwVisibleMembers)
 	{
 		m_pqlwVisibleMembers->clear();
-	   QLinkedList<QString> qllVisibleMembers = m_cForm.GetDisplayMembers();
-	   QLinkedList<QString>::iterator qllIt = qllVisibleMembers.begin();
-	   QLinkedList<QString>::iterator qllItEnd = qllVisibleMembers.end();
+	   QList<QString> qllVisibleMembers = m_cForm.GetDisplayMembers();
+	   QList<QString>::iterator qllIt = qllVisibleMembers.begin();
+	   QList<QString>::iterator qllItEnd = qllVisibleMembers.end();
 
 	   for (; qllIt != qllItEnd; ++qllIt)
 	   {
@@ -666,7 +666,7 @@ void CwmsFormStandardContainerEditor::SaveData()
       m_cForm.SetSearchEnabled(m_pqchbSearch->isChecked());
       m_cForm.SetSaveAsCsvEnabled(m_pqchbSaveAsCsv->isChecked());
       m_cForm.SetCopyEnabled(m_pqchbCopy->isChecked());
-      QLinkedList<QString> qstrlFunctions;
+      QList<QString> qstrlFunctions;
 
       for (int iCounter = 0; iCounter < m_pqlwFunctions->count(); ++iCounter)
       {
@@ -682,7 +682,7 @@ void CwmsFormStandardContainerEditor::SaveData()
 
 	  if (m_pqwVisibleMembers)
 	  {
-		  QLinkedList<QString> qstrlVisibleMembers;
+		  QList<QString> qstrlVisibleMembers;
 
 		  for (int iCounter = 0; iCounter < m_pqlwVisibleMembers->count(); ++iCounter)
 		  {
@@ -700,7 +700,7 @@ void CwmsFormStandardContainerEditor::SaveData()
 
 	  if (m_pqwSearchMembers)
 	  {
-		  QLinkedList<QString> qstrlSearchMembers;
+		  QList<QString> qstrlSearchMembers;
 
 		  for (int iCounter = 0; iCounter < m_pqlwSearchMembers->count(); ++iCounter)
 		  {

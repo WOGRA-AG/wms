@@ -262,9 +262,9 @@ CdmObject* CdmQueryModel::GetObject(QAbstractItemView* p_pqItemView)
     return pCdmObject;
 }
 
-QLinkedList<CdmObject*> CdmQueryModel::GetObjects(QAbstractItemView* p_pqItemView)
+QList<CdmObject*> CdmQueryModel::GetObjects(QAbstractItemView* p_pqItemView)
 {
-    QLinkedList<CdmObject*> qllObjects;
+    QList<CdmObject*> qllObjects;
 
     BODY_TRY
     if (CHKPTR(p_pqItemView))

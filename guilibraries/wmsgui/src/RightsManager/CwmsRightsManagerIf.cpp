@@ -96,8 +96,8 @@ void CwmsRightsManagerIf::FillDialog()
 void CwmsRightsManagerIf::FillUserList(QMap<int, EdmRight>& p_rqmAccessorRights)
 {
    m_pqlbUsers->clear();
-   QLinkedList<CumUser*>::iterator qvlIt = m_qvlUsers.begin();
-   QLinkedList<CumUser*>::iterator qvlItEnd = m_qvlUsers.end();
+   QList<CumUser*>::iterator qvlIt = m_qvlUsers.begin();
+   QList<CumUser*>::iterator qvlItEnd = m_qvlUsers.end();
 
    for (; qvlIt != qvlItEnd; ++qvlIt)
    {
@@ -122,8 +122,8 @@ void CwmsRightsManagerIf::FillUserList(QMap<int, EdmRight>& p_rqmAccessorRights)
 void CwmsRightsManagerIf::FillUserGroupList(QMap<int, EdmRight>& p_rqmAccessorRights)
 {
    m_pqlbGroups->clear();
-   QLinkedList<CumUserGroup*>::iterator qvlIt = m_qvlUserGroups.begin();
-   QLinkedList<CumUserGroup*>::iterator qvlItEnd = m_qvlUserGroups.end();
+   QList<CumUserGroup*>::iterator qvlIt = m_qvlUserGroups.begin();
+   QList<CumUserGroup*>::iterator qvlItEnd = m_qvlUserGroups.end();
 
    for (; qvlIt != qvlItEnd; ++qvlIt)
    {
@@ -220,8 +220,8 @@ void CwmsRightsManagerIf::FillRights(QMap<int, EdmRight>& p_rqmAccessorRights)
 CumUser* CwmsRightsManagerIf::FindUser(long p_lUserId)
 {
    CumUser* pRet = nullptr;
-   QLinkedList<CumUser*>::iterator qvlIt = m_qvlUsers.begin();
-   QLinkedList<CumUser*>::iterator qvlItEnd = m_qvlUsers.end();
+   QList<CumUser*>::iterator qvlIt = m_qvlUsers.begin();
+   QList<CumUser*>::iterator qvlItEnd = m_qvlUsers.end();
 
    for (; qvlIt != qvlItEnd; ++qvlIt)
    {
@@ -246,8 +246,8 @@ CumUser* CwmsRightsManagerIf::FindUser(long p_lUserId)
 CumUser* CwmsRightsManagerIf::FindUser(QString p_qstrLogin)
 {
    CumUser* pRet = nullptr;
-   QLinkedList<CumUser*>::iterator qvlIt = m_qvlUsers.begin();
-   QLinkedList<CumUser*>::iterator qvlItEnd = m_qvlUsers.end();
+   QList<CumUser*>::iterator qvlIt = m_qvlUsers.begin();
+   QList<CumUser*>::iterator qvlItEnd = m_qvlUsers.end();
 
    for (; qvlIt != qvlItEnd; ++qvlIt)
    {
@@ -274,8 +274,8 @@ CumUserGroup* CwmsRightsManagerIf::FindUserGroup(long p_lUserId)
 
    CumUserGroup* pRet = nullptr;
 
-   QLinkedList<CumUserGroup*>::iterator qvlIt = m_qvlUserGroups.begin();
-   QLinkedList<CumUserGroup*>::iterator qvlItEnd = m_qvlUserGroups.end();
+   QList<CumUserGroup*>::iterator qvlIt = m_qvlUserGroups.begin();
+   QList<CumUserGroup*>::iterator qvlItEnd = m_qvlUserGroups.end();
 
    for (; qvlIt != qvlItEnd; ++qvlIt)
    {
@@ -301,8 +301,8 @@ CumUserGroup* CwmsRightsManagerIf::FindUserGroup(QString p_qstrGroupName)
 {
    CumUserGroup* pRet = nullptr;
 
-   QLinkedList<CumUserGroup*>::iterator qvlIt = m_qvlUserGroups.begin();
-   QLinkedList<CumUserGroup*>::iterator qvlItEnd = m_qvlUserGroups.end();
+   QList<CumUserGroup*>::iterator qvlIt = m_qvlUserGroups.begin();
+   QList<CumUserGroup*>::iterator qvlItEnd = m_qvlUserGroups.end();
 
    for (; qvlIt != qvlItEnd; ++qvlIt)
    {

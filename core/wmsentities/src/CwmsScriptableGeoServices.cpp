@@ -1,5 +1,5 @@
 // System and Qt Includes
-#include <math.h>
+//#include <math.h>
 #include <QCoreApplication>
 #include <QThread>
 #include <QScopedPointer>
@@ -40,6 +40,7 @@
 #define LATITUDE "latitude"
 #define LONGITUDE "longitude"
 #define ALTITUDE "altitude"
+#define M_PI 3.14
 
 CwmsScriptableGeoServices::CwmsScriptableGeoServices()
     : m_pProvider(nullptr),
@@ -473,7 +474,8 @@ QVariantList CwmsScriptableGeoServices::rangeSearch(double latPoint, double lonP
         double latDivision = (rangeKm / DISTANCE_UNIT);
         double latFrom = (latPoint - latDivision);
         double latTo = (latPoint + latDivision);
-        double lonFormulaMultiplication = (rangeKm / (DISTANCE_UNIT * cos((latPoint * M_PI) / 180)));
+        latPoint *= M_PI / 180.0;
+        double lonFormulaMultiplication = (rangeKm / (DISTANCE_UNIT)); //* cos((double)latPoint))); TODO
         double lonFrom = (lonPoint - lonFormulaMultiplication);
         double lonTo = (lonPoint + lonFormulaMultiplication);
 

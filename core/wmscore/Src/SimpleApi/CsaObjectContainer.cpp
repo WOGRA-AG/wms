@@ -101,11 +101,11 @@ int CsaObjectContainer::countLocalObjects()
 QVariantList CsaObjectContainer::getObjectList()
 {
    QVariantList qvResult;
-   QLinkedList<CdmObject*> qllObjects;
+   QList<CdmObject*> qllObjects;
    getInternals()->GetObjectList(qllObjects);
 
-   QLinkedList<CdmObject*>::iterator qllIt = qllObjects.begin();
-   QLinkedList<CdmObject*>::iterator qllItEnd = qllObjects.end();
+   QList<CdmObject*>::iterator qllIt = qllObjects.begin();
+   QList<CdmObject*>::iterator qllItEnd = qllObjects.end();
 
    for(; qllIt != qllItEnd; ++qllIt)
    {

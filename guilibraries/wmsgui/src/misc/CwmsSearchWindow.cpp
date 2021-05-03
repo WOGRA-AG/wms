@@ -291,8 +291,8 @@ void CwmsSearchWindow::AddResultMembers()
 {
    if (m_qllResultMembers.count() > 0)
    {
-      QLinkedList<QString>::iterator qllIt = m_qllResultMembers.begin();
-      QLinkedList<QString>::iterator qllItEnd = m_qllResultMembers.end();
+      QList<QString>::iterator qllIt = m_qllResultMembers.begin();
+      QList<QString>::iterator qllItEnd = m_qllResultMembers.end();
 
       for (; qllIt != qllItEnd; ++qllIt)
       {
@@ -753,12 +753,12 @@ void CwmsSearchWindow::SetModule(CwmsApplicationModule p_cModule)
    {
       CwmsFormSearch cForm(p_cModule.GetUserInterface());
 
-      QLinkedList<QString> qllDisplayMembers = cForm.GetDisplayMembers();
+      QList<QString> qllDisplayMembers = cForm.GetDisplayMembers();
       m_qllResultMembers = qllDisplayMembers;
-      QLinkedList<QString> qllSearchMembers = cForm.GetSearchMembers();
+      QList<QString> qllSearchMembers = cForm.GetSearchMembers();
 
-      QLinkedList<QString>::iterator qllIt = qllSearchMembers.begin();
-      QLinkedList<QString>::iterator qllItEnd = qllSearchMembers.end();
+      QList<QString>::iterator qllIt = qllSearchMembers.begin();
+      QList<QString>::iterator qllItEnd = qllSearchMembers.end();
 
       for (; qllIt != qllItEnd; ++qllIt)
       {

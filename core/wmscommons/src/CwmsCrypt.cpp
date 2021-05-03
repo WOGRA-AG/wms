@@ -31,6 +31,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <QDateTime>
 #include <QCryptographicHash>
 #include <QDataStream>
+#include <QRandomGenerator>
 
 CwmsCrypt::CwmsCrypt():
     m_key(0),
@@ -38,7 +39,6 @@ CwmsCrypt::CwmsCrypt():
     m_protectionMode(ProtectionChecksum),
     m_lastError(ErrorNoError)
 {
-    qsrand(uint(QDateTime::currentMSecsSinceEpoch() & 0xFFFF));
 }
 
 CwmsCrypt::CwmsCrypt(quint64 key):
@@ -47,7 +47,6 @@ CwmsCrypt::CwmsCrypt(quint64 key):
     m_protectionMode(ProtectionChecksum),
     m_lastError(ErrorNoError)
 {
-    qsrand(uint(QDateTime::currentMSecsSinceEpoch() & 0xFFFF));
     splitKey();
 }
 
@@ -112,8 +111,9 @@ QByteArray CwmsCrypt::encryptToByteArray(QByteArray plaintext)
         integrityProtection += hash.result();
     }
 
+    QRandomGenerator qrg(uint(QDateTime::currentMSecsSinceEpoch() & 0xFFFF));
     //prepend a random char to the string
-    char randomChar = char(qrand() & 0xFF);
+    char randomChar = char(qrg.generate() & 0xFF);
     ba = randomChar + integrityProtection + ba;
 
     int pos(0);

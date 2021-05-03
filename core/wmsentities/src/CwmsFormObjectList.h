@@ -61,7 +61,7 @@ class BASETOOLS_API CwmsFormContainer : public CwmsFormBase
    public:
       void SetDefault(bool p_bValue);
    public:
-      QLinkedList<QString> GetFunctions();
+      QList<QString> GetFunctions();
    public:
       void SetFunctions(QString p_qstrValue);
    public:
@@ -73,10 +73,10 @@ class BASETOOLS_API CwmsFormContainer : public CwmsFormBase
    /** +-=---------------------------------------------------------Mo 10. Sep 16:19:32 2012-------*
     * @method  CwmsFormObjectList::SetFunctions              // public                            *
     * @return  void                                          //                                   *
-    * @param   QLinkedList<QString> p_qstrlMembers           //                                   *
+    * @param   QList<QString> p_qstrlMembers           //                                   *
     * @comment                                                                                    *
     *----------------last changed: -----------------------------Mo 10. Sep 16:19:32 2012----------*/
-      void SetFunctions(QLinkedList<QString> p_qstrlMembers);
+      void SetFunctions(QList<QString> p_qstrlMembers);
       bool GetCopyEnabled();
       void SetCopyEnabled(bool p_bValue);
       bool GetSaveAsCsvEnabled();

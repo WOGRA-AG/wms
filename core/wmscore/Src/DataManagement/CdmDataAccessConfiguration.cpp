@@ -141,6 +141,17 @@ void CdmDataAccessConfiguration::openDataAccessConfiguration(QString p_qstrDataA
     }
 }
 
+void CdmDataAccessConfiguration::testConfig(QString p_qstrDataAccess)
+{
+    IwmsDataAccessPlugin* pPlugin = m_qmDataAccess[p_qstrDataAccess];
+
+    if (CHKPTR(pPlugin))
+    {
+
+    }
+}
+
+
 QObject* CdmDataAccessConfiguration::getDataAccessConfiguration(QString p_qstrDataAccess)
 {
     QObject* pConfig = nullptr;
@@ -184,16 +195,18 @@ IdmDataAccess* CdmDataAccessConfiguration::EstablishConnection()
 {
     IdmDataAccess* pDataAccess = nullptr;
 
-#ifndef Q_OS_IOS
+
     QString qstrPluginFilename = ReadConfigFile();
+
+    if (qstrPluginFilename.isEmpty())
+    {
+        QString qstrErr = QString("Could not read configuration from Config File. Pluginname is Empty.");
+        ERR(qstrErr);
+        return pDataAccess;
+    }
+
     QString qstrPluginsPath;
-
-#ifdef Q_OS_ANDROID
-    qstrPluginsPath = qApp->applicationDirPath();
-#else
     qstrPluginsPath = qApp->applicationDirPath() + DATAACCESS_PLUGIN_PATH;
-#endif
-
     qstrPluginFilename = qstrPluginsPath + "/" + qstrPluginFilename;
     QPluginLoader qLoader(qstrPluginFilename);
 
@@ -214,15 +227,21 @@ IdmDataAccess* CdmDataAccessConfiguration::EstablishConnection()
         }
         else
         {
-            ERR("Error while loading Plugin. This is not a valid Data Access Plugin\n" + qLoader.errorString());
+            QString qstrErr = QString("Error while instantiating Plugin. This is not a valid Data Access Plugin\n Filename: %1\nError Message:%2")
+                    .arg(qstrPluginFilename)
+                    .arg(qLoader.errorString());
+            ERR(qstrErr);
         }
     }
     else
     {
-       ERR("Error while loading Plugin. This is not a valid Plugin. " + qLoader.errorString());
+        QString qstrErr = QString("Error while loading Plugin. This is not a valid Data Access Plugin\n Filename: %1\nError Message:%2")
+                .arg(qstrPluginFilename)
+                .arg(qLoader.errorString());
+        ERR(qstrErr);
     }
-#endif
-   return pDataAccess;
+
+    return pDataAccess;
 }
 
 QString CdmDataAccessConfiguration::ReadConfigName()

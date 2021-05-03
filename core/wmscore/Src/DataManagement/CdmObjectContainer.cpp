@@ -16,7 +16,7 @@
 #include <qtimer.h>
 #include <qdom.h>
 #include <QUuid>
-#include <QLinkedList>
+#include <QList>
 
 // WMS Commons Includes
 #include "CwmsJson.h"
@@ -479,13 +479,13 @@ void CdmObjectContainer::RemoveObjectLocal(long p_lObjectId)
     }
 }
 
-void CdmObjectContainer::GetObjects(QLinkedList<long>&  p_rqllObjectIds,
-                                    QLinkedList<CdmObject*>& p_rqllObjects)
+void CdmObjectContainer::GetObjects(QList<long>&  p_rqllObjectIds,
+                                    QList<CdmObject*>& p_rqllObjects)
 {
     SYNCHRONIZED;
     LoadObjects(p_rqllObjectIds);
-    QLinkedList<long>::iterator qlIt = p_rqllObjectIds.begin();
-    QLinkedList<long>::iterator qlItEnd = p_rqllObjectIds.end();
+    QList<long>::iterator qlIt = p_rqllObjectIds.begin();
+    QList<long>::iterator qlItEnd = p_rqllObjectIds.end();
 
     for (; qlIt != qlItEnd; ++qlIt)
     {
@@ -512,8 +512,8 @@ void CdmObjectContainer::RemoveObjectLocalWithoutDelete(long p_lObjectId)
         disconnect(pCdmObject, SIGNAL(ObjectRefModifiedSignal(CdmObject*)), this, SLOT(ObjectRefModifiedSlot(CdmObject*)));
         disconnect(pCdmObject, SIGNAL(ObjectCommitedSignal(i)), this, SLOT(ObjectCommitedSlot(int)));
 
-        QLinkedList<CdmContainerAdaptor*>::iterator qvlIt    = m_qvlObjectFactories.begin();
-        QLinkedList<CdmContainerAdaptor*>::iterator qvlItEnd = m_qvlObjectFactories.end();
+        QList<CdmContainerAdaptor*>::iterator qvlIt    = m_qvlObjectFactories.begin();
+        QList<CdmContainerAdaptor*>::iterator qvlItEnd = m_qvlObjectFactories.end();
 
         for(; qvlIt != qvlItEnd; ++qvlIt)
         {
@@ -710,13 +710,13 @@ CdmObject* CdmObjectContainer::FindObjectByIdLocal(long p_lObjectId)
     return pCdmObject;
 }
 
-long CdmObjectContainer::LoadObjects(const QLinkedList<long>& p_rqvlObjectIds, bool p_bWithChildren)
+long CdmObjectContainer::LoadObjects(const QList<long>& p_rqvlObjectIds, bool p_bWithChildren)
 {
     SYNCHRONIZED;
     long lRet = CdmLogging::eDmUnknownObjectError;
-    QLinkedList<long> qvlObjectIds;
-    QLinkedList<long>::const_iterator qvlIt = p_rqvlObjectIds.begin();
-    QLinkedList<long>::const_iterator qvlItEnd = p_rqvlObjectIds.end();
+    QList<long> qvlObjectIds;
+    QList<long>::const_iterator qvlIt = p_rqvlObjectIds.begin();
+    QList<long>::const_iterator qvlItEnd = p_rqvlObjectIds.end();
 
     for (; qvlIt != qvlItEnd; ++qvlIt)
     {
@@ -748,7 +748,7 @@ long CdmObjectContainer::LoadObjects(const QLinkedList<long>& p_rqvlObjectIds, b
     return lRet;
 }
 
-void CdmObjectContainer::LoadChildrenObjects(const QLinkedList<long>& p_rqvlObjectIds)
+void CdmObjectContainer::LoadChildrenObjects(const QList<long>& p_rqvlObjectIds)
 {
     SYNCHRONIZED;
     const CdmClass* pCdmClass = GetClass();
@@ -771,8 +771,8 @@ void CdmObjectContainer::LoadChildrenObjects(const QLinkedList<long>& p_rqvlObje
 
             if (CHKPTR(pCdmMember) && pCdmMember->GetValueType() == eDmValueObjectRef)
             {
-                QLinkedList<long>::const_iterator qvlIt = p_rqvlObjectIds.begin();
-                QLinkedList<long>::const_iterator qvlItEnd = p_rqvlObjectIds.end();
+                QList<long>::const_iterator qvlIt = p_rqvlObjectIds.begin();
+                QList<long>::const_iterator qvlItEnd = p_rqvlObjectIds.end();
 
                 for (; qvlIt != qvlItEnd; ++qvlIt)
                 {
@@ -810,7 +810,7 @@ void CdmObjectContainer::LoadObjectRefs(QMap<long,long>& p_rqmObjectRefs)
 
     if (CHKPTR(pContainerManager))
     {
-        QLinkedList<long> qvlObjectLists;
+        QList<long> qvlObjectLists;
 
         QMap<long, long>::iterator qmIt = p_rqmObjectRefs.begin();
         QMap<long, long>::iterator qmItEnd = p_rqmObjectRefs.end();
@@ -828,8 +828,8 @@ void CdmObjectContainer::LoadObjectRefs(QMap<long,long>& p_rqmObjectRefs)
 
 
         // now find all objecttids to one ojectlist
-        QLinkedList<long>::iterator qvlIt = qvlObjectLists.begin();
-        QLinkedList<long>::iterator qvlItEnd = qvlObjectLists.end();
+        QList<long>::iterator qvlIt = qvlObjectLists.begin();
+        QList<long>::iterator qvlItEnd = qvlObjectLists.end();
 
         for (; qvlIt != qvlItEnd; ++qvlIt)
         {
@@ -839,7 +839,7 @@ void CdmObjectContainer::LoadObjectRefs(QMap<long,long>& p_rqmObjectRefs)
 
             if (CHKPTR(pContainer))
             {
-                QLinkedList<long> qvlObjects;
+                QList<long> qvlObjects;
 
                 qmIt = p_rqmObjectRefs.begin();
                 qmItEnd = p_rqmObjectRefs.end();
@@ -1120,8 +1120,8 @@ int CdmObjectContainer::DeleteObject(CdmObject* p_pCdmObject)
     {
         p_pCdmObject->SetDeleted();
 
-        QLinkedList<CdmContainerAdaptor*>::iterator qvlIt    = m_qvlObjectFactories.begin();
-        QLinkedList<CdmContainerAdaptor*>::iterator qvlItEnd = m_qvlObjectFactories.end();
+        QList<CdmContainerAdaptor*>::iterator qvlIt    = m_qvlObjectFactories.begin();
+        QList<CdmContainerAdaptor*>::iterator qvlItEnd = m_qvlObjectFactories.end();
 
         for(; qvlIt != qvlItEnd; ++qvlIt)
         {
@@ -1181,7 +1181,7 @@ int CdmObjectContainer::DeleteObject(long p_lObjectId)
     return iRet;
 }
 
-void CdmObjectContainer::GetObjectList(QLinkedList<CdmObject*>& p_rqvlObjects)
+void CdmObjectContainer::GetObjectList(QList<CdmObject*>& p_rqvlObjects)
 {
     SYNCHRONIZED;
     QMap<long,CdmObject*>::iterator qmIt    = m_qmObjects.begin();
@@ -1286,7 +1286,7 @@ bool CdmObjectContainer::IsExactTypeOf(CdmClass* p_pClass) const
     return bRet;
 }
 
-void CdmObjectContainer::GetObjectList(QLinkedList<long>& p_rqvlObjects)
+void CdmObjectContainer::GetObjectList(QList<long>& p_rqvlObjects)
 {
     SYNCHRONIZED;
     QMap<long,CdmObject*>::iterator qmIt    = m_qmObjects.begin();
@@ -1335,8 +1335,8 @@ void CdmObjectContainer::ObjectModifiedSlot(  CdmObject* p_pCdmObject )
             m_qlNewModifiedObjects.append(p_pCdmObject);
         }
 
-        QLinkedList<CdmContainerAdaptor*>::iterator qvlIt    = m_qvlObjectFactories.begin();
-        QLinkedList<CdmContainerAdaptor*>::iterator qvlItEnd = m_qvlObjectFactories.end();
+        QList<CdmContainerAdaptor*>::iterator qvlIt    = m_qvlObjectFactories.begin();
+        QList<CdmContainerAdaptor*>::iterator qvlItEnd = m_qvlObjectFactories.end();
 
         for(; qvlIt != qvlItEnd; ++qvlIt)
         {
@@ -1355,8 +1355,8 @@ void CdmObjectContainer::ObjectRefModifiedSlot(CdmObject* p_pCdmObject)
     SYNCHRONIZED;
     if(CHKPTR(p_pCdmObject))
     {
-        QLinkedList<CdmContainerAdaptor*>::iterator qvlIt    = m_qvlObjectFactories.begin();
-        QLinkedList<CdmContainerAdaptor*>::iterator qvlItEnd = m_qvlObjectFactories.end();
+        QList<CdmContainerAdaptor*>::iterator qvlIt    = m_qvlObjectFactories.begin();
+        QList<CdmContainerAdaptor*>::iterator qvlItEnd = m_qvlObjectFactories.end();
 
         for(; qvlIt != qvlItEnd; ++qvlIt)
         {
@@ -1383,8 +1383,8 @@ void CdmObjectContainer::ObjectDeletedSlot(CdmObject* p_pCdmObject)
             m_qlNewModifiedObjects.removeOne(p_pCdmObject);
         }
 
-        QLinkedList<CdmContainerAdaptor*>::iterator qvlIt    = m_qvlObjectFactories.begin();
-        QLinkedList<CdmContainerAdaptor*>::iterator qvlItEnd = m_qvlObjectFactories.end();
+        QList<CdmContainerAdaptor*>::iterator qvlIt    = m_qvlObjectFactories.begin();
+        QList<CdmContainerAdaptor*>::iterator qvlItEnd = m_qvlObjectFactories.end();
 
         for(; qvlIt != qvlItEnd; ++qvlIt)
         {
@@ -1398,12 +1398,12 @@ void CdmObjectContainer::ObjectDeletedSlot(CdmObject* p_pCdmObject)
     }
 }
 
-QLinkedList<CdmObject*> CdmObjectContainer::GetDeletedList()
+QList<CdmObject*> CdmObjectContainer::GetDeletedList()
 {
     return m_qlDeletedObjects;
 }
 
-QLinkedList<CdmObject*> CdmObjectContainer::GetNewModifiedList()
+QList<CdmObject*> CdmObjectContainer::GetNewModifiedList()
 {
     return m_qlNewModifiedObjects;
 }
@@ -1413,8 +1413,8 @@ void CdmObjectContainer::ObjectCommitedSlot(int p_iId)
     SYNCHRONIZED;
     if (!m_bImportMode)
     {
-        QLinkedList<CdmContainerAdaptor*>::iterator qvlIt    = m_qvlObjectFactories.begin();
-        QLinkedList<CdmContainerAdaptor*>::iterator qvlItEnd = m_qvlObjectFactories.end();
+        QList<CdmContainerAdaptor*>::iterator qvlIt    = m_qvlObjectFactories.begin();
+        QList<CdmContainerAdaptor*>::iterator qvlItEnd = m_qvlObjectFactories.end();
 
         for(; qvlIt != qvlItEnd; ++qvlIt)
         {
@@ -1457,8 +1457,8 @@ void CdmObjectContainer::RefreshObjectKeyname(CdmObject* pObject)
 
 void CdmObjectContainer::CommitDeleteObjects()
 {
-    QLinkedList<CdmObject*>::iterator qllIt = m_qlDeletedObjects.begin();
-    QLinkedList<CdmObject*>::iterator qllItEnd = m_qlDeletedObjects.end();
+    QList<CdmObject*>::iterator qllIt = m_qlDeletedObjects.begin();
+    QList<CdmObject*>::iterator qllItEnd = m_qlDeletedObjects.end();
 
     for (; qllIt != qllItEnd; ++qllIt)
     {
@@ -1471,8 +1471,8 @@ void CdmObjectContainer::CommitDeleteObjects()
 
 void CdmObjectContainer::CommitUpdateObjects()
 {
-    QLinkedList<CdmObject*>::iterator qllIt = m_qlNewModifiedObjects.begin();
-    QLinkedList<CdmObject*>::iterator qllItEnd = m_qlNewModifiedObjects.end();
+    QList<CdmObject*>::iterator qllIt = m_qlNewModifiedObjects.begin();
+    QList<CdmObject*>::iterator qllItEnd = m_qlNewModifiedObjects.end();
 
     for (; qllIt != qllItEnd; ++qllIt)
     {
@@ -1569,8 +1569,8 @@ int CdmObjectContainer::Commit()
 void CdmObjectContainer::UpdateFactoriesObjectModified()
 {
     SYNCHRONIZED;
-    QLinkedList<CdmContainerAdaptor*>::iterator qvlIt    = m_qvlObjectFactories.begin();
-    QLinkedList<CdmContainerAdaptor*>::iterator qvlItEnd = m_qvlObjectFactories.end();
+    QList<CdmContainerAdaptor*>::iterator qvlIt    = m_qvlObjectFactories.begin();
+    QList<CdmContainerAdaptor*>::iterator qvlItEnd = m_qvlObjectFactories.end();
 
     for(; qvlIt != qvlItEnd; ++qvlIt)
     {
@@ -1662,7 +1662,7 @@ void CdmObjectContainer::AddObjectFactory(CdmContainerAdaptor* p_pCdmObjectFacto
     }
 }
 
-QLinkedList<CdmContainerAdaptor*> CdmObjectContainer::GetObjectFactoryList()
+QList<CdmContainerAdaptor*> CdmObjectContainer::GetObjectFactoryList()
 {
     return m_qvlObjectFactories;
 }

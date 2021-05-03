@@ -30,7 +30,7 @@ class BASETOOLS_API CwmsFormSearch : public CwmsFormContainer
    public:
       virtual ~CwmsFormSearch();
    public:
-      QLinkedList<QString> GetDisplayMembers();
+      QList<QString> GetDisplayMembers();
    public:
       void SetDisplayMembers(QString p_qstrValue);
    public:
@@ -38,7 +38,7 @@ class BASETOOLS_API CwmsFormSearch : public CwmsFormContainer
    public:
       void SetSearchList(CdmObjectContainer* p_pCdmOLValue);
    public:
-      QLinkedList<QString> GetSearchMembers();
+      QList<QString> GetSearchMembers();
    public:
       void SetSearchMembers(QString p_qstrValue);
    public:
@@ -50,18 +50,18 @@ class BASETOOLS_API CwmsFormSearch : public CwmsFormContainer
    /** +-=---------------------------------------------------------Mo 17. Sep 18:47:41 2012-------*
     * @method  CwmsFormSearch::SetDisplayMembers             // public                            *
     * @return  void                                          //                                   *
-    * @param   QLinkedList<QString> p_qstrlMembers           //                                   *
+    * @param   QList<QString> p_qstrlMembers           //                                   *
     * @comment                                                                                    *
     *----------------last changed: -----------------------------Mo 17. Sep 18:47:41 2012----------*/
-    void SetDisplayMembers(QLinkedList<QString> p_qstrlMembers);
+    void SetDisplayMembers(QList<QString> p_qstrlMembers);
 
    public:
    /** +-=---------------------------------------------------------Mo 17. Sep 18:47:45 2012-------*
     * @method  CwmsFormSearch::SetSearchMembers              // public                            *
     * @return  void                                          //                                   *
-    * @param   QLinkedList<QString> p_qstrlMembers           //                                   *
+    * @param   QList<QString> p_qstrlMembers           //                                   *
     * @comment                                                                                    *
     *----------------last changed: -----------------------------Mo 17. Sep 18:47:45 2012----------*/
-    void SetSearchMembers(QLinkedList<QString> p_qstrlMembers);
+    void SetSearchMembers(QList<QString> p_qstrlMembers);
 };
 #endif //

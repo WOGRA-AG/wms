@@ -15,7 +15,7 @@
 #include <qdom.h>
 #include <QUuid>
 #include <qtimer.h>
-#include <QLinkedList>
+#include <QList>
 
 // WMS Commons Includes
 #include "CwmsJson.h"

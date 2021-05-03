@@ -9,7 +9,7 @@
 
 // System and QT Includes
 #include <QDialog>
-#include <QLinkedList>
+#include <QList>
 
 
 // own Includes

@@ -6,7 +6,7 @@
 #include <QVariant>
 #include <QObject>
 #include <QVector>
-#include <QLinkedList>
+#include <QList>
 #include <QModelIndex>
 
 // own Includes
@@ -180,7 +180,7 @@ public slots:
     void ClearAll();
     void AddAllMembers();
     QString GetResultAsString() const;
-    const QLinkedList<long> GetResultList() const;
+    const QList<long> GetResultList() const;
     QVariant GetFirstResultList(QString p_qstrKeyname) const;
     void GetResultElementList(QString p_qstrKeyname, QVector<QVariant> &p_rqllResults) const;
     int CountQueryiedChildren(long p_lParentId) const;

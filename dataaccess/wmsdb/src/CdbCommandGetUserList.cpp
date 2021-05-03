@@ -136,7 +136,7 @@ int CdbCommandGetUserList::FindUsersByUnknownString()
    return iRet;
 }
 
-QLinkedList<CumUser*> CdbCommandGetUserList::GetResult()
+QList<CumUser*> CdbCommandGetUserList::GetResult()
 {
     return m_qllUsers;
 }

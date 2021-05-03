@@ -132,6 +132,12 @@ QString CwmsGuiDataAccessConfiguration::GetSelectedTreeConfig()
     return qstrConfig;
 }
 
+void CwmsGuiDataAccessConfiguration::TestClickedSlot()
+{
+    QString qstrConfig = ui->m_pqcbConfig->currentText();
+    m_Config.testConfig(qstrConfig);
+}
+
 void CwmsGuiDataAccessConfiguration::OkClickedSlot()
 {
     QString qstrConfig = ui->m_pqcbConfig->currentText();

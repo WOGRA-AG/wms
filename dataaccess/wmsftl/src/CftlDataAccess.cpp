@@ -19,7 +19,7 @@
 #include <QVariant>
 #include <QThread>
 #include <qtextstream.h>
-#include <QLinkedList>
+#include <QList>
 
 #ifdef WIN32
 #include <qt_windows.h>
@@ -205,7 +205,7 @@ long CftlDataAccess::ExecuteQuery(QSqlQuery& p_rqsqlQuery)
     return lRet;
 }
 
-int CftlDataAccess::LoadObjects(QLinkedList<long>& p_rqvlObjects, CdmObjectContainer*& p_pCdmObject)
+int CftlDataAccess::LoadObjects(QList<long>& p_rqvlObjects, CdmObjectContainer*& p_pCdmObject)
 {
     INFO("Data Access Call LoadObjects()");
     ++m_iInterfaceCallCounter;
@@ -768,7 +768,7 @@ int CftlDataAccess::DeleteObjectContainer(long p_lObjectListId)
     return lRet;
 }
 
-int CftlDataAccess::GetUserList(QLinkedList<CumUser*>& p_rqvlUser)
+int CftlDataAccess::GetUserList(QList<CumUser*>& p_rqvlUser)
 {
     INFO("Data Access Call GetUserList()");
     ++m_iInterfaceCallCounter;
@@ -1067,7 +1067,7 @@ long CftlDataAccess::RemoveUserFromGroup(long p_lChangeUserId, long p_lUserGroup
 }
 
 
-long CftlDataAccess::GetUserGroupList(QLinkedList<CumUserGroup*>& p_rqvlUserGroups, QString p_qstrSchemeUri)
+long CftlDataAccess::GetUserGroupList(QList<CumUserGroup*>& p_rqvlUserGroups, QString p_qstrSchemeUri)
 {
     Q_UNUSED(p_qstrSchemeUri);
     INFO("Data Access Call GetUserGroupList()");
@@ -1088,7 +1088,7 @@ long CftlDataAccess::GetUserGroupList(QLinkedList<CumUserGroup*>& p_rqvlUserGrou
     return lRet;
 }
 
-long CftlDataAccess::GetListOfUsersInList(long p_lUserGroupId, QLinkedList<CumUser*>& p_rqvlUserList)
+long CftlDataAccess::GetListOfUsersInList(long p_lUserGroupId, QList<CumUser*>& p_rqvlUserList)
 {
     INFO("Data Access Call GetListOfUsersInList()");
     ++m_iInterfaceCallCounter;
@@ -1106,7 +1106,7 @@ long CftlDataAccess::GetListOfUsersInList(long p_lUserGroupId, QLinkedList<CumUs
     return lRet;
 }
 
-long CftlDataAccess::GetUserGroupMemberList(long p_lChangeUserId, QLinkedList<CumUserGroup*>& p_qvlUserGroups)
+long CftlDataAccess::GetUserGroupMemberList(long p_lChangeUserId, QList<CumUserGroup*>& p_qvlUserGroups)
 {
     INFO("Data Access Call GetUserGroupMemberList()");
     ++m_iInterfaceCallCounter;
@@ -1142,7 +1142,7 @@ long CftlDataAccess::FreeLicense()
     return -1;
 }
 
-long CftlDataAccess::GetSchemeList(QLinkedList<QString>& p_qvlDatabases)
+long CftlDataAccess::GetSchemeList(QList<QString>& p_qvlDatabases)
 {
     INFO("Data Access Call GetDatbaseList()");
     ++m_iInterfaceCallCounter;
@@ -1688,13 +1688,13 @@ CumUser *CftlDataAccess::FindUserByIdentKey(QString p_qstridentKey, QString p_qs
     return m_pCftlUserManager->FindUserByIdentKey(p_qstridentKey, p_qstrSchemeUri);
 }
 
-QLinkedList<CumUser*> CftlDataAccess::FindUser(QString p_qstrUserLoginNameEmail, QString p_qstrSchemeUri)
+QList<CumUser*> CftlDataAccess::FindUser(QString p_qstrUserLoginNameEmail, QString p_qstrSchemeUri)
 {
     ++m_iInterfaceCallCounter;
     return m_pCftlUserManager->FindUser(p_qstrUserLoginNameEmail, p_qstrSchemeUri);
 }
 
-QLinkedList<CumUserGroup *> CftlDataAccess::FindUserGroups(QString p_qstrName, QString p_qstrSchemeUri)
+QList<CumUserGroup *> CftlDataAccess::FindUserGroups(QString p_qstrName, QString p_qstrSchemeUri)
 {
     ++m_iInterfaceCallCounter;
     return m_pCftlUserManager->FindUserGroups(p_qstrName, p_qstrSchemeUri);

@@ -38,9 +38,9 @@ UICIMPLS = $$OUT_PWD/$$WMS_ARCH/uic/$$WMS_MODE
 
 message("WMSPLUGINS DESTDIR: "$$DESTDIR)
 
-CONFIG(gcc, gcc|clang) {
-    QMAKE_CXXFLAGS += -Werror -Wall -Wextra
-}
+#CONFIG(gcc, gcc|clang) {
+#    QMAKE_CXXFLAGS += -Werror -Wall -Wextra
+#}
 
 INCLUDEPATH +=    ./../../../core/wmscore/Src/DataManagement \
     ./../../../core/wmscore/Src/UserManagement \
@@ -66,14 +66,14 @@ LIBS +=  -L$$DESTDIR/dataaccess \
 include(wmsplugin.pri)
 
 
-QMAKE_TARGET_COMPANY = "WOGRA"
-QMAKE_TARGET_PRODUCT = "WMS Plugin Manager Console App"
-QMAKE_TARGET_COPYRIGHT = "Copyright (C) 2010-2015 WOGRA Consulting GmbH <info@wogra.com>"
-QMAKE_TARGET_DESCRIPTION = "Managing WMS Plugins"
+#QMAKE_TARGET_COMPANY = "WOGRA"
+#QMAKE_TARGET_PRODUCT = "WMS Plugin Manager Console App"
+#QMAKE_TARGET_COPYRIGHT = "Copyright (C) 2010-2021 WOGRA AG <info@wogra.com>"
+#QMAKE_TARGET_DESCRIPTION = "Managing WMS Plugins"
 
-DEFINES += \
-  APP_VERSION=\"\\\"$$VERSION\\\"\" \
-  APP_COMPANY=\"\\\"$$QMAKE_TARGET_COMPANY\\\"\" \
-  APP_PRODUCT=\"\\\"$$QMAKE_TARGET_PRODUCT\\\"\" \
-  APP_DESCRIPTION=\"\\\"$$QMAKE_TARGET_DESCRIPTION\\\"\" \
-  APP_COPYRIGHT=\"\\\"$$QMAKE_TARGET_COPYRIGHT\\\"\"
+#DEFINES += \
+#  APP_VERSION=\"\\\"$$VERSION\\\"\" \
+#  APP_COMPANY=\"\\\"$$QMAKE_TARGET_COMPANY\\\"\" \
+#  APP_PRODUCT=\"\\\"$$QMAKE_TARGET_PRODUCT\\\"\" \
+#  APP_DESCRIPTION=\"\\\"$$QMAKE_TARGET_DESCRIPTION\\\"\" \
+#  APP_COPYRIGHT=\"\\\"$$QMAKE_TARGET_COPYRIGHT\\\"\"

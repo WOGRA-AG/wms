@@ -12,7 +12,7 @@
  *****************************************************************************/
 
 // System and QT Includes
-#include <QLinkedList>
+#include <QList>
 #include <QStringList>
 
 // WMS Includes
@@ -160,10 +160,10 @@ void CwmsWorkflowStepEditorDlg::FillReadOnlyValues()
        if (CHKPTR(pCdmValue))
        {
           CdmValueListString* pList = dynamic_cast<CdmValueListString*>(pCdmValue);
-          QLinkedList<QString> qllEntries = pList->GetList();
+          QList<QString> qllEntries = pList->GetList();
 
-          QLinkedList<QString>::iterator qllIt    = qllEntries.begin();
-          QLinkedList<QString>::iterator qllItEnd = qllEntries.end();
+          QList<QString>::iterator qllIt    = qllEntries.begin();
+          QList<QString>::iterator qllItEnd = qllEntries.end();
 
           for ( ; qllIt != qllItEnd; ++qllIt)
           {
@@ -444,7 +444,7 @@ bool CwmsWorkflowStepEditorDlg::SaveData()
  *----------------last changed: --------------------------------Do 20. Dez 16:39:59 2012----------*/
 void CwmsWorkflowStepEditorDlg::SaveHiddenMembers()
 {
-   QLinkedList<QString> qllValues;
+   QList<QString> qllValues;
 
    for (int iCounter = 0; iCounter < m_pqlwHiddenMembers->count(); ++iCounter)
    {
@@ -474,7 +474,7 @@ void CwmsWorkflowStepEditorDlg::SaveHiddenMembers()
  *----------------last changed: --------------------------------Do 20. Dez 16:40:09 2012----------*/
 void CwmsWorkflowStepEditorDlg::SaveReadOnlyMembers()
 {
-   QLinkedList<QString> qllValues;
+   QList<QString> qllValues;
 
    for (int iCounter = 0; iCounter < m_pqlwReadOnlyMembers->count(); ++iCounter)
    {

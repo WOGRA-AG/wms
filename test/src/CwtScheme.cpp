@@ -103,7 +103,7 @@ void CwtScheme::CheckSchemeListSlot()
 
         if (pIdmDataAccess)
         {
-            QLinkedList<QString> qllDatabases;
+            QList<QString> qllDatabases;
             pIdmDataAccess->GetSchemeList(qllDatabases);
 
             QVERIFY(qllDatabases.count() > 0);

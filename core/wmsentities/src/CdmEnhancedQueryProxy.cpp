@@ -184,10 +184,10 @@ void CdmEnhancedQueryProxy::GetDisplaySetV(CdmObjectContainer* p_pContainer, QSe
       GetQuery()->DeleteResultElements();
       CreateQuery(p_pContainer);
       Execute();
-      const QLinkedList<long> qvlResult = GetQuery()->GetResultList();
+      const QList<long> qvlResult = GetQuery()->GetResultList();
 
-      QLinkedList<long>::const_iterator qvlIt = qvlResult.begin();
-      QLinkedList<long>::const_iterator qvlItEnd = qvlResult.end();
+      QList<long>::const_iterator qvlIt = qvlResult.begin();
+      QList<long>::const_iterator qvlItEnd = qvlResult.end();
 
       for(; qvlIt != qvlItEnd; ++ qvlIt)
       {
@@ -224,7 +224,7 @@ void CdmEnhancedQueryProxy::GetDisplaySet(CdmObjectContainer* p_pContainer, QSet
 int CdmEnhancedQueryProxy::GetFirstResult(CdmObjectContainer* p_pContainer)
 {
    int iRet = 0;
-   QLinkedList<long> qvlResults;
+   QList<long> qvlResults;
    GetDisplayListV(p_pContainer, qvlResults);
 
    if (qvlResults.count() == 1)
@@ -244,14 +244,14 @@ int CdmEnhancedQueryProxy::GetFirstResult(CdmObjectContainer* p_pContainer)
  * @method  CdmEnhancedQueryProxy::GetDisplayList            // public, slots                     *
  * @return  void                                             //                                   *
  * @param   CdmObjectContainer* p_pContainer                  // the source objectlist             *
- * @param   QLinkedList<long>& p_rqvlResults                 // The list of objects or objectlists*
+ * @param   QList<long>& p_rqvlResults                 // The list of objects or objectlists*
  *                                                           //  which can be used                *
  * @comment This is the abstract method which must be overwritten be the derived class. the       *
  *          gui components which uses proxies uses the list of results for displaying their       *
  *          contents.                                                                             *
  *----------------last changed: --------------------------------Di 20. Nov 09:44:11 2012----------*/
 void CdmEnhancedQueryProxy::GetDisplayList(CdmObjectContainer* p_pContainer,
-                                           QLinkedList<long>& p_rqvlResults)
+                                           QList<long>& p_rqvlResults)
 {
 
    GetDisplayListV(p_pContainer, p_rqvlResults);
@@ -261,14 +261,14 @@ void CdmEnhancedQueryProxy::GetDisplayList(CdmObjectContainer* p_pContainer,
  * @method  CdmEnhancedQueryProxy::GetDisplayListV           // public, virtual                   *
  * @return  void                                             //                                   *
  * @param   CdmObjectContainer* p_pContainer                  // the source objectlist             *
- * @param   QLinkedList<long>& p_rqvlResults                 // The list of objects or objectlists*
+ * @param   QList<long>& p_rqvlResults                 // The list of objects or objectlists*
  *                                                           //  which can be used                *
  * @comment This is the abstract method which must be overwritten be the derived class. the       *
  *          gui components which uses proxies uses the list of results for displaying their       *
  *          contents.                                                                             *
  *----------------last changed: --------------------------------Mi 3. Okt 11:49:19 2012-----------*/
 void CdmEnhancedQueryProxy::GetDisplayListV(CdmObjectContainer* p_pContainer,
-                                            QLinkedList<long>& p_rqvlResults)
+                                            QList<long>& p_rqvlResults)
 {
    if(CHKPTR(p_pContainer))
    { 
@@ -276,10 +276,10 @@ void CdmEnhancedQueryProxy::GetDisplayListV(CdmObjectContainer* p_pContainer,
       GetQuery()->DeleteResultElements();
       CreateQuery(p_pContainer);
       Execute();
-      const QLinkedList<long> qvlResult = GetQuery()->GetResultList();
+      const QList<long> qvlResult = GetQuery()->GetResultList();
 
-      QLinkedList<long>::const_iterator qvlIt = qvlResult.begin();
-      QLinkedList<long>::const_iterator qvlItEnd = qvlResult.end();
+      QList<long>::const_iterator qvlIt = qvlResult.begin();
+      QList<long>::const_iterator qvlItEnd = qvlResult.end();
 
       for(; qvlIt != qvlItEnd; ++ qvlIt)
       {

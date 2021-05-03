@@ -289,7 +289,7 @@ void CwtObject::CheckListContentSlot()
     QVERIFY(pObject != nullptr);
     CdmValueListInt* pValue = dynamic_cast<CdmValueListInt*> (pObject->GetValue(MEMBER_LIST_INT_KEYNAME));
     QVERIFY(pValue != nullptr);
-    QLinkedList<int> qListInt = pValue->GetList();
+    QList<int> qListInt = pValue->GetList();
     QVERIFY(qListInt.count() == 3);
     QVERIFY(qListInt.contains(78));
     QVERIFY(qListInt.contains(15));

@@ -37,9 +37,9 @@ UICIMPLS = $$OUT_PWD/$$WMS_ARCH/uic/$$WMS_MODE
 
 message("WMSDEPLOY DESTDIR: "$$DESTDIR)
 
-CONFIG(gcc, gcc|clang) {
-    QMAKE_CXXFLAGS += -Werror -Wall -Wextra
-}
+#CONFIG(gcc, gcc|clang) {
+#    QMAKE_CXXFLAGS += -Werror -Wall -Wextra
+#}
 
 INCLUDEPATH += ./../../../core/wmscore/Src/DataManagement \
                ./../../../core/wmscore/Src/UserManagement \
@@ -58,13 +58,13 @@ QMAKE_RPATHDIR += $$DESTDIR
 include(wmsdeploy.pri)
 
 
-QMAKE_TARGET_COMPANY = "WOGRA"
-QMAKE_TARGET_PRODUCT = "WMS Deploy"
-QMAKE_TARGET_COPYRIGHT = "Copyright (C) 2010-2015 WOGRA Consulting GmbH <info@wogra.com>"
-QMAKE_TARGET_DESCRIPTION = "Deploy wdf files to a scheme."
+#QMAKE_TARGET_COMPANY = "WOGRA"
+#QMAKE_TARGET_PRODUCT = "WMS Deploy"
+#QMAKE_TARGET_COPYRIGHT = "Copyright (C) 2010-2015 WOGRA Consulting GmbH <info@wogra.com>"
+#QMAKE_TARGET_DESCRIPTION = "Deploy wdf files to a scheme."
 
-DEFINES += \
-  APP_COMPANY=\"\\\"$$QMAKE_TARGET_COMPANY\\\"\" \
-  APP_PRODUCT=\"\\\"$$QMAKE_TARGET_PRODUCT\\\"\" \
-  APP_DESCRIPTION=\"\\\"$$QMAKE_TARGET_DESCRIPTION\\\"\" \
-  APP_COPYRIGHT=\"\\\"$$QMAKE_TARGET_COPYRIGHT\\\"\"
+#DEFINES += \
+#  APP_COMPANY=\"\\\"$$QMAKE_TARGET_COMPANY\\\"\" \
+#  APP_PRODUCT=\"\\\"$$QMAKE_TARGET_PRODUCT\\\"\" \
+#  APP_DESCRIPTION=\"\\\"$$QMAKE_TARGET_DESCRIPTION\\\"\" \
+#  APP_COPYRIGHT=\"\\\"$$QMAKE_TARGET_COPYRIGHT\\\"\"

@@ -2,7 +2,7 @@
 #define CWMSCONTAINERUPDATELOCKER_H
 
 #include <CdmContainerAdaptor.h>
-#include <QLinkedList>
+#include <QList>
 
 #include "wmsgui.h"
 
@@ -11,8 +11,8 @@ class WMSGUI_API CwmsContainerUpdateLocker
 
     private:
         QString m_qstrContainerKeyname;
-        QLinkedList<CdmContainerAdaptor*> m_qllOriginalContainers;
-        QLinkedList<CdmContainerAdaptor*> m_qllAdaptorExceptions; // this adaptors needs updates
+        QList<CdmContainerAdaptor*> m_qllOriginalContainers;
+        QList<CdmContainerAdaptor*> m_qllAdaptorExceptions; // this adaptors needs updates
         bool m_bForceUpdateOnDestruction;
 
         void RemoveAdaptorsFromContainer(CdmObjectContainer* p_pContainer);

@@ -14,7 +14,7 @@
 #include <QDir>
 #include <QFileDialog>
 #include <QFileInfo>
-#include <QLinkedList>
+#include <QList>
 #include <QMdiArea>
 #include <QStandardItemModel>
 #include <QMdiSubWindow>
@@ -272,7 +272,7 @@ void CwmsAdminMainWindowIf::FillDialog()
 
    if (CHKPTR(pCdmManager))
    {
-      QLinkedList<QString> qvlDatabases;
+      QList<QString> qvlDatabases;
       
       pCdmManager->GetSchemeList(qvlDatabases);
 
@@ -281,8 +281,8 @@ void CwmsAdminMainWindowIf::FillDialog()
          m_pqcbDatabases->addItem("");
       }
 
-      QLinkedList<QString>::iterator qvlIt = qvlDatabases.begin();
-      QLinkedList<QString>::iterator qvlItEnd = qvlDatabases.end();
+      QList<QString>::iterator qvlIt = qvlDatabases.begin();
+      QList<QString>::iterator qvlItEnd = qvlDatabases.end();
 
       for (; qvlIt != qvlItEnd; ++ qvlIt)
       {
@@ -601,11 +601,11 @@ void CwmsAdminMainWindowIf::FillSchemeContent(QString p_qstrDbName)
 
 void CwmsAdminMainWindowIf::SubscribeEventMethods(CdmClassManager *pCdmClassManager)
 {
-    QLinkedList<CdmClass*> qlClasses;
+    QList<CdmClass*> qlClasses;
     pCdmClassManager->GetClassList(qlClasses);
 
-    QLinkedList<CdmClass*>::iterator qlItStart = qlClasses.begin();
-    QLinkedList<CdmClass*>::iterator qlItEnd = qlClasses.end();
+    QList<CdmClass*>::iterator qlItStart = qlClasses.begin();
+    QList<CdmClass*>::iterator qlItEnd = qlClasses.end();
 
     for(; qlItStart != qlItEnd; ++qlItStart)
     {
@@ -1695,10 +1695,10 @@ void CwmsAdminMainWindowIf::DeleteAllObjectsSlot()
       {
          CdmContainerManager* pManager = pContainer->GetContainerManager();
          pManager->ReloadContainerComplete(pContainer);
-         QLinkedList<CdmObject*> qvlObjects;
+         QList<CdmObject*> qvlObjects;
          pContainer->GetObjectList(qvlObjects);
-         QLinkedList<CdmObject*>::iterator qvlIt    = qvlObjects.begin();
-         QLinkedList<CdmObject*>::iterator qvlItEnd = qvlObjects.end();
+         QList<CdmObject*>::iterator qvlIt    = qvlObjects.begin();
+         QList<CdmObject*>::iterator qvlItEnd = qvlObjects.end();
 
          if (qvlObjects.isEmpty())
          {
@@ -4110,4 +4110,15 @@ void CwmsAdminMainWindowIf::LogoutAndExitSlot()
         INFO("Logout unsuccessfull!!!")
     }
     BODY_CATCH
+}
+
+void CwmsAdminMainWindowIf::ClassFilterEnterPressedSlot()
+{
+    // todo
+}
+
+
+void CwmsAdminMainWindowIf::ViewFilterEnterPressedSlot()
+{
+    // todo
 }

@@ -72,3 +72,8 @@ doku/src/main/asciidoc/*.odt
 java-wmsdb-dump.wdf
 wms/dataaccess/wmsdb/project/_src_wmsdb_qmlcache.qrc
 wms/guilibraries/wmsqml/project/_src_wmsqml_qmlcache.qrc
+thirdparty/antlr/antlr4-cpp-runtime-4.7.2-source/files_h.txt
+thirdparty/antlr/antlr4-cpp-runtime-4.7.2-source/files_all.txt
+thirdparty/antlr/antlr4-cpp-runtime-4.7.2-source/files.txt
+dataaccess/wmsftl/project/_src_wmsftl_qmlcache.qrc
+clitools/wmsdatainterface/project/compile.txt

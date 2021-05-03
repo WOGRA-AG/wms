@@ -15,7 +15,7 @@
 #include <QStack>
 #include <QMutex>
 #include <QSqlDatabase>
-#include <QLinkedList>
+#include <QList>
 #include <QTimer>
 #include <QObject>
 #ifdef WOGRA_DEBUG
@@ -177,7 +177,7 @@ public:
     int DeleteClass(long p_lClassId);
     int DeleteScheme(QString p_qstrKeyname);
     int DeleteObjectContainer(long p_lObjectListId);
-    int GetUserList(QLinkedList<CumUser*>& p_rqvlUser);
+    int GetUserList(QList<CumUser*>& p_rqvlUser);
     int UpdateUser(CumUser* p_pUser);
     int GetContainerList(long p_lDbId, long p_lClassId, QMap<long, QString>& p_rqmObjectListsLList);
     int ExecuteQuery(CdmQuery* p_pCdmQuery);
@@ -195,19 +195,19 @@ public:
     long DeleteUserGroup(long p_llGroupId);
     long AddUserToUserGroup(long p_lChangeUserId,long p_lUserGroupId);
     long RemoveUserFromGroup(long p_lChangeUserId, long p_lUserGroupId);
-    long GetUserGroupList(QLinkedList<CumUserGroup*>& p_rqvlUserGroups, QString p_qstrSchemeUri);
-    long GetListOfUsersInList(long p_lUserGroupId, QLinkedList<CumUser*>& p_rqvlUserList);
-    long GetUserGroupMemberList(long p_lChangeUserId, QLinkedList<CumUserGroup*>& p_qvlUserGroups);
+    long GetUserGroupList(QList<CumUserGroup*>& p_rqvlUserGroups, QString p_qstrSchemeUri);
+    long GetListOfUsersInList(long p_lUserGroupId, QList<CumUser*>& p_rqvlUserList);
+    long GetUserGroupMemberList(long p_lChangeUserId, QList<CumUserGroup*>& p_qvlUserGroups);
     long AddLicense(QString p_qstrApplication, QString p_qstrLicensee, QString p_qstrLicensekey);
     long FreeLicense();
-    long GetSchemeList(QLinkedList<QString>& p_qvlDatabases);
+    long GetSchemeList(QList<QString>& p_qvlDatabases);
     long UpdateScheme(CdmScheme* p_pCdmDatabase);
     int Init(CftlDataAccessConfigurator* p_pConfig);
     virtual int Init(QString p_qstrApplicationName, QString p_qstrVersion);
     long GetCounterValue(const CdmObjectContainer* p_pContainer, CdmValue* p_pValue);
     virtual QString GetConnectionDisplayString();
     int LoadEmptyObjectContainer(long p_lDataBaseId, long p_lId, CdmObjectContainer*& p_pContainer);
-    virtual int LoadObjects(QLinkedList<long>& p_rqvlObjects, CdmObjectContainer*& p_pCdmObject);
+    virtual int LoadObjects(QList<long>& p_rqvlObjects, CdmObjectContainer*& p_pCdmObject);
     virtual int IsDemo(QString p_qstrApplication, QString p_qstrVersion);
     virtual long IsObjectUsed(const CdmObject* p_pObject);
     bool LicenceCheck(QString p_qstrApplication, bool& p_bDemo, int& p_iModules, QString p_qstrVersion);
@@ -252,13 +252,13 @@ public:
     void UpdateSession(int p_iSessionId);
     void UpdateSession(QString p_qstrBaseAuth);
     void SessionTimeoutCheck(int p_iTimeoutMin);
-    virtual QLinkedList<CumUser*> FindUser(QString p_qstrUserLoginNameEmail, QString p_qstrSchemeUri);
+    virtual QList<CumUser*> FindUser(QString p_qstrUserLoginNameEmail, QString p_qstrSchemeUri);
     virtual CumUser* FindUserByIdentKey(QString p_qstridentKey, QString p_qstrSchemeUri);
     virtual CumUserGroup* FindUserGroupById(int p_iId);
     virtual CumUserGroup* FindUserGroupByName(QString p_qstrName, QString p_qstrSchemeUri);
     long ExecuteQuery(QSqlQuery &p_rqsqlQuery);
     CftlInterface *GetFtlInterface();
-    QLinkedList<CumUserGroup *> FindUserGroups(QString p_qstrName, QString p_qstrSchemeUri);
+    QList<CumUserGroup *> FindUserGroups(QString p_qstrName, QString p_qstrSchemeUri);
     virtual int LoadObject(const CdmObjectContainer* p_pContainer, QString p_qstrKeyname, CdmObject *&p_pCdmObject);
 };
 

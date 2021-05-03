@@ -15,12 +15,12 @@ class CwnCommandGetSchemeList : public CwnCommandBase
 {
 
 private:
-    QLinkedList<QString> m_qllSchemes;
+    QList<QString> m_qllSchemes;
 public:
     CwnCommandGetSchemeList(CwnDataAccess *p_pDataAccess);
     virtual ~CwnCommandGetSchemeList();
 
-    QLinkedList<QString> GetSchemes() const;
+    QList<QString> GetSchemes() const;
 
     QString createQuery();
     void interpretAnswer(QVariant &Ret);

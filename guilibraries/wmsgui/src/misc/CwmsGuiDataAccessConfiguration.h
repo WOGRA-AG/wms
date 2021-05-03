@@ -27,6 +27,7 @@ public slots:
     void DeleteClickedSlot();
     void EditClickedSlot();
     void NewClickedSlot();
+    void TestClickedSlot();
 private:
     Ui::CwmsGuiDataAccessConfigurationUi *ui;
     CwmsDataAccessConfiguration m_Config;

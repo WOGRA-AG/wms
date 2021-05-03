@@ -2,7 +2,7 @@
 #define CODBCQUERYELEMENT_H
 
 // System and QT Inlcudes
-#include <QLinkedList>
+#include <QList>
 
 
 // own Includes
@@ -20,7 +20,7 @@ class CdbQueryElement
 private:
     CdbDataAccess* m_rpCdbDataAccess;
     CdmQueryElement* m_rpCdmQueryElement;
-    QLinkedList<CdbQueryElement*> m_qvlChilds;
+    QList<CdbQueryElement*> m_qvlChilds;
     QString m_qstrQuery;
 
 public:
@@ -36,7 +36,7 @@ public:
     QString GetDataFieldName();
 
 private:
-    void CreateChilds(QLinkedList<CdmQueryElement*> &p_qvlChilds);
+    void CreateChilds(QList<CdmQueryElement*> &p_qvlChilds);
     long ExecuteValue(QMap<long,long> &p_rqvlResults);
     QString GenerateValueQuery();
     QString GenerateOrQuery();

@@ -477,11 +477,11 @@ public:
    public:
    /** +-=---------------------------------------------------------So 10. Feb 09:41:46 2013-------*
     * @method  CdmObjectAdaptor::GetStringList               // public, const                     *
-    * @return  QLinkedList<QString>                          //                                   *
+    * @return  QList<QString>                          //                                   *
     * @param   QString p_qstrMember                          //                                   *
     * @comment                                                                                    *
     *----------------last changed: -----------------------------So 10. Feb 09:41:46 2013----------*/
-    QLinkedList<QString> GetStringList(QString p_qstrMember) const;
+    QList<QString> GetStringList(QString p_qstrMember) const;
 
    public:
    /** +-=---------------------------------------------------------Di 14. Jun 10:02:51 2011-------*
@@ -535,29 +535,29 @@ public:
 public:
    /** +-=---------------------------------------------------------So 10. Feb 09:41:53 2013-------*
     * @method  CdmObjectAdaptor::GetDoubleList               // public, const                     *
-    * @return  QLinkedList<double>                           //                                   *
+    * @return  QList<double>                           //                                   *
     * @param   QString p_qstrMember                          //                                   *
     * @comment                                                                                    *
     *----------------last changed: -----------------------------So 10. Feb 09:41:53 2013----------*/
-    QLinkedList<double> GetDoubleList(QString p_qstrMember) const;
+    QList<double> GetDoubleList(QString p_qstrMember) const;
 
    public:
    /** +-=---------------------------------------------------------So 10. Feb 09:42:02 2013-------*
     * @method  CdmObjectAdaptor::GetIntList                  // public, const                     *
-    * @return  QLinkedList<int>                              //                                   *
+    * @return  QList<int>                              //                                   *
     * @param   QString p_qstrMember                          //                                   *
     * @comment                                                                                    *
     *----------------last changed: -----------------------------So 10. Feb 09:42:02 2013----------*/
-    QLinkedList<int> GetIntList(QString p_qstrMember) const;
+    QList<int> GetIntList(QString p_qstrMember) const;
 
    public:
    /** +-=---------------------------------------------------------Do 10. Nov 16:14:22 2011-------*
     * @method  CdmObjectAdaptor::GetListObjects              // public                            *
-    * @return  QLinkedList<CdmObject*>                       //                                   *
+    * @return  QList<CdmObject*>                       //                                   *
     * @param   QString p_qstrMember                          //                                   *
     * @comment                                                                                    *
     *----------------last changed: -----------------------------Do 10. Nov 16:14:22 2011----------*/
-    QLinkedList<CdmObject*> GetListObjects(QString p_qstrMember);
+    QList<CdmObject*> GetListObjects(QString p_qstrMember);
 
    public:
    /** +-=---------------------------------------------------------Do 10. Nov 16:31:36 2011-------*
@@ -850,10 +850,10 @@ public:
     * @method  CdmObjectAdaptor::SetStringList               // public                            *
     * @return  void                                          //                                   *
     * @param   QString p_qstrMember                          //                                   *
-    * @param   QLinkedList<QString> p_rqstrlList             //                                   *
+    * @param   QList<QString> p_rqstrlList             //                                   *
     * @comment                                                                                    *
     *----------------last changed: -----------------------------Mo 10. Sep 16:18:34 2012----------*/
-    void SetStringList(QString p_qstrMember, QLinkedList<QString> p_rqstrlList);
+    void SetStringList(QString p_qstrMember, QList<QString> p_rqstrlList);
 
    public:
    /** +-=---------------------------------------------------------Mi 12. Sep 11:54:42 2012-------*
@@ -904,10 +904,10 @@ public:
     * @method  CdmObjectAdaptor::SetListObjects              // public                            *
     * @return  void                                          //                                   *
     * @param   QString p_qstrMember                          //                                   *
-    * @param   QLinkedList<CdmObject*> p_qlObjects           //                                   *
+    * @param   QList<CdmObject*> p_qlObjects           //                                   *
     * @comment                                                                                    *
     *----------------last changed: -----------------------------Do 25. Okt 13:54:43 2012----------*/
-    void SetListObjects(QString p_qstrMember, QLinkedList<CdmObject*> p_qlObjects);
+    void SetListObjects(QString p_qstrMember, QList<CdmObject*> p_qlObjects);
 
    public:
    /** +-=---------------------------------------------------------Mo 11. Feb 16:37:43 2013-------*
@@ -923,20 +923,20 @@ public:
     * @method  CdmObjectAdaptor::SetIntList                  // public                            *
     * @return  void                                          //                                   *
     * @param   QString p_qstrMember                          //                                   *
-    * @param   QLinkedList<int> p_rqstrlList                 //                                   *
+    * @param   QList<int> p_rqstrlList                 //                                   *
     * @comment                                                                                    *
     *----------------last changed: -----------------------------Di 28. Mai 14:35:56 2013----------*/
-    void SetIntList(QString p_qstrMember, QLinkedList<int> p_rqstrlList);
+    void SetIntList(QString p_qstrMember, QList<int> p_rqstrlList);
 
    public:
    /** +-=---------------------------------------------------------Di 28. Mai 14:36:26 2013-------*
     * @method  CdmObjectAdaptor::SetDoubleList               // public                            *
     * @return  void                                          //                                   *
     * @param   QString p_qstrMember                          //                                   *
-    * @param   QLinkedList<double> p_rqstrlList              //                                   *
+    * @param   QList<double> p_rqstrlList              //                                   *
     * @comment                                                                                    *
     *----------------last changed: -----------------------------Di 28. Mai 14:36:26 2013----------*/
-    void SetDoubleList(QString p_qstrMember, QLinkedList<double> p_rqstrlList);
+    void SetDoubleList(QString p_qstrMember, QList<double> p_rqstrlList);
 
    public:
    /** +-=---------------------------------------------------------Di 28. Mai 14:38:57 2013-------*

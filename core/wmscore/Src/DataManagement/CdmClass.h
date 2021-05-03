@@ -154,7 +154,7 @@ public:
     void SetMemberSequence(QVector<QString>& p_qvlSequence);
     virtual void ResetNewModified();
     bool HasNonSystemMembers() const;
-    QLinkedList<QString> GetVisibleUserDefinedMembers() const;
+    QList<QString> GetVisibleUserDefinedMembers() const;
     virtual QVariant GetVariant() const;
     void SetVariant(QVariantMap& p_rqvVariant);
     CdmClassGroup* CreateGroup(QString p_qstrName,

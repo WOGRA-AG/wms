@@ -34,9 +34,9 @@ UICIMPLS = $$OUT_PWD/$$WMS_ARCH/uic/$$WMS_MODE
 
 message("WMSREQUESTMANAGER DESTDIR: "$$DESTDIR)
 
-CONFIG(gcc, gcc|clang) {
-    QMAKE_CXXFLAGS += -Werror -Wall -Wextra
-}
+#CONFIG(gcc, gcc|clang) {
+#    QMAKE_CXXFLAGS += -Werror -Wall -Wextra
+#}
 
 QT += core script
 DEFINES += WMSCOM_LIB WOGRA_DEBUG

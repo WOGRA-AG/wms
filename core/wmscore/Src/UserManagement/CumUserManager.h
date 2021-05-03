@@ -15,7 +15,7 @@
 #define CUMUSERMANAGER_H
 
 // System and QT Includes
-#include <QLinkedList>
+#include <QList>
 #include <QMap>
 
 
@@ -49,7 +49,7 @@ private:
     QMap<int,CumUser*>        m_qmUsers;
 
     // The List Usergroupds
-    QLinkedList<CumUserGroup*> m_qlUserGroups;
+    QList<CumUserGroup*> m_qlUserGroups;
     QString m_qstrSchemeUri;
 
 
@@ -76,7 +76,7 @@ public:
     long GetSessionId();
     long GetCurrentUserId();
     CumUserGroup* FindUserGroupById(int p_iId);
-    void GetUserBaseIds(QLinkedList<long>& p_rqllUserBaseIds);
+    void GetUserBaseIds(QList<long>& p_rqllUserBaseIds);
     QVariant GetVariant() const;
     void ClearUsers();
     void ClearUserGroups();
@@ -90,22 +90,22 @@ public:
     CumUser* FindUserByLogin(QString p_qstrUserLogin);
     long DeleteUser(long p_lUserId);
     CumUser *FindUserByIdentityKey(QString p_qstrIdentityKey);
-    QLinkedList<CumUser *> FindUsersUnmanaged(QString p_qstrSearchString);
+    QList<CumUser *> FindUsersUnmanaged(QString p_qstrSearchString);
     long DeleteUserGroup(QString p_qstrGroup);
     CumUserGroup *FindUserGroupByName(QString p_qstrName);
     long RemoveUserFromGroup(QString p_qstrLogin, QString p_qstrGroup);
     long AddUserToUserGroup(QString p_qstrLogin, QString p_qstrGroup);
     long RenameUserGroup(QString qstrOldName, QString p_qstrNewName);
-    QLinkedList<CumUserGroup *> FindUserGroupsByNameUnmanaged(QString p_qstrName);
+    QList<CumUserGroup *> FindUserGroupsByNameUnmanaged(QString p_qstrName);
     QVariant GetGroupVariant() const;
     QString GetSchemeUri() const;
 
     bool IsCurrentUserAdmin();
 public slots:
-    long GetUserGroupList(QLinkedList<CumUserGroup*>& p_rqvlUserGroups);
-    long GetListOfUsersInList(long p_lUserGroupId, QLinkedList<CumUser*>& p_rqvlUserList);
-    long GetUserGroupMemberList(long p_lUserId, QLinkedList<CumUserGroup*>& p_qvlUserGroups);
-    long GetUserListUnmanaged(QLinkedList<CumUser*>& p_rqvlUsers);
+    long GetUserGroupList(QList<CumUserGroup*>& p_rqvlUserGroups);
+    long GetListOfUsersInList(long p_lUserGroupId, QList<CumUser*>& p_rqvlUserList);
+    long GetUserGroupMemberList(long p_lUserId, QList<CumUserGroup*>& p_qvlUserGroups);
+    long GetUserListUnmanaged(QList<CumUser*>& p_rqvlUsers);
     CumUser* FindUserById(int p_iUserId);
 
 };

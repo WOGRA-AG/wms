@@ -27,12 +27,12 @@ CwmsFormObjectContainer::~CwmsFormObjectContainer()
 {
 }
 
-QLinkedList<QString> CwmsFormObjectContainer::GetSelectionDisplayMembers()
+QList<QString> CwmsFormObjectContainer::GetSelectionDisplayMembers()
 {
    return GetStringList("Selection_Display_Members");
 }
 
-void CwmsFormObjectContainer::SetSelectionDisplayMembers(QLinkedList<QString> p_qllMembers)
+void CwmsFormObjectContainer::SetSelectionDisplayMembers(QList<QString> p_qllMembers)
 {
 	return SetStringList("Selection_Display_Members", p_qllMembers);
 }

@@ -27,13 +27,13 @@ void CwiCommandFindGroup::Execute()
         CumUserManager* pCumUserManager = pCdmManager->GetUserManager();
         if(pCumUserManager)
         {
-            QLinkedList<CumUserGroup*> qlUserGroup = pCumUserManager->FindUserGroupsByNameUnmanaged(qstrSearchString);
+            QList<CumUserGroup*> qlUserGroup = pCumUserManager->FindUserGroupsByNameUnmanaged(qstrSearchString);
             if (!qlUserGroup.isEmpty())
             {
                 QVariantList qvlGroup;
 
-                QLinkedList<CumUserGroup*>::iterator qlIt = qlUserGroup.begin();
-                QLinkedList<CumUserGroup*>::iterator qlItEnd = qlUserGroup.end();
+                QList<CumUserGroup*>::iterator qlIt = qlUserGroup.begin();
+                QList<CumUserGroup*>::iterator qlItEnd = qlUserGroup.end();
 
                 for(; qlIt != qlItEnd; ++qlIt)
                 {

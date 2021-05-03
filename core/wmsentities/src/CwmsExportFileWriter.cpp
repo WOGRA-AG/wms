@@ -13,7 +13,7 @@
 #include <QDomDocument>
 #include <QApplication>
 #include <QTextStream>
-#include <QLinkedList>
+#include <QList>
 #include <QFileInfo>
 
 // WMS Includes
@@ -75,7 +75,7 @@ bool CwmsExportWriter::Export()
       CdmObjectContainer* pContainer = GetObjectList();
       if (CHKPTR(pContainer))
       {
-         QLinkedList<long> qvlObjects;
+         QList<long> qvlObjects;
          INFO("Execute Query");
          bool bQueryResult = GetQueryObjects(qvlObjects, pContainer);
 
@@ -155,18 +155,18 @@ CdmObjectContainer* CwmsExportWriter::GetObjectList()
 /** +-=---------------------------------------------------------So 18. Nov 11:15:39 2007----------*
  * @method  CwmsExportWriter::GetQueryObjects            // private                           *
  * @return  bool                                             // successflag                       *
- * @param   QLinkedList<long>& p_rqvlObjects                  //                                   *
+ * @param   QList<long>& p_rqvlObjects                  //                                   *
  * @param   CdmObjectContainer* p_pContainer                  //                                   *
  * @comment This method returns the query objects which are the result of the query.              *
  *----------------last changed: Wolfgang Graßhof----------------So 18. Nov 11:15:39 2007----------*/
-bool CwmsExportWriter::GetQueryObjects(QLinkedList<long>& p_rqvlObjects,
+bool CwmsExportWriter::GetQueryObjects(QList<long>& p_rqvlObjects,
                                        CdmObjectContainer* p_pContainer)
 {
    bool bRet = false;
     Q_UNUSED(p_pContainer);
 
     QString qstrQuery = m_rCwmsSettings.GetQuery();
-    QLinkedList<long> qllExportList = m_rCwmsSettings.GetExportList();
+    QList<long> qllExportList = m_rCwmsSettings.GetExportList();
 
     if (!qstrQuery.isEmpty())
     {
@@ -177,10 +177,10 @@ bool CwmsExportWriter::GetQueryObjects(QLinkedList<long>& p_rqvlObjects,
         {
             bRet = true;
 
-            const QLinkedList<long> qvlResult = pCdmQuery->GetResultList();
+            const QList<long> qvlResult = pCdmQuery->GetResultList();
 
-            QLinkedList<long>::const_iterator qvlIt = qvlResult.begin();
-            QLinkedList<long>::const_iterator qvlItEnd = qvlResult.end();
+            QList<long>::const_iterator qvlIt = qvlResult.begin();
+            QList<long>::const_iterator qvlItEnd = qvlResult.end();
 
             for(; qvlIt != qvlItEnd; ++ qvlIt)
             {
@@ -284,12 +284,12 @@ void CwmsExportWriter::CloseDevice()
  * @return  bool                                             //                                   *
  * @param   QTextStream& p_rqtStream                         //                                   *
  * @param   CdmObjectContainer* p_pContainer                  //                                   *
- * @param   QLinkedList<long> p_rqvlObjects                   //                                   *
+ * @param   QList<long> p_rqvlObjects                   //                                   *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------Mo 29. Okt 10:37:11 2012----------*/
 bool CwmsExportWriter::ExportCsv(QTextStream& p_rqtStream,
                                  CdmObjectContainer* p_pContainer,
-                                 QLinkedList<long> p_rqvlObjects)
+                                 QList<long> p_rqvlObjects)
 {
    bool bRet = false;
 
@@ -319,10 +319,10 @@ bool CwmsExportWriter::ExportCsv(QTextStream& p_rqtStream,
          p_rqtStream << qstrHeader;
       }
        
-      QLinkedList<QString> qvlMembers = m_rCwmsSettings.GetMemberList();
+      QList<QString> qvlMembers = m_rCwmsSettings.GetMemberList();
 
-      QLinkedList<long>::iterator qvlIt = p_rqvlObjects.begin();
-      QLinkedList<long>::iterator qvlItEnd = p_rqvlObjects.end();
+      QList<long>::iterator qvlIt = p_rqvlObjects.begin();
+      QList<long>::iterator qvlItEnd = p_rqvlObjects.end();
       
       INFO("Exporting " + QString::number(p_rqvlObjects.count()) + " Objects:");
       int iCounter = 0;
@@ -338,8 +338,8 @@ bool CwmsExportWriter::ExportCsv(QTextStream& p_rqtStream,
          if (CHKPTR(pCdmObject))
          {
             QString qstrLine;
-            QLinkedList<QString>::iterator qvlMemberIt = qvlMembers.begin();
-            QLinkedList<QString>::iterator qvlMemberItEnd = qvlMembers.end();
+            QList<QString>::iterator qvlMemberIt = qvlMembers.begin();
+            QList<QString>::iterator qvlMemberItEnd = qvlMembers.end();
             bool bFirst = true;
 
             for (; qvlMemberIt != qvlMemberItEnd; ++qvlMemberIt)
@@ -472,13 +472,13 @@ QString CwmsExportWriter::GetCsvHeader(CdmObjectContainer* p_pContainer)
 
    if (CHKPTR(p_pContainer))
    {
-      QLinkedList<QString> qvlMembers = m_rCwmsSettings.GetMemberList();
+      QList<QString> qvlMembers = m_rCwmsSettings.GetMemberList();
       const CdmClass* pCdmClass = p_pContainer->GetClass();
 
       if (CHKPTR(pCdmClass))
       {
-         QLinkedList<QString>::iterator qvlIt = qvlMembers.begin();
-         QLinkedList<QString>::iterator qvlItEnd = qvlMembers.end();
+         QList<QString>::iterator qvlIt = qvlMembers.begin();
+         QList<QString>::iterator qvlItEnd = qvlMembers.end();
          bool bFirst = true;
 
          for (; qvlIt != qvlItEnd; ++qvlIt)
@@ -536,12 +536,12 @@ QString CwmsExportWriter::GetCsvSeperator()
  * @return  bool                                             //                                   *
  * @param   QTextStream& p_rqtStream                         //                                   *
  * @param   CdmObjectContainer* p_pContainer                  //                                   *
- * @param   QLinkedList<long> p_rqvlObjects                   //                                   *
+ * @param   QList<long> p_rqvlObjects                   //                                   *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------Mo 29. Okt 10:37:36 2012----------*/
 bool CwmsExportWriter::ExportHtml(QTextStream& p_rqtStream,
                                       CdmObjectContainer* p_pContainer,
-                                      QLinkedList<long> p_rqvlObjects)
+                                      QList<long> p_rqvlObjects)
 {
 
    bool bRet = false;
@@ -570,10 +570,10 @@ bool CwmsExportWriter::ExportHtml(QTextStream& p_rqtStream,
          QString qstrHeader = GetHtmlHeader(p_pContainer);
          p_rqtStream << qstrHeader;
 
-         QLinkedList<QString> qvlMembers = m_rCwmsSettings.GetMemberList();
+         QList<QString> qvlMembers = m_rCwmsSettings.GetMemberList();
 
-         QLinkedList<long>::iterator qvlIt = p_rqvlObjects.begin();
-         QLinkedList<long>::iterator qvlItEnd = p_rqvlObjects.end();
+         QList<long>::iterator qvlIt = p_rqvlObjects.begin();
+         QList<long>::iterator qvlItEnd = p_rqvlObjects.end();
          INFO("Exporting " + QString::number(p_rqvlObjects.count()) + " Objects:");
          int iCounter = 0;
          
@@ -587,8 +587,8 @@ bool CwmsExportWriter::ExportHtml(QTextStream& p_rqtStream,
             if (CHKPTR(pCdmObject))
             {
                QString qstrLine = "<tr>";
-               QLinkedList<QString>::iterator qvlMemberIt = qvlMembers.begin();
-               QLinkedList<QString>::iterator qvlMemberItEnd = qvlMembers.end();
+               QList<QString>::iterator qvlMemberIt = qvlMembers.begin();
+               QList<QString>::iterator qvlMemberItEnd = qvlMembers.end();
                
                for (; qvlMemberIt != qvlMemberItEnd; ++qvlMemberIt)
                {
@@ -653,13 +653,13 @@ QString CwmsExportWriter::GetHtmlHeader(CdmObjectContainer* p_pContainer)
 
    if (CHKPTR(p_pContainer))
    {
-      QLinkedList<QString> qvlMembers = m_rCwmsSettings.GetMemberList();
+      QList<QString> qvlMembers = m_rCwmsSettings.GetMemberList();
       const CdmClass* pCdmClass = p_pContainer->GetClass();
 
       if (CHKPTR(pCdmClass))
       {
-         QLinkedList<QString>::iterator qvlIt = qvlMembers.begin();
-         QLinkedList<QString>::iterator qvlItEnd = qvlMembers.end();
+         QList<QString>::iterator qvlIt = qvlMembers.begin();
+         QList<QString>::iterator qvlItEnd = qvlMembers.end();
          
          for (; qvlIt != qvlItEnd; ++qvlIt)
          {
@@ -702,12 +702,12 @@ QString CwmsExportWriter::GetHtmlFooter()
  * @return  bool                                             //                                   *
  * @param   QTextStream& p_rqtStream                         //                                   *
  * @param   CdmObjectContainer* p_pContainer                  //                                   *
- * @param   QLinkedList<long> p_rqvlObjects                   //                                   *
+ * @param   QList<long> p_rqvlObjects                   //                                   *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------Mo 29. Okt 10:37:44 2012----------*/
 bool CwmsExportWriter::ExportXml(QTextStream& p_rqtStream,
                                      CdmObjectContainer* p_pContainer,
-                                     QLinkedList<long> p_rqvlObjects)
+                                     QList<long> p_rqvlObjects)
 {
    bool bRet = false;
 
@@ -729,9 +729,9 @@ bool CwmsExportWriter::ExportXml(QTextStream& p_rqtStream,
          }
       }
 
-      QLinkedList<QString> qvlMembers = m_rCwmsSettings.GetMemberList();
-      QLinkedList<long>::iterator qvlIt = p_rqvlObjects.begin();
-      QLinkedList<long>::iterator qvlItEnd = p_rqvlObjects.end();
+      QList<QString> qvlMembers = m_rCwmsSettings.GetMemberList();
+      QList<long>::iterator qvlIt = p_rqvlObjects.begin();
+      QList<long>::iterator qvlItEnd = p_rqvlObjects.end();
       INFO("Exporting " + QString::number(p_rqvlObjects.count()) + " Objects:");
       int iCounter = 0;
       QDomDocument qddDocument;
@@ -754,8 +754,8 @@ bool CwmsExportWriter::ExportXml(QTextStream& p_rqtStream,
             QDomElement qdeObject = qddDocument.createElement("Object");
             qdeTag.appendChild(qdeObject);
 
-            QLinkedList<QString>::iterator qvlMemberIt = qvlMembers.begin();
-            QLinkedList<QString>::iterator qvlMemberItEnd = qvlMembers.end();
+            QList<QString>::iterator qvlMemberIt = qvlMembers.begin();
+            QList<QString>::iterator qvlMemberItEnd = qvlMembers.end();
             
             for (; qvlMemberIt != qvlMemberItEnd; ++qvlMemberIt)
             {

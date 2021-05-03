@@ -103,10 +103,10 @@ void CwmsFormViewEditor::FillReport(CdmObject* p_pCdmObject)
 void CwmsFormViewEditor::FillViews()
 {
    m_pqlwViews->clear();
-   QLinkedList<QString> qllFunctions = m_cForm.GetViews();
+   QList<QString> qllFunctions = m_cForm.GetViews();
 
-   QLinkedList<QString>::iterator qllIt = qllFunctions.begin();
-   QLinkedList<QString>::iterator qllItEnd = qllFunctions.end();
+   QList<QString>::iterator qllIt = qllFunctions.begin();
+   QList<QString>::iterator qllItEnd = qllFunctions.end();
 
    for (; qllIt != qllItEnd; ++qllIt)
    {
@@ -226,7 +226,7 @@ void CwmsFormViewEditor::SaveData()
       m_cForm.SetPrintEnabled(m_pqchbPrint->isChecked());
       m_cForm.SetReadOnly(m_pqchbReadOnly->isChecked());
 
-      QLinkedList<QString> qstrlViews;
+      QList<QString> qstrlViews;
 
       for (int iCounter = 0; iCounter < m_pqlwViews->count(); ++iCounter)
       {

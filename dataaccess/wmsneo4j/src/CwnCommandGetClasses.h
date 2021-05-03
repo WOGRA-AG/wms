@@ -1,7 +1,7 @@
 #ifndef CWNCOMMANDGETCLASSES_H
 #define CWNCOMMANDGETCLASSES_H
 
-#include <QLinkedList>
+#include <QList>
 
 // own Includes
 #include "CwnCommandBase.h"
@@ -29,7 +29,7 @@ private:
     bool interpretAnswerForPackageLoad(const QVariantList *dataList);
 
 public:
-    CwnCommandGetClasses(CdmClassManager* p_ppClassManager, QLinkedList<long> &p_lClassIds, CwnDataAccess* p_pDataAccess);
+    CwnCommandGetClasses(CdmClassManager* p_ppClassManager, QList<long> &p_lClassIds, CwnDataAccess* p_pDataAccess);
     virtual ~CwnCommandGetClasses();
     QString queryCausedError;
 

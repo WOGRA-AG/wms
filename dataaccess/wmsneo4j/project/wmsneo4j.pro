@@ -39,13 +39,13 @@ UICIMPLS = $$OUT_PWD/$$WMS_ARCH/uic/$$WMS_MODE
 DESTDIR = $$DESTDIR/dataaccess
 message("WMSNEO4j DESTDIR: "$$DESTDIR)
 
-CONFIG(gcc, gcc|clang) {
-    QMAKE_CXXFLAGS += -Werror -Wall -Wextra
+#CONFIG(gcc, gcc|clang) {
+#    QMAKE_CXXFLAGS += -Werror -Wall -Wextra
 
-    IGNORE_ERRORS += -Wno-error=unused-parameter -Wno-error=unused-variable -Wno-error=switch
-    message("WMSCOMMONS Ignored Errors: "$$IGNORE_ERRORS)
-    QMAKE_CXXFLAGS += $$IGNORE_ERRORS
-}
+#    IGNORE_ERRORS += -Wno-error=unused-parameter -Wno-error=unused-variable -Wno-error=switch
+#    message("WMSCOMMONS Ignored Errors: "$$IGNORE_ERRORS)
+#    QMAKE_CXXFLAGS += $$IGNORE_ERRORS
+#}
 
 QT += core network gui quick qml script widgets
 DEFINES += WMSNEO4J_EXPORTS

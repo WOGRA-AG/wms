@@ -42,7 +42,7 @@ CwsServerConfig::~CwsServerConfig()
 
 void CwsServerConfig::FillDialog()
 {
-    if (CwmsContext::GetContext()->ServerLogin() > 0)
+    if (CwmsContext::GetContext()->ServerLogin())
     {
         FillPlugins();
     }

@@ -46,12 +46,14 @@ QString CwsHttpRequest::GenerateRequestString()
     if (m_qbaContent.isEmpty())
     {
         m_qbaContent.append(GetMethodAsString().toUtf8());
-        m_qbaContent.append(" " + GetPathInfo().toUtf8() + GenerateParameterListString().toUtf8() + " HTTP/"+GetHttpVersion()+"\r\n");
+        QString qstrPathInfo = " " + GetPathInfo() + GenerateParameterListString() + " HTTP/"+GetHttpVersion()+"\r\n";
+        m_qbaContent.append(qstrPathInfo.toUtf8());
 
         QString qstrHttpRequest;
         AddHeadersToString(qstrHttpRequest);
         AddCookiesToString(qstrHttpRequest);
-        m_qbaContent.append("Host: " + GetHost() + " \r\n");
+        QString qstrHost = "Host: " + GetHost() + " \r\n";
+        m_qbaContent.append(qstrHost.toUtf8());
         qstrHttpRequest += "\r\n";
 
         if (m_wsMethod !=  eWsGet)

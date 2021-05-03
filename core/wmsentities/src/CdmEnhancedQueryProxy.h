@@ -1,17 +1,4 @@
-﻿/******************************************************************************
- ** WOGRA technologies Gmbh & Co KG Modul Information
- ** Modulename: CdmEnhancedQueryProxy.h
- ** Started Implementation: 2010/11/11
- ** Description:
- **
- ** This class implements the proxy for tableviews of enhanced queries
- **
- ** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
- ** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
- **(C) copyright by WOGRA technologies Gmbh & Co KG All rights reserved
- *****************************************************************************/
-
-#ifndef CDMENHANCEDQUERYPROXY_H
+﻿#ifndef CDMENHANCEDQUERYPROXY_H
 #define CDMENHANCEDQUERYPROXY_H
 
 #ifdef WURZELBLA
@@ -38,7 +25,7 @@ class CdmQueryEnhanced;
 // Enumerations
 
 /* 
- * This class implements the proxy for tableviews of enhanced queries
+ * This class implements the proxy for table/tree views of queries
  */
 class BASETOOLS_API CdmEnhancedQueryProxy : public CdmQueryModel
 {
@@ -50,7 +37,7 @@ protected:
 public:
     CdmEnhancedQueryProxy();
     virtual ~CdmEnhancedQueryProxy();
-    virtual void GetDisplayListV(CdmObjectContainer* p_pContainer, QLinkedList<long>& p_rqvlResults);
+    virtual void GetDisplayListV(CdmObjectContainer* p_pContainer, QList<long>& p_rqvlResults);
     virtual CdmQuery* GetQuery();
     virtual void CreateQuery(CdmObjectContainer* p_pContainer);
 
@@ -70,7 +57,7 @@ public slots:
     virtual void Execute();
     bool IsInResult(CdmObject* p_pCdmObject);
     bool IsInResult(long p_lObjectId, CdmObjectContainer* p_pContainer);
-    void GetDisplayList(CdmObjectContainer* p_pContainer, QLinkedList<long>& p_rqvlResults);
+    void GetDisplayList(CdmObjectContainer* p_pContainer, QList<long>& p_rqvlResults);
     int GetFirstResult(CdmObjectContainer* p_pContainer);
     void GetDisplaySet(CdmObjectContainer* p_pContainer, QSet<long>& p_rqsResult);
     virtual void GetDisplaySetV(CdmObjectContainer* p_pContainer, QSet<long>& p_rqsResult);

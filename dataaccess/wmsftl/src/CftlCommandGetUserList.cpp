@@ -129,7 +129,7 @@ int CftlCommandGetUserList::FindUsersByUnknownString()
    return iRet;
 }
 
-QLinkedList<CumUser*> CftlCommandGetUserList::GetResult()
+QList<CumUser*> CftlCommandGetUserList::GetResult()
 {
     return m_qllUsers;
 }

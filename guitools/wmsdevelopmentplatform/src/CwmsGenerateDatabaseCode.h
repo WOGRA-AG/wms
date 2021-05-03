@@ -21,7 +21,7 @@
 // System and QT Includes
 #include <QString>
 #include <QVector>
-#include <QLinkedList>
+#include <QList>
 #include <QList>
 #include <QMap>
 
@@ -45,7 +45,7 @@ class CwmsGenerateDatabaseCode
       QString m_qstrClassPrefix;
       QString m_qstrDirectory;
       QVector<long> m_qvGeneratedClasses;
-      QLinkedList<CdmClass*> m_qllNotGeneratedClasses;
+      QList<CdmClass*> m_qllNotGeneratedClasses;
       QMap<long, QString> m_qmClassNames;
       QMap<long, QString> m_qmFilenames;
 

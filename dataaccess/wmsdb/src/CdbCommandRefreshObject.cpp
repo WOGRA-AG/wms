@@ -118,7 +118,7 @@ long CdbCommandRefreshObject::ReadValues()
       if(GetDataAccess()->ExecuteQuery(qstrQuery, cQSqlQuery) > 0)
       {
          lRet = CdmLogging::eDmOk;
-         QLinkedList<long> qvlBaseTypes;
+         QList<long> qvlBaseTypes;
          cQSqlQuery.first();
 
          if(cQSqlQuery.isValid())

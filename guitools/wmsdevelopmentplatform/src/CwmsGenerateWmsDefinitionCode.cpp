@@ -13,7 +13,7 @@
 
 
 // System and QT Includes
-#include <QLinkedList>
+#include <QList>
 
 // WMS Includes
 #include "CdmScheme.h"
@@ -180,12 +180,12 @@ void CwmsGenerateWmsDefinitionCode::GenerateClassesCode()
    if (CHKPTR(pCdmManager))
    {
       CdmClassManager* pCdmClassManager = pCdmManager->GetClassManager(m_rpCdmDatabase->GetId());
-      QLinkedList<CdmClass*> qllClasses;
+      QList<CdmClass*> qllClasses;
       pCdmClassManager->GetClassList(qllClasses);
       GenerateCreateClassesByNameCode(qllClasses);
 
-      QLinkedList<CdmClass*>::iterator qllIt = qllClasses.begin();
-      QLinkedList<CdmClass*>::iterator qllItEnd = qllClasses.end();
+      QList<CdmClass*>::iterator qllIt = qllClasses.begin();
+      QList<CdmClass*>::iterator qllItEnd = qllClasses.end();
 
       for (; qllIt != qllItEnd; ++qllIt)
       {
@@ -198,10 +198,10 @@ void CwmsGenerateWmsDefinitionCode::GenerateClassesCode()
 /** +-=---------------------------------------------------------Mi 23. Nov 10:47:35 2011----------*
  * @method  CwmsGenerateWmsDefinitionCode::GenerateCreateClassesByNameCode // private             *
  * @return  void                                             //                                   *
- * @param   QLinkedList<CdmClass*>& p_rqllClasses            //                                   *
+ * @param   QList<CdmClass*>& p_rqllClasses            //                                   *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------Mi 23. Nov 10:47:35 2011----------*/
-void CwmsGenerateWmsDefinitionCode::GenerateCreateClassesByNameCode(QLinkedList<CdmClass*>& p_rqllClasses)
+void CwmsGenerateWmsDefinitionCode::GenerateCreateClassesByNameCode(QList<CdmClass*>& p_rqllClasses)
 {
    m_qstrHeader += GenerateMethodHeadHeader("private", "void", "GenerateClassesByName", "");
    m_qstrSource += GenerateMethodHeadSource("void", m_qstrClassName, "GenerateClassesByName", "");
@@ -211,8 +211,8 @@ void CwmsGenerateWmsDefinitionCode::GenerateCreateClassesByNameCode(QLinkedList<
    m_qstrSource += AddIndent(1);
    m_qstrSource += "{\n";
 
-   QLinkedList<CdmClass*>::iterator qllIt = p_rqllClasses.begin();
-   QLinkedList<CdmClass*>::iterator qllItEnd = p_rqllClasses.end();
+   QList<CdmClass*>::iterator qllIt = p_rqllClasses.begin();
+   QList<CdmClass*>::iterator qllItEnd = p_rqllClasses.end();
 
    for (; qllIt != qllItEnd; ++qllIt)
    {
@@ -559,12 +559,12 @@ void CwmsGenerateWmsDefinitionCode::GenerateObjectListsCode()
    if (CHKPTR(pCdmManager))
    {
       CdmClassManager* pCdmClassManager = pCdmManager->GetClassManager(m_rpCdmDatabase->GetId());
-      QLinkedList<CdmClass*> qllClasses;
+      QList<CdmClass*> qllClasses;
       pCdmClassManager->GetClassList(qllClasses);
       GenerateCreateClassesByNameCode(qllClasses);
 
-      QLinkedList<CdmClass*>::iterator qllIt = qllClasses.begin();
-      QLinkedList<CdmClass*>::iterator qllItEnd = qllClasses.end();
+      QList<CdmClass*>::iterator qllIt = qllClasses.begin();
+      QList<CdmClass*>::iterator qllItEnd = qllClasses.end();
 
       for (; qllIt != qllItEnd; ++qllIt)
       {
@@ -596,7 +596,7 @@ void CwmsGenerateWmsDefinitionCode::GenerateObjectListMethod(CdmClass* p_pCdmCla
 
          if (CHKPTR(pContainerManager))
          {
-            QLinkedList<QString> qllObjectLists;
+            QList<QString> qllObjectLists;
             qllObjectLists = pContainerManager->GetContainerList(p_pCdmClass->GetId());
 
             if (!qllObjectLists.isEmpty())
@@ -611,8 +611,8 @@ void CwmsGenerateWmsDefinitionCode::GenerateObjectListMethod(CdmClass* p_pCdmCla
                m_qstrSource += AddIndent(1);
                m_qstrSource += "{\n";
                
-               QLinkedList<QString>::iterator qllIt = qllObjectLists.begin();
-               QLinkedList<QString>::iterator qllItEnd = qllObjectLists.end();
+               QList<QString>::iterator qllIt = qllObjectLists.begin();
+               QList<QString>::iterator qllItEnd = qllObjectLists.end();
 
                for (; qllIt != qllItEnd; ++qllIt)
                {

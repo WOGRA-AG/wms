@@ -12,7 +12,7 @@
 // System and QT Includes
 #include <qsqlquery.h>
 #include <qvariant.h>
-#include <QLinkedList>
+#include <QList>
 
 // WMS Includes
 #include "CdmLogging.h"
@@ -160,7 +160,7 @@ long CdbSchemeAccess::FindScheme(long p_lId, CdmScheme*& p_pCdmDatabaseManager)
  * @param   QValueList<QString>& p_rqvlDatabases             //                                   *
  * @comment This method fills the list of all virutal databases.                                  *
  *----------------last changed: --------------------------------Sa 20. Aug 11:51:56 2005----------*/
-long CdbSchemeAccess::GetDatabaseList(QLinkedList<QString>& p_rqvlDatabases)
+long CdbSchemeAccess::GetDatabaseList(QList<QString>& p_rqvlDatabases)
 {
    long lRet = CdmLogging::eDmUnknownDbAccessError;
    CdbCommandGetSchemeList command(m_rpCdbDataAccess);

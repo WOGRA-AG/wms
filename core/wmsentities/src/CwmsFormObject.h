@@ -31,10 +31,10 @@ class BASETOOLS_API CwmsFormObject : public CwmsFormBase
       void SetCaptionValue(QString p_qstrValue);
       QString GetWql();
       void SetWql(QString p_qstrValue);
-      QLinkedList<QString> GetVisibleMembers();
-      void SetVisibleMembers(QLinkedList<QString> p_qllValue);
-      QLinkedList<QString> GetFunctions();
-      void SetFunctions(QLinkedList<QString> p_qllValue);
+      QList<QString> GetVisibleMembers();
+      void SetVisibleMembers(QList<QString> p_qllValue);
+      QList<QString> GetFunctions();
+      void SetFunctions(QList<QString> p_qllValue);
       QMap<QString, int> GetDisplayTypes();
       void SetDisplayTypes(QMap<QString, int> p_qmDisplayTypes);
       QMap<QString, QString> GetObjectRefAssignment();

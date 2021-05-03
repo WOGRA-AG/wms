@@ -12,7 +12,7 @@
  *****************************************************************************/
 
 // System and QT Includes
-#include <QLinkedList>
+#include <QList>
 
 
 // WMS Includes
@@ -155,7 +155,7 @@ void CwmsObjectContainerEditorWidget::SetModule(CwmsApplicationModule p_cModule)
          }
          else
          {
-            QLinkedList<QString> qllDisplayMembers = cForm.GetSelectionDisplayMembers();
+            QList<QString> qllDisplayMembers = cForm.GetSelectionDisplayMembers();
             CdmObjectContainer* pContainer = cForm.GetSelectionObjectList();
 
             if (pContainer)
@@ -163,8 +163,8 @@ void CwmsObjectContainerEditorWidget::SetModule(CwmsApplicationModule p_cModule)
                m_pCdmQuery = new CdmQueryEnhanced();
                m_pCdmQuery->SetContainer(pContainer);
 
-               QLinkedList<QString>::iterator qllIt = qllDisplayMembers.begin();
-               QLinkedList<QString>::iterator qllItEnd = qllDisplayMembers.end();
+               QList<QString>::iterator qllIt = qllDisplayMembers.begin();
+               QList<QString>::iterator qllItEnd = qllDisplayMembers.end();
 
                for (; qllIt != qllItEnd; ++qllIt)
                {

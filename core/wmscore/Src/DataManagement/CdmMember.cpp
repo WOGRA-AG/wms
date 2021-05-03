@@ -1519,7 +1519,7 @@ QString CdmMember::ConvertValueToDisplayString(QVariant p_qvValue) const
     case eDmValueListString:
     {
         QString qstrDocument = p_qvValue.toString();
-        QLinkedList<QString> qllValues;
+        QList<QString> qllValues;
         CdmValueListString::DeserializeXmlToStringList(qstrDocument, qllValues);
 
         for (auto qllIt = qllValues.begin(); qllIt != qllValues.end();++qllIt)
@@ -1531,7 +1531,7 @@ QString CdmMember::ConvertValueToDisplayString(QVariant p_qvValue) const
     case eDmValueListDouble:
     {
         QString qstrDocument = p_qvValue.toString();
-        QLinkedList<double> qllValues;
+        QList<double> qllValues;
         CdmValueListDouble::DeserializeXmlToDoubleList(qstrDocument, qllValues);
         QLocale loc;
 
@@ -1544,7 +1544,7 @@ QString CdmMember::ConvertValueToDisplayString(QVariant p_qvValue) const
     case eDmValueListInt:
     {
         QString qstrDocument = p_qvValue.toString();
-        QLinkedList<int> qllValues;
+        QList<int> qllValues;
         CdmValueListInt::DeserializeXmlToIntList(qstrDocument, qllValues);
         QLocale loc;
 

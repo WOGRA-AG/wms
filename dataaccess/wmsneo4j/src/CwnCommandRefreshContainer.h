@@ -15,7 +15,7 @@ private:
     QString GetObjectQuery();
     QString GetContainerQuery();
     QString GetRightsQuery();
-    QLinkedList<long> qvlObjects;
+    QList<long> qvlObjects;
 
     bool interpretAnswerForRefreshContainer(const QVariantList *dataList, QVariant &Ret);
     bool interpretAnswerForObjects(const QVariantList *dataList);

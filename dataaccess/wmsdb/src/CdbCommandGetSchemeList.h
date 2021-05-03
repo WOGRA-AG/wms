@@ -14,12 +14,12 @@ class CdbDataAccess;
 class CdbCommandGetSchemeList : public CdbAbstractCommand
 {
 private:
-    QLinkedList<QString> m_qllSchemes;
+    QList<QString> m_qllSchemes;
 public:
     CdbCommandGetSchemeList(CdbDataAccess* p_pDataAccess);
     virtual ~CdbCommandGetSchemeList();
 
-    QLinkedList<QString> GetSchemes() const;
+    QList<QString> GetSchemes() const;
 
 protected:
     virtual bool CheckValid();

@@ -115,7 +115,7 @@ bool CsaUser::isAdmin()
 QVariantList CsaUser::getGroups()
 {
     QVariantList qlGroups;
-    QLinkedList<CumUserGroup*> qllGroups;
+    QList<CumUserGroup*> qllGroups;
 
     CumUser* pUser = getInternals();
 
@@ -124,8 +124,8 @@ QVariantList CsaUser::getGroups()
         pUser->GetUserGroups(qllGroups);
     }
 
-    QLinkedList<CumUserGroup*>::iterator qllIt = qllGroups.begin();
-    QLinkedList<CumUserGroup*>::iterator qllItEnd = qllGroups.end();
+    QList<CumUserGroup*>::iterator qllIt = qllGroups.begin();
+    QList<CumUserGroup*>::iterator qllItEnd = qllGroups.end();
 
     for(; qllIt != qllItEnd; ++qllIt)
     {

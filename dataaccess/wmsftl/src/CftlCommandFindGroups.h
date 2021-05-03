@@ -2,7 +2,7 @@
 #define CFTLCOMMANDFINDGROUPS_H
 
 // System and Qt Includes
-#include <QLinkedList>
+#include <QList>
 
 #include "CftlAbstractCommand.h"
 
@@ -16,11 +16,11 @@ class CftlCommandFindGroups : public CftlAbstractCommand
 private:
     QString m_qstrGroupName;
     QString m_qstrSchemeUri;
-    QLinkedList<CumUserGroup*> m_qllGroups;
+    QList<CumUserGroup*> m_qllGroups;
 public:
     CftlCommandFindGroups(QString p_qstrGroupName, QString p_qstrSchemeUri, CftlDataAccess* p_pDataAccess);
     virtual ~CftlCommandFindGroups();
-    QLinkedList<CumUserGroup*> GetResult();
+    QList<CumUserGroup*> GetResult();
 protected:
     virtual int Execute();
     bool CheckValid();

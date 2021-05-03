@@ -10,7 +10,7 @@ CftlCommandGetSchemeList::~CftlCommandGetSchemeList()
 
 }
 
-QLinkedList<QString> CftlCommandGetSchemeList::GetSchemes() const
+QList<QString> CftlCommandGetSchemeList::GetSchemes() const
 {
     return m_qllSchemes;
 }

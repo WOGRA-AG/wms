@@ -11,7 +11,7 @@
 
 // System and QT Includes
 #include <qstring.h>
-#include <QLinkedList>
+#include <QList>
 
 // WMS Includes
 #include "CdmLogging.h"
@@ -54,20 +54,20 @@ CwmsExportSettings::~CwmsExportSettings()
 /** +-=---------------------------------------------------------Mi 9. Sep 17:55:41 2009-----------*
  * @method  CwmsExportSettings::SetExportList                // public                            *
  * @return  void                                             //                                   *
- * @param   QLinkedList<long> p_qllExportList                //                                   *
+ * @param   QList<long> p_qllExportList                //                                   *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------Mi 9. Sep 17:55:41 2009-----------*/
-void CwmsExportSettings::SetExportList(QLinkedList<long> p_qllExportList)
+void CwmsExportSettings::SetExportList(QList<long> p_qllExportList)
 {
    m_qllExportList = p_qllExportList;
 }
 
 /** +-=---------------------------------------------------------Mi 9. Sep 18:07:15 2009-----------*
  * @method  CwmsExportSettings::GetExportList                // public                            *
- * @return  QLinkedList<long>                                //                                   *
+ * @return  QList<long>                                //                                   *
  * @comment returns the exportlist.                                                               *
  *----------------last changed: --------------------------------Mi 9. Sep 18:07:15 2009-----------*/
-QLinkedList<long> CwmsExportSettings::GetExportList()
+QList<long> CwmsExportSettings::GetExportList()
 {
    return m_qllExportList;
 }
@@ -301,7 +301,7 @@ void CwmsExportSettings::AddMember(QString p_qstrMember)
  * @return  const QValueList<QString>&                       //                                   *
  * @comment                                                                                       *
  *----------------last changed: Wolfgang Graßhof----------------Sa 17. Nov 13:29:46 2007----------*/
-const QLinkedList<QString>& CwmsExportSettings::GetMemberList() const
+const QList<QString>& CwmsExportSettings::GetMemberList() const
 {
    return m_qvlMembers;
 }
@@ -484,8 +484,8 @@ void CwmsExportSettings::Save(QString p_qstFilename)
 
    cCwmsSettingsHandler.SetInteger("Members","Count", m_qvlMembers.count());
 
-   QLinkedList<QString>::iterator qvlIt = m_qvlMembers.begin();
-   QLinkedList<QString>::iterator qvlItEnd = m_qvlMembers.end();
+   QList<QString>::iterator qvlIt = m_qvlMembers.begin();
+   QList<QString>::iterator qvlItEnd = m_qvlMembers.end();
    
    int iCounter = 1; // for easier use by manual editing
 

@@ -39,9 +39,9 @@ UICIMPLS = $$OUT_PWD/$$WMS_ARCH/uic/$$WMS_MODE
 
 message("WMSRUNTIME DESTDIR: "$$DESTDIR)
 
-CONFIG(gcc, gcc|clang) {
-    QMAKE_CXXFLAGS += -Werror -Wall -Wextra
-}
+#CONFIG(gcc, gcc|clang) {
+#    QMAKE_CXXFLAGS += -Werror -Wall -Wextra
+#}
 
 INCLUDEPATH += ./../../../core/wmscore/Src/DataManagement \
                ./../../../core/wmscore/Src/UserManagement \
@@ -67,38 +67,38 @@ LIBS +=  -L$$DESTDIR \
 
 QMAKE_RPATHDIR += $$DESTDIR
 
-contains(DEFINES, WMS_LINK_STATIC) {
-LIBS +=  -L$$DESTDIR/dataaccess \
-         -lwmswebclient \
-         -lwmssqlite \
-         -lwmsodbc \
-}
+#contains(DEFINES, WMS_LINK_STATIC) {
+#LIBS +=  -L$$DESTDIR/dataaccess \
+#         -lwmswebclient \
+#         -lwmssqlite \
+#         -lwmsodbc \
+#}
 
 include(wmsruntime.pri)
 
-DISTFILES += \
-    android/gradle/wrapper/gradle-wrapper.jar \
-    android/AndroidManifest.xml \
-    android/res/values/libs.xml \
-    android/build.gradle \
-    android/gradle/wrapper/gradle-wrapper.properties \
-    android/gradlew \
-    android/gradlew.bat
+#DISTFILES += \
+#    android/gradle/wrapper/gradle-wrapper.jar \
+#    android/AndroidManifest.xml \
+#    android/res/values/libs.xml \
+#    android/build.gradle \
+#    android/gradle/wrapper/gradle-wrapper.properties \
+#    android/gradlew \
+#    android/gradlew.bat
 
-ANDROID_PACKAGE_SOURCE_DIR = $$PWD/wmstools/wmsruntime/VisualStudio/android
+#ANDROID_PACKAGE_SOURCE_DIR = $$PWD/wmstools/wmsruntime/VisualStudio/android
 
 
-QMAKE_TARGET_COMPANY = "WOGRA"
-QMAKE_TARGET_PRODUCT = "WMS Runtime"
-QMAKE_TARGET_COPYRIGHT = "Copyright (C) 2010-2015 WOGRA Consulting GmbH <info@wogra.com>"
-QMAKE_TARGET_DESCRIPTION = "Native WMS Runtime for different devices"
+#QMAKE_TARGET_COMPANY = "WOGRA"
+#QMAKE_TARGET_PRODUCT = "WMS Runtime"
+#QMAKE_TARGET_COPYRIGHT = "Copyright (C) 2010-2015 WOGRA Consulting GmbH <info@wogra.com>"
+#QMAKE_TARGET_DESCRIPTION = "Native WMS Runtime for different devices"
 
-DEFINES += \
-  APP_VERSION=\"\\\"$$VERSION\\\"\" \
-  APP_COMPANY=\"\\\"$$QMAKE_TARGET_COMPANY\\\"\" \
-  APP_PRODUCT=\"\\\"$$QMAKE_TARGET_PRODUCT\\\"\" \
-  APP_DESCRIPTION=\"\\\"$$QMAKE_TARGET_DESCRIPTION\\\"\" \
-  APP_COPYRIGHT=\"\\\"$$QMAKE_TARGET_COPYRIGHT\\\"\"
+#DEFINES += \
+#  APP_VERSION=\"\\\"$$VERSION\\\"\" \
+#  APP_COMPANY=\"\\\"$$QMAKE_TARGET_COMPANY\\\"\" \
+#  APP_PRODUCT=\"\\\"$$QMAKE_TARGET_PRODUCT\\\"\" \
+#  APP_DESCRIPTION=\"\\\"$$QMAKE_TARGET_DESCRIPTION\\\"\" \
+#  APP_COPYRIGHT=\"\\\"$$QMAKE_TARGET_COPYRIGHT\\\"\"
 
 HEADERS += \
     ../src/CwmsNonGuiInitApplication.h

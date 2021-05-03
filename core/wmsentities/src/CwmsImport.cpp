@@ -278,13 +278,13 @@ CdmObject* CwmsImport::ExecuteObjectQuery(QStringList p_rqstrlParseData)
 
       if (cCdmQuery.Execute() > 0)
       {
-         QLinkedList<long> qvlResults;
+         QList<long> qvlResults;
          qvlResults = cCdmQuery.GetResultList();
 
          if (qvlResults.count() > 0)
          {
-            QLinkedList<long>::iterator qvlIt = qvlResults.begin();
-            QLinkedList<long>::iterator qvlItEnd = qvlResults.end();
+            QList<long>::iterator qvlIt = qvlResults.begin();
+            QList<long>::iterator qvlItEnd = qvlResults.end();
 
             for (; qvlIt != qvlItEnd; ++qvlIt)
             {

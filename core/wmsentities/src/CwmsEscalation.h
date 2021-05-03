@@ -29,7 +29,7 @@ class BASETOOLS_API CwmsEscalation: public CdmObjectAdaptor
    public:
       virtual ~CwmsEscalation();
    public:
-      QLinkedList<int> GetEmployees();
+      QList<int> GetEmployees();
    public:
       void AddEmployee(int p_iValue);
    public:

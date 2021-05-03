@@ -1,13 +1,3 @@
-/******************************************************************************
- ** WOGRA Middleware Server Data Manager Module
- **
- ** @Author Wolfgang Graßhof 
- **
- ** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
- ** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. 
- **(C) copyright by WOGRA technologies All rights reserved
- ******************************************************************************/
-
 // System and QT Includes 
 #include <QQuickWindow>
 #include <QQuickItem>
@@ -29,14 +19,6 @@
 
 QString CwmsQmlLogin::m_qstrLoginError = "";
 
-/** +-=---------------------------------------------------------Di 28. Sep 08:16:36 2010----------*
- * @method  CwmsLogin::CwmsLogin                         // public                            *
- * @return  void                                             //                                   *
- * @param   QString p_qstrAppliactionName                    //                                   *
- * @param   QWidget* parent = nullptr                           //                                   *
- * @param   Qt::WFlags fl = 0                                //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Di 28. Sep 08:16:36 2010----------*/
 CwmsQmlLogin::CwmsQmlLogin(QString p_qstrAppliactionName, CwmsInitApplication* p_pInit, QWidget* parent)
 : m_cCdmSettings(eDmSettingsModeClient),
   m_qstrApplicationName(p_qstrAppliactionName),
@@ -46,11 +28,6 @@ CwmsQmlLogin::CwmsQmlLogin(QString p_qstrAppliactionName, CwmsInitApplication* p
    Q_UNUSED(parent);
 }
 
-/** +-=---------------------------------------------------------Thu Dec 18 13:37:17 2003----------*
- * @method  CwmsLogin::~CwmsLogin                        // public, virtual                   *
- * @return  void                                             //                                   *
- * @comment The Destructor of Class CwmsLogin                                                   *
- *---------------------------------------------------------------Thu Dec 18 13:37:17 2003---------*/
 CwmsQmlLogin::~CwmsQmlLogin(  )
 {
     DELPTR(m_pView);
@@ -83,8 +60,6 @@ void CwmsQmlLogin::openLoginDialog()
    }
 }
 
-
-
 void CwmsQmlLogin::registerToQml()
 {
     qmlRegisterUncreatableType<CwmsQmlLogin>("com.wogra.wmsqml", 1, 0, "WmsLogin", "WmsLogin can oonly be created by the system");
@@ -100,13 +75,6 @@ void CwmsQmlLogin::loginSuccessfull()
     m_pInit->StateFinished(true);
 }
 
-
-
-/** +-=---------------------------------------------------------Thu Dec 18 15:23:11 2003----------*
- * @method  CwmsLogin::Login                       // public, virtual, slots         *
- * @return  bool                                             //                                   *
- * @comment This slot will be called if the user wants to login to the system.                    *
- *---------------------------------------------------------------Thu Dec 18 15:23:11 2003---------*/
 bool CwmsQmlLogin::login()
 {
    CwmsQmlApplicationController* pController = CwmsQmlApplicationController::getController();
@@ -131,12 +99,6 @@ bool CwmsQmlLogin::login()
     return loginP(m_qstrApplicationName, qstrLogin, qstrPassword);
 }
 
-/** +-=---------------------------------------------------------Sa 22. Jan 13:14:52 2005----------*
- * @method  CwmsLogin::SetCaption                          // public                            *
- * @return  void                                             //                                   *
- * @param   QString p_qstrCaption                            //                                   *
- * @comment Sets the Caption of the Login Dialog.                                                 *
- *----------------last changed: --------------------------------Sa 22. Jan 13:14:52 2005----------*/
 void CwmsQmlLogin::setCaption(QString p_qstrCaption)
 {
    if (CHKPTR(m_pView))
@@ -176,16 +138,6 @@ void CwmsQmlLogin::setStoreUserData(bool p_bStoreUserData)
 }
 
 
-/** +-=---------------------------------------------------------Do 29. Dez 13:57:34 2005----------*
- * @method  CwmsLogin::Login                               // public, static                    *
- * @return  void                                             //                                   *
- * @param   QString p_qstrApplicationName                    //                                   *
- * @param   QString p_qstrCaption                            //                                   *
- * @param   QWidget* p_pqwParent                             //                                   *
- * @comment This static memeber function starts the login screen waits for user input and will    *
- *          do all the stuff for creating a workable WMS, inlcusive communication settings and    *
- *          so on.                                                                                *
- *----------------last changed: Wolfgang Graßhof----------------Do 29. Dez 13:57:34 2005----------*/
 void CwmsQmlLogin::login(QString p_qstrApplicationName,
                       QString p_qstrCaption,
                       CwmsInitApplication* p_pInit,
@@ -196,18 +148,6 @@ void CwmsQmlLogin::login(QString p_qstrApplicationName,
    pCwmsLogin->setCaption(p_qstrCaption);
 }
 
-/** +-=---------------------------------------------------------Mi 20. Feb 22:57:08 2008----------*
- * @method  CwmsLogin::AutoLogin                           // public, static                    *
- * @return  bool                                             //                                   *
- * @param   QString p_qstrApplicationName                    //                                   *
- * @param   QString p_qstrLogin                              //                                   *
- * @param   QString p_qstrPassword                           //                                   *
- * @comment This static memeber function starts the login screen waits for user input and         *
- *          will                                                                                  *
- *          do all the stuff for creating a workable WMS, inlcusive communication settings        *
- *          and                                                                                   *
- *          so on.                                                                                *
- *----------------last changed: Wolfgang Graßhof----------------Mi 20. Feb 22:57:08 2008----------*/
 bool CwmsQmlLogin::autoLogin(QString p_qstrApplicationName,
                             QString p_qstrLogin,
                             QString p_qstrPassword)
@@ -215,17 +155,10 @@ bool CwmsQmlLogin::autoLogin(QString p_qstrApplicationName,
    return loginP(p_qstrApplicationName, p_qstrLogin, p_qstrPassword);
 }
 
-/** +-=---------------------------------------------------------Di 28. Sep 09:10:42 2010----------*
- * @method  CwmsLogin::LoginP                              // private, static                   *
- * @return  bool                                             //                                   *
- * @param   QString p_qstrApplication                        //                                   *
- * @param   QString p_qstrLogin                              //                                   *
- * @param   QString p_qstrPassword                           //                                   *
- * @comment Does the real login.                                                                  *
- *----------------last changed: --------------------------------Di 28. Sep 09:10:42 2010----------*/
 bool CwmsQmlLogin::loginP(QString p_qstrApplication, QString p_qstrLogin, QString p_qstrPassword)
 {
-    Q_UNUSED(p_qstrApplication);
+   Q_UNUSED(p_qstrApplication);
+    CdmMessageManager::StartAsyncMessageCollection();
    bool bRet = false;
    CdmSessionManager* pSessionManager = CdmSessionManager::GetSessionManager();
    int iRet = pSessionManager->CreateNewSession(p_qstrLogin,
@@ -260,6 +193,8 @@ bool CwmsQmlLogin::loginP(QString p_qstrApplication, QString p_qstrLogin, QStrin
 
        }
    }
+
+   CdmMessageManager::EndAndShowAsyncMessageCollection();
 
    return bRet;
 }

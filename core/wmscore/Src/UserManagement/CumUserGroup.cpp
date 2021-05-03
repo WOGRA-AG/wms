@@ -13,7 +13,7 @@
 // System and QT Includes
 #include <qstring.h>
 #include <qdatetime.h>
-#include <QLinkedList>
+#include <QList>
 
 #include "wmsdefines.h"
 
@@ -63,7 +63,7 @@ QString CumUserGroup::GetGroupName() const
    return m_qstrGroupName;
 }
 
-void CumUserGroup::GetUserListNewPointers(QLinkedList<CumUser*>& p_rllUsers) const
+void CumUserGroup::GetUserListNewPointers(QList<CumUser*>& p_rllUsers) const
 {
     p_rllUsers.clear();
     CumUserManager* pCumUserManager = GetUserManager();
@@ -78,11 +78,11 @@ bool CumUserGroup::HasUser(long p_lUserId) const
 {
     bool bRet = false;
 
-    QLinkedList<CumUser*> qllGroupUsers;
+    QList<CumUser*> qllGroupUsers;
     GetUserListNewPointers(qllGroupUsers);
 
-    QLinkedList<CumUser*>::iterator qllIt = qllGroupUsers.begin();
-    QLinkedList<CumUser*>::iterator qllItEnd = qllGroupUsers.end();
+    QList<CumUser*>::iterator qllIt = qllGroupUsers.begin();
+    QList<CumUser*>::iterator qllItEnd = qllGroupUsers.end();
 
     for (; qllIt != qllItEnd; ++qllIt)
     {
@@ -159,13 +159,13 @@ QVariant CumUserGroup::GetVariant() const
    qMap.insert(WMS_URI, GetUri());
    qMap.insert(WMS_TYPE, "Usergroup");
 
-   QLinkedList<CumUser*> qllUsers;
+   QList<CumUser*> qllUsers;
    GetUserListNewPointers(qllUsers);
 
    QVariantList qvlUsers;
 
-   QLinkedList<CumUser*>::iterator qllIt = qllUsers.begin();
-   QLinkedList<CumUser*>::iterator qllItEnd = qllUsers.end();
+   QList<CumUser*>::iterator qllIt = qllUsers.begin();
+   QList<CumUser*>::iterator qllItEnd = qllUsers.end();
 
    for (; qllIt != qllItEnd; ++qllIt)
    {

@@ -1,7 +1,7 @@
 #ifndef CWNCOMMANDLOADSINGLEOBJECT_H
 #define CWNCOMMANDLOADSINGLEOBJECT_H
 
-#include <QLinkedList>
+#include <QList>
 
 #include "CwnCommandBase.h"
 #include "CdmModelElement.h"

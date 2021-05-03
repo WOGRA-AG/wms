@@ -106,12 +106,12 @@ void CwtUser::CreateFindDeleteUser()
     QVERIFY(iUserId > 0);
     pUser = pUserManager->FindUserById(iUserId);
     QVERIFY(pUser != nullptr);
-    QLinkedList<CumUser*> qllUsers;
+    QList<CumUser*> qllUsers;
     pUserManager->GetUserListUnmanaged(qllUsers);
     QVERIFY(qllUsers.count() > 0);
 
-    QLinkedList<CumUser*>::iterator qllIt = qllUsers.begin();
-    QLinkedList<CumUser*>::iterator qllItEnd = qllUsers.end();
+    QList<CumUser*>::iterator qllIt = qllUsers.begin();
+    QList<CumUser*>::iterator qllItEnd = qllUsers.end();
     bool found = false;
 
     for (; qllIt != qllItEnd; ++qllIt)
@@ -141,12 +141,12 @@ void CwtUser::CreateFindDeleteUserGroup()
     QVERIFY(iUsergroup > 0);
     CumUserGroup* pGroup = pUserManager->FindUserGroupById(iUsergroup);
     QVERIFY(pGroup != nullptr);
-    QLinkedList<CumUserGroup*> qllUserGroups;
+    QList<CumUserGroup*> qllUserGroups;
     pUserManager->GetUserGroupList(qllUserGroups);
     QVERIFY(qllUserGroups.count() > 0);
 
-    QLinkedList<CumUserGroup*>::iterator qllIt = qllUserGroups.begin();
-    QLinkedList<CumUserGroup*>::iterator qllItEnd = qllUserGroups.end();
+    QList<CumUserGroup*>::iterator qllIt = qllUserGroups.begin();
+    QList<CumUserGroup*>::iterator qllItEnd = qllUserGroups.end();
     bool found = false;
 
     for (; qllIt != qllItEnd; ++qllIt)
@@ -269,7 +269,7 @@ void CwtUser::AddAndRemoveUserToUsergroupByIds()
     CumUserGroup* pGroup = pUserManager->FindUserGroupById(iUsergroup);
     QVERIFY(pGroup != nullptr);
 
-    QLinkedList<CumUser*> qllUsers;
+    QList<CumUser*> qllUsers;
     pGroup->GetUserListNewPointers(qllUsers);
     QVERIFY(qllUsers.count() == 1);
     pUser = *qllUsers.begin();
@@ -308,7 +308,7 @@ void CwtUser::AddAndRemoveUserToUsergroupByNames()
     CumUserGroup* pGroup = pUserManager->FindUserGroupById(iUsergroup);
     QVERIFY(pGroup != nullptr);
 
-    QLinkedList<CumUser*> qllUsers;
+    QList<CumUser*> qllUsers;
     pGroup->GetUserListNewPointers(qllUsers);
     QVERIFY(qllUsers.count() == 1);
     pUser = *qllUsers.begin();
@@ -380,7 +380,7 @@ void CwtUser::FindUsersUnmanaged()
     iUserId = pUserManager->CreateUser(pUser);
     QVERIFY(iUserId > 0);
     pUserManager->ClearUsers();
-    QLinkedList<CumUser*> qllUsers = pUserManager->FindUsersUnmanaged(qstrLogin);
+    QList<CumUser*> qllUsers = pUserManager->FindUsersUnmanaged(qstrLogin);
     QVERIFY(qllUsers.count() == 1);
     pUser = *qllUsers.begin();
     QVERIFY(pUser->GetLogin() == qstrLogin);
@@ -411,11 +411,11 @@ void CwtUser::CreateAndFindUserGroupUnmanaged()
     QString qstrGroupName = CwtHelper::CreateUniqueName("Testgroup");
     iUsergroup = pUserManager->CreateUserGroup(qstrGroupName);
     QVERIFY(iUsergroup > 0);
-    QLinkedList<CumUserGroup*> qllUserGroups = pUserManager->FindUserGroupsByNameUnmanaged("test");
+    QList<CumUserGroup*> qllUserGroups = pUserManager->FindUserGroupsByNameUnmanaged("test");
     QVERIFY(qllUserGroups.count() > 0);
 
-    QLinkedList<CumUserGroup*>::iterator qllIt = qllUserGroups.begin();
-    QLinkedList<CumUserGroup*>::iterator qllItEnd = qllUserGroups.end();
+    QList<CumUserGroup*>::iterator qllIt = qllUserGroups.begin();
+    QList<CumUserGroup*>::iterator qllItEnd = qllUserGroups.end();
     bool found = false;
 
     for (; qllIt != qllItEnd; ++qllIt)

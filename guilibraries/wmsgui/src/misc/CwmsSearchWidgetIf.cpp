@@ -13,7 +13,7 @@
 
 // System and QT Includes
 #include <CdmQueryBuilder.h>
-#include <QLinkedList>
+#include <QList>
 #include <QMap>
 
 // WMS Includes
@@ -330,13 +330,13 @@ void CwmsSearchWidgetIf::SearchClickedSlot()
 /** +-=---------------------------------------------------------Di 9. Sep 08:18:25 2008-----------*
  * @method  CwmsSearchWidgetIf::GetDisplayList               // public                            *
  * @return  void                                             //                                   *
- * @param   QLinkedList<long>& p_rqvlResults                 // The list of objects or objectlists*
+ * @param   QList<long>& p_rqvlResults                 // The list of objects or objectlists*
  *                                                           //  which can be used                *
  * @comment This is the abstract method which must be overwritten be the derived class. the       *
  *          gui components which uses proxies uses the list of results for displaying their       *
  *          contents.                                                                             *
  *----------------last changed: --------------------------------Di 9. Sep 08:18:25 2008-----------*/
-void CwmsSearchWidgetIf::GetDisplayList(QLinkedList<long>& p_rqvlResults)
+void CwmsSearchWidgetIf::GetDisplayList(QList<long>& p_rqvlResults)
 {
    m_cCdmQuery.Clear();
    CreateQuery();
@@ -345,10 +345,10 @@ void CwmsSearchWidgetIf::GetDisplayList(QLinkedList<long>& p_rqvlResults)
    {
       if (m_cCdmQuery.Execute())
       {
-         QLinkedList<long> qvlResult = m_cCdmQuery.GetResultList();
+         QList<long> qvlResult = m_cCdmQuery.GetResultList();
 
-         QLinkedList<long>::const_iterator qvlIt    = qvlResult.begin();
-         QLinkedList<long>::const_iterator qvlItEnd = qvlResult.end();
+         QList<long>::const_iterator qvlIt    = qvlResult.begin();
+         QList<long>::const_iterator qvlItEnd = qvlResult.end();
 
          for ( ; qvlIt != qvlItEnd; ++ qvlIt)
          {
@@ -364,11 +364,11 @@ void CwmsSearchWidgetIf::GetDisplayList(QLinkedList<long>& p_rqvlResults)
    {
       if (m_rpContainer)
       {
-         QLinkedList<CdmObject*> qvlObjects;
+         QList<CdmObject*> qvlObjects;
          m_rpContainer->GetObjectList(qvlObjects);
 
-         QLinkedList<CdmObject*>::iterator qvlIt    = qvlObjects.begin();
-         QLinkedList<CdmObject*>::iterator qvlItEnd = qvlObjects.end();
+         QList<CdmObject*>::iterator qvlIt    = qvlObjects.begin();
+         QList<CdmObject*>::iterator qvlItEnd = qvlObjects.end();
 
          for ( ; qvlIt != qvlItEnd; ++qvlIt)
          {

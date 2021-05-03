@@ -82,10 +82,10 @@ void CwmsGenerateDatabaseCode::GenerateDatabaseCode(QString p_qstrDirectory)
    if (CHKPTR(m_rpCdmClassManager))
    {
       m_qstrDirectory = p_qstrDirectory;
-      QLinkedList<CdmClass*> qllClasses;
+      QList<CdmClass*> qllClasses;
       m_rpCdmClassManager->GetClassList(qllClasses);
-      QLinkedList<CdmClass*>::iterator qllIt = qllClasses.begin();
-      QLinkedList<CdmClass*>::iterator qllItEnd = qllClasses.end();
+      QList<CdmClass*>::iterator qllIt = qllClasses.begin();
+      QList<CdmClass*>::iterator qllItEnd = qllClasses.end();
 
       for (; qllIt != qllItEnd; ++qllIt)
       {
@@ -188,7 +188,7 @@ void CwmsGenerateDatabaseCode::AddBaseClassData(CdmClass* p_pCdmClass,
  *----------------last changed: --------------------------------Do 10. Nov 19:38:55 2011----------*/
 void CwmsGenerateDatabaseCode::GenerateNotCreatedClasses()
 {
-   QLinkedList<CdmClass*>::iterator qllIt = m_qllNotGeneratedClasses.begin();
+   QList<CdmClass*>::iterator qllIt = m_qllNotGeneratedClasses.begin();
 
    while (qllIt != m_qllNotGeneratedClasses.end())
    {

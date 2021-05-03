@@ -14,7 +14,7 @@
 
 
 // System and QT Includes
-#include <QLinkedList>
+#include <QList>
 
 
 // own Includes
@@ -50,7 +50,7 @@ class WMSMANAGER_API CdmDataProvider : public CdmLocatedElement
     Q_OBJECT
 
 private:
-    QLinkedList<CdmScheme*> m_qlSchemes;
+    QList<CdmScheme*> m_qlSchemes;
     IdmDataAccess* m_rpIdmDataAccess;
     CumUserManager* m_pCumUserManager;
     QString m_qstrBinaryDirectory;
@@ -118,7 +118,7 @@ public slots:
     long ExistScheme(QString p_qstrKeyname);
     CumUserManager* GetUserManager();
     long GetUserId() const;
-    void GetSchemeList(QLinkedList<QString>& p_rqvlDatabases);
+    void GetSchemeList(QList<QString>& p_rqvlDatabases);
     QString GetSystemApplicationVersion() const;
     QString GetApplicationVersion() const;
     CdmObjectContainer* GetObjectContainer(int p_iDatabaseId, int p_iObjectListId);

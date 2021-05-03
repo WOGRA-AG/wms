@@ -10,7 +10,7 @@ CdbCommandGetSchemeList::~CdbCommandGetSchemeList()
 
 }
 
-QLinkedList<QString> CdbCommandGetSchemeList::GetSchemes() const
+QList<QString> CdbCommandGetSchemeList::GetSchemes() const
 {
     return m_qllSchemes;
 }

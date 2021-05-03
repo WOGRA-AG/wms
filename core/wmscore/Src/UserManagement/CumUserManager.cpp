@@ -23,7 +23,7 @@
 #include "CumUser.h"
 #include "CumUserGroup.h"
 #include "CumUserManager.h"
-#include <QLinkedList>
+#include <QList>
 
 
 CumUserManager::CumUserManager(IdmDataAccess* p_pIdmDataAccess, QString p_qstrSchemeUri)
@@ -59,8 +59,8 @@ void CumUserManager::ClearUsers()
 void CumUserManager::ClearUserGroups() 
 {
     SYNCHRONIZED;
-    QLinkedList<CumUserGroup*>::iterator qllIt = m_qlUserGroups.begin();
-    QLinkedList<CumUserGroup*>::iterator qllItEnd = m_qlUserGroups.end();
+    QList<CumUserGroup*>::iterator qllIt = m_qlUserGroups.begin();
+    QList<CumUserGroup*>::iterator qllItEnd = m_qlUserGroups.end();
 
     for (; qllIt != qllItEnd; ++qllIt)
     {
@@ -448,8 +448,8 @@ CumUserGroup* CumUserManager::FindUserGroupByName(QString p_qstrName)
 {
     SYNCHRONIZED;
     CumUserGroup* pCumUserGroup = nullptr;
-    QLinkedList<CumUserGroup*>::iterator qllIt = m_qlUserGroups.begin();
-    QLinkedList<CumUserGroup*>::iterator qllItEnd = m_qlUserGroups.end();
+    QList<CumUserGroup*>::iterator qllIt = m_qlUserGroups.begin();
+    QList<CumUserGroup*>::iterator qllItEnd = m_qlUserGroups.end();
 
     for (; qllIt != qllItEnd; ++qllIt)
     {
@@ -483,7 +483,7 @@ CumUserGroup* CumUserManager::FindUserGroupByName(QString p_qstrName)
     return pCumUserGroup;
 }
 
-QLinkedList<CumUserGroup*> CumUserManager::FindUserGroupsByNameUnmanaged(QString p_qstrName)
+QList<CumUserGroup*> CumUserManager::FindUserGroupsByNameUnmanaged(QString p_qstrName)
 {
     return m_rpIdmDataAccess->FindUserGroups(p_qstrName, m_qstrSchemeUri);
 }
@@ -620,7 +620,7 @@ long CumUserManager::RemoveUserFromGroup(QString p_qstrLogin, QString p_qstrGrou
     return lRet;
 }
 
-long CumUserManager::GetUserGroupList(QLinkedList<CumUserGroup*>& p_rqvlUserGroups)
+long CumUserManager::GetUserGroupList(QList<CumUserGroup*>& p_rqvlUserGroups)
 {
     long lRet = CdmLogging::eDmUnknownDataAccessError;
     ClearUserGroups();
@@ -634,8 +634,8 @@ CumUserGroup* CumUserManager::FindUserGroupById(int p_iId)
 {
     SYNCHRONIZED;
     CumUserGroup* pCumUserGroup = nullptr;
-    QLinkedList<CumUserGroup*>::iterator qlIt = m_qlUserGroups.begin();
-    QLinkedList<CumUserGroup*>::iterator qlItEnd = m_qlUserGroups.end();
+    QList<CumUserGroup*>::iterator qlIt = m_qlUserGroups.begin();
+    QList<CumUserGroup*>::iterator qlItEnd = m_qlUserGroups.end();
 
     for (; qlIt != qlItEnd; ++qlIt)
     {
@@ -675,8 +675,8 @@ void CumUserManager::LoadUserGroups()
         m_rpIdmDataAccess->GetUserGroupList(m_qlUserGroups,
                                             m_qstrSchemeUri);
 
-        QLinkedList<CumUserGroup*>::iterator qllIt = m_qlUserGroups.begin();
-        QLinkedList<CumUserGroup*>::iterator qllItEnd = m_qlUserGroups.end();
+        QList<CumUserGroup*>::iterator qllIt = m_qlUserGroups.begin();
+        QList<CumUserGroup*>::iterator qllItEnd = m_qlUserGroups.end();
 
         for (; qllIt != qllItEnd; ++qllIt)
         {
@@ -687,7 +687,7 @@ void CumUserManager::LoadUserGroups()
 }
 
 long CumUserManager::GetListOfUsersInList(long p_lUserGroupId,
-                                          QLinkedList<CumUser*>& p_rqvlUserList)
+                                          QList<CumUser*>& p_rqvlUserList)
 {
 
     long lRet = CdmLogging::eDmUnknownDataAccessError;
@@ -697,8 +697,8 @@ long CumUserManager::GetListOfUsersInList(long p_lUserGroupId,
         lRet = m_rpIdmDataAccess->GetListOfUsersInList(p_lUserGroupId,
                                                        p_rqvlUserList);
 
-        QLinkedList<CumUser*>::iterator qllIt = p_rqvlUserList.begin();
-        QLinkedList<CumUser*>::iterator qllItEnd = p_rqvlUserList.end();
+        QList<CumUser*>::iterator qllIt = p_rqvlUserList.begin();
+        QList<CumUser*>::iterator qllItEnd = p_rqvlUserList.end();
 
         for (; qllIt != qllItEnd; ++qllIt)
         {
@@ -714,7 +714,7 @@ long CumUserManager::GetListOfUsersInList(long p_lUserGroupId,
 }
 
 long CumUserManager::GetUserGroupMemberList(long p_lUserId,
-                                            QLinkedList<CumUserGroup*>& p_qvlUserGroups)
+                                            QList<CumUserGroup*>& p_qvlUserGroups)
 {
     long lRet = CdmLogging::eDmUnknownDataAccessError;
 
@@ -723,8 +723,8 @@ long CumUserManager::GetUserGroupMemberList(long p_lUserId,
         lRet = m_rpIdmDataAccess->GetUserGroupMemberList(p_lUserId,
                                                          p_qvlUserGroups);
 
-        QLinkedList<CumUserGroup*>::iterator qllIt = p_qvlUserGroups.begin();
-        QLinkedList<CumUserGroup*>::iterator qllItEnd = p_qvlUserGroups.end();
+        QList<CumUserGroup*>::iterator qllIt = p_qvlUserGroups.begin();
+        QList<CumUserGroup*>::iterator qllItEnd = p_qvlUserGroups.end();
 
         for (; qllIt != qllItEnd; ++qllIt)
         {
@@ -739,7 +739,7 @@ long CumUserManager::GetUserGroupMemberList(long p_lUserId,
     return lRet;
 }
 
-long CumUserManager::GetUserListUnmanaged(QLinkedList<CumUser*>& p_rqvlUsers)
+long CumUserManager::GetUserListUnmanaged(QList<CumUser*>& p_rqvlUsers)
 {
     long lRet = CdmLogging::eDmUnknownDataAccessError;
 
@@ -912,18 +912,18 @@ CumUser* CumUserManager::FindUserByIdentityKey(QString p_qstrIdentityKey)
     return pCumUser;
 }
 
-QLinkedList<CumUser*> CumUserManager::FindUsersUnmanaged(QString p_qstrSearchString)
+QList<CumUser*> CumUserManager::FindUsersUnmanaged(QString p_qstrSearchString)
 {
     SYNCHRONIZED;
-    QLinkedList<CumUser*> qlUsers;
+    QList<CumUser*> qlUsers;
 
     if(CHKPTR(m_rpIdmDataAccess))
     {
         qlUsers = m_rpIdmDataAccess->FindUser(p_qstrSearchString,
                                               m_qstrSchemeUri);
 
-        QLinkedList<CumUser*>::iterator qllIt = qlUsers.begin();
-        QLinkedList<CumUser*>::iterator qllItEnd = qlUsers.end();
+        QList<CumUser*>::iterator qllIt = qlUsers.begin();
+        QList<CumUser*>::iterator qllItEnd = qlUsers.end();
 
         for (; qllIt != qllItEnd; ++qllIt)
         {
@@ -934,16 +934,16 @@ QLinkedList<CumUser*> CumUserManager::FindUsersUnmanaged(QString p_qstrSearchStr
     return qlUsers;
 }
 
-void CumUserManager::GetUserBaseIds(QLinkedList<long>& p_rqllUserBaseIds)
+void CumUserManager::GetUserBaseIds(QList<long>& p_rqllUserBaseIds)
 {
     SYNCHRONIZED;
     p_rqllUserBaseIds.append(GetCurrentUserId());
 
-    QLinkedList<CumUserGroup*> qllUserGroups;
+    QList<CumUserGroup*> qllUserGroups;
     GetUserGroupMemberList(GetCurrentUserId(), qllUserGroups);
 
-    QLinkedList<CumUserGroup*>::iterator qllIt = qllUserGroups.begin();
-    QLinkedList<CumUserGroup*>::iterator qllItEnd = qllUserGroups.end();
+    QList<CumUserGroup*>::iterator qllIt = qllUserGroups.begin();
+    QList<CumUserGroup*>::iterator qllItEnd = qllUserGroups.end();
 
     for (; qllIt != qllItEnd; ++qllIt)
     {
@@ -960,14 +960,14 @@ QVariant CumUserManager::GetVariant() const
 {
     SYNCHRONIZED;
     QVariantMap qMap;
-    QLinkedList<CumUser*> qlUsers;
-    QLinkedList<CumUserGroup*> qlUsersGroups;
+    QList<CumUser*> qlUsers;
+    QList<CumUserGroup*> qlUsersGroups;
     (const_cast<CumUserManager*>(this))->GetUserListUnmanaged(qlUsers);
     (const_cast<CumUserManager*>(this))->GetUserGroupList(qlUsersGroups);
     QVariantList qvlGroups;
     QVariantList qvlUsers;
-    QLinkedList<CumUser*>::iterator qllIt = qlUsers.begin();
-    QLinkedList<CumUser*>::iterator qllItEnd = qlUsers.end();
+    QList<CumUser*>::iterator qllIt = qlUsers.begin();
+    QList<CumUser*>::iterator qllItEnd = qlUsers.end();
 
     for (; qllIt != qllItEnd; ++qllIt)
     {
@@ -979,8 +979,8 @@ QVariant CumUserManager::GetVariant() const
         }
     }
 
-    QLinkedList<CumUserGroup*>::iterator qllItGroup = qlUsersGroups.begin();
-    QLinkedList<CumUserGroup*>::iterator qllItGroupEnd = qlUsersGroups.end();
+    QList<CumUserGroup*>::iterator qllItGroup = qlUsersGroups.begin();
+    QList<CumUserGroup*>::iterator qllItGroupEnd = qlUsersGroups.end();
 
     for (; qllItGroup != qllItGroupEnd; ++qllItGroup)
     {
@@ -1002,12 +1002,12 @@ QVariant CumUserManager::GetGroupVariant() const
 {
     SYNCHRONIZED;
     QVariantMap qMap;
-    QLinkedList<CumUserGroup*> qlUsersGroups;
+    QList<CumUserGroup*> qlUsersGroups;
     (const_cast<CumUserManager*>(this))->GetUserGroupList(qlUsersGroups);
     QVariantList qvlGroups;
 
-    QLinkedList<CumUserGroup*>::iterator qllItGroup = qlUsersGroups.begin();
-    QLinkedList<CumUserGroup*>::iterator qllItGroupEnd = qlUsersGroups.end();
+    QList<CumUserGroup*>::iterator qllItGroup = qlUsersGroups.begin();
+    QList<CumUserGroup*>::iterator qllItGroupEnd = qlUsersGroups.end();
 
     for (; qllItGroup != qllItGroupEnd; ++qllItGroup)
     {

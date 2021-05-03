@@ -17,7 +17,7 @@
 #include <qapplication.h>
 #include <qinputdialog.h>
 #include <qpushbutton.h>
-#include <QLinkedList>
+#include <QList>
 
 // WMS Includes
 #include "CdmMessageManager.h"
@@ -42,15 +42,15 @@ CwmsUserSchemeSelection::~CwmsUserSchemeSelection()
    // nothing to do here :-) 
 }
 
-void CwmsUserSchemeSelection::FillDialog(QLinkedList<QString>& p_rqllDatabases)
+void CwmsUserSchemeSelection::FillDialog(QList<QString>& p_rqllDatabases)
 {
    CdmDataProvider* pCdmManager = CdmSessionManager::GetDataProvider();
 
    if(CHKPTR(pCdmManager))
    {
       m_pqlbMandators->clear();
-	  QLinkedList<QString>::iterator qvlIt = p_rqllDatabases.begin();
-	  QLinkedList<QString>::iterator qvlItEnd = p_rqllDatabases.end();
+	  QList<QString>::iterator qvlIt = p_rqllDatabases.begin();
+	  QList<QString>::iterator qvlItEnd = p_rqllDatabases.end();
 
       for (; qvlIt != qvlItEnd; ++ qvlIt)
       {
@@ -100,7 +100,7 @@ QListWidgetItem* CwmsUserSchemeSelection::GetSelectedItem()
 }
 
 
-QString CwmsUserSchemeSelection::SelectScheme(QLinkedList<QString>& qllSchemes, QWidget* p_pParent)
+QString CwmsUserSchemeSelection::SelectScheme(QList<QString>& qllSchemes, QWidget* p_pParent)
 {
     QString qstrScheme;
     CwmsUserSchemeSelection selector(p_pParent);

@@ -85,9 +85,9 @@ void CsraHandlerClass::getContainerList(CsaLocatedElement *p_pElement, CwsHttpRe
 
     if (CHKPTR(pContainerManager) && CHKPTR(pClass))
     {
-        QLinkedList<QString> qllContainers = pContainerManager->getInternals()->GetContainerList(pClass->getId());
-        QLinkedList<QString>::iterator qllIt = qllContainers.begin();
-        QLinkedList<QString>::iterator qllItEnd = qllContainers.end();
+        QList<QString> qllContainers = pContainerManager->getInternals()->GetContainerList(pClass->getId());
+        QList<QString>::iterator qllIt = qllContainers.begin();
+        QList<QString>::iterator qllItEnd = qllContainers.end();
         QVariantList qvlResults;
 
         for (; qllIt != qllItEnd; ++qllIt)

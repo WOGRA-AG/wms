@@ -17,10 +17,10 @@ bool CwmsUserCommandListGroups::Run(QMap<QString, QString> p_qmArgs)
 
     if (CHKPTR(pUserManager))
     {
-        QLinkedList<CumUserGroup*> qllGroups;
+        QList<CumUserGroup*> qllGroups;
         pUserManager->GetUserGroupList(qllGroups);
-        QLinkedList<CumUserGroup*>::iterator qllIt = qllGroups.begin();
-        QLinkedList<CumUserGroup*>::iterator qllItEnd = qllGroups.end();
+        QList<CumUserGroup*>::iterator qllIt = qllGroups.begin();
+        QList<CumUserGroup*>::iterator qllItEnd = qllGroups.end();
         QString qstrOutput = "Group\r\n";
 
         for (; qllIt != qllItEnd; ++qllIt)

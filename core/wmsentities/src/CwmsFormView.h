@@ -29,9 +29,9 @@ class BASETOOLS_API CwmsFormView : public CwmsFormContainer
    public:
       virtual ~CwmsFormView();
    public:
-      void SetViews(QLinkedList<QString> p_qstrlViews);
+      void SetViews(QList<QString> p_qstrlViews);
    public:
-      QLinkedList<QString> GetViews();
+      QList<QString> GetViews();
    public:
       static CwmsFormView Create(CdmObjectContainer* p_pContainer);
    public:

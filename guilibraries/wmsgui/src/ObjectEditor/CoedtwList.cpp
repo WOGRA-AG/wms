@@ -20,8 +20,8 @@
 #include <QVBoxLayout>
 #include <QHBoxLayout>
 #include <QMap>
-#include <QLinkedList>
-#include <QLinkedList>
+#include <QList>
+#include <QList>
 #include <QString>
 
 // WMS Includes
@@ -218,21 +218,21 @@ void CoedtwList::SetValue(CdmValue* p_pCdmValue)
       case eDmValueListDouble:
          {
             m_pqpbEdit->hide();
-            QLinkedList<double> qvlDoubles = ((CdmValueListDouble*)p_pCdmValue)->GetList();
+            QList<double> qvlDoubles = ((CdmValueListDouble*)p_pCdmValue)->GetList();
             FillTreeWidget(qvlDoubles);
          }
          break;
       case eDmValueListInt:
          {
             m_pqpbEdit->hide();
-            QLinkedList<int> qvlInt = ((CdmValueListInt*)p_pCdmValue)->GetList();
+            QList<int> qvlInt = ((CdmValueListInt*)p_pCdmValue)->GetList();
             FillTreeWidget(qvlInt);
          }
          break;
       case eDmValueListString:
          {
             m_pqpbEdit->hide();
-            QLinkedList<QString> qvlStrings = ((CdmValueListString*)p_pCdmValue)->GetList();
+            QList<QString> qvlStrings = ((CdmValueListString*)p_pCdmValue)->GetList();
             FillTreeWidget(qvlStrings);
 
          }
@@ -240,7 +240,7 @@ void CoedtwList::SetValue(CdmValue* p_pCdmValue)
       case eDmValueListObjects:
          {
             m_pqpbEdit->hide();
-            QLinkedList<CdmObject*> qvlObjects;
+            QList<CdmObject*> qvlObjects;
             ((CdmValueListObjects*)p_pCdmValue)->GetList(qvlObjects);
             FillTreeWidget(qvlObjects);
          }
@@ -255,13 +255,13 @@ void CoedtwList::SetValue(CdmValue* p_pCdmValue)
 /** +-=---------------------------------------------------------Mi 9. Jan 14:53:12 2013-----------*
  * @method  CoedtwList::FillTreeWidget                       // private                           *
  * @return  void                                             //                                   *
- * @param   QLinkedList<CdmObject*> p_rqvlList               //                                   *
+ * @param   QList<CdmObject*> p_rqvlList               //                                   *
  * @comment This method fills the treewidget.                                                     *
  *----------------last changed: --------------------------------Mi 9. Jan 14:53:12 2013-----------*/
-void CoedtwList::FillTreeWidget(QLinkedList<CdmObject*> p_rqvlList)
+void CoedtwList::FillTreeWidget(QList<CdmObject*> p_rqvlList)
 {
-   QLinkedList<CdmObject*>::iterator qllIt = p_rqvlList.begin();
-   QLinkedList<CdmObject*>::iterator qllItEnd = p_rqvlList.end();
+   QList<CdmObject*>::iterator qllIt = p_rqvlList.begin();
+   QList<CdmObject*>::iterator qllItEnd = p_rqvlList.end();
    m_pqtwTreeWidget->setColumnCount(1);
    m_pqtwTreeWidget->setHeaderLabel(tr("Werte"));
 
@@ -281,13 +281,13 @@ void CoedtwList::FillTreeWidget(QLinkedList<CdmObject*> p_rqvlList)
 /** +-=---------------------------------------------------------Do 4. Sep 19:17:23 2008-----------*
  * @method  CoedtwList::FillTreeWidget                       // private                           *
  * @return  void                                             //                                   *
- * @param   QLinkedList<QString> p_rqvlList                  //                                   *
+ * @param   QList<QString> p_rqvlList                  //                                   *
  * @comment This method fills the treewidget.                                                     *
  *----------------last changed: --------------------------------Do 4. Sep 19:17:23 2008-----------*/
-void CoedtwList::FillTreeWidget(QLinkedList<QString> p_rqvlList)
+void CoedtwList::FillTreeWidget(QList<QString> p_rqvlList)
 {
-   QLinkedList<QString>::iterator qllIt = p_rqvlList.begin();
-   QLinkedList<QString>::iterator qllItEnd = p_rqvlList.end();
+   QList<QString>::iterator qllIt = p_rqvlList.begin();
+   QList<QString>::iterator qllItEnd = p_rqvlList.end();
    m_pqtwTreeWidget->setColumnCount(1);
    m_pqtwTreeWidget->setHeaderLabel(tr("Werte"));
 
@@ -302,13 +302,13 @@ void CoedtwList::FillTreeWidget(QLinkedList<QString> p_rqvlList)
 /** +-=---------------------------------------------------------Do 4. Sep 19:17:31 2008-----------*
  * @method  CoedtwList::FillTreeWidget                       // private                           *
  * @return  void                                             //                                   *
- * @param   QLinkedList<int> p_rqvlList                      //                                   *
+ * @param   QList<int> p_rqvlList                      //                                   *
  * @comment This method fills the treewidget.                                                     *
  *----------------last changed: --------------------------------Do 4. Sep 19:17:31 2008-----------*/
-void CoedtwList::FillTreeWidget(QLinkedList<int> p_rqvlList)
+void CoedtwList::FillTreeWidget(QList<int> p_rqvlList)
 {
-   QLinkedList<int>::iterator qllIt = p_rqvlList.begin();
-   QLinkedList<int>::iterator qllItEnd = p_rqvlList.end();
+   QList<int>::iterator qllIt = p_rqvlList.begin();
+   QList<int>::iterator qllItEnd = p_rqvlList.end();
    m_pqtwTreeWidget->setColumnCount(1);
    m_pqtwTreeWidget->setHeaderLabel(tr("Werte"));
 
@@ -323,13 +323,13 @@ void CoedtwList::FillTreeWidget(QLinkedList<int> p_rqvlList)
 /** +-=---------------------------------------------------------Do 4. Sep 19:17:37 2008-----------*
  * @method  CoedtwList::FillTreeWidget                       // private                           *
  * @return  void                                             //                                   *
- * @param   QLinkedList<double> p_rqvlList                   //                                   *
+ * @param   QList<double> p_rqvlList                   //                                   *
  * @comment This method fills the treewidget.                                                     *
  *----------------last changed: --------------------------------Do 4. Sep 19:17:37 2008-----------*/
-void CoedtwList::FillTreeWidget(QLinkedList<double> p_rqvlList)
+void CoedtwList::FillTreeWidget(QList<double> p_rqvlList)
 {
-   QLinkedList<double>::iterator qllIt = p_rqvlList.begin();
-   QLinkedList<double>::iterator qllItEnd = p_rqvlList.end();
+   QList<double>::iterator qllIt = p_rqvlList.begin();
+   QList<double>::iterator qllItEnd = p_rqvlList.end();
    m_pqtwTreeWidget->setColumnCount(1);
    m_pqtwTreeWidget->setHeaderLabel(tr("Werte"));
 

@@ -136,7 +136,7 @@ void CwmsFormContainer::SetDefault(bool p_bValue)
    SetValue("Default", p_bValue);
 }
 
-QLinkedList<QString> CwmsFormContainer::GetFunctions()
+QList<QString> CwmsFormContainer::GetFunctions()
 {
    return GetStringList("Functions");
 }
@@ -144,10 +144,10 @@ QLinkedList<QString> CwmsFormContainer::GetFunctions()
 /** +-=---------------------------------------------------------Mo 10. Sep 16:19:32 2012----------*
  * @method  CwmsFormObjectList::SetFunctions                 // public                            *
  * @return  void                                             //                                   *
- * @param   QLinkedList<QString> p_qstrlMembers              //                                   *
+ * @param   QList<QString> p_qstrlMembers              //                                   *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------Mo 10. Sep 16:19:32 2012----------*/
-void CwmsFormContainer::SetFunctions(QLinkedList<QString> p_qstrlMembers)
+void CwmsFormContainer::SetFunctions(QList<QString> p_qstrlMembers)
 {
    SetStringList("Functions", p_qstrlMembers);
 }

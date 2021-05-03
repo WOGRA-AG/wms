@@ -20,7 +20,7 @@
 
 // System and QT Includes
 #include <qdialog.h>
-#include <QLinkedList>
+#include <QList>
 
 // Own Includes
 #include "ui_CwmsExportDlg.h"
@@ -44,7 +44,7 @@ class WMSGUI_API CwmsExportSettingsIf : public QDialog, public Ui::CwmsExportDlg
 
    private: 
       CwmsExportSettings& m_rCwmsExportSettings;
-      QLinkedList<QString> m_qstrlHiddenMembers;
+      QList<QString> m_qstrlHiddenMembers;
       QString m_qstrFilename;
       long m_lClassId;
 
@@ -181,7 +181,7 @@ void DownClickedSlot( );
     * @param   QValueList<QString> p_qvlHiddenMembers        //                                   *
     * @comment                                                                                    *
     *----------------last changed: -----------------------------Mo 21. Apr 17:28:49 2008----------*/
-    void SetHiddenList(QLinkedList<QString> p_qvlHiddenMembers);
+    void SetHiddenList(QList<QString> p_qvlHiddenMembers);
     
     private slots:
    /** +-=---------------------------------------------------------Mo 21. Apr 18:05:29 2008-------*

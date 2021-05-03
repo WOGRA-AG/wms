@@ -184,7 +184,7 @@ int CwmsguiObjectEditorIf::workOffEvents()
 
        if(pEventContainer)
        {
-           QLinkedList<CdmObject*> qlEventObjects;
+           QList<CdmObject*> qlEventObjects;
            pEventContainer->GetObjectList(qlEventObjects);
            //there will allways just one object in this list.
            if(!qlEventObjects.isEmpty())

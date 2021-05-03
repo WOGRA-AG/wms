@@ -39,6 +39,7 @@ public:
     static QString ReadConfigName();
     void SetConfigName(QString p_qstrConfig);
     static QString ReadConfigFile();
+    void testConfig(QString p_qstrDataAccess);
 public slots:
     int getCurrentDataAccessConfigurationIndex();
     virtual QStringList getDataAccessList() = 0;

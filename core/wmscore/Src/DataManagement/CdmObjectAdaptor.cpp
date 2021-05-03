@@ -1269,13 +1269,13 @@ void CdmObjectAdaptor::SaveBinDocTo(QString p_qstrKeyname, QString p_qstrPath)
 
 /** +-=---------------------------------------------------------So 10. Feb 09:41:46 2013----------*
  * @method  CdmObjectAdaptor::GetStringList                  // public, const                     *
- * @return  QLinkedList<QString>                             //                                   *
+ * @return  QList<QString>                             //                                   *
  * @param   QString p_qstrMember                             //                                   *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------So 10. Feb 09:41:46 2013----------*/
-QLinkedList<QString> CdmObjectAdaptor::GetStringList(QString p_qstrMember) const
+QList<QString> CdmObjectAdaptor::GetStringList(QString p_qstrMember) const
 {
-   QLinkedList<QString> qllRet;
+   QList<QString> qllRet;
    CdmValue* pCdmValue = (const_cast<CdmObjectAdaptor*>(this))->GetValue(p_qstrMember);
 
    if (CHKPTR(pCdmValue) && pCdmValue->GetValueType() == eDmValueListString)
@@ -1289,13 +1289,13 @@ QLinkedList<QString> CdmObjectAdaptor::GetStringList(QString p_qstrMember) const
 
 /** +-=---------------------------------------------------------So 10. Feb 09:41:53 2013----------*
  * @method  CdmObjectAdaptor::GetDoubleList                  // public, const                     *
- * @return  QLinkedList<double>                              //                                   *
+ * @return  QList<double>                              //                                   *
  * @param   QString p_qstrMember                             //                                   *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------So 10. Feb 09:41:53 2013----------*/
-QLinkedList<double> CdmObjectAdaptor::GetDoubleList(QString p_qstrMember) const
+QList<double> CdmObjectAdaptor::GetDoubleList(QString p_qstrMember) const
 {
-   QLinkedList<double> qllRet;
+   QList<double> qllRet;
    CdmValue* pCdmValue = (const_cast<CdmObjectAdaptor*>(this))->GetValue(p_qstrMember);
 
    if (CHKPTR(pCdmValue) && pCdmValue->GetValueType() == eDmValueListDouble)
@@ -1309,13 +1309,13 @@ QLinkedList<double> CdmObjectAdaptor::GetDoubleList(QString p_qstrMember) const
 
 /** +-=---------------------------------------------------------So 10. Feb 09:42:02 2013----------*
  * @method  CdmObjectAdaptor::GetIntList                     // public, const                     *
- * @return  QLinkedList<int>                                 //                                   *
+ * @return  QList<int>                                 //                                   *
  * @param   QString p_qstrMember                             //                                   *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------So 10. Feb 09:42:02 2013----------*/
-QLinkedList<int> CdmObjectAdaptor::GetIntList(QString p_qstrMember) const
+QList<int> CdmObjectAdaptor::GetIntList(QString p_qstrMember) const
 {
-   QLinkedList<int> qllRet;
+   QList<int> qllRet;
    CdmValue* pCdmValue = (const_cast<CdmObjectAdaptor*>(this))->GetValue(p_qstrMember);
 
    if (CHKPTR(pCdmValue) && pCdmValue->GetValueType() == eDmValueListInt)
@@ -1329,13 +1329,13 @@ QLinkedList<int> CdmObjectAdaptor::GetIntList(QString p_qstrMember) const
 
 /** +-=---------------------------------------------------------Do 10. Nov 16:14:22 2011----------*
  * @method  CdmObjectAdaptor::GetListObjects                 // public                            *
- * @return  QLinkedList<CdmObject*>                          //                                   *
+ * @return  QList<CdmObject*>                          //                                   *
  * @param   QString p_qstrMember                             //                                   *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------Do 10. Nov 16:14:22 2011----------*/
-QLinkedList<CdmObject*> CdmObjectAdaptor::GetListObjects(QString p_qstrMember)
+QList<CdmObject*> CdmObjectAdaptor::GetListObjects(QString p_qstrMember)
 {
-   QLinkedList<CdmObject*> qllRet;
+   QList<CdmObject*> qllRet;
    CdmValue* pCdmValue = GetValue(p_qstrMember);
 
    if (CHKPTR(pCdmValue) && pCdmValue->GetValueType() == eDmValueListObjects)
@@ -1351,10 +1351,10 @@ QLinkedList<CdmObject*> CdmObjectAdaptor::GetListObjects(QString p_qstrMember)
  * @method  CdmObjectAdaptor::SetListObjects                 // public                            *
  * @return  void                                             //                                   *
  * @param   QString p_qstrMember                             //                                   *
- * @param   QLinkedList<CdmObject*> p_qlObjects              //                                   *
+ * @param   QList<CdmObject*> p_qlObjects              //                                   *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------Do 25. Okt 13:54:43 2012----------*/
-void CdmObjectAdaptor::SetListObjects(QString p_qstrMember, QLinkedList<CdmObject*> p_qlObjects)
+void CdmObjectAdaptor::SetListObjects(QString p_qstrMember, QList<CdmObject*> p_qlObjects)
 {
    CdmValue* pCdmValue = GetValue(p_qstrMember);
 
@@ -1387,10 +1387,10 @@ void CdmObjectAdaptor::AddStringListValue(QString p_qstrMember, QString p_qstrVa
  * @method  CdmObjectAdaptor::SetStringList                  // public                            *
  * @return  void                                             //                                   *
  * @param   QString p_qstrMember                             //                                   *
- * @param   QLinkedList<QString> p_rqstrlList                //                                   *
+ * @param   QList<QString> p_rqstrlList                //                                   *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------Mo 10. Sep 16:18:34 2012----------*/
-void CdmObjectAdaptor::SetStringList(QString p_qstrMember, QLinkedList<QString> p_rqstrlList)
+void CdmObjectAdaptor::SetStringList(QString p_qstrMember, QList<QString> p_rqstrlList)
 {
 
    CdmValue* pCdmValue = GetValue(p_qstrMember);
@@ -1406,10 +1406,10 @@ void CdmObjectAdaptor::SetStringList(QString p_qstrMember, QLinkedList<QString> 
  * @method  CdmObjectAdaptor::SetIntList                     // public                            *
  * @return  void                                             //                                   *
  * @param   QString p_qstrMember                             //                                   *
- * @param   QLinkedList<int> p_rqstrlList                    //                                   *
+ * @param   QList<int> p_rqstrlList                    //                                   *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------Di 28. Mai 14:35:56 2013----------*/
-void CdmObjectAdaptor::SetIntList(QString p_qstrMember, QLinkedList<int> p_rqstrlList)
+void CdmObjectAdaptor::SetIntList(QString p_qstrMember, QList<int> p_rqstrlList)
 {
    CdmValue* pCdmValue = GetValue(p_qstrMember);
 
@@ -1424,10 +1424,10 @@ void CdmObjectAdaptor::SetIntList(QString p_qstrMember, QLinkedList<int> p_rqstr
  * @method  CdmObjectAdaptor::SetDoubleList                  // public                            *
  * @return  void                                             //                                   *
  * @param   QString p_qstrMember                             //                                   *
- * @param   QLinkedList<double> p_rqstrlList                 //                                   *
+ * @param   QList<double> p_rqstrlList                 //                                   *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------Di 28. Mai 14:36:26 2013----------*/
-void CdmObjectAdaptor::SetDoubleList(QString p_qstrMember, QLinkedList<double> p_rqstrlList)
+void CdmObjectAdaptor::SetDoubleList(QString p_qstrMember, QList<double> p_rqstrlList)
 {
    CdmValue* pCdmValue = GetValue(p_qstrMember);
 
@@ -1494,7 +1494,7 @@ void CdmObjectAdaptor::AddListObjectsValue(QString p_qstrMember, CdmObject* p_pC
 
 void CdmObjectAdaptor::SetListObjectsValues(QString p_qstrMember, QVariantList selfLinks)
 {
-    QLinkedList<CdmObject*> qll_cdmObjects;
+    QList<CdmObject*> qll_cdmObjects;
     for(auto selfLink : selfLinks)
     {
         CdmObject* p_cdmObj = FindObjectBySelfLink(selfLink.toString());
@@ -2317,11 +2317,11 @@ QVariantMap CdmObjectAdaptor::GetVariantGraph(bool p_bFollowNonOwnerObjectlist,
                     pManager->ReloadContainerComplete(lId);
                     pObjectlist = pManager->FindContainerById(lId);
 
-                    QLinkedList<CdmObject*> qllObjects;
+                    QList<CdmObject*> qllObjects;
                     pObjectlist->GetObjectList(qllObjects);
 
-                    QLinkedList<CdmObject*>::iterator qllIt = qllObjects.begin();
-                    QLinkedList<CdmObject*>::iterator qllItEnd = qllObjects.end();
+                    QList<CdmObject*>::iterator qllIt = qllObjects.begin();
+                    QList<CdmObject*>::iterator qllItEnd = qllObjects.end();
 
                     QVariantList pObjectlistVariant;
                     for(; qllIt != qllItEnd; ++qllIt)
@@ -2379,10 +2379,10 @@ QVariantMap CdmObjectAdaptor::GetVariantGraph(bool p_bFollowNonOwnerObjectlist,
                 else if (pCdmValue->GetValueType() == eDmValueListObjects && p_bFollowNonOwnerObjectlist)
                 {
                     CdmValueListObjects *pObjectList = dynamic_cast<CdmValueListObjects*>(pCdmValue);
-                    QLinkedList<CdmObject*>qllObjects;
+                    QList<CdmObject*>qllObjects;
                     pObjectList->GetList(qllObjects);
-                    QLinkedList<CdmObject*>::iterator qllIt = qllObjects.begin();
-                    QLinkedList<CdmObject*>::iterator qllItEnd = qllObjects.end();
+                    QList<CdmObject*>::iterator qllIt = qllObjects.begin();
+                    QList<CdmObject*>::iterator qllItEnd = qllObjects.end();
 
                     QVariantList pObjectlistVariant;
                     for (; qllIt != qllItEnd; ++qllIt)

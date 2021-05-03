@@ -19,7 +19,7 @@ CftlCommandFindGroups::~CftlCommandFindGroups()
     // NOTHING To DO
 }
 
-QLinkedList<CumUserGroup *> CftlCommandFindGroups::GetResult()
+QList<CumUserGroup *> CftlCommandFindGroups::GetResult()
 {
     return m_qllGroups;
 }

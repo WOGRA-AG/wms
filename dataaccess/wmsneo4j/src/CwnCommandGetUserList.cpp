@@ -114,7 +114,7 @@ bool CwnCommandGetUserList::CheckValid()
     return bRet;
 }
 
-QLinkedList<CumUser*> CwnCommandGetUserList::getResult()
+QList<CumUser*> CwnCommandGetUserList::getResult()
 {
     return this->p_qvlUsers;
 }

@@ -36,14 +36,14 @@ UICIMPLS = $$OUT_PWD/$$WMS_ARCH/uic/$$WMS_MODE
 
 message("WMSCORE DESTDIR: "$$DESTDIR)
 
-CONFIG(gcc, gcc|clang) {
-    QMAKE_CXXFLAGS += -Werror -Wall -Wextra
+#CONFIG(gcc, gcc|clang) {
+#    QMAKE_CXXFLAGS += -Werror -Wall -Wextra
 
-    ## used to ignore warnings in generated files WmsQL1Lexer.cpp and WmsQL1Parser.cpp
-    IGNORE_ERRORS = -Wno-unused-parameter
-    message("WMSCORE Ignored Errors: "$$IGNORE_ERRORS)
-    QMAKE_CXXFLAGS += $(and $(filter %/WmsQL1Lexer.o %/WmsQL1Parser.o, $@), $$IGNORE_ERRORS)
-}
+#    ## used to ignore warnings in generated files WmsQL1Lexer.cpp and WmsQL1Parser.cpp
+#    IGNORE_ERRORS = -Wno-unused-parameter -Wno-deprecated-declarations
+#    message("WMSCORE Ignored Errors: "$$IGNORE_ERRORS)
+#    QMAKE_CXXFLAGS += $(and $(filter %/WmsQL1Lexer.o %/WmsQL1Parser.o, $@), $$IGNORE_ERRORS)
+#}
 
 # script, scripttools widgets and qml is needed for scriptengine todo: extract from core
 QT += core xml script scripttools widgets qml
@@ -55,7 +55,7 @@ INCLUDEPATH += ./../Src/DataManagement \
                ./../../../thirdparty/antlr/antlr4-cpp-runtime-4.7.2-source/src
 
 ## Make antlr headers system headers to disable warnings
-QMAKE_CXXFLAGS += -isystem ./../../../thirdparty/antlr/antlr4-cpp-runtime-4.7.2-source/src
+#QMAKE_CXXFLAGS += -isystem ./../../../thirdparty/antlr/antlr4-cpp-runtime-4.7.2-source/src
 
 include(wmscore.pri)
 

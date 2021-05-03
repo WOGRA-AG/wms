@@ -23,7 +23,7 @@
 #include <qobject.h>
 #include <qstringlist.h>
 #include <qlist.h>
-#include <QLinkedList>
+#include <QList>
 
 // Third Party Includes
 #include "qmailtransport.h"
@@ -118,7 +118,7 @@ class CwmsbtSmtpClient : public QObject
       QByteArray m_qbaDomainName;
       QStringList m_qstrlCapabilities;
       quint32 m_uiAddressComponent;
-      QLinkedList<QString>::iterator m_qlIt;
+      QList<QString>::iterator m_qlIt;
    
 
    public:

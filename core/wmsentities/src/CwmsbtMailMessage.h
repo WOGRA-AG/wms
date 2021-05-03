@@ -19,7 +19,7 @@
 #endif //
 
 // System and QT Includes
-#include <QLinkedList>
+#include <QList>
 #include <QString>
 #include <QObject>
 #include <QDataStream>
@@ -43,10 +43,10 @@ class BASETOOLS_API CwmsbtMailMessage : public QObject
  
    private:
       QList<QPair<QString,QString>> m_qlAttachments;
-      QLinkedList<QString> m_qvlRecipients;
-      QLinkedList<QString> m_qvlCopies;
-      QLinkedList<QString> m_qvlBlindCopies;
-      QLinkedList<QString> m_qvlAllRecipients;
+      QList<QString> m_qvlRecipients;
+      QList<QString> m_qvlCopies;
+      QList<QString> m_qvlBlindCopies;
+      QList<QString> m_qvlAllRecipients;
       CwmsbtSmtpClient*       m_pCslSmtpClient;
       IwmsbtSmtpConfiguration* m_pIslSmtpConfiguration;
       QString              m_qstrBody;
@@ -154,10 +154,10 @@ bool SendMessage( );
    /** +-=---------------------------------------------------------Sa 9. Jan 11:06:00 2010--------*
     * @method  CwmsbtMailMessage::GetMailAddressesAsString      // private                           *
     * @return  QString                                       //                                   *
-    * @param   QLinkedList<QString>& p_rqllAddresses         //                                   *
+    * @param   QList<QString>& p_rqllAddresses         //                                   *
     * @comment                                                                                    *
     *----------------last changed: -----------------------------Sa 9. Jan 11:06:00 2010-----------*/
-    QString GetMailAddressesAsString(QLinkedList<QString>& p_rqllAddresses);
+    QString GetMailAddressesAsString(QList<QString>& p_rqllAddresses);
 
    private:
    /** +-=---------------------------------------------------------Sa 9. Jan 11:07:35 2010--------*
@@ -205,11 +205,11 @@ bool SendMessage( );
     * @method  CwmsbtMailMessage::GetMailAddressesAsStringList  // private                           *
     * @return  QStringList                                   //                                   *
     * @param   QString p_qstrPreString                       //                                   *
-    * @param   QLinkedList<QString>& p_rqllAddresses         //                                   *
+    * @param   QList<QString>& p_rqllAddresses         //                                   *
     * @comment                                                                                    *
     *----------------last changed: -----------------------------Sa 9. Jan 14:40:36 2010-----------*/
     QStringList GetMailAddressesAsStringList(QString p_qstrPreString,
-                                             QLinkedList<QString>& p_rqllAddresses);
+                                             QList<QString>& p_rqllAddresses);
 
    public:
    /** +-=---------------------------------------------------------Sa 9. Jan 14:41:58 2010--------*
@@ -238,10 +238,10 @@ QString GetBody( );
    public:
    /** +-=---------------------------------------------------------Sa 9. Jan 14:54:10 2010--------*
     * @method  CwmsbtMailMessage::GetRecipients                 // public                            *
-    * @return  QLinkedList<QString>&                         //                                   *
+    * @return  QList<QString>&                         //                                   *
     * @comment                                                                                    *
     *----------------last changed: -----------------------------Sa 9. Jan 14:54:10 2010-----------*/
-    QLinkedList<QString>& GetRecipients();
+    QList<QString>& GetRecipients();
 
    public:
    /** +-=---------------------------------------------------------So 10. Jan 13:06:31 2010-------*
@@ -263,10 +263,10 @@ QString GetBody( );
    public:
    /** +-=---------------------------------------------------------So 10. Jan 11:48:08 2010-------*
     * @method  CwmsbtMailMessage::GetAllRecipients              // public                            *
-    * @return  QLinkedList<QString>                          //                                   *
+    * @return  QList<QString>                          //                                   *
     * @comment                                                                                    *
     *----------------last changed: -----------------------------So 10. Jan 11:48:08 2010----------*/
-    QLinkedList<QString> GetAllRecipients();
+    QList<QString> GetAllRecipients();
 
     private slots:
    /** +-=---------------------------------------------------------So 10. Jan 13:26:55 2010-------*
@@ -306,7 +306,7 @@ public:
     IwmsbtSmtpConfiguration* getSmtpConfigurations();
     void SetSender(QString qstrSender);
     void AddRecipients(QStringList &p_qstrRecipient);
-    void AddRecipients(QLinkedList<QString> &p_qstrRecipient);
+    void AddRecipients(QList<QString> &p_qstrRecipient);
 };
 
 #endif //

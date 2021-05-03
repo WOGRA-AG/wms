@@ -152,7 +152,8 @@ bool CwsHttpClient::ReadResponseFromServer(QByteArray& p_Response)
     else
     {
         QString qstrError = m_pSocket->errorString();
-        p_Response += "Not ready to read from application server!\n" + qstrError;
+        qstrError = "Not ready to read from application server!\n" + qstrError;
+        p_Response += qstrError.toUtf8();
         qWarning() << qstrError;
     }
 

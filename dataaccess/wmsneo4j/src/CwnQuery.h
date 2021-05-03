@@ -2,7 +2,7 @@
 #define CWNQUERY_H
 
 // System and QT Includes
-#include <QLinkedList>
+#include <QList>
 #include <QMap>
 
 #include "CwnHelper.h"

@@ -23,7 +23,7 @@ void CwiCommandGetSchemeList::Execute()
 
        if (pCdmManager)
        {
-          QLinkedList<QString> qllDbs;
+          QList<QString> qllDbs;
           pCdmManager->GetSchemeList(qllDbs);
 
           pResult = GetResultContainer(m_rpData,
@@ -34,8 +34,8 @@ void CwiCommandGetSchemeList::Execute()
 
           QList<QVariant> qllResults;
 
-          QLinkedList<QString>::iterator qllIt = qllDbs.begin();
-          QLinkedList<QString>::iterator qllItEnd = qllDbs.end();
+          QList<QString>::iterator qllIt = qllDbs.begin();
+          QList<QString>::iterator qllItEnd = qllDbs.end();
 
           for (; qllIt != qllItEnd; ++qllIt)
           {

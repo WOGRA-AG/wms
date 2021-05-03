@@ -17,7 +17,7 @@
 #include <qapplication.h>
 #include <qinputdialog.h>
 #include <qpushbutton.h>
-#include <QLinkedList>
+#include <QList>
 
 // WMS Includes
 #include "CdmMessageManager.h"
@@ -59,7 +59,7 @@ CwmsGuiDatabaseSelection::~CwmsGuiDatabaseSelection()
  * @return  void                                             //                                   *
  * @comment This method fills the dialog with the mandators.                                      *
  *----------------last changed: --------------------------------Di 4. Sep 14:27:10 2012-----------*/
-void CwmsGuiDatabaseSelection::FillDialog(QLinkedList<QString>& p_rqllDatabases)
+void CwmsGuiDatabaseSelection::FillDialog(QList<QString>& p_rqllDatabases)
 {
    m_bNeedToShow = true;
    CdmDataProvider* pCdmManager = CdmSessionManager::GetDataProvider();
@@ -69,8 +69,8 @@ void CwmsGuiDatabaseSelection::FillDialog(QLinkedList<QString>& p_rqllDatabases)
       m_pqlbMandators->clear();
 
       
-	  QLinkedList<QString>::iterator qvlIt = p_rqllDatabases.begin();
-	  QLinkedList<QString>::iterator qvlItEnd = p_rqllDatabases.end();
+	  QList<QString>::iterator qvlIt = p_rqllDatabases.begin();
+	  QList<QString>::iterator qvlItEnd = p_rqllDatabases.end();
 
       for (; qvlIt != qvlItEnd; ++ qvlIt)
       {

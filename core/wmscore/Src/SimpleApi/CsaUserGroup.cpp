@@ -27,12 +27,12 @@ CsaUserGroup::~CsaUserGroup()
 
 QVariantList CsaUserGroup::getUsers()
 {
-    QLinkedList<CumUser*> qllUsers;
+    QList<CumUser*> qllUsers;
     QVariantList qlUsers;
     getInternals()->GetUserListNewPointers(qllUsers);
 
-    QLinkedList<CumUser*>::iterator qllIt = qllUsers.begin();
-    QLinkedList<CumUser*>::iterator qllItEnd = qllUsers.end();
+    QList<CumUser*>::iterator qllIt = qllUsers.begin();
+    QList<CumUser*>::iterator qllItEnd = qllUsers.end();
 
     for(; qllIt != qllItEnd; ++qllIt)
     {

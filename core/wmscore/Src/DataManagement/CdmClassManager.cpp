@@ -16,7 +16,7 @@
 #include <qstring.h>
 #include <qdom.h>
 #include <qdatetime.h>
-#include <QLinkedList>
+#include <QList>
 #include <QVariant>
 #include <QDebug>
 
@@ -181,11 +181,11 @@ CdmClass *CdmClassManager::findEventClassByKeyname(QString qstrKeyname)
  * @method  CdmClassManager::GetInheritedClasses             // public                            *
  * @return  int                                              //                                   *
  * @param   CdmClass* p_pCdmBaseClass                        //                                   *
- * @param   QLinkedList<CdmClass*>& p_rqvlClassList           //                                   *
+ * @param   QList<CdmClass*>& p_rqvlClassList           //                                   *
  * @comment This method returns all classes which are inherited from this class.                  *
  *----------------last changed: --------------------------------Sa 13. Aug 21:16:47 2005----------*/
 int CdmClassManager::GetInheritedClasses(  CdmClass* p_pCdmBaseClass,
-                                           QLinkedList<CdmClass*>& p_rqvlClassList )
+                                           QList<CdmClass*>& p_rqvlClassList )
 {
     int iRet = CdmLogging::eDmUnknownClassError;
     SYNCHRONIZED_READ;
@@ -520,10 +520,10 @@ long CdmClassManager::GetNewClassId()
 /** +-=---------------------------------------------------------Mo 19. Nov 18:35:47 2012----------*
  * @method  CdmClassManager::GetClassList                    // public, slots                     *
  * @return  void                                             //                                   *
- * @param   QLinkedList<CdmClass*>& p_pqlClasses             //                                   *
+ * @param   QList<CdmClass*>& p_pqlClasses             //                                   *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------Mo 19. Nov 18:35:47 2012----------*/
-void CdmClassManager::GetClassList(QLinkedList<CdmClass*>& p_pqlClasses)
+void CdmClassManager::GetClassList(QList<CdmClass*>& p_pqlClasses)
 {
     SYNCHRONIZED_READ;
     CdmClass* pCdmClass = nullptr;

@@ -41,9 +41,9 @@ private:
 public:
     CwmsUserSchemeSelection( QWidget* parent = NULL);
     virtual ~CwmsUserSchemeSelection( );
-    void FillDialog(QLinkedList<QString>& p_rqllDatabases);
+    void FillDialog(QList<QString>& p_rqllDatabases);
 
-    static QString SelectScheme(QLinkedList<QString> &qllSchemes, QWidget *p_pParent);
+    static QString SelectScheme(QList<QString> &qllSchemes, QWidget *p_pParent);
 private slots:
     void ListBoxDoubleClickedSlot( );
     void CancelClickedSlot( );

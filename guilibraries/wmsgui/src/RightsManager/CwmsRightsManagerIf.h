@@ -15,7 +15,7 @@
 
 
 // System and QT Includes
-#include <QLinkedList>
+#include <QList>
 #include <QDialog>
 
 // WMS Includes
@@ -43,8 +43,8 @@ class WMSGUI_API CwmsRightsManagerIf : public QDialog, public Ui::CwmsRightsMana
     */
    private:
       CdmObjectContainer* m_rpContainer;
-      QLinkedList<CumUser*> m_qvlUsers;
-      QLinkedList<CumUserGroup*> m_qvlUserGroups;
+      QList<CumUser*> m_qvlUsers;
+      QList<CumUserGroup*> m_qvlUserGroups;
 
 
 

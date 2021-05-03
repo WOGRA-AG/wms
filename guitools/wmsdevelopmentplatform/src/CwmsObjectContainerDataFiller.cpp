@@ -49,11 +49,11 @@ void CwmsObjectContainerDataFiller::FillAllObjectContainersToView(QTreeWidget* p
           CHKPTR(pClassManager))
       {
           p_pTree->clear();
-          QLinkedList<CdmClass*> qlClasses;
+          QList<CdmClass*> qlClasses;
           pClassManager->GetClassList(qlClasses);
 
-          QLinkedList<CdmClass*>::const_iterator qIt    = qlClasses.begin();
-          QLinkedList<CdmClass*>::const_iterator qItEnd = qlClasses.end();
+          QList<CdmClass*>::const_iterator qIt    = qlClasses.begin();
+          QList<CdmClass*>::const_iterator qItEnd = qlClasses.end();
 
           for ( ; qIt != qItEnd; ++qIt)
           {
@@ -69,10 +69,10 @@ void CwmsObjectContainerDataFiller::FillAllObjectContainersToView(QTreeWidget* p
                   if (!pClass->IsSingleton())
                   {
                       pqtwClassItem->setText(0, pClass->GetFullQualifiedName());
-                      QLinkedList<QString>  qvlObjectLists = pContainerManager->GetContainerList(pClass->GetId());
+                      QList<QString>  qvlObjectLists = pContainerManager->GetContainerList(pClass->GetId());
 
-                      QLinkedList<QString>::iterator qmIt    = qvlObjectLists.begin();
-                      QLinkedList<QString>::iterator qmItEnd = qvlObjectLists.end();
+                      QList<QString>::iterator qmIt    = qvlObjectLists.begin();
+                      QList<QString>::iterator qmItEnd = qvlObjectLists.end();
 
                       QSet<QString> qsetAlreadyAddedContainers;
                       int iCount = 0;
@@ -138,10 +138,10 @@ void CwmsObjectContainerDataFiller::FillObjectContainersToClass(CdmClass* p_pCla
             CHKPTR(pContainerManager))
         {
             QTreeWidgetItem* pqlviOLItem = new QTreeWidgetItem(p_pItem);
-            QLinkedList<QString>  qvlObjectLists = pContainerManager->GetContainerList(p_pClass->GetId());
+            QList<QString>  qvlObjectLists = pContainerManager->GetContainerList(p_pClass->GetId());
 
-            QLinkedList<QString>::iterator qmIt    = qvlObjectLists.begin();
-            QLinkedList<QString>::iterator qmItEnd = qvlObjectLists.end();
+            QList<QString>::iterator qmIt    = qvlObjectLists.begin();
+            QList<QString>::iterator qmItEnd = qvlObjectLists.end();
 
             for ( ; qmIt != qmItEnd; ++qmIt)
             {
@@ -182,10 +182,10 @@ void CwmsObjectContainerDataFiller::FillObjectContainersToClass(CdmClass* p_pCla
             CHKPTR(pContainerManager))
         {
             p_pTreeWidget->clear();
-            QLinkedList<QString> qvlObjectLists = pContainerManager->GetContainerList(p_pClass->GetId());
+            QList<QString> qvlObjectLists = pContainerManager->GetContainerList(p_pClass->GetId());
 
-            QLinkedList<QString>::iterator qmIt    = qvlObjectLists.begin();
-            QLinkedList<QString>::iterator qmItEnd = qvlObjectLists.end();
+            QList<QString>::iterator qmIt    = qvlObjectLists.begin();
+            QList<QString>::iterator qmItEnd = qvlObjectLists.end();
 
             for ( ; qmIt != qmItEnd; ++qmIt)
             {

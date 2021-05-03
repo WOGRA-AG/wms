@@ -7,7 +7,7 @@
 
 // System and QT Includes
 #include <QMap>
-#include <QLinkedList>
+#include <QList>
 #include <QVariant>
 
 // own Includes
@@ -46,12 +46,12 @@ private:
        * List of object factories which must be informed
        * by changes
        */
-    QLinkedList<CdmContainerAdaptor*> m_qvlObjectFactories;
+    QList<CdmContainerAdaptor*> m_qvlObjectFactories;
     long                          m_lClassId;
     QString                       m_qstrComment;
     bool                          m_bIsAccessorListModified;
-    QLinkedList<CdmObject*>       m_qlNewModifiedObjects;
-    QLinkedList<CdmObject*>       m_qlDeletedObjects;
+    QList<CdmObject*>       m_qlNewModifiedObjects;
+    QList<CdmObject*>       m_qlDeletedObjects;
     bool m_bIsTree;
     bool m_bImportMode;
     bool m_bIsImmutable;
@@ -75,12 +75,12 @@ public:
     CdmObject* CopyObject(const CdmObject* p_pCdmObject);
     int DeleteObject(CdmObject* p_pCdmObject);
     int DeleteObject(long p_lObjectId);
-    void GetObjectList(QLinkedList<CdmObject*>& p_rqvlObjects);
+    void GetObjectList(QList<CdmObject*>& p_rqvlObjects);
     const CdmRights& GetRights() const;
     virtual void ResetNewModified();
-    QLinkedList<CdmObject*> GetDeletedList();
-    QLinkedList<CdmObject*> GetNewModifiedList();
-    void GetObjects(QLinkedList<long>&  p_rqllObjectIds, QLinkedList<CdmObject*>& p_rqllObjects);
+    QList<CdmObject*> GetDeletedList();
+    QList<CdmObject*> GetNewModifiedList();
+    void GetObjects(QList<long>&  p_rqllObjectIds, QList<CdmObject*>& p_rqllObjects);
     QVariant GetVariant() const;
     bool HasDeploymentRelevantOwner() const;
     void SetObjects(QVariantList& p_rqvObjects);
@@ -112,12 +112,12 @@ public:
     void SetDeleted();
     CdmObject* FindObjectByIndex(int p_iIndex);
     void DeleteAllObjects();
-    long LoadObjects(const QLinkedList<long>& p_rqvlObjectIds, bool p_bWithChildren = true);
+    long LoadObjects(const QList<long>& p_rqvlObjectIds, bool p_bWithChildren = true);
     void ClearContainerLocal();
     void RemoveObjectLocal(long p_lObjectId);
     void CopyObjects(CdmObjectContainer* p_pContainerSource);
     int MoveObjectsTo(CdmObjectContainer *p_pDestContainer);
-    void GetObjectList(QLinkedList<long>& p_rqvlObjects);
+    void GetObjectList(QList<long>& p_rqvlObjects);
     virtual QString GetInfo() const;
     bool IsTypeOf(QString p_qstrClassName) const;
     long CountModifiedObjects() const;
@@ -138,7 +138,7 @@ public:
     long Refresh();
     QMap<int, EdmRight> GetAccessorMap() const;
     CdmObject *CreateObject(long p_lObjectId);
-    QLinkedList<CdmContainerAdaptor *> GetObjectFactoryList();
+    QList<CdmContainerAdaptor *> GetObjectFactoryList();
 protected:
     virtual void SetModified();
 
@@ -156,7 +156,7 @@ public:
 
 private:
     void CopyRights(CdmObjectContainer* p_pCdmSourceObjectList);
-    void LoadChildrenObjects(const QLinkedList<long>& p_rqvlObjectIds);
+    void LoadChildrenObjects(const QList<long>& p_rqvlObjectIds);
     void LoadObjectRefs(QMap<long,long>& p_rqmObjectRefs);
     void UpdateFactoriesObjectModified();
     bool IsDeploymentObjectKeynameValid(QString &p_rqstrKeyname);

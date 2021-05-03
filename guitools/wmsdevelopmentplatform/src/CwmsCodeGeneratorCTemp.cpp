@@ -632,16 +632,16 @@ QString CwmsCodeGeneratorCTemp::GetReturnType(EdmValueType p_eDmValue)
       qstrRet = "int";
       break;
    case eDmValueListDouble:
-      qstrRet = "QLinkedList<double>";
+      qstrRet = "QList<double>";
       break;
    case eDmValueListInt:
-      qstrRet = "QLinkedList<int>";
+      qstrRet = "QList<int>";
       break;
    case eDmValueListObjects:
-      qstrRet = "QLinkedList<CdmObject*>";
+      qstrRet = "QList<CdmObject*>";
       break;
    case eDmValueListString:
-      qstrRet = "QLinkedList<QString>";
+      qstrRet = "QList<QString>";
       break;
    case eDmValueLong:
       qstrRet = "long";

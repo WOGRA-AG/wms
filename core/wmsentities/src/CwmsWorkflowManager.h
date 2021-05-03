@@ -78,10 +78,10 @@ class BASETOOLS_API CwmsWorkflowManager : public QObject
    /** +-=---------------------------------------------------------Mo 22. Okt 15:30:59 2012-------*
     * @method  CwmsWorkflowManager::GetWorkflowList          // public                            *
     * @return  void                                          //                                   *
-    * @param   QLinkedList<CdmObject*>& p_rqlViews           //                                   *
+    * @param   QList<CdmObject*>& p_rqlViews           //                                   *
     * @comment                                                                                    *
     *----------------last changed: -----------------------------Mo 22. Okt 15:30:59 2012----------*/
-    void GetWorkflowList(QLinkedList<CdmObject*>& p_rqlViews);
+    void GetWorkflowList(QList<CdmObject*>& p_rqlViews);
 
 
 

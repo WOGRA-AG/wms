@@ -6,7 +6,7 @@
 
 #include <QVariant>
 #include <QString>
-#include <QLinkedList>
+#include <QList>
 
 // Forwards
 class CwnUserManager;
@@ -18,7 +18,7 @@ class CwnCommandGetListOfUsersInList : public CwnCommandBase
 public:
     CwnCommandGetListOfUsersInList(CwnDataAccess* m_rpDataAccess);
     virtual ~CwnCommandGetListOfUsersInList();
-    QLinkedList<CumUser*> getResult();
+    QList<CumUser*> getResult();
 
     void setGroupId(long groupId);
     long getGroupId();
@@ -27,7 +27,7 @@ public:
     QString queryCausedError;
 
 private:
-    QLinkedList<CumUser *> p_qvlUsers;
+    QList<CumUser *> p_qvlUsers;
     long groupId;
 
 

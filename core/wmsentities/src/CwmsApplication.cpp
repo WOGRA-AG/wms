@@ -426,10 +426,10 @@ QStringList CwmsApplication::GetApplicationList(bool p_bDesktop, bool p_bWeb, bo
       if (CHKPTR(pManager))
       {
          pManager->ReloadContainerComplete(pContainer);
-         QLinkedList<CdmObject*> qllObjects;
+         QList<CdmObject*> qllObjects;
          pContainer->GetObjectList(qllObjects);
-         QLinkedList<CdmObject*>::iterator qllIt = qllObjects.begin();
-         QLinkedList<CdmObject*>::iterator qllItEnd = qllObjects.end();
+         QList<CdmObject*>::iterator qllIt = qllObjects.begin();
+         QList<CdmObject*>::iterator qllItEnd = qllObjects.end();
          
 
          for (; qllIt != qllItEnd; ++qllIt)
@@ -469,7 +469,7 @@ CdmObject* CwmsApplication::GetApplication(QString p_qstrApplication)
 
    if (pCdmQuery)
    {
-      QLinkedList<long> qllResults = pCdmQuery->GetResultList();         
+      QList<long> qllResults = pCdmQuery->GetResultList();         
 
       if (qllResults.count() > 0)
       {

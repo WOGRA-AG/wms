@@ -21,7 +21,7 @@
 // System and QT Includes
 #include <QComboBox>
 #include <QMap>
-#include <QLinkedList>
+#include <QList>
 
 // Own Includes
 #include "wmsgui.h"
@@ -103,10 +103,10 @@ private:
    /** +-=---------------------------------------------------------Sa 14. Nov 11:29:57 2009-------*
     * @method  CwmsUserSelectionBox::GetUserList             // private                           *
     * @return  void                                          //                                   *
-    * @param   QLinkedList<CumUser*>& p_rqllUsers            //                                   *
+    * @param   QList<CumUser*>& p_rqllUsers            //                                   *
     * @comment                                                                                    *
     *----------------last changed: -----------------------------Sa 14. Nov 11:29:57 2009----------*/
-    void GetUserList(QLinkedList<CumUser*>& p_rqllUsers);
+    void GetUserList(QList<CumUser*>& p_rqllUsers);
 };
 
 #endif //

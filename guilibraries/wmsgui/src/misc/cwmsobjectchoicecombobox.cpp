@@ -10,7 +10,7 @@
 
 
 // System and Qt Includes
-#include <QLinkedList>
+#include <QList>
 #include <QKeyEvent>
 
 // WMS Includes
@@ -131,7 +131,7 @@ void CwmsObjectChoiceComboBox::SetContainerAndDisplayValue(  CdmObjectContainer*
       
       if(m_rpCdmProxy)
       {
-         QLinkedList<long> qvlResults;
+         QList<long> qvlResults;
 
          m_rpCdmProxy->CreateQuery(p_pContainer);
          CdmQuery* pCdmQuery = m_rpCdmProxy->GetQuery();
@@ -356,7 +356,7 @@ void CwmsObjectChoiceComboBox::FillWidget(CdmQuery& p_rcCdmQuery)
  *----------------last changed: Wolfgang GraÃŸhof----------------Fr 12. Jan 19:54:58 2007----------*/
 void CwmsObjectChoiceComboBox::FillDialog(CdmObjectContainer* p_pContainer,
                                           QString p_qstrValueKeyname,
-                                          QLinkedList<long>& p_rqvlObjects)
+                                          QList<long>& p_rqvlObjects)
 {
 	ClearEntries();
    QString qstrValueKeyname = p_qstrValueKeyname;
@@ -369,8 +369,8 @@ void CwmsObjectChoiceComboBox::FillDialog(CdmObjectContainer* p_pContainer,
 
       if (p_rqvlObjects.count() > 0)
       {
-         QLinkedList<long>::iterator qvlIt = p_rqvlObjects.begin();
-         QLinkedList<long>::iterator qvlItEnd = p_rqvlObjects.end();
+         QList<long>::iterator qvlIt = p_rqvlObjects.begin();
+         QList<long>::iterator qvlItEnd = p_rqvlObjects.end();
 
          for(; qvlIt != qvlItEnd; ++qvlIt, ++iIndex)
          {
@@ -402,7 +402,7 @@ void CwmsObjectChoiceComboBox::FillDialog(CdmObjectContainer* p_pContainer,
 
    if(CHKPTR(p_pContainer))
    {
-      QLinkedList<CdmObject*> qvlObjects;
+      QList<CdmObject*> qvlObjects;
       p_pContainer->GetObjectList(qvlObjects);
       int iIndex = 0;
 
@@ -410,8 +410,8 @@ void CwmsObjectChoiceComboBox::FillDialog(CdmObjectContainer* p_pContainer,
       //insertItem("-");
       ++iIndex;
 
-      QLinkedList<CdmObject*>::iterator qvlIt = qvlObjects.begin();
-      QLinkedList<CdmObject*>::iterator qvlItEnd = qvlObjects.end();
+      QList<CdmObject*>::iterator qvlIt = qvlObjects.begin();
+      QList<CdmObject*>::iterator qvlItEnd = qvlObjects.end();
 
       for(; qvlIt != qvlItEnd; ++qvlIt, ++iIndex)
       {

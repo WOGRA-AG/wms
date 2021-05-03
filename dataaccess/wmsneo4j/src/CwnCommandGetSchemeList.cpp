@@ -13,7 +13,7 @@ CwnCommandGetSchemeList::~CwnCommandGetSchemeList()
 
 }
 
-QLinkedList<QString> CwnCommandGetSchemeList::GetSchemes() const
+QList<QString> CwnCommandGetSchemeList::GetSchemes() const
 {
     return m_qllSchemes;
 }

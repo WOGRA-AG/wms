@@ -265,7 +265,7 @@ void CwtObjectContainer::GetContainerList()
    QVERIFY(pCdmOLManager != nullptr);
    QString qstrKeyname = CwtHelper::CreateUniqueName(TEST_CONTAINER_NAME);
    QVERIFY(SUCCESSFULL(pCdmOLManager->CreateContainer(m_pClass, qstrKeyname)));
-   QLinkedList<QString> qlContainers = pCdmOLManager->GetContainerList(m_pClass->GetId());
+   QList<QString> qlContainers = pCdmOLManager->GetContainerList(m_pClass->GetId());
    QVERIFY(qlContainers.count() > 0);
 }
 

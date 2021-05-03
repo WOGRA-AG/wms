@@ -10,7 +10,7 @@
 
 // System and QT includes
 #include <QWidget>
-#include <QLinkedList>
+#include <QList>
 
 
 // own Inlcudes
@@ -28,7 +28,7 @@ class CwmsUserIf : public QWidget, public Ui::CwmsUserWidget
 
    private:
       CumUser* m_rpCumUser;
-      QLinkedList<CumUserGroup*> m_qvlUserGroups;
+      QList<CumUserGroup*> m_qvlUserGroups;
 
 
    public:

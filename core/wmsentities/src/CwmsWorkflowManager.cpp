@@ -12,7 +12,7 @@
  *****************************************************************************/
 
 // System and QT Includes
-#include <QLinkedList>
+#include <QList>
 
 // WMS Includes
 #include "CdmMessageManager.h"
@@ -107,10 +107,10 @@ CdmObjectContainer* CwmsWorkflowManager::GetWorkflowStepsObjectList()
 /** +-=---------------------------------------------------------Mo 22. Okt 15:30:59 2012----------*
  * @method  CwmsWorkflowManager::GetWorkflowList             // public                            *
  * @return  void                                             //                                   *
- * @param   QLinkedList<CdmObject*>& p_rqlViews              //                                   *
+ * @param   QList<CdmObject*>& p_rqlViews              //                                   *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------Mo 22. Okt 15:30:59 2012----------*/
-void CwmsWorkflowManager::GetWorkflowList(QLinkedList<CdmObject*>& p_rqlViews)
+void CwmsWorkflowManager::GetWorkflowList(QList<CdmObject*>& p_rqlViews)
 {
     CdmObjectContainer* pContainer = GetObjectList();
 
@@ -157,7 +157,7 @@ CdmObject* CwmsWorkflowManager::FindWorkflowByName(QString p_qstrName)
 
     if (pQuery)
     {
-        QLinkedList<long> qllResults = pQuery->GetResultList();
+        QList<long> qllResults = pQuery->GetResultList();
 
         if (qllResults.count() > 0)
         {

@@ -576,7 +576,7 @@ long CdbCommandUpdateClass::InsertOrUpdateBaseClasses(CdmClass* p_pCdmClass)
       if(ExecuteQuery(qstrQuery, cQSqlQuery) > 0)
       {
          lRet = EC(eDmFalse);
-         QLinkedList<int> qvlDbBaseClasses;
+         QList<int> qvlDbBaseClasses;
 
          cQSqlQuery.first();
          if(cQSqlQuery.isValid())
@@ -607,8 +607,8 @@ long CdbCommandUpdateClass::InsertOrUpdateBaseClasses(CdmClass* p_pCdmClass)
          }
 
          // checking if a base class must be removed from DB
-         QLinkedList<int>::iterator qvlIt = qvlDbBaseClasses.begin();
-         QLinkedList<int>::iterator qvlItEnd = qvlDbBaseClasses.end();
+         QList<int>::iterator qvlIt = qvlDbBaseClasses.begin();
+         QList<int>::iterator qvlItEnd = qvlDbBaseClasses.end();
 
          for(; qvlIt != qvlItEnd; ++qvlIt)
          {
@@ -651,12 +651,12 @@ bool CdbCommandUpdateClass::FindValueInMap(  long p_lValue, QMap<long, long>& p_
    return bRet;
 }
 
-bool CdbCommandUpdateClass::FindValueInList(  int p_iValue, QLinkedList<int>& p_rqvlList )
+bool CdbCommandUpdateClass::FindValueInList(  int p_iValue, QList<int>& p_rqvlList )
 {
    bool bRet = false;
 
-   QLinkedList<int>::iterator qvlIt = p_rqvlList.begin();
-   QLinkedList<int>::iterator qvlItEnd = p_rqvlList.end();
+   QList<int>::iterator qvlIt = p_rqvlList.begin();
+   QList<int>::iterator qvlItEnd = p_rqvlList.end();
 
    for(; qvlIt != qvlItEnd; ++qvlIt)
    {

@@ -15,7 +15,7 @@
 #include <qfile.h>
 #include <qdom.h>
 #include <qtextstream.h>
-#include <QLinkedList>
+#include <QList>
 
 // WMS Commons
 #include "CwmsUtilities.h"
@@ -249,8 +249,8 @@ bool CdmDataProvider::IsDataProvider() const
 CdmScheme* CdmDataProvider::GetSchemeLocal(QString &p_qstrSchemeName)
 {
     CdmScheme* pLocal = nullptr;
-    QLinkedList<CdmScheme*>::iterator qIt = m_qlSchemes.begin();
-    QLinkedList<CdmScheme*>::iterator qItEnd = m_qlSchemes.end();
+    QList<CdmScheme*>::iterator qIt = m_qlSchemes.begin();
+    QList<CdmScheme*>::iterator qItEnd = m_qlSchemes.end();
 
     for (; qIt != qItEnd; ++qIt)
     {
@@ -267,8 +267,8 @@ CdmScheme* CdmDataProvider::GetSchemeLocal(QString &p_qstrSchemeName)
 CdmScheme* CdmDataProvider::GetSchemeLocal(long p_lSchemeId)
 {
     CdmScheme* pLocal = nullptr;
-    QLinkedList<CdmScheme*>::iterator qIt = m_qlSchemes.begin();
-    QLinkedList<CdmScheme*>::iterator qItEnd = m_qlSchemes.end();
+    QList<CdmScheme*>::iterator qIt = m_qlSchemes.begin();
+    QList<CdmScheme*>::iterator qItEnd = m_qlSchemes.end();
 
     for (; qIt != qItEnd; ++qIt)
     {
@@ -323,8 +323,8 @@ CdmScheme* CdmDataProvider::FindSchemeById(long p_lId)
     }
     else
     {
-        QLinkedList<CdmScheme*>::iterator iIt = m_qlSchemes.begin();
-        QLinkedList<CdmScheme*>::iterator iItEnd = m_qlSchemes.end();
+        QList<CdmScheme*>::iterator iIt = m_qlSchemes.begin();
+        QList<CdmScheme*>::iterator iItEnd = m_qlSchemes.end();
 
         for(; iIt != iItEnd; ++iIt)
         {
@@ -358,8 +358,8 @@ CdmScheme* CdmDataProvider::FindSchemeByName(QString &p_qstrDatabaseName)
 {
     CdmScheme* pCdmDatabase = nullptr;
 
-    QLinkedList<CdmScheme*>::iterator iIt = m_qlSchemes.begin();
-    QLinkedList<CdmScheme*>::iterator iItEnd = m_qlSchemes.end();
+    QList<CdmScheme*>::iterator iIt = m_qlSchemes.begin();
+    QList<CdmScheme*>::iterator iItEnd = m_qlSchemes.end();
 
     for(; iIt != iItEnd; ++iIt)
     {
@@ -555,8 +555,8 @@ long CdmDataProvider::RemoveScheme(long p_lDatabaseId)
 
     if(CHKPTR(m_rpIdmDataAccess))
     {
-        QLinkedList<CdmScheme*>::iterator iIt = m_qlSchemes.begin();
-        QLinkedList<CdmScheme*>::iterator iItEnd = m_qlSchemes.end();
+        QList<CdmScheme*>::iterator iIt = m_qlSchemes.begin();
+        QList<CdmScheme*>::iterator iItEnd = m_qlSchemes.end();
 
         for(; iIt != iItEnd; ++iIt)
         {
@@ -597,8 +597,8 @@ long CdmDataProvider::RemoveScheme(QString &p_qstrDatabaseName)
 
         if(lRet > 0)
         {
-            QLinkedList<CdmScheme*>::iterator qllIt = m_qlSchemes.begin();
-            QLinkedList<CdmScheme*>::iterator qllItEnd = m_qlSchemes.end();
+            QList<CdmScheme*>::iterator qllIt = m_qlSchemes.begin();
+            QList<CdmScheme*>::iterator qllItEnd = m_qlSchemes.end();
 
             for (; qllIt != qllItEnd; ++qllIt)
             {
@@ -625,8 +625,8 @@ long CdmDataProvider::RemoveScheme(QString &p_qstrDatabaseName)
 
 void CdmDataProvider::RemoveAllLocalSchemes()
 {
-    QLinkedList<CdmScheme*>::iterator qllIt = m_qlSchemes.begin();
-    QLinkedList<CdmScheme*>::iterator qllItEnd = m_qlSchemes.end();
+    QList<CdmScheme*>::iterator qllIt = m_qlSchemes.begin();
+    QList<CdmScheme*>::iterator qllItEnd = m_qlSchemes.end();
 
     for (; qllIt != qllItEnd; ++qllIt)
     {
@@ -822,18 +822,18 @@ const CumUser* CdmDataProvider::GetUser() const
     return CdmSessionManager::GetSessionManager()->GetCurrentUser();
 }
 
-void CdmDataProvider::GetSchemeList(QLinkedList<QString>& p_rqvlDatabases)
+void CdmDataProvider::GetSchemeList(QList<QString>& p_rqvlDatabases)
 {
     IdmDataAccess* pIdmDataAccess = nullptr;
     pIdmDataAccess = GetDataAccess();
 
     if(CHKPTR(pIdmDataAccess))
     {
-        QLinkedList<QString> qllDatabases;
+        QList<QString> qllDatabases;
         pIdmDataAccess->GetSchemeList(qllDatabases);
 
-        QLinkedList<QString>::iterator qvlIt = qllDatabases.begin();
-        QLinkedList<QString>::iterator qvlItEnd = qllDatabases.end();
+        QList<QString>::iterator qvlIt = qllDatabases.begin();
+        QList<QString>::iterator qvlItEnd = qllDatabases.end();
 
         for (; qvlIt != qvlItEnd; ++ qvlIt)
         {

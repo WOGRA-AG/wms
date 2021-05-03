@@ -104,12 +104,12 @@ void CwmsUserChoiceIf::SearchUserClickedSlot()
     CdmDataProvider* pCdmManager = CdmSessionManager::GetDataProvider();
     CumUserManager* pCumUserManager = pCdmManager->GetUserManager();
     QString qstrSearchString = m_pqleInputSearch->text();
-    QLinkedList<CumUser*> qllUsers = pCumUserManager->FindUsersUnmanaged(qstrSearchString);
+    QList<CumUser*> qllUsers = pCumUserManager->FindUsersUnmanaged(qstrSearchString);
 
     m_pqlvUsers->clear();
 
-    QLinkedList<CumUser*>::iterator qvlIt    = qllUsers.begin();
-    QLinkedList<CumUser*>::iterator qvlItEnd = qllUsers.end();
+    QList<CumUser*>::iterator qvlIt    = qllUsers.begin();
+    QList<CumUser*>::iterator qvlItEnd = qllUsers.end();
 
     for(; qvlIt != qvlItEnd; ++qvlIt)
     {

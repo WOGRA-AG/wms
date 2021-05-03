@@ -16,7 +16,7 @@ private:
     int GetNewIdForClassMembers(long p_lClassId, QString p_qstrName, QString p_qstrTable);
     long DeleteBaseClassFromDb(long p_lClassId, long p_lBaseClassId);
     long InsertBaseClass(long p_lClassId, long p_lBaseClassId);
-    bool FindValueInList(int p_iValue, QLinkedList<int> &p_rqvlList);
+    bool FindValueInList(int p_iValue, QList<int> &p_rqvlList);
     bool FindValueInMap(long p_lValue, QMap<long, long> &p_rqmMap);
     long InsertOrUpdateBaseClasses(CdmClass *p_pCdmClass);
     long DeleteMember(long p_lMemberId);

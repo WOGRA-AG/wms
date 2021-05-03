@@ -13,7 +13,7 @@
 
 // System and QT Includes
 #include <QCoreApplication>
-#include <QLinkedList>
+#include <QList>
 #include <QDir>
 #include <QDebug>
 
@@ -190,10 +190,10 @@ CdmObjectContainer* CwmsReportManager::GetObjectList()
 /** +-=---------------------------------------------------------Mo 27. Aug 14:40:50 2012----------*
  * @method  CwmsReportManager::GetReportList                 // public                            *
  * @return  void                                             //                                   *
- * @param   QLinkedList<CdmObject*>& p_rqlViews              //                                   *
+ * @param   QList<CdmObject*>& p_rqlViews              //                                   *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------Mo 27. Aug 14:40:50 2012----------*/
-void CwmsReportManager::GetReportList(QLinkedList<CdmObject*>& p_rqlViews)
+void CwmsReportManager::GetReportList(QList<CdmObject*>& p_rqlViews)
 {
    CdmObjectContainer* pContainer = GetObjectList();
 
@@ -238,7 +238,7 @@ CwmsPrintingTemplate CwmsReportManager::GetReport(QString p_qstrName)
 
    if (pQuery)
    {
-      QLinkedList<long> qllResults = pQuery->GetResultList();
+      QList<long> qllResults = pQuery->GetResultList();
 
       if (qllResults.count() > 0)
       {
@@ -389,7 +389,7 @@ CwmsPrintingTemplate CwmsReportManager::GetDefaultReportByClassKeyname(QString p
 
       if (CHKPTR(pQuery) && pQuery->GetResultCount() > 0)
       {
-         const QLinkedList<long>& qllResults = pQuery->GetResultList();
+         const QList<long>& qllResults = pQuery->GetResultList();
          long lObjectId = (*qllResults.begin());
          CdmObjectContainer* pList = GetObjectList();
 

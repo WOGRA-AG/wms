@@ -14,7 +14,7 @@
 
 
 // System and QT Includes
-#include <QLinkedList>
+#include <QList>
 #include <QDialog>
 
 
@@ -37,8 +37,8 @@ class CwmsUniversalRightsManagerIf : public QDialog, public Ui::CwmsRightsManage
 
    private:
       CdmRights* m_rpCdmRights;
-      QLinkedList<CumUser*> m_qvlUsers;
-      QLinkedList<CumUserGroup*> m_qvlUserGroups;
+      QList<CumUser*> m_qvlUsers;
+      QList<CumUserGroup*> m_qvlUserGroups;
 
 
 

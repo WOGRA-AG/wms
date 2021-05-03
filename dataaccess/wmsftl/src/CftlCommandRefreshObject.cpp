@@ -60,7 +60,7 @@ int CftlCommandRefreshObject::Execute()
 {
     int lRet = CdmLogging::eDmObjectAccessError;
     CftlContainerTableSelect selector(m_rpObject->GetObjectContainer(), GetDialect());
-    QLinkedList<long> qllIds;
+    QList<long> qllIds;
     qllIds.append(m_rpObject->GetId());
     selector.SetObjectList(qllIds);
     selector.Execute(GetInterface());

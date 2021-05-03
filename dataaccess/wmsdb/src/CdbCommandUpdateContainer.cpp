@@ -40,7 +40,7 @@ int CdbCommandUpdateContainer::Execute()
        }
 
        // first step updating all objects
-       QLinkedList<CdmObject*> qvlObjects;
+       QList<CdmObject*> qvlObjects;
        qvlObjects = m_rpObjectContainer->GetNewModifiedList();
        lRet = UpdateObjects(m_rpObjectContainer, qvlObjects, m_lSessionId);
        qvlObjects = m_rpObjectContainer->GetDeletedList();
@@ -83,12 +83,12 @@ int CdbCommandUpdateContainer::Execute()
  }
 
  long CdbCommandUpdateContainer::UpdateObjects(CdmObjectContainer* p_pContainer,
-                                       QLinkedList<CdmObject*>& p_rqlObjects,
+                                       QList<CdmObject*>& p_rqlObjects,
                                        long p_lSessionId)
  {
     long lRet = CdmLogging::eDmObjectAccessError;
-    QLinkedList<CdmObject*>::iterator qvlIt    = p_rqlObjects.begin();
-    QLinkedList<CdmObject*>::iterator qvlItEnd = p_rqlObjects.end();
+    QList<CdmObject*>::iterator qvlIt    = p_rqlObjects.begin();
+    QList<CdmObject*>::iterator qvlItEnd = p_rqlObjects.end();
 
     for(; qvlIt != qvlItEnd; ++qvlIt)
     {
@@ -129,12 +129,12 @@ int CdbCommandUpdateContainer::Execute()
  }
 
  long CdbCommandUpdateContainer::DeleteObjects(CdmObjectContainer* p_pContainer,
-                                       QLinkedList<CdmObject*>& p_rqlObjects,
+                                       QList<CdmObject*>& p_rqlObjects,
                                        long p_lSessionId)
  {
     long lRet = CdmLogging::eDmObjectAccessError;
-    QLinkedList<CdmObject*>::iterator qvlIt    = p_rqlObjects.begin();
-    QLinkedList<CdmObject*>::iterator qvlItEnd = p_rqlObjects.end();
+    QList<CdmObject*>::iterator qvlIt    = p_rqlObjects.begin();
+    QList<CdmObject*>::iterator qvlItEnd = p_rqlObjects.end();
 
     for(; qvlIt != qvlItEnd; ++qvlIt)
     {

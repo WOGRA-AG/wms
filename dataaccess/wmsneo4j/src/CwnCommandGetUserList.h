@@ -6,7 +6,7 @@
 
 #include <QVariant>
 #include <QString>
-#include <QLinkedList>
+#include <QList>
 
 // Forwards
 class CwnUserManager;
@@ -19,7 +19,7 @@ public:
     CwnCommandGetUserList(CwnDataAccess* m_rpDataAccess);
     CwnCommandGetUserList(QString p_qstrUserLoginNameEmail, CwnDataAccess* m_rpDataAccess);
     virtual ~CwnCommandGetUserList();
-    QLinkedList<CumUser*> getResult();
+    QList<CumUser*> getResult();
 
 
     QString createQuery();
@@ -27,7 +27,7 @@ public:
     QString queryCausedError;
 
 private:
-    QLinkedList<CumUser*> p_qvlUsers;
+    QList<CumUser*> p_qvlUsers;
     QString m_qstrUserLoginNameEmail;
     bool m_specialSearch;
     QVariantList m_dataList;

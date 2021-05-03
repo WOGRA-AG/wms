@@ -1,4 +1,3 @@
-#include <unistd.h>
 #include <QStringList>
 #include <QDir>
 #include <QSettings>

@@ -13,7 +13,7 @@
 #include <QTextStream>
 #include <QVariant>
 #include <QCoreApplication>
-#include <QLinkedList>
+#include <QList>
 #include <QScriptable>
 #include <QString>
 #include <QObject>

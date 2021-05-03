@@ -41,11 +41,11 @@ QObject* CsaClassManager::findClass(QString p_qstrKeyname)
 QVariantList CsaClassManager::getClassList()
 {
     QVariantList qlClasses;
-    QLinkedList<CdmClass*> qllClasses;
+    QList<CdmClass*> qllClasses;
     getInternals()->GetClassList(qllClasses);
 
-    QLinkedList<CdmClass*>::iterator qllIt = qllClasses.begin();
-    QLinkedList<CdmClass*>::iterator qllItEnd = qllClasses.end();
+    QList<CdmClass*>::iterator qllIt = qllClasses.begin();
+    QList<CdmClass*>::iterator qllItEnd = qllClasses.end();
 
     CsaFactory* pFactory = getFactory();
 
@@ -85,10 +85,10 @@ QVariant CsaClassManager::getDetailedVariant()
 
     if (CHKPTR(pClassManager))
     {
-        QLinkedList<CdmClass*> qllClasses;
+        QList<CdmClass*> qllClasses;
         pClassManager->GetClassList(qllClasses);
-        QLinkedList<CdmClass*>::iterator qllIt = qllClasses.begin();
-        QLinkedList<CdmClass*>::iterator qllItEnd = qllClasses.end();
+        QList<CdmClass*>::iterator qllIt = qllClasses.begin();
+        QList<CdmClass*>::iterator qllItEnd = qllClasses.end();
 
         CsaFactory* pFactory = getFactory();
         QVariantList qvlClasses;

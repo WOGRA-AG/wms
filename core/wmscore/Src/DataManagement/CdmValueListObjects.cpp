@@ -50,12 +50,12 @@ QString CdmValueListObjects::GetValue() const
     return m_qstrDocument;
 }
 
-void CdmValueListObjects::SetList(QLinkedList<CdmObject*>& p_rqvlObjects)
+void CdmValueListObjects::SetList(QList<CdmObject*>& p_rqvlObjects)
 {
     ClearList();
 
-   QLinkedList<CdmObject*>::iterator qllIt = p_rqvlObjects.begin();
-   QLinkedList<CdmObject*>::iterator qllItEnd = p_rqvlObjects.end();
+   QList<CdmObject*>::iterator qllIt = p_rqvlObjects.begin();
+   QList<CdmObject*>::iterator qllItEnd = p_rqvlObjects.end();
 
    for (; qllIt != qllItEnd; ++qllIt)
    {
@@ -63,7 +63,7 @@ void CdmValueListObjects::SetList(QLinkedList<CdmObject*>& p_rqvlObjects)
    }
 }
 
-void CdmValueListObjects::GetList(QLinkedList<CdmObject*>& p_rqvlObjects) const
+void CdmValueListObjects::GetList(QList<CdmObject*>& p_rqvlObjects) const
 {
    const CdmObject* pCdmObject = GetObject();
   
@@ -73,8 +73,8 @@ void CdmValueListObjects::GetList(QLinkedList<CdmObject*>& p_rqvlObjects) const
 
       if (CHKPTR(pCdmOLManager))
       {
-            QLinkedList<QPair<long, long> >::const_iterator qllIt = m_qllObjects.begin();
-            QLinkedList<QPair<long, long> >::const_iterator qllItEnd = m_qllObjects.end();
+            QList<QPair<long, long> >::const_iterator qllIt = m_qllObjects.begin();
+            QList<QPair<long, long> >::const_iterator qllItEnd = m_qllObjects.end();
 
             for (; qllIt != qllItEnd; ++qllIt)
          {
@@ -156,8 +156,8 @@ CdmObject* CdmValueListObjects::FindObjectById(int p_iId)
 
       if (CHKPTR(pCdmOLManager))
       {
-            QLinkedList<QPair<long, long> >::const_iterator qllIt = m_qllObjects.begin();
-            QLinkedList<QPair<long, long> >::const_iterator qllItEnd = m_qllObjects.end();
+            QList<QPair<long, long> >::const_iterator qllIt = m_qllObjects.begin();
+            QList<QPair<long, long> >::const_iterator qllItEnd = m_qllObjects.end();
 
             for (; qllIt != qllItEnd; ++qllIt)
          {
@@ -189,8 +189,8 @@ void CdmValueListObjects::Serialize() const
     qddDocument.appendChild(qdeElement);
     int iCounter = 1;
 
-    QLinkedList<QPair<long, long> >::const_iterator qllIt = m_qllObjects.begin();
-    QLinkedList<QPair<long, long> >::const_iterator qllItEnd = m_qllObjects.end();
+    QList<QPair<long, long> >::const_iterator qllIt = m_qllObjects.begin();
+    QList<QPair<long, long> >::const_iterator qllItEnd = m_qllObjects.end();
 
     for (; qllIt != qllItEnd; ++qllIt)
     {
@@ -235,8 +235,8 @@ void CdmValueListObjects::Deserialize()
 
 void CdmValueListObjects::RemoveValue(long p_iObjectId)
 {
-    QLinkedList<QPair<long, long> >::iterator qllIt = m_qllObjects.begin();
-    QLinkedList<QPair<long, long> >::iterator qllItEnd = m_qllObjects.end();
+    QList<QPair<long, long> >::iterator qllIt = m_qllObjects.begin();
+    QList<QPair<long, long> >::iterator qllItEnd = m_qllObjects.end();
 
     for (; qllIt != qllItEnd; ++qllIt)
     {
@@ -272,8 +272,8 @@ QString CdmValueListObjects::GetValueAsString() const
 {
     QString qstrList;
 
-    QLinkedList<QPair<long, long> >::const_iterator qllIt = m_qllObjects.begin();
-    QLinkedList<QPair<long, long> >::const_iterator qllItEnd = m_qllObjects.end();
+    QList<QPair<long, long> >::const_iterator qllIt = m_qllObjects.begin();
+    QList<QPair<long, long> >::const_iterator qllItEnd = m_qllObjects.end();
 
     for (; qllIt != qllItEnd; ++qllIt)
     {
@@ -288,8 +288,8 @@ QVariant CdmValueListObjects::GetValueVariant() const
 {
     QVariantList qvVariant;
 
-    QLinkedList<QPair<long, long> >::const_iterator qllIt = m_qllObjects.begin();
-    QLinkedList<QPair<long, long> >::const_iterator qllItEnd = m_qllObjects.end();
+    QList<QPair<long, long> >::const_iterator qllIt = m_qllObjects.begin();
+    QList<QPair<long, long> >::const_iterator qllItEnd = m_qllObjects.end();
 
     for (; qllIt != qllItEnd; ++qllIt)
     {

@@ -11,12 +11,12 @@ class CdbCommandGetGroupsOfUser : public CdbAbstractCommand
 {
 private:
     long m_lUserId;
-    QLinkedList<CumUserGroup*> m_qllGroups;
+    QList<CumUserGroup*> m_qllGroups;
 
 public:
     CdbCommandGetGroupsOfUser(long p_lUser, CdbDataAccess* p_pDataAccess);
     virtual ~CdbCommandGetGroupsOfUser();
-    QLinkedList<CumUserGroup*> GetResult();
+    QList<CumUserGroup*> GetResult();
 protected:
     virtual int Execute();
     bool CheckValid();

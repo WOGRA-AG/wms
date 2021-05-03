@@ -26,7 +26,7 @@ int CdbCommandRefreshComtainer::Execute()
    QSqlQuery cQSqlQuery;
    QString qstrQuery;
    QDateTime qdtLastChange;
-   QLinkedList<long> qvlObjects;
+   QList<long> qvlObjects;
 
    // query for reading new id
    qstrQuery = QString("Select ObjectId from WMS_DM_OBJECT where ObjectListId = %1").arg(m_rpContainer->GetId());

@@ -1153,9 +1153,9 @@ void CwmsObjectBinder::FillData(CdmValueUser* p_pValue, QWidget* p_pWidget)
 
                         if (CHKPTR(pUserManager))
                         {
-                            QLinkedList<CumUser*> qllUsers;
+                            QList<CumUser*> qllUsers;
                             pUserManager->GetUserListUnmanaged(qllUsers);
-                            QLinkedListIterator<CumUser*> qllIt(qllUsers);
+                            QListIterator<CumUser*> qllIt(qllUsers);
 
                             pEdit->addItem("-", "");
 
@@ -1244,9 +1244,9 @@ void CwmsObjectBinder::FillData(CdmValueUserGroup* p_pValue, QWidget* p_pWidget)
 
                         if (CHKPTR(pUserManager))
                         {
-                            QLinkedList<CumUserGroup*> qllUserGroups;
+                            QList<CumUserGroup*> qllUserGroups;
                             pUserManager->GetUserGroupList(qllUserGroups);
-                            QLinkedListIterator<CumUserGroup*> qllIt(qllUserGroups);
+                            QListIterator<CumUserGroup*> qllIt(qllUserGroups);
 
                             pEdit->addItem("-", "");
 

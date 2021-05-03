@@ -29,11 +29,11 @@ class BASETOOLS_API CwmsFormStandardContainer : public CwmsFormContainer
    public:
       virtual ~CwmsFormStandardContainer();
    public:
-      QLinkedList<QString> GetDisplayMembers();
+      QList<QString> GetDisplayMembers();
    public:
       void SetDisplayMembers(QString p_qstrValue);
    public:
-      QLinkedList<QString> GetSearchMembers();
+      QList<QString> GetSearchMembers();
    public:
       void SetSearchMembers(QString p_qstrValue);
    public:
@@ -49,18 +49,18 @@ class BASETOOLS_API CwmsFormStandardContainer : public CwmsFormContainer
    /** +-=---------------------------------------------------------Mo 10. Sep 16:18:57 2012-------*
     * @method  CwmsFormStandardObjectList::SetSearchMembers  // public                            *
     * @return  void                                          //                                   *
-    * @param   QLinkedList<QString> p_qstrlMembers           //                                   *
+    * @param   QList<QString> p_qstrlMembers           //                                   *
     * @comment                                                                                    *
     *----------------last changed: -----------------------------Mo 10. Sep 16:18:57 2012----------*/
-    void SetSearchMembers(QLinkedList<QString> p_qstrlMembers);
+    void SetSearchMembers(QList<QString> p_qstrlMembers);
 
    public:
    /** +-=---------------------------------------------------------Mo 10. Sep 16:19:07 2012-------*
     * @method  CwmsFormStandardObjectList::SetDisplayMembers // public                            *
     * @return  void                                          //                                   *
-    * @param   QLinkedList<QString> p_qstrlMembers           //                                   *
+    * @param   QList<QString> p_qstrlMembers           //                                   *
     * @comment                                                                                    *
     *----------------last changed: -----------------------------Mo 10. Sep 16:19:07 2012----------*/
-    void SetDisplayMembers(QLinkedList<QString> p_qstrlMembers);
+    void SetDisplayMembers(QList<QString> p_qstrlMembers);
 };
 #endif //

@@ -1,6 +1,7 @@
 #ifndef CWMSTIMEMEASSUREMENT_H
 #define CWMSTIMEMEASSUREMENT_H
 
+#include <QElapsedTimer>
 #include <QMap>
 #include <QTime>
 
@@ -10,7 +11,7 @@
 class WMSCOMMONS_API CwmsTimeMeassurement
 {
 private:
-    QTime m_qTime;
+    QElapsedTimer m_qTime;
     QMap<QString,int> m_qmTimeRecorder;
     int m_iTaskCounter;
     int m_iElapsed;

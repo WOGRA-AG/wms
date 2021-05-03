@@ -26,12 +26,12 @@ CwmsFormView::~CwmsFormView()
 {
 }
 
-void CwmsFormView::SetViews(QLinkedList<QString> p_qstrlViews)
+void CwmsFormView::SetViews(QList<QString> p_qstrlViews)
 {
    SetStringList("Views", p_qstrlViews);
 }
 
-QLinkedList<QString> CwmsFormView::GetViews()
+QList<QString> CwmsFormView::GetViews()
 {
    return GetStringList("Views");
 }

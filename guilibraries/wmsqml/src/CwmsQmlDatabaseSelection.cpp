@@ -14,7 +14,7 @@
 
 // System and QT Includes
 #include <QApplication>
-#include <QLinkedList>
+#include <QList>
 #include <QQuickWindow>
 
 // WMS Includes
@@ -63,11 +63,11 @@ QStringList CwmsQmlDatabaseSelection::getDatabaseList()
 
     if(CHKPTR(pCdmManager))
     {
-       QLinkedList<QString> qllDatabases;
+       QList<QString> qllDatabases;
        pCdmManager->GetSchemeList(qllDatabases);
 
-       QLinkedList<QString>::iterator qvlIt = qllDatabases.begin();
-       QLinkedList<QString>::iterator qvlItEnd = qllDatabases.end();
+       QList<QString>::iterator qvlIt = qllDatabases.begin();
+       QList<QString>::iterator qvlItEnd = qllDatabases.end();
 
        for (; qvlIt != qvlItEnd; ++ qvlIt)
        {

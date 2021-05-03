@@ -19,7 +19,7 @@ CwnCommandFindGroups::~CwnCommandFindGroups()
     // NOTHING To DO
 }
 
-QLinkedList<CumUserGroup *> CwnCommandFindGroups::GetResult()
+QList<CumUserGroup *> CwnCommandFindGroups::GetResult()
 {
     return m_qllGroups;
 }

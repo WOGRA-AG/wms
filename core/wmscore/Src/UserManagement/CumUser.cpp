@@ -13,7 +13,7 @@
 // System and QT Includes
 #include <qstring.h>
 #include <qdatetime.h>
-#include <QLinkedList>
+#include <QList>
 
 #include "wmsdefines.h"
 
@@ -184,7 +184,7 @@ void CumUser::SetActive(bool p_bActive)
    m_bActive = p_bActive;
 }
 
-void CumUser::GetUserGroups(QLinkedList<CumUserGroup*>& p_qvlUserGroups)
+void CumUser::GetUserGroups(QList<CumUserGroup*>& p_qvlUserGroups)
 {
    LoadUserGroups();
    p_qvlUserGroups = m_qvlUserGroups;
@@ -195,8 +195,8 @@ void CumUser::DeleteLocalGroups()
     if(!m_qvlUserGroups.isEmpty())
     {
         SYNCHRONIZED
-        QLinkedList<CumUserGroup*>::iterator qllIt = m_qvlUserGroups.begin();
-        QLinkedList<CumUserGroup*>::iterator qllItEnd = m_qvlUserGroups.end();
+        QList<CumUserGroup*>::iterator qllIt = m_qvlUserGroups.begin();
+        QList<CumUserGroup*>::iterator qllItEnd = m_qvlUserGroups.end();
 
         for (; qllIt != qllItEnd; ++qllIt)
         {
@@ -275,8 +275,8 @@ QVariant CumUser::GetVariant() const
 
    (const_cast<CumUser*>(this))->LoadUserGroups();
    QVariantMap qvmGroups;
-   QLinkedList<CumUserGroup*>::const_iterator qllIt = m_qvlUserGroups.begin();
-   QLinkedList<CumUserGroup*>::const_iterator qllItEnd = m_qvlUserGroups.end();
+   QList<CumUserGroup*>::const_iterator qllIt = m_qvlUserGroups.begin();
+   QList<CumUserGroup*>::const_iterator qllItEnd = m_qvlUserGroups.end();
 
    for (; qllIt != qllItEnd; ++qllIt)
    {

@@ -1,7 +1,6 @@
 TEMPLATE = app
 TARGET = wmsdatainterface
 QT += core script sql network scripttools xml
-DESTDIR = $$OUT_PWD/../../../../bin
 CONFIG += console
 
 win32{
@@ -39,9 +38,9 @@ UICIMPLS = $$OUT_PWD/$$WMS_ARCH/uic/$$WMS_MODE
 
 message("WMSDATAINTERFACE DESTDIR: "$$DESTDIR)
 
-CONFIG(gcc, gcc|clang) {
-    QMAKE_CXXFLAGS += -Werror -Wall -Wextra
-}
+#CONFIG(gcc, gcc|clang) {
+#    QMAKE_CXXFLAGS += -Werror -Wall -Wextra
+#}
 
 INCLUDEPATH += ./../../../core/wmscore/Src/DataManagement \
                ./../../../core/wmscore/Src/UserManagement \
@@ -55,26 +54,25 @@ LIBS +=  -L$$DESTDIR \
     -lwmscore \
     -lwmscommons
 
-QMAKE_RPATHDIR += $$DESTDIR
+#QMAKE_RPATHDIR += $$DESTDIR
 
-contains(DEFINES, WMS_LINK_STATIC) {
-LIBS +=  -L$$DESTDIR/dataaccess \
-         -lwmswebclient \
-         -lwmssqlite \
-         -lwmsodbc \
-}
+#contains(DEFINES, WMS_LINK_STATIC) {
+#LIBS +=  -L$$DESTDIR/dataaccess \
+#         -lwmswebclient \
+#         -lwmssqlite \
+#         -lwmsodbc \
+#}
 
 include(wmsdatainterface.pri)
 
+#QMAKE_TARGET_COMPANY = "WOGRA AG"
+#QMAKE_TARGET_PRODUCT = "WMS DataInterface"
+#QMAKE_TARGET_COPYRIGHT = "Copyright (C) 2010-2021 WOGRA AG <info@wogra.com>"
+#QMAKE_TARGET_DESCRIPTION = "Data interface for importing or exporting data from or to WMS"
 
-QMAKE_TARGET_COMPANY = "WOGRA"
-QMAKE_TARGET_PRODUCT = "WMS DataInterface"
-QMAKE_TARGET_COPYRIGHT = "Copyright (C) 2010-2015 WOGRA Consulting GmbH <info@wogra.com>"
-QMAKE_TARGET_DESCRIPTION = "Data interface for importing or exporting data from or to WMS"
-
-DEFINES += \
-  APP_VERSION=\"\\\"$$VERSION\\\"\" \
-  APP_COMPANY=\"\\\"$$QMAKE_TARGET_COMPANY\\\"\" \
-  APP_PRODUCT=\"\\\"$$QMAKE_TARGET_PRODUCT\\\"\" \
-  APP_DESCRIPTION=\"\\\"$$QMAKE_TARGET_DESCRIPTION\\\"\" \
-  APP_COPYRIGHT=\"\\\"$$QMAKE_TARGET_COPYRIGHT\\\"\"
+#DEFINES += \
+#  APP_VERSION=\"\\\"$$VERSION\\\"\" \
+#  APP_COMPANY=\"\\\"$$QMAKE_TARGET_COMPANY\\\"\" \
+#  APP_PRODUCT=\"\\\"$$QMAKE_TARGET_PRODUCT\\\"\" \
+#  APP_DESCRIPTION=\"\\\"$$QMAKE_TARGET_DESCRIPTION\\\"\" \
+#  APP_COPYRIGHT=\"\\\"$$QMAKE_TARGET_COPYRIGHT\\\"\"

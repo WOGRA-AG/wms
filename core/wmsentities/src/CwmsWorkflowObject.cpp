@@ -159,20 +159,20 @@ void CwmsWorkflowObject::CurrentStepFinished(CdmObject* p_pCdmObject)
 
 /** +-=---------------------------------------------------------Di 8. Jan 15:26:56 2013-----------*
  * @method  CwmsWorkflowObject::GetCurrentSteps              // public                            *
- * @return  QLinkedList<CdmObject*>                          //                                   *
+ * @return  QList<CdmObject*>                          //                                   *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------Di 8. Jan 15:26:56 2013-----------*/
-QLinkedList<CdmObject*> CwmsWorkflowObject::GetCurrentSteps()
+QList<CdmObject*> CwmsWorkflowObject::GetCurrentSteps()
 {
    return GetListObjects("Current_Steps");
 }
 
 /** +-=---------------------------------------------------------Di 8. Jan 15:26:47 2013-----------*
  * @method  CwmsWorkflowObject::GetDoneSteps                 // public                            *
- * @return  QLinkedList<CdmObject*>                          //                                   *
+ * @return  QList<CdmObject*>                          //                                   *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------Di 8. Jan 15:26:47 2013-----------*/
-QLinkedList<CdmObject*> CwmsWorkflowObject::GetDoneSteps()
+QList<CdmObject*> CwmsWorkflowObject::GetDoneSteps()
 {
    return GetListObjects("Done_Streps");
 }
@@ -184,9 +184,9 @@ QLinkedList<CdmObject*> CwmsWorkflowObject::GetDoneSteps()
  *----------------last changed: --------------------------------Mi 17. Okt 18:12:32 2012----------*/
 void CwmsWorkflowObject::UpdateCurrentWorkflowStep()
 {
-   QLinkedList<CdmObject*> qllCurrentSteps = GetCurrentSteps();
-   QLinkedList<CdmObject*>::iterator qllIt = qllCurrentSteps.begin();
-   QLinkedList<CdmObject*>::iterator qllItEnd = qllCurrentSteps.end();
+   QList<CdmObject*> qllCurrentSteps = GetCurrentSteps();
+   QList<CdmObject*>::iterator qllIt = qllCurrentSteps.begin();
+   QList<CdmObject*>::iterator qllItEnd = qllCurrentSteps.end();
 
    for (; qllIt != qllItEnd; ++qllItEnd)
    {

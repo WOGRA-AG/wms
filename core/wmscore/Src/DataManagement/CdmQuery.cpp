@@ -1,7 +1,7 @@
 // System and QT Includes
 #include <qdom.h>
 #include <QModelIndex>
-#include <QLinkedList>
+#include <QList>
 
 // WMS Commons Includes
 #include "wmsdefines.h"
@@ -1183,9 +1183,9 @@ QString CdmQuery::GetResultAsString() const
     return qstrResult;
 }
 
-const QLinkedList<long> CdmQuery::GetResultList() const
+const QList<long> CdmQuery::GetResultList() const
 {
-   QLinkedList<long> qllResult;
+   QList<long> qllResult;
 
    for (int iPos = 0; iPos < GetResultCount(); ++iPos)
    {

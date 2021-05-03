@@ -583,7 +583,7 @@ CwmsImExportConfiguration CwmsImExportManager::GetConfigurationObject(QString p_
 
       if (CHKPTR(pQuery))
       {
-         QLinkedList<long> qllResults = pQuery->GetResultList();
+         QList<long> qllResults = pQuery->GetResultList();
 
          if (qllResults.count() > 0)
          {

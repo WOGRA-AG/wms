@@ -8,18 +8,18 @@ class CwiCommandGetGroupUserList : public CwiAbstractCommand
 {
 private:
     CwmscomData* m_rpData;
-    QLinkedList<CumUser*> m_qlUserList;
+    QList<CumUser*> m_qlUserList;
     QVariantList m_qlUserListToVariant;
     CumUserManager* pCumUserManager;
 
     long ReadAllUsers();
-    QVariantList GetResultToVariant(QLinkedList<CumUser*> ql_userList);
+    QVariantList GetResultToVariant(QList<CumUser*> ql_userList);
 
 public:
     CwiCommandGetGroupUserList(CwmscomData* p_pData);
     ~CwiCommandGetGroupUserList();
     virtual void Execute();
-    QLinkedList<CumUser*> GetResult();
+    QList<CumUser*> GetResult();
 };
 
 #endif // CWICOMMANDGETGROUPUSERLIST_H

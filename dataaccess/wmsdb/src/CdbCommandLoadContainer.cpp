@@ -163,7 +163,7 @@ void CdbCommandLoadContainer::LoadObjects()
 {
     if (m_bLoadObjects)
     {
-        QLinkedList<long> qvlObjects;
+        QList<long> qvlObjects;
         QSqlQuery cQSqlQuery;
         QString qstrQuery = GetObjectQuery();
 

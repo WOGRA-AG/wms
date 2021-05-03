@@ -13,7 +13,7 @@ CwnQueryElement::CwnQueryElement(CwnDataAccess *p_pCwnDataAccess, CdmQueryElemen
 {
     if(CHKPTR(m_rpCdmQueryElement) && CHKPTR(m_rpCwnDataAccess))
     {
-       QLinkedList<CdmQueryElement*> qvlQueryElements;
+       QList<CdmQueryElement*> qvlQueryElements;
        m_rpCdmQueryElement->GetChildList(qvlQueryElements);
        CreateChildren(qvlQueryElements);
     }
@@ -25,10 +25,10 @@ CwnQueryElement::~CwnQueryElement()
       m_rpCdmQueryElement = nullptr;
 }
 
-void CwnQueryElement::CreateChildren(QLinkedList<CdmQueryElement*>& p_qvlChildren)
+void CwnQueryElement::CreateChildren(QList<CdmQueryElement*>& p_qvlChildren)
 {
-   QLinkedList<CdmQueryElement*>::iterator qvlIt    = p_qvlChildren.begin();
-   QLinkedList<CdmQueryElement*>::iterator qvlItEnd = p_qvlChildren.end();
+   QList<CdmQueryElement*>::iterator qvlIt    = p_qvlChildren.begin();
+   QList<CdmQueryElement*>::iterator qvlItEnd = p_qvlChildren.end();
 
    for (; qvlIt != qvlItEnd; ++qvlIt)
    {
@@ -46,8 +46,8 @@ void CwnQueryElement::GenerateVariablesForLaterUse(QString& qstrQuery)
 {
     if (m_qvlChildren.count() > 0)
     {
-        QLinkedList<CwnQueryElement*>::iterator qvlIt = m_qvlChildren.begin();
-        QLinkedList<CwnQueryElement*>::iterator qvlItEnd = m_qvlChildren.end();
+        QList<CwnQueryElement*>::iterator qvlIt = m_qvlChildren.begin();
+        QList<CwnQueryElement*>::iterator qvlItEnd = m_qvlChildren.end();
 
         for (; qvlIt != qvlItEnd; ++qvlIt)
         {
@@ -185,8 +185,8 @@ QString CwnQueryElement::GenerateAndQuery()
 
     if (m_qvlChildren.count() > 0)
     {
-        QLinkedList<CwnQueryElement*>::iterator qvlIt = m_qvlChildren.begin();
-        QLinkedList<CwnQueryElement*>::iterator qvlItEnd = m_qvlChildren.end();
+        QList<CwnQueryElement*>::iterator qvlIt = m_qvlChildren.begin();
+        QList<CwnQueryElement*>::iterator qvlItEnd = m_qvlChildren.end();
 
         qstrQuery += " ( ";
 
@@ -221,8 +221,8 @@ QString CwnQueryElement::GenerateOrQuery()
     if (m_qvlChildren.count() > 0)
     {
         bool bLast = false;
-        QLinkedList<CwnQueryElement*>::iterator qvlIt = m_qvlChildren.begin();
-        QLinkedList<CwnQueryElement*>::iterator qvlItEnd = m_qvlChildren.end();
+        QList<CwnQueryElement*>::iterator qvlIt = m_qvlChildren.begin();
+        QList<CwnQueryElement*>::iterator qvlItEnd = m_qvlChildren.end();
 
         qstrQuery += " ( ";
 

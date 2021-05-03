@@ -13,7 +13,7 @@
 
 // System and QT Includes
 #include <qstring.h>
-#include <QLinkedList>
+#include <QList>
 
 
 // own Includes

@@ -12,7 +12,7 @@
 #include <qlabel.h>
 #include <qlineedit.h>
 #include <QGroupBox>
-#include <QLinkedList>
+#include <QList>
 #include <QLayout>
 #include <qmenubar.h>
 #include <qtoolbar.h>
@@ -753,9 +753,9 @@ void CwmsObjectEditor::FillMembers()
     QFormLayout* pLayout = nullptr;
     GetParentWidgetAndLayout(nullptr, pParentWidget, pLayout, pqTab);
 
-    QLinkedList<long> qvlMembers         = GetSortMemberList();
-    QLinkedList<long>::iterator qvlIt    = qvlMembers.begin();
-    QLinkedList<long>::iterator qvlItEnd = qvlMembers.end();
+    QList<long> qvlMembers         = GetSortMemberList();
+    QList<long>::iterator qvlIt    = qvlMembers.begin();
+    QList<long>::iterator qvlItEnd = qvlMembers.end();
 
     for (; qvlIt != qvlItEnd; ++qvlIt)
     {
@@ -783,9 +783,9 @@ void CwmsObjectEditor::FillMembers(CdmClass *pEventClass)
     QFormLayout* pLayout = nullptr;
     GetParentWidgetAndEventLayout(nullptr, pParentWidget, pLayout, pqTab, pEventClass);
 
-    QLinkedList<long> qvlMembers         = getEventClassMemberList(pEventClass);
-    QLinkedList<long>::iterator qvlIt    = qvlMembers.begin();
-    QLinkedList<long>::iterator qvlItEnd = qvlMembers.end();
+    QList<long> qvlMembers         = getEventClassMemberList(pEventClass);
+    QList<long>::iterator qvlIt    = qvlMembers.begin();
+    QList<long>::iterator qvlItEnd = qvlMembers.end();
 
     if(!qvlMembers.isEmpty())
     {
@@ -1417,9 +1417,9 @@ void CwmsObjectEditor::CaptionChangedSlot(  const QString & p_qstrCaption )
  * @return  QValueList<long>                                 // the list of members               *
  * @comment                                                                                       *
  *----------------last changed: Wolfgang GraÃŸhof----------------Fr 6. Jan 18:17:58 2006-----------*/
-QLinkedList<long> CwmsObjectEditor::GetSortMemberList(  )
+QList<long> CwmsObjectEditor::GetSortMemberList(  )
 {
-    QLinkedList<long> qvlMembers;
+    QList<long> qvlMembers;
 
     if(m_qstrlSortedMembers.isEmpty())
     {
@@ -1470,9 +1470,9 @@ QLinkedList<long> CwmsObjectEditor::GetSortMemberList(  )
     return qvlMembers;
 }
 
-QLinkedList<long> CwmsObjectEditor::getEventClassMemberList(CdmClass *pClass)
+QList<long> CwmsObjectEditor::getEventClassMemberList(CdmClass *pClass)
 {
-    QLinkedList<long> qvlMembers;
+    QList<long> qvlMembers;
 
     if(m_qstrlEventClassMembers.isEmpty())
     {
@@ -1526,9 +1526,9 @@ QLinkedList<long> CwmsObjectEditor::getEventClassMemberList(CdmClass *pClass)
  * @return  QValueList<long>                                 //                                   *
  * @comment This method creates the sorted memberlist with the helb of the string list.           *
  *----------------last changed: Wolfgang GraÃŸhof----------------Fr 20. Jan 22:43:03 2006----------*/
-QLinkedList<long> CwmsObjectEditor::GetSortedMemberListFromStringList(  )
+QList<long> CwmsObjectEditor::GetSortedMemberListFromStringList(  )
 {
-    QLinkedList<long> qvlMembers;
+    QList<long> qvlMembers;
 
     QStringList::Iterator  qstrIt    = m_qstrlSortedMembers.begin();
     QStringList::Iterator  qstrItEnd = m_qstrlSortedMembers.end();
@@ -1554,9 +1554,9 @@ QLinkedList<long> CwmsObjectEditor::GetSortedMemberListFromStringList(  )
     return qvlMembers;
 }
 
-QLinkedList<long> CwmsObjectEditor::getEventClassMemberListFromStringList(CdmClass *pClass)
+QList<long> CwmsObjectEditor::getEventClassMemberListFromStringList(CdmClass *pClass)
 {
-    QLinkedList<long> qvlMembers;
+    QList<long> qvlMembers;
 
     QStringList::Iterator qstrIt = m_qstrlEventClassMembers.begin();
     QStringList::Iterator qstrItEnd = m_qstrlEventClassMembers.end();
@@ -1878,16 +1878,16 @@ void CwmsObjectEditor::SetFormConfiguration(CdmObject* p_pObject)
             //QMap<QString, QString> qmDefaults = cForm.GetDefaultValues();
             QMap<QString, int> qmDisplayTypes = cForm.GetDisplayTypes();
             QMap<QString, QString> qmObjectRefAssignments = cForm.GetObjectRefAssignment();
-            QLinkedList<QString> qllVisibleMembers = cForm.GetVisibleMembers();
-            QLinkedList<QString>::iterator qllIt = qllVisibleMembers.begin();
-            QLinkedList<QString>::iterator qllItEnd = qllVisibleMembers.end();
+            QList<QString> qllVisibleMembers = cForm.GetVisibleMembers();
+            QList<QString>::iterator qllIt = qllVisibleMembers.begin();
+            QList<QString>::iterator qllItEnd = qllVisibleMembers.end();
 
             for (; qllIt != qllItEnd; ++qllIt)
             {
                 m_qstrlSortedMembers.append(*qllIt);
             }
 
-            QLinkedList<QString> qllFucntions = cForm.GetFunctions();
+            QList<QString> qllFucntions = cForm.GetFunctions();
 
             qllIt = qllFucntions.begin();
             qllItEnd = qllFucntions.end();

@@ -164,8 +164,8 @@ void CsaQuery::setContainerId(long p_lId)
 const QVariantList CsaQuery::getResultList()
 {
     QVariantList qvResults;
-    QLinkedList<long> qllResults = m_pQuery->GetResultList();
-    QLinkedListIterator<long> qllIt(qllResults);
+    QList<long> qllResults = m_pQuery->GetResultList();
+    QListIterator<long> qllIt(qllResults);
 
     while (qllIt.hasNext())
     {

@@ -1,7 +1,7 @@
 #ifndef CWNCOMMANDREFRESHOBJECT_H
 #define CWNCOMMANDREFRESHOBJECT_H
 
-#include <QLinkedList>
+#include <QList>
 
 #include "CwnCommandBase.h"
 #include "CdmModelElement.h"

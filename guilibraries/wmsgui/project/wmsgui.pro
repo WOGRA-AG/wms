@@ -39,13 +39,13 @@ UI_DIR = $$OUT_PWD/$$WMS_ARCH/ui/$$WMS_MODE
 
 message("WMSGUI DESTDIR: "$$DESTDIR)
 
-CONFIG(gcc, gcc|clang) {
-    QMAKE_CXXFLAGS += -Werror -Wall -Wextra
+#CONFIG(gcc, gcc|clang) {
+#    QMAKE_CXXFLAGS += -Werror -Wall -Wextra
 
-    IGNORE_ERRORS += -Wno-error=unused-parameter -Wno-error=unused-but-set-variable
-    message("WMSCOMMONS Ignored Errors: "$$IGNORE_ERRORS)
-    QMAKE_CXXFLAGS += $$IGNORE_ERRORS
-}
+#    IGNORE_ERRORS += -Wno-error=unused-parameter -Wno-error=unused-but-set-variable
+#    message("WMSCOMMONS Ignored Errors: "$$IGNORE_ERRORS)
+#    QMAKE_CXXFLAGS += $$IGNORE_ERRORS
+#}
 
 DEFINES += QT_NO_OPENGL WMSGUI_EXPORTS
 

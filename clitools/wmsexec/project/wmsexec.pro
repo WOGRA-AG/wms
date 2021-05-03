@@ -39,9 +39,9 @@ UICIMPLS = $$OUT_PWD/$$WMS_ARCH/uic/$$WMS_MODE
 
 message("WMSEXEC DESTDIR: "$$DESTDIR)
 
-CONFIG(gcc, gcc|clang) {
-    QMAKE_CXXFLAGS += -Werror -Wall -Wextra
-}
+#CONFIG(gcc, gcc|clang) {
+#    QMAKE_CXXFLAGS += -Werror -Wall -Wextra
+#}
 
 INCLUDEPATH += ./../../../core/wmscore/Src/DataManagement \
                ./../../../core/wmscore/Src/UserManagement \
@@ -67,13 +67,13 @@ LIBS +=  -L$$DESTDIR/dataaccess \
 include(wmsexec.pri)
 
 
-QMAKE_TARGET_COMPANY = "WOGRA"
-QMAKE_TARGET_PRODUCT = "WMS Exec"
-QMAKE_TARGET_COPYRIGHT = "Copyright (C) 2010-2015 WOGRA Consulting GmbH <info@wogra.com>"
-QMAKE_TARGET_DESCRIPTION = "Executes static class functions in the specified WMS Scheme"
+#QMAKE_TARGET_COMPANY = "WOGRA"
+#QMAKE_TARGET_PRODUCT = "WMS Exec"
+#QMAKE_TARGET_COPYRIGHT = "Copyright (C) 2010-2015 WOGRA Consulting GmbH <info@wogra.com>"
+#QMAKE_TARGET_DESCRIPTION = "Executes static class functions in the specified WMS Scheme"
 
-DEFINES += \
-  APP_COMPANY=\"\\\"$$QMAKE_TARGET_COMPANY\\\"\" \
-  APP_PRODUCT=\"\\\"$$QMAKE_TARGET_PRODUCT\\\"\" \
-  APP_DESCRIPTION=\"\\\"$$QMAKE_TARGET_DESCRIPTION\\\"\" \
-  APP_COPYRIGHT=\"\\\"$$QMAKE_TARGET_COPYRIGHT\\\"\"
+#DEFINES += \
+#  APP_COMPANY=\"\\\"$$QMAKE_TARGET_COMPANY\\\"\" \
+#  APP_PRODUCT=\"\\\"$$QMAKE_TARGET_PRODUCT\\\"\" \
+#  APP_DESCRIPTION=\"\\\"$$QMAKE_TARGET_DESCRIPTION\\\"\" \
+#  APP_COPYRIGHT=\"\\\"$$QMAKE_TARGET_COPYRIGHT\\\"\"

@@ -17,10 +17,10 @@ bool CwmsUserCommandListUsers::Run(QMap<QString, QString> p_qmArgs)
 
     if (CHKPTR(pUserManager))
     {
-        QLinkedList<CumUser*> qllUsers;
+        QList<CumUser*> qllUsers;
         pUserManager->GetUserListUnmanaged(qllUsers);
-        QLinkedList<CumUser*>::iterator qllIt = qllUsers.begin();
-        QLinkedList<CumUser*>::iterator qllItEnd = qllUsers.end();
+        QList<CumUser*>::iterator qllIt = qllUsers.begin();
+        QList<CumUser*>::iterator qllItEnd = qllUsers.end();
         QString qstrOutput = "login;Lastname;Firstname;E-Mail;ID;Active;Admin\r\n";
 
         for (; qllIt != qllItEnd; ++qllIt)

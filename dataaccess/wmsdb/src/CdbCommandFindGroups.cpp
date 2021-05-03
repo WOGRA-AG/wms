@@ -19,7 +19,7 @@ CdbCommandFindGroups::~CdbCommandFindGroups()
     // NOTHING To DO
 }
 
-QLinkedList<CumUserGroup *> CdbCommandFindGroups::GetResult()
+QList<CumUserGroup *> CdbCommandFindGroups::GetResult()
 {
     return m_qllGroups;
 }

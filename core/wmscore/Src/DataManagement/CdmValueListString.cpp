@@ -1,6 +1,6 @@
 ﻿// System and QT Includes
 #include <qdom.h>
-#include <QLinkedList>
+#include <QList>
 
 
 // own Includes
@@ -48,8 +48,8 @@ void CdmValueListString::Serialize() const
 {
    QDomDocument qddDocument(WMS_LIST);
 
-   QLinkedList<QString>::const_iterator qvlIt = m_qvlStrings.begin();
-   QLinkedList<QString>::const_iterator qvlItEnd = m_qvlStrings.end();
+   QList<QString>::const_iterator qvlIt = m_qvlStrings.begin();
+   QList<QString>::const_iterator qvlItEnd = m_qvlStrings.end();
 
    QDomElement qdeElement = qddDocument.createElement(WMS_LISTENTRIES);
    qddDocument.appendChild(qdeElement);
@@ -73,7 +73,7 @@ void CdmValueListString::Deserialize()
     DeserializeXmlToStringList(m_qstrDocument, m_qvlStrings);
 }
 
-void CdmValueListString::DeserializeXmlToStringList(QString& p_qstrXml, QLinkedList<QString>& p_qllResultList)
+void CdmValueListString::DeserializeXmlToStringList(QString& p_qstrXml, QList<QString>& p_qllResultList)
 {
     p_qllResultList.clear();
     QDomDocument qddDocument;
@@ -112,7 +112,7 @@ void CdmValueListString::RemoveValue(QString p_qstrValue)
    ValueChanged();
 }
 
-QLinkedList<QString> CdmValueListString::GetList() const
+QList<QString> CdmValueListString::GetList() const
 {
    return m_qvlStrings;
 }
@@ -123,7 +123,7 @@ void CdmValueListString::ClearList()
    ValueChanged();
 }
 
-void CdmValueListString::SetList(QLinkedList<QString> p_qllStrings)
+void CdmValueListString::SetList(QList<QString> p_qllStrings)
 {
    m_qvlStrings = p_qllStrings;
    ValueChanged();
@@ -132,8 +132,8 @@ void CdmValueListString::SetList(QLinkedList<QString> p_qllStrings)
 QString CdmValueListString::GetValueAsString() const
 {
    QString qstrList;
-   QLinkedList<QString>::const_iterator qvlIt = m_qvlStrings.begin();
-   QLinkedList<QString>::const_iterator qvlItEnd = m_qvlStrings.end();
+   QList<QString>::const_iterator qvlIt = m_qvlStrings.begin();
+   QList<QString>::const_iterator qvlItEnd = m_qvlStrings.end();
 
    for (; qvlIt != qvlItEnd; ++qvlIt)
    {

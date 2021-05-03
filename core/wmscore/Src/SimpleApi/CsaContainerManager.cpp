@@ -138,11 +138,11 @@ QObject* CsaContainerManager::copyContainer(CsaObjectContainer *p_pContainer, bo
 
 QVariantList CsaContainerManager::getContainerList(QString p_qstrClassName)
 {
-    QLinkedList<QString> qllContainers = getInternals()->GetContainerList(p_qstrClassName);
+    QList<QString> qllContainers = getInternals()->GetContainerList(p_qstrClassName);
     QVariantList qlContainers;
 
-    QLinkedList<QString>::iterator qllIt = qllContainers.begin();
-    QLinkedList<QString>::iterator qllItEnd = qllContainers.end();
+    QList<QString>::iterator qllIt = qllContainers.begin();
+    QList<QString>::iterator qllItEnd = qllContainers.end();
 
     for(; qllIt != qllItEnd; ++qllIt)
     {

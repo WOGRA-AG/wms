@@ -13,7 +13,7 @@
 // System and QT Includes
 #include <qsqlquery.h>
 #include <qvariant.h>
-#include <QLinkedList>
+#include <QList>
 #include <QCryptographicHash>
 
 // WMS Includes
@@ -170,7 +170,7 @@ long CftlUserManager::UpdateUser(CumUser* p_pUser)
    return command.Run();
 }
 
-long CftlUserManager::GetUserList(QLinkedList<CumUser*>& p_qvlUsers)
+long CftlUserManager::GetUserList(QList<CumUser*>& p_qvlUsers)
 {
     long lRet = 0;
     CftlCommandGetUserList command(m_pCftlDataAccess);
@@ -215,7 +215,7 @@ long CftlUserManager::RemoveUserFromGroup(long p_lUserId, long p_lUserGroupId)
     return command.Run();
 }
 
-long CftlUserManager::GetUserGroupList(QLinkedList<CumUserGroup*>& p_rqvlUserGroups)
+long CftlUserManager::GetUserGroupList(QList<CumUserGroup*>& p_rqvlUserGroups)
 {
    long lRet = CdmLogging::eDmUnknownUserQueryError;
    CftlCommandGetUserGroupList command(m_pCftlDataAccess);
@@ -225,7 +225,7 @@ long CftlUserManager::GetUserGroupList(QLinkedList<CumUserGroup*>& p_rqvlUserGro
 }
 
 long CftlUserManager::GetListOfUsersInList(long p_lUserGroupId,
-                                          QLinkedList<CumUser*>& p_rqvlUserList)
+                                          QList<CumUser*>& p_rqvlUserList)
 {
    CftlCommandGetGroupUserList command(p_lUserGroupId, m_pCftlDataAccess);
    long lRet = command.Run();
@@ -234,7 +234,7 @@ long CftlUserManager::GetListOfUsersInList(long p_lUserGroupId,
 }
 
 long CftlUserManager::GetUserGroupMemberList(long p_lUserId,
-                                            QLinkedList<CumUserGroup*>& p_qvlUserGroups)
+                                            QList<CumUserGroup*>& p_qvlUserGroups)
 {
    long lRet = CdmLogging::eDmUnknownUserQueryError;
    CftlCommandGetGroupsOfUser command(p_lUserId, m_pCftlDataAccess);
@@ -250,9 +250,9 @@ CumUserGroup* CftlUserManager::FindUserGroup(long p_lGroupId)
    return command.GetResult();
 }
 
-QLinkedList<CumUser*> CftlUserManager::FindUser(QString p_qstrUserLoginNameEmail, QString p_qstrSchemeUri)
+QList<CumUser*> CftlUserManager::FindUser(QString p_qstrUserLoginNameEmail, QString p_qstrSchemeUri)
 {
-    QLinkedList<CumUser*> lUsers;
+    QList<CumUser*> lUsers;
     CftlCommandGetUserList command(p_qstrUserLoginNameEmail, m_pCftlDataAccess);
 
     if (SUCCESSFULL(command.Run()))
@@ -311,7 +311,7 @@ CumUserGroup* CftlUserManager::FindUserGroupByName(QString p_qstrName, QString p
     return pCumUserGroup;
 }
 
-QLinkedList<CumUserGroup*> CftlUserManager::FindUserGroups(QString p_qstrName, QString p_qstrSchemeUri)
+QList<CumUserGroup*> CftlUserManager::FindUserGroups(QString p_qstrName, QString p_qstrSchemeUri)
 {
     CftlCommandFindGroups command(p_qstrName, p_qstrSchemeUri, m_pCftlDataAccess);
     command.Run();

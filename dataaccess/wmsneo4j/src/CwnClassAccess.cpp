@@ -11,7 +11,7 @@
 // System and QT Includes
 #include <qdatetime.h>
 #include <qvariant.h>
-#include <QLinkedList>
+#include <QList>
 #include <qmap.h>
 
 // WMS Includes

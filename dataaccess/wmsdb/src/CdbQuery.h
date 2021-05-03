@@ -13,7 +13,7 @@
 
 
 // System and QT Includes
-#include <QLinkedList>
+#include <QList>
 
 
 // own Includes
@@ -150,7 +150,7 @@ virtual ~CdbQuery(  );
    /** +-=---------------------------------------------------------Mo 9. Mai 15:56:25 2011--------*
     * @method  CdbQuery::ExecuteObjectListQuery            // private                           *
     * @return  long                                          //                                   *
-    * @param   QLinkedList<long>& p_rqllResults              //                                   *
+    * @param   QList<long>& p_rqllResults              //                                   *
     * @comment                                                                                    *
     *----------------last changed: -----------------------------Mo 9. Mai 15:56:25 2011-----------*/
     long ExecuteObjectListQuery(QMap<long,long>& p_rqllResults);

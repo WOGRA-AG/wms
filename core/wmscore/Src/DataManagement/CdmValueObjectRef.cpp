@@ -351,7 +351,7 @@ CdmObject* CdmValueObjectRef::TryToGetOwnerObject()
 {
     CdmObject *pCdmObject = nullptr;
     const CdmMember* pCdmMember = GetMember();
-    QLinkedList<QString> qlObjectlists;
+    QList<QString> qlObjectlists;
 
     if(CHKPTR(pCdmMember) && pCdmMember->IsOwner())
     {
@@ -408,10 +408,10 @@ CdmObject* CdmValueObjectRef::TryToGetOwnerObject()
 
              if (CHKPTR(pCdmList))
              {
-                 QLinkedList<long> qllObjects;
+                 QList<long> qllObjects;
                  pCdmList->GetObjectList(qllObjects);
-                 QLinkedList<long>::iterator qmIt = qllObjects.begin();
-                 QLinkedList<long>::iterator qmItEnd = qllObjects.end();
+                 QList<long>::iterator qmIt = qllObjects.begin();
+                 QList<long>::iterator qmItEnd = qllObjects.end();
                  long lRefObjVal = this->GetValue();
                  long lObjId = -1;
 
@@ -442,7 +442,7 @@ CdmObject *CdmValueObjectRef::TryToGetOwnerObjectByEventObject(CdmObject *pEvent
 {
     CdmObject *pCdmObject = nullptr;
     const CdmMember* pCdmMember = GetEventMember(pEventObject);
-    QLinkedList<QString> qlObjectlists;
+    QList<QString> qlObjectlists;
     if(CHKPTR(pCdmMember) && pCdmMember->IsOwner())
     {
         CdmContainerManager* pCdmOLManager = pCdmMember->GetContainerManager();
@@ -497,10 +497,10 @@ CdmObject *CdmValueObjectRef::TryToGetOwnerObjectByEventObject(CdmObject *pEvent
 
              if (CHKPTR(pCdmList))
              {
-                 QLinkedList<long> qllObjects;
+                 QList<long> qllObjects;
                  pCdmList->GetObjectList(qllObjects);
 
-                 QLinkedList<CdmObject*> qlObjects;
+                 QList<CdmObject*> qlObjects;
 
                  CdmObject *pObject = GetObject();
                  QString qstrRefValueKeyname = GetOriginalKeyname();
@@ -774,7 +774,7 @@ CdmObject* CdmValueObjectRef::TryToCreateOwnerObject()
 {
    CdmObject* pCdmObject = nullptr;
    const CdmMember* pCdmMember = GetMember();
-   QLinkedList<QString> qlObjectlists;
+   QList<QString> qlObjectlists;
 
    if (CHKPTR(pCdmMember) && pCdmMember->IsOwner())
    {

@@ -23,15 +23,12 @@
 
 // forwards
 
-#ifdef WIN32
-   #ifdef BASETOOLS_EXPORTS
-      #define BASETOOLS_API __declspec(dllexport)
-   #else
-      #define BASETOOLS_API __declspec(dllimport)
-   #endif //
+
+#ifdef BASETOOLS_EXPORTS
+  #define BASETOOLS_API Q_DECL_EXPORT
 #else
-   #define BASETOOLS_API
-#endif //
+  #define BASETOOLS_API Q_DECL_IMPORT
+#endif
 
 // defines
 #define MAP(f,c) for (auto x : c) { if (x) x->f;}

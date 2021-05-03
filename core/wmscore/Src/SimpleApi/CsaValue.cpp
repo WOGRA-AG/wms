@@ -458,11 +458,11 @@ int CsaValue::getUserListIndex(int p_iId)
 
       if (CHKPTR(pCumUserManager))
       {
-         QLinkedList<CumUser*> qllUsers;
+         QList<CumUser*> qllUsers;
          pCumUserManager->GetUserListUnmanaged(qllUsers);
 
-         QLinkedList<CumUser*>::iterator qllIt = qllUsers.begin();
-         QLinkedList<CumUser*>::iterator qllItEnd = qllUsers.end();
+         QList<CumUser*>::iterator qllIt = qllUsers.begin();
+         QList<CumUser*>::iterator qllItEnd = qllUsers.end();
          int iCounter = 0;
 
          for (; qllIt != qllItEnd; ++qllIt)
@@ -493,11 +493,11 @@ int CsaValue::getUserGroupListIndex(int p_iId)
 
       if (CHKPTR(pCumUserManager))
       {
-         QLinkedList<CumUserGroup*> qllUserGroups;
+         QList<CumUserGroup*> qllUserGroups;
          pCumUserManager->GetUserGroupList(qllUserGroups);
 
-         QLinkedList<CumUserGroup*>::iterator qllIt = qllUserGroups.begin();
-         QLinkedList<CumUserGroup*>::iterator qllItEnd = qllUserGroups.end();
+         QList<CumUserGroup*>::iterator qllIt = qllUserGroups.begin();
+         QList<CumUserGroup*>::iterator qllItEnd = qllUserGroups.end();
          int iCounter = 0;
 
          for (; qllIt != qllItEnd; ++qllIt)
@@ -536,11 +536,11 @@ QString CsaValue::getUserList()
          QString qstrElementTemplate = getListElementTemplate();
          qstrModel += QString(qstrElementTemplate).arg("-").arg(-1);
 
-         QLinkedList<CumUser*> qllUsers;
+         QList<CumUser*> qllUsers;
          pCumUserManager->GetUserListUnmanaged(qllUsers);
 
-         QLinkedList<CumUser*>::iterator qllIt = qllUsers.begin();
-         QLinkedList<CumUser*>::iterator qllItEnd = qllUsers.end();
+         QList<CumUser*>::iterator qllIt = qllUsers.begin();
+         QList<CumUser*>::iterator qllItEnd = qllUsers.end();
 
          for (; qllIt != qllItEnd; ++qllIt)
          {
@@ -577,11 +577,11 @@ QString CsaValue::getUserGroupList()
          QString qstrElementTemplate = getListElementTemplate();
          qstrModel += QString(qstrElementTemplate).arg("-").arg(-1);
 
-         QLinkedList<CumUserGroup*> qllUserGroups;
+         QList<CumUserGroup*> qllUserGroups;
          pCumUserManager->GetUserGroupList(qllUserGroups);
 
-         QLinkedList<CumUserGroup*>::iterator qllIt = qllUserGroups.begin();
-         QLinkedList<CumUserGroup*>::iterator qllItEnd = qllUserGroups.end();
+         QList<CumUserGroup*>::iterator qllIt = qllUserGroups.begin();
+         QList<CumUserGroup*>::iterator qllItEnd = qllUserGroups.end();
 
          for (; qllIt != qllItEnd; ++qllIt)
          {
@@ -606,9 +606,9 @@ QString CsaValue::getListStringsQml()
 
    if (CHKPTR(pValue) && pValue->GetValueType() == eDmValueListString)
    {
-      QLinkedList<QString> qllValues = static_cast<CdmValueListString*>(pValue)->GetList();
-      QLinkedList<QString>::iterator qllIt = qllValues.begin();
-      QLinkedList<QString>::iterator qllItEnd = qllValues.end();
+      QList<QString> qllValues = static_cast<CdmValueListString*>(pValue)->GetList();
+      QList<QString>::iterator qllIt = qllValues.begin();
+      QList<QString>::iterator qllItEnd = qllValues.end();
       int iCounter = 0;
 
       for (; qllIt != qllItEnd; ++qllIt)
@@ -628,9 +628,9 @@ QVariantList CsaValue::getListStrings()
 
    if (CHKPTR(pValue) && pValue->GetValueType() == eDmValueListString)
    {
-      QLinkedList<QString> qllValues = static_cast<CdmValueListString*>(pValue)->GetList();
-      QLinkedList<QString>::iterator qllIt = qllValues.begin();
-      QLinkedList<QString>::iterator qllItEnd = qllValues.end();
+      QList<QString> qllValues = static_cast<CdmValueListString*>(pValue)->GetList();
+      QList<QString>::iterator qllIt = qllValues.begin();
+      QList<QString>::iterator qllItEnd = qllValues.end();
 
       for (; qllIt != qllItEnd; ++qllIt)
       {
@@ -649,9 +649,9 @@ QString CsaValue::getListIntsQml()
 
    if (CHKPTR(pValue) && pValue->GetValueType() == eDmValueListInt)
    {
-      QLinkedList<int> qllValues = static_cast<CdmValueListInt*>(pValue)->GetList();
-      QLinkedList<int>::iterator qllIt = qllValues.begin();
-      QLinkedList<int>::iterator qllItEnd = qllValues.end();
+      QList<int> qllValues = static_cast<CdmValueListInt*>(pValue)->GetList();
+      QList<int>::iterator qllIt = qllValues.begin();
+      QList<int>::iterator qllItEnd = qllValues.end();
       int iCounter = 0;
 
       for (; qllIt != qllItEnd; ++qllIt)
@@ -671,9 +671,9 @@ QVariantList CsaValue::getListInts()
 
    if (CHKPTR(pValue) && pValue->GetValueType() == eDmValueListInt)
    {
-      QLinkedList<int> qllValues = static_cast<CdmValueListInt*>(pValue)->GetList();
-      QLinkedList<int>::iterator qllIt = qllValues.begin();
-      QLinkedList<int>::iterator qllItEnd = qllValues.end();
+      QList<int> qllValues = static_cast<CdmValueListInt*>(pValue)->GetList();
+      QList<int>::iterator qllIt = qllValues.begin();
+      QList<int>::iterator qllItEnd = qllValues.end();
 
       for (; qllIt != qllItEnd; ++qllIt)
       {
@@ -692,9 +692,9 @@ QString CsaValue::getListDoublesQml()
 
    if (CHKPTR(pValue) && pValue->GetValueType() == eDmValueListDouble)
    {
-      QLinkedList<double> qllValues = static_cast<CdmValueListDouble*>(pValue)->GetList();
-      QLinkedList<double>::iterator qllIt = qllValues.begin();
-      QLinkedList<double>::iterator qllItEnd = qllValues.end();
+      QList<double> qllValues = static_cast<CdmValueListDouble*>(pValue)->GetList();
+      QList<double>::iterator qllIt = qllValues.begin();
+      QList<double>::iterator qllItEnd = qllValues.end();
       int iCounter = 0;
 
       for (; qllIt != qllItEnd; ++qllIt)
@@ -716,9 +716,9 @@ QVariantList CsaValue::getListDoubles()
    {
       if (pValue->GetValueType() == eDmValueListDouble)
       {
-         QLinkedList<double> qllValues = static_cast<CdmValueListDouble*>(pValue)->GetList();
-         QLinkedList<double>::iterator qllIt = qllValues.begin();
-         QLinkedList<double>::iterator qllItEnd = qllValues.end();
+         QList<double> qllValues = static_cast<CdmValueListDouble*>(pValue)->GetList();
+         QList<double>::iterator qllIt = qllValues.begin();
+         QList<double>::iterator qllItEnd = qllValues.end();
 
          for (; qllIt != qllItEnd; ++qllIt)
          {
@@ -958,10 +958,10 @@ QVariant CsaValue::getListObjectsEntriesVariant()
 
     if (CHKPTR(pValue) && pValue->GetValueType() == eDmValueListObjects)
     {
-        QLinkedList<CdmObject*> qllValues;
+        QList<CdmObject*> qllValues;
         static_cast<CdmValueListObjects*>(pValue)->GetList(qllValues);
-        QLinkedList<CdmObject*>::iterator qllIt = qllValues.begin();
-        QLinkedList<CdmObject*>::iterator qllItEnd = qllValues.end();
+        QList<CdmObject*>::iterator qllIt = qllValues.begin();
+        QList<CdmObject*>::iterator qllItEnd = qllValues.end();
         int iCounter = 0;
 
         for (; qllIt != qllItEnd; ++qllIt)
@@ -987,10 +987,10 @@ QString CsaValue::getListObjectsEntries()
 
    if (CHKPTR(pValue) && pValue->GetValueType() == eDmValueListObjects)
    {
-      QLinkedList<CdmObject*> qllValues;
+      QList<CdmObject*> qllValues;
       static_cast<CdmValueListObjects*>(pValue)->GetList(qllValues);
-      QLinkedList<CdmObject*>::iterator qllIt = qllValues.begin();
-      QLinkedList<CdmObject*>::iterator qllItEnd = qllValues.end();
+      QList<CdmObject*>::iterator qllIt = qllValues.begin();
+      QList<CdmObject*>::iterator qllItEnd = qllValues.end();
       int iCounter = 0;
 
       for (; qllIt != qllItEnd; ++qllIt)
@@ -1018,10 +1018,10 @@ QVariantList CsaValue::getListObjects()
    {
       if (pValue->GetValueType() == eDmValueListObjects)
       {
-         QLinkedList<CdmObject*> qllValues;
+         QList<CdmObject*> qllValues;
          static_cast<CdmValueListObjects*>(pValue)->GetList(qllValues);
-         QLinkedList<CdmObject*>::iterator qllIt = qllValues.begin();
-         QLinkedList<CdmObject*>::iterator qllItEnd = qllValues.end();
+         QList<CdmObject*>::iterator qllIt = qllValues.begin();
+         QList<CdmObject*>::iterator qllItEnd = qllValues.end();
          CsaFactory* pFactory = getFactory();
 
          if (CHKPTR(pFactory))

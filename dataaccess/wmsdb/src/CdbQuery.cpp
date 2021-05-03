@@ -11,7 +11,7 @@
 
 // System and QT Includes
 #include <QSqlQuery>
-#include <QLinkedList>
+#include <QList>
 #include <qvariant.h>
 
 
@@ -282,7 +282,7 @@ bool CdbQuery::IsQueryElementValid(CdmQueryElement* p_pElement)
         }
         else
         {
-            QLinkedList<CdmQueryElement*> qllChilds;
+            QList<CdmQueryElement*> qllChilds;
             p_pElement->GetChildList(qllChilds);
 
             if (qllChilds.count() > 0)

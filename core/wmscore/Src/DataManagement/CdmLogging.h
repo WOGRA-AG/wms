@@ -3,7 +3,7 @@
 
 // Sytsem and QT Includes
 #include <QString>
-#include <QLinkedList>
+#include <QList>
 #include <QTextStream>
 #include <QFile>
 #include <QMutex>
@@ -95,7 +95,7 @@ private:
        * List of ErrorAdaptors which wants to be notified
        * if a message occurs
        */
-    QLinkedList<CdmLoggingAdaptor*> m_qvlAdaptors;
+    QList<CdmLoggingAdaptor*> m_qvlAdaptors;
 
 public:
 

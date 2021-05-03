@@ -19,7 +19,7 @@
 #endif //
 
 // System and QT Includes
-#include <QLinkedList>
+#include <QList>
 #include <QWidget>
 #include <QAction>
 
@@ -43,8 +43,8 @@ enum EslGuiRight
 class BASETOOLS_API CwmsbtRightsGroup
 {
    private:
-      QLinkedList<QObject*> m_qllWriteObjects;
-      QLinkedList<QObject*> m_qllReadObjects;
+      QList<QObject*> m_qllWriteObjects;
+      QList<QObject*> m_qllReadObjects;
       int m_iID;
       QString m_qstrDisplayName;
       EslGuiRight m_eSlRight;
@@ -125,11 +125,11 @@ class BASETOOLS_API CwmsbtRightsGroup
    /** +-=---------------------------------------------------------Sa 8. Mai 13:27:48 2010--------*
     * @method  CwmsbtRightsGroup::ChangeVisibility              // private                           *
     * @return  void                                          //                                   *
-    * @param   QLinkedList<QObject*>& p_rqllWidgets          //                                   *
+    * @param   QList<QObject*>& p_rqllWidgets          //                                   *
     * @param   bool p_bVisibility                            //                                   *
     * @comment                                                                                    *
     *----------------last changed: -----------------------------Sa 8. Mai 13:27:48 2010-----------*/
-    void ChangeVisibility(QLinkedList<QObject*>& p_rqllWidgets, bool p_bVisibility);
+    void ChangeVisibility(QList<QObject*>& p_rqllWidgets, bool p_bVisibility);
 
 
 
@@ -160,18 +160,18 @@ class BASETOOLS_API CwmsbtRightsGroup
    public:
    /** +-=---------------------------------------------------------Mo 10. Mai 20:14:23 2010-------*
     * @method  CwmsbtRightsGroup::GetWriteRightsElements        // public                            *
-    * @return  QLinkedList<QObject*>                         //                                   *
+    * @return  QList<QObject*>                         //                                   *
     * @comment                                                                                    *
     *----------------last changed: -----------------------------Mo 10. Mai 20:14:23 2010----------*/
-    QLinkedList<QObject*> GetWriteRightsElements();
+    QList<QObject*> GetWriteRightsElements();
 
    public:
    /** +-=---------------------------------------------------------Mo 10. Mai 20:14:40 2010-------*
     * @method  CwmsbtRightsGroup::GetReadRightsElements         // public                            *
-    * @return  QLinkedList<QObject*>                         //                                   *
+    * @return  QList<QObject*>                         //                                   *
     * @comment                                                                                    *
     *----------------last changed: -----------------------------Mo 10. Mai 20:14:40 2010----------*/
-    QLinkedList<QObject*> GetReadRightsElements();
+    QList<QObject*> GetReadRightsElements();
 
    public:
    /** +-=---------------------------------------------------------Do 13. Mai 12:57:08 2010-------*

@@ -60,7 +60,7 @@ class WMSGUI_API CwmsGuiDatabaseSelection : public QDialog, public Ui::CwmsDatab
     * @return  void                                          //                                   *
     * @comment This method fills the dialog with the mandators.                                   *
     *----------------last changed: -----------------------------Di 4. Sep 14:27:10 2012-----------*/
-	   void FillDialog(QLinkedList<QString>& p_rqllDatabases);
+	   void FillDialog(QList<QString>& p_rqllDatabases);
 
     private slots:
    /** +-=---------------------------------------------------------Di 4. Sep 14:28:07 2012--------*

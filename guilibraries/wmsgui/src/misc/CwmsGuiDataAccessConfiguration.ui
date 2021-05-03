@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>747</width>
-    <height>502</height>
+    <width>446</width>
+    <height>292</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -70,7 +70,7 @@
         <string/>
        </property>
        <property name="icon">
-        <iconset resource="../../../WMSadmin/resources/emresources.qrc">
+        <iconset resource="wmsgui.qrc">
          <normaloff>:/icons/new24.png</normaloff>:/icons/new24.png</iconset>
        </property>
       </widget>
@@ -81,7 +81,7 @@
         <string/>
        </property>
        <property name="icon">
-        <iconset resource="../../../WMSadmin/resources/emresources.qrc">
+        <iconset resource="wmsgui.qrc">
          <normaloff>:/icons/edit24.png</normaloff>:/icons/edit24.png</iconset>
        </property>
       </widget>
@@ -92,7 +92,7 @@
         <string/>
        </property>
        <property name="icon">
-        <iconset resource="../../../WMSadmin/resources/emresources.qrc">
+        <iconset resource="wmsgui.qrc">
          <normaloff>:/icons/delete24.png</normaloff>:/icons/delete24.png</iconset>
        </property>
       </widget>
@@ -140,6 +140,32 @@
       <item>
        <widget class="QComboBox" name="m_pqcbConfig"/>
       </item>
+      <item>
+       <widget class="QPushButton" name="m_pqpbTest">
+        <property name="maximumSize">
+         <size>
+          <width>32</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="toolTip">
+         <string>DB Verbindung testen</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset resource="wmsgui.qrc">
+          <normaloff>:/icons/offer-open24.png</normaloff>:/icons/offer-open24.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>24</width>
+          <height>24</height>
+         </size>
+        </property>
+       </widget>
+      </item>
      </layout>
     </widget>
    </item>
@@ -164,7 +190,7 @@
         <string/>
        </property>
        <property name="icon">
-        <iconset resource="../../../WMSadmin/resources/emresources.qrc">
+        <iconset resource="wmsgui.qrc">
          <normaloff>:/icons/cancel24.png</normaloff>:/icons/cancel24.png</iconset>
        </property>
       </widget>
@@ -175,7 +201,7 @@
         <string/>
        </property>
        <property name="icon">
-        <iconset resource="../../../WMSadmin/resources/emresources.qrc">
+        <iconset resource="wmsgui.qrc">
          <normaloff>:/icons/ok24.png</normaloff>:/icons/ok24.png</iconset>
        </property>
       </widget>
@@ -185,7 +211,7 @@
   </layout>
  </widget>
  <resources>
-  <include location="../../../WMSadmin/resources/emresources.qrc"/>
+  <include location="wmsgui.qrc"/>
  </resources>
  <connections>
   <connection>
@@ -195,8 +221,8 @@
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>694</x>
-     <y>497</y>
+     <x>407</x>
+     <y>287</y>
     </hint>
     <hint type="destinationlabel">
      <x>291</x>
@@ -211,8 +237,8 @@
    <slot>OkClickedSlot()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>742</x>
-     <y>497</y>
+     <x>441</x>
+     <y>287</y>
     </hint>
     <hint type="destinationlabel">
      <x>345</x>
@@ -227,12 +253,12 @@
    <slot>NewClickedSlot()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>22</x>
-     <y>380</y>
+     <x>26</x>
+     <y>196</y>
     </hint>
     <hint type="destinationlabel">
      <x>70</x>
-     <y>637</y>
+     <y>291</y>
     </hint>
    </hints>
   </connection>
@@ -243,12 +269,12 @@
    <slot>EditClickedSlot()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>70</x>
-     <y>373</y>
+     <x>65</x>
+     <y>196</y>
     </hint>
     <hint type="destinationlabel">
      <x>193</x>
-     <y>624</y>
+     <y>291</y>
     </hint>
    </hints>
   </connection>
@@ -259,12 +285,12 @@
    <slot>DeleteClickedSlot()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>133</x>
-     <y>378</y>
+     <x>99</x>
+     <y>196</y>
     </hint>
     <hint type="destinationlabel">
      <x>213</x>
-     <y>565</y>
+     <y>291</y>
     </hint>
    </hints>
   </connection>
@@ -275,12 +301,28 @@
    <slot>EditClickedSlot()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>350</x>
-     <y>237</y>
+     <x>357</x>
+     <y>161</y>
     </hint>
     <hint type="destinationlabel">
-     <x>978</x>
-     <y>600</y>
+     <x>445</x>
+     <y>291</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqpbTest</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsGuiDataAccessConfigurationUi</receiver>
+   <slot>TestClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>427</x>
+     <y>239</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>699</x>
+     <y>248</y>
     </hint>
    </hints>
   </connection>
@@ -291,5 +333,6 @@
   <slot>NewClickedSlot()</slot>
   <slot>EditClickedSlot()</slot>
   <slot>DeleteClickedSlot()</slot>
+  <slot>TestClickedSlot()</slot>
  </slots>
 </ui>

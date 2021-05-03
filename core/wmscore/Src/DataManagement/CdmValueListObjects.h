@@ -7,7 +7,7 @@
 
 // System and QT Includes
 #include <QString>
-#include <QLinkedList>
+#include <QList>
 
 // Own Includes
 #include "CdmValueCharacterDocument.h"
@@ -28,7 +28,7 @@ class WMSMANAGER_API CdmValueListObjects : public CdmValueCharacterDocument
     Q_OBJECT
 
 private:
-    QLinkedList<QPair<long, long> > m_qllObjects;
+    QList<QPair<long, long> > m_qllObjects;
 
 public:
     CdmValueListObjects( long p_lDatabaseId,
@@ -37,11 +37,11 @@ public:
                          CdmObject* p_pCdmObject);
     CdmValueListObjects( QVariantMap& p_rqvHash, CdmObject* p_pCdmObject);
     virtual ~CdmValueListObjects( );
-    void GetList(QLinkedList<CdmObject*>& p_rqvlObjects) const;
+    void GetList(QList<CdmObject*>& p_rqvlObjects) const;
     void AddValue(CdmObject* p_pCmObject);
     void AddEventValue(CdmObject *pCdmObject, CdmClass *pObjectClass);
     void RemoveValue(CdmObject* p_pCdmObject);
-    void SetList(QLinkedList<CdmObject*>& p_rqvlObjects);
+    void SetList(QList<CdmObject*>& p_rqvlObjects);
     void Deserialize();
     void Serialize() const;
     void RemoveValue(long p_iKey);

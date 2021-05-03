@@ -40,7 +40,7 @@ int CftlCommandUpdateContainer::Execute()
         }
 
         // first step updating all objects
-        QLinkedList<CdmObject*> qvlObjects;
+        QList<CdmObject*> qvlObjects;
         qvlObjects = m_rpObjectContainer->GetNewModifiedList();
 
         if (qvlObjects.count() > 0)
@@ -87,11 +87,11 @@ int CftlCommandUpdateContainer::Execute()
 }
 
 long CftlCommandUpdateContainer::UpdateObjects(CdmObjectContainer* p_pContainer,
-                                               QLinkedList<CdmObject*>& p_rqlObjects)
+                                               QList<CdmObject*>& p_rqlObjects)
 {
     long lRet = CdmLogging::eDmObjectAccessError;
-    QLinkedList<CdmObject*>::iterator qvlIt    = p_rqlObjects.begin();
-    QLinkedList<CdmObject*>::iterator qvlItEnd = p_rqlObjects.end();
+    QList<CdmObject*>::iterator qvlIt    = p_rqlObjects.begin();
+    QList<CdmObject*>::iterator qvlItEnd = p_rqlObjects.end();
 
     for(; qvlIt != qvlItEnd; ++qvlIt)
     {
@@ -124,11 +124,11 @@ long CftlCommandUpdateContainer::UpdateObjects(CdmObjectContainer* p_pContainer,
 }
 
 long CftlCommandUpdateContainer::DeleteObjects(CdmObjectContainer* p_pContainer,
-                                               QLinkedList<CdmObject*>& p_rqlObjects)
+                                               QList<CdmObject*>& p_rqlObjects)
 {
     long lRet = CdmLogging::eDmObjectAccessError;
-    QLinkedList<CdmObject*>::iterator qvlIt    = p_rqlObjects.begin();
-    QLinkedList<CdmObject*>::iterator qvlItEnd = p_rqlObjects.end();
+    QList<CdmObject*>::iterator qvlIt    = p_rqlObjects.begin();
+    QList<CdmObject*>::iterator qvlItEnd = p_rqlObjects.end();
 
     for(; qvlIt != qvlItEnd; ++qvlIt)
     {

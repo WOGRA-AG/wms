@@ -14,7 +14,7 @@
 
 // System and QT Includes
 #include <qstring.h>
-#include <QLinkedList>
+#include <QList>
 
 // own Includes
 #include "CdmLocatedElement.h"
@@ -89,7 +89,7 @@ CumUser* FindUser(  QString p_qstrLogin, QString p_qstrPassword, QString p_qstrS
     * @param   QValueList<CumUser*>& p_qvlUsers              //                                   *
     * @comment This method returns a list of users from db.                                       *
     *----------------last changed: -----------------------------Sa 20. Aug 12:16:48 2005----------*/
-long GetUserList(  QLinkedList<CumUser*>& p_qvlUsers );
+long GetUserList(  QList<CumUser*>& p_qvlUsers );
 
    public:
    /** +-=---------------------------------------------------------Sa 20. Aug 12:17:07 2005*
@@ -155,7 +155,7 @@ long RemoveUserFromGroup(  long p_lUserId, long p_lUserGroupId );
     * @param   QValueList<CumUserGroup*>& p_rqvlUserGroups   //                                   *
     * @comment This method returns a list of all Usergroups.                                      *
     *----------------last changed: -----------------------------Sa 20. Aug 12:17:29 2005----------*/
-long GetUserGroupList(  QLinkedList<CumUserGroup*>& p_rqvlUserGroups, QString p_qstrSchemeUri );
+long GetUserGroupList(  QList<CumUserGroup*>& p_rqvlUserGroups, QString p_qstrSchemeUri );
 
    public:
    /** +-=---------------------------------------------------------Sa 20. Aug 12:17:33 2005*
@@ -165,7 +165,7 @@ long GetUserGroupList(  QLinkedList<CumUserGroup*>& p_rqvlUserGroups, QString p_
     * @param   QValueList<CumUser*>& p_rqvlUserList          //                                   *
     * @comment This method returns a list of User in usergroup p_lUserGroupId.                    *
     *----------------last changed: -----------------------------Sa 20. Aug 12:17:33 2005----------*/
-long GetListOfUsersInList(  long p_lUserGroupId, QLinkedList<CumUser*>& p_rqvlUserList );
+long GetListOfUsersInList(  long p_lUserGroupId, QList<CumUser*>& p_rqvlUserList );
 
    public:
    /** +-=---------------------------------------------------------Sa 20. Aug 12:17:37 2005*
@@ -175,7 +175,7 @@ long GetListOfUsersInList(  long p_lUserGroupId, QLinkedList<CumUser*>& p_rqvlUs
     * @param   QValueList<CumUserGroup*>& p_qvlUserGroups    //                                   *
     * @comment This method returns a list of groups in which a is member.                         *
     *----------------last changed: -----------------------------Sa 20. Aug 12:17:37 2005----------*/
-long GetUserGroupMemberList(  long p_lUserId, QLinkedList<CumUserGroup*>& p_qvlUserGroups );
+long GetUserGroupMemberList(  long p_lUserId, QList<CumUserGroup*>& p_qvlUserGroups );
 
    public:
    /** +-=---------------------------------------------------------Sa 20. Aug 12:16:30 2005*
@@ -219,11 +219,11 @@ CumUserGroup* FindUserGroup(  long p_lGroupId );
     CumUser *FindUserByLogin(QString p_qstrLogin, QString p_qstrSchemeUri);
 
     long DeleteUser(long p_lUserId);
-    QLinkedList<CumUser*> FindUser(QString p_qstrUserLoginNameEmail, QString p_qstrSchemeUri);
+    QList<CumUser*> FindUser(QString p_qstrUserLoginNameEmail, QString p_qstrSchemeUri);
     virtual CumUser* FindUserByIdentKey(QString p_qstridentKey, QString p_qstrSchemeUri);
     virtual CumUserGroup* FindUserGroupById(int p_iId);
     virtual CumUserGroup* FindUserGroupByName(QString p_qstrGroupName, QString p_qstrSchemeUri);
-    QLinkedList<CumUserGroup *> FindUserGroups(QString p_qstrName, QString p_qstrSchemeUri);
+    QList<CumUserGroup *> FindUserGroups(QString p_qstrName, QString p_qstrSchemeUri);
 };
 
 #endif //

@@ -12,7 +12,7 @@
 #define CFTLQUERYELEMENT_H
 
 // System and QT Inlcudes
-#include <QLinkedList>
+#include <QList>
 #include <QStringList>
 
 
@@ -36,7 +36,7 @@ private:
     CftlDataAccess* m_rpCftlDataAccess;
     CdmQueryElement* m_rpCdmQueryElement;
     CftlCommandQuery* m_rpCtflQuery;
-    QLinkedList<CftlCommandQueryElement*> m_qvlChilds;
+    QList<CftlCommandQueryElement*> m_qvlChilds;
     QString m_qstrQuery;
 
 public:
@@ -53,7 +53,7 @@ public:
     QString GetListCompareValueAsStringFromDecimals();
 
 private:
-    void CreateChilds(QLinkedList<CdmQueryElement*>& p_qvlChilds);
+    void CreateChilds(QList<CdmQueryElement*>& p_qvlChilds);
     QString GenerateOrQuery();
     QString GenerateAndQuery();
     QString ExtractCompareEntriesFromList();

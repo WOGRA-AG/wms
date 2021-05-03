@@ -51,11 +51,11 @@ void CwmsSymbolSearch::ClassSearch()
 
         if (CHKPTR(pClassManager))
         {
-            QLinkedList<CdmClass*> qllClasses;
+            QList<CdmClass*> qllClasses;
             pClassManager->GetClassList(qllClasses);
 
-            QLinkedList<CdmClass*>::iterator qllIt = qllClasses.begin();
-            QLinkedList<CdmClass*>::iterator qllItEnd = qllClasses.end();
+            QList<CdmClass*>::iterator qllIt = qllClasses.begin();
+            QList<CdmClass*>::iterator qllItEnd = qllClasses.end();
 
             for (; qllIt != qllItEnd; ++qllIt)
             {

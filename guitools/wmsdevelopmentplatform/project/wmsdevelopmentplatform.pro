@@ -36,15 +36,15 @@ OBJECTS_DIR = $$OUT_PWD/$$WMS_ARCH/obj/$$WMS_MODE
 UICIMPLS = $$OUT_PWD/$$WMS_ARCH/uic/$$WMS_MODE
 UI_DIR = $$OUT_PWD/$$WMS_ARCH/ui/$$WMS_MODE
 
-message("WMSADMIN DESTDIR: "$$DESTDIR)
+message("WMSDEVELOPMENTPLATFORM DESTDIR: "$$DESTDIR)
 
-CONFIG(gcc, gcc|clang) {
-    QMAKE_CXXFLAGS += -Werror -Wall -Wextra
+#CONFIG(gcc, gcc|clang) {
+#    QMAKE_CXXFLAGS += -Werror -Wall -Wextra
 
-    IGNORE_ERRORS += -Wno-error=unused-variable
-    message("WMSCOMMONS Ignored Errors: "$$IGNORE_ERRORS)
-    QMAKE_CXXFLAGS += $$IGNORE_ERRORS
-}
+#    IGNORE_ERRORS += -Wno-error=unused-variable
+#    message("WMSCOMMONS Ignored Errors: "$$IGNORE_ERRORS)
+#    QMAKE_CXXFLAGS += $$IGNORE_ERRORS
+#}
 
 DEFINES += QT_NO_OPENGL
 INCLUDEPATH += \
@@ -81,15 +81,13 @@ QMAKE_RPATHDIR += $$DESTDIR
 include(wmsdevelopmentplatform.pri)
 TRANSLATIONS += wmsadmin_en.ts
 
+#QMAKE_TARGET_COMPANY = "WOGRA"
+#QMAKE_TARGET_PRODUCT = "WMS Development Platfrom"
+#QMAKE_TARGET_COPYRIGHT = "Copyright (C) 2010-2015 WOGRA Consulting GmbH <info@wogra.com>"
+#QMAKE_TARGET_DESCRIPTION = "Development Plattform for developing WMS applications"
 
-
-QMAKE_TARGET_COMPANY = "WOGRA"
-QMAKE_TARGET_PRODUCT = "WMS Development Platfrom"
-QMAKE_TARGET_COPYRIGHT = "Copyright (C) 2010-2015 WOGRA Consulting GmbH <info@wogra.com>"
-QMAKE_TARGET_DESCRIPTION = "Development Plattform for developing WMS applications"
-
-DEFINES += \
-  APP_COMPANY=\"\\\"$$QMAKE_TARGET_COMPANY\\\"\" \
-  APP_PRODUCT=\"\\\"$$QMAKE_TARGET_PRODUCT\\\"\" \
-  APP_DESCRIPTION=\"\\\"$$QMAKE_TARGET_DESCRIPTION\\\"\" \
-  APP_COPYRIGHT=\"\\\"$$QMAKE_TARGET_COPYRIGHT\\\"\"
+#DEFINES += \
+#  APP_COMPANY=\"\\\"$$QMAKE_TARGET_COMPANY\\\"\" \
+#  APP_PRODUCT=\"\\\"$$QMAKE_TARGET_PRODUCT\\\"\" \
+#  APP_DESCRIPTION=\"\\\"$$QMAKE_TARGET_DESCRIPTION\\\"\" \
+#  APP_COPYRIGHT=\"\\\"$$QMAKE_TARGET_COPYRIGHT\\\"\"

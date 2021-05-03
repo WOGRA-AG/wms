@@ -5,7 +5,7 @@
 
 #include <QVariant>
 #include <QString>
-#include <QLinkedList>
+#include <QList>
 
 // Forwards
 class CwnUserManager;

@@ -106,9 +106,9 @@ void CsraHandlerContainerManager::getListByClassId(CsaLocatedElement *p_pElement
         if (p_pRequest->HasPathVariable(WMS_ID))
         {
             QString qstrClassKeyname = p_pRequest->GetPathVariable(WMS_ID);
-            QLinkedList<QString> qllContainers = pContainerManager->getInternals()->GetContainerList(qstrClassKeyname.toLong());
-            QLinkedList<QString>::iterator qllIt = qllContainers.begin();
-            QLinkedList<QString>::iterator qllItEnd = qllContainers.end();
+            QList<QString> qllContainers = pContainerManager->getInternals()->GetContainerList(qstrClassKeyname.toLong());
+            QList<QString>::iterator qllIt = qllContainers.begin();
+            QList<QString>::iterator qllItEnd = qllContainers.end();
             QVariantList qvlResults;
 
             for (; qllIt != qllItEnd; ++qllIt)
@@ -147,9 +147,9 @@ void CsraHandlerContainerManager::getListByClassKeyname(CsaLocatedElement *p_pEl
         if (p_pRequest->HasPathVariable(WMS_CLASS_KEYNAME))
         {
             QString qstrClassKeyname = p_pRequest->GetPathVariable(WMS_CLASS_KEYNAME);
-            QLinkedList<QString> qllContainers = pContainerManager->getInternals()->GetContainerList(qstrClassKeyname);
-            QLinkedList<QString>::iterator qllIt = qllContainers.begin();
-            QLinkedList<QString>::iterator qllItEnd = qllContainers.end();
+            QList<QString> qllContainers = pContainerManager->getInternals()->GetContainerList(qstrClassKeyname);
+            QList<QString>::iterator qllIt = qllContainers.begin();
+            QList<QString>::iterator qllItEnd = qllContainers.end();
             QVariantList qvlResults;
 
             for (; qllIt != qllItEnd; ++qllIt)

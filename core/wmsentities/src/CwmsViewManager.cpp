@@ -12,7 +12,7 @@
  *****************************************************************************/
 
 // System and QT Includes
-#include <QLinkedList>
+#include <QList>
 
 // WMS Includes
 #include "CdmDataProvider.h"
@@ -152,7 +152,7 @@ CdmObjectContainer* CwmsViewManager::GetContainer()
    return CdmDataProvider::GetObjectContainer("TechnicalViews");
 }
 
-void CwmsViewManager::GetViewList(QLinkedList<CdmObject*>& p_rqlViews)
+void CwmsViewManager::GetViewList(QList<CdmObject*>& p_rqlViews)
 {
    CdmObjectContainer* pContainer = GetContainer();
 
@@ -184,7 +184,7 @@ CwmsView CwmsViewManager::GetViewByName(QString p_qstrName)
 
    if (pQuery)
    {
-      QLinkedList<long> qllResults = pQuery->GetResultList();
+      QList<long> qllResults = pQuery->GetResultList();
 
       if (qllResults.count() > 0)
       {

@@ -17,7 +17,7 @@
 #include <QSqlDriver>
 #include <QFileInfo>
 #include <QSqlError>
-#include <QLinkedList>
+#include <QList>
 #include <QTime>
 
 
@@ -174,7 +174,7 @@ long CftlObjectAccess::GetObjectListsList(  long p_lDbId,
 }
 
 long CftlObjectAccess::LoadObjects(CdmObjectContainer* p_pContainer,
-                                    QLinkedList<long>& p_rqvlObjectIds)
+                                    QList<long>& p_rqvlObjectIds)
 {
     CftlCommandLoadObjects command(p_pContainer, p_rqvlObjectIds, m_rpCftlDataAccess);
     return command.Run();

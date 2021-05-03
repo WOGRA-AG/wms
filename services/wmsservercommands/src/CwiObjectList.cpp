@@ -739,7 +739,7 @@ void CwiObjectContainer::saveEvent(CdmObjectContainer *pContainer)
     if(pSession)
     {
         IdmEventStoreManager *pEventStoreManager = pSession->getEventStoreManager();
-        QLinkedList<CdmObject*> qlObjects;
+        QList<CdmObject*> qlObjects;
         pContainer->GetObjectList(qlObjects);
         if(!qlObjects.isEmpty())
         {
@@ -765,10 +765,10 @@ void CwiObjectContainer::saveEvent(CdmObjectContainer *pContainer)
 
 void CwiObjectContainer::subcribeSubscribersForEventSourcing(CdmClassManager *pClassManager, IdmEventStoreManager *pEventStoreManager)
 {
-    QLinkedList<CdmClass*> qllClasses;
+    QList<CdmClass*> qllClasses;
     pClassManager->GetClassList(qllClasses);
-    QLinkedList<CdmClass*>::iterator qmIt = qllClasses.begin();
-    QLinkedList<CdmClass*>::iterator qmItEnd = qllClasses.end();
+    QList<CdmClass*>::iterator qmIt = qllClasses.begin();
+    QList<CdmClass*>::iterator qmItEnd = qllClasses.end();
     for(; qmIt != qmItEnd; ++qmIt)
     {
         CdmClass *pSubscriberClass = (*qmIt);

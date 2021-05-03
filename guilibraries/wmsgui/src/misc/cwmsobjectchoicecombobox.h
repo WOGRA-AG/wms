@@ -20,7 +20,7 @@
 #include <qcombobox.h>
 #include <qmap.h>
 #include <QKeyEvent>
-#include <QLinkedList>
+#include <QList>
 
 
 // own Includes
@@ -90,7 +90,7 @@ private:
    void FillDialog(CdmObjectContainer* p_pContainer, QString p_qstrValueKeyname);
    void FillDialog(CdmObjectContainer* p_pContainer,
                    QString p_qstrValueKeyname,
-                   QLinkedList<long>& p_rqvlObjects);
+                   QList<long>& p_rqvlObjects);
 
    void keyPressEvent(QKeyEvent * p_pqKeyEvent);
    int FindIndexById(long p_lObjectId);

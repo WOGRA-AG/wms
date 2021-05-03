@@ -3,7 +3,7 @@
 
 #include <QMap>
 #include <QList>
-#include <QLinkedList>
+#include <QList>
 #include <QVariant>
 #include <QQueue>
 #include <QPair>

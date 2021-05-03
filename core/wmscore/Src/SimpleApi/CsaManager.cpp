@@ -9,7 +9,7 @@
  ******************************************************************************/
 
 // System and QT Includes
-#include <QLinkedList>
+#include <QList>
 
 // own Includes
 #include "CdmDataProvider.h"

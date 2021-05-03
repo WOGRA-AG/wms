@@ -38,7 +38,7 @@
 #include "CwmsUtilities.h"
 #include "CdbCommandLoadObjects.h"
 
-CdbCommandLoadObjects::CdbCommandLoadObjects(CdmObjectContainer* p_pContainer, QLinkedList<long>& p_qlObjectIds, CdbDataAccess* p_pDataAccess)
+CdbCommandLoadObjects::CdbCommandLoadObjects(CdmObjectContainer* p_pContainer, QList<long>& p_qlObjectIds, CdbDataAccess* p_pDataAccess)
 : CdbAbstractCommand(p_pDataAccess),
   m_rpContainer(p_pContainer),
   m_qvlObjectIds(p_qlObjectIds)
@@ -150,12 +150,12 @@ int CdbCommandLoadObjects::Execute()
    return lRet;
 }
 
-QString CdbCommandLoadObjects::GenerateInString(QLinkedList<long>& p_rqvlIds)
+QString CdbCommandLoadObjects::GenerateInString(QList<long>& p_rqvlIds)
 {
    QString qstrRet = "(";
 
-   QLinkedList<long>::iterator qvlIt = p_rqvlIds.begin();
-   QLinkedList<long>::iterator qvlItEnd = p_rqvlIds.end();
+   QList<long>::iterator qvlIt = p_rqvlIds.begin();
+   QList<long>::iterator qvlItEnd = p_rqvlIds.end();
 
    while (qvlIt != qvlItEnd)
    {
@@ -194,7 +194,7 @@ long CdbCommandLoadObjects::ReadValues(QString p_qstrInString, QMap<long, CdmObj
       if(GetDataAccess()->ExecuteQuery(qstrQuery, cQSqlQuery) > 0)
       {
          long lRet = CdmLogging::eDmOk;
-         QLinkedList<long> qvlBaseTypes;
+         QList<long> qvlBaseTypes;
          cQSqlQuery.first();
 
          if(cQSqlQuery.isValid())

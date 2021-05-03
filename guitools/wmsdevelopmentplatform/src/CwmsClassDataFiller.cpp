@@ -52,7 +52,7 @@ void CwmsClassDataFiller::FillClasses(CdmClassManager* p_pClassManager,
                                       bool p_bAddObjectContainers,
                                       bool p_bShowTechnicalItems)
 {
-   QLinkedList<CdmClass*> qvlClasses;
+   QList<CdmClass*> qvlClasses;
    p_pClassManager->GetClassList(qvlClasses);
    QList<CdmPackage*> qlPackages = p_pClassManager->GetPackageList();
 
@@ -68,8 +68,8 @@ void CwmsClassDataFiller::FillClasses(CdmClassManager* p_pClassManager,
 
    if (qvlClasses.count() > 0)
    {
-      QLinkedList<CdmClass*>::iterator qvlIt = qvlClasses.begin();
-      QLinkedList<CdmClass*>::iterator qvlItEnd = qvlClasses.end();
+      QList<CdmClass*>::iterator qvlIt = qvlClasses.begin();
+      QList<CdmClass*>::iterator qvlItEnd = qvlClasses.end();
 
       for (; qvlIt != qvlItEnd; ++ qvlIt)
       {
@@ -238,7 +238,7 @@ void CwmsClassDataFiller::FillFunctions(CdmClass* p_pCdmClass, QTreeWidgetItem* 
    {
       QTreeWidgetItem* pqlviFunctionItem = new QTreeWidgetItem(p_pqtwClass);
       pqlviFunctionItem->setData(1, Qt::UserRole, eWmsTreeItemTypeFunctionParent);
-      QLinkedList<QString> qvlObjectLists;
+      QList<QString> qvlObjectLists;
 
       QMap<QString, CdmClassMethod*> qmMethods = p_pCdmClass->GetMethods();
 
@@ -289,14 +289,14 @@ void CwmsClassDataFiller::FillClassesToComboBox(QComboBox* p_pComboBox,
 
          if (CHKPTR(pClassManager))
          {
-            QLinkedList<CdmClass*> qvlClasses;
+            QList<CdmClass*> qvlClasses;
             pClassManager->GetClassList(qvlClasses);
             QMap<QString, QString> qmEntries;
 
             if (qvlClasses.count() > 0)
             {
-               QLinkedList<CdmClass*>::iterator qvlIt    = qvlClasses.begin();
-               QLinkedList<CdmClass*>::iterator qvlItEnd = qvlClasses.end();
+               QList<CdmClass*>::iterator qvlIt    = qvlClasses.begin();
+               QList<CdmClass*>::iterator qvlItEnd = qvlClasses.end();
 
                for ( ; qvlIt != qvlItEnd; ++ qvlIt)
                {

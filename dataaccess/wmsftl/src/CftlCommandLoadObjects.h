@@ -2,7 +2,7 @@
 #define CDBCOMMANDLOADOBJECTS_H
 
 // System and Qt Includes
-#include <QLinkedList>
+#include <QList>
 
 // Own Includes
 #include "CftlAbstractCommand.h"
@@ -16,12 +16,12 @@ class CftlCommandLoadObjects : public CftlAbstractCommand
 {
 private:
     CdmObjectContainer* m_rpContainer;
-    QLinkedList<long> m_qvlObjectIds;
-    QLinkedList<QString> m_qvlObjectKeynames;
+    QList<long> m_qvlObjectIds;
+    QList<QString> m_qvlObjectKeynames;
 
 public:
-    CftlCommandLoadObjects(CdmObjectContainer* p_pContainer, QLinkedList<long>& p_qlObjectIds, CftlDataAccess* p_pDataAccess);
-    CftlCommandLoadObjects(CdmObjectContainer* p_pContainer, QLinkedList<QString>& p_qlObjectKeynames, CftlDataAccess* p_pDataAccess);
+    CftlCommandLoadObjects(CdmObjectContainer* p_pContainer, QList<long>& p_qlObjectIds, CftlDataAccess* p_pDataAccess);
+    CftlCommandLoadObjects(CdmObjectContainer* p_pContainer, QList<QString>& p_qlObjectKeynames, CftlDataAccess* p_pDataAccess);
     CftlCommandLoadObjects(CdmObjectContainer* p_pContainer, CftlDataAccess* p_pDataAccess);
     virtual ~CftlCommandLoadObjects();
 

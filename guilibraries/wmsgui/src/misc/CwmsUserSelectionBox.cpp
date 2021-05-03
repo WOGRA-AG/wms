@@ -50,10 +50,10 @@ CwmsUserSelectionBox::~CwmsUserSelectionBox()
 /** +-=---------------------------------------------------------Sa 14. Nov 11:29:57 2009----------*
  * @method  CwmsUserSelectionBox::GetUserList                // private                           *
  * @return  void                                             //                                   *
- * @param   QLinkedList<CumUser*>& p_rqllUsers               //                                   *
+ * @param   QList<CumUser*>& p_rqllUsers               //                                   *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------Sa 14. Nov 11:29:57 2009----------*/
-void CwmsUserSelectionBox::GetUserList(QLinkedList<CumUser*>& p_rqllUsers)
+void CwmsUserSelectionBox::GetUserList(QList<CumUser*>& p_rqllUsers)
 {
     // TODO SB Document transfer of ownership
     CdmDataProvider* pCdmManager = CdmSessionManager::GetDataProvider();
@@ -77,7 +77,7 @@ void CwmsUserSelectionBox::GetUserList(QLinkedList<CumUser*>& p_rqllUsers)
 void CwmsUserSelectionBox::FillComboBox()
 {
     BODY_TRY
-    QLinkedList<CumUser*> qllUsers;
+    QList<CumUser*> qllUsers;
     GetUserList(qllUsers);
 
     QMap<QString, int> qmUsers;
@@ -118,7 +118,7 @@ void CwmsUserSelectionBox::FillComboBoxWithGivenUserGroup(CumUserGroup *pUserGro
     {
         clear();
 
-        QLinkedList<CumUser*> qllUsers;
+        QList<CumUser*> qllUsers;
         pUserGroup->GetUserListNewPointers(qllUsers);
 
         for (CumUser* pCumUser : qllUsers)

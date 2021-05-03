@@ -14,7 +14,7 @@
 
 // System and QT Includes
 #include <qstring.h>
-#include <QLinkedList>
+#include <QList>
 #include <QVariant>
 
 // own Includes
@@ -39,7 +39,7 @@ private:
        * The list of group in which this user is
        * a member.
        */
-    QLinkedList<CumUserGroup*> m_qvlUserGroups;
+    QList<CumUserGroup*> m_qvlUserGroups;
 
     /*
        * The password of the user
@@ -122,7 +122,7 @@ public slots:
     QString GetLastName( ) const;
     QString GetIdentitiyKey( ) const;
     bool IsAdministrator( ) const;
-    void GetUserGroups( QLinkedList<CumUserGroup*>& p_qvlUserGroups);
+    void GetUserGroups( QList<CumUserGroup*>& p_qvlUserGroups);
     QString GetEmail( ) const;
     QString GetDisplayString( ) const;
     virtual bool IsUser( ) const;

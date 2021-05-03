@@ -19,7 +19,7 @@
 #endif //
 
 // System and QT includes
-#include <QLinkedList>
+#include <QList>
 
 
 // own Includes
@@ -37,7 +37,7 @@ class CwmsGroupIf : public QWidget, public Ui::CwmsGroupWidget
 
 private:
     CumUserGroup* m_rpCumUserGroup;
-    QLinkedList<CumUser*> m_qvlUsers;
+    QList<CumUser*> m_qvlUsers;
 
 public:
     CwmsGroupIf( CumUserGroup*, QWidget*);

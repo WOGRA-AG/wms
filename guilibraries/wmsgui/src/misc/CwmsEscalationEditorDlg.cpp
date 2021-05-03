@@ -74,9 +74,9 @@ void CwmsEscalationEditorDlg::FillDialog(CwmsEscalation p_cEscalation, bool p_bN
  *----------------last changed: --------------------------------Mi 10. Okt 18:07:02 2012----------*/
 void CwmsEscalationEditorDlg::FillEmployees()
 {
-   QLinkedList<int> qlEmployees = m_cEscalation.GetEmployees();
-   QLinkedList<int>::iterator qllIt = qlEmployees.begin();
-   QLinkedList<int>::iterator qllItEnd = qlEmployees.end();
+   QList<int> qlEmployees = m_cEscalation.GetEmployees();
+   QList<int>::iterator qllIt = qlEmployees.begin();
+   QList<int>::iterator qllItEnd = qlEmployees.end();
    CdmDataProvider* pCdmManager = CdmSessionManager::GetDataProvider();
 
    if (CHKPTR(pCdmManager))

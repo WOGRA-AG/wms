@@ -76,8 +76,8 @@ void CwmsContainerUpdateLocker::GetAdaptorsFromContainer(CdmObjectContainer* p_p
 void CwmsContainerUpdateLocker::RemoveAdaptorsFromContainer(CdmObjectContainer* p_pContainer)
 {
 
-    QLinkedList<CdmContainerAdaptor*>::iterator qvlIt    = m_qllOriginalContainers.begin();
-    QLinkedList<CdmContainerAdaptor*>::iterator qvlItEnd = m_qllOriginalContainers.end();
+    QList<CdmContainerAdaptor*>::iterator qvlIt    = m_qllOriginalContainers.begin();
+    QList<CdmContainerAdaptor*>::iterator qvlItEnd = m_qllOriginalContainers.end();
 
     for(; qvlIt != qvlItEnd; ++qvlIt)
     {
@@ -95,8 +95,8 @@ void CwmsContainerUpdateLocker::EnableUpdates()
 
     if (CHKPTR(pContainer))
     {
-        QLinkedList<CdmContainerAdaptor*>::iterator qvlIt    = m_qllOriginalContainers.begin();
-        QLinkedList<CdmContainerAdaptor*>::iterator qvlItEnd = m_qllOriginalContainers.end();
+        QList<CdmContainerAdaptor*>::iterator qvlIt    = m_qllOriginalContainers.begin();
+        QList<CdmContainerAdaptor*>::iterator qvlItEnd = m_qllOriginalContainers.end();
 
         for(; qvlIt != qvlItEnd; ++qvlIt)
         {

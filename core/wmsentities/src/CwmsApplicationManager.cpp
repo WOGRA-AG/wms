@@ -655,7 +655,7 @@ CwmsApplication CwmsApplicationManager::FindApplication(QString p_qstrName)
 
    if (pQuery)
    {
-      QLinkedList<long> qllResults = pQuery->GetResultList();
+      QList<long> qllResults = pQuery->GetResultList();
 
       if (qllResults.count() > 0)
       {

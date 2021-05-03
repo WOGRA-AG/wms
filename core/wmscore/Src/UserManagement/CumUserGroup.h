@@ -12,7 +12,7 @@
 #define CUMUSERGROUP_H
 
 // System and QT Includes
-#include <QLinkedList>
+#include <QList>
 #include <QVariant>
 
 // own Includes
@@ -50,7 +50,7 @@ public:
 
 public slots:
     QString GetGroupName() const;
-    void GetUserListNewPointers(QLinkedList<CumUser*>& p_qvlUsers) const;
+    void GetUserListNewPointers(QList<CumUser*>& p_qvlUsers) const;
     virtual bool IsGroup() const;
     virtual QString GetUri() const;
 };

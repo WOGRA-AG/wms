@@ -25,7 +25,7 @@
 // forwards
 class CdmPackage;
 class QDomElement;
-template<class T> class QLinkedList;
+template<class T> class QList;
 
 /*
  * This class manages the class of a virtual database
@@ -47,7 +47,7 @@ private:
     virtual ~CdmClassManager();
 
 public:
-    int GetInheritedClasses(CdmClass* p_pCdmBaseClass, QLinkedList<CdmClass*>& p_rqvlClassList);
+    int GetInheritedClasses(CdmClass* p_pCdmBaseClass, QList<CdmClass*>& p_rqvlClassList);
     CdmClass* CreateClass(QString p_qstrKeyname);
     int DeleteClass(long p_lId);
     int DeleteClass(CdmClass* p_pCdmClass);
@@ -80,7 +80,7 @@ public:
     CdmClass* FindClassByKeyname( QString p_qstrKeyname);
     CdmClass* FindClassByKeyname(CdmPackage* p_pPackage, QString p_qstrKeyname);
     CdmClass* FindClassById(long p_lId);
-    void GetClassList( QLinkedList<CdmClass*>& p_pqlClasses);
+    void GetClassList( QList<CdmClass*>& p_pqlClasses);
     int ExistClass(QString p_qstrClassKeyname) const;
     void GenerateClassDocumentation( QString p_qstrDatabase, QString p_qstrFilename) const;
 

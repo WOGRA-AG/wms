@@ -2,7 +2,7 @@
 #define CDBCOMMANDGETUSERLIST_H
 
 // System and Qt Includes
-#include <QLinkedList>
+#include <QList>
 // WMS Includes
 
 // own Includes
@@ -15,7 +15,7 @@ class CumUser;
 class CftlCommandGetUserList : public CftlAbstractCommand
 {
 private:
-    QLinkedList<CumUser*> m_qllUsers;
+    QList<CumUser*> m_qllUsers;
     QString m_qstrSearchString;
 
     int FindUsersByUnknownString();
@@ -24,7 +24,7 @@ public:
     CftlCommandGetUserList(CftlDataAccess* p_pDataAccess);
     CftlCommandGetUserList(QString p_qstrSearchString, CftlDataAccess *p_pDataAccess);
     virtual ~CftlCommandGetUserList();
-    QLinkedList<CumUser*> GetResult();
+    QList<CumUser*> GetResult();
 
 protected:
     virtual bool CheckValid();

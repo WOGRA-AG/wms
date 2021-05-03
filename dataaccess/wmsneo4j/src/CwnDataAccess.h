@@ -51,7 +51,7 @@ public:
     virtual long GetNewObjectId(const CdmObjectContainer* p_pContainer);
     virtual CdmObject* CreateObject(CdmObjectContainer* p_pContainer);
     virtual int UpdateObject(CdmObject*& p_pCdmObject);
-    virtual int LoadObjects(QLinkedList<long>& p_rqvlObjects,CdmObjectContainer*& p_pCdmObject);
+    virtual int LoadObjects(QList<long>& p_rqvlObjects,CdmObjectContainer*& p_pCdmObject);
     virtual int LoadObject(const CdmObjectContainer* p_pContainer, long p_lObjectId,CdmObject*& p_pCdmObject);
     virtual long RefreshObject(CdmObject* p_pCdmObject);
     virtual long GetCounterValue(const CdmObjectContainer* p_pContainer, CdmValue* p_pValue);
@@ -79,7 +79,7 @@ public:
     virtual int ExecuteQuery(CdmQuery* p_pCdmQuery);
     CwnJournal* GetJournal();
     virtual int CreateScheme(QString p_qstrKeyname, CdmScheme*& p_pCdmDatabaseManager);
-    virtual long GetSchemeList(QLinkedList<QString>& p_qvlDatabases);
+    virtual long GetSchemeList(QList<QString>& p_qvlDatabases);
     virtual int  GetSchemeModifications(long p_lDatabaseId,QDate p_qdFrom,QDate p_qdTo,QList<CdmJournalItem*>& p_qlItems);
     virtual long UpdateScheme(CdmScheme* p_pCdmDatabase);
     virtual int AddLanguage(long p_lDatabaseId, QString p_qstrLanguage);
@@ -108,14 +108,14 @@ public:
     virtual bool UnlockClassMethod(long p_lMethodId);
     virtual int DeleteClass(long p_lClassId);
     virtual int CreateUser(CumUser* p_pUser);
-    virtual int GetUserList(QLinkedList<CumUser*>& p_rqvlUser);
-    virtual long GetListOfUsersInList(long p_lUserGroupId,QLinkedList<CumUser*>& p_rqvlUserList );
+    virtual int GetUserList(QList<CumUser*>& p_rqvlUser);
+    virtual long GetListOfUsersInList(long p_lUserGroupId,QList<CumUser*>& p_rqvlUserList );
     virtual CumUser* FindUserById(int p_iId);
     virtual CumUser* FindUserByEmail(QString p_qstrEmail, QString p_qstrSchemeUri);
     virtual CumUser* FindUserByLogin(QString p_qstrLogin, QString p_qstrSchemeUri);
     virtual CumUser* FindUserByIdentKey(QString p_qstridentKey, QString p_qstrSchemeUri);
     virtual CumUser* FindUser(QString p_qstrUserId, QString p_qstrPassword, QString p_qstrSchemeUri);
-    virtual QLinkedList<CumUser*> FindUser(QString p_qstrUserLoginNameEmail, QString p_qstrSchemeUri);
+    virtual QList<CumUser*> FindUser(QString p_qstrUserLoginNameEmail, QString p_qstrSchemeUri);
     virtual int UpdateUser(CumUser* p_pUser);
     virtual int DeleteUser(QString p_qstrLogin);
     virtual int DeleteUser(long p_lUserToDeleteId);
@@ -123,8 +123,8 @@ public:
     virtual long RemoveUserFromGroup(long p_lChangeUserId,long p_lUserGroupId);
     virtual long CreateUserGroup(QString p_qstrGroupName);
     virtual long RenameUserGroup(long p_lGroupId,QString p_qstrNewName );
-    virtual long GetUserGroupMemberList(long p_lChangeUserId,QLinkedList<CumUserGroup*>& p_qvlUserGroups);
-    virtual long GetUserGroupList(QLinkedList<CumUserGroup*>& p_rqvlUserGroups, QString p_qstrSchemeUri);
+    virtual long GetUserGroupMemberList(long p_lChangeUserId,QList<CumUserGroup*>& p_qvlUserGroups);
+    virtual long GetUserGroupList(QList<CumUserGroup*>& p_rqvlUserGroups, QString p_qstrSchemeUri);
     virtual CumUserGroup* FindUserGroupById(int p_iId);
     virtual CumUserGroup* FindUserGroupByName(QString p_qstrName, QString p_qstrSchemeUri);
     virtual long DeleteUserGroup(long p_llGroupId);
@@ -148,8 +148,8 @@ public:
     int SaveRights(CdmRights& p_rCcdmRights, long p_lObjectId, QString p_qstrTableName, QString p_qstrIdFieldName);
     int DeleteRights(long p_lObjectId, QString p_qstrTableName, QString p_qstrIdFieldName);
     QString GetBoolAsString(bool p_bValue);
-    QString GenerateInString(QLinkedList<long> &p_rqvlIds);
-    virtual QLinkedList<CumUserGroup *> FindUserGroups(QString p_qstrName, QString p_qstrSchemeUri);
+    QString GenerateInString(QList<long> &p_rqvlIds);
+    virtual QList<CumUserGroup *> FindUserGroups(QString p_qstrName, QString p_qstrSchemeUri);
     virtual int LoadObject(const CdmObjectContainer* p_pContainer, QString p_qstrKeyname, CdmObject *&p_pCdmObject);
 };
 

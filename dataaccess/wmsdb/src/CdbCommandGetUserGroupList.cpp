@@ -15,7 +15,7 @@ CdbCommandGetUserGroupList::~CdbCommandGetUserGroupList()
 
 }
 
-QLinkedList<CumUserGroup *> CdbCommandGetUserGroupList::GetResult()
+QList<CumUserGroup *> CdbCommandGetUserGroupList::GetResult()
 {
     return m_qllUserGroups;
 }

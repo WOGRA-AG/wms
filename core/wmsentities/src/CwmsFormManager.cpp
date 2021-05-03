@@ -845,7 +845,7 @@ CdmObject* CwmsFormManager::GeDefaultObjectForm(CdmObject* p_pCdmObject)
 
          if (CHKPTR(pQuery))
          {
-            QLinkedList<long> qllResults;
+            QList<long> qllResults;
             qllResults = pQuery->GetResultList();
 
             if (qllResults.count() > 0)
@@ -880,7 +880,7 @@ CdmObject* CwmsFormManager::GeDefaultContainerForm(CdmObjectContainer* p_pContai
 
 			if (CHKPTR(pQuery))
 			{
-				QLinkedList<long> qllResults;
+				QList<long> qllResults;
 				qllResults = pQuery->GetResultList();
 
 				if (qllResults.count() > 0)

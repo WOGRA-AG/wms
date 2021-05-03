@@ -5,7 +5,7 @@
 #include "CwnHelper.h"
 
 // System and QT Includes
-#include <QLinkedList>
+#include <QList>
 
 #include "CdmQueryElement.h"
 
@@ -27,7 +27,7 @@ private:
 
 
    // The Children
-   QLinkedList<CwnQueryElement*> m_qvlChildren;
+   QList<CwnQueryElement*> m_qvlChildren;
 
    QString query;
    QString getLabel(EdmValueType type);
@@ -43,7 +43,7 @@ public:
 
 private:
     bool con_reference=false;
-    void CreateChildren(QLinkedList<CdmQueryElement*>& p_qvlChildren);
+    void CreateChildren(QList<CdmQueryElement*>& p_qvlChildren);
     QString GenerateAndQuery();
     QString GenerateOrQuery();
     QString GenerateValueQuery();

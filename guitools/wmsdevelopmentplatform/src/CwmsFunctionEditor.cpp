@@ -202,11 +202,11 @@ void CwmsFunctionEditor::AddClassesToComboBox()
 
       if (CHKPTR(pClassManager))
       {
-         QLinkedList<CdmClass*> qlClasses;
+         QList<CdmClass*> qlClasses;
          pClassManager->GetClassList(qlClasses);
 
-         QLinkedList<CdmClass*>::iterator qlIt = qlClasses.begin();
-         QLinkedList<CdmClass*>::iterator qlItEnd = qlClasses.end();
+         QList<CdmClass*>::iterator qlIt = qlClasses.begin();
+         QList<CdmClass*>::iterator qlItEnd = qlClasses.end();
 
          for (; qlIt != qlItEnd; ++qlIt)
          {

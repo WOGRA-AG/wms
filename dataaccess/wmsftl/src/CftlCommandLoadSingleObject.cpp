@@ -49,13 +49,13 @@ int CftlCommandLoadSingleObject::Execute()
 
     if (m_lObjectId > 0)
     {
-        QLinkedList<long> qllObjects;
+        QList<long> qllObjects;
         qllObjects.append(m_lObjectId);
         pCommand.reset(new CftlCommandLoadObjects(m_rpContainer, qllObjects, GetDataAccess()));
     }
     else if (!m_qstrKeyname.isEmpty())
     {
-        QLinkedList<QString> qllObjects;
+        QList<QString> qllObjects;
         qllObjects.append(m_qstrKeyname);
         pCommand.reset(new CftlCommandLoadObjects(m_rpContainer, qllObjects, GetDataAccess()));
     }

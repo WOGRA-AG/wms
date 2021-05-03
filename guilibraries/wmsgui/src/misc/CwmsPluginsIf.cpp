@@ -514,9 +514,9 @@ void CwmsPluginsIf::FillNotExistingPlugins(CdmObjectContainer* p_pContainer, Ewm
 
    if (CHKPTR(pQuery))
    {
-      QLinkedList<long> qllResults = pQuery->GetResultList();
-      QLinkedList<long>::iterator qllIt = qllResults.begin();
-      QLinkedList<long>::iterator qllItEnd = qllResults.end();
+      QList<long> qllResults = pQuery->GetResultList();
+      QList<long>::iterator qllIt = qllResults.begin();
+      QList<long>::iterator qllItEnd = qllResults.end();
 
       for (; qllIt != qllItEnd; ++qllIt)
       {

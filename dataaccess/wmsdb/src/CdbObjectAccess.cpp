@@ -193,7 +193,7 @@ long CdbObjectAccess::GetObjectListsList(  long p_lDbId,
  * @comment This method loads all objects overgiven in the objectid list.                         *
  *----------------last changed: Wolfgang Gra�of----------------Do 17. Mai 15:37:35 2007----------*/
 long CdbObjectAccess::LoadObjects(CdmObjectContainer* p_pContainer,
-                                    QLinkedList<long>& p_rqvlObjectIds)
+                                    QList<long>& p_rqvlObjectIds)
 {
     CdbCommandLoadObjects command(p_pContainer, p_rqvlObjectIds, m_rpCdbDataAccess);
     return command.Run();

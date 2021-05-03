@@ -1,13 +1,3 @@
-/******************************************************************************
- ** WOGRA Middleware Server Data Manager Module
- **
- ** @Author Wolfgang Graßhof 
- **
- ** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
- ** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. 
- **(C) copyright by WOGRA technologies All rights reserved
- ******************************************************************************/
-
 // WMS Includes
 #include "wmsdefines.h"
 #include "CdmMessageManager.h"
@@ -56,33 +46,18 @@ CwmsGuiLoginIf::CwmsGuiLoginIf(QString p_qstrAppliactionName, QWidget* p_pqwPare
    }
 }
 
-/** +-=---------------------------------------------------------Thu Dec 18 13:37:17 2003----------*
- * @method  CwmsLoginIf::~CwmsLoginIf                        // public, virtual                   *
- * @return  void                                             //                                   *
- * @comment The Destructor of Class CwmsLoginIf                                                   *
- *---------------------------------------------------------------Thu Dec 18 13:37:17 2003---------*/
-CwmsGuiLoginIf::~CwmsGuiLoginIf(  )
+CwmsGuiLoginIf::~CwmsGuiLoginIf()
 {
    // nothing to be done here
 }
 
-/** +-=---------------------------------------------------------Thu Dec 18 15:22:42 2003----------*
- * @method  CwmsLoginIf::CancelClickedSlot                   // protected, virtual, slots         *
- * @return  void                                             //                                   *
- * @comment This slot will be called if the user wants to cancel the login.                       *
- *---------------------------------------------------------------Thu Dec 18 15:22:42 2003---------*/
-void CwmsGuiLoginIf::CancelClickedSlot(  )
+void CwmsGuiLoginIf::CancelClickedSlot()
 {
    reject();
    exit(0);
 }
 
-/** +-=---------------------------------------------------------Thu Dec 18 15:23:11 2003----------*
- * @method  CwmsLoginIf::OKClickedSlot                       // protected, virtual, slots         *
- * @return  void                                             //                                   *
- * @comment This slot will be called if the user wants to login to the system.                    *
- *---------------------------------------------------------------Thu Dec 18 15:23:11 2003---------*/
-void CwmsGuiLoginIf::OKClickedSlot(  )
+void CwmsGuiLoginIf::OKClickedSlot()
 {
    if (m_pqchbStoreLogin->isChecked())
    {
@@ -100,41 +75,18 @@ void CwmsGuiLoginIf::OKClickedSlot(  )
    accept();
 }
 
-/** +-=---------------------------------------------------------Sa 22. Jan 13:14:52 2005----------*
- * @method  CwmsLoginIf::SetCaption                          // public                            *
- * @return  void                                             //                                   *
- * @param   QString p_qstrCaption                            //                                   *
- * @comment Sets the Caption of the Login Dialog.                                                 *
- *----------------last changed: --------------------------------Sa 22. Jan 13:14:52 2005----------*/
-void CwmsGuiLoginIf::SetCaption(  QString p_qstrCaption )
+void CwmsGuiLoginIf::SetCaption(QString p_qstrCaption)
 {
    setWindowTitle(p_qstrCaption);
 }
 
-/** +-=---------------------------------------------------------Sa 22. Jan 13:16:36 2005----------*
- * @method  CwmsLoginIf::SetApplicationInfoText              // public                            *
- * @return  void                                             //                                   *
- * @param   QString p_qstrLoginLabel                         //                                   *
- * @comment Sets the Text of the Login Label.                                                     *
- *----------------last changed: --------------------------------Sa 22. Jan 13:16:36 2005----------*/
-void CwmsGuiLoginIf::SetApplicationInfoText(  QString p_qstrLoginLabel )
+void CwmsGuiLoginIf::SetApplicationInfoText(QString p_qstrLoginLabel)
 {
    m_pqlApplicationInfo->setText(p_qstrLoginLabel);
 }
 
-/** +-=---------------------------------------------------------Do 29. Dez 13:57:34 2005----------*
- * @method  CwmsLoginIf::Login                               // public, static                    *
- * @return  bool                                             //                                   *
- * @param   QString p_qstrApplicationName                    //                                   *
- * @param   QString p_qstrCaption                            //                                   *
- * @param   QString p_qstrApplicationInfoText                //                                   *
- * @param   QWidget* p_pqwParent                             //                                   *
- * @comment This static memeber function starts the login screen waits for user input and will    *
- *          do all the stuff for creating a workable WMS, inlcusive communication settings and    *
- *          so on.                                                                                *
- *----------------last changed: Wolfgang Graßhof----------------Do 29. Dez 13:57:34 2005----------*/
 bool CwmsGuiLoginIf::Login(QString p_qstrApplicationName,
-                           QWidget* p_pqwParent )
+                           QWidget* p_pqwParent)
 {
     bool bRet = false;
     bool bAccepted = true;
@@ -197,12 +149,6 @@ bool CwmsGuiLoginIf::TryLogin(QString p_qstrLogin, QString p_qstrPassword, QStri
     return bRet;
 }
 
-/** +-=---------------------------------------------------------Fr 9. Mai 19:13:41 2008-----------*
- * @method  CwmsLoginIf::ClientSettingsClickedSlot           // private, slots                    *
- * @return  void                                             //                                   *
- * @comment This slot will be called if the user clicks on the clientsettings button. it          *
- *          opens the clientsettings app.                                                         *
- *----------------last changed: --------------------------------Fr 9. Mai 19:13:41 2008-----------*/
 void CwmsGuiLoginIf::ClientSettingsClickedSlot()
 {
     CwmsGuiDataAccessConfiguration* pEditor = new CwmsGuiDataAccessConfiguration();
@@ -216,12 +162,6 @@ void CwmsGuiLoginIf::ClientSettingsClickedSlot()
     DELPTR(pEditor)
 }
 
-/** +-=---------------------------------------------------------Fr 9. Mai 19:13:41 2008-----------*
- * @method  CwmsLoginIf::LdapSettingsClickedSlot           // private, slots                    *
- * @return  void                                             //                                   *
- * @comment This slot will be called if the user clicks on the ldapsettings button. it          *
- *          opens the ldapsettings app.                                                         *
- *----------------last changed: --------------------------------Fr 9. Mai 19:13:41 2008-----------*/
 void CwmsGuiLoginIf::LdapSettingsClickedSlot()
 {
     CwmsGuiLdapAccessConfiguration* lEditor = new CwmsGuiLdapAccessConfiguration(&m_cCdmSettings, nullptr);

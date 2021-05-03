@@ -26,7 +26,7 @@ CwmsFormSearch::~CwmsFormSearch()
 {
 }
 
-QLinkedList<QString> CwmsFormSearch::GetDisplayMembers()
+QList<QString> CwmsFormSearch::GetDisplayMembers()
 {
    return GetStringList("Display_Members");
 }
@@ -41,7 +41,7 @@ void CwmsFormSearch::SetSearchList(CdmObjectContainer* p_pCdmOLValue)
    SetContainerRefValue("SearchList", p_pCdmOLValue);
 }
 
-QLinkedList<QString> CwmsFormSearch::GetSearchMembers()
+QList<QString> CwmsFormSearch::GetSearchMembers()
 {
    return GetStringList("Search_Members");
 }
@@ -50,10 +50,10 @@ QLinkedList<QString> CwmsFormSearch::GetSearchMembers()
 /** +-=---------------------------------------------------------Mo 17. Sep 18:47:45 2012----------*
  * @method  CwmsFormSearch::SetSearchMembers                 // public                            *
  * @return  void                                             //                                   *
- * @param   QLinkedList<QString> p_qstrlMembers              //                                   *
+ * @param   QList<QString> p_qstrlMembers              //                                   *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------Mo 17. Sep 18:47:45 2012----------*/
-void CwmsFormSearch::SetSearchMembers(QLinkedList<QString> p_qstrlMembers)
+void CwmsFormSearch::SetSearchMembers(QList<QString> p_qstrlMembers)
 {
    SetStringList("Search_Members", p_qstrlMembers);
 }
@@ -61,10 +61,10 @@ void CwmsFormSearch::SetSearchMembers(QLinkedList<QString> p_qstrlMembers)
 /** +-=---------------------------------------------------------Mo 17. Sep 18:47:41 2012----------*
  * @method  CwmsFormSearch::SetDisplayMembers                // public                            *
  * @return  void                                             //                                   *
- * @param   QLinkedList<QString> p_qstrlMembers              //                                   *
+ * @param   QList<QString> p_qstrlMembers              //                                   *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------Mo 17. Sep 18:47:41 2012----------*/
-void CwmsFormSearch::SetDisplayMembers(QLinkedList<QString> p_qstrlMembers)
+void CwmsFormSearch::SetDisplayMembers(QList<QString> p_qstrlMembers)
 {
    SetStringList("Display_Members", p_qstrlMembers);
 }

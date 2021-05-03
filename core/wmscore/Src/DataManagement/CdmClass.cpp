@@ -504,15 +504,15 @@ int CdmClass::AddMember(CdmMember* p_pCdmMember)
 void CdmClass::UpdateSequenceOfDerivedClasses(QString p_qstrKeyname)
 {
     SYNCHRONIZED_WRITE;
-    QLinkedList<CdmClass*> qlClasses;
+    QList<CdmClass*> qlClasses;
 
     CdmClassManager* pManager = GetClassManager();
 
     if (CHKPTR(pManager))
     {
         pManager->GetInheritedClasses(this, qlClasses);
-        QLinkedList<CdmClass*>::iterator qllIt = qlClasses.begin();
-        QLinkedList<CdmClass*>::iterator qllItEnd = qlClasses.end();
+        QList<CdmClass*>::iterator qllIt = qlClasses.begin();
+        QList<CdmClass*>::iterator qllItEnd = qlClasses.end();
 
         for (; qllIt != qllItEnd; ++qllIt)
         {
@@ -888,13 +888,13 @@ CdmMember* CdmClass::FindReferencedMember(QString p_qstrKeyname, int p_iRecusrio
 
 /** +-=---------------------------------------------------------Mo 11. Feb 11:05:37 2013----------*
  * @method  CdmClass::GetVisibleUserDefinedMembers           // public, const                     *
- * @return  QLinkedList<QString>                             // the list of keynames.             *
+ * @return  QList<QString>                             // the list of keynames.             *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------Mo 11. Feb 11:05:37 2013----------*/
-QLinkedList<QString> CdmClass::GetVisibleUserDefinedMembers() const
+QList<QString> CdmClass::GetVisibleUserDefinedMembers() const
 {
     SYNCHRONIZED_READ;
-    QLinkedList<QString> qllUserDefinedMembers;
+    QList<QString> qllUserDefinedMembers;
     QMap<long,CdmMember*> qmMembers;
     GetMemberMap(qmMembers);
 
@@ -3586,11 +3586,11 @@ QList<long> CdmClass::GetDerivedClasses() const
 
     if (CHKPTR(pClassManager))
     {
-        QLinkedList<CdmClass*> qlClasses;
+        QList<CdmClass*> qlClasses;
         pClassManager->GetClassList(qlClasses);
 
-        QLinkedList<CdmClass*>::iterator qIt = qlClasses.begin();
-        QLinkedList<CdmClass*>::iterator qItEnd = qlClasses.end();
+        QList<CdmClass*>::iterator qIt = qlClasses.begin();
+        QList<CdmClass*>::iterator qItEnd = qlClasses.end();
 
         for (; qIt != qItEnd; ++qIt)
         {
@@ -3612,11 +3612,11 @@ QList<CdmClass*> CdmClass::getDerivedClasses()
 
     if(CHKPTR(pClassManager))
     {
-        QLinkedList<CdmClass*> qlClasses;
+        QList<CdmClass*> qlClasses;
         pClassManager->GetClassList(qlClasses);
 
-        QLinkedList<CdmClass*>::iterator qIt = qlClasses.begin();
-        QLinkedList<CdmClass*>::iterator qItEnd = qlClasses.end();
+        QList<CdmClass*>::iterator qIt = qlClasses.begin();
+        QList<CdmClass*>::iterator qItEnd = qlClasses.end();
 
         for (; qIt != qItEnd; ++qIt)
         {

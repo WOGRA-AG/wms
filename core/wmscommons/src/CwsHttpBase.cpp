@@ -117,7 +117,7 @@ void CwsHttpBase::ParseHeaderContent(QString p_qstrHeader)
 
                 if (qstrKey.toLower() == QString(AUTHORIZATION).toLower())
                 {
-                    QStringList qstrlAuth = qstrValue.split(" ", QString::SkipEmptyParts);
+                    QStringList qstrlAuth = qstrValue.split(" ", Qt::SkipEmptyParts);
                     if (qstrlAuth.count() == 2)
                     {
                         SetAuthType(qstrlAuth[0]);

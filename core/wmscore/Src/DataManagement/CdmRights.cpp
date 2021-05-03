@@ -294,11 +294,11 @@ EdmRight CdmRights::FindRight(const CumUser* p_pCumUser) const
    }
    else // the user could be member in a usergroup
    {
-      QLinkedList<CumUserGroup*> qvlUserGroupIds;
+      QList<CumUserGroup*> qvlUserGroupIds;
       (const_cast<CumUser*>(p_pCumUser))->GetUserGroups(qvlUserGroupIds);
 
-      QLinkedList<CumUserGroup*>::iterator qvlIt    = qvlUserGroupIds.begin();
-      QLinkedList<CumUserGroup*>::iterator qvlItEnd = qvlUserGroupIds.end();
+      QList<CumUserGroup*>::iterator qvlIt    = qvlUserGroupIds.begin();
+      QList<CumUserGroup*>::iterator qvlItEnd = qvlUserGroupIds.end();
 
       for(; qvlIt != qvlItEnd; ++qvlIt)
       {

@@ -18,7 +18,7 @@ CftlCommandGetGroupUserList::~CftlCommandGetGroupUserList()
 
 }
 
-QLinkedList<CumUser *> CftlCommandGetGroupUserList::GetResult()
+QList<CumUser *> CftlCommandGetGroupUserList::GetResult()
 {
     return m_qllUserList;
 }

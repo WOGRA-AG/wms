@@ -7,7 +7,7 @@
 #include <QVariant>
 #include <QThread>
 #include <qtextstream.h>
-#include <QLinkedList>
+#include <QList>
 #include <QDebug>
 
 // WMS Includes
@@ -591,7 +591,7 @@ int CwnDataAccess::DeleteObjectContainer(long p_lObjectListId)
      return static_cast<int>(lRet);
 }
 
-int CwnDataAccess::GetUserList(QLinkedList<CumUser *> &p_rqvlUser)
+int CwnDataAccess::GetUserList(QList<CumUser *> &p_rqvlUser)
 {
     INFO("Data Access Call GetUserList()");
     ++m_iInterfaceCallCounter;
@@ -1011,7 +1011,7 @@ long CwnDataAccess::RemoveUserFromGroup(long p_lChangeUserId, long p_lUserGroupI
     return lRet;
 }
 
-long CwnDataAccess::GetUserGroupList(QLinkedList<CumUserGroup *> &p_rqvlUserGroups, QString p_qstrSchemeUri)
+long CwnDataAccess::GetUserGroupList(QList<CumUserGroup *> &p_rqvlUserGroups, QString p_qstrSchemeUri)
 {
     Q_UNUSED(p_qstrSchemeUri);
     INFO("Data Access Call GetUserGroupList()");
@@ -1035,7 +1035,7 @@ long CwnDataAccess::GetUserGroupList(QLinkedList<CumUserGroup *> &p_rqvlUserGrou
     return lRet;
 }
 
-long CwnDataAccess::GetListOfUsersInList(long p_lUserGroupId, QLinkedList<CumUser *> &p_rqvlUserList)
+long CwnDataAccess::GetListOfUsersInList(long p_lUserGroupId, QList<CumUser *> &p_rqvlUserList)
 {
     INFO("Data Access Call GetListOfUsersInList()");
     ++m_iInterfaceCallCounter;
@@ -1058,7 +1058,7 @@ long CwnDataAccess::GetListOfUsersInList(long p_lUserGroupId, QLinkedList<CumUse
     return lRet;
 }
 
-long CwnDataAccess::GetUserGroupMemberList(long p_lChangeUserId, QLinkedList<CumUserGroup *> &p_qvlUserGroups)
+long CwnDataAccess::GetUserGroupMemberList(long p_lChangeUserId, QList<CumUserGroup *> &p_qvlUserGroups)
 {
     INFO("Data Access Call GetUserGroupMemberList()");
     ++m_iInterfaceCallCounter;
@@ -1098,7 +1098,7 @@ long CwnDataAccess::FreeLicense()
     return -1;
 }
 
-long CwnDataAccess::GetSchemeList(QLinkedList<QString> &p_qvlDatabases)
+long CwnDataAccess::GetSchemeList(QList<QString> &p_qvlDatabases)
 {
     INFO("Data Access Call GetDatbaseList()");
     //BeginTransaction();
@@ -1257,7 +1257,7 @@ int CwnDataAccess::LoadEmptyObjectContainer(long p_lDataBaseId, long p_lId, CdmO
     return static_cast<int>(lRet);
 }
 
-int CwnDataAccess::LoadObjects(QLinkedList<long> &p_rqvlObjects, CdmObjectContainer *&p_pCdmObject)
+int CwnDataAccess::LoadObjects(QList<long> &p_rqvlObjects, CdmObjectContainer *&p_pCdmObject)
 {
     INFO("Data Access Call LoadObjects()");
     ++m_iInterfaceCallCounter;
@@ -1833,7 +1833,7 @@ void CwnDataAccess::SessionTimeoutCheck(int p_iTimeoutMin)
     m_pCwnLoginManager->SessionTimeoutCheck(p_iTimeoutMin);
 }
 
-QLinkedList<CumUser*> CwnDataAccess::FindUser(QString p_qstrUserLoginNameEmail, QString p_qstrSchemeUri)
+QList<CumUser*> CwnDataAccess::FindUser(QString p_qstrUserLoginNameEmail, QString p_qstrSchemeUri)
 {
     Q_UNUSED(p_qstrSchemeUri);
     return m_pCwnUserManager->FindUser(p_qstrUserLoginNameEmail);
@@ -1849,12 +1849,12 @@ CwnJournal* CwnDataAccess::GetJournal()
    return m_pCwnJournal;
 }
 
-QString CwnDataAccess::GenerateInString(QLinkedList<long> &p_rqvlIds)
+QString CwnDataAccess::GenerateInString(QList<long> &p_rqvlIds)
 {
    QString qstrRet = "[";
 
-   QLinkedList<long>::iterator qvlIt = p_rqvlIds.begin();
-   QLinkedList<long>::iterator qvlItEnd = p_rqvlIds.end();
+   QList<long>::iterator qvlIt = p_rqvlIds.begin();
+   QList<long>::iterator qvlItEnd = p_rqvlIds.end();
 
    while (qvlIt != qvlItEnd)
    {
@@ -1888,11 +1888,11 @@ CumUserGroup* CwnDataAccess::FindUserGroupByName(QString p_qstrName, QString p_q
     return m_pCwnUserManager->FindUserGroupByName(p_qstrName);
 }
 
-QLinkedList<CumUserGroup *> CwnDataAccess::FindUserGroups(QString p_qstrName, QString p_qstrSchemeUri)
+QList<CumUserGroup *> CwnDataAccess::FindUserGroups(QString p_qstrName, QString p_qstrSchemeUri)
 {
     Q_UNUSED(p_qstrSchemeUri);
     Q_UNUSED(p_qstrName);
-    QLinkedList<CumUserGroup *> qllGroups;
+    QList<CumUserGroup *> qllGroups;
     NOTIMPLEMENTED;
     return qllGroups;
 }

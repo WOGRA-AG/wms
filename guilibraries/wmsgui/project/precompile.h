@@ -24,7 +24,7 @@
 #include <QLineEdit>
 #include <QString>
 #include <QComboBox>
-#include <QLinkedList>
+#include <QList>
 #include <QDialog>
 
 // from ui headers

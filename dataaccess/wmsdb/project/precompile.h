@@ -51,6 +51,6 @@
 #include <QSqlQuery>
 #include "CdmDataAccessHelper.h"
 #include "CdmLogging.h"
-#include <QLinkedList>
+#include <QList>
 
 #endif

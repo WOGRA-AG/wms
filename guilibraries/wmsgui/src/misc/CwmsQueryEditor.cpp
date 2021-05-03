@@ -195,11 +195,11 @@ void CwmsQueryEditor::AddQueryElement(CdmQueryElement* p_pCdmElement, QTreeWidge
 
         if (p_pCdmElement->GetQueryElementType() != eDmQueryElementTypeCompare)
         {
-            QLinkedList<CdmQueryElement*> qlChilds;
+            QList<CdmQueryElement*> qlChilds;
             p_pCdmElement->GetChildList(qlChilds);
 
-            QLinkedList<CdmQueryElement*>::iterator qllIt = qlChilds.begin();
-            QLinkedList<CdmQueryElement*>::iterator qllItEnd = qlChilds.end();
+            QList<CdmQueryElement*>::iterator qllIt = qlChilds.begin();
+            QList<CdmQueryElement*>::iterator qllItEnd = qlChilds.end();
 
             for (; qllIt != qllItEnd; ++qllIt)
             {

@@ -19,7 +19,7 @@
 #include <QVariant>
 #include <QThread>
 #include <qtextstream.h>
-#include <QLinkedList>
+#include <QList>
 
 #ifdef WIN32
 #include <CdmValueCounter.h>
@@ -186,9 +186,9 @@ long CdbDataAccess::ExecuteQuery(QSqlQuery& p_rqsqlQuery)
 
 
 
-QLinkedList<CumUserGroup*> CdbDataAccess::FindUserGroups(QString p_qstrName, QString p_qstrSchemeUri)
+QList<CumUserGroup*> CdbDataAccess::FindUserGroups(QString p_qstrName, QString p_qstrSchemeUri)
 {
-    QLinkedList<CumUserGroup*> qllGroups;
+    QList<CumUserGroup*> qllGroups;
     qllGroups = m_pCdbUserManager->FindUserGroups(p_qstrName, p_qstrSchemeUri);
     return qllGroups;
 }
@@ -264,7 +264,7 @@ CdbDataAccess::EodbcBaseType CdbDataAccess::ConvertValueType(EdmValueType p_eVal
     }
 }
 
-int CdbDataAccess::LoadObjects(QLinkedList<long>& p_rqvlObjects, CdmObjectContainer*& p_pContainer)
+int CdbDataAccess::LoadObjects(QList<long>& p_rqvlObjects, CdmObjectContainer*& p_pContainer)
 {
     INFO("Data Access Call LoadObjects()");
     ++m_iInterfaceCallCounter;
@@ -837,7 +837,7 @@ int CdbDataAccess::DeleteObjectContainer(long p_lObjectListId)
     return lRet;
 }
 
-int CdbDataAccess::GetUserList(QLinkedList<CumUser*>& p_rqvlUser)
+int CdbDataAccess::GetUserList(QList<CumUser*>& p_rqvlUser)
 {
     INFO("Data Access Call GetUserList()")
     ++m_iInterfaceCallCounter;
@@ -1143,7 +1143,7 @@ long CdbDataAccess::RemoveUserFromGroup(long p_lChangeUserId, long p_lUserGroupI
     return lRet;
 }
 
-long CdbDataAccess::GetUserGroupList(QLinkedList<CumUserGroup*>& p_rqvlUserGroups, QString p_qstrSchemeUri)
+long CdbDataAccess::GetUserGroupList(QList<CumUserGroup*>& p_rqvlUserGroups, QString p_qstrSchemeUri)
 {
     INFO("Data Access Call GetUserGroupList()");
     ++m_iInterfaceCallCounter;
@@ -1174,7 +1174,7 @@ CumUserGroup* CdbDataAccess::FindUserGroupByName(QString p_qstrName, QString p_q
     return m_pCdbUserManager->FindUserGroupByName(p_qstrName, p_qstrSchemeUri);
 }
 
-long CdbDataAccess::GetListOfUsersInList(long p_lUserGroupId, QLinkedList<CumUser*>& p_rqvlUserList)
+long CdbDataAccess::GetListOfUsersInList(long p_lUserGroupId, QList<CumUser*>& p_rqvlUserList)
 {
     INFO("Data Access Call GetListOfUsersInList()");
     ++m_iInterfaceCallCounter;
@@ -1193,7 +1193,7 @@ long CdbDataAccess::GetListOfUsersInList(long p_lUserGroupId, QLinkedList<CumUse
     return lRet;
 }
 
-long CdbDataAccess::GetUserGroupMemberList(long p_lChangeUserId, QLinkedList<CumUserGroup*>& p_qvlUserGroups)
+long CdbDataAccess::GetUserGroupMemberList(long p_lChangeUserId, QList<CumUserGroup*>& p_qvlUserGroups)
 {
     INFO("Data Access Call GetUserGroupMemberList()");
     ++m_iInterfaceCallCounter;
@@ -1226,7 +1226,7 @@ long CdbDataAccess::FreeLicense()
     return -1;
 }
 
-long CdbDataAccess::GetSchemeList(QLinkedList<QString>& p_qvlDatabases)
+long CdbDataAccess::GetSchemeList(QList<QString>& p_qvlDatabases)
 {
     INFO("Data Access Call GetDatbaseList()");
     ++m_iInterfaceCallCounter;
@@ -1837,7 +1837,7 @@ CumUser *CdbDataAccess::FindUserByIdentKey(QString p_qstridentKey, QString p_qst
     return m_pCdbUserManager->FindUserByIdentKey(p_qstridentKey, p_qstrSchemeUri);
 }
 
-QLinkedList<CumUser*> CdbDataAccess::FindUser(QString p_qstrUserLoginNameEmail, QString p_qstrSchemeUri)
+QList<CumUser*> CdbDataAccess::FindUser(QString p_qstrUserLoginNameEmail, QString p_qstrSchemeUri)
 {
     return m_pCdbUserManager->FindUser(p_qstrUserLoginNameEmail, p_qstrSchemeUri);
 }

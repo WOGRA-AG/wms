@@ -122,18 +122,18 @@ class BASETOOLS_API CwmsWorkflowObject: public CdmObjectAdaptor
    public:
    /** +-=---------------------------------------------------------Di 8. Jan 15:26:56 2013--------*
     * @method  CwmsWorkflowObject::GetCurrentSteps           // public                            *
-    * @return  QLinkedList<CdmObject*>                       //                                   *
+    * @return  QList<CdmObject*>                       //                                   *
     * @comment                                                                                    *
     *----------------last changed: -----------------------------Di 8. Jan 15:26:56 2013-----------*/
-    QLinkedList<CdmObject*> GetCurrentSteps();
+    QList<CdmObject*> GetCurrentSteps();
 
    public:
    /** +-=---------------------------------------------------------Di 8. Jan 15:26:47 2013--------*
     * @method  CwmsWorkflowObject::GetDoneSteps              // public                            *
-    * @return  QLinkedList<CdmObject*>                       //                                   *
+    * @return  QList<CdmObject*>                       //                                   *
     * @comment                                                                                    *
     *----------------last changed: -----------------------------Di 8. Jan 15:26:47 2013-----------*/
-    QLinkedList<CdmObject*> GetDoneSteps();
+    QList<CdmObject*> GetDoneSteps();
 
    public:
    /** +-=---------------------------------------------------------Do 18. Jul 15:44:34 2013-------*

@@ -20,7 +20,7 @@
 
 // System and QT Includes
 #include <QWidget>
-#include <QLinkedList>
+#include <QList>
 
 // WMS Includes
 #include "CdmQueryEnhanced.h"
@@ -51,7 +51,7 @@ class WMSGUI_API CwmsSearchWindow : public QWidget, public Ui::CwmsSearchWindowC
       CdmQueryEnhanced* m_pCdmQuery;
       CdmQueryModel m_CdmModel;
       CdmObject* m_rpCdmPrintingTemplate;
-      QLinkedList<QString> m_qllResultMembers;
+      QList<QString> m_qllResultMembers;
       QMenu* m_pMenu;
       QToolBar* m_pToolBar;
 

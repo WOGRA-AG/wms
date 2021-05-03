@@ -11,7 +11,7 @@
 // System and QT Includes
 #include <qstring.h>
 #include <qfile.h>
-#include <QLinkedList>
+#include <QList>
 #include <qvariant.h>
 #include <QSqlQuery>
 #include <CdmObjectContainer.h>
@@ -45,7 +45,7 @@ CftlCommandQueryElement::CftlCommandQueryElement(CftlDataAccess* p_pCftlDataAcce
     if(CHKPTR(m_rpCdmQueryElement) &&
        CHKPTR(m_rpCftlDataAccess))
     {
-        QLinkedList<CdmQueryElement*> qvlQueryElements;
+        QList<CdmQueryElement*> qvlQueryElements;
         m_rpCdmQueryElement->GetChildList(qvlQueryElements);
         CreateChilds(qvlQueryElements);
     }
@@ -78,10 +78,10 @@ QString CftlCommandQueryElement::GenerateQuery()
     return qstrQuery;
 }
 
-void CftlCommandQueryElement::CreateChilds(QLinkedList<CdmQueryElement*>& p_qvlChilds)
+void CftlCommandQueryElement::CreateChilds(QList<CdmQueryElement*>& p_qvlChilds)
 {
-    QLinkedList<CdmQueryElement*>::iterator qvlIt    = p_qvlChilds.begin();
-    QLinkedList<CdmQueryElement*>::iterator qvlItEnd = p_qvlChilds.end();
+    QList<CdmQueryElement*>::iterator qvlIt    = p_qvlChilds.begin();
+    QList<CdmQueryElement*>::iterator qvlItEnd = p_qvlChilds.end();
 
     for (; qvlIt != qvlItEnd; ++qvlIt)
     {
@@ -131,8 +131,8 @@ QString CftlCommandQueryElement::GenerateSelectPartOfQuery()
 
 void CftlCommandQueryElement::CollectChildConditions(QStringList& qstrlConditions)
 {
-    QLinkedList<CftlCommandQueryElement*>::iterator qvlIt = m_qvlChilds.begin();
-    QLinkedList<CftlCommandQueryElement*>::iterator qvlItEnd = m_qvlChilds.end();
+    QList<CftlCommandQueryElement*>::iterator qvlIt = m_qvlChilds.begin();
+    QList<CftlCommandQueryElement*>::iterator qvlItEnd = m_qvlChilds.end();
 
     for (; qvlIt != qvlItEnd; ++qvlIt)
     {
@@ -229,8 +229,8 @@ QString CftlCommandQueryElement::GenerateValueConditionObjectId()
                             .arg(containerId)
                             .arg(FTL_OBJECT_ID_FIELD_NAME);
 
-                    QLinkedList<QVariant>::iterator qlIt = m_rpCdmQueryElement->GetList().begin();
-                    QLinkedList<QVariant>::iterator qlItEnd = m_rpCdmQueryElement->GetList().end();
+                    QList<QVariant>::iterator qlIt = m_rpCdmQueryElement->GetList().begin();
+                    QList<QVariant>::iterator qlItEnd = m_rpCdmQueryElement->GetList().end();
                     qstrQuery = "(";
                     bool bFirst = true;
 
@@ -269,8 +269,8 @@ QString CftlCommandQueryElement::GenerateValueConditionObjectId()
                     qstrQuery = QString ("%1 in(")
                             .arg(FTL_OBJECT_ID_FIELD_NAME);
 
-                    QLinkedList<QVariant>::iterator qlIt = m_rpCdmQueryElement->GetList().begin();
-                    QLinkedList<QVariant>::iterator qlItEnd = m_rpCdmQueryElement->GetList().end();
+                    QList<QVariant>::iterator qlIt = m_rpCdmQueryElement->GetList().begin();
+                    QList<QVariant>::iterator qlItEnd = m_rpCdmQueryElement->GetList().end();
                     qstrQuery = "(";
                     bool bFirst = true;
 
@@ -621,13 +621,13 @@ QString CftlCommandQueryElement::GetListCompareValueAsStringFromDecimals()
 QString CftlCommandQueryElement::ExtractCompareEntriesFromList()
 {
     QString qstrValueList;
-    QLinkedList<QVariant> qvlSubList;
+    QList<QVariant> qvlSubList;
     qvlSubList += m_rpCdmQueryElement->GetList();
 
     if (qvlSubList.count() > 0)
     {
-        QLinkedList<QVariant>::iterator qvlIt    = qvlSubList.begin();
-        QLinkedList<QVariant>::iterator qvlItEnd = qvlSubList.end();
+        QList<QVariant>::iterator qvlIt    = qvlSubList.begin();
+        QList<QVariant>::iterator qvlItEnd = qvlSubList.end();
 
         qstrValueList = "(";
         bool bFirst = true;

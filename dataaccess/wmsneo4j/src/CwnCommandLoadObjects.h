@@ -1,7 +1,7 @@
 #ifndef CWNCOMMANDLOADOBJECTS_H
 #define CWNCOMMANDLOADOBJECTS_H
 
-#include <QLinkedList>
+#include <QList>
 
 #include "CwnCommandBase.h"
 #include "CdmModelElement.h"
@@ -14,7 +14,7 @@ class CwnCommandLoadObjects : public CwnCommandBase
 {
 private:
     CdmObjectContainer* m_rpContainer;
-    QLinkedList<long> &m_qvlObjectIds;
+    QList<long> &m_qvlObjectIds;
     QMap<long, CdmObject*> qmObjects;
     QString qstrObjectInString;
     QMap<CdmObject*, QDateTime> qmLastChange;
@@ -44,7 +44,7 @@ private:
     bool interpretAnswerForTimes(const QVariantList *list);
 
 public:
-    CwnCommandLoadObjects(CdmObjectContainer* p_pContainer, QLinkedList<long> &p_qlObjectIds, CwnDataAccess* p_pDataAccess);
+    CwnCommandLoadObjects(CdmObjectContainer* p_pContainer, QList<long> &p_qlObjectIds, CwnDataAccess* p_pDataAccess);
     virtual ~CwnCommandLoadObjects();
     QString queryCausedError;
 

@@ -2,7 +2,7 @@
 #define CDBCOMMANDGETUSERLIST_H
 
 // System and Qt Includes
-#include <QLinkedList>
+#include <QList>
 // WMS Includes
 
 // own Includes
@@ -15,7 +15,7 @@ class CumUser;
 class CdbCommandGetUserList : public CdbAbstractCommand
 {
 private:
-    QLinkedList<CumUser*> m_qllUsers;
+    QList<CumUser*> m_qllUsers;
     QString m_qstrSearchString;
     QString m_qstrSchemeUri;
 
@@ -28,7 +28,7 @@ public:
     CdbCommandGetUserList(CdbDataAccess* p_pDataAccess);
     CdbCommandGetUserList(QString p_qstrSearchString, QString p_qstrSchemeUri, CdbDataAccess *p_pDataAccess);
     virtual ~CdbCommandGetUserList();
-    QLinkedList<CumUser*> GetResult();
+    QList<CumUser*> GetResult();
 
 
 protected:

@@ -19,7 +19,7 @@
 #include <QFileDialog>
 #include <QFileInfo>
 #include <QTextCodec>
-#include <QLinkedList>
+#include <QList>
 
 // WMS Includes
 #include "CdmMessageManager.h"
@@ -379,7 +379,7 @@ void CwmsExportSettingsIf::AddHiddenMember(QString p_qstrHiddenMember)
  * @param   QValueList<QString> p_qvlHiddenMembers           //                                   *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------Mo 21. Apr 17:28:49 2008----------*/
-void CwmsExportSettingsIf::SetHiddenList(QLinkedList<QString> p_qvlHiddenMembers)
+void CwmsExportSettingsIf::SetHiddenList(QList<QString> p_qvlHiddenMembers)
 {
    m_qstrlHiddenMembers = p_qvlHiddenMembers;
 }
@@ -594,9 +594,9 @@ void CwmsExportSettingsIf::LoadClickedSlot()
              m_pqcbEncoding->setCurrentText(m_rCwmsExportSettings.GetEncoding());
          }
          
-         QLinkedList<QString> qvlMembers = m_rCwmsExportSettings.GetMemberList();
-         QLinkedList<QString>::iterator qvlIt = qvlMembers.begin();
-         QLinkedList<QString>::iterator qvlItEnd = qvlMembers.end();
+         QList<QString> qvlMembers = m_rCwmsExportSettings.GetMemberList();
+         QList<QString>::iterator qvlIt = qvlMembers.begin();
+         QList<QString>::iterator qvlItEnd = qvlMembers.end();
 
          for (; qvlIt != qvlItEnd; ++qvlIt)
          {
@@ -689,7 +689,7 @@ void CwmsExportSettingsIf::ReduceExportSlot()
 
       if (pCwmsSearchDlg->exec() == QDialog::Accepted)
       {
-         QLinkedList<long> qllObjects;
+         QList<long> qllObjects;
          pCwmsSearchWidget->GetDisplayList(qllObjects);
 
          int iCount = qllObjects.count();

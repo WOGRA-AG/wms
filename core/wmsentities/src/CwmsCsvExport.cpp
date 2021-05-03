@@ -160,11 +160,11 @@ void CwmsCsvExport::GenerateContainerContent()
 
             GenerateHeader(qstrlHeaders);
 
-            QLinkedList<CdmObject*> qllObjects;
+            QList<CdmObject*> qllObjects;
             m_rpContainer->GetObjectList(qllObjects);
 
-            QLinkedList<CdmObject*>::iterator qllIt = qllObjects.begin();
-            QLinkedList<CdmObject*>::iterator qllItEnd = qllObjects.end();
+            QList<CdmObject*>::iterator qllIt = qllObjects.begin();
+            QList<CdmObject*>::iterator qllItEnd = qllObjects.end();
 
             for (; qllIt != qllItEnd; ++qllIt)
             {

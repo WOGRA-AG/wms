@@ -1,6 +1,6 @@
 ﻿// System and QT Includes
 #include <qdom.h>
-#include <QLinkedList>
+#include <QList>
 
 
 // own Includes
@@ -48,8 +48,8 @@ void CdmValueListDouble::Serialize() const
 {
    QDomDocument qddDocument(WMS_LIST);
 
-   QLinkedList<double>::const_iterator qvlIt = m_qvlDoubles.begin();
-   QLinkedList<double>::const_iterator qvlItEnd = m_qvlDoubles.end();
+   QList<double>::const_iterator qvlIt = m_qvlDoubles.begin();
+   QList<double>::const_iterator qvlItEnd = m_qvlDoubles.end();
 
    QDomElement qdeElement = qddDocument.createElement(WMS_LISTENTRIES);
    qddDocument.appendChild(qdeElement);
@@ -72,7 +72,7 @@ void CdmValueListDouble::Deserialize()
     CdmValueListDouble::DeserializeXmlToDoubleList(m_qstrDocument, m_qvlDoubles);
 }
 
-void CdmValueListDouble::DeserializeXmlToDoubleList(QString& p_qstrXml, QLinkedList<double>& p_qllList)
+void CdmValueListDouble::DeserializeXmlToDoubleList(QString& p_qstrXml, QList<double>& p_qllList)
 {
     p_qllList.clear();
     QDomDocument qddDocument;
@@ -108,12 +108,12 @@ void CdmValueListDouble::RemoveValue(double p_dValue)
    ValueChanged();
 }
 
-QLinkedList<double> CdmValueListDouble::GetList() const
+QList<double> CdmValueListDouble::GetList() const
 {
    return m_qvlDoubles;
 }
 
-void CdmValueListDouble::SetList(QLinkedList<double> p_qllDoubles)
+void CdmValueListDouble::SetList(QList<double> p_qllDoubles)
 {
    m_qvlDoubles = p_qllDoubles;
    ValueChanged();
@@ -123,8 +123,8 @@ QString CdmValueListDouble::GetValueAsString() const
 {
    QString qstrList;
 
-   QLinkedList<double>::const_iterator qvlIt = m_qvlDoubles.begin();
-   QLinkedList<double>::const_iterator qvlItEnd = m_qvlDoubles.end();
+   QList<double>::const_iterator qvlIt = m_qvlDoubles.begin();
+   QList<double>::const_iterator qvlItEnd = m_qvlDoubles.end();
 
    for (; qvlIt != qvlItEnd; ++qvlIt)
    {

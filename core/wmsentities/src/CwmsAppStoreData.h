@@ -14,7 +14,7 @@ private:
     CdmScheme* m_rpCurrentScheme;
 
     CdmObjectContainer* LoadData();
-    void ReadData(QVariantList &p_rqvlApps, QLinkedList<CdmObject *> &p_rqllObjects);
+    void ReadData(QVariantList &p_rqvlApps, QList<CdmObject *> &p_rqllObjects);
     void AddDataToVariant(QVariantList &p_rqvlApps, CdmObject *p_pObject);
     long AddAppScheme(CdmObjectContainer *p_pContainer, QVariantMap &p_rMap);
     bool DeleteAppScheme(CdmObjectContainer *p_pContainer, long p_lAppSchemeId);

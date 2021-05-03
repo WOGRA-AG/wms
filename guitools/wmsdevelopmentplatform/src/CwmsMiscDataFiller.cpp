@@ -478,13 +478,13 @@ void CwmsMiscDataFiller::FillViews(QTreeWidget* p_pTreeWidget)
  *----------------last changed: --------------------------------Fr 20. Sep 16:34:54 2013----------*/
 void CwmsMiscDataFiller::FillViews(QTreeWidgetItem* p_pParent)
 {
-   QLinkedList<CdmObject*> qllObjects;
+   QList<CdmObject*> qllObjects;
 
    CwmsViewManager cCwmsViewManager;
    cCwmsViewManager.GetViewList(qllObjects);
 
-   QLinkedList<CdmObject*>::iterator qllIt = qllObjects.begin();
-   QLinkedList<CdmObject*>::iterator qllItEnd = qllObjects.end();
+   QList<CdmObject*>::iterator qllIt = qllObjects.begin();
+   QList<CdmObject*>::iterator qllItEnd = qllObjects.end();
 
    for(; qllIt != qllItEnd; ++qllIt)
    {
@@ -526,12 +526,12 @@ void CwmsMiscDataFiller::FillWorkflows(QTreeWidget* p_pTreeWidget)
  *----------------last changed: --------------------------------So 22. Sep 12:56:40 2013----------*/
 void CwmsMiscDataFiller::FillWorkflows(QTreeWidgetItem* p_pParent)
 {
-   QLinkedList<CdmObject*> qllObjects;
+   QList<CdmObject*> qllObjects;
    CwmsWorkflowManager cCwmsWorkflowManager;
    cCwmsWorkflowManager.GetWorkflowList(qllObjects);
 
-   QLinkedList<CdmObject*>::iterator qllIt = qllObjects.begin();
-   QLinkedList<CdmObject*>::iterator qllItEnd = qllObjects.end();
+   QList<CdmObject*>::iterator qllIt = qllObjects.begin();
+   QList<CdmObject*>::iterator qllItEnd = qllObjects.end();
 
    for(; qllIt != qllItEnd; ++qllIt)
    {

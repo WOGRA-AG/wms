@@ -19,7 +19,7 @@
 #endif //
 
 // System and QT Includes
-#include <QLinkedList>
+#include <QList>
 #include <QDate>
 #include <QDateTime>
 #include <QTime>
@@ -98,31 +98,31 @@ class WMSMANAGER_API CdmContainerServices
    /** +-=---------------------------------------------------------Di 7. Apr 19:14:39 2009--------*
     * @method  CdmContainerServices::EvaluateSum            // public, static                    *
     * @return  QString                                       // value as string for conversion issues*
-    * @param   QLinkedList<CdmObject*>& p_rqvlObjects        //                                   *
+    * @param   QList<CdmObject*>& p_rqvlObjects        //                                   *
     * @param   QString p_qstrMember                          //                                   *
     * @comment                                                                                    *
     *----------------last changed: -----------------------------Di 7. Apr 19:14:39 2009-----------*/
-    static QString EvaluateSum(QLinkedList<CdmObject*>& p_rqvlObjects, QString p_qstrMember);
+    static QString EvaluateSum(QList<CdmObject*>& p_rqvlObjects, QString p_qstrMember);
 
    public:
    /** +-=---------------------------------------------------------Di 7. Apr 19:16:30 2009--------*
     * @method  CdmContainerServices::EvaluateMin            // public, static                    *
     * @return  QString                                       // value as string for conversion issues*
-    * @param   QLinkedList<CdmObject*>& p_rqvlObjects        //                                   *
+    * @param   QList<CdmObject*>& p_rqvlObjects        //                                   *
     * @param   QString p_qstrMember                          //                                   *
     * @comment                                                                                    *
     *----------------last changed: -----------------------------Di 7. Apr 19:16:30 2009-----------*/
-    static QString EvaluateMin(QLinkedList<CdmObject*>& p_rqvlObjects, QString p_qstrMember);
+    static QString EvaluateMin(QList<CdmObject*>& p_rqvlObjects, QString p_qstrMember);
 
    public:
    /** +-=---------------------------------------------------------Di 7. Apr 19:17:30 2009--------*
     * @method  CdmContainerServices::EvaluateMax            // public, static                    *
     * @return  QString                                       // value as string for conversion issues*
-    * @param   QLinkedList<CdmObject*>& p_rqvlObjects        //                                   *
+    * @param   QList<CdmObject*>& p_rqvlObjects        //                                   *
     * @param   QString p_qstrMember                          //                                   *
     * @comment                                                                                    *
     *----------------last changed: -----------------------------Di 7. Apr 19:17:30 2009-----------*/
-    static QString EvaluateMax(QLinkedList<CdmObject*>& p_rqvlObjects, QString p_qstrMember);
+    static QString EvaluateMax(QList<CdmObject*>& p_rqvlObjects, QString p_qstrMember);
 
   
 
@@ -130,11 +130,11 @@ class WMSMANAGER_API CdmContainerServices
    /** +-=---------------------------------------------------------Di 7. Apr 20:33:56 2009--------*
     * @method  CdmContainerServices::EvaluateAverage        // public, static                    *
     * @return  QString                                       // value as string for conversion issues*
-    * @param   QLinkedList<CdmObject*>& p_rqvlObjects        //                                   *
+    * @param   QList<CdmObject*>& p_rqvlObjects        //                                   *
     * @param   QString p_qstrMember                          //                                   *
     * @comment                                                                                    *
     *----------------last changed: -----------------------------Di 7. Apr 20:33:56 2009-----------*/
-    static QString EvaluateAverage(QLinkedList<CdmObject*>& p_rqvlObjects, QString p_qstrMember);
+    static QString EvaluateAverage(QList<CdmObject*>& p_rqvlObjects, QString p_qstrMember);
 };
 
 #endif //

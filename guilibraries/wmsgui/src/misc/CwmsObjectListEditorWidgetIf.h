@@ -57,7 +57,7 @@ private:
     QToolBar* m_pToolBar;
     QMap<QString, StringPair> m_qmDefaultValuesNewObject;
     QStringList m_qstrlContextMenuItems;
-    QLinkedList<QString> m_qllSearchMembers;
+    QList<QString> m_qllSearchMembers;
     QStringList m_qstrlFunctions;
     QString m_qstrObjectEventMode;
     class::CwmsEventClassEditor *m_pEventClassEditor;

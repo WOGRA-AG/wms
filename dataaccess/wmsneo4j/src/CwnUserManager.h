@@ -40,7 +40,7 @@ long DeleteUser(long p_lUserId);
 public:
 CumUser* FindUser(long p_lUserId);
 CumUser* FindUser(QString p_qstrLogin, QString p_qstrPassword );
-QLinkedList<CumUser*> FindUser(QString p_qstrUserLoginNameEmail);
+QList<CumUser*> FindUser(QString p_qstrUserLoginNameEmail);
 virtual long UpdateUser(CumUser* p_pUser);
 public:
 /** +-=---------------------------------------------------------Sa 20. Aug 12:16:48 2005*
@@ -49,7 +49,7 @@ public:
  * @param   QValueList<CumUser*>& p_qvlUsers              //                                   *
  * @comment This method returns a list of users from db.                                       *
  *----------------last changed: -----------------------------Sa 20. Aug 12:16:48 2005----------*/
-long GetUserList(QLinkedList<CumUser*>& p_qvlUsers);
+long GetUserList(QList<CumUser*>& p_qvlUsers);
 public:
 /** +-=---------------------------------------------------------Sa 20. Aug 12:17:07 2005*
  * @method  CdbUserManager::ExistUser                   // public                            *
@@ -108,7 +108,7 @@ public:
  * @param   QValueList<CumUserGroup*>& p_rqvlUserGroups   //                                   *
  * @comment This method returns a list of all Usergroups.                                      *
  *----------------last changed: -----------------------------Sa 20. Aug 12:17:29 2005----------*/
-long GetUserGroupList(QLinkedList<CumUserGroup*>& p_rqvlUserGroups);
+long GetUserGroupList(QList<CumUserGroup*>& p_rqvlUserGroups);
 public:
 /** +-=---------------------------------------------------------Sa 20. Aug 12:17:33 2005*
  * @method  CdbUserManager::GetListOfUsersInList        // public                            *
@@ -117,7 +117,7 @@ public:
  * @param   QValueList<CumUser*>& p_rqvlUserList          //                                   *
  * @comment This method returns a list of User in usergroup p_lUserGroupId.                    *
  *----------------last changed: -----------------------------Sa 20. Aug 12:17:33 2005----------*/
-long GetListOfUsersInList(long p_lUserGroupId, QLinkedList<CumUser*>& p_rqvlUserList);
+long GetListOfUsersInList(long p_lUserGroupId, QList<CumUser*>& p_rqvlUserList);
 public:
 /** +-=---------------------------------------------------------Sa 20. Aug 12:17:37 2005*
  * @method  CdbUserManager::GetUserGroupMemberList      // public                            *
@@ -126,7 +126,7 @@ public:
  * @param   QValueList<CumUserGroup*>& p_qvlUserGroups    //                                   *
  * @comment This method returns a list of groups in which a is member.                         *
  *----------------last changed: -----------------------------Sa 20. Aug 12:17:37 2005----------*/
-long GetUserGroupMemberList(long p_lUserId, QLinkedList<CumUserGroup*>& p_qvlUserGroups);
+long GetUserGroupMemberList(long p_lUserId, QList<CumUserGroup*>& p_qvlUserGroups);
 public:
 /** +-=---------------------------------------------------------Sa 20. Aug 12:17:49 2005*
  * @method  CdbUserManager::FindUserGroup               // public                            *
@@ -159,7 +159,7 @@ bool CheckAuthorisation(QString p_qstrLogin, QString p_qstrPassword);
 CumUser *FindUserByEmail(QString p_qstrEmail);
 CumUser *FindUserByLogin(QString p_qstrLogin);
 virtual CumUser* FindUserByIdentKey(QString p_qstridentKey);
-QLinkedList<CumUserGroup *> FindUserGroups(QString p_qstrName, QString p_qstrSchemeUri);
+QList<CumUserGroup *> FindUserGroups(QString p_qstrName, QString p_qstrSchemeUri);
 private:
 /** +-=---------------------------------------------------------Fr 22. Jun 11:39:32 2012-------*
  * @method  CdbUserManager::EncryptAllPasswords         // private                           *

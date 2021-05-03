@@ -660,7 +660,7 @@ bool CwmsguiObjectEditorSelector::DisplayQmlForm(CdmObject* p_pCdmObject, EwmsGu
 
        if (pQuery)
        {
-           const QLinkedList<long>& qllResults = pQuery->GetResultList();
+           const QList<long>& qllResults = pQuery->GetResultList();
 
            if (qllResults.count() > 0)
            {
@@ -689,7 +689,7 @@ bool CwmsguiObjectEditorSelector::ExistQmlForThisPlattform(const CdmClass* p_pCl
 
       if (CHKPTR(pQuery))
       {
-          const QLinkedList<long>& qllResults = pQuery->GetResultList();
+          const QList<long>& qllResults = pQuery->GetResultList();
 
           if (qllResults.count() > 0)
           {

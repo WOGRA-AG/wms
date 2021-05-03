@@ -18,7 +18,7 @@ private:
     long m_lSchemeId;
     QString m_qstrKeyname;
     CdmObjectContainer* m_rpContainer;
-    QLinkedList<long> qvlObjects;
+    QList<long> qvlObjects;
 
     bool interpretAnswerForContainerLoad(const QVariantList *dataList);
     bool interpretAnswerForObjects(const QVariantList *dataList);

@@ -10,12 +10,12 @@ class CdbDataAccess;
 class CdbCommandGetUserGroupList : public CdbAbstractCommand
 {
 private:
-    QLinkedList<CumUserGroup*> m_qllUserGroups;
+    QList<CumUserGroup*> m_qllUserGroups;
     QString m_qstrSchemeUri;
 public:
     CdbCommandGetUserGroupList(CdbDataAccess* p_pDataAccess, QString p_qstrSchemeUri);
     virtual ~CdbCommandGetUserGroupList();
-    QLinkedList<CumUserGroup*> GetResult();
+    QList<CumUserGroup*> GetResult();
 
 protected:
     virtual int Execute();

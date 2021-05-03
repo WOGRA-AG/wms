@@ -514,16 +514,16 @@ QString CwmsCodeGeneratorCBase::GetParameter(EdmValueType p_eDmValue)
       qstrRet = "NO CODE";
       break;
    case eDmValueListDouble:
-      qstrRet = "QLinkedList<double> p_qlValue";
+      qstrRet = "QList<double> p_qlValue";
       break;
    case eDmValueListInt:
-      qstrRet = "QLinkedList<int> p_qlValue";
+      qstrRet = "QList<int> p_qlValue";
       break;
    case eDmValueListObjects:
-      qstrRet = "QLinkedList<CdmObject*> p_qlValue";
+      qstrRet = "QList<CdmObject*> p_qlValue";
       break;
    case eDmValueListString:
-      qstrRet = "QLinkedList<QString> p_qlValue";
+      qstrRet = "QList<QString> p_qlValue";
       break;
    case eDmValueLong:
       qstrRet = "long p_lValue";
@@ -613,16 +613,16 @@ QString CwmsCodeGeneratorCBase::GetReturnType(EdmValueType p_eDmValue)
       qstrRet = "QString";// Display string
       break;
    case eDmValueListDouble:
-      qstrRet = "QLinkedList<double>";
+      qstrRet = "QList<double>";
       break;
    case eDmValueListInt:
-      qstrRet = "QLinkedList<int>";
+      qstrRet = "QList<int>";
       break;
    case eDmValueListObjects:
-      qstrRet = "QLinkedList<CdmObject*>";
+      qstrRet = "QList<CdmObject*>";
       break;
    case eDmValueListString:
-      qstrRet = "QLinkedList<QString>";
+      qstrRet = "QList<QString>";
       break;
    case eDmValueLong:
       qstrRet = "long";

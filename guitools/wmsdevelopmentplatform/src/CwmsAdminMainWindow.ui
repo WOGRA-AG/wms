@@ -470,7 +470,7 @@
     <number>1</number>
    </attribute>
    <widget class="QWidget" name="dockWidgetContents_4">
-    <layout class="QVBoxLayout" name="verticalLayout_3">
+    <layout class="QGridLayout" name="gridLayout_5">
      <property name="leftMargin">
       <number>3</number>
      </property>
@@ -483,7 +483,17 @@
      <property name="bottomMargin">
       <number>3</number>
      </property>
-     <item>
+     <item row="0" column="0">
+      <widget class="QLabel" name="label_4">
+       <property name="text">
+        <string>Filter</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QLineEdit" name="m_pqleClassFilter"/>
+     </item>
+     <item row="1" column="0" colspan="2">
       <widget class="QTreeWidget" name="m_pqlvModel">
        <property name="selectionMode">
         <enum>QAbstractItemView::ExtendedSelection</enum>
@@ -518,19 +528,20 @@
    </attribute>
    <widget class="QWidget" name="dockWidgetContents_5">
     <layout class="QVBoxLayout" name="verticalLayout_4">
+     <property name="leftMargin">
+      <number>3</number>
+     </property>
+     <property name="topMargin">
+      <number>3</number>
+     </property>
+     <property name="rightMargin">
+      <number>3</number>
+     </property>
+     <property name="bottomMargin">
+      <number>3</number>
+     </property>
      <item>
       <layout class="QHBoxLayout" name="horizontalLayout">
-       <item>
-        <widget class="QPushButton" name="m_pqpbClearFilter">
-         <property name="text">
-          <string/>
-         </property>
-         <property name="icon">
-          <iconset resource="../../../guilibraries/wmsgui/src/misc/wmsgui.qrc">
-           <normaloff>:/icons/cancel16.png</normaloff>:/icons/cancel16.png</iconset>
-         </property>
-        </widget>
-       </item>
        <item>
         <widget class="QLabel" name="m_pqlabClassFilter">
          <property name="text">
@@ -560,6 +571,23 @@
            <string>Objektcontainer aller Klassen</string>
           </property>
          </item>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="m_pqpbClearFilter">
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset resource="../../../guilibraries/wmsgui/src/misc/wmsgui.qrc">
+           <normaloff>:/icons/cancel16.png</normaloff>:/icons/cancel16.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>16</width>
+           <height>16</height>
+          </size>
+         </property>
         </widget>
        </item>
       </layout>
@@ -886,7 +914,7 @@
      <property name="bottomMargin">
       <number>3</number>
      </property>
-     <item row="0" column="0" colspan="2">
+     <item row="1" column="0" colspan="2">
       <widget class="QTreeWidget" name="m_pqlvViews">
        <property name="selectionMode">
         <enum>QAbstractItemView::ExtendedSelection</enum>
@@ -904,7 +932,20 @@
        </column>
       </widget>
      </item>
-     <item row="1" column="0">
+     <item row="2" column="1">
+      <spacer name="horizontalSpacer_2">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>211</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item row="2" column="0">
       <widget class="QPushButton" name="m_pqpbRefreshViews">
        <property name="text">
         <string/>
@@ -921,18 +962,15 @@
        </property>
       </widget>
      </item>
-     <item row="1" column="1">
-      <spacer name="horizontalSpacer_2">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
+     <item row="0" column="0">
+      <widget class="QLabel" name="label_6">
+       <property name="text">
+        <string>Filter</string>
        </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>211</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QLineEdit" name="m_pqleViewFilter"/>
      </item>
     </layout>
    </widget>
@@ -1694,7 +1732,7 @@
    <slot>DatabaseSelectedSlot()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>269</x>
+     <x>257</x>
      <y>122</y>
     </hint>
     <hint type="destinationlabel">
@@ -1838,7 +1876,7 @@
    <slot>LanguageChangedSlot()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>269</x>
+     <x>257</x>
      <y>148</y>
     </hint>
     <hint type="destinationlabel">
@@ -2463,7 +2501,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>1067</x>
-     <y>479</y>
+     <y>471</y>
     </hint>
     <hint type="destinationlabel">
      <x>1070</x>
@@ -2494,8 +2532,8 @@
    <slot>ClassFilterChangedSlot()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>272</x>
-     <y>543</y>
+     <x>232</x>
+     <y>537</y>
     </hint>
     <hint type="destinationlabel">
      <x>195</x>
@@ -2527,7 +2565,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>1067</x>
-     <y>620</y>
+     <y>611</y>
     </hint>
     <hint type="destinationlabel">
      <x>1070</x>
@@ -2543,7 +2581,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>1067</x>
-     <y>338</y>
+     <y>331</y>
     </hint>
     <hint type="destinationlabel">
      <x>1070</x>
@@ -2623,7 +2661,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>1067</x>
-     <y>620</y>
+     <y>611</y>
     </hint>
     <hint type="destinationlabel">
      <x>1070</x>
@@ -2639,7 +2677,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>1067</x>
-     <y>479</y>
+     <y>471</y>
     </hint>
     <hint type="destinationlabel">
      <x>1070</x>
@@ -2655,7 +2693,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>1067</x>
-     <y>338</y>
+     <y>331</y>
     </hint>
     <hint type="destinationlabel">
      <x>1070</x>
@@ -2751,7 +2789,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>1067</x>
-     <y>620</y>
+     <y>611</y>
     </hint>
     <hint type="destinationlabel">
      <x>1070</x>
@@ -2767,7 +2805,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>1067</x>
-     <y>479</y>
+     <y>471</y>
     </hint>
     <hint type="destinationlabel">
      <x>1070</x>
@@ -2783,7 +2821,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>1067</x>
-     <y>338</y>
+     <y>331</y>
     </hint>
     <hint type="destinationlabel">
      <x>1070</x>
@@ -3038,12 +3076,12 @@
    <slot>clearEditText()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>30</x>
-     <y>545</y>
+     <x>260</x>
+     <y>539</y>
     </hint>
     <hint type="destinationlabel">
-     <x>146</x>
-     <y>543</y>
+     <x>205</x>
+     <y>537</y>
     </hint>
    </hints>
   </connection>
@@ -3060,6 +3098,38 @@
     <hint type="destinationlabel">
      <x>1113</x>
      <y>772</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqleViewFilter</sender>
+   <signal>returnPressed()</signal>
+   <receiver>CwmsAdminMainWindow</receiver>
+   <slot>ViewFilterEnterPressedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>947</x>
+     <y>652</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1224</x>
+     <y>675</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqleClassFilter</sender>
+   <signal>returnPressed()</signal>
+   <receiver>CwmsAdminMainWindow</receiver>
+   <slot>ClassFilterEnterPressedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>219</x>
+     <y>280</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1259</x>
+     <y>336</y>
     </hint>
    </hints>
   </connection>
@@ -3118,5 +3188,7 @@
   <slot>DeleteAllEventsClickedSlot()</slot>
   <slot>DataSearchClickedSlot()</slot>
   <slot>RefreshViewsClickedSlot()</slot>
+  <slot>ViewFilterEnterPressedSlot()</slot>
+  <slot>ClassFilterEnterPressedSlot()</slot>
  </slots>
 </ui>

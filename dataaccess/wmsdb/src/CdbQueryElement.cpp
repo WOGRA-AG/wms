@@ -1,7 +1,7 @@
 // System and QT Includes
 #include <QString>
 #include <qfile.h>
-#include <QLinkedList>
+#include <QList>
 #include <qvariant.h>
 #include <QSqlQuery>
 
@@ -31,7 +31,7 @@ CdbQueryElement::CdbQueryElement(CdbDataAccess* p_pCdbDataAccess,
 {
     if(CHKPTR(m_rpCdmQueryElement) && CHKPTR(m_rpCdbDataAccess))
     {
-        QLinkedList<CdmQueryElement*> qvlQueryElements;
+        QList<CdmQueryElement*> qvlQueryElements;
         m_rpCdmQueryElement->GetChildList(qvlQueryElements);
         CreateChilds(qvlQueryElements);
     }
@@ -78,8 +78,8 @@ long CdbQueryElement::ExecuteValue(QMap<long, long> &p_rqvlResults)
                 }
                 else if (m_rpCdmQueryElement->GetCompareType() == eDmQueryCompareTypeIn)
                 {
-                    QLinkedList<QVariant>::iterator qlIt = m_rpCdmQueryElement->GetList().begin();
-                    QLinkedList<QVariant>::iterator qlItEnd = m_rpCdmQueryElement->GetList().end();
+                    QList<QVariant>::iterator qlIt = m_rpCdmQueryElement->GetList().begin();
+                    QList<QVariant>::iterator qlItEnd = m_rpCdmQueryElement->GetList().end();
 
                     for (; qlIt  != qlItEnd; ++qlIt)
                     {
@@ -159,10 +159,10 @@ QString CdbQueryElement::GenerateQuery()
     return qstrQuery;
 }
 
-void CdbQueryElement::CreateChilds(QLinkedList<CdmQueryElement*> &p_qvlChilds)
+void CdbQueryElement::CreateChilds(QList<CdmQueryElement*> &p_qvlChilds)
 {
-    QLinkedList<CdmQueryElement*>::iterator qvlIt    = p_qvlChilds.begin();
-    QLinkedList<CdmQueryElement*>::iterator qvlItEnd = p_qvlChilds.end();
+    QList<CdmQueryElement*>::iterator qvlIt    = p_qvlChilds.begin();
+    QList<CdmQueryElement*>::iterator qvlItEnd = p_qvlChilds.end();
 
     for (; qvlIt != qvlItEnd; ++qvlIt)
     {
@@ -186,8 +186,8 @@ QString CdbQueryElement::GenerateAndQuery()
         int iCounter = 1;
 
 
-        QLinkedList<CdbQueryElement*>::iterator qvlIt = m_qvlChilds.begin();
-        QLinkedList<CdbQueryElement*>::iterator qvlItEnd = m_qvlChilds.end();
+        QList<CdbQueryElement*>::iterator qvlIt = m_qvlChilds.begin();
+        QList<CdbQueryElement*>::iterator qvlItEnd = m_qvlChilds.end();
 
         for (; qvlIt != qvlItEnd; ++qvlIt)
         {
@@ -223,8 +223,8 @@ QString CdbQueryElement::GenerateOrQuery()
 
     if (m_qvlChilds.count() > 0)
     {
-        QLinkedList<CdbQueryElement*>::iterator qvlIt = m_qvlChilds.begin();
-        QLinkedList<CdbQueryElement*>::iterator qvlItEnd = m_qvlChilds.end();
+        QList<CdbQueryElement*>::iterator qvlIt = m_qvlChilds.begin();
+        QList<CdbQueryElement*>::iterator qvlItEnd = m_qvlChilds.end();
         bool bFirst = true;
 
         for (; qvlIt != qvlItEnd; ++qvlIt)
@@ -292,8 +292,8 @@ QString CdbQueryElement::GenerateValueQuery()
                     else if (m_rpCdmQueryElement->GetCompareType() == eDmQueryCompareTypeIn)
                     {
 
-                        QLinkedList<QVariant>::iterator qlIt = m_rpCdmQueryElement->GetList().begin();
-                        QLinkedList<QVariant>::iterator qlItEnd = m_rpCdmQueryElement->GetList().end();
+                        QList<QVariant>::iterator qlIt = m_rpCdmQueryElement->GetList().begin();
+                        QList<QVariant>::iterator qlItEnd = m_rpCdmQueryElement->GetList().end();
                         qstrQuery = "(";
                         bool bFirst = true;
 
@@ -644,12 +644,12 @@ QString CdbQueryElement::GetListCompareValueAsString()
 QString CdbQueryElement::ExtractCompareEntriesFromList()
 {
     QString qstrValueList;
-    QLinkedList<QVariant> qvlSubList;
+    QList<QVariant> qvlSubList;
     qvlSubList += m_rpCdmQueryElement->GetList();
 
     if (qvlSubList.size() > 0)
     {
-        QLinkedList<QVariant>::Iterator qvlIt;
+        QList<QVariant>::Iterator qvlIt;
         qstrValueList = "(";
         bool bFirst = true;
 

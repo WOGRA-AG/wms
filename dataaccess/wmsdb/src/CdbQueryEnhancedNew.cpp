@@ -394,7 +394,7 @@ void CdbQueryEnhancedNew::BuildReference(QString p_qstrKeyname)
 
     if (CHKPTR(pCdmClass))
     {
-        QLinkedList<const CdmMember*> p_qllReferencedMembers;
+        QList<const CdmMember*> p_qllReferencedMembers;
         QStringList qstrlMemberChain = p_qstrKeyname.split(".");
         for (int Count = 0; Count < qstrlMemberChain.size(); ++Count)
         {
@@ -418,7 +418,7 @@ void CdbQueryEnhancedNew::BuildReference(QString p_qstrKeyname)
             const CdmMember* pSearchMember = p_qllReferencedMembers.takeLast();
             int iDepth = p_qllReferencedMembers.size();
 
-            QMutableMapIterator<int, QPair<QLinkedList<const CdmMember*>, QList<const CdmMember*>>>
+            QMutableMapIterator<int, QPair<QList<const CdmMember*>, QList<const CdmMember*>>>
                     qmmIt(m_qmmObjectRefMembers);
             while (qmmIt.hasNext())
             {
@@ -440,7 +440,7 @@ void CdbQueryEnhancedNew::BuildReference(QString p_qstrKeyname)
 
             if (!bFound)
             {
-                QPair<QLinkedList<const CdmMember*>, QList<const CdmMember*>> qPair;
+                QPair<QList<const CdmMember*>, QList<const CdmMember*>> qPair;
                 qPair.first = p_qllReferencedMembers;
                 QList<const CdmMember*> qlMembers;
                 qlMembers.append(pSearchMember);
@@ -505,13 +505,13 @@ QMap<QString, QString> CdbQueryEnhancedNew::BuildObjectRefSubQueries(QString &p_
     QString qstrObjectTemplate = QString("%1.objectid = %2.val and "
                                          "%1.objectlistid = %2.orefobjectlist");
 
-    QMapIterator<int, QPair<QLinkedList<const CdmMember*>, QList<const CdmMember*>>>
+    QMapIterator<int, QPair<QList<const CdmMember*>, QList<const CdmMember*>>>
             qmitPairs(m_qmmObjectRefMembers);
     while (qmitPairs.hasNext())
     {
         qmitPairs.next();
-        QPair<QLinkedList<const CdmMember*>, QList<const CdmMember*>> qPair = qmitPairs.value();
-        QLinkedList<const CdmMember*> qlReferences = qPair.first;
+        QPair<QList<const CdmMember*>, QList<const CdmMember*>> qPair = qmitPairs.value();
+        QList<const CdmMember*> qlReferences = qPair.first;
         QList<const CdmMember*> qlMembers = qPair.second;
         if (qlReferences.isEmpty() || qlMembers.isEmpty())
         {
@@ -526,7 +526,7 @@ QMap<QString, QString> CdbQueryEnhancedNew::BuildObjectRefSubQueries(QString &p_
         QString qstrResults;
         QString qstrFullReferenceKeyName;
 
-        QLinkedListIterator<const CdmMember*> qlIt(qlReferences);
+        QListIterator<const CdmMember*> qlIt(qlReferences);
         while (qlIt.hasNext())
         {
             const CdmMember* pRefMember = qlIt.next();
@@ -795,18 +795,18 @@ QMap<QString, QString> CdbQueryEnhancedNew::BuildObjectRefSubQueriesPerDepth(QSt
         }
 
         // Iterator over every ReferencePath of given depth
-        QListIterator<QPair<QLinkedList<const CdmMember*>, QList<const CdmMember*>>> pairIterator(m_qmmObjectRefMembers.values(iDepth));
+        QListIterator<QPair<QList<const CdmMember*>, QList<const CdmMember*>>> pairIterator(m_qmmObjectRefMembers.values(iDepth));
         while (pairIterator.hasNext())
         {
-            QPair<QLinkedList<const CdmMember*>, QList<const CdmMember*>> qPair = pairIterator.next();
-            QLinkedList<const CdmMember*> qllReferences = qPair.first;
+            QPair<QList<const CdmMember*>, QList<const CdmMember*>> qPair = pairIterator.next();
+            QList<const CdmMember*> qllReferences = qPair.first;
             QList<const CdmMember*> qlMembers = qPair.second;
             if (qllReferences.size() != iDepth || qlMembers.isEmpty())
             {
                 continue;
             }
 
-            QLinkedListIterator<const CdmMember*> refIterator(qllReferences);
+            QListIterator<const CdmMember*> refIterator(qllReferences);
             bool bFirstReference = true;
             int iTablePos = 0;
             QString qstrFullReferenceKeyName;

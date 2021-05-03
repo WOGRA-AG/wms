@@ -17,7 +17,7 @@
 #include <qstringlist.h>
 #include <qpair.h>
 #include <qmap.h>
-#include <QLinkedList>
+#include <QList>
 
 // WMS Includes
 #include "CdmObjectAdaptor.h"
@@ -198,8 +198,8 @@ bool IsReadOnly(  );
     * @return  QValueList<long>                              // the list of members               *
     * @comment                                                                                    *
     *----------------last changed: Wolfgang Graßhof-------------Fr 6. Jan 18:17:58 2006-----------*/
-QLinkedList<long> GetSortMemberList(  );
-QLinkedList<long> getEventClassMemberList(CdmClass *pClass);
+QList<long> GetSortMemberList(  );
+QList<long> getEventClassMemberList(CdmClass *pClass);
    private:
    /** +-=---------------------------------------------------------Fr 6. Jan 18:14:58 2006*
     * @method  CwmsObjectEditor::FindValueByMemberId          // private                           *
@@ -247,8 +247,8 @@ void AddObjectRefData(  QString p_qstrValue,
     * @return  QValueList<long>                              //                                   *
     * @comment This method creates the sorted memberlist with the helb of the string list.        *
     *----------------last changed: Wolfgang Graßhof-------------Fr 20. Jan 22:43:03 2006----------*/
-QLinkedList<long> GetSortedMemberListFromStringList(  );
-QLinkedList<long> getEventClassMemberListFromStringList(CdmClass *pClass);
+QList<long> GetSortedMemberListFromStringList(  );
+QList<long> getEventClassMemberListFromStringList(CdmClass *pClass);
 
     private slots:
    /** +-=---------------------------------------------------------Di 24. Jan 22:49:24 2006*

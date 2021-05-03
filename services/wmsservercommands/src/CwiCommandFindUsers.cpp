@@ -24,12 +24,12 @@ void CwiCommandFindUsers::Execute()
         CumUserManager* pCumUserManager = pCdmManager->GetUserManager();
         if(pCumUserManager)
         {
-            QLinkedList<CumUser*> qlUsers = pCumUserManager->FindUsersUnmanaged(qstrSearchString);
+            QList<CumUser*> qlUsers = pCumUserManager->FindUsersUnmanaged(qstrSearchString);
             QVariantList qvlUsers;
             if (!qlUsers.isEmpty())
             {
-                QLinkedList<CumUser*>::iterator qllIt = qlUsers.begin();
-                QLinkedList<CumUser*>::iterator qllItEnd = qlUsers.end();
+                QList<CumUser*>::iterator qllIt = qlUsers.begin();
+                QList<CumUser*>::iterator qllItEnd = qlUsers.end();
 
                 for (; qllIt != qllItEnd; ++qllIt)
                 {

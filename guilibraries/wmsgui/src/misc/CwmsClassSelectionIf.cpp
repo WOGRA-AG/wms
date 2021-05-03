@@ -12,7 +12,7 @@
  *****************************************************************************/ 
 
 // System and QT Includes
-#include <QLinkedList>
+#include <QList>
 
 // WMS Includes
 #include "CdmClass.h"
@@ -66,11 +66,11 @@ void CwmsClassSelectionIf::FillDialog(bool p_bShowAbstractClasses)
 
       if (CHKPTR(pCdmClassManager))
       {
-         QLinkedList<CdmClass*> qvlClasses;
+         QList<CdmClass*> qvlClasses;
          pCdmClassManager->GetClassList(qvlClasses);
 
-         QLinkedList<CdmClass*>::iterator qvlIt = qvlClasses.begin();
-         QLinkedList<CdmClass*>::iterator qvlItEnd = qvlClasses.end();
+         QList<CdmClass*>::iterator qvlIt = qvlClasses.begin();
+         QList<CdmClass*>::iterator qvlItEnd = qvlClasses.end();
 
          for (; qvlIt != qvlItEnd; qvlIt++)
          {

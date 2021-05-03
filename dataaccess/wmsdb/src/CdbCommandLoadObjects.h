@@ -1,7 +1,7 @@
 #ifndef CDBCOMMANDLOADOBJECTS_H
 #define CDBCOMMANDLOADOBJECTS_H
 
-#include <QLinkedList>
+#include <QList>
 
 #include "CdbAbstractCommand.h"
 
@@ -13,7 +13,7 @@ class CdbCommandLoadObjects : public CdbAbstractCommand
 {
 private:
     CdmObjectContainer* m_rpContainer;
-    QLinkedList<long> m_qvlObjectIds;
+    QList<long> m_qvlObjectIds;
 
 
     long ReadValues(QString p_qstrInString, QMap<long, CdmObject *> &p_rqmObjects);
@@ -33,9 +33,9 @@ private:
     int ReadObjectListRefs(QString p_qstrInString, QMap<long, CdmObject *> &p_rqmObjects);
     int ReadStrings(QString p_qstrInString, QMap<long, CdmObject *> &p_rqmObjects);
     int ReadTimes(QString p_qstrInString, QMap<long, CdmObject *> &p_rqmObjects);
-    QString GenerateInString(QLinkedList<long> &p_rqvlIds);
+    QString GenerateInString(QList<long> &p_rqvlIds);
 public:
-    CdbCommandLoadObjects(CdmObjectContainer* p_pContainer, QLinkedList<long>& p_qlObjectIds, CdbDataAccess* p_pDataAccess);
+    CdbCommandLoadObjects(CdmObjectContainer* p_pContainer, QList<long>& p_qlObjectIds, CdbDataAccess* p_pDataAccess);
     virtual ~CdbCommandLoadObjects();
 
 protected:

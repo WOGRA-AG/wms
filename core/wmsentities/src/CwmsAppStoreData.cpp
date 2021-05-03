@@ -69,7 +69,7 @@ void CwmsAppStoreData::GetAppStoreData(QVariantList& p_rList)
 
     if (CHKPTR(pContainer))
     {
-        QLinkedList<CdmObject*> qllObjects;
+        QList<CdmObject*> qllObjects;
         pContainer->GetObjectList(qllObjects);
         ReadData(p_rList, qllObjects);
     }
@@ -221,10 +221,10 @@ CdmObjectContainer* CwmsAppStoreData::LoadData()
 }
 
 
-void CwmsAppStoreData::ReadData(QVariantList& p_rqvlApps, QLinkedList<CdmObject*>& p_rqllObjects)
+void CwmsAppStoreData::ReadData(QVariantList& p_rqvlApps, QList<CdmObject*>& p_rqllObjects)
 {
-    QLinkedList<CdmObject*>::iterator qllIt =  p_rqllObjects.begin();
-    QLinkedList<CdmObject*>::iterator qllItEnd =  p_rqllObjects.end();
+    QList<CdmObject*>::iterator qllIt =  p_rqllObjects.begin();
+    QList<CdmObject*>::iterator qllItEnd =  p_rqllObjects.end();
 
     for (; qllIt != qllItEnd; ++qllIt)
     {

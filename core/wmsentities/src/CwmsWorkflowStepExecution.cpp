@@ -274,7 +274,7 @@ CdmObject* CwmsWorkflowStepExecution::FindEscalation(int p_iPos)
 
          if (pCdmQuery)
          {
-            QLinkedList<long> qllResults = pCdmQuery->GetResultList();
+            QList<long> qllResults = pCdmQuery->GetResultList();
 
             if (qllResults.count() > 0)
             {

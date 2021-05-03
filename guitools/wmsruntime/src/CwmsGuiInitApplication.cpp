@@ -75,12 +75,12 @@ void CwmsGuiInitApplication::DbSelection()
 
     if (CHKPTR(pManager))
     {
-        QLinkedList<QString> qllSchemes;
+        QList<QString> qllSchemes;
         pManager->GetSchemeList(qllSchemes);
         QList<QString> qlSchemes;
 
-        QLinkedList<QString>::iterator qIt = qllSchemes.begin();
-        QLinkedList<QString>::iterator qItEnd = qllSchemes.end();
+        QList<QString>::iterator qIt = qllSchemes.begin();
+        QList<QString>::iterator qItEnd = qllSchemes.end();
 
         for (; qIt != qItEnd; ++qIt)
         {

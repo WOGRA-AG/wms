@@ -78,20 +78,20 @@ QString CwmsbtRightsGroup::GetDisplayName()
 
 /** +-=---------------------------------------------------------Mo 10. Mai 20:14:23 2010----------*
  * @method  CwmsbtRightsGroup::GetWriteRightsElements           // public                            *
- * @return  QLinkedList<QObject*>                            //                                   *
+ * @return  QList<QObject*>                            //                                   *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------Mo 10. Mai 20:14:23 2010----------*/
-QLinkedList<QObject*> CwmsbtRightsGroup::GetWriteRightsElements()
+QList<QObject*> CwmsbtRightsGroup::GetWriteRightsElements()
 {
    return m_qllWriteObjects;
 }
 
 /** +-=---------------------------------------------------------Mo 10. Mai 20:14:40 2010----------*
  * @method  CwmsbtRightsGroup::GetReadRightsElements            // public                            *
- * @return  QLinkedList<QObject*>                            //                                   *
+ * @return  QList<QObject*>                            //                                   *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------Mo 10. Mai 20:14:40 2010----------*/
-QLinkedList<QObject*> CwmsbtRightsGroup::GetReadRightsElements()
+QList<QObject*> CwmsbtRightsGroup::GetReadRightsElements()
 {
    return m_qllReadObjects;
 }
@@ -217,14 +217,14 @@ void CwmsbtRightsGroup::UpdateElementsReadWite()
 /** +-=---------------------------------------------------------Sa 8. Mai 13:27:48 2010-----------*
  * @method  CwmsbtRightsGroup::ChangeVisibility                 // private                           *
  * @return  void                                             //                                   *
- * @param   QLinkedList<QObject*>& p_rqllWidgets             //                                   *
+ * @param   QList<QObject*>& p_rqllWidgets             //                                   *
  * @param   bool p_bVisibility                               //                                   *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------Sa 8. Mai 13:27:48 2010-----------*/
-void CwmsbtRightsGroup::ChangeVisibility(QLinkedList<QObject*>& p_rqllWidgets, bool p_bVisibility)
+void CwmsbtRightsGroup::ChangeVisibility(QList<QObject*>& p_rqllWidgets, bool p_bVisibility)
 {
-   QLinkedList<QObject*>::iterator qllIt = p_rqllWidgets.begin();
-   QLinkedList<QObject*>::iterator qllItEnd = p_rqllWidgets.end();
+   QList<QObject*>::iterator qllIt = p_rqllWidgets.begin();
+   QList<QObject*>::iterator qllItEnd = p_rqllWidgets.end();
 
    for (; qllIt != qllItEnd; ++qllIt)
    {

@@ -168,10 +168,10 @@ void CwmsFormGenericObjectEditor::FillDefaultValues()
 void CwmsFormGenericObjectEditor::FillFunctions()
 {
    m_pqlwFunctions->clear();
-   QLinkedList<QString> qllFunctions = m_cForm.GetFunctions();
+   QList<QString> qllFunctions = m_cForm.GetFunctions();
 
-   QLinkedList<QString>::iterator qllIt = qllFunctions.begin();
-   QLinkedList<QString>::iterator qllItEnd = qllFunctions.end();
+   QList<QString>::iterator qllIt = qllFunctions.begin();
+   QList<QString>::iterator qllItEnd = qllFunctions.end();
 
    for (; qllIt != qllItEnd; ++qllIt)
    {
@@ -188,9 +188,9 @@ void CwmsFormGenericObjectEditor::FillFunctions()
 void CwmsFormGenericObjectEditor::FillVisibleMembers()
 {
    m_pqlwVisibleMembers->clear();
-   QLinkedList<QString> qllVisibleMembers = m_cForm.GetVisibleMembers();
-   QLinkedList<QString>::iterator qllIt = qllVisibleMembers.begin();
-   QLinkedList<QString>::iterator qllItEnd = qllVisibleMembers.end();
+   QList<QString> qllVisibleMembers = m_cForm.GetVisibleMembers();
+   QList<QString>::iterator qllIt = qllVisibleMembers.begin();
+   QList<QString>::iterator qllItEnd = qllVisibleMembers.end();
 
    for (; qllIt != qllItEnd; ++qllIt)
    {
@@ -704,7 +704,7 @@ bool CwmsFormGenericObjectEditor::SaveData()
       m_cForm.SetReadOnly(m_pqchbReadOnly->isChecked());
       m_cForm.SetWql(m_pqteWql->toPlainText());
 
-      QLinkedList<QString> qstrlVisibleMembers;
+      QList<QString> qstrlVisibleMembers;
 
       for (int iCounter = 0; iCounter < m_pqlwVisibleMembers->count(); ++iCounter)
       {
@@ -758,7 +758,7 @@ bool CwmsFormGenericObjectEditor::SaveData()
 
       m_cForm.SetDefaultValues(qmDefaultValues);
 
-      QLinkedList<QString> qstrlFunctions;
+      QList<QString> qstrlFunctions;
 
       for (int iCounter = 0; iCounter < m_pqlwFunctions->count(); ++iCounter)
       {

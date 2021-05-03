@@ -46,22 +46,22 @@ void CwmsFormObject::SetWql(QString p_qstrValue)
     SetValue("Wql", p_qstrValue);
 }
 
-QLinkedList<QString> CwmsFormObject::GetVisibleMembers()
+QList<QString> CwmsFormObject::GetVisibleMembers()
 {
    return GetStringList("Visible_Members");
 }
 
-void CwmsFormObject::SetVisibleMembers(QLinkedList<QString> p_qllValue)
+void CwmsFormObject::SetVisibleMembers(QList<QString> p_qllValue)
 {
    SetStringList("Visible_Members", p_qllValue);
 }
 
-QLinkedList<QString> CwmsFormObject::GetFunctions()
+QList<QString> CwmsFormObject::GetFunctions()
 {
    return GetStringList("Functions");
 }
 
-void CwmsFormObject::SetFunctions(QLinkedList<QString> p_qllValue)
+void CwmsFormObject::SetFunctions(QList<QString> p_qllValue)
 {
    SetStringList("Functions", p_qllValue);
 }

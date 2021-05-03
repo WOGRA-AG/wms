@@ -21,12 +21,12 @@ CftlContainerTableSelect::~CftlContainerTableSelect()
 
 }
 
-void CftlContainerTableSelect::SetObjectList(QLinkedList<long> &p_qlObjectIds)
+void CftlContainerTableSelect::SetObjectList(QList<long> &p_qlObjectIds)
 {
     m_qlObjectIds = p_qlObjectIds;
 }
 
-void CftlContainerTableSelect::SetObjectList(QLinkedList<QString> &p_qlObjectKeynames)
+void CftlContainerTableSelect::SetObjectList(QList<QString> &p_qlObjectKeynames)
 {
     m_qlObjectKeynames = p_qlObjectKeynames;
 }
@@ -208,8 +208,8 @@ QString CftlContainerTableSelect::GenerateInStringIds()
 {
    QString qstrRet = "(";
 
-   QLinkedList<long>::iterator qvlIt = m_qlObjectIds.begin();
-   QLinkedList<long>::iterator qvlItEnd = m_qlObjectIds.end();
+   QList<long>::iterator qvlIt = m_qlObjectIds.begin();
+   QList<long>::iterator qvlItEnd = m_qlObjectIds.end();
 
    while (qvlIt != qvlItEnd)
    {
@@ -236,8 +236,8 @@ QString CftlContainerTableSelect::GenerateInStringKeynames()
 {
    QString qstrRet = "(";
 
-   QLinkedList<QString>::iterator qvlIt = m_qlObjectKeynames.begin();
-   QLinkedList<QString>::iterator qvlItEnd = m_qlObjectKeynames.end();
+   QList<QString>::iterator qvlIt = m_qlObjectKeynames.begin();
+   QList<QString>::iterator qvlItEnd = m_qlObjectKeynames.end();
 
    while (qvlIt != qvlItEnd)
    {

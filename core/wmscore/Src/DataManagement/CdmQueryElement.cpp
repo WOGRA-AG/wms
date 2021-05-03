@@ -13,7 +13,7 @@
 #include <QString>
 #include <QVariant>
 #include <QDomDocument>
-#include <QLinkedList>
+#include <QList>
 
 // WMS Commons Includes
 #include "CwmsUtilities.h"
@@ -154,8 +154,8 @@ QVariant CdmQueryElement::GetVariant() const
         qvHash.insert("SubQuery", m_rpCdmSubQuery->GetVariant());
     }
 
-    QLinkedList<QVariant>::const_iterator qllIt = m_qvlInOrNotInList.begin();
-    QLinkedList<QVariant>::const_iterator qllItEnd = m_qvlInOrNotInList.end();
+    QList<QVariant>::const_iterator qllIt = m_qvlInOrNotInList.begin();
+    QList<QVariant>::const_iterator qllItEnd = m_qvlInOrNotInList.end();
     QList<QVariant> qlInOrNotInList;
 
     for (; qllIt != qllItEnd; ++qllIt)
@@ -165,8 +165,8 @@ QVariant CdmQueryElement::GetVariant() const
 
     qvHash.insert("InOrNotIn", qlInOrNotInList);
 
-    QLinkedList<CdmQueryElement*>::const_iterator qllQueryIt = m_lChildQuerys.begin();
-    QLinkedList<CdmQueryElement*>::const_iterator qllQueryItEnd = m_lChildQuerys.end();
+    QList<CdmQueryElement*>::const_iterator qllQueryIt = m_lChildQuerys.begin();
+    QList<CdmQueryElement*>::const_iterator qllQueryItEnd = m_lChildQuerys.end();
     QList<QVariant> qlChildQueries;
 
     for (; qllQueryIt != qllQueryItEnd; ++qllQueryIt)
@@ -219,7 +219,7 @@ void CdmQueryElement::SetQueryElementType(EdmQueryElementType p_eDmQueryElementT
     m_eDmQueryElementType = p_eDmQueryElementType;
 }
 
-void CdmQueryElement::GetChildList(QLinkedList<CdmQueryElement*> &p_rqvlChilds) const
+void CdmQueryElement::GetChildList(QList<CdmQueryElement*> &p_rqvlChilds) const
 {
     if(!m_lChildQuerys.isEmpty())
     {
@@ -302,7 +302,7 @@ void CdmQueryElement::SetComparisonValue(QString p_qstrKeyname, float p_fValue)
     SetComparisonValue(p_qstrKeyname, QVariant(p_fValue));
 }
 
-void CdmQueryElement::SetComparisonValue(QString p_qstrKeyname, QLinkedList<QVariant> p_qvlList)
+void CdmQueryElement::SetComparisonValue(QString p_qstrKeyname, QList<QVariant> p_qvlList)
 {
     m_qVariant = QVariant();
     m_qvlInOrNotInList = p_qvlList;
@@ -503,7 +503,7 @@ CdmQuery* CdmQueryElement::GetSubQuery() const
     return m_rpCdmSubQuery;
 }
 
-QLinkedList<QVariant>& CdmQueryElement::GetList()
+QList<QVariant>& CdmQueryElement::GetList()
 {
     return m_qvlInOrNotInList;
 }
@@ -519,7 +519,7 @@ int CdmQueryElement::GetComplexity() const
 
     if (GetQueryElementType() != eDmQueryElementTypeCompare)
     {
-        QLinkedList<CdmQueryElement*>::ConstIterator qvlIt;
+        QList<CdmQueryElement*>::ConstIterator qvlIt;
 
         for(qvlIt = m_lChildQuerys.begin(); qvlIt != m_lChildQuerys.end(); ++qvlIt)
         {
@@ -870,7 +870,7 @@ QString CdmQueryElement::GetConditionAsString() const
             else
             {
                 QStringList qstrlInValues;
-                QLinkedListIterator<QVariant> qllIt(m_qvlInOrNotInList);
+                QListIterator<QVariant> qllIt(m_qvlInOrNotInList);
                 while (qllIt.hasNext())
                 {
                     qstrlInValues.append(qllIt.next().toString());
@@ -907,7 +907,7 @@ QString CdmQueryElement::GetConditionAsString() const
             qstrRet += "or(";
         }
 
-        QLinkedList<CdmQueryElement*>::ConstIterator qvlIt;
+        QList<CdmQueryElement*>::ConstIterator qvlIt;
         bool bFirst = true;
 
         for(qvlIt = m_lChildQuerys.begin(); qvlIt != m_lChildQuerys.end(); ++qvlIt)
@@ -1068,8 +1068,8 @@ void CdmQueryElement::XmlExport(QDomDocument& p_rqdDomDocument, QDomElement& p_r
    }
    else
    {
-      QLinkedList<CdmQueryElement*>::const_iterator qvlIt = m_lChildQuerys.begin();
-      QLinkedList<CdmQueryElement*>::const_iterator qvlItEnd = m_lChildQuerys.end();
+      QList<CdmQueryElement*>::const_iterator qvlIt = m_lChildQuerys.begin();
+      QList<CdmQueryElement*>::const_iterator qvlItEnd = m_lChildQuerys.end();
 
       for(; qvlIt != qvlItEnd; ++qvlIt)
       {

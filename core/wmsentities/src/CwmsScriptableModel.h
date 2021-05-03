@@ -31,7 +31,7 @@ public:
     CwmsScriptableModel();
     ~CwmsScriptableModel();
     void appendFromItemModel(QAbstractItemModel &p_rModel, int p_iDisplayType);
-    void CopyFromItemModel(QAbstractItemModel& p_rModel, int p_iDisplayType);
+    void copyFromItemModel(QAbstractItemModel& p_rModel, int p_iDisplayType);
 
 public slots:
     QVariant getValue(int p_iRow, int p_iColumn, int p_iDisplayType);

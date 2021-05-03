@@ -40,8 +40,8 @@ void CwmsUserIf::FillGroups()
 {
     m_rpCumUser->GetUserGroups(m_qvlUserGroups);
 
-    QLinkedList<CumUserGroup*>::iterator qvlIt = m_qvlUserGroups.begin();
-    QLinkedList<CumUserGroup*>::iterator qvlItEnd = m_qvlUserGroups.end();
+    QList<CumUserGroup*>::iterator qvlIt = m_qvlUserGroups.begin();
+    QList<CumUserGroup*>::iterator qvlItEnd = m_qvlUserGroups.end();
 
     for(; qvlIt != qvlItEnd; ++qvlIt)
     {
@@ -123,7 +123,7 @@ void CwmsUserIf::AddScheme()
 
     if (CHKPTR(pManager))
     {
-        QLinkedList<QString> qllSchemes;
+        QList<QString> qllSchemes;
         pManager->GetSchemeList(qllSchemes);
         QString qstrScheme = CwmsUserSchemeSelection::SelectScheme(qllSchemes, this);
         m_rpCumUser->AddSchemeUri("/" WMS_SCHEME  "/" + qstrScheme);
