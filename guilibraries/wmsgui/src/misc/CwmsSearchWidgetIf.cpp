@@ -1,17 +1,4 @@
-﻿/******************************************************************************
- ** WOGRA technologies Modul Information
- ** Modulename: CwmsSearchWidgetIf.cpp
- ** Started Implementation: 2008/09/06
- ** Description:
- **
- ** This class implements the simple search gui for searching the wms
- **
- ** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
- ** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
- **(C) copyright by WOGRA technologies All rights reserved
- *****************************************************************************/
-
-// System and QT Includes
+﻿// System and QT Includes
 #include <CdmQueryBuilder.h>
 #include <QList>
 #include <QMap>

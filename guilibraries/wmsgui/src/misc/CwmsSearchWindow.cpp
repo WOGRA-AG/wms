@@ -1,17 +1,4 @@
-﻿/******************************************************************************
- ** WOGRA technologies GmbH & Co. KG Modul Information
- ** Modulename: CwmsSearchWindow.cpp
- ** Started Implementation: 2012/09/06
- ** Description:
- **
- ** implements the user for generic search
- **
- ** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
- ** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. 
- **(C) copyright by WOGRA technologies GmbH & Co. KG All rights reserved
- *****************************************************************************/
-
-// System and QT Includes
+﻿// System and QT Includes
 #include <QMenu>
 #include <QAction>
 #include <qtoolbar.h>
@@ -43,12 +30,6 @@
 #include "CwmsSearchWindow.h"
 
 
-/** +-=---------------------------------------------------------Do 6. Sep 19:01:24 2012-----------*
- * @method  CwmsSearchWindow::CwmsSearchWindow               // public                            *
- * @return                                                   //                                   *
- * @param   QWidget* p_pqwParent                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Do 6. Sep 19:01:24 2012-----------*/
 CwmsSearchWindow::CwmsSearchWindow(QWidget* p_pqwParent)
 : QWidget(p_pqwParent),
   m_pCdmQuery(nullptr),
@@ -60,34 +41,17 @@ CwmsSearchWindow::CwmsSearchWindow(QWidget* p_pqwParent)
    m_pqtvResult->setModel(&m_CdmModel);
 }
 
-/** +-=---------------------------------------------------------Do 6. Sep 19:01:51 2012-----------*
- * @method  CwmsSearchWindow::~CwmsSearchWindow              // public, virtual                   *
- * @return  void                                             //                                   *
- * @comment The Destructor of Class CwmsSearchWindow                                              *
- *----------------last changed: --------------------------------Do 6. Sep 19:01:51 2012-----------*/
 CwmsSearchWindow::~CwmsSearchWindow()
 {
    // change of ownership of m_pCdmQuery
    // m_pCdmQuery will be deleted by Model
 }
 
-/** +-=---------------------------------------------------------Fr 14. Sep 12:36:19 2012----------*
- * @method  CwmsSearchWindow::AddSearchMember                // public                            *
- * @return  void                                             //                                   *
- * @param   QString p_qstrSearchMember                       //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Fr 14. Sep 12:36:19 2012----------*/
 void CwmsSearchWindow::AddSearchMember(QString p_qstrSearchMember)
 {
    m_pCwmsSearchWidget->AddSearchMember(p_qstrSearchMember);
 }
 
-/** +-=---------------------------------------------------------Do 6. Sep 19:02:39 2012-----------*
- * @method  CwmsSearchWindow::FillDialog                     // public                            *
- * @return  void                                             //                                   *
- * @param   CdmObjectContainer* p_pContainer                  //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Do 6. Sep 19:02:39 2012-----------*/
 void CwmsSearchWindow::FillDialog(CdmObjectContainer* p_pContainer)
 {
    if (CHKPTR(p_pContainer))     
@@ -158,12 +122,6 @@ void CwmsSearchWindow::SetPrintVisibility(bool p_bVisible)
     }
 }
 
-
-/** +-=---------------------------------------------------------Do 6. Sep 19:08:06 2012-----------*
- * @method  CwmsSearchWindow::EditClickedSlot                // private, slots                    *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Do 6. Sep 19:08:06 2012-----------*/
 void CwmsSearchWindow::EditClickedSlot()
 {
    CdmObject* pCdmObject = m_CdmModel.GetObject(m_pqtvResult->currentIndex());
@@ -262,11 +220,6 @@ void CwmsSearchWindow::DeleteClickedSlot()
 
 }
 
-/** +-=---------------------------------------------------------Do 6. Sep 19:08:15 2012-----------*
- * @method  CwmsSearchWindow::SearchSlot                     // private, slots                    *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Do 6. Sep 19:08:15 2012-----------*/
 void CwmsSearchWindow::SearchSlot()
 {
     QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
@@ -279,6 +232,7 @@ void CwmsSearchWindow::SearchSlot()
    QTime qEnd = QTime::currentTime();
    m_pqleDuration->setText(QString::number(qStart.msecsTo(qEnd)) + " msecs");
    m_pqleResultCount->setText(QString::number(m_pCdmQuery->GetResultCount()) + " Objekte");
+   m_pqtvResult->setModel(&m_CdmModel);
    QApplication::restoreOverrideCursor();
 }
 
@@ -405,11 +359,6 @@ void CwmsSearchWindow::SaveAsCsvClickedSlot()
     CwmsQueryModelExportCsv::SaveModel(m_CdmModel);
 }
 
-/** +-=---------------------------------------------------------Di 18. Sep 10:51:39 2012----------*
- * @method  CwmsSearchWindow::PrintClickedSlot               // private, slots                    *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Di 18. Sep 10:51:39 2012----------*/
 void CwmsSearchWindow::PrintClickedSlot()
 {
    if (m_rpCdmPrintingTemplate)
@@ -422,12 +371,6 @@ void CwmsSearchWindow::PrintClickedSlot()
    }
 }
 
-/** +-=---------------------------------------------------------Di 18. Sep 10:54:19 2012----------*
- * @method  CwmsSearchWindow::Print                          // private                           *
- * @return  void                                             //                                   *
- * @param   CdmObject* p_pCdmObject                          //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Di 18. Sep 10:54:19 2012----------*/
 void CwmsSearchWindow::Print(CdmObject* p_pCdmObject)
 {
    CwmsPrintingTemplate cTemplate(p_pCdmObject);
@@ -446,11 +389,6 @@ void CwmsSearchWindow::Print(CdmObject* p_pCdmObject)
    }
 }
 
-/** +-=---------------------------------------------------------Di 18. Sep 10:54:13 2012----------*
- * @method  CwmsSearchWindow::Print                          // private                           *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Di 18. Sep 10:54:13 2012----------*/
 void CwmsSearchWindow::Print()
 {
    CwmsReportManager cReportManager;  
@@ -503,12 +441,6 @@ void CwmsSearchWindow::Print()
    }
 }
 
-
-/** +-=---------------------------------------------------------Do 7. Feb 09:46:42 2013-----------*
- * @method  CwmsSearchWindow::ImportClickedSlot              // private, slots                    *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Do 7. Feb 09:46:42 2013-----------*/
 void CwmsSearchWindow::ImportClickedSlot()
 {
 
@@ -567,12 +499,6 @@ void CwmsSearchWindow::ImportClickedSlot()
    }
 }
 
-
-/** +-=---------------------------------------------------------Do 7. Feb 09:46:37 2013-----------*
- * @method  CwmsSearchWindow::OpenImportConfigurator         // private                           *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Do 7. Feb 09:46:37 2013-----------*/
 void CwmsSearchWindow::OpenImportConfigurator()
 {
 
@@ -588,12 +514,6 @@ void CwmsSearchWindow::OpenImportConfigurator()
    }
 }
 
-
-/** +-=---------------------------------------------------------Do 7. Feb 09:46:31 2013-----------*
- * @method  CwmsSearchWindow::ExportClickedSlot              // private, slots                    *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Do 7. Feb 09:46:31 2013-----------*/
 void CwmsSearchWindow::ExportClickedSlot()
 {
    CwmsImExportManager cManager;
@@ -653,14 +573,8 @@ void CwmsSearchWindow::ExportClickedSlot()
    }
 }
 
-/** +-=---------------------------------------------------------Do 7. Feb 09:46:25 2013-----------*
- * @method  CwmsSearchWindow::OpenExportConfigurator         // private                           *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Do 7. Feb 09:46:25 2013-----------*/
 void CwmsSearchWindow::OpenExportConfigurator()
 {
-
    CwmsExportSettings cCwmsExportSettings;
    cCwmsExportSettings.SetContainerId(m_CdmModel.GetContainer()->GetId());
    cCwmsExportSettings.SetSchemeId(m_CdmModel.GetContainer()->GetSchemeId());
@@ -673,13 +587,6 @@ void CwmsSearchWindow::OpenExportConfigurator()
    delete pCwmsExportSettingsIf;
 }
 
-/** +-=---------------------------------------------------------Di 23. Jul 13:23:04 2013----------*
- * @method  CwmsSearchWindow::ConnectRuntime                 // private                           *
- * @return  void                                             //                                   *
- * @param   CwmsRuntime* p_pRuntime                          //                                   *
- * @param   CwmsApplicationModule p_cModule                  //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Di 23. Jul 13:23:04 2013----------*/
 void CwmsSearchWindow::ConnectRuntime(CwmsRuntime* p_pRuntime, CwmsApplicationModule p_cModule)
 {
    if (p_pRuntime)
@@ -741,12 +648,6 @@ void CwmsSearchWindow::ConnectRuntime(CwmsRuntime* p_pRuntime, CwmsApplicationMo
    }
 }
 
-/** +-=---------------------------------------------------------Di 18. Sep 10:39:40 2012----------*
- * @method  CwmsSearchWindow::SetModule                      // private                           *
- * @return  void                                             //                                   *
- * @param   CwmsApplicationModule p_cModule                  //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Di 18. Sep 10:39:40 2012----------*/
 void CwmsSearchWindow::SetModule(CwmsApplicationModule p_cModule)
 {
    if (p_cModule.IsValid())
@@ -797,17 +698,8 @@ void CwmsSearchWindow::SetModule(CwmsApplicationModule p_cModule)
    }
 }
 
-/** +-=---------------------------------------------------------Di 18. Sep 10:39:34 2012----------*
- * @method  CwmsSearchWindow::Initialize                     // public                            *
- * @return  void                                             //                                   *
- * @param   CwmsApplicationModule p_cModule                  //                                   *
- * @param   CwmsRuntime* p_pRuntime                          //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Di 18. Sep 10:39:34 2012----------*/
 void CwmsSearchWindow::Initialize(CwmsApplicationModule p_cModule, CwmsRuntime* p_pRuntime)
 {
-
    SetModule(p_cModule);
    ConnectRuntime(p_pRuntime, p_cModule);
-   
 }

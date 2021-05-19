@@ -1,14 +1,3 @@
-/******************************************************************************
- ** WOGRA Middleware Server GUI Tools Module
- **
- ** @Author Wolfgang GraÃŸhof
- **
- ** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
- ** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
- **(C) copyright by WOGRA technologies All rights reserved
- ******************************************************************************/
-
-
 // System and QT Includes
 #include <QPushButton>
 #include <QCursor>
@@ -219,7 +208,7 @@ void CwmsObjectListEditorWidgetIf::FillDialog()
 
     if (pModel != nullptr)
     {
-        if (pModel->columnCount() == 0)
+        if (!pModel->GetQuery()->HasResultElements())
         {
             pModel->AddAllMembers();
         }
@@ -972,27 +961,34 @@ void CwmsObjectListEditorWidgetIf::SetView(CwmsView p_cCwmsView)
         {
             auto pModel = dynamic_cast<CdmQueryModel*>(m_pModel);
 
-            if (pModel != nullptr && p_cCwmsView.IsWql())
+            if (pModel == nullptr)
+            {
+                DELPTR(m_pModel);
+                m_pModel = new CdmQueryModel();
+                pModel = dynamic_cast<CdmQueryModel*>(m_pModel);
+            }
+
+            if (pModel != nullptr)
             {
                 pModel->Execute(p_cCwmsView.GetViewCommand());
             }
-            else if (p_cCwmsView.IsModel())
-            {
-                m_pModel = p_cCwmsView.GetModel();
-                m_pCwmsObjectListListView->setModel(m_pModel);
-                HideCopyButton();
-                HideExportButton();
-                HideImportButton();
-                HideJournalButton();
-                HidePrintButton();
-                HideRefreshButton();
-                HideSearchButton();
-                m_pqpbNew->hide();
-                m_pqpbEdit->hide();
-                m_pqpbDelete->hide();
-            }
 
-            CwmsTreeWidgetHelper::ResizeColumnsToContent(m_pCwmsObjectListListView);
+            m_pCwmsObjectListListView->setModel(m_pModel);
+        }
+        else if (p_cCwmsView.IsModel())
+        {
+            m_pModel = p_cCwmsView.GetModel();
+            m_pCwmsObjectListListView->setModel(m_pModel);
+            HideCopyButton();
+            HideExportButton();
+            HideImportButton();
+            HideJournalButton();
+            HidePrintButton();
+            HideRefreshButton();
+            HideSearchButton();
+            m_pqpbNew->hide();
+            m_pqpbEdit->hide();
+            m_pqpbDelete->hide();
         }
 
         CwmsTreeWidgetHelper::ResizeColumnsToContent(m_pCwmsObjectListListView);

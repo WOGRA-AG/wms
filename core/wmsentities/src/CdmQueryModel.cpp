@@ -413,7 +413,7 @@ QVariant CdmQueryModel::headerData(int p_iSection, Qt::Orientation p_iOrientatio
                         }
                     }
 
-                    if (CHKPTR(pCdmClass))
+                    if (pCdmClass)
                     {
                         const CdmMember* pCdmMember = pCdmClass->FindMember(qstrKeyname);
 

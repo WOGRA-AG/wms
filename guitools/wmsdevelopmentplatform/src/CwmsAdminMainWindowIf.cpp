@@ -1299,7 +1299,6 @@ QList<QTreeWidgetItem*> CwmsAdminMainWindowIf::GetSelectedItems()
 CdmClass* CwmsAdminMainWindowIf::GetSelectedClass()
 {
    CdmClass* pCdmClass = nullptr;
-   CdmPackage* pPackage = nullptr;
    QTreeWidgetItem* pqlviItem = GetSelectedItem();
    QString qstrDbName = m_pqcbDatabases->currentText();
    CdmDataProvider* pCdmManager = CdmSessionManager::GetDataProvider();
