@@ -164,6 +164,7 @@ private:
     static void FillWorkflows(QTreeWidgetItem* p_pParent);
 public:
     static void FillLibraries(QTreeWidgetItem* p_pItem);
+    static void FilterTreeWidgetsUnderRootElement(QString p_qstrFilter, QTreeWidget *p_pTreeWidget);
 private:
     static void FillInteractiveComponents(QTreeWidgetItem *p_pItem);
 };

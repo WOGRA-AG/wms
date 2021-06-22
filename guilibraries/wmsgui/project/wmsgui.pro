@@ -3,7 +3,7 @@ TARGET = wmsgui
 
 !CONFIG(no_precompile_header):CONFIG += precompile_header
 
-QT += core sql network xml script widgets gui qml printsupport quick location positioning
+QT += core sql network xml script widgets gui qml printsupport quick location positioning charts
 
 win32{
    WMS_ARCH = mingw32

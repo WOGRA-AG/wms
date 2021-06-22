@@ -909,6 +909,18 @@ QVariant CdmQuery::GetResultAt(int p_iColumn, int p_iRow) const
     return qvResult;
 }
 
+QString CdmQuery::GetResultAsDisplayStringAt(int p_iColumn, int p_iRow) const
+{
+    QString qvResult;
+
+    if (CHKPTR(m_pRoot))
+    {
+        qvResult = GetDisplayString(GetKeynameAt(p_iColumn), m_pRoot->GetResult(p_iRow, p_iColumn));
+    }
+
+    return qvResult;
+}
+
 QVariant CdmQuery::GetResultAt(QString p_qstrKeyname, int p_iPos) const
 {
     QVariant qVariant(QVariant::Int);
@@ -1494,4 +1506,75 @@ void CdmQuery::IndexOutOfRangeError(int p_iPos, int p_iResultCount) const
     BODY_TRY
     ERR("Index out of range. Index: " + QString::number(p_iPos) + ", Range: " + QString::number(p_iResultCount))
     BODY_CATCH
+}
+
+QString CdmQuery::GetDisplayString(QString p_qstrMember, QVariant p_qvValue) const
+{
+    QString qstrRet;
+    const CdmMember* pCdmMember = FindMemberByKeyname(p_qstrMember);
+
+    if (pCdmMember)
+    {
+        qstrRet = pCdmMember->ConvertValueToDisplayString(p_qvValue);
+    }
+    else
+    {
+        qstrRet = p_qvValue.toString();
+    }
+
+    return qstrRet;
+}
+
+QVariant CdmQuery::GetColumnAlignment(QString p_qstrKeyname) const
+{
+    QVariant qVariant;
+    const CdmMember* pCdmMember = FindMemberByKeyname(p_qstrKeyname);
+
+    if (pCdmMember)
+    {
+        qVariant = pCdmMember->GetMemberAlignment();
+    }
+    else
+    {
+        qVariant = int(Qt::AlignLeft | Qt::AlignVCenter);
+    }
+
+    return qVariant;
+}
+
+QVariant CdmQuery::GetColumnTooltip(QString p_qstrKeyname) const
+{
+    QVariant qVariant;
+    const CdmMember* pCdmMember = FindMemberByKeyname(p_qstrKeyname);
+
+    if (pCdmMember)
+    {
+        qVariant = pCdmMember->GetComment();
+    }
+
+    return qVariant;
+}
+
+const CdmMember* CdmQuery::FindMemberByKeyname(QString p_qstrKeyname) const
+{
+    const CdmMember* pCdmMember = nullptr;
+
+    CdmObjectContainer* pContainer = GetContainer();
+    const CdmClass* pCdmClass = nullptr;
+
+    if (pContainer)
+    {
+        pCdmClass = pContainer->GetClass();
+    }
+    else
+    {
+        pCdmClass = GetClass();
+    }
+
+    if (CHKPTR(pCdmClass))
+    {
+        pCdmMember = pCdmClass->FindMember(p_qstrKeyname);
+    }
+
+    return pCdmMember;
 }

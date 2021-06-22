@@ -123,6 +123,8 @@ public:
     CdmObjectContainer* GetSelectedObjectList();
     CwmsScriptingEnvironment *GetScriptingEnvironment();
 
+    void RefreshClasses();
+    void CloseClassSubWindows();
 public slots:
     void EditSingleton();
     void SearchClickedSlot();

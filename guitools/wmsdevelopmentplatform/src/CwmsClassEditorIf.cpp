@@ -357,12 +357,6 @@ void CwmsClassEditorIf::FillBaseClasses()
     }
 }
 
-
-/** +-=---------------------------------------------------------Do 17. Mai 10:18:24 2007----------*
- * @method  CwmsClassEditorIf::FillMembers                   // private                           *
- * @return  void                                             //                                   *
- * @comment Fills the members to the listview                                                     *
- *----------------last changed: Wolfgang GraÃŸhof----------------Do 17. Mai 10:18:24 2007----------*/
 void CwmsClassEditorIf::FillMembers()
 {
     if (CHKPTR(m_rpCdmClass))
@@ -1055,13 +1049,9 @@ void CwmsClassEditorIf::DeleteValidationClickedSlot()
     }
 }
 
-/** +-=---------------------------------------------------------Do 23. Aug 13:51:49 2012----------*
- * @method  CwmsClassEditorIf::FillFunctions                 // private                           *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Do 23. Aug 13:51:49 2012----------*/
 void CwmsClassEditorIf::FillFunctions()
 {
+    m_pqtwMethods->clear();
    QMap<QString, CdmClassMethod*> qmMethods = m_rpCdmClass->GetMethods();
 
     QMap<QString, CdmClassMethod*>::iterator qmIt = qmMethods.begin();

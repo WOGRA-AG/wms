@@ -159,7 +159,7 @@ bool CwmsViewEditor::Validate()
            }
            else
            {
-               m_pqleState->setText(tr("Fehlerhaft"));
+               m_pqleState->setText(tr("Fehlerhaft - Funktion nicht gefunden"));
            }
        }
        else

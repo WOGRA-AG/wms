@@ -1,4 +1,9 @@
-
+#include <QtCharts/QChart>
+#include <QtCharts/QChartView>
+#include <QtCharts/QLineSeries>
+#include <QtCharts/QLineSeries>
+#include <QtCharts/QDateTimeAxis>
+#include <QtCharts/QValueAxis>
 #include "CdmMessageManager.h"
 #include "CdmLogging.h"
 
@@ -376,10 +381,27 @@ QStandardItemModel *CwmsScriptableModel::generateItemModel()
                 QMap<int,QVariant> qmDisplayTypeMap;
                 getDisplayTypeMap(iRowCounter,iColumnCounter, qmDisplayTypeMap);
                 QModelIndex qIndex = pModel->index(iRowCounter, iColumnCounter);
-                pModel->setItemData(qIndex, qmDisplayTypeMap);
+                bool bSuccess = pModel->setItemData(qIndex, qmDisplayTypeMap);
+
+                if (bSuccess)
+                {
+                    qmDisplayTypeMap = pModel->itemData(qIndex);
+                }
             }
         }
     }
 
     return pModel;
 }
+
+//QChart* CwmsScriptableModel::generateLineChart()
+//{
+//    QChart* chart = new QChart();
+//    chart->legend()->hide();
+//    //chart->addSeries(series); // todo
+//    chart->createDefaultAxes();
+//    chart->setTitle("Simple line chart example");
+
+//    return chart;
+//}
+

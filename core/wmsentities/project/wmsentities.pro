@@ -53,7 +53,7 @@ message("WMSENTITIES DESTDIR: "$$DESTDIR)
 #    QMAKE_CXXFLAGS += $$IGNORE_ERRORS
 #}
 
-QT += core network script widgets gui xml qml quick positioning location sql
+QT += core network script widgets gui xml qml quick positioning location sql charts
 DEFINES += BASETOOLS_EXPORTS WOGRA_DEBUG
 INCLUDEPATH += ./../../../thirdparty/QMessaging/src/qtopiamail/support \
                ./../../../thirdparty/QMessaging/src/messageserver \

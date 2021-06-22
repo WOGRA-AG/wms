@@ -174,6 +174,10 @@ public:
     QVariant GetResultsAsVariant() const;
     QVariant GetResultElementsAsVariant() const;
 
+    QString GetDisplayString(QString p_qstrMember, QVariant p_qvValue) const;
+    QString GetResultAsDisplayStringAt(int p_iColumn, int p_iRow) const;
+    QVariant GetColumnAlignment(QString p_qstrKeyname) const;
+    QVariant GetColumnTooltip(QString p_qstrKeyname) const;
 public slots:
     int Execute();
     void Clear();
@@ -218,6 +222,7 @@ private:
     void IndexOutOfRangeError(int p_iPos, int p_iResultCount) const;
     bool IsEnhancedQuery() const;
 
+    const CdmMember *FindMemberByKeyname(QString p_qstrKeyname) const;
 };
 
 #endif //

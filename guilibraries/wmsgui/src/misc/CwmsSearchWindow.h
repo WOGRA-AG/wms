@@ -57,6 +57,7 @@ public:
     void SetEditVisibility(bool p_bVisible);
     void SaveAsCsvClickedSlot();
 
+    QList<CdmObject *> GetSelectedObjects();
 public slots:
     void DeleteClickedSlot();
     void NewClickedSlot();

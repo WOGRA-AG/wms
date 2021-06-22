@@ -106,9 +106,6 @@ private slots:
     void ExecuteQuery();
 
 private:
-    QVariant GetColumnAlignment(QString p_qstrKeyname) const;
-    QVariant GetColumnTooltip(QString p_qstrKeyname) const;
-    const CdmMember* FindMemberByKeyname(QString p_qstrKeyname) const;
     QModelIndexList getSelection(QAbstractItemView* p_pqItemView, QModelIndex p_Index);
 
 

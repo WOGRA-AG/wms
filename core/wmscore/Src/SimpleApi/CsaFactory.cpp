@@ -363,7 +363,7 @@ CsaQuery* CsaFactory::createQuery(CdmQuery* p_pQuery)
    return pQuery;
 }
 
-CsaObject* CsaFactory::findObjectById(int pOlId, int pId)
+QObject* CsaFactory::findObjectById(int pOlId, int pId)
 {
    CsaObject* pObject = nullptr;
    QObject* pObjObjectContainer = getContainerManager()->findEmptyContainerById(pOlId);

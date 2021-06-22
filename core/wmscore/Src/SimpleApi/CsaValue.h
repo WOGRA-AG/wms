@@ -44,9 +44,10 @@ public:
     CsaValue(QObject* parent = NULL): CsaModelElement(NULL, parent){}
     CsaValue(CdmValue* p_pValue, QObject* parent = NULL);
     ~CsaValue();
-
+    CdmValue* getInternals();
     QVariant getDetailedVariant();
     QVariant getRoughVariant();
+
 public slots:
     virtual QObject* getMember();
     virtual QVariant getValue();
@@ -74,7 +75,6 @@ public slots:
     virtual QVariantList getListStrings();
     virtual QVariant getValueReference();
 
-    CdmValue* getInternals();
     bool removeListValue(QString p_qstrValue);
     bool addListValue(QString p_qstrValue);
     void setValueBool(bool p_bValue);

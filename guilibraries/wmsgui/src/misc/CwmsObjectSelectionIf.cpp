@@ -1,15 +1,4 @@
-﻿/******************************************************************************
- ** WOGRA Middleware Server GUI Tools Module
- **
- ** @Author Wolfgang Graßhof 
- **
- ** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
- ** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. 
- **(C) copyright by WOGRA technologies All rights reserved
- ******************************************************************************/
-
-
-// System and QT Includes
+﻿// System and QT Includes
 
 
 
@@ -25,45 +14,21 @@
 
 
 
-/** +-=---------------------------------------------------------So 23. Mai 10:55:30 2010----------*
- * @method  CwmsObjectSelectionIf::CwmsObjectSelectionIf     // private                           *
- * @return  void                                             //                                   *
- * @param   QWidget* parent = nullptr                           //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------So 23. Mai 10:55:30 2010----------*/
 CwmsObjectSelectionIf::CwmsObjectSelectionIf(QWidget* parent)
    : QDialog(parent)
 {
    setupUi(this);
 }
 
-/** +-=---------------------------------------------------------Mo 23. Jan 22:31:53 2006----------*
- * @method  CwmsObjectSelectionIf::~CwmsObjectSelectionIf    // public, virtual                   *
- * @return  void                                             //                                   *
- * @comment The Destructor of Class CwmsObjectSelectionIf                                         *
- *                                                                                                *
- *----------------last changed: Wolfgang Graßhof----------------Mo 23. Jan 22:31:53 2006----------*/
 CwmsObjectSelectionIf::~CwmsObjectSelectionIf(  )
 {
 }
 
-/** +-=---------------------------------------------------------Mi 3. Okt 11:28:42 2012-----------*
- * @method  CwmsObjectSelectionIf::SetProxy                  // public                            *
- * @return  void                                             //                                   *
- * @param   CdmEnhancedQueryProxy* p_pCwmsProxy              //                                   *
- * @comment This method sets the proxy for the dialog.                                            *
- *----------------last changed: --------------------------------Mi 3. Okt 11:28:42 2012-----------*/
 void CwmsObjectSelectionIf::SetProxy(CdmEnhancedQueryProxy* p_pCwmsProxy)
 {
    m_cModel.SetProxy(p_pCwmsProxy);
 }
 
-/** +-=---------------------------------------------------------Fr 21. Dez 11:30:40 2012----------*
- * @method  CwmsObjectSelectionIf::SetWql                    // public                            *
- * @return  void                                             //                                   *
- * @param   QString p_qstrWql                                //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Fr 21. Dez 11:30:40 2012----------*/
 bool CwmsObjectSelectionIf::SetWql(QString p_qstrWql)
 {
    m_cModel.Execute(p_qstrWql);
@@ -77,12 +42,6 @@ bool CwmsObjectSelectionIf::SetWql(QString p_qstrWql)
    return true;
 }
 
-/** +-=---------------------------------------------------------Mo 23. Jan 22:33:13 2006----------*
- * @method  CwmsObjectSelectionIf::SetObjectList             // public                            *
- * @return  void                                             //                                   *
- * @param   CdmObjectContainer* p_pContainer                  //                                   *
- * @comment                                                                                       *
- *----------------last changed: Wolfgang Graßhof----------------Mo 23. Jan 22:33:13 2006----------*/
 void CwmsObjectSelectionIf::SetObjectList(CdmObjectContainer* p_pContainer)
 {
    if(CHKPTR(p_pContainer))
@@ -197,21 +156,16 @@ CdmMember *CwmsObjectSelectionIf::getReferencedClassMemberForEvent(long lReferen
 }
 
 
-/** +-=---------------------------------------------------------Mo 23. Jan 22:32:28 2006----------*
- * @method  CwmsObjectSelectionIf::GetSelectedObject         // public                            *
- * @return  CdmObject*                                       //                                   *
- * @comment                                                                                       *
- *----------------last changed: Wolfgang Graßhof----------------Mo 23. Jan 22:32:28 2006----------*/
-CdmObject* CwmsObjectSelectionIf::GetSelectedObject(  )
+CdmObject* CwmsObjectSelectionIf::GetSelectedObject()
 {
    return m_cModel.GetObject(m_pqlvObjects);
 }
 
-/** +-=---------------------------------------------------------Fr 1. Jun 10:53:38 2012-----------*
- * @method  CwmsObjectSelectionIf::GetSelectedObjectId       // public                            *
- * @return  long                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Fr 1. Jun 10:53:38 2012-----------*/
+QList<CdmObject*> CwmsObjectSelectionIf::GetSelectedListOfObject()
+{
+   return m_cModel.GetObjects(m_pqlvObjects);
+}
+
 long CwmsObjectSelectionIf::GetSelectedObjectId()
 {
    long lRet = 0;
@@ -226,12 +180,6 @@ long CwmsObjectSelectionIf::GetSelectedObjectId()
    return lRet;
 }
 
-/** +-=---------------------------------------------------------Di 4. Sep 15:32:40 2012-----------*
- * @method  CwmsObjectSelectionIf::SetDisplayMember          // public                            *
- * @return  void                                             //                                   *
- * @param   QString p_qstrMember                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Di 4. Sep 15:32:40 2012-----------*/
 void CwmsObjectSelectionIf::SetDisplayMember(QString p_qstrMember)
 {
    if (!p_qstrMember.isEmpty())
@@ -241,13 +189,6 @@ void CwmsObjectSelectionIf::SetDisplayMember(QString p_qstrMember)
    }
 }
 
-/** +-=---------------------------------------------------------Fr 21. Dez 11:33:30 2012----------*
- * @method  CwmsObjectSelectionIf::GetObject                 // public, static                    *
- * @return  CdmObject*                                       //                                   *
- * @param   QString p_qstrWql                                //                                   *
- * @param   QWidget* p_pqwParent                             //                                   *
- * @comment the static implementation for returning an object.                                    *
- *----------------last changed: --------------------------------Fr 21. Dez 11:33:30 2012----------*/
 CdmObject* CwmsObjectSelectionIf::GetObject(QString p_qstrWql, QWidget* p_pqwParent)
 {
    CdmObject* pCdmObject = nullptr;
@@ -263,15 +204,38 @@ CdmObject* CwmsObjectSelectionIf::GetObject(QString p_qstrWql, QWidget* p_pqwPar
    return pCdmObject;
 }
 
-/** +-=---------------------------------------------------------Mi 3. Okt 11:34:31 2012-----------*
- * @method  CwmsObjectSelectionIf::GetObject                 // public, static                    *
- * @return  CdmObject*                                       //                                   *
- * @param   CdmObjectContainer* p_pContainer                  //                                   *
- * @param   CdmEnhancedQueryProxy* p_pCwmsProxy              //                                   *
- * @param   QWidget* p_pqwParent                             //                                   *
- * @param   QString p_qstrDisplayMember = ""                 //                                   *
- * @comment the static implementation for returning an object.                                    *
- *----------------last changed: --------------------------------Mi 3. Okt 11:34:31 2012-----------*/
+QList<CdmObject*> CwmsObjectSelectionIf::GetListofObjects(CdmObjectContainer* p_pContainer,
+                                                          CdmEnhancedQueryProxy* p_pCwmsProxy,
+                                                          QWidget* p_pqwParent,
+                                                          QString p_qstrDisplayMember)
+{
+    QList<CdmObject*> qlObjects;
+
+    if(CHKPTR(p_pContainer))
+    {
+       int iObjectsOnDb = p_pContainer->CountObjectsOnDb();
+       if (iObjectsOnDb < 100)
+       {
+           CwmsObjectSelectionIf* pCwmsSelection = new CwmsObjectSelectionIf(p_pqwParent);
+           pCwmsSelection->SetObjectList(p_pContainer);
+           pCwmsSelection->SetProxy(p_pCwmsProxy);
+           pCwmsSelection->SetDisplayMember(p_qstrDisplayMember);
+
+           if(pCwmsSelection->exec() == QDialog::Accepted)
+           {
+              qlObjects = pCwmsSelection->GetSelectedListOfObject();
+           }
+       }
+       else
+       {
+           qlObjects = CwmsSearchWindowDlg::FindObjects(p_pContainer, p_pqwParent);
+       }
+    }
+
+
+    return qlObjects;
+}
+
 CdmObject* CwmsObjectSelectionIf::GetObject(CdmObjectContainer* p_pContainer,
                                             CdmEnhancedQueryProxy* p_pCwmsProxy,
                                             QWidget* p_pqwParent,
@@ -303,14 +267,6 @@ CdmObject* CwmsObjectSelectionIf::GetObject(CdmObjectContainer* p_pContainer,
    return pCdmObject;
 }
 
-/** +-=---------------------------------------------------------Mi 3. Okt 11:34:49 2012-----------*
- * @method  CwmsObjectSelectionIf::GetObjectId               // public, static                    *
- * @return  long                                             //                                   *
- * @param   CdmObjectContainer* p_pContainer                  //                                   *
- * @param   CdmEnhancedQueryProxy* p_pCwmsProxy              //                                   *
- * @param   QWidget* p_pqwParent                             //                                   *
- * @comment the static implementation for returning an object.                                    *
- *----------------last changed: --------------------------------Mi 3. Okt 11:34:49 2012-----------*/
 long CwmsObjectSelectionIf::GetObjectId(CdmObjectContainer* p_pContainer,
                                         CdmEnhancedQueryProxy* p_pCwmsProxy,
                                         QWidget* p_pqwParent)

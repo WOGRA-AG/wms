@@ -3,6 +3,7 @@
 
 #include <QMap>
 #include <QStandardItemModel>
+#include <QtCharts/QChart>
 
 
 #include "basetools.h"
@@ -32,6 +33,7 @@ public:
     ~CwmsScriptableModel();
     void appendFromItemModel(QAbstractItemModel &p_rModel, int p_iDisplayType);
     void copyFromItemModel(QAbstractItemModel& p_rModel, int p_iDisplayType);
+    //QChart* generateLineChart();
 
 public slots:
     QVariant getValue(int p_iRow, int p_iColumn, int p_iDisplayType);
@@ -43,6 +45,7 @@ public slots:
     int rowCount();
     int columnCount();
     QStandardItemModel* generateItemModel();
+
     bool existRowHeader(int p_iPos);
     bool existColumnHeader(int p_iPos);
     void setRowCount(int p_iCount);

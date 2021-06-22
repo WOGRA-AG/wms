@@ -89,7 +89,7 @@ QWidget* CoedtwUserGroup::GetEditWidget(QWidget* p_pqwParent)
    m_qleGroup = new QLineEdit(pqWidget);
    m_qleGroup->setReadOnly(true);
    pqLayout->addWidget(m_qleGroup);
-   m_pqbButton = new QPushButton("Auswählen", pqWidget);
+   m_pqbButton = new QPushButton(QStringLiteral("Auswählen"), pqWidget);
    pqLayout->addWidget(m_pqbButton);
    connect(m_pqbButton, SIGNAL(clicked(bool)), this, SLOT(openNewWindow()));
    return pqWidget;

@@ -1,13 +1,3 @@
-/******************************************************************************
- ** WOGRA Middleware Tools WMS Enterprise Manager Module
- **
- ** @Author Wolfgang Graßhof 
- **
- ** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
- ** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. 
- **(C) copyright by WOGRA Solutions All rights reserved
- ******************************************************************************/
-
 // System and QT Includes
 #include <QCloseEvent>
 #include <QCompleter>
@@ -141,12 +131,6 @@
 #define WMS_DP "wms_dp"
 CwmsErrorIf* CwmsAdminMainWindowIf::m_pCwmsErrorIf = nullptr;
 
-/** +-=---------------------------------------------------------Mi 23. Nov 12:19:22 2011----------*
- * @method  CwmsAdminMainWindowIf::CwmsAdminMainWindowIf     // public                            *
- * @return                                                   //                                   *
- * @param   QWidget* parent = nullptr                           //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mi 23. Nov 12:19:22 2011----------*/
 CwmsAdminMainWindowIf::CwmsAdminMainWindowIf(QWidget* parent)
    : QMainWindow(parent),
    m_pqlviClasses(nullptr),
@@ -179,11 +163,6 @@ CwmsAdminMainWindowIf::CwmsAdminMainWindowIf(QWidget* parent)
    setEventStoreManager();
 }
 
-/** +-=---------------------------------------------------------Mi 16. Mai 16:16:14 2007----------*
- * @method  CwmsAdminMainWindowIf::~CwmsAdminMainWindowIf    // public, virtual                   *
- * @return  void                                             //                                   *
- * @comment The Destructor of Class CwmsAdminMainWindowIf                                         *
- *----------------last changed: Wolfgang GraÃŸhof----------------Mi 16. Mai 16:16:14 2007----------*/
 CwmsAdminMainWindowIf::~CwmsAdminMainWindowIf()
 {
    DELPTR(m_pCwmsUserManager)
@@ -191,11 +170,6 @@ CwmsAdminMainWindowIf::~CwmsAdminMainWindowIf()
    DELPTR(m_pScriptEnvironment)
 }
 
-/** +-=---------------------------------------------------------Mo 23. Sep 08:30:15 2013----------*
- * @method  CwmsAdminMainWindowIf::AddContextMenus           // private                           *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mo 23. Sep 08:30:15 2013----------*/
 void CwmsAdminMainWindowIf::AddContextMenus()
 {
    connect(m_pqlvModel, SIGNAL(customContextMenuRequested(const QPoint &)), 
@@ -245,11 +219,6 @@ void CwmsAdminMainWindowIf::ModelTreeWidgetExpandedSlot()
     CwmsTreeWidgetHelper::ResizeColumnsToContent(m_pqlvModel);
 }
 
-/** +-=---------------------------------------------------------So 8. Sep 10:25:26 2013-----------*
- * @method  CwmsAdminMainWindowIf::CreateErrorDlg            // protected                         *
- * @return  void                                             //                                   *
- * @comment Creates the error dlg for displaying error messages in Debug Mode.                    *
- *----------------last changed: --------------------------------So 8. Sep 10:25:26 2013-----------*/
 void CwmsAdminMainWindowIf::CreateErrorDlg()
 {
    if (!m_pCwmsErrorIf)
@@ -261,11 +230,6 @@ void CwmsAdminMainWindowIf::CreateErrorDlg()
    new CwmsMessenger(this, statusBar());
 }
 
-/** +-=---------------------------------------------------------Mi 16. Mai 16:16:43 2007----------*
- * @method  CwmsAdminMainWindowIf::FillDialog                // private                           *
- * @return  void                                             //                                   *
- * @comment This method fills the dialog after application start                                  *
- *----------------last changed: Wolfgang GraÃŸhof----------------Mi 16. Mai 16:16:43 2007----------*/
 void CwmsAdminMainWindowIf::FillDialog()
 {
    CdmDataProvider* pCdmManager = CdmSessionManager::GetDataProvider();
@@ -308,11 +272,6 @@ void CwmsAdminMainWindowIf::FillDialog()
    }
 }
 
-/** +-=---------------------------------------------------------Mi 12. Sep 09:53:48 2012----------*
- * @method  CwmsAdminMainWindowIf::UpdateActionState         // private                           *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mi 12. Sep 09:53:48 2012----------*/
 void CwmsAdminMainWindowIf::UpdateActionState()
 {
    QString qstrDbName = m_pqcbDatabases->currentText();
@@ -327,11 +286,6 @@ void CwmsAdminMainWindowIf::UpdateActionState()
    }
 }
 
-/** +-=---------------------------------------------------------Mi 12. Sep 10:03:46 2012----------*
- * @method  CwmsAdminMainWindowIf::EnableActionOnContext     // private                           *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mi 12. Sep 10:03:46 2012----------*/
 void CwmsAdminMainWindowIf::EnableActionOnContext()
 {
    DisableAllContentActions();
@@ -407,11 +361,6 @@ void CwmsAdminMainWindowIf::EnableActionOnContext()
    }
 }
 
-/** +-=---------------------------------------------------------Mi 12. Sep 09:54:36 2012----------*
- * @method  CwmsAdminMainWindowIf::DisableAllContentActions  // private                           *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mi 12. Sep 09:54:36 2012----------*/
 void CwmsAdminMainWindowIf::DisableAllContentActions()
 {
     if (!CwmsContext::GetContext()->IsTimedOut())
@@ -460,12 +409,6 @@ void CwmsAdminMainWindowIf::DisableAllContentActions()
     }
 }
 
-/** +-=---------------------------------------------------------Mi 16. Mai 16:49:11 2007----------*
- * @method  CwmsAdminMainWindowIf::DatabaseSelectedSlot      // private, slots                    *
- * @return  void                                             //                                   *
- * @comment This slot will be called if the user selected a new database. It fills the            *
- *          listview with the content of the database.                                            *
- *----------------last changed: Wolfgang GraÃŸhof----------------Mi 16. Mai 16:49:11 2007----------*/
 void CwmsAdminMainWindowIf::DatabaseSelectedSlot()
 {
    ClearEditor();
@@ -477,11 +420,6 @@ void CwmsAdminMainWindowIf::DatabaseSelectedSlot()
    }
 }
 
-/** +-=---------------------------------------------------------So 8. Sep 20:53:19 2013-----------*
- * @method  CwmsAdminMainWindowIf::ClearEditor               // private                           *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------So 8. Sep 20:53:19 2013-----------*/
 void CwmsAdminMainWindowIf::ClearEditor()
 {
    m_pqMdiArea->closeAllSubWindows();
@@ -500,22 +438,11 @@ void CwmsAdminMainWindowIf::ClearEditor()
    m_pqcbLanguage->clear();
 }
 
-/** +-=---------------------------------------------------------Di 14. Aug 14:21:08 2012----------*
- * @method  CwmsAdminMainWindowIf::RefreshClickedSlot        // private, slots                    *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Di 14. Aug 14:21:08 2012----------*/
 void CwmsAdminMainWindowIf::RefreshClickedSlot()
 {
    DatabaseSelectedSlot();
 }
 
-/** +-=---------------------------------------------------------Mi 16. Mai 16:51:36 2007----------*
- * @method  CwmsAdminMainWindowIf::FillSchemeContent             // private                           *
- * @return  void                                             //                                   *
- * @param   QString p_qstrDbName                             //                                   *
- * @comment This method loads the selected db and fills the conntent to the listview.             *
- *----------------last changed: Wolfgang Graßhof----------------Mi 16. Mai 16:51:36 2007----------*/
 void CwmsAdminMainWindowIf::FillSchemeContent(QString p_qstrDbName)
 {
    CdmMessageManager::StartAsyncMessageCollection();
@@ -628,43 +555,23 @@ void CwmsAdminMainWindowIf::SubscribeEventMethods(CdmClassManager *pCdmClassMana
     }
 }
 
-/** +-=---------------------------------------------------------Mi 5. Sep 13:33:50 2012-----------*
- * @method  CwmsAdminMainWindowIf::FillLanguages             // private                           *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mi 5. Sep 13:33:50 2012-----------*/
 void CwmsAdminMainWindowIf::FillLanguages()
 {
     CwmsMiscDataFiller::FillLanguages(m_pqcbLanguage);
 }
 
-/** +-=---------------------------------------------------------Do 30. Aug 14:42:31 2012----------*
- * @method  CwmsAdminMainWindowIf::FillApplications          // private                           *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Do 30. Aug 14:42:31 2012----------*/
 void CwmsAdminMainWindowIf::FillApplications()
 {
    CwmsMiscDataFiller::FillApplications(m_pqlvApplications);
    CwmsTreeWidgetHelper::ResizeColumnsToContent(m_pqlvApplications);
 }
 
-/** +-=---------------------------------------------------------Do 23. Aug 16:57:30 2012----------*
- * @method  CwmsAdminMainWindowIf::FillForms                 // private                           *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Do 23. Aug 16:57:30 2012----------*/
 void CwmsAdminMainWindowIf::FillForms()
 {
    CwmsMiscDataFiller::FillForms(m_pqlvUis);
    CwmsTreeWidgetHelper::ResizeColumnsToContent(m_pqlvUis);
 }
 
-/** +-=---------------------------------------------------------Do 23. Aug 16:55:48 2012----------*
- * @method  CwmsAdminMainWindowIf::FillReports               // private                           *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Do 23. Aug 16:55:48 2012----------*/
 void CwmsAdminMainWindowIf::FillReports()
 {
    CwmsReportManager cReportManager; //will be done for creating the datastructure
@@ -672,36 +579,58 @@ void CwmsAdminMainWindowIf::FillReports()
    CwmsTreeWidgetHelper::ResizeColumnsToContent(m_pqlvPrint);
 }
 
-/** +-=---------------------------------------------------------Di 14. Aug 14:00:16 2012----------*
- * @method  CwmsAdminMainWindowIf::FillViews                 // private                           *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Di 14. Aug 14:00:16 2012----------*/
 void CwmsAdminMainWindowIf::FillViews()
 {
    CwmsMiscDataFiller::FillViews(m_pqlvViews);
    CwmsTreeWidgetHelper::ResizeColumnsToContent(m_pqlvViews);
 }
 
-
-/** +-=---------------------------------------------------------Mi 24. Okt 15:29:28 2012----------*
- * @method  CwmsAdminMainWindowIf::FillWorkflows             // private                           *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mi 24. Okt 15:29:28 2012----------*/
 void CwmsAdminMainWindowIf::FillWorkflows()
 {
    CwmsMiscDataFiller::FillWorkflows(m_pqlvWorkflows);
    CwmsTreeWidgetHelper::ResizeColumnsToContent(m_pqlvWorkflows);
 }
 
+void CwmsAdminMainWindowIf::RefreshClasses()
+{
+    CdmDataProvider* pCdmManager = CdmSessionManager::GetDataProvider();
 
-/** +-=---------------------------------------------------------Di 14. Aug 13:56:09 2012----------*
- * @method  CwmsAdminMainWindowIf::FillClasses               // private                           *
- * @return  void                                             //                                   *
- * @param   CdmClassManager* p_pCdmClassManager              //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Di 14. Aug 13:56:09 2012----------*/
+    if (CHKPTR(pCdmManager))
+    {
+       CdmClassManager* pCdmClassManager = pCdmManager->GetClassManager();
+
+       if (CHKPTR(pCdmClassManager))
+       {
+           FillClasses(pCdmClassManager);
+       }
+    }
+}
+
+void CwmsAdminMainWindowIf::CloseClassSubWindows()
+{
+    QList<QMdiSubWindow*> qlSubWindows = m_pqMdiArea->subWindowList();
+
+    for (int iCounter = 0; iCounter < qlSubWindows.count(); ++iCounter)
+    {
+       QMdiSubWindow* pTempWindow = qlSubWindows[iCounter];
+       QString qstrUri = pTempWindow->objectName();
+       CdmLocatedElement* pElement = CdmSessionManager::GetDataProvider()->GetUriObject(qstrUri);
+
+       if (pElement && pElement->IsClass())
+       {
+           auto pClassEditor = dynamic_cast<CwmsClassEditorIf*> (pTempWindow->widget());
+
+           if (CHKPTR(pClassEditor))
+           {
+               pClassEditor->FillFunctions();
+               pClassEditor->FillMembers();
+           }
+
+           //DELPTR(pTempWindow)
+       }
+    }
+}
+
 void CwmsAdminMainWindowIf::FillClasses(CdmClassManager* p_pCdmClassManager)
 {
    if (CHKPTR(p_pCdmClassManager))
@@ -728,24 +657,11 @@ void CwmsAdminMainWindowIf::FillClasses(CdmClassManager* p_pCdmClassManager)
    }
 }
 
-/** +-=---------------------------------------------------------Di 14. Aug 13:51:16 2012----------*
- * @method  CwmsAdminMainWindowIf::FillObjectLists           // private                           *
- * @return  void                                             //                                   *
- * @param   CdmClass* p_pCdmClass                            //                                   *
- * @param   QTreeWidgetItem* p_pqtwClass                     //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Di 14. Aug 13:51:16 2012----------*/
 void CwmsAdminMainWindowIf::FillObjectLists(CdmClass* p_pCdmClass, QTreeWidgetItem* p_pqtwClass)
 {
    CwmsObjectContainerDataFiller::FillObjectContainersToClass(p_pCdmClass, p_pqtwClass);
 }
 
-/** +-=---------------------------------------------------------Fr 20. Sep 08:59:04 2013----------*
- * @method  CwmsAdminMainWindowIf::DbContentSelectedSlot     // private, slots                    *
- * @return  void                                             //                                   *
- * @comment This slot will be called if the user collected database content. it opens the         *
- *          selected item in the edit frame.                                                      *
- *----------------last changed: --------------------------------Fr 20. Sep 08:59:04 2013----------*/
 void CwmsAdminMainWindowIf::SchemeContentSelectedSlot()
 {
    BODY_TRY
@@ -782,11 +698,6 @@ void CwmsAdminMainWindowIf::SchemeContentSelectedSlot()
    BODY_CATCH
 }
 
-/** +-=---------------------------------------------------------Di 11. Sep 18:42:00 2012----------*
- * @method  CwmsAdminMainWindowIf::EditSlot                  // private, slots                    *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Di 11. Sep 18:42:00 2012----------*/
 void CwmsAdminMainWindowIf::EditSlot()
 {
    QObject* pObject = sender();
@@ -801,12 +712,6 @@ void CwmsAdminMainWindowIf::EditSlot()
    EditSlot(pItem);
 }
 
-/** +-=---------------------------------------------------------Fr 20. Sep 08:08:12 2013----------*
- * @method  CwmsAdminMainWindowIf::EditSlot                  // private, slots                    *
- * @return  void                                             //                                   *
- * @param   QTreeWidgetItem* p_pItem                         //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Fr 20. Sep 08:08:12 2013----------*/
 void CwmsAdminMainWindowIf::EditSlot(QTreeWidgetItem* p_pItem)
 {
    QString qstrDbName = m_pqcbDatabases->currentText();
@@ -902,11 +807,6 @@ void CwmsAdminMainWindowIf::EditSlot(QTreeWidgetItem* p_pItem)
    }
 }
 
-/** +-=---------------------------------------------------------Di 11. Sep 18:42:10 2012----------*
- * @method  CwmsAdminMainWindowIf::DeleteSlot                // private, slots                    *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Di 11. Sep 18:42:10 2012----------*/
 void CwmsAdminMainWindowIf::DeleteSlot()
 {
    QList<QTreeWidgetItem*> qlItems = GetSelectedItems();
@@ -1003,12 +903,6 @@ void CwmsAdminMainWindowIf::DeleteSlot()
    }
 }
 
-/** +-=---------------------------------------------------------Fr 31. Aug 09:58:50 2012----------*
- * @method  CwmsAdminMainWindowIf::OpenClassEditor           // private                           *
- * @return  void                                             //                                   *
- * @param   QTreeWidgetItem* p_pItem                         //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Fr 31. Aug 09:58:50 2012----------*/
 void CwmsAdminMainWindowIf::OpenClassEditor(QTreeWidgetItem* p_pItem)
 {
    CdmDataProvider* pCdmManager = CdmSessionManager::GetDataProvider();
@@ -1023,12 +917,6 @@ void CwmsAdminMainWindowIf::OpenClassEditor(QTreeWidgetItem* p_pItem)
    }
 }
 
-/** +-=---------------------------------------------------------Mo 23. Sep 19:56:07 2013----------*
- * @method  CwmsAdminMainWindowIf::OpenClassEditor           // private                           *
- * @return  void                                             //                                   *
- * @param   CdmClass* p_pClass                               //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mo 23. Sep 19:56:07 2013----------*/
 void CwmsAdminMainWindowIf::OpenClassEditor(CdmClass* p_pClass)
 {
   if (CHKPTR(p_pClass))
@@ -1050,12 +938,6 @@ void CwmsAdminMainWindowIf::OpenClassEditor(CdmClass* p_pClass)
   }
 }
 
-/** +-=---------------------------------------------------------Di 17. Sep 18:58:19 2013----------*
- * @method  CwmsAdminMainWindowIf::FindAndSetSubWindow       // private                           *
- * @return  bool                                             //                                   *
- * @param   QString p_qstrUri                                //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Di 17. Sep 18:58:19 2013----------*/
 bool CwmsAdminMainWindowIf::FindAndSetSubWindow(QString p_qstrUri)
 {
    bool bRet = false;
@@ -1070,12 +952,6 @@ bool CwmsAdminMainWindowIf::FindAndSetSubWindow(QString p_qstrUri)
    return bRet;
 }
 
-/** +-=---------------------------------------------------------Di 17. Sep 18:48:29 2013----------*
- * @method  CwmsAdminMainWindowIf::FindSubWindowByUri        // private                           *
- * @return  QMdiSubWindow*                                   //                                   *
- * @param   QString p_qstrUri                                //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Di 17. Sep 18:48:29 2013----------*/
 QMdiSubWindow* CwmsAdminMainWindowIf::FindSubWindowByUri(QString p_qstrUri)
 {
    QMdiSubWindow* pSubWindow = nullptr;
@@ -1100,12 +976,6 @@ QMdiSubWindow* CwmsAdminMainWindowIf::FindSubWindowByUri(QString p_qstrUri)
 }
 
 
-/** +-=---------------------------------------------------------Fr 13. Sep 15:19:15 2013----------*
- * @method  CwmsAdminMainWindowIf::AddMdiWindow              // private                           *
- * @return  QMdiSubWindow*                                   //                                   *
- * @param   QWidget* p_pWidget                               //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Fr 13. Sep 15:19:15 2013----------*/
 QMdiSubWindow* CwmsAdminMainWindowIf::AddMdiWindow(QWidget* p_pWidget)
 {
    QMdiSubWindow* pSubWindow = nullptr;
@@ -1123,12 +993,6 @@ QMdiSubWindow* CwmsAdminMainWindowIf::AddMdiWindow(QWidget* p_pWidget)
    return pSubWindow;
 }
 
-/** +-=---------------------------------------------------------Fr 31. Aug 09:57:00 2012----------*
- * @method  CwmsAdminMainWindowIf::OpenViewViewer            // private                           *
- * @return  void                                             //                                   *
- * @param   QTreeWidgetItem* p_pItem                         //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Fr 31. Aug 09:57:00 2012----------*/
 void CwmsAdminMainWindowIf::OpenViewViewer(QTreeWidgetItem* p_pItem)
 {
    if (p_pItem)
@@ -1164,12 +1028,6 @@ void CwmsAdminMainWindowIf::OpenViewViewer(QTreeWidgetItem* p_pItem)
    }
 }
 
-/** +-=---------------------------------------------------------Fr 31. Aug 09:52:38 2012----------*
- * @method  CwmsAdminMainWindowIf::OpenContainerEditor      // private                           *
- * @return  void                                             //                                   *
- * @param   QTreeWidgetItem* p_pItem                         //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Fr 31. Aug 09:52:38 2012----------*/
 void CwmsAdminMainWindowIf::OpenContainerEditor(QTreeWidgetItem* p_pItem)
 {
    if (CHKPTR(p_pItem))
@@ -1184,12 +1042,6 @@ void CwmsAdminMainWindowIf::OpenContainerEditor(QTreeWidgetItem* p_pItem)
    }
 }
 
-/** +-=---------------------------------------------------------Mo 23. Sep 19:57:59 2013----------*
- * @method  CwmsAdminMainWindowIf::OpenObjectContainerEditor // private                           *
- * @return  void                                             //                                   *
- * @param   CdmObjectContainer* p_pContainer                 //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mo 23. Sep 19:57:59 2013----------*/
 void CwmsAdminMainWindowIf::OpenObjectContainerEditor(CdmObjectContainer* p_pContainer)
 {
    if (CHKPTR(p_pContainer))
@@ -1207,12 +1059,6 @@ void CwmsAdminMainWindowIf::OpenObjectContainerEditor(CdmObjectContainer* p_pCon
    }
 }
 
-/** +-=---------------------------------------------------------Di 15. Jan 14:51:29 2013----------*
- * @method  CwmsAdminMainWindowIf::OpenObjectListSearch      // private                           *
- * @return  void                                             //                                   *
- * @param   CdmObjectContainer* p_pList                           //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Di 15. Jan 14:51:29 2013----------*/
 void CwmsAdminMainWindowIf::OpenObjectListSearch(CdmObjectContainer* p_pList)
 {
    if (CHKPTR(p_pList))
@@ -1235,12 +1081,6 @@ void CwmsAdminMainWindowIf::OpenObjectListSearch(CdmObjectContainer* p_pList)
    }
 }
 
-/** +-=---------------------------------------------------------Di 15. Jan 14:49:40 2013----------*
- * @method  CwmsAdminMainWindowIf::OpenContainerEditor      // private                           *
- * @return  void                                             //                                   *
- * @param   CdmObjectContainer* p_pList                           //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Di 15. Jan 14:49:40 2013----------*/
 void CwmsAdminMainWindowIf::OpenContainerEditor(CdmObjectContainer* p_pList)
 {
    if (CHKPTR(p_pList))
@@ -1262,11 +1102,6 @@ void CwmsAdminMainWindowIf::OpenContainerEditor(CdmObjectContainer* p_pList)
    }
 }
 
-/** +-=---------------------------------------------------------Di 14. Aug 11:30:27 2012----------*
- * @method  CwmsAdminMainWindowIf::GetSelectedItem           // private                           *
- * @return  QTreeWidgetItem*                                 //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Di 14. Aug 11:30:27 2012----------*/
 QTreeWidgetItem* CwmsAdminMainWindowIf::GetSelectedItem()
 {
    QTreeWidgetItem* pItem = nullptr;
@@ -1291,11 +1126,6 @@ QList<QTreeWidgetItem*> CwmsAdminMainWindowIf::GetSelectedItems()
    return qlItems;
 }
 
-/** +-=---------------------------------------------------------So 18. Mai 13:19:22 2008----------*
- * @method  CwmsAdminMainWindowIf::GetSelectedClass          // public                            *
- * @return  CdmClass*                                        //                                   *
- * @comment returns the selected class in listview. or nullptr of no class is selected.              *
- *----------------last changed: --------------------------------So 18. Mai 13:19:22 2008----------*/
 CdmClass* CwmsAdminMainWindowIf::GetSelectedClass()
 {
    CdmClass* pCdmClass = nullptr;
@@ -1329,11 +1159,6 @@ CdmClass* CwmsAdminMainWindowIf::GetSelectedClass()
    return pCdmClass;
 }
 
-/** +-=---------------------------------------------------------So 18. Mai 13:21:45 2008----------*
- * @method  CwmsAdminMainWindowIf::GetSelectedObjectList     // public                            *
- * @return  CdmObjectContainer*                                   //                                   *
- * @comment returns the selected Objectlist or nullptr if no one is selected.                        *
- *----------------last changed: --------------------------------So 18. Mai 13:21:45 2008----------*/
 CdmObjectContainer* CwmsAdminMainWindowIf::GetSelectedObjectList()
 {
    QTreeWidgetItem* pqlviItem = GetSelectedItem();
@@ -1365,12 +1190,6 @@ CdmObjectContainer* CwmsAdminMainWindowIf::GetContainerFromItem(QTreeWidgetItem*
    return pContainer;
 }
 
-/** +-=---------------------------------------------------------Do 17. Mai 00:17:31 2007----------*
- * @method  CwmsAdminMainWindowIf::closeEvent                // protected                         *
- * @return  void                                             //                                   *
- * @param   QCloseEvent* p_pqCloseEvent                      //                                   *
- * @comment                                                                                       *
- *----------------last changed: Wolfgang GraÃŸhof----------------Do 17. Mai 00:17:31 2007----------*/
 void CwmsAdminMainWindowIf::closeEvent(QCloseEvent* p_pqCloseEvent)
 {
     ClearEditor();
@@ -1406,11 +1225,6 @@ CdmClassManager* CwmsAdminMainWindowIf::GetCurrentClassManager()
     return pCdmClassManager;
 }
 
-/** +-=---------------------------------------------------------So 18. Mai 13:14:03 2008----------*
- * @method  CwmsAdminMainWindowIf::CreateClassSlot           // private, slots                    *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------So 18. Mai 13:14:03 2008----------*/
 void CwmsAdminMainWindowIf::CreateClassSlot()
 {
     CdmClassManager* pCdmClassManager = GetCurrentClassManager();
@@ -1446,11 +1260,6 @@ void CwmsAdminMainWindowIf::CreateClassSlot()
     }
 }
 
-/** +-=---------------------------------------------------------So 18. Mai 13:14:13 2008----------*
- * @method  CwmsAdminMainWindowIf::CreateDatabaseSlot        // private, slots                    *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------So 18. Mai 13:14:13 2008----------*/
 void CwmsAdminMainWindowIf::CreateDatabaseSlot()
 {
    QString qstrDbName = QInputDialog::getText(this, tr("Schema anlegen"), 
@@ -1485,11 +1294,6 @@ void CwmsAdminMainWindowIf::CreateDatabaseSlot()
 
 }
 
-/** +-=---------------------------------------------------------So 18. Mai 13:14:24 2008----------*
- * @method  CwmsAdminMainWindowIf::CreateObjectListSlot      // private, slots                    *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------So 18. Mai 13:14:24 2008----------*/
 void CwmsAdminMainWindowIf::CreateObjectListSlot()
 {
    CdmObjectContainer* pContainer = CwmsCreateObjectContainerDlg::CreateObjectContainer(this);
@@ -1501,11 +1305,6 @@ void CwmsAdminMainWindowIf::CreateObjectListSlot()
    }
 }
 
-/** +-=---------------------------------------------------------So 18. Mai 13:14:36 2008----------*
- * @method  CwmsAdminMainWindowIf::DeleteClassSlot           // private, slots                    *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------So 18. Mai 13:14:36 2008----------*/
 void CwmsAdminMainWindowIf::DeleteClassSlot()
 {
    CdmClass* pCdmClass = GetSelectedClass();
@@ -1593,11 +1392,6 @@ void CwmsAdminMainWindowIf::CloseClassRelatedContainerUis(CdmClass* p_pClass)
     CwmsObjectContainerDataFiller::FillAllObjectContainersToView(m_pqlvData, m_pqchbShowTechnicalItems->isChecked());
 }
 
-/** +-=---------------------------------------------------------So 18. Mai 13:14:48 2008----------*
- * @method  CwmsAdminMainWindowIf::DeleteDatabaseSlot        // private, slots                    *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------So 18. Mai 13:14:48 2008----------*/
 void CwmsAdminMainWindowIf::DeleteDatabaseSlot()
 {
     BODY_TRY
@@ -1628,11 +1422,6 @@ void CwmsAdminMainWindowIf::DeleteDatabaseSlot()
     BODY_CATCH
 }
 
-/** +-=---------------------------------------------------------So 18. Mai 13:15:44 2008----------*
- * @method  CwmsAdminMainWindowIf::DeleteObjectListSlot      // private, slots                    *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------So 18. Mai 13:15:44 2008----------*/
 void CwmsAdminMainWindowIf::DeleteObjectListSlot(QTreeWidgetItem* p_pItem)
 {
    CdmObjectContainer* pContainer = GetContainerFromItem(p_pItem);
@@ -1655,11 +1444,6 @@ void CwmsAdminMainWindowIf::DeleteObjectListSlot(QTreeWidgetItem* p_pItem)
    }
 }
 
-/** +-=---------------------------------------------------------So 18. Mai 13:16:11 2008----------*
- * @method  CwmsAdminMainWindowIf::ObjectListRightsSlot      // private, slots                    *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------So 18. Mai 13:16:11 2008----------*/
 void CwmsAdminMainWindowIf::ObjectListRightsSlot()
 {
    CdmObjectContainer* pContainer = GetSelectedObjectList();
@@ -1677,11 +1461,6 @@ void CwmsAdminMainWindowIf::ObjectListRightsSlot()
    }
 }
 
-/** +-=---------------------------------------------------------So 18. Mai 13:18:01 2008----------*
- * @method  CwmsAdminMainWindowIf::DeleteAllObjectsSlot      // private, slots                    *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------So 18. Mai 13:18:01 2008----------*/
 void CwmsAdminMainWindowIf::DeleteAllObjectsSlot()
 {
    CdmObjectContainer* pContainer = GetSelectedObjectList();
@@ -1739,11 +1518,6 @@ void CwmsAdminMainWindowIf::DeleteAllObjectsSlot()
    }
 }
 
-/** +-=---------------------------------------------------------Mo 19. Mai 19:20:12 2008----------*
- * @method  CwmsAdminMainWindowIf::DataExportSlot            // private, slots                    *
- * @return  void                                             //                                   *
- * @comment This starts the export dlg for the selected objectlist.                               *
- *----------------last changed: --------------------------------Mo 19. Mai 19:20:12 2008----------*/
 void CwmsAdminMainWindowIf::DataExportSlot()
 {
     CdmMessageManager::StartAsyncMessageCollection();
@@ -1770,11 +1544,6 @@ void CwmsAdminMainWindowIf::DataExportSlot()
 
 }
 
-/** +-=---------------------------------------------------------Mo 19. Mai 19:20:33 2008----------*
- * @method  CwmsAdminMainWindowIf::CreateDocumentationSlot   // private, slots                    *
- * @return  void                                             //                                   *
- * @comment This method creates the DB Documentation as html file.                                *
- *----------------last changed: --------------------------------Mo 19. Mai 19:20:33 2008----------*/
 void CwmsAdminMainWindowIf::CreateDocumentationSlot()
 {
   CdmMessageManager::StartAsyncMessageCollection();
@@ -1797,11 +1566,6 @@ void CwmsAdminMainWindowIf::CreateDocumentationSlot()
   CdmMessageManager::EndAndShowAsyncMessageCollection();
 }
 
-/** +-=---------------------------------------------------------Do 10. Nov 14:36:45 2011----------*
- * @method  CwmsAdminMainWindowIf::GenerateClassCodeSlot     // private, slots                    *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Do 10. Nov 14:36:45 2011----------*/
 void CwmsAdminMainWindowIf::GenerateClassCodeSlot()
 {
    CdmClass* pCdmClass = GetSelectedClass();
@@ -1817,11 +1581,6 @@ void CwmsAdminMainWindowIf::GenerateClassCodeSlot()
    }
 }
 
-/** +-=---------------------------------------------------------Fr 11. Nov 18:27:58 2011----------*
- * @method  CwmsAdminMainWindowIf::GenerateDbCodeSlot        // private, slots                    *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Fr 11. Nov 18:27:58 2011----------*/
 void CwmsAdminMainWindowIf::GenerateDbCodeSlot()
 {
   CdmClassManager* pCdmClassManager = GetCurrentClassManager();
@@ -1839,11 +1598,6 @@ void CwmsAdminMainWindowIf::GenerateDbCodeSlot()
   }
 }
 
-/** +-=---------------------------------------------------------Di 14. Aug 15:20:50 2012----------*
- * @method  CwmsAdminMainWindowIf::UserManagerSlot           // private, slots                    *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Di 14. Aug 15:20:50 2012----------*/
 void CwmsAdminMainWindowIf::UserManagerSlot()
 {
    if (!m_pCwmsUserManager)
@@ -1854,11 +1608,6 @@ void CwmsAdminMainWindowIf::UserManagerSlot()
    m_pCwmsUserManager->show();
 }
 
-/** +-=---------------------------------------------------------Di 14. Aug 15:45:30 2012----------*
- * @method  CwmsAdminMainWindowIf::OpenQueryEditorSlot       // private, slots                    *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Di 14. Aug 15:45:30 2012----------*/
 void CwmsAdminMainWindowIf::OpenQueryEditorSlot()
 {
    CdmDataProvider* pCdmManager = CdmSessionManager::GetDataProvider();
@@ -1895,11 +1644,6 @@ void CwmsAdminMainWindowIf::OpenQueryEditorSlot()
    }
 }
 
-/** +-=---------------------------------------------------------Do 16. Aug 16:17:41 2012----------*
- * @method  CwmsAdminMainWindowIf::DbRightsSlot              // private, slots                    *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Do 16. Aug 16:17:41 2012----------*/
 void CwmsAdminMainWindowIf::SchemeRightsSlot()
 {
    CdmDataProvider* pCdmManager = CdmSessionManager::GetDataProvider();
@@ -1923,11 +1667,6 @@ void CwmsAdminMainWindowIf::SchemeRightsSlot()
    }
 }
 
-/** +-=---------------------------------------------------------Fr 17. Aug 15:03:21 2012----------*
- * @method  CwmsAdminMainWindowIf::DbLanguagesSlot           // private, slots                    *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Fr 17. Aug 15:03:21 2012----------*/
 void CwmsAdminMainWindowIf::SchemeLanguagesSlot()
 {
    CwmsLanguagesEditorDlg* pCwmsDlg = new CwmsLanguagesEditorDlg(this);
@@ -1937,11 +1676,6 @@ void CwmsAdminMainWindowIf::SchemeLanguagesSlot()
    FillLanguages();
 }
 
-/** +-=---------------------------------------------------------Fr 24. Aug 15:46:36 2012----------*
- * @method  CwmsAdminMainWindowIf::NewViewSlot               // private, slots                    *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Fr 24. Aug 15:46:36 2012----------*/
 void CwmsAdminMainWindowIf::NewViewSlot()
 {
    CwmsView cView = CwmsView::Create();
@@ -1949,11 +1683,6 @@ void CwmsAdminMainWindowIf::NewViewSlot()
    FillViews();
 }
 
-/** +-=---------------------------------------------------------Fr 24. Aug 15:46:45 2012----------*
- * @method  CwmsAdminMainWindowIf::EditViewSlot              // private, slots                    *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Fr 24. Aug 15:46:45 2012----------*/
 void CwmsAdminMainWindowIf::EditViewSlot()
 {
    QTreeWidgetItem* pqItem = GetSelectedItem();
@@ -1973,11 +1702,6 @@ void CwmsAdminMainWindowIf::EditViewSlot()
    FillViews();
 }
 
-/** +-=---------------------------------------------------------Fr 24. Aug 15:46:54 2012----------*
- * @method  CwmsAdminMainWindowIf::DeleteViewSlot            // private, slots                    *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Fr 24. Aug 15:46:54 2012----------*/
 void CwmsAdminMainWindowIf::DeleteViewSlot()
 {
    QTreeWidgetItem* pqItem = GetSelectedItem();
@@ -2001,11 +1725,6 @@ void CwmsAdminMainWindowIf::RefreshViewsClickedSlot()
     FillViews();
 }
 
-/** +-=---------------------------------------------------------Mo 27. Aug 15:15:05 2012----------*
- * @method  CwmsAdminMainWindowIf::LanguageChangedSlot       // private, slots                    *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mo 27. Aug 15:15:05 2012----------*/
 void CwmsAdminMainWindowIf::LanguageChangedSlot()
 {
    CdmDataProvider* pCdmManager = CdmSessionManager::GetDataProvider();
@@ -2022,11 +1741,6 @@ void CwmsAdminMainWindowIf::LanguageChangedSlot()
    }
 }
 
-/** +-=---------------------------------------------------------Mo 27. Aug 15:15:26 2012----------*
- * @method  CwmsAdminMainWindowIf::NewReportSlot             // private, slots                    *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mo 27. Aug 15:15:26 2012----------*/
 void CwmsAdminMainWindowIf::NewReportSlot()
 {
     if (CwmsContext::GetContext()->GetPluginManager()->HasPrintingPlugin())
@@ -2053,11 +1767,6 @@ void CwmsAdminMainWindowIf::NewReportSlot()
     }
 }
 
-/** +-=---------------------------------------------------------Mo 27. Aug 15:15:35 2012----------*
- * @method  CwmsAdminMainWindowIf::EditReportSlot            // private, slots                    *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mo 27. Aug 15:15:35 2012----------*/
 void CwmsAdminMainWindowIf::EditReportSlot()
 {
     if (CwmsContext::GetContext()->GetPluginManager()->HasPrintingPlugin())
@@ -2082,11 +1791,6 @@ void CwmsAdminMainWindowIf::EditReportSlot()
     }
 }
 
-/** +-=---------------------------------------------------------Mo 27. Aug 15:15:45 2012----------*
- * @method  CwmsAdminMainWindowIf::ReportPropertiesSlot      // private, slots                    *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mo 27. Aug 15:15:45 2012----------*/
 void CwmsAdminMainWindowIf::ReportPropertiesSlot()
 {
     if (CwmsContext::GetContext()->GetPluginManager()->HasPrintingPlugin())
@@ -2112,11 +1816,6 @@ void CwmsAdminMainWindowIf::ReportPropertiesSlot()
     }
 }
 
-/** +-=---------------------------------------------------------Mo 27. Aug 15:16:03 2012----------*
- * @method  CwmsAdminMainWindowIf::DeleteReportSlot          // private, slots                    *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mo 27. Aug 15:16:03 2012----------*/
 void CwmsAdminMainWindowIf::DeleteReportSlot()
 {
     if (CwmsContext::GetContext()->GetPluginManager()->HasPrintingPlugin())
@@ -2143,21 +1842,11 @@ void CwmsAdminMainWindowIf::DeleteReportSlot()
     }
 }
 
-/** +-=---------------------------------------------------------Mo 27. Aug 15:16:10 2012----------*
- * @method  CwmsAdminMainWindowIf::NewFormSlot               // private, slots                    *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mo 27. Aug 15:16:10 2012----------*/
 void CwmsAdminMainWindowIf::NewFormSlot()
 {
    // TODO
 }
 
-/** +-=---------------------------------------------------------Mo 27. Aug 15:16:21 2012----------*
- * @method  CwmsAdminMainWindowIf::EditFormSlot              // private, slots                    *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mo 27. Aug 15:16:21 2012----------*/
 void CwmsAdminMainWindowIf::EditFormSlot()
 {
    QTreeWidgetItem* pqItem = GetSelectedItem();
@@ -2168,11 +1857,6 @@ void CwmsAdminMainWindowIf::EditFormSlot()
    }
 }
 
-/** +-=---------------------------------------------------------Mo 27. Aug 15:16:29 2012----------*
- * @method  CwmsAdminMainWindowIf::DeleteFormSlot            // private, slots                    *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mo 27. Aug 15:16:29 2012----------*/
 void CwmsAdminMainWindowIf::DeleteFormSlot()
 {
    QTreeWidgetItem* pqItem = GetSelectedItem();
@@ -2183,11 +1867,6 @@ void CwmsAdminMainWindowIf::DeleteFormSlot()
    }
 }
 
-/** +-=---------------------------------------------------------Mi 29. Aug 19:13:42 2012----------*
- * @method  CwmsAdminMainWindowIf::DatabaseJournalSlot       // private, slots                    *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mi 29. Aug 19:13:42 2012----------*/
 void CwmsAdminMainWindowIf::DatabaseJournalSlot()
 {
    CdmDataProvider* pCdmManager = CdmSessionManager::GetDataProvider();
@@ -2205,11 +1884,6 @@ void CwmsAdminMainWindowIf::DatabaseJournalSlot()
    }
 }
 
-/** +-=---------------------------------------------------------Mi 29. Aug 19:13:54 2012----------*
- * @method  CwmsAdminMainWindowIf::ObjectListJournalSlot     // private, slots                    *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mi 29. Aug 19:13:54 2012----------*/
 void CwmsAdminMainWindowIf::ObjectListJournalSlot()
 {
    CdmObjectContainer* pContainer = GetSelectedObjectList();
@@ -2223,11 +1897,6 @@ void CwmsAdminMainWindowIf::ObjectListJournalSlot()
    }
 }
 
-/** +-=---------------------------------------------------------Do 30. Aug 16:27:31 2012----------*
- * @method  CwmsAdminMainWindowIf::OpenApplicationEditor     // private                           *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Do 30. Aug 16:27:31 2012----------*/
 void CwmsAdminMainWindowIf::OpenApplicationEditor()
 {
    CwmsApplicationManager cAppManager;
@@ -2249,14 +1918,8 @@ void CwmsAdminMainWindowIf::OpenApplicationEditor()
    }
 }
 
-/** +-=---------------------------------------------------------Do 30. Aug 16:37:43 2012----------*
- * @method  CwmsAdminMainWindowIf::NewApplicationSlot        // private, slots                    *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Do 30. Aug 16:37:43 2012----------*/
 void CwmsAdminMainWindowIf::NewApplicationSlot()
 {
-    // ToDo ask for Applicationname
    QString qstrApplicationName = CdmMessageManager::AskForInputText(tr("Neu Applikation anlegen"),
                                                                     tr("Bitte geben Sie den Namen der Applikation ein."));
 
@@ -2270,12 +1933,6 @@ void CwmsAdminMainWindowIf::NewApplicationSlot()
    }
 }
 
-/** +-=---------------------------------------------------------Fr 13. Sep 14:47:11 2013----------*
- * @method  CwmsAdminMainWindowIf::OpenApplicationEditor     // private                           *
- * @return  void                                             //                                   *
- * @param   CwmsApplication& p_rApp                          //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Fr 13. Sep 14:47:11 2013----------*/
 void CwmsAdminMainWindowIf::OpenApplicationEditor(CwmsApplication& p_rApp)
 {
     if (p_rApp.IsValid())
@@ -2299,11 +1956,6 @@ void CwmsAdminMainWindowIf::OpenApplicationEditor(CwmsApplication& p_rApp)
     }
 }
 
-/** +-=---------------------------------------------------------Do 30. Aug 16:37:54 2012----------*
- * @method  CwmsAdminMainWindowIf::DeleteApplicationSlot     // private, slots                    *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Do 30. Aug 16:37:54 2012----------*/
 void CwmsAdminMainWindowIf::DeleteApplicationSlot()
 {
    CwmsApplicationManager cAppManager;
@@ -2325,11 +1977,6 @@ void CwmsAdminMainWindowIf::DeleteApplicationSlot()
    }
 }
 
-/** +-=---------------------------------------------------------Do 30. Aug 16:38:04 2012----------*
- * @method  CwmsAdminMainWindowIf::ExecuteApplicationSlot    // private, slots                    *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Do 30. Aug 16:38:04 2012----------*/
 void CwmsAdminMainWindowIf::ExecuteApplicationSlot()
 {
    QTreeWidgetItem* pItem = GetSelectedItem();
@@ -2379,11 +2026,6 @@ void CwmsAdminMainWindowIf::ExecuteApplicationSlot()
    }
 }
 
-/** +-=---------------------------------------------------------Do 6. Sep 15:48:17 2012-----------*
- * @method  CwmsAdminMainWindowIf::ExportJsonSlot            // private, slots                    *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Do 6. Sep 15:48:17 2012-----------*/
 void CwmsAdminMainWindowIf::ExportJsonSlot()
 {
    CdmDataProvider* pCdmManager = CdmSessionManager::GetDataProvider();
@@ -2428,11 +2070,6 @@ void CwmsAdminMainWindowIf::ExportJsonSlot()
    }
 }
 
-/** +-=---------------------------------------------------------Mo 10. Sep 16:37:03 2012----------*
- * @method  CwmsAdminMainWindowIf::NewGenericObjectFormSlot  // private, slots                    *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mo 10. Sep 16:37:03 2012----------*/
 void CwmsAdminMainWindowIf::NewGenericObjectFormSlot()
 {
    CwmsFormManager cManager;
@@ -2451,11 +2088,6 @@ void CwmsAdminMainWindowIf::NewGenericObjectFormSlot()
    }
 }
 
-/** +-=---------------------------------------------------------Di 11. Sep 18:55:37 2012----------*
- * @method  CwmsAdminMainWindowIf::EditGenericObjectFormSlot // private, slots                    *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Di 11. Sep 18:55:37 2012----------*/
 void CwmsAdminMainWindowIf::EditGenericObjectFormSlot()
 {
    CwmsFormManager cManager;
@@ -2475,11 +2107,6 @@ void CwmsAdminMainWindowIf::EditGenericObjectFormSlot()
    }
 }
 
-/** +-=---------------------------------------------------------Di 11. Sep 19:01:02 2012----------*
- * @method  CwmsAdminMainWindowIf::DeleteGenericObjectFormSlot // private, slots                  *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Di 11. Sep 19:01:02 2012----------*/
 void CwmsAdminMainWindowIf::DeleteGenericObjectFormSlot()
 {
    CwmsFormManager cManager;
@@ -2499,11 +2126,6 @@ void CwmsAdminMainWindowIf::DeleteGenericObjectFormSlot()
    }
 }
 
-/** +-=---------------------------------------------------------Mo 10. Sep 16:37:27 2012----------*
- * @method  CwmsAdminMainWindowIf::NewObjectObjectListFormSlot // private, slots                  *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mo 10. Sep 16:37:27 2012----------*/
 void CwmsAdminMainWindowIf::NewObjectObjectListFormSlot()
 {
    CwmsFormManager cManager;
@@ -2522,11 +2144,6 @@ void CwmsAdminMainWindowIf::NewObjectObjectListFormSlot()
    }
 }
 
-/** +-=---------------------------------------------------------Di 11. Sep 18:52:16 2012----------*
- * @method  CwmsAdminMainWindowIf::EditObjectObjectListFormSlot // private, slots                 *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Di 11. Sep 18:52:16 2012----------*/
 void CwmsAdminMainWindowIf::EditObjectObjectListFormSlot()
 {
    CwmsFormManager cManager;
@@ -2546,11 +2163,6 @@ void CwmsAdminMainWindowIf::EditObjectObjectListFormSlot()
    }
 }
 
-/** +-=---------------------------------------------------------Di 11. Sep 19:00:30 2012----------*
- * @method  CwmsAdminMainWindowIf::DeleteObjectObjectListFormSlot // private, slots               *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Di 11. Sep 19:00:30 2012----------*/
 void CwmsAdminMainWindowIf::DeleteObjectObjectListFormSlot()
 {
    CwmsFormManager cManager;
@@ -2570,11 +2182,6 @@ void CwmsAdminMainWindowIf::DeleteObjectObjectListFormSlot()
    }
 }
 
-/** +-=---------------------------------------------------------Mo 10. Sep 16:38:00 2012----------*
- * @method  CwmsAdminMainWindowIf::NewStandardObjectListFormSlot // private, slots                *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mo 10. Sep 16:38:00 2012----------*/
 void CwmsAdminMainWindowIf::NewStandardObjectListFormSlot()
 {
    CwmsFormManager cManager;
@@ -2593,11 +2200,6 @@ void CwmsAdminMainWindowIf::NewStandardObjectListFormSlot()
    }
 }
 
-/** +-=---------------------------------------------------------Di 11. Sep 18:51:21 2012----------*
- * @method  CwmsAdminMainWindowIf::EditStandardObjectListFormSlot // private, slots               *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Di 11. Sep 18:51:21 2012----------*/
 void CwmsAdminMainWindowIf::EditStandardObjectListFormSlot()
 {
    CwmsFormManager cManager;
@@ -2617,11 +2219,6 @@ void CwmsAdminMainWindowIf::EditStandardObjectListFormSlot()
    }
 }
 
-/** +-=---------------------------------------------------------Di 11. Sep 19:00:01 2012----------*
- * @method  CwmsAdminMainWindowIf::DeleteStandardObjectListFormSlot // private, slots             *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Di 11. Sep 19:00:01 2012----------*/
 void CwmsAdminMainWindowIf::DeleteStandardObjectListFormSlot()
 {
    CwmsFormManager cManager;
@@ -2641,11 +2238,6 @@ void CwmsAdminMainWindowIf::DeleteStandardObjectListFormSlot()
    }
 }
 
-/** +-=---------------------------------------------------------Mo 10. Sep 16:38:20 2012----------*
- * @method  CwmsAdminMainWindowIf::NewUserDefinedFormSlot    // private, slots                    *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mo 10. Sep 16:38:20 2012----------*/
 void CwmsAdminMainWindowIf::NewUserDefinedFormSlot()
 {
    CwmsFormManager cManager;
@@ -2669,11 +2261,6 @@ void CwmsAdminMainWindowIf::NewUserDefinedFormSlot()
    }
 }
 
-/** +-=---------------------------------------------------------Di 11. Sep 18:49:47 2012----------*
- * @method  CwmsAdminMainWindowIf::EditUserDefinedFormSlot   // private, slots                    *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Di 11. Sep 18:49:47 2012----------*/
 void CwmsAdminMainWindowIf::EditUserDefinedFormSlot()
 {
    CwmsFormManager cManager;
@@ -2696,11 +2283,6 @@ void CwmsAdminMainWindowIf::EditUserDefinedFormSlot()
    }
 }
 
-/** +-=---------------------------------------------------------Di 11. Sep 18:59:31 2012----------*
- * @method  CwmsAdminMainWindowIf::DeleteUserDefinedFormSlot // private, slots                    *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Di 11. Sep 18:59:31 2012----------*/
 void CwmsAdminMainWindowIf::DeleteUserDefinedFormSlot()
 {
    CwmsFormManager cManager;
@@ -2720,11 +2302,6 @@ void CwmsAdminMainWindowIf::DeleteUserDefinedFormSlot()
    }
 }
 
-/** +-=---------------------------------------------------------Di 11. Sep 14:24:59 2012----------*
- * @method  CwmsAdminMainWindowIf::NewViewObjectListFormSlot // private, slots                    *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Di 11. Sep 14:24:59 2012----------*/
 void CwmsAdminMainWindowIf::NewViewObjectListFormSlot()
 {
    CwmsFormManager cManager;
@@ -2743,11 +2320,6 @@ void CwmsAdminMainWindowIf::NewViewObjectListFormSlot()
    }
 }
 
-/** +-=---------------------------------------------------------Di 11. Sep 18:47:17 2012----------*
- * @method  CwmsAdminMainWindowIf::EditViewObjectListFormSlot // private, slots                   *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Di 11. Sep 18:47:17 2012----------*/
 void CwmsAdminMainWindowIf::EditViewObjectListFormSlot()
 {
    CwmsFormManager cManager;
@@ -2767,11 +2339,6 @@ void CwmsAdminMainWindowIf::EditViewObjectListFormSlot()
    }
 }
 
-/** +-=---------------------------------------------------------Di 11. Sep 18:58:44 2012----------*
- * @method  CwmsAdminMainWindowIf::DeleteViewObjectListFormSlot // private, slots                 *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Di 11. Sep 18:58:44 2012----------*/
 void CwmsAdminMainWindowIf::DeleteViewObjectListFormSlot()
 {
    CwmsFormManager cManager;
@@ -2791,11 +2358,6 @@ void CwmsAdminMainWindowIf::DeleteViewObjectListFormSlot()
    }
 }
 
-/** +-=---------------------------------------------------------Di 18. Sep 09:21:50 2012----------*
- * @method  CwmsAdminMainWindowIf::NewSearchFormSlot         // private, slots                    *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Di 18. Sep 09:21:50 2012----------*/
 void CwmsAdminMainWindowIf::NewSearchFormSlot()
 {
    CwmsFormManager cManager;
@@ -2814,11 +2376,6 @@ void CwmsAdminMainWindowIf::NewSearchFormSlot()
    }
 }
 
-/** +-=---------------------------------------------------------Di 18. Sep 09:27:30 2012----------*
- * @method  CwmsAdminMainWindowIf::EditSearchFormSlot        // private, slots                    *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Di 18. Sep 09:27:30 2012----------*/
 void CwmsAdminMainWindowIf::EditSearchFormSlot()
 {
    CwmsFormManager cManager;
@@ -2838,11 +2395,6 @@ void CwmsAdminMainWindowIf::EditSearchFormSlot()
    }
 }
 
-/** +-=---------------------------------------------------------Di 18. Sep 09:27:21 2012----------*
- * @method  CwmsAdminMainWindowIf::DeleteSearchFormSlot      // private, slots                    *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Di 18. Sep 09:27:21 2012----------*/
 void CwmsAdminMainWindowIf::DeleteSearchFormSlot()
 {
    CwmsFormManager cManager;
@@ -2862,11 +2414,6 @@ void CwmsAdminMainWindowIf::DeleteSearchFormSlot()
    }
 }
 
-/** +-=---------------------------------------------------------Mi 24. Okt 17:44:04 2012----------*
- * @method  CwmsAdminMainWindowIf::NewWorkflowSlot           // private, slots                    *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mi 24. Okt 17:44:04 2012----------*/
 void CwmsAdminMainWindowIf::NewWorkflowSlot()
 {
    CwmsWorkflowManager cManager;
@@ -2884,11 +2431,6 @@ void CwmsAdminMainWindowIf::NewWorkflowSlot()
    }
 }
 
-/** +-=---------------------------------------------------------Mi 24. Okt 17:44:13 2012----------*
- * @method  CwmsAdminMainWindowIf::EditWorkflowSlot          // private, slots                    *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mi 24. Okt 17:44:13 2012----------*/
 void CwmsAdminMainWindowIf::EditWorkflowSlot()
 {
    CwmsWorkflowManager cManager;
@@ -2906,11 +2448,6 @@ void CwmsAdminMainWindowIf::EditWorkflowSlot()
    }
 }
 
-/** +-=---------------------------------------------------------Mi 24. Okt 17:44:22 2012----------*
- * @method  CwmsAdminMainWindowIf::DeleteWorkflowSlot        // private, slots                    *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mi 24. Okt 17:44:22 2012----------*/
 void CwmsAdminMainWindowIf::DeleteWorkflowSlot()
 {
    CwmsWorkflowManager cManager;
@@ -2929,11 +2466,7 @@ void CwmsAdminMainWindowIf::DeleteWorkflowSlot()
       }
    }
 }
-/** +-=---------------------------------------------------------Di 11. Sep 18:46:36 2012----------*
- * @method  CwmsAdminMainWindowIf::EditFunctionSlot          // private, slots                    *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Di 11. Sep 18:46:36 2012----------*/
+
 void CwmsAdminMainWindowIf::EditFunctionSlot()
 {
 	CdmClassMethod* pMethod = nullptr;
@@ -2960,11 +2493,6 @@ void CwmsAdminMainWindowIf::EditFunctionSlot()
 	}
 }
 
-/** +-=---------------------------------------------------------Di 11. Sep 18:58:25 2012----------*
- * @method  CwmsAdminMainWindowIf::DeleteFunctionSlot        // private, slots                    *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Di 11. Sep 18:58:25 2012----------*/
 void CwmsAdminMainWindowIf::DeleteFunctionSlot()
 {
     BODY_TRY
@@ -2996,11 +2524,6 @@ void CwmsAdminMainWindowIf::DeleteFunctionSlot()
     BODY_CATCH
 }
 
-/** +-=---------------------------------------------------------Di 11. Sep 18:46:46 2012----------*
- * @method  CwmsAdminMainWindowIf::EditMemberSlot            // private, slots                    *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Di 11. Sep 18:46:46 2012----------*/
 void CwmsAdminMainWindowIf::EditMemberSlot()
 {
 	CdmMember* pMember = nullptr;
@@ -3025,16 +2548,8 @@ void CwmsAdminMainWindowIf::EditMemberSlot()
 
 		delete pCwmsAddMemberIf;
 	}
-
-	
-	
 }
 
-/** +-=---------------------------------------------------------Di 11. Sep 18:58:13 2012----------*
- * @method  CwmsAdminMainWindowIf::DeleteMemberSlot          // private, slots                    *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Di 11. Sep 18:58:13 2012----------*/
 void CwmsAdminMainWindowIf::DeleteMemberSlot()
 {
     BODY_TRY
@@ -3066,20 +2581,10 @@ void CwmsAdminMainWindowIf::DeleteMemberSlot()
     BODY_CATCH
 }
 
-/** +-=---------------------------------------------------------Di 11. Sep 18:46:59 2012----------*
- * @method  CwmsAdminMainWindowIf::EditObjectListSlot        // private, slots                    *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Di 11. Sep 18:46:59 2012----------*/
 void CwmsAdminMainWindowIf::EditObjectListSlot()
 {
 }
 
-/** +-=---------------------------------------------------------Do 25. Okt 14:51:32 2012----------*
- * @method  CwmsAdminMainWindowIf::WorkflowTeamsSlot         // private, slots                    *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Do 25. Okt 14:51:32 2012----------*/
 void CwmsAdminMainWindowIf::WorkflowTeamsSlot()
 {
    CdmDataProvider* pCdmManager = CdmSessionManager::GetDataProvider();
@@ -3102,12 +2607,6 @@ void CwmsAdminMainWindowIf::WorkflowTeamsSlot()
    }
 }
 
-/** +-=---------------------------------------------------------Mi 12. Sep 09:52:01 2012----------*
- * @method  CwmsAdminMainWindowIf::CustomContextMenuSlot     // private, slots                    *
- * @return  void                                             //                                   *
- * @param   const QPoint & p_Pos                             //                                   *
- * @comment CustomContextMenuSlot(const QPoint &))                                                *
- *----------------last changed: --------------------------------Mi 12. Sep 09:52:01 2012----------*/
 void CwmsAdminMainWindowIf::CustomContextMenuSlot(const QPoint & p_Pos)
 {
    QObject* pObject = sender();
@@ -3169,11 +2668,6 @@ void CwmsAdminMainWindowIf::CustomContextMenuSlot(const QPoint & p_Pos)
    }
 }
 
-/** +-=---------------------------------------------------------Mi 21. Nov 16:26:32 2012----------*
- * @method  CwmsAdminMainWindowIf::SmtpSlot                  // private, slots                    *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mi 21. Nov 16:26:32 2012----------*/
 void CwmsAdminMainWindowIf::SmtpSlot()
 {
    CwmsSmtpManager cManager;
@@ -3186,22 +2680,12 @@ void CwmsAdminMainWindowIf::SmtpSlot()
    }
 }
 
-/** +-=---------------------------------------------------------Di 13. Nov 13:24:30 2012----------*
- * @method  CwmsAdminMainWindowIf::InstallBaseFunctionsToExecutor // protected, virtual           *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Di 13. Nov 13:24:30 2012----------*/
 void CwmsAdminMainWindowIf::InstallBaseFunctionsToExecutor()
 {
     CwmsApplicationServices::InstallFunctionsAndPlugins();
     CwmsguiApplicationServices::InstallUiEditors();
 }
 
-/** +-=---------------------------------------------------------Mo 3. Dez 10:37:19 2012-----------*
- * @method  CwmsAdminMainWindowIf::ExportDeploymentFileSlot  // private, slots                    *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mo 3. Dez 10:37:19 2012-----------*/
 void CwmsAdminMainWindowIf::ExportDeploymentFileSlot()
 {
    CdmDataProvider* pManager = CdmSessionManager::GetDataProvider();
@@ -3237,11 +2721,6 @@ void CwmsAdminMainWindowIf::ExportDeploymentFileSlot()
    }
 }
 
-/** +-=---------------------------------------------------------Mo 3. Dez 10:37:32 2012-----------*
- * @method  CwmsAdminMainWindowIf::ImportDeploymentFileSlot  // private, slots                    *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mo 3. Dez 10:37:32 2012-----------*/
 void CwmsAdminMainWindowIf::ImportDeploymentFileSlot()
 {
    CdmDataProvider* pManager = CdmSessionManager::GetDataProvider();
@@ -3272,11 +2751,6 @@ void CwmsAdminMainWindowIf::ImportDeploymentFileSlot()
    }
 }
 
-/** +-=---------------------------------------------------------Do 13. Dez 15:26:51 2012----------*
- * @method  CwmsAdminMainWindowIf::ObjectListPropertiesSlot  // private, slots                    *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Do 13. Dez 15:26:51 2012----------*/
 void CwmsAdminMainWindowIf::ObjectListPropertiesSlot()
 {
    CdmObjectContainer* pContainer = GetSelectedObjectList();
@@ -3289,12 +2763,6 @@ void CwmsAdminMainWindowIf::ObjectListPropertiesSlot()
    }
 }
 
-
-/** +-=---------------------------------------------------------Mi 4. Sep 19:58:50 2013-----------*
- * @method  CwmsAdminMainWindowIf::ClientSettingsSlot        // private, slots                    *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mi 4. Sep 19:58:50 2013-----------*/
 void CwmsAdminMainWindowIf::ClientSettingsSlot()
 {
     CdmDataProvider* pManager = CdmSessionManager::GetDataProvider();
@@ -3319,11 +2787,6 @@ void CwmsAdminMainWindowIf::ClientSettingsSlot()
     }
 }
 
-/** +-=---------------------------------------------------------So 8. Sep 10:33:22 2013-----------*
- * @method  CwmsAdminMainWindowIf::LoggerClickedSlot         // private, slots                    *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------So 8. Sep 10:33:22 2013-----------*/
 void CwmsAdminMainWindowIf::LoggerClickedSlot()
 {
    if (CHKPTR(m_pCwmsErrorIf)) 
@@ -3332,11 +2795,6 @@ void CwmsAdminMainWindowIf::LoggerClickedSlot()
    }
 }
 
-/** +-=---------------------------------------------------------So 8. Sep 11:45:17 2013-----------*
- * @method  CwmsAdminMainWindowIf::RestoreWindowsSlot        // private, slots                    *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------So 8. Sep 11:45:17 2013-----------*/
 void CwmsAdminMainWindowIf::RestoreWindowsSlot()
 {
    m_pqdwApplications->show();
@@ -3367,11 +2825,6 @@ void CwmsAdminMainWindowIf::RestoreWindowsSlot()
    tabifyDockWidget(m_pqdwData, m_pqdwModel);
 }
 
-/** +-=---------------------------------------------------------Sa 14. Sep 12:51:10 2013----------*
- * @method  CwmsAdminMainWindowIf::UpdateDockWidgetVisibility // private                          *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Sa 14. Sep 12:51:10 2013----------*/
 void CwmsAdminMainWindowIf::UpdateDockWidgetVisibility()
 {
    m_pqmViews->addAction(m_pqdwDatabase->toggleViewAction());
@@ -3386,11 +2839,6 @@ void CwmsAdminMainWindowIf::UpdateDockWidgetVisibility()
    m_pqmViews->addAction(m_pqdwViews->toggleViewAction());
 }
 
-/** +-=---------------------------------------------------------Mi 18. Sep 11:48:48 2013----------*
- * @method  CwmsAdminMainWindowIf::ClassFilterChangedSlot    // private, slots                    *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mi 18. Sep 11:48:48 2013----------*/
 void CwmsAdminMainWindowIf::ClassFilterChangedSlot()
 {
     BODY_TRY
@@ -3440,11 +2888,6 @@ void CwmsAdminMainWindowIf::ClassFilterChangedSlot()
    BODY_CATCH
 }
 
-/** +-=---------------------------------------------------------Fr 20. Sep 08:57:46 2013----------*
- * @method  CwmsAdminMainWindowIf::CurrentTreeWidgetChangedSlot // private, slots                 *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Fr 20. Sep 08:57:46 2013----------*/
 void CwmsAdminMainWindowIf::CurrentTreeWidgetChangedSlot()
 {
    m_rpqCurrentWidget = static_cast<QTreeWidget*> (sender());
@@ -4113,11 +3556,11 @@ void CwmsAdminMainWindowIf::LogoutAndExitSlot()
 
 void CwmsAdminMainWindowIf::ClassFilterEnterPressedSlot()
 {
-    // todo
+    CwmsMiscDataFiller::FilterTreeWidgetsUnderRootElement(m_pqleClassFilter->text(), m_pqlvModel);
 }
 
 
 void CwmsAdminMainWindowIf::ViewFilterEnterPressedSlot()
 {
-    // todo
+    CwmsMiscDataFiller::FilterTreeWidgetsUnderRootElement(m_pqleViewFilter->text(), m_pqlvViews);
 }

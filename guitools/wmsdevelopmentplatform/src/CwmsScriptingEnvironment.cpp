@@ -92,7 +92,8 @@ void CwmsScriptingEnvironment::closeEvent(QCloseEvent* p_pqCloseEvent)
    if (m_pAdminMainWindow)
    {
        m_pAdminMainWindow->setEnabled(true);
-       m_pAdminMainWindow->RefreshClickedSlot();
+       m_pAdminMainWindow->RefreshClasses();
+       m_pAdminMainWindow->CloseClassSubWindows();
    }
 
    QMainWindow::closeEvent(p_pqCloseEvent);
@@ -754,7 +755,7 @@ void CwmsScriptingEnvironment::NewFunction(QTreeWidgetItem* p_pItem)
 
          if (CHKPTR(pClass))
          {
-             pClass->CreateMethod(tr("New_Function"));
+             pMethod = pClass->CreateMethod(tr("New_Function"));
              pClass->Commit();
          }
 

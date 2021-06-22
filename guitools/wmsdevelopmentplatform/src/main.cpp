@@ -1,14 +1,3 @@
-/******************************************************************************
- ** WOGRA Middleware Server Licence Creator Module
- **
- ** @Author Wolfgang Graßhof 
- **
- ** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
- ** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. 
- **(C) copyright by WOGRA Solutions All rights reserved
- ******************************************************************************/
-
-
 // System and QT Includes
 #include <qapplication.h>
 #include <qstring.h>
@@ -47,7 +36,7 @@ int main(int argc, char ** argv)
    qApplication.setApplicationName("WMS Development Platform");
    qApplication.setApplicationVersion(qstrVersion);
    qApplication.setOrganizationDomain("www.wogra.com");
-   qApplication.setOrganizationName("WOGRA Consulting GmbH");
+   qApplication.setOrganizationName("WOGRA AG");
 
    CwmsInitAdmin* pInit = new CwmsInitAdmin("WMS Development Platform", qstrVersion);
    pInit->InitApplication();

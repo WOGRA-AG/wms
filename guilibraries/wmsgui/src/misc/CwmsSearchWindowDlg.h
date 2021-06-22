@@ -84,6 +84,7 @@ class WMSGUI_API CwmsSearchWindowDlg : public QDialog, public Ui::CwmsSearchWind
     void SetImportVisibility(bool p_bVisible);
     void SetDeleteVisibility(bool p_bVisible);
     void SetEditVisibility(bool p_bVisible);
+    static QList<CdmObject *> FindObjects(CdmObjectContainer *p_pContainer, QWidget *parent);
 };
 
 #endif // CWMSSEARCHWINDOW_H

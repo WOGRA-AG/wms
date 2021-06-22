@@ -154,7 +154,7 @@ QVariant CdmQueryModel::data(const QModelIndex & p_qmIndex, int p_iRole) const
                 {
                     QModelIndex modelIndex = this->index(p_qmIndex.row(), columnIAbsdx);
                     qVariant = data(modelIndex, Qt::DisplayRole);
-                    qVariant = GetDisplayString(m_pCdmQuery->GetKeynameAt(columnIAbsdx), qVariant);
+                    qVariant = m_pCdmQuery->GetDisplayString(m_pCdmQuery->GetKeynameAt(columnIAbsdx), qVariant);
                 }
             }
             else if (p_iRole == Qt::DisplayRole)
@@ -166,20 +166,20 @@ QVariant CdmQueryModel::data(const QModelIndex & p_qmIndex, int p_iRole) const
                 else
                 {
                     qVariant = m_pCdmQuery->GetResultAt(p_qmIndex);
-                    qVariant = GetDisplayString(m_pCdmQuery->GetKeynameAt(iColumn), qVariant);
+                    qVariant = m_pCdmQuery->GetDisplayString(m_pCdmQuery->GetKeynameAt(iColumn), qVariant);
                 }
             }
             else if (p_iRole == Qt::TextAlignmentRole)
             {
-                qVariant = GetColumnAlignment(m_pCdmQuery->GetKeynameAt(iColumn));
+                qVariant = m_pCdmQuery->GetColumnAlignment(m_pCdmQuery->GetKeynameAt(iColumn));
             }
             else if (p_iRole == Qt::ToolTipRole)
             {
-                qVariant = GetColumnTooltip(m_pCdmQuery->GetKeynameAt(iColumn));
+                qVariant = m_pCdmQuery->GetColumnTooltip(m_pCdmQuery->GetKeynameAt(iColumn));
             }
             else if (p_iRole == Qt::StatusTipRole)
             {
-                qVariant = GetColumnTooltip(m_pCdmQuery->GetKeynameAt(iColumn));
+                qVariant = m_pCdmQuery->GetColumnTooltip(m_pCdmQuery->GetKeynameAt(iColumn));
             }
             else if (p_iRole == Qt::FontRole)
             {
@@ -550,53 +550,6 @@ QHash<int, QByteArray> CdmQueryModel::roleNames() const
     return roles;
 }
 
-QVariant CdmQueryModel::GetColumnAlignment(QString p_qstrKeyname) const
-{
-    QVariant qVariant;
-    const CdmMember* pCdmMember = FindMemberByKeyname(p_qstrKeyname);
-
-    if (pCdmMember)
-    {
-        qVariant = pCdmMember->GetMemberAlignment();
-    }
-    else
-    {
-        qVariant = int(Qt::AlignLeft | Qt::AlignVCenter);
-    }
-
-    return qVariant;
-}
-
-QVariant CdmQueryModel::GetColumnTooltip(QString p_qstrKeyname) const
-{
-    QVariant qVariant;
-    const CdmMember* pCdmMember = FindMemberByKeyname(p_qstrKeyname);
-
-    if (pCdmMember)
-    {
-        qVariant = pCdmMember->GetComment();
-    }
-
-    return qVariant;
-}
-
-QString CdmQueryModel::GetDisplayString(QString p_qstrMember, QVariant p_qvValue) const
-{
-    QString qstrRet;
-    const CdmMember* pCdmMember = FindMemberByKeyname(p_qstrMember);
-
-    if (pCdmMember)
-    {
-        qstrRet = pCdmMember->ConvertValueToDisplayString(p_qvValue);
-    }
-    else
-    {
-        qstrRet = p_qvValue.toString();
-    }
-
-    return qstrRet;
-}
-
 void CdmQueryModel::sort(int p_iColumn, Qt::SortOrder p_eSortOrder)
 {
     if (m_pCdmQuery)
@@ -616,33 +569,6 @@ void CdmQueryModel::sort(int p_iColumn, Qt::SortOrder p_eSortOrder)
             UpdateSlot();
         }
     }
-}
-
-const CdmMember* CdmQueryModel::FindMemberByKeyname(QString p_qstrKeyname) const
-{
-    const CdmMember* pCdmMember = nullptr;
-
-    if (m_pCdmQuery)
-    {
-        CdmObjectContainer* pContainer = m_pCdmQuery->GetContainer();
-        const CdmClass* pCdmClass = nullptr;
-
-        if (pContainer)
-        {
-            pCdmClass = pContainer->GetClass();
-        }
-        else
-        {
-            pCdmClass = m_pCdmQuery->GetClass();
-        }
-
-        if (CHKPTR(pCdmClass))
-        {
-            pCdmMember = pCdmClass->FindMember(p_qstrKeyname);
-        }
-    }
-
-    return pCdmMember;
 }
 
 CdmQuery* CdmQueryModel::GetQuery()

@@ -87,12 +87,7 @@ class CwmsClassEditorIf : public QWidget, public Ui::CwmsClassEditor
     *----------------last changed: Wolfgang Graßhof-------------Do 17. Mai 10:18:54 2007----------*/
     void FillBaseData();
 
-   private:
-   /** +-=---------------------------------------------------------Do 17. Mai 10:18:24 2007-------*
-    * @method  CwmsClassEditorIf::FillMembers                // private                           *
-    * @return  void                                          //                                   *
-    * @comment Fills the members to the listview                                                  *
-    *----------------last changed: Wolfgang Graßhof-------------Do 17. Mai 10:18:24 2007----------*/
+   public:
     void FillMembers();
 
     private slots:
@@ -275,12 +270,7 @@ void EditValidationClickedSlot( );
     *----------------last changed: -----------------------------Do 23. Aug 13:51:34 2012----------*/
 void DeleteValidationClickedSlot( );
 
-   private:
-   /** +-=---------------------------------------------------------Do 23. Aug 13:51:49 2012-------*
-    * @method  CwmsClassEditorIf::FillFunctions              // private                           *
-    * @return  void                                          //                                   *
-    * @comment                                                                                    *
-    *----------------last changed: -----------------------------Do 23. Aug 13:51:49 2012----------*/
+   public:
     void FillFunctions();
 
     private slots:

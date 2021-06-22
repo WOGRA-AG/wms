@@ -1,18 +1,4 @@
-﻿/******************************************************************************
- ** WOGRA technologies GmbH & Co. KG Modul Information
- ** Modulename: CwmsFormViewEditor.cpp
- ** Started Implementation: 2012/09/11
- ** Description:
- **
- ** implements the editor for view forms
- **
- ** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
- ** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. 
- **(C) copyright by WOGRA technologies GmbH & Co. KG All rights reserved
- *****************************************************************************/
-
-
-// System and QT Includes
+﻿// System and QT Includes
 
 // WMS Includes
 #include "CdmObjectContainer.h"
@@ -30,34 +16,16 @@
 #include "CwmsReportManager.h"
 #include "CwmsFormViewEditor.h"
 
-/** +-=---------------------------------------------------------Di 11. Sep 13:33:54 2012----------*
- * @method  CwmsFormViewEditor::CwmsFormViewEditor           // public                            *
- * @return                                                   //                                   *
- * @param   QWidget* p_pqwParent                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Di 11. Sep 13:33:54 2012----------*/
 CwmsFormViewEditor::CwmsFormViewEditor(QWidget* p_pqwParent)
 : QDialog(p_pqwParent)
 {
    setupUi(this);
 }
 
-/** +-=---------------------------------------------------------Di 11. Sep 13:34:17 2012----------*
- * @method  CwmsFormViewEditor::~CwmsFormViewEditor          // public, virtual                   *
- * @return  void                                             //                                   *
- * @comment The Destructor of Class CwmsFormViewEditor                                            *
- *----------------last changed: --------------------------------Di 11. Sep 13:34:17 2012----------*/
 CwmsFormViewEditor::~CwmsFormViewEditor()
 {
 }
 
-/** +-=---------------------------------------------------------Di 11. Sep 14:44:21 2012----------*
- * @method  CwmsFormViewEditor::FillDialog                   // private                           *
- * @return  void                                             //                                   *
- * @param   CwmsFormView p_cForm                             //                                   *
- * @param   bool p_bNew                                      //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Di 11. Sep 14:44:21 2012----------*/
 void CwmsFormViewEditor::FillDialog(CwmsFormView p_cForm, bool p_bNew)
 {
    m_cForm.SetObject(p_cForm.GetObject());
@@ -74,13 +42,6 @@ void CwmsFormViewEditor::FillDialog(CwmsFormView p_cForm, bool p_bNew)
    }
 }
 
-
-/** +-=---------------------------------------------------------Di 11. Sep 13:37:26 2012----------*
- * @method  CwmsFormViewEditor::FillReport                   // private                           *
- * @return  void                                             //                                   *
- * @param   CdmObject* p_pCdmObject                          //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Di 11. Sep 13:37:26 2012----------*/
 void CwmsFormViewEditor::FillReport(CdmObject* p_pCdmObject)
 {
    m_cTemplate.SetObject(p_pCdmObject);
@@ -95,11 +56,6 @@ void CwmsFormViewEditor::FillReport(CdmObject* p_pCdmObject)
    }
 }
 
-/** +-=---------------------------------------------------------Di 11. Sep 13:37:05 2012----------*
- * @method  CwmsFormViewEditor::FillViews                    // private                           *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Di 11. Sep 13:37:05 2012----------*/
 void CwmsFormViewEditor::FillViews()
 {
    m_pqlwViews->clear();
@@ -115,11 +71,6 @@ void CwmsFormViewEditor::FillViews()
    }
 }
 
-/** +-=---------------------------------------------------------Di 11. Sep 14:36:21 2012----------*
- * @method  CwmsFormViewEditor::SelectPrintingTemplateClickedSlot // private, slots               *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Di 11. Sep 14:36:21 2012----------*/
 void CwmsFormViewEditor::SelectPrintingTemplateClickedSlot()
 {
    CwmsReportManager cManager;
@@ -127,30 +78,28 @@ void CwmsFormViewEditor::SelectPrintingTemplateClickedSlot()
    FillReport(pCdmObject);
 }
 
-/** +-=---------------------------------------------------------Di 11. Sep 13:59:43 2012----------*
- * @method  CwmsFormViewEditor::AddViewClickedSlot           // private, slots                    *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Di 11. Sep 13:59:43 2012----------*/
 void CwmsFormViewEditor::AddViewClickedSlot()
 {
    CwmsViewManager cManager;
-   CdmObject* pCdmObject = CwmsObjectSelectionIf::GetObject(cManager.GetContainer(), nullptr, this, "Name");
+   QList<CdmObject*> qlObject = CwmsObjectSelectionIf::GetListofObjects(cManager.GetContainer(), nullptr, this, "Name");
 
-   if (pCdmObject)
+   if (qlObject.count() > 0)
    {
-      CwmsView cView(pCdmObject);
-      QListWidgetItem* pItem = new QListWidgetItem(m_pqlwViews);
-      pItem->setText(cView.GetName());
-      pItem->setData(Qt::UserRole, cView.GetUri());
+       for (int counter = 0; counter < qlObject.count(); ++counter)
+       {
+           auto pObject = qlObject[counter];
+
+           if (CHKPTR(pObject))
+           {
+              CwmsView cView(pObject);
+              QListWidgetItem* pItem = new QListWidgetItem(m_pqlwViews);
+              pItem->setText(cView.GetName());
+              pItem->setData(Qt::UserRole, cView.GetUri());
+           }
+       }
    }
 }
 
-/** +-=---------------------------------------------------------Di 11. Sep 14:00:10 2012----------*
- * @method  CwmsFormViewEditor::RemoveViewClickedSlot        // private, slots                    *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Di 11. Sep 14:00:10 2012----------*/
 void CwmsFormViewEditor::RemoveViewClickedSlot()
 {
    QList<QListWidgetItem*> qlSelected = m_pqlwViews->selectedItems();
@@ -162,31 +111,16 @@ void CwmsFormViewEditor::RemoveViewClickedSlot()
    }
 }
 
-/** +-=---------------------------------------------------------Di 11. Sep 14:01:04 2012----------*
- * @method  CwmsFormViewEditor::ViewMemberUpClickedSlot      // private, slots                    *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Di 11. Sep 14:01:04 2012----------*/
 void CwmsFormViewEditor::ViewUpClickedSlot()
 {
    CwmsListWidgetHelper::MoveItemUp(m_pqlwViews);
 }
 
-/** +-=---------------------------------------------------------Di 11. Sep 14:00:57 2012----------*
- * @method  CwmsFormViewEditor::ViewMemberDownClickedSlot    // private, slots                    *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Di 11. Sep 14:00:57 2012----------*/
 void CwmsFormViewEditor::ViewDownClickedSlot()
 {
    CwmsListWidgetHelper::MoveItemDown(m_pqlwViews);
 }
 
-/** +-=---------------------------------------------------------Di 11. Sep 13:53:48 2012----------*
- * @method  CwmsFormViewEditor::Validate                     // private                           *
- * @return  bool                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Di 11. Sep 13:53:48 2012----------*/
 bool CwmsFormViewEditor::Validate()
 {
    bool bRet = true;
@@ -204,12 +138,6 @@ bool CwmsFormViewEditor::Validate()
    return bRet;
 }
 
-
-/** +-=---------------------------------------------------------Di 11. Sep 13:53:57 2012----------*
- * @method  CwmsFormViewEditor::SaveData                     // private                           *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Di 11. Sep 13:53:57 2012----------*/
 void CwmsFormViewEditor::SaveData()
 {
    if (m_cForm.IsValid())
@@ -243,12 +171,6 @@ void CwmsFormViewEditor::SaveData()
    }
 }
 
-
-/** +-=---------------------------------------------------------Di 11. Sep 13:54:07 2012----------*
- * @method  CwmsFormViewEditor::OKClickedSlot                // private, slots                    *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Di 11. Sep 13:54:07 2012----------*/
 void CwmsFormViewEditor::OKClickedSlot()
 {
    if (Validate())
@@ -258,14 +180,6 @@ void CwmsFormViewEditor::OKClickedSlot()
    }
 }
 
-/** +-=---------------------------------------------------------Di 11. Sep 14:03:06 2012----------*
- * @method  CwmsFormViewEditor::EditForm                     // public, static                    *
- * @return  void                                             //                                   *
- * @param   CwmsFormView p_cForm                             //                                   *
- * @param   bool p_bNew                                      //                                   *
- * @param   QWidget* p_pqwParent                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Di 11. Sep 14:03:06 2012----------*/
 void CwmsFormViewEditor::EditForm(CwmsFormView p_cForm, bool p_bNew, QWidget* p_pqwParent)
 {
    if (p_cForm.IsValid())

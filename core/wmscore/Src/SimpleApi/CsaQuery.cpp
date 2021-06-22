@@ -46,7 +46,7 @@ bool CsaQuery::containsGrouping()
    return m_pQuery->ContainsGrouping();
 }
 
-CsaObject* CsaQuery::getObjectAt(int p_iIndex)
+QObject *CsaQuery::getObjectAt(int p_iIndex)
 {
    CsaObject* pObject = nullptr;
    CdmObject* pObjectInternal = m_pQuery->GetObjectAt(p_iIndex);
@@ -72,6 +72,11 @@ long CsaQuery::getObjectIdAt(int p_iIndex)
 QString CsaQuery::getResultAsStringAt(int p_iIndex)
 {
    return m_pQuery->GetResultAsStringAt(p_iIndex);
+}
+
+QString CsaQuery::getResultAsDisplayStringAt(int p_iColumn, int p_iRow)
+{
+   return m_pQuery->GetResultAsDisplayStringAt(p_iColumn, p_iRow);
 }
 
 QVariant CsaQuery::getResultAt(QModelIndex& p_index)
@@ -105,7 +110,7 @@ void CsaQuery::addGroupByElement(QString p_qstrElement)
     m_pQuery->AddGroupByElement(p_qstrElement);
 }
 
-CsaObject* CsaQuery::getFirstResultObject()
+QObject* CsaQuery::getFirstResultObject()
 {
    CsaObject* pObject = nullptr;
    CdmObject* pObjectInternal = m_pQuery->GetObjectAt(0);
@@ -138,7 +143,7 @@ void CsaQuery::clear()
    m_pQuery->Clear();
 }
 
-CsaObjectContainer* CsaQuery::getContainer()
+QObject *CsaQuery::getContainer()
 {
    CsaObjectContainer* pContainer = nullptr;
    CdmObjectContainer* pContainerInternal = m_pQuery->GetContainer();

@@ -500,6 +500,42 @@ void CwmsMiscDataFiller::FillViews(QTreeWidgetItem* p_pParent)
    }
 }
 
+void CwmsMiscDataFiller::FilterTreeWidgetsUnderRootElement(QString p_qstrFilter, QTreeWidget* p_pTreeWidget)
+{
+    QString qstrFilter = p_qstrFilter;
+    QTreeWidgetItem* pitem = p_pTreeWidget->topLevelItem(0);
+
+    if (CHKPTR(pitem))
+    {
+        for (int counter = 0; counter < pitem->childCount(); ++counter)
+        {
+            QTreeWidgetItem* pItem = pitem->child(counter);
+
+            if (CHKPTR(pItem))
+            {
+                if (qstrFilter.isEmpty())
+                {
+                    pItem->setHidden(false);
+                }
+                else
+                {
+                    QString qstrView = pItem->text(0);
+
+                    if (qstrView.contains(qstrFilter))
+                    {
+                        pItem->setHidden(false);
+                    }
+                    else
+                    {
+                        pItem->setHidden(true);
+                    }
+                }
+            }
+        }
+    }
+}
+
+
 /** +-=---------------------------------------------------------So 22. Sep 12:54:00 2013----------*
  * @method  CwmsMiscDataFiller::FillWorkflows                // public, static                    *
  * @return  void                                             //                                   *

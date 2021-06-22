@@ -82,7 +82,7 @@ public slots:
     CsaQuery* createQuery(QString p_qstrWQl);
     void collectGarbage();
     CsaQuery *createQuery(CdmQuery *p_pQuery);
-    CsaObject *findObjectById(int pOlId, int pId);
+    QObject *findObjectById(int pOlId, int pId);
     void addObjectForGarbageCollection(QObject *p_pObject);
     QStringList getArguments();
 };

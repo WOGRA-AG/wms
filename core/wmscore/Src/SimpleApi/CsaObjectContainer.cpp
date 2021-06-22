@@ -151,7 +151,7 @@ bool CsaObjectContainer::hasOwner()
    return getInternals()->HasOwner();
 }
 
-CsaObject* CsaObjectContainer::getOwner()
+QObject *CsaObjectContainer::getOwner()
 {
    return static_cast<CsaObject*> (getFactory()->createScriptObject(getInternals()->GetOwner()));
 }

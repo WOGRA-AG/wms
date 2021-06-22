@@ -3,10 +3,10 @@
 
 #include "wmsServerDefines.h"
 
-#define WMS_LIB_VERSION "2.4.0"
-#define WMS_LIB_VERSION_MAJOR "2"
-#define WMS_LIB_VERSION_MINOR "4"
-#define WMS_LIB_VERSION_BUGFIX "0"
+#define WMS_LIB_VERSION "3.0.1"
+#define WMS_LIB_VERSION_MAJOR "3"
+#define WMS_LIB_VERSION_MINOR "0"
+#define WMS_LIB_VERSION_BUGFIX "1"
 
 
 #define WMS_OBJECT "Object"

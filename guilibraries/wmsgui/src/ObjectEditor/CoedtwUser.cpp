@@ -89,7 +89,7 @@ QWidget* CoedtwUser::GetEditWidget(QWidget* p_pqwParent)
     m_pqleUser = new QLineEdit(pqWidget);
     m_pqleUser->setReadOnly(true);
     pqLayout->addWidget(m_pqleUser);
-    m_pqbButton = new QPushButton("Auswählen", pqWidget);
+    m_pqbButton = new QPushButton(QStringLiteral("Auswählen"), pqWidget);
     pqLayout->addWidget(m_pqbButton);
     connect(m_pqbButton, SIGNAL(clicked(bool)), this, SLOT(openNewWindow()));
     return pqWidget;
@@ -216,7 +216,11 @@ void CoedtwUser::openNewWindow(){
 
              if (pCumUser)
              {
-                 dynamic_cast<CdmValueUser*>(m_rpCdmValue)->SetValue(m_lCurrentUserId);
+                 if (m_rpCdmValue)
+                 {
+                    dynamic_cast<CdmValueUser*>(m_rpCdmValue)->SetValue(m_lCurrentUserId);
+                 }
+
                  m_pqleUser->setText(pCumUser->GetDisplayString());
              }
              else

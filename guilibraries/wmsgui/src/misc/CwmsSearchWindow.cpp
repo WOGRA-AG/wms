@@ -137,6 +137,11 @@ CdmObject* CwmsSearchWindow::GetSelectedObject()
     return m_CdmModel.GetObject(m_pqtvResult->currentIndex());
 }
 
+QList<CdmObject*> CwmsSearchWindow::GetSelectedObjects()
+{
+    return m_CdmModel.GetObjects(m_pqtvResult);
+}
+
 void CwmsSearchWindow::DeleteClickedSlot()
 {
     QModelIndexList qSelections;

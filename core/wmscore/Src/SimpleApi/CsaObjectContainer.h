@@ -47,7 +47,7 @@ class WMSMANAGER_API CsaObjectContainer : public CsaModelElement
         void setTree(bool p_bTree);
         bool hasOwner();
         void loadContainerComplete();
-        CsaObject *getOwner();
+        QObject *getOwner();
         void setImmutable(bool p_bImmutable);
         bool isImmutable();
         bool hasCurrentUserWriteAccess();
