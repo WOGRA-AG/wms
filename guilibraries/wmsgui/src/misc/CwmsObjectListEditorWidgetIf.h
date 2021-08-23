@@ -39,6 +39,7 @@ private:
     EwmsLvObjectInUseHandling m_eWmsLvObjectInUseHandling;
     CdmObject* m_rpCdmObjectSelected;
     QAbstractItemModel* m_pModel;
+    CwmsView m_View;
     QString m_qstrWQL;
 
     QMap<QPushButton*, QString> m_qmFunctionMapping;

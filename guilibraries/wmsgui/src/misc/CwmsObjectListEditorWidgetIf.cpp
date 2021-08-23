@@ -955,9 +955,10 @@ CdmObjectContainer* CwmsObjectListEditorWidgetIf::GetContainer()
 
 void CwmsObjectListEditorWidgetIf::SetView(CwmsView p_cCwmsView)
 {
-    if (p_cCwmsView.IsValid())
+    m_View.SetObject(p_cCwmsView.GetObject());
+    if (m_View.IsValid())
     {
-        if (p_cCwmsView.IsWql())
+        if (m_View.IsWql())
         {
             auto pModel = dynamic_cast<CdmQueryModel*>(m_pModel);
 
@@ -975,16 +976,21 @@ void CwmsObjectListEditorWidgetIf::SetView(CwmsView p_cCwmsView)
 
             m_pCwmsObjectListListView->setModel(m_pModel);
         }
-        else if (p_cCwmsView.IsModel())
+        else if (m_View.IsModel())
         {
-            m_pModel = p_cCwmsView.GetModel();
+            m_pModel = m_View.GetModel();
             m_pCwmsObjectListListView->setModel(m_pModel);
             HideCopyButton();
             HideExportButton();
             HideImportButton();
             HideJournalButton();
-            HidePrintButton();
-            HideRefreshButton();
+
+            if (m_View.GetReport() == nullptr)
+            {
+                HidePrintButton();
+            }
+
+            //HideRefreshButton();
             HideSearchButton();
             m_pqpbNew->hide();
             m_pqpbEdit->hide();
@@ -1544,5 +1550,11 @@ void CwmsObjectListEditorWidgetIf::RefreshClickedSlot()
     {
         pModel->Execute();
         CwmsTreeWidgetHelper::ResizeColumnsToContent(m_pCwmsObjectListListView);
+    }
+    else if (m_View.IsValid())
+    {
+        DELPTR(m_pModel);
+        m_pModel = m_View.GetModel();
+        m_pCwmsObjectListListView->setModel(m_pModel);
     }
 }

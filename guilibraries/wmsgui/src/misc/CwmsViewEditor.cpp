@@ -1,17 +1,4 @@
-﻿/******************************************************************************
- ** WOGRA technologies GmbH & Co. KG Modul Information
- ** Modulename: CwmsViewEditor.cpp
- ** Started Implementation: 2012/08/24
- ** Description:
- **
- ** implements the editor for views
- **
- ** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
- ** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. 
- **(C) copyright by WOGRA technologies GmbH & Co. KG All rights reserved
- *****************************************************************************/
-
-// System and QT Includes
+﻿// System and QT Includes
 
 
 // WMS Includes
@@ -24,35 +11,21 @@
 
 // own Includes
 #include "CwmsQueryEditor.h"
+#include "CwmsObjectSelectionIf.h"
 #include "CwmsViewEditor.h"
 
-/** +-=---------------------------------------------------------Fr 24. Aug 11:56:17 2012----------*
- * @method  CwmsViewEditor::CwmsViewEditor                   // public                            *
- * @return                                                   //                                   *
- * @param   QWidget* p_pqwParent                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Fr 24. Aug 11:56:17 2012----------*/
+#include <CwmsReportManager.h>
+
 CwmsViewEditor::CwmsViewEditor(QWidget* p_pqwParent)
 : QDialog(p_pqwParent)
 {
    setupUi(this);
 }
 
-/** +-=---------------------------------------------------------Fr 24. Aug 11:56:41 2012----------*
- * @method  CwmsViewEditor::~CwmsViewEditor                  // public, virtual                   *
- * @return  void                                             //                                   *
- * @comment The Destructor of Class CwmsViewEditor                                                *
- *----------------last changed: --------------------------------Fr 24. Aug 11:56:41 2012----------*/
 CwmsViewEditor::~CwmsViewEditor()
 {
 }
 
-/** +-=---------------------------------------------------------Fr 24. Aug 11:57:01 2012----------*
- * @method  CwmsViewEditor::FillDialog                       // public                            *
- * @return  void                                             //                                   *
- * @param   CwmsView p_cCwmsView                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Fr 24. Aug 11:57:01 2012----------*/
 void CwmsViewEditor::FillDialog(CwmsView p_cCwmsView)
 {
    m_cView = p_cCwmsView;
@@ -71,14 +44,11 @@ void CwmsViewEditor::FillDialog(CwmsView p_cCwmsView)
       {
          m_pqleState->setText(tr("Fehlerhaft"));
       }
+
+      FillReport(m_cView.GetReport());
    }
 }
 
-/** +-=---------------------------------------------------------Fr 24. Aug 11:58:23 2012----------*
- * @method  CwmsViewEditor::CurrentTabChangedSlot            // private, slots                    *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Fr 24. Aug 11:58:23 2012----------*/
 void CwmsViewEditor::CurrentTabChangedSlot()
 {
    if (m_pqTabWidget->currentIndex() == 1)
@@ -102,13 +72,6 @@ void CwmsViewEditor::CurrentTabChangedSlot()
    }
 }
 
-
-
-/** +-=---------------------------------------------------------Fr 24. Aug 11:57:32 2012----------*
-* @method  CwmsViewEditor::ShowResultClickedSlot            // private, slots                    *
-* @return  void                                             //                                   *
-* @comment                                                                                       *
-*----------------last changed: --------------------------------Fr 24. Aug 11:57:32 2012----------*/
 void CwmsViewEditor::ShowResultClickedSlot()
 {
    if (Validate())
@@ -121,11 +84,6 @@ void CwmsViewEditor::ShowResultClickedSlot()
    }
 }
 
-/** +-=---------------------------------------------------------Fr 24. Aug 11:58:44 2012----------*
- * @method  CwmsViewEditor::Validate                         // private                           *
- * @return  bool                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Fr 24. Aug 11:58:44 2012----------*/
 bool CwmsViewEditor::Validate()
 {
    bool bRet = false;
@@ -176,11 +134,27 @@ bool CwmsViewEditor::Validate()
    return bRet;
 }
 
-/** +-=---------------------------------------------------------Fr 24. Aug 13:19:34 2012----------*
- * @method  CwmsViewEditor::SaveData                         // private                           *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Fr 24. Aug 13:19:34 2012----------*/
+void CwmsViewEditor::SelectPrintingTemplateClickedSlot()
+{
+   CwmsReportManager cManager;
+   CdmObject* pCdmObject = CwmsObjectSelectionIf::GetObject(cManager.GetObjectList(), nullptr, this, "Name");
+   FillReport(pCdmObject);
+}
+
+void CwmsViewEditor::FillReport(CdmObject* p_pCdmObject)
+{
+   m_cTemplate.SetObject(p_pCdmObject);
+
+   if (m_cTemplate.IsValid())
+   {
+      m_pqlePrintingTemplate->setText(m_cTemplate.GetName());
+   }
+   else
+   {
+      m_pqlePrintingTemplate->setText("");
+   }
+}
+
 void CwmsViewEditor::SaveData()
 {
    if (m_cView.IsValid())
@@ -189,6 +163,7 @@ void CwmsViewEditor::SaveData()
       m_cView.SetValid(true);
       m_cView.SetComment(m_pqteComment->toPlainText());
       m_cView.SetViewCommand(m_pqteWql->toPlainText());
+      m_cView.SetReport(m_cTemplate.GetObject());
 
       if (m_cView.IsWql())
       {
@@ -205,11 +180,6 @@ void CwmsViewEditor::SaveData()
    }
 }
 
-/** +-=---------------------------------------------------------Fr 24. Aug 12:01:21 2012----------*
- * @method  CwmsViewEditor::CheckClickedSlot                 // private, slots                    *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Fr 24. Aug 12:01:21 2012----------*/
 void CwmsViewEditor::CheckClickedSlot()
 {
    if (Validate())
@@ -222,11 +192,6 @@ void CwmsViewEditor::CheckClickedSlot()
    }
 }
 
-/** +-=---------------------------------------------------------Fr 24. Aug 11:57:19 2012----------*
- * @method  CwmsViewEditor::OKClickedSlot                    // private, slots                    *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Fr 24. Aug 11:57:19 2012----------*/
 void CwmsViewEditor::OKClickedSlot()
 {
    if (Validate())
@@ -236,14 +201,6 @@ void CwmsViewEditor::OKClickedSlot()
    }
 }
 
-/** +-=---------------------------------------------------------Fr 24. Aug 13:56:50 2012----------*
- * @method  CwmsViewEditor::Edit                             // public, static                    *
- * @return  void                                             //                                   *
- * @param   CwmsView p_cView                                 //                                   *
- * @param   bool p_bNew                                      //                                   *
- * @param   QWidget* p_pqwParent                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Fr 24. Aug 13:56:50 2012----------*/
 void CwmsViewEditor::Edit(CwmsView p_cView, bool p_bNew, QWidget* p_pqwParent)
 {
    if (p_cView.IsValid())

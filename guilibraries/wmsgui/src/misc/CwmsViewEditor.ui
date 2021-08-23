@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>607</width>
-    <height>454</height>
+    <width>690</width>
+    <height>495</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -92,6 +92,41 @@ p, li { white-space: pre-wrap; }
       <widget class="QLineEdit" name="m_pqleState">
        <property name="readOnly">
         <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <item>
+      <widget class="QLabel" name="label_4">
+       <property name="text">
+        <string>Druckvorlage</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="m_pqlePrintingTemplate">
+       <property name="readOnly">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="m_pqpbPrintingTemplate">
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="wmsgui.qrc">
+         <normaloff>:/icons/search24.png</normaloff>:/icons/search24.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>24</width>
+         <height>24</height>
+        </size>
        </property>
       </widget>
      </item>
@@ -301,8 +336,8 @@ p, li { white-space: pre-wrap; }
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>521</x>
-     <y>365</y>
+     <x>643</x>
+     <y>490</y>
     </hint>
     <hint type="destinationlabel">
      <x>179</x>
@@ -317,8 +352,8 @@ p, li { white-space: pre-wrap; }
    <slot>OKClickedSlot()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>572</x>
-     <y>376</y>
+     <x>685</x>
+     <y>490</y>
     </hint>
     <hint type="destinationlabel">
      <x>578</x>
@@ -333,8 +368,8 @@ p, li { white-space: pre-wrap; }
    <slot>ShowResultClickedSlot()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>134</x>
-     <y>384</y>
+     <x>81</x>
+     <y>490</y>
     </hint>
     <hint type="destinationlabel">
      <x>89</x>
@@ -365,12 +400,28 @@ p, li { white-space: pre-wrap; }
    <slot>CheckClickedSlot()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>43</x>
-     <y>371</y>
+     <x>39</x>
+     <y>490</y>
     </hint>
     <hint type="destinationlabel">
      <x>81</x>
-     <y>516</y>
+     <y>494</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqpbPrintingTemplate</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsViewEditorClass</receiver>
+   <slot>SelectPrintingTemplateClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>672</x>
+     <y>84</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>931</x>
+     <y>109</y>
     </hint>
    </hints>
   </connection>
@@ -380,5 +431,6 @@ p, li { white-space: pre-wrap; }
   <slot>CurrentTabChangedSlot()</slot>
   <slot>ShowResultClickedSlot()</slot>
   <slot>CheckClickedSlot()</slot>
+  <slot>SelectPrintingTemplateClickedSlot()</slot>
  </slots>
 </ui>
