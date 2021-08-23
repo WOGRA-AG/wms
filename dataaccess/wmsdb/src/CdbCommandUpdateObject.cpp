@@ -539,6 +539,13 @@ long CdbCommandUpdateObject::InsertValue(CdmValue* p_pValue,
                {
                   long lValueId = cQSqlQuery.value(0).toInt();
                   CdmDataAccessHelper::SetId(p_pValue, lValueId);
+
+                  CdbJournal* pJournal = GetDataAccess()->GetJournal();
+
+                  if (pJournal)
+                  {
+                     pJournal->ValueModified(p_pValue);
+                  }
                }
                else
                {
