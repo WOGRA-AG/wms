@@ -130,6 +130,11 @@ void CwmsFunctionEditor::FillDialog(CdmClassMethod* p_pMethod, CdmClass* p_pCdmC
       m_pjsEditor->SetClass(m_rpCdmClass);
       m_pjsEditor->setCodeFoldingEnabled(true);
       m_pjsEditor->document()->setModified(false);
+
+      if (!p_bNew)
+      {
+          m_bModified = false;
+      }
    }
 }
 
@@ -408,6 +413,8 @@ bool CwmsFunctionEditor::Save()
           m_rpItem->setText(0, m_rpCdmFunction->GetMethodName());
           m_rpItem->setData(0, Qt::UserRole, m_rpCdmFunction->GetUriInternal());
         }
+
+        m_bModified = false;
     }
 
     return bSuccess;
