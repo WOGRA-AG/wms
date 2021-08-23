@@ -45,6 +45,7 @@ public slots:
     int rowCount();
     int columnCount();
     QStandardItemModel* generateItemModel();
+    int findRow(int p_iSearchColumn, QVariant qvValue);
 
     bool existRowHeader(int p_iPos);
     bool existColumnHeader(int p_iPos);

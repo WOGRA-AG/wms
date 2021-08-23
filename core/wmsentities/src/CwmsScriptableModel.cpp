@@ -394,6 +394,34 @@ QStandardItemModel *CwmsScriptableModel::generateItemModel()
     return pModel;
 }
 
+int CwmsScriptableModel::findRow(int p_iSearchColumn, QVariant qvValue)
+{
+    int iResult = -1;
+
+    for (int iRowCounter = 0; iRowCounter < rowCount(); ++iRowCounter)
+    {
+        auto qmRow = m_qmData[iRowCounter];
+
+        if (qmRow.contains(p_iSearchColumn))
+        {
+            auto qmData = qmRow[p_iSearchColumn];
+
+            if (qmData.contains(0))
+            {
+                QVariant qvData = qmData[0];
+
+                if (qvData == qvValue)
+                {
+                    iResult = iRowCounter;
+                    break;
+                }
+            }
+        }
+    }
+
+    return iResult;
+}
+
 //QChart* CwmsScriptableModel::generateLineChart()
 //{
 //    QChart* chart = new QChart();
