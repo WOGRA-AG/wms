@@ -1,17 +1,4 @@
-﻿/******************************************************************************
- ** WOGRA technologies Gmbh & Co KG Modul Information
- ** Modulename: CwmsViewManager.h
- ** Started Implementation: 2012/08/24
- ** Description:
- **
- ** implements the manager for views
- **
- ** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
- ** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
- **(C) copyright by WOGRA technologies GmbH & Co KG All rights reserved
- *****************************************************************************/
-
-#ifndef CWMSVIEWMANAGER_H
+﻿#ifndef CWMSVIEWMANAGER_H
 #define CWMSVIEWMANAGER_H
 
 #ifdef WURZELBLA
@@ -51,6 +38,7 @@ private:
     void CheckViewDataStructure();
     void CreateViewClass(CdmClassManager* p_pCdmClassManager);
 
+    void UpdateViewClass(CdmClass *p_pClass);
 };
 
 #endif // CWMSVIEWMANAGER_H

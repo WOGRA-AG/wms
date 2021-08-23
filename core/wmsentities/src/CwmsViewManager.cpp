@@ -58,6 +58,13 @@ void CwmsViewManager::CheckViewDataStructure()
          {
             CreateViewClass(pCdmClassManager);
          }
+
+         pCdmClass = pCdmClassManager->FindClassByKeyname("Technical_View");
+
+         if (pCdmClass)
+         {
+            UpdateViewClass(pCdmClass);
+         }
       }
    }
 }
@@ -145,6 +152,27 @@ void CwmsViewManager::CreateViewClass(CdmClassManager* p_pCdmClassManager)
          }
       }
    }
+}
+
+void CwmsViewManager::UpdateViewClass(CdmClass* p_pClass)
+{
+    if (CHKPTR(p_pClass))
+    {
+        if (!p_pClass->FindMember("Report"))
+        {
+            auto pMember = p_pClass->CreateMember("Report", eDmValueObjectRef, false, 0);
+
+            if (CHKPTR(pMember))
+            {
+               pMember->SetCaption(tr("Druckvorlage"));
+               pMember->SetComment(tr("Die Druckvorlage, die diesem View zugeordnet ist."));
+               pMember->SetMemberAccess(eDmMemberAccessPublic);
+               pMember->SetClassReference("Technical_Report");
+            }
+
+            p_pClass->Commit();
+        }
+    }
 }
 
 CdmObjectContainer* CwmsViewManager::GetContainer()

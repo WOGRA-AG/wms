@@ -206,6 +206,17 @@ CwmsView CwmsView::Create()
 
    return cCwmsView;
 }
+
+CdmObject *CwmsView::GetReport()
+{
+    return GetObjectRefValue("Report");
+}
+
+void CwmsView::SetReport(CdmObject *p_pObject)
+{
+    SetObjectRefValue("Report", p_pObject);
+}
+
 bool CwmsView::Delete(CwmsView cCwmsView)
 {
    bool bSuccess = false;

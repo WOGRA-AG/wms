@@ -40,6 +40,8 @@ class BASETOOLS_API CwmsView: public CdmObjectAdaptor
       bool GetValid();
       void SetValid(bool p_bValue);
       static CwmsView Create();
+      CdmObject* GetReport();
+      void SetReport(CdmObject* p_pObject);
 
       static bool Delete(CwmsView cCwmsView);
       bool IsWql();
