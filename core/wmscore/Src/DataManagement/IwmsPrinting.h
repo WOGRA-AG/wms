@@ -38,7 +38,7 @@ public:
     virtual CwmsPrintingTemplate GetTemplate() = 0;
     virtual bool IsTemplateValid() = 0;
     virtual void SetMaxIterationDepth(int p_iDepth) = 0;
-    virtual void ShowPdfDocument(QString& p_qstrFilePath) = 0;
+    virtual void ShowPdfDocument(QString& p_qstrFilePath, QWidget *parent = nullptr) = 0;
 
 };
 
