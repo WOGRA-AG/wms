@@ -18,6 +18,11 @@ public slots:
     QByteArray convertFromBase64ToByteArray(QString p_qstrBase64);
     QObject *createEmptyModel();
     void deleteModel(QObject *p_pModel);
+    QString formatDoubleValueToLocaleString(double p_dValue, int p_iDecimalPlaces);
+    QString formatIntValueToLocaleString(int p_iValue);
+    QDate getDateFromIsoString(QString p_qstrIsoDate);
+    QString formatIsoDateToLocaleDate(QString p_qstrIsoDate);
+
 };
 
 #endif // CWMSSCRIPTABLEUTILITIES_H

@@ -36,3 +36,27 @@ void CwmsScriptableUtilities::deleteModel(QObject* p_pModel)
         CdmMessageManager::critical("Pointer Löschung nicht erlaubt","In dieser Funktion dürfen nur Models gelöscht werden");
     }
 }
+
+QString CwmsScriptableUtilities::formatDoubleValueToLocaleString(double p_dValue, int p_iDecimalPlaces)
+{
+    QLocale loc;
+    return loc.toString(p_dValue, 'f', p_iDecimalPlaces);
+}
+
+QString CwmsScriptableUtilities::formatIntValueToLocaleString(int p_iValue)
+{
+    QLocale loc;
+    return loc.toString(p_iValue);
+}
+
+QDate CwmsScriptableUtilities::getDateFromIsoString(QString p_qstrIsoDate)
+{
+    return QDate::fromString(p_qstrIsoDate, Qt::ISODate);
+}
+
+QString CwmsScriptableUtilities::formatIsoDateToLocaleDate(QString p_qstrIsoDate)
+{
+    QDate qdDate = getDateFromIsoString(p_qstrIsoDate);
+    QLocale loc;
+    return qdDate.toString("dd.MM.yyyy");
+}
