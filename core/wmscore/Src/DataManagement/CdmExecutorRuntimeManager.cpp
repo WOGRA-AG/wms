@@ -15,7 +15,7 @@ CdmExecutorRuntimeManager::~CdmExecutorRuntimeManager()
     SYNCHRONIZED;
     if (m_qmRuntimes.count() > 0)
     {
-        ERR("Runtimes not cleaned up! There are " + QString::number(m_qmRuntimes.count()) + " still in memory.");
+        INFO("Runtimes not cleaned up! There are " + QString::number(m_qmRuntimes.count()) + " still in memory.");
 
         QMap<IdmExecutorEngine*, CdmExecutorRuntime*>::iterator qmIt = m_qmRuntimes.begin();
         QMap<IdmExecutorEngine*, CdmExecutorRuntime*>::iterator qmItEnd = m_qmRuntimes.end();

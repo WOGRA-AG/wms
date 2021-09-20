@@ -47,7 +47,7 @@ public slots:
     void RestoreClickedSlot();
 
 private:
-    void AddObjectListHeader();
+    void AddContainerHeader();
     void AddDbHeader();
     void AddObjectHeader();
 

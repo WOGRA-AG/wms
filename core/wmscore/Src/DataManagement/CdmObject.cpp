@@ -1018,7 +1018,7 @@ int CdmObject::GetValue(const QString& p_qstrKeyname, QString& p_qstrValue)
             }
             else
             {
-                ERR("Wrong Value for this Value.");
+                ERR(QString("Wrong Type for this Value. Value: %1 Type %2").arg(p_qstrKeyname).arg(eDmValue));
                 iRet = EC(eDmWrongValueType);
             }
         }

@@ -583,6 +583,7 @@ void CwmsAdminMainWindowIf::FillViews()
 {
    CwmsMiscDataFiller::FillViews(m_pqlvViews);
    CwmsTreeWidgetHelper::ResizeColumnsToContent(m_pqlvViews);
+   ViewFilterEnterPressedSlot();
 }
 
 void CwmsAdminMainWindowIf::FillWorkflows()

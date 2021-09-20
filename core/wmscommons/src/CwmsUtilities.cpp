@@ -3,6 +3,7 @@
 #include <QRegExp>
 #include <QDate>
 #include <QRegularExpression>
+#include <QLocale>
 #include <QCryptographicHash>
 
 // Own Includes
@@ -22,7 +23,16 @@ bool CwmsUtilities::isNumberValid(int iNumber)
 bool CwmsUtilities::IsNumber(QString& p_qstrValue)
 {
     QRegExp re("\\d*");  // a digit (\d), zero or more times (*)
-    return (re.exactMatch(p_qstrValue));
+
+    if (!re.exactMatch(p_qstrValue))
+    {
+        QLocale loc;
+        bool bOk = false;
+        loc.toDouble(p_qstrValue, &bOk);
+        return bOk;
+    }
+
+    return true;
 }
 
 bool CwmsUtilities::isNumberValid(long lNumber)
