@@ -740,3 +740,48 @@ void CdmQueryModel::SetInitialDisplayHandler(IdmHandleDisplayData *pDisplayHandl
 {
     m_pIdmDisplayHandler = pDisplayHandler;
 }
+
+QString CdmQueryModel::GetDisplayString(QString p_qstrMember, QVariant p_qvValue) const
+{
+    QString qstrRet;
+    const CdmMember* pCdmMember = FindMemberByKeyname(p_qstrMember);
+
+    if (pCdmMember)
+    {
+        qstrRet = pCdmMember->ConvertValueToDisplayString(p_qvValue);
+    }
+    else
+    {
+        qstrRet = p_qvValue.toString();
+    }
+
+    return qstrRet;
+}
+
+const CdmMember* CdmQueryModel::FindMemberByKeyname(QString p_qstrKeyname) const
+{
+    const CdmMember* pCdmMember = nullptr;
+
+    if (m_pCdmQuery)
+    {
+        CdmObjectContainer* pContainer = m_pCdmQuery->GetContainer();
+        const CdmClass* pCdmClass = nullptr;
+
+        if (pContainer)
+        {
+            pCdmClass = pContainer->GetClass();
+        }
+        else
+        {
+            pCdmClass = m_pCdmQuery->GetClass();
+        }
+
+        if (CHKPTR(pCdmClass))
+        {
+            pCdmMember = pCdmClass->FindMember(p_qstrKeyname);
+        }
+    }
+
+    return pCdmMember;
+}
+

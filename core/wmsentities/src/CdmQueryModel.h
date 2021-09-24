@@ -109,6 +109,7 @@ private:
     QModelIndexList getSelection(QAbstractItemView* p_pqItemView, QModelIndex p_Index);
 
 
+    const CdmMember *FindMemberByKeyname(QString p_qstrKeyname) const;
 signals:
     void UpdateSignal();
 };

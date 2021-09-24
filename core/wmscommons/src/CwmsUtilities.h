@@ -37,6 +37,7 @@ public:
     static QString GetInvalidDateString();
     static QString GetInvalidDateStringOld();
     static bool CreateArchive(QString p_rArchiveFileName, QString p_qstrOutPath, QStringList p_qstrlFileNamesForArchive);
+    static QString TeaserText(const QString &p_rqstrText, int p_iLength, const QString &p_rqstrTruncateHint);
 };
 
 #endif // CWMSUTILITIES_H

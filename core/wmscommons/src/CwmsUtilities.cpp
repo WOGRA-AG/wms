@@ -998,3 +998,22 @@ bool CwmsUtilities::CreateArchive(QString p_rArchiveFileName, QString p_qstrOutP
     return QFile::exists(p_qstrOutPath + p_rArchiveFileName);
 }
 
+QString CwmsUtilities::TeaserText(const QString& p_rqstrText, int p_iLength, const QString& p_rqstrTruncateHint)
+{
+    QString qstrTeaserText(p_rqstrText);
+    int iAddLength = p_rqstrTruncateHint.length();
+
+    if (p_rqstrText.length() > p_iLength + iAddLength)
+    {
+        qstrTeaserText.truncate(p_iLength);
+
+        if (iAddLength > 0)
+        {
+            qstrTeaserText += QString("\n");
+            qstrTeaserText += p_rqstrTruncateHint;
+        }
+    }
+
+    return(qstrTeaserText);
+}
+
