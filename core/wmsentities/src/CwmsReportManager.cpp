@@ -7,7 +7,7 @@
  ** Implements the manager for reports and printing templates
  **
  ** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
- ** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. 
+ ** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
  **(C) copyright by WOGRA technologies GmbH & Co. KG All rights reserved
  *****************************************************************************/
 
@@ -48,7 +48,7 @@
  *----------------last changed: --------------------------------Mo 27. Aug 14:07:50 2012----------*/
 CwmsReportManager::CwmsReportManager()
 {
-   CheckReportDataStructure();
+    CheckReportDataStructure();
 }
 
 /** +-=---------------------------------------------------------Mo 27. Aug 14:07:57 2012----------*
@@ -68,22 +68,22 @@ CwmsReportManager::~CwmsReportManager()
  *----------------last changed: --------------------------------Mo 27. Aug 14:08:49 2012----------*/
 void CwmsReportManager::CheckReportDataStructure()
 {
-   CdmDataProvider* pCdmManager = CdmSessionManager::GetDataProvider();
+    CdmDataProvider* pCdmManager = CdmSessionManager::GetDataProvider();
 
-   if (CHKPTR(pCdmManager) && CHKPTR(pCdmManager->GetCurrentScheme()))
-   {
-      CdmClassManager* pCdmClassManager = pCdmManager->GetClassManager(pCdmManager->GetCurrentScheme()->GetId());
+    if (CHKPTR(pCdmManager) && CHKPTR(pCdmManager->GetCurrentScheme()))
+    {
+        CdmClassManager* pCdmClassManager = pCdmManager->GetClassManager(pCdmManager->GetCurrentScheme()->GetId());
 
-      if (CHKPTR(pCdmClassManager))
-      {
-         CdmClass* pCdmClass = pCdmClassManager->FindClassByKeyname("Technical_Report");
+        if (CHKPTR(pCdmClassManager))
+        {
+            CdmClass* pCdmClass = pCdmClassManager->FindClassByKeyname("Technical_Report");
 
-         if (!pCdmClass)
-         {
-            CreateReportClass(pCdmClassManager);
-         }
-      }
-   }
+            if (!pCdmClass)
+            {
+                CreateReportClass(pCdmClassManager);
+            }
+        }
+    }
 }
 
 /** +-=---------------------------------------------------------Mo 27. Aug 14:18:47 2012----------*
@@ -94,87 +94,87 @@ void CwmsReportManager::CheckReportDataStructure()
  *----------------last changed: --------------------------------Mo 27. Aug 14:18:47 2012----------*/
 void CwmsReportManager::CreateReportClass(CdmClassManager* p_pCdmClassManager)
 {
-   if (CHKPTR(p_pCdmClassManager))
-   {
-      CdmClass* pCdmClass = p_pCdmClassManager->CreateClass("Technical_Report");
+    if (CHKPTR(p_pCdmClassManager))
+    {
+        CdmClass* pCdmClass = p_pCdmClassManager->CreateClass("Technical_Report");
 
-      if (CHKPTR(pCdmClass))
-      {
-         pCdmClass->SetCaption(tr("Bericht und Druckvorlage"));
-         pCdmClass->SetComment(tr("Speichert Berichts- und Druckvorlagen in der Datenbank."));
+        if (CHKPTR(pCdmClass))
+        {
+            pCdmClass->SetCaption(tr("Bericht und Druckvorlage"));
+            pCdmClass->SetComment(tr("Speichert Berichts- und Druckvorlagen in der Datenbank."));
 
-         CdmClassGroup* pCdmClassGroupInfo = pCdmClass->CreateGroup(tr("Information"), 1, nullptr);
-         CdmClassGroup* pCdmClassGroupDetails = pCdmClass->CreateGroup(tr("Details"), 1, nullptr);
-         pCdmClass->Commit();
+            CdmClassGroup* pCdmClassGroupInfo = pCdmClass->CreateGroup(tr("Information"), 1, nullptr);
+            CdmClassGroup* pCdmClassGroupDetails = pCdmClass->CreateGroup(tr("Details"), 1, nullptr);
+            pCdmClass->Commit();
 
-         CdmMember* pCdmMember = nullptr;
-         pCdmMember = pCdmClass->CreateMember("Name", eDmValueString, true, 200);
+            CdmMember* pCdmMember = nullptr;
+            pCdmMember = pCdmClass->CreateMember("Name", eDmValueString, true, 200);
 
-         if (CHKPTR(pCdmMember))
-         {
-            pCdmMember->SetCaption(tr("Name"));
-            pCdmMember->SetComment(tr("Name der Vorlage"));
-            pCdmMember->SetGroup(pCdmClassGroupInfo);
-         }
+            if (CHKPTR(pCdmMember))
+            {
+                pCdmMember->SetCaption(tr("Name"));
+                pCdmMember->SetComment(tr("Name der Vorlage"));
+                pCdmMember->SetGroup(pCdmClassGroupInfo);
+            }
 
-         pCdmMember = pCdmClass->CreateMember("Template", eDmValueCharacterDocument, false, 0);
+            pCdmMember = pCdmClass->CreateMember("Template", eDmValueCharacterDocument, false, 0);
 
-         if (CHKPTR(pCdmMember))
-         {
-            pCdmMember->SetCaption(tr("Vorlage"));
-            pCdmMember->SetComment(tr("Die Vorlage als XML DOkument"));
-            pCdmMember->SetMemberAccess(eDmMemberAccessPrivate);
-            pCdmMember->SetGroup(pCdmClassGroupDetails);
-         }
+            if (CHKPTR(pCdmMember))
+            {
+                pCdmMember->SetCaption(tr("Vorlage"));
+                pCdmMember->SetComment(tr("Die Vorlage als XML DOkument"));
+                pCdmMember->SetMemberAccess(eDmMemberAccessPrivate);
+                pCdmMember->SetGroup(pCdmClassGroupDetails);
+            }
 
-         pCdmMember = pCdmClass->CreateMember("Class", eDmValueString, false, 0);
+            pCdmMember = pCdmClass->CreateMember("Class", eDmValueString, false, 0);
 
-         if (CHKPTR(pCdmMember))
-         {
-            pCdmMember->SetCaption(tr("Klasse"));
-            pCdmMember->SetComment(tr("Die Klasse zu der die Vorlage gehört (Keyname)"));
-            pCdmMember->SetGroup(pCdmClassGroupInfo);
-         }
+            if (CHKPTR(pCdmMember))
+            {
+                pCdmMember->SetCaption(tr("Klasse"));
+                pCdmMember->SetComment(tr("Die Klasse zu der die Vorlage gehört (Keyname)"));
+                pCdmMember->SetGroup(pCdmClassGroupInfo);
+            }
 
-         pCdmMember = pCdmClass->CreateMember("Language", eDmValueString, false, 0);
+            pCdmMember = pCdmClass->CreateMember("Language", eDmValueString, false, 0);
 
-         if (CHKPTR(pCdmMember))
-         {
-            pCdmMember->SetCaption(tr("Sprache"));
-            pCdmMember->SetComment(tr("Die Sprache der Vorlage"));
-            pCdmMember->SetGroup(pCdmClassGroupInfo);
-         }
+            if (CHKPTR(pCdmMember))
+            {
+                pCdmMember->SetCaption(tr("Sprache"));
+                pCdmMember->SetComment(tr("Die Sprache der Vorlage"));
+                pCdmMember->SetGroup(pCdmClassGroupInfo);
+            }
 
-         pCdmMember = pCdmClass->CreateMember("Type", eDmValueInt, false, 0);
+            pCdmMember = pCdmClass->CreateMember("Type", eDmValueInt, false, 0);
 
-         if (CHKPTR(pCdmMember))
-         {
-            pCdmMember->SetCaption(tr("Art"));
-            pCdmMember->SetComment(tr("Die Art der Vorlage"));
-            pCdmMember->SetGroup(pCdmClassGroupInfo);
-         }
+            if (CHKPTR(pCdmMember))
+            {
+                pCdmMember->SetCaption(tr("Art"));
+                pCdmMember->SetComment(tr("Die Art der Vorlage"));
+                pCdmMember->SetGroup(pCdmClassGroupInfo);
+            }
 
-         pCdmMember = pCdmClass->CreateMember("Default", eDmValueBool, false, 0);
+            pCdmMember = pCdmClass->CreateMember("Default", eDmValueBool, false, 0);
 
-         if (CHKPTR(pCdmMember))
-         {
-            pCdmMember->SetCaption(tr("Standard"));
-            pCdmMember->SetComment(tr("Kennzeichen ob diese Vorlage die Standardvorlage ist."));
-            pCdmMember->SetGroup(pCdmClassGroupInfo);
-         }
+            if (CHKPTR(pCdmMember))
+            {
+                pCdmMember->SetCaption(tr("Standard"));
+                pCdmMember->SetComment(tr("Kennzeichen ob diese Vorlage die Standardvorlage ist."));
+                pCdmMember->SetGroup(pCdmClassGroupInfo);
+            }
 
-         pCdmClass->UpdateVersion();
-         pCdmClass->Commit();
+            pCdmClass->UpdateVersion();
+            pCdmClass->Commit();
 
-         CdmContainerManager* pCdmOLManager = pCdmClass->GetContainerManager();
+            CdmContainerManager* pCdmOLManager = pCdmClass->GetContainerManager();
 
-         if (CHKPTR(pCdmOLManager))
-         {
-            QString qstrOLName = "TechnicalReports";
-            pCdmOLManager->CreateContainer(pCdmClass, qstrOLName);
-         }
-      }
-   }
+            if (CHKPTR(pCdmOLManager))
+            {
+                QString qstrOLName = "TechnicalReports";
+                pCdmOLManager->CreateContainer(pCdmClass, qstrOLName);
+            }
+        }
+    }
 }
 
 /** +-=---------------------------------------------------------Mo 27. Aug 14:40:21 2012----------*
@@ -184,7 +184,7 @@ void CwmsReportManager::CreateReportClass(CdmClassManager* p_pCdmClassManager)
  *----------------last changed: --------------------------------Mo 27. Aug 14:40:21 2012----------*/
 CdmObjectContainer* CwmsReportManager::GetObjectList()
 {
-   return CdmDataProvider::GetObjectContainer("TechnicalReports");
+    return CdmDataProvider::GetObjectContainer("TechnicalReports");
 }
 
 /** +-=---------------------------------------------------------Mo 27. Aug 14:40:50 2012----------*
@@ -195,12 +195,12 @@ CdmObjectContainer* CwmsReportManager::GetObjectList()
  *----------------last changed: --------------------------------Mo 27. Aug 14:40:50 2012----------*/
 void CwmsReportManager::GetReportList(QList<CdmObject*>& p_rqlViews)
 {
-   CdmObjectContainer* pContainer = GetObjectList();
+    CdmObjectContainer* pContainer = GetObjectList();
 
-   if (CHKPTR(pContainer))
-   {
-      pContainer->GetObjectList(p_rqlViews);
-   }
+    if (CHKPTR(pContainer))
+    {
+        pContainer->GetObjectList(p_rqlViews);
+    }
 }
 
 /** +-=---------------------------------------------------------Mo 27. Aug 14:43:22 2012----------*
@@ -211,16 +211,16 @@ void CwmsReportManager::GetReportList(QList<CdmObject*>& p_rqlViews)
  *----------------last changed: --------------------------------Mo 27. Aug 14:43:22 2012----------*/
 CwmsPrintingTemplate CwmsReportManager::GetReport(long p_lObjectId)
 {
-   CwmsPrintingTemplate cPrintingTemplate;
-   CdmObjectContainer* pContainer = GetObjectList();
+    CwmsPrintingTemplate cPrintingTemplate;
+    CdmObjectContainer* pContainer = GetObjectList();
 
-   if (CHKPTR(pContainer))
-   {
-      CdmObject* pCdmObject = pContainer->FindObjectById(p_lObjectId);
-      cPrintingTemplate.SetObject(pCdmObject);
-   }
+    if (CHKPTR(pContainer))
+    {
+        CdmObject* pCdmObject = pContainer->FindObjectById(p_lObjectId);
+        cPrintingTemplate.SetObject(pCdmObject);
+    }
 
-   return cPrintingTemplate;
+    return cPrintingTemplate;
 }
 
 /** +-=---------------------------------------------------------Mo 27. Aug 14:41:50 2012----------*
@@ -231,24 +231,24 @@ CwmsPrintingTemplate CwmsReportManager::GetReport(long p_lObjectId)
  *----------------last changed: --------------------------------Mo 27. Aug 14:41:50 2012----------*/
 CwmsPrintingTemplate CwmsReportManager::GetReport(QString p_qstrName)
 {
-   CwmsPrintingTemplate cPrintingTemplate;
-   QString qstrQuery = "select from TechnicalReports where Name = \"" + p_qstrName +"\"";
+    CwmsPrintingTemplate cPrintingTemplate;
+    QString qstrQuery = "select from TechnicalReports where Name = \"" + p_qstrName +"\"";
 
-   CdmQuery* pQuery = CdmQueryBuilder::ExecuteQuery(qstrQuery);
+    CdmQuery* pQuery = CdmQueryBuilder::ExecuteQuery(qstrQuery);
 
-   if (pQuery)
-   {
-      QList<long> qllResults = pQuery->GetResultList();
+    if (pQuery)
+    {
+        QList<long> qllResults = pQuery->GetResultList();
 
-      if (qllResults.count() > 0)
-      {
-         cPrintingTemplate = GetReport(*(qllResults.begin()));
-      }
+        if (qllResults.count() > 0)
+        {
+            cPrintingTemplate = GetReport(*(qllResults.begin()));
+        }
 
-      DELPTR(pQuery);
-   }
+        DELPTR(pQuery);
+    }
 
-   return cPrintingTemplate;
+    return cPrintingTemplate;
 }
 
 /** +-=---------------------------------------------------------Mi 20. Feb 16:20:42 2013----------*
@@ -259,26 +259,26 @@ CwmsPrintingTemplate CwmsReportManager::GetReport(QString p_qstrName)
  *----------------last changed: --------------------------------Mi 20. Feb 16:20:42 2013----------*/
 void CwmsReportManager::GetClassesWithReports(QStringList& p_rqlClasses)
 {
-   CwmsPrintingTemplate cPrintingTemplate;
-   QString qstrQuery = "select Class from TechnicalReports";
-   CdmQueryEnhanced* pQuery = (CdmQueryEnhanced*)CdmQueryBuilder::ExecuteQuery(qstrQuery);
+    CwmsPrintingTemplate cPrintingTemplate;
+    QString qstrQuery = "select Class from TechnicalReports";
+    CdmQueryEnhanced* pQuery = (CdmQueryEnhanced*)CdmQueryBuilder::ExecuteQuery(qstrQuery);
 
-   if (pQuery)
-   {
-      int iCount = pQuery->GetResultCount();
-      
-      for( int iCounter = 0; iCounter < iCount; ++iCounter)
-      {
-         QString qstrKeyname = pQuery->GetResultAt(0, iCounter).toString();
+    if (pQuery)
+    {
+        int iCount = pQuery->GetResultCount();
 
-         if (!p_rqlClasses.contains(qstrKeyname))
-         {
-            p_rqlClasses.append(qstrKeyname);
-         }
-      }
+        for( int iCounter = 0; iCounter < iCount; ++iCounter)
+        {
+            QString qstrKeyname = pQuery->GetResultAt(0, iCounter).toString();
 
-      DELPTR(pQuery);
-   }
+            if (!p_rqlClasses.contains(qstrKeyname))
+            {
+                p_rqlClasses.append(qstrKeyname);
+            }
+        }
+
+        DELPTR(pQuery);
+    }
 }
 
 /** +-=---------------------------------------------------------Mi 20. Feb 16:21:19 2013----------*
@@ -289,9 +289,9 @@ void CwmsReportManager::GetClassesWithReports(QStringList& p_rqlClasses)
  *----------------last changed: --------------------------------Mi 20. Feb 16:21:19 2013----------*/
 CdmQueryEnhanced* CwmsReportManager::GetReportsByClassKeyname(QString p_qstrKeyname)
 {
-   QString qstrQuery = "select Name, Language, Type, Default from TechnicalReports where Class = \"" + p_qstrKeyname + "\"";
-   CdmQueryEnhanced* pQuery = (CdmQueryEnhanced*)CdmQueryBuilder::ExecuteQuery(qstrQuery);
-   return pQuery;
+    QString qstrQuery = "select Name, Language, Type, Default from TechnicalReports where Class = \"" + p_qstrKeyname + "\"";
+    CdmQueryEnhanced* pQuery = (CdmQueryEnhanced*)CdmQueryBuilder::ExecuteQuery(qstrQuery);
+    return pQuery;
 }
 
 /** +-=---------------------------------------------------------Mi 20. Feb 16:22:09 2013----------*
@@ -304,53 +304,53 @@ CdmQueryEnhanced* CwmsReportManager::GetReportsByClassKeyname(QString p_qstrKeyn
 CdmQueryEnhanced* CwmsReportManager::GetReportsByClassKeyname(QString p_qstrKeyname,
                                                               EwmsTemplateType p_eType)
 {
-   CdmDataProvider* pCdmManager = CdmSessionManager::GetDataProvider();
-   CdmQueryEnhanced* pQuery = nullptr;
+    CdmDataProvider* pCdmManager = CdmSessionManager::GetDataProvider();
+    CdmQueryEnhanced* pQuery = nullptr;
 
-   if (pCdmManager)
-   {
-       QString qstrLanguage = pCdmManager->GetCurrentLanguage();
-       QString qstrQuery;
+    if (pCdmManager)
+    {
+        QString qstrLanguage = pCdmManager->GetCurrentLanguage();
+        QString qstrQuery;
 
-       if (!qstrLanguage.isEmpty())
-       {
-           qstrQuery = QString("select Name, Default from TechnicalReports where and(Class = \"%1\", Type = %2, Language = \"%3\")")
-                   .arg(p_qstrKeyname)
-                   .arg(p_eType)
-                   .arg(pCdmManager->GetCurrentLanguage());
-       }
-       else
-       {
-           qstrQuery = QString("select Name, Default from TechnicalReports where and(Class = \"%1\", Type = %2)")
-                   .arg(p_qstrKeyname)
-                   .arg(p_eType);
-       }
+        if (!qstrLanguage.isEmpty())
+        {
+            qstrQuery = QString("select Name, Default from TechnicalReports where and(Class = \"%1\", Type = %2, Language = \"%3\")")
+                    .arg(p_qstrKeyname)
+                    .arg(p_eType)
+                    .arg(pCdmManager->GetCurrentLanguage());
+        }
+        else
+        {
+            qstrQuery = QString("select Name, Default from TechnicalReports where and(Class = \"%1\", Type = %2)")
+                    .arg(p_qstrKeyname)
+                    .arg(p_eType);
+        }
 
-      pQuery = (CdmQueryEnhanced*)CdmQueryBuilder::ExecuteQuery(qstrQuery);
-   }
+        pQuery = (CdmQueryEnhanced*)CdmQueryBuilder::ExecuteQuery(qstrQuery);
+    }
 
-   return pQuery;
+    return pQuery;
 }
 
 CdmQueryEnhanced* CwmsReportManager::GetReportsByClassKeynameAndLanguage(QString p_qstrKeyname,
                                                                          EwmsTemplateType p_eType,
                                                                          QString p_qstrLanguage)
 {
-   CdmDataProvider* pCdmManager = CdmSessionManager::GetDataProvider();
-   CdmQueryEnhanced* pQuery = nullptr;
+    CdmDataProvider* pCdmManager = CdmSessionManager::GetDataProvider();
+    CdmQueryEnhanced* pQuery = nullptr;
 
-   if (pCdmManager)
-   {
+    if (pCdmManager)
+    {
 
-      QString qstrQuery = QString("select Name, Default from TechnicalReports where and(Class = \"%1\", Type = %2, Language = \"%3\")")
-                                 .arg(p_qstrKeyname)
-                                 .arg(p_eType)
-                                 .arg(p_qstrLanguage);
+        QString qstrQuery = QString("select Name, Default from TechnicalReports where and(Class = \"%1\", Type = %2, Language = \"%3\")")
+                .arg(p_qstrKeyname)
+                .arg(p_eType)
+                .arg(p_qstrLanguage);
 
-      pQuery = (CdmQueryEnhanced*)CdmQueryBuilder::ExecuteQuery(qstrQuery);
-   }
+        pQuery = (CdmQueryEnhanced*)CdmQueryBuilder::ExecuteQuery(qstrQuery);
+    }
 
-   return pQuery;
+    return pQuery;
 }
 
 /** +-=---------------------------------------------------------Mi 27. Feb 09:24:24 2013----------*
@@ -363,49 +363,49 @@ CdmQueryEnhanced* CwmsReportManager::GetReportsByClassKeynameAndLanguage(QString
 CwmsPrintingTemplate CwmsReportManager::GetDefaultReportByClassKeyname(QString p_qstrKeyname,
                                                                        EwmsTemplateType p_eType)
 {
-   CdmDataProvider* pCdmManager = CdmSessionManager::GetDataProvider();
-   CwmsPrintingTemplate cTemplate;
+    CdmDataProvider* pCdmManager = CdmSessionManager::GetDataProvider();
+    CwmsPrintingTemplate cTemplate;
 
-   if (pCdmManager)
-   {
-       QString qstrLanguage = pCdmManager->GetCurrentLanguage();
-       QString qstrQuery;
+    if (pCdmManager)
+    {
+        QString qstrLanguage = pCdmManager->GetCurrentLanguage();
+        QString qstrQuery;
 
-       if (!qstrLanguage.isEmpty())
-       {
-           qstrQuery = QString("select from TechnicalReports where and(Class = \"%1\", Type = %2, Language = \"%3\", Default = true)")
-             .arg(p_qstrKeyname)
-             .arg(p_eType)
-             .arg(pCdmManager->GetCurrentLanguage());
-       }
-       else
-       {
-           qstrQuery = QString("select from TechnicalReports where and(Class = \"%1\", Type = %2, Default = true)")
-             .arg(p_qstrKeyname)
-             .arg(p_eType);
-       }
+        if (!qstrLanguage.isEmpty())
+        {
+            qstrQuery = QString("select from TechnicalReports where and(Class = \"%1\", Type = %2, Language = \"%3\", Default = true)")
+                    .arg(p_qstrKeyname)
+                    .arg(p_eType)
+                    .arg(pCdmManager->GetCurrentLanguage());
+        }
+        else
+        {
+            qstrQuery = QString("select from TechnicalReports where and(Class = \"%1\", Type = %2, Default = true)")
+                    .arg(p_qstrKeyname)
+                    .arg(p_eType);
+        }
 
-      CdmQuery* pQuery = CdmQueryBuilder::ExecuteQuery(qstrQuery);
+        CdmQuery* pQuery = CdmQueryBuilder::ExecuteQuery(qstrQuery);
 
-      if (CHKPTR(pQuery) && pQuery->GetResultCount() > 0)
-      {
-         const QList<long>& qllResults = pQuery->GetResultList();
-         long lObjectId = (*qllResults.begin());
-         CdmObjectContainer* pList = GetObjectList();
+        if (CHKPTR(pQuery) && pQuery->GetResultCount() > 0)
+        {
+            const QList<long>& qllResults = pQuery->GetResultList();
+            long lObjectId = (*qllResults.begin());
+            CdmObjectContainer* pList = GetObjectList();
 
-         if (CHKPTR(pList))
-         {
-            CdmObject* pObject = pList->FindObjectById(lObjectId);
-
-            if (CHKPTR(pObject))
+            if (CHKPTR(pList))
             {
-               cTemplate.SetObject(pObject);
-            }
-         }
-      }
-   }
+                CdmObject* pObject = pList->FindObjectById(lObjectId);
 
-   return cTemplate;
+                if (CHKPTR(pObject))
+                {
+                    cTemplate.SetObject(pObject);
+                }
+            }
+        }
+    }
+
+    return cTemplate;
 }
 
 bool CwmsReportManager::HasDefaultPrintingTemplate(CdmObject* p_pObject)
@@ -446,28 +446,28 @@ bool CwmsReportManager::HasDefaultPrintingTemplate(CdmObjectContainer* p_pContai
  *----------------last changed: --------------------------------Di 26. Feb 15:57:00 2013----------*/
 QByteArray CwmsReportManager::GetPdf(long p_ObjectListId, QString p_qstrTemplate)
 {
-   QByteArray qArray;
-   CdmObjectContainer* pList = FindObjectListForPDFCreation(p_ObjectListId);
+    QByteArray qArray;
+    CdmObjectContainer* pList = FindObjectListForPDFCreation(p_ObjectListId);
 
-   if (CHKPTR(pList))
-   {
-      CwmsPrintingTemplate cTemplate = GetReport(p_qstrTemplate);
+    if (CHKPTR(pList))
+    {
+        CwmsPrintingTemplate cTemplate = GetReport(p_qstrTemplate);
 
-      if (cTemplate.IsValid())
-      {
-         IwmsPrinting* pPrinting = GetPrintingObject();
+        if (cTemplate.IsValid())
+        {
+            IwmsPrinting* pPrinting = GetPrintingObject();
 
-         if (CHKPTR(pPrinting))
-         {
-             pPrinting->AddObjectContainer("ObjectContainer", pList);
-             pPrinting->SetTemplate(cTemplate);
-             qArray = pPrinting->PrintPdfToByteArray();
-             DELPTR(pPrinting);
-         }
-      }
-   }
+            if (CHKPTR(pPrinting))
+            {
+                pPrinting->AddObjectContainer("ObjectContainer", pList);
+                pPrinting->SetTemplate(cTemplate);
+                qArray = pPrinting->PrintPdfToByteArray();
+                DELPTR(pPrinting);
+            }
+        }
+    }
 
-   return qArray;
+    return qArray;
 }
 
 /** +-=---------------------------------------------------------Di 26. Feb 15:57:38 2013----------*
@@ -478,33 +478,33 @@ QByteArray CwmsReportManager::GetPdf(long p_ObjectListId, QString p_qstrTemplate
  *----------------last changed: --------------------------------Di 26. Feb 15:57:38 2013----------*/
 QByteArray CwmsReportManager::GetPdf(long p_ObjectListId)
 {
-   QByteArray qArray;
-   CdmObjectContainer* pList = FindObjectListForPDFCreation(p_ObjectListId);
+    QByteArray qArray;
+    CdmObjectContainer* pList = FindObjectListForPDFCreation(p_ObjectListId);
 
-   if (CHKPTR(pList))
-   {
-      const CdmClass* pClass = pList->GetClass();
+    if (CHKPTR(pList))
+    {
+        const CdmClass* pClass = pList->GetClass();
 
-      if (CHKPTR(pClass))
-      {
-         CwmsPrintingTemplate cTemplate = GetDefaultReportByClassKeyname(pClass->GetKeyname(), eWmsTemplateTypeList);
+        if (CHKPTR(pClass))
+        {
+            CwmsPrintingTemplate cTemplate = GetDefaultReportByClassKeyname(pClass->GetKeyname(), eWmsTemplateTypeList);
 
-         if (cTemplate.IsValid())
-         {
-            IwmsPrinting* pPrinting = GetPrintingObject();
-
-            if (CHKPTR(pPrinting))
+            if (cTemplate.IsValid())
             {
-                pPrinting->AddObjectContainer("ObjectContainer", pList);
-                pPrinting->SetTemplate(cTemplate);
-                qArray = pPrinting->PrintPdfToByteArray();
-                DELPTR(pPrinting);
-            }
-         }
-      }
-   }
+                IwmsPrinting* pPrinting = GetPrintingObject();
 
-   return qArray;
+                if (CHKPTR(pPrinting))
+                {
+                    pPrinting->AddObjectContainer("ObjectContainer", pList);
+                    pPrinting->SetTemplate(cTemplate);
+                    qArray = pPrinting->PrintPdfToByteArray();
+                    DELPTR(pPrinting);
+                }
+            }
+        }
+    }
+
+    return qArray;
 }
 
 /** +-=---------------------------------------------------------Di 26. Feb 15:57:19 2013----------*
@@ -517,38 +517,38 @@ QByteArray CwmsReportManager::GetPdf(long p_ObjectListId)
  *----------------last changed: --------------------------------Di 26. Feb 15:57:19 2013----------*/
 QByteArray CwmsReportManager::GetPdf(long p_ObjectListId, long p_ObjectId, QString p_qstrTemplate)
 {
-   QByteArray qArray;
-   CdmObjectContainer* pList = FindObjectListForPDFCreation(p_ObjectListId);
+    QByteArray qArray;
+    CdmObjectContainer* pList = FindObjectListForPDFCreation(p_ObjectListId);
 
-   if (CHKPTR(pList))
-   {
-      const CdmClass* pClass = pList->GetClass();
+    if (CHKPTR(pList))
+    {
+        const CdmClass* pClass = pList->GetClass();
 
-      if (CHKPTR(pClass))
-      {
-         CwmsPrintingTemplate cTemplate = GetReport(p_qstrTemplate);
+        if (CHKPTR(pClass))
+        {
+            CwmsPrintingTemplate cTemplate = GetReport(p_qstrTemplate);
 
-         if (cTemplate.IsValid())
-         {
-            CdmObject* pObject = pList->FindObjectById(p_ObjectId);
-
-            if (CHKPTR(pObject))
+            if (cTemplate.IsValid())
             {
-               IwmsPrinting* pPrinting = GetPrintingObject();
+                CdmObject* pObject = pList->FindObjectById(p_ObjectId);
 
-               if (CHKPTR(pPrinting))
-               {
-                   pPrinting->AddObject("Object", pObject);
-                   pPrinting->SetTemplate(cTemplate);
-                   qArray = CreatePDFOutput(*pPrinting);
-                   DELPTR(pPrinting);
-               }
+                if (CHKPTR(pObject))
+                {
+                    IwmsPrinting* pPrinting = GetPrintingObject();
+
+                    if (CHKPTR(pPrinting))
+                    {
+                        pPrinting->AddObject("Object", pObject);
+                        pPrinting->SetTemplate(cTemplate);
+                        qArray = CreatePDFOutput(*pPrinting);
+                        DELPTR(pPrinting);
+                    }
+                }
             }
-         }
-      }
-   }
+        }
+    }
 
-   return qArray;
+    return qArray;
 }
 
 /** +-=---------------------------------------------------------Di 26. Feb 15:57:52 2013----------*
@@ -561,34 +561,34 @@ QByteArray CwmsReportManager::GetPdf(long p_ObjectListId, long p_ObjectId, QStri
 QByteArray CwmsReportManager::GetPdf(long p_ObjectListId, long p_ObjectId)
 {
 
-   QByteArray qArray;
-   CdmObjectContainer* pList = FindObjectListForPDFCreation(p_ObjectListId);
+    QByteArray qArray;
+    CdmObjectContainer* pList = FindObjectListForPDFCreation(p_ObjectListId);
 
-   if (CHKPTR(pList))
-   {
-      const CdmClass* pClass = pList->GetClass();
+    if (CHKPTR(pList))
+    {
+        const CdmClass* pClass = pList->GetClass();
 
-      if (CHKPTR(pClass))
-      {
-         CwmsPrintingTemplate cTemplate = GetDefaultReportByClassKeyname(pClass->GetKeyname(), eWmsTemplateTypeObject);
+        if (CHKPTR(pClass))
+        {
+            CwmsPrintingTemplate cTemplate = GetDefaultReportByClassKeyname(pClass->GetKeyname(), eWmsTemplateTypeObject);
 
-         if (cTemplate.IsValid())
-         {
-            CdmObject* pObject = pList->FindObjectById(p_ObjectId);
-
-            if (CHKPTR(pObject))
+            if (cTemplate.IsValid())
             {
-               IwmsPrinting* pPrinting = GetPrintingObject();
-               pPrinting->AddObject("Object", pObject);
-               pPrinting->SetTemplate(cTemplate);
-               qArray = CreatePDFOutput(*pPrinting);
-               DELPTR(pPrinting);
-            }
-         }
-      }
-   }
+                CdmObject* pObject = pList->FindObjectById(p_ObjectId);
 
-   return qArray;
+                if (CHKPTR(pObject))
+                {
+                    IwmsPrinting* pPrinting = GetPrintingObject();
+                    pPrinting->AddObject("Object", pObject);
+                    pPrinting->SetTemplate(cTemplate);
+                    qArray = CreatePDFOutput(*pPrinting);
+                    DELPTR(pPrinting);
+                }
+            }
+        }
+    }
+
+    return qArray;
 }
 
 /** +-=---------------------------------------------------------Di 26. Feb 15:59:55 2013----------*
@@ -599,20 +599,20 @@ QByteArray CwmsReportManager::GetPdf(long p_ObjectListId, long p_ObjectId)
  *----------------last changed: --------------------------------Di 26. Feb 15:59:55 2013----------*/
 CdmObjectContainer* CwmsReportManager::FindObjectListForPDFCreation(long p_lObjectListId)
 {
-   CdmObjectContainer* pList = nullptr;
-   CdmDataProvider* pManager = CdmSessionManager::GetDataProvider();
+    CdmObjectContainer* pList = nullptr;
+    CdmDataProvider* pManager = CdmSessionManager::GetDataProvider();
 
-   if (CHKPTR(pManager) && CHKPTR(pManager->GetCurrentScheme()))
-   {
-      CdmContainerManager* pOLManager = pManager->GetContainerManager(pManager->GetCurrentScheme()->GetId());
+    if (CHKPTR(pManager) && CHKPTR(pManager->GetCurrentScheme()))
+    {
+        CdmContainerManager* pOLManager = pManager->GetContainerManager(pManager->GetCurrentScheme()->GetId());
 
-      if (CHKPTR(pOLManager))
-      {
-         pList = pOLManager->FindEmptyContainerById(p_lObjectListId);
-      }
-   }
+        if (CHKPTR(pOLManager))
+        {
+            pList = pOLManager->FindEmptyContainerById(p_lObjectListId);
+        }
+    }
     
-   return pList;
+    return pList;
 }
 
 /** +-=---------------------------------------------------------Mi 27. Feb 09:37:16 2013----------*
@@ -623,9 +623,9 @@ CdmObjectContainer* CwmsReportManager::FindObjectListForPDFCreation(long p_lObje
  *----------------last changed: --------------------------------Mi 27. Feb 09:37:16 2013----------*/
 QByteArray CwmsReportManager::CreatePDFOutput(IwmsPrinting& p_rPrinting)
 {
-   //QByteArray qbaPdf;
-   return p_rPrinting.PrintPdfToByteArray();
-   /*CdmManager* pManager = CdmSessionManager::GetManager();
+    //QByteArray qbaPdf;
+    return p_rPrinting.PrintPdfToByteArray();
+    /*CdmManager* pManager = CdmSessionManager::GetManager();
 
    if (CHKPTR(pManager))
    {
@@ -651,10 +651,10 @@ QByteArray CwmsReportManager::CreatePDFOutput(IwmsPrinting& p_rPrinting)
 IwmsPrinting* CwmsReportManager::GetPrintingObject()
 {
     IwmsPrinting* pPrinting = nullptr;
-	CwmsContext* pContext = CwmsContext::GetContext();
+    CwmsContext* pContext = CwmsContext::GetContext();
 
-	if (CHKPTR(pContext))
-	{
+    if (CHKPTR(pContext))
+    {
         CwmsPluginManager* pPluginManager = pContext->GetPluginManager();
 
         if (CHKPTR(pPluginManager) && pPluginManager->HasPrintingPlugin())
@@ -666,7 +666,7 @@ IwmsPrinting* CwmsReportManager::GetPrintingObject()
             CdmMessageManager::critical(tr("Druck Plugin nicht gefunden"),
                                         tr("Das Druck Plugin wurde nicht gefunden. Drucken nicht möglich!"));
         }
-	}
+    }
 
     return pPrinting;
 }
@@ -675,22 +675,22 @@ IwmsPrinting* CwmsReportManager::GetPrintingObject()
 void CwmsReportManager::OpenReportEditor(long p_lObjectId, QWidget* p_pParent)
 {
     CwmsReportManager cManager;
-	OpenReportEditor(cManager.GetReport(p_lObjectId).GetObject(), p_pParent);
+    OpenReportEditor(cManager.GetReport(p_lObjectId).GetObject(), p_pParent);
 }
 
 void CwmsReportManager::OpenReportEditor(CdmObject* p_pObject, QWidget* p_pParent)
 {
-	CwmsPluginManager* pPluginManager = CwmsContext::GetContext()->GetPluginManager();
+    CwmsPluginManager* pPluginManager = CwmsContext::GetContext()->GetPluginManager();
 
-	if (CHKPTR(pPluginManager) && pPluginManager->HasPrintingPlugin())
-	{
-		pPluginManager->GetPrintingPlugin()->OpenPrintingDesigner(p_pObject, p_pParent);
-	}
-	else
-	{
-		CdmMessageManager::critical(tr("Druck Plugin nicht gefunden"),
-			tr("Der Druckausgabe Designer kann nicht geöffnet werden!"));
-	}
+    if (CHKPTR(pPluginManager) && pPluginManager->HasPrintingPlugin())
+    {
+        pPluginManager->GetPrintingPlugin()->OpenPrintingDesigner(p_pObject, p_pParent);
+    }
+    else
+    {
+        CdmMessageManager::critical(tr("Druck Plugin nicht gefunden"),
+                                    tr("Der Druckausgabe Designer kann nicht geöffnet werden!"));
+    }
 }
 
 void CwmsReportManager::PrintDefaultForContainer(CdmObjectContainer* p_pContainer)
@@ -703,61 +703,65 @@ void CwmsReportManager::PrintDefaultForContainer(CdmObjectContainer* p_pContaine
 
     if (CHKPTR(pClass))
     {
-       pQuery = cReportManager.GetReportsByClassKeyname(pClass->GetFullQualifiedName(),
-                                                        eWmsTemplateTypeList);
+        pQuery = cReportManager.GetReportsByClassKeyname(pClass->GetFullQualifiedName(),
+                                                         eWmsTemplateTypeList);
     }
 
     if (pQuery)
     {
-       int iResultCount = pQuery->GetResultCount();
+        int iResultCount = pQuery->GetResultCount();
 
-       if (iResultCount > 0)
-       {
-          for (int iCounter = 0; iCounter < iResultCount; ++iCounter)
-          {
-             QString qstrName = pQuery->GetResultAt(0, iCounter).toString();
-             bool bDefault = pQuery->GetResultAt(1, iCounter).toBool();
+        if (iResultCount > 0)
+        {
+            for (int iCounter = 0; iCounter < iResultCount; ++iCounter)
+            {
+                QString qstrName = pQuery->GetResultAt(0, iCounter).toString();
+                bool bDefault = pQuery->GetResultAt(1, iCounter).toBool();
 
-             if (iCounter == 0)
-             {
-                qstrTemplate = qstrName;
-             }
+                if (iCounter == 0)
+                {
+                    qstrTemplate = qstrName;
+                }
 
-             if (bDefault)
-             {
-                qstrTemplate = qstrName;
-                break;
-             }
-          }
-       }
+                if (bDefault)
+                {
+                    qstrTemplate = qstrName;
+                    break;
+                }
+            }
+        }
 
-       DELPTR(pQuery);
+        DELPTR(pQuery);
     }
 
     if (!qstrTemplate.isEmpty())
     {
-       CwmsPrintingTemplate cTemplate = cReportManager.GetReport(qstrTemplate);
-       Print(cTemplate.GetObject(), p_pContainer);
+        CwmsPrintingTemplate cTemplate = cReportManager.GetReport(qstrTemplate);
+        Print(cTemplate.GetObject(), p_pContainer);
     }
 }
 
 void CwmsReportManager::Print(CdmObject* p_pCdmTemplateObject, CdmObjectContainer* p_pContainer)
 {
-   CwmsPrintingTemplate cTemplate(p_pCdmTemplateObject);
+    CwmsPrintingTemplate cTemplate(p_pCdmTemplateObject);
 
-   if (cTemplate.IsValid())
-   {
-       IwmsPrinting* pPrinting = CwmsReportManager::GetPrintingObject();
+    if (cTemplate.IsValid())
+    {
+        IwmsPrinting* pPrinting = CwmsReportManager::GetPrintingObject();
 
-       if (CHKPTR(pPrinting) && CHKPTR(p_pContainer))
-       {
-           pPrinting->AddObjectContainer("ObjectContainer", p_pContainer);
-           pPrinting->AddParameter("ContainerKeyname", p_pContainer->GetKeyname());
-           pPrinting->SetTemplate(cTemplate);
-           pPrinting->Print();
-           DELPTR(pPrinting);
-       }
-   }
+        if (CHKPTR(pPrinting))
+        {
+            if (p_pContainer != nullptr)
+            {
+                pPrinting->AddObjectContainer("ObjectContainer", p_pContainer);
+                pPrinting->AddParameter("ContainerKeyname", p_pContainer->GetKeyname());
+            }
+
+            pPrinting->SetTemplate(cTemplate);
+            pPrinting->Print();
+            DELPTR(pPrinting);
+        }
+    }
 }
 
 void CwmsReportManager::PrintDefaultForObject(CdmObject* p_pObject)
@@ -770,41 +774,41 @@ void CwmsReportManager::PrintDefaultForObject(CdmObject* p_pObject)
 
     if (CHKPTR(pClass))
     {
-       pQuery = cReportManager.GetReportsByClassKeyname(pClass->GetFullQualifiedName(),
-                                                        eWmsTemplateTypeObject);
+        pQuery = cReportManager.GetReportsByClassKeyname(pClass->GetFullQualifiedName(),
+                                                         eWmsTemplateTypeObject);
     }
 
     if (pQuery)
     {
-       int iResultCount = pQuery->GetResultCount();
+        int iResultCount = pQuery->GetResultCount();
 
-       if (iResultCount > 0)
-       {
-          for (int iCounter = 0; iCounter < iResultCount; ++iCounter)
-          {
-             QString qstrName = pQuery->GetResultAt(0, iCounter).toString();
-             bool bDefault = pQuery->GetResultAt(1, iCounter).toBool();
+        if (iResultCount > 0)
+        {
+            for (int iCounter = 0; iCounter < iResultCount; ++iCounter)
+            {
+                QString qstrName = pQuery->GetResultAt(0, iCounter).toString();
+                bool bDefault = pQuery->GetResultAt(1, iCounter).toBool();
 
-             if (iCounter == 0)
-             {
-                qstrTemplate = qstrName;
-             }
+                if (iCounter == 0)
+                {
+                    qstrTemplate = qstrName;
+                }
 
-             if (bDefault)
-             {
-                qstrTemplate = qstrName;
-                break;
-             }
-          }
-       }
+                if (bDefault)
+                {
+                    qstrTemplate = qstrName;
+                    break;
+                }
+            }
+        }
 
-       DELPTR(pQuery);
+        DELPTR(pQuery);
     }
 
     if (!qstrTemplate.isEmpty())
     {
-       CwmsPrintingTemplate cTemplate = cReportManager.GetReport(qstrTemplate);
-       Print(cTemplate.GetObject(), p_pObject);
+        CwmsPrintingTemplate cTemplate = cReportManager.GetReport(qstrTemplate);
+        Print(cTemplate.GetObject(), p_pObject);
     }
 }
 

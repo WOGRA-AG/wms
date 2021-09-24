@@ -26,3 +26,6 @@ public slots:
 };
 
 #endif // CWMSSCRIPTABLEUTILITIES_H
+
+
+

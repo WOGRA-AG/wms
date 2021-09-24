@@ -3,10 +3,18 @@
 #include <QRegExp>
 #include <QDate>
 #include <QRegularExpression>
+#include <QLocale>
 #include <QCryptographicHash>
+#include <QProcess>
+#include <QFile>
 
 // Own Includes
 #include "CwmsUtilities.h"
+
+#define MAX_ISO_DATE     QStringLiteral("9999-12-31")
+#define MAX_ISO_DATE_OLD QStringLiteral("7999-12-31")
+#define MAX_WMS_DATE     QStringLiteral("2100-12-31")
+
 
 bool CwmsUtilities::isValueTrue(QString& p_qstrValue)
 {
@@ -22,7 +30,16 @@ bool CwmsUtilities::isNumberValid(int iNumber)
 bool CwmsUtilities::IsNumber(QString& p_qstrValue)
 {
     QRegExp re("\\d*");  // a digit (\d), zero or more times (*)
-    return (re.exactMatch(p_qstrValue));
+
+    if (!re.exactMatch(p_qstrValue))
+    {
+        QLocale loc;
+        bool bOk = false;
+        loc.toDouble(p_qstrValue, &bOk);
+        return bOk;
+    }
+
+    return true;
 }
 
 bool CwmsUtilities::isNumberValid(long lNumber)
@@ -908,3 +925,76 @@ bool CwmsUtilities::IsInTheSameMonth(QDate& qdStart, QDate& qdEnd)
 {
     return (qdStart.month() == qdEnd.month() && qdStart.year() == qdEnd.year());
 }
+
+QString CwmsUtilities::MakeWindowsFileName(QString p_qstrText, QString p_qstrReplaceString)
+{
+    p_qstrText = p_qstrText.simplified();
+    p_qstrText = p_qstrText.replace(".", p_qstrReplaceString);
+    p_qstrText = p_qstrText.replace(" ", p_qstrReplaceString);
+    p_qstrText = p_qstrText.replace("+", p_qstrReplaceString);
+    p_qstrText = p_qstrText.replace("*", p_qstrReplaceString);
+    p_qstrText = p_qstrText.replace("/", p_qstrReplaceString);
+    p_qstrText = p_qstrText.replace("\\", p_qstrReplaceString);
+    p_qstrText = p_qstrText.replace("\"", p_qstrReplaceString);
+    p_qstrText = p_qstrText.replace("'", p_qstrReplaceString);
+    p_qstrText = p_qstrText.replace(",", p_qstrReplaceString);
+    p_qstrText = p_qstrText.replace(";", p_qstrReplaceString);
+    p_qstrText = p_qstrText.replace("^", p_qstrReplaceString);
+    p_qstrText = p_qstrText.replace("°", p_qstrReplaceString);
+    p_qstrText = p_qstrText.replace("?", p_qstrReplaceString);
+    p_qstrText = p_qstrText.replace("@", p_qstrReplaceString);
+    p_qstrText = p_qstrText.replace("~", p_qstrReplaceString);
+    p_qstrText = p_qstrText.replace("|", p_qstrReplaceString);
+    p_qstrText = p_qstrText.replace(">", p_qstrReplaceString);
+    p_qstrText = p_qstrText.replace("<", p_qstrReplaceString);
+    p_qstrText = p_qstrText.replace("=", p_qstrReplaceString);
+    p_qstrText = p_qstrText.replace(":", p_qstrReplaceString);
+
+    return p_qstrText;
+}
+
+QString CwmsUtilities::GetMaxWmsDateString()
+{
+    return(MAX_WMS_DATE);
+}
+
+QString CwmsUtilities::GetInvalidDateString()
+{
+    return(MAX_ISO_DATE);
+}
+
+QString CwmsUtilities::GetInvalidDateStringOld()
+{
+    return(MAX_ISO_DATE_OLD);
+}
+
+
+bool CwmsUtilities::CreateArchive(QString p_rArchiveFileName, QString p_qstrOutPath, QStringList p_qstrlFileNamesForArchive)
+{
+    if (false == (p_qstrOutPath.endsWith("/") || p_qstrOutPath.endsWith("\\")))
+    {
+        p_qstrOutPath.append("/");
+    }
+
+    QFile::remove(p_qstrOutPath + p_rArchiveFileName);
+
+    QStringList qstrlArguments;
+    qstrlArguments.append("a");
+    qstrlArguments.append(p_rArchiveFileName);
+
+    QStringList::iterator it(p_qstrlFileNamesForArchive.begin());
+    QStringList::iterator itLast(p_qstrlFileNamesForArchive.end());
+
+    for ( ; it != itLast; ++it)
+    {
+       qstrlArguments.append(*it);
+    }
+
+    QProcess qprocZip;
+    qprocZip.setWorkingDirectory(p_qstrOutPath);
+    qprocZip.start("C:\\Program Files\\7-Zip\\7z.exe", qstrlArguments);
+    qprocZip.waitForFinished();
+
+    return QFile::exists(p_qstrOutPath + p_rArchiveFileName);
+}
+

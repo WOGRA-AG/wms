@@ -161,7 +161,8 @@ bool CwmsMessenger::IsAsyncMessageCollectionRunning()
 bool CwmsMessenger::StartProgressBar(QString p_qstrProgessBarName,
                                      QString p_qstrWindowTitle,
                                      QString p_qstrDisplayText,
-                                     int p_iSteps)
+                                     int p_iSteps,
+                                     bool p_bAbortPossible)
 {
     bool bRet = false;
 
@@ -170,6 +171,17 @@ bool CwmsMessenger::StartProgressBar(QString p_qstrProgessBarName,
         QProgressDialog* pQProgressDialog = new QProgressDialog(QApplication::activeWindow());
         pQProgressDialog->setWindowTitle(p_qstrWindowTitle);
         pQProgressDialog->setLabelText(p_qstrDisplayText);
+
+        if (p_bAbortPossible)
+        {
+            pQProgressDialog->setCancelButtonText(tr("Abbrechen"));
+        }
+        else
+        {
+            pQProgressDialog->setCancelButton(nullptr);
+        }
+
+
         pQProgressDialog->setMinimum(0);
         pQProgressDialog->setMaximum(p_iSteps);
         pQProgressDialog->show();

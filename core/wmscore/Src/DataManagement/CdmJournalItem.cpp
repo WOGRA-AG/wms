@@ -119,7 +119,7 @@ QString CdmJournalItem::GetChangeModeAsString() const
       qstrRet = tr("Neu");
       break;
    case eDmChangeModeModified:
-      qstrRet = tr("Änderung");
+      qstrRet = QStringLiteral("Änderung");
       break;
    case eDmChangeModeDeleted:
       qstrRet = tr("Löschung");

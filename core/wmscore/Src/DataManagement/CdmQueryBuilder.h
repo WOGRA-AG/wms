@@ -24,6 +24,8 @@ class CdmObjectContainer;
 
 // defines
 #define EXECUTE_QUERY(q) QScopedPointer<CdmQuery> pQuery(CdmQueryBuilder::ExecuteQuery(q));
+#define EXECUTE_QUERY2(q) QScopedPointer<CdmQuery> pQuery2(CdmQueryBuilder::ExecuteQuery(q));
+
 
 /* 
  * This class implements the Query builder. It creates a CdmQuery Object by parsing a string

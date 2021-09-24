@@ -32,6 +32,11 @@ public:
     static int CalculateMonthCount(QDate &qdStart, QDate &qdEnd);
     static bool IsInTheSameMonth(QDate &qdStart, QDate &qdEnd);
     static bool IsDateValid(QDateTime p_qdDate);
+    static QString MakeWindowsFileName(QString p_qstrText, QString p_qstrReplaceString);
+    static QString GetMaxWmsDateString();
+    static QString GetInvalidDateString();
+    static QString GetInvalidDateStringOld();
+    static bool CreateArchive(QString p_rArchiveFileName, QString p_qstrOutPath, QStringList p_qstrlFileNamesForArchive);
 };
 
 #endif // CWMSUTILITIES_H

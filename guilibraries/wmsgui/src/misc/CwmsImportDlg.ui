@@ -95,6 +95,9 @@
       </property>
       <item row="0" column="0" colspan="5">
        <widget class="QTreeWidget" name="m_pqlvImportColumns">
+        <property name="sortingEnabled">
+         <bool>false</bool>
+        </property>
         <column>
          <property name="text">
           <string>Spalte</string>

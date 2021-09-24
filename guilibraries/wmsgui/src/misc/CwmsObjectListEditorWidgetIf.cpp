@@ -656,7 +656,14 @@ void CwmsObjectListEditorWidgetIf::PrintClickedSlot()
     }
     else
     {
-        CwmsReportManager::PrintDefaultForContainer(GetContainer());
+        if (m_View.IsValid() && m_View.GetReport() != nullptr)
+        {
+            CwmsReportManager::Print(m_View.GetReport(), GetContainer());
+        }
+        else
+        {
+            CwmsReportManager::PrintDefaultForContainer(GetContainer());
+        }
     }
 }
 
