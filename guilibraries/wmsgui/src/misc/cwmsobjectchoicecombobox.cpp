@@ -620,6 +620,19 @@ CdmObject* CwmsObjectChoiceComboBox::GetSelectedObject()
    return pCdmObject;
 }
 
+CdmObject *CwmsObjectChoiceComboBox::GetSelectedObjectByIndex(int iIndex)
+{
+    CdmObject *pCurrentObject = nullptr;
+    QList<long> qlValues = m_qmEntries.values();
+    if(iIndex >= 0)
+    {
+        long lObjectIdByIndex = qlValues.at(iIndex);
+        pCurrentObject = FindObject(lObjectIdByIndex);
+    }
+    return pCurrentObject;
+}
+
+
 /** +-=---------------------------------------------------------So 8. Jan 22:12:14 2006-----------*
  * @method  CwmsObjectChoiceComboBox::ComboBoxActivatedSlot  // private, slots                    *
  * @return  void                                             //                                   *

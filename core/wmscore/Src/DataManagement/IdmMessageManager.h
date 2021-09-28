@@ -51,7 +51,7 @@ public:
     virtual int GetAsyncMessageCollectionCount() = 0;
 	 virtual bool EndAndShowAsyncMessageCollection() = 0;
 	 virtual bool IsAsyncMessageCollectionRunning() = 0;
-	 virtual bool StartProgressBar(QString p_qstrProgessBarName,QString p_qstrTitle, QString p_qstrDisplayText, int p_iSteps) = 0;
+     virtual bool StartProgressBar(QString p_qstrProgessBarName,QString p_qstrTitle, QString p_qstrDisplayText, int p_iSteps, bool p_bAbortPossible = false) = 0;
 	 virtual bool SetProgress(QString p_qstrProgessBarName, QString p_qstrDisplayText, int p_iProgressSteps) = 0;
 	 virtual bool CloseProgressBar(QString p_qstrProgessBarName) = 0;
 	 virtual bool IsProgressAborted(QString p_qstrProgessBarName) = 0;

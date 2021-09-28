@@ -77,7 +77,7 @@ public:
     bool StartProgressBar(QString p_qstrProgessBarName,
                           QString p_qstrWindowTitle,
                           QString p_qstrDisplayText,
-                          int p_iSteps);
+                          int p_iSteps, bool p_bAbortPossible = false);
     bool SetProgress(QString p_qstrProgessBarName, QString p_qstrText, int p_iProgressSteps);
     bool CloseProgressBar(QString p_qstrProgessBarName);
     bool IsProgressAborted(QString p_qstrProgessBarName);

@@ -63,6 +63,7 @@ public:
    CdmObject* GetSelectedObject();
 
    void SetContainerAndDisplayValueByWql(QString qstrWql);
+   CdmObject *GetSelectedObjectByIndex(int iIndex);
 public slots:
    void Refresh();
 
