@@ -109,10 +109,19 @@ returns the given value as formatted string. Dependent on system language settin
 
 [source, java]
 ----
-void setDeleted()
+void setDeleted()  --- Deprecated!!
 ----
 
-sets the objected to deleted. after calling commit the object will be deleted locally and on the database.
+sets the objected to deleted. The Object will be directly deleted on the db and after this you cannot call any function on this object!
+
+This method is deprecated use deleteObjectOnDb() instead.
+
+[source, java]
+----
+void deleteObjectOnDb()
+----
+
+sets the objected to deleted. The Object will be directly deleted on the db and after this you cannot call any function on this object!
 
 [source, java]
 ----
