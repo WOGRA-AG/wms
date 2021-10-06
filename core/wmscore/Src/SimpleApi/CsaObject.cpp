@@ -790,13 +790,26 @@ CsaFunction *CsaObject::getFunction(QString qstrName)
    return nullptr;
 }
 
+void CsaObject::deleteObjectOnDb()
+{
+    CdmObject* pObject = getInternals();
+
+    if (CHKPTR(pObject))
+    {
+        pObject->SetDeleted();
+        pObject->Commit();
+    }
+}
+
 void CsaObject::setDeleted()
 {
-    getInternals()->SetDeleted();
+    DEPRECATED
+    deleteObjectOnDb();
 }
 
 bool CsaObject::isDeleted()
 {
+    DEPRECATED
     return getInternals()->IsDeleted();
 }
 

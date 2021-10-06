@@ -103,6 +103,7 @@ public slots:
         bool isDeleted();
         bool isModified();
         void setImmutable(bool p_bImmutable);
+        void deleteObjectOnDb();
 protected:
         virtual bool eventFilter(QObject *obj, QEvent *event);
         virtual void setFactory(CsaFactory *p_pFactory);
