@@ -1,19 +1,5 @@
-/******************************************************************************
- ** WOGRA technologies Gmbh & Co KG Modul Information
- ** Modulename: CwmsObjectContainerDataFiller.h
- ** Started Implementation: 2013/09/20
- ** Description:
- ** 
- ** implements static helpers for filling misc data in ui.
- **
- ** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
- ** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. 
- **(C) copyright by WOGRA technologies GmbH & Co KG All rights reserved
- *****************************************************************************/ 
-
 // System and QT Includes
 #include <qtreewidget.h>
-#include <qlinkedlist.h>
 #include <qapplication.h>
 
 // WMS Includes
