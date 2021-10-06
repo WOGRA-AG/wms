@@ -67,10 +67,6 @@ public slots:
    QString getKeynameAt(int p_iSection);
    QVector<QString> getResultElements();
    void setQuery(CdmQuery* p_pEnhanced);
-   
-
-
-
    // CsaLocatedElement interface
    QString getResultAsDisplayStringAt(int p_iColumn, int p_iRow);
 public:

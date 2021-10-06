@@ -47,7 +47,7 @@ private:
     QString m_qstrName;
     
 public:
-    CdmClassMethodParameter( );
+    CdmClassMethodParameter();
     void SetName(QString p_qstrName);
     QString GetName() const;
 };
