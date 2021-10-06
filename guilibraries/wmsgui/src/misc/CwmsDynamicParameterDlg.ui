@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>CwmsDynamicParameterDlg</class>
+ <widget class="QDialog" name="CwmsDynamicParameterDlg">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>640</width>
+    <height>480</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <property name="leftMargin">
+    <number>3</number>
+   </property>
+   <property name="topMargin">
+    <number>3</number>
+   </property>
+   <property name="rightMargin">
+    <number>3</number>
+   </property>
+   <property name="bottomMargin">
+    <number>3</number>
+   </property>
+   <item>
+    <widget class="QScrollArea" name="m_pqsaParams">
+     <property name="widgetResizable">
+      <bool>true</bool>
+     </property>
+     <widget class="QWidget" name="scrollAreaWidgetContents">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>632</width>
+        <height>432</height>
+       </rect>
+      </property>
+     </widget>
+    </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <spacer name="spacer1">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Expanding</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>498</width>
+         <height>21</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="m_pqpbCancel">
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="wmsgui.qrc">
+         <normaloff>:/icons/cancel24.png</normaloff>:/icons/cancel24.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>24</width>
+         <height>24</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="m_pqpbOK">
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="wmsgui.qrc">
+         <normaloff>:/icons/ok24.png</normaloff>:/icons/ok24.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>24</width>
+         <height>24</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources>
+  <include location="wmsgui.qrc"/>
+ </resources>
+ <connections>
+  <connection>
+   <sender>m_pqpbCancel</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsDynamicParameterDlg</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>569</x>
+     <y>458</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>584</x>
+     <y>533</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqpbOK</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsDynamicParameterDlg</receiver>
+   <slot>accept()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>624</x>
+     <y>468</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>663</x>
+     <y>581</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>OKClickedSlot()</slot>
+ </slots>
+</ui>

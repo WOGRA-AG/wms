@@ -123,6 +123,7 @@ void CwmsScriptingEnvironment::FillClasses() // todo remove this function ShowTe
     CdmClassManager* pClassManager = CdmSessionManager::GetDataProvider()->GetClassManager();
     CwmsClassDataFiller::FillClasses(pClassManager, pClassItem, false, ui->m_pqchbShowTechnicalClasses->isChecked());
     CwmsTreeWidgetHelper::ResizeColumnsToContent(ui->m_pqtwClasses);
+    ui->m_pqtwClasses->sortByColumn(0,Qt::SortOrder::AscendingOrder);
 }
 
 void CwmsScriptingEnvironment::FillUi()
@@ -172,6 +173,7 @@ void CwmsScriptingEnvironment::OpenObject(CdmLocatedElement* p_pElement)
                     pItem->setSelected(true);
                     pItem->parent()->parent()->setExpanded(true); // class
                     pItem->parent()->setExpanded(true); // Functiongrouping
+                    ui->m_pqtwClasses->scrollToItem(pItem);
                     EditFunctionSlot(pMethod, pItem);
                 }
             }
@@ -548,9 +550,9 @@ void CwmsScriptingEnvironment::ExecuteSlot()
 
         if (pWidget)
         {
-            CdmMessageManager::StartAsyncMessageCollection();
+            //CdmMessageManager::StartAsyncMessageCollection();
             pWidget->Execute();
-            CdmMessageManager::EndAndShowAsyncMessageCollection();
+            //CdmMessageManager::EndAndShowAsyncMessageCollection();
         }
     }
 }

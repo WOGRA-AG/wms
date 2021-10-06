@@ -271,7 +271,8 @@ QVariant CdmExecutorFunction::ExecuteStatic(CdmClassMethod* p_pMethod, QVariantL
          }
          else
          {
-             ERR("Invalid argument count.")
+             ERR("Invalid argument count.");
+             qvValue = EC(eDmRequiredValueIsMissing);
          }
       }
    }
@@ -497,8 +498,10 @@ QVariant CdmExecutorFunction::Execute(CdmClassMethod* p_pMethod,
                               CdmModelElement* p_pCdmBase,
                               QVariantList p_qlParams)
 {
-    SYNCHRONIZED;
+   SYNCHRONIZED;
    QVariant qvValue;
+   CdmMessageManager::StartAsyncMessageCollection();
+
    
    if (CHKPTR(p_pMethod))
    {
@@ -571,7 +574,8 @@ QVariant CdmExecutorFunction::Execute(CdmClassMethod* p_pMethod,
           }
       }
    }
-   
+
+   CdmMessageManager::EndAndShowAsyncMessageCollection();
    return qvValue;
 }
 

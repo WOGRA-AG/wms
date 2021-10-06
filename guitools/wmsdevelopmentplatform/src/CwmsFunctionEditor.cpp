@@ -557,7 +557,7 @@ void CwmsFunctionEditor::ExecuteFunction(bool p_bDebugger)
      qstrResult = tr("Kein Rückgabewert");
   }
 
-  CdmMessageManager::information(tr("Ergebnis"), tr("Funktion erfolgreich beendet. Rückgabewert: %1").arg(qstrResult));
+  CdmMessageManager::information(tr("Ergebnis"), tr("Funktion beendet. Rückgabewert: %1").arg(qstrResult));
 }
 
 

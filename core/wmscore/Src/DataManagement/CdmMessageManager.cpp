@@ -19,6 +19,7 @@
 #include "IdmMessageManager.h"
 #include "CdmMessageManager.h"
 #include "CdmEventLogger.h"
+#include "CdmClassMethod.h"
 
 IdmMessageManager* CdmMessageManager::m_spCdmMessenger = nullptr;
 
@@ -158,6 +159,17 @@ QString CdmMessageManager::AskForInputText(QString p_qstrHeader, QString p_qstrT
    }
 
    return qstrRet;
+}
+
+QVariantList CdmMessageManager::AskForParameters(QList<CdmClassMethodParameter>& p_qlParameters)
+{
+    QVariantList qlPparams;
+    if (m_spCdmMessenger)
+    {
+       qlPparams = m_spCdmMessenger->AskForParameters(p_qlParameters);
+    }
+
+    return qlPparams;
 }
 
 QString CdmMessageManager::AskForInputStringList(QString p_qstrText, QStringList p_qstrlItems)

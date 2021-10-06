@@ -149,6 +149,7 @@ private:
     static int GetAsyncMessageCollectionCount();
     static QString GetLoadFile(QString p_qstrMessage, QString p_qstrPathToOpen = "", QString p_qstrFilter = "");
     static QString GetSaveFile(QString p_qstrMessage, QString p_qstrPathToOpen = "", QString p_qstrFilter = "");
+    static QVariantList AskForParameters(QList<CdmClassMethodParameter> &p_qlParameters);
 };
 
 #endif //

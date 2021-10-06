@@ -18,6 +18,7 @@
 #include "CwmsShowResultMessageDlg.h"
 #include "CwmsShowMessageListDlg.h"
 #include "CwmsMessenger.h"
+#include "CwmsDynamicParameterDlg.h"
 
 CwmsMessenger::CwmsMessenger(QWidget* p_pqwMainWindow, QStatusBar* p_pqStatusBar)
     : m_rpqwMainWindow(p_pqwMainWindow),
@@ -126,6 +127,7 @@ bool CwmsMessenger::StartAsyncMessageCollection()
 
     if (!IsAsyncMessageCollectionRunning())
     {
+        qApp->setOverrideCursor(Qt::WaitCursor);
         m_qlAsyncMessageCollection.clear();
         m_bIsAsnyMessageCollectionRunning = true;
         bRet = true;
@@ -137,6 +139,7 @@ bool CwmsMessenger::StartAsyncMessageCollection()
 bool CwmsMessenger::EndAndShowAsyncMessageCollection()
 {
     bool bRet = true;
+    qApp->restoreOverrideCursor();
 
     if (m_qlAsyncMessageCollection.count() > 0)
     {
@@ -412,6 +415,11 @@ QDate CwmsMessenger::AskForInputDate(QString p_qstrMessage)
 {
     Q_UNUSED(p_qstrMessage);
     return QDate();
+}
+
+QVariantList CwmsMessenger::AskForParameters(QList<CdmClassMethodParameter> &p_qlParameters)
+{
+    return CwmsDynamicParameterDlg::AskForFunctionParams(p_qlParameters,nullptr);
 }
 
 QTime CwmsMessenger::AskForInputTime(QString p_qstrMessage)

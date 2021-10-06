@@ -77,7 +77,7 @@ void CdmQueryBuilder::ExecutePreProcessor()
             }
             else
             {
-                qstrValue = CdmMessageManager::GetMessenger()->AskForInputText("Bitte geben Sie den Wert für \"" + qstrKey + "\" ein.");
+                //qstrValue = CdmMessageManager::GetMessenger()->AskForInputText("Bitte geben Sie den Wert für \"" + qstrKey + "\" ein.");
             }
 
             m_qstrQuery.replace(qstrKey, qstrValue);

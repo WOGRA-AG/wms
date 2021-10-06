@@ -79,12 +79,15 @@ LIBS += -L$$DESTDIR \
 include(wmsgui.pri)
 
 SOURCES += \
+    ../src/misc/CwmsDynamicParameterDlg.cpp \
     ../src/misc/CwmsQueryEditorDlg.cpp
 
 HEADERS += \
+    ../src/misc/CwmsDynamicParameterDlg.h \
     ../src/misc/CwmsQueryEditorDlg.h
 
 FORMS += \
+    ../src/misc/CwmsDynamicParameterDlg.ui \
     ../src/misc/CwmsQueryEditorDlg.ui
 
 

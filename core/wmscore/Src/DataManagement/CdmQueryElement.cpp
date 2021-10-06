@@ -799,10 +799,9 @@ void CdmQueryElement::SetInNotInValuesForComparision(QString p_qstrFirst, QStrin
     }
 }
 
-void CdmQueryElement::AnalyzeCompare(QString p_qstrFirst, QString p_qstrSecond)
+const CdmMember* CdmQueryElement::GetMember(QString p_qstrKeyname)
 {
-    const CdmClass* pCdmClass = nullptr;
-
+     const CdmClass* pCdmClass = nullptr;
     if (GetQuery())
     {
         CdmObjectContainer* pContainer = GetQuery()->GetContainer();
@@ -818,30 +817,31 @@ void CdmQueryElement::AnalyzeCompare(QString p_qstrFirst, QString p_qstrSecond)
 
         if (CHKPTR(pCdmClass))
         {
-            const CdmMember* pCdmMember = pCdmClass->FindMember(p_qstrFirst);
-
-            if (pCdmMember)
-            {
-                SetKeyname(p_qstrFirst);
-                SetValue(p_qstrSecond);
-                m_eDmValueCompare = pCdmMember->GetValueType();
-            }
-            else
-            {
-                pCdmMember = pCdmClass->FindMember(p_qstrSecond);
-
-                if (pCdmMember)
-                {
-                    SetKeyname(p_qstrSecond);
-                    SetValue(p_qstrFirst);
-                    m_eDmValueCompare = pCdmMember->GetValueType();
-                }
-                else
-                {
-                    ERR("No Member in condition");
-                }
-            }
+            return pCdmClass->FindMember(p_qstrKeyname);
         }
+    }
+
+    return nullptr;
+}
+
+void CdmQueryElement::AnalyzeCompare(QString p_qstrFirst, QString p_qstrSecond)
+{
+    const CdmMember* pCdmMember = GetMember(p_qstrFirst);
+
+    if (!pCdmMember)
+    {
+        pCdmMember = GetMember(p_qstrSecond);
+    }
+
+    if (pCdmMember)
+    {
+        SetKeyname(p_qstrFirst);
+        SetValue(p_qstrSecond);
+        m_eDmValueCompare = pCdmMember->GetValueType();
+    }
+    else
+    {
+        ERR("No Member in condition");
     }
 }
 

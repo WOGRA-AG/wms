@@ -1,6 +1,7 @@
 PRECOMPILED_HEADER = precompile.h
 
 HEADERS += \
+    $$PWD/../src/misc/CwmsDynamicParamWidget.h \
     $$PWD/precompile.h \
     ../src/ObjectEditor/CoeDataTypeWidget.h \
     ../src/ObjectEditor/CoedtwAddValueDlgIf.h \
@@ -118,6 +119,7 @@ HEADERS += \
     $$PWD/../src/misc/CwmsContainerUpdateLocker.h
 
 SOURCES += ../src/misc/CwmsQmlEditor.cpp \
+    $$PWD/../src/misc/CwmsDynamicParamWidget.cpp \
     ../src/misc/jsedit.cpp \
     ../src/misc/jshighlighter.cpp \
     ../src/misc/jstokenizer.cpp \

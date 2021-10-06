@@ -1,15 +1,4 @@
-/******************************************************************************
- ** WOGRA technologies GmbH & Co KG Modul Information
- ** Modulename: IdmMessageManager.h
- ** Started Implementation: 2009/10/09
- ** Description:
- ** 
- ** This is a interface for displaying messages over all libs and apps
- **
- ** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
- ** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. 
- **(C) copyright by WOGRA technologies GmbH & Co KG All rights reserved
- *****************************************************************************/ 
+
 
 #ifndef IDMMESSAGEMANAGER_H
 #define IDMMESSAGEMANAGER_H
@@ -25,6 +14,8 @@
 #include <QList>
 #include <QDateTime>
 
+// own Includes
+#include "CdmClassMethod.h"
 
 // Forwards
 class QStatusBar;
@@ -71,6 +62,7 @@ public:
     virtual void SetMainWindow(QWidget* p_pMainWindow) = 0;
     virtual void ShowResultMessage(QString p_qstrResultCaption, QString p_qstrResultText, QString p_qstrResult) = 0;
     virtual QString AskForInputStringList(QString p_qstrMessage, QStringList p_qstrlItems) = 0;
+    virtual QVariantList AskForParameters(QList<CdmClassMethodParameter>& p_qlParameters) = 0;
 };
 
 #endif //

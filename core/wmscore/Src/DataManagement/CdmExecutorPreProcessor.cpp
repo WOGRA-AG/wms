@@ -115,20 +115,7 @@ QVariantList CdmExecutorPreProcessor::AskForParameters(CdmClassMethod* p_pMethod
    if (CHKPTR(p_pMethod))
    {
       QList<CdmClassMethodParameter> qmParams = p_pMethod->GetParameters();
-
-      for (int iCounter = 0; iCounter < qmParams.count(); ++iCounter)
-      {
-         CdmClassMethodParameter cParam = qmParams[iCounter];
-         QString qstrKey = cParam.GetName();
-
-         // ToDo only String input is not the best solution
-
-         QString qstrInput = 
-            CdmMessageManager::AskForInputText(qApp->tr("Parameterwert fehlt"), 
-                                               qApp->tr("Bitte geben Sie den Wert für den Parameter %1 ein").arg(qstrKey));
-
-        qmRet.append(qstrInput);
-      }
+      qmRet = CdmMessageManager::AskForParameters(qmParams);
    }
 
    return qmRet;

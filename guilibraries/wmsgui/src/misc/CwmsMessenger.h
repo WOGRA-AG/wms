@@ -87,6 +87,7 @@ public:
     QString AskForPath(QString p_qstrMessage);
     int AskForInputValue(QString p_qstrMessage);
     QDate AskForInputDate(QString p_qstrMessage);
+    virtual QVariantList AskForParameters(QList<CdmClassMethodParameter>& p_qlParameters);
 
 private:
     QString GetFileNameForSave();

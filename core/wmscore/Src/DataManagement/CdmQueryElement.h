@@ -491,6 +491,7 @@ private:
      * @comment                                                                                    *
      *----------------last changed: -----------------------------Do 23. Aug 14:38:47 2012----------*/
     void AnalyzeCompare(QString p_qstrFirst, QString p_qstrSecond);
+    const CdmMember *GetMember(QString p_qstrKeyname);
 };
 
 #endif //
