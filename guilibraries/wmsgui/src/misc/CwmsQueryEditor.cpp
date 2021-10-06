@@ -71,6 +71,9 @@ CwmsQueryEditor::~CwmsQueryEditor()
 
 void CwmsQueryEditor::ExecuteClickedSlot()
 {
+    m_pqleState->setText(tr("Läuft..."));
+    m_pqleResultCount->setText("-");
+    m_pqleDuration->setText("");
     CdmMessageManager::StartAsyncMessageCollection();
     CwmsTimeMeassurement cTimeMeassure(false,"Wql");
     QString qstrQuery = m_pqteEditor->toPlainText();
@@ -252,14 +255,29 @@ void CwmsQueryEditor::EditClickedSlot()
 
 void CwmsQueryEditor::DeleteClickedSlot()
 {
-    CdmObject* pObject = m_cCdmModel.GetObject(m_pqtvResult);
+    QList<CdmObject*> qlObjects = m_cCdmModel.GetObjects(m_pqtvResult);
+    CdmObjectContainer* pContainer = nullptr;
 
-    if (pObject)
+    for (int iPos = 0; iPos < qlObjects.count(); ++iPos)
     {
-        pObject->SetDeleted();
-        pObject->Commit();
-        ExecuteClickedSlot();
+        CdmObject* pObject = qlObjects[iPos];
+        if (pObject)
+        {
+            pObject->SetDeleted();
+
+            if (!pContainer)
+            {
+                pContainer = pObject->GetObjectContainer();
+            }
+        }
     }
+
+    if (pContainer)
+    {
+        pContainer->Commit();
+    }
+
+    ExecuteClickedSlot();
 }
 
 
