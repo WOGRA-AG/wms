@@ -1,19 +1,9 @@
-/******************************************************************************
- ** WOGRA Middleware Server Data Manager Module
- **
- ** @Author Wolfgang Graﬂhof 
- **
- ** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
- ** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. 
- **(C) copyright by WOGRA technologies All rights reserved
- ******************************************************************************/
-
 #ifndef CODBCCLASSACCESS_H
 #define CODBCCLASSACCESS_H
 
 // System and QT Includes
 #include <qstring.h>
-#include <QLinkedList>
+#include <QList>
 
 
 // own Includes
@@ -70,7 +60,7 @@ virtual ~CdbClassAccess();
     * @return  long                                          //                                   *
     * @param   long p_lDbId                                  //                                   *
     * @comment This mehtod returns a new class id for a new class.                                *
-    *----------------last changed: Wolfgang Graﬂhof-------------Fr 25. Jun 13:27:50 2004----------*/
+    *----------------last changed: Wolfgang Gra√ühof-------------Fr 25. Jun 13:27:50 2004----------*/
 long GetNewClassId(long p_lDbId);
 
    public:
@@ -81,7 +71,7 @@ long GetNewClassId(long p_lDbId);
     * @param   QString p_qstrKeyname                         //                                   *
     * @param   bool& p_bRet                                  //                                   *
     * @comment This method checks if the class with the overgiven keyname exists.                 *
-    *----------------last changed: Wolfgang Graﬂhof-------------Fr 25. Jun 13:31:50 2004----------*/
+    *----------------last changed: Wolfgang Gra√ühof-------------Fr 25. Jun 13:31:50 2004----------*/
 long ExistClass(long p_lDbId, QString p_qstrKeyname, bool& p_bRet);
 
    public:
@@ -91,7 +81,7 @@ long ExistClass(long p_lDbId, QString p_qstrKeyname, bool& p_bRet);
     * @param   long p_lDbId                                  //                                   *
     * @param   CdmClassManager*& p_rpCdmClassManager         //                                   *
     * @comment This method loads the complete class manager of a class.                           *
-    *----------------last changed: Wolfgang Graﬂhof-------------Fr 25. Jun 13:37:36 2004----------*/
+    *----------------last changed: Wolfgang Gra√ühof-------------Fr 25. Jun 13:37:36 2004----------*/
 long LoadClassManager(  long p_lDbId, CdmClassManager*& p_rpCdmClassManager );
 
    public:
