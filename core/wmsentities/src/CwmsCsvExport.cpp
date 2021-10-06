@@ -128,6 +128,7 @@ void CwmsCsvExport::GenerateQueryContent()
                     }
 
 
+                    qstrResultValue = qstrResultValue.replace("\n","");
                     qstrlContent.append(qstrResultValue);
                 }
             }
@@ -211,14 +212,15 @@ void CwmsCsvExport::AddLine(QStringList& qstrlContent)
 
         if (m_qmHeaderMapping.contains(qstrCell))
         {
-            m_qstrContent += m_qmHeaderMapping[qstrCell];
+            qstrCell += m_qmHeaderMapping[qstrCell];
         }
-        else
-        {
-            m_qstrContent += qstrCell;
-        }
+
+        qstrCell = qstrCell.replace(";"," ");
+        m_qstrContent += qstrCell;
     }
 
+    m_qstrContent = m_qstrContent.replace("\r\n","");
+    m_qstrContent = m_qstrContent.replace("\n","");
     m_qstrContent += "\r\n";
 }
 
