@@ -96,7 +96,7 @@ void CsaFactory::createFormulaScriptObject(CdmObject *p_pCdmObject)
 {
    if (CHKPTR(p_pCdmObject))
    {
-       QMap<long, CdmMember*> qmValues;
+       QMap<qint64, CdmMember*> qmValues;
        CdmClass* pClass = p_pCdmObject->GetClass();
 
        if (pClass)
@@ -104,8 +104,8 @@ void CsaFactory::createFormulaScriptObject(CdmObject *p_pCdmObject)
           pClass->GetMemberMap(qmValues);
        }
 
-       QMap<long, CdmMember*>::iterator qmIt = qmValues.begin();
-       QMap<long, CdmMember*>::iterator qmItEnd = qmValues.end();
+       QMap<qint64, CdmMember*>::iterator qmIt = qmValues.begin();
+       QMap<qint64, CdmMember*>::iterator qmItEnd = qmValues.end();
 
        for (; qmIt != qmItEnd; ++qmIt)
        {

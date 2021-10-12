@@ -61,7 +61,7 @@ CdbLoginManager::~CdbLoginManager(  )
 
 /** +-=---------------------------------------------------------Mo 20. Aug 15:05:28 2007----------*
  * @method  CdbLoginManager::Login                         // public                            *
- * @return  long                                             //                                   *
+ * @return qint64                                             //                                   *
  * @param   QString p_qstrApplication                        //                                   *
  * @param   QString p_qstrLogin                              //                                   *
  * @param   QString p_qstrPassword                           //                                   *
@@ -71,7 +71,7 @@ CdbLoginManager::~CdbLoginManager(  )
  * @param   QString& p_qstrVersion                           //                                   *
  * @comment The login to the erver.                                                               *
  *----------------last changed: --------------------------------Mo 20. Aug 15:05:28 2007----------*/
-long CdbLoginManager::Login(QString p_qstrApplication,
+qint64 CdbLoginManager::Login(QString p_qstrApplication,
                             QString p_qstrLogin,
                             QString p_qstrPassword,
                             CumUser*& p_rpCumUser,
@@ -79,7 +79,7 @@ long CdbLoginManager::Login(QString p_qstrApplication,
                             int& p_iModules,
                             QString& p_qstrVersion)
 {
-   long lRet = CdmLogging::eDmUnknownLoginManagerError;
+  qint64 lRet = CdmLogging::eDmUnknownLoginManagerError;
    
    CdbCommandLogin command(p_qstrApplication,
                            p_qstrVersion,
@@ -103,11 +103,11 @@ long CdbLoginManager::Login(QString p_qstrApplication,
 
 /** +-=---------------------------------------------------------Mo 5. Sep 19:03:34 2005-----------*
  * @method  CdbLoginManager::Logout                        // public, virtual                   *
- * @return  long                                             //                                   *
- * @param   long p_lSessionId                                //                                   *
+ * @return qint64                                             //                                   *
+ * @param  qint64 p_lSessionId                                //                                   *
  * @comment The logout from server.                                                               *
  *----------------last changed: --------------------------------Mo 5. Sep 19:03:34 2005-----------*/
-long CdbLoginManager::Logout(  long p_lSessionId )
+qint64 CdbLoginManager::Logout( qint64 p_lSessionId )
 {
    CdbCommandLogout command(p_lSessionId, m_rpCdbDataAccess);
    return command.Run();
@@ -115,12 +115,12 @@ long CdbLoginManager::Logout(  long p_lSessionId )
 
 /** +-=---------------------------------------------------------Sa 24. Sep 10:40:49 2005----------*
  * @method  CdbLoginManager::FindSession                   // public, virtual                   *
- * @return  long                                             //                                   *
- * @param   long p_lSessionId                                //                                   *
- * @param   long p_lUserId                                   //                                   *
+ * @return qint64                                             //                                   *
+ * @param  qint64 p_lSessionId                                //                                   *
+ * @param  qint64 p_lUserId                                   //                                   *
  * @comment This method searches for session and returns it if found, if not nullptr will returned.. *
  *----------------last changed: --------------------------------Sa 24. Sep 10:40:49 2005----------*/
-long CdbLoginManager::FindSession(long p_lSessionId, long p_lUserId)
+qint64 CdbLoginManager::FindSession(qint64 p_lSessionId,qint64 p_lUserId)
 {
    CdbCommandFindSession command(p_lSessionId, p_lUserId, m_rpCdbDataAccess);
    return command.Run();
@@ -128,14 +128,14 @@ long CdbLoginManager::FindSession(long p_lSessionId, long p_lUserId)
 
 /** +-=---------------------------------------------------------Di 7. Aug 15:34:18 2007-----------*
  * @method  CdbLoginManager::GetNewSession                 // public, virtual                   *
- * @return  long                                             //                                   *
+ * @return qint64                                             //                                   *
  * @param   QString p_qstrApplication                        //                                   *
- * @param   long p_lUserId                                   //                                   *
+ * @param  qint64 p_lUserId                                   //                                   *
  * @comment returns a new session number                                                          *
  *----------------last changed: --------------------------------Di 7. Aug 15:34:18 2007-----------*/
-long CdbLoginManager::GetNewSession(QString p_qstrApplication, long p_lUserId)
+qint64 CdbLoginManager::GetNewSession(QString p_qstrApplication,qint64 p_lUserId)
 {
-   long lRet = CdmLogging::eDmUnknownLoginManagerError;
+  qint64 lRet = CdmLogging::eDmUnknownLoginManagerError;
    CdbCommandGetNewSession command(p_qstrApplication, p_lUserId, "", m_rpCdbDataAccess);
    lRet = command.Run();
 
@@ -172,11 +172,11 @@ bool CdbLoginManager::LicenceCheck(QString p_qstrApplication,
    return bRet;
 }
 
-long CdbLoginManager::LoginLdap(QString p_qstrApplication, QString p_qstrLogin, QString p_qstrPassword, CumUser*& p_rUser)
+qint64 CdbLoginManager::LoginLdap(QString p_qstrApplication, QString p_qstrLogin, QString p_qstrPassword, CumUser*& p_rUser)
 {
 #ifndef WMS_NO_LDAP
     CdbCommandLdapLogin command(p_qstrApplication, "", p_qstrLogin, p_qstrPassword, m_rpCdbDataAccess, m_rpCdbUserManager);
-    long lRet = command.Run();
+   qint64 lRet = command.Run();
 
     if (SUCCESSFULL(lRet))
     {

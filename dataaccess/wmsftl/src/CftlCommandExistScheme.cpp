@@ -17,7 +17,7 @@ bool CftlCommandExistScheme::CheckValid()
 
 int CftlCommandExistScheme::Execute()
 {
-    long lRet = CdmLogging::eDmUnknownDbAccessError;
+   qint64 lRet = CdmLogging::eDmUnknownDbAccessError;
     QSqlQuery cQSqlQuery(GetSqlDatabase());
     cQSqlQuery.prepare("select SchemeId from WMS_SCHEME where SchemeName = ?");
     cQSqlQuery.addBindValue(m_qstrSchemeName);

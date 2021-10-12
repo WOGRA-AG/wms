@@ -68,7 +68,7 @@ bool CwmsNewUserIf::Save()
     pUser->SetEmail(m_pqleEmail->text());
     pUser->SetAdministrator(m_pqchbAdministrator->isChecked());
     pUser->SetSchemeIndependent(m_pqchbSchemeIndependent->isChecked());
-    long lAccessorId = m_rpUserManager->CreateUser(pUser);
+   qint64 lAccessorId = m_rpUserManager->CreateUser(pUser);
     return (lAccessorId > 0);
 }
 

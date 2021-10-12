@@ -25,7 +25,7 @@ class WMSMANAGER_API CdmValueEnum : public CdmValueInt
     Q_OBJECT
 
 public:
-    CdmValueEnum( long p_lDatabaseId, long p_lId, QString p_qstrKeyname, CdmObject* p_pCdmObject);
+    CdmValueEnum(qint64 p_lDatabaseId,qint64 p_lId, QString p_qstrKeyname, CdmObject* p_pCdmObject);
     CdmValueEnum( QVariantMap& p_rqvHash, CdmObject* p_pCdmObject);
     virtual ~CdmValueEnum( );
     virtual QVariant GetVariant() const;

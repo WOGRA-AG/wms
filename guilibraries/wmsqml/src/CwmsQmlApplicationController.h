@@ -99,7 +99,7 @@ public slots:
     void quit();
     QString getContainerEditorName();
     CwmsQmlWidget *popViewFromStack();
-    void pushViewToStack(long p_lModuleId, QString p_qstrUiName, QString p_qstrElementUri);
+    void pushViewToStack(qint64 p_lModuleId, QString p_qstrUiName, QString p_qstrElementUri);
     CsaFactory *getFactory();
 };
 

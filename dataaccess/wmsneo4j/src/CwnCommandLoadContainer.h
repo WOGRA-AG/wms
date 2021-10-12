@@ -13,12 +13,12 @@ class CwnCommandLoadContainer : public CwnCommandBase
 
 private:
     QString payload;
-    long m_lContainerId;
+   qint64 m_lContainerId;
     bool m_bLoadObjects;
-    long m_lSchemeId;
+   qint64 m_lSchemeId;
     QString m_qstrKeyname;
     CdmObjectContainer* m_rpContainer;
-    QList<long> qvlObjects;
+    QList<qint64> qvlObjects;
 
     bool interpretAnswerForContainerLoad(const QVariantList *dataList);
     bool interpretAnswerForObjects(const QVariantList *dataList);
@@ -29,8 +29,8 @@ private:
     QString GetContainerQuery();
 
 public:
-    CwnCommandLoadContainer(long p_lContainerId, bool p_bLoadObjects, CwnDataAccess* p_pDataAccess);
-    CwnCommandLoadContainer(long p_lSchemeId, QString p_qstrKeyname, bool p_bLoadObjects, CwnDataAccess* p_pDataAccess);
+    CwnCommandLoadContainer(qint64 p_lContainerId, bool p_bLoadObjects, CwnDataAccess* p_pDataAccess);
+    CwnCommandLoadContainer(qint64 p_lSchemeId, QString p_qstrKeyname, bool p_bLoadObjects, CwnDataAccess* p_pDataAccess);
     virtual ~CwnCommandLoadContainer();
 
     CdmObjectContainer *GetResult();

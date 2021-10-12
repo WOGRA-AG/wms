@@ -8,9 +8,9 @@ class CwiCommandGetContainerList : public CwiAbstractCommand
 
 private:
     CwmscomData* m_rpData;
-    long m_rlDbId;
+   qint64 m_rlDbId;
 public:
-    CwiCommandGetContainerList(CwmscomData* p_pData, long p_lDbId);
+    CwiCommandGetContainerList(CwmscomData* p_pData,qint64 p_lDbId);
     virtual ~CwiCommandGetContainerList();
     virtual void Execute();
 };

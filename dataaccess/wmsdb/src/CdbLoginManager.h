@@ -64,7 +64,7 @@ virtual ~CdbLoginManager(  );
    public:
    /** +-=---------------------------------------------------------Mo 20. Aug 15:05:28 2007-------*
     * @method  CdbLoginManager::Login                      // public                            *
-    * @return  long                                          //                                   *
+    * @return qint64                                          //                                   *
     * @param   QString p_qstrApplication                     //                                   *
     * @param   QString p_qstrLogin                           //                                   *
     * @param   QString p_qstrPassword                        //                                   *
@@ -74,7 +74,7 @@ virtual ~CdbLoginManager(  );
     * @param   QString& p_qstrVersion                        //                                   *
     * @comment The login to the erver.                                                            *
     *----------------last changed: -----------------------------Mo 20. Aug 15:05:28 2007----------*/
-    long Login(QString p_qstrApplication,
+   qint64 Login(QString p_qstrApplication,
                QString p_qstrLogin,
                QString p_qstrPassword,
                CumUser*& p_rpCumUser,
@@ -85,31 +85,31 @@ virtual ~CdbLoginManager(  );
    public:
    /** +-=---------------------------------------------------------Mo 5. Sep 19:03:34 2005*
     * @method  CdbLoginManager::Logout                     // public, virtual                   *
-    * @return  long                                          //                                   *
-    * @param   long p_lSessionId                             //                                   *
+    * @return qint64                                          //                                   *
+    * @param  qint64 p_lSessionId                             //                                   *
     * @comment The logout from server.                                                            *
     *----------------last changed: -----------------------------Mo 5. Sep 19:03:34 2005-----------*/
-virtual long Logout(  long p_lSessionId );
+virtual qint64 Logout( qint64 p_lSessionId );
 
    public:
    /** +-=---------------------------------------------------------Sa 24. Sep 10:40:49 2005*
     * @method  CdbLoginManager::FindSession                // public, virtual                   *
-    * @return  long                                          //                                   *
-    * @param   long p_lSessionId                             //                                   *
-    * @param   long p_lUserId                                //                                   *
+    * @return qint64                                          //                                   *
+    * @param  qint64 p_lSessionId                             //                                   *
+    * @param  qint64 p_lUserId                                //                                   *
     * @comment This method searches for session and returns it if found, if not null will returned..*
     *----------------last changed: -----------------------------Sa 24. Sep 10:40:49 2005----------*/
-virtual long FindSession(  long p_lSessionId, long p_lUserId );
+virtual qint64 FindSession( qint64 p_lSessionId,qint64 p_lUserId );
 
    public:
    /** +-=---------------------------------------------------------Di 7. Aug 15:34:18 2007--------*
     * @method  CdbLoginManager::GetNewSession              // public, virtual                   *
-    * @return  long                                          //                                   *
+    * @return qint64                                          //                                   *
     * @param   QString p_qstrApplication                     //                                   *
-    * @param   long p_lUserId                                //                                   *
+    * @param  qint64 p_lUserId                                //                                   *
     * @comment returns a new session number                                                       *
     *----------------last changed: -----------------------------Di 7. Aug 15:34:18 2007-----------*/
-    virtual long GetNewSession(QString p_qstrApplication, long p_lUserId);
+    virtual qint64 GetNewSession(QString p_qstrApplication,qint64 p_lUserId);
 
    public:
    /** +-=---------------------------------------------------------Do 1. Mai 17:02:22 2008--------*
@@ -127,7 +127,7 @@ virtual long FindSession(  long p_lSessionId, long p_lUserId );
                       QString p_qstrVersion);
 
     public:
-        long LoginLdap(QString p_qstrApplication, QString p_qstrLogin, QString p_qstrPassword, CumUser*& p_rUser);
+       qint64 LoginLdap(QString p_qstrApplication, QString p_qstrLogin, QString p_qstrPassword, CumUser*& p_rUser);
         virtual CdmSession* FindSession(int p_iSessionId);
         virtual CdmSession* FindSession(QString p_qstrBaseAuth);
         void UpdateSession(int p_iSessionId);

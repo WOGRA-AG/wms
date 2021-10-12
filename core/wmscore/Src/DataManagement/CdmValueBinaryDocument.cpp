@@ -30,8 +30,8 @@
 #include "CdmMember.h"
 #include "CdmValueBinaryDocument.h"
 
-CdmValueBinaryDocument::CdmValueBinaryDocument(long p_lDatabaseId,
-                                     long p_lId,
+CdmValueBinaryDocument::CdmValueBinaryDocument(qint64 p_lDatabaseId,
+                                    qint64 p_lId,
                                      QString p_qstrKeyname,
                                      QString p_qstrFilename,
                                      QString p_qstrType,
@@ -235,7 +235,7 @@ void CdmValueBinaryDocument::WriteByteArrayToFile(QByteArray& p_qByteArray, QStr
 
       if(qfFile.open(QIODevice::WriteOnly))
       {
-         long lLength = qfFile.write(p_qByteArray);
+        qint64 lLength = qfFile.write(p_qByteArray);
 
          if(lLength <= 0)
          {

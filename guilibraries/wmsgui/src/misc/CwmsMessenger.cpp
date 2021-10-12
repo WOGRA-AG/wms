@@ -101,7 +101,7 @@ void CwmsMessenger::AddMessageToStatusBar(QString p_qstrMessage)
     Q_UNUSED(p_qstrMessage);
     if (m_rpqStatusBar)
     {
-        // showing the message 3 seconds long
+        // showing the message 3 seconds qint64
         //m_rpqStatusBar->showMessage(p_qstrMessage, 3000);
     }
 }

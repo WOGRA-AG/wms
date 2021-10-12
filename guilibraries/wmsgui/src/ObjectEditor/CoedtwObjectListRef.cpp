@@ -267,10 +267,10 @@ void CoedtwContainerRef::EditClickedSlot(  )
 
          if(CHKPTR(pCdmClass))
          {
-            QMap<long, CdmMember*> qmMembers = pCdmClass->GetClassMemberMap();
+            QMap<qint64, CdmMember*> qmMembers = pCdmClass->GetClassMemberMap();
 
-            QMap<long, CdmMember*>::iterator qmIt    = qmMembers.begin();
-            QMap<long, CdmMember*>::iterator qmItEnd = qmMembers.end();
+            QMap<qint64, CdmMember*>::iterator qmIt    = qmMembers.begin();
+            QMap<qint64, CdmMember*>::iterator qmItEnd = qmMembers.end();
 
             for(; qmIt != qmItEnd; ++qmIt)
             {

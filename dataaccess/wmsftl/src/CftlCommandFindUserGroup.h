@@ -13,7 +13,7 @@ class CumUserGroup;
 class CftlCommandFindUserGroup : public CftlAbstractCommand
 {
 private:
-    long m_lGroupId;
+   qint64 m_lGroupId;
     CumUserGroup* m_pGroup;
     QString m_qstrGroupName;
     QString m_qstrSchemeUri;
@@ -22,7 +22,7 @@ private:
     int FindUserGroupByName();
 
 public:
-    CftlCommandFindUserGroup(long p_lGroup, CftlDataAccess* p_pDataAccess);
+    CftlCommandFindUserGroup(qint64 p_lGroup, CftlDataAccess* p_pDataAccess);
     CftlCommandFindUserGroup(QString p_qstrName, QString m_qstrSchemeUri, CftlDataAccess* p_pDataAccess);
     virtual ~CftlCommandFindUserGroup();
     CumUserGroup* GetResult();

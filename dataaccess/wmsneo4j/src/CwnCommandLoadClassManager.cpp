@@ -14,7 +14,7 @@
 
 #include "CwnCommandStdHeader.h"
 
-CwnCommandLoadClassManager::CwnCommandLoadClassManager(long p_lSchemeId, CwnDataAccess* p_pDataAccess)
+CwnCommandLoadClassManager::CwnCommandLoadClassManager(qint64 p_lSchemeId, CwnDataAccess* p_pDataAccess)
 : CwnCommandBase(p_pDataAccess),
   m_lSchemeId(p_lSchemeId),
   m_pClassManager(nullptr)
@@ -60,7 +60,7 @@ void CwnCommandLoadClassManager::interpretAnswer(QVariant &Ret)
             CwnCommandLoadPackages commandLoadPackages(m_pClassManager, GetDataAccess(), m_pClassManager->GetScheme()->GetSchemeName());
             commandLoadPackages.Run();
 
-            QList<long> notLoadedClasses;
+            QList<qint64> notLoadedClasses;
 
             QList<QVariant>::ConstIterator it;
             for(it=dataListCon->begin();it!=dataListCon->end();it++) // loading each class
@@ -68,7 +68,7 @@ void CwnCommandLoadClassManager::interpretAnswer(QVariant &Ret)
                 const QVariantMap* rowTemp = static_cast<const QVariantMap*>(it->data());
                 const QVariantList* row = static_cast<const QVariantList*>(rowTemp->find("row")->data());
 
-                long lClassId = row->at(0).toInt();
+               qint64 lClassId = row->at(0).toInt();
 
                 if (!m_pClassManager->FindClassById(lClassId))
                 {
@@ -79,7 +79,7 @@ void CwnCommandLoadClassManager::interpretAnswer(QVariant &Ret)
             if(notLoadedClasses.count()>0)
             {
                 CwnCommandGetClasses commandGetClasses(m_pClassManager, notLoadedClasses, GetDataAccess());
-                long lRet = commandGetClasses.Run();
+               qint64 lRet = commandGetClasses.Run();
 
                 if(lRet > 0)
                 {

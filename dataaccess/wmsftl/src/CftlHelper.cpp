@@ -81,7 +81,7 @@ QString CftlHelper::GenerateClassContainerTableName(CdmClass *p_pClass, CftlDial
             QStringList qstrlSplit = qstrFullQualifiedName.split(".", QString::SkipEmptyParts);
             int iListSize = qstrlSplit.count();
 
-            if (iListSize == 1) // the keyname itself is too long
+            if (iListSize == 1) // the keyname itself is too qint64
             {
                 qstrTableName = qstrFullQualifiedName.left(iMaxTableNameLength) + QString::number(p_pClass->GetId());
 
@@ -242,7 +242,7 @@ void CftlHelper::FillFieldValues(QString p_qstrPlaceholder,
                 p_rMap.insert(p_qstrPlaceholder, dynamic_cast<CdmValueInt*> (pValue)->GetValue());
                 break;
             case eDmValueLong:
-                p_rMap.insert(p_qstrPlaceholder, (int)dynamic_cast<CdmValueLong*> (pValue)->GetValue());
+                p_rMap.insert(p_qstrPlaceholder, dynamic_cast<CdmValueLong*> (pValue)->GetValue());
                 break;
             case eDmValueFloat:
                 p_rMap.insert(p_qstrPlaceholder, dynamic_cast<CdmValueFloat*> (pValue)->GetValue());
@@ -263,11 +263,11 @@ void CftlHelper::FillFieldValues(QString p_qstrPlaceholder,
                 p_rMap.insert(p_qstrPlaceholder, dynamic_cast<CdmValueDateTime*> (pValue)->GetValue());
                 break;
             case eDmValueObjectRef:
-                p_rMap.insert(p_qstrPlaceholder + FTL_OBJECT_REF_OBJECT_SUFFIX, (int)dynamic_cast<CdmValueObjectRef*> (pValue)->GetValue());
-                p_rMap.insert(p_qstrPlaceholder + FTL_OBJECT_REF_CONTAINER_SUFFIX, (int)dynamic_cast<CdmValueObjectRef*> (pValue)->GetObjectListId());
+                p_rMap.insert(p_qstrPlaceholder + FTL_OBJECT_REF_OBJECT_SUFFIX, dynamic_cast<CdmValueObjectRef*> (pValue)->GetValue());
+                p_rMap.insert(p_qstrPlaceholder + FTL_OBJECT_REF_CONTAINER_SUFFIX, dynamic_cast<CdmValueObjectRef*> (pValue)->GetObjectListId());
                 break;
             case eDmValueContainerRef:
-                p_rMap.insert(p_qstrPlaceholder, (int)dynamic_cast<CdmValueContainerRef*> (pValue)->GetValue());
+                p_rMap.insert(p_qstrPlaceholder, dynamic_cast<CdmValueContainerRef*> (pValue)->GetValue());
                 break;
             case eDmValueCounter:
             {
@@ -276,7 +276,7 @@ void CftlHelper::FillFieldValues(QString p_qstrPlaceholder,
                 if (iValue == 0)
                 {
                     GetCounterValue(dynamic_cast<CdmValueCounter*> (pValue), p_pInterface);
-                    p_rMap.insert(p_qstrPlaceholder, (int) dynamic_cast<CdmValueCounter*> (pValue)->GetValue());
+                    p_rMap.insert(p_qstrPlaceholder, dynamic_cast<CdmValueCounter*> (pValue)->GetValue());
                 }
 
                 break;
@@ -354,7 +354,7 @@ void CftlHelper::GetCounterValue(CdmValueCounter* p_pCdmCounter, CftlInterface *
 
       if (CHKPTR(pCdmObject))
       {
-         long lObjectListId = pCdmObject->GetObjectContainerId();
+        qint64 lObjectListId = pCdmObject->GetObjectContainerId();
          CdmClass* pClass = pCdmObject->GetClass();
          const CdmMember* pMember = p_pCdmCounter->GetMember();
          if (CHKPTR(pClass) && CHKPTR(pMember))
@@ -373,12 +373,12 @@ void CftlHelper::GetCounterValue(CdmValueCounter* p_pCdmCounter, CftlInterface *
    }
 }
 
-long CftlHelper::GetCounterValue(long p_lObjectListId,
+qint64 CftlHelper::GetCounterValue(qint64 p_lObjectListId,
                                  QString& p_qstrTableName,
                                  QString& p_qstrMemberFieldName,
                                  CftlInterface *p_pInterface)
 {
-   long lRet = CdmLogging::eDmObjectAccessError;
+  qint64 lRet = CdmLogging::eDmObjectAccessError;
    QString qstrQuery;
    QSqlQuery querySelect(p_pInterface->GetSqlDatabase());
 
@@ -394,7 +394,7 @@ long CftlHelper::GetCounterValue(long p_lObjectListId,
 
    if(lRet > 0)
    {
-      long lValue = 0;
+     qint64 lValue = 0;
       querySelect.first();
 
       if(querySelect.isValid())
@@ -690,7 +690,7 @@ QString CftlHelper::GetUnionOfSubclasses(const CdmClass* p_pClass)
 
     if (CHKPTR(p_pClass))
     {
-        QList<long> qllClasses = p_pClass->GetDerivedClasses();
+        QList<qint64> qllClasses = p_pClass->GetDerivedClasses();
 
         if (qllClasses.count() == 0)
         {

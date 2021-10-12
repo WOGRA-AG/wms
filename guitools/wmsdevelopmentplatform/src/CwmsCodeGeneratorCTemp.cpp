@@ -347,7 +347,7 @@ QString CwmsCodeGeneratorCTemp::GenerateSetterCode(EdmValueType p_eReturnValue, 
       break;
    case eDmValueLong:
       qstrRet += qstrMember + " = p_lValue;";
-      AddMemberString("long " + qstrMember);
+      AddMemberString("qint64 " + qstrMember);
       break;
    case eDmValueContainerRef:
       qstrRet += qstrMember + " = p_pCdmOLValue;";
@@ -465,7 +465,7 @@ QString CwmsCodeGeneratorCTemp::GetParameter(EdmValueType p_eDmValue)
       qstrRet = "QString p_qstrValue";
       break;
    case eDmValueLong:
-      qstrRet = "long p_lValue";
+      qstrRet = "qint64 p_lValue";
       break;
    case eDmValueContainerRef:
       qstrRet = "CdmObjectContainer* p_pCdmOLValue";
@@ -644,7 +644,7 @@ QString CwmsCodeGeneratorCTemp::GetReturnType(EdmValueType p_eDmValue)
       qstrRet = "QList<QString>";
       break;
    case eDmValueLong:
-      qstrRet = "long";
+      qstrRet = "qint64";
       break;
    case eDmValueContainerRef:
       qstrRet = "CdmObjectContainer*";
@@ -952,7 +952,7 @@ void CwmsCodeGeneratorCTemp::GenerateDestructors()
  *----------------last changed: --------------------------------Mi 6. Jun 15:32:55 2012-----------*/
 void CwmsCodeGeneratorCTemp::GeneratesMemberAccess()
 {
-   QMap<long, CdmMember*> qmMembers;
+   QMap<qint64, CdmMember*> qmMembers;
    if (m_bCreateBaseClassMemberFunctions)
    {
        m_rpCdmClass->GetMemberMap(qmMembers);
@@ -968,15 +968,15 @@ void CwmsCodeGeneratorCTemp::GeneratesMemberAccess()
 /** +-=---------------------------------------------------------Mi 6. Jun 18:07:01 2012-----------*
  * @method  CwmsCodeGeneratorCTemp::GenerateMembersAccess    // private                           *
  * @return  void                                             //                                   *
- * @param   QMap<long, CdmMember*>& p_rMap                   //                                   *
+ * @param   QMap<qint64, CdmMember*>& p_rMap                   //                                   *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------Mi 6. Jun 18:07:01 2012-----------*/
-void CwmsCodeGeneratorCTemp::GenerateMembersAccess(QMap<long, CdmMember*>& p_rMap)
+void CwmsCodeGeneratorCTemp::GenerateMembersAccess(QMap<qint64, CdmMember*>& p_rMap)
 {
    if (CHKPTR(m_rpCdmClass))
    {
-      QMap<long, CdmMember*>::iterator qmIt = p_rMap.begin();
-      QMap<long, CdmMember*>::iterator qmItEnd = p_rMap.end();
+      QMap<qint64, CdmMember*>::iterator qmIt = p_rMap.begin();
+      QMap<qint64, CdmMember*>::iterator qmItEnd = p_rMap.end();
 
       for (; qmIt != qmItEnd; ++qmIt)
       {
@@ -1036,7 +1036,7 @@ void CwmsCodeGeneratorCTemp::AddMembersToHeader()
  *----------------last changed: --------------------------------Mi 6. Jun 17:48:27 2012-----------*/
 void CwmsCodeGeneratorCTemp::GenerateCopyConstructorMembers()
 {
-   QMap<long, CdmMember*> qmMembers;
+   QMap<qint64, CdmMember*> qmMembers;
    if (m_bCreateBaseClassMemberFunctions)
    {
       m_rpCdmClass->GetMemberMap(qmMembers);
@@ -1052,16 +1052,16 @@ void CwmsCodeGeneratorCTemp::GenerateCopyConstructorMembers()
 /** +-=---------------------------------------------------------Mi 6. Jun 17:47:00 2012-----------*
  * @method  CwmsCodeGeneratorCTemp::GenerateCopyConstructorMembers // private                     *
  * @return  void                                             //                                   *
- * @param   QMap<long, CdmMember*>& p_rMap                   //                                   *
+ * @param   QMap<qint64, CdmMember*>& p_rMap                   //                                   *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------Mi 6. Jun 17:47:00 2012-----------*/
-void CwmsCodeGeneratorCTemp::GenerateCopyConstructorMembers(QMap<long, CdmMember*>& p_rMap)
+void CwmsCodeGeneratorCTemp::GenerateCopyConstructorMembers(QMap<qint64, CdmMember*>& p_rMap)
 {
 
    if (CHKPTR(m_rpCdmClass))
    {
-      QMap<long, CdmMember*>::iterator qmIt = p_rMap.begin();
-      QMap<long, CdmMember*>::iterator qmItEnd = p_rMap.end();
+      QMap<qint64, CdmMember*>::iterator qmIt = p_rMap.begin();
+      QMap<qint64, CdmMember*>::iterator qmItEnd = p_rMap.end();
 
       for (; qmIt != qmItEnd; ++qmIt)
       {

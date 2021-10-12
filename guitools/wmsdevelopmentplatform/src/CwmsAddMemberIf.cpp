@@ -149,7 +149,7 @@ void CwmsAddMemberIf::SetMember(CdmMember* p_pCdmMember)
       m_pqchbOwner->setChecked(m_rpCdmMember->IsOwner());
       m_pqchbUnique->setChecked(m_rpCdmMember->IsUnique());
       m_pqteValidation->setPlainText(m_rpCdmMember->GetValidationCode());
-      long lClassId = m_rpCdmMember->GetClassReference();
+     qint64 lClassId = m_rpCdmMember->GetClassReference();
       m_pqchbPersistent->setChecked(m_rpCdmMember->IsPersistent());
       m_pqchbIsTree->setChecked(m_rpCdmMember->IsTree());
       m_pqlePrefix->setText(m_rpCdmMember->GetPrefix());

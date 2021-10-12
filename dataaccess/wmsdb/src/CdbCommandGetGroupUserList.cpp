@@ -6,7 +6,7 @@
 #include "CdbCommandFindUser.h"
 #include "CdbCommandGetGroupUserList.h"
 
-CdbCommandGetGroupUserList::CdbCommandGetGroupUserList(long p_lGroup, CdbDataAccess* p_pDataAccess)
+CdbCommandGetGroupUserList::CdbCommandGetGroupUserList(qint64 p_lGroup, CdbDataAccess* p_pDataAccess)
     : CdbAbstractCommand(p_pDataAccess),
       m_lGroupId(p_lGroup)
 {
@@ -25,7 +25,7 @@ QList<CumUser *> CdbCommandGetGroupUserList::GetResult()
 
 int CdbCommandGetGroupUserList::Execute()
 {
-    long lRet = CdmLogging::eDmUnknownUserQueryError;
+   qint64 lRet = CdmLogging::eDmUnknownUserQueryError;
 
     if(m_lGroupId <= 0)
     {
@@ -41,7 +41,7 @@ int CdbCommandGetGroupUserList::Execute()
 
 int CdbCommandGetGroupUserList::ReadAllUsers()
 {
-    long lRet = CdmLogging::eDmUnknownUserQueryError;
+   qint64 lRet = CdmLogging::eDmUnknownUserQueryError;
     INFO("Call read all users");
     CdbCommandGetUserList command(GetDataAccess());
     lRet = command.Run();
@@ -53,7 +53,7 @@ int CdbCommandGetGroupUserList::ReadAllUsers()
 
 int CdbCommandGetGroupUserList::ReadGroupUsers()
 {
-    long lRet = CdmLogging::eDmUnknownUserQueryError;
+   qint64 lRet = CdmLogging::eDmUnknownUserQueryError;
     QSqlQuery cQSqlQuery;
     QString qstrQuery;
     INFO("Loading all users in group " + QString::number(m_lGroupId));

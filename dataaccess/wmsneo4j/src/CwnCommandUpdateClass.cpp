@@ -221,11 +221,11 @@ int CwnCommandUpdateClass::Execute()
     // First Update Attributs of a Class
     createQueryForUpdateAttributesOfClass();
 
-    QMap<long, CdmMember*> qmMembers;
+    QMap<qint64, CdmMember*> qmMembers;
     m_rpClass->GetClassMemberMap(qmMembers);
 
-    QMap<long,CdmMember*>::iterator iIt    = qmMembers.begin();
-    QMap<long,CdmMember*>::iterator iItEnd = qmMembers.end();
+    QMap<qint64,CdmMember*>::iterator iIt    = qmMembers.begin();
+    QMap<qint64,CdmMember*>::iterator iItEnd = qmMembers.end();
 
     for(; iIt != iItEnd; ++iIt)
     {
@@ -342,10 +342,10 @@ void CwnCommandUpdateClass::InsertOrUpdateBaseClasses(CdmClass *p_pCdmClass)
 
         QString qstrQuery;
 
-        QMap<long,long> qmBaseClasses = p_pCdmClass->GetBaseClasses();
+        QMap<qint64,qint64> qmBaseClasses = p_pCdmClass->GetBaseClasses();
 
-        QMap<long,long>::iterator qmIt    = qmBaseClasses.begin();
-        QMap<long,long>::iterator qmItEnd = qmBaseClasses.end();
+        QMap<qint64,qint64>::iterator qmIt    = qmBaseClasses.begin();
+        QMap<qint64,qint64>::iterator qmItEnd = qmBaseClasses.end();
 
         for(; qmIt != qmItEnd; ++qmIt)
         {

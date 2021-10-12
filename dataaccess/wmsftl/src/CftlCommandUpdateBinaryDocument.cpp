@@ -46,7 +46,7 @@ int CftlCommandUpdateBinaryDocument::Execute()
 
         cQSqlQuery.prepare((qstrQuery));
         cQSqlQuery.addBindValue(m_rpValue->GetByteArray());
-        cQSqlQuery.addBindValue((int)pObject->GetId());
+        cQSqlQuery.addBindValue(pObject->GetId());
 
         if(SUCCESSFULL(ExecuteQuery(cQSqlQuery)))
         {

@@ -185,9 +185,9 @@ void CdbInterface::PrintLastErrorFromDb()
    BODY_CATCH
 }
 
-long CdbInterface::ExecuteQuery(QSqlQuery& p_rqsqlQuery)
+qint64 CdbInterface::ExecuteQuery(QSqlQuery& p_rqsqlQuery)
 {
-    long lRet = CdmLogging::eDmUnknownSqlError;
+   qint64 lRet = CdmLogging::eDmUnknownSqlError;
     QMutexLocker locker(&m_qMutex);
 
     if (!p_rqsqlQuery.exec())
@@ -237,10 +237,10 @@ long CdbInterface::ExecuteQuery(QSqlQuery& p_rqsqlQuery)
     return lRet;
 }
 
-long CdbInterface::ExecuteQuery(QString p_qstrQuery, QSqlQuery& p_rqsqlQuery)
+qint64 CdbInterface::ExecuteQuery(QString p_qstrQuery, QSqlQuery& p_rqsqlQuery)
 {
     // #define LOG_SLOW_QUERIES
-   long lRet = CdmLogging::eDmUnknownSqlError;
+  qint64 lRet = CdmLogging::eDmUnknownSqlError;
 
    QMutexLocker locker(&m_qMutex);
 #ifdef LOG_SLOW_QUERIES
@@ -345,10 +345,10 @@ QString CdbInterface::GetConnectionDisplayString()
    return "DB Host: " + m_qstrDbHostName + " User: " + m_qstrDbUserName + " Password: " + m_qstrDbUserPassword;
 }
 
-long CdbInterface::BeginTransaction()
+qint64 CdbInterface::BeginTransaction()
 {
     QMutexLocker locker(&m_qMutex);
-    long lRet = CdmLogging::eDmOk;
+   qint64 lRet = CdmLogging::eDmOk;
     INFO("Beginn Transaction")
 
     if (m_iTransactionCount == 0)
@@ -368,10 +368,10 @@ long CdbInterface::BeginTransaction()
     return lRet;
 }
 
-long CdbInterface::Rollback()
+qint64 CdbInterface::Rollback()
 {
     QMutexLocker locker(&m_qMutex);
-    long lRet = CdmLogging::eDmOk;
+   qint64 lRet = CdmLogging::eDmOk;
     INFO("Transaction count: " + QString::number(--m_iTransactionCount))
     INFO("In Rollback")
 
@@ -399,11 +399,11 @@ long CdbInterface::Rollback()
     return lRet;
 }
 
-long CdbInterface::Commit()
+qint64 CdbInterface::Commit()
 {
     QMutexLocker locker(&m_qMutex);
     INFO("Commiting changes")
-    long lRet = CdmLogging::eDmOk;
+   qint64 lRet = CdmLogging::eDmOk;
     INFO("Transaction count: " + QString::number(--m_iTransactionCount))
 
     if (m_iTransactionCount == 0)

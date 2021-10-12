@@ -1,6 +1,6 @@
 #include "CdbCommandDeleteSchemeLanguage.h"
 
-CdbCommandDeleteSchemeLanguage::CdbCommandDeleteSchemeLanguage(long p_lSchemeId, int p_lLanguage, CdbDataAccess* p_pDataAccess)
+CdbCommandDeleteSchemeLanguage::CdbCommandDeleteSchemeLanguage(qint64 p_lSchemeId, int p_lLanguage, CdbDataAccess* p_pDataAccess)
     : CdbAbstractCommandTransactional(p_pDataAccess),
       m_lSchemeId(p_lSchemeId),
       m_lLanguage(p_lLanguage)
@@ -19,7 +19,7 @@ bool CdbCommandDeleteSchemeLanguage::CheckValid()
 
 int CdbCommandDeleteSchemeLanguage::Execute()
 {
-    long lRet = CdmLogging::eDmUnknownDbAccessError;
+   qint64 lRet = CdmLogging::eDmUnknownDbAccessError;
     QSqlQuery cQuery;
     QString qstrQuery;
 

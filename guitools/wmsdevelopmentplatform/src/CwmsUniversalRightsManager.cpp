@@ -205,10 +205,10 @@ void CwmsUniversalRightsManagerIf::FillRights()
 /** +-=---------------------------------------------------------Do 16. Aug 14:17:02 2012----------*
  * @method  CwmsUniversalRightsManagerIf::FindUser           // protected, virtual                *
  * @return  CumUser*                                         //                                   *
- * @param   long p_lUserId                                   //                                   *
+ * @param  qint64 p_lUserId                                   //                                   *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------Do 16. Aug 14:17:02 2012----------*/
-CumUser* CwmsUniversalRightsManagerIf::FindUser(long p_lUserId)
+CumUser* CwmsUniversalRightsManagerIf::FindUser(qint64 p_lUserId)
 {
    CumUser* pRet = nullptr;
    QList<CumUser*>::iterator qvlIt = m_qvlUsers.begin();
@@ -257,10 +257,10 @@ CumUser* CwmsUniversalRightsManagerIf::FindUser(QString p_qstrLogin)
 /** +-=---------------------------------------------------------Do 16. Aug 14:17:24 2012----------*
  * @method  CwmsUniversalRightsManagerIf::FindUserGroup      // protected, virtual                *
  * @return  CumUserGroup*                                    //                                   *
- * @param   long p_lUserId                                   //                                   *
+ * @param  qint64 p_lUserId                                   //                                   *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------Do 16. Aug 14:17:24 2012----------*/
-CumUserGroup* CwmsUniversalRightsManagerIf::FindUserGroup(long p_lUserId)
+CumUserGroup* CwmsUniversalRightsManagerIf::FindUserGroup(qint64 p_lUserId)
 {
    CumUserGroup* pRet = nullptr;
 
@@ -321,7 +321,7 @@ void CwmsUniversalRightsManagerIf::RemoveRightClickedSlot()
    if(pqlviItem)
    {
       QString qstrId = pqlviItem->text(0);
-      long lId = qstrId.toLong();
+     qint64 lId = qstrId.toLong();
       m_rpCdmRights->DeleteRight(lId);
       FillDialog();
    }
@@ -396,7 +396,7 @@ void CwmsUniversalRightsManagerIf::RightsListViewDoubleClickedSlot()
    if(pqlviItem)
    {
       QString qstrId = pqlviItem->text(0);
-      long lId = qstrId.toLong();
+     qint64 lId = qstrId.toLong();
       QMap<int, EdmRight> qmRights = m_rpCdmRights->GetRights();
 
       EdmRight eDmRight = qmRights[lId];

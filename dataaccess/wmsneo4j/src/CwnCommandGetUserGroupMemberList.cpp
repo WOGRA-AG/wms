@@ -92,12 +92,12 @@ QList<CumUserGroup*> CwnCommandGetUserGroupMemberList::getResult()
     return this->p_rqvlUserGroups;
 }
 
-void CwnCommandGetUserGroupMemberList::setUserId(long userId)
+void CwnCommandGetUserGroupMemberList::setUserId(qint64 userId)
 {
     this->userId = userId;
 }
 
-long CwnCommandGetUserGroupMemberList::getUserId()
+qint64 CwnCommandGetUserGroupMemberList::getUserId()
 {
     return this->userId;
 }

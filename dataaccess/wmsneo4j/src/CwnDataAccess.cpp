@@ -90,24 +90,24 @@ CwnDataAccessConfigurator *CwnDataAccess::GetConfig()
 
 int CwnDataAccess::SessionCheck()
 {
-    long lRet = CdmLogging::eDmUnknownSqlError;
+   qint64 lRet = CdmLogging::eDmUnknownSqlError;
     CdmSessionManager* pSessionManager = CdmSessionManager::GetSessionManager();
 
     if (CHKPTR(pSessionManager))
     {
-        long iSessionId = pSessionManager->GetCurrentSessionId();
-        long iUserId = pSessionManager->GetCurrentUserId();
+       qint64 iSessionId = pSessionManager->GetCurrentSessionId();
+       qint64 iUserId = pSessionManager->GetCurrentUserId();
         lRet = m_pCwnLoginManager->FindSession(iSessionId, iUserId);
     }
 
     return lRet;
 }
 
-int CwnDataAccess::LoadObject(const CdmObjectContainer* p_pContainer, long p_lObjectId, CdmObject *&p_pCdmObject)
+int CwnDataAccess::LoadObject(const CdmObjectContainer* p_pContainer,qint64 p_lObjectId, CdmObject *&p_pCdmObject)
 {
     INFO("Data Access Call LoadObject()");
     ++m_iInterfaceCallCounter;
-    long lRet = 0;
+   qint64 lRet = 0;
     lRet = SessionCheck();
 
     if(lRet > 0)
@@ -126,12 +126,12 @@ int CwnDataAccess::LoadObject(const CdmObjectContainer* p_pContainer, long p_lOb
     return static_cast<int>(lRet);
 }
 
-int CwnDataAccess::LoadObjectContainer(long p_lObjectListId, CdmObjectContainer *&p_pContainer)
+int CwnDataAccess::LoadObjectContainer(qint64 p_lObjectListId, CdmObjectContainer *&p_pContainer)
 {
     INFO("Data Access Call LoadObjectList()");
     ++m_iInterfaceCallCounter;
 
-    long lRet = 0;
+   qint64 lRet = 0;
     lRet = SessionCheck();
 
     if(lRet > 0)
@@ -150,12 +150,12 @@ int CwnDataAccess::LoadObjectContainer(long p_lObjectListId, CdmObjectContainer 
     return static_cast<int>(lRet);
 }
 
-long CwnDataAccess::GetNewClassId(long p_lDbId)
+qint64 CwnDataAccess::GetNewClassId(qint64 p_lDbId)
 {
     INFO("Data Access Call LoadObjectList()");
     ++m_iInterfaceCallCounter;
 
-    long lRet = 0;
+   qint64 lRet = 0;
     lRet = SessionCheck();
 
     if(lRet > 0)
@@ -166,11 +166,11 @@ long CwnDataAccess::GetNewClassId(long p_lDbId)
     return static_cast<int>(lRet);
 }
 
-long CwnDataAccess::GetNewObjectId(const CdmObjectContainer* p_pContainer)
+qint64 CwnDataAccess::GetNewObjectId(const CdmObjectContainer* p_pContainer)
 {
     INFO("Data Access Call GetNewObjectId()");
     ++m_iInterfaceCallCounter;
-    long lRet=1;
+   qint64 lRet=1;
 
     if(lRet > 0)
     {
@@ -197,8 +197,8 @@ int CwnDataAccess::UpdateObject(CdmObject *&p_pCdmObject)
 {
     INFO("Data Access Call UpdateObject()");
     ++m_iInterfaceCallCounter;
-    //long lRet = BeginTransaction();
-    long lRet = 1;
+    //qint64 lRet = BeginTransaction();
+   qint64 lRet = 1;
 
     if(lRet > 0)
     {
@@ -225,7 +225,7 @@ int CwnDataAccess::UpdateObjectContainer(CdmObjectContainer *&p_pContainer)
 {
     INFO("Data Access Call UpdateObjectList()");
     ++m_iInterfaceCallCounter;
-    long lRet = 1;
+   qint64 lRet = 1;
 
     if(lRet > 0)
     {
@@ -253,7 +253,7 @@ int CwnDataAccess::CreateScheme(QString p_qstrKeyname, CdmScheme *&p_pScheme)
 {
     INFO("Data Access Call CreateScheme()");
     ++m_iInterfaceCallCounter;
-    long lRet = -1;
+   qint64 lRet = -1;
     lRet = SessionCheck();
 
     if(lRet > 0)
@@ -278,7 +278,7 @@ int CwnDataAccess::LoadSchemeBaseData(QString p_qstrKeyname, CdmScheme *&p_pSche
     INFO("Data Access Call LoadDbBaseData()");
     ++m_iInterfaceCallCounter;
 
-    long lRet = SessionCheck();
+   qint64 lRet = SessionCheck();
 
     if(lRet > 0)
     {
@@ -296,12 +296,12 @@ int CwnDataAccess::LoadSchemeBaseData(QString p_qstrKeyname, CdmScheme *&p_pSche
     return static_cast<int>(lRet);
 }
 
-int CwnDataAccess::LoadSchemeBaseData(long p_lSchemeId, CdmScheme *&p_pScheme)
+int CwnDataAccess::LoadSchemeBaseData(qint64 p_lSchemeId, CdmScheme *&p_pScheme)
 {
     INFO("Data Access Call LoadDbBaseData()");
     ++m_iInterfaceCallCounter;
-    long lRet;
-    //long lRet = BeginTransaction();
+   qint64 lRet;
+    //qint64 lRet = BeginTransaction();
 
     lRet = SessionCheck();
 
@@ -322,10 +322,10 @@ int CwnDataAccess::LoadSchemeBaseData(long p_lSchemeId, CdmScheme *&p_pScheme)
 
 }
 
-int CwnDataAccess::Login(QString p_qstrApplication, QString p_qstrLogin, QString p_qstrPassword, bool &p_bDemo, int &p_iModules, QString p_qstrVersion, long &p_lSessionId, CumUser *&p_rpCumUser)
+int CwnDataAccess::Login(QString p_qstrApplication, QString p_qstrLogin, QString p_qstrPassword, bool &p_bDemo, int &p_iModules, QString p_qstrVersion,qint64 &p_lSessionId, CumUser *&p_rpCumUser)
 {
     INFO("Data Access Call LogIn()");
-    long lRet = -1;
+   qint64 lRet = -1;
     ++m_iInterfaceCallCounter;
     if(CHKPTR(m_pCwnLoginManager))
     {
@@ -348,11 +348,11 @@ int CwnDataAccess::Login(QString p_qstrApplication, QString p_qstrLogin, QString
     return static_cast<int>(lRet);
 }
 
-int CwnDataAccess::LoginLdap(QString p_qstrApplication, QString p_qstrLogin, QString p_qstrPassword, long &p_lSessionId, CumUser *&p_rUser)
+int CwnDataAccess::LoginLdap(QString p_qstrApplication, QString p_qstrLogin, QString p_qstrPassword,qint64 &p_lSessionId, CumUser *&p_rUser)
 {
     INFO("Data Access Call LogIn()");
     ++m_iInterfaceCallCounter;
-    long lRet = -1;
+   qint64 lRet = -1;
 
     if(CHKPTR(m_pCwnLoginManager))
     {
@@ -374,7 +374,7 @@ int CwnDataAccess::Logout()
 {
     INFO("Data Access Call LogOut()");
     ++m_iInterfaceCallCounter;
-    long lRet = -1;
+   qint64 lRet = -1;
 
     if(CHKPTR(m_pCwnLoginManager))
     {
@@ -394,7 +394,7 @@ int CwnDataAccess::CreateUser(CumUser* p_pUser)
 {
     INFO("Data Access Call CreateUser()");
     ++m_iInterfaceCallCounter;
-    long lRet = -1;
+   qint64 lRet = -1;
 
     lRet = SessionCheck();
 
@@ -418,7 +418,7 @@ int CwnDataAccess::RegisterUser(CumUser* p_pUser)
 {
     INFO("Data Access Call RegisterUser()");
     ++m_iInterfaceCallCounter;
-    long lRet=1;
+   qint64 lRet=1;
     if(lRet > 0)
     {
        if (m_pCwnUserManager)
@@ -439,7 +439,7 @@ int CwnDataAccess::DeleteUser(QString p_qstrLogin)
 {
     INFO("Data Access Call DeleteUser()");
     ++m_iInterfaceCallCounter;
-    long lRet = -1;
+   qint64 lRet = -1;
 
     lRet = SessionCheck();
 
@@ -460,11 +460,11 @@ int CwnDataAccess::DeleteUser(QString p_qstrLogin)
 
 }
 
-int CwnDataAccess::DeleteUser(long p_lUserToDeleteId)
+int CwnDataAccess::DeleteUser(qint64 p_lUserToDeleteId)
 {
     INFO("Data Access Call DeleteUser()");
     ++m_iInterfaceCallCounter;
-    long lRet =1;
+   qint64 lRet =1;
 
     if(lRet > 0)
     {
@@ -487,11 +487,11 @@ int CwnDataAccess::DeleteUser(long p_lUserToDeleteId)
     return static_cast<int>(lRet);
 }
 
-int CwnDataAccess::DeleteClass(long p_lClassId)
+int CwnDataAccess::DeleteClass(qint64 p_lClassId)
 {
     INFO("Data Access Call DeleteClass()");
     ++m_iInterfaceCallCounter;
-    long lRet =1;
+   qint64 lRet =1;
     //BeginTransaction();
 
     if(lRet > 0)
@@ -515,12 +515,12 @@ int CwnDataAccess::DeleteClass(long p_lClassId)
     return static_cast<int>(lRet);
 }
 
-int CwnDataAccess::LoadClassManager(long p_lDatabaseId, CdmClassManager *&p_pCdmClassManager)
+int CwnDataAccess::LoadClassManager(qint64 p_lDatabaseId, CdmClassManager *&p_pCdmClassManager)
 {
     INFO("Data Access Call LoadClassManager()");
 
     ++m_iInterfaceCallCounter;
-    long lRet = 0;
+   qint64 lRet = 0;
     lRet = SessionCheck();
 
     if(lRet > 0)
@@ -543,7 +543,7 @@ int CwnDataAccess::DeleteScheme(QString p_qstrKeyname)
 {
     INFO("Data Access Call DeleteDb()");
     ++m_iInterfaceCallCounter;
-    long lRet = 1;
+   qint64 lRet = 1;
 
     if(lRet > 0)
     {
@@ -564,11 +564,11 @@ int CwnDataAccess::DeleteScheme(QString p_qstrKeyname)
     return static_cast<int>(lRet);
 }
 
-int CwnDataAccess::DeleteObjectContainer(long p_lObjectListId)
+int CwnDataAccess::DeleteObjectContainer(qint64 p_lObjectListId)
 {
     INFO("Data Access Call DeleteObjectList()");
      ++m_iInterfaceCallCounter;
-     long lRet =1;
+    qint64 lRet =1;
 
      if(lRet > 0)
      {
@@ -595,7 +595,7 @@ int CwnDataAccess::GetUserList(QList<CumUser *> &p_rqvlUser)
 {
     INFO("Data Access Call GetUserList()");
     ++m_iInterfaceCallCounter;
-    long lRet = 0;
+   qint64 lRet = 0;
     lRet = SessionCheck();
 
     if(lRet > 0)
@@ -615,11 +615,11 @@ int CwnDataAccess::GetUserList(QList<CumUser *> &p_rqvlUser)
 
 }
 
-int CwnDataAccess::GetContainerList(long p_lDbId, long p_lClassId, QMap<long, QString> &p_rqmObjectListsLList)
+int CwnDataAccess::GetContainerList(qint64 p_lDbId,qint64 p_lClassId, QMap<qint64, QString> &p_rqmObjectListsLList)
 {
     INFO("Data Access Call GetObjectListsList()");
     ++m_iInterfaceCallCounter;
-    long lRet = 0;
+   qint64 lRet = 0;
     lRet = SessionCheck();
 
     if(lRet > 0)
@@ -642,7 +642,7 @@ int CwnDataAccess::ExecuteQuery(CdmQuery *p_pCdmQuery)
 {
     INFO("Data Access Call ExecuteQuery()");
     ++m_iInterfaceCallCounter;
-    long lRet = 0;
+   qint64 lRet = 0;
     lRet = SessionCheck();
 
     if(lRet > 0)
@@ -665,7 +665,7 @@ int CwnDataAccess::ExistScheme(QString p_qstrKeyname, bool &p_bResult)
     INFO("Data Access Call ExistDb()");
     ++m_iInterfaceCallCounter;
     //BeginTransaction();
-    long lRet = 0;
+   qint64 lRet = 0;
     lRet = SessionCheck();
 
     if(lRet > 0)
@@ -684,12 +684,12 @@ int CwnDataAccess::ExistScheme(QString p_qstrKeyname, bool &p_bResult)
     return static_cast<int>(lRet);
 }
 
-int CwnDataAccess::ExistClass(long p_lDbId, QString p_qstrClassKeyname, bool &p_bResult)
+int CwnDataAccess::ExistClass(qint64 p_lDbId, QString p_qstrClassKeyname, bool &p_bResult)
 {
     INFO("Data Access Call ExistClass()");
     //BeginTransaction();
     ++m_iInterfaceCallCounter;
-    long lRet = 0;
+   qint64 lRet = 0;
     lRet = SessionCheck();
 
     if(lRet > 0)
@@ -708,11 +708,11 @@ int CwnDataAccess::ExistClass(long p_lDbId, QString p_qstrClassKeyname, bool &p_
     return static_cast<int>(lRet);
 }
 
-int CwnDataAccess::ExistObjectContainer(long p_lDbId, QString p_qstrObjectListKeyname)
+int CwnDataAccess::ExistObjectContainer(qint64 p_lDbId, QString p_qstrObjectListKeyname)
 {
     INFO("Data Access Call ExistObjectList()");
     ++m_iInterfaceCallCounter;
-    long lRet = 0;
+   qint64 lRet = 0;
     lRet = SessionCheck();
 
     if(lRet > 0)
@@ -735,7 +735,7 @@ int CwnDataAccess::LockObject(CdmObject* p_pObject, bool &p_bResult)
 {
     INFO("Data Access Call LockObject()");
     ++m_iInterfaceCallCounter;
-    long lRet = 1;
+   qint64 lRet = 1;
 
     if(lRet > 0)
     {
@@ -764,7 +764,7 @@ int CwnDataAccess::UnLockObject(CdmObject* p_pObject, bool &p_bResult)
 {
     INFO("Data Access Call UnLockObject()");
     ++m_iInterfaceCallCounter;
-    long lRet=1;
+   qint64 lRet=1;
 
     if(lRet > 0)
     {
@@ -789,12 +789,12 @@ int CwnDataAccess::UnLockObject(CdmObject* p_pObject, bool &p_bResult)
     return static_cast<int>(lRet);
 }
 
-int CwnDataAccess::LoadObjectContainer(long p_lDatabaseId, QString p_qstrKeyname, CdmObjectContainer *&p_pContainer)
+int CwnDataAccess::LoadObjectContainer(qint64 p_lDatabaseId, QString p_qstrKeyname, CdmObjectContainer *&p_pContainer)
 {
     INFO("Data Access Call LoadObjectList()");
     ++m_iInterfaceCallCounter;
 
-    long lRet = 0;
+   qint64 lRet = 0;
     lRet = SessionCheck();
 
     if(lRet > 0)
@@ -813,12 +813,12 @@ int CwnDataAccess::LoadObjectContainer(long p_lDatabaseId, QString p_qstrKeyname
     return static_cast<int>(lRet);
 }
 
-int CwnDataAccess::LoadEmptyObjectContainer(long p_lDataBaseId, QString p_qstrKeyname, CdmObjectContainer *&p_pContainer)
+int CwnDataAccess::LoadEmptyObjectContainer(qint64 p_lDataBaseId, QString p_qstrKeyname, CdmObjectContainer *&p_pContainer)
 {
     INFO("Data Access Call LoadEmptyObjectList()");
      ++m_iInterfaceCallCounter;
 
-     long lRet = 0;
+    qint64 lRet = 0;
      lRet = SessionCheck();
 
      if(lRet > 0)
@@ -837,13 +837,13 @@ int CwnDataAccess::LoadEmptyObjectContainer(long p_lDataBaseId, QString p_qstrKe
      return static_cast<int>(lRet);
 }
 
-QByteArray CwnDataAccess::ReadBinaryDocument(long p_lDbId, CdmValueBinaryDocument *p_pCdmBinaryDocument)
+QByteArray CwnDataAccess::ReadBinaryDocument(qint64 p_lDbId, CdmValueBinaryDocument *p_pCdmBinaryDocument)
 {
     INFO("Data Access Call ReadBinaryDocument()");
     ++m_iInterfaceCallCounter;
     Q_UNUSED(p_lDbId)
 
-    long lRet = 0;
+   qint64 lRet = 0;
     lRet = SessionCheck();
     QByteArray qbaResult;
 
@@ -863,12 +863,12 @@ QByteArray CwnDataAccess::ReadBinaryDocument(long p_lDbId, CdmValueBinaryDocumen
     return qbaResult;
 }
 
-int CwnDataAccess::UpdateBinaryDocument(long p_lDbId, CdmValueBinaryDocument *p_pCdmBinaryDocument)
+int CwnDataAccess::UpdateBinaryDocument(qint64 p_lDbId, CdmValueBinaryDocument *p_pCdmBinaryDocument)
 {
     INFO("Data Access Call UpdateBinaryDocument()");
     ++m_iInterfaceCallCounter;
     Q_UNUSED(p_lDbId)
-    long lRet=1;
+   qint64 lRet=1;
 
     if(lRet > 0)
     {
@@ -891,11 +891,11 @@ int CwnDataAccess::UpdateBinaryDocument(long p_lDbId, CdmValueBinaryDocument *p_
     return static_cast<int>(lRet);
 }
 
-long CwnDataAccess::RenameUserGroup(long p_lGroupId, QString p_qstrNewName)
+qint64 CwnDataAccess::RenameUserGroup(qint64 p_lGroupId, QString p_qstrNewName)
 {
     INFO("Data Access Call RenameUserGroup()");
     ++m_iInterfaceCallCounter;
-    long lRet = -1;
+   qint64 lRet = -1;
 
     lRet = SessionCheck();
 
@@ -915,11 +915,11 @@ long CwnDataAccess::RenameUserGroup(long p_lGroupId, QString p_qstrNewName)
     return lRet;
 }
 
-long CwnDataAccess::CreateUserGroup(QString p_qstrGroupName)
+qint64 CwnDataAccess::CreateUserGroup(QString p_qstrGroupName)
 {
     INFO("Data Access Call CreateUserGroup()");
     ++m_iInterfaceCallCounter;
-    long lRet = -1;
+   qint64 lRet = -1;
 
     lRet = SessionCheck();
 
@@ -939,11 +939,11 @@ long CwnDataAccess::CreateUserGroup(QString p_qstrGroupName)
     return lRet;
 }
 
-long CwnDataAccess::DeleteUserGroup(long p_llGroupId)
+qint64 CwnDataAccess::DeleteUserGroup(qint64 p_llGroupId)
 {
     INFO("Data Access Call DeleteUserGroup()");
      ++m_iInterfaceCallCounter;
-     long lRet = -1;
+    qint64 lRet = -1;
 
     lRet = SessionCheck();
 
@@ -963,11 +963,11 @@ long CwnDataAccess::DeleteUserGroup(long p_llGroupId)
     return lRet;
 }
 
-long CwnDataAccess::AddUserToUserGroup(long p_lChangeUserId, long p_lUserGroupId)
+qint64 CwnDataAccess::AddUserToUserGroup(qint64 p_lChangeUserId,qint64 p_lUserGroupId)
 {
     INFO("Data Access Call AddUserToUserGroup()");
     ++m_iInterfaceCallCounter;
-    long lRet = -1;
+   qint64 lRet = -1;
 
     lRet = SessionCheck();
 
@@ -987,11 +987,11 @@ long CwnDataAccess::AddUserToUserGroup(long p_lChangeUserId, long p_lUserGroupId
     return lRet;
 }
 
-long CwnDataAccess::RemoveUserFromGroup(long p_lChangeUserId, long p_lUserGroupId)
+qint64 CwnDataAccess::RemoveUserFromGroup(qint64 p_lChangeUserId,qint64 p_lUserGroupId)
 {
     INFO("Data Access Call RemoveUserFromGroup()");
     ++m_iInterfaceCallCounter;
-    long lRet = -1;
+   qint64 lRet = -1;
 
     lRet = SessionCheck();
 
@@ -1011,12 +1011,12 @@ long CwnDataAccess::RemoveUserFromGroup(long p_lChangeUserId, long p_lUserGroupI
     return lRet;
 }
 
-long CwnDataAccess::GetUserGroupList(QList<CumUserGroup *> &p_rqvlUserGroups, QString p_qstrSchemeUri)
+qint64 CwnDataAccess::GetUserGroupList(QList<CumUserGroup *> &p_rqvlUserGroups, QString p_qstrSchemeUri)
 {
     Q_UNUSED(p_qstrSchemeUri);
     INFO("Data Access Call GetUserGroupList()");
     ++m_iInterfaceCallCounter;
-    long lRet = 0;
+   qint64 lRet = 0;
     lRet = SessionCheck();
 
     if(lRet > 0)
@@ -1035,11 +1035,11 @@ long CwnDataAccess::GetUserGroupList(QList<CumUserGroup *> &p_rqvlUserGroups, QS
     return lRet;
 }
 
-long CwnDataAccess::GetListOfUsersInList(long p_lUserGroupId, QList<CumUser *> &p_rqvlUserList)
+qint64 CwnDataAccess::GetListOfUsersInList(qint64 p_lUserGroupId, QList<CumUser *> &p_rqvlUserList)
 {
     INFO("Data Access Call GetListOfUsersInList()");
     ++m_iInterfaceCallCounter;
-    long lRet = 0;
+   qint64 lRet = 0;
     lRet = SessionCheck();
 
     if(lRet > 0)
@@ -1058,11 +1058,11 @@ long CwnDataAccess::GetListOfUsersInList(long p_lUserGroupId, QList<CumUser *> &
     return lRet;
 }
 
-long CwnDataAccess::GetUserGroupMemberList(long p_lChangeUserId, QList<CumUserGroup *> &p_qvlUserGroups)
+qint64 CwnDataAccess::GetUserGroupMemberList(qint64 p_lChangeUserId, QList<CumUserGroup *> &p_qvlUserGroups)
 {
     INFO("Data Access Call GetUserGroupMemberList()");
     ++m_iInterfaceCallCounter;
-    long lRet = -1;
+   qint64 lRet = -1;
 
     lRet = SessionCheck();
 
@@ -1082,7 +1082,7 @@ long CwnDataAccess::GetUserGroupMemberList(long p_lChangeUserId, QList<CumUserGr
     return lRet;
 }
 
-long CwnDataAccess::AddLicense(QString p_qstrApplication, QString p_qstrLicensee, QString p_qstrLicensekey)
+qint64 CwnDataAccess::AddLicense(QString p_qstrApplication, QString p_qstrLicensee, QString p_qstrLicensekey)
 {
     // ToDo Impl
     Q_UNUSED(p_qstrApplication);
@@ -1091,19 +1091,19 @@ long CwnDataAccess::AddLicense(QString p_qstrApplication, QString p_qstrLicensee
     return -1;
 }
 
-long CwnDataAccess::FreeLicense()
+qint64 CwnDataAccess::FreeLicense()
 {
     // ToDo Impl
     NOTIMPLEMENTED;
     return -1;
 }
 
-long CwnDataAccess::GetSchemeList(QList<QString> &p_qvlDatabases)
+qint64 CwnDataAccess::GetSchemeList(QList<QString> &p_qvlDatabases)
 {
     INFO("Data Access Call GetDatbaseList()");
     //BeginTransaction();
     ++m_iInterfaceCallCounter;
-    long lRet = 0;
+   qint64 lRet = 0;
     lRet = SessionCheck();
 
     if(lRet > 0)
@@ -1123,11 +1123,11 @@ long CwnDataAccess::GetSchemeList(QList<QString> &p_qvlDatabases)
     return lRet;
 }
 
-long CwnDataAccess::UpdateScheme(CdmScheme *p_pCdmDatabase)
+qint64 CwnDataAccess::UpdateScheme(CdmScheme *p_pCdmDatabase)
 {
     INFO("Data Access Call UpdateDatabase()");
     ++m_iInterfaceCallCounter;
-    long lRet =1;
+   qint64 lRet =1;
     //BeginTransaction();
 
     if(lRet > 0)
@@ -1151,11 +1151,11 @@ long CwnDataAccess::UpdateScheme(CdmScheme *p_pCdmDatabase)
     return lRet;
 }
 
-long CwnDataAccess::GetCounterValue(const CdmObjectContainer* p_pContainer, CdmValue* p_pValue)
+qint64 CwnDataAccess::GetCounterValue(const CdmObjectContainer* p_pContainer, CdmValue* p_pValue)
 {
     INFO("Data Access Call GetCounterValue()");
     ++m_iInterfaceCallCounter;
-    long lRet = 1;
+   qint64 lRet = 1;
 
     if(lRet > 0)
     {
@@ -1177,13 +1177,13 @@ long CwnDataAccess::GetCounterValue(const CdmObjectContainer* p_pContainer, CdmV
     return lRet;
 }
 
-long CwnDataAccess::GetNewContainerId(long p_lClassId)
+qint64 CwnDataAccess::GetNewContainerId(qint64 p_lClassId)
 {
     INFO("Data Access Call GetNewObjectListId()");
 
     ++m_iInterfaceCallCounter;
 
-    long lRet = SessionCheck();
+   qint64 lRet = SessionCheck();
 
     if(lRet > 0)
     {
@@ -1211,7 +1211,7 @@ int CwnDataAccess::UpdateUser(CumUser* p_pUser)
 {
     INFO("Data Access Call UpdateUser()");
     ++m_iInterfaceCallCounter;
-    long lRet = -1;
+   qint64 lRet = -1;
 
     lRet = SessionCheck();
 
@@ -1231,13 +1231,13 @@ int CwnDataAccess::UpdateUser(CumUser* p_pUser)
     return static_cast<int>(lRet);
 }
 
-int CwnDataAccess::LoadEmptyObjectContainer(long p_lDataBaseId, long p_lId, CdmObjectContainer *&p_pContainer)
+int CwnDataAccess::LoadEmptyObjectContainer(qint64 p_lDataBaseId,qint64 p_lId, CdmObjectContainer *&p_pContainer)
 {
     INFO("Data Access Call LoadEmptyObjectList()");
     ++m_iInterfaceCallCounter;
     //BeginTransaction();
 
-    long lRet = 0;
+   qint64 lRet = 0;
     lRet = SessionCheck();
 
     if(lRet > 0)
@@ -1257,12 +1257,12 @@ int CwnDataAccess::LoadEmptyObjectContainer(long p_lDataBaseId, long p_lId, CdmO
     return static_cast<int>(lRet);
 }
 
-int CwnDataAccess::LoadObjects(QList<long> &p_rqvlObjects, CdmObjectContainer *&p_pCdmObject)
+int CwnDataAccess::LoadObjects(QList<qint64> &p_rqvlObjects, CdmObjectContainer *&p_pCdmObject)
 {
     INFO("Data Access Call LoadObjects()");
     ++m_iInterfaceCallCounter;
 
-    long lRet = 0;
+   qint64 lRet = 0;
     lRet = SessionCheck();
 
     if(lRet > 0)
@@ -1308,12 +1308,12 @@ int CwnDataAccess::IsDemo(QString p_qstrApplication, QString p_qstrVersion)
      return iRet;
 }
 
-long CwnDataAccess::IsObjectUsed(const CdmObject* p_pObject)
+qint64 CwnDataAccess::IsObjectUsed(const CdmObject* p_pObject)
 {
     INFO("Data Access Call IsObjectUsed()");
     ++m_iInterfaceCallCounter;
 
-    long lRet = 0;
+   qint64 lRet = 0;
     lRet = SessionCheck();
 
     if(lRet > 0)
@@ -1384,9 +1384,9 @@ CumUser *CwnDataAccess::FindUser(QString p_qstrUserId, QString p_qstrPassword, Q
     return m_pCwnUserManager->FindUser(p_qstrUserId,p_qstrPassword);
 }
 
-long CwnDataAccess::RefreshObject(CdmObject *p_pCdmObject)
+qint64 CwnDataAccess::RefreshObject(CdmObject *p_pCdmObject)
 {
-    long lRet = -1;
+   qint64 lRet = -1;
      ++m_iInterfaceCallCounter;
      INFO("RefreshObject Call");
 
@@ -1404,9 +1404,9 @@ long CwnDataAccess::RefreshObject(CdmObject *p_pCdmObject)
     return lRet;
 }
 
-long CwnDataAccess::RefreshObjectContainer(CdmObjectContainer *p_pCdmObject)
+qint64 CwnDataAccess::RefreshObjectContainer(CdmObjectContainer *p_pCdmObject)
 {
-    long lRet = -1;
+   qint64 lRet = -1;
     INFO("RefreshObjectList Call");
      ++m_iInterfaceCallCounter;
 
@@ -1424,9 +1424,9 @@ long CwnDataAccess::RefreshObjectContainer(CdmObjectContainer *p_pCdmObject)
     return lRet;
 }
 
-long CwnDataAccess::CountObjectsOnDb(CdmObjectContainer *p_pCdmObject)
+qint64 CwnDataAccess::CountObjectsOnDb(CdmObjectContainer *p_pCdmObject)
 {
-    long lRet = -1;
+   qint64 lRet = -1;
     ++m_iInterfaceCallCounter;
     INFO("CountObjectOnDb Call");
 
@@ -1443,9 +1443,9 @@ long CwnDataAccess::CountObjectsOnDb(CdmObjectContainer *p_pCdmObject)
     return lRet;
 }
 
-int CwnDataAccess::AddLanguage(long p_lDatabaseId, QString p_qstrLanguage)
+int CwnDataAccess::AddLanguage(qint64 p_lDatabaseId, QString p_qstrLanguage)
 {
-    long lRet = -1;
+   qint64 lRet = -1;
     ++m_iInterfaceCallCounter;
     INFO("AddLanguage Call");
 
@@ -1459,9 +1459,9 @@ int CwnDataAccess::AddLanguage(long p_lDatabaseId, QString p_qstrLanguage)
     return static_cast<int>(lRet);
 }
 
-int CwnDataAccess::DeleteLanguage(long p_lDatabaseId, int p_iLanguageId)
+int CwnDataAccess::DeleteLanguage(qint64 p_lDatabaseId, int p_iLanguageId)
 {
-    long lRet = -1;
+   qint64 lRet = -1;
     //BeginTransaction();
     ++m_iInterfaceCallCounter;
     INFO("Delete Language Call");
@@ -1476,9 +1476,9 @@ int CwnDataAccess::DeleteLanguage(long p_lDatabaseId, int p_iLanguageId)
     return static_cast<int>(lRet);
 }
 
-int CwnDataAccess::GetSchemeModifications(long p_lDatabaseId, QDate p_qdFrom, QDate p_qdTo, QList<CdmJournalItem *> &p_qlItems)
+int CwnDataAccess::GetSchemeModifications(qint64 p_lDatabaseId, QDate p_qdFrom, QDate p_qdTo, QList<CdmJournalItem *> &p_qlItems)
 {
-    long lRet = -1;
+   qint64 lRet = -1;
     ++m_iInterfaceCallCounter;
     INFO("GetDatabaseModifications Call");
 
@@ -1494,7 +1494,7 @@ int CwnDataAccess::GetSchemeModifications(long p_lDatabaseId, QDate p_qdFrom, QD
 
 int CwnDataAccess::GetObjectContainerModifications(const CdmObjectContainer* p_pContainer, QDate p_qdFrom, QDate p_qdTo, QList<CdmJournalItem *> &p_qlItems)
 {
-    long lRet = -1;
+   qint64 lRet = -1;
     ++m_iInterfaceCallCounter;
     INFO("GetObjectListModifications Call");
 
@@ -1510,7 +1510,7 @@ int CwnDataAccess::GetObjectContainerModifications(const CdmObjectContainer* p_p
 
 int CwnDataAccess::GetObjectModifications(const CdmObject* p_pObject, QDate p_qdFrom, QDate p_qdTo, QList<CdmJournalItem *> &p_qlItems)
 {
-    long lRet = -1;
+   qint64 lRet = -1;
     ++m_iInterfaceCallCounter;
     INFO("GetObjectModifications Call");
 
@@ -1526,12 +1526,12 @@ int CwnDataAccess::GetObjectModifications(const CdmObject* p_pObject, QDate p_qd
 bool CwnDataAccess::GetOwner(const CdmObject* p_pObject, CdmObject*& p_pOwnerObject)
 {
     bool bRet = false;
-    long lRet = SessionCheck();
+   qint64 lRet = SessionCheck();
 
     if(lRet > 0)
     {
-        long lOwnerObjectId = 0;
-        long lOwnerContainerId = 0;
+       qint64 lOwnerObjectId = 0;
+       qint64 lOwnerContainerId = 0;
         m_pCwnObjectAccess->GetOwner(p_pObject->GetObjectContainerId(), p_pObject->GetId(), lOwnerObjectId, lOwnerContainerId);
 
         p_pOwnerObject = GetObject(lOwnerContainerId, lOwnerObjectId);
@@ -1542,7 +1542,7 @@ bool CwnDataAccess::GetOwner(const CdmObject* p_pObject, CdmObject*& p_pOwnerObj
     return bRet;
 }
 
-CdmObject* CwnDataAccess::GetObject(long p_lContainerId, long p_lObjectId)
+CdmObject* CwnDataAccess::GetObject(qint64 p_lContainerId,qint64 p_lObjectId)
 {
     CdmObject* pObject = nullptr;
     CdmDataProvider* pDataProvider = CdmSessionManager::GetDataProvider();
@@ -1566,7 +1566,7 @@ bool CwnDataAccess::GetReferences(const CdmObject* p_pObject, QList<CdmObject*> 
     Q_UNUSED(p_pObject);
 
     bool bRet = false;
-    long lRet = SessionCheck();
+   qint64 lRet = SessionCheck();
 
     if(lRet > 0)
     {
@@ -1577,12 +1577,12 @@ bool CwnDataAccess::GetReferences(const CdmObject* p_pObject, QList<CdmObject*> 
 bool CwnDataAccess::GetOwner(const CdmObjectContainer* p_pContainer, CdmObject*& p_pOwnerObject)
 {
     bool bRet = false;
-    long lRet = SessionCheck();
+   qint64 lRet = SessionCheck();
 
     if(lRet > 0)
     {
-        long lOwnerObjectId = 0;
-        long lOwnerContainerId = 0;
+       qint64 lOwnerObjectId = 0;
+       qint64 lOwnerContainerId = 0;
         m_pCwnObjectAccess->GetOwner(p_pContainer->GetId(), lOwnerObjectId, lOwnerContainerId);
 
         p_pOwnerObject = GetObject(lOwnerContainerId, lOwnerObjectId);
@@ -1594,7 +1594,7 @@ bool CwnDataAccess::GetOwner(const CdmObjectContainer* p_pContainer, CdmObject*&
 
 int CwnDataAccess::UpdateClass(CdmClass *&p_pCdmClass)
 {
-    long lRet=0;
+   qint64 lRet=0;
     INFO("Data Access Call UpdateClass()");
     ++m_iInterfaceCallCounter;
 
@@ -1620,8 +1620,8 @@ int CwnDataAccess::UpdatePackage(CdmPackage *&p_pCdmPackage)
 {
     INFO("Data Access Call GetCounterValue()");
     ++m_iInterfaceCallCounter;
-    //long lRet = BeginTransaction();
-    long lRet = 1;
+    //qint64 lRet = BeginTransaction();
+   qint64 lRet = 1;
 
     if(lRet > 0)
     {
@@ -1664,11 +1664,11 @@ CdmObject *CwnDataAccess::CreateObject(CdmObjectContainer *p_pContainer)
      return nullptr;
 }
 
-bool CwnDataAccess::LockClassMethod(long p_lMethodId)
+bool CwnDataAccess::LockClassMethod(qint64 p_lMethodId)
 {
     INFO("Data Access Call LockObject()");
     ++m_iInterfaceCallCounter;
-    long lRet =1;
+   qint64 lRet =1;
     bool bSuccess=false;
     //BeginTransaction();
 
@@ -1688,12 +1688,12 @@ bool CwnDataAccess::LockClassMethod(long p_lMethodId)
     return bSuccess;
 }
 
-bool CwnDataAccess::UnlockClassMethod(long p_lMethodId)
+bool CwnDataAccess::UnlockClassMethod(qint64 p_lMethodId)
 {
 
     INFO("Data Access Call LockObject()");
     ++m_iInterfaceCallCounter;
-    long lRet =1;
+   qint64 lRet =1;
     bool bSuccess=false;
 
     if(lRet > 0)
@@ -1771,19 +1771,19 @@ void CwnDataAccess::PrintObject(QString p_qstrTemplateName, CdmObject *p_pObject
     NOTIMPLEMENTED;
     // not for neo4j
 }
-int CwnDataAccess::LoadRights(CdmRights& p_rCcdmRights, long p_lObjectId, QString p_qstrTableName, QString p_qstrIdFieldName)
+int CwnDataAccess::LoadRights(CdmRights& p_rCcdmRights,qint64 p_lObjectId, QString p_qstrTableName, QString p_qstrIdFieldName)
 {
     Q_UNUSED(p_qstrIdFieldName);
     CwnCommandLoadRights rights(p_rCcdmRights,p_lObjectId,p_qstrTableName,this);
     return static_cast<int>(rights.Run());
 }
-int CwnDataAccess::SaveRights(CdmRights& p_rCcdmRights, long p_lObjectId, QString p_qstrTableName, QString p_qstrIdFieldName)
+int CwnDataAccess::SaveRights(CdmRights& p_rCcdmRights,qint64 p_lObjectId, QString p_qstrTableName, QString p_qstrIdFieldName)
 {
     Q_UNUSED(p_qstrIdFieldName);
     CwnCommandSaveRights rights(p_rCcdmRights,p_lObjectId,p_qstrTableName);
     return static_cast<int>(rights.Run());
 }
-int CwnDataAccess::DeleteRights(long p_lObjectId,QString p_qstrTableName,QString p_qstrIdFieldName)
+int CwnDataAccess::DeleteRights(qint64 p_lObjectId,QString p_qstrTableName,QString p_qstrIdFieldName)
 {
     Q_UNUSED(p_lObjectId);
     Q_UNUSED(p_qstrIdFieldName);
@@ -1849,12 +1849,12 @@ CwnJournal* CwnDataAccess::GetJournal()
    return m_pCwnJournal;
 }
 
-QString CwnDataAccess::GenerateInString(QList<long> &p_rqvlIds)
+QString CwnDataAccess::GenerateInString(QList<qint64> &p_rqvlIds)
 {
    QString qstrRet = "[";
 
-   QList<long>::iterator qvlIt = p_rqvlIds.begin();
-   QList<long>::iterator qvlItEnd = p_rqvlIds.end();
+   QList<qint64>::iterator qvlIt = p_rqvlIds.begin();
+   QList<qint64>::iterator qvlItEnd = p_rqvlIds.end();
 
    while (qvlIt != qvlItEnd)
    {
@@ -1899,7 +1899,7 @@ QList<CumUserGroup *> CwnDataAccess::FindUserGroups(QString p_qstrName, QString 
 
 int CwnDataAccess::LoadObject(const CdmObjectContainer* p_pContainer, QString p_qstrKeyname, CdmObject *&p_pCdmObject)
 {
-    long lRet = CdmLogging::eDmUnknownSqlError;
+   qint64 lRet = CdmLogging::eDmUnknownSqlError;
     lRet = SessionCheck();
 
     if(lRet > 0)

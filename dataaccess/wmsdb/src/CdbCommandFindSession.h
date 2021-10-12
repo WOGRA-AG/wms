@@ -6,8 +6,8 @@
 class CdbCommandFindSession : public CdbAbstractCommand
 {
 private:
-    long m_lSessionId;
-    long m_lUserId;
+   qint64 m_lSessionId;
+   qint64 m_lUserId;
     QString m_qstrBaseAuth;
     CdmSession* m_pSession;
 
@@ -15,8 +15,8 @@ private:
     int FindSessionBySessionId();
     int FindSessionBySessionIdAndUserId();
 public:
-    CdbCommandFindSession(long p_lSessionId, long p_lUserId, CdbDataAccess* p_pDataAccess);
-    CdbCommandFindSession(long p_lSessionId, CdbDataAccess* p_pDataAccess);
+    CdbCommandFindSession(qint64 p_lSessionId,qint64 p_lUserId, CdbDataAccess* p_pDataAccess);
+    CdbCommandFindSession(qint64 p_lSessionId, CdbDataAccess* p_pDataAccess);
     CdbCommandFindSession(QString p_qstrBaseAuth, CdbDataAccess* p_pDataAccess);
     virtual ~CdbCommandFindSession();
 

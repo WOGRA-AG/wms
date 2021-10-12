@@ -18,7 +18,7 @@ void CwiCommandGetNewClassID::Execute()
 {
     if (m_rpData->HasValue("DatabaseId"))
     {
-       long iDbId = m_rpData->GetValue("DatabaseId").toInt();
+      qint64 iDbId = m_rpData->GetValue("DatabaseId").toInt();
 
        CdmDataProvider* pCdmManager = CdmSessionManager::GetDataProvider();
 

@@ -91,173 +91,173 @@ virtual ~CwnObjectAccess(  );
    public:
    /** +-=---------------------------------------------------------Di 23. Aug 15:50:10 2005*
     * @method  CwnObjectAccess::DeleteObjectList           // public, virtual                   *
-    * @return  long                                          //                                   *
-    * @param   long p_lObjectListId                          //                                   *
+    * @return qint64                                          //                                   *
+    * @param  qint64 p_lObjectListId                          //                                   *
     * @comment Deletes an objectlist from db.                                                     *
     *----------------last changed: -----------------------------Di 23. Aug 15:50:10 2005----------*/
-virtual long DeleteContainer(  long p_lObjectListId );
+virtual qint64 DeleteContainer( qint64 p_lObjectListId );
 
    public:
    /** +-=---------------------------------------------------------Mi 15. Sep 17:00:25 2010-------*
     * @method  CwnObjectAccess::ExecuteQuery               // public                            *
-    * @return  long                                          //                                   *
-    * @param   long# p_lDbId                                 //                                   *
+    * @return qint64                                          //                                   *
+    * @param  qint64# p_lDbId                                 //                                   *
     * @param   CdmObjectContainer*# p_pContainer              //                                   *
     * @param   CdmQuery* p_pCdmQuery                         //                                   *
     * @comment This emthod executes an query on Server Side.                                      *
     *----------------last changed: -----------------------------Mi 15. Sep 17:00:25 2010----------*/
-    long ExecuteQuery(CdmQuery* p_pCdmQuery);
+   qint64 ExecuteQuery(CdmQuery* p_pCdmQuery);
 
    public:
    /** +-=---------------------------------------------------------Sa 20. Aug 12:02:31 2005*
     * @method  CwnObjectAccess::ExistObjectList            // public                            *
-    * @return  long                                          //                                   *
-    * @param   long p_lClassId                               //                                   *
+    * @return qint64                                          //                                   *
+    * @param  qint64 p_lClassId                               //                                   *
     * @param   QString p_qstrObjectListKeyname               //                                   *
     * @comment This method checks if exist th objectlist with the overgiven keyname.              *
     *----------------last changed: -----------------------------Sa 20. Aug 12:02:31 2005----------*/
-long ExistObjectList(  long p_lClassId, QString p_qstrObjectListKeyname );
+qint64 ExistObjectList( qint64 p_lClassId, QString p_qstrObjectListKeyname );
 
    public:
    /** +-=---------------------------------------------------------So 11. Sep 12:22:14 2005*
     * @method  CwnObjectAccess::GetNewObjectId             // public, virtual                   *
-    * @return  long                                          //                                   *
-    * @param   long p_lObjectListId                          //                                   *
-    * @param   long p_lSessionId                             //                                   *
+    * @return qint64                                          //                                   *
+    * @param  qint64 p_lObjectListId                          //                                   *
+    * @param  qint64 p_lSessionId                             //                                   *
     * @comment This method gets a new object id from datasource.                                  *
     *----------------last changed: -----------------------------So 11. Sep 12:22:14 2005----------*/
-virtual long GetNewObjectId(  long p_lObjectListId, long p_lSessionId );
+virtual qint64 GetNewObjectId( qint64 p_lObjectListId,qint64 p_lSessionId );
 
    public:
    /** +-=---------------------------------------------------------So 11. Sep 12:22:20 2005*
     * @method  CwnObjectAccess::GetNewObjectListId         // public, virtual                   *
-    * @return  long                                          //                                   *
-    * @param   long p_lClassId                               //                                   *
-    * @param   long p_lSessionId                             //                                   *
+    * @return qint64                                          //                                   *
+    * @param  qint64 p_lClassId                               //                                   *
+    * @param  qint64 p_lSessionId                             //                                   *
     * @comment                                                                                    *
     *----------------last changed: -----------------------------So 11. Sep 12:22:20 2005----------*/
-virtual long GetNewObjectListId(  long p_lClassId, long p_lSessionId );
+virtual qint64 GetNewObjectListId( qint64 p_lClassId,qint64 p_lSessionId );
 
    public:
    /** +-=---------------------------------------------------------So 22. Jan 13:59:23 2006*
     * @method  CwnObjectAccess::GetObjectListsList         // public                            *
-    * @return  long                                          //                                   *
-    * @param   long p_lDbId                                  //                                   *
-    * @param   long p_lClassId                               //                                   *
-    * @param   QMap<long,QString>& p_rqmObjectListsList      //                                   *
+    * @return qint64                                          //                                   *
+    * @param  qint64 p_lDbId                                  //                                   *
+    * @param  qint64 p_lClassId                               //                                   *
+    * @param   QMap<qint64,QString>& p_rqmObjectListsList      //                                   *
     * @comment This method returns a list of all objectlists.                                     *
     *----------------last changed: Wolfgang Gra�hof-------------So 22. Jan 13:59:23 2006----------*/
-long GetObjectListsList(  long p_lDbId, long p_lClassId, QMap<long,QString>& p_rqmObjectListsList );
+qint64 GetObjectListsList( qint64 p_lDbId,qint64 p_lClassId, QMap<qint64,QString>& p_rqmObjectListsList );
 
    public:
    /** +-=---------------------------------------------------------Sa 20. Aug 12:02:49 2005*
     * @method  CwnObjectAccess::LoadObject                 // public                            *
-    * @return  long                                          //                                   *
-    * @param   long p_lObjectListId                          //                                   *
-    * @param   long p_lObjectId                              //                                   *
+    * @return qint64                                          //                                   *
+    * @param  qint64 p_lObjectListId                          //                                   *
+    * @param  qint64 p_lObjectId                              //                                   *
     * @param   CdmObject*& p_pCdmObject                      //                                   *
     * @comment This method loads a aobject from DataAccess.                                       *
     *----------------last changed: -----------------------------Sa 20. Aug 12:02:49 2005----------*/
-long LoadObject(  long p_lObjectListId, long p_lObjectId, CdmObject*& p_pCdmObject );
+qint64 LoadObject( qint64 p_lObjectListId,qint64 p_lObjectId, CdmObject*& p_pCdmObject );
 
    public:
    /** +-=---------------------------------------------------------Sa 20. Aug 12:02:53 2005*
     * @method  CwnObjectAccess::LoadObjectList             // public                            *
-    * @return  long                                          //                                   *
-    * @param   long p_lObjectListId                          //                                   *
+    * @return qint64                                          //                                   *
+    * @param  qint64 p_lObjectListId                          //                                   *
     * @param   CdmObjectContainer*& p_pContainer              //                                   *
     * @comment This method loads the objectlist with the Id p_lObjectId from Database p_lDatabase.*
     *----------------last changed: -----------------------------Sa 20. Aug 12:02:53 2005----------*/
-long LoadContainer(  long p_lObjectListId, CdmObjectContainer*& p_pContainer );
+qint64 LoadContainer( qint64 p_lObjectListId, CdmObjectContainer*& p_pContainer );
 
    public:
    /** +-=---------------------------------------------------------Sa 20. Aug 12:03:11 2005*
     * @method  CwnObjectAccess::LockObject                 // public                            *
-    * @return  long                                          //                                   *
-    * @param   long p_lSessionId                             //                                   *
-    * @param   long p_lObjectId                              //                                   *
+    * @return qint64                                          //                                   *
+    * @param  qint64 p_lSessionId                             //                                   *
+    * @param  qint64 p_lObjectId                              //                                   *
     * @param   bool & p_bResult                              //                                   *
     * @comment This method locks objects on server side.                                          *
     *----------------last changed: -----------------------------Sa 20. Aug 12:03:11 2005----------*/
-long LockObject(  long p_lSessionId, long p_lObjectId, bool & p_bResult );
+qint64 LockObject( qint64 p_lSessionId,qint64 p_lObjectId, bool & p_bResult );
 
    public:
    /** +-=---------------------------------------------------------Sa 20. Aug 12:03:22 2005*
     * @method  CwnObjectAccess::UnLockObject               // public                            *
-    * @return  long                                          //                                   *
-    * @param   long p_lSessionId                             //                                   *
-    * @param   long p_lObjectId                              //                                   *
+    * @return qint64                                          //                                   *
+    * @param  qint64 p_lSessionId                             //                                   *
+    * @param  qint64 p_lObjectId                              //                                   *
     * @param   bool & p_bResult                              //                                   *
     * @comment This method unlocks objects on server side.                                        *
     *----------------last changed: -----------------------------Sa 20. Aug 12:03:22 2005----------*/
-long UnLockObject(  long p_lSessionId, long p_lObjectId, bool & p_bResult );
+qint64 UnLockObject( qint64 p_lSessionId,qint64 p_lObjectId, bool & p_bResult );
 
    public:
    /** +-=---------------------------------------------------------Sa 20. Aug 12:03:26 2005*
     * @method  CwnObjectAccess::UpdateObject               // public                            *
-    * @return  long                                          //                                   *
+    * @return qint64                                          //                                   *
     * @param   CdmObject*& p_pCdmObject                      //                                   *
-    * @param   long p_lSessionId                             //                                   *
+    * @param  qint64 p_lSessionId                             //                                   *
     * @comment This method updates an object. It sends the object changes to server. on which it  *
     *          will be merged and resend. This object can be invalid or delted and receiving the  *
     *          new object data because a other user has deleted it.                               *
     *----------------last changed: -----------------------------Sa 20. Aug 12:03:26 2005----------*/
-long UpdateObject(  CdmObject*& p_pCdmObject, long p_lSessionId );
+qint64 UpdateObject(  CdmObject*& p_pCdmObject,qint64 p_lSessionId );
 
    public:
    /** +-=---------------------------------------------------------Mo 5. Sep 19:07:39 2005*
     * @method  CwnObjectAccess::UpdateObjectList           // public, virtual                   *
-    * @return  long                                          //                                   *
+    * @return qint64                                          //                                   *
     * @param   CdmObjectContainer*& p_pContainer              //                                   *
-    * @param   long p_lSessionId                             //                                   *
+    * @param  qint64 p_lSessionId                             //                                   *
     * @comment This method updates an object. It sends the object changes to server. on which it  *
     *          will be merged and resend. This object can be invalid or delted and receiving the  *
     *          new object data because a other user has deleted it.                               *
     *----------------last changed: -----------------------------Mo 5. Sep 19:07:39 2005-----------*/
-virtual long UpdateContainer(  CdmObjectContainer*& p_pContainer, long p_lSessionId );
+virtual qint64 UpdateContainer(  CdmObjectContainer*& p_pContainer,qint64 p_lSessionId );
 
    protected:
    /** +-=---------------------------------------------------------Di 23. Aug 15:50:01 2005*
     * @method  CwnObjectAccess::DeleteObject               // protected, virtual                *
-    * @return  long                                          //                                   *
-    * @param   long p_lObjectId                              //                                   *
-    * @param   long p_lSessionId                             //                                   *
+    * @return qint64                                          //                                   *
+    * @param  qint64 p_lObjectId                              //                                   *
+    * @param  qint64 p_lSessionId                             //                                   *
     * @comment This method deletes objects from db.                                               *
     *----------------last changed: -----------------------------Di 23. Aug 15:50:01 2005----------*/
-virtual long DeleteObject(  long p_lObjectId, long p_lSessionId );
+virtual qint64 DeleteObject( qint64 p_lObjectId,qint64 p_lSessionId );
 
    protected:
    /** +-=---------------------------------------------------------Sa 20. Aug 12:03:16 2005*
     * @method  CwnObjectAccess::IsObjectLocked             // protected                         *
-    * @return  long                                          // SessionId of the locker or 0 if object is not locked*
-    * @param   long p_lObjectId                              //                                   *
-    * @param   long p_lSessionId                             //                                   *
+    * @return qint64                                          // SessionId of the locker or 0 if object is not locked*
+    * @param  qint64 p_lObjectId                              //                                   *
+    * @param  qint64 p_lSessionId                             //                                   *
     * @comment returns if a object is locked or not.                                              *
     *----------------last changed: -----------------------------Sa 20. Aug 12:03:16 2005----------*/
-long IsObjectLocked(  long p_lObjectId, long p_lSessionId );
+qint64 IsObjectLocked( qint64 p_lObjectId,qint64 p_lSessionId );
 
 
    public:
    /** +-=---------------------------------------------------------Sa 20. Aug 12:03:05 2005*
     * @method  CwnObjectAccess::LoadObjectList             // public                            *
-    * @return  long                                          //                                   *
-    * @param   long p_lDbId                                  //                                   *
+    * @return qint64                                          //                                   *
+    * @param  qint64 p_lDbId                                  //                                   *
     * @param   QString p_qstrKeyname                         //                                   *
     * @param   CdmObjectContainer*& p_pContainer              //                                   *
     * @comment This method loads the objectlist with the Id p_lObjectId from Database p_lDatabase.*
     *----------------last changed: -----------------------------Sa 20. Aug 12:03:05 2005----------*/
-long LoadContainer(  long p_lDbId, QString p_qstrKeyname, CdmObjectContainer*& p_pContainer );
+qint64 LoadContainer( qint64 p_lDbId, QString p_qstrKeyname, CdmObjectContainer*& p_pContainer );
 
    public:
    /** +-=---------------------------------------------------------Sa 20. Aug 12:03:00 2005*
     * @method  CwnObjectAccess::LoadEmptyObjectList        // public                            *
-    * @return  long                                          //                                   *
-    * @param   long p_lDbId                                  //                                   *
+    * @return qint64                                          //                                   *
+    * @param  qint64 p_lDbId                                  //                                   *
     * @param   QString p_qstrKeyname                         //                                   *
     * @param   CdmObjectContainer*& p_pContainer              //                                   *
     * @comment This method loads the objectlist with the Id p_lObjectId from Database p_lDatabase.*
     *----------------last changed: -----------------------------Sa 20. Aug 12:03:00 2005----------*/
-long LoadEmptyContainer(  long p_lDbId, QString p_qstrKeyname, CdmObjectContainer*& p_pContainer );
+qint64 LoadEmptyContainer( qint64 p_lDbId, QString p_qstrKeyname, CdmObjectContainer*& p_pContainer );
 
    public:
    /** +-=---------------------------------------------------------Sa 20. Aug 12:07:25 2005*
@@ -281,137 +281,137 @@ virtual int UpdateBinaryDocument(  CdmValueBinaryDocument* p_pCdmBinaryDocument 
    public:
    /** +-=---------------------------------------------------------Mi 15. Sep 17:05:22 2010-------*
     * @method  CwnObjectAccess::GetCounterValue            // public, virtual                   *
-    * @return  long                                          //                                   *
-    * @param   long# p_lDbId                                 //                                   *
-    * @param   long p_lObjectListId                          //                                   *
-    * @param   long p_lValueId                               //                                   *
+    * @return qint64                                          //                                   *
+    * @param  qint64# p_lDbId                                 //                                   *
+    * @param  qint64 p_lObjectListId                          //                                   *
+    * @param  qint64 p_lValueId                               //                                   *
     * @param   QString p_qstrKeyname                         //                                   *
     * @comment                                                                                    *
     *----------------last changed: -----------------------------Mi 15. Sep 17:05:22 2010----------*/
-    virtual long GetCounterValue(long p_lDbId,
-                                 long p_lObjectListId,
-                                 long p_lValueId,
+    virtual qint64 GetCounterValue(qint64 p_lDbId,
+                                qint64 p_lObjectListId,
+                                qint64 p_lValueId,
                                  QString p_qstrKeyname);
 
 
    protected:
    /** +-=---------------------------------------------------------Fr 23. Dez 10:57:56 2005*
     * @method  CwnObjectAccess::UpdateRights               // protected                         *
-    * @return  long                                          //                                   *
+    * @return qint64                                          //                                   *
     * @param   CdmObjectContainer*& p_pContainer              //                                   *
     * @comment                                                                                    *
     *----------------last changed: Wolfgang Gra�hof-------------Fr 23. Dez 10:57:56 2005----------*/
-long UpdateRights(  CdmObjectContainer*& p_pContainer );
+qint64 UpdateRights(  CdmObjectContainer*& p_pContainer );
 
    private:
    /** +-=---------------------------------------------------------Fr 23. Dez 11:13:49 2005*
     * @method  CwnObjectAccess::LoadObjectListRights       // private                           *
-    * @return  long                                          //                                   *
+    * @return qint64                                          //                                   *
     * @param   CdmObjectContainer*& p_pContainer              //                                   *
     * @comment                                                                                    *
     *----------------last changed: Wolfgang Gra�hof-------------Fr 23. Dez 11:13:49 2005----------*/
-long LoadObjectListRights(  CdmObjectContainer*& p_pContainer );
+qint64 LoadObjectListRights(  CdmObjectContainer*& p_pContainer );
 
 
    public:
    /** +-=---------------------------------------------------------Do 25. Mai 12:46:34 2006-------*
     * @method  CwnObjectAccess::LoadEmptyObjectList        // public                            *
-    * @return  long                                          //                                   *
-    * @param   long p_lDbId                                  //                                   *
-    * @param   long p_lId                                    //                                   *
+    * @return qint64                                          //                                   *
+    * @param  qint64 p_lDbId                                  //                                   *
+    * @param  qint64 p_lId                                    //                                   *
     * @param   CdmObjectContainer*& p_pContainer              //                                   *
     * @comment This method loads the objectlist with the Id p_lObjectId from Database p_lDatabase. *
     *----------------last changed: Wolfgang Gra�hof-------------Do 25. Mai 12:46:34 2006----------*/
-    long LoadEmptyContainer(long p_lDbId, long p_lId, CdmObjectContainer*& p_pContainer);
+   qint64 LoadEmptyContainer(qint64 p_lDbId,qint64 p_lId, CdmObjectContainer*& p_pContainer);
 
    public:
    /** +-=---------------------------------------------------------Do 17. Mai 15:37:35 2007-------*
     * @method  CwnObjectAccess::LoadObjects                // public                            *
-    * @return  long                                          //                                   *
+    * @return qint64                                          //                                   *
     * @param   CdmObjectContainer* p_pContainer               //                                   *
-    * @param   QValueList<long>& p_rqvlObjectIds             //                                   *
+    * @param   QValueList<qint64>& p_rqvlObjectIds             //                                   *
     * @comment This method loads all objects overgiven in the objectid list.                      *
     *----------------last changed: Wolfgang Gra�hof-------------Do 17. Mai 15:37:35 2007----------*/
-    long LoadObjects(CdmObjectContainer* p_pContainer, QList<long>& p_rqvlObjectIds);
+   qint64 LoadObjects(CdmObjectContainer* p_pContainer, QList<qint64>& p_rqvlObjectIds);
 
 
    public:
    /** +-=---------------------------------------------------------Mo 17. Sep 17:55:28 2007-------*
     * @method  CwnObjectAccess::IsObjectUsed               // public                            *
     * @return  int                                           //                                   *
-    * @param   long p_lObjectId                              //                                   *
-    * @param   long p_lObjectListId                          //                                   *
+    * @param  qint64 p_lObjectId                              //                                   *
+    * @param  qint64 p_lObjectListId                          //                                   *
     * @comment This method returns if a object is used in a objectref or not.                     *
     *----------------last changed: -----------------------------Mo 17. Sep 17:55:28 2007----------*/
-    int IsObjectUsed(long p_lObjectId, long p_lObjectListId);
+    int IsObjectUsed(qint64 p_lObjectId,qint64 p_lObjectListId);
 
 
 
    public:
    /** +-=---------------------------------------------------------Sa 8. Nov 10:59:19 2008--------*
     * @method  CwnObjectAccess::CountObjectsOnDb           // public, virtual                   *
-    * @return  long                                          //                                   *
+    * @return qint64                                          //                                   *
     * @param   CdmObjectContainer* p_pContainer               //                                   *
     * @comment refreshes the objects from the overgiven objectlist.                               *
     *----------------last changed: -----------------------------Sa 8. Nov 10:59:19 2008-----------*/
-    virtual long CountObjectsOnDb(CdmObjectContainer* p_pContainer);
+    virtual qint64 CountObjectsOnDb(CdmObjectContainer* p_pContainer);
 
    public:
    /** +-=---------------------------------------------------------Sa 8. Nov 10:59:01 2008--------*
     * @method  CwnObjectAccess::RefreshObjectList          // public, virtual                   *
-    * @return  long                                          //                                   *
+    * @return qint64                                          //                                   *
     * @param   CdmObjectContainer* p_pContainer               //                                   *
     * @comment refreshes the objects from the overgiven objectlist.                               *
     *----------------last changed: -----------------------------Sa 8. Nov 10:59:01 2008-----------*/
-    virtual long RefreshObjectList(CdmObjectContainer* p_pContainer);
+    virtual qint64 RefreshObjectList(CdmObjectContainer* p_pContainer);
 
    public:
    /** +-=---------------------------------------------------------Sa 8. Nov 10:57:29 2008--------*
     * @method  CwnObjectAccess::RefreshObject              // public, virtual                   *
-    * @return  long                                          //                                   *
+    * @return qint64                                          //                                   *
     * @param   CdmObject* p_pCdmObject                       //                                   *
     * @comment refreshes the values from the overgiven object.                                    *
     *----------------last changed: -----------------------------Sa 8. Nov 10:57:29 2008-----------*/
-    virtual long RefreshObject(CdmObject* p_pCdmObject);
+    virtual qint64 RefreshObject(CdmObject* p_pCdmObject);
 
    private:
    /** +-=---------------------------------------------------------Sa 8. Nov 11:12:25 2008--------*
     * @method  CwnObjectAccess::FindObjectIdToObjectList   // private                           *
-    * @return  long                                          //                                   *
-    * @param   long p_lDbId                                  //                                   *
+    * @return qint64                                          //                                   *
+    * @param  qint64 p_lDbId                                  //                                   *
     * @param   QString p_qstrKeynameObjectList               //                                   *
-    * @param   QList<long>& p_rqvlIds                  //                                   *
+    * @param   QList<qint64>& p_rqvlIds                  //                                   *
     * @comment Finds the objectId's of the objectlist.                                            *
     *----------------last changed: -----------------------------Sa 8. Nov 11:12:25 2008-----------*/
-    long FindObjectIdToObjectList(long p_lDbId,
+   qint64 FindObjectIdToObjectList(qint64 p_lDbId,
                                   QString p_qstrKeynameObjectList,
-                                  QList<long>& p_rqvlIds);
+                                  QList<qint64>& p_rqvlIds);
 
    private:
    /** +-=---------------------------------------------------------Di 21. Jul 19:07:15 2009-------*
     * @method  CwnObjectAccess::UpdateObjects              // private                           *
-    * @return  long                                          //                                   *
+    * @return qint64                                          //                                   *
     * @param   CdmObjectContainer* p_pContainer               //                                   *
     * @param   QList<CdmObject*>& p_rqlObjects         //                                   *
-    * @param   long p_lSessionId                             //                                   *
+    * @param  qint64 p_lSessionId                             //                                   *
     * @comment                                                                                    *
     *----------------last changed: -----------------------------Di 21. Jul 19:07:15 2009----------*/
-    long UpdateObjects(CdmObjectContainer* p_pContainer,
+   qint64 UpdateObjects(CdmObjectContainer* p_pContainer,
                        QList<CdmObject*>& p_rqlObjects,
-                       long p_lSessionId);
+                      qint64 p_lSessionId);
 
    private:
    /** +-=---------------------------------------------------------Di 21. Jul 19:08:28 2009-------*
     * @method  CwnObjectAccess::DeleteObjects              // private                           *
-    * @return  long                                          //                                   *
+    * @return qint64                                          //                                   *
     * @param   CdmObjectContainer* p_pContainer               //                                   *
     * @param   QList<CdmObject*>& p_rqlObjects         //                                   *
-    * @param   long p_lSessionId                             //                                   *
+    * @param  qint64 p_lSessionId                             //                                   *
     * @comment                                                                                    *
     *----------------last changed: -----------------------------Di 21. Jul 19:08:28 2009----------*/
-    long DeleteObjects(CdmObjectContainer* p_pContainer,
+   qint64 DeleteObjects(CdmObjectContainer* p_pContainer,
                        QList<CdmObject*>& p_rqlObjects,
-                       long p_lSessionId);
+                      qint64 p_lSessionId);
 
 
 public:
@@ -428,42 +428,42 @@ public:
    /** +-=---------------------------------------------------------Do 8. Nov 11:18:37 2012--------*
     * @method  CwnObjectAccess::GetReferences              // public, virtual                   *
     * @return  bool                                          //                                   *
-    * @param   long p_lObjectListId                          //                                   *
-    * @param   long p_lObjectId                              //                                   *
-    * @param   QMap<long, long>& p_rqmReferences             // objectId/ObjectListId             *
+    * @param  qint64 p_lObjectListId                          //                                   *
+    * @param  qint64 p_lObjectId                              //                                   *
+    * @param   QMap<qint64,qint64>& p_rqmReferences             // objectId/ObjectListId             *
     * @comment                                                                                    *
     *----------------last changed: -----------------------------Do 8. Nov 11:18:37 2012-----------*/
-    virtual bool GetReferences(long p_lObjectListId,
-                               long p_lObjectId,
-                               QMap<long,
-                               long>& p_rqmReferences);
+    virtual bool GetReferences(qint64 p_lObjectListId,
+                              qint64 p_lObjectId,
+                               QMap<qint64,
+                              qint64>& p_rqmReferences);
 
    public:
    /** +-=---------------------------------------------------------Do 8. Nov 11:18:59 2012--------*
     * @method  CwnObjectAccess::GetOwner                   // public, virtual                   *
     * @return  bool                                          //                                   *
-    * @param   long p_lObjectListId                          //                                   *
-    * @param   long& p_lOwnerObjectListId                    //                                   *
-    * @param   long& p_lOwnerObjectId                        //                                   *
+    * @param  qint64 p_lObjectListId                          //                                   *
+    * @param  qint64& p_lOwnerObjectListId                    //                                   *
+    * @param  qint64& p_lOwnerObjectId                        //                                   *
     * @comment                                                                                    *
     *----------------last changed: -----------------------------Do 8. Nov 11:18:59 2012-----------*/
-    virtual bool GetOwner(long p_lObjectListId, long& p_lOwnerObjectListId, long& p_lOwnerObjectId);
+    virtual bool GetOwner(qint64 p_lObjectListId,qint64& p_lOwnerObjectListId,qint64& p_lOwnerObjectId);
 
    public:
    /** +-=---------------------------------------------------------Do 8. Nov 11:19:21 2012--------*
     * @method  CwnObjectAccess::GetOwner                   // public, virtual                   *
     * @return  bool                                          //                                   *
-    * @param   long p_lObjectListId                          //                                   *
-    * @param   long p_lObjectId                              //                                   *
-    * @param   long& p_lOwnerObjectListId                    //                                   *
-    * @param   long& p_lOwnerObjectId                        //                                   *
+    * @param  qint64 p_lObjectListId                          //                                   *
+    * @param  qint64 p_lObjectId                              //                                   *
+    * @param  qint64& p_lOwnerObjectListId                    //                                   *
+    * @param  qint64& p_lOwnerObjectId                        //                                   *
     * @comment                                                                                    *
     *----------------last changed: -----------------------------Do 8. Nov 11:19:21 2012-----------*/
-    virtual bool GetOwner(long p_lObjectListId,
-                          long p_lObjectId,
-                          long& p_lOwnerObjectListId,
-                          long& p_lOwnerObjectId);
-    long LoadObject(long p_lObjectListId, QString p_qstrKeyname, CdmObject *&p_pCdmObject);
+    virtual bool GetOwner(qint64 p_lObjectListId,
+                         qint64 p_lObjectId,
+                         qint64& p_lOwnerObjectListId,
+                         qint64& p_lOwnerObjectId);
+   qint64 LoadObject(qint64 p_lObjectListId, QString p_qstrKeyname, CdmObject *&p_pCdmObject);
 };
 
 #endif //

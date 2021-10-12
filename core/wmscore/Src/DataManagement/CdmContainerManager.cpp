@@ -28,10 +28,10 @@
 /** +-=---------------------------------------------------------Sa 20. Aug 10:33:20 2005----------*
  * @method  CdmContainerManager::CdmContainerManager       // public                            *
  * @return                                                   //                                   *
- * @param   long p_lDatabaseId                               //                                   *
+ * @param  qint64 p_lDatabaseId                               //                                   *
  * @comment The Constructor of the ObjectListManager                                              *
  *----------------last changed: --------------------------------Sa 20. Aug 10:33:20 2005----------*/
-CdmContainerManager::CdmContainerManager(long p_lDatabaseId)
+CdmContainerManager::CdmContainerManager(qint64 p_lDatabaseId)
     : CdmModelElementBase(p_lDatabaseId)
 {
     // nothing to do :-)
@@ -44,8 +44,8 @@ CdmContainerManager::CdmContainerManager(long p_lDatabaseId)
  *----------------last changed: --------------------------------Sa 20. Aug 12:47:55 2005----------*/
 CdmContainerManager::~CdmContainerManager(  )
 {
-    QMap<long,CdmObjectContainer*>::iterator qmIt    = m_qmContainer.begin();
-    QMap<long,CdmObjectContainer*>::iterator qmItEnd = m_qmContainer.end();
+    QMap<qint64,CdmObjectContainer*>::iterator qmIt    = m_qmContainer.begin();
+    QMap<qint64,CdmObjectContainer*>::iterator qmItEnd = m_qmContainer.end();
 
     for ( ; qmIt != qmItEnd; ++qmIt )
     {
@@ -64,8 +64,8 @@ CdmContainerManager::~CdmContainerManager(  )
 void CdmContainerManager::RemoveContainerLocally()
 {
     SYNCHRONIZED;
-    QMap<long,CdmObjectContainer*>::iterator qmIt    = m_qmContainer.begin();
-    QMap<long,CdmObjectContainer*>::iterator qmItEnd = m_qmContainer.end();
+    QMap<qint64,CdmObjectContainer*>::iterator qmIt    = m_qmContainer.begin();
+    QMap<qint64,CdmObjectContainer*>::iterator qmItEnd = m_qmContainer.end();
 
     for ( ; qmIt != qmItEnd; ++qmIt )
     {
@@ -92,10 +92,10 @@ void CdmContainerManager::RemoveContainerLocally(CdmObjectContainer* p_pContaine
 /** +-=---------------------------------------------------------Di 20. Nov 10:37:06 2012----------*
  * @method  CdmContainerManager::RemoveContainerLocally    // public, slots                     *
  * @return  void                                             //                                   *
- * @param   long p_lObjectListId                             //                                   *
+ * @param  qint64 p_lObjectListId                             //                                   *
  * @comment This method removes a objectlists locally no changes will be saved!!!                 *
  *----------------last changed: --------------------------------Di 20. Nov 10:37:06 2012----------*/
-void CdmContainerManager::RemoveContainerLocally(long p_lObjectListId)
+void CdmContainerManager::RemoveContainerLocally(qint64 p_lObjectListId)
 {
     CdmObjectContainer* pContainer = FindContainerById(p_lObjectListId);
 
@@ -150,7 +150,7 @@ int CdmContainerManager::CreateContainer(CdmClass* p_pCdmClass, QString& p_qstrK
 
         }
 
-        long lId = GetNewContainerId(p_pCdmClass->GetId());
+       qint64 lId = GetNewContainerId(p_pCdmClass->GetId());
 
         if(lId > 0)
         {
@@ -186,11 +186,11 @@ int CdmContainerManager::CreateContainer(CdmClass* p_pCdmClass, QString& p_qstrK
 /** +-=---------------------------------------------------------Di 20. Nov 10:37:50 2012----------*
  * @method  CdmContainerManager::CreateContainer           // public, slots                     *
  * @return  int                                              //                                   *
- * @param   long p_lClassId                                  //                                   *
+ * @param  qint64 p_lClassId                                  //                                   *
  * @param   QString& p_qstrKeyname                           //                                   *
  * @comment This method creates a new object list.                                                *
  *----------------last changed: --------------------------------Di 20. Nov 10:37:50 2012----------*/
-int CdmContainerManager::CreateContainer(long p_lClassId, QString& p_qstrKeyname)
+int CdmContainerManager::CreateContainer(qint64 p_lClassId, QString& p_qstrKeyname)
 {
     int iRet = CdmLogging::eDmUnknownObjectListError;
 
@@ -326,10 +326,10 @@ int CdmContainerManager::CreateContainer(QString p_qstrClassKeyname,
 /** +-=---------------------------------------------------------Di 20. Nov 10:39:01 2012----------*
  * @method  CdmContainerManager::FindContainerByIdLocal         // public, slots                     *
  * @return  CdmObjectContainer*                                   //                                   *
- * @param   long p_lObjectListId                             //                                   *
+ * @param  qint64 p_lObjectListId                             //                                   *
  * @comment This method finds a objectlist or returns nullptr. The objectlist will be completly      *
  *----------------last changed: --------------------------------Di 20. Nov 10:39:01 2012----------*/
-CdmObjectContainer* CdmContainerManager::FindContainerByIdLocal(long p_lObjectListId)
+CdmObjectContainer* CdmContainerManager::FindContainerByIdLocal(qint64 p_lObjectListId)
 {
     CdmObjectContainer* pContainer = nullptr;
 
@@ -361,10 +361,10 @@ CdmObjectContainer* CdmContainerManager::FindContainerByIdLocal(long p_lObjectLi
 /** +-=---------------------------------------------------------Di 20. Nov 10:39:01 2012----------*
  * @method  CdmContainerManager::FindContainerById         // public, slots                     *
  * @return  CdmObjectContainer*                                   //                                   *
- * @param   long p_lObjectListId                             //                                   *
+ * @param  qint64 p_lObjectListId                             //                                   *
  * @comment This method finds a objectlist or returns nullptr. The objectlist will be completly      *
  *----------------last changed: --------------------------------Di 20. Nov 10:39:01 2012----------*/
-CdmObjectContainer* CdmContainerManager::FindContainerById(long p_lObjectListId)
+CdmObjectContainer* CdmContainerManager::FindContainerById(qint64 p_lObjectListId)
 {
     SYNCHRONIZED;
     CdmObjectContainer* pContainer = FindContainerByIdLocal(p_lObjectListId);
@@ -399,8 +399,8 @@ CdmObjectContainer* CdmContainerManager::FindContainerByKeyname(QString p_qstrKe
 {
     SYNCHRONIZED;
     CdmObjectContainer* pContainer = nullptr;
-    QMap<long,CdmObjectContainer*>::iterator qmIt    = m_qmContainer.begin();
-    QMap<long,CdmObjectContainer*>::iterator qmItEnd = m_qmContainer.end();
+    QMap<qint64,CdmObjectContainer*>::iterator qmIt    = m_qmContainer.begin();
+    QMap<qint64,CdmObjectContainer*>::iterator qmItEnd = m_qmContainer.end();
 
     for (; qmIt != qmItEnd; ++qmIt)
     {
@@ -439,8 +439,8 @@ CdmObjectContainer* CdmContainerManager::FindEmptyContainerByKeyname(QString p_q
     CdmObjectContainer* pContainer = nullptr;
 
     SYNCHRONIZED;
-    QMap<long,CdmObjectContainer*>::iterator qmIt    = m_qmContainer.begin();
-    QMap<long,CdmObjectContainer*>::iterator qmItEnd = m_qmContainer.end();
+    QMap<qint64,CdmObjectContainer*>::iterator qmIt    = m_qmContainer.begin();
+    QMap<qint64,CdmObjectContainer*>::iterator qmItEnd = m_qmContainer.end();
 
     for(; qmIt != qmItEnd; ++qmIt)
     {
@@ -482,7 +482,7 @@ CdmObjectContainer* CdmContainerManager::FindEmptyContainerByKeyname(QString p_q
     return pContainer;
 }
 
-CdmObjectContainer* CdmContainerManager::FindEmptyContainerById(long p_lId)
+CdmObjectContainer* CdmContainerManager::FindEmptyContainerById(qint64 p_lId)
 {
     if (p_lId > 0)
     {
@@ -535,7 +535,7 @@ int CdmContainerManager::DeleteContainer(CdmObjectContainer* p_pContainer)
     SYNCHRONIZED;
     if(p_pContainer)
     {
-        long lId = p_pContainer->GetId();
+       qint64 lId = p_pContainer->GetId();
         m_qmContainer.remove(lId);
         p_pContainer->SetDeleted();
         p_pContainer->Commit();
@@ -555,10 +555,10 @@ int CdmContainerManager::DeleteContainer(CdmObjectContainer* p_pContainer)
 /** +-=---------------------------------------------------------Di 20. Nov 10:40:05 2012----------*
  * @method  CdmContainerManager::DeleteContainer           // public, slots                     *
  * @return  int                                              //                                   *
- * @param   long p_lObjectListId                             //                                   *
+ * @param  qint64 p_lObjectListId                             //                                   *
  * @comment This method deletes an objectlsit.                                                    *
  *----------------last changed: --------------------------------Di 20. Nov 10:40:05 2012----------*/
-int CdmContainerManager::DeleteContainer(long p_lObjectListId)
+int CdmContainerManager::DeleteContainer(qint64 p_lObjectListId)
 {
     int iRet = CdmLogging::eDmUnknownObjectListError;
     CdmObjectContainer* pContainer = FindContainerById(p_lObjectListId);
@@ -601,9 +601,9 @@ int CdmContainerManager::DeleteContainer(QString p_qstrKeyname)
     return iRet;
 }
 
-long CdmContainerManager::GetNewContainerId(long p_lClassId)
+qint64 CdmContainerManager::GetNewContainerId(qint64 p_lClassId)
 {
-    long lId = CdmLogging::eDmUnknownObjectListError;
+   qint64 lId = CdmLogging::eDmUnknownObjectListError;
 
     IdmDataAccess* pIdmDataAccess = GetDataAccess();
 
@@ -649,7 +649,7 @@ CdmObjectContainer* CdmContainerManager::CopyContainer(CdmObjectContainer* p_pCd
 
     if(CHKPTR(p_pCdmObjetList))
     {
-        long lId = GetNewContainerId(p_pCdmObjetList->GetClassId());
+       qint64 lId = GetNewContainerId(p_pCdmObjetList->GetClassId());
         pContainerNew = new CdmObjectContainer(lId, p_pCdmObjetList);
         pContainerNew->SetNew();
 
@@ -672,13 +672,13 @@ CdmObjectContainer* CdmContainerManager::CopyContainer(CdmObjectContainer* p_pCd
 /** +-=---------------------------------------------------------Di 20. Nov 10:40:57 2012----------*
  * @method  CdmContainerManager::CopyContainer             // public, slots                     *
  * @return  CdmObjectContainer*                                   //                                   *
- * @param   long p_lObjetListId                              //                                   *
+ * @param  qint64 p_lObjetListId                              //                                   *
  * @param   bool p_bComplete                                 // the complete objectlist or the local*
  *                                                           //  part.                            *
  * @comment This method makes a copy from a objectlist. the copy will be isnerted in the          *
  *          objectlistmanager.                                                                    *
  *----------------last changed: --------------------------------Di 20. Nov 10:40:57 2012----------*/
-CdmObjectContainer* CdmContainerManager::CopyContainer(long p_lObjetListId, bool p_bComplete)
+CdmObjectContainer* CdmContainerManager::CopyContainer(qint64 p_lObjetListId, bool p_bComplete)
 {
     CdmObjectContainer* pContainer = FindContainerById(p_lObjetListId);
 
@@ -738,10 +738,10 @@ QList<QString> CdmContainerManager::GetContainerList(QString p_qstrClassKeyName)
 /** +-=---------------------------------------------------------Di 20. Nov 10:41:32 2012----------*
  * @method  CdmContainerManager::GetContainerList          // public, slots                     *
  * @return  QList<QString>                             //                                   *
- * @param   long p_lClassId                                  //                                   *
+ * @param  qint64 p_lClassId                                  //                                   *
  * @comment Returns the list of objectlists of the current database.                              *
  *----------------last changed: --------------------------------Di 20. Nov 10:41:32 2012----------*/
-QList<QString> CdmContainerManager::GetContainerList(long p_lClassId)
+QList<QString> CdmContainerManager::GetContainerList(qint64 p_lClassId)
 {
     SYNCHRONIZED;
     QList<QString> qvlRet;
@@ -749,14 +749,14 @@ QList<QString> CdmContainerManager::GetContainerList(long p_lClassId)
 
     if (CHKPTR(pIdmDataAccess))
     {
-        QMap<long, QString> qmObjectLists;
+        QMap<qint64, QString> qmObjectLists;
 
         pIdmDataAccess->GetContainerList(GetSchemeId(),
                                          p_lClassId,
                                          qmObjectLists);
 
-        QMap<long, QString>::iterator qmIt = qmObjectLists.begin();
-        QMap<long, QString>::iterator qmItEnd = qmObjectLists.end();
+        QMap<qint64, QString>::iterator qmIt = qmObjectLists.begin();
+        QMap<qint64, QString>::iterator qmItEnd = qmObjectLists.end();
 
         for (; qmIt != qmItEnd; ++qmIt)
         {
@@ -784,10 +784,10 @@ void CdmContainerManager::ReloadContainerComplete(CdmObjectContainer*& p_rpConta
 /** +-=---------------------------------------------------------Di 20. Nov 10:42:15 2012----------*
  * @method  CdmContainerManager::ReloadContainerComplete   // public, slots                     *
  * @return  CdmObjectContainer*                                   //                                   *
- * @param   long p_lObjectListId                             //                                   *
+ * @param  qint64 p_lObjectListId                             //                                   *
  * @comment reloads the complete objectlist. it loads all objects.                                *
  *----------------last changed: --------------------------------Di 20. Nov 10:42:15 2012----------*/
-CdmObjectContainer* CdmContainerManager::ReloadContainerComplete(long p_lObjectListId)
+CdmObjectContainer* CdmContainerManager::ReloadContainerComplete(qint64 p_lObjectListId)
 {
     CdmObjectContainer* pContainer = nullptr;
 
@@ -800,7 +800,7 @@ CdmObjectContainer* CdmContainerManager::ReloadContainerComplete(long p_lObjectL
 }
 
 
-CdmObject* CdmContainerManager::FindObject(long p_lContainerId, long p_lObjectId)
+CdmObject* CdmContainerManager::FindObject(qint64 p_lContainerId,qint64 p_lObjectId)
 {
     CdmObject* pObject = nullptr;
     CdmObjectContainer* pContainer = FindEmptyContainerById(p_lContainerId);
@@ -825,8 +825,8 @@ CdmObject* CdmContainerManager::FindObject(long p_lContainerId, long p_lObjectId
 QVariant CdmContainerManager::GetVariant() const
 {
     QVariantMap qvHash;
-    QMap<long,CdmObjectContainer*>::const_iterator qmIt    = m_qmContainer.begin();
-    QMap<long,CdmObjectContainer*>::const_iterator qmItEnd = m_qmContainer.end();
+    QMap<qint64,CdmObjectContainer*>::const_iterator qmIt    = m_qmContainer.begin();
+    QMap<qint64,CdmObjectContainer*>::const_iterator qmItEnd = m_qmContainer.end();
 
     QVariantList qvObjectLists;
     for(; qmIt != qmItEnd; ++qmIt)
@@ -974,8 +974,8 @@ void CdmContainerManager::Deploy(QVariantList& p_rqvList)
 void CdmContainerManager::Commit()
 {
     SYNCHRONIZED;
-    QMap<long,CdmObjectContainer*>::iterator qmIt = m_qmContainer.begin();
-    QMap<long,CdmObjectContainer*>::iterator qmItEnd = m_qmContainer.end();
+    QMap<qint64,CdmObjectContainer*>::iterator qmIt = m_qmContainer.begin();
+    QMap<qint64,CdmObjectContainer*>::iterator qmItEnd = m_qmContainer.end();
 
     for (; qmIt != qmItEnd; ++qmIt)
     {

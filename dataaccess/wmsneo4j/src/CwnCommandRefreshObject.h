@@ -17,9 +17,9 @@ private:
 
     EdmValueType m_eType = eDmValueNone;
 
-    CdmValueCharacterDocument *CreateCharDocValue(long p_lDatabaseId, long p_lId, QString p_qstrKeyname);
+    CdmValueCharacterDocument *CreateCharDocValue(qint64 p_lDatabaseId,qint64 p_lId, QString p_qstrKeyname);
 
-    long ReadValues();
+   qint64 ReadValues();
 
     QString GetLoadAllObjectQuery();
 

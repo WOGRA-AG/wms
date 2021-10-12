@@ -6,7 +6,7 @@
 #include "CdbCommandLoadObjects.h"
 #include "CdbCommandLoadContainer.h"
 
-CdbCommandLoadContainer::CdbCommandLoadContainer(long p_lContainerId, bool p_bLoadObjects, CdbDataAccess* p_pDataAccess)
+CdbCommandLoadContainer::CdbCommandLoadContainer(qint64 p_lContainerId, bool p_bLoadObjects, CdbDataAccess* p_pDataAccess)
     : CdbAbstractCommand(p_pDataAccess),
       m_lContainerId(p_lContainerId),
       m_bLoadObjects(p_bLoadObjects),
@@ -15,7 +15,7 @@ CdbCommandLoadContainer::CdbCommandLoadContainer(long p_lContainerId, bool p_bLo
 {
 }
 
-CdbCommandLoadContainer::CdbCommandLoadContainer(long p_lSchemeId, QString p_qstrKeyname, bool p_bLoadObjects, CdbDataAccess* p_pDataAccess)
+CdbCommandLoadContainer::CdbCommandLoadContainer(qint64 p_lSchemeId, QString p_qstrKeyname, bool p_bLoadObjects, CdbDataAccess* p_pDataAccess)
     : CdbAbstractCommand(p_pDataAccess),
       m_lContainerId(0),
       m_bLoadObjects(p_bLoadObjects),
@@ -89,7 +89,7 @@ QString CdbCommandLoadContainer::GetContainerQuery()
 
 int CdbCommandLoadContainer::Execute()
 {
-    long lRet = CdmLogging::eDmObjectAccessError;
+   qint64 lRet = CdmLogging::eDmObjectAccessError;
     QDateTime qdtLastChange;
     QSqlQuery cQSqlQuery;
 
@@ -107,15 +107,15 @@ int CdbCommandLoadContainer::Execute()
 
         if (cQSqlQuery.isValid())
         {
-            long lClassId           = cQSqlQuery.value(0).toInt();
+           qint64 lClassId           = cQSqlQuery.value(0).toInt();
             m_lContainerId          = cQSqlQuery.value(1).toInt();
             QString qstrKeyname     = cQSqlQuery.value(2).toString();
             qdtLastChange           = cQSqlQuery.value(3).toDateTime();
-            long lCreatorId         = cQSqlQuery.value(4).toInt();
-            long lLastModifierId    = cQSqlQuery.value(5).toInt();
+           qint64 lCreatorId         = cQSqlQuery.value(4).toInt();
+           qint64 lLastModifierId    = cQSqlQuery.value(5).toInt();
             QString qstrCaption     = cQSqlQuery.value(6).toString();
             QString qstrComment     = cQSqlQuery.value(7).toString();
-            long lDatabaseId        = cQSqlQuery.value(8).toInt();
+           qint64 lDatabaseId        = cQSqlQuery.value(8).toInt();
             bool bTree              = cQSqlQuery.value(9).toBool();
             QString qstrConfig     = cQSqlQuery.value(10).toString();
 
@@ -163,7 +163,7 @@ void CdbCommandLoadContainer::LoadObjects()
 {
     if (m_bLoadObjects)
     {
-        QList<long> qvlObjects;
+        QList<qint64> qvlObjects;
         QSqlQuery cQSqlQuery;
         QString qstrQuery = GetObjectQuery();
 
@@ -190,9 +190,9 @@ void CdbCommandLoadContainer::LoadObjects()
     }
 }
 
-long CdbCommandLoadContainer::LoadObjectListRights()
+qint64 CdbCommandLoadContainer::LoadObjectListRights()
 {
-   long lRet = CdmLogging::eDmObjectAccessError;
+  qint64 lRet = CdmLogging::eDmObjectAccessError;
 
    if(CHKPTR(m_rpContainer))
    {
@@ -212,7 +212,7 @@ long CdbCommandLoadContainer::LoadObjectListRights()
          {
             do
             {
-               long lAccessorId = cQSqlQuery.value(0).toInt();
+              qint64 lAccessorId = cQSqlQuery.value(0).toInt();
                int iRight       = cQSqlQuery.value(1).toInt();
 
                m_rpContainer->AddAccessorRight(lAccessorId, (EdmRight)iRight);

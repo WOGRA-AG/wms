@@ -174,7 +174,7 @@ QVariant CsaMember::getDetailedVariant()
     qvm.insert(WMS_SYSTEMVALUE, isSystemMember());
     qvm.insert(WMS_TREE, isTree());
 
-    long lClassReference = pMember->GetClassReference();
+   qint64 lClassReference = pMember->GetClassReference();
     CdmClassManager* pClassManager = getInternals()->GetClassManager();
 
     if (CHKPTR(pClassManager))

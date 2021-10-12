@@ -22,7 +22,7 @@ bool CftlCommandRefreshComtainer::CheckValid()
 
 int CftlCommandRefreshComtainer::Execute()
 {
-   long lRet = CdmLogging::eDmObjectAccessError;
+  qint64 lRet = CdmLogging::eDmObjectAccessError;
    QSqlQuery cQSqlQuery(GetSqlDatabase());
    QDateTime qdtLastChange;
 
@@ -30,7 +30,7 @@ int CftlCommandRefreshComtainer::Execute()
    cQSqlQuery.prepare("Select ol.LastChange, ol.ModifierId, ol.Caption, ol.Comment from WMS_DM_CONTAINER ol, "
                        "WMS_CLASS cl where ol.Keyname = ? and ol.ClassId = cl.ClassId and cl.SchemeId = ?");
    cQSqlQuery.addBindValue(m_rpContainer->GetKeyname());
-   cQSqlQuery.addBindValue((int)m_rpContainer->GetSchemeId());
+   cQSqlQuery.addBindValue(m_rpContainer->GetSchemeId());
 
    if(SUCCESSFULL(ExecuteQuery(cQSqlQuery)))
    {
@@ -38,7 +38,7 @@ int CftlCommandRefreshComtainer::Execute()
       if(cQSqlQuery.isValid())
       {
          qdtLastChange           = cQSqlQuery.value(0).toDateTime();
-         long lLastModifierId    = cQSqlQuery.value(1).toInt();
+        qint64 lLastModifierId    = cQSqlQuery.value(1).toInt();
          QString qstrCaption     = cQSqlQuery.value(2).toString();
          QString qstrComment     = cQSqlQuery.value(3).toString();
 

@@ -1,6 +1,6 @@
 #include "CdbCommandDeleteUserGroup.h"
 
-CdbCommandDeleteUserGroup::CdbCommandDeleteUserGroup(long p_lgroupId, CdbDataAccess* p_pDataAccess)
+CdbCommandDeleteUserGroup::CdbCommandDeleteUserGroup(qint64 p_lgroupId, CdbDataAccess* p_pDataAccess)
     : CdbAbstractCommandTransactional(p_pDataAccess),
       m_lGroupId(p_lgroupId)
 {
@@ -14,7 +14,7 @@ CdbCommandDeleteUserGroup::~CdbCommandDeleteUserGroup()
 
 int CdbCommandDeleteUserGroup::Execute()
 {
-    long lRet = CdmLogging::eDmUnknownUserQueryError;
+   qint64 lRet = CdmLogging::eDmUnknownUserQueryError;
      QSqlQuery cQSqlQuery;
     QString qstrQuery;
 

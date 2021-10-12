@@ -30,7 +30,7 @@ public:
     virtual ~CwmsViewManager();
     CdmObjectContainer* GetContainer();
     void GetViewList(QList<CdmObject*>& p_rqlViews);
-    CwmsView GetViewById(long p_lObjectId);
+    CwmsView GetViewById(qint64 p_lObjectId);
     CwmsView GetViewByName(QString p_qstrName);
 
     CwmsView GetViewByUri(QString p_qstrUri);

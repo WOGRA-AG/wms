@@ -1,6 +1,6 @@
 #include "CdbCommandDeleteUser.h"
 
-CdbCommandDeleteUser::CdbCommandDeleteUser(long p_lUserId, CdbDataAccess* p_pDataAccess)
+CdbCommandDeleteUser::CdbCommandDeleteUser(qint64 p_lUserId, CdbDataAccess* p_pDataAccess)
     : CdbAbstractCommandTransactional(p_pDataAccess),
       m_iUserId(p_lUserId)
 {
@@ -37,7 +37,7 @@ int CdbCommandDeleteUser::Execute()
 
 int CdbCommandDeleteUser::DeleteUserById()
 {
-    long lRet = CdmLogging::eDmUnknownUserQueryError;
+   qint64 lRet = CdmLogging::eDmUnknownUserQueryError;
 
        QSqlQuery cQSqlQuery;
        QString qstrQuery;
@@ -72,7 +72,7 @@ int CdbCommandDeleteUser::DeleteUserById()
 
 int CdbCommandDeleteUser::DeleteUserByLogin()
 {
-    long lRet = CdmLogging::eDmUnknownUserQueryError;
+   qint64 lRet = CdmLogging::eDmUnknownUserQueryError;
 
    QSqlQuery cQSqlQuery;
    QString qstrQuery;

@@ -21,11 +21,11 @@ bool CdbCommandDeleteScheme::CheckValid()
 
 int CdbCommandDeleteScheme::Execute()
 {
-    long lRet = CdmLogging::eDmUnknownDbAccessError;
+   qint64 lRet = CdmLogging::eDmUnknownDbAccessError;
     QSqlQuery cQSqlQuery;
     QString qstrQuery;
 
-    long lId = GetSchemeId();
+   qint64 lId = GetSchemeId();
 
     qstrQuery = QString("delete from WMS_DATABASE where DataBaseName = '%1'")
                         .arg(CwmsUtilities::MaskStringForChanges(m_qstrSchemeName));
@@ -45,11 +45,11 @@ int CdbCommandDeleteScheme::Execute()
     return lRet;
 }
 
-void CdbCommandDeleteScheme::DeleteLanguages(long p_lSchemeId)
+void CdbCommandDeleteScheme::DeleteLanguages(qint64 p_lSchemeId)
 {
     QSqlQuery cQSqlQuery(GetSqlDatabase());
     cQSqlQuery.prepare("delete from WMS_LANGUAGE where SchemeId = ?");
-    cQSqlQuery.addBindValue((int)p_lSchemeId);
+    cQSqlQuery.addBindValue(p_lSchemeId);
 
     if(!SUCCESSFULL(ExecuteQuery(cQSqlQuery)))
     {
@@ -57,9 +57,9 @@ void CdbCommandDeleteScheme::DeleteLanguages(long p_lSchemeId)
     }
 }
 
-long CdbCommandDeleteScheme::GetSchemeId()
+qint64 CdbCommandDeleteScheme::GetSchemeId()
 {
-    long lRet = CdmLogging::eDmUnknownDbAccessError;
+   qint64 lRet = CdmLogging::eDmUnknownDbAccessError;
     QSqlQuery cQSqlQuery;
     QString qstrQuery;
 

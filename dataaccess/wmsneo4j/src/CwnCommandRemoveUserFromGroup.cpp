@@ -15,22 +15,22 @@ CwnCommandRemoveUserFromGroup::~CwnCommandRemoveUserFromGroup()
 
 }
 
-void CwnCommandRemoveUserFromGroup::setGroupId(long groupId)
+void CwnCommandRemoveUserFromGroup::setGroupId(qint64 groupId)
 {
     this->groupId = groupId;
 }
 
-long CwnCommandRemoveUserFromGroup::getGroupId()
+qint64 CwnCommandRemoveUserFromGroup::getGroupId()
 {
     return groupId;
 }
 
-void CwnCommandRemoveUserFromGroup::setUserId(long userId)
+void CwnCommandRemoveUserFromGroup::setUserId(qint64 userId)
 {
     this->userId = userId;
 }
 
-long CwnCommandRemoveUserFromGroup::getUserId()
+qint64 CwnCommandRemoveUserFromGroup::getUserId()
 {
     return userId;
 }

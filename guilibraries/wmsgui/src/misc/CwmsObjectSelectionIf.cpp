@@ -54,11 +54,11 @@ void CwmsObjectSelectionIf::SetObjectList(CdmObjectContainer* p_pContainer)
 
          if(pCdmClass)
          {
-            QMap<long, CdmMember*> qmMembers;
+            QMap<qint64, CdmMember*> qmMembers;
             pCdmClass->GetMemberMap(qmMembers);
 
-            QMap<long, CdmMember*>::iterator qmIt = qmMembers.begin();
-            QMap<long, CdmMember*>::iterator qmItEnd = qmMembers.end();
+            QMap<qint64, CdmMember*>::iterator qmIt = qmMembers.begin();
+            QMap<qint64, CdmMember*>::iterator qmItEnd = qmMembers.end();
 
             if(pCdmClass->IsEventSourcingActive() || pCdmClass->IsEventClass())
             {
@@ -133,16 +133,16 @@ void CwmsObjectSelectionIf::SetObjectList(CdmObjectContainer* p_pContainer)
    }
 }
 
-CdmMember *CwmsObjectSelectionIf::getReferencedClassMemberForEvent(long lReferencedClassId, CdmClassManager *pClassManager)
+CdmMember *CwmsObjectSelectionIf::getReferencedClassMemberForEvent(qint64 lReferencedClassId, CdmClassManager *pClassManager)
 {
     CdmMember *pMember = nullptr;
 
     CdmClass *pReferencedClass = pClassManager->FindClassById(lReferencedClassId);
-    QMap<long, CdmMember*> qmMembers;
+    QMap<qint64, CdmMember*> qmMembers;
     pReferencedClass->GetMemberMap(qmMembers);
 
-    QMap<long, CdmMember*>::iterator qmIt = qmMembers.begin();
-    QMap<long, CdmMember*>::iterator qmItEnd = qmMembers.end();
+    QMap<qint64, CdmMember*>::iterator qmIt = qmMembers.begin();
+    QMap<qint64, CdmMember*>::iterator qmItEnd = qmMembers.end();
     for(; qmIt != qmItEnd; ++qmIt)
     {
         pMember = (*qmIt);
@@ -166,9 +166,9 @@ QList<CdmObject*> CwmsObjectSelectionIf::GetSelectedListOfObject()
    return m_cModel.GetObjects(m_pqlvObjects);
 }
 
-long CwmsObjectSelectionIf::GetSelectedObjectId()
+qint64 CwmsObjectSelectionIf::GetSelectedObjectId()
 {
-   long lRet = 0;
+  qint64 lRet = 0;
 
    CdmObject* pCdmObject = GetSelectedObject();
 
@@ -267,11 +267,11 @@ CdmObject* CwmsObjectSelectionIf::GetObject(CdmObjectContainer* p_pContainer,
    return pCdmObject;
 }
 
-long CwmsObjectSelectionIf::GetObjectId(CdmObjectContainer* p_pContainer,
+qint64 CwmsObjectSelectionIf::GetObjectId(CdmObjectContainer* p_pContainer,
                                         CdmEnhancedQueryProxy* p_pCwmsProxy,
                                         QWidget* p_pqwParent)
 {
-   long lObjectId = 0;
+  qint64 lObjectId = 0;
 
    if(CHKPTR(p_pContainer))
    {

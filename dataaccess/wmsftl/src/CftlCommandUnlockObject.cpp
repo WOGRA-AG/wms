@@ -23,7 +23,7 @@ bool CftlCommandUnlockObject::CheckValid()
 
 int CftlCommandUnlockObject::Execute()
 {
-    long lRet = CdmLogging::eDmObjectAccessError;
+   qint64 lRet = CdmLogging::eDmObjectAccessError;
     QString qstrTableName = GetClassTableNameFromObject(m_rpObject);
 
     if (!qstrTableName.isEmpty())
@@ -38,7 +38,7 @@ int CftlCommandUnlockObject::Execute()
         cQSqlQuery.prepare(qstrQuery);
         cQSqlQuery.addBindValue(QVariant());
         cQSqlQuery.addBindValue(QVariant());
-        cQSqlQuery.addBindValue((int)m_rpObject->GetId());
+        cQSqlQuery.addBindValue(m_rpObject->GetId());
 
         if (SUCCESSFULL(ExecuteQuery(cQSqlQuery)))
         {

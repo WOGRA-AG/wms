@@ -1,6 +1,6 @@
 #include "CdbCommandCheckObjectUsed.h"
 
-CdbCommandCheckObjectUsed::CdbCommandCheckObjectUsed(long p_lObjectId, long p_lContainerId, CdbDataAccess* p_pDataAccess)
+CdbCommandCheckObjectUsed::CdbCommandCheckObjectUsed(qint64 p_lObjectId,qint64 p_lContainerId, CdbDataAccess* p_pDataAccess)
 : CdbAbstractCommand(p_pDataAccess),
   m_lObjectId(p_lObjectId),
   m_lContainerId(p_lContainerId)

@@ -156,7 +156,7 @@ QString CwmsHttpService::TranslateStatusCodeToString(EwmsHttpStatusCode p_eStatu
        qstrRet = "Request Entity too large";
        break;
    case eWmsHttpStatusCodeRequestUrlTooLong:
-       qstrRet = "Request Url too long";
+       qstrRet = "Request Url too qint64";
        break;
    case eWmsHttpStatusCodeUnsupportedMediaType:
        qstrRet = "Unsupported Media Type";

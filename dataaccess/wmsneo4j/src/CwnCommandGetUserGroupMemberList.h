@@ -20,15 +20,15 @@ public:
     virtual ~CwnCommandGetUserGroupMemberList();
     QList<CumUserGroup *> getResult();
 
-    void setUserId(long userId);
-    long getUserId();
+    void setUserId(qint64 userId);
+   qint64 getUserId();
 
     QString createQuery();
     QString queryCausedError;
 
 private:
     QList<CumUserGroup *> p_rqvlUserGroups;
-    long userId;
+   qint64 userId;
 
 
 protected:

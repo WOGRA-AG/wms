@@ -1,6 +1,6 @@
 #include "CftlCommandDeleteSchemeLanguage.h"
 
-CftlCommandDeleteSchemeLanguage::CftlCommandDeleteSchemeLanguage(long p_lSchemeId, int p_lLanguage, CftlDataAccess* p_pDataAccess)
+CftlCommandDeleteSchemeLanguage::CftlCommandDeleteSchemeLanguage(qint64 p_lSchemeId, int p_lLanguage, CftlDataAccess* p_pDataAccess)
     : CftlAbstractTransactionalCommand(p_pDataAccess),
       m_lSchemeId(p_lSchemeId),
       m_lLanguage(p_lLanguage)
@@ -19,12 +19,12 @@ bool CftlCommandDeleteSchemeLanguage::CheckValid()
 
 int CftlCommandDeleteSchemeLanguage::Execute()
 {
-    long lRet = CdmLogging::eDmUnknownDbAccessError;
+   qint64 lRet = CdmLogging::eDmUnknownDbAccessError;
     QSqlQuery cQuery(GetSqlDatabase());
 
     cQuery.prepare("delete from WMS_LANGUAGE where SchemeId = %1 and LanguageId = %2");
-    cQuery.addBindValue((int)m_lSchemeId);
-    cQuery.addBindValue((int)m_lLanguage);
+    cQuery.addBindValue(m_lSchemeId);
+    cQuery.addBindValue(m_lLanguage);
 
     if(ExecuteQuery(cQuery) > 0)
     {

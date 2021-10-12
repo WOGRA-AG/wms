@@ -16,9 +16,9 @@ class CftlCommandDeleteScheme : public CftlAbstractTransactionalCommand
 private:
     QString m_qstrSchemeName;
 
-    long GetSchemeId();
-    void DeleteLanguages(long p_lSchemeId);
-    int DropClassTables(long p_lSchemeId);
+   qint64 GetSchemeId();
+    void DeleteLanguages(qint64 p_lSchemeId);
+    int DropClassTables(qint64 p_lSchemeId);
 public:
     CftlCommandDeleteScheme(QString p_qstrSchemeName, CftlDataAccess* p_pDataAccess);
     virtual ~CftlCommandDeleteScheme();

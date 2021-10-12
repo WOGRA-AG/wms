@@ -1727,7 +1727,7 @@
   </connection>
   <connection>
    <sender>m_pqcbDatabases</sender>
-   <signal>activated(int)</signal>
+   <signal>activated(QString)</signal>
    <receiver>CwmsAdminMainWindow</receiver>
    <slot>DatabaseSelectedSlot()</slot>
    <hints>
@@ -1871,7 +1871,7 @@
   </connection>
   <connection>
    <sender>m_pqcbLanguage</sender>
-   <signal>currentIndexChanged(int)</signal>
+   <signal>currentIndexChanged</signal>
    <receiver>CwmsAdminMainWindow</receiver>
    <slot>LanguageChangedSlot()</slot>
    <hints>

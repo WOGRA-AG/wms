@@ -10,7 +10,7 @@
 #include "CdmMember.h"
 #include "CdmValueDate.h"
 
-CdmValueDate::CdmValueDate(  long p_lDatabaseId, long p_lId, QString p_qstrKeyname, CdmObject* p_pCdmObject )
+CdmValueDate::CdmValueDate( qint64 p_lDatabaseId,qint64 p_lId, QString p_qstrKeyname, CdmObject* p_pCdmObject )
    : CdmValue( p_lDatabaseId, p_lId, p_qstrKeyname,eDmValueDate, p_pCdmObject)
 {
 //   m_qdValue = QDate::currentDate();
@@ -42,7 +42,7 @@ void CdmValueDate::SetDefaultValue(  const CdmMember* p_pCdmMember )
    }
 }
 
-void CdmValueDate::SetValue(const long p_lDate)
+void CdmValueDate::SetValue(const qint64 p_lDate)
 {
 
    if(m_qdValue != ChangeLongToDate(p_lDate))
@@ -77,7 +77,7 @@ QDate CdmValueDate::GetValue() const
    return m_qdValue;
 }
 
-void CdmValueDate::GetValue(long& p_dValue) const
+void CdmValueDate::GetValue(qint64& p_dValue) const
 {
    p_dValue = ChangeDateToLong(m_qdValue);
 }

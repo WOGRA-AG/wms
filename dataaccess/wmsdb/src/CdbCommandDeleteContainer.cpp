@@ -10,7 +10,7 @@
 #include "CdbJournal.h"
 #include "CdbCommandDeleteContainer.h"
 
-CdbCommandDeleteContainer::CdbCommandDeleteContainer(long p_lContainerId, CdbDataAccess* p_pDataAccess)
+CdbCommandDeleteContainer::CdbCommandDeleteContainer(qint64 p_lContainerId, CdbDataAccess* p_pDataAccess)
     : CdbAbstractCommandTransactional(p_pDataAccess),
       m_lContainerId(p_lContainerId)
 {
@@ -27,7 +27,7 @@ bool CdbCommandDeleteContainer::CheckValid()
 
 int CdbCommandDeleteContainer::Execute()
 {
-    long lRet = CdmLogging::eDmObjectAccessError;
+   qint64 lRet = CdmLogging::eDmObjectAccessError;
 
     if(CHKPTR(GetDataAccess()))
     {

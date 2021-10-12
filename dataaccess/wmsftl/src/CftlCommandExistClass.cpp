@@ -1,6 +1,6 @@
 #include "CftlCommandExistClass.h"
 
-CftlCommandExistClass::CftlCommandExistClass(long p_lSchemeId, QString p_qstrKeyname, CftlDataAccess* p_pDataAccess)
+CftlCommandExistClass::CftlCommandExistClass(qint64 p_lSchemeId, QString p_qstrKeyname, CftlDataAccess* p_pDataAccess)
 : CftlAbstractCommand(p_pDataAccess),
   m_lSchemeId(p_lSchemeId),
   m_qstrKeyname(p_qstrKeyname),
@@ -26,7 +26,7 @@ int CftlCommandExistClass::Execute()
     // query for reading new id
     cQSqlQuery.prepare("select ClassId from WMS_CLASS where Keyname = ? and SchemeId = ?");
     cQSqlQuery.addBindValue(m_qstrKeyname);
-    cQSqlQuery.addBindValue((int)m_lSchemeId);
+    cQSqlQuery.addBindValue(m_lSchemeId);
 
     if(SUCCESSFULL(ExecuteQuery(cQSqlQuery)))
     {

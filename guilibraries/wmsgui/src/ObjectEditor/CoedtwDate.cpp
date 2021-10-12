@@ -249,8 +249,8 @@ QWidget* CoedtwDate::GetSearchWidget(QWidget* p_pqwParent)
    m_pqdDateEditTo->hide();
    RelevantCheckBoxClickedSlot();
 
-   connect(m_pqcbComboBox, SIGNAL(currentIndexChanged(int)), 
-           this, SLOT(CompareComboBoxIndexChangedSlot(int)));
+   connect(m_pqcbComboBox, SIGNAL(currentIndexChanged), 
+           this, SLOT(CompareComboBoxIndexChangedSlot));
 
    return pqwWidget;
 }

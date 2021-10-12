@@ -13,11 +13,11 @@ class CwnCommandGetClass : public CwnCommandBase
 {
 private:
     QString payload;
-    long m_lClassId;
+   qint64 m_lClassId;
     CdmClass* m_rpClass;
     CdmClassManager* m_rpClassManager;
 
-    long interpretAnswerForLoadMembers(QVariantList& dataList);
+   qint64 interpretAnswerForLoadMembers(QVariantList& dataList);
     bool interpretAnswerForLoadMethods(QVariantList& dataList);
     bool interpretAnswerForLoadValidators(QVariantList& dataList);
     bool interpretAnswerForLoadGroups(QVariantList& dataList);
@@ -36,7 +36,7 @@ private:
     QString createQueryForLoadPackageString();
 
 public:
-    CwnCommandGetClass(CdmClassManager* p_ppClassManager, long p_lClassId, CwnDataAccess* p_pDataAccess);
+    CwnCommandGetClass(CdmClassManager* p_ppClassManager,qint64 p_lClassId, CwnDataAccess* p_pDataAccess);
     virtual ~CwnCommandGetClass();
     CdmClass* GetResult();
     QString queryCausedError;

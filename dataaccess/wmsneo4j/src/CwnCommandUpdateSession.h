@@ -6,12 +6,12 @@
 class CwnCommandUpdateSession : public CwnCommandBase
 {
 private:
-    long m_lSessionId;
+   qint64 m_lSessionId;
     QString m_qstrBaseAuth;
 
 
 public:
-    CwnCommandUpdateSession(long p_lSessionId, CwnDataAccess* p_pDataAccess);
+    CwnCommandUpdateSession(qint64 p_lSessionId, CwnDataAccess* p_pDataAccess);
     CwnCommandUpdateSession(QString p_qstrBaseAuth, CwnDataAccess* p_pDataAccess);
     virtual ~CwnCommandUpdateSession();
 

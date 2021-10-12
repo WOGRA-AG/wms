@@ -20,7 +20,7 @@ private:
     int DeleteUserById();
     int DeleteUserByLogin();
 public:
-    CdbCommandDeleteUser(long p_lUserId, CdbDataAccess* p_pDataAccess);
+    CdbCommandDeleteUser(qint64 p_lUserId, CdbDataAccess* p_pDataAccess);
     CdbCommandDeleteUser(QString p_qstrLogin, CdbDataAccess* p_pDataAccess);
     virtual ~CdbCommandDeleteUser();
 

@@ -339,7 +339,7 @@ void CwmsUserManagerIf::getSearchedUsersToList()
         {
             QTreeWidgetItem* pItem = new QTreeWidgetItem(m_pqlvUsers);
             pItem->setText(0, QString::number(pCumUser->GetId()));
-            pItem->setData(0, Qt::UserRole, (int)pCumUser->GetId());
+            pItem->setData(0, Qt::UserRole, pCumUser->GetId());
             pItem->setText(1, pCumUser->GetFirstName());
             pItem->setText(2, pCumUser->GetLastName());
             pItem->setText(3, pCumUser->GetLogin());
@@ -392,7 +392,7 @@ void CwmsUserManagerIf::getSearchedUserGroupToList()
         {
             QTreeWidgetItem* pItem = new QTreeWidgetItem(m_pqlvGroups);
             pItem->setText(0, QString::number(pCumUserGroup->GetId()));
-            pItem->setData(0, Qt::UserRole, (int)pCumUserGroup->GetId());
+            pItem->setData(0, Qt::UserRole, pCumUserGroup->GetId());
             pItem->setText(1, pCumUserGroup->GetGroupName());
 
             if (bFirst)

@@ -54,20 +54,20 @@ CwmsExportSettings::~CwmsExportSettings()
 /** +-=---------------------------------------------------------Mi 9. Sep 17:55:41 2009-----------*
  * @method  CwmsExportSettings::SetExportList                // public                            *
  * @return  void                                             //                                   *
- * @param   QList<long> p_qllExportList                //                                   *
+ * @param   QList<qint64> p_qllExportList                //                                   *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------Mi 9. Sep 17:55:41 2009-----------*/
-void CwmsExportSettings::SetExportList(QList<long> p_qllExportList)
+void CwmsExportSettings::SetExportList(QList<qint64> p_qllExportList)
 {
    m_qllExportList = p_qllExportList;
 }
 
 /** +-=---------------------------------------------------------Mi 9. Sep 18:07:15 2009-----------*
  * @method  CwmsExportSettings::GetExportList                // public                            *
- * @return  QList<long>                                //                                   *
+ * @return  QList<qint64>                                //                                   *
  * @comment returns the exportlist.                                                               *
  *----------------last changed: --------------------------------Mi 9. Sep 18:07:15 2009-----------*/
-QList<long> CwmsExportSettings::GetExportList()
+QList<qint64> CwmsExportSettings::GetExportList()
 {
    return m_qllExportList;
 }
@@ -96,20 +96,20 @@ EwmsExportType CwmsExportSettings::GetExportType() const
 /** +-=---------------------------------------------------------Mi 6. Feb 11:39:47 2013-----------*
  * @method  CwmsExportSettings::SetClassId                   // public                            *
  * @return  void                                             //                                   *
- * @param   long p_lCassId                                   //                                   *
+ * @param  qint64 p_lCassId                                   //                                   *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------Mi 6. Feb 11:39:47 2013-----------*/
-void CwmsExportSettings::SetClassId(long p_lCassId)
+void CwmsExportSettings::SetClassId(qint64 p_lCassId)
 {
 	m_lCassId = p_lCassId;
 }
 
 /** +-=---------------------------------------------------------Mi 6. Feb 11:39:59 2013-----------*
  * @method  CwmsExportSettings::GetClassId                   // public                            *
- * @return  long                                             //                                   *
+ * @return qint64                                             //                                   *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------Mi 6. Feb 11:39:59 2013-----------*/
-long CwmsExportSettings::GetClassId()
+qint64 CwmsExportSettings::GetClassId()
 {
    return m_lCassId;
 }
@@ -117,20 +117,20 @@ long CwmsExportSettings::GetClassId()
 /** +-=---------------------------------------------------------Sa 17. Nov 13:11:23 2007----------*
  * @method  CwmsExportSettings::SetObjectListId              // public                            *
  * @return  void                                             //                                   *
- * @param   long p_lObjectListId                             //                                   *
+ * @param  qint64 p_lObjectListId                             //                                   *
  * @comment                                                                                       *
  *----------------last changed: Wolfgang Graßhof----------------Sa 17. Nov 13:11:23 2007----------*/
-void CwmsExportSettings::SetContainerId(long p_lObjectListId)
+void CwmsExportSettings::SetContainerId(qint64 p_lObjectListId)
 {
    m_lContainerId = p_lObjectListId;
 }
 
 /** +-=---------------------------------------------------------Sa 17. Nov 13:28:16 2007----------*
  * @method  CwmsExportSettings::GetObjectListId              // public, const                     *
- * @return  long                                             //                                   *
+ * @return qint64                                             //                                   *
  * @comment                                                                                       *
  *----------------last changed: Wolfgang Graßhof----------------Sa 17. Nov 13:28:16 2007----------*/
-long CwmsExportSettings::GetContainerId() const
+qint64 CwmsExportSettings::GetContainerId() const
 {
    return m_lContainerId;
 }
@@ -159,20 +159,20 @@ bool CwmsExportSettings::GetExportHeader() const
 /** +-=---------------------------------------------------------Sa 17. Nov 13:13:09 2007----------*
  * @method  CwmsExportSettings::SetDatabaseId                // public                            *
  * @return  void                                             //                                   *
- * @param   long p_lDbId                                     //                                   *
+ * @param  qint64 p_lDbId                                     //                                   *
  * @comment                                                                                       *
  *----------------last changed: Wolfgang Graßhof----------------Sa 17. Nov 13:13:09 2007----------*/
-void CwmsExportSettings::SetSchemeId(long p_lDbId)
+void CwmsExportSettings::SetSchemeId(qint64 p_lDbId)
 {
    m_lSchemeId = p_lDbId;
 }
 
 /** +-=---------------------------------------------------------Sa 17. Nov 13:27:52 2007----------*
  * @method  CwmsExportSettings::GetDatabaseId                // public, const                     *
- * @return  long                                             //                                   *
+ * @return qint64                                             //                                   *
  * @comment                                                                                       *
  *----------------last changed: Wolfgang Graßhof----------------Sa 17. Nov 13:27:52 2007----------*/
-long CwmsExportSettings::GetSchemeId() const
+qint64 CwmsExportSettings::GetSchemeId() const
 {
    return m_lSchemeId;
 }
@@ -509,10 +509,10 @@ void CwmsExportSettings::Save(QString p_qstFilename)
  * @method  CwmsExportSettings::Load                         // public                            *
  * @return  void                                             //                                   *
  * @param   QString p_qstFilename                            //                                   *
- * @param   long p_lClassId                                  //                                   *
+ * @param  qint64 p_lClassId                                  //                                   *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------Mi 6. Feb 14:18:25 2013-----------*/
-void CwmsExportSettings::Load(QString p_qstFilename, long p_lClassId)
+void CwmsExportSettings::Load(QString p_qstFilename,qint64 p_lClassId)
 {
    SetSettingName(p_qstFilename);
    CwmsImExportSettingsHandler cCwmsSettingsHandler;

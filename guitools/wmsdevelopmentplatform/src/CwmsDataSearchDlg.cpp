@@ -95,7 +95,7 @@ void CwmsDataSearchDlg::SearchContainer()
 
 void CwmsDataSearchDlg::SearchContainerById()
 {
-    long lContainerId = ui->m_pqleContainer->text().toInt();
+   qint64 lContainerId = ui->m_pqleContainer->text().toInt();
 
     if (lContainerId > 0)
     {
@@ -205,8 +205,8 @@ void CwmsDataSearchDlg::SearchObject()
 void CwmsDataSearchDlg::SearchObjectById()
 {
     CdmObject* pObject = nullptr;
-    long lContainerId = ui->m_pqleContainer->text().toInt();
-    long lObjectId = ui->m_pqleObject->text().toInt();
+   qint64 lContainerId = ui->m_pqleContainer->text().toInt();
+   qint64 lObjectId = ui->m_pqleObject->text().toInt();
 
     if (lContainerId > 0 && lObjectId > 0)
     {

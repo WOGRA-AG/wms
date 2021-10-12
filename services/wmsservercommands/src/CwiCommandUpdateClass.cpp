@@ -22,12 +22,12 @@ void CwiCommandUpdateClass::Execute()
 
     if (pCdmManager)
     {
-       long iDbId = qvHash["DatabaseId"].toInt();
+      qint64 iDbId = qvHash["DatabaseId"].toInt();
        CdmClassManager* pCdmClassManager = pCdmManager->GetClassManager(iDbId);
 
        if (pCdmClassManager)
        {
-          long iId = qvHash["Id"].toInt();
+         qint64 iId = qvHash["Id"].toInt();
           CdmClass* pCdmClass = pCdmClassManager->FindClassById(iId);
 
           if (pCdmClass)

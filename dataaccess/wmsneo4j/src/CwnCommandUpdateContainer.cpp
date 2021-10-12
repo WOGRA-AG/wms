@@ -9,7 +9,7 @@
 
 #include "CwnCommandStdHeader.h"
 
-CwnCommandUpdateContainer::CwnCommandUpdateContainer(CdmObjectContainer *&p_pContainer, long p_lSessionId, CwnDataAccess *p_pDataAccess):CwnCommandBase(p_pDataAccess),
+CwnCommandUpdateContainer::CwnCommandUpdateContainer(CdmObjectContainer *&p_pContainer,qint64 p_lSessionId, CwnDataAccess *p_pDataAccess):CwnCommandBase(p_pDataAccess),
 m_rpObjectContainer(p_pContainer),
 m_lSessionId(p_lSessionId)
 {
@@ -83,7 +83,7 @@ void CwnCommandUpdateContainer::interpretAnswer(QVariant &Ret)
 
 int CwnCommandUpdateContainer::Execute()
 {
-    long lRet = CdmLogging::eDmObjectAccessError;
+   qint64 lRet = CdmLogging::eDmObjectAccessError;
 
     if(m_rpObjectContainer->IsModified() || m_rpObjectContainer->IsNew())
     {
@@ -155,11 +155,11 @@ bool CwnCommandUpdateContainer::CheckValid()
     return (CHKPTR(m_rpObjectContainer) && m_lSessionId > 0);
 }
 
-long CwnCommandUpdateContainer::UpdateObjects(CdmObjectContainer* p_pContainer,
+qint64 CwnCommandUpdateContainer::UpdateObjects(CdmObjectContainer* p_pContainer,
                                       QList<CdmObject*>& p_rqlObjects,
-                                      long p_lSessionId)
+                                     qint64 p_lSessionId)
 {
-   long lRet = CdmLogging::eDmObjectAccessError;
+  qint64 lRet = CdmLogging::eDmObjectAccessError;
    QList<CdmObject*>::iterator qvlIt    = p_rqlObjects.begin();
    QList<CdmObject*>::iterator qvlItEnd = p_rqlObjects.end();
 
@@ -176,7 +176,7 @@ long CwnCommandUpdateContainer::UpdateObjects(CdmObjectContainer* p_pContainer,
 
          }
 #endif //
-         long lObjectId = pCdmObject->GetId();
+        qint64 lObjectId = pCdmObject->GetId();
 
          CwnCommandUpdateObject command(p_lSessionId, pCdmObject, GetDataAccess());
          lRet = command.Run();
@@ -201,11 +201,11 @@ long CwnCommandUpdateContainer::UpdateObjects(CdmObjectContainer* p_pContainer,
    return lRet;
 }
 
-long CwnCommandUpdateContainer::DeleteObjects(CdmObjectContainer* p_pContainer,
+qint64 CwnCommandUpdateContainer::DeleteObjects(CdmObjectContainer* p_pContainer,
                                       QList<CdmObject*>& p_rqlObjects,
-                                      long p_lSessionId)
+                                     qint64 p_lSessionId)
 {
-   long lRet = CdmLogging::eDmObjectAccessError;
+  qint64 lRet = CdmLogging::eDmObjectAccessError;
    QList<CdmObject*>::iterator qvlIt    = p_rqlObjects.begin();
    QList<CdmObject*>::iterator qvlItEnd = p_rqlObjects.end();
 
@@ -221,7 +221,7 @@ long CwnCommandUpdateContainer::DeleteObjects(CdmObjectContainer* p_pContainer,
             ERR("ObjectlistId in Object is 0.\n Objectinfo:\n" + pCdmObject->GetInfo());
          }
 #endif //
-         long lObjectId = pCdmObject->GetId();
+        qint64 lObjectId = pCdmObject->GetId();
          CwnCommandDeleteObject command(lObjectId, p_lSessionId, GetDataAccess());
          lRet = command.Run();
 

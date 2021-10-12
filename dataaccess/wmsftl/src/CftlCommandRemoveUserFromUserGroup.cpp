@@ -1,6 +1,6 @@
 #include "CftlCommandRemoveUserFromUserGroup.h"
 
-CftlCommandRemoveUserFromUserGroup::CftlCommandRemoveUserFromUserGroup(long p_lUser, long p_lGroup, CftlDataAccess* p_pDataAccess)
+CftlCommandRemoveUserFromUserGroup::CftlCommandRemoveUserFromUserGroup(qint64 p_lUser,qint64 p_lGroup, CftlDataAccess* p_pDataAccess)
     : CftlAbstractTransactionalCommand(p_pDataAccess),
       m_lGroupId(p_lGroup),
       m_lUserId(p_lUser)
@@ -15,13 +15,13 @@ CftlCommandRemoveUserFromUserGroup::~CftlCommandRemoveUserFromUserGroup()
 
 int CftlCommandRemoveUserFromUserGroup::Execute()
 {
-    long lRet = CdmLogging::eDmUnknownUserQueryError;
+   qint64 lRet = CdmLogging::eDmUnknownUserQueryError;
     QSqlQuery cQSqlQuery(GetSqlDatabase());
     QString qstrQuery;
 
     cQSqlQuery.prepare("delete from  WMS_UM_GROUPMEMBER where GroupId = ? and UserId = ?");
-    cQSqlQuery.addBindValue((int)m_lGroupId);
-    cQSqlQuery.addBindValue((int)m_lUserId);
+    cQSqlQuery.addBindValue(m_lGroupId);
+    cQSqlQuery.addBindValue(m_lUserId);
 
     if(SUCCESSFULL(ExecuteQuery(cQSqlQuery)))
     {

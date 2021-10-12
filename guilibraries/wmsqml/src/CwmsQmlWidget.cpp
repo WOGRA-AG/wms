@@ -75,12 +75,12 @@ void CwmsQmlWidget::setUiName(const QString &value)
     m_qstrUiName = value;
 }
 
-long CwmsQmlWidget::getModuleId() const
+qint64 CwmsQmlWidget::getModuleId() const
 {
     return m_lModuleId;
 }
 
-void CwmsQmlWidget::setModuleId(const long &value)
+void CwmsQmlWidget::setModuleId(const qint64 &value)
 {
     m_lModuleId = value;
 }

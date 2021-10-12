@@ -4,7 +4,7 @@
 #include "CwnCommandStdHeader.h"
 
 
-CwnCommandExistContainer::CwnCommandExistContainer(long p_lClassId, QString p_qstrContainer, CwnDataAccess* p_pDataAccess)
+CwnCommandExistContainer::CwnCommandExistContainer(qint64 p_lClassId, QString p_qstrContainer, CwnDataAccess* p_pDataAccess)
 :CwnCommandBase(p_pDataAccess),
 m_lClassId(p_lClassId),
 m_qstrContainerKeyname(p_qstrContainer)

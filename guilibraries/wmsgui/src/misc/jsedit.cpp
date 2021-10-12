@@ -706,7 +706,7 @@ JSEdit::JSEdit(QWidget *parent)
     document()->setDocumentLayout(d_ptr->layout);
 
     connect(this, SIGNAL(cursorPositionChanged()), this, SLOT(updateCursor()));
-    connect(this, SIGNAL(blockCountChanged(int)), this, SLOT(updateSidebar()));
+    connect(this, SIGNAL(blockCountChanged), this, SLOT(updateSidebar()));
     connect(this, SIGNAL(updateRequest(QRect, int)), this, SLOT(updateSidebar(QRect, int)));
 
 

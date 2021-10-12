@@ -18,7 +18,7 @@ void CwiCommandCreateDatabase::Execute()
     CdmDataProvider* pCdmManager = CdmSessionManager::GetDataProvider();
     QString qstrScheme = m_rpData->GetValue("Name").toString();
 
-    long lId = pCdmManager->CreateScheme(qstrScheme);
+   qint64 lId = pCdmManager->CreateScheme(qstrScheme);
 
     if (lId >= 0)
     {
@@ -35,6 +35,6 @@ void CwiCommandCreateDatabase::Execute()
                                     eWmscomMessageServerityError);
     }
 
-    pResult->AddValue("Id", (int)lId);
+    pResult->AddValue("Id", lId);
 }
 

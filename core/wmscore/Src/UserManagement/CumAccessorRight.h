@@ -42,7 +42,7 @@ class WMSMANAGER_API CumAccessorRight
       /*
        * The Accessor Id
        */
-      long           m_lAccessorId;
+     qint64           m_lAccessorId;
 
       /*
        * The right of the accessor
@@ -83,11 +83,11 @@ virtual ~CumAccessorRight(  );
    /** +-=---------------------------------------------------------Sa 20. Aug 11:21:22 2005*
     * @method  CumAccessorRight::CumAccessorRight            // public                            *
     * @return                                                //                                   *
-    * @param   long p_lAccessorId                            //                                   *
+    * @param  qint64 p_lAccessorId                            //                                   *
     * @param   EumAccessRight p_eUmAccessRight               //                                   *
     * @comment The cosntructor of accessor rights.                                                *
     *----------------last changed: -----------------------------Sa 20. Aug 11:21:22 2005----------*/
-CumAccessorRight(  long p_lAccessorId, EumAccessRight p_eUmAccessRight );
+CumAccessorRight( qint64 p_lAccessorId, EumAccessRight p_eUmAccessRight );
 
    public:
    /** +-=---------------------------------------------------------So 10. Feb 11:44:33 2013-------*
@@ -110,18 +110,18 @@ void SetAccessRight(  EumAccessRight p_eUmAccessRight );
    /** +-=---------------------------------------------------------Sa 20. Aug 11:21:40 2005*
     * @method  CumAccessorRight::SetAccessorId               // public                            *
     * @return  void                                          //                                   *
-    * @param   long p_lAccessorId                            //                                   *
+    * @param  qint64 p_lAccessorId                            //                                   *
     * @comment This method sets the accessorid of this accessorright.                             *
     *----------------last changed: -----------------------------Sa 20. Aug 11:21:40 2005----------*/
-void SetAccessorId(  long p_lAccessorId );
+void SetAccessorId( qint64 p_lAccessorId );
 
    public:
    /** +-=---------------------------------------------------------So 10. Feb 11:44:25 2013-------*
     * @method  CumAccessorRight::GetAccessorId               // public, const                     *
-    * @return  long                                          //                                   *
+    * @return qint64                                          //                                   *
     * @comment This method returns the accessorid of this right.                                  *
     *----------------last changed: -----------------------------So 10. Feb 11:44:25 2013----------*/
-    long GetAccessorId() const;
+   qint64 GetAccessorId() const;
 
    public:
    /** +-=---------------------------------------------------------So 10. Feb 11:44:41 2013-------*

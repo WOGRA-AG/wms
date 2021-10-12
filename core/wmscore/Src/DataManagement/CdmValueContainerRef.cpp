@@ -33,8 +33,8 @@
 #include "CdmJsonToObjectMapper.h"
 
 
-CdmValueContainerRef::CdmValueContainerRef(  long p_lDatabaseId,
-                                    long p_lId,
+CdmValueContainerRef::CdmValueContainerRef( qint64 p_lDatabaseId,
+                                   qint64 p_lId,
                                     QString p_qstrKeyname,
                                     CdmObject* p_pCdmObject )
    : CdmValueLong(p_lDatabaseId, p_lId, p_qstrKeyname, eDmValueContainerRef, p_pCdmObject)
@@ -136,7 +136,7 @@ bool CdmValueContainerRef::IsTypeOf(QString p_qstrClassName) const
 
    if (CHKPTR(pCdmMember))
    {
-      long lClassId = pCdmMember->GetClassReference();
+     qint64 lClassId = pCdmMember->GetClassReference();
 
       CdmDataProvider* pCdmManager = CdmSessionManager::GetDataProvider();
 
@@ -210,14 +210,14 @@ void CdmValueContainerRef::SetValue(CdmObjectContainer* p_pContainer)
    }
 }
 
-void CdmValueContainerRef::SetValue(long p_lObjectListId)
+void CdmValueContainerRef::SetValue(qint64 p_lObjectListId)
 {
    CdmValueLong::SetValue(p_lObjectListId);
    CdmObjectContainer* pContainer = GetEmptyContainer();
    SetValue(pContainer);
 }
 
-void CdmValueContainerRef::SetValue(long p_lObjectListId, QString p_qstrContainerKeyname)
+void CdmValueContainerRef::SetValue(qint64 p_lObjectListId, QString p_qstrContainerKeyname)
 {
    CdmValueLong::SetValue(p_lObjectListId);
    m_qstrContainerKeyname = p_qstrContainerKeyname;
@@ -229,9 +229,9 @@ void CdmValueContainerRef::SetDefaultValue(const CdmMember*)
    INFO("This Value type can not have default values.");
 }
 
-long CdmValueContainerRef::GetClassId() const
+qint64 CdmValueContainerRef::GetClassId() const
 {
-   long lRet = 0;
+  qint64 lRet = 0;
    const CdmMember* pMember = GetMember();
 
    if (CHKPTR(pMember))

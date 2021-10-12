@@ -10,7 +10,7 @@ class CumUser;
 class CdbCommandFindUser : public CdbAbstractCommand
 {
 private:
-    long m_lUserId;
+   qint64 m_lUserId;
     QString m_qstrLogin;
     QString m_qstrPassword;
     QString m_qstrEmail;
@@ -31,7 +31,7 @@ private:
     bool CheckPassword(QSqlQuery& cQSqlQuery);
 
 public:
-    CdbCommandFindUser(long p_lUserId, CdbDataAccess* p_pDataAccess);
+    CdbCommandFindUser(qint64 p_lUserId, CdbDataAccess* p_pDataAccess);
     CdbCommandFindUser(QString p_qstrValue, bool p_bEmail, QString p_qstrSchemeUri, CdbDataAccess* p_pDataAccess);
     CdbCommandFindUser(QString p_qstrLogin, QString p_qstrPassword, QString p_qstrSchemeUri,  CdbDataAccess *p_pDataAccess);
     CdbCommandFindUser(QString p_qstrIdentKey, QString p_qstrSchemeUri, CdbDataAccess *p_pDataAccess);

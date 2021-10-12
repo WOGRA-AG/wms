@@ -435,7 +435,7 @@ void CdmSessionManager::DeleteSession(CdmSession* p_pSession)
     if (p_pSession)
     {
         SYNCHRONIZED;
-        long lId = p_pSession->GetId();
+       qint64 lId = p_pSession->GetId();
         QString qstrBaseAuth = p_pSession->GetBaseAuth();
         p_pSession->Logout();
         m_qmSessionManager.remove(lId);
@@ -616,9 +616,9 @@ const CumUser* CdmSessionManager::GetCurrentUser() const
     return pUser;
 }
 
-long CdmSessionManager::GetCurrentUserId() const
+qint64 CdmSessionManager::GetCurrentUserId() const
 {
-    long lRet = 0;
+   qint64 lRet = 0;
     const CumUser* pUser = GetCurrentUser();
 
     if(CHKPTR(pUser))

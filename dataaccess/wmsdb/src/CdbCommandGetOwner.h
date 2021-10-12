@@ -6,19 +6,19 @@
 class CdbCommandGetOwner : public CdbAbstractCommand
 {
 private:
-    long m_lContainerId;
-    long m_lObjectId;
-    long m_lOwnerContainerId;
-    long m_lOwnerObjectId;
+   qint64 m_lContainerId;
+   qint64 m_lObjectId;
+   qint64 m_lOwnerContainerId;
+   qint64 m_lOwnerObjectId;
 
-    long FindContainerOwner();
-    long FindObjectOwner();
+   qint64 FindContainerOwner();
+   qint64 FindObjectOwner();
 public:
-    CdbCommandGetOwner(long p_lContainerId, long p_lObjectId, CdbDataAccess* p_pDataAccess);
+    CdbCommandGetOwner(qint64 p_lContainerId,qint64 p_lObjectId, CdbDataAccess* p_pDataAccess);
     virtual ~CdbCommandGetOwner();
 
-    long GetOwnerObjectId();
-    long GetOwnerContainerId();
+   qint64 GetOwnerObjectId();
+   qint64 GetOwnerContainerId();
 protected:
     bool CheckValid();
     int Execute();

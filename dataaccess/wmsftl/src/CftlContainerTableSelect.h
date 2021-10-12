@@ -14,9 +14,9 @@ class CftlContainerTableSelect : public CftlContainerTableBase
 {
 private:
     CdmObjectContainer* m_rpContainer;
-    QList<long> m_qlObjectIds;
+    QList<qint64> m_qlObjectIds;
     QList<QString> m_qlObjectKeynames;
-    QMap<long, CdmMember*> m_qmMembers;
+    QMap<qint64, CdmMember*> m_qmMembers;
     QStringList m_qstrlLeftJoins;
     int m_iValueStartPos;
 
@@ -27,11 +27,11 @@ private:
 public:
     CftlContainerTableSelect(CdmObjectContainer* p_pContainer, CftlDialect* p_ppDialect);
     virtual ~CftlContainerTableSelect();
-    void SetObjectList(QList<long>& p_qlObjectIds);
+    void SetObjectList(QList<qint64>& p_qlObjectIds);
     void SetObjectList(QList<QString>& p_qlObjectKeynames);
     int GetValueStartPos();
 
-    QMap<long, CdmMember *> &GetMemberMap();
+    QMap<qint64, CdmMember *> &GetMemberMap();
 protected:
     virtual QStringList GenerateSqls();
     virtual bool IsValid();

@@ -1,6 +1,6 @@
 #include "CdbCommandGetNewClassId.h"
 
-CdbCommandGetNewClassId::CdbCommandGetNewClassId(long p_lSessionId, long p_lSchemeId, CdbDataAccess* p_pDataAccess)
+CdbCommandGetNewClassId::CdbCommandGetNewClassId(qint64 p_lSessionId,qint64 p_lSchemeId, CdbDataAccess* p_pDataAccess)
     : CdbAbstractCommandTransactional(p_pDataAccess),
       m_lSchemeId(p_lSchemeId),
       m_lSessionId(p_lSessionId)

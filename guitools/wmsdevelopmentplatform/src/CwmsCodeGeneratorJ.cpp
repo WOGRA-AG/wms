@@ -166,11 +166,11 @@ void CwmsCodeGeneratorJ::CreateClassMembers()
 {
    if (CHKPTR(m_rpCdmClass))
    {
-      QMap<long, CdmMember*> qmMembers;
+      QMap<qint64, CdmMember*> qmMembers;
       GetClassMembers(m_rpCdmClass, !m_qstrBaseClassName.isEmpty(), qmMembers);
 
-      QMap<long, CdmMember*>::iterator qmIt = qmMembers.begin();
-      QMap<long, CdmMember*>::iterator qmItEnd = qmMembers.end();
+      QMap<qint64, CdmMember*>::iterator qmIt = qmMembers.begin();
+      QMap<qint64, CdmMember*>::iterator qmItEnd = qmMembers.end();
 
       for (; qmIt != qmItEnd; ++qmIt)
       {
@@ -243,11 +243,11 @@ void CwmsCodeGeneratorJ::CreateJSonConstructor()
    m_qstrSource += "\n\n";
    m_qstrSource += AddIndent(1) + "public " + m_qstrClassName + "(JSONObject object) {\n\n";
    
-   QMap<long, CdmMember*> qmMembers;
+   QMap<qint64, CdmMember*> qmMembers;
    GetClassMembers(m_rpCdmClass, !m_qstrBaseClassName.isEmpty(),  qmMembers);
 
-   QMap<long, CdmMember*>::iterator qmIt = qmMembers.begin();
-   QMap<long, CdmMember*>::iterator qmItEnd = qmMembers.end();
+   QMap<qint64, CdmMember*>::iterator qmIt = qmMembers.begin();
+   QMap<qint64, CdmMember*>::iterator qmItEnd = qmMembers.end();
 
    for (; qmIt != qmItEnd; ++qmIt)
    {
@@ -260,7 +260,7 @@ void CwmsCodeGeneratorJ::CreateJSonConstructor()
    }
 
    m_qstrSource += AddIndent(2) + "JSONNumber temp = (JSONNumber)object.get(\"ObjectId\");\n";
-   m_qstrSource += AddIndent(2) + "objectId = (int)temp.doubleValue();\n";
+   m_qstrSource += AddIndent(2) + "objectId = temp.doubleValue();\n";
    m_qstrSource += AddIndent(1) + "}\n\n";
 }
 
@@ -284,11 +284,11 @@ void CwmsCodeGeneratorJ::CreateListConstructorAssignment(QString p_qstrKeyname, 
       break;
    case eDmValueListInt:
       m_qstrSource += AddIndent(4) + "JSONNumber value = temp.get(counter);\n";
-      m_qstrSource += AddIndent(4) + GenerateCodeMemberName(p_qstrKeyname) + ".add((int)value.doubleValue());\n";
+      m_qstrSource += AddIndent(4) + GenerateCodeMemberName(p_qstrKeyname) + ".add(value.doubleValue());\n";
       break;
    case eDmValueListObjects:
       m_qstrSource += AddIndent(4) + "JSONNumber value = temp.get(counter);\n";
-      m_qstrSource += AddIndent(4) + GenerateCodeMemberName(p_qstrKeyname) + ".add((int)value.doubleValue());\n";
+      m_qstrSource += AddIndent(4) + GenerateCodeMemberName(p_qstrKeyname) + ".add(value.doubleValue());\n";
       break;
    case eDmValueListString:
       m_qstrSource += AddIndent(4) + "JSONString value = temp.get(counter);\n";
@@ -345,7 +345,7 @@ void CwmsCodeGeneratorJ::CreateDictionaryConstructorAssignment(QString p_qstrKey
    switch(p_eDmValue)
    {
    case eDmValueDictIntInt:
-      m_qstrSource += AddIndent(4) + GenerateCodeMemberName(p_qstrKeyname) + ".insert(key, (int)value.doubleValue());\n";
+      m_qstrSource += AddIndent(4) + GenerateCodeMemberName(p_qstrKeyname) + ".insert(key, value.doubleValue());\n";
       break;
    case eDmValueDictIntDouble:
       m_qstrSource += AddIndent(4) + GenerateCodeMemberName(p_qstrKeyname) + ".insert(key, value.doubleValue());\n";
@@ -357,7 +357,7 @@ void CwmsCodeGeneratorJ::CreateDictionaryConstructorAssignment(QString p_qstrKey
       m_qstrSource += AddIndent(4) + GenerateCodeMemberName(p_qstrKeyname) + ".insert(key, value.doubleValue());\n";
       break;
    case eDmValueDictStringInt:
-      m_qstrSource += AddIndent(4) + GenerateCodeMemberName(p_qstrKeyname) + ".insert(key, (int)value.doubleValue());\n";
+      m_qstrSource += AddIndent(4) + GenerateCodeMemberName(p_qstrKeyname) + ".insert(key, value.doubleValue());\n";
       break;
    case eDmValueDictStringString:
       m_qstrSource += AddIndent(4) + GenerateCodeMemberName(p_qstrKeyname) + ".insert(key, value.stringValue());\n";
@@ -417,11 +417,11 @@ void CwmsCodeGeneratorJ::CreateConstructorAssignment(CdmMember* p_pCdmMember)
  *----------------last changed: --------------------------------Fr 13. Jul 10:10:37 2012----------*/
 void CwmsCodeGeneratorJ::CreateMemberMethods()
 {
-   QMap<long, CdmMember*> qmMembers;
+   QMap<qint64, CdmMember*> qmMembers;
    GetClassMembers(m_rpCdmClass, !m_qstrBaseClassName.isEmpty(),  qmMembers);
 
-   QMap<long, CdmMember*>::iterator qmIt = qmMembers.begin();
-   QMap<long, CdmMember*>::iterator qmItEnd = qmMembers.end();
+   QMap<qint64, CdmMember*>::iterator qmIt = qmMembers.begin();
+   QMap<qint64, CdmMember*>::iterator qmItEnd = qmMembers.end();
 
    for (; qmIt != qmItEnd; ++qmIt)
    {
@@ -485,11 +485,11 @@ void CwmsCodeGeneratorJ::CreateGetJSonMethod()
    m_qstrSource += AddIndent(2) + "JSONNumber valObjectId = new JSONNumber(objectId);\n";
    m_qstrSource += AddIndent(2) + "obj.put(\"ObjectId\", valObjectId);\n";
 
-   QMap<long, CdmMember*> qmMembers;
+   QMap<qint64, CdmMember*> qmMembers;
    GetClassMembers(m_rpCdmClass, !m_qstrBaseClassName.isEmpty(),  qmMembers);
 
-   QMap<long, CdmMember*>::iterator qmIt = qmMembers.begin();
-   QMap<long, CdmMember*>::iterator qmItEnd = qmMembers.end();
+   QMap<qint64, CdmMember*>::iterator qmIt = qmMembers.begin();
+   QMap<qint64, CdmMember*>::iterator qmItEnd = qmMembers.end();
 
    for (; qmIt != qmItEnd; ++qmIt)
    {
@@ -654,11 +654,11 @@ void CwmsCodeGeneratorJ::CreateGetMemberMapMethod()
    m_qstrSource += AddIndent(1) + "public HashMap<String, Integer> getMemberMap() {\n\n";
    m_qstrSource += AddIndent(2) + "// Type definition from WMS used!\n";
    m_qstrSource += AddIndent(2) + "HashMap<String, Integer> map = new HashMap<String, Integer>();\n";
-   QMap<long, CdmMember*> qmMembers;
+   QMap<qint64, CdmMember*> qmMembers;
    GetClassMembers(m_rpCdmClass, !m_qstrBaseClassName.isEmpty(),  qmMembers);
 
-   QMap<long, CdmMember*>::iterator qmIt = qmMembers.begin();
-   QMap<long, CdmMember*>::iterator qmItEnd = qmMembers.end();
+   QMap<qint64, CdmMember*>::iterator qmIt = qmMembers.begin();
+   QMap<qint64, CdmMember*>::iterator qmItEnd = qmMembers.end();
 
    for (; qmIt != qmItEnd; ++qmIt)
    {
@@ -1124,7 +1124,7 @@ QString CwmsCodeGeneratorJ::GetReturnType(EdmValueType p_eDmValue)
       qstrRet = "List<String>";
       break;
    case eDmValueLong:
-      qstrRet = "long";
+      qstrRet = "qint64";
       break;
    case eDmValueContainerRef:
       qstrRet = "int";

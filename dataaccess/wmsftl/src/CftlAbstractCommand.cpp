@@ -47,12 +47,12 @@ int CftlAbstractCommand::Run()
     return iRet;
 }
 
-long CftlAbstractCommand::ExecuteQuery(QString p_qstrQuery, QSqlQuery& p_rqsqlQuery)
+qint64 CftlAbstractCommand::ExecuteQuery(QString p_qstrQuery, QSqlQuery& p_rqsqlQuery)
 {
     return m_rpDataAccess->ExecuteQuery(p_qstrQuery,p_rqsqlQuery);
 }
 
-long CftlAbstractCommand::ExecuteQuery(QSqlQuery& p_rqsqlQuery)
+qint64 CftlAbstractCommand::ExecuteQuery(QSqlQuery& p_rqsqlQuery)
 {
     return m_rpDataAccess->ExecuteQuery(p_rqsqlQuery);
 }
@@ -86,7 +86,7 @@ CftlDataAccess* CftlAbstractCommand::GetDataAccess()
     return m_rpDataAccess;
 }
 
-const CdmClass* CftlAbstractCommand::GetClassFromContainerId(long p_lId)
+const CdmClass* CftlAbstractCommand::GetClassFromContainerId(qint64 p_lId)
 {
     CdmDataProvider* pDataProvider = CdmSessionManager::GetSessionManager()->GetDataProvider();
 
@@ -123,7 +123,7 @@ QString CftlAbstractCommand::GetClassTableNameFromObject(const CdmObject* p_pObj
     return "";
 }
 
-QString CftlAbstractCommand::GetClassTableNameFromContainerId(long p_lId)
+QString CftlAbstractCommand::GetClassTableNameFromContainerId(qint64 p_lId)
 {
     const CdmClass* pClass = GetClassFromContainerId(p_lId);
 
@@ -212,7 +212,7 @@ bool CftlAbstractCommand::NeedsSessionCheck()
 
 int CftlAbstractCommand::SessionCheck()
 {
-    long lRet = CdmLogging::eDmUnknownSqlError;
+   qint64 lRet = CdmLogging::eDmUnknownSqlError;
     CftlInterface* pInterface = GetInterface();
 
     if (CHKPTR(pInterface))
@@ -223,8 +223,8 @@ int CftlAbstractCommand::SessionCheck()
 
             if (CHKPTR(pSessionManager))
             {
-                long iSessionId = pSessionManager->GetCurrentSessionId();
-                long iUserId = pSessionManager->GetCurrentUserId();
+               qint64 iSessionId = pSessionManager->GetCurrentSessionId();
+               qint64 iUserId = pSessionManager->GetCurrentUserId();
                 CftlCommandFindSession command(iSessionId, iUserId, m_rpDataAccess);
                 lRet = command.Run();
 
@@ -245,7 +245,7 @@ int CftlAbstractCommand::SessionCheck()
 
 void CftlAbstractCommand::UpdateSession()
 {
-    long lSessionId = CdmSessionManager::GetSessionManager()->GetCurrentSessionId();
+   qint64 lSessionId = CdmSessionManager::GetSessionManager()->GetCurrentSessionId();
     CdmSession* pSession = CdmSessionManager::GetSessionManager()->FindSessionLocal();
 
     if (CHKPTR(pSession) && pSession->NeedsUpdate())

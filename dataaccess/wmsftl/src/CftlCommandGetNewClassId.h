@@ -6,11 +6,11 @@
 class CftlCommandGetNewClassId : public CftlAbstractTransactionalCommand
 {
 private:
-    long m_lSchemeId;
-    long m_lSessionId;
+   qint64 m_lSchemeId;
+   qint64 m_lSessionId;
 
 public:
-    CftlCommandGetNewClassId(long p_lSessionId, long p_lSchemeId, CftlDataAccess* p_pDataAccess);
+    CftlCommandGetNewClassId(qint64 p_lSessionId,qint64 p_lSchemeId, CftlDataAccess* p_pDataAccess);
     virtual ~CftlCommandGetNewClassId();
 
 protected:

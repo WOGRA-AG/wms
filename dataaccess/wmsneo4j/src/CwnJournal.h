@@ -34,20 +34,20 @@ private:
 public:
     CwnJournal(CwnDataAccess *m_rpDataAccess);
     virtual ~CwnJournal();
-    long ValueModified(CdmValue* p_pCdmValue);
-    long ObjectDeleted(int p_iObjectId);
-    long ObjectModified(CdmObject* p_pCdmObject);
-    long ObjectListModified(CdmObjectContainer* p_pContainer);
-    long ObjectListDeleted(int p_iObjectListId);
-    long GetObjectModifications(int p_iObjectId,
+   qint64 ValueModified(CdmValue* p_pCdmValue);
+   qint64 ObjectDeleted(int p_iObjectId);
+   qint64 ObjectModified(CdmObject* p_pCdmObject);
+   qint64 ObjectListModified(CdmObjectContainer* p_pContainer);
+   qint64 ObjectListDeleted(int p_iObjectListId);
+   qint64 GetObjectModifications(int p_iObjectId,
                                 QDate p_qdFrom,
                                 QDate p_qdTo,
                                 QList<CdmJournalItem*>& p_rqlItems);
-    long GetObjectListModifications(int p_iObjectListId,
+   qint64 GetObjectListModifications(int p_iObjectListId,
                                     QDate p_qdFrom,
                                     QDate p_qdTo,
                                     QList<CdmJournalItem*>& p_rqlItems);
-    long GetSchemeModifications(int p_iDatabaseId, QDate p_qdFrom, QDate p_qdTo, QList<CdmJournalItem*>& p_rqlItems);
+   qint64 GetSchemeModifications(int p_iDatabaseId, QDate p_qdFrom, QDate p_qdTo, QList<CdmJournalItem*>& p_rqlItems);
 
 
 

@@ -29,7 +29,7 @@ bool CftlCommandDeleteObject::CheckValid()
 
 int CftlCommandDeleteObject::Execute()
 {
-    long lRet = CdmLogging::eDmObjectAccessError;
+   qint64 lRet = CdmLogging::eDmObjectAccessError;
 
     if(CHKPTR(GetDataAccess()))
     {
@@ -46,15 +46,15 @@ int CftlCommandDeleteObject::Execute()
                         .arg(qstrTableName)
                         .arg(FTL_OBJECT_ID_FIELD_NAME);
                 cQSqlQuery.prepare(qstrQuery);
-                cQSqlQuery.addBindValue((int)m_rpObject->GetId());
+                cQSqlQuery.addBindValue(m_rpObject->GetId());
 
                 if(SUCCESSFULL(ExecuteQuery(cQSqlQuery)))
                 {
                     cQSqlQuery.prepare("delete from WMS_DM_OBJECT_REFERENCE where (ObjectId = ? and ContainerId = ?) or (Ref_Object_ID = ? and Ref_Container_ID = ?)");
-                    cQSqlQuery.addBindValue((int)m_rpObject->GetId());
-                    cQSqlQuery.addBindValue((int)m_rpObject->GetObjectContainerId());
-                    cQSqlQuery.addBindValue((int)m_rpObject->GetId());
-                    cQSqlQuery.addBindValue((int)m_rpObject->GetObjectContainerId());
+                    cQSqlQuery.addBindValue(m_rpObject->GetId());
+                    cQSqlQuery.addBindValue(m_rpObject->GetObjectContainerId());
+                    cQSqlQuery.addBindValue(m_rpObject->GetId());
+                    cQSqlQuery.addBindValue(m_rpObject->GetObjectContainerId());
 
                     if(SUCCESSFULL(ExecuteQuery(cQSqlQuery)))
                     {

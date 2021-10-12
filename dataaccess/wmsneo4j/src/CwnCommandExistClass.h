@@ -7,12 +7,12 @@
 class CwnCommandExistClass : public CwnCommandBase
 {
 private:
-    long m_lSchemeId;
+   qint64 m_lSchemeId;
     QString m_qstrKeyname;
     bool m_bResult;
 
 public:
-    CwnCommandExistClass(long p_lSchemeId, QString p_qstrKeyname, CwnDataAccess* p_pDataAccess);
+    CwnCommandExistClass(qint64 p_lSchemeId, QString p_qstrKeyname, CwnDataAccess* p_pDataAccess);
     virtual ~CwnCommandExistClass();
     bool GetResult();
     QString createQuery();

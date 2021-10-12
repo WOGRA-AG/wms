@@ -21,7 +21,7 @@ CftlContainerTableSelect::~CftlContainerTableSelect()
 
 }
 
-void CftlContainerTableSelect::SetObjectList(QList<long> &p_qlObjectIds)
+void CftlContainerTableSelect::SetObjectList(QList<qint64> &p_qlObjectIds)
 {
     m_qlObjectIds = p_qlObjectIds;
 }
@@ -69,7 +69,7 @@ QStringList CftlContainerTableSelect::GenerateSqls()
     return qstrlQueries;
 }
 
-QMap<long, CdmMember*>& CftlContainerTableSelect::GetMemberMap()
+QMap<qint64, CdmMember*>& CftlContainerTableSelect::GetMemberMap()
 {
     return m_qmMembers;
 }
@@ -82,7 +82,7 @@ QString CftlContainerTableSelect::GenerateFields(const CdmClass* p_pClass)
     {
         AddCommonFields(qstrFields);
         p_pClass->GetMemberMap(m_qmMembers);
-        QMapIterator<long, CdmMember*> qmIt(m_qmMembers);
+        QMapIterator<qint64, CdmMember*> qmIt(m_qmMembers);
 
         while (qmIt.hasNext())
         {
@@ -208,8 +208,8 @@ QString CftlContainerTableSelect::GenerateInStringIds()
 {
    QString qstrRet = "(";
 
-   QList<long>::iterator qvlIt = m_qlObjectIds.begin();
-   QList<long>::iterator qvlItEnd = m_qlObjectIds.end();
+   QList<qint64>::iterator qvlIt = m_qlObjectIds.begin();
+   QList<qint64>::iterator qvlItEnd = m_qlObjectIds.end();
 
    while (qvlIt != qvlItEnd)
    {

@@ -46,7 +46,7 @@
 
 #include "CwnCommandStdHeader.h"
 
-CwnCommandUpdateObject::CwnCommandUpdateObject(long p_lSessionId, CdmObject* p_pObject, CwnDataAccess* p_pDataAccess)
+CwnCommandUpdateObject::CwnCommandUpdateObject(qint64 p_lSessionId, CdmObject* p_pObject, CwnDataAccess* p_pDataAccess)
     : CwnCommandBase(p_pDataAccess),
       m_lSessionId(p_lSessionId),
       m_rpObject(p_pObject)
@@ -67,7 +67,7 @@ bool CwnCommandUpdateObject::CheckValid()
 int CwnCommandUpdateObject::Execute()
 {
 
-    long lRet = CdmLogging::eDmObjectAccessError;
+   qint64 lRet = CdmLogging::eDmObjectAccessError;
     CwnCommandCheckObjectLocked command(m_rpObject->GetId(), m_lSessionId, GetDataAccess());
 
     if(!SUCCESSFULL(command.Run())) // is not locked
@@ -868,7 +868,7 @@ void CwnCommandUpdateObject::GetCounterValue()
 
           if (CHKPTR(pCdmObject))
           {
-             long lObjectListId = pCdmObject->GetObjectContainerId();
+            qint64 lObjectListId = pCdmObject->GetObjectContainerId();
 
              ((CdmValueLong*)temp)->SetValue(GetCounterValue(lObjectListId,temp->GetId(),temp->GetKeyname()));
           }
@@ -877,11 +877,11 @@ void CwnCommandUpdateObject::GetCounterValue()
 }
 
 
-long CwnCommandUpdateObject::GetCounterValue(long p_lObjectListId,
-                                             long p_lValueId,
+qint64 CwnCommandUpdateObject::GetCounterValue(qint64 p_lObjectListId,
+                                            qint64 p_lValueId,
                                              QString p_qstrKeyname)
 {
-   long lRet = CdmLogging::eDmObjectAccessError;
+  qint64 lRet = CdmLogging::eDmObjectAccessError;
    QString qstrQuery;
 
 
@@ -895,7 +895,7 @@ long CwnCommandUpdateObject::GetCounterValue(long p_lObjectListId,
    ConnectAndExecute(executeCommit,payload,nullptr,nullptr);
    QVariant Ret;
    interpretAnswerForCounter(Ret);
-   long lValue = Ret.toInt();
+  qint64 lValue = Ret.toInt();
    lRet = Ret.toInt();
 
    QTime qtCurrent = QTime::currentTime();
@@ -952,7 +952,7 @@ int CwnCommandUpdateObject::MakeCounterValueUnique(int p_iCounter,
 
    if(iSuccess > 0)
    {
-      long lValue = iSuccess;
+     qint64 lValue = iSuccess;
       if (lValue == 1)
       {
         iRet = p_iCounter;
@@ -1018,7 +1018,7 @@ bool CwnCommandUpdateObject::CheckIncreaseCounterNeeded(int p_iCounter,
 
    if(iSuccess > 0)
    {
-      long lValue = iSuccess;
+     qint64 lValue = iSuccess;
 
       if (lValue != p_iTimeStamp)
       {
@@ -1267,7 +1267,7 @@ QString CwnCommandUpdateObject::getLabel(EdmValueType p_eBaseType)
         label="INTEGER";
     break;
     case eDmValueLong:
-        label="LONG";
+        label="qint64";
     break;
     case eDmValueFloat:
         label="FLOAT";

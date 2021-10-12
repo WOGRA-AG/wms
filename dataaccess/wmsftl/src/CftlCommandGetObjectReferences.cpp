@@ -1,6 +1,6 @@
 #include "CftlCommandGetObjectReferences.h"
 
-CftlCommandGetObjectReferences::CftlCommandGetObjectReferences(long p_lContainerId, long p_lObjectId, CftlDataAccess* p_pDataAccess)
+CftlCommandGetObjectReferences::CftlCommandGetObjectReferences(qint64 p_lContainerId,qint64 p_lObjectId, CftlDataAccess* p_pDataAccess)
 : CftlAbstractCommand(p_pDataAccess),
   m_lContainerId(p_lContainerId),
   m_lObjectId(p_lObjectId)
@@ -23,10 +23,10 @@ int CftlCommandGetObjectReferences::Execute()
     QSqlQuery cQSqlQuery(GetSqlDatabase());
 
     cQSqlQuery.prepare("select Ref_Container_ID, Ref_Object_ID from WMS_DM_OBJECT_REFERENCE where ObjectId = ? and ContainerId = ?");
-    cQSqlQuery.addBindValue((int)m_lObjectId);
-    cQSqlQuery.addBindValue((int)m_lContainerId);
+    cQSqlQuery.addBindValue(m_lObjectId);
+    cQSqlQuery.addBindValue(m_lContainerId);
 
-    long lRet = ExecuteQuery(cQSqlQuery);
+   qint64 lRet = ExecuteQuery(cQSqlQuery);
 
     if(SUCCESSFULL(lRet))
     {
@@ -34,8 +34,8 @@ int CftlCommandGetObjectReferences::Execute()
 
        while(cQSqlQuery.isValid())
        {
-          long lObjectListId = cQSqlQuery.value(0).toInt();
-          long lObjectId = cQSqlQuery.value(1).toInt();
+         qint64 lObjectListId = cQSqlQuery.value(0).toInt();
+         qint64 lObjectId = cQSqlQuery.value(1).toInt();
           m_qmReferences.insert(lObjectId, lObjectListId);
           cQSqlQuery.next();
        }
@@ -44,7 +44,7 @@ int CftlCommandGetObjectReferences::Execute()
     return lRet;
 }
 
-QMap<long,long> CftlCommandGetObjectReferences::GetResult()
+QMap<qint64,qint64> CftlCommandGetObjectReferences::GetResult()
 {
     return m_qmReferences;
 }

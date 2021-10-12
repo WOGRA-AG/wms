@@ -28,10 +28,10 @@ protected:
     bool Validate();
     CdbInterface *GetInterface();
     int SessionCheck();
-    long ExecuteQuery(QString p_qstrQuery, QSqlQuery &p_rqsqlQuery);
+   qint64 ExecuteQuery(QString p_qstrQuery, QSqlQuery &p_rqsqlQuery);
     CdbDataAccess *GetDataAccess();
     virtual bool NeedsActiveSession();
-    long ExecuteQuery(QSqlQuery &p_rqsqlQuery);
+   qint64 ExecuteQuery(QSqlQuery &p_rqsqlQuery);
     QSqlDatabase GetSqlDatabase();
 };
 

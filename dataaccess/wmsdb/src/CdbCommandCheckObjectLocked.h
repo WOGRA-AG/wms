@@ -7,11 +7,11 @@
 class CdbCommandCheckObjectLocked : public CdbAbstractCommand
 {
 private:
-    long m_lObjectId;
-    long m_lSessionId;
+   qint64 m_lObjectId;
+   qint64 m_lSessionId;
 
 public:
-    CdbCommandCheckObjectLocked(long p_lObjectId, long p_lSessionId, CdbDataAccess* p_pDataAccess);
+    CdbCommandCheckObjectLocked(qint64 p_lObjectId,qint64 p_lSessionId, CdbDataAccess* p_pDataAccess);
     virtual ~CdbCommandCheckObjectLocked();
 
 protected:

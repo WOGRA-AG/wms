@@ -2,7 +2,7 @@
 
 #include "CwnCommandStdHeader.h"
 
-CwnCommandDeleteSchemeLanguage::CwnCommandDeleteSchemeLanguage(long p_lSchemeId, int p_lLanguage, CwnDataAccess* p_pDataAccess)
+CwnCommandDeleteSchemeLanguage::CwnCommandDeleteSchemeLanguage(qint64 p_lSchemeId, int p_lLanguage, CwnDataAccess* p_pDataAccess)
     : CwnCommandBase(p_pDataAccess),
       m_lSchemeId(p_lSchemeId),
       m_lLanguage(p_lLanguage)

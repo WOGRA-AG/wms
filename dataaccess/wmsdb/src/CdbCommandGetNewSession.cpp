@@ -4,7 +4,7 @@
 #include "CdbCommandGetNewSession.h"
 
 CdbCommandGetNewSession::CdbCommandGetNewSession(QString p_qstrApplication,
-                                                 long p_lUserId,
+                                                qint64 p_lUserId,
                                                  QString p_qstrBaseAuth,
                                                  CdbDataAccess* p_ppDataAccess)
     : CdbAbstractCommandTransactional(p_ppDataAccess),

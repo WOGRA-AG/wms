@@ -8,8 +8,8 @@
 #include "CdmLogging.h"
 #include "CdmValueListInt.h"
 
-CdmValueListInt::CdmValueListInt(long p_lDatabaseId,
-                       long p_lId,
+CdmValueListInt::CdmValueListInt(qint64 p_lDatabaseId,
+                      qint64 p_lId,
                        QString p_qstrKeyname,
                        CdmObject* p_pCdmObject)
    : CdmValueCharacterDocument(p_lDatabaseId, p_lId, p_qstrKeyname, eDmValueListInt, p_pCdmObject)

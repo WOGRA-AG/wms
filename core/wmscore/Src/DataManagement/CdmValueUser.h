@@ -25,7 +25,7 @@ class WMSMANAGER_API CdmValueUser : public CdmValueInt
     Q_OBJECT
 
 public:
-    CdmValueUser( long p_lDatabaseId, long p_lId, QString p_qstrKeyname, CdmObject* p_pCdmObject);
+    CdmValueUser(qint64 p_lDatabaseId,qint64 p_lId, QString p_qstrKeyname, CdmObject* p_pCdmObject);
     virtual ~CdmValueUser( );
 
 

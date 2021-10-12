@@ -14,11 +14,11 @@ class CdbDataAccess;
 class CdbCommandRenameUserGroup : public CdbAbstractCommandTransactional
 {
 private:
-    long m_lGroupId;
+   qint64 m_lGroupId;
     QString m_qstrNewName;
 
 public:
-    CdbCommandRenameUserGroup(long p_lGroupId, QString p_qstrName, CdbDataAccess* p_pDataAccess);
+    CdbCommandRenameUserGroup(qint64 p_lGroupId, QString p_qstrName, CdbDataAccess* p_pDataAccess);
     virtual ~CdbCommandRenameUserGroup();
 
 protected:

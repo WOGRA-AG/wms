@@ -3,7 +3,7 @@
 #include "CwnCommandStdHeader.h"
 
 
-CwnCommandLoadRights::CwnCommandLoadRights(CdmRights& p_rCcdmRights, long p_lObjectId, QString p_qstrTableName, CwnDataAccess* p_DataAccess)
+CwnCommandLoadRights::CwnCommandLoadRights(CdmRights& p_rCcdmRights,qint64 p_lObjectId, QString p_qstrTableName, CwnDataAccess* p_DataAccess)
 : CwnCommandBase(p_DataAccess),
 m_lObjectId(p_lObjectId),
 m_prCcdmRights(p_rCcdmRights),

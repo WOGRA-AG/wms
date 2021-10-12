@@ -9,13 +9,13 @@
 class CwnCommandSaveRights : public CwnCommandBase
 {
 public:
-    CwnCommandSaveRights(CdmRights& p_rCcdmRights, long p_lObjectId, QString p_qstrTableName);
+    CwnCommandSaveRights(CdmRights& p_rCcdmRights,qint64 p_lObjectId, QString p_qstrTableName);
     virtual ~CwnCommandSaveRights();
 
     QString queryCausedError;
 
 private:
-    long m_lObjectId;
+   qint64 m_lObjectId;
     CdmRights& m_prCcdmRights;
     QString m_pqstrTableName;
 

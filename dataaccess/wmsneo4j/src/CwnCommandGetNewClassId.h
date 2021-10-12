@@ -8,11 +8,11 @@
 class CwnCommandGetNewClassId : public CwnCommandBase
 {
 private:
-    long m_lSchemeId;
-    long m_lSessionId;
+   qint64 m_lSchemeId;
+   qint64 m_lSessionId;
 
 public:
-    CwnCommandGetNewClassId(long p_lSessionId, long p_lSchemeId, CwnDataAccess* p_pDataAccess);
+    CwnCommandGetNewClassId(qint64 p_lSessionId,qint64 p_lSchemeId, CwnDataAccess* p_pDataAccess);
     virtual ~CwnCommandGetNewClassId();
     QString createQuery();
     QString queryCausedError;

@@ -21,7 +21,7 @@ private:
     QDate m_qdValue;
 
 public:
-    CdmValueDate(long p_lDatabaseId, long p_lId, QString p_qstrKeyname, CdmObject* p_pCdmObject);
+    CdmValueDate(qint64 p_lDatabaseId,qint64 p_lId, QString p_qstrKeyname, CdmObject* p_pCdmObject);
     CdmValueDate( QVariantMap& p_rqvHash, CdmObject* p_pCdmObject);
     virtual ~CdmValueDate();
     void SetDefaultValue(const CdmMember* p_pCdmMember);
@@ -38,8 +38,8 @@ public slots:
     QString GetDisplayString() const;
     void SetValue(const QDate& p_rqdDate);
     QDate GetValue() const;
-    void SetValue(const long p_lDate);
-    void GetValue(long& p_dValue) const;
+    void SetValue(const qint64 p_lDate);
+    void GetValue(qint64& p_dValue) const;
 
 private:
     void XmlImportDate(QDomElement& p_rqDomElement);

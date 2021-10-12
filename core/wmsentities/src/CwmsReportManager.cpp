@@ -206,10 +206,10 @@ void CwmsReportManager::GetReportList(QList<CdmObject*>& p_rqlViews)
 /** +-=---------------------------------------------------------Mo 27. Aug 14:43:22 2012----------*
  * @method  CwmsReportManager::GetReport                     // public                            *
  * @return  CwmsPrintingTemplate                             //                                   *
- * @param   long p_lObjectId                                 //                                   *
+ * @param  qint64 p_lObjectId                                 //                                   *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------Mo 27. Aug 14:43:22 2012----------*/
-CwmsPrintingTemplate CwmsReportManager::GetReport(long p_lObjectId)
+CwmsPrintingTemplate CwmsReportManager::GetReport(qint64 p_lObjectId)
 {
     CwmsPrintingTemplate cPrintingTemplate;
     CdmObjectContainer* pContainer = GetObjectList();
@@ -238,7 +238,7 @@ CwmsPrintingTemplate CwmsReportManager::GetReport(QString p_qstrName)
 
     if (pQuery)
     {
-        QList<long> qllResults = pQuery->GetResultList();
+        QList<qint64> qllResults = pQuery->GetResultList();
 
         if (qllResults.count() > 0)
         {
@@ -389,8 +389,8 @@ CwmsPrintingTemplate CwmsReportManager::GetDefaultReportByClassKeyname(QString p
 
         if (CHKPTR(pQuery) && pQuery->GetResultCount() > 0)
         {
-            const QList<long>& qllResults = pQuery->GetResultList();
-            long lObjectId = (*qllResults.begin());
+            const QList<qint64>& qllResults = pQuery->GetResultList();
+           qint64 lObjectId = (*qllResults.begin());
             CdmObjectContainer* pList = GetObjectList();
 
             if (CHKPTR(pList))
@@ -440,11 +440,11 @@ bool CwmsReportManager::HasDefaultPrintingTemplate(CdmObjectContainer* p_pContai
 /** +-=---------------------------------------------------------Di 26. Feb 15:57:00 2013----------*
  * @method  CwmsReportManager::GetPdf                        // public                            *
  * @return  QByteArray                                       //                                   *
- * @param   long p_ObjectListId                              //                                   *
+ * @param  qint64 p_ObjectListId                              //                                   *
  * @param   QString p_qstrTemplate                           //                                   *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------Di 26. Feb 15:57:00 2013----------*/
-QByteArray CwmsReportManager::GetPdf(long p_ObjectListId, QString p_qstrTemplate)
+QByteArray CwmsReportManager::GetPdf(qint64 p_ObjectListId, QString p_qstrTemplate)
 {
     QByteArray qArray;
     CdmObjectContainer* pList = FindObjectListForPDFCreation(p_ObjectListId);
@@ -473,10 +473,10 @@ QByteArray CwmsReportManager::GetPdf(long p_ObjectListId, QString p_qstrTemplate
 /** +-=---------------------------------------------------------Di 26. Feb 15:57:38 2013----------*
  * @method  CwmsReportManager::GetPdf                        // public                            *
  * @return  QByteArray                                       //                                   *
- * @param   long p_ObjectListId                              //                                   *
+ * @param  qint64 p_ObjectListId                              //                                   *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------Di 26. Feb 15:57:38 2013----------*/
-QByteArray CwmsReportManager::GetPdf(long p_ObjectListId)
+QByteArray CwmsReportManager::GetPdf(qint64 p_ObjectListId)
 {
     QByteArray qArray;
     CdmObjectContainer* pList = FindObjectListForPDFCreation(p_ObjectListId);
@@ -510,12 +510,12 @@ QByteArray CwmsReportManager::GetPdf(long p_ObjectListId)
 /** +-=---------------------------------------------------------Di 26. Feb 15:57:19 2013----------*
  * @method  CwmsReportManager::GetPdf                        // public                            *
  * @return  QByteArray                                       //                                   *
- * @param   long p_ObjectListId                              //                                   *
- * @param   long p_ObjectId                                  //                                   *
+ * @param  qint64 p_ObjectListId                              //                                   *
+ * @param  qint64 p_ObjectId                                  //                                   *
  * @param   QString p_qstrTemplate                           //                                   *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------Di 26. Feb 15:57:19 2013----------*/
-QByteArray CwmsReportManager::GetPdf(long p_ObjectListId, long p_ObjectId, QString p_qstrTemplate)
+QByteArray CwmsReportManager::GetPdf(qint64 p_ObjectListId,qint64 p_ObjectId, QString p_qstrTemplate)
 {
     QByteArray qArray;
     CdmObjectContainer* pList = FindObjectListForPDFCreation(p_ObjectListId);
@@ -554,11 +554,11 @@ QByteArray CwmsReportManager::GetPdf(long p_ObjectListId, long p_ObjectId, QStri
 /** +-=---------------------------------------------------------Di 26. Feb 15:57:52 2013----------*
  * @method  CwmsReportManager::GetPdf                        // public                            *
  * @return  QByteArray                                       //                                   *
- * @param   long p_ObjectListId                              //                                   *
- * @param   long p_ObjectId                                  //                                   *
+ * @param  qint64 p_ObjectListId                              //                                   *
+ * @param  qint64 p_ObjectId                                  //                                   *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------Di 26. Feb 15:57:52 2013----------*/
-QByteArray CwmsReportManager::GetPdf(long p_ObjectListId, long p_ObjectId)
+QByteArray CwmsReportManager::GetPdf(qint64 p_ObjectListId,qint64 p_ObjectId)
 {
 
     QByteArray qArray;
@@ -594,10 +594,10 @@ QByteArray CwmsReportManager::GetPdf(long p_ObjectListId, long p_ObjectId)
 /** +-=---------------------------------------------------------Di 26. Feb 15:59:55 2013----------*
  * @method  CwmsReportManager::FindObjectListForPDFCreation  // private                           *
  * @return  CdmObjectContainer*                                   //                                   *
- * @param   long p_lObjectListId                             //                                   *
+ * @param  qint64 p_lObjectListId                             //                                   *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------Di 26. Feb 15:59:55 2013----------*/
-CdmObjectContainer* CwmsReportManager::FindObjectListForPDFCreation(long p_lObjectListId)
+CdmObjectContainer* CwmsReportManager::FindObjectListForPDFCreation(qint64 p_lObjectListId)
 {
     CdmObjectContainer* pList = nullptr;
     CdmDataProvider* pManager = CdmSessionManager::GetDataProvider();
@@ -663,7 +663,7 @@ IwmsPrinting* CwmsReportManager::GetPrintingObject()
         }
         else
         {
-            CdmMessageManager::critical(tr("Druck Plugin nicht gefunden"),
+            CdmMessageManager::critical(QStringLiteral("Druck Plugin nicht gefunden"),
                                         tr("Das Druck Plugin wurde nicht gefunden. Drucken nicht möglich!"));
         }
     }
@@ -672,7 +672,7 @@ IwmsPrinting* CwmsReportManager::GetPrintingObject()
 }
 
 
-void CwmsReportManager::OpenReportEditor(long p_lObjectId, QWidget* p_pParent)
+void CwmsReportManager::OpenReportEditor(qint64 p_lObjectId, QWidget* p_pParent)
 {
     CwmsReportManager cManager;
     OpenReportEditor(cManager.GetReport(p_lObjectId).GetObject(), p_pParent);

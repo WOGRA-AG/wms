@@ -139,7 +139,7 @@ bool CwsHttpClient::ReadResponseFromServer(QByteArray& p_Response)
     if (m_pSocket->waitForReadyRead(m_iTimeoutMSecs))
     {
         quint64 bytes = m_pSocket->bytesAvailable();
-        while (bytes > (int)sizeof(quint64))
+        while (bytes > sizeof(quint64))
         {
             p_Response += m_pSocket->readAll();
             bRet = true;

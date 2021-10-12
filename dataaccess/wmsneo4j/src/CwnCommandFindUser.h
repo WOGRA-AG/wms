@@ -25,8 +25,8 @@ public:
     void setPassw(QString passw);
     QString getPassw();
 
-    void setUserId(long userid);
-    long getUserId();
+    void setUserId(qint64 userid);
+   qint64 getUserId();
 
     void setUserEmail(QString useremail);
     QString getUserEmail();
@@ -43,7 +43,7 @@ public:
 
 private:
     int decider;
-    long userid;
+   qint64 userid;
     QString useremail;
     QString login;
     QString passw;

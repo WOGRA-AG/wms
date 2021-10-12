@@ -55,8 +55,8 @@ CoeTextEditMainWindow::CoeTextEditMainWindow(QWidget* p_pqwPrent)
    m_pqcbStyle->addItem(tr("Sortierte Liste (Nummerisch)"));
    m_pqcbStyle->addItem(tr("Sortierte Liste (Alphabetisch Kleinbuchstaben)"));
    m_pqcbStyle->addItem(tr("Sortierte Liste (Alphabetisch Großbuchstaben)"));
-   connect(m_pqcbStyle, SIGNAL(activated(int)),
-           this, SLOT(TextStyleSlot(int)));
+   connect(m_pqcbStyle, SIGNAL(activated),
+           this, SLOT(TextStyleSlot));
 
    m_pqfcbFont = new QFontComboBox(ui.m_pqtbText);
    m_pqfcbFont->setCurrentFont(QFont(m_sqstrTextFamily));

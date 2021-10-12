@@ -12,8 +12,8 @@
 #include "CdmMember.h"
 #include "CdmValueDouble.h"
 
-CdmValueDouble::CdmValueDouble(  long p_lDatabaseId,
-                      long p_lId,
+CdmValueDouble::CdmValueDouble( qint64 p_lDatabaseId,
+                     qint64 p_lId,
                       QString p_qstrKeyname,
                       CdmObject* p_pCdmObject )
 : CdmValue(p_lDatabaseId, p_lId, p_qstrKeyname, eDmValueDouble, p_pCdmObject),

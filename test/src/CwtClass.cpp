@@ -269,7 +269,7 @@ void CwtClass::CheckBaseClass()
     QVERIFY(pClass->AddBaseClass(pBaseClass1) > 0);
     QVERIFY(pClass->Commit() > 0);
     pClass = ResetSessionAndLoadClass("BaseClassCheck0");
-    QMap<long, CdmMember*> qmMembers;
+    QMap<qint64, CdmMember*> qmMembers;
     pClass->GetMemberMap(qmMembers);
     QVERIFY(qmMembers.count() == 3);
     pClassManager = GetClassManager();

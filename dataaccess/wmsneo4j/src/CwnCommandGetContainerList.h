@@ -7,17 +7,17 @@ class CwnCommandGetContainerList : public CwnCommandBase
 {
 
 private:
-    long m_lSchemeId;
-    long m_lClassId;
-    QMap<long, QString> m_qmContainer;
-    QList<long> GetClassList();
+   qint64 m_lSchemeId;
+   qint64 m_lClassId;
+    QMap<qint64, QString> m_qmContainer;
+    QList<qint64> GetClassList();
     QString GetClassListString();
     QString GetContainerQuery();
 
 public:
-    CwnCommandGetContainerList(long p_lSchemeId, long p_lClassId, CwnDataAccess* p_pDataAccess);
+    CwnCommandGetContainerList(qint64 p_lSchemeId,qint64 p_lClassId, CwnDataAccess* p_pDataAccess);
     virtual ~CwnCommandGetContainerList();
-    void GetResult(QMap<long, QString>& p_rqmContainerList);
+    void GetResult(QMap<qint64, QString>& p_rqmContainerList);
     QString queryCausedError;
 
 protected:

@@ -36,7 +36,7 @@ private:
     QTime m_qtValue;
 
 public:
-    CdmValueTime(long p_lDatabaseId, long p_lId, QString p_qstrKeyname, CdmObject* p_pCdmObject);
+    CdmValueTime(qint64 p_lDatabaseId,qint64 p_lId, QString p_qstrKeyname, CdmObject* p_pCdmObject);
     CdmValueTime(QVariantMap& p_rqvHash, CdmObject* p_pCdmObject);
     virtual ~CdmValueTime();
     void SetDefaultValue(const CdmMember* p_pCdmMember);

@@ -4,7 +4,7 @@
 
 #include "CwnCommandStdHeader.h"
 
-CwnCommandUpdateSession::CwnCommandUpdateSession(long p_lSessionId, CwnDataAccess* p_pDataAccess)
+CwnCommandUpdateSession::CwnCommandUpdateSession(qint64 p_lSessionId, CwnDataAccess* p_pDataAccess)
 : CwnCommandBase(p_pDataAccess),
   m_lSessionId(p_lSessionId)
 {

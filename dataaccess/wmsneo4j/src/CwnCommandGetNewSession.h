@@ -11,13 +11,13 @@ class CwnCommandGetNewSession : public CwnCommandBase
 
 private:
     QString m_qstrApplication;
-    long m_lUserId;
-    long m_lSessionId;
+   qint64 m_lUserId;
+   qint64 m_lSessionId;
     QDateTime m_qdtLoginDate;
 
 public:
     CwnCommandGetNewSession(QString p_qstrApplication,
-                            long p_lUserId,
+                           qint64 p_lUserId,
                             CwnDataAccess* m_rpDataAccess);
     virtual ~CwnCommandGetNewSession();
 

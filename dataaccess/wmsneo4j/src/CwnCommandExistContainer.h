@@ -7,11 +7,11 @@
 class CwnCommandExistContainer: public CwnCommandBase
 {
 private:
-      long m_lClassId;
+     qint64 m_lClassId;
       QString m_qstrContainerKeyname;
 
 public:
-    CwnCommandExistContainer(long p_lClassId, QString p_qstrContainer, CwnDataAccess* p_pDataAccess);
+    CwnCommandExistContainer(qint64 p_lClassId, QString p_qstrContainer, CwnDataAccess* p_pDataAccess);
     virtual ~CwnCommandExistContainer();
     QString createQuery();
     QString queryCausedError;

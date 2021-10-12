@@ -68,7 +68,7 @@ void SearchGroupClickedSlot();
     int GetSelectedGroupId();
 
    public:
-    static long GetGroupSelection(  QWidget* parent );
+    static qint64 GetGroupSelection(  QWidget* parent );
 };
 
 #endif //

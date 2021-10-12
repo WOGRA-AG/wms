@@ -98,10 +98,10 @@ QString CftlContainerTableCreate::AddPrimaryKey()
 QString CftlContainerTableCreate::AddMembersToTable()
 {
     QString qstrSqlPart;
-    QMap<long, CdmMember*> qmMembers;
+    QMap<qint64, CdmMember*> qmMembers;
     m_rpClass->GetMemberMap(qmMembers);
 
-    QMapIterator<long, CdmMember*> qmIt(qmMembers);
+    QMapIterator<qint64, CdmMember*> qmIt(qmMembers);
 
     while (qmIt.hasNext())
     {

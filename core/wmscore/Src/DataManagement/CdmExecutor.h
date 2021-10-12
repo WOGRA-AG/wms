@@ -74,7 +74,7 @@ class WMSMANAGER_API CdmExecutor : public QObject
       CdmExecutorFunction* m_pFunction;
       CdmExecutorValidator* m_pValidator;
       CdmExecutorRuntimeManager* m_pRuntimeManager;
-      QList<long> m_qlCommitRunningContainers;
+      QList<qint64> m_qlCommitRunningContainers;
       
       
       

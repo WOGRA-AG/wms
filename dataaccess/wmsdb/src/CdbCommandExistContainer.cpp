@@ -26,7 +26,7 @@ bool CdbCommandExistContainer::CheckValid()
 
 int CdbCommandExistContainer::Execute()
 {
-    long lRet = CdmLogging::eDmObjectAccessError;
+   qint64 lRet = CdmLogging::eDmObjectAccessError;
     CdmDataProvider* pProvider = CdmSessionManager::GetSessionManager()->GetDataProvider();
 
     if (CHKPTR(pProvider))
@@ -35,7 +35,7 @@ int CdbCommandExistContainer::Execute()
 
         if (CHKPTR(pScheme))
         {
-            long lSchemeId = pScheme->GetId();
+           qint64 lSchemeId = pScheme->GetId();
             QSqlQuery cQSqlQuery(GetSqlDatabase());
 
             cQSqlQuery.prepare("Select ContainerId from WMS_DM_CONTAINER cont "
@@ -43,7 +43,7 @@ int CdbCommandExistContainer::Execute()
                                "inner join WMS_DATABASE sc on sc.DatabaseId = cl.SChemeId "
                                "where cont.Keyname = ? and sc.DatabaseId = ?");
             cQSqlQuery.addBindValue(m_qstrContainerKeyname);
-            cQSqlQuery.addBindValue((int)lSchemeId);
+            cQSqlQuery.addBindValue(lSchemeId);
 
             if(SUCCESSFULL(ExecuteQuery(cQSqlQuery)))
             {

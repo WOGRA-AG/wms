@@ -26,7 +26,7 @@ private:
     double m_dValue;
 
 public:
-    CdmValueDouble(  long p_lDatabaseId, long p_lId, QString p_qstrKeyname, CdmObject* p_pCdmObject );
+    CdmValueDouble( qint64 p_lDatabaseId,qint64 p_lId, QString p_qstrKeyname, CdmObject* p_pCdmObject );
     CdmValueDouble( QVariantMap& p_rqvHash, CdmObject* p_pCdmObject);
     virtual ~CdmValueDouble(  );
     void SetDefaultValue(  const CdmMember* p_pCdmMember );

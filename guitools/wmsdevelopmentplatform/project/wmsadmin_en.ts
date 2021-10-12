@@ -58,7 +58,7 @@
     <message>
         <location filename="../src/cwmsaddclassmemberdlg.ui" line="101"/>
         <source>Ganze Zahl (doppelte Länge)</source>
-        <translation>Long</translation>
+        <translation>qint64</translation>
     </message>
     <message>
         <location filename="../src/cwmsaddclassmemberdlg.ui" line="106"/>

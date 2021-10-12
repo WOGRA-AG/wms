@@ -41,7 +41,7 @@ CwmsObjectChoiceComboBox::CwmsObjectChoiceComboBox(  QWidget* parent)
 : QComboBox(parent),
   m_rpCdmProxy(nullptr)
 {
-   connect(this, SIGNAL(activated(int)), this, SLOT(ComboBoxActivatedSlot()));
+   connect(this, SIGNAL(activated), this, SLOT(ComboBoxActivatedSlot()));
 }
 
 /** +-=---------------------------------------------------------So 8. Jan 21:54:07 2006-----------*
@@ -131,7 +131,7 @@ void CwmsObjectChoiceComboBox::SetContainerAndDisplayValue(  CdmObjectContainer*
       
       if(m_rpCdmProxy)
       {
-         QList<long> qvlResults;
+         QList<qint64> qvlResults;
 
          m_rpCdmProxy->CreateQuery(p_pContainer);
          CdmQuery* pCdmQuery = m_rpCdmProxy->GetQuery();
@@ -331,7 +331,7 @@ void CwmsObjectChoiceComboBox::FillWidget(CdmQuery& p_rcCdmQuery)
           }
       }
       
-      long lObjectId = p_rcCdmQuery.GetObjectIdAt(iRowPos);
+     qint64 lObjectId = p_rcCdmQuery.GetObjectIdAt(iRowPos);
 
       if (lObjectId > 0)
       {
@@ -351,12 +351,12 @@ void CwmsObjectChoiceComboBox::FillWidget(CdmQuery& p_rcCdmQuery)
  * @return  void                                             //                                   *
  * @param   CdmObjectContainer* p_pContainer                  //                                   *
  * @param   QString p_qstrValueKeyname                       //                                   *
- * @param   QValueList<long>& p_rqvlObjects                  //                                   *
+ * @param   QValueList<qint64>& p_rqvlObjects                  //                                   *
  * @comment This method fills the Combobox with the results of the proxy.                         *
  *----------------last changed: Wolfgang GraÃŸhof----------------Fr 12. Jan 19:54:58 2007----------*/
 void CwmsObjectChoiceComboBox::FillDialog(CdmObjectContainer* p_pContainer,
                                           QString p_qstrValueKeyname,
-                                          QList<long>& p_rqvlObjects)
+                                          QList<qint64>& p_rqvlObjects)
 {
 	ClearEntries();
    QString qstrValueKeyname = p_qstrValueKeyname;
@@ -369,12 +369,12 @@ void CwmsObjectChoiceComboBox::FillDialog(CdmObjectContainer* p_pContainer,
 
       if (p_rqvlObjects.count() > 0)
       {
-         QList<long>::iterator qvlIt = p_rqvlObjects.begin();
-         QList<long>::iterator qvlItEnd = p_rqvlObjects.end();
+         QList<qint64>::iterator qvlIt = p_rqvlObjects.begin();
+         QList<qint64>::iterator qvlItEnd = p_rqvlObjects.end();
 
          for(; qvlIt != qvlItEnd; ++qvlIt, ++iIndex)
          {
-            long lObjectId = (*qvlIt);
+           qint64 lObjectId = (*qvlIt);
             CdmObject* pCdmObject = p_pContainer->FindObjectById(lObjectId);
 
             if(CHKPTR(pCdmObject))
@@ -445,11 +445,11 @@ void CwmsObjectChoiceComboBox::AddEntry(CdmObject* p_pCdmObject, QString p_qstrV
 /** +-=---------------------------------------------------------Sa 7. Mai 14:33:00 2011-----------*
  * @method  CwmsObjectChoiceComboBox::AddEntry               // public                            *
  * @return  void                                             //                                   *
- * @param   long p_lObjectId                                 //                                   *
+ * @param  qint64 p_lObjectId                                 //                                   *
  * @param   QString p_qstrValue                              //                                   *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------Sa 7. Mai 14:33:00 2011-----------*/
-void CwmsObjectChoiceComboBox::AddEntry(long p_lObjectId, QString p_qstrValue)
+void CwmsObjectChoiceComboBox::AddEntry(qint64 p_lObjectId, QString p_qstrValue)
 {
     if(m_qmEntries.value(p_qstrValue) != p_lObjectId)
     {
@@ -475,8 +475,8 @@ void CwmsObjectChoiceComboBox::FillEntries()
       m_qmEntries.insert("-", 0);
    }
 
-   QMap<QString, long>::iterator qmIt = m_qmEntries.begin();
-   QMap<QString, long>::iterator qmItEnd = m_qmEntries.end();
+   QMap<QString,qint64>::iterator qmIt = m_qmEntries.begin();
+   QMap<QString,qint64>::iterator qmItEnd = m_qmEntries.end();
 
    for (; qmIt != qmItEnd; ++qmIt)
    {
@@ -493,7 +493,7 @@ void CwmsObjectChoiceComboBox::FillEntries()
 void CwmsObjectChoiceComboBox::Refresh()
 {
    // storing the old value
-  long lObjectId = GetSelectedObjectId();
+ qint64 lObjectId = GetSelectedObjectId();
 
    ClearEntries();
 
@@ -512,10 +512,10 @@ void CwmsObjectChoiceComboBox::Refresh()
 /** +-=---------------------------------------------------------Fr 1. Jun 10:06:02 2012-----------*
  * @method  CwmsObjectChoiceComboBox::SetCurrentObjectId     // public                            *
  * @return  void                                             //                                   *
- * @param   long p_lId                                       //                                   *
+ * @param  qint64 p_lId                                       //                                   *
  * @comment This method sets the current selected object in the combobox.                         *
  *----------------last changed: --------------------------------Fr 1. Jun 10:06:02 2012-----------*/
-void CwmsObjectChoiceComboBox::SetCurrentObjectId(long p_lId)
+void CwmsObjectChoiceComboBox::SetCurrentObjectId(qint64 p_lId)
 {
    if(p_lId > 0)
    {
@@ -557,21 +557,21 @@ void CwmsObjectChoiceComboBox::SetCurrentObject(CdmObject* p_pCdmObject)
 /** +-=---------------------------------------------------------Fr 1. Jun 10:05:31 2012-----------*
  * @method  CwmsObjectChoiceComboBox::FindIndexById          // private                           *
  * @return  int                                              //                                   *
- * @param   long p_lObjectId                                 //                                   *
+ * @param  qint64 p_lObjectId                                 //                                   *
  * @comment This method finds the idnex of the object.                                            *
  *----------------last changed: --------------------------------Fr 1. Jun 10:05:31 2012-----------*/
-int CwmsObjectChoiceComboBox::FindIndexById(long p_lObjectId)
+int CwmsObjectChoiceComboBox::FindIndexById(qint64 p_lObjectId)
 {
    int iRet = -1;
 
    if(p_lObjectId > 0)
    {
-      QMap<QString, long>::iterator qmIt = m_qmEntries.begin();
-      QMap<QString, long>::iterator qmItEnd = m_qmEntries.end();
+      QMap<QString,qint64>::iterator qmIt = m_qmEntries.begin();
+      QMap<QString,qint64>::iterator qmItEnd = m_qmEntries.end();
 
       for(; qmIt != qmItEnd; ++qmIt)
       {
-         long lObjectTemp = qmIt.value();
+        qint64 lObjectTemp = qmIt.value();
 
          if(lObjectTemp == p_lObjectId)
          {
@@ -587,10 +587,10 @@ int CwmsObjectChoiceComboBox::FindIndexById(long p_lObjectId)
 
 /** +-=---------------------------------------------------------Fr 1. Jun 10:34:08 2012-----------*
  * @method  CwmsObjectChoiceComboBox::GetSelectedObjectId    // public                            *
- * @return  long                                             //                                   *
+ * @return qint64                                             //                                   *
  * @comment This method returns the selected object.                                              *
  *----------------last changed: --------------------------------Fr 1. Jun 10:34:08 2012-----------*/
-long CwmsObjectChoiceComboBox::GetSelectedObjectId()
+qint64 CwmsObjectChoiceComboBox::GetSelectedObjectId()
 {
    QString qstrCurrent = currentText();
    return m_qmEntries[qstrCurrent];
@@ -608,7 +608,7 @@ long CwmsObjectChoiceComboBox::GetSelectedObjectId()
 CdmObject* CwmsObjectChoiceComboBox::GetSelectedObject()
 {
    CdmObject* pCdmObject = nullptr;
-   long lObjectId = GetSelectedObjectId();
+  qint64 lObjectId = GetSelectedObjectId();
 
    CdmObjectContainer* pContainer = CdmContainerAdaptor::GetContainer();
 
@@ -623,10 +623,10 @@ CdmObject* CwmsObjectChoiceComboBox::GetSelectedObject()
 CdmObject *CwmsObjectChoiceComboBox::GetSelectedObjectByIndex(int iIndex)
 {
     CdmObject *pCurrentObject = nullptr;
-    QList<long> qlValues = m_qmEntries.values();
+    QList<qint64> qlValues = m_qmEntries.values();
     if(iIndex >= 0)
     {
-        long lObjectIdByIndex = qlValues.at(iIndex);
+       qint64 lObjectIdByIndex = qlValues.at(iIndex);
         pCurrentObject = FindObject(lObjectIdByIndex);
     }
     return pCurrentObject;
@@ -707,10 +707,10 @@ void CwmsObjectChoiceComboBox::keyPressEvent(QKeyEvent * p_pqKeyEvent)
 /** +-=---------------------------------------------------------Do 16. Sep 20:32:01 2010----------*
  * @method  CwmsObjectChoiceComboBox::ObjectCreatedEvent     // protected, virtual                *
  * @return  void                                             //                                   *
- * @param   long# p_lObjectId                                //                                   *
+ * @param  qint64# p_lObjectId                                //                                   *
  * @comment This method will be called if a new object was created.                               *
  *----------------last changed: --------------------------------Do 16. Sep 20:32:01 2010----------*/
-void CwmsObjectChoiceComboBox::ObjectCreatedEvent(long)
+void CwmsObjectChoiceComboBox::ObjectCreatedEvent(qint64)
 {
    Refresh();
 }
@@ -718,30 +718,30 @@ void CwmsObjectChoiceComboBox::ObjectCreatedEvent(long)
 /** +-=---------------------------------------------------------Do 16. Sep 20:32:14 2010----------*
  * @method  CwmsObjectChoiceComboBox::ObjectModifiedEvent    // protected, virtual                *
  * @return  void                                             //                                   *
- * @param   long# p_lObjectId                                //                                   *
+ * @param  qint64# p_lObjectId                                //                                   *
  * @comment This mehtod will be called if a object was modified.                                  *
  *----------------last changed: --------------------------------Do 16. Sep 20:32:14 2010----------*/
-void CwmsObjectChoiceComboBox::ObjectModifiedEvent(long)
+void CwmsObjectChoiceComboBox::ObjectModifiedEvent(qint64)
 {
 }
 
 /** +-=---------------------------------------------------------Do 16. Sep 20:32:26 2010----------*
  * @method  CwmsObjectChoiceComboBox::ObjectRefModifiedEvent // protected                         *
  * @return  void                                             //                                   *
- * @param   long# p_lObjectId                                //                                   *
+ * @param  qint64# p_lObjectId                                //                                   *
  * @comment This mehtod will be called if a object was modified.                                  *
  *----------------last changed: --------------------------------Do 16. Sep 20:32:26 2010----------*/
-void CwmsObjectChoiceComboBox::ObjectRefModifiedEvent(long)
+void CwmsObjectChoiceComboBox::ObjectRefModifiedEvent(qint64)
 {
 }
 
 /** +-=---------------------------------------------------------Do 16. Sep 20:32:37 2010----------*
  * @method  CwmsObjectChoiceComboBox::ObjectDeletedEvent     // protected, virtual                *
  * @return  void                                             //                                   *
- * @param   long# p_lObjectId                                //                                   *
+ * @param  qint64# p_lObjectId                                //                                   *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------Do 16. Sep 20:32:37 2010----------*/
-void CwmsObjectChoiceComboBox::ObjectDeletedEvent(long)
+void CwmsObjectChoiceComboBox::ObjectDeletedEvent(qint64)
 {
    Refresh();
 }
@@ -749,10 +749,10 @@ void CwmsObjectChoiceComboBox::ObjectDeletedEvent(long)
 /** +-=---------------------------------------------------------Do 16. Sep 20:33:05 2010----------*
  * @method  CwmsObjectChoiceComboBox::ObjectCommitedEvent    // protected, virtual                *
  * @return  void                                             //                                   *
- * @param   long# p_lObjectId                                //                                   *
+ * @param  qint64# p_lObjectId                                //                                   *
  * @comment This mehtod will be called if a object was modified.                                  *
  *----------------last changed: --------------------------------Do 16. Sep 20:33:05 2010----------*/
-void CwmsObjectChoiceComboBox::ObjectCommitedEvent(long)
+void CwmsObjectChoiceComboBox::ObjectCommitedEvent(qint64)
 {
    Refresh();
 }

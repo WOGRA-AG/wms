@@ -6,12 +6,12 @@
 class CftlCommandLoadClassManager : public CftlAbstractCommand
 {
 private:
-    long m_lSchemeId;
+   qint64 m_lSchemeId;
     CdmClassManager* m_pClassManager;
 
 
 public:
-    CftlCommandLoadClassManager(long p_lSchemeId, CftlDataAccess* p_pDataAccess);
+    CftlCommandLoadClassManager(qint64 p_lSchemeId, CftlDataAccess* p_pDataAccess);
     virtual ~CftlCommandLoadClassManager();
     CdmClassManager* GetResult();
 

@@ -57,20 +57,20 @@ CftlUserManager::~CftlUserManager()
 }
 
 
-long CftlUserManager::CreateUser(CumUser* p_pUser)
+qint64 CftlUserManager::CreateUser(CumUser* p_pUser)
 {
     CftlCommandCreateUser command(p_pUser,
                                  m_pCftlDataAccess);
     return command.Run();
 }
 
-long CftlUserManager::DeleteUser(QString p_qstrLogin)
+qint64 CftlUserManager::DeleteUser(QString p_qstrLogin)
 {
    CftlCommandDeleteUser command(p_qstrLogin, m_pCftlDataAccess);
    return command.Run();
 }
 
-long CftlUserManager::DeleteUser(long p_lUserId)
+qint64 CftlUserManager::DeleteUser(qint64 p_lUserId)
 {
     CftlCommandDeleteUser command(p_lUserId, m_pCftlDataAccess);
     return command.Run();
@@ -122,7 +122,7 @@ bool CftlUserManager::CheckAuthorisation(QString p_qstrLogin, QString p_qstrPass
    return bRet;
 }
 
-CumUser* CftlUserManager::FindUser(long p_lUserId)
+CumUser* CftlUserManager::FindUser(qint64 p_lUserId)
 {
     CumUser* pCumUser = nullptr;
     CftlCommandFindUser command(p_lUserId, m_pCftlDataAccess);
@@ -162,7 +162,7 @@ CumUser* CftlUserManager::FindUserByEmail(QString p_qstrEmail, QString p_qstrSch
     return pCumUser;
 }
 
-long CftlUserManager::UpdateUser(CumUser* p_pUser)
+qint64 CftlUserManager::UpdateUser(CumUser* p_pUser)
 {
     CftlCommandUpdateUser command(p_pUser,
                                  m_pCftlDataAccess);
@@ -170,80 +170,80 @@ long CftlUserManager::UpdateUser(CumUser* p_pUser)
    return command.Run();
 }
 
-long CftlUserManager::GetUserList(QList<CumUser*>& p_qvlUsers)
+qint64 CftlUserManager::GetUserList(QList<CumUser*>& p_qvlUsers)
 {
-    long lRet = 0;
+   qint64 lRet = 0;
     CftlCommandGetUserList command(m_pCftlDataAccess);
     lRet = command.Run();
     p_qvlUsers = command.GetResult();
     return lRet;
 }
 
-long CftlUserManager::ExistUser(QString p_qstrLogin)
+qint64 CftlUserManager::ExistUser(QString p_qstrLogin)
 {
    CftlCommandExistUser command(p_qstrLogin, m_pCftlDataAccess);
    return command.Run();
 }
 
-long CftlUserManager::RenameUserGroup(long p_lGroupId, QString p_qstrNewName)
+qint64 CftlUserManager::RenameUserGroup(qint64 p_lGroupId, QString p_qstrNewName)
 {
     CftlCommandRenameUserGroup command(p_lGroupId, p_qstrNewName, m_pCftlDataAccess);
     return command.Run();
 }
 
-long CftlUserManager::CreateUserGroup(QString p_qstrGroupName)
+qint64 CftlUserManager::CreateUserGroup(QString p_qstrGroupName)
 {
     CftlCommandCreateUserGroup command(p_qstrGroupName, m_pCftlDataAccess);
     return command.Run();
 }
 
-long CftlUserManager::DeleteUserGroup(long p_llGroupId)
+qint64 CftlUserManager::DeleteUserGroup(qint64 p_llGroupId)
 {
    CftlCommandDeleteUserGroup command(p_llGroupId, m_pCftlDataAccess);
    return command.Run();
 }
 
-long CftlUserManager::AddUserToUserGroup(long p_lUserId, long p_lUserGroupId)
+qint64 CftlUserManager::AddUserToUserGroup(qint64 p_lUserId,qint64 p_lUserGroupId)
 {
    CftlCommandAddUserToUserGroup command(p_lUserId, p_lUserGroupId, m_pCftlDataAccess);
    return command.Run();
 }
 
-long CftlUserManager::RemoveUserFromGroup(long p_lUserId, long p_lUserGroupId)
+qint64 CftlUserManager::RemoveUserFromGroup(qint64 p_lUserId,qint64 p_lUserGroupId)
 {
     CftlCommandRemoveUserFromUserGroup command(p_lUserId, p_lUserGroupId, m_pCftlDataAccess);
     return command.Run();
 }
 
-long CftlUserManager::GetUserGroupList(QList<CumUserGroup*>& p_rqvlUserGroups)
+qint64 CftlUserManager::GetUserGroupList(QList<CumUserGroup*>& p_rqvlUserGroups)
 {
-   long lRet = CdmLogging::eDmUnknownUserQueryError;
+  qint64 lRet = CdmLogging::eDmUnknownUserQueryError;
    CftlCommandGetUserGroupList command(m_pCftlDataAccess);
    lRet = command.Run();
    p_rqvlUserGroups = command.GetResult();
    return lRet;
 }
 
-long CftlUserManager::GetListOfUsersInList(long p_lUserGroupId,
+qint64 CftlUserManager::GetListOfUsersInList(qint64 p_lUserGroupId,
                                           QList<CumUser*>& p_rqvlUserList)
 {
    CftlCommandGetGroupUserList command(p_lUserGroupId, m_pCftlDataAccess);
-   long lRet = command.Run();
+  qint64 lRet = command.Run();
    p_rqvlUserList = command.GetResult();
    return lRet;
 }
 
-long CftlUserManager::GetUserGroupMemberList(long p_lUserId,
+qint64 CftlUserManager::GetUserGroupMemberList(qint64 p_lUserId,
                                             QList<CumUserGroup*>& p_qvlUserGroups)
 {
-   long lRet = CdmLogging::eDmUnknownUserQueryError;
+  qint64 lRet = CdmLogging::eDmUnknownUserQueryError;
    CftlCommandGetGroupsOfUser command(p_lUserId, m_pCftlDataAccess);
    lRet = command.Run();
    p_qvlUserGroups = command.GetResult();
    return lRet;
 }
 
-CumUserGroup* CftlUserManager::FindUserGroup(long p_lGroupId)
+CumUserGroup* CftlUserManager::FindUserGroup(qint64 p_lGroupId)
 {
    CftlCommandFindUserGroup command(p_lGroupId, m_pCftlDataAccess);
    command.Run();
@@ -276,7 +276,7 @@ CumUser *CftlUserManager::FindUserByIdentKey(QString p_qstridentKey, QString p_q
     return pCumUser;
 }
 
-CumUser* CftlUserManager::FindUserById(long p_lId)
+CumUser* CftlUserManager::FindUserById(qint64 p_lId)
 {
     CumUser* pCumUser = nullptr;
     CftlCommandFindUser command(p_lId, m_pCftlDataAccess);

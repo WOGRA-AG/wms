@@ -12,7 +12,7 @@ CftlCommandFindScheme::CftlCommandFindScheme(QString p_qstrSchemeName, CftlDataA
 {
 }
 
-CftlCommandFindScheme::CftlCommandFindScheme(long p_lSchemeId, CftlDataAccess* p_pDataAccess)
+CftlCommandFindScheme::CftlCommandFindScheme(qint64 p_lSchemeId, CftlDataAccess* p_pDataAccess)
 : CftlAbstractCommand(p_pDataAccess),
   m_lSchemeId(p_lSchemeId),
   m_pScheme(nullptr)
@@ -32,7 +32,7 @@ bool CftlCommandFindScheme::CheckValid()
 
 int CftlCommandFindScheme::Execute()
 {
-   long lRet = CdmLogging::eDmUnknownDbAccessError;
+  qint64 lRet = CdmLogging::eDmUnknownDbAccessError;
    QSqlQuery cQSqlQuery(GetSqlDatabase());
    QString qstrQuery;
 
@@ -44,7 +44,7 @@ int CftlCommandFindScheme::Execute()
    else
    {
        cQSqlQuery.prepare("Select SchemeId, SchmeName, Version from WMS_SCHEME where SchemeId = ?");
-       cQSqlQuery.addBindValue((int)m_lSchemeId);
+       cQSqlQuery.addBindValue(m_lSchemeId);
    }
 
    if(SUCCESSFULL(ExecuteQuery(cQSqlQuery)))
@@ -53,7 +53,7 @@ int CftlCommandFindScheme::Execute()
 
       if(cQSqlQuery.isValid())
       {
-         long lSchemeId = cQSqlQuery.value(0).toInt();
+        qint64 lSchemeId = cQSqlQuery.value(0).toInt();
 
          // this is just for test if the correct one was found
          QString qstrKeyname = cQSqlQuery.value(1).toString();
@@ -96,7 +96,7 @@ void CftlCommandFindScheme::LoadLanguages()
    {
       QSqlQuery cQuery(GetSqlDatabase());
       cQuery.prepare("select LanguageId, Name from WMS_LANGUAGE where SchemeId = ?");
-      cQuery.addBindValue((int)m_pScheme->GetId());
+      cQuery.addBindValue(m_pScheme->GetId());
 
       if(SUCCESSFULL(ExecuteQuery(cQuery)))
       {

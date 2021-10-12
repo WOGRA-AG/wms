@@ -49,20 +49,20 @@ private:
     /*
         * The Value size, is used for strings
         */
-    long        m_lSize;
+   qint64        m_lSize;
     /*
         * Used for ObjectLists and ObjectListRefs
         */
-    long        m_lReference;
+   qint64        m_lReference;
     /*
         * Used for Counter Values to set the value on which the counter has to start.
         */
-    long        m_lCounterStart;
+   qint64        m_lCounterStart;
 
     /*
         * Is used for referencing the class, the member belongs to
         */
-    long        m_lClassId;
+   qint64        m_lClassId;
 
     /*
         * This shows if a value of this member must have a value or not
@@ -141,14 +141,14 @@ private:
     bool m_bIsTree;
 
 private:
-    CdmMember(long p_lDbId,
-              long p_lId,
+    CdmMember(qint64 p_lDbId,
+             qint64 p_lId,
               QString p_qstrKeyname,
               EdmValueType p_eDmValue,
               bool p_bMust,
-              long p_lSize);
+             qint64 p_lSize);
     CdmMember(QDomElement& p_rqDomElement);
-    CdmMember(QVariantMap& p_qMember, long p_lClassId);
+    CdmMember(QVariantMap& p_qMember,qint64 p_lClassId);
     virtual ~CdmMember();
 
 public:
@@ -156,7 +156,7 @@ public:
     void SetDefaultValue(const QString p_qstDefault );
     void SetDefaultValue(const bool p_bDefault );
     void SetDefaultValue(const int p_iDefault );
-    void SetDefaultValue(const long p_lDefault );
+    void SetDefaultValue(const qint64 p_lDefault );
     void SetDefaultValue(const double p_dDefault );
     void SetDefaultValue(const float p_fDefault );
     void SetDefaultValue(const QDate p_qdDefault );
@@ -166,7 +166,7 @@ public:
     void GetDefaultValue(QDateTime& p_qdtDefault) const;
     void GetDefaultValue(QDate& p_qdDefault) const;
     void GetDefaultValue(float& p_fDefault) const;
-    void GetDefaultValue(long& p_lDefault) const;
+    void GetDefaultValue(qint64& p_lDefault) const;
     void GetDefaultValue(int& p_iDefault) const;
     void GetDefaultValue(QString& p_qstDefault) const;
     void GetDefaultValue(bool& p_bDefault) const;
@@ -174,18 +174,18 @@ public:
     QVariant GetDefaultValue() const;
     void SetValueType(EdmValueType p_eDmValue);
     void SetMustValue(bool p_bMust);
-    void SetSize(long p_lSize );
+    void SetSize(qint64 p_lSize );
     void SetDefaultValue(const QVariant p_qvValue );
-    void SetClassId(long p_lClassId );
+    void SetClassId(qint64 p_lClassId );
     void SetComment(QString p_qstrComment );
     void SetTimeDefaultValue(const double p_dDefault );
     void GetTimeDefaultValue(double& p_dDefault ) const;
     void SetDateTimeDefaultValue(const double p_dDefault );
     void GetDateTimeDefaultValue(double& p_dDefault) const;
-    void SetDateDefaultValue(const long p_lDefault );
-    void GetDateDefaultValue(long& p_lDefault ) const;
-    void SetClassReference(long p_lReference );
-    void SetCounterStart(long p_lCounterStart );
+    void SetDateDefaultValue(const qint64 p_lDefault );
+    void GetDateDefaultValue(qint64& p_lDefault ) const;
+    void SetClassReference(qint64 p_lReference );
+    void SetCounterStart(qint64 p_lCounterStart );
     void XmlExport(QDomElement& p_rqdeClassMembers) const;
     void XmlImport(QDomElement& p_rqdeClassMembers );
     void XmlImportMember(QDomElement& p_rqdeClassMembers );
@@ -227,14 +227,14 @@ public:
     void SetEnabledCheck(QString p_qstrRendered);
     void SetRenderedCheck(QString p_qstrRendered);
     void SetClassReference(CdmClass *p_pClass);
-    long GetSize() const;
+   qint64 GetSize() const;
     EdmValueType GetValueType() const;
-    long GetClassId() const;
+   qint64 GetClassId() const;
     QString GetComment() const;
     QString GenerateDocument();
     QString GetValueTypeAsString() const;
-    long GetClassReference() const;
-    long GetCounterStart() const;
+   qint64 GetClassReference() const;
+   qint64 GetCounterStart() const;
     bool IsOwner() const;
     bool IsUnique() const;
     bool IsSystemMember() const;

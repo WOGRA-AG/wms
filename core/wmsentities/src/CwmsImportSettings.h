@@ -69,9 +69,9 @@ class BASETOOLS_API CwmsImportSettings
       QString m_qstrApplication;
       QString m_qstrLogin;
       QString m_qstrPassword;
-      long m_lObjectListId;
-      long m_lDbId;
-      long m_lClassId;
+     qint64 m_lObjectListId;
+     qint64 m_lDbId;
+     qint64 m_lClassId;
       QString m_qstrDbName;
       QString m_qstrSettingsName;
       bool m_bIgnoreFirstLine;
@@ -213,10 +213,10 @@ class BASETOOLS_API CwmsImportSettings
    public:
    /** +-=---------------------------------------------------------Di 21. Okt 17:54:54 2008-------*
     * @method  CwmsImportSettings::GetObjectListId           // public                            *
-    * @return  long                                          //                                   *
+    * @return qint64                                          //                                   *
     * @comment                                                                                    *
     *----------------last changed: -----------------------------Di 21. Okt 17:54:54 2008----------*/
-    long GetObjectListId();
+   qint64 GetObjectListId();
 
    public:
    /** +-=---------------------------------------------------------So 26. Okt 13:44:29 2008-------*
@@ -336,10 +336,10 @@ class BASETOOLS_API CwmsImportSettings
    public:
    /** +-=---------------------------------------------------------Di 21. Okt 17:55:21 2008-------*
     * @method  CwmsImportSettings::GetDatabaseId             // public                            *
-    * @return  long                                          //                                   *
+    * @return qint64                                          //                                   *
     * @comment                                                                                    *
     *----------------last changed: -----------------------------Di 21. Okt 17:55:21 2008----------*/
-    long GetDatabaseId();
+   qint64 GetDatabaseId();
 
    public:
    /** +-=---------------------------------------------------------Di 21. Okt 17:55:34 2008-------*
@@ -384,20 +384,20 @@ class BASETOOLS_API CwmsImportSettings
    public:
    /** +-=---------------------------------------------------------Mi 6. Feb 11:11:28 2013--------*
     * @method  CwmsImportSettings::GetClassId                // public                            *
-    * @return  long                                          //                                   *
+    * @return qint64                                          //                                   *
     * @comment                                                                                    *
     *----------------last changed: -----------------------------Mi 6. Feb 11:11:28 2013-----------*/
-    long GetClassId();
+   qint64 GetClassId();
 
    public:
    /** +-=---------------------------------------------------------Mi 6. Feb 12:09:28 2013--------*
     * @method  CwmsImportSettings::LoadSettings              // public                            *
     * @return  void                                          //                                   *
     * @param   QString p_qstrName                            //                                   *
-    * @param   long p_lClassId                               //                                   *
+    * @param  qint64 p_lClassId                               //                                   *
     * @comment                                                                                    *
     *----------------last changed: -----------------------------Mi 6. Feb 12:09:28 2013-----------*/
-    void LoadSettings(QString p_qstrName, long p_lClassId);
+    void LoadSettings(QString p_qstrName,qint64 p_lClassId);
 
    public:
    /** +-=---------------------------------------------------------Do 7. Feb 10:09:04 2013--------*

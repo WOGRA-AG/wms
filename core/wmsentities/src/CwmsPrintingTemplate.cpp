@@ -48,7 +48,7 @@ QString CwmsPrintingTemplate::GetLanguage()
    return "";
 }
 
-long CwmsPrintingTemplate::GetLanguageId()
+qint64 CwmsPrintingTemplate::GetLanguageId()
 {
    return GetObjectRef("Language");
 }

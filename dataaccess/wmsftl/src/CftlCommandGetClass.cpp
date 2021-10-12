@@ -12,7 +12,7 @@
 // own Includes
 #include "CftlCommandGetClass.h"
 
-CftlCommandGetClass::CftlCommandGetClass(CdmClassManager* p_ppClassManager, long p_lClassId, CftlDataAccess* p_pDataAccess)
+CftlCommandGetClass::CftlCommandGetClass(CdmClassManager* p_ppClassManager,qint64 p_lClassId, CftlDataAccess* p_pDataAccess)
     : CftlAbstractCommand(p_pDataAccess),
       m_lClassId(p_lClassId),
       m_rpClass(nullptr),
@@ -33,7 +33,7 @@ int CftlCommandGetClass::Execute()
     // query for reading new id
     cQSqlQuery.prepare("select ClassId, Keyname, LastChange, SchemeId, Caption, Comment, PositionSequence, Abstract, CaptionMember, Version, Package_URI, config"
                        " from WMS_CLASS where ClassId = ?");
-    cQSqlQuery.addBindValue((int)m_lClassId);
+    cQSqlQuery.addBindValue(m_lClassId);
 
     if(SUCCESSFULL(ExecuteQuery(cQSqlQuery)))
     {
@@ -41,15 +41,15 @@ int CftlCommandGetClass::Execute()
         if(cQSqlQuery.isValid())
         {
             // first step reading the WMS_Class data
-            long lClassId        = cQSqlQuery.value(0).toInt();
+           qint64 lClassId        = cQSqlQuery.value(0).toInt();
             QString qstrKeyname  = cQSqlQuery.value(1).toString();
             QDateTime qdLastChange = cQSqlQuery.value(2).toDateTime();
-            long    lSchemeId  = cQSqlQuery.value(3).toInt();
+           qint64    lSchemeId  = cQSqlQuery.value(3).toInt();
             QString qstrCaption  = cQSqlQuery.value(4).toString();
             QString qstrComment  = cQSqlQuery.value(5).toString();
             QString qstrPositionSequence = cQSqlQuery.value(6).toString();
             bool bAbstract = cQSqlQuery.value(7).toBool();
-            long lCaptionMember = cQSqlQuery.value(8).toInt();
+           qint64 lCaptionMember = cQSqlQuery.value(8).toInt();
             int iVersion = cQSqlQuery.value(9).toInt();
             QString qstrPackage = cQSqlQuery.value(10).toString();
             QString qstrConfig = cQSqlQuery.value(11).toString();
@@ -108,15 +108,15 @@ int CftlCommandGetClass::Execute()
     return iRet;
 }
 
-long CftlCommandGetClass::LoadBaseClasses(CdmClass* p_pCdmClass)
+qint64 CftlCommandGetClass::LoadBaseClasses(CdmClass* p_pCdmClass)
 {
-    long lRet = CdmLogging::eDmUnknownClassAccessError;
+   qint64 lRet = CdmLogging::eDmUnknownClassAccessError;
 
     if(CHKPTR(p_pCdmClass))
     {
         QSqlQuery cQSqlQuery(GetSqlDatabase());
         cQSqlQuery.prepare("select BaseClassID from WMS_CLASS_BASECLASS where ClassId = ?");
-        cQSqlQuery.addBindValue((int)p_pCdmClass->GetId());
+        cQSqlQuery.addBindValue(p_pCdmClass->GetId());
 
         if(SUCCESSFULL(ExecuteQuery(cQSqlQuery)))
         {
@@ -126,7 +126,7 @@ long CftlCommandGetClass::LoadBaseClasses(CdmClass* p_pCdmClass)
             {
                 do // loading each class
                 {
-                    long lBaseClassId = cQSqlQuery.value(0).toInt();
+                   qint64 lBaseClassId = cQSqlQuery.value(0).toInt();
                     CdmDataAccessHelper::AddBaseClassToClass(p_pCdmClass, lBaseClassId);
                 }
                 while(cQSqlQuery.next());
@@ -150,9 +150,9 @@ long CftlCommandGetClass::LoadBaseClasses(CdmClass* p_pCdmClass)
     return lRet;
 }
 
-long CftlCommandGetClass::LoadMembers(CdmClass* p_pCdmClass)
+qint64 CftlCommandGetClass::LoadMembers(CdmClass* p_pCdmClass)
 {
-    long lRet = CdmLogging::eDmUnknownClassAccessError;
+   qint64 lRet = CdmLogging::eDmUnknownClassAccessError;
 
     if(CHKPTR(p_pCdmClass))
     {
@@ -167,7 +167,7 @@ long CftlCommandGetClass::LoadMembers(CdmClass* p_pCdmClass)
                            "from WMS_CLASS_MEMBER me, WMS_SCHEME db, WMS_CLASS cl "
                            "where me.ClassId = ? and cl.ClassId = me.ClassId and "
                            "db.schemeid = cl.schemeid");
-        cQSqlQuery.addBindValue((int)p_pCdmClass->GetId());
+        cQSqlQuery.addBindValue(p_pCdmClass->GetId());
 
         if(SUCCESSFULL(ExecuteQuery(cQSqlQuery)))
         {
@@ -177,20 +177,20 @@ long CftlCommandGetClass::LoadMembers(CdmClass* p_pCdmClass)
             {
                 do // loading each member
                 {
-                    long     lId                = cQSqlQuery.value(0).toInt();
+                   qint64     lId                = cQSqlQuery.value(0).toInt();
                     int      iValue             = cQSqlQuery.value(1).toInt();
                     bool     bMust              = cQSqlQuery.value(2).toBool();
-                    long     lSize              = cQSqlQuery.value(3).toInt();
-                    long     lRefClassId        = cQSqlQuery.value(4).toInt();
-                    long     lCounterSize       = cQSqlQuery.value(5).toInt();
-                    long     lClassId           = cQSqlQuery.value(6).toInt();
+                   qint64     lSize              = cQSqlQuery.value(3).toInt();
+                   qint64     lRefClassId        = cQSqlQuery.value(4).toInt();
+                   qint64     lCounterSize       = cQSqlQuery.value(5).toInt();
+                   qint64     lClassId           = cQSqlQuery.value(6).toInt();
                     QVariant qvDefaultValue     = cQSqlQuery.value(7);
                     QString  qstrKeyname        = cQSqlQuery.value(8).toString();
                     QString  qstrCaption        = cQSqlQuery.value(9).toString();
-                    long     lCreatorId         = cQSqlQuery.value(10).toInt();
-                    long     lModifierId        = cQSqlQuery.value(11).toInt();
+                   qint64     lCreatorId         = cQSqlQuery.value(10).toInt();
+                   qint64     lModifierId        = cQSqlQuery.value(11).toInt();
                     QString  qstrComment        = cQSqlQuery.value(12).toString();
-                    long     lDatabaseId        = cQSqlQuery.value(13).toInt();
+                   qint64     lDatabaseId        = cQSqlQuery.value(13).toInt();
                     bool     bOwner             = cQSqlQuery.value(14).toBool();
                     bool     bUnique            = cQSqlQuery.value(15).toBool();
 
@@ -213,7 +213,7 @@ long CftlCommandGetClass::LoadMembers(CdmClass* p_pCdmClass)
                         iAccess = cQSqlQuery.value(17).toInt();
                     }
 
-                    long lGroupId = 0;
+                   qint64 lGroupId = 0;
 
                     if (!cQSqlQuery.isNull(18))
                     {
@@ -316,7 +316,7 @@ void CftlCommandGetClass::LoadTranslations(CdmMember* p_pCdmMember)
     {
         QSqlQuery cQuery(GetSqlDatabase());
         cQuery.prepare("select Language, Caption, Comment from WMS_CLASS_MEMBER_TRANSLATION where MemberId = ?");
-        cQuery.addBindValue((int)p_pCdmMember->GetId());
+        cQuery.addBindValue(p_pCdmMember->GetId());
 
         if (SUCCESSFULL(ExecuteQuery(cQuery)))
         {
@@ -341,7 +341,7 @@ void CftlCommandGetClass::LoadGroups(CdmClass* p_pCdmClass)
 {
     QSqlQuery cQuery(GetSqlDatabase());
     cQuery.prepare("select Id, Name, Version, Position, Parent from WMS_CLASS_GROUP where classid = ?");
-    cQuery.addBindValue((int)p_pCdmClass->GetId());
+    cQuery.addBindValue(p_pCdmClass->GetId());
 
     if (SUCCESSFULL(ExecuteQuery(cQuery)))
     {
@@ -349,7 +349,7 @@ void CftlCommandGetClass::LoadGroups(CdmClass* p_pCdmClass)
         QList<CdmClassGroup*> qlGroups;
         while(cQuery.isValid())
         {
-            long lGroupId = cQuery.value(0).toInt();
+           qint64 lGroupId = cQuery.value(0).toInt();
             QString qstrName = cQuery.value(1).toString();
             int iVersion = cQuery.value(2).toInt();
             int iPosition = cQuery.value(3).toInt();
@@ -413,14 +413,14 @@ void CftlCommandGetClass::LoadValidators(CdmClass* p_pCdmClass)
 {
     QSqlQuery cQuery(GetSqlDatabase());
     cQuery.prepare("select Id, Name, Version, Code, ValidationType, Message from WMS_CLASS_VALIDATION where classid = ?");
-    cQuery.addBindValue((int)p_pCdmClass->GetId());
+    cQuery.addBindValue(p_pCdmClass->GetId());
 
     if (SUCCESSFULL(ExecuteQuery(cQuery)))
     {
         cQuery.first();
         while(cQuery.isValid())
         {
-            long lValidationId = cQuery.value(0).toInt();
+           qint64 lValidationId = cQuery.value(0).toInt();
             QString qstrName = cQuery.value(1).toString();
             int iVersion = cQuery.value(2).toInt();
             QString qstrCode = cQuery.value(3).toString();
@@ -443,7 +443,7 @@ void CftlCommandGetClass::LoadMethods(CdmClass* p_pCdmClass)
 {
     QSqlQuery cQuery(GetSqlDatabase());
     cQuery.prepare("select Id, Name, Version, Code, MethodType, AccessMode, Parameters, Comment, Icon, Caption, Static from WMS_CLASS_METHOD where classid = ?");
-    cQuery.addBindValue((int)p_pCdmClass->GetId());
+    cQuery.addBindValue(p_pCdmClass->GetId());
 
     if (SUCCESSFULL(ExecuteQuery(cQuery)))
     {
@@ -451,7 +451,7 @@ void CftlCommandGetClass::LoadMethods(CdmClass* p_pCdmClass)
         cQuery.first();
         while(cQuery.isValid())
         {
-            long lMethodId = cQuery.value(0).toInt();
+           qint64 lMethodId = cQuery.value(0).toInt();
             QString qstrName = cQuery.value(1).toString();
             int iVersion = cQuery.value(2).toInt();
             QString qstrCode = cQuery.value(3).toString();

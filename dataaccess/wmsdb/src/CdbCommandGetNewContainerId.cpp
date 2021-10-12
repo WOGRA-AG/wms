@@ -6,7 +6,7 @@
 #include "CwmsUtilities.h"
 #include "CdbCommandGetNewContainerId.h"
 
-CdbCommandGetNewContainerId::CdbCommandGetNewContainerId(long p_lClassId, long p_lSessionId, CdbDataAccess* p_pDataAccess)
+CdbCommandGetNewContainerId::CdbCommandGetNewContainerId(qint64 p_lClassId,qint64 p_lSessionId, CdbDataAccess* p_pDataAccess)
 : CdbAbstractCommandTransactional(p_pDataAccess),
   m_lClassId(p_lClassId),
   m_lSessionId(p_lSessionId)
@@ -25,7 +25,7 @@ bool CdbCommandGetNewContainerId::CheckValid()
 
 int CdbCommandGetNewContainerId::Execute()
 {
-   long lRet = CdmLogging::eDmObjectAccessError;
+  qint64 lRet = CdmLogging::eDmObjectAccessError;
    QSqlQuery cQSqlQuery;
    QString qstrQuery;
 

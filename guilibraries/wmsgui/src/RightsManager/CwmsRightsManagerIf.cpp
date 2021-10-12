@@ -90,7 +90,7 @@ void CwmsRightsManagerIf::FillDialog()
 /** +-=---------------------------------------------------------Wed Dec 21 16:11:51 2005----------*
  * @method  CwmsRightsManagerIf::FillUserList                // private                           *
  * @return  void                                             //                                   *
- * @param   QMap<long, CumAccessorRight*>& p_rqmAccessorRights//                                  *
+ * @param   QMap<qint64, CumAccessorRight*>& p_rqmAccessorRights//                                  *
  * @comment                                                                                       *
  *---------------------------------------------------------------Wed Dec 21 16:11:51 2005---------*/
 void CwmsRightsManagerIf::FillUserList(QMap<int, EdmRight>& p_rqmAccessorRights)
@@ -116,7 +116,7 @@ void CwmsRightsManagerIf::FillUserList(QMap<int, EdmRight>& p_rqmAccessorRights)
 /** +-=---------------------------------------------------------Wed Dec 21 16:12:14 2005----------*
  * @method  CwmsRightsManagerIf::FillUserGroupList           // private                           *
  * @return  void                                             //                                   *
- * @param   QMap<long, CumAccessorRight*>& p_rqmAccessorRights//                                  *
+ * @param   QMap<qint64, CumAccessorRight*>& p_rqmAccessorRights//                                  *
  * @comment                                                                                       *
  *---------------------------------------------------------------Wed Dec 21 16:12:14 2005---------*/
 void CwmsRightsManagerIf::FillUserGroupList(QMap<int, EdmRight>& p_rqmAccessorRights)
@@ -142,7 +142,7 @@ void CwmsRightsManagerIf::FillUserGroupList(QMap<int, EdmRight>& p_rqmAccessorRi
 /** +-=---------------------------------------------------------Wed Dec 21 16:12:36 2005----------*
  * @method  CwmsRightsManagerIf::FillRights                  // private                           *
  * @return  void                                             //                                   *
- * @param   QMap<long, CumAccessorRight*>& p_rqmAccessorRights//                                  *
+ * @param   QMap<qint64, CumAccessorRight*>& p_rqmAccessorRights//                                  *
  * @comment                                                                                       *
  *---------------------------------------------------------------Wed Dec 21 16:12:36 2005---------*/
 void CwmsRightsManagerIf::FillRights(QMap<int, EdmRight>& p_rqmAccessorRights)
@@ -214,10 +214,10 @@ void CwmsRightsManagerIf::FillRights(QMap<int, EdmRight>& p_rqmAccessorRights)
 /** +-=---------------------------------------------------------So 3. Mai 13:02:33 2009-----------*
  * @method  CwmsRightsManagerIf::FindUser                    // protected, virtual                *
  * @return  CumUser*                                         //                                   *
- * @param   long p_lUserId                                   //                                   *
+ * @param  qint64 p_lUserId                                   //                                   *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------So 3. Mai 13:02:33 2009-----------*/
-CumUser* CwmsRightsManagerIf::FindUser(long p_lUserId)
+CumUser* CwmsRightsManagerIf::FindUser(qint64 p_lUserId)
 {
    CumUser* pRet = nullptr;
    QList<CumUser*>::iterator qvlIt = m_qvlUsers.begin();
@@ -266,10 +266,10 @@ CumUser* CwmsRightsManagerIf::FindUser(QString p_qstrLogin)
 /** +-=---------------------------------------------------------So 3. Mai 13:02:19 2009-----------*
  * @method  CwmsRightsManagerIf::FindUserGroup               // protected, virtual                *
  * @return  CumUserGroup*                                    //                                   *
- * @param   long p_lUserId                                   //                                   *
+ * @param  qint64 p_lUserId                                   //                                   *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------So 3. Mai 13:02:19 2009-----------*/
-CumUserGroup* CwmsRightsManagerIf::FindUserGroup(long p_lUserId)
+CumUserGroup* CwmsRightsManagerIf::FindUserGroup(qint64 p_lUserId)
 {
 
    CumUserGroup* pRet = nullptr;
@@ -330,7 +330,7 @@ void CwmsRightsManagerIf::RemoveRightClickedSlot()
    if(pqlviItem)
    {
       QString qstrId = pqlviItem->text(0);
-      long lId = qstrId.toLong();
+     qint64 lId = qstrId.toLong();
       m_rpContainer->RemoveAccessorRight(lId);
       FillDialog();
    }
@@ -405,7 +405,7 @@ void CwmsRightsManagerIf::RightsListViewDoubleClickedSlot()
    if(pqlviItem)
    {
       QString qstrId = pqlviItem->text(0);
-      long lId = qstrId.toLong();
+     qint64 lId = qstrId.toLong();
       const CdmRights& cRights = m_rpContainer->GetRights();
 
 	  if (cRights.HasWriteAccess(lId))

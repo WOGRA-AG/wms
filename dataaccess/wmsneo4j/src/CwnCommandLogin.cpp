@@ -65,7 +65,7 @@ bool CwnCommandLogin::CheckValid()
             !m_qstrPassword.isEmpty());
 }
 
-long CwnCommandLogin::GetSessionId()
+qint64 CwnCommandLogin::GetSessionId()
 {
     return m_lNewSession;
 }

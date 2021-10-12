@@ -71,9 +71,9 @@ void CumUserManager::ClearUserGroups()
 }
 
 
-long CumUserManager::CreateUser(CumUser* p_pUser)
+qint64 CumUserManager::CreateUser(CumUser* p_pUser)
 {
-    long lRet = CdmLogging::eDmUnknownDataAccessError;
+   qint64 lRet = CdmLogging::eDmUnknownDataAccessError;
 
     if(CHKPTR(m_rpIdmDataAccess) && CHKPTR(p_pUser))
     {
@@ -115,14 +115,14 @@ long CumUserManager::CreateUser(CumUser* p_pUser)
     return lRet;
 }
 
-long CumUserManager::RegisterUser(QString p_qstrLogin,
+qint64 CumUserManager::RegisterUser(QString p_qstrLogin,
                                   QString p_qstrPassword,
                                   QString p_qstrName,
                                   QString p_qstrSurName,
                                   QString p_qstrEmail,
                                   QString p_qstrIdentKey)
 {
-    long lRet = CdmLogging::eDmUnknownDataAccessError;
+   qint64 lRet = CdmLogging::eDmUnknownDataAccessError;
 
     if(CHKPTR(m_rpIdmDataAccess))
     {
@@ -211,9 +211,9 @@ bool CumUserManager::CheckUserData(QString p_qstrLogin, QString p_qstrEmail, QSt
     return true;
 }
 
-long CumUserManager::DeleteUser(QString p_qstrLogin)
+qint64 CumUserManager::DeleteUser(QString p_qstrLogin)
 {
-    long lRet = CdmLogging::eDmUnknownDataAccessError;
+   qint64 lRet = CdmLogging::eDmUnknownDataAccessError;
 
     if(CHKPTR(m_rpIdmDataAccess))
     {
@@ -242,9 +242,9 @@ long CumUserManager::DeleteUser(QString p_qstrLogin)
     return lRet;
 }
 
-long CumUserManager::DeleteUser(long p_lUserId)
+qint64 CumUserManager::DeleteUser(qint64 p_lUserId)
 {
-    long lRet = CdmLogging::eDmUnknownDataAccessError;
+   qint64 lRet = CdmLogging::eDmUnknownDataAccessError;
 
     if(CHKPTR(m_rpIdmDataAccess))
     {
@@ -272,9 +272,9 @@ long CumUserManager::DeleteUser(long p_lUserId)
     return lRet;
 }
 
-long CumUserManager::UpdateUser(CumUser *p_pUser)
+qint64 CumUserManager::UpdateUser(CumUser *p_pUser)
 {
-    long lRet = EC(eDmUnknownUserManagerError);
+   qint64 lRet = EC(eDmUnknownUserManagerError);
 
     if (CHKPTR(p_pUser))
     {
@@ -293,9 +293,9 @@ long CumUserManager::UpdateUser(CumUser *p_pUser)
     return lRet;
 }
 
-long CumUserManager::RenameUserGroup(long p_lGroupId, QString p_qstrNewName)
+qint64 CumUserManager::RenameUserGroup(qint64 p_lGroupId, QString p_qstrNewName)
 {
-    long lRet = CdmLogging::eDmUnknownDataAccessError;
+   qint64 lRet = CdmLogging::eDmUnknownDataAccessError;
 
     CumUserGroup* pGroup = FindUserGroupById(p_lGroupId);
 
@@ -332,9 +332,9 @@ long CumUserManager::RenameUserGroup(long p_lGroupId, QString p_qstrNewName)
 
 }
 
-long CumUserManager::RenameUserGroup(QString qstrOldName, QString p_qstrNewName)
+qint64 CumUserManager::RenameUserGroup(QString qstrOldName, QString p_qstrNewName)
 {
-    long lRet = CdmLogging::eDmUnknownDataAccessError;
+   qint64 lRet = CdmLogging::eDmUnknownDataAccessError;
     CumUserGroup* pGroup = FindUserGroupByName(qstrOldName);
 
     if (pGroup)
@@ -369,9 +369,9 @@ long CumUserManager::RenameUserGroup(QString qstrOldName, QString p_qstrNewName)
     return lRet;
 }
 
-long CumUserManager::CreateUserGroup(QString p_qstrGroupName)
+qint64 CumUserManager::CreateUserGroup(QString p_qstrGroupName)
 {
-    long lRet = CdmLogging::eDmUnknownDataAccessError;
+   qint64 lRet = CdmLogging::eDmUnknownDataAccessError;
 
     if(CHKPTR(m_rpIdmDataAccess))
     {
@@ -392,9 +392,9 @@ long CumUserManager::CreateUserGroup(QString p_qstrGroupName)
     return lRet;
 }
 
-long CumUserManager::DeleteUserGroup(long p_llGroupId)
+qint64 CumUserManager::DeleteUserGroup(qint64 p_llGroupId)
 {
-    long lRet = CdmLogging::eDmUnknownDataAccessError;
+   qint64 lRet = CdmLogging::eDmUnknownDataAccessError;
 
     if(CHKPTR(m_rpIdmDataAccess))
     {
@@ -425,7 +425,7 @@ long CumUserManager::DeleteUserGroup(long p_llGroupId)
     return lRet;
 }
 
-long CumUserManager::DeleteUserGroup(QString p_qstrGroup)
+qint64 CumUserManager::DeleteUserGroup(QString p_qstrGroup)
 {
     if (IsCurrentUserAdmin())
     {
@@ -488,9 +488,9 @@ QList<CumUserGroup*> CumUserManager::FindUserGroupsByNameUnmanaged(QString p_qst
     return m_rpIdmDataAccess->FindUserGroups(p_qstrName, m_qstrSchemeUri);
 }
 
-long CumUserManager::AddUserToUserGroup(long p_lUserId, long p_lUserGroupId)
+qint64 CumUserManager::AddUserToUserGroup(qint64 p_lUserId,qint64 p_lUserGroupId)
 {
-    long lRet = CdmLogging::eDmUnknownDataAccessError;
+   qint64 lRet = CdmLogging::eDmUnknownDataAccessError;
 
     if(CHKPTR(m_rpIdmDataAccess))
     {
@@ -512,9 +512,9 @@ long CumUserManager::AddUserToUserGroup(long p_lUserId, long p_lUserGroupId)
     return lRet;
 }
 
-long CumUserManager::AddUserToUserGroup(QString p_qstrLogin, QString p_qstrGroup)
+qint64 CumUserManager::AddUserToUserGroup(QString p_qstrLogin, QString p_qstrGroup)
 {
-    long lRet = CdmLogging::eDmUnknownDataAccessError;
+   qint64 lRet = CdmLogging::eDmUnknownDataAccessError;
 
     CumUser* pUser = FindUserByLogin(p_qstrLogin);
     CumUserGroup* pGroup = FindUserGroupByName(p_qstrGroup);
@@ -554,9 +554,9 @@ long CumUserManager::AddUserToUserGroup(QString p_qstrLogin, QString p_qstrGroup
     return lRet;
 }
 
-long CumUserManager::RemoveUserFromGroup(long p_lUserId, long p_lUserGroupId)
+qint64 CumUserManager::RemoveUserFromGroup(qint64 p_lUserId,qint64 p_lUserGroupId)
 {
-    long lRet = CdmLogging::eDmUnknownDataAccessError;
+   qint64 lRet = CdmLogging::eDmUnknownDataAccessError;
 
     if(CHKPTR(m_rpIdmDataAccess))
     {
@@ -578,9 +578,9 @@ long CumUserManager::RemoveUserFromGroup(long p_lUserId, long p_lUserGroupId)
     return lRet;
 }
 
-long CumUserManager::RemoveUserFromGroup(QString p_qstrLogin, QString p_qstrGroup)
+qint64 CumUserManager::RemoveUserFromGroup(QString p_qstrLogin, QString p_qstrGroup)
 {
-    long lRet = CdmLogging::eDmUnknownDataAccessError;
+   qint64 lRet = CdmLogging::eDmUnknownDataAccessError;
 
     CumUser* pUser = FindUserByLogin(p_qstrLogin);
     CumUserGroup* pGroup = FindUserGroupByName(p_qstrGroup);
@@ -620,9 +620,9 @@ long CumUserManager::RemoveUserFromGroup(QString p_qstrLogin, QString p_qstrGrou
     return lRet;
 }
 
-long CumUserManager::GetUserGroupList(QList<CumUserGroup*>& p_rqvlUserGroups)
+qint64 CumUserManager::GetUserGroupList(QList<CumUserGroup*>& p_rqvlUserGroups)
 {
-    long lRet = CdmLogging::eDmUnknownDataAccessError;
+   qint64 lRet = CdmLogging::eDmUnknownDataAccessError;
     ClearUserGroups();
     LoadUserGroups();
     p_rqvlUserGroups = m_qlUserGroups;
@@ -686,11 +686,11 @@ void CumUserManager::LoadUserGroups()
     }
 }
 
-long CumUserManager::GetListOfUsersInList(long p_lUserGroupId,
+qint64 CumUserManager::GetListOfUsersInList(qint64 p_lUserGroupId,
                                           QList<CumUser*>& p_rqvlUserList)
 {
 
-    long lRet = CdmLogging::eDmUnknownDataAccessError;
+   qint64 lRet = CdmLogging::eDmUnknownDataAccessError;
 
     if(CHKPTR(m_rpIdmDataAccess))
     {
@@ -713,10 +713,10 @@ long CumUserManager::GetListOfUsersInList(long p_lUserGroupId,
     return lRet;
 }
 
-long CumUserManager::GetUserGroupMemberList(long p_lUserId,
+qint64 CumUserManager::GetUserGroupMemberList(qint64 p_lUserId,
                                             QList<CumUserGroup*>& p_qvlUserGroups)
 {
-    long lRet = CdmLogging::eDmUnknownDataAccessError;
+   qint64 lRet = CdmLogging::eDmUnknownDataAccessError;
 
     if(CHKPTR(m_rpIdmDataAccess))
     {
@@ -739,9 +739,9 @@ long CumUserManager::GetUserGroupMemberList(long p_lUserId,
     return lRet;
 }
 
-long CumUserManager::GetUserListUnmanaged(QList<CumUser*>& p_rqvlUsers)
+qint64 CumUserManager::GetUserListUnmanaged(QList<CumUser*>& p_rqvlUsers)
 {
-    long lRet = CdmLogging::eDmUnknownDataAccessError;
+   qint64 lRet = CdmLogging::eDmUnknownDataAccessError;
 
     BODY_TRY
     p_rqvlUsers.clear();
@@ -934,7 +934,7 @@ QList<CumUser*> CumUserManager::FindUsersUnmanaged(QString p_qstrSearchString)
     return qlUsers;
 }
 
-void CumUserManager::GetUserBaseIds(QList<long>& p_rqllUserBaseIds)
+void CumUserManager::GetUserBaseIds(QList<qint64>& p_rqllUserBaseIds)
 {
     SYNCHRONIZED;
     p_rqllUserBaseIds.append(GetCurrentUserId());
@@ -1021,12 +1021,12 @@ QVariant CumUserManager::GetGroupVariant() const
     return qvlGroups;
 }
 
-long CumUserManager::GetSessionId()
+qint64 CumUserManager::GetSessionId()
 {
     return CdmSessionManager::GetSessionManager()->GetCurrentSessionId();
 }
 
-long CumUserManager::GetCurrentUserId()
+qint64 CumUserManager::GetCurrentUserId()
 {
     return CdmSessionManager::GetSessionManager()->GetCurrentUserId();
 }

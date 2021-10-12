@@ -35,7 +35,7 @@
 #include "CdmClassManager.h"
 
 
-CdmClassManager::CdmClassManager(long p_lDbId)
+CdmClassManager::CdmClassManager(qint64 p_lDbId)
     : CdmModelElementBase(p_lDbId)
 {
 }
@@ -44,8 +44,8 @@ CdmClassManager::CdmClassManager(long p_lDbId)
 CdmClassManager::~CdmClassManager(  )
 {
     CdmClass* pCdmClass = nullptr;
-    QMap<long,CdmClass*>::iterator qmiItClass = m_qmClasses.begin();
-    QMap<long,CdmClass*>::iterator qmiItClassEnd = m_qmClasses.end();
+    QMap<qint64,CdmClass*>::iterator qmiItClass = m_qmClasses.begin();
+    QMap<qint64,CdmClass*>::iterator qmiItClassEnd = m_qmClasses.end();
 
     for (; qmiItClass != qmiItClassEnd; ++qmiItClass)
     {
@@ -64,10 +64,10 @@ CdmClassManager::~CdmClassManager(  )
 /** +-=---------------------------------------------------------Mo 19. Nov 18:34:57 2012----------*
  * @method  CdmClassManager::FindClassById                   // public, slots                     *
  * @return  CdmClass*                                        // if not found nullptr will be returned*
- * @param   long p_lId                                       //                                   *
+ * @param  qint64 p_lId                                       //                                   *
  * @comment This method searches for the class in the map and if found it will be returned.       *
  *----------------last changed: --------------------------------Mo 19. Nov 18:34:57 2012----------*/
-CdmClass* CdmClassManager::FindClassById(long p_lId)
+CdmClass* CdmClassManager::FindClassById(qint64 p_lId)
 {
     CdmClass* pCdmClass = nullptr;
     SYNCHRONIZED_READ;
@@ -106,8 +106,8 @@ CdmClass* CdmClassManager::FindClassByKeyname(QString p_qstrKeyname)
 {
     SYNCHRONIZED_READ;
     CdmClass* pCdmClass = nullptr;
-    QMap<long,CdmClass*>::iterator qmiItClass = m_qmClasses.begin();
-    QMap<long,CdmClass*>::iterator qmiItClassEnd = m_qmClasses.end();
+    QMap<qint64,CdmClass*>::iterator qmiItClass = m_qmClasses.begin();
+    QMap<qint64,CdmClass*>::iterator qmiItClassEnd = m_qmClasses.end();
 
     for(; qmiItClass != qmiItClassEnd; ++qmiItClass)
     {
@@ -134,8 +134,8 @@ QList<CdmClass*> CdmClassManager::getEventClassList()
     SYNCHRONIZED_READ;
     CdmClass *pClass = nullptr;
     QList<CdmClass*> qlClasses;
-    QMap<long,CdmClass*>::iterator qmiItClass = m_qmClasses.begin();
-    QMap<long,CdmClass*>::iterator qmiItClassEnd = m_qmClasses.end();
+    QMap<qint64,CdmClass*>::iterator qmiItClass = m_qmClasses.begin();
+    QMap<qint64,CdmClass*>::iterator qmiItClassEnd = m_qmClasses.end();
 
     for(; qmiItClass != qmiItClassEnd; ++qmiItClass)
     {
@@ -189,8 +189,8 @@ int CdmClassManager::GetInheritedClasses(  CdmClass* p_pCdmBaseClass,
 {
     int iRet = CdmLogging::eDmUnknownClassError;
     SYNCHRONIZED_READ;
-    QMap<long,CdmClass*>::iterator qmiItClass = m_qmClasses.begin();
-    QMap<long,CdmClass*>::iterator qmiItClassEnd = m_qmClasses.end();
+    QMap<qint64,CdmClass*>::iterator qmiItClass = m_qmClasses.begin();
+    QMap<qint64,CdmClass*>::iterator qmiItClassEnd = m_qmClasses.end();
 
     CdmClass* pCdmClass = nullptr;
 
@@ -291,7 +291,7 @@ CdmClass* CdmClassManager::CreateClassWithoutCheck(QString p_qstrKeyname)
 {
     SYNCHRONIZED_WRITE;
     CdmClass* pCdmClass = nullptr;
-    long lClassId = GetNewClassId();
+   qint64 lClassId = GetNewClassId();
 
     if(lClassId > 0)
     {
@@ -325,12 +325,12 @@ CdmClass* CdmClassManager::CreateClassWithoutCheck(QString p_qstrKeyname)
 /** +-=---------------------------------------------------------Mi 15. Sep 14:09:58 2010----------*
  * @method  CdmClassManager::CreateClass                     // private                           *
  * @return  CdmClass*                                        //                                   *
- * @param   long p_lId                                       //                                   *
+ * @param  qint64 p_lId                                       //                                   *
  * @param   QString p_qstrKeyname                            //                                   *
  * @comment This method creates a class and wit an Id and Keyname. This method is private,        *
  *          because it should only be used by itselves or by friend classes.                      *
  *----------------last changed: --------------------------------Mi 15. Sep 14:09:58 2010----------*/
-CdmClass* CdmClassManager::CreateClass(long p_lId, QString p_qstrKeyname)
+CdmClass* CdmClassManager::CreateClass(qint64 p_lId, QString p_qstrKeyname)
 {
     SYNCHRONIZED_WRITE;
     CdmClass* pCdmClass = nullptr;
@@ -366,15 +366,15 @@ CdmClass* CdmClassManager::CreateClass(long p_lId, QString p_qstrKeyname)
 /** +-=---------------------------------------------------------Sa 13. Aug 21:17:04 2005----------*
  * @method  CdmClassManager::DeleteClass                     // public                            *
  * @return  int                                              //                                   *
- * @param   long p_lId                                       //                                   *
+ * @param  qint64 p_lId                                       //                                   *
  * @comment removes a class from classmanager.                                                    *
  *----------------last changed: --------------------------------Sa 13. Aug 21:17:04 2005----------*/
-int CdmClassManager::DeleteClass(long p_lId)
+int CdmClassManager::DeleteClass(qint64 p_lId)
 {
     SYNCHRONIZED_WRITE;
     int iRet = CdmLogging::eDmUnknownClassError;
     CdmClass* pCdmClass = nullptr;
-    QMap<long,CdmClass*>::iterator qmiClass = m_qmClasses.find(p_lId);
+    QMap<qint64,CdmClass*>::iterator qmiClass = m_qmClasses.find(p_lId);
 
     if(qmiClass != m_qmClasses.end())
     {
@@ -500,9 +500,9 @@ int CdmClassManager::DeleteClass(CdmClass* p_pCdmClass)
     return iRet;
 }
 
-long CdmClassManager::GetNewClassId()
+qint64 CdmClassManager::GetNewClassId()
 {
-    long lId = CdmLogging::eDmUnknownClassError;
+   qint64 lId = CdmLogging::eDmUnknownClassError;
     IdmDataAccess* pIdmDataAccess = GetDataAccess();
 
     if(CHKPTR(pIdmDataAccess))
@@ -528,8 +528,8 @@ void CdmClassManager::GetClassList(QList<CdmClass*>& p_pqlClasses)
     SYNCHRONIZED_READ;
     CdmClass* pCdmClass = nullptr;
 
-    QMap<long,CdmClass*>::iterator qmiItClass = m_qmClasses.begin();
-    QMap<long,CdmClass*>::iterator qmiItClassEnd = m_qmClasses.end();
+    QMap<qint64,CdmClass*>::iterator qmiItClass = m_qmClasses.begin();
+    QMap<qint64,CdmClass*>::iterator qmiItClassEnd = m_qmClasses.end();
 
     for(; qmiItClass != qmiItClassEnd; ++qmiItClass)
     {
@@ -599,8 +599,8 @@ void CdmClassManager::GenerateClassDocumentation(QString p_qstrDatabase, QString
     qstrDocument = "<html>";
     qstrDocument += "<h1>WMS Class Documentation for Database " +  p_qstrDatabase + "</h1>";
 
-    QMap<long, CdmClass*>::const_iterator qmiItClass = m_qmClasses.begin();
-    QMap<long, CdmClass*>::const_iterator qmiItClassEnd = m_qmClasses.end();
+    QMap<qint64, CdmClass*>::const_iterator qmiItClass = m_qmClasses.begin();
+    QMap<qint64, CdmClass*>::const_iterator qmiItClassEnd = m_qmClasses.end();
 
     for(; qmiItClass != qmiItClassEnd; ++qmiItClass)
     {
@@ -634,8 +634,8 @@ int CdmClassManager::XmlExport(QDomElement& p_rqdeClassManager) const
 {
     SYNCHRONIZED_READ;
     int iRet = CdmLogging::eDmUnknownClassError;
-    QMap<long, CdmClass*>::const_iterator qmiItClass = m_qmClasses.begin();
-    QMap<long, CdmClass*>::const_iterator qmiItClassEnd = m_qmClasses.end();
+    QMap<qint64, CdmClass*>::const_iterator qmiItClass = m_qmClasses.begin();
+    QMap<qint64, CdmClass*>::const_iterator qmiItClassEnd = m_qmClasses.end();
 
     for (; qmiItClass != qmiItClassEnd; ++qmiItClass)
     {
@@ -737,8 +737,8 @@ QVariant CdmClassManager::GetVariant() const
 {
     QVariantMap qvClasses;
     SYNCHRONIZED_READ;
-    QMap<long,CdmClass*>::const_iterator qmIt =  m_qmClasses.begin();
-    QMap<long,CdmClass*>::const_iterator qmItEnd =  m_qmClasses.end();
+    QMap<qint64,CdmClass*>::const_iterator qmIt =  m_qmClasses.begin();
+    QMap<qint64,CdmClass*>::const_iterator qmItEnd =  m_qmClasses.end();
     QVariantList qlClasses;
     QStringList qstrlClasses;
 
@@ -776,10 +776,10 @@ void CdmClassManager::CreateClassVariant(CdmClass* pCdmClass, QStringList& qstrl
    {
       if (!qstrlClasses.contains(pCdmClass->GetFullQualifiedName()))
       {
-         const QMap<long,long> qmBaseClasses = pCdmClass->GetBaseClasses();
+         const QMap<qint64,qint64> qmBaseClasses = pCdmClass->GetBaseClasses();
 
-         QMap<long,long>::const_iterator iItClasses = qmBaseClasses.begin();
-         QMap<long,long>::const_iterator iItClassesEnd = qmBaseClasses.end();
+         QMap<qint64,qint64>::const_iterator iItClasses = qmBaseClasses.begin();
+         QMap<qint64,qint64>::const_iterator iItClassesEnd = qmBaseClasses.end();
 
          for(; iItClasses != iItClassesEnd; ++iItClasses)
          {
@@ -1151,8 +1151,8 @@ void CdmClassManager::MoveClassToPackage(CdmClass *p_pClass, CdmPackage *p_pPack
 void CdmClassManager::UpdateModifiedClasses()
 {
     SYNCHRONIZED_WRITE;
-    QMap<long,CdmClass*>::const_iterator qmIt =  m_qmClasses.begin();
-    QMap<long,CdmClass*>::const_iterator qmItEnd =  m_qmClasses.end();
+    QMap<qint64,CdmClass*>::const_iterator qmIt =  m_qmClasses.begin();
+    QMap<qint64,CdmClass*>::const_iterator qmItEnd =  m_qmClasses.end();
 
     for (; qmIt != qmItEnd; ++qmIt)
     {

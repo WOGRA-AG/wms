@@ -43,10 +43,10 @@ class WMSMANAGER_API CdmQueryResultObject : public QObject
 private:
     CdmQuery* m_rpCdmQuery;
     QMap<int, QVariant> m_qmResultValues;
-    QMap<long, CdmQueryResultObject*> m_qmChildrenByObject;
+    QMap<qint64, CdmQueryResultObject*> m_qmChildrenByObject;
     QMap<int, CdmQueryResultObject*> m_qmChildrenByRow;
-    long m_lObjectId;
-    long m_lContainerId;
+   qint64 m_lObjectId;
+   qint64 m_lContainerId;
     CdmQueryResultObject* m_pParent;
     int m_iRow;
 
@@ -54,13 +54,13 @@ public:
     /** +-=---------------------------------------------------------Mo 15. Okt 08:44:50 2012-------*
      * @method  CdmQueryResultObject::CdmQueryResultObject    // public                            *
      * @return                                                //                                   *
-     * @param   long p_lObjectId                              //                                   *
+     * @param  qint64 p_lObjectId                              //                                   *
      * @param   CdmQueryResultObject* p_pParent               //                                   *
      * @param   CdmQueryEnhanced* p_pQuery                    //                                   *
      * @comment                                                                                    *
      *----------------last changed: -----------------------------Mo 15. Okt 08:44:50 2012----------*/
-    CdmQueryResultObject( long p_lObjectId,
-                          long p_lContainerId,
+    CdmQueryResultObject(qint64 p_lObjectId,
+                         qint64 p_lContainerId,
                           CdmQueryResultObject* p_pParent,
                           CdmQuery* p_pQuery);
 
@@ -76,26 +76,26 @@ public:
      * @return  CdmQueryResultObject*                         //                                   *
      * @param   CdmQueryEnhanced* p_pQuery                    //                                   *
      * @param   CdmQueryResultObject* p_pRoot                 //                                   *
-     * @param   long p_lObjectId                              //                                   *
-     * @param   long p_lParentId                              //                                   *
+     * @param  qint64 p_lObjectId                              //                                   *
+     * @param  qint64 p_lParentId                              //                                   *
      * @comment                                                                                    *
      *----------------last changed: -----------------------------Mo 15. Okt 08:47:25 2012----------*/
     static CdmQueryResultObject* CreateResultObject(CdmQuery* p_pQuery,
                                                     CdmQueryResultObject* p_pRoot,
-                                                    long p_lObjectId,
-                                                    long p_lContainerId,
-                                                    long p_lParentId);
+                                                   qint64 p_lObjectId,
+                                                   qint64 p_lContainerId,
+                                                   qint64 p_lParentId);
 
     /** +-=---------------------------------------------------------Mo 15. Okt 10:17:00 2012-------*
      * @method  CdmQueryResultObject::FindOrCreateResultObject // public, static                   *
      * @return  CdmQueryResultObject*                         //                                   *
-     * @param   long p_lObjectId                              //                                   *
+     * @param  qint64 p_lObjectId                              //                                   *
      * @param   CdmQueryResultObject* p_pRoot                 //                                   *
      * @param   CdmQueryEnhanced* p_pQuery                    //                                   *
      * @comment                                                                                    *
      *----------------last changed: -----------------------------Mo 15. Okt 10:17:00 2012----------*/
-    static CdmQueryResultObject* FindOrCreateResultObject(long p_lObjectId,
-                                                          long p_lContainerId,
+    static CdmQueryResultObject* FindOrCreateResultObject(qint64 p_lObjectId,
+                                                         qint64 p_lContainerId,
                                                           CdmQueryResultObject* p_pRoot,
                                                           CdmQuery* p_pQuery);
 
@@ -115,8 +115,8 @@ public:
     void SetVariant(QVariantMap& p_rqvHash);
 
     QString GetResultAsString();
-    long GetContainerId() const;
-    long SetContainerId(long p_lContainerId);
+   qint64 GetContainerId() const;
+   qint64 SetContainerId(qint64 p_lContainerId);
     QVariant GetResultAsVariant();
 
 
@@ -148,17 +148,17 @@ public slots:
     /** +-=---------------------------------------------------------Di 20. Nov 11:42:02 2012-------*
      * @method  CdmQueryResultObject::GetChild                // public, slots                     *
      * @return  CdmQueryResultObject*                         //                                   *
-     * @param   long p_lObjectId                              //                                   *
+     * @param  qint64 p_lObjectId                              //                                   *
      * @comment                                                                                    *
      *----------------last changed: -----------------------------Di 20. Nov 11:42:02 2012----------*/
-    CdmQueryResultObject* GetChild( long p_lObjectId);
+    CdmQueryResultObject* GetChild(qint64 p_lObjectId);
 
     /** +-=---------------------------------------------------------So 10. Feb 10:17:36 2013-------*
      * @method  CdmQueryResultObject::GetObjectId             // public, const, slots              *
-     * @return  long                                          //                                   *
+     * @return qint64                                          //                                   *
      * @comment                                                                                    *
      *----------------last changed: -----------------------------So 10. Feb 10:17:36 2013----------*/
-    long GetObjectId( ) const;
+   qint64 GetObjectId( ) const;
 
     /** +-=---------------------------------------------------------Di 20. Nov 11:42:13 2012-------*
      * @method  CdmQueryResultObject::GetChildAtRow           // public, slots                     *
@@ -212,10 +212,10 @@ public slots:
      * @return  QVariant                                      //                                   *
      * @param   int p_iRow                                    //                                   *
      * @param   int p_iColumn                                 //                                   *
-     * @param   long p_lParentId                              //                                   *
+     * @param  qint64 p_lParentId                              //                                   *
      * @comment                                                                                    *
      *----------------last changed: -----------------------------Di 20. Nov 11:43:01 2012----------*/
-    QVariant GetResult( int p_iRow, int p_iColumn, long p_lParentId);
+    QVariant GetResult( int p_iRow, int p_iColumn,qint64 p_lParentId);
 
     /** +-=---------------------------------------------------------So 10. Feb 10:16:30 2013-------*
      * @method  CdmQueryResultObject::GetRow                  // public, const, slots              *
@@ -249,22 +249,22 @@ public slots:
 
     /** +-=---------------------------------------------------------Di 20. Nov 11:41:17 2012-------*
      * @method  CdmQueryResultObject::GetObjectParentId       // public, slots                     *
-     * @return  long                                          //                                   *
+     * @return qint64                                          //                                   *
      * @comment                                                                                    *
      *----------------last changed: -----------------------------Di 20. Nov 11:41:17 2012----------*/
-    long GetObjectParentId( );
+   qint64 GetObjectParentId( );
 
 
 
 private:
     /** +-=---------------------------------------------------------Mo 15. Okt 10:17:38 2012-------*
      * @method  CdmQueryResultObject::GetObjectParentId       // private, static                   *
-     * @return  long                                          //                                   *
-     * @param   long p_lObjectId                              //                                   *
+     * @return qint64                                          //                                   *
+     * @param  qint64 p_lObjectId                              //                                   *
      * @param   CdmQueryEnhanced* p_pQuery                    //                                   *
      * @comment                                                                                    *
      *----------------last changed: -----------------------------Mo 15. Okt 10:17:38 2012----------*/
-    static long GetObjectParentId(long p_lObjectId, long p_lContainerId, CdmQuery* p_pQuery);
+    static qint64 GetObjectParentId(qint64 p_lObjectId,qint64 p_lContainerId, CdmQuery* p_pQuery);
 
     void ClearChildData();
 };

@@ -7,7 +7,7 @@
 
 #include "CwnCommandStdHeader.h"
 
-CwnCommandGetContainerList::CwnCommandGetContainerList(long p_lSchemeId, long p_lClassId, CwnDataAccess* p_pDataAccess)
+CwnCommandGetContainerList::CwnCommandGetContainerList(qint64 p_lSchemeId,qint64 p_lClassId, CwnDataAccess* p_pDataAccess)
 : CwnCommandBase(p_pDataAccess),
   m_lSchemeId(p_lSchemeId),
   m_lClassId(p_lClassId)
@@ -19,7 +19,7 @@ CwnCommandGetContainerList::~CwnCommandGetContainerList()
 
 }
 
-void CwnCommandGetContainerList::GetResult(QMap<long, QString> &p_rqmContainerList)
+void CwnCommandGetContainerList::GetResult(QMap<qint64, QString> &p_rqmContainerList)
 {
     p_rqmContainerList = m_qmContainer;
 }
@@ -75,7 +75,7 @@ void CwnCommandGetContainerList::interpretAnswer(QVariant &Ret)
                 const QVariantMap* rowTemp = static_cast<const QVariantMap*>(it->data());
                 const QVariantList* row = static_cast<const QVariantList*>(rowTemp->find("row")->data());
 
-                long lId = row->at(0).toInt();
+               qint64 lId = row->at(0).toInt();
                 QString qstrKeyname = row->at(1).toString();
 
                 if(lId !=0)
@@ -110,7 +110,7 @@ int CwnCommandGetContainerList::Execute()
 QString CwnCommandGetContainerList::GetClassListString()
 {
     QString qstrClassList;
-    QList<long> qlClasses = GetClassList();
+    QList<qint64> qlClasses = GetClassList();
 
     if (qlClasses.count() > 0)
     {
@@ -135,9 +135,9 @@ QString CwnCommandGetContainerList::GetClassListString()
     return qstrClassList;
 }
 
-QList<long> CwnCommandGetContainerList::GetClassList()
+QList<qint64> CwnCommandGetContainerList::GetClassList()
 {
-    QList<long> qlClasses;
+    QList<qint64> qlClasses;
     CdmDataProvider* pManager = CdmSessionManager::GetDataProvider();
     if (CHKPTR(pManager))
     {

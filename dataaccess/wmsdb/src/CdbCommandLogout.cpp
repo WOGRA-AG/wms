@@ -1,6 +1,6 @@
 #include "CdbCommandLogout.h"
 
-CdbCommandLogout::CdbCommandLogout(long p_lSessionId,CdbDataAccess* p_pDataAccess)
+CdbCommandLogout::CdbCommandLogout(qint64 p_lSessionId,CdbDataAccess* p_pDataAccess)
     : CdbAbstractCommandTransactional(p_pDataAccess),
       m_lSessionId(p_lSessionId)
 {
@@ -13,7 +13,7 @@ CdbCommandLogout::~CdbCommandLogout()
 
 int CdbCommandLogout::Execute()
 {
-   long lRet = CdmLogging::eDmUnknownLoginManagerError;
+  qint64 lRet = CdmLogging::eDmUnknownLoginManagerError;
    QSqlQuery cQSqlQuery;
    QString qstrQuery;
    qstrQuery = QString("update WMS_UM_SESSION set State = %1, LogOutDate = %2 "

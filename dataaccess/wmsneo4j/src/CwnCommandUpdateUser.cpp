@@ -16,7 +16,7 @@ CwnCommandUpdateUser::~CwnCommandUpdateUser()
 
 }
 
-void CwnCommandUpdateUser::setUserId(long userid)
+void CwnCommandUpdateUser::setUserId(qint64 userid)
 {
     this->userid = userid;
 }
@@ -98,7 +98,7 @@ QString CwnCommandUpdateUser::getLastname()
     return lastname;
 }
 
-long CwnCommandUpdateUser::getUserId()
+qint64 CwnCommandUpdateUser::getUserId()
 {
     return userid;
 }

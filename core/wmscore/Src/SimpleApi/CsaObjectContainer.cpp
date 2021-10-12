@@ -159,7 +159,7 @@ QObject *CsaObjectContainer::getOwner()
 void CsaObjectContainer::loadContainerComplete()
 {
    CdmContainerManager* pManager = getInternals()->GetContainerManager();
-   long lId = getInternals()->GetId();
+  qint64 lId = getInternals()->GetId();
    pManager->ReloadContainerComplete(getInternals()->GetId());
    CdmObjectContainer* pContainer = pManager->FindContainerById(lId);
    setElement(pContainer);

@@ -845,12 +845,12 @@ CdmObject* CwmsFormManager::GeDefaultObjectForm(CdmObject* p_pCdmObject)
 
          if (CHKPTR(pQuery))
          {
-            QList<long> qllResults;
+            QList<qint64> qllResults;
             qllResults = pQuery->GetResultList();
 
             if (qllResults.count() > 0)
             {
-               long lObjectId = (*qllResults.begin());
+              qint64 lObjectId = (*qllResults.begin());
                CdmObjectContainer* pList = GetGenericFormContainer();
 
                if (CHKPTR(pList))
@@ -880,12 +880,12 @@ CdmObject* CwmsFormManager::GeDefaultContainerForm(CdmObjectContainer* p_pContai
 
 			if (CHKPTR(pQuery))
 			{
-				QList<long> qllResults;
+				QList<qint64> qllResults;
 				qllResults = pQuery->GetResultList();
 
 				if (qllResults.count() > 0)
 				{
-					long lObjectId = (*qllResults.begin());
+					qint64 lObjectId = (*qllResults.begin());
 					CdmObjectContainer* pList = GetStandardFormContainer();
 
 					if (CHKPTR(pList))

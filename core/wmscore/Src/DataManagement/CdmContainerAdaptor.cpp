@@ -38,7 +38,7 @@ CdmContainerAdaptor::CdmContainerAdaptor(CdmObjectContainer* p_pContainer)
    }
 }
 
-CdmContainerAdaptor::CdmContainerAdaptor(long m_lDbId, long m_lObjectListId)
+CdmContainerAdaptor::CdmContainerAdaptor(qint64 m_lDbId,qint64 m_lObjectListId)
    : m_lDbId(m_lDbId),
   m_lContainerId(m_lObjectListId)
 {
@@ -66,7 +66,7 @@ CdmContainerAdaptor::~CdmContainerAdaptor()
    }
 }
 
-long CdmContainerAdaptor::GetSchemeId() const
+qint64 CdmContainerAdaptor::GetSchemeId() const
 {
    return m_lDbId;
 }
@@ -105,7 +105,7 @@ void CdmContainerAdaptor::SetContainer(CdmObjectContainer* p_pContainer)
    }
 }
 
-void CdmContainerAdaptor::SetContainer(long p_lDbId, long p_lObjectListId)
+void CdmContainerAdaptor::SetContainer(qint64 p_lDbId,qint64 p_lObjectListId)
 {
    m_lDbId = p_lDbId;
    m_lContainerId = p_lObjectListId;
@@ -201,9 +201,9 @@ CdmObject* CdmContainerAdaptor::CreateObject(  QString p_qstrCaption )
    return pCdmObject;
 }
 
-long CdmContainerAdaptor::DeleteObject(CdmObjectAdaptor* p_pCdmObjectAdaptor)
+qint64 CdmContainerAdaptor::DeleteObject(CdmObjectAdaptor* p_pCdmObjectAdaptor)
 {
-   long lRet = 0;
+  qint64 lRet = 0;
 
    if(CHKPTR(p_pCdmObjectAdaptor))
    {
@@ -218,7 +218,7 @@ long CdmContainerAdaptor::DeleteObject(CdmObjectAdaptor* p_pCdmObjectAdaptor)
    return lRet;
 }
 
-CdmObject* CdmContainerAdaptor::FindObject(long p_lObjectId)
+CdmObject* CdmContainerAdaptor::FindObject(qint64 p_lObjectId)
 {
    CdmObject* pCdmObject = nullptr;
    CdmObjectContainer* pContainer = GetContainer();
@@ -231,9 +231,9 @@ CdmObject* CdmContainerAdaptor::FindObject(long p_lObjectId)
    return pCdmObject;
 }
 
-long CdmContainerAdaptor::DeleteObject(long p_lObjectId)
+qint64 CdmContainerAdaptor::DeleteObject(qint64 p_lObjectId)
 {
-   long lRet = 0;
+  qint64 lRet = 0;
    CdmObjectContainer* pContainer = GetContainer();
    
    if(CHKPTR(pContainer))
@@ -259,27 +259,27 @@ bool CdmContainerAdaptor::IsValid()
    return (GetContainer() != nullptr);
 }
 
-void CdmContainerAdaptor::ObjectDeletedEvent(long p_lObjectId)
+void CdmContainerAdaptor::ObjectDeletedEvent(qint64 p_lObjectId)
 {
    Q_UNUSED(p_lObjectId);
 }
 
-void CdmContainerAdaptor::ObjectCreatedEvent(long p_lObjectId)
+void CdmContainerAdaptor::ObjectCreatedEvent(qint64 p_lObjectId)
 {
    Q_UNUSED(p_lObjectId);
 }
 
-void CdmContainerAdaptor::ObjectModifiedEvent(long p_lObjectId)
+void CdmContainerAdaptor::ObjectModifiedEvent(qint64 p_lObjectId)
 {
    Q_UNUSED(p_lObjectId);
 }
 
-void CdmContainerAdaptor::ObjectRefModifiedEvent(long p_lObjectId)
+void CdmContainerAdaptor::ObjectRefModifiedEvent(qint64 p_lObjectId)
 {
    Q_UNUSED(p_lObjectId);
 }
 
-void CdmContainerAdaptor::ObjectCommitedEvent(long p_lObjectId)
+void CdmContainerAdaptor::ObjectCommitedEvent(qint64 p_lObjectId)
 {
    Q_UNUSED(p_lObjectId);
 }

@@ -31,7 +31,7 @@ bool CftlCommandGetNewObjectId::CheckValid()
 
 int CftlCommandGetNewObjectId::Execute()
 {
-    long lRet = CdmLogging::eDmObjectAccessError;
+   qint64 lRet = CdmLogging::eDmObjectAccessError;
     QString qstrTableName = GetClassTableNameFromContainer(m_rpContainer);
     QDateTime qdtCreatedDate = QDateTime::currentDateTime();
     QString qstrTempKeyname = QUuid::createUuid().toString()
@@ -51,13 +51,13 @@ int CftlCommandGetNewObjectId::Execute()
             .arg(FTL_SESSION_ID);
 
     cQuery.prepare(qstrQuery);
-    cQuery.addBindValue((int)m_rpContainer->GetId());
+    cQuery.addBindValue(m_rpContainer->GetId());
     cQuery.addBindValue(qstrTempKeyname);
-    cQuery.addBindValue((int)CdmSessionManager::GetSessionManager()->GetCurrentUserId());
-    cQuery.addBindValue((int)CdmSessionManager::GetSessionManager()->GetCurrentUserId());
+    cQuery.addBindValue(CdmSessionManager::GetSessionManager()->GetCurrentUserId());
+    cQuery.addBindValue(CdmSessionManager::GetSessionManager()->GetCurrentUserId());
     cQuery.addBindValue(qdtCreatedDate);
     cQuery.addBindValue(qdtCreatedDate);
-    cQuery.addBindValue((int)CdmSessionManager::GetSessionManager()->GetCurrentSessionId());
+    cQuery.addBindValue(CdmSessionManager::GetSessionManager()->GetCurrentSessionId());
 
     if (SUCCESSFULL(ExecuteQuery(cQuery)))
     {
@@ -69,9 +69,9 @@ int CftlCommandGetNewObjectId::Execute()
                 .arg(FTL_SESSION_ID)
                 .arg(FTL_OBJECT_KEYNAME_FIELD_NAME);
         cQuery.prepare(qstrQuery);
-        cQuery.addBindValue((int)m_rpContainer->GetId());
-        cQuery.addBindValue((int)CdmSessionManager::GetSessionManager()->GetCurrentUserId());
-        cQuery.addBindValue((int)CdmSessionManager::GetSessionManager()->GetCurrentSessionId());
+        cQuery.addBindValue(m_rpContainer->GetId());
+        cQuery.addBindValue(CdmSessionManager::GetSessionManager()->GetCurrentUserId());
+        cQuery.addBindValue(CdmSessionManager::GetSessionManager()->GetCurrentSessionId());
         cQuery.addBindValue(qstrTempKeyname);
 
         if (SUCCESSFULL(ExecuteQuery(cQuery)))

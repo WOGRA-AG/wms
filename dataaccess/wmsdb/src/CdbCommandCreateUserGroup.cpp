@@ -16,7 +16,7 @@ CdbCommandCreateUserGroup::~CdbCommandCreateUserGroup()
 
 int CdbCommandCreateUserGroup::Execute()
 {
-    long lRet = CdmLogging::eDmUnknownUserQueryError;
+   qint64 lRet = CdmLogging::eDmUnknownUserQueryError;
     int iAccessorId = InsertInAccessorTable();
 
     if(SUCCESSFULL(iAccessorId))
@@ -29,7 +29,7 @@ int CdbCommandCreateUserGroup::Execute()
 
 int CdbCommandCreateUserGroup::InsertInGroupTable(int p_iAccessorId)
 {
-    long lRet = CdmLogging::eDmUnknownUserQueryError;
+   qint64 lRet = CdmLogging::eDmUnknownUserQueryError;
     QSqlQuery cQSqlQuery;
     QString qstrQuery;
 

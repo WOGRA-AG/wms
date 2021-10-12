@@ -126,11 +126,11 @@ void CwmsSearchWidgetIf::AddAllSearchMembers()
 {
    if (m_rpClass)
    {
-      QMap<long, CdmMember*> qmMembers;
+      QMap<qint64, CdmMember*> qmMembers;
       m_rpClass->GetMemberMap(qmMembers);
 
-      QMap<long, CdmMember*>::iterator qmIt    = qmMembers.begin();
-      QMap<long, CdmMember*>::iterator qmItEnd = qmMembers.end();
+      QMap<qint64, CdmMember*>::iterator qmIt    = qmMembers.begin();
+      QMap<qint64, CdmMember*>::iterator qmItEnd = qmMembers.end();
 
       for ( ; qmIt != qmItEnd; ++qmIt)
       {
@@ -317,13 +317,13 @@ void CwmsSearchWidgetIf::SearchClickedSlot()
 /** +-=---------------------------------------------------------Di 9. Sep 08:18:25 2008-----------*
  * @method  CwmsSearchWidgetIf::GetDisplayList               // public                            *
  * @return  void                                             //                                   *
- * @param   QList<long>& p_rqvlResults                 // The list of objects or objectlists*
+ * @param   QList<qint64>& p_rqvlResults                 // The list of objects or objectlists*
  *                                                           //  which can be used                *
  * @comment This is the abstract method which must be overwritten be the derived class. the       *
  *          gui components which uses proxies uses the list of results for displaying their       *
  *          contents.                                                                             *
  *----------------last changed: --------------------------------Di 9. Sep 08:18:25 2008-----------*/
-void CwmsSearchWidgetIf::GetDisplayList(QList<long>& p_rqvlResults)
+void CwmsSearchWidgetIf::GetDisplayList(QList<qint64>& p_rqvlResults)
 {
    m_cCdmQuery.Clear();
    CreateQuery();
@@ -332,10 +332,10 @@ void CwmsSearchWidgetIf::GetDisplayList(QList<long>& p_rqvlResults)
    {
       if (m_cCdmQuery.Execute())
       {
-         QList<long> qvlResult = m_cCdmQuery.GetResultList();
+         QList<qint64> qvlResult = m_cCdmQuery.GetResultList();
 
-         QList<long>::const_iterator qvlIt    = qvlResult.begin();
-         QList<long>::const_iterator qvlItEnd = qvlResult.end();
+         QList<qint64>::const_iterator qvlIt    = qvlResult.begin();
+         QList<qint64>::const_iterator qvlItEnd = qvlResult.end();
 
          for ( ; qvlIt != qvlItEnd; ++ qvlIt)
          {
@@ -409,11 +409,11 @@ void CwmsSearchWidgetIf::FillDefaultMembers()
 {
    if (CHKPTR(m_rpClass))
    {
-      QMap<long,CdmMember*> qmMembers;
+      QMap<qint64,CdmMember*> qmMembers;
       m_rpClass->GetMemberMap(qmMembers);
 
-      QMap<long, CdmMember*>::iterator qmIt    = qmMembers.begin();
-      QMap<long, CdmMember*>::iterator qmItEnd = qmMembers.end();
+      QMap<qint64, CdmMember*>::iterator qmIt    = qmMembers.begin();
+      QMap<qint64, CdmMember*>::iterator qmItEnd = qmMembers.end();
 
       for ( ; qmIt != qmItEnd; ++qmIt)
       {

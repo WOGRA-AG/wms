@@ -209,7 +209,7 @@ CdmObjectContainer *CwmsApplication::GetPlugins()
     return GetContainerRefValue("Plugins");
 }
 
-long CwmsApplication::GetModulesId()
+qint64 CwmsApplication::GetModulesId()
 {
    return GetContainerRef("Modules");
 }
@@ -317,7 +317,7 @@ void CwmsApplication::SetCurrentUserLanguage(QString p_qstrqsLanguage)
 
    if (CHKPTR(pContainer))
    {
-      long lObjectId;
+     qint64 lObjectId;
       CdmQueryEnhanced* pCdmQuery = CreateQuery();
 
       if (pCdmQuery && pCdmQuery->GetResultCount() > 0)
@@ -469,11 +469,11 @@ CdmObject* CwmsApplication::GetApplication(QString p_qstrApplication)
 
    if (pCdmQuery)
    {
-      QList<long> qllResults = pCdmQuery->GetResultList();         
+      QList<qint64> qllResults = pCdmQuery->GetResultList();         
 
       if (qllResults.count() > 0)
       {
-         long lObjectId = *qllResults.begin();
+        qint64 lObjectId = *qllResults.begin();
          CdmObjectContainer* pContainer = CdmDataProvider::GetObjectContainer("TechnicalApplications");
 
          if (CHKPTR(pContainer))
@@ -486,7 +486,7 @@ CdmObject* CwmsApplication::GetApplication(QString p_qstrApplication)
    return pCdmObject;        
 }
 
-CdmObject* CwmsApplication::LoadModule(long p_lObjectId)
+CdmObject* CwmsApplication::LoadModule(qint64 p_lObjectId)
 {
    CdmObject* pModule = nullptr;
 

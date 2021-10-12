@@ -24,8 +24,8 @@ private:
     QMap<QString,int> m_qmMap;
 
 public:
-    CdmValueDictStringInt( long p_lDatabaseId,
-                           long p_lId,
+    CdmValueDictStringInt(qint64 p_lDatabaseId,
+                          qint64 p_lId,
                            QString p_qstrKeyname,
                            CdmObject* p_pCdmObject);
 

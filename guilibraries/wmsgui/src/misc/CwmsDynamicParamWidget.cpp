@@ -28,43 +28,44 @@ CwmsDynamicParamWidget::~CwmsDynamicParamWidget()
 void CwmsDynamicParamWidget::CreateWidget()
 {
     auto layout = CreateLayoutAndLabel();
-       switch(m_eType)
-       {
-       case eDmValueBool:
-          CreateBoolWidget();
-          break;
-       case eDmValueInt:
-       case eDmValueEnum:
-       case eDmValueCounter:
-       case eDmValueLong:
-       case eDmValueFloat:
-       case eDmValueDouble:
-          CreateNumberWidget();
-          break;
-       case eDmValueString:
-       case eDmValueCharacterDocument:
-          CreateTextWidget();
-          break;
-       case eDmValueDate:
-          CreateDateWidget();
-          break;
-       case eDmValueTime:
-          CreateTimeWidget();
-          break;
-       case eDmValueDateTime:
-          CreateDateTimeWidget();
-          break;
-       case eDmValueUser:
-          CreateUserWidget();
-          break;
-       case eDmValueUserGroup:
-          CreateUserGroupWidget();
-          break;
-       default:
-          ERR("Value for " + m_qstrName + " not implemented for Dynamic Param Widget");
-          break;
 
-       }
+    switch(m_eType)
+    {
+    case eDmValueBool:
+        CreateBoolWidget();
+        break;
+    case eDmValueInt:
+    case eDmValueEnum:
+    case eDmValueCounter:
+    case eDmValueLong:
+    case eDmValueFloat:
+    case eDmValueDouble:
+        CreateNumberWidget();
+        break;
+    case eDmValueString:
+    case eDmValueCharacterDocument:
+        CreateTextWidget();
+        break;
+    case eDmValueDate:
+        CreateDateWidget();
+        break;
+    case eDmValueTime:
+        CreateTimeWidget();
+        break;
+    case eDmValueDateTime:
+        CreateDateTimeWidget();
+        break;
+    case eDmValueUser:
+        CreateUserWidget();
+        break;
+    case eDmValueUserGroup:
+        CreateUserGroupWidget();
+        break;
+    default:
+        ERR("Value for " + m_qstrName + " not implemented for Dynamic Param Widget");
+        break;
+
+    }
 }
 
 QVariant CwmsDynamicParamWidget::GetInput()
@@ -75,7 +76,7 @@ QVariant CwmsDynamicParamWidget::GetInput()
     {
     case eDmValueBool:
         qvValue = GetBoolValue();
-       break;
+        break;
     case eDmValueInt:
     case eDmValueEnum:
     case eDmValueCounter:
@@ -83,28 +84,28 @@ QVariant CwmsDynamicParamWidget::GetInput()
     case eDmValueFloat:
     case eDmValueDouble:
         qvValue = GetNumberValue();
-       break;
+        break;
     case eDmValueString:
     case eDmValueCharacterDocument:
         qvValue = GetTextValue();
-       break;
+        break;
     case eDmValueDate:
         qvValue = GetDateValue();
-       break;
+        break;
     case eDmValueTime:
         qvValue = GetTimeValue();
-       break;
+        break;
     case eDmValueDateTime:
         qvValue = GetDateTimeValue();
-       break;
+        break;
     case eDmValueUser:
         qvValue = GetUserValue();
-       break;
+        break;
     case eDmValueUserGroup:
-       break;
+        break;
     default:
-       ERR("Value for " + m_qstrName + " not implemented for Dynamic Param Widget");
-       break;
+        ERR("Value for " + m_qstrName + " not implemented for Dynamic Param Widget");
+        break;
 
     }
 
@@ -113,12 +114,12 @@ QVariant CwmsDynamicParamWidget::GetInput()
 
 QHBoxLayout *CwmsDynamicParamWidget::CreateLayoutAndLabel()
 {
- auto layout = new QHBoxLayout;
- setLayout(layout);
- auto pLabel = new QLabel(this);
- pLabel->setText(m_qstrName);
- layout->addWidget(pLabel);
- return layout;
+    auto layout = new QHBoxLayout;
+    setLayout(layout);
+    auto pLabel = new QLabel(this);
+    pLabel->setText(m_qstrName);
+    layout->addWidget(pLabel);
+    return layout;
 }
 
 void CwmsDynamicParamWidget::CreateBoolWidget()

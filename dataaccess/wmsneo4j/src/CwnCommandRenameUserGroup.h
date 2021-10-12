@@ -17,15 +17,15 @@ public:
     CwnCommandRenameUserGroup(CwnDataAccess* m_rpDataAccess);
     virtual ~CwnCommandRenameUserGroup();
 
-    void setGroupId(long groupid);
-    long getGroupId();
+    void setGroupId(qint64 groupid);
+   qint64 getGroupId();
 
     void setGroupname(QString groupname);
     QString getGroupname();
     QString queryCausedError;
 
 private:
-    long groupid;
+   qint64 groupid;
     QString groupname;
     QString createQuery();
 

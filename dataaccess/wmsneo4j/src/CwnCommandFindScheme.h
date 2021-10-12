@@ -18,13 +18,13 @@ class CwnCommandFindScheme : public CwnCommandBase
 
 private:
     QString m_qstrSchemeName;
-    long m_lSchemeId;
+   qint64 m_lSchemeId;
     CdmScheme* m_pScheme;
 
 
 public:
     CwnCommandFindScheme(QString p_qstrSchemeName, CwnDataAccess* p_pDataAccess);
-    CwnCommandFindScheme(long p_lId, CwnDataAccess* p_pDataAccess);
+    CwnCommandFindScheme(qint64 p_lId, CwnDataAccess* p_pDataAccess);
     virtual ~CwnCommandFindScheme();
 
     CdmScheme *GetResult();

@@ -23,8 +23,8 @@ void CwiCommandIsObjectUsed::Execute()
     if (CHKPTR(m_rpData))
     {
         CdmDataProvider* pCdmManager = CdmSessionManager::GetDataProvider();
-        long lObjectListId = m_rpData->GetValue("ObjectListId").toInt();
-        long lObjectId = m_rpData->GetValue("ObjectId").toInt();
+       qint64 lObjectListId = m_rpData->GetValue("ObjectListId").toInt();
+       qint64 lObjectId = m_rpData->GetValue("ObjectId").toInt();
 
         if (pCdmManager)
         {

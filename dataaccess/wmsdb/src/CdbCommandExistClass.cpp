@@ -1,6 +1,6 @@
 #include "CdbCommandExistClass.h"
 
-CdbCommandExistClass::CdbCommandExistClass(long p_lSchemeId, QString p_qstrKeyname, CdbDataAccess* p_pDataAccess)
+CdbCommandExistClass::CdbCommandExistClass(qint64 p_lSchemeId, QString p_qstrKeyname, CdbDataAccess* p_pDataAccess)
 : CdbAbstractCommand(p_pDataAccess),
   m_lSchemeId(p_lSchemeId),
   m_qstrKeyname(p_qstrKeyname),

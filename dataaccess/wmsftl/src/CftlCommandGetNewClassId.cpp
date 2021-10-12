@@ -5,7 +5,7 @@
 
 #define INIT_CLASS_NAME "NewClass"
 
-CftlCommandGetNewClassId::CftlCommandGetNewClassId(long p_lSessionId, long p_lSchemeId, CftlDataAccess* p_pDataAccess)
+CftlCommandGetNewClassId::CftlCommandGetNewClassId(qint64 p_lSessionId,qint64 p_lSchemeId, CftlDataAccess* p_pDataAccess)
     : CftlAbstractTransactionalCommand(p_pDataAccess),
       m_lSchemeId(p_lSchemeId),
       m_lSessionId(p_lSessionId)
@@ -27,18 +27,18 @@ int CftlCommandGetNewClassId::Execute()
                           "values(?, ?, ?, ?, ?, ?, ?)");
     cQSqlQuery.addBindValue(INIT_CLASS_NAME);
     cQSqlQuery.addBindValue(QDateTime::currentDateTime());
-    cQSqlQuery.addBindValue((int)m_lSchemeId);
-    cQSqlQuery.addBindValue((int)CdmSessionManager::GetSessionManager()->GetCurrentUserId());
-    cQSqlQuery.addBindValue((int)CdmSessionManager::GetSessionManager()->GetCurrentUserId());
+    cQSqlQuery.addBindValue(m_lSchemeId);
+    cQSqlQuery.addBindValue(CdmSessionManager::GetSessionManager()->GetCurrentUserId());
+    cQSqlQuery.addBindValue(CdmSessionManager::GetSessionManager()->GetCurrentUserId());
     cQSqlQuery.addBindValue(INIT_CLASS_NAME);
-    cQSqlQuery.addBindValue((int)m_lSessionId);
+    cQSqlQuery.addBindValue(m_lSessionId);
 
     if(SUCCESSFULL(ExecuteQuery(cQSqlQuery)))
     {
        // query for reading new id
        cQSqlQuery.prepare("select ClassId from WMS_CLASS where Keyname = ? and TempSessionId = ?");
        cQSqlQuery.addBindValue(INIT_CLASS_NAME);
-       cQSqlQuery.addBindValue((int)m_lSessionId);
+       cQSqlQuery.addBindValue(m_lSessionId);
 
        if(SUCCESSFULL(ExecuteQuery(cQSqlQuery)))
        {

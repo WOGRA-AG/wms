@@ -670,14 +670,14 @@ CdmObjectContainer* CdmQuery::GetContainer() const
     return pContainer;
 }
 
-void CdmQuery::SetContainerId(long p_lId)
+void CdmQuery::SetContainerId(qint64 p_lId)
 {
     m_lContainerId = p_lId;
 
     SetContainer(GetContainer());
 }
 
-long CdmQuery::GetContainerId() const
+qint64 CdmQuery::GetContainerId() const
 {
     return m_lContainerId;
 }
@@ -698,7 +698,7 @@ const CdmClass* CdmQuery::GetClass() const
     return m_rpCdmClass;
 }
 
-void CdmQuery::SetClassId(long p_lId)
+void CdmQuery::SetClassId(qint64 p_lId)
 {
     m_rpCdmClass = nullptr;
     m_lClassId = p_lId;
@@ -716,7 +716,7 @@ void CdmQuery::SetClassId(long p_lId)
     }
 }
 
-long CdmQuery::GetClassId() const
+qint64 CdmQuery::GetClassId() const
 {
     return m_lClassId;
 }
@@ -851,8 +851,8 @@ void CdmQuery::SetResults(QList<QVariant> &p_rqlResults)
     for (int iPos = 0; iPos < p_rqlResults.size(); ++iPos)
     {
         QVariantMap qvResult = p_rqlResults[iPos].toMap();
-        long lObjectId = qvResult["ObjectId"].toInt();
-        long lContainerId = qvResult["ObjectListId"].toInt();
+       qint64 lObjectId = qvResult["ObjectId"].toInt();
+       qint64 lContainerId = qvResult["ObjectListId"].toInt();
         AddResult(lObjectId, lContainerId);
     }
 }
@@ -1005,9 +1005,9 @@ QString CdmQuery::GetResultAsStringAt(int p_iRow) const
     return qstrRet;
 }
 
-long CdmQuery::GetObjectIdAt(int p_iPos) const
+qint64 CdmQuery::GetObjectIdAt(int p_iPos) const
 {
-    long lObjectId = 0;
+   qint64 lObjectId = 0;
 
     BODY_TRY
     if ((0 <= p_iPos) && (p_iPos < GetResultCount()))
@@ -1070,9 +1070,9 @@ CdmObject* CdmQuery::GetResultObjectAt(int p_iPos) const
     return pObject;
 }
 
-long CdmQuery::GetObjectListIdAt(int p_iPos) const
+qint64 CdmQuery::GetObjectListIdAt(int p_iPos) const
 {
-    long lContainerId = 0;
+   qint64 lContainerId = 0;
 
     BODY_TRY
     if ((0 <= p_iPos) && (p_iPos < GetResultCount()))
@@ -1093,12 +1093,12 @@ long CdmQuery::GetObjectListIdAt(int p_iPos) const
     return lContainerId;
 }
 
-long CdmQuery::GetContainerIdAt(int p_iRow) const
+qint64 CdmQuery::GetContainerIdAt(int p_iRow) const
 {
     return GetObjectListIdAt(p_iRow);
 }
 
-int CdmQuery::GetRowPosOfObjectInResultTree(long p_lObjectId) const
+int CdmQuery::GetRowPosOfObjectInResultTree(qint64 p_lObjectId) const
 {
     int iRet = -1;
 
@@ -1117,12 +1117,12 @@ int CdmQuery::GetRowPosOfObjectInResultTree(long p_lObjectId) const
     return iRet;
 }
 
-bool CdmQuery::IsObjectInResultTree(long p_lObjectId) const
+bool CdmQuery::IsObjectInResultTree(qint64 p_lObjectId) const
 {
     return ContainsResultObject(p_lObjectId);
 }
 
-bool CdmQuery::ContainsResultObject(long p_lObjectId) const
+bool CdmQuery::ContainsResultObject(qint64 p_lObjectId) const
 {
     bool bRet = false;
 
@@ -1195,13 +1195,13 @@ QString CdmQuery::GetResultAsString() const
     return qstrResult;
 }
 
-const QList<long> CdmQuery::GetResultList() const
+const QList<qint64> CdmQuery::GetResultList() const
 {
-   QList<long> qllResult;
+   QList<qint64> qllResult;
 
    for (int iPos = 0; iPos < GetResultCount(); ++iPos)
    {
-       long lObjectId = GetObjectIdAt(iPos);
+      qint64 lObjectId = GetObjectIdAt(iPos);
        qllResult.append(lObjectId);
    }
 
@@ -1231,7 +1231,7 @@ void CdmQuery::GetResultElementList(QString p_qstrKeyname, QVector<QVariant> &p_
     }
 }
 
-int CdmQuery::CountQueryiedChildren(long p_lParentId) const
+int CdmQuery::CountQueryiedChildren(qint64 p_lParentId) const
 {
     int iRet = 0;
 
@@ -1248,7 +1248,7 @@ int CdmQuery::CountQueryiedChildren(long p_lParentId) const
     return iRet;
 }
 
-QList<CdmObject*> CdmQuery::GetChildList(long lParentId) const
+QList<CdmObject*> CdmQuery::GetChildList(qint64 lParentId) const
 {
     QList<CdmObject*> qlObjects;
 
@@ -1265,9 +1265,9 @@ QList<CdmObject*> CdmQuery::GetChildList(long lParentId) const
     return qlObjects;
 }
 
-long CdmQuery::GetParentObjectId(const QModelIndex &p_rqIndex) const
+qint64 CdmQuery::GetParentObjectId(const QModelIndex &p_rqIndex) const
 {
-    long lRet = -1;
+   qint64 lRet = -1;
 
     if (p_rqIndex.isValid())
     {
@@ -1283,7 +1283,7 @@ long CdmQuery::GetParentObjectId(const QModelIndex &p_rqIndex) const
     return lRet;
 }
 
-CdmObject* CdmQuery::GetChildAt(long p_lParentId, int p_iRow)
+CdmObject* CdmQuery::GetChildAt(qint64 p_lParentId, int p_iRow)
 {
     CdmObject* pCdmOject = nullptr;
 
@@ -1300,9 +1300,9 @@ CdmObject* CdmQuery::GetChildAt(long p_lParentId, int p_iRow)
     return pCdmOject;
 }
 
-long CdmQuery::GetPositionObjectId(long p_lParentId, int p_iPosition)
+qint64 CdmQuery::GetPositionObjectId(qint64 p_lParentId, int p_iPosition)
 {
-    long lRet = -1;
+   qint64 lRet = -1;
     CdmQueryResultObject* pParent = nullptr;
 
     if (p_lParentId <= 0)
@@ -1402,7 +1402,7 @@ EdmQueryResultElementMode CdmQuery::ReadModeFromString(QString p_qstrMode)
     return eMode;
 }
 
-void CdmQuery::AddResult(long p_lObjectId, long p_lContainerId)
+void CdmQuery::AddResult(qint64 p_lObjectId,qint64 p_lContainerId)
 {
     CdmQueryResultObject * pResult = CdmQueryResultObject::FindOrCreateResultObject(p_lObjectId, p_lContainerId, m_pRoot, this);
 
@@ -1412,7 +1412,7 @@ void CdmQuery::AddResult(long p_lObjectId, long p_lContainerId)
     }
 }
 
-void CdmQuery::AddResultToColumn(int p_iColumn, QVariant p_qvValue, long p_lObjectId, long p_lContainerId)
+void CdmQuery::AddResultToColumn(int p_iColumn, QVariant p_qvValue,qint64 p_lObjectId,qint64 p_lContainerId)
 {
     CdmQueryResultObject* pResult = nullptr;
 
@@ -1486,7 +1486,7 @@ void CdmQuery::AddResultToColumnInRow(int p_iColumn, int p_iRow, QVariant& p_rqv
     BODY_CATCH
 }
 
-void CdmQuery::SetResultInternal(int p_iColumn, QVariant p_qvValue, long p_lObjectId, long p_lContainerId)
+void CdmQuery::SetResultInternal(int p_iColumn, QVariant p_qvValue,qint64 p_lObjectId,qint64 p_lContainerId)
 {
     AddResultToColumn(p_iColumn, p_qvValue, p_lObjectId, p_lContainerId);
 }

@@ -3,7 +3,7 @@
 
 #include "CwnCommandStdHeader.h"
 
-CwnCommandLockObject::CwnCommandLockObject(long p_lSessionId, long p_lObjectId,CwnDataAccess* p_pDataAccess)
+CwnCommandLockObject::CwnCommandLockObject(qint64 p_lSessionId,qint64 p_lObjectId,CwnDataAccess* p_pDataAccess)
     : CwnCommandBase(p_pDataAccess),
       m_lSessionId(p_lSessionId),
       m_lObjectId(p_lObjectId)
@@ -61,7 +61,7 @@ void CwnCommandLockObject::interpretAnswer(QVariant &Ret)
 
 int CwnCommandLockObject::Execute()
 {
-    long lRet = CdmLogging::eDmObjectAccessError;
+   qint64 lRet = CdmLogging::eDmObjectAccessError;
 
     CwnCommandCheckObjectLocked command(m_lObjectId, m_lSessionId, GetDataAccess());
     lRet = command.Run();

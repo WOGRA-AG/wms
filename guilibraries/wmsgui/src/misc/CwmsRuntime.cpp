@@ -110,14 +110,14 @@ void CwmsRuntime::FillModules()
       for (int iCounter = 0; iCounter < iResultCount; ++iCounter)
       {
          QString qstrName = pCdmQuery->GetResultAt(0, iCounter).toString();
-         long lObjectId = pCdmQuery->GetObjectIdAt(iCounter);
+        qint64 lObjectId = pCdmQuery->GetObjectIdAt(iCounter);
          CdmObject* pCdmObject = pCdmQuery->GetObjectAt(iCounter);
          CwmsApplicationModule cModule(pCdmObject);
 
          QAction* pAction = new QAction();
          pAction->setText(qstrName.toUtf8());
          pAction->setIcon(cModule.GetIcon());
-         pAction->setData((int)lObjectId);
+         pAction->setData(lObjectId);
          m_pqtbModules->addAction(pAction);
          connect(pAction, SIGNAL(triggered(bool)), this, SLOT(EditActionTriggeredSlot()));
 
@@ -142,7 +142,7 @@ void CwmsRuntime::EditActionTriggeredSlot()
    QAction* pAction = dynamic_cast<QAction*> (sender());
    if (pAction)
    {
-      long lObjectId = pAction->data().toInt();
+     qint64 lObjectId = pAction->data().toInt();
 
       if (lObjectId > 0)
       {

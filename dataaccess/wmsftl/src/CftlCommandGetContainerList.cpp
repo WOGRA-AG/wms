@@ -1,6 +1,6 @@
 #include "CftlCommandGetContainerList.h"
 
-CftlCommandGetContainerList::CftlCommandGetContainerList(long p_lSchemeId, long p_lClassId, CftlDataAccess* p_pDataAccess)
+CftlCommandGetContainerList::CftlCommandGetContainerList(qint64 p_lSchemeId,qint64 p_lClassId, CftlDataAccess* p_pDataAccess)
 : CftlAbstractCommand(p_pDataAccess),
   m_lSchemeId(p_lSchemeId),
   m_lClassId(p_lClassId)
@@ -12,7 +12,7 @@ CftlCommandGetContainerList::~CftlCommandGetContainerList()
 
 }
 
-void CftlCommandGetContainerList::GetResult(QMap<long, QString> &p_rqmContainerList)
+void CftlCommandGetContainerList::GetResult(QMap<qint64, QString> &p_rqmContainerList)
 {
     p_rqmContainerList = m_qmContainer;
 }
@@ -25,7 +25,7 @@ bool CftlCommandGetContainerList::CheckValid()
 
 int CftlCommandGetContainerList::Execute()
 {
-   long lRet = CdmLogging::eDmObjectAccessError;
+  qint64 lRet = CdmLogging::eDmObjectAccessError;
    QSqlQuery cQSqlQuery(GetSqlDatabase());
    QString qstrQuery;
 
@@ -33,14 +33,14 @@ int CftlCommandGetContainerList::Execute()
    {
        cQSqlQuery.prepare("Select ol.ContainerId, ol.Keyname from WMS_DM_CONTAINER ol, WMS_CLASS cl where "
                           "cl.ClassId = ol.ClassId and cl.SchemeId =  ?");
-       cQSqlQuery.addBindValue((int)m_lSchemeId);
+       cQSqlQuery.addBindValue(m_lSchemeId);
    }
    else
    {
       cQSqlQuery.prepare("Select ol.ContainerId, ol.Keyname from WMS_DM_CONTAINER ol, WMS_CLASS cl where "
                           "cl.ClassId = ol.ClassId and cl.SchemeId =  ? and ol.ClassId = ?");
-      cQSqlQuery.addBindValue((int)m_lSchemeId);
-      cQSqlQuery.addBindValue((int)m_lClassId);
+      cQSqlQuery.addBindValue(m_lSchemeId);
+      cQSqlQuery.addBindValue(m_lClassId);
    }
 
    m_qmContainer.clear();
@@ -53,7 +53,7 @@ int CftlCommandGetContainerList::Execute()
       {
          do
          {
-            long lId = cQSqlQuery.value(0).toInt();
+           qint64 lId = cQSqlQuery.value(0).toInt();
             QString qstrKeyname = cQSqlQuery.value(1).toString();
             m_qmContainer.insert(lId, qstrKeyname);
          }

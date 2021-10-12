@@ -1,6 +1,6 @@
 #include "CdbCommandRenameUserGroup.h"
 
-CdbCommandRenameUserGroup::CdbCommandRenameUserGroup(long p_lGroupId, QString p_qstrName, CdbDataAccess* p_pDataAccess)
+CdbCommandRenameUserGroup::CdbCommandRenameUserGroup(qint64 p_lGroupId, QString p_qstrName, CdbDataAccess* p_pDataAccess)
     : CdbAbstractCommandTransactional(p_pDataAccess),
       m_lGroupId(p_lGroupId),
       m_qstrNewName(p_qstrName)
@@ -15,7 +15,7 @@ CdbCommandRenameUserGroup::~CdbCommandRenameUserGroup()
 
 int CdbCommandRenameUserGroup::Execute()
 {
-    long lRet = CdmLogging::eDmUnknownUserQueryError;
+   qint64 lRet = CdmLogging::eDmUnknownUserQueryError;
     QSqlQuery cQSqlQuery;
     QString qstrQuery;
 

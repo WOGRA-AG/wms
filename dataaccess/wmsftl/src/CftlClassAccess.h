@@ -57,70 +57,70 @@ virtual ~CftlClassAccess();
    public:
    /** +-=---------------------------------------------------------Fr 25. Jun 13:27:50 2004*
     * @method  CftlClassAccess::GetNewClassId               // public                            *
-    * @return  long                                          //                                   *
-    * @param   long p_lDbId                                  //                                   *
+    * @return qint64                                          //                                   *
+    * @param  qint64 p_lDbId                                  //                                   *
     * @comment This mehtod returns a new class id for a new class.                                *
     *----------------last changed: Wolfgang Graßhof-------------Fr 25. Jun 13:27:50 2004----------*/
-long GetNewClassId(long p_lDbId);
+qint64 GetNewClassId(qint64 p_lDbId);
 
    public:
    /** +-=---------------------------------------------------------Fr 25. Jun 13:31:50 2004*
     * @method  CftlClassAccess::ExistClass                  // public                            *
-    * @return  long                                          //                                   *
-    * @param   long p_lDbId                                  //                                   *
+    * @return qint64                                          //                                   *
+    * @param  qint64 p_lDbId                                  //                                   *
     * @param   QString p_qstrKeyname                         //                                   *
     * @param   bool& p_bRet                                  //                                   *
     * @comment This method checks if the class with the overgiven keyname exists.                 *
     *----------------last changed: Wolfgang Graßhof-------------Fr 25. Jun 13:31:50 2004----------*/
-long ExistClass(long p_lDbId, QString p_qstrKeyname, bool& p_bRet);
+qint64 ExistClass(qint64 p_lDbId, QString p_qstrKeyname, bool& p_bRet);
 
    public:
    /** +-=---------------------------------------------------------Fr 25. Jun 13:37:36 2004*
     * @method  CftlClassAccess::LoadClassManager            // public                            *
-    * @return  long                                          //                                   *
-    * @param   long p_lDbId                                  //                                   *
+    * @return qint64                                          //                                   *
+    * @param  qint64 p_lDbId                                  //                                   *
     * @param   CdmClassManager*& p_rpCdmClassManager         //                                   *
     * @comment This method loads the complete class manager of a class.                           *
     *----------------last changed: Wolfgang Graßhof-------------Fr 25. Jun 13:37:36 2004----------*/
-long LoadClassManager(  long p_lDbId, CdmClassManager*& p_rpCdmClassManager );
+qint64 LoadClassManager( qint64 p_lDbId, CdmClassManager*& p_rpCdmClassManager );
 
    public:
    /** +-=---------------------------------------------------------Mo 9. Jun 14:56:10 2008--------*
     * @method  CftlClassAccess::DeleteMember                // public                            *
-    * @return  long                                          //                                   *
-    * @param   long p_lMemberId                              //                                   *
+    * @return qint64                                          //                                   *
+    * @param  qint64 p_lMemberId                              //                                   *
     * @comment This method deletes a Member.                                                      *
     *----------------last changed: -----------------------------Mo 9. Jun 14:56:10 2008-----------*/
-    long DeleteMember(long p_lMemberId);
+   qint64 DeleteMember(qint64 p_lMemberId);
 
    public:
    /** +-=---------------------------------------------------------So 11. Sep 11:41:31 2005*
     * @method  CftlClassAccess::GetNewClassId               // public, virtual                   *
-    * @return  long                                          //                                   *
-    * @param   long p_lDataBaseId                            //                                   *
-    * @param   long p_lSessionId                             //                                   *
+    * @return qint64                                          //                                   *
+    * @param  qint64 p_lDataBaseId                            //                                   *
+    * @param  qint64 p_lSessionId                             //                                   *
     * @comment This mehtod returns a new class id for a new class.                                *
     *----------------last changed: -----------------------------So 11. Sep 11:41:31 2005----------*/
-virtual long GetNewClassId(long p_lDataBaseId, long p_lSessionId);
+virtual qint64 GetNewClassId(qint64 p_lDataBaseId,qint64 p_lSessionId);
 
 
    public:
    /** +-=---------------------------------------------------------Fr 8. Aug 21:18:37 2008--------*
     * @method  CftlClassAccess::UpdateClass                 // public, virtual                   *
-    * @return  long                                          //                                   *
+    * @return qint64                                          //                                   *
     * @param   CdmClass*& p_rpCdmClass                       //                                   *
     * @comment This method updates a class.                                                       *
     *----------------last changed: -----------------------------Fr 8. Aug 21:18:37 2008-----------*/
-    virtual long UpdateClass(CdmClass*& p_rpCdmClass);
+    virtual qint64 UpdateClass(CdmClass*& p_rpCdmClass);
 
    public:
    /** +-=---------------------------------------------------------Di 23. Aug 15:49:41 2005*
     * @method  CftlClassAccess::DeleteClass                 // public, virtual                   *
-    * @return  long                                          //                                   *
-    * @param   long p_lClassId                               //                                   *
+    * @return qint64                                          //                                   *
+    * @param  qint64 p_lClassId                               //                                   *
     * @comment This method deletes a class from db.                                               *
     *----------------last changed: -----------------------------Di 23. Aug 15:49:41 2005----------*/
-    virtual long DeleteClass(  long p_lClassId );
+    virtual qint64 DeleteClass( qint64 p_lClassId );
     int CreatePackage(CdmPackage *&p_pCdmPackage);
     int UpdatePackageP(CdmPackage *&p_pCdmPackage);
     int DeletePackage(CdmPackage *&p_pCdmPackage);

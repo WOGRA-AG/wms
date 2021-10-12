@@ -57,13 +57,13 @@ CftlJournal::~CftlJournal()
 
 /** +-=---------------------------------------------------------Mi 29. Aug 11:39:55 2012----------*
  * @method  CftlJournal::ValueModified                      // public                            *
- * @return  long                                             //                                   *
+ * @return qint64                                             //                                   *
  * @param   CdmValue* p_pCdmValue                            //                                   *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------Mi 29. Aug 11:39:55 2012----------*/
-long CftlJournal::ValueModified(CdmValue* p_pCdmValue)
+qint64 CftlJournal::ValueModified(CdmValue* p_pCdmValue)
 {
-   long lRet = CdmLogging::eDmObjectAccessError;
+  qint64 lRet = CdmLogging::eDmObjectAccessError;
    if (CHKPTR(p_pCdmValue) && p_pCdmValue->GetValueType() != eDmValueBinaryDocument)
    {
       QSqlQuery cQSqlQuery;
@@ -92,13 +92,13 @@ long CftlJournal::ValueModified(CdmValue* p_pCdmValue)
 
 /** +-=---------------------------------------------------------Mi 29. Aug 14:26:05 2012----------*
  * @method  CftlJournal::ObjectDeleted                      // public                            *
- * @return  long                                             //                                   *
+ * @return qint64                                             //                                   *
  * @param   int p_iObjectId                                  //                                   *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------Mi 29. Aug 14:26:05 2012----------*/
-long CftlJournal::ObjectDeleted(int p_iObjectId)
+qint64 CftlJournal::ObjectDeleted(int p_iObjectId)
 {
-   long lRet = CdmLogging::eDmObjectAccessError;
+  qint64 lRet = CdmLogging::eDmObjectAccessError;
    if (p_iObjectId > 0)
    {
       CdmDataProvider* pCdmManager = CdmSessionManager::GetDataProvider();
@@ -127,13 +127,13 @@ long CftlJournal::ObjectDeleted(int p_iObjectId)
 
 /** +-=---------------------------------------------------------Mi 29. Aug 11:40:06 2012----------*
  * @method  CftlJournal::ObjectModified                     // public                            *
- * @return  long                                             //                                   *
+ * @return qint64                                             //                                   *
  * @param   CdmObject* p_pCdmObject                          //                                   *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------Mi 29. Aug 11:40:06 2012----------*/
-long CftlJournal::ObjectModified(CdmObject* p_pCdmObject)
+qint64 CftlJournal::ObjectModified(CdmObject* p_pCdmObject)
 {
-   long lRet = CdmLogging::eDmObjectAccessError;
+  qint64 lRet = CdmLogging::eDmObjectAccessError;
    if (CHKPTR(p_pCdmObject))
    {
       QSqlQuery cQSqlQuery;
@@ -172,13 +172,13 @@ long CftlJournal::ObjectModified(CdmObject* p_pCdmObject)
 
 /** +-=---------------------------------------------------------Mi 29. Aug 11:39:46 2012----------*
  * @method  CftlJournal::ObjectListModified                 // public                            *
- * @return  long                                             //                                   *
+ * @return qint64                                             //                                   *
  * @param   CdmObjectContainer* p_pContainer                  //                                   *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------Mi 29. Aug 11:39:46 2012----------*/
-long CftlJournal::ObjectListModified(CdmObjectContainer* p_pContainer)
+qint64 CftlJournal::ObjectListModified(CdmObjectContainer* p_pContainer)
 {
-   long lRet = CdmLogging::eDmObjectAccessError;
+  qint64 lRet = CdmLogging::eDmObjectAccessError;
    if (CHKPTR(p_pContainer))
    {
       QSqlQuery cQSqlQuery;
@@ -222,13 +222,13 @@ long CftlJournal::ObjectListModified(CdmObjectContainer* p_pContainer)
 
 /** +-=---------------------------------------------------------Mi 29. Aug 14:22:55 2012----------*
  * @method  CftlJournal::ObjectListDeleted                  // public                            *
- * @return  long                                             //                                   *
+ * @return qint64                                             //                                   *
  * @param   int p_iObjectListId                              //                                   *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------Mi 29. Aug 14:22:55 2012----------*/
-long CftlJournal::ObjectListDeleted(int p_iObjectListId)
+qint64 CftlJournal::ObjectListDeleted(int p_iObjectListId)
 {
-   long lRet = CdmLogging::eDmObjectAccessError;
+  qint64 lRet = CdmLogging::eDmObjectAccessError;
    if (p_iObjectListId > 0)
    {
       CdmDataProvider* pCdmManager = CdmSessionManager::GetDataProvider();
@@ -254,12 +254,12 @@ long CftlJournal::ObjectListDeleted(int p_iObjectListId)
    return lRet;
 }
 
-long CftlJournal::GetObjectModifications(const CdmObject* p_pObject,
+qint64 CftlJournal::GetObjectModifications(const CdmObject* p_pObject,
                                           QDate p_qdFrom,
                                           QDate p_qdTo,
                                           QList<CdmJournalItem*>& p_rqlItems)
 {
-   long lRet = CdmLogging::eDmObjectAccessError;
+  qint64 lRet = CdmLogging::eDmObjectAccessError;
 
    if (p_pObject)
    {
@@ -318,19 +318,19 @@ long CftlJournal::GetObjectModifications(const CdmObject* p_pObject,
 
 /** +-=---------------------------------------------------------Mi 29. Aug 13:55:15 2012----------*
  * @method  CftlJournal::GetObjectListModifications         // public                            *
- * @return  long                                             //                                   *
+ * @return qint64                                             //                                   *
  * @param   int p_iObjectListId                              //                                   *
  * @param   QDate p_qdFrom                                   //                                   *
  * @param   QDate p_qdTo                                     //                                   *
  * @param   QList<CdmJournalItem*>& p_rqlItems               //                                   *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------Mi 29. Aug 13:55:15 2012----------*/
-long CftlJournal::GetObjectListModifications(int p_iObjectListId,
+qint64 CftlJournal::GetObjectListModifications(int p_iObjectListId,
                                               QDate p_qdFrom,
                                               QDate p_qdTo,
                                               QList<CdmJournalItem*>& p_rqlItems)
 {
-   long lRet = CdmLogging::eDmObjectAccessError;
+  qint64 lRet = CdmLogging::eDmObjectAccessError;
 
    if (p_iObjectListId > 0)
    {
@@ -390,19 +390,19 @@ long CftlJournal::GetObjectListModifications(int p_iObjectListId,
 
 /** +-=---------------------------------------------------------Mi 29. Aug 13:54:17 2012----------*
  * @method  CftlJournal::GetDatabaseModifications           // public                            *
- * @return  long                                             //                                   *
+ * @return qint64                                             //                                   *
  * @param   int p_iSchemeId                                //                                   *
  * @param   QDate p_qdFrom                                   //                                   *
  * @param   QDate p_qdTo                                     //                                   *
  * @param   QList<CdmJournalItem*>& p_rqlItems               //                                   *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------Mi 29. Aug 13:54:17 2012----------*/
-long CftlJournal::GetDatabaseModifications(int p_iSchemeId,
+qint64 CftlJournal::GetDatabaseModifications(int p_iSchemeId,
                                             QDate p_qdFrom,
                                             QDate p_qdTo,
                                             QList<CdmJournalItem*>& p_rqlItems)
 {
-   long lRet = CdmLogging::eDmObjectAccessError;
+  qint64 lRet = CdmLogging::eDmObjectAccessError;
 
    if (p_iSchemeId > 0)
    {

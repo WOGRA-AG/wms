@@ -161,33 +161,33 @@ class WMSINTERFACE_API CwiRuntime : public CwmscomResourceBase
    /** +-=---------------------------------------------------------Mi 27. Feb 14:20:15 2013-------*
     * @method  CwiRuntime::GetObject                      // public                            *
     * @return  CdmObject*                                    //                                   *
-    * @param   long p_lObjectListId                          //                                   *
-    * @param   long p_lObjectId                              //                                   *
+    * @param  qint64 p_lObjectListId                          //                                   *
+    * @param  qint64 p_lObjectId                              //                                   *
     * @comment                                                                                    *
     *----------------last changed: -----------------------------Mi 27. Feb 14:20:15 2013----------*/
-    CdmObject* GetObject(long p_lObjectListId, long p_lObjectId);
+    CdmObject* GetObject(qint64 p_lObjectListId,qint64 p_lObjectId);
 
    public:
    /** +-=---------------------------------------------------------Do 28. Feb 10:21:21 2013-------*
     * @method  CwiRuntime::GetObjectList                  // public                            *
     * @return  CdmObjectContainer*                                //                                   *
-    * @param   long p_lObjectList                            //                                   *
+    * @param  qint64 p_lObjectList                            //                                   *
     * @comment                                                                                    *
     *----------------last changed: -----------------------------Do 28. Feb 10:21:21 2013----------*/
-    CdmObjectContainer* GetContainer(long p_lObjectList);
+    CdmObjectContainer* GetContainer(qint64 p_lObjectList);
 
    private:
    /** +-=---------------------------------------------------------Do 28. Feb 10:27:46 2013-------*
     * @method  CwiRuntime::ExecuteStaticMethod            // private                           *
     * @return  void                                          //                                   *
     * @param   CwmscomData* p_pData                          //                                   *
-    * @param   long p_lCassId                                //                                   *
+    * @param  qint64 p_lCassId                                //                                   *
     * @param   QString p_qstrFunction                        //                                   *
     * @param   QVariantList p_qvlParameters                  //                                   *
     * @comment                                                                                    *
     *----------------last changed: -----------------------------Do 28. Feb 10:27:46 2013----------*/
     void ExecuteStaticMethod(CwmscomData* p_pData,
-                             long p_lCassId,
+                            qint64 p_lCassId,
                              QString p_qstrFunction,
                              QVariantList p_qvlParameters);
 
@@ -197,15 +197,15 @@ class WMSINTERFACE_API CwiRuntime : public CwmscomResourceBase
     * @method  CwiRuntime::ExecuteObjectMethod            // private                           *
     * @return  void                                          //                                   *
     * @param   CwmscomData* p_pData                          //                                   *
-    * @param   long p_lObjectListId                          //                                   *
-    * @param   long p_lObjectId                              //                                   *
+    * @param  qint64 p_lObjectListId                          //                                   *
+    * @param  qint64 p_lObjectId                              //                                   *
     * @param   QString p_qstrFunction                        //                                   *
     * @param   QVariantList p_qvlParameters                  //                                   *
     * @comment                                                                                    *
     *----------------last changed: -----------------------------Do 28. Feb 10:34:58 2013----------*/
     void ExecuteObjectMethod(CwmscomData* p_pData,
-                             long p_lObjectListId,
-                             long p_lObjectId,
+                            qint64 p_lObjectListId,
+                            qint64 p_lObjectId,
                              QString p_qstrFunction,
                              QVariantList p_qvlParameters);
 

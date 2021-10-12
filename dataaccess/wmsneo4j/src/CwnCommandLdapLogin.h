@@ -20,7 +20,7 @@ private:
     QString m_qstrVersion;
     CumUser* m_pUser;
 
-    long GetNewSession();
+   qint64 GetNewSession();
 public:
     CwnCommandLdapLogin(QString p_qstrApplication,
                         QString p_qstrVersion,

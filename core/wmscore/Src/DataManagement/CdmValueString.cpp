@@ -14,8 +14,8 @@
 #include "CdmValueString.h"
 
 
-CdmValueString::CdmValueString(  long p_lDatabaseId,
-                      long p_lId,
+CdmValueString::CdmValueString( qint64 p_lDatabaseId,
+                     qint64 p_lId,
                       QString p_qstrKeyname,
                       CdmObject* p_pCdmObject )
    : CdmValue( p_lDatabaseId, p_lId, p_qstrKeyname, eDmValueString, p_pCdmObject)

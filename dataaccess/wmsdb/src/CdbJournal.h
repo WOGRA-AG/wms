@@ -32,14 +32,14 @@ class CdbJournal
 {
    public:
     CdbJournal( CdbDataAccess*);
-    long ValueModified(CdmValue*);
-    long ObjectModified(CdmObject*);
-    long ObjectListModified(CdmObjectContainer*);
-    long GetDatabaseModifications(int p_iDatabaseId, QDate p_qdFrom, QDate p_qdTo, QList<CdmJournalItem*>& p_rqlItems);
-    long GetContainerModifications(int p_iObjectListId, QDate p_qdFrom, QDate p_qdTo, QList<CdmJournalItem*>& p_rqlItems);
-    long GetObjectModifications(const CdmObject *p_pObject, QDate p_qdFrom, QDate p_qdTo, QList<CdmJournalItem*>& p_rqlItems);
-    long ObjectListDeleted(int p_iObjectListId);
-    long ObjectDeleted(int p_iObjectId);
+   qint64 ValueModified(CdmValue*);
+   qint64 ObjectModified(CdmObject*);
+   qint64 ObjectListModified(CdmObjectContainer*);
+   qint64 GetDatabaseModifications(int p_iDatabaseId, QDate p_qdFrom, QDate p_qdTo, QList<CdmJournalItem*>& p_rqlItems);
+   qint64 GetContainerModifications(int p_iObjectListId, QDate p_qdFrom, QDate p_qdTo, QList<CdmJournalItem*>& p_rqlItems);
+   qint64 GetObjectModifications(const CdmObject *p_pObject, QDate p_qdFrom, QDate p_qdTo, QList<CdmJournalItem*>& p_rqlItems);
+   qint64 ObjectListDeleted(int p_iObjectListId);
+   qint64 ObjectDeleted(int p_iObjectId);
 
 protected:
    CdbDataAccess* m_rpCdbDataAccess;

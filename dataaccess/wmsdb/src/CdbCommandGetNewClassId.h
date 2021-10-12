@@ -6,11 +6,11 @@
 class CdbCommandGetNewClassId : public CdbAbstractCommandTransactional
 {
 private:
-    long m_lSchemeId;
-    long m_lSessionId;
+   qint64 m_lSchemeId;
+   qint64 m_lSessionId;
 
 public:
-    CdbCommandGetNewClassId(long p_lSessionId, long p_lSchemeId, CdbDataAccess* p_pDataAccess);
+    CdbCommandGetNewClassId(qint64 p_lSessionId,qint64 p_lSchemeId, CdbDataAccess* p_pDataAccess);
     virtual ~CdbCommandGetNewClassId();
 
 protected:

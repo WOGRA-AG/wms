@@ -16,12 +16,12 @@ private:
     CdmObjectContainer* LoadData();
     void ReadData(QVariantList &p_rqvlApps, QList<CdmObject *> &p_rqllObjects);
     void AddDataToVariant(QVariantList &p_rqvlApps, CdmObject *p_pObject);
-    long AddAppScheme(CdmObjectContainer *p_pContainer, QVariantMap &p_rMap);
-    bool DeleteAppScheme(CdmObjectContainer *p_pContainer, long p_lAppSchemeId);
+   qint64 AddAppScheme(CdmObjectContainer *p_pContainer, QVariantMap &p_rMap);
+    bool DeleteAppScheme(CdmObjectContainer *p_pContainer,qint64 p_lAppSchemeId);
 public:
     void GetAppStoreData(QVariantList &p_rMap);
-    long AddAppScheme(QVariantMap &p_rMap);
-    bool DeleteAppScheme(long p_lAppSchemeId);
+   qint64 AddAppScheme(QVariantMap &p_rMap);
+    bool DeleteAppScheme(qint64 p_lAppSchemeId);
     CwmsAppStoreData();
     virtual ~CwmsAppStoreData();
 };

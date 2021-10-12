@@ -25,7 +25,7 @@ private:
     CdmPackage* m_rParent;
     QString m_qstrOriginalPackageString;
 
-    CdmPackage(long p_lSchemeId, QString p_qstrKeyname);
+    CdmPackage(qint64 p_lSchemeId, QString p_qstrKeyname);
 
 public:
     CdmPackage( QVariant p_qvVariant);
@@ -43,7 +43,7 @@ public:
     QString GetPackageString() const;
     CdmPackage *FindChild(QString p_qstrName);
     CdmPackage *FindChildByUri(QString p_qstrName);
-    CdmPackage *FindChildById(long p_lId);
+    CdmPackage *FindChildById(qint64 p_lId);
     int Commit();
     bool IsSystemPackage();
     void SetSystemPackage(bool p_bSystemFlag);

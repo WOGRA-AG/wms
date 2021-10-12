@@ -15,7 +15,7 @@ CwnCommandRenameUserGroup::~CwnCommandRenameUserGroup()
 
 }
 
-void CwnCommandRenameUserGroup::setGroupId(long groupid)
+void CwnCommandRenameUserGroup::setGroupId(qint64 groupid)
 {
     this->groupid = groupid;
 }
@@ -31,7 +31,7 @@ QString CwnCommandRenameUserGroup::getGroupname()
     return groupname;
 }
 
-long CwnCommandRenameUserGroup::getGroupId()
+qint64 CwnCommandRenameUserGroup::getGroupId()
 {
     return groupid;
 }

@@ -7,11 +7,11 @@ class CftlCommandGetNewSession : public CftlAbstractTransactionalCommand
 {
 private:
     QString m_qstrApplication;
-    long m_lUserId;
-    long m_lSessionId;
+   qint64 m_lUserId;
+   qint64 m_lSessionId;
 
 public:
-    CftlCommandGetNewSession(QString p_qstrApplication, long p_lUserId, CftlDataAccess* p_ppDataAccess);
+    CftlCommandGetNewSession(QString p_qstrApplication,qint64 p_lUserId, CftlDataAccess* p_ppDataAccess);
     virtual ~CftlCommandGetNewSession();
 
 

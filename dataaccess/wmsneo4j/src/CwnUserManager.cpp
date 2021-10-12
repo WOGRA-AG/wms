@@ -40,7 +40,7 @@ CwnUserManager::~CwnUserManager()
     //Nothing to do.
 }
 
-long CwnUserManager::CreateUser(CumUser* p_pUser)
+qint64 CwnUserManager::CreateUser(CumUser* p_pUser)
 {
     CwnCommandCreateUser createU(m_pCwnDataAccess,p_pUser->GetIdentitiyKey());
 
@@ -63,7 +63,7 @@ long CwnUserManager::CreateUser(CumUser* p_pUser)
     return createU.Run();
 }
 
-long CwnUserManager::DeleteUser(QString p_qstrLogin)
+qint64 CwnUserManager::DeleteUser(QString p_qstrLogin)
 {
     CwnCommandDeleteUser deleteU(m_pCwnDataAccess);
     deleteU.setLogin(p_qstrLogin);
@@ -71,7 +71,7 @@ long CwnUserManager::DeleteUser(QString p_qstrLogin)
     return deleteU.Run();
 }
 
-long CwnUserManager::DeleteUser(long p_lUserId)
+qint64 CwnUserManager::DeleteUser(qint64 p_lUserId)
 {
     CwnCommandDeleteUser command(p_lUserId, m_pCwnDataAccess);
     return command.Run();
@@ -95,7 +95,7 @@ CumUser *CwnUserManager::FindUser(QString p_qstrLogin, QString p_qstrPassword)
     return cu;
 }
 
-long CwnUserManager::UpdateUser(CumUser* p_pUser)
+qint64 CwnUserManager::UpdateUser(CumUser* p_pUser)
 {
     CwnCommandUpdateUser updateU(m_pCwnDataAccess);
     updateU.setUserId(p_pUser->GetId());
@@ -110,11 +110,11 @@ long CwnUserManager::UpdateUser(CumUser* p_pUser)
     return updateU.Run();
 }
 
-long CwnUserManager::GetUserList(QList<CumUser *> &p_qvlUsers)
+qint64 CwnUserManager::GetUserList(QList<CumUser *> &p_qvlUsers)
 {
     CwnCommandGetUserList getUserList(m_pCwnDataAccess);
 
-    long val = getUserList.Run();
+   qint64 val = getUserList.Run();
 
     if(val>0)
     {
@@ -124,7 +124,7 @@ long CwnUserManager::GetUserList(QList<CumUser *> &p_qvlUsers)
     return val;
 }
 
-long CwnUserManager::ExistUser(QString p_qstrLogin)
+qint64 CwnUserManager::ExistUser(QString p_qstrLogin)
 {
     CwnCommandExistUser exUser(m_pCwnDataAccess);
     exUser.setLogin(p_qstrLogin);
@@ -132,7 +132,7 @@ long CwnUserManager::ExistUser(QString p_qstrLogin)
     return exUser.Run();
 }
 
-long CwnUserManager::RenameUserGroup(long p_lGroupId, QString p_qstrNewName)
+qint64 CwnUserManager::RenameUserGroup(qint64 p_lGroupId, QString p_qstrNewName)
 {
     CwnCommandRenameUserGroup updateG(m_pCwnDataAccess);
     updateG.setGroupId(p_lGroupId);
@@ -141,7 +141,7 @@ long CwnUserManager::RenameUserGroup(long p_lGroupId, QString p_qstrNewName)
     return updateG.Run();
 }
 
-long CwnUserManager::CreateUserGroup(QString p_qstrGroupName)
+qint64 CwnUserManager::CreateUserGroup(QString p_qstrGroupName)
 {
     CwnCommandCreateUserGroup createGroup(m_pCwnDataAccess);
     createGroup.setGroupName(p_qstrGroupName);
@@ -149,7 +149,7 @@ long CwnUserManager::CreateUserGroup(QString p_qstrGroupName)
     return createGroup.Run();
 }
 
-long CwnUserManager::DeleteUserGroup(long p_llGroupId)
+qint64 CwnUserManager::DeleteUserGroup(qint64 p_llGroupId)
 {
     CwnCommandDeleteGroup deleteGroup(m_pCwnDataAccess);
     deleteGroup.setGroupId(p_llGroupId);
@@ -157,7 +157,7 @@ long CwnUserManager::DeleteUserGroup(long p_llGroupId)
     return deleteGroup.Run();
 }
 
-long CwnUserManager::AddUserToUserGroup(long p_lUserId, long p_lUserGroupId)
+qint64 CwnUserManager::AddUserToUserGroup(qint64 p_lUserId,qint64 p_lUserGroupId)
 {
     CwnCommandAddUserToGroup UserToGroup(m_pCwnDataAccess);
     UserToGroup.setUserId(p_lUserId);
@@ -166,7 +166,7 @@ long CwnUserManager::AddUserToUserGroup(long p_lUserId, long p_lUserGroupId)
     return UserToGroup.Run();
 }
 
-long CwnUserManager::RemoveUserFromGroup(long p_lUserId, long p_lUserGroupId)
+qint64 CwnUserManager::RemoveUserFromGroup(qint64 p_lUserId,qint64 p_lUserGroupId)
 {
     CwnCommandRemoveUserFromGroup RemoveFromGroup(m_pCwnDataAccess);
     RemoveFromGroup.setUserId(p_lUserId);
@@ -175,11 +175,11 @@ long CwnUserManager::RemoveUserFromGroup(long p_lUserId, long p_lUserGroupId)
     return RemoveFromGroup.Run();
 }
 
-long CwnUserManager::GetUserGroupList(QList<CumUserGroup *> &p_rqvlUserGroups)
+qint64 CwnUserManager::GetUserGroupList(QList<CumUserGroup *> &p_rqvlUserGroups)
 {
     CwnCommandGetUserGroupList getGroupList(m_pCwnDataAccess);
 
-    long val = getGroupList.Run();
+   qint64 val = getGroupList.Run();
 
     if(val>0)
     {
@@ -189,12 +189,12 @@ long CwnUserManager::GetUserGroupList(QList<CumUserGroup *> &p_rqvlUserGroups)
     return val;
 }
 
-long CwnUserManager::GetListOfUsersInList(long p_lUserGroupId, QList<CumUser *> &p_rqvlUserList)
+qint64 CwnUserManager::GetListOfUsersInList(qint64 p_lUserGroupId, QList<CumUser *> &p_rqvlUserList)
 {
     CwnCommandGetListOfUsersInList getListOfUsersInList(m_pCwnDataAccess);
 
     getListOfUsersInList.setGroupId(p_lUserGroupId);
-    long val = getListOfUsersInList.Run();
+   qint64 val = getListOfUsersInList.Run();
 
     if(val>0)
     {
@@ -204,12 +204,12 @@ long CwnUserManager::GetListOfUsersInList(long p_lUserGroupId, QList<CumUser *> 
     return val;
 }
 
-long CwnUserManager::GetUserGroupMemberList(long p_lUserId, QList<CumUserGroup *> &p_qvlUserGroups)
+qint64 CwnUserManager::GetUserGroupMemberList(qint64 p_lUserId, QList<CumUserGroup *> &p_qvlUserGroups)
 {
     CwnCommandGetUserGroupMemberList getGroupMemberList(m_pCwnDataAccess);
 
     getGroupMemberList.setUserId(p_lUserId);
-    long val = getGroupMemberList.Run();
+   qint64 val = getGroupMemberList.Run();
 
     if(val>0)
     {
@@ -219,7 +219,7 @@ long CwnUserManager::GetUserGroupMemberList(long p_lUserId, QList<CumUserGroup *
     return val;
 }
 
-CumUser* CwnUserManager::FindUser(long p_lUserId)
+CumUser* CwnUserManager::FindUser(qint64 p_lUserId)
 {
     CwnCommandFindUser findU(m_pCwnDataAccess);
     findU.setUserId(p_lUserId);
@@ -234,7 +234,7 @@ CumUser* CwnUserManager::FindUser(long p_lUserId)
     return cu;
 }
 
-CumUserGroup *CwnUserManager::FindUserGroup(long p_lGroupId)
+CumUserGroup *CwnUserManager::FindUserGroup(qint64 p_lGroupId)
 {
     CwnCommandFindUserGroup findG(m_pCwnDataAccess);
     findG.setGroupid(p_lGroupId);

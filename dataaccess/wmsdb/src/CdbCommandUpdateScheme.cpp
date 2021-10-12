@@ -23,7 +23,7 @@ bool CdbCommandUpdateScheme::CheckValid()
 
 int CdbCommandUpdateScheme::Execute()
 {
-   long lRet = CdmLogging::eDmUnknownDbAccessError;
+  qint64 lRet = CdmLogging::eDmUnknownDbAccessError;
    QSqlQuery cQSqlQuery;
    QString qstrQuery;
 

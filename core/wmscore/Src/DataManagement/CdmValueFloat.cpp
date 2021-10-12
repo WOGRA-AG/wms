@@ -11,8 +11,8 @@
 #include "CdmLogging.h"
 #include "CdmValueFloat.h"
 
-CdmValueFloat::CdmValueFloat(  long p_lDatabaseId,
-                    long p_lId,
+CdmValueFloat::CdmValueFloat( qint64 p_lDatabaseId,
+                   qint64 p_lId,
                     QString p_qstrKeyname,
                     CdmObject* p_pCdmObject )
    : CdmValue(p_lDatabaseId, p_lId, p_qstrKeyname, eDmValueFloat, p_pCdmObject),

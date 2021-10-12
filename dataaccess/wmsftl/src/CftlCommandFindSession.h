@@ -6,8 +6,8 @@
 class CftlCommandFindSession : public CftlAbstractCommand
 {
 private:
-    long m_lSessionId;
-    long m_lUserId;
+   qint64 m_lSessionId;
+   qint64 m_lUserId;
 
 public:
     QString m_qstrBaseAuth;
@@ -17,8 +17,8 @@ public:
     int FindSessionBySessionId();
     int FindSessionBySessionIdAndUserId();
 public:
-    CftlCommandFindSession(long p_lSessionId, long p_lUserId, CftlDataAccess* p_pDataAccess);
-    CftlCommandFindSession(long p_lSessionId, CftlDataAccess* p_pDataAccess);
+    CftlCommandFindSession(qint64 p_lSessionId,qint64 p_lUserId, CftlDataAccess* p_pDataAccess);
+    CftlCommandFindSession(qint64 p_lSessionId, CftlDataAccess* p_pDataAccess);
     CftlCommandFindSession(QString p_qstrBaseAuth, CftlDataAccess* p_pDataAccess);
     virtual ~CftlCommandFindSession();
 

@@ -103,7 +103,7 @@ void CdmLogging::AddLog(EdmErrorSeverity p_eDmErrorSeverity,
 
    if (m_iLoggingMode & p_eDmErrorSeverity)
    {
-       long lSessionId = 0;
+      qint64 lSessionId = 0;
 
        if (CdmSessionManager::GetSessionManager())
        {
@@ -199,7 +199,7 @@ int CdmLogging::AddErrorCode(EdmErrorCode p_eDmErrorCode)
    return p_eDmErrorCode;
 }
 
-bool CdmLogging::WasSuccessFull(long p_lReturnCode)
+bool CdmLogging::WasSuccessFull(qint64 p_lReturnCode)
 {
     return (p_lReturnCode > 0);
 }

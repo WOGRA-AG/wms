@@ -9,15 +9,15 @@ class CwnCommandUpdateContainer : public CwnCommandBase
 {
 private:
     CdmObjectContainer* m_rpObjectContainer;
-    long m_lSessionId;
+   qint64 m_lSessionId;
     QString payload;
 
-    long DeleteObjects(CdmObjectContainer *p_pContainer, QList<CdmObject *> &p_rqlObjects, long p_lSessionId);
-    long UpdateObjects(CdmObjectContainer *p_pContainer, QList<CdmObject *> &p_rqlObjects, long p_lSessionId);
+   qint64 DeleteObjects(CdmObjectContainer *p_pContainer, QList<CdmObject *> &p_rqlObjects,qint64 p_lSessionId);
+   qint64 UpdateObjects(CdmObjectContainer *p_pContainer, QList<CdmObject *> &p_rqlObjects,qint64 p_lSessionId);
     void UpdateRights(CdmObjectContainer *&p_pContainer);
 
 public:
-    CwnCommandUpdateContainer(CdmObjectContainer*& p_pContainer, long p_lSessionId, CwnDataAccess* p_pDataAccess);
+    CwnCommandUpdateContainer(CdmObjectContainer*& p_pContainer,qint64 p_lSessionId, CwnDataAccess* p_pDataAccess);
     virtual ~CwnCommandUpdateContainer();
     QString queryCausedError;
 

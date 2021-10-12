@@ -29,10 +29,10 @@
 /** +-=---------------------------------------------------------Fr 23. Nov 14:24:16 2012----------*
  * @method  CdmModelElementBase::CdmModelElementBase                   // public                            *
  * @return                                                   //                                   *
- * @param   long p_lDbId                                     //                                   *
+ * @param  qint64 p_lDbId                                     //                                   *
  * @comment The cosntructor.                                                                      *
  *----------------last changed: --------------------------------Fr 23. Nov 14:24:16 2012----------*/
-CdmModelElementBase::CdmModelElementBase(long p_lDbId)
+CdmModelElementBase::CdmModelElementBase(qint64 p_lDbId)
 : CdmLocatedElement(),
   m_lSchemeId(p_lDbId)
 {
@@ -52,10 +52,10 @@ CdmModelElementBase::~CdmModelElementBase(  )
 
 /** +-=---------------------------------------------------------Fr 23. Nov 14:47:04 2012----------*
  * @method  CdmModelElementBase::GetSchemeId               // public, const, slots              *
- * @return  long                                             //                                   *
+ * @return qint64                                             //                                   *
  * @comment This method returns the DatabaseId.                                                   *
  *----------------last changed: --------------------------------Fr 23. Nov 14:47:04 2012----------*/
-long CdmModelElementBase::GetSchemeId() const
+qint64 CdmModelElementBase::GetSchemeId() const
 {
    return m_lSchemeId.load();
 }
@@ -63,10 +63,10 @@ long CdmModelElementBase::GetSchemeId() const
 /** +-=---------------------------------------------------------Fr 23. Nov 14:53:44 2012----------*
  * @method  CdmModelElementBase::SetDatabaseId               // public                            *
  * @return  void                                             //                                   *
- * @param   long p_lDbId                                     //                                   *
+ * @param  qint64 p_lDbId                                     //                                   *
  * @comment sets the db id in the base object.                                                    *
  *----------------last changed: --------------------------------Fr 23. Nov 14:53:44 2012----------*/
-void CdmModelElementBase::SetSchemeId(long p_lDbId)
+void CdmModelElementBase::SetSchemeId(qint64 p_lDbId)
 {
    m_lSchemeId = p_lDbId;
 }
@@ -215,20 +215,20 @@ IdmDataAccess* CdmModelElementBase::GetDataAccess() const
 
 /** +-=---------------------------------------------------------Sa 9. Feb 11:51:57 2013-----------*
  * @method  CdmModelElementBase::GetSessionId                // public, const                     *
- * @return  long                                             //                                   *
+ * @return qint64                                             //                                   *
  * @comment This method returns the userId.                                                       *
  *----------------last changed: --------------------------------Sa 9. Feb 11:51:57 2013-----------*/
-long CdmModelElementBase::GetSessionId() const
+qint64 CdmModelElementBase::GetSessionId() const
 {
    return CdmSessionManager::GetSessionManager()->GetCurrentSessionId();
 }
 
 /** +-=---------------------------------------------------------Fr 12. Aug 00:36:58 2005----------*
  * @method  CdmModelElementBase::GetUserId                        // public, const                     *
- * @return  long                                             //                                   *
+ * @return qint64                                             //                                   *
  * @comment This method returns the Id of the logged in user.                                     *
  *----------------last changed: --------------------------------Fr 12. Aug 00:36:58 2005----------*/
-long CdmModelElementBase::GetUserId(  ) const
+qint64 CdmModelElementBase::GetUserId(  ) const
 {
    return CdmSessionManager::GetSessionManager()->GetCurrentUserId();
 }

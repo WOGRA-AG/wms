@@ -6,12 +6,12 @@
 class CdbCommandLoadClassManager : public CdbAbstractCommand
 {
 private:
-    long m_lSchemeId;
+   qint64 m_lSchemeId;
     CdmClassManager* m_pClassManager;
 
 
 public:
-    CdbCommandLoadClassManager(long p_lSchemeId, CdbDataAccess* p_pDataAccess);
+    CdbCommandLoadClassManager(qint64 p_lSchemeId, CdbDataAccess* p_pDataAccess);
     virtual ~CdbCommandLoadClassManager();
     CdmClassManager* GetResult();
 

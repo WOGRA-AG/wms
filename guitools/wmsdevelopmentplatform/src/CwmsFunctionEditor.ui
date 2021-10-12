@@ -667,7 +667,7 @@
   </connection>
   <connection>
    <sender>m_pqcbType</sender>
-   <signal>currentIndexChanged(int)</signal>
+   <signal>currentIndexChanged</signal>
    <receiver>CwmsFunctionEditorClass</receiver>
    <slot>TypeIndexChangedSlot()</slot>
    <hints>

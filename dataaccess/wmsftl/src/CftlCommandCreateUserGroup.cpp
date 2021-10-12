@@ -17,7 +17,7 @@ CftlCommandCreateUserGroup::~CftlCommandCreateUserGroup()
 
 int CftlCommandCreateUserGroup::Execute()
 {
-    long lRet = CdmLogging::eDmUnknownUserQueryError;
+   qint64 lRet = CdmLogging::eDmUnknownUserQueryError;
     int iAccessorId = InsertInAccessorTable(eUmUserGroupTypeUser);
 
     if(SUCCESSFULL(iAccessorId))
@@ -30,7 +30,7 @@ int CftlCommandCreateUserGroup::Execute()
 
 int CftlCommandCreateUserGroup::InsertInGroupTable(int p_iAccessorId)
 {
-    long lRet = CdmLogging::eDmUnknownUserQueryError;
+   qint64 lRet = CdmLogging::eDmUnknownUserQueryError;
     QSqlQuery cQSqlQuery(GetSqlDatabase());
 
     cQSqlQuery.prepare("insert into WMS_UM_GROUP (GroupId, Name) values(?, ?)");

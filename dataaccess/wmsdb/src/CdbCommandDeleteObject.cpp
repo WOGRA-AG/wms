@@ -11,7 +11,7 @@
 #include "CdbCommandCheckObjectLocked.h"
 #include "CdbCommandDeleteObject.h"
 
-CdbCommandDeleteObject::CdbCommandDeleteObject(long p_lObjectId, long p_lSessionId, CdbDataAccess* p_pDataAccess)
+CdbCommandDeleteObject::CdbCommandDeleteObject(qint64 p_lObjectId,qint64 p_lSessionId, CdbDataAccess* p_pDataAccess)
 : CdbAbstractCommandTransactional(p_pDataAccess),
   m_lObjectId(p_lObjectId),
   m_lSessionId(p_lSessionId)
@@ -30,7 +30,7 @@ bool CdbCommandDeleteObject::CheckValid()
 
 int CdbCommandDeleteObject::Execute()
 {
-    long lRet = CdmLogging::eDmObjectAccessError;
+   qint64 lRet = CdmLogging::eDmObjectAccessError;
 
     if(CHKPTR(GetDataAccess()))
     {

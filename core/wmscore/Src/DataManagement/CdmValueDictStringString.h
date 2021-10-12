@@ -24,8 +24,8 @@ private:
     QMap<QString,QString> m_qmMap;
 
 public:
-    CdmValueDictStringString( long p_lDatabaseId,
-                              long p_lId,
+    CdmValueDictStringString(qint64 p_lDatabaseId,
+                             qint64 p_lId,
                               QString p_qstrKeyname,
                               CdmObject* p_pCdmObject);
     virtual ~CdmValueDictStringString( );

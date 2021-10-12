@@ -77,12 +77,12 @@ class BASETOOLS_API CwmsExportWriter
     * @return  bool                                          //                                   *
     * @param   QTextStream& p_rqtStream                      //                                   *
     * @param   CdmObjectContainer* p_pContainer               //                                   *
-    * @param   QList<long> p_rqvlObjects                //                                   *
+    * @param   QList<qint64> p_rqvlObjects                //                                   *
     * @comment                                                                                    *
     *----------------last changed: -----------------------------Mo 29. Okt 10:37:11 2012----------*/
     bool ExportCsv(QTextStream& p_rqtStream,
                    CdmObjectContainer* p_pContainer,
-                   QList<long> p_rqvlObjects);
+                   QList<qint64> p_rqvlObjects);
 
    private:
    /** +-=---------------------------------------------------------Mo 29. Okt 10:38:10 2012-------*
@@ -105,11 +105,11 @@ class BASETOOLS_API CwmsExportWriter
    /** +-=---------------------------------------------------------So 18. Nov 11:15:39 2007-------*
     * @method  CwmsExportWriter::GetQueryObjects         // private                           *
     * @return  bool                                          // successflag                       *
-    * @param   QList<long>& p_rqvlObjects               //                                   *
+    * @param   QList<qint64>& p_rqvlObjects               //                                   *
     * @param   CdmObjectContainer* p_pContainer               //                                   *
     * @comment This method returns the query objects which are the result of the query.           *
     *----------------last changed: Wolfgang Graßhof-------------So 18. Nov 11:15:39 2007----------*/
-    bool GetQueryObjects(QList<long>& p_rqvlObjects, CdmObjectContainer* p_pContainer);
+    bool GetQueryObjects(QList<qint64>& p_rqvlObjects, CdmObjectContainer* p_pContainer);
 
    private:
    /** +-=---------------------------------------------------------Mo 29. Okt 10:37:36 2012-------*
@@ -117,12 +117,12 @@ class BASETOOLS_API CwmsExportWriter
     * @return  bool                                          //                                   *
     * @param   QTextStream& p_rqtStream                      //                                   *
     * @param   CdmObjectContainer* p_pContainer               //                                   *
-    * @param   QList<long> p_rqvlObjects                //                                   *
+    * @param   QList<qint64> p_rqvlObjects                //                                   *
     * @comment                                                                                    *
     *----------------last changed: -----------------------------Mo 29. Okt 10:37:36 2012----------*/
     bool ExportHtml(QTextStream& p_rqtStream,
                     CdmObjectContainer* p_pContainer,
-                    QList<long> p_rqvlObjects);
+                    QList<qint64> p_rqvlObjects);
 
    private:
    /** +-=---------------------------------------------------------Mo 29. Okt 10:37:44 2012-------*
@@ -130,12 +130,12 @@ class BASETOOLS_API CwmsExportWriter
     * @return  bool                                          //                                   *
     * @param   QTextStream& p_rqtStream                      //                                   *
     * @param   CdmObjectContainer* p_pContainer               //                                   *
-    * @param   QList<long> p_rqvlObjects                //                                   *
+    * @param   QList<qint64> p_rqvlObjects                //                                   *
     * @comment                                                                                    *
     *----------------last changed: -----------------------------Mo 29. Okt 10:37:44 2012----------*/
     bool ExportXml(QTextStream& p_rqtStream,
                    CdmObjectContainer* p_pContainer,
-                   QList<long> p_rqvlObjects);
+                   QList<qint64> p_rqvlObjects);
 
    private:
    /** +-=---------------------------------------------------------So 18. Nov 11:15:23 2007-------*

@@ -22,14 +22,14 @@
 /** +-=---------------------------------------------------------Sa 11. Aug 20:41:38 2007----------*
  * @method  CdmValueDictIntDouble::CdmValueDictIntDouble               // public                            *
  * @return  void                                             //                                   *
- * @param   long p_lDatabaseId                               //                                   *
- * @param   long p_lId                                       //                                   *
+ * @param  qint64 p_lDatabaseId                               //                                   *
+ * @param  qint64 p_lId                                       //                                   *
  * @param   QString p_qstrKeyname                            //                                   *
  * @param   CdmObject* p_pCdmObject                          //                                   *
  * @comment The constructor of the stringlist.                                                    *
  *----------------last changed: Wolfgang Graßhof----------------Sa 11. Aug 20:41:38 2007----------*/
-CdmValueDictIntDouble::CdmValueDictIntDouble(long p_lDatabaseId,
-                                   long p_lId,
+CdmValueDictIntDouble::CdmValueDictIntDouble(qint64 p_lDatabaseId,
+                                  qint64 p_lId,
                                    QString p_qstrKeyname,
                                    CdmObject* p_pCdmObject)
 : CdmValueCharacterDocument(p_lDatabaseId, p_lId, p_qstrKeyname, eDmValueDictIntDouble, p_pCdmObject)

@@ -526,7 +526,7 @@ QString CwmsCodeGeneratorCBase::GetParameter(EdmValueType p_eDmValue)
       qstrRet = "QList<QString> p_qlValue";
       break;
    case eDmValueLong:
-      qstrRet = "long p_lValue";
+      qstrRet = "qint64 p_lValue";
       break;
    case eDmValueContainerRef:
       qstrRet = "CdmObjectContainer* p_pCdmOLValue";
@@ -625,7 +625,7 @@ QString CwmsCodeGeneratorCBase::GetReturnType(EdmValueType p_eDmValue)
       qstrRet = "QList<QString>";
       break;
    case eDmValueLong:
-      qstrRet = "long";
+      qstrRet = "qint64";
       break;
    case eDmValueContainerRef:
       qstrRet = "CdmObjectContainer*";

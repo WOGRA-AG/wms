@@ -91,7 +91,7 @@
  <connections>
   <connection>
    <sender>m_pqcbDatasourceType</sender>
-   <signal>currentIndexChanged(int)</signal>
+   <signal>currentIndexChanged</signal>
    <receiver>CwmsDataAccessConfigurator</receiver>
    <slot>DatasourceTypeChangedSlot()</slot>
    <hints>

@@ -7,15 +7,15 @@
 class CdbCommandGetContainerList : public CdbAbstractCommand
 {
 private:
-    long m_lSchemeId;
-    long m_lClassId;
-    QMap<long, QString> m_qmContainer;
-    QList<long> GetClassList();
+   qint64 m_lSchemeId;
+   qint64 m_lClassId;
+    QMap<qint64, QString> m_qmContainer;
+    QList<qint64> GetClassList();
     QString GetClassListString();
 public:
-    CdbCommandGetContainerList(long p_lSchemeId, long p_lClassId, CdbDataAccess* p_pDataAccess);
+    CdbCommandGetContainerList(qint64 p_lSchemeId,qint64 p_lClassId, CdbDataAccess* p_pDataAccess);
     virtual ~CdbCommandGetContainerList();
-    void GetResult(QMap<long, QString>& p_rqmContainerList);
+    void GetResult(QMap<qint64, QString>& p_rqmContainerList);
 
 protected:
     bool CheckValid();

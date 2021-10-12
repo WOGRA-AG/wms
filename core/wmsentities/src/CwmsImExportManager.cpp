@@ -229,10 +229,10 @@ CdmObjectContainer* CwmsImExportManager::GetExportObjectList()
 /** +-=---------------------------------------------------------Mi 6. Feb 11:35:41 2013-----------*
  * @method  CwmsImExportManager::GetImportConfiguration      // public                            *
  * @return  QMap<QString, QString>                           //                                   *
- * @param   long p_lClass                                    //                                   *
+ * @param  qint64 p_lClass                                    //                                   *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------Mi 6. Feb 11:35:41 2013-----------*/
-QMap<QString, QString> CwmsImExportManager::GetImportConfiguration(long p_lClass)
+QMap<QString, QString> CwmsImExportManager::GetImportConfiguration(qint64 p_lClass)
 {
 
    QMap<QString, QString> qmConfigurations;
@@ -299,10 +299,10 @@ QMap<QString, QString> CwmsImExportManager::GetExportConfiguration(CdmClass* p_p
 /** +-=---------------------------------------------------------Mi 6. Feb 11:36:17 2013-----------*
  * @method  CwmsImExportManager::GetExportConfiguration      // public                            *
  * @return  QMap<QString, QString>                           //                                   *
- * @param   long p_lClass                                    //                                   *
+ * @param  qint64 p_lClass                                    //                                   *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------Mi 6. Feb 11:36:17 2013-----------*/
-QMap<QString, QString> CwmsImExportManager::GetExportConfiguration(long p_lClass)
+QMap<QString, QString> CwmsImExportManager::GetExportConfiguration(qint64 p_lClass)
 {
 
    QMap<QString, QString> qmConfigurations;
@@ -323,10 +323,10 @@ QMap<QString, QString> CwmsImExportManager::GetExportConfiguration(long p_lClass
 /** +-=---------------------------------------------------------Do 28. Feb 15:19:33 2013----------*
  * @method  CwmsImExportManager::GetExportConfigurationNames // public                            *
  * @return  QStringList                                      //                                   *
- * @param   long p_lClass                                    //                                   *
+ * @param  qint64 p_lClass                                    //                                   *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------Do 28. Feb 15:19:33 2013----------*/
-QStringList CwmsImExportManager::GetExportConfigurationNames(long p_lClass)
+QStringList CwmsImExportManager::GetExportConfigurationNames(qint64 p_lClass)
 {
    QStringList qstrlConfigs;
    if (p_lClass > 0)
@@ -345,10 +345,10 @@ QStringList CwmsImExportManager::GetExportConfigurationNames(long p_lClass)
 /** +-=---------------------------------------------------------Do 28. Feb 15:20:10 2013----------*
  * @method  CwmsImExportManager::GetImportConfigurationNames // public                            *
  * @return  QStringList                                      //                                   *
- * @param   long p_lClass                                    //                                   *
+ * @param  qint64 p_lClass                                    //                                   *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------Do 28. Feb 15:20:10 2013----------*/
-QStringList CwmsImExportManager::GetImportConfigurationNames(long p_lClass)
+QStringList CwmsImExportManager::GetImportConfigurationNames(qint64 p_lClass)
 {
    QStringList qstrlConfigs;
    if (p_lClass > 0)
@@ -368,10 +368,10 @@ QStringList CwmsImExportManager::GetImportConfigurationNames(long p_lClass)
  * @method  CwmsImExportManager::GetExportConfiguration      // public                            *
  * @return  QString                                          //                                   *
  * @param   QString p_qstrName                               //                                   *
- * @param   long p_lClass                                    //                                   *
+ * @param  qint64 p_lClass                                    //                                   *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------Mi 6. Feb 12:14:12 2013-----------*/
-QString CwmsImExportManager::GetExportConfiguration(QString p_qstrName, long p_lClass)
+QString CwmsImExportManager::GetExportConfiguration(QString p_qstrName,qint64 p_lClass)
 {
    QString qstrConfig;
 
@@ -392,10 +392,10 @@ QString CwmsImExportManager::GetExportConfiguration(QString p_qstrName, long p_l
  * @method  CwmsImExportManager::GetImportConfiguration      // public                            *
  * @return  QString                                          //                                   *
  * @param   QString p_qstrName                               //                                   *
- * @param   long p_lClass                                    //                                   *
+ * @param  qint64 p_lClass                                    //                                   *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------Mi 6. Feb 12:13:56 2013-----------*/
-QString CwmsImExportManager::GetImportConfiguration(QString p_qstrName, long p_lClass)
+QString CwmsImExportManager::GetImportConfiguration(QString p_qstrName,qint64 p_lClass)
 {
    QString qstrConfig;
 
@@ -415,11 +415,11 @@ QString CwmsImExportManager::GetImportConfiguration(QString p_qstrName, long p_l
 /** +-=---------------------------------------------------------Do 28. Feb 15:18:26 2013----------*
  * @method  CwmsImExportManager::LoadConfigurationNames      // public                            *
  * @return  QStringList                                      //                                   *
- * @param   long p_lClassId                                  //                                   *
+ * @param  qint64 p_lClassId                                  //                                   *
  * @param   CdmObjectContainer* p_pObjectList                     //                                   *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------Do 28. Feb 15:18:26 2013----------*/
-QStringList CwmsImExportManager::LoadConfigurationNames(long p_lClassId,
+QStringList CwmsImExportManager::LoadConfigurationNames(qint64 p_lClassId,
                                                         CdmObjectContainer* p_pObjectList)
 {
    QStringList qstrlConfigurations;
@@ -446,11 +446,11 @@ QStringList CwmsImExportManager::LoadConfigurationNames(long p_lClassId,
 /** +-=---------------------------------------------------------Mi 6. Feb 11:13:35 2013-----------*
  * @method  CwmsImExportManager::LoadConfigurations          // public                            *
  * @return  QMap<QString, QString>                           //                                   *
- * @param   long p_lClassId                                  //                                   *
+ * @param  qint64 p_lClassId                                  //                                   *
  * @param   CdmObjectContainer* p_pObjectList                     //                                   *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------Mi 6. Feb 11:13:35 2013-----------*/
-QMap<QString, QString> CwmsImExportManager::LoadConfigurations(long p_lClassId,
+QMap<QString, QString> CwmsImExportManager::LoadConfigurations(qint64 p_lClassId,
                                                                CdmObjectContainer* p_pObjectList)
 {
    QMap<QString, QString> qmConfigurations;
@@ -479,12 +479,12 @@ QMap<QString, QString> CwmsImExportManager::LoadConfigurations(long p_lClassId,
  * @method  CwmsImExportManager::GetConfiguration            // public                            *
  * @return  QString                                          //                                   *
  * @param   QString p_qstrName                               //                                   *
- * @param   long p_lClassId                                  //                                   *
+ * @param  qint64 p_lClassId                                  //                                   *
  * @param   CdmObjectContainer* p_pObjectList                     //                                   *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------Mi 6. Feb 12:11:49 2013-----------*/
 QString CwmsImExportManager::GetConfiguration(QString p_qstrName,
-                                              long p_lClassId,
+                                             qint64 p_lClassId,
                                               CdmObjectContainer* p_pObjectList)
 {
    QString qstrConfiguration;
@@ -512,11 +512,11 @@ QString CwmsImExportManager::GetConfiguration(QString p_qstrName,
  * @method  CwmsImExportManager::CreateOrGetExportConfiguration // public                         *
  * @return  CwmsImExportConfiguration                        //                                   *
  * @param   QString p_qstrName                               //                                   *
- * @param   long p_lClassId                                  //                                   *
+ * @param  qint64 p_lClassId                                  //                                   *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------Mi 6. Feb 15:34:26 2013-----------*/
 CwmsImExportConfiguration CwmsImExportManager::CreateOrGetExportConfiguration(QString p_qstrName,
-                                                                              long p_lClassId)
+                                                                             qint64 p_lClassId)
 {
    return CreateOrGetConfiguration(p_qstrName, p_lClassId, GetExportObjectList());
 }
@@ -525,11 +525,11 @@ CwmsImExportConfiguration CwmsImExportManager::CreateOrGetExportConfiguration(QS
  * @method  CwmsImExportManager::CreateOrGetImportConfiguration // public                         *
  * @return  CwmsImExportConfiguration                        //                                   *
  * @param   QString p_qstrName                               //                                   *
- * @param   long p_lClassId                                  //                                   *
+ * @param  qint64 p_lClassId                                  //                                   *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------Mi 6. Feb 15:34:05 2013-----------*/
 CwmsImExportConfiguration CwmsImExportManager::CreateOrGetImportConfiguration(QString p_qstrName,
-                                                                              long p_lClassId)
+                                                                             qint64 p_lClassId)
 {
    return CreateOrGetConfiguration(p_qstrName, p_lClassId, GetImportObjectList());
 }
@@ -538,12 +538,12 @@ CwmsImExportConfiguration CwmsImExportManager::CreateOrGetImportConfiguration(QS
  * @method  CwmsImExportManager::CreateOrGetConfiguration    // public                            *
  * @return  CwmsImExportConfiguration                        //                                   *
  * @param   QString p_qstrName                               //                                   *
- * @param   long p_lClassId                                  //                                   *
+ * @param  qint64 p_lClassId                                  //                                   *
  * @param   CdmObjectContainer* p_pList                           //                                   *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------Mi 6. Feb 15:34:51 2013-----------*/
 CwmsImExportConfiguration CwmsImExportManager::CreateOrGetConfiguration(QString p_qstrName,
-                                                                        long p_lClassId,
+                                                                       qint64 p_lClassId,
                                                                         CdmObjectContainer* p_pList)
 {
    CwmsImExportConfiguration cConfig = GetConfigurationObject(p_qstrName, p_lClassId, p_pList);
@@ -564,12 +564,12 @@ CwmsImExportConfiguration CwmsImExportManager::CreateOrGetConfiguration(QString 
  * @method  CwmsImExportManager::GetConfigurationObject      // public                            *
  * @return  CwmsImExportConfiguration                        //                                   *
  * @param   QString p_qstrName                               //                                   *
- * @param   long p_lClassId                                  //                                   *
+ * @param  qint64 p_lClassId                                  //                                   *
  * @param   CdmObjectContainer* p_pList                           //                                   *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------Mi 6. Feb 15:37:14 2013-----------*/
 CwmsImExportConfiguration CwmsImExportManager::GetConfigurationObject(QString p_qstrName,
-                                                                      long p_lClassId,
+                                                                     qint64 p_lClassId,
                                                                       CdmObjectContainer* p_pList)
 {
    CwmsImExportConfiguration cConfig;
@@ -583,11 +583,11 @@ CwmsImExportConfiguration CwmsImExportManager::GetConfigurationObject(QString p_
 
       if (CHKPTR(pQuery))
       {
-         QList<long> qllResults = pQuery->GetResultList();
+         QList<qint64> qllResults = pQuery->GetResultList();
 
          if (qllResults.count() > 0)
          {
-            long lObjectId = *qllResults.begin();
+           qint64 lObjectId = *qllResults.begin();
             CdmObject* pObject = p_pList->FindObjectById(lObjectId);
             cConfig.SetObject(pObject);
          }

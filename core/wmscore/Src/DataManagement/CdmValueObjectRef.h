@@ -30,14 +30,14 @@ class WMSMANAGER_API CdmValueObjectRef : public CdmValueLong
     Q_OBJECT
 
 private:    
-    long m_lObjectListId;
+   qint64 m_lObjectListId;
     mutable bool m_bObjectConnected;
     QString m_qstrObjectKeyname;
     QString m_qstrContainerKeyname;
     QString m_qstrReferenceUri;
 
 public:
-    CdmValueObjectRef(  long p_lDatabaseId, long p_lId, QString p_qstrKeyname, CdmObject* p_pCdmObject );
+    CdmValueObjectRef( qint64 p_lDatabaseId,qint64 p_lId, QString p_qstrKeyname, CdmObject* p_pCdmObject );
     CdmValueObjectRef( QVariantMap& p_rqvHash, CdmObject* p_pCdmObject);
     virtual ~CdmValueObjectRef(  );
     void SetDefaultValue(const CdmMember* p_pCdmMember);
@@ -55,12 +55,12 @@ public:
 
 public slots:
     virtual bool HasValue( ) const;
-    void SetValue(long p_lObjectListId, long p_lObjectId, QString p_qstrObjectKeyname, QString p_qstrContainerKeyname);
+    void SetValue(qint64 p_lObjectListId,qint64 p_lObjectId, QString p_qstrObjectKeyname, QString p_qstrContainerKeyname);
     void SetValue( const CdmObject* p_pCdmObject);
     void SetEventValue(const CdmObject *p_pCdmObject, const CdmObject *pEventObject);
     CdmObject* GetObject( );
-    long GetObjectListId( );
-    long GetClassId( ) const;
+   qint64 GetObjectListId( );
+   qint64 GetClassId( ) const;
     QString GetDisplayString( ) const;
     bool IsTypeOf( QString p_qstrClassName) const;
 

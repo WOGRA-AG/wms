@@ -6,10 +6,10 @@
 class CdbCommandCheckObjectUsed : public CdbAbstractCommand
 {
 private:
-    long m_lObjectId;
-    long m_lContainerId;
+   qint64 m_lObjectId;
+   qint64 m_lContainerId;
 public:
-    CdbCommandCheckObjectUsed(long p_lObjectId, long p_lContainerId, CdbDataAccess* p_pDataAccess);
+    CdbCommandCheckObjectUsed(qint64 p_lObjectId,qint64 p_lContainerId, CdbDataAccess* p_pDataAccess);
     virtual ~CdbCommandCheckObjectUsed();
 
 protected:

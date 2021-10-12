@@ -57,17 +57,17 @@ CftlCommandQuery::~CftlCommandQuery()
     }
 }
 
-long CftlCommandQuery::Execute(CftlDataAccess* p_pCftlDataAccess, CdmQuery* p_pCdmQuery)
+qint64 CftlCommandQuery::Execute(CftlDataAccess* p_pCftlDataAccess, CdmQuery* p_pCdmQuery)
 {
-    long lRet = CdmLogging::eDmUnknownDBQueryError;
+   qint64 lRet = CdmLogging::eDmUnknownDBQueryError;
     CftlCommandQuery cQuery(p_pCftlDataAccess, p_pCdmQuery);
     lRet = cQuery.ExecuteQuery();
     return lRet;
 }
 
-long CftlCommandQuery::ExecuteQuery()
+qint64 CftlCommandQuery::ExecuteQuery()
 {
-    long lRet = CdmLogging::eDmUnknownDBQueryError;
+   qint64 lRet = CdmLogging::eDmUnknownDBQueryError;
 
     if(CHKPTR(m_rpCftlDataAccess) &&
        CHKPTR(m_rpCdmQuery))
@@ -78,9 +78,9 @@ long CftlCommandQuery::ExecuteQuery()
     return lRet;
 }
 
-long CftlCommandQuery::ExecuteQueryP()
+qint64 CftlCommandQuery::ExecuteQueryP()
 {
-    long lRet = CdmLogging::eDmUnknownDBQueryError;
+   qint64 lRet = CdmLogging::eDmUnknownDBQueryError;
     QString qstrSql = GenerateSql();
     QSqlQuery cQSqlQuery;
     int iColumnCount = 0;

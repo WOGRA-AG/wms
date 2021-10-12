@@ -379,7 +379,7 @@ p, li { white-space: pre-wrap; }
   </connection>
   <connection>
    <sender>m_pqTabWidget</sender>
-   <signal>currentChanged(int)</signal>
+   <signal>currentChanged</signal>
    <receiver>CwmsViewEditorClass</receiver>
    <slot>CurrentTabChangedSlot()</slot>
    <hints>

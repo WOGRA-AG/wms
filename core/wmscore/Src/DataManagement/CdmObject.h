@@ -34,28 +34,28 @@ class WMSMANAGER_API CdmObject : public CdmModelElement
 private:
     int                        m_iValueIdCounter;
     QMap<QString,CdmValue*>    m_qmValues;
-    long                       m_lClassId;
+   qint64                       m_lClassId;
     CdmObjectContainer*        m_rpContainer;
-    mutable long               m_lContainerId;
+    mutable qint64               m_lContainerId;
     bool                       m_bIsInitialized;
-    long                       m_lParentId;
+   qint64                       m_lParentId;
     bool                       m_bIsImmutable;
     bool                       m_bCommitRunning;
     mutable QPointer<CdmClass> m_rpClass = {};
 
 private:
     CdmObject(QVariantMap& p_rqvHash);
-    CdmObject(CdmObjectContainer* p_pContainer, CdmObject* p_pCdmObject, long p_lId);
-    CdmObject(long p_lDatbaseId,
-              long p_lId,
+    CdmObject(CdmObjectContainer* p_pContainer, CdmObject* p_pCdmObject,qint64 p_lId);
+    CdmObject(qint64 p_lDatbaseId,
+             qint64 p_lId,
               QString p_qstrKeyname,
-              long p_lClassId,
+             qint64 p_lClassId,
               CdmObjectContainer* p_pContainer);
 
-    CdmObject(long p_lDatbaseId, long p_lId, long p_lClassId, long p_lObjectListId);
-    CdmObject(const CdmObject& p_rCdmObject, long p_lId);
-    CdmObject(long p_lDatbaseId,
-              long p_lId,
+    CdmObject(qint64 p_lDatbaseId,qint64 p_lId,qint64 p_lClassId,qint64 p_lObjectListId);
+    CdmObject(const CdmObject& p_rCdmObject,qint64 p_lId);
+    CdmObject(qint64 p_lDatbaseId,
+             qint64 p_lId,
               QString p_qstrKeyname,
               const CdmClass* p_pCdmClass,
               CdmObjectContainer* p_pContainer);
@@ -66,7 +66,7 @@ public:
     void Deploy(QVariantMap& p_rqvHash);
     void DeployValues(QVariantMap& p_rqvHash);
     void SetObjectContainer(CdmObjectContainer* p_pContainer);
-    void SetObjectContainer(long lObjectContainerId);
+    void SetObjectContainer(qint64 lObjectContainerId);
     QString GetUri() const;
     int SetValue(const wchar_t* p_pKeyname, const double p_dValue);
     void ClearValuesFromObject();
@@ -79,7 +79,7 @@ public:
     void SetValues(QVariantMap& p_rqvHash);
     void SetVariant(QVariantMap& p_rqvHash);
     void SetParentObject(CdmObject* p_pCdmObject);
-    void SetParent(long p_lObjectId);
+    void SetParent(qint64 p_lObjectId);
     void ClearPersistentValuesFromObject();
     bool IsExactTypeOf(QString p_qstrClassName) const;
     bool IsExactTypeOf(CdmClass *p_pClass) const;
@@ -110,16 +110,16 @@ public:
     int SetValue(const QString& p_qstrKeyname, const float p_rfValue);
     int SetValue(const QString& p_qstrKeyname, const int p_riValue);
     int GetValue(const QString& p_qstrKeyname, int& p_iValue);
-    int GetValue(const QString& p_qstrKeyname, long& p_lValue);
-    int SetValue(const QString& p_qstrKeyname, const long p_lValue);
+    int GetValue(const QString& p_qstrKeyname,qint64& p_lValue);
+    int SetValue(const QString& p_qstrKeyname, const qint64 p_lValue);
     int SetValue(const QString& p_qstrKeyname, const QTime& p_qtValue);
     int DeleteValue(const QString& p_qstrKeyname);
     void SetDeleted();
     void SetNew();
     CdmObjectContainer* GetObjectContainer() const;
-    long GetObjectContainerId() const;
+   qint64 GetObjectContainerId() const;
     void ResetNewModified();
-    long GetClassId() const;
+   qint64 GetClassId() const;
     bool IsObjectInitialized() const;
     int GetValueCounter() const;
     void SetValueIdCounter(int p_lValueIdCounter);
@@ -140,7 +140,7 @@ public:
     bool IsTypeOf(QString p_qstrClassName) const;
     void Refresh();
     CdmObject* GetParent();
-    long GetParentId() const;
+   qint64 GetParentId() const;
     void GetChanges(QList<CdmJournalItem*>& p_rqllChanges);
     void GetChanges(QDate p_qdFrom, QDate p_qdTo, QList<CdmJournalItem*>& p_rqllChanges);
     bool HasParent() const;

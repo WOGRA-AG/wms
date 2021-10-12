@@ -33,9 +33,9 @@ CwnJournal::~CwnJournal()
 
 }
 
-long CwnJournal::ValueModified(CdmValue* p_pCdmValue){
+qint64 CwnJournal::ValueModified(CdmValue* p_pCdmValue){
 
-    long lRet = CdmLogging::eDmObjectAccessError;
+   qint64 lRet = CdmLogging::eDmObjectAccessError;
     if (CHKPTR(p_pCdmValue) && p_pCdmValue->GetValueType() != eDmValueBinaryDocument)
     {
         this->qstrQuery = QString("MATCH (s:Scheme) WHERE id(s)=%1 CREATE (s)-[:scheme_journal]->(j:ObjectModified:WMSJournal) WITH j ")
@@ -62,9 +62,9 @@ long CwnJournal::ValueModified(CdmValue* p_pCdmValue){
     return lRet;
 }
 
-long CwnJournal::ObjectDeleted(int p_iObjectId)
+qint64 CwnJournal::ObjectDeleted(int p_iObjectId)
 {
-    long lRet = CdmLogging::eDmObjectAccessError;
+   qint64 lRet = CdmLogging::eDmObjectAccessError;
     if (p_iObjectId > 0)
     {
         CdmDataProvider* pCdmManager = CdmSessionManager::GetDataProvider();
@@ -88,9 +88,9 @@ long CwnJournal::ObjectDeleted(int p_iObjectId)
 }
 
 
-long CwnJournal::ObjectModified(CdmObject* p_pCdmObject)
+qint64 CwnJournal::ObjectModified(CdmObject* p_pCdmObject)
 {
-   long lRet = CdmLogging::eDmObjectAccessError;
+  qint64 lRet = CdmLogging::eDmObjectAccessError;
    if (CHKPTR(p_pCdmObject))
    {
       this->qstrQuery = QString("MATCH (s:Scheme) WHERE id(s)=%1 CREATE (s)-[:scheme_journal]->(j:ObjectModified:WMSJournal) WITH j ").arg(p_pCdmObject->GetSchemeId());
@@ -125,9 +125,9 @@ long CwnJournal::ObjectModified(CdmObject* p_pCdmObject)
    return lRet;
 }
 
-long CwnJournal::ObjectListModified(CdmObjectContainer* p_pContainer)
+qint64 CwnJournal::ObjectListModified(CdmObjectContainer* p_pContainer)
 {
-    long lRet = CdmLogging::eDmObjectAccessError;
+   qint64 lRet = CdmLogging::eDmObjectAccessError;
     if(CHKPTR(p_pContainer))
     {
         this->qstrQuery = QString("MATCH (s:Scheme) WHERE id(s)=%1 CREATE (s)-[:scheme_journal]->(j:ObjectListModified:WMSJournal) WITH j ").arg(p_pContainer->GetSchemeId());
@@ -167,9 +167,9 @@ long CwnJournal::ObjectListModified(CdmObjectContainer* p_pContainer)
     return lRet;
  }
 
-long CwnJournal::ObjectListDeleted(int p_iObjectListId)
+qint64 CwnJournal::ObjectListDeleted(int p_iObjectListId)
 {
-    long lRet = CdmLogging::eDmObjectAccessError;
+   qint64 lRet = CdmLogging::eDmObjectAccessError;
     if (p_iObjectListId > 0)
     {
         CdmDataProvider* pCdmManager = CdmSessionManager::GetDataProvider();
@@ -193,9 +193,9 @@ long CwnJournal::ObjectListDeleted(int p_iObjectListId)
 
 }
 
-long CwnJournal::GetObjectModifications(int p_iObjectId, QDate p_qdFrom, QDate p_qdTo, QList<CdmJournalItem *> &p_rqlItems)
+qint64 CwnJournal::GetObjectModifications(int p_iObjectId, QDate p_qdFrom, QDate p_qdTo, QList<CdmJournalItem *> &p_rqlItems)
 {
-    long lRet = CdmLogging::eDmObjectAccessError;
+   qint64 lRet = CdmLogging::eDmObjectAccessError;
 
     QDateTime qdFrom;
     qdFrom.setDate(p_qdFrom);
@@ -217,9 +217,9 @@ long CwnJournal::GetObjectModifications(int p_iObjectId, QDate p_qdFrom, QDate p
     return lRet;
 }
 
-long CwnJournal::GetObjectListModifications(int p_iObjectListId, QDate p_qdFrom, QDate p_qdTo, QList<CdmJournalItem *> &p_rqlItems)
+qint64 CwnJournal::GetObjectListModifications(int p_iObjectListId, QDate p_qdFrom, QDate p_qdTo, QList<CdmJournalItem *> &p_rqlItems)
 {
-    long lRet = CdmLogging::eDmObjectAccessError;
+   qint64 lRet = CdmLogging::eDmObjectAccessError;
 
     QDateTime qdFrom;
     qdFrom.setDate(p_qdFrom);
@@ -242,9 +242,9 @@ long CwnJournal::GetObjectListModifications(int p_iObjectListId, QDate p_qdFrom,
 
 }
 
-long CwnJournal::GetSchemeModifications(int p_iDatabaseId, QDate p_qdFrom, QDate p_qdTo, QList<CdmJournalItem *> &p_rqlItems)
+qint64 CwnJournal::GetSchemeModifications(int p_iDatabaseId, QDate p_qdFrom, QDate p_qdTo, QList<CdmJournalItem *> &p_rqlItems)
 {
-    long lRet = CdmLogging::eDmObjectAccessError;
+   qint64 lRet = CdmLogging::eDmObjectAccessError;
 
     if (p_iDatabaseId>0)
     {

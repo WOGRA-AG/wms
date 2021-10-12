@@ -74,10 +74,10 @@ public:
    public:
    /** +-=---------------------------------------------------------Mo 19. Mai 20:30:46 2008-------*
     * @method  CwmsClassSelectionIf::GetSelectedClass        // public                            *
-    * @return  long                                          //                                   *
+    * @return qint64                                          //                                   *
     * @comment                                                                                    *
     *----------------last changed: -----------------------------Mo 19. Mai 20:30:46 2008----------*/
-    long GetSelectedClass();
+   qint64 GetSelectedClass();
 
    public:
    /** +-=---------------------------------------------------------Mo 3. Sep 18:25:35 2012--------*

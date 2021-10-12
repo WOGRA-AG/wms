@@ -3162,7 +3162,7 @@ void CwmsAdminMainWindowIf::EditLibrarySlot()
 
         if (eType == eWmsTreeItemTypeFormLibrary)
         {
-            long lObjectId = pCurrent->data(0, Qt::UserRole).toInt();
+           qint64 lObjectId = pCurrent->data(0, Qt::UserRole).toInt();
             CwmsFormManager cFormManager;
             CdmObjectContainer* pContainer = cFormManager.GetFormLibrary();
 
@@ -3209,7 +3209,7 @@ void CwmsAdminMainWindowIf::EditResourceSlot()
 
         if (eType == eWmsTreeItemTypeResource)
         {
-            long lObjectId = pCurrent->data(0, Qt::UserRole).toInt();
+           qint64 lObjectId = pCurrent->data(0, Qt::UserRole).toInt();
             CwmsFormManager cFormManager;
             CdmObjectContainer* pContainer = cFormManager.GetResourceContainer();
 
@@ -3236,7 +3236,7 @@ void CwmsAdminMainWindowIf::DeleteLibrarySlot()
 
         if (eType == eWmsTreeItemTypeFormLibrary)
         {
-            long lObjectId = pCurrent->data(0, Qt::UserRole).toInt();
+           qint64 lObjectId = pCurrent->data(0, Qt::UserRole).toInt();
             CwmsFormManager cFormManager;
             CdmObjectContainer* pContainer = cFormManager.GetFormLibrary();
 
@@ -3265,7 +3265,7 @@ void CwmsAdminMainWindowIf::DeleteResourceSlot()
 
         if (eType == eWmsTreeItemTypeResource)
         {
-            long lObjectId = pCurrent->data(0, Qt::UserRole).toInt();
+           qint64 lObjectId = pCurrent->data(0, Qt::UserRole).toInt();
             CwmsFormManager cFormManager;
             CdmObjectContainer* pContainer = cFormManager.GetResourceContainer();
 

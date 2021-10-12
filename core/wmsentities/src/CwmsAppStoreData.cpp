@@ -75,9 +75,9 @@ void CwmsAppStoreData::GetAppStoreData(QVariantList& p_rList)
     }
 }
 
-long CwmsAppStoreData::AddAppScheme(QVariantMap &p_rMap)
+qint64 CwmsAppStoreData::AddAppScheme(QVariantMap &p_rMap)
 {
-    long lRet = 0;
+   qint64 lRet = 0;
     CdmObjectContainer* pContainer = nullptr;
     CdmDataProvider* pManager = CdmSessionManager::GetDataProvider();
 
@@ -99,9 +99,9 @@ long CwmsAppStoreData::AddAppScheme(QVariantMap &p_rMap)
     return lRet;
 }
 
-long CwmsAppStoreData::AddAppScheme(CdmObjectContainer* p_pContainer, QVariantMap &p_rMap)
+qint64 CwmsAppStoreData::AddAppScheme(CdmObjectContainer* p_pContainer, QVariantMap &p_rMap)
 {
-    long lRet = 0;
+   qint64 lRet = 0;
 
     if (CHKPTR(p_pContainer))
     {
@@ -156,7 +156,7 @@ long CwmsAppStoreData::AddAppScheme(CdmObjectContainer* p_pContainer, QVariantMa
 }
 
 
-bool CwmsAppStoreData::DeleteAppScheme(long p_lAppSchemeId)
+bool CwmsAppStoreData::DeleteAppScheme(qint64 p_lAppSchemeId)
 {
     bool bRet = false;
     CdmObjectContainer* pContainer = nullptr;
@@ -180,7 +180,7 @@ bool CwmsAppStoreData::DeleteAppScheme(long p_lAppSchemeId)
     return bRet;
 }
 
-bool CwmsAppStoreData::DeleteAppScheme(CdmObjectContainer* p_pContainer, long p_lAppSchemeId)
+bool CwmsAppStoreData::DeleteAppScheme(CdmObjectContainer* p_pContainer,qint64 p_lAppSchemeId)
 {
     bool bRet = false;
 
@@ -242,7 +242,7 @@ void CwmsAppStoreData::AddDataToVariant(QVariantList& p_rqvlApps, CdmObject* p_p
         entry.insert(WMS_APP_DESCRIPTION,p_pObject->GetDisplayString("Description"));
         entry.insert(WMS_APP_DEVELOPER, p_pObject->GetDisplayString("Manufacturer"));
         entry.insert(WMS_APP_EMAIL, p_pObject->GetDisplayString("E-Mail") );
-        entry.insert(WMS_APP_ID, (int)p_pObject->GetId());
+        entry.insert(WMS_APP_ID, p_pObject->GetId());
         entry.insert(WMS_APP_WDF, p_pObject->GetDisplayString("WDF"));
 
         CdmValue* pValue = p_pObject->GetValue("Sign");

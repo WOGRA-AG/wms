@@ -28,7 +28,7 @@ CwmsFormObjectRefAssignment::~CwmsFormObjectRefAssignment()
 
 void CwmsFormObjectRefAssignment::FillDialog(CdmClass* p_pClass)
 {
-    long lClassId = 0;
+   qint64 lClassId = 0;
 
     if (p_pClass)
     {
@@ -43,15 +43,15 @@ void CwmsFormObjectRefAssignment::FillDialog(CdmClass* p_pClass)
 
         if(CHKPTR(pIdmDataAccess) && CHKPTR(pCdmManager->GetCurrentScheme()))
         {
-            QMap<long, QString> qmObjectLists;
+            QMap<qint64, QString> qmObjectLists;
             pIdmDataAccess->GetContainerList(pCdmManager->GetCurrentScheme()->GetId(),
                                              lClassId,
                                              qmObjectLists);
 
 
 
-            QMap<long, QString>::iterator qmIt = qmObjectLists.begin();
-            QMap<long, QString>::iterator qmItEnd = qmObjectLists.end();
+            QMap<qint64, QString>::iterator qmIt = qmObjectLists.begin();
+            QMap<qint64, QString>::iterator qmItEnd = qmObjectLists.end();
 
             for(; qmIt != qmItEnd; ++qmIt)
             {

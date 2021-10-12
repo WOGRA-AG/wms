@@ -11,7 +11,7 @@
 #include "CdmMember.h"
 #include "CdmValueInt.h"
 
-CdmValueInt::CdmValueInt(  long p_lDatabaseId, long p_lId, QString p_qstrKeyname, CdmObject* p_pCdmObject )
+CdmValueInt::CdmValueInt( qint64 p_lDatabaseId,qint64 p_lId, QString p_qstrKeyname, CdmObject* p_pCdmObject )
    : CdmValue(p_lDatabaseId, p_lId, p_qstrKeyname, eDmValueInt, p_pCdmObject),
   m_iValue(0)
 {
@@ -19,8 +19,8 @@ CdmValueInt::CdmValueInt(  long p_lDatabaseId, long p_lId, QString p_qstrKeyname
 }
 
 CdmValueInt::CdmValueInt(EdmValueType p_eDmValue,
-                         long p_lDatabaseId,
-                         long p_lId,
+                        qint64 p_lDatabaseId,
+                        qint64 p_lId,
                          QString p_qstrKeyname,
                          CdmObject* p_pCdmObject)
 : CdmValue(p_lDatabaseId, p_lId, p_qstrKeyname, p_eDmValue, p_pCdmObject),

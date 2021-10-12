@@ -20,7 +20,7 @@ int CdbCommandCleanupDB::Execute()
 {
     QSqlQuery cQSqlQuery;
     QString qstrQuery;
-    long lRet = EC(eDmOk);
+   qint64 lRet = EC(eDmOk);
 
     qstrQuery =
             QString("delete from WMS_CLASS "

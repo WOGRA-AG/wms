@@ -607,11 +607,11 @@ void CwmsbtMailMessage::MessageTransmittedSlot(bool p_bSuccess)
     }
 }
 
-bool CwmsbtMailMessage::WaitForMessageSent(long p_iTimeout)
+bool CwmsbtMailMessage::WaitForMessageSent(qint64 p_iTimeout)
 {
     bool bSent = false;
-    long lTimeNeeded = 0;
-    unsigned long sleep = 100;
+   qint64 lTimeNeeded = 0;
+     qint64 sleep = 100;
     while (!m_bMessageSent)
     {
         QThread* pCurrentThread = QThread::currentThread();

@@ -122,17 +122,17 @@ private:
     /*
      * The Id of the Base object it will be used for referencing
      */
-    QAtomicInteger<long> m_lId;
+    QAtomicInteger<qint64> m_lId;
 
     /*
      * The User Id of the latest person who modified this object
      */
-    QAtomicInteger<long>        m_lModifierId;
+    QAtomicInteger<qint64>        m_lModifierId;
 
     /*
      * The User Id of the creator of this object
      */
-    QAtomicInteger<long>        m_lCreatorId;
+    QAtomicInteger<qint64>        m_lCreatorId;
 
     /*
      * The Object keyname
@@ -194,13 +194,13 @@ virtual ~CdmModelElement(  );
    /** +-=---------------------------------------------------------Fr 12. Aug 00:30:46 2005*
     * @method  CdmModelElement::CdmModelElement                              // public                            *
     * @return                                                //                                   *
-    * @param   long p_lDatabaseId                            //                                   *
-    * @param   long p_lId                                    //                                   *
+    * @param  qint64 p_lDatabaseId                            //                                   *
+    * @param  qint64 p_lId                                    //                                   *
     * @param   QString p_qstrKeyname                         //                                   *
     * @param   QString p_qstrCaption = ""                    //                                   *
     * @comment                                                                                    *
     *----------------last changed: -----------------------------Fr 12. Aug 00:30:46 2005----------*/
-CdmModelElement(  long p_lDatabaseId, long p_lId, QString p_qstrKeyname, QString p_qstrCaption = "" );
+CdmModelElement( qint64 p_lDatabaseId,qint64 p_lId, QString p_qstrKeyname, QString p_qstrCaption = "" );
    public:
    /** +-=---------------------------------------------------------Fr 12. Aug 00:31:35 2005*
     * @method  CdmModelElement::GetLastChange                        // public, const                     *
@@ -263,33 +263,33 @@ void SetValid(  );
    public:
    /** +-=---------------------------------------------------------Fr 12. Aug 00:33:03 2005*
     * @method  CdmModelElement::GetCreatorId                         // public, const                     *
-    * @return  long                                          //                                   *
+    * @return qint64                                          //                                   *
     * @comment returns the Id of the creator or null if the system has created this object.       *
     *----------------last changed: -----------------------------Fr 12. Aug 00:33:03 2005----------*/
-long GetCreatorId(  ) const;
+qint64 GetCreatorId(  ) const;
    public:
    /** +-=---------------------------------------------------------Fr 12. Aug 00:33:06 2005*
     * @method  CdmModelElement::SetModifierId                        // public                            *
     * @return  void                                          //                                   *
-    * @param   long p_lUserId                                //                                   *
+    * @param  qint64 p_lUserId                                //                                   *
     * @comment Sets the Modifier Id.                                                              *
     *----------------last changed: -----------------------------Fr 12. Aug 00:33:06 2005----------*/
-void SetModifierId(  long p_lUserId );
+void SetModifierId( qint64 p_lUserId );
    public:
    /** +-=---------------------------------------------------------Fr 12. Aug 00:33:00 2005*
     * @method  CdmModelElement::SetCreatorId                         // public                            *
     * @return  void                                          //                                   *
-    * @param   long p_lUserId                                //                                   *
+    * @param  qint64 p_lUserId                                //                                   *
     * @comment This method sets the creator of this object.                                       *
     *----------------last changed: -----------------------------Fr 12. Aug 00:33:00 2005----------*/
-void SetCreatorId(  long p_lUserId );
+void SetCreatorId( qint64 p_lUserId );
     public slots:
          /** +-=---------------------------------------------------------Mo 19. Nov 15:49:09 2012-------*
     * @method  CdmModelElement::GetModifierId                        // public, const, slots              *
-    * @return  long                                          //                                   *
+    * @return qint64                                          //                                   *
     * @comment returns the id of the modifier or 0 for system modifier.                           *
     *----------------last changed: -----------------------------Mo 19. Nov 15:49:09 2012----------*/
-long GetModifierId( ) const;
+qint64 GetModifierId( ) const;
    protected:
    /** +-=---------------------------------------------------------Fr 13. Sep 13:13:07 2013-------*
     * @method  CdmModelElement::SetKeyname                   // protected, virtual                *
@@ -324,18 +324,18 @@ virtual void ResetNewModified(  );
     public slots:
          /** +-=---------------------------------------------------------Mo 19. Nov 15:45:35 2012-------*
     * @method  CdmModelElement::GetId                                // public, const, slots              *
-    * @return  long                                          //                                   *
+    * @return qint64                                          //                                   *
     * @comment returns the Id of this base object.                                                *
     *----------------last changed: -----------------------------Mo 19. Nov 15:45:35 2012----------*/
-long GetId( ) const;
+qint64 GetId( ) const;
    private:
    /** +-=---------------------------------------------------------Fr 12. Aug 00:31:19 2005*
     * @method  CdmModelElement::SetId                                // private                           *
     * @return  void                                          //                                   *
-    * @param   long p_lId                                    //                                   *
+    * @param  qint64 p_lId                                    //                                   *
     * @comment sets the Id of this base object.                                                   *
     *----------------last changed: -----------------------------Fr 12. Aug 00:31:19 2005----------*/
-void SetId(  long p_lId );
+void SetId( qint64 p_lId );
     public slots:
          /** +-=---------------------------------------------------------Do 9. Mai 18:30:03 2013--------*
     * @method  CdmModelElement::IsModified                   // public, const, virtual, slots     *
@@ -364,21 +364,21 @@ void SetCaption( QString p_qstrCaption);
    public:
    /** +-=---------------------------------------------------------Sa 9. Feb 11:47:12 2013--------*
     * @method  CdmModelElement::ChangeDateToLong             // public, static                    *
-    * @return  long                                          //                                   *
+    * @return qint64                                          //                                   *
     * @param   const QDate p_qdDate                          //                                   *
-    * @comment This method changes a date to a long value. This long value means the number of    *
+    * @comment This method changes a date to a qint64 value. This qint64 value means the number of    *
     *          days since 1.1.1900.                                                               *
     *----------------last changed: -----------------------------Sa 9. Feb 11:47:12 2013-----------*/
-    static long ChangeDateToLong(const QDate p_qdDate);
+    static qint64 ChangeDateToLong(const QDate p_qdDate);
 
    public:
    /** +-=---------------------------------------------------------Fr 12. Aug 00:34:21 2005*
     * @method  CdmModelElement::ChangeLongToDate                     // public, static                    *
     * @return  QDate                                         //                                   *
-    * @param   long p_lDate                                  //                                   *
-    * @comment This method converts a long value whixh contains the number of days sind 1.1.1970 to a valid qdate.*
+    * @param  qint64 p_lDate                                  //                                   *
+    * @comment This method converts a qint64 value whixh contains the number of days sind 1.1.1970 to a valid qdate.*
     *----------------last changed: -----------------------------Fr 12. Aug 00:34:21 2005----------*/
-static QDate ChangeLongToDate(  long p_lDate );
+static QDate ChangeLongToDate( qint64 p_lDate );
 
    public:
    /** +-=---------------------------------------------------------Fr 12. Aug 00:34:23 2005*

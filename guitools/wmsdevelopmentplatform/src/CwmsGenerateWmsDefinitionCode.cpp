@@ -284,14 +284,14 @@ void CwmsGenerateWmsDefinitionCode::AddMembers(CdmClass* p_pCdmClass)
 {
    if (CHKPTR(p_pCdmClass))
    {
-      QMap<long, CdmMember*> qmMembers;
+      QMap<qint64, CdmMember*> qmMembers;
       p_pCdmClass->GetClassMemberMap(qmMembers);
 
       m_qstrSource += AddIndent(2);
       m_qstrSource += "CdmMember* pCdmMember = nullptr;";
 
-      QMap<long, CdmMember*>::iterator qmIt = qmMembers.begin();
-      QMap<long, CdmMember*>::iterator qmItEnd = qmMembers.end();
+      QMap<qint64, CdmMember*>::iterator qmIt = qmMembers.begin();
+      QMap<qint64, CdmMember*>::iterator qmItEnd = qmMembers.end();
 
       for (; qmIt != qmItEnd; ++qmIt)
       {
@@ -529,9 +529,9 @@ void CwmsGenerateWmsDefinitionCode::AddBaseClassCode(CdmClass* p_pCdmClass)
 
       if (CHKPTR(pCdmClassManager))
       {
-         const QMap<long,long>& qmBaseClasses = p_pCdmClass->GetBaseClasses();
-         QMap<long,long>::const_iterator qmIt = qmBaseClasses.begin();
-         QMap<long,long>::const_iterator qmItEnd = qmBaseClasses.end();
+         const QMap<qint64,qint64>& qmBaseClasses = p_pCdmClass->GetBaseClasses();
+         QMap<qint64,qint64>::const_iterator qmIt = qmBaseClasses.begin();
+         QMap<qint64,qint64>::const_iterator qmItEnd = qmBaseClasses.end();
 
          for (; qmIt != qmItEnd; ++qmIt)
          {

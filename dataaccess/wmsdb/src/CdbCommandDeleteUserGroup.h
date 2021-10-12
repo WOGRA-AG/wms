@@ -10,10 +10,10 @@ class CdbDataAccess;
 class CdbCommandDeleteUserGroup : public CdbAbstractCommandTransactional
 {
 private:
-    long m_lGroupId;
+   qint64 m_lGroupId;
 
 public:
-    CdbCommandDeleteUserGroup(long p_lgroupId, CdbDataAccess* p_pDataAccess);
+    CdbCommandDeleteUserGroup(qint64 p_lgroupId, CdbDataAccess* p_pDataAccess);
     virtual ~CdbCommandDeleteUserGroup();
 
 protected:

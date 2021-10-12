@@ -20,7 +20,7 @@ private:
     int DeleteUserById();
     int DeleteUserByLogin();
 public:
-    CftlCommandDeleteUser(long p_lUserId, CftlDataAccess* p_pDataAccess);
+    CftlCommandDeleteUser(qint64 p_lUserId, CftlDataAccess* p_pDataAccess);
     CftlCommandDeleteUser(QString p_qstrLogin, CftlDataAccess* p_pDataAccess);
     virtual ~CftlCommandDeleteUser();
 

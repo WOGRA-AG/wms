@@ -2,7 +2,7 @@
 
 #include "CwnCommandStdHeader.h"
 
-CwnCommandGetOwner::CwnCommandGetOwner(long p_lContainerId, long p_lObjectId, CwnDataAccess* p_pDataAccess)
+CwnCommandGetOwner::CwnCommandGetOwner(qint64 p_lContainerId,qint64 p_lObjectId, CwnDataAccess* p_pDataAccess)
     : CwnCommandBase(p_pDataAccess),
       m_lContainerId(p_lContainerId),
       m_lObjectId(p_lObjectId),
@@ -27,12 +27,12 @@ QString CwnCommandGetOwner::createQueryForFindContainerOwner()
     return QString("MATCH (o:WMS_DM_OBJECTLIST)<-[:objectListRefValue]-(v:WMS_VALUE)<-[:member_to_value]-(m:WMS_CLASS_MEMBER)-[:member_to_value]->(:WMS_VALUE)<-[:Object_value]-(e:WMS_DM_OBJECT)<-[:hasObjects]-(i:WMS_DM_OBJECTLIST) WHERE m.Owner='true' AND id(o)=%1 RETURN id(e),id(i)").arg(m_lContainerId);
 }
 
-long CwnCommandGetOwner::GetOwnerObjectId()
+qint64 CwnCommandGetOwner::GetOwnerObjectId()
 {
     return m_lOwnerObjectId;
 }
 
-long CwnCommandGetOwner::GetOwnerContainerId()
+qint64 CwnCommandGetOwner::GetOwnerContainerId()
 {
     return m_lOwnerContainerId;
 }

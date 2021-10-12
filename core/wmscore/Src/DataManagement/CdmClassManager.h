@@ -39,19 +39,19 @@ class WMSMANAGER_API CdmClassManager : public CdmModelElementBase
     friend class CdmGlobalContext;
 
 private:
-    QMap<long,CdmClass*> m_qmClasses;
+    QMap<qint64,CdmClass*> m_qmClasses;
     QList<CdmPackage*> m_qlPackages;
 
 private:
-    CdmClassManager(long p_lDbId);
+    CdmClassManager(qint64 p_lDbId);
     virtual ~CdmClassManager();
 
 public:
     int GetInheritedClasses(CdmClass* p_pCdmBaseClass, QList<CdmClass*>& p_rqvlClassList);
     CdmClass* CreateClass(QString p_qstrKeyname);
-    int DeleteClass(long p_lId);
+    int DeleteClass(qint64 p_lId);
     int DeleteClass(CdmClass* p_pCdmClass);
-    long GetNewClassId();
+   qint64 GetNewClassId();
     int XmlExport(QDomElement& p_rqdeClassManager) const;
     int XmlImport(QDomElement& p_rqdeClassManager);
     QVariant GetVariant() const;
@@ -60,7 +60,7 @@ public:
     CdmPackage* CreatePackage(QString p_qstrName);
     CdmPackage* CreatePackage(QString p_qstrName, CdmPackage* p_pParent);
     CdmPackage* FindPackageByName(QString p_qstrPackage);
-    CdmPackage* FindPackageById(long p_lId);
+    CdmPackage* FindPackageById(qint64 p_lId);
     void DeletePackage(CdmPackage* p_pPackage);
     void MoveClassToPackage(CdmClass* p_pClass, CdmPackage* p_pPackage);
     void UpdateModifiedClasses();
@@ -79,13 +79,13 @@ public:
     int DeleteClass(QString p_qstrClassName);
     CdmClass* FindClassByKeyname( QString p_qstrKeyname);
     CdmClass* FindClassByKeyname(CdmPackage* p_pPackage, QString p_qstrKeyname);
-    CdmClass* FindClassById(long p_lId);
+    CdmClass* FindClassById(qint64 p_lId);
     void GetClassList( QList<CdmClass*>& p_pqlClasses);
     int ExistClass(QString p_qstrClassKeyname) const;
     void GenerateClassDocumentation( QString p_qstrDatabase, QString p_qstrFilename) const;
 
 private:
-    CdmClass* CreateClass(long p_lId, QString p_qstrKeyname);
+    CdmClass* CreateClass(qint64 p_lId, QString p_qstrKeyname);
     int AddClass(CdmClass* p_pCdmClass);
     int XmlImportClass(QDomElement& p_rqdeElement);
     void AddPackage(CdmPackage *p_pPackage);

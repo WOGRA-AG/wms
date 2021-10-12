@@ -91,7 +91,7 @@ bool CdbCommandLogin::CheckValid()
             !m_qstrPassword.isEmpty());
 }
 
-long CdbCommandLogin::GetSessionId()
+qint64 CdbCommandLogin::GetSessionId()
 {
     return m_lNewSession;
 }

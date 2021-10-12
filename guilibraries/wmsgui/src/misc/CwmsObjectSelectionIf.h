@@ -37,8 +37,8 @@ public:
                                 QWidget* p_pqwParent,
                                 QString p_qstrDisplayMember = "");
     void SetProxy(CdmEnhancedQueryProxy* p_pCwmsProxy);
-    long GetSelectedObjectId();
-    static long GetObjectId(CdmObjectContainer* p_pContainer,
+   qint64 GetSelectedObjectId();
+    static qint64 GetObjectId(CdmObjectContainer* p_pContainer,
                             CdmEnhancedQueryProxy* p_pCwmsProxy,
                             QWidget* p_pqwParent);
     void SetDisplayMember(QString p_qstrMember);
@@ -49,7 +49,7 @@ public:
     QList<CdmObject *> GetSelectedListOfObject();
 private:
     CwmsObjectSelectionIf(QWidget* parent = NULL);
-    CdmMember *getReferencedClassMemberForEvent(long lReferencedClassId, CdmClassManager *pClassManager);
+    CdmMember *getReferencedClassMemberForEvent(qint64 lReferencedClassId, CdmClassManager *pClassManager);
 
 };
 

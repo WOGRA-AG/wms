@@ -30,11 +30,11 @@ bool CftlCommandDeleteScheme::CheckValid()
 
 int CftlCommandDeleteScheme::Execute()
 {
-    long lRet = CdmLogging::eDmUnknownDbAccessError;
+   qint64 lRet = CdmLogging::eDmUnknownDbAccessError;
     QSqlQuery cQSqlQuery(GetSqlDatabase());
 
 
-    long lId = GetSchemeId();
+   qint64 lId = GetSchemeId();
 
     lRet = DropClassTables(lId);
 
@@ -61,11 +61,11 @@ int CftlCommandDeleteScheme::Execute()
     return lRet;
 }
 
-void CftlCommandDeleteScheme::DeleteLanguages(long p_lSchemeId)
+void CftlCommandDeleteScheme::DeleteLanguages(qint64 p_lSchemeId)
 {
     QSqlQuery cQSqlQuery(GetSqlDatabase());
     cQSqlQuery.prepare("delete from WMS_LANGUAGE where SchemeId = ?");
-    cQSqlQuery.addBindValue((int)p_lSchemeId);
+    cQSqlQuery.addBindValue(p_lSchemeId);
 
     if(!SUCCESSFULL(ExecuteQuery(cQSqlQuery)))
     {
@@ -73,7 +73,7 @@ void CftlCommandDeleteScheme::DeleteLanguages(long p_lSchemeId)
     }
 }
 
-int CftlCommandDeleteScheme::DropClassTables(long p_lSchemeId)
+int CftlCommandDeleteScheme::DropClassTables(qint64 p_lSchemeId)
 {
     int iRet =  CdmLogging::eDmOk;
     if (p_lSchemeId > 0)
@@ -120,9 +120,9 @@ int CftlCommandDeleteScheme::DropClassTables(long p_lSchemeId)
     return iRet;
 }
 
-long CftlCommandDeleteScheme::GetSchemeId()
+qint64 CftlCommandDeleteScheme::GetSchemeId()
 {
-    long lRet = CdmLogging::eDmUnknownDbAccessError;
+   qint64 lRet = CdmLogging::eDmUnknownDbAccessError;
     QSqlQuery cQSqlQuery(GetSqlDatabase());
 
 

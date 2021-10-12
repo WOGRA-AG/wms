@@ -92,11 +92,11 @@ virtual ~CdmDataAccessHelper(  );
     * @method  CdmDataAccessHelper::SetId                          // public                            *
     * @return  int                                           //                                   *
     * @param   CdmModelElement* p_pCdmBase                           //                                   *
-    * @param   long p_lId                                    //                                   *
+    * @param  qint64 p_lId                                    //                                   *
     * @comment ONLY FOR INTERNAL USE!!!                                                           *
     *          Sets the Id in base objects.                                                       *
     *----------------last changed: -----------------------------Sa 13. Aug 21:27:47 2005----------*/
-static int SetId(  CdmModelElement* p_pCdmBase, long p_lId );
+static int SetId(  CdmModelElement* p_pCdmBase,qint64 p_lId );
    public:
    /** +-=---------------------------------------------------------Sa 13. Aug 21:28:29 2005*
     * @method  CdmDataAccessHelper::SetKeyname                     // public                            *
@@ -176,11 +176,11 @@ static int SetDeleted(  CdmModelElement* p_pCdmBase );
     * @method  CdmDataAccessHelper::SetDatabaseId                  // public                            *
     * @return  int                                           //                                   *
     * @param   CdmModelElement* p_pCdmBase                           //                                   *
-    * @param   long p_lDbId                                  //                                   *
+    * @param  qint64 p_lDbId                                  //                                   *
     * @comment ONLY FOR INTERNAL USE!!!                                                           *
     *          Sets the databseid in the Data Access.                                             *
     *----------------last changed: -----------------------------Sa 13. Aug 21:31:26 2005----------*/
-static int SetDatabaseId(  CdmModelElement* p_pCdmBase, long p_lDbId );
+static int SetDatabaseId(  CdmModelElement* p_pCdmBase,qint64 p_lDbId );
 
    public:
    /** +-=---------------------------------------------------------Sa 13. Aug 21:31:40 2005*
@@ -221,23 +221,23 @@ static int AddMemberToClass(  CdmClass* pCdmClass, CdmMember* p_pCdmMember );
     * @method  CdmDataAccessHelper::AddQueryResult                 // public                            *
     * @return  int                                           //                                   *
     * @param   CdmQuery* p_pCdmQuery                         //                                   *
-    * @param   long p_lObjectId                              //                                   *
+    * @param  qint64 p_lObjectId                              //                                   *
     * @comment ONLY FOR INTERNAL USE!!!!                                                          *
     *          This method adds an result object to the overgiven query.                          *
     *----------------last changed: -----------------------------Sa 13. Aug 21:27:32 2005----------*/
-static int AddQueryResult(CdmQuery* p_pCdmQuery, long p_lObjectId, long p_lContainerId);
+static int AddQueryResult(CdmQuery* p_pCdmQuery,qint64 p_lObjectId,qint64 p_lContainerId);
 
    public:
    /** +-=---------------------------------------------------------Sa 13. Aug 21:25:14 2005*
     * @method  CdmDataAccessHelper::CreateClass                    // public                            *
     * @return  CdmClass*                                     //                                   *
-    * @param   long p_lDbId                                  //                                   *
-    * @param   long p_lId                                    //                                   *
+    * @param  qint64 p_lDbId                                  //                                   *
+    * @param  qint64 p_lId                                    //                                   *
     * @param   QString p_qstrKeyname                         //                                   *
     * @comment ONLY FOR INTERNAL USE!!!!                                                          *
     *          This method is a helper function for creating classes.                             *
     *----------------last changed: -----------------------------Sa 13. Aug 21:25:14 2005----------*/
-static CdmClass* CreateClass(  long p_lDbId, long p_lId, QString p_qstrKeyname );
+static CdmClass* CreateClass( qint64 p_lDbId,qint64 p_lId, QString p_qstrKeyname );
 
    public:
    /** +-=---------------------------------------------------------Sa 13. Aug 21:29:19 2005*
@@ -256,8 +256,8 @@ static CdmValue* GetValue(  CdmObject* p_pCdmObject, QString p_qstrKeyname );
    /** +-=---------------------------------------------------------Sa 13. Aug 21:26:09 2005*
     * @method  CdmDataAccessHelper::CreateMember                   // public                            *
     * @return  CdmMember*                                    //                                   *
-    * @param   long p_lDbId                                  // database Id                       *
-    * @param   long p_lId                                    // Member Id                         *
+    * @param  qint64 p_lDbId                                  // database Id                       *
+    * @param  qint64 p_lId                                    // Member Id                         *
     * @param   QString p_qstrkeyname                         // Member Keyname                    *
     * @param   int p_iType                                   // Value Type                        *
     * @param   bool p_bMust                                  // Is Must Value                     *
@@ -265,8 +265,8 @@ static CdmValue* GetValue(  CdmObject* p_pCdmObject, QString p_qstrKeyname );
     * @comment ONLY FOR INTERNAL USE!!!!                                                          *
     *          This method is a helper function for creating Members in derived classes.          *
     *----------------last changed: -----------------------------Sa 13. Aug 21:26:09 2005----------*/
-static CdmMember* CreateMember(  long p_lDbId,
-                         long p_lId,
+static CdmMember* CreateMember( qint64 p_lDbId,
+                        qint64 p_lId,
                          QString p_qstrkeyname,
                          int p_iType,
                          bool p_bMust,
@@ -277,11 +277,11 @@ static CdmMember* CreateMember(  long p_lDbId,
     * @method  CdmDataAccessHelper::SetMemberSize                  // public                            *
     * @return  int                                           //                                   *
     * @param   CdmMember* p_pCdmMember                       //                                   *
-    * @param   long m_lSize                                  //                                   *
+    * @param  qint64 m_lSize                                  //                                   *
     * @comment ONLY FOR INTERNAL USE!!!!                                                          *
     *          This method sets the Value size.                                                   *
     *----------------last changed: -----------------------------Sa 13. Aug 21:34:35 2005----------*/
-static int SetMemberSize(  CdmMember* p_pCdmMember, long m_lSize );
+static int SetMemberSize(  CdmMember* p_pCdmMember,qint64 m_lSize );
 
    public:
    /** +-=---------------------------------------------------------Sa 13. Aug 21:35:05 2005*
@@ -313,22 +313,22 @@ static int UpdateObjectWithClass(  CdmObject* p_pCdmObject, CdmClass* p_pCdmClas
     * @method  CdmDataAccessHelper::SetCreatorId                   // public                            *
     * @return  int                                           //                                   *
     * @param   CdmModelElement* p_pCdmBase                           //                                   *
-    * @param   long p_lId                                    //                                   *
+    * @param  qint64 p_lId                                    //                                   *
     * @comment ONLY FOR INTERNAL USE!!!                                                           *
     *          This emthod sets the creator Id.                                                   *
     *----------------last changed: -----------------------------Sa 13. Aug 21:32:00 2005----------*/
-static int SetCreatorId(  CdmModelElement* p_pCdmBase, long p_lId );
+static int SetCreatorId(  CdmModelElement* p_pCdmBase,qint64 p_lId );
 
    public:
    /** +-=---------------------------------------------------------Sa 13. Aug 21:32:20 2005*
     * @method  CdmDataAccessHelper::SetModifierId                  // public                            *
     * @return  int                                           //                                   *
     * @param   CdmModelElement* p_pCdmBase                           //                                   *
-    * @param   long p_lId                                    //                                   *
+    * @param  qint64 p_lId                                    //                                   *
     * @comment ONLY FOR INTERNAL USE!!!                                                           *
     *          This method sets the modifier Id.                                                  *
     *----------------last changed: -----------------------------Sa 13. Aug 21:32:20 2005----------*/
-static int SetModifierId(  CdmModelElement* p_pCdmBase, long p_lId );
+static int SetModifierId(  CdmModelElement* p_pCdmBase,qint64 p_lId );
 
    public:
    /** +-=---------------------------------------------------------Sa 13. Aug 21:30:49 2005*
@@ -345,11 +345,11 @@ static int SetValid(  CdmModelElement* p_pCdmBase );
     * @method  CdmDataAccessHelper::RemoveObjectFromObjectList     // public                            *
     * @return  int                                           //                                   *
     * @param   CdmObjectContainer* p_pContainer               //                                   *
-    * @param   long p_lObjectId                              //                                   *
+    * @param  qint64 p_lObjectId                              //                                   *
     * @comment ONLY FOR INTERNAL USE!!!!!!                                                        *
     *          This method removes anobject from objectlist.                                      *
     *----------------last changed: -----------------------------Sa 13. Aug 21:34:16 2005----------*/
-static int RemoveObjectFromObjectList(  CdmObjectContainer* p_pContainer, long p_lObjectId );
+static int RemoveObjectFromObjectList(  CdmObjectContainer* p_pContainer,qint64 p_lObjectId );
 
    public:
    /** +-=---------------------------------------------------------Sa 13. Aug 21:32:35 2005*
@@ -366,11 +366,11 @@ static int SetObjectInitialized(  CdmObject* p_pCdmObject );
     * @method  CdmDataAccessHelper::SetMemberClassId               // public                            *
     * @return  int                                           //                                   *
     * @param   CdmMember* p_pCdmMember                       //                                   *
-    * @param   long p_lClassId                               //                                   *
+    * @param  qint64 p_lClassId                               //                                   *
     * @comment ONLY FOR INTERNAL USE!!!                                                           *
     *          This method sets the clasid of the member.                                         *
     *----------------last changed: -----------------------------Sa 13. Aug 21:33:46 2005----------*/
-static int SetMemberClassId(  CdmMember* p_pCdmMember, long p_lClassId );
+static int SetMemberClassId(  CdmMember* p_pCdmMember,qint64 p_lClassId );
 
 
    public:
@@ -388,13 +388,13 @@ static int SetObjectValueIdCounter(  int p_iCounter, CdmObject* p_pCdmObject );
    /** +-=---------------------------------------------------------Sa 13. Aug 21:24:49 2005*
     * @method  CdmDataAccessHelper::SetNameAndIdOfDatabase         // public                            *
     * @return  int                                           //                                   *
-    * @param   long p_lId                                    // Database Id                       *
+    * @param  qint64 p_lId                                    // Database Id                       *
     * @param   QString p_qstrName                            // Database name                     *
     * @param   CdmScheme* p_pCdmDatabase                   // Database Object                   *
     * @comment ONLY FOR INTERNAL USE!!!!!!!                                                       *
     *          This method sets the name and id for a database                                    *
     *----------------last changed: -----------------------------Sa 13. Aug 21:24:49 2005----------*/
-static int SetNameAndIdOfDatabase(  long p_lId, QString p_qstrName, CdmScheme* p_pCdmDatabase );
+static int SetNameAndIdOfDatabase( qint64 p_lId, QString p_qstrName, CdmScheme* p_pCdmDatabase );
 
 
    public:
@@ -445,12 +445,12 @@ static QDate GetLicenceExpirationDate(  QString p_qstrLicenceKey );
    public:
    /** +-=---------------------------------------------------------Fr 23. Mai 17:20:56 2008-------*
     * @method  CdmDataAccessHelper::RemoveMemberFromClass          // public                            *
-    * @return  long                                          //                                   *
+    * @return qint64                                          //                                   *
     * @param   CdmClass* p_pCdmClass                         //                                   *
     * @param   CdmMember* p_pCdmMember                       //                                   *
     * @comment                                                                                    *
     *----------------last changed: -----------------------------Fr 23. Mai 17:20:56 2008----------*/
-    static long RemoveMemberFromClass(CdmClass* p_pCdmClass, CdmMember* p_pCdmMember);
+    static qint64 RemoveMemberFromClass(CdmClass* p_pCdmClass, CdmMember* p_pCdmMember);
 
    public:
    /** +-=---------------------------------------------------------Mo 15. Okt 10:32:42 2012-------*
@@ -459,14 +459,14 @@ static QDate GetLicenceExpirationDate(  QString p_qstrLicenceKey );
     * @param   CdmQueryEnhanced* p_pCdmQuery                 //                                   *
     * @param   int p_iColumn                                 //                                   *
     * @param   QVariant p_qvValue                            //                                   *
-    * @param   long p_lObjectId                              //                                   *
+    * @param  qint64 p_lObjectId                              //                                   *
     * @comment                                                                                    *
     *----------------last changed: -----------------------------Mo 15. Okt 10:32:42 2012----------*/
     static void SetQueryEnhancedResult(CdmQueryEnhanced* p_pCdmQuery,
                                 int p_iColumn,
                                 QVariant p_qvValue,
-                                long p_lObjectId,
-                                long p_lContainerId);
+                               qint64 p_lObjectId,
+                               qint64 p_lContainerId);
 
    public:
    /** +-=---------------------------------------------------------Do 15. Nov 14:40:05 2012-------*
@@ -477,21 +477,21 @@ static QDate GetLicenceExpirationDate(  QString p_qstrLicenceKey );
     * @comment                                                                                    *
     *----------------last changed: -----------------------------Do 15. Nov 14:40:05 2012----------*/
     static void UpdateMemberId(CdmClass* p_pCdmClass, CdmMember* p_pCdmMember);
-    static void AddBaseClassToClass(CdmClass *p_pClass, long p_lBaseClassId);
+    static void AddBaseClassToClass(CdmClass *p_pClass,qint64 p_lBaseClassId);
 
-    static CdmPackage* CreatePackage(long p_lSchemeId, QString p_qstrKeyname);
+    static CdmPackage* CreatePackage(qint64 p_lSchemeId, QString p_qstrKeyname);
     static void AddPackageToClassManager(CdmClassManager* p_pClassManager, CdmPackage* p_pPackage);
     static void SetOriginalPackageName(CdmPackage *p_pPackage, QString p_qstrName);
     static void SetCurrentScheme(CdmScheme* p_pScheme);
-    static CdmClass* CreateNewTestClass(long scheme, long classid, QString name);
-    static CdmSession *CreateNewSession(long p_lSessionId, long p_lUser, IdmDataAccess *p_pDataAccess);
-    static CdmClassManager *CreateClassManager(long p_lSchemeId);
+    static CdmClass* CreateNewTestClass(qint64 scheme,qint64 classid, QString name);
+    static CdmSession *CreateNewSession(qint64 p_lSessionId,qint64 p_lUser, IdmDataAccess *p_pDataAccess);
+    static CdmClassManager *CreateClassManager(qint64 p_lSchemeId);
     static CdmClass *CreateClass(QVariantMap &p_qvMap);
-    static CdmObjectContainer *CreateObjectContainer(long p_lSchemeId, long p_lContainerId, QString &p_qstrKeyname, long p_lClassId);
+    static CdmObjectContainer *CreateObjectContainer(qint64 p_lSchemeId,qint64 p_lContainerId, QString &p_qstrKeyname,qint64 p_lClassId);
     static CdmObjectContainer *CreateObjectContainer(QVariantMap &p_rMap);
     static void DeleteObjectContainer(CdmObjectContainer*& p_pContainer);
     static CdmObject* CreateObject(QVariantMap& p_rMap);
     static void DeleteObject(CdmObject*& p_pObject);
-    static CdmObject *CreateObject(long p_lSchemeId, long p_lObjectId, long p_lClassId, long p_lContainerId);
+    static CdmObject *CreateObject(qint64 p_lSchemeId,qint64 p_lObjectId,qint64 p_lClassId,qint64 p_lContainerId);
 };
 #endif // //IdmDataAccess_H

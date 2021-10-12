@@ -24,7 +24,7 @@ bool CftlCommandLockObject::CheckValid()
 
 int CftlCommandLockObject::Execute()
 {
-    long lRet = CdmLogging::eDmObjectAccessError;
+   qint64 lRet = CdmLogging::eDmObjectAccessError;
 
     CftlCommandCheckObjectLocked command(m_rpObject, GetDataAccess());
     lRet = command.Run();
@@ -43,9 +43,9 @@ int CftlCommandLockObject::Execute()
 
             QSqlQuery cQSqlQuery(GetSqlDatabase());
             cQSqlQuery.prepare(qstrQuery);
-            cQSqlQuery.addBindValue((int)CdmSessionManager::GetSessionManager()->GetCurrentSessionId());
+            cQSqlQuery.addBindValue(CdmSessionManager::GetSessionManager()->GetCurrentSessionId());
             cQSqlQuery.addBindValue(QDateTime::currentDateTime());
-            cQSqlQuery.addBindValue((int)m_rpObject->GetId());
+            cQSqlQuery.addBindValue(m_rpObject->GetId());
 
             if (SUCCESSFULL(ExecuteQuery(cQSqlQuery)))
             {

@@ -22,7 +22,7 @@ public slots:
     virtual QObject* getValueReference(QString p_qstrKeyname) = 0;
     virtual QObject *getValueUser(QString p_qstrKeyname) = 0;
     virtual double getValueDouble(QString p_qstrKeyname) const = 0;
-    virtual long getValueLong(QString p_qstrKeyname) const = 0;
+    virtual qint64 getValueLong(QString p_qstrKeyname) const = 0;
     virtual int getValueInt(QString p_qstrKeyname) const = 0;
     virtual bool getValueBool(QString p_qstrKeyname) const = 0;
     virtual float getValueFloat(QString p_qstrKeyname) const = 0;

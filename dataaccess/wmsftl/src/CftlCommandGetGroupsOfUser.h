@@ -10,11 +10,11 @@ class CftlDataAccess;
 class CftlCommandGetGroupsOfUser : public CftlAbstractCommand
 {
 private:
-    long m_lUserId;
+   qint64 m_lUserId;
     QList<CumUserGroup*> m_qllGroups;
 
 public:
-    CftlCommandGetGroupsOfUser(long p_lUser, CftlDataAccess* p_pDataAccess);
+    CftlCommandGetGroupsOfUser(qint64 p_lUser, CftlDataAccess* p_pDataAccess);
     virtual ~CftlCommandGetGroupsOfUser();
     QList<CumUserGroup*> GetResult();
 protected:

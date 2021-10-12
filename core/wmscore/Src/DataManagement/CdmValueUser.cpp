@@ -10,8 +10,8 @@
 #include "CumUser.h"
 #include "CdmLogging.h"
 
-CdmValueUser::CdmValueUser(long p_lDatabaseId,
-                           long p_lId,
+CdmValueUser::CdmValueUser(qint64 p_lDatabaseId,
+                          qint64 p_lId,
                            QString p_qstrKeyname,
                            CdmObject* p_pCdmObject)
 : CdmValueInt(eDmValueUser, p_lDatabaseId, p_lId, p_qstrKeyname, p_pCdmObject)

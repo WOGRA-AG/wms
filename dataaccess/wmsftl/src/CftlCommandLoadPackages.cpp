@@ -28,7 +28,7 @@ int CftlCommandLoadPackages::Execute()
     int iRet = CdmLogging::eDmUnknownClassAccessError;
     QSqlQuery cQuery(GetSqlDatabase());
     cQuery.prepare("select URI, System_Package from WMS_CLASS_PACKAGE where SchemeId = ?");
-    cQuery.addBindValue((int)m_rpClassManager->GetSchemeId());
+    cQuery.addBindValue(m_rpClassManager->GetSchemeId());
 
     QList<CdmPackage*> qlUnresolvedPackages;
 

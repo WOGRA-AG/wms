@@ -22,7 +22,7 @@ private:
 public:
     CwnCommandBase(CwnDataAccess* m_rpDataAccess);
     virtual ~CwnCommandBase();
-    long Run();
+   qint64 Run();
 
 protected:
     enum exe_type {executeCommit=1, traverseDepthSearchFullPath=2, openTransaction=3, rollbackTransaction=4, commitTransaction=5};

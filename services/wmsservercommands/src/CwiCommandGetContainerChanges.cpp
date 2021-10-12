@@ -24,7 +24,7 @@ void CwiCommandGetContainerChanges::Execute()
     if (m_rpData)
     {
         int iDatabaseId = m_rpData->GetValue("DatabaseId").toInt();
-        long lContainerId = m_rpData->GetValue("ObjectListId").toInt();
+       qint64 lContainerId = m_rpData->GetValue("ObjectListId").toInt();
         QString qstrFrom = m_rpData->GetValue("From").toString();
         QString qstrTo = m_rpData->GetValue("To").toString();
         QDate qdFrom = m_rpData->GetValue("From").toDate();

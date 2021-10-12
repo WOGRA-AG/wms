@@ -75,11 +75,11 @@ void SearchUserClickedSlot();
    public:
    /** +-=---------------------------------------------------------Do 27. Jan 07:42:30 2005*
     * @method  CwmsUserChoiceIf::GetUserSelection            // public, static                    *
-    * @return  long                                          // UserId                            *
+    * @return qint64                                          // UserId                            *
     * @param   QWidget* parent                               //                                   *
     * @comment This static member function gets a selected user from the complete user list.      *
     *----------------last changed: -----------------------------Do 27. Jan 07:42:30 2005----------*/
-static long GetUserSelection(  QWidget* parent );
+static qint64 GetUserSelection(  QWidget* parent );
 };
 
 #endif //

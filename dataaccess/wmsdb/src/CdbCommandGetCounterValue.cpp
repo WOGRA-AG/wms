@@ -26,7 +26,7 @@ int CdbCommandGetCounterValue::Execute()
 
         if (CHKPTR(pCdmObject))
         {
-           long lObjectListId = pCdmObject->GetObjectContainerId();
+          qint64 lObjectListId = pCdmObject->GetObjectContainerId();
            ((CdmValueLong*)m_rpCdmCounter)->SetValue(GetCounterValue(lObjectListId,
                                                                     m_rpCdmCounter->GetMemberId()));
         }
@@ -35,10 +35,10 @@ int CdbCommandGetCounterValue::Execute()
     return EC(eDmOk);
 }
 
-long CdbCommandGetCounterValue::GetCounterValue(long p_lObjectListId,
-                                             long p_lMemberId)
+qint64 CdbCommandGetCounterValue::GetCounterValue(qint64 p_lObjectListId,
+                                            qint64 p_lMemberId)
 {
-   long lRet = CdmLogging::eDmObjectAccessError;
+  qint64 lRet = CdmLogging::eDmObjectAccessError;
 
    QSqlQuery cQSqlQuery;
    QString qstrQuery;

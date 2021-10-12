@@ -63,7 +63,7 @@ bool CftlCommandUpdateObject::CheckValid()
 
 int CftlCommandUpdateObject::Execute()
 {
-    long lRet = CdmLogging::eDmObjectAccessError;
+   qint64 lRet = CdmLogging::eDmObjectAccessError;
 
 
     CftlCommandCheckObjectLocked command(m_rpObject, GetDataAccess());
@@ -108,7 +108,7 @@ int CftlCommandUpdateObject::Execute()
     return lRet;
 }
 
-long CftlCommandUpdateObject::UpdateNewOrModifiedObject()
+qint64 CftlCommandUpdateObject::UpdateNewOrModifiedObject()
 {
     CftlContainerTableUpdate update(m_rpObject, GetDialect());
     return update.Execute(GetInterface());

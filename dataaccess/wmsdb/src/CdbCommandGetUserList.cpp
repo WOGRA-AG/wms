@@ -80,7 +80,7 @@ QString CdbCommandGetUserList::GenerateJoin()
 
 int CdbCommandGetUserList::FindAllUsers()
 {
-    long lRet = CdmLogging::eDmUnknownUserQueryError;
+   qint64 lRet = CdmLogging::eDmUnknownUserQueryError;
     QSqlQuery cQSqlQuery;
     QString qstrQuery;
 

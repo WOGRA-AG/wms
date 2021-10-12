@@ -34,14 +34,14 @@ private:
     QString m_qstrGroupName;
 
 public:
-    CumUserGroup(long p_lId, CumUserManager* p_pUserManager);
-    CumUserGroup(long p_lId, QString p_qstrGroupName, CumUserManager* p_pUserManager);
+    CumUserGroup(qint64 p_lId, CumUserManager* p_pUserManager);
+    CumUserGroup(qint64 p_lId, QString p_qstrGroupName, CumUserManager* p_pUserManager);
     CumUserGroup(QVariantMap& p_qValues, CumUserManager* p_pUserManager);
     virtual ~CumUserGroup();
     void SetGroupName(QString p_qstrGroupName);
     QVariant GetVariant() const;
     void SetVariant(QVariantMap& p_rqvHash);
-    bool HasUser(long p_lUserId) const;
+    bool HasUser(qint64 p_lUserId) const;
     QString GetUriInternal() const;
     QVariant GetVariantForDeplyoment() const;
     void Update();

@@ -125,9 +125,9 @@ CftlJournal* CftlDataAccess::GetJournal()
     return m_pCftlJournal;
 }
 
-long CftlDataAccess::ExecuteQuery(QString p_qstrQuery, QSqlQuery& p_rqsqlQuery)
+qint64 CftlDataAccess::ExecuteQuery(QString p_qstrQuery, QSqlQuery& p_rqsqlQuery)
 {
-    long lRet = CdmLogging::eDmUnknownSqlError;
+   qint64 lRet = CdmLogging::eDmUnknownSqlError;
     CftlInterface* pInterface = GetFtlInterface();
 
     if (CHKPTR(pInterface))
@@ -173,9 +173,9 @@ CftlInterface* CftlDataAccess::GetFtlInterface()
     return pInterface;
 }
 
-long CftlDataAccess::ExecuteQuery(QSqlQuery& p_rqsqlQuery)
+qint64 CftlDataAccess::ExecuteQuery(QSqlQuery& p_rqsqlQuery)
 {
-    long lRet = CdmLogging::eDmUnknownSqlError;
+   qint64 lRet = CdmLogging::eDmUnknownSqlError;
 
     QTime qtStart = QTime::currentTime();
     QTime qtEnd;
@@ -205,11 +205,11 @@ long CftlDataAccess::ExecuteQuery(QSqlQuery& p_rqsqlQuery)
     return lRet;
 }
 
-int CftlDataAccess::LoadObjects(QList<long>& p_rqvlObjects, CdmObjectContainer*& p_pCdmObject)
+int CftlDataAccess::LoadObjects(QList<qint64>& p_rqvlObjects, CdmObjectContainer*& p_pCdmObject)
 {
     INFO("Data Access Call LoadObjects()");
     ++m_iInterfaceCallCounter;
-    long lRet = 0;
+   qint64 lRet = 0;
 
     if(CHKPTR(m_pCftlObjectAccess))
     {
@@ -225,11 +225,11 @@ int CftlDataAccess::LoadObjects(QList<long>& p_rqvlObjects, CdmObjectContainer*&
 }
 
 
-long CftlDataAccess::IsObjectUsed(const CdmObject* p_pObject)
+qint64 CftlDataAccess::IsObjectUsed(const CdmObject* p_pObject)
 {
     INFO("Data Access Call IsObjectUsed()");
     ++m_iInterfaceCallCounter;
-    long lRet = 0;
+   qint64 lRet = 0;
 
     if(CHKPTR(m_pCftlObjectAccess))
     {
@@ -244,11 +244,11 @@ long CftlDataAccess::IsObjectUsed(const CdmObject* p_pObject)
     return lRet;
 }
 
-int CftlDataAccess::LoadObject(const CdmObjectContainer* p_pContainer, long p_lObjectId, CdmObject*& p_pCdmObject)
+int CftlDataAccess::LoadObject(const CdmObjectContainer* p_pContainer,qint64 p_lObjectId, CdmObject*& p_pCdmObject)
 {
     INFO("Data Access Call LoadObject()");
     ++m_iInterfaceCallCounter;
-    long lRet = 0;
+   qint64 lRet = 0;
 
     if(CHKPTR(m_pCftlObjectAccess))
     {
@@ -263,11 +263,11 @@ int CftlDataAccess::LoadObject(const CdmObjectContainer* p_pContainer, long p_lO
     return lRet;
 }
 
-int CftlDataAccess::LoadObjectContainer(long p_lObjectListId, CdmObjectContainer*& p_pContainer)
+int CftlDataAccess::LoadObjectContainer(qint64 p_lObjectListId, CdmObjectContainer*& p_pContainer)
 {
     INFO("Data Access Call LoadObjectList()");
     ++m_iInterfaceCallCounter;
-    long lRet = 0;
+   qint64 lRet = 0;
 
     if(CHKPTR(m_pCftlObjectAccess))
     {
@@ -282,13 +282,13 @@ int CftlDataAccess::LoadObjectContainer(long p_lObjectListId, CdmObjectContainer
     return lRet;
 }
 
-int CftlDataAccess::LoadObjectContainer(long p_lDatabaseId,
+int CftlDataAccess::LoadObjectContainer(qint64 p_lDatabaseId,
                                         QString p_qstrKeyname,
                                         CdmObjectContainer*& p_pContainer)
 {
     INFO("Data Access Call LoadObjectList()");
     ++m_iInterfaceCallCounter;
-    long lRet = 0;
+   qint64 lRet = 0;
 
     if(CHKPTR(m_pCftlObjectAccess))
     {
@@ -304,11 +304,11 @@ int CftlDataAccess::LoadObjectContainer(long p_lDatabaseId,
     return lRet;
 }
 
-int CftlDataAccess::LoadEmptyObjectContainer(long p_lDataBaseId, QString p_qstrKeyname, CdmObjectContainer*& p_pContainer)
+int CftlDataAccess::LoadEmptyObjectContainer(qint64 p_lDataBaseId, QString p_qstrKeyname, CdmObjectContainer*& p_pContainer)
 {
     INFO("Data Access Call LoadEmptyObjectList()");
     ++m_iInterfaceCallCounter;
-    long lRet = 0;
+   qint64 lRet = 0;
 
     if(CHKPTR(m_pCftlObjectAccess))
     {
@@ -323,12 +323,12 @@ int CftlDataAccess::LoadEmptyObjectContainer(long p_lDataBaseId, QString p_qstrK
     return lRet;
 }
 
-int CftlDataAccess::LoadEmptyObjectContainer(long p_lDataBaseId, long p_lId, CdmObjectContainer*& p_pContainer)
+int CftlDataAccess::LoadEmptyObjectContainer(qint64 p_lDataBaseId,qint64 p_lId, CdmObjectContainer*& p_pContainer)
 {
     INFO("Data Access Call LoadEmptyObjectList()");
     ++m_iInterfaceCallCounter;
 
-    long lRet = 0;
+   qint64 lRet = 0;
 
     if(CHKPTR(m_pCftlObjectAccess))
     {
@@ -343,11 +343,11 @@ int CftlDataAccess::LoadEmptyObjectContainer(long p_lDataBaseId, long p_lId, Cdm
     return lRet;
 }
 
-long CftlDataAccess::GetNewContainerId(long p_lClassId)
+qint64 CftlDataAccess::GetNewContainerId(qint64 p_lClassId)
 {
     INFO("Data Access Call GetNewObjectListId()");
     ++m_iInterfaceCallCounter;
-    long lRet = 0;
+   qint64 lRet = 0;
 
     if(CHKPTR(m_pCftlObjectAccess))
     {
@@ -362,11 +362,11 @@ long CftlDataAccess::GetNewContainerId(long p_lClassId)
     return lRet;
 }
 
-long CftlDataAccess::GetNewClassId(long p_lDbId)
+qint64 CftlDataAccess::GetNewClassId(qint64 p_lDbId)
 {
     INFO("Data Access Call GetNewClassId()");
     ++m_iInterfaceCallCounter;
-    long lRet = 0;
+   qint64 lRet = 0;
 
     if(CHKPTR(m_pCftlClassAccess))
     {
@@ -381,11 +381,11 @@ long CftlDataAccess::GetNewClassId(long p_lDbId)
     return lRet;
 }
 
-long CftlDataAccess::GetNewObjectId(const CdmObjectContainer* p_pContainer)
+qint64 CftlDataAccess::GetNewObjectId(const CdmObjectContainer* p_pContainer)
 {
     INFO("Data Access Call GetNewObjectId()");
     ++m_iInterfaceCallCounter;
-    long lRet = 0;
+   qint64 lRet = 0;
 
     if(CHKPTR(m_pCftlObjectAccess))
     {
@@ -404,7 +404,7 @@ int CftlDataAccess::UpdateObject(CdmObject*& p_pCdmObject)
 {
     INFO("Data Access Call UpdateObject()");
     ++m_iInterfaceCallCounter;
-    long lRet = 0;
+   qint64 lRet = 0;
 
 
     if(CHKPTR(m_pCftlObjectAccess))
@@ -425,7 +425,7 @@ int CftlDataAccess::UpdateObjectContainer(CdmObjectContainer*& p_pContainer)
 {
     INFO("Data Access Call UpdateObjectList()");
     ++m_iInterfaceCallCounter;
-    long lRet = 0;
+   qint64 lRet = 0;
 
 
     if(CHKPTR(m_pCftlObjectAccess))
@@ -446,7 +446,7 @@ int CftlDataAccess::CreateScheme(QString p_qstrKeyname, CdmScheme*& p_pCdmDataba
 {
     INFO("Data Access Call CreateDb()");
     ++m_iInterfaceCallCounter;
-    long lRet = 0;
+   qint64 lRet = 0;
 
     if(CHKPTR(m_pCftlDbAccess))
     {
@@ -465,7 +465,7 @@ int CftlDataAccess::LoadSchemeBaseData(QString p_qstrKeyname, CdmScheme*& p_pCdm
 {
     INFO("Data Access Call LoadDbBaseData()");
     ++m_iInterfaceCallCounter;
-    long lRet = 0;
+   qint64 lRet = 0;
 
     if(CHKPTR(m_pCftlDbAccess))
     {
@@ -480,11 +480,11 @@ int CftlDataAccess::LoadSchemeBaseData(QString p_qstrKeyname, CdmScheme*& p_pCdm
     return lRet;
 }
 
-int CftlDataAccess::LoadSchemeBaseData(long p_lDb, CdmScheme *&p_pCdmDatabaseManager)
+int CftlDataAccess::LoadSchemeBaseData(qint64 p_lDb, CdmScheme *&p_pCdmDatabaseManager)
 {
     INFO("Data Access Call LoadDbBaseData()");
     ++m_iInterfaceCallCounter;
-    long lRet = 0;
+   qint64 lRet = 0;
     if(CHKPTR(m_pCftlDbAccess))
     {
         lRet = m_pCftlDbAccess->FindDatabase(p_lDb, p_pCdmDatabaseManager);
@@ -546,12 +546,12 @@ int CftlDataAccess::Login(QString p_qstrApplication,
                           bool& p_bDemo,
                           int& p_iModules,
                           QString p_qstrVersion,
-                          long& p_lSessionId,
+                         qint64& p_lSessionId,
                           CumUser*& p_rpCumUser)
 {
     INFO("Data Access Call LogIn()");
     ++m_iInterfaceCallCounter;
-    long lRet = 0;
+   qint64 lRet = 0;
 
     if(CHKPTR(m_pCftlLoginManager))
     {
@@ -579,7 +579,7 @@ int CftlDataAccess::Logout()
 {
     INFO("Data Access Call LogOut()");
     ++m_iInterfaceCallCounter;
-    long lRet = 0;
+   qint64 lRet = 0;
 
     if(CHKPTR(m_pCftlLoginManager))
     {
@@ -599,7 +599,7 @@ int CftlDataAccess::CreateUser(CumUser* p_pUser)
 {
     INFO("Data Access Call CreateUser()");
     ++m_iInterfaceCallCounter;
-    long lRet = 0;
+   qint64 lRet = 0;
 
     if (m_pCftlUserManager)
     {
@@ -619,7 +619,7 @@ int CftlDataAccess::RegisterUser(CumUser* p_pUser)
 {
     INFO("Data Access Call RegisterUser()");
     ++m_iInterfaceCallCounter;
-    long lRet = 0;
+   qint64 lRet = 0;
 
     if (m_pCftlUserManager)
     {
@@ -638,7 +638,7 @@ int CftlDataAccess::DeleteUser(QString p_qstrLogin)
 {
     INFO("Data Access Call DeleteUser()");
     ++m_iInterfaceCallCounter;
-    long lRet = 0;
+   qint64 lRet = 0;
 
     if(CHKPTR(m_pCftlUserManager))
     {
@@ -654,11 +654,11 @@ int CftlDataAccess::DeleteUser(QString p_qstrLogin)
     return lRet;
 }
 
-int CftlDataAccess::DeleteUser(long p_lUserToDeleteId)
+int CftlDataAccess::DeleteUser(qint64 p_lUserToDeleteId)
 {
     INFO("Data Access Call DeleteUser()");
     ++m_iInterfaceCallCounter;
-    long lRet = 0;
+   qint64 lRet = 0;
 
     if(CHKPTR(m_pCftlUserManager))
     {
@@ -673,12 +673,12 @@ int CftlDataAccess::DeleteUser(long p_lUserToDeleteId)
     return lRet;
 }
 
-int CftlDataAccess::LoadClassManager(long p_lSchemeId, CdmClassManager*& p_pCdmClassManager)
+int CftlDataAccess::LoadClassManager(qint64 p_lSchemeId, CdmClassManager*& p_pCdmClassManager)
 {
     INFO("Data Access Call LoadClassManager()");
 
     ++m_iInterfaceCallCounter;
-    long lRet = 0;
+   qint64 lRet = 0;
 
     if(CHKPTR(m_pCftlClassAccess))
     {
@@ -697,7 +697,7 @@ int CftlDataAccess::UpdateClass(CdmClass*& p_pCdmClass)
 {
     INFO("Data Access Call UpdateClass()");
     ++m_iInterfaceCallCounter;
-    long lRet = 0;
+   qint64 lRet = 0;
 
     if(CHKPTR(m_pCftlClassAccess))
     {
@@ -712,11 +712,11 @@ int CftlDataAccess::UpdateClass(CdmClass*& p_pCdmClass)
     return lRet;
 }
 
-int CftlDataAccess::DeleteClass(long p_lClassId)
+int CftlDataAccess::DeleteClass(qint64 p_lClassId)
 {
     INFO("Data Access Call DeleteClass()");
     ++m_iInterfaceCallCounter;
-    long lRet = 0;
+   qint64 lRet = 0;
     if(CHKPTR(m_pCftlClassAccess))
     {
         lRet = m_pCftlClassAccess->DeleteClass(p_lClassId);
@@ -735,7 +735,7 @@ int CftlDataAccess::DeleteScheme(QString p_qstrKeyname)
 {
     INFO("Data Access Call DeleteDb()");
     ++m_iInterfaceCallCounter;
-    long lRet = 0;
+   qint64 lRet = 0;
 
     if(CHKPTR(m_pCftlDbAccess))
     {
@@ -750,11 +750,11 @@ int CftlDataAccess::DeleteScheme(QString p_qstrKeyname)
     return lRet;
 }
 
-int CftlDataAccess::DeleteObjectContainer(long p_lObjectListId)
+int CftlDataAccess::DeleteObjectContainer(qint64 p_lObjectListId)
 {
     INFO("Data Access Call DeleteObjectList()");
     ++m_iInterfaceCallCounter;
-    long lRet = 0;
+   qint64 lRet = 0;
     if(CHKPTR(m_pCftlObjectAccess))
     {
          lRet = m_pCftlObjectAccess->DeleteObjectList(p_lObjectListId);
@@ -772,7 +772,7 @@ int CftlDataAccess::GetUserList(QList<CumUser*>& p_rqvlUser)
 {
     INFO("Data Access Call GetUserList()");
     ++m_iInterfaceCallCounter;
-    long lRet = 0;
+   qint64 lRet = 0;
 
     if(m_pCftlUserManager)
     {
@@ -792,7 +792,7 @@ int CftlDataAccess::UpdateUser(CumUser* p_pUser)
 
     INFO("Data Access Call UpdateUser()");
     ++m_iInterfaceCallCounter;
-    long lRet = 0;
+   qint64 lRet = 0;
 
     if(m_pCftlUserManager)
     {
@@ -807,11 +807,11 @@ int CftlDataAccess::UpdateUser(CumUser* p_pUser)
     return lRet;
 }
 
-int CftlDataAccess::GetContainerList(long p_lDbId, long p_lClassId, QMap<long, QString>& p_rqmObjectListsLList)
+int CftlDataAccess::GetContainerList(qint64 p_lDbId,qint64 p_lClassId, QMap<qint64, QString>& p_rqmObjectListsLList)
 {
     INFO("Data Access Call GetObjectListsList()");
     ++m_iInterfaceCallCounter;
-    long lRet = 0;
+   qint64 lRet = 0;
     if(CHKPTR(m_pCftlObjectAccess))
     {
         lRet = m_pCftlObjectAccess->GetObjectListsList(p_lDbId, p_lClassId, p_rqmObjectListsLList);
@@ -829,7 +829,7 @@ int CftlDataAccess::ExecuteQuery(CdmQuery* p_pCdmQuery)
 {
     INFO("Data Access Call ExecuteQuery()");
     ++m_iInterfaceCallCounter;
-    long lRet = 0;
+   qint64 lRet = 0;
     if(CHKPTR(m_pCftlObjectAccess))
     {
         lRet = m_pCftlObjectAccess->ExecuteQuery(p_pCdmQuery);
@@ -847,7 +847,7 @@ int CftlDataAccess::ExistScheme(QString p_qstrKeyname, bool& p_bResult)
 {
     INFO("Data Access Call ExistDb()");
     ++m_iInterfaceCallCounter;
-    long lRet = 0;
+   qint64 lRet = 0;
 
     if(CHKPTR(m_pCftlDbAccess))
     {
@@ -862,11 +862,11 @@ int CftlDataAccess::ExistScheme(QString p_qstrKeyname, bool& p_bResult)
     return lRet;
 }
 
-int CftlDataAccess::ExistClass(long p_lDbId, QString p_qstrClassKeyname, bool & p_bResult)
+int CftlDataAccess::ExistClass(qint64 p_lDbId, QString p_qstrClassKeyname, bool & p_bResult)
 {
     INFO("Data Access Call ExistClass()");
     ++m_iInterfaceCallCounter;
-    long lRet = 0;
+   qint64 lRet = 0;
 
     if(CHKPTR(m_pCftlClassAccess))
     {
@@ -881,11 +881,11 @@ int CftlDataAccess::ExistClass(long p_lDbId, QString p_qstrClassKeyname, bool & 
     return lRet;
 }
 
-int CftlDataAccess::ExistObjectContainer(long p_lDbId, QString p_qstrObjectListKeyname)
+int CftlDataAccess::ExistObjectContainer(qint64 p_lDbId, QString p_qstrObjectListKeyname)
 {
     INFO("Data Access Call ExistObjectList()");
     ++m_iInterfaceCallCounter;
-    long lRet = 0;
+   qint64 lRet = 0;
     if(CHKPTR(m_pCftlObjectAccess))
     {
         m_pCftlObjectAccess->ExistObjectList(p_lDbId, p_qstrObjectListKeyname);
@@ -903,7 +903,7 @@ int CftlDataAccess::LockObject(CdmObject* p_pObject, bool & p_bResult)
 {
     INFO("Data Access Call LockObject()");
     ++m_iInterfaceCallCounter;
-    long lRet = 0;
+   qint64 lRet = 0;
 
     if(CHKPTR(m_pCftlObjectAccess))
     {
@@ -922,7 +922,7 @@ int CftlDataAccess::UnLockObject(CdmObject* p_pObject, bool & p_bResult )
 {
     INFO("Data Access Call UnLockObject()");
     ++m_iInterfaceCallCounter;
-    long lRet = 0;
+   qint64 lRet = 0;
 
     if(CHKPTR(m_pCftlObjectAccess))
     {
@@ -937,7 +937,7 @@ int CftlDataAccess::UnLockObject(CdmObject* p_pObject, bool & p_bResult )
     return lRet;
 }
 
-QByteArray CftlDataAccess::ReadBinaryDocument(long p_lDbId, CdmValueBinaryDocument* p_pCdmBinaryDocument )
+QByteArray CftlDataAccess::ReadBinaryDocument(qint64 p_lDbId, CdmValueBinaryDocument* p_pCdmBinaryDocument )
 {
     INFO("Data Access Call ReadBinaryDocument()");
     ++m_iInterfaceCallCounter;
@@ -952,12 +952,12 @@ QByteArray CftlDataAccess::ReadBinaryDocument(long p_lDbId, CdmValueBinaryDocume
     return qByteArray;
 }
 
-int CftlDataAccess::UpdateBinaryDocument(long p_lDbId, CdmValueBinaryDocument* p_pCdmBinaryDocument )
+int CftlDataAccess::UpdateBinaryDocument(qint64 p_lDbId, CdmValueBinaryDocument* p_pCdmBinaryDocument )
 {
     INFO("Data Access Call UpdateBinaryDocument()");
     ++m_iInterfaceCallCounter;
     Q_UNUSED(p_lDbId)
-    long lRet = 0;
+   qint64 lRet = 0;
 
     if(CHKPTR(p_pCdmBinaryDocument) && CHKPTR(m_pCftlObjectAccess))
     {
@@ -972,11 +972,11 @@ int CftlDataAccess::UpdateBinaryDocument(long p_lDbId, CdmValueBinaryDocument* p
     return lRet;
 }
 
-long CftlDataAccess::RenameUserGroup(long p_lGroupId, QString p_qstrNewName)
+qint64 CftlDataAccess::RenameUserGroup(qint64 p_lGroupId, QString p_qstrNewName)
 {
     INFO("Data Access Call RenameUserGroup()");
     ++m_iInterfaceCallCounter;
-    long lRet = 0;
+   qint64 lRet = 0;
 
     if(CHKPTR(m_pCftlUserManager))
     {
@@ -991,11 +991,11 @@ long CftlDataAccess::RenameUserGroup(long p_lGroupId, QString p_qstrNewName)
     return lRet;
 }
 
-long CftlDataAccess::CreateUserGroup(QString p_qstrGroupName)
+qint64 CftlDataAccess::CreateUserGroup(QString p_qstrGroupName)
 {
     INFO("Data Access Call CreateUserGroup()");
     ++m_iInterfaceCallCounter;
-    long lRet = 0;
+   qint64 lRet = 0;
     if(CHKPTR(m_pCftlUserManager))
     {
         lRet = m_pCftlUserManager->CreateUserGroup(p_qstrGroupName);
@@ -1009,11 +1009,11 @@ long CftlDataAccess::CreateUserGroup(QString p_qstrGroupName)
     return lRet;
 }
 
-long CftlDataAccess::DeleteUserGroup(long p_llGroupId)
+qint64 CftlDataAccess::DeleteUserGroup(qint64 p_llGroupId)
 {
     INFO("Data Access Call DeleteUserGroup()");
     ++m_iInterfaceCallCounter;
-    long lRet = 0;
+   qint64 lRet = 0;
 
     if(CHKPTR(m_pCftlUserManager))
     {
@@ -1028,11 +1028,11 @@ long CftlDataAccess::DeleteUserGroup(long p_llGroupId)
     return lRet;
 }
 
-long CftlDataAccess::AddUserToUserGroup(long p_lChangeUserId, long p_lUserGroupId)
+qint64 CftlDataAccess::AddUserToUserGroup(qint64 p_lChangeUserId,qint64 p_lUserGroupId)
 {
     INFO("Data Access Call AddUserToUserGroup()");
     ++m_iInterfaceCallCounter;
-    long lRet = 0;
+   qint64 lRet = 0;
 
     if(CHKPTR(m_pCftlUserManager))
     {
@@ -1047,11 +1047,11 @@ long CftlDataAccess::AddUserToUserGroup(long p_lChangeUserId, long p_lUserGroupI
     return lRet;
 }
 
-long CftlDataAccess::RemoveUserFromGroup(long p_lChangeUserId, long p_lUserGroupId)
+qint64 CftlDataAccess::RemoveUserFromGroup(qint64 p_lChangeUserId,qint64 p_lUserGroupId)
 {
     INFO("Data Access Call RemoveUserFromGroup()");
     ++m_iInterfaceCallCounter;
-    long lRet = 0;
+   qint64 lRet = 0;
 
     if(CHKPTR(m_pCftlUserManager))
     {
@@ -1067,12 +1067,12 @@ long CftlDataAccess::RemoveUserFromGroup(long p_lChangeUserId, long p_lUserGroup
 }
 
 
-long CftlDataAccess::GetUserGroupList(QList<CumUserGroup*>& p_rqvlUserGroups, QString p_qstrSchemeUri)
+qint64 CftlDataAccess::GetUserGroupList(QList<CumUserGroup*>& p_rqvlUserGroups, QString p_qstrSchemeUri)
 {
     Q_UNUSED(p_qstrSchemeUri);
     INFO("Data Access Call GetUserGroupList()");
     ++m_iInterfaceCallCounter;
-    long lRet = 0;
+   qint64 lRet = 0;
 
     if(CHKPTR(m_pCftlUserManager))
     {
@@ -1088,11 +1088,11 @@ long CftlDataAccess::GetUserGroupList(QList<CumUserGroup*>& p_rqvlUserGroups, QS
     return lRet;
 }
 
-long CftlDataAccess::GetListOfUsersInList(long p_lUserGroupId, QList<CumUser*>& p_rqvlUserList)
+qint64 CftlDataAccess::GetListOfUsersInList(qint64 p_lUserGroupId, QList<CumUser*>& p_rqvlUserList)
 {
     INFO("Data Access Call GetListOfUsersInList()");
     ++m_iInterfaceCallCounter;
-    long lRet = 0;
+   qint64 lRet = 0;
     if(CHKPTR(m_pCftlUserManager))
     {
         lRet = m_pCftlUserManager->GetListOfUsersInList(p_lUserGroupId, p_rqvlUserList);
@@ -1106,11 +1106,11 @@ long CftlDataAccess::GetListOfUsersInList(long p_lUserGroupId, QList<CumUser*>& 
     return lRet;
 }
 
-long CftlDataAccess::GetUserGroupMemberList(long p_lChangeUserId, QList<CumUserGroup*>& p_qvlUserGroups)
+qint64 CftlDataAccess::GetUserGroupMemberList(qint64 p_lChangeUserId, QList<CumUserGroup*>& p_qvlUserGroups)
 {
     INFO("Data Access Call GetUserGroupMemberList()");
     ++m_iInterfaceCallCounter;
-    long lRet = 0;
+   qint64 lRet = 0;
 
     if(CHKPTR(m_pCftlUserManager))
     {
@@ -1126,7 +1126,7 @@ long CftlDataAccess::GetUserGroupMemberList(long p_lChangeUserId, QList<CumUserG
     return lRet;
 }
 
-long CftlDataAccess::AddLicense(QString p_qstrApplication, QString p_qstrLicensee, QString p_qstrLicensekey)
+qint64 CftlDataAccess::AddLicense(QString p_qstrApplication, QString p_qstrLicensee, QString p_qstrLicensekey)
 {
     // ToDo Impl
     Q_UNUSED(p_qstrApplication);
@@ -1135,18 +1135,18 @@ long CftlDataAccess::AddLicense(QString p_qstrApplication, QString p_qstrLicense
     return -1;
 }
 
-long CftlDataAccess::FreeLicense()
+qint64 CftlDataAccess::FreeLicense()
 {
     // ToDo Impl
     NOTIMPLEMENTED;
     return -1;
 }
 
-long CftlDataAccess::GetSchemeList(QList<QString>& p_qvlDatabases)
+qint64 CftlDataAccess::GetSchemeList(QList<QString>& p_qvlDatabases)
 {
     INFO("Data Access Call GetDatbaseList()");
     ++m_iInterfaceCallCounter;
-    long lRet = 0;
+   qint64 lRet = 0;
 
     if(CHKPTR(m_pCftlDbAccess))
     {
@@ -1161,11 +1161,11 @@ long CftlDataAccess::GetSchemeList(QList<QString>& p_qvlDatabases)
     return lRet;
 }
 
-long CftlDataAccess::UpdateScheme(CdmScheme* p_pCdmDatabase)
+qint64 CftlDataAccess::UpdateScheme(CdmScheme* p_pCdmDatabase)
 {
     INFO("Data Access Call UpdateDatabase()");
     ++m_iInterfaceCallCounter;
-    long lRet = 0;
+   qint64 lRet = 0;
     if(CHKPTR(m_pCftlDbAccess) && CHKPTR(p_pCdmDatabase))
     {
         lRet = m_pCftlDbAccess->UpdateDatabase(p_pCdmDatabase);
@@ -1180,11 +1180,11 @@ long CftlDataAccess::UpdateScheme(CdmScheme* p_pCdmDatabase)
 }
 
 
-long CftlDataAccess::GetCounterValue(const CdmObjectContainer* p_pContainer, CdmValue* p_pValue)
+qint64 CftlDataAccess::GetCounterValue(const CdmObjectContainer* p_pContainer, CdmValue* p_pValue)
 {
     INFO("Data Access Call GetCounterValue()");
     ++m_iInterfaceCallCounter;
-    long lRet = 0;
+   qint64 lRet = 0;
 
     if(CHKPTR(m_pCftlObjectAccess))
     {
@@ -1257,11 +1257,11 @@ CumUserGroup* CftlDataAccess::FindUserGroupByName(QString p_qstrName, QString p_
     return m_pCftlUserManager->FindUserGroupByName(p_qstrName, p_qstrSchemeUri);
 }
 
-int CftlDataAccess::LoginLdap(QString p_qstrApplication, QString p_qstrLogin, QString p_qstrPassword, long& p_lSessionId, CumUser*& p_rUser)
+int CftlDataAccess::LoginLdap(QString p_qstrApplication, QString p_qstrLogin, QString p_qstrPassword,qint64& p_lSessionId, CumUser*& p_rUser)
 {
     INFO("Data Access Call LogIn()");
     ++m_iInterfaceCallCounter;
-    long lRet = 0;
+   qint64 lRet = 0;
 
     if(CHKPTR(m_pCftlLoginManager))
     {
@@ -1285,7 +1285,7 @@ int CftlDataAccess::UpdatePackage(CdmPackage *&p_pCdmPackage)
 {
     INFO("Data Access Call GetCounterValue()");
     ++m_iInterfaceCallCounter;
-    long lRet = 0;
+   qint64 lRet = 0;
 
     if(CHKPTR(m_pCftlClassAccess))
     {
@@ -1295,9 +1295,9 @@ int CftlDataAccess::UpdatePackage(CdmPackage *&p_pCdmPackage)
     return lRet;
 }
 
-long CftlDataAccess::RefreshObject(CdmObject* p_pCdmObject)
+qint64 CftlDataAccess::RefreshObject(CdmObject* p_pCdmObject)
 {
-    long lRet = 0;
+   qint64 lRet = 0;
     ++m_iInterfaceCallCounter;
     INFO("RefreshObject Call");
 
@@ -1310,9 +1310,9 @@ long CftlDataAccess::RefreshObject(CdmObject* p_pCdmObject)
     return lRet;
 }
 
-long CftlDataAccess::RefreshObjectContainer(CdmObjectContainer* p_pCdmObject)
+qint64 CftlDataAccess::RefreshObjectContainer(CdmObjectContainer* p_pCdmObject)
 {
-    long lRet = 0;
+   qint64 lRet = 0;
     INFO("RefreshObjectList Call");
     ++m_iInterfaceCallCounter;
 
@@ -1327,9 +1327,9 @@ long CftlDataAccess::RefreshObjectContainer(CdmObjectContainer* p_pCdmObject)
     return lRet;
 }
 
-long CftlDataAccess::CountObjectsOnDb(CdmObjectContainer* p_pCdmObject)
+qint64 CftlDataAccess::CountObjectsOnDb(CdmObjectContainer* p_pCdmObject)
 {
-    long lRet = 0;
+   qint64 lRet = 0;
     ++m_iInterfaceCallCounter;
     INFO("CountObjectOnDb Call");
 
@@ -1341,7 +1341,7 @@ long CftlDataAccess::CountObjectsOnDb(CdmObjectContainer* p_pCdmObject)
     return lRet;
 }
 
-int CftlDataAccess::DeleteRights(long p_lObjectId, QString p_qstrTableName, QString p_qstrIdFieldName)
+int CftlDataAccess::DeleteRights(qint64 p_lObjectId, QString p_qstrTableName, QString p_qstrIdFieldName)
 {
     int iRet = CdmLogging::eDmUnknownUserQueryError;
     GetFtlInterface()->BeginTransaction();
@@ -1371,7 +1371,7 @@ int CftlDataAccess::DeleteRights(long p_lObjectId, QString p_qstrTableName, QStr
     return iRet;
 }
 
-int CftlDataAccess::SaveRights(CdmRights& p_rCcdmRights, long p_lObjectId, QString p_qstrTableName, QString p_qstrIdFieldName)
+int CftlDataAccess::SaveRights(CdmRights& p_rCcdmRights,qint64 p_lObjectId, QString p_qstrTableName, QString p_qstrIdFieldName)
 {
     int iRet = CdmLogging::eDmUnknownUserQueryError;
     GetFtlInterface()->BeginTransaction();
@@ -1423,7 +1423,7 @@ int CftlDataAccess::SaveRights(CdmRights& p_rCcdmRights, long p_lObjectId, QStri
     return iRet;
 }
 
-int CftlDataAccess::LoadRights(CdmRights& p_rCcdmRights,  long p_lObjectId,  QString p_qstrTableName, QString p_qstrIdFieldName)
+int CftlDataAccess::LoadRights(CdmRights& p_rCcdmRights, qint64 p_lObjectId,  QString p_qstrTableName, QString p_qstrIdFieldName)
 {
     int iRet = CdmLogging::eDmUnknownUserQueryError;
     QSqlQuery cQuery;
@@ -1454,9 +1454,9 @@ int CftlDataAccess::LoadRights(CdmRights& p_rCcdmRights,  long p_lObjectId,  QSt
     return iRet;
 }
 
-int CftlDataAccess::DeleteLanguage(long p_lDatabaseId, int p_iLanguageId)
+int CftlDataAccess::DeleteLanguage(qint64 p_lDatabaseId, int p_iLanguageId)
 {
-    long lRet = 0;
+   qint64 lRet = 0;
     ++m_iInterfaceCallCounter;
     INFO("Delete Language Call");
 
@@ -1465,7 +1465,7 @@ int CftlDataAccess::DeleteLanguage(long p_lDatabaseId, int p_iLanguageId)
     return lRet;
 }
 
-int CftlDataAccess::AddLanguage(long p_lDatabaseId, QString p_qstrLanguage)
+int CftlDataAccess::AddLanguage(qint64 p_lDatabaseId, QString p_qstrLanguage)
 {
     ++m_iInterfaceCallCounter;
     INFO("AddLanguage Call");
@@ -1473,7 +1473,7 @@ int CftlDataAccess::AddLanguage(long p_lDatabaseId, QString p_qstrLanguage)
 }
 
 
-int CftlDataAccess::GetSchemeModifications(long p_lSchemeId,
+int CftlDataAccess::GetSchemeModifications(qint64 p_lSchemeId,
                                            QDate p_qdFrom,
                                            QDate p_qdTo,
                                            QList<CdmJournalItem*>& p_qlItems)
@@ -1589,7 +1589,7 @@ void CftlDataAccess::CreateDatabase(QString p_qstrFilename)
 }
 
 
-bool CftlDataAccess::LockClassMethod(long p_lMethodId)
+bool CftlDataAccess::LockClassMethod(qint64 p_lMethodId)
 {
     bool bSuccess = false;
     INFO("Data Access Call LockObject()");
@@ -1603,7 +1603,7 @@ bool CftlDataAccess::LockClassMethod(long p_lMethodId)
     return bSuccess;
 }
 
-bool CftlDataAccess::UnlockClassMethod(long p_lMethodId)
+bool CftlDataAccess::UnlockClassMethod(qint64 p_lMethodId)
 {
     bool bSuccess = false;
     INFO("Data Access Call LockObject()");
@@ -1702,7 +1702,7 @@ QList<CumUserGroup *> CftlDataAccess::FindUserGroups(QString p_qstrName, QString
 
 int CftlDataAccess::LoadObject(const CdmObjectContainer* p_pContainer, QString p_qstrKeyname, CdmObject *&p_pCdmObject)
 {
-    long lRet = CdmLogging::eDmUnknownSqlError;
+   qint64 lRet = CdmLogging::eDmUnknownSqlError;
 
     if(CHKPTR(m_pCftlObjectAccess))
     {

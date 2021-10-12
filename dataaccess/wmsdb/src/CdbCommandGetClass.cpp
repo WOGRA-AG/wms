@@ -12,7 +12,7 @@
 // own Includes
 #include "CdbCommandGetClass.h"
 
-CdbCommandGetClass::CdbCommandGetClass(CdmClassManager* p_ppClassManager, long p_lClassId, CdbDataAccess* p_pDataAccess)
+CdbCommandGetClass::CdbCommandGetClass(CdmClassManager* p_ppClassManager,qint64 p_lClassId, CdbDataAccess* p_pDataAccess)
 : CdbAbstractCommand(p_pDataAccess),
   m_lClassId(p_lClassId),
   m_rpClass(nullptr),
@@ -41,15 +41,15 @@ int CdbCommandGetClass::Execute()
        if(cQSqlQuery.isValid())
        {
           // first step reading the WMS_Class data
-          long lClassId        = cQSqlQuery.value(0).toInt();
+         qint64 lClassId        = cQSqlQuery.value(0).toInt();
           QString qstrKeyname  = cQSqlQuery.value(1).toString();
           QDateTime qdLastChange = cQSqlQuery.value(2).toDateTime();
-          long    lDatabaseId  = cQSqlQuery.value(3).toInt();
+         qint64    lDatabaseId  = cQSqlQuery.value(3).toInt();
           QString qstrCaption  = cQSqlQuery.value(4).toString();
           QString qstrComment  = cQSqlQuery.value(5).toString();
           QString qstrPositionSequence = cQSqlQuery.value(6).toString();
           bool bAbstract = cQSqlQuery.value(7).toBool();
-          long lCaptionMember = cQSqlQuery.value(8).toInt();
+         qint64 lCaptionMember = cQSqlQuery.value(8).toInt();
           int iVersion = cQSqlQuery.value(9).toInt();
 		  QString qstrPackage = cQSqlQuery.value(10).toString();
           QString qstrConfig = cQSqlQuery.value(11).toString();
@@ -108,9 +108,9 @@ int CdbCommandGetClass::Execute()
     return iRet;
 }
 
-long CdbCommandGetClass::LoadBaseClasses(CdmClass* p_pCdmClass)
+qint64 CdbCommandGetClass::LoadBaseClasses(CdmClass* p_pCdmClass)
 {
-   long lRet = CdmLogging::eDmUnknownClassAccessError;
+  qint64 lRet = CdmLogging::eDmUnknownClassAccessError;
 
    if(CHKPTR(p_pCdmClass))
    {
@@ -129,7 +129,7 @@ long CdbCommandGetClass::LoadBaseClasses(CdmClass* p_pCdmClass)
         {
            do // loading each class
            {
-              long lBaseClassId = cQSqlQuery.value(0).toInt();
+             qint64 lBaseClassId = cQSqlQuery.value(0).toInt();
               CdmDataAccessHelper::AddBaseClassToClass(p_pCdmClass, lBaseClassId);
            }
            while(cQSqlQuery.next());
@@ -153,9 +153,9 @@ long CdbCommandGetClass::LoadBaseClasses(CdmClass* p_pCdmClass)
   return lRet;
 }
 
-long CdbCommandGetClass::LoadMembers(CdmClass* p_pCdmClass)
+qint64 CdbCommandGetClass::LoadMembers(CdmClass* p_pCdmClass)
 {
-   long lRet = CdmLogging::eDmUnknownClassAccessError;
+  qint64 lRet = CdmLogging::eDmUnknownClassAccessError;
 
    if(CHKPTR(p_pCdmClass))
    {
@@ -180,20 +180,20 @@ long CdbCommandGetClass::LoadMembers(CdmClass* p_pCdmClass)
          {
             do // loading each class
             {
-               long     lId                = cQSqlQuery.value(0).toInt();
+              qint64     lId                = cQSqlQuery.value(0).toInt();
                int      iValue             = cQSqlQuery.value(1).toInt();
                bool     bMust              = cQSqlQuery.value(2).toBool();
-               long     lSize              = cQSqlQuery.value(3).toInt();
-               long     lRefClassId        = cQSqlQuery.value(4).toInt();
-               long     lCounterSize       = cQSqlQuery.value(5).toInt();
-               long     lClassId           = cQSqlQuery.value(6).toInt();
+              qint64     lSize              = cQSqlQuery.value(3).toInt();
+              qint64     lRefClassId        = cQSqlQuery.value(4).toInt();
+              qint64     lCounterSize       = cQSqlQuery.value(5).toInt();
+              qint64     lClassId           = cQSqlQuery.value(6).toInt();
                QVariant qvDefaultValue     = cQSqlQuery.value(7);
                QString  qstrKeyname        = cQSqlQuery.value(8).toString();
                QString  qstrCaption        = cQSqlQuery.value(9).toString();
-               long     lCreatorId         = cQSqlQuery.value(10).toInt();
-               long     lModifierId        = cQSqlQuery.value(11).toInt();
+              qint64     lCreatorId         = cQSqlQuery.value(10).toInt();
+              qint64     lModifierId        = cQSqlQuery.value(11).toInt();
                QString  qstrComment        = cQSqlQuery.value(12).toString();
-               long     lDatabaseId        = cQSqlQuery.value(13).toInt();
+              qint64     lDatabaseId        = cQSqlQuery.value(13).toInt();
                bool     bOwner             = cQSqlQuery.value(14).toBool();
                bool     bUnique            = cQSqlQuery.value(15).toBool();
                bool     bSystem            =  false;
@@ -215,7 +215,7 @@ long CdbCommandGetClass::LoadMembers(CdmClass* p_pCdmClass)
                   iAccess = cQSqlQuery.value(17).toInt();
                }
 
-               long lGroupId = 0;
+              qint64 lGroupId = 0;
 
                if (!cQSqlQuery.isNull(18))
                {
@@ -357,7 +357,7 @@ void CdbCommandGetClass::LoadGroups(CdmClass* p_pCdmClass)
       QList<CdmClassGroup*> qlGroups;
       while(cQuery.isValid())
       {
-         long lGroupId = cQuery.value(0).toInt();
+        qint64 lGroupId = cQuery.value(0).toInt();
          QString qstrName = cQuery.value(1).toString();
          int iVersion = cQuery.value(2).toInt();
          int iPosition = cQuery.value(3).toInt();
@@ -435,7 +435,7 @@ void CdbCommandGetClass::LoadValidators(CdmClass* p_pCdmClass)
       cQuery.first();
       while(cQuery.isValid())
       {
-         long lValidationId = cQuery.value(0).toInt();
+        qint64 lValidationId = cQuery.value(0).toInt();
          QString qstrName = cQuery.value(1).toString();
          int iVersion = cQuery.value(2).toInt();
          QString qstrCode = cQuery.value(3).toString();
@@ -467,7 +467,7 @@ void CdbCommandGetClass::LoadMethods(CdmClass* p_pCdmClass)
       cQuery.first();
       while(cQuery.isValid())
       {
-         long lMethodId = cQuery.value(0).toInt();
+        qint64 lMethodId = cQuery.value(0).toInt();
          QString qstrName = cQuery.value(1).toString();
          int iVersion = cQuery.value(2).toInt();
          QString qstrCode = cQuery.value(3).toString();

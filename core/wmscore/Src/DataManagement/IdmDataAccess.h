@@ -57,19 +57,19 @@ class IdmDataAccess
    public:
     virtual ~IdmDataAccess() {}
     virtual int LoadObject(const CdmObjectContainer* p_pContainer,
-                           long p_lObjectId,
+                          qint64 p_lObjectId,
                            CdmObject*& p_pCdmObject)= 0;
 
     virtual int LoadObject(const CdmObjectContainer* p_pContainer,
                            QString p_qstrKeyname,
                            CdmObject*& p_pCdmObject)= 0;
 
-    virtual int LoadObjectContainer(long p_lObjectListId,
+    virtual int LoadObjectContainer(qint64 p_lObjectListId,
                                     CdmObjectContainer*& p_pContainer)= 0;
 
 
-    virtual long GetNewClassId(long p_lDbId)= 0;
-    virtual long GetNewObjectId(const CdmObjectContainer* p_pContainer)= 0;
+    virtual qint64 GetNewClassId(qint64 p_lDbId)= 0;
+    virtual qint64 GetNewObjectId(const CdmObjectContainer* p_pContainer)= 0;
     virtual int UpdateObject(CdmObject*& p_pCdmObject)= 0;
     virtual int UpdateObjectContainer(CdmObjectContainer*& p_pContainer)= 0;
     virtual int CreateScheme(QString p_qstrKeyname,
@@ -78,7 +78,7 @@ class IdmDataAccess
     virtual int LoadSchemeBaseData(QString p_qstrKeyname,
                                    CdmScheme*& p_pCdmDatabaseManager)= 0;
 
-    virtual int LoadSchemeBaseData(long p_lId,
+    virtual int LoadSchemeBaseData(qint64 p_lId,
                                    CdmScheme*& p_pCdmDatabaseManager)= 0;
 public:
     virtual int Login(QString p_qstrApplication,
@@ -87,13 +87,13 @@ public:
                       bool& p_bDemo,
                       int& p_iModules,
                       QString p_qstrVersion,
-                      long& p_lSessionId,
+                     qint64& p_lSessionId,
                       CumUser*& p_rpCumUser)= 0;
 
     virtual int LoginLdap(QString p_qstrApplication,
                           QString p_qstrLogin,
                           QString p_qstrPassword,
-                          long& p_lSessionId,
+                         qint64& p_lSessionId,
                           CumUser*& p_rUser) = 0;
     virtual int Logout()= 0;
 
@@ -102,28 +102,28 @@ public:
     virtual int RegisterUser(CumUser* p_pUser)= 0;
 
     virtual int DeleteUser(QString p_qstrLogin)= 0;
-    virtual int DeleteUser(long p_lUserToDeleteId)= 0;
-    virtual int DeleteClass(long p_lClassId)= 0;
-    virtual int LoadClassManager(long p_lDatabaseId,
+    virtual int DeleteUser(qint64 p_lUserToDeleteId)= 0;
+    virtual int DeleteClass(qint64 p_lClassId)= 0;
+    virtual int LoadClassManager(qint64 p_lDatabaseId,
                                  CdmClassManager*& p_pCdmClassManager)= 0;
 
     virtual int DeleteScheme(QString p_qstrKeyname )= 0;
-    virtual int DeleteObjectContainer(long p_lObjectListId)= 0;
+    virtual int DeleteObjectContainer(qint64 p_lObjectListId)= 0;
     virtual int GetUserList(QList<CumUser*>& p_rqvlUser)= 0;
-    virtual int GetContainerList(long p_lDbId,
-                                 long lClassId,
-                                 QMap<long,
+    virtual int GetContainerList(qint64 p_lDbId,
+                                qint64 lClassId,
+                                 QMap<qint64,
                                     QString>& p_rqmObjectListsList)= 0;
 
     virtual int ExecuteQuery(CdmQuery* p_pCdmQuery)= 0;
 
     virtual int ExistScheme(QString p_qstrKeyname, bool& p_bResult)= 0;
 
-    virtual int ExistClass(long p_lDbId,
+    virtual int ExistClass(qint64 p_lDbId,
                            QString p_qstrClassKeyname,
                            bool & p_bResult)= 0;
 
-    virtual int ExistObjectContainer(long p_lDbId,
+    virtual int ExistObjectContainer(qint64 p_lDbId,
                                      QString p_qstrObjectListKeyname)= 0;
 
     virtual int LockObject(CdmObject* p_pObject,
@@ -133,68 +133,68 @@ public:
                              bool & p_bResult)= 0;
 
 
-    virtual int LoadObjectContainer(long p_lDatabaseId,
+    virtual int LoadObjectContainer(qint64 p_lDatabaseId,
                                     QString p_qstrKeyname,
                                     CdmObjectContainer*& p_pContainer)= 0;
 
-    virtual int LoadEmptyObjectContainer(long p_lDataBaseId,
+    virtual int LoadEmptyObjectContainer(qint64 p_lDataBaseId,
                                          QString p_qstrKeyname,
                                          CdmObjectContainer*& p_pContainer)= 0;
 
-    virtual QByteArray ReadBinaryDocument(long p_lDbId,
+    virtual QByteArray ReadBinaryDocument(qint64 p_lDbId,
                                           CdmValueBinaryDocument* p_pCdmBinaryDocument)= 0;
 
 
-    virtual int UpdateBinaryDocument(long p_lDbId,
+    virtual int UpdateBinaryDocument(qint64 p_lDbId,
                                      CdmValueBinaryDocument* p_pCdmBinaryDocument )= 0;
 
-    virtual long RenameUserGroup(long p_lGroupId,
+    virtual qint64 RenameUserGroup(qint64 p_lGroupId,
                                  QString p_qstrNewName)= 0;
 
-    virtual long CreateUserGroup(QString p_qstrGroupName)= 0;
-    virtual long DeleteUserGroup(long p_llGroupId)= 0;
-    virtual long AddUserToUserGroup(long p_lChangeUserId,
-                                    long p_lUserGroupId)= 0;
+    virtual qint64 CreateUserGroup(QString p_qstrGroupName)= 0;
+    virtual qint64 DeleteUserGroup(qint64 p_llGroupId)= 0;
+    virtual qint64 AddUserToUserGroup(qint64 p_lChangeUserId,
+                                   qint64 p_lUserGroupId)= 0;
 
-    virtual long RemoveUserFromGroup(long p_lChangeUserId,
-                                     long p_lUserGroupId)= 0;
+    virtual qint64 RemoveUserFromGroup(qint64 p_lChangeUserId,
+                                    qint64 p_lUserGroupId)= 0;
 
-    virtual long GetUserGroupList(QList<CumUserGroup*>& p_rqvlUserGroups,
+    virtual qint64 GetUserGroupList(QList<CumUserGroup*>& p_rqvlUserGroups,
                                   QString p_qstrSchemeUri)= 0;
 
-    virtual long GetListOfUsersInList(long p_lUserGroupId,
+    virtual qint64 GetListOfUsersInList(qint64 p_lUserGroupId,
                                       QList<CumUser*>& p_rqvlUserList)= 0;
 
-    virtual long GetUserGroupMemberList(long p_lChangeUserId,
+    virtual qint64 GetUserGroupMemberList(qint64 p_lChangeUserId,
                                         QList<CumUserGroup*>& p_qvlUserGroups)= 0;
 
-    virtual long AddLicense(QString p_qstrApplication,
+    virtual qint64 AddLicense(QString p_qstrApplication,
                             QString p_qstrLicensee,
                             QString p_qstrLicensekey)= 0;
 
-    virtual long FreeLicense()= 0;
+    virtual qint64 FreeLicense()= 0;
 
-    virtual long GetSchemeList(QList<QString>& p_qvlDatabases)= 0;
+    virtual qint64 GetSchemeList(QList<QString>& p_qvlDatabases)= 0;
 
-    virtual long UpdateScheme(CdmScheme* p_pCdmDatabase)= 0;
+    virtual qint64 UpdateScheme(CdmScheme* p_pCdmDatabase)= 0;
 
-    virtual long GetCounterValue(const CdmObjectContainer* p_pContainer,
+    virtual qint64 GetCounterValue(const CdmObjectContainer* p_pContainer,
                                  CdmValue* p_pValue)= 0;
 
-    virtual long GetNewContainerId(long p_lClassId)= 0;
+    virtual qint64 GetNewContainerId(qint64 p_lClassId)= 0;
     virtual QString GetConnectionDisplayString()= 0;
     virtual int UpdateUser(CumUser* p_pUser)= 0;
 
-    virtual int LoadEmptyObjectContainer(long p_lDataBaseId,
-                                         long p_lId,
+    virtual int LoadEmptyObjectContainer(qint64 p_lDataBaseId,
+                                        qint64 p_lId,
                                          CdmObjectContainer*& p_pContainer)= 0;
 
-    virtual int LoadObjects(QList<long>& p_rqvlObjects,
+    virtual int LoadObjects(QList<qint64>& p_rqvlObjects,
                             CdmObjectContainer*& p_pCdmObject)= 0;
 
     virtual int IsDemo(QString p_qstrApplication, QString p_qstrVersion)= 0;
 
-    virtual long IsObjectUsed(const CdmObject* p_pObject)= 0;
+    virtual qint64 IsObjectUsed(const CdmObject* p_pObject)= 0;
 
     virtual bool LicenceCheck(QString p_qstrApplication,
                               bool& p_bDemo,
@@ -213,16 +213,16 @@ public:
     virtual CumUserGroup* FindUserGroupByName(QString p_qstrName, QString p_qstrSchemeUri) = 0;
     virtual QList<CumUser*> FindUser(QString p_qstrUserLoginNameEmail, QString p_qstrSchemeUri) = 0;
     virtual QList<CumUserGroup*> FindUserGroups(QString p_qstrName, QString p_qstrSchemeUri) = 0;
-    virtual long RefreshObject(CdmObject* p_pCdmObject)= 0;
-    virtual long RefreshObjectContainer(CdmObjectContainer* p_pCdmObject)= 0;
-    virtual long CountObjectsOnDb(CdmObjectContainer* p_pCdmObject)= 0;
-    virtual int AddLanguage(long p_lDatabaseId,
+    virtual qint64 RefreshObject(CdmObject* p_pCdmObject)= 0;
+    virtual qint64 RefreshObjectContainer(CdmObjectContainer* p_pCdmObject)= 0;
+    virtual qint64 CountObjectsOnDb(CdmObjectContainer* p_pCdmObject)= 0;
+    virtual int AddLanguage(qint64 p_lDatabaseId,
                             QString p_qstrLanguage)= 0;
 
-    virtual int DeleteLanguage(long p_lDatabaseId,
+    virtual int DeleteLanguage(qint64 p_lDatabaseId,
                                int p_iLanguageId)= 0;
 
-    virtual int GetSchemeModifications(long p_lDatabaseId,
+    virtual int GetSchemeModifications(qint64 p_lDatabaseId,
                                          QDate p_qdFrom,
                                          QDate p_qdTo,
                                          QList<CdmJournalItem*>& p_qlItems)= 0;
@@ -252,8 +252,8 @@ public:
     virtual bool IsInServerMode() const = 0;
     virtual int GetInterfaceCallCounter() const = 0;
     virtual CdmObject* CreateObject(CdmObjectContainer* p_pContainer) = 0;
-    virtual bool LockClassMethod(long p_lMethodId) = 0;
-    virtual bool UnlockClassMethod(long p_lMethodId) = 0;
+    virtual bool LockClassMethod(qint64 p_lMethodId) = 0;
+    virtual bool UnlockClassMethod(qint64 p_lMethodId) = 0;
     virtual QVariant ExecuteFunction(CdmObject* p_PObject, QString p_qstrFunctionName, QVariantList p_qvlParameters) = 0;
     virtual QVariant EvaluateFormula(const CdmObject* p_pObject, QString p_qstrFormula) = 0;
     virtual bool GetRfcExecution() const = 0;

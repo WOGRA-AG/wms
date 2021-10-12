@@ -5,7 +5,7 @@
 #include "CdbCommandFindUserGroup.h"
 
 
-CdbCommandFindUserGroup::CdbCommandFindUserGroup(long p_lGroup, CdbDataAccess* p_pDataAccess)
+CdbCommandFindUserGroup::CdbCommandFindUserGroup(qint64 p_lGroup, CdbDataAccess* p_pDataAccess)
 : CdbAbstractCommand(p_pDataAccess),
   m_lGroupId(p_lGroup),
   m_pGroup(nullptr)
@@ -34,7 +34,7 @@ CumUserGroup* CdbCommandFindUserGroup::GetResult()
 
 int CdbCommandFindUserGroup::Execute()
 {
-    long lRet = CdmLogging::eDmUnknownUserQueryError;
+   qint64 lRet = CdmLogging::eDmUnknownUserQueryError;
     QSqlQuery cQSqlQuery;
     QString qstrQuery;
 

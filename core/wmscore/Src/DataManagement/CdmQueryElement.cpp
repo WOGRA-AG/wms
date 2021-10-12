@@ -292,7 +292,7 @@ void CdmQueryElement::SetComparisonValue(QString p_qstrKeyname, int p_iValue)
     SetComparisonValue(p_qstrKeyname, QVariant(p_iValue));
 }
 
-void CdmQueryElement::SetComparisonValue(QString p_qstrKeyname, long p_lValue)
+void CdmQueryElement::SetComparisonValue(QString p_qstrKeyname,qint64 p_lValue)
 {
     SetComparisonValue(p_qstrKeyname, QVariant(static_cast<qlonglong>(p_lValue)));
 }
@@ -454,7 +454,7 @@ void CdmQueryElement::CreateSubQueryFromMember(const CdmMember* p_pCdmMember,
 {
     if (CHKPTR(p_pCdmMember) && !p_qstrSubMemberName.isEmpty())
     {
-        long lClassId = p_pCdmMember->GetClassReference();
+       qint64 lClassId = p_pCdmMember->GetClassReference();
 
         CdmClassManager* pCdmClassManager = p_pCdmMember->GetClassManager();
 

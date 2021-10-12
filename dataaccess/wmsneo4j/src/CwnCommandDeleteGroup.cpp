@@ -12,12 +12,12 @@ CwnCommandDeleteGroup::~CwnCommandDeleteGroup()
 
 }
 
-void CwnCommandDeleteGroup::setGroupId(long groupId)
+void CwnCommandDeleteGroup::setGroupId(qint64 groupId)
 {
     this->groupId = groupId;
 }
 
-long CwnCommandDeleteGroup::getGroupId()
+qint64 CwnCommandDeleteGroup::getGroupId()
 {
     return groupId;
 }

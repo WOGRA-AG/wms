@@ -36,12 +36,12 @@ class BASETOOLS_API CwmsExportSettings
 {
 
    private:
-      QList<long> m_qllExportList;
+      QList<qint64> m_qllExportList;
       EwmsExportType m_eWmsExportType;
-      long m_lContainerId;
+     qint64 m_lContainerId;
       bool m_bExportHeader;
-      long m_lSchemeId;
-      long m_lCassId;
+     qint64 m_lSchemeId;
+     qint64 m_lCassId;
       QString m_qstrFilename;
       QString m_qstrCsvSeperator;
       QString m_qstrCsvStringEnclosing;
@@ -59,12 +59,12 @@ class BASETOOLS_API CwmsExportSettings
     virtual ~CwmsExportSettings( );
     void SetExportType(EwmsExportType p_eWmsExportType);
     EwmsExportType GetExportType() const;
-    void SetContainerId(long p_lObjectListId);
-    long GetContainerId() const;
+    void SetContainerId(qint64 p_lObjectListId);
+   qint64 GetContainerId() const;
     void SetExportHeader(bool p_bExport);
     bool GetExportHeader() const;
-    void SetSchemeId(long p_lDbId);
-    long GetSchemeId() const;
+    void SetSchemeId(qint64 p_lDbId);
+   qint64 GetSchemeId() const;
     void SetFilename(QString p_qstrFilename);
     QString GetFilename() const;
     void SetCsvSeperator(QString p_qstrSeperator);
@@ -87,11 +87,11 @@ class BASETOOLS_API CwmsExportSettings
     CdmQuery* GetQueryObject();
     void Save(QString p_qstFilename);
     void Load(QString p_qstFilename, QString p_qstrConfiguration);
-    void SetExportList(QList<long> p_qllExportList);
-    QList<long> GetExportList();
-    void SetClassId(long p_lCassId);
-    long GetClassId();
-    void Load(QString p_qstFilename, long p_lClassId);
+    void SetExportList(QList<qint64> p_qllExportList);
+    QList<qint64> GetExportList();
+    void SetClassId(qint64 p_lCassId);
+   qint64 GetClassId();
+    void Load(QString p_qstFilename,qint64 p_lClassId);
     void SetSettingName(QString p_qstrName);
     QString GetSettingsName() const;
     void ClearMembers();

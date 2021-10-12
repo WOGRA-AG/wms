@@ -17,7 +17,7 @@ private:
     QString m_qstrVersion;
     CumUser* m_pUser;
 
-    long GetNewSession();
+   qint64 GetNewSession();
 public:
     CftlCommandLdapLogin(QString p_qstrApplication,
                         QString p_qstrVersion,

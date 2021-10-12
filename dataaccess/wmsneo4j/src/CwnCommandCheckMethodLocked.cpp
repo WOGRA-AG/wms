@@ -3,7 +3,7 @@
 #include "CwnCommandCheckMethodLocked.h"
 #include "CwnCommandUnlockMethod.h"
 
-CwnCommandCheckMethodLocked::CwnCommandCheckMethodLocked(long p_lMethodId, long p_lSessionId, CwnDataAccess* p_pDataAccess): CwnCommandBase(p_pDataAccess),
+CwnCommandCheckMethodLocked::CwnCommandCheckMethodLocked(qint64 p_lMethodId,qint64 p_lSessionId, CwnDataAccess* p_pDataAccess): CwnCommandBase(p_pDataAccess),
       m_lMethodId(p_lMethodId),
       m_lSessionId(p_lSessionId)
 {
@@ -65,7 +65,7 @@ void CwnCommandCheckMethodLocked::interpretAnswer(QVariant &Ret)
 
             //Method is locked
 
-            long lSessionId = list->at(0).toLongLong();
+           qint64 lSessionId = list->at(0).toLongLong();
             QString qstrLogin = list->at(2).toString();
 
             ERR("The method is under examination by User " + qstrLogin + ". SessionId: "

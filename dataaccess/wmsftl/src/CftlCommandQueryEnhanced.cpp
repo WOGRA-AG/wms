@@ -56,12 +56,12 @@ CftlCommandlQueryEnhanced::~CftlCommandlQueryEnhanced()
 
 /** +-=---------------------------------------------------------Do 11. Nov 09:40:25 2010----------*
  * @method  CftlQueryEnhanced::Execute                      // public                            *
- * @return  long                                             //                                   *
+ * @return qint64                                             //                                   *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------Do 11. Nov 09:40:25 2010----------*/
-long CftlCommandlQueryEnhanced::Execute()
+qint64 CftlCommandlQueryEnhanced::Execute()
 {
-   long lRet = CdmLogging::eDmUnknownDBQueryError;
+  qint64 lRet = CdmLogging::eDmUnknownDBQueryError;
 
    if(CHKPTR(m_rpCftlDataAccess) && 
       CHKPTR(m_rpCdmQuery))
@@ -126,7 +126,7 @@ QString CftlCommandlQueryEnhanced::ExecuteFirstPartQuery(QString p_qstrQuery)
 
    if (!p_qstrQuery.isEmpty())
    {
-      long lRet = m_rpCftlDataAccess->ExecuteQuery(p_qstrQuery, cQSqlQuery);
+     qint64 lRet = m_rpCftlDataAccess->ExecuteQuery(p_qstrQuery, cQSqlQuery);
 
       if(lRet > 0)
       {
@@ -164,13 +164,13 @@ QString CftlCommandlQueryEnhanced::ExecuteFirstPartQuery(QString p_qstrQuery)
 
 /** +-=---------------------------------------------------------Fr 12. Nov 09:15:57 2010----------*
  * @method  CftlQueryEnhanced::ExecuteQuery                 // private                           *
- * @return  long                                             //                                   *
+ * @return qint64                                             //                                   *
  * @param   QString p_qstrSql                                //                                   *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------Fr 12. Nov 09:15:57 2010----------*/
-long CftlCommandlQueryEnhanced::ExecuteQuery(QString p_qstrSql)
+qint64 CftlCommandlQueryEnhanced::ExecuteQuery(QString p_qstrSql)
 {
-   long lRet = CdmLogging::eDmUnknownDBQueryError;
+  qint64 lRet = CdmLogging::eDmUnknownDBQueryError;
    QSqlQuery cQSqlQuery;
 
    if (!p_qstrSql.isEmpty())
@@ -195,8 +195,8 @@ long CftlCommandlQueryEnhanced::ExecuteQuery(QString p_qstrSql)
                else
                {
                   QVariant qvObjectId = cQSqlQuery.value(iColumnCount);
-                  long lObjectId = qvObjectId.toInt();
-                  long lContainerId = cQSqlQuery.value(iColumnCount + 1).toInt();
+                 qint64 lObjectId = qvObjectId.toInt();
+                 qint64 lContainerId = cQSqlQuery.value(iColumnCount + 1).toInt();
 
                   for (int iCounter = 0; iCounter < iColumnCount; ++iCounter)
                   {

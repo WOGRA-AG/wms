@@ -7,12 +7,12 @@ class CwnCommandLockObject : public CwnCommandBase
 {
 
 private:
-    long m_lSessionId;
-    long m_lObjectId;
+   qint64 m_lSessionId;
+   qint64 m_lObjectId;
     QString createQuery();
 
 public:
-     CwnCommandLockObject(long p_lSessionId, long p_lObjectId,CwnDataAccess* p_pDataAccess);
+     CwnCommandLockObject(qint64 p_lSessionId,qint64 p_lObjectId,CwnDataAccess* p_pDataAccess);
     ~CwnCommandLockObject();
      QString queryCausedError;
 

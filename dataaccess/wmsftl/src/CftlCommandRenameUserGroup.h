@@ -14,11 +14,11 @@ class CftlDataAccess;
 class CftlCommandRenameUserGroup : public CftlAbstractTransactionalCommand
 {
 private:
-    long m_lGroupId;
+   qint64 m_lGroupId;
     QString m_qstrNewName;
 
 public:
-    CftlCommandRenameUserGroup(long p_lGroupId, QString p_qstrName, CftlDataAccess* p_pDataAccess);
+    CftlCommandRenameUserGroup(qint64 p_lGroupId, QString p_qstrName, CftlDataAccess* p_pDataAccess);
     virtual ~CftlCommandRenameUserGroup();
 
 protected:

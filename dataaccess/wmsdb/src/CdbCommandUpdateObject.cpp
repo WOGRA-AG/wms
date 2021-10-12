@@ -45,7 +45,7 @@
 #include "CdbCommandUpdateObject.h"
 #include "CdbCommandGetCounterValue.h"
 
-CdbCommandUpdateObject::CdbCommandUpdateObject(long p_lSessionId, CdmObject* p_pObject, CdbDataAccess* p_pDataAccess)
+CdbCommandUpdateObject::CdbCommandUpdateObject(qint64 p_lSessionId, CdmObject* p_pObject, CdbDataAccess* p_pDataAccess)
     : CdbAbstractCommandTransactional(p_pDataAccess),
       m_lSessionId(p_lSessionId),
       m_rpObject(p_pObject)
@@ -64,7 +64,7 @@ bool CdbCommandUpdateObject::CheckValid()
 
 int CdbCommandUpdateObject::Execute()
 {
-   long lRet = CdmLogging::eDmObjectAccessError;
+  qint64 lRet = CdmLogging::eDmObjectAccessError;
 
    BODY_TRY
    CdbCommandCheckObjectLocked command(m_rpObject->GetId(), m_lSessionId, GetDataAccess());
@@ -111,9 +111,9 @@ int CdbCommandUpdateObject::Execute()
    return lRet;
 }
 
-long CdbCommandUpdateObject::UpdateNewOrModifiedObject()
+qint64 CdbCommandUpdateObject::UpdateNewOrModifiedObject()
 {
-   long lRet = CdmLogging::eDmObjectAccessError;
+  qint64 lRet = CdmLogging::eDmObjectAccessError;
   QSqlQuery cQSqlQuery;
   QString qstrQuery;
   int iParentId = m_rpObject->GetParentId();
@@ -193,9 +193,9 @@ long CdbCommandUpdateObject::UpdateNewOrModifiedObject()
    return lRet;
 }
 
-long CdbCommandUpdateObject::InsertOrUpdateValue(CdmValue* p_pValue)
+qint64 CdbCommandUpdateObject::InsertOrUpdateValue(CdmValue* p_pValue)
 {
-    long lRet = CdmLogging::eDmObjectAccessError;;
+   qint64 lRet = CdmLogging::eDmObjectAccessError;;
     if(m_rpObject->IsNew() || p_pValue->IsNew())
     {
        INFO("New Object the Insert method will be called!!");
@@ -225,9 +225,9 @@ long CdbCommandUpdateObject::InsertOrUpdateValue(CdmValue* p_pValue)
     return lRet;
 }
 
-long CdbCommandUpdateObject::InsertValue(CdmValue* p_pValue)
+qint64 CdbCommandUpdateObject::InsertValue(CdmValue* p_pValue)
 {
-   long lRet = CdmLogging::eDmObjectAccessError;
+  qint64 lRet = CdmLogging::eDmObjectAccessError;
 
    if(CHKPTR(p_pValue))
    {
@@ -360,9 +360,9 @@ long CdbCommandUpdateObject::InsertValue(CdmValue* p_pValue)
    return lRet;
 }
 
-long CdbCommandUpdateObject::UpdateValue(CdmValue* p_pValue)
+qint64 CdbCommandUpdateObject::UpdateValue(CdmValue* p_pValue)
 {
-   long lRet = CdmLogging::eDmObjectAccessError;
+  qint64 lRet = CdmLogging::eDmObjectAccessError;
 
    if(CHKPTR(p_pValue))
    {
@@ -492,10 +492,10 @@ long CdbCommandUpdateObject::UpdateValue(CdmValue* p_pValue)
    return lRet;
 }
 
-long CdbCommandUpdateObject::InsertValue(CdmValue* p_pValue,
+qint64 CdbCommandUpdateObject::InsertValue(CdmValue* p_pValue,
                                   CdbDataAccess::EodbcBaseType p_eOdbcBaseType)
 {
-   long lRet = CdmLogging::eDmObjectAccessError;
+  qint64 lRet = CdmLogging::eDmObjectAccessError;
 
    if( CHKPTR(p_pValue))
    {
@@ -537,7 +537,7 @@ long CdbCommandUpdateObject::InsertValue(CdmValue* p_pValue,
                cQSqlQuery.first();
                if(cQSqlQuery.isValid())
                {
-                  long lValueId = cQSqlQuery.value(0).toInt();
+                 qint64 lValueId = cQSqlQuery.value(0).toInt();
                   CdmDataAccessHelper::SetId(p_pValue, lValueId);
 
                   CdbJournal* pJournal = GetDataAccess()->GetJournal();
@@ -580,9 +580,9 @@ long CdbCommandUpdateObject::InsertValue(CdmValue* p_pValue,
      return lRet;
 }
 
-long CdbCommandUpdateObject::UpdateValueTable(CdmValue* p_pValue)
+qint64 CdbCommandUpdateObject::UpdateValueTable(CdmValue* p_pValue)
 {
-   long lRet = CdmLogging::eDmObjectAccessError;
+  qint64 lRet = CdmLogging::eDmObjectAccessError;
 
    if(CHKPTR(p_pValue))
    {
@@ -620,9 +620,9 @@ long CdbCommandUpdateObject::UpdateValueTable(CdmValue* p_pValue)
    return lRet;
 }
 
-long CdbCommandUpdateObject::InsertBool(CdmValueBool* p_pCdmBool)
+qint64 CdbCommandUpdateObject::InsertBool(CdmValueBool* p_pCdmBool)
 {
-   long lRet = CdmLogging::eDmObjectAccessError;
+  qint64 lRet = CdmLogging::eDmObjectAccessError;
 
    if(CHKPTR(p_pCdmBool))
    {
@@ -661,9 +661,9 @@ long CdbCommandUpdateObject::InsertBool(CdmValueBool* p_pCdmBool)
    return lRet;
 }
 
-long CdbCommandUpdateObject::UpdateBool(CdmValueBool* p_pCdmBool)
+qint64 CdbCommandUpdateObject::UpdateBool(CdmValueBool* p_pCdmBool)
 {
-   long lRet = CdmLogging::eDmObjectAccessError;
+  qint64 lRet = CdmLogging::eDmObjectAccessError;
 
    if(CHKPTR(p_pCdmBool))
    {
@@ -701,9 +701,9 @@ long CdbCommandUpdateObject::UpdateBool(CdmValueBool* p_pCdmBool)
    return lRet;
 }
 
-long CdbCommandUpdateObject::InsertInt(CdmValueInt* p_pCdmInt, CdbDataAccess::EodbcBaseType  p_eOdbcType)
+qint64 CdbCommandUpdateObject::InsertInt(CdmValueInt* p_pCdmInt, CdbDataAccess::EodbcBaseType  p_eOdbcType)
 {
-   long lRet = CdmLogging::eDmObjectAccessError;
+  qint64 lRet = CdmLogging::eDmObjectAccessError;
 
    if(CHKPTR(p_pCdmInt))
    {
@@ -734,9 +734,9 @@ long CdbCommandUpdateObject::InsertInt(CdmValueInt* p_pCdmInt, CdbDataAccess::Eo
    return lRet;
 }
 
-long CdbCommandUpdateObject::UpdateInt(CdmValueInt* p_pCdmInt)
+qint64 CdbCommandUpdateObject::UpdateInt(CdmValueInt* p_pCdmInt)
 {
-   long lRet = CdmLogging::eDmObjectAccessError;
+  qint64 lRet = CdmLogging::eDmObjectAccessError;
 
    if(CHKPTR(p_pCdmInt))
    {
@@ -768,9 +768,9 @@ long CdbCommandUpdateObject::UpdateInt(CdmValueInt* p_pCdmInt)
    return lRet;
 }
 
-long CdbCommandUpdateObject::InsertLong(CdmValueLong* p_pCdmLong)
+qint64 CdbCommandUpdateObject::InsertLong(CdmValueLong* p_pCdmLong)
 {
-   long lRet = CdmLogging::eDmObjectAccessError;
+  qint64 lRet = CdmLogging::eDmObjectAccessError;
 
    if(CHKPTR(p_pCdmLong))
    {
@@ -790,7 +790,7 @@ long CdbCommandUpdateObject::InsertLong(CdmValueLong* p_pCdmLong)
          if(lRet < 0)
          {
             lRet = EC(eDmInvalidInsertStatement);
-            ERR("Insert not possible for Long!!");
+            ERR("Insert not possible for qint64!!");
          }
       }
    }
@@ -802,9 +802,9 @@ long CdbCommandUpdateObject::InsertLong(CdmValueLong* p_pCdmLong)
    return lRet;
 }
 
-long CdbCommandUpdateObject::UpdateLong(CdmValueLong* p_pCdmLong)
+qint64 CdbCommandUpdateObject::UpdateLong(CdmValueLong* p_pCdmLong)
 {
-   long lRet = CdmLogging::eDmObjectAccessError;
+  qint64 lRet = CdmLogging::eDmObjectAccessError;
 
    if(CHKPTR(p_pCdmLong))
    {
@@ -824,7 +824,7 @@ long CdbCommandUpdateObject::UpdateLong(CdmValueLong* p_pCdmLong)
          if(lRet < 0)
          {
             lRet = EC(eDmInvalidUpdateStatement);
-            ERR("Update not possible for Long!!");
+            ERR("Update not possible for qint64!!");
          }
       }
    }
@@ -836,9 +836,9 @@ long CdbCommandUpdateObject::UpdateLong(CdmValueLong* p_pCdmLong)
    return lRet;
 }
 
-long CdbCommandUpdateObject::InsertFloat(CdmValueFloat* p_pCdmFloat)
+qint64 CdbCommandUpdateObject::InsertFloat(CdmValueFloat* p_pCdmFloat)
 {
-   long lRet = CdmLogging::eDmObjectAccessError;
+  qint64 lRet = CdmLogging::eDmObjectAccessError;
 
    if(CHKPTR(p_pCdmFloat))
    {
@@ -869,9 +869,9 @@ long CdbCommandUpdateObject::InsertFloat(CdmValueFloat* p_pCdmFloat)
    return lRet;
 }
 
-long CdbCommandUpdateObject::UpdateFloat(CdmValueFloat* p_pCdmFloat)
+qint64 CdbCommandUpdateObject::UpdateFloat(CdmValueFloat* p_pCdmFloat)
 {
-   long lRet = CdmLogging::eDmObjectAccessError;
+  qint64 lRet = CdmLogging::eDmObjectAccessError;
 
    if(CHKPTR(p_pCdmFloat))
    {
@@ -903,9 +903,9 @@ long CdbCommandUpdateObject::UpdateFloat(CdmValueFloat* p_pCdmFloat)
    return lRet;
 }
 
-long CdbCommandUpdateObject::InsertDouble(CdmValueDouble* p_pCdmDouble)
+qint64 CdbCommandUpdateObject::InsertDouble(CdmValueDouble* p_pCdmDouble)
 {
-   long lRet = CdmLogging::eDmObjectAccessError;
+  qint64 lRet = CdmLogging::eDmObjectAccessError;
 
    if(CHKPTR(p_pCdmDouble))
    {
@@ -936,9 +936,9 @@ long CdbCommandUpdateObject::InsertDouble(CdmValueDouble* p_pCdmDouble)
    return lRet;
 }
 
-long CdbCommandUpdateObject::UpdateDouble(CdmValueDouble* p_pCdmDouble)
+qint64 CdbCommandUpdateObject::UpdateDouble(CdmValueDouble* p_pCdmDouble)
 {
-   long lRet = CdmLogging::eDmObjectAccessError;
+  qint64 lRet = CdmLogging::eDmObjectAccessError;
 
    if(CHKPTR(p_pCdmDouble))
    {
@@ -970,9 +970,9 @@ long CdbCommandUpdateObject::UpdateDouble(CdmValueDouble* p_pCdmDouble)
    return lRet;
 }
 
-long CdbCommandUpdateObject::InsertString(CdmValueString* p_pCdmString)
+qint64 CdbCommandUpdateObject::InsertString(CdmValueString* p_pCdmString)
 {
-   long lRet = CdmLogging::eDmObjectAccessError;
+  qint64 lRet = CdmLogging::eDmObjectAccessError;
 
    if(CHKPTR(p_pCdmString))
    {
@@ -986,7 +986,7 @@ long CdbCommandUpdateObject::InsertString(CdmValueString* p_pCdmString)
 
          cQSqlQuery.prepare("insert into WMS_VALUE_STRING (StringId, Val) values(:id, :val)");
          cQSqlQuery.bindValue(":val", qstrValue);
-         cQSqlQuery.bindValue(":id", (int)p_pCdmString->GetId());
+         cQSqlQuery.bindValue(":id", p_pCdmString->GetId());
 
          lRet = GetDataAccess()->ExecuteQuery(cQSqlQuery);
 
@@ -1005,9 +1005,9 @@ long CdbCommandUpdateObject::InsertString(CdmValueString* p_pCdmString)
    return lRet;
 }
 
-long CdbCommandUpdateObject::UpdateString(CdmValueString* p_pCdmString)
+qint64 CdbCommandUpdateObject::UpdateString(CdmValueString* p_pCdmString)
 {
-   long lRet = CdmLogging::eDmObjectAccessError;
+  qint64 lRet = CdmLogging::eDmObjectAccessError;
 
    if(CHKPTR(p_pCdmString))
    {
@@ -1020,7 +1020,7 @@ long CdbCommandUpdateObject::UpdateString(CdmValueString* p_pCdmString)
 
          cQSqlQuery.prepare("update WMS_VALUE_STRING set Val = :val where StringId = :id");
          cQSqlQuery.bindValue(":val", qstrValue);
-         cQSqlQuery.bindValue(":id", (int)p_pCdmString->GetId());
+         cQSqlQuery.bindValue(":id", p_pCdmString->GetId());
 
 
 
@@ -1041,9 +1041,9 @@ long CdbCommandUpdateObject::UpdateString(CdmValueString* p_pCdmString)
    return lRet;
 }
 
-long CdbCommandUpdateObject::InsertDate(CdmValueDate* p_pCdmDate)
+qint64 CdbCommandUpdateObject::InsertDate(CdmValueDate* p_pCdmDate)
 {
-   long lRet = CdmLogging::eDmObjectAccessError;
+  qint64 lRet = CdmLogging::eDmObjectAccessError;
 
    if(CHKPTR(p_pCdmDate))
    {
@@ -1074,9 +1074,9 @@ long CdbCommandUpdateObject::InsertDate(CdmValueDate* p_pCdmDate)
    return lRet;
 }
 
-long CdbCommandUpdateObject::UpdateDate(CdmValueDate* p_pCdmDate)
+qint64 CdbCommandUpdateObject::UpdateDate(CdmValueDate* p_pCdmDate)
 {
-   long lRet = CdmLogging::eDmObjectAccessError;
+  qint64 lRet = CdmLogging::eDmObjectAccessError;
 
    if(CHKPTR(p_pCdmDate))
    {
@@ -1107,9 +1107,9 @@ long CdbCommandUpdateObject::UpdateDate(CdmValueDate* p_pCdmDate)
    return lRet;
 }
 
-long CdbCommandUpdateObject::InsertTime(CdmValueTime* p_pCdmTime)
+qint64 CdbCommandUpdateObject::InsertTime(CdmValueTime* p_pCdmTime)
 {
-   long lRet = CdmLogging::eDmObjectAccessError;
+  qint64 lRet = CdmLogging::eDmObjectAccessError;
 
    if(CHKPTR(p_pCdmTime))
    {
@@ -1148,9 +1148,9 @@ long CdbCommandUpdateObject::InsertTime(CdmValueTime* p_pCdmTime)
    return lRet;
 }
 
-long CdbCommandUpdateObject::UpdateTime(CdmValueTime* p_pCdmTime)
+qint64 CdbCommandUpdateObject::UpdateTime(CdmValueTime* p_pCdmTime)
 {
-   long lRet = CdmLogging::eDmObjectAccessError;
+  qint64 lRet = CdmLogging::eDmObjectAccessError;
 
    if(CHKPTR(p_pCdmTime))
    {
@@ -1189,9 +1189,9 @@ long CdbCommandUpdateObject::UpdateTime(CdmValueTime* p_pCdmTime)
    return lRet;
 }
 
-long CdbCommandUpdateObject::InsertDateTime(CdmValueDateTime* p_pCdmDateTime)
+qint64 CdbCommandUpdateObject::InsertDateTime(CdmValueDateTime* p_pCdmDateTime)
 {
-   long lRet = CdmLogging::eDmObjectAccessError;
+  qint64 lRet = CdmLogging::eDmObjectAccessError;
 
    if(CHKPTR(p_pCdmDateTime))
    {
@@ -1225,9 +1225,9 @@ long CdbCommandUpdateObject::InsertDateTime(CdmValueDateTime* p_pCdmDateTime)
    return lRet;
 }
 
-long CdbCommandUpdateObject::UpdateDateTime(CdmValueDateTime* p_pCdmDateTime)
+qint64 CdbCommandUpdateObject::UpdateDateTime(CdmValueDateTime* p_pCdmDateTime)
 {
-   long lRet = CdmLogging::eDmObjectAccessError;
+  qint64 lRet = CdmLogging::eDmObjectAccessError;
 
    if(CHKPTR(p_pCdmDateTime))
    {
@@ -1261,9 +1261,9 @@ long CdbCommandUpdateObject::UpdateDateTime(CdmValueDateTime* p_pCdmDateTime)
    return lRet;
 }
 
-long CdbCommandUpdateObject::InsertObjectRef(CdmValueObjectRef* p_pCdmObjectRef)
+qint64 CdbCommandUpdateObject::InsertObjectRef(CdmValueObjectRef* p_pCdmObjectRef)
 {
-   long lRet = CdmLogging::eDmObjectAccessError;
+  qint64 lRet = CdmLogging::eDmObjectAccessError;
 
    if(CHKPTR(p_pCdmObjectRef))
    {
@@ -1297,9 +1297,9 @@ long CdbCommandUpdateObject::InsertObjectRef(CdmValueObjectRef* p_pCdmObjectRef)
    return lRet;
 }
 
-long CdbCommandUpdateObject::UpdateObjectRef(CdmValueObjectRef* p_pCdmObjectRef)
+qint64 CdbCommandUpdateObject::UpdateObjectRef(CdmValueObjectRef* p_pCdmObjectRef)
 {
-   long lRet = CdmLogging::eDmObjectAccessError;
+  qint64 lRet = CdmLogging::eDmObjectAccessError;
 
    if(CHKPTR(p_pCdmObjectRef))
    {
@@ -1331,9 +1331,9 @@ long CdbCommandUpdateObject::UpdateObjectRef(CdmValueObjectRef* p_pCdmObjectRef)
    return lRet;
 }
 
-long CdbCommandUpdateObject::InsertContainerRef(CdmValueContainerRef* p_pContainerRef)
+qint64 CdbCommandUpdateObject::InsertContainerRef(CdmValueContainerRef* p_pContainerRef)
 {
-   long lRet = CdmLogging::eDmObjectAccessError;
+  qint64 lRet = CdmLogging::eDmObjectAccessError;
 
    if(CHKPTR(p_pContainerRef))
    {
@@ -1367,9 +1367,9 @@ long CdbCommandUpdateObject::InsertContainerRef(CdmValueContainerRef* p_pContain
    return lRet;
 }
 
-long CdbCommandUpdateObject::UpdateContainerRef(CdmValueContainerRef* p_pContainerRef)
+qint64 CdbCommandUpdateObject::UpdateContainerRef(CdmValueContainerRef* p_pContainerRef)
 {
-   long lRet = CdmLogging::eDmObjectAccessError;
+  qint64 lRet = CdmLogging::eDmObjectAccessError;
 
    if(CHKPTR(p_pContainerRef))
    {
@@ -1402,9 +1402,9 @@ long CdbCommandUpdateObject::UpdateContainerRef(CdmValueContainerRef* p_pContain
    return lRet;
 }
 
-long CdbCommandUpdateObject::InsertCounter(CdmValueCounter* p_pCdmCounter)
+qint64 CdbCommandUpdateObject::InsertCounter(CdmValueCounter* p_pCdmCounter)
 {
-   long lRet = CdmLogging::eDmObjectAccessError;
+  qint64 lRet = CdmLogging::eDmObjectAccessError;
 
    if(CHKPTR(p_pCdmCounter))
    {
@@ -1442,9 +1442,9 @@ void CdbCommandUpdateObject::GetCounterValue(CdmValueCounter* p_pCdmCounter)
     cCommand.Run();
 }
 
-long CdbCommandUpdateObject::UpdateCounter(CdmValueCounter* p_pCdmCounter)
+qint64 CdbCommandUpdateObject::UpdateCounter(CdmValueCounter* p_pCdmCounter)
 {
-   long lRet = CdmLogging::eDmObjectAccessError;
+  qint64 lRet = CdmLogging::eDmObjectAccessError;
 
    if(CHKPTR(p_pCdmCounter))
    {
@@ -1475,9 +1475,9 @@ long CdbCommandUpdateObject::UpdateCounter(CdmValueCounter* p_pCdmCounter)
    return lRet;
 }
 
-long CdbCommandUpdateObject::InsertBinaryDocument(CdmValueBinaryDocument* p_pCdmBinaryDocument)
+qint64 CdbCommandUpdateObject::InsertBinaryDocument(CdmValueBinaryDocument* p_pCdmBinaryDocument)
 {
-   long lRet = CdmLogging::eDmObjectAccessError;
+  qint64 lRet = CdmLogging::eDmObjectAccessError;
 
    if(CHKPTR(p_pCdmBinaryDocument))
    {
@@ -1534,9 +1534,9 @@ QString CdbCommandUpdateObject::ShortFilename(QString p_qstrFilename)
    return qstrFilename;
 }
 
-long CdbCommandUpdateObject::UpdateBinaryDocument(CdmValueBinaryDocument* p_pCdmBinaryDocument)
+qint64 CdbCommandUpdateObject::UpdateBinaryDocument(CdmValueBinaryDocument* p_pCdmBinaryDocument)
 {
-   long lRet = CdmLogging::eDmObjectAccessError;
+  qint64 lRet = CdmLogging::eDmObjectAccessError;
 
    BODY_TRY
    if (CHKPTR(p_pCdmBinaryDocument))
@@ -1577,10 +1577,10 @@ long CdbCommandUpdateObject::UpdateBinaryDocument(CdmValueBinaryDocument* p_pCdm
    return lRet;
 }
 
-long CdbCommandUpdateObject::InsertCharacterDocument(CdmValueCharacterDocument* p_pCdmCharacterDocument,
+qint64 CdbCommandUpdateObject::InsertCharacterDocument(CdmValueCharacterDocument* p_pCdmCharacterDocument,
                                                      CdbDataAccess::EodbcBaseType p_eType)
 {
-   long lRet = CdmLogging::eDmObjectAccessError;
+  qint64 lRet = CdmLogging::eDmObjectAccessError;
 
    if(CHKPTR(p_pCdmCharacterDocument))
    {
@@ -1594,7 +1594,7 @@ long CdbCommandUpdateObject::InsertCharacterDocument(CdmValueCharacterDocument* 
 
          cQSqlQuery.prepare("insert into WMS_VALUE_CHARACTERDOCUMENT (CharacterDocumentId, Val) values(:id, :val)");
          cQSqlQuery.bindValue(":val", qstrValue);
-         cQSqlQuery.bindValue(":id", (int)p_pCdmCharacterDocument->GetId());
+         cQSqlQuery.bindValue(":id", p_pCdmCharacterDocument->GetId());
 
          lRet = GetDataAccess()->ExecuteQuery(cQSqlQuery);
 
@@ -1614,10 +1614,10 @@ long CdbCommandUpdateObject::InsertCharacterDocument(CdmValueCharacterDocument* 
    return lRet;
 }
 
-long CdbCommandUpdateObject::UpdateCharacterDocument(CdmValueCharacterDocument* p_pCdmCharacterDocument,
+qint64 CdbCommandUpdateObject::UpdateCharacterDocument(CdmValueCharacterDocument* p_pCdmCharacterDocument,
                                               CdbDataAccess::EodbcBaseType p_eType)
 {
-   long lRet = CdmLogging::eDmObjectAccessError;
+  qint64 lRet = CdmLogging::eDmObjectAccessError;
    Q_UNUSED(p_eType);
 
    if(CHKPTR(p_pCdmCharacterDocument))
@@ -1633,7 +1633,7 @@ long CdbCommandUpdateObject::UpdateCharacterDocument(CdmValueCharacterDocument* 
 
          cQSqlQuery.prepare("update WMS_VALUE_CHARACTERDOCUMENT set Val = :val where CharacterDocumentId = :id");
          cQSqlQuery.bindValue(":val", qstrValue);
-         cQSqlQuery.bindValue(":id", (int)p_pCdmCharacterDocument->GetId());
+         cQSqlQuery.bindValue(":id", p_pCdmCharacterDocument->GetId());
 
 //         qstrQuery = QString("update WMS_VALUE_CHARACTERDOCUMENT set Val = '%1' where CharacterDocumentId = %2")
 //                             .arg(CwmsUtilities::MaskStringForChanges(qstrValue))

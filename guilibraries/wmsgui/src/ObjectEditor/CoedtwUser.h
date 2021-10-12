@@ -30,7 +30,7 @@ class CoedtwUser : public CoeValueWidget
    private:
       QPushButton* m_pqbButton;
       QLineEdit* m_pqleUser;
-      long m_lCurrentUserId;
+     qint64 m_lCurrentUserId;
 
    public:
    /** +-=---------------------------------------------------------Di 28. Aug 15:06:06 2012-------*

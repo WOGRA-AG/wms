@@ -75,7 +75,7 @@ bool CwmsExportWriter::Export()
       CdmObjectContainer* pContainer = GetObjectList();
       if (CHKPTR(pContainer))
       {
-         QList<long> qvlObjects;
+         QList<qint64> qvlObjects;
          INFO("Execute Query");
          bool bQueryResult = GetQueryObjects(qvlObjects, pContainer);
 
@@ -155,18 +155,18 @@ CdmObjectContainer* CwmsExportWriter::GetObjectList()
 /** +-=---------------------------------------------------------So 18. Nov 11:15:39 2007----------*
  * @method  CwmsExportWriter::GetQueryObjects            // private                           *
  * @return  bool                                             // successflag                       *
- * @param   QList<long>& p_rqvlObjects                  //                                   *
+ * @param   QList<qint64>& p_rqvlObjects                  //                                   *
  * @param   CdmObjectContainer* p_pContainer                  //                                   *
  * @comment This method returns the query objects which are the result of the query.              *
  *----------------last changed: Wolfgang Graßhof----------------So 18. Nov 11:15:39 2007----------*/
-bool CwmsExportWriter::GetQueryObjects(QList<long>& p_rqvlObjects,
+bool CwmsExportWriter::GetQueryObjects(QList<qint64>& p_rqvlObjects,
                                        CdmObjectContainer* p_pContainer)
 {
    bool bRet = false;
     Q_UNUSED(p_pContainer);
 
     QString qstrQuery = m_rCwmsSettings.GetQuery();
-    QList<long> qllExportList = m_rCwmsSettings.GetExportList();
+    QList<qint64> qllExportList = m_rCwmsSettings.GetExportList();
 
     if (!qstrQuery.isEmpty())
     {
@@ -177,14 +177,14 @@ bool CwmsExportWriter::GetQueryObjects(QList<long>& p_rqvlObjects,
         {
             bRet = true;
 
-            const QList<long> qvlResult = pCdmQuery->GetResultList();
+            const QList<qint64> qvlResult = pCdmQuery->GetResultList();
 
-            QList<long>::const_iterator qvlIt = qvlResult.begin();
-            QList<long>::const_iterator qvlItEnd = qvlResult.end();
+            QList<qint64>::const_iterator qvlIt = qvlResult.begin();
+            QList<qint64>::const_iterator qvlItEnd = qvlResult.end();
 
             for(; qvlIt != qvlItEnd; ++ qvlIt)
             {
-                long lValue = (*qvlIt);
+               qint64 lValue = (*qvlIt);
                 p_rqvlObjects.append(lValue);
             }
 
@@ -284,12 +284,12 @@ void CwmsExportWriter::CloseDevice()
  * @return  bool                                             //                                   *
  * @param   QTextStream& p_rqtStream                         //                                   *
  * @param   CdmObjectContainer* p_pContainer                  //                                   *
- * @param   QList<long> p_rqvlObjects                   //                                   *
+ * @param   QList<qint64> p_rqvlObjects                   //                                   *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------Mo 29. Okt 10:37:11 2012----------*/
 bool CwmsExportWriter::ExportCsv(QTextStream& p_rqtStream,
                                  CdmObjectContainer* p_pContainer,
-                                 QList<long> p_rqvlObjects)
+                                 QList<qint64> p_rqvlObjects)
 {
    bool bRet = false;
 
@@ -301,7 +301,7 @@ bool CwmsExportWriter::ExportCsv(QTextStream& p_rqtStream,
 
          if (CHKPTR(pContainerManager))
          {
-            long lObjectListId = p_pContainer->GetId();
+           qint64 lObjectListId = p_pContainer->GetId();
             pContainerManager->RemoveContainerLocally(p_pContainer->GetId());
             p_pContainer = pContainerManager->FindContainerById(lObjectListId);
             if (CHKPTR(p_pContainer))
@@ -321,15 +321,15 @@ bool CwmsExportWriter::ExportCsv(QTextStream& p_rqtStream,
        
       QList<QString> qvlMembers = m_rCwmsSettings.GetMemberList();
 
-      QList<long>::iterator qvlIt = p_rqvlObjects.begin();
-      QList<long>::iterator qvlItEnd = p_rqvlObjects.end();
+      QList<qint64>::iterator qvlIt = p_rqvlObjects.begin();
+      QList<qint64>::iterator qvlItEnd = p_rqvlObjects.end();
       
       INFO("Exporting " + QString::number(p_rqvlObjects.count()) + " Objects:");
       int iCounter = 0;
 
       for (; qvlIt != qvlItEnd; ++qvlIt)
       {
-         long lObjectId = (*qvlIt);
+        qint64 lObjectId = (*qvlIt);
          ++iCounter;
          INFO("Exporting Object " + QString::number(iCounter));
 
@@ -536,12 +536,12 @@ QString CwmsExportWriter::GetCsvSeperator()
  * @return  bool                                             //                                   *
  * @param   QTextStream& p_rqtStream                         //                                   *
  * @param   CdmObjectContainer* p_pContainer                  //                                   *
- * @param   QList<long> p_rqvlObjects                   //                                   *
+ * @param   QList<qint64> p_rqvlObjects                   //                                   *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------Mo 29. Okt 10:37:36 2012----------*/
 bool CwmsExportWriter::ExportHtml(QTextStream& p_rqtStream,
                                       CdmObjectContainer* p_pContainer,
-                                      QList<long> p_rqvlObjects)
+                                      QList<qint64> p_rqvlObjects)
 {
 
    bool bRet = false;
@@ -554,7 +554,7 @@ bool CwmsExportWriter::ExportHtml(QTextStream& p_rqtStream,
 
          if (CHKPTR(pContainerManager))
          {
-            long lObjectListId = p_pContainer->GetId();
+           qint64 lObjectListId = p_pContainer->GetId();
             pContainerManager->RemoveContainerLocally(p_pContainer->GetId());
             p_pContainer = pContainerManager->FindContainerById(lObjectListId);
 
@@ -572,14 +572,14 @@ bool CwmsExportWriter::ExportHtml(QTextStream& p_rqtStream,
 
          QList<QString> qvlMembers = m_rCwmsSettings.GetMemberList();
 
-         QList<long>::iterator qvlIt = p_rqvlObjects.begin();
-         QList<long>::iterator qvlItEnd = p_rqvlObjects.end();
+         QList<qint64>::iterator qvlIt = p_rqvlObjects.begin();
+         QList<qint64>::iterator qvlItEnd = p_rqvlObjects.end();
          INFO("Exporting " + QString::number(p_rqvlObjects.count()) + " Objects:");
          int iCounter = 0;
          
          for (; qvlIt != qvlItEnd; ++qvlIt)
          {
-            long lObjectId = (*qvlIt);
+           qint64 lObjectId = (*qvlIt);
             ++iCounter;
             INFO("Exporting Object " + QString::number(iCounter));
             CdmObject* pCdmObject = p_pContainer->FindObjectById(lObjectId);
@@ -702,12 +702,12 @@ QString CwmsExportWriter::GetHtmlFooter()
  * @return  bool                                             //                                   *
  * @param   QTextStream& p_rqtStream                         //                                   *
  * @param   CdmObjectContainer* p_pContainer                  //                                   *
- * @param   QList<long> p_rqvlObjects                   //                                   *
+ * @param   QList<qint64> p_rqvlObjects                   //                                   *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------Mo 29. Okt 10:37:44 2012----------*/
 bool CwmsExportWriter::ExportXml(QTextStream& p_rqtStream,
                                      CdmObjectContainer* p_pContainer,
-                                     QList<long> p_rqvlObjects)
+                                     QList<qint64> p_rqvlObjects)
 {
    bool bRet = false;
 
@@ -719,7 +719,7 @@ bool CwmsExportWriter::ExportXml(QTextStream& p_rqtStream,
 
          if (CHKPTR(pContainerManager))
          {
-            long lObjectListId = p_pContainer->GetId();
+           qint64 lObjectListId = p_pContainer->GetId();
             pContainerManager->RemoveContainerLocally(p_pContainer->GetId());
             p_pContainer = pContainerManager->FindContainerById(lObjectListId);
             if (CHKPTR(p_pContainer))
@@ -730,8 +730,8 @@ bool CwmsExportWriter::ExportXml(QTextStream& p_rqtStream,
       }
 
       QList<QString> qvlMembers = m_rCwmsSettings.GetMemberList();
-      QList<long>::iterator qvlIt = p_rqvlObjects.begin();
-      QList<long>::iterator qvlItEnd = p_rqvlObjects.end();
+      QList<qint64>::iterator qvlIt = p_rqvlObjects.begin();
+      QList<qint64>::iterator qvlItEnd = p_rqvlObjects.end();
       INFO("Exporting " + QString::number(p_rqvlObjects.count()) + " Objects:");
       int iCounter = 0;
       QDomDocument qddDocument;
@@ -744,7 +744,7 @@ bool CwmsExportWriter::ExportXml(QTextStream& p_rqtStream,
 
       for (; qvlIt != qvlItEnd; ++qvlIt)
       {
-         long lObjectId = (*qvlIt);
+        qint64 lObjectId = (*qvlIt);
          ++iCounter;
          INFO("Exporting Object " + QString::number(iCounter));
          CdmObject* pCdmObject = p_pContainer->FindObjectById(lObjectId);

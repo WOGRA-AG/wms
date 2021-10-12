@@ -11,8 +11,8 @@
 #include "CdmLogging.h"
 
 
-CdmValueUserGroup::CdmValueUserGroup(long p_lDatabaseId,
-                                     long p_lId,
+CdmValueUserGroup::CdmValueUserGroup(qint64 p_lDatabaseId,
+                                    qint64 p_lId,
                                      QString p_qstrKeyname,
                                      CdmObject* p_pCdmObject)
    : CdmValueInt(eDmValueUserGroup, p_lDatabaseId, p_lId, p_qstrKeyname, p_pCdmObject)

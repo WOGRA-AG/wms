@@ -7,7 +7,7 @@
 #include "CftlCommandLoadObjects.h"
 #include "CftlCommandLoadContainer.h"
 
-CftlCommandLoadContainer::CftlCommandLoadContainer(long p_lContainerId, bool p_bLoadObjects, CftlDataAccess* p_pDataAccess)
+CftlCommandLoadContainer::CftlCommandLoadContainer(qint64 p_lContainerId, bool p_bLoadObjects, CftlDataAccess* p_pDataAccess)
     : CftlAbstractCommand(p_pDataAccess),
       m_lContainerId(p_lContainerId),
       m_bLoadObjects(p_bLoadObjects),
@@ -16,7 +16,7 @@ CftlCommandLoadContainer::CftlCommandLoadContainer(long p_lContainerId, bool p_b
 {
 }
 
-CftlCommandLoadContainer::CftlCommandLoadContainer(long p_lSchemeId, QString p_qstrKeyname, bool p_bLoadObjects, CftlDataAccess* p_pDataAccess)
+CftlCommandLoadContainer::CftlCommandLoadContainer(qint64 p_lSchemeId, QString p_qstrKeyname, bool p_bLoadObjects, CftlDataAccess* p_pDataAccess)
     : CftlAbstractCommand(p_pDataAccess),
       m_lContainerId(0),
       m_bLoadObjects(p_bLoadObjects),
@@ -49,7 +49,7 @@ void CftlCommandLoadContainer::GenerateContainerQuery(QSqlQuery& p_rQuery)
                          "ol.CreatorId, ol.ModifierId, ol.Caption, ol.Comment, cl.SchemeId, ol.Tree "
                          "from WMS_DM_CONTAINER ol, WMS_CLASS cl where ol.ContainerId = ? "
                          "and ol.ClassId = cl.ClassId");
-        p_rQuery.addBindValue((int)m_lContainerId);
+        p_rQuery.addBindValue(m_lContainerId);
     }
     else
     {
@@ -58,16 +58,16 @@ void CftlCommandLoadContainer::GenerateContainerQuery(QSqlQuery& p_rQuery)
                          "ol.Tree from WMS_DM_CONTAINER ol, WMS_CLASS cl where ol.Keyname = ? "
                          "and ol.ClassId = cl.ClassId and cl.SchemeId = ?");
         p_rQuery.addBindValue(m_qstrKeyname);
-        p_rQuery.addBindValue((int)m_lSchemeId);
+        p_rQuery.addBindValue(m_lSchemeId);
 
     }
 }
 
 int CftlCommandLoadContainer::Execute()
 {
-    long lRet = CdmLogging::eDmObjectAccessError;
+   qint64 lRet = CdmLogging::eDmObjectAccessError;
     QDateTime qdtLastChange;
-    QList<long> qvlObjects;
+    QList<qint64> qvlObjects;
     QSqlQuery cQSqlQuery(GetSqlDatabase());
     QString qstrQuery;
 
@@ -86,15 +86,15 @@ int CftlCommandLoadContainer::Execute()
 
         if(cQSqlQuery.isValid())
         {
-            long lClassId           = cQSqlQuery.value(0).toInt();
+           qint64 lClassId           = cQSqlQuery.value(0).toInt();
             m_lContainerId          = cQSqlQuery.value(1).toInt();
             QString qstrKeyname     = cQSqlQuery.value(2).toString();
             qdtLastChange           = cQSqlQuery.value(3).toDateTime();
-            long lCreatorId         = cQSqlQuery.value(4).toInt();
-            long lLastModifierId    = cQSqlQuery.value(5).toInt();
+           qint64 lCreatorId         = cQSqlQuery.value(4).toInt();
+           qint64 lLastModifierId    = cQSqlQuery.value(5).toInt();
             QString qstrCaption     = cQSqlQuery.value(6).toString();
             QString qstrComment     = cQSqlQuery.value(7).toString();
-            long lDatabaseId        = cQSqlQuery.value(8).toInt();
+           qint64 lDatabaseId        = cQSqlQuery.value(8).toInt();
             bool bTree              = cQSqlQuery.value(9).toBool();
 
             m_rpContainer = CdmDataAccessHelper::CreateObjectContainer(lDatabaseId, m_lContainerId, qstrKeyname, lClassId);
@@ -143,9 +143,9 @@ void CftlCommandLoadContainer::LoadObjects()
     }
 }
 
-long CftlCommandLoadContainer::LoadContainerRights()
+qint64 CftlCommandLoadContainer::LoadContainerRights()
 {
-    long lRet = CdmLogging::eDmObjectAccessError;
+   qint64 lRet = CdmLogging::eDmObjectAccessError;
 
     if(CHKPTR(m_rpContainer))
     {
@@ -153,7 +153,7 @@ long CftlCommandLoadContainer::LoadContainerRights()
         QString qstrQuery;
 
         cQSqlQuery.prepare("select AccessorId, AccessRight from WMS_DM_ACCESSORRIGHT where ContainerId = ?");
-        cQSqlQuery.addBindValue((int)m_rpContainer->GetId());
+        cQSqlQuery.addBindValue(m_rpContainer->GetId());
 
         lRet = GetDataAccess()->ExecuteQuery(cQSqlQuery);
 
@@ -165,7 +165,7 @@ long CftlCommandLoadContainer::LoadContainerRights()
             {
                 do
                 {
-                    long lAccessorId = cQSqlQuery.value(0).toInt();
+                   qint64 lAccessorId = cQSqlQuery.value(0).toInt();
                     int iRight       = cQSqlQuery.value(1).toInt();
 
                     m_rpContainer->AddAccessorRight(lAccessorId, (EdmRight)iRight);

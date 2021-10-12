@@ -512,10 +512,10 @@ void CdmClassMethod::SetParameters(QString p_qstrParameters)
  * @return  void                                             //                                   *
  * @param   QString p_qstrName                               //                                   *
  * @param   EdmValue p_eValueType                            //                                   *
- * @param   long p_lClassId = 0                              //                                   *
+ * @param  qint64 p_lClassId = 0                              //                                   *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------Do 22. Nov 16:10:17 2012----------*/
-void CdmClassMethod::AddParameter(QString p_qstrName, EdmValueType p_eValueType, long p_lClassId)
+void CdmClassMethod::AddParameter(QString p_qstrName, EdmValueType p_eValueType,qint64 p_lClassId)
 {
     SYNCHRONIZED_WRITE;
    CdmClassMethodParameter cParam;
@@ -823,7 +823,7 @@ QVariant CdmClassMethod::GetVariant() const
       CdmClassMethodParameter cParam = m_qlParameters[iCounter];
       qvParameter.insert(WMS_TYPE, cParam.m_eType);
       qvParameter.insert(WMS_POS, cParam.m_iPos);
-      qvParameter.insert(WMS_REFERENCE, (int)cParam.m_lReference);
+      qvParameter.insert(WMS_REFERENCE, cParam.m_lReference);
       qvParameter.insert(WMS_NAME, cParam.GetName());
       qvParameters.insert(cParam.GetName(), qvParameter);
    }

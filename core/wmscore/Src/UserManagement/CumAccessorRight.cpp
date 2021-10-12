@@ -35,11 +35,11 @@ CumAccessorRight::CumAccessorRight(  )
 /** +-=---------------------------------------------------------Sa 20. Aug 11:21:22 2005----------*
  * @method  CumAccessorRight::CumAccessorRight               // public                            *
  * @return                                                   //                                   *
- * @param   long p_lAccessorId                               //                                   *
+ * @param  qint64 p_lAccessorId                               //                                   *
  * @param   EumAccessRight p_eUmAccessRight                  //                                   *
  * @comment The cosntructor of accessor rights.                                                   *
  *----------------last changed: --------------------------------Sa 20. Aug 11:21:22 2005----------*/
-CumAccessorRight::CumAccessorRight(  long p_lAccessorId, EumAccessRight p_eUmAccessRight )
+CumAccessorRight::CumAccessorRight( qint64 p_lAccessorId, EumAccessRight p_eUmAccessRight )
    : m_lAccessorId(p_lAccessorId),
   m_eUmAccessRight(p_eUmAccessRight)
 {
@@ -76,7 +76,7 @@ CumAccessorRight::~CumAccessorRight(  )
 QVariant CumAccessorRight::GetVariant() const
 {
    QVariantMap qvHash;
-   qvHash["AccessorId"] = (int)m_lAccessorId;
+   qvHash["AccessorId"] = m_lAccessorId;
    qvHash["RightId"] = m_eUmAccessRight;
 
    return qvHash;
@@ -119,20 +119,20 @@ bool CumAccessorRight::HasWriteAccess() const
 /** +-=---------------------------------------------------------Sa 20. Aug 11:21:40 2005----------*
  * @method  CumAccessorRight::SetAccessorId                  // public                            *
  * @return  void                                             //                                   *
- * @param   long p_lAccessorId                               //                                   *
+ * @param  qint64 p_lAccessorId                               //                                   *
  * @comment This method sets the accessorid of this accessorright.                                *
  *----------------last changed: --------------------------------Sa 20. Aug 11:21:40 2005----------*/
-void CumAccessorRight::SetAccessorId(  long p_lAccessorId )
+void CumAccessorRight::SetAccessorId( qint64 p_lAccessorId )
 {
    m_lAccessorId = p_lAccessorId;
 }
 
 /** +-=---------------------------------------------------------So 10. Feb 11:44:25 2013----------*
  * @method  CumAccessorRight::GetAccessorId                  // public, const                     *
- * @return  long                                             //                                   *
+ * @return qint64                                             //                                   *
  * @comment This method returns the accessorid of this right.                                     *
  *----------------last changed: --------------------------------So 10. Feb 11:44:25 2013----------*/
-long CumAccessorRight::GetAccessorId() const
+qint64 CumAccessorRight::GetAccessorId() const
 {
    return m_lAccessorId;
 }

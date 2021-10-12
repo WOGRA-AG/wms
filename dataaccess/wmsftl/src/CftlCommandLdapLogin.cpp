@@ -42,7 +42,7 @@ CftlCommandLdapLogin::~CftlCommandLdapLogin()
 
 int CftlCommandLdapLogin::Execute()
 {
-    long lRet = CdmLogging::eDmUnknownLoginManagerError;
+   qint64 lRet = CdmLogging::eDmUnknownLoginManagerError;
     CftlCommandLicenceCheck command(m_qstrApplication, m_qstrVersion, GetDataAccess());
 
     if(SUCCESSFULL(command.Run()))
@@ -175,11 +175,11 @@ CumUser* CftlCommandLdapLogin::GetUser()
     return m_pUser;
 }
 
-long CftlCommandLdapLogin::GetNewSession()
+qint64 CftlCommandLdapLogin::GetNewSession()
 {
     CftlCommandGetNewSession commandNewSession(m_qstrApplication, m_pUser->GetId(), GetDataAccess());
 
-    long lRet = commandNewSession.Run();
+   qint64 lRet = commandNewSession.Run();
 
     if (SUCCESSFULL(lRet))
     {

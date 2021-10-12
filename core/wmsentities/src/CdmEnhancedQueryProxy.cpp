@@ -170,13 +170,13 @@ void CdmEnhancedQueryProxy::CreateQuery(CdmObjectContainer *p_pContainer)
  * @method  CdmEnhancedQueryProxy::GetDisplaySetV            // public, virtual                   *
  * @return  void                                             //                                   *
  * @param   CdmObjectContainer* p_pContainer                  // the source objectlist             *
- * @param   QSet<long>& p_rqsResult                          // The list of objects or objectlists*
+ * @param   QSet<qint64>& p_rqsResult                          // The list of objects or objectlists*
  *                                                           //  which can be used                *
  * @comment This is the abstract method which must be overwritten be the derived class. the       *
  *          gui components which uses proxies uses the list of results for displaying their       *
  *          contents.                                                                             *
  *----------------last changed: --------------------------------Mi 3. Okt 11:48:20 2012-----------*/
-void CdmEnhancedQueryProxy::GetDisplaySetV(CdmObjectContainer* p_pContainer, QSet<long>& p_rqsResult)
+void CdmEnhancedQueryProxy::GetDisplaySetV(CdmObjectContainer* p_pContainer, QSet<qint64>& p_rqsResult)
 {
    if(CHKPTR(p_pContainer))
    { 
@@ -184,14 +184,14 @@ void CdmEnhancedQueryProxy::GetDisplaySetV(CdmObjectContainer* p_pContainer, QSe
       GetQuery()->DeleteResultElements();
       CreateQuery(p_pContainer);
       Execute();
-      const QList<long> qvlResult = GetQuery()->GetResultList();
+      const QList<qint64> qvlResult = GetQuery()->GetResultList();
 
-      QList<long>::const_iterator qvlIt = qvlResult.begin();
-      QList<long>::const_iterator qvlItEnd = qvlResult.end();
+      QList<qint64>::const_iterator qvlIt = qvlResult.begin();
+      QList<qint64>::const_iterator qvlItEnd = qvlResult.end();
 
       for(; qvlIt != qvlItEnd; ++ qvlIt)
       {
-         long lValue = (*qvlIt);
+        qint64 lValue = (*qvlIt);
          p_rqsResult.insert(lValue);
       }
 
@@ -203,13 +203,13 @@ void CdmEnhancedQueryProxy::GetDisplaySetV(CdmObjectContainer* p_pContainer, QSe
  * @method  CdmEnhancedQueryProxy::GetDisplaySet             // public, slots                     *
  * @return  void                                             //                                   *
  * @param   CdmObjectContainer* p_pContainer                  // the source objectlist             *
- * @param   QSet<long>& p_rqsResult                          // The list of objects or objectlists*
+ * @param   QSet<qint64>& p_rqsResult                          // The list of objects or objectlists*
  *                                                           //  which can be used                *
  * @comment This is the abstract method which must be overwritten be the derived class. the       *
  *          gui components which uses proxies uses the list of results for displaying their       *
  *          contents.                                                                             *
  *----------------last changed: --------------------------------Di 20. Nov 09:43:46 2012----------*/
-void CdmEnhancedQueryProxy::GetDisplaySet(CdmObjectContainer* p_pContainer, QSet<long>& p_rqsResult)
+void CdmEnhancedQueryProxy::GetDisplaySet(CdmObjectContainer* p_pContainer, QSet<qint64>& p_rqsResult)
 {
    GetDisplaySetV(p_pContainer, p_rqsResult);
 }
@@ -224,7 +224,7 @@ void CdmEnhancedQueryProxy::GetDisplaySet(CdmObjectContainer* p_pContainer, QSet
 int CdmEnhancedQueryProxy::GetFirstResult(CdmObjectContainer* p_pContainer)
 {
    int iRet = 0;
-   QList<long> qvlResults;
+   QList<qint64> qvlResults;
    GetDisplayListV(p_pContainer, qvlResults);
 
    if (qvlResults.count() == 1)
@@ -244,14 +244,14 @@ int CdmEnhancedQueryProxy::GetFirstResult(CdmObjectContainer* p_pContainer)
  * @method  CdmEnhancedQueryProxy::GetDisplayList            // public, slots                     *
  * @return  void                                             //                                   *
  * @param   CdmObjectContainer* p_pContainer                  // the source objectlist             *
- * @param   QList<long>& p_rqvlResults                 // The list of objects or objectlists*
+ * @param   QList<qint64>& p_rqvlResults                 // The list of objects or objectlists*
  *                                                           //  which can be used                *
  * @comment This is the abstract method which must be overwritten be the derived class. the       *
  *          gui components which uses proxies uses the list of results for displaying their       *
  *          contents.                                                                             *
  *----------------last changed: --------------------------------Di 20. Nov 09:44:11 2012----------*/
 void CdmEnhancedQueryProxy::GetDisplayList(CdmObjectContainer* p_pContainer,
-                                           QList<long>& p_rqvlResults)
+                                           QList<qint64>& p_rqvlResults)
 {
 
    GetDisplayListV(p_pContainer, p_rqvlResults);
@@ -261,14 +261,14 @@ void CdmEnhancedQueryProxy::GetDisplayList(CdmObjectContainer* p_pContainer,
  * @method  CdmEnhancedQueryProxy::GetDisplayListV           // public, virtual                   *
  * @return  void                                             //                                   *
  * @param   CdmObjectContainer* p_pContainer                  // the source objectlist             *
- * @param   QList<long>& p_rqvlResults                 // The list of objects or objectlists*
+ * @param   QList<qint64>& p_rqvlResults                 // The list of objects or objectlists*
  *                                                           //  which can be used                *
  * @comment This is the abstract method which must be overwritten be the derived class. the       *
  *          gui components which uses proxies uses the list of results for displaying their       *
  *          contents.                                                                             *
  *----------------last changed: --------------------------------Mi 3. Okt 11:49:19 2012-----------*/
 void CdmEnhancedQueryProxy::GetDisplayListV(CdmObjectContainer* p_pContainer,
-                                            QList<long>& p_rqvlResults)
+                                            QList<qint64>& p_rqvlResults)
 {
    if(CHKPTR(p_pContainer))
    { 
@@ -276,14 +276,14 @@ void CdmEnhancedQueryProxy::GetDisplayListV(CdmObjectContainer* p_pContainer,
       GetQuery()->DeleteResultElements();
       CreateQuery(p_pContainer);
       Execute();
-      const QList<long> qvlResult = GetQuery()->GetResultList();
+      const QList<qint64> qvlResult = GetQuery()->GetResultList();
 
-      QList<long>::const_iterator qvlIt = qvlResult.begin();
-      QList<long>::const_iterator qvlItEnd = qvlResult.end();
+      QList<qint64>::const_iterator qvlIt = qvlResult.begin();
+      QList<qint64>::const_iterator qvlItEnd = qvlResult.end();
 
       for(; qvlIt != qvlItEnd; ++ qvlIt)
       {
-         long lValue = (*qvlIt);
+        qint64 lValue = (*qvlIt);
          p_rqvlResults.append(lValue);
       }
 
@@ -305,18 +305,18 @@ bool CdmEnhancedQueryProxy::IsInResult(CdmObject* p_pCdmObject)
 /** +-=---------------------------------------------------------Di 20. Nov 09:44:34 2012----------*
  * @method  CdmEnhancedQueryProxy::IsInResult                // public, slots                     *
  * @return  bool                                             //                                   *
- * @param   long p_lObjectId                                 //                                   *
+ * @param  qint64 p_lObjectId                                 //                                   *
  * @param   CdmObjectContainer* p_pContainer                  //                                   *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------Di 20. Nov 09:44:34 2012----------*/
-bool CdmEnhancedQueryProxy::IsInResult(long p_lObjectId, CdmObjectContainer* p_pContainer)
+bool CdmEnhancedQueryProxy::IsInResult(qint64 p_lObjectId, CdmObjectContainer* p_pContainer)
 {
 
    bool bRet = false;
 
    if (CHKPTR(p_pContainer))
    {
-      QSet<long> qsObjects;
+      QSet<qint64> qsObjects;
       GetDisplaySet(p_pContainer, qsObjects);
 
       if (qsObjects.contains(p_lObjectId))
@@ -328,7 +328,7 @@ bool CdmEnhancedQueryProxy::IsInResult(long p_lObjectId, CdmObjectContainer* p_p
    return bRet;
 }
 
-void CdmEnhancedQueryProxy::ObjectCommitedEvent(long )
+void CdmEnhancedQueryProxy::ObjectCommitedEvent(qint64 )
 {
     ValueChanged();
 }

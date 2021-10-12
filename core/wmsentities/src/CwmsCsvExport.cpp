@@ -197,11 +197,13 @@ void CwmsCsvExport::AddLine(QStringList& qstrlContent)
 {
     bool bFirst = true;
 
+    QString qstrSet;
+
     for (int iPos = 0; iPos < qstrlContent.count(); ++iPos)
     {
         if (!bFirst)
         {
-            m_qstrContent += ";";
+            qstrSet += ";";
         }
         else
         {
@@ -215,13 +217,15 @@ void CwmsCsvExport::AddLine(QStringList& qstrlContent)
             qstrCell += m_qmHeaderMapping[qstrCell];
         }
 
-        qstrCell = qstrCell.replace(";"," ");
-        m_qstrContent += qstrCell;
+        qstrCell = qstrCell.replace(";","");
+        qstrSet += qstrCell;
     }
 
-    m_qstrContent = m_qstrContent.replace("\r\n","");
-    m_qstrContent = m_qstrContent.replace("\n","");
-    m_qstrContent += "\r\n";
+    qstrSet = qstrSet.replace("\r\n","");
+    qstrSet = qstrSet.replace("\n","");
+
+    qstrSet += "\r\n";
+    m_qstrContent += qstrSet;
 }
 
 

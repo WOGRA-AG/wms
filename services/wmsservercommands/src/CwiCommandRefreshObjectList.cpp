@@ -7,7 +7,7 @@
 */
 
 
-CwiCommandRefreshObjectList::CwiCommandRefreshObjectList(CwmscomData *p_pData, long p_lDbId, long p_ObjectListId)
+CwiCommandRefreshObjectList::CwiCommandRefreshObjectList(CwmscomData *p_pData,qint64 p_lDbId,qint64 p_ObjectListId)
     :m_rpData(p_pData),
      m_rlDbId(p_lDbId),
      m_rObjectListId(p_ObjectListId)

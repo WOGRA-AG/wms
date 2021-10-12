@@ -26,7 +26,7 @@ void CwiCommandUpdateUsergroup::Execute()
        if (pCumUserManager)
        {
            QString qstrName = m_rpData->GetValue("Name").toString();
-           long lgroupId = m_rpData->GetValue("GroupId").toInt();
+          qint64 lgroupId = m_rpData->GetValue("GroupId").toInt();
            int iRes = pCumUserManager->RenameUserGroup(lgroupId, qstrName);
 
            if(iRes >= 0)

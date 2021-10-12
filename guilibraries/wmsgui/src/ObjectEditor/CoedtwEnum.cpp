@@ -72,7 +72,7 @@ CoedtwEnum::~CoedtwEnum()
 QWidget* CoedtwEnum::GetEditWidget(QWidget* p_pqwParent)
 {
    m_pqcbComboBox = new QComboBox(p_pqwParent);
-   connect(m_pqcbComboBox, SIGNAL(activated(int)), this, SLOT(ValueChangedSlotByUser()));
+   connect(m_pqcbComboBox, SIGNAL(activated), this, SLOT(ValueChangedSlotByUser()));
    return m_pqcbComboBox;
 }
 

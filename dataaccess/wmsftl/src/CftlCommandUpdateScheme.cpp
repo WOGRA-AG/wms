@@ -23,12 +23,12 @@ bool CftlCommandUpdateScheme::CheckValid()
 
 int CftlCommandUpdateScheme::Execute()
 {
-   long lRet = CdmLogging::eDmUnknownDbAccessError;
+  qint64 lRet = CdmLogging::eDmUnknownDbAccessError;
    QSqlQuery cQSqlQuery(GetSqlDatabase());
    cQSqlQuery.prepare("Update WMS_SCHEME set Version = ?, SchemeName = ? where SchemeId = ?");
    cQSqlQuery.addBindValue(m_rpScheme->GetVersion());
    cQSqlQuery.addBindValue(m_rpScheme->GetSchemeName());
-   cQSqlQuery.addBindValue((int)m_rpScheme->GetId());
+   cQSqlQuery.addBindValue(m_rpScheme->GetId());
 
    if(SUCCESSFULL(ExecuteQuery(cQSqlQuery)))
    {

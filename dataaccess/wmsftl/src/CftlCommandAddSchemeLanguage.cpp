@@ -1,6 +1,6 @@
 #include "CftlCommandAddSchemeLanguage.h"
 
-CftlCommandAddSchemeLanguage::CftlCommandAddSchemeLanguage(long p_lSchemeId,
+CftlCommandAddSchemeLanguage::CftlCommandAddSchemeLanguage(qint64 p_lSchemeId,
                                                          QString p_qstrLanguage,
                                                          CftlDataAccess* p_pDataAccess)
 : CftlAbstractTransactionalCommand(p_pDataAccess),
@@ -22,18 +22,18 @@ bool CftlCommandAddSchemeLanguage::CheckValid()
 
 int CftlCommandAddSchemeLanguage::Execute()
 {
-    long lRet = CdmLogging::eDmUnknownDbAccessError;
+   qint64 lRet = CdmLogging::eDmUnknownDbAccessError;
     QSqlQuery cQuery(GetSqlDatabase());
 
 
     cQuery.prepare("insert into WMS_LANGUAGE (SchemeId, Name) values(?, ?)");
-    cQuery.addBindValue((int)m_lSchemeId);
+    cQuery.addBindValue(m_lSchemeId);
     cQuery.addBindValue(m_qstrLanguage);
 
     if(SUCCESSFULL(ExecuteQuery(cQuery)))
     {
         cQuery.prepare("select LanguageId from WMS_LANGUAGE where SchemeId = ? and Name = ?");
-        cQuery.addBindValue((int)m_lSchemeId);
+        cQuery.addBindValue(m_lSchemeId);
         cQuery.addBindValue(m_qstrLanguage);
 
       if(ExecuteQuery(cQuery) > 0)

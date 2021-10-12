@@ -16,7 +16,7 @@ CdbCommandUpdateUser::~CdbCommandUpdateUser()
 
 int CdbCommandUpdateUser::Execute()
 {
-    long lRet = CdmLogging::eDmUnknownUserQueryError;
+   qint64 lRet = CdmLogging::eDmUnknownUserQueryError;
     QSqlQuery cQSqlQuery(GetDataAccess()->GetDbInterface()->GetSqlDatabase());
     QString qstrQuery;
 
@@ -37,7 +37,7 @@ int CdbCommandUpdateUser::Execute()
         cQSqlQuery.addBindValue(m_rpUser->IsActive());
         cQSqlQuery.addBindValue(m_rpUser->GetEmail());
         cQSqlQuery.addBindValue(m_rpUser->IsSchemeIndependent());
-        cQSqlQuery.addBindValue((int)m_rpUser->GetId());
+        cQSqlQuery.addBindValue(m_rpUser->GetId());
     }
     else
     {
@@ -49,7 +49,7 @@ int CdbCommandUpdateUser::Execute()
         cQSqlQuery.addBindValue(m_rpUser->IsActive());
         cQSqlQuery.addBindValue(m_rpUser->GetEmail());
         cQSqlQuery.addBindValue(m_rpUser->IsSchemeIndependent());
-        cQSqlQuery.addBindValue((int)m_rpUser->GetId());
+        cQSqlQuery.addBindValue(m_rpUser->GetId());
     }
 
     if(ExecuteQuery(cQSqlQuery) > 0)

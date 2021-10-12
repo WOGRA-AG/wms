@@ -12,14 +12,14 @@ class CwnConfiguration;
 class CwnCommandLogout : public CwnCommandBase
 {
 public:
-    CwnCommandLogout(long m_lSessionId, CwnDataAccess* m_rpDataAccess);
+    CwnCommandLogout(qint64 m_lSessionId, CwnDataAccess* m_rpDataAccess);
     virtual ~CwnCommandLogout();
 
     QString createQuery();
     QString queryCausedError;
 
 private:
-    long m_lSessionId;
+   qint64 m_lSessionId;
 
 protected:
     void interpretAnswer(QVariant& Ret);

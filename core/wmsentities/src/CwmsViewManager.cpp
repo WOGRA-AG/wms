@@ -190,7 +190,7 @@ void CwmsViewManager::GetViewList(QList<CdmObject*>& p_rqlViews)
    }
 }
 
-CwmsView CwmsViewManager::GetViewById(long p_lObjectId)
+CwmsView CwmsViewManager::GetViewById(qint64 p_lObjectId)
 {
    CwmsView cView;
    CdmObjectContainer* pContainer = GetContainer();
@@ -212,7 +212,7 @@ CwmsView CwmsViewManager::GetViewByName(QString p_qstrName)
 
    if (pQuery)
    {
-      QList<long> qllResults = pQuery->GetResultList();
+      QList<qint64> qllResults = pQuery->GetResultList();
 
       if (qllResults.count() > 0)
       {

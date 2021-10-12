@@ -65,7 +65,7 @@ public slots:
         virtual QObject* getContainer();
         virtual QObject *getValueUser(QString p_qstrKeyname);
         virtual double getValueDouble(QString p_qstrKeyname) const;
-        virtual long getValueLong(QString p_qstrKeyname) const;
+        virtual qint64 getValueLong(QString p_qstrKeyname) const;
         virtual int getValueInt(QString p_qstrKeyname) const;
         virtual bool getValueBool(QString p_qstrKeyname) const;
         virtual float getValueFloat(QString p_qstrKeyname) const;
@@ -94,7 +94,7 @@ public slots:
         void setValueFloat(QString p_qstrKeyname, float p_fValue);
         void setValueDouble(QString p_qstrKeyname, double p_dValue);
         void setValueInt(QString p_qstrKeyname, int p_iValue);
-        void setValueLong(QString p_qstrKeyname, long p_lValue);
+        void setValueLong(QString p_qstrKeyname,qint64 p_lValue);
         void setValueBool(QString p_qstrKeyname, bool p_bValue);
         void addValueListObjectItem(QString p_qstrKeyname, QObject* p_qObject);
         void removeValueListObjectItem(QString p_qstrKeyname, QObject* p_qObject);

@@ -16,12 +16,12 @@
 class CftlObjectReader
 {
 public:
-    static long ReadValues(CftlContainerTableSelect& selector, QSqlQuery& cQSqlQuery, CdmObject* p_pObject);
+    static qint64 ReadValues(CftlContainerTableSelect& selector, QSqlQuery& cQSqlQuery, CdmObject* p_pObject);
 private:
     static int ReadBinaryDocument(QSqlQuery& p_rQuery, int& p_riPos, CdmMember* p_pMember, CdmObject* p_pObject);
     static int ReadBool(QSqlQuery& p_rQuery, int& p_riPos, CdmMember* p_pMember, CdmObject* p_pObject);
     static int ReadCharacterDocument(QSqlQuery& p_rQuery, int& p_riPos, CdmMember* p_pMember, CdmObject* p_pObject);
-    static CdmValueCharacterDocument *CreateCharDocValue(EdmValueType p_eType, long p_lDatabaseId, long p_lId, QString p_qstrKeyname, CdmObject *p_pCdmObjectOwner);
+    static CdmValueCharacterDocument *CreateCharDocValue(EdmValueType p_eType,qint64 p_lDatabaseId,qint64 p_lId, QString p_qstrKeyname, CdmObject *p_pCdmObjectOwner);
     static int ReadCounter(QSqlQuery& p_rQuery, int& p_riPos, CdmMember* p_pMember, CdmObject* p_pObject);
     static int ReadDate(QSqlQuery& p_rQuery, int& p_riPos, CdmMember* p_pMember, CdmObject* p_pObject);
     static int ReadDateTime(QSqlQuery& p_rQuery, int& p_riPos, CdmMember* p_pMember, CdmObject* p_pObject);

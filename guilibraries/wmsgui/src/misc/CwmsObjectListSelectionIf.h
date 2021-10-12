@@ -29,7 +29,7 @@ class CdmClass;
 class WMSGUI_API CwmsContainerSelectionIf : public QDialog, public Ui::CwmsObjectListSelection
 {
    private:
-      long m_lDbId;
+     qint64 m_lDbId;
 
 
    public:
@@ -63,11 +63,11 @@ void SetClass(  CdmClass* pCdmClass );
    /** +-=---------------------------------------------------------Mo 23. Jan 21:52:52 2006*
     * @method  CwmsObjectListSelectionIf::SetClass           // public                            *
     * @return  void                                          //                                   *
-    * @param   long p_lDbId                                  //                                   *
-    * @param   long p_lClassId                               //                                   *
+    * @param  qint64 p_lDbId                                  //                                   *
+    * @param  qint64 p_lClassId                               //                                   *
     * @comment                                                                                    *
     *----------------last changed: Wolfgang Graßhof-------------Mo 23. Jan 21:52:52 2006----------*/
-void SetClass(  long p_lDbId, long p_lClassId );
+void SetClass( qint64 p_lDbId,qint64 p_lClassId );
 
 
    public:
@@ -82,12 +82,12 @@ CdmObjectContainer* GetSelectedObjectContainer(  );
    /** +-=---------------------------------------------------------Mo 23. Jan 22:35:56 2006*
     * @method  CwmsObjectListSelectionIf::GetObjectContainer      // public, static                    *
     * @return  CdmObjectContainer*                                //                                   *
-    * @param   long p_lDbId                                  //                                   *
-    * @param   long p_lClassId                               //                                   *
+    * @param  qint64 p_lDbId                                  //                                   *
+    * @param  qint64 p_lClassId                               //                                   *
     * @param   QWidget* p_pqwParent                          //                                   *
     * @comment This method does the static method call.                                           *
     *----------------last changed: Wolfgang Graßhof-------------Mo 23. Jan 22:35:56 2006----------*/
-static CdmObjectContainer* GetObjectContainer(  long p_lDbId, long p_lClassId, QWidget* p_pqwParent );
+static CdmObjectContainer* GetObjectContainer( qint64 p_lDbId,qint64 p_lClassId, QWidget* p_pqwParent );
 
     public:
     int GetContainerCount();

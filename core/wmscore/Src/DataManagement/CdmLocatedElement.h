@@ -98,7 +98,7 @@ public:
    /** +-=---------------------------------------------------------Fr 7. Dez 15:14:00 2012--------*
     * @method  CdmLocatedElement::CreateUri                  // public, static                    *
     * @return  QString                                       //                                   *
-    * @param   long p_lDbId                                  //                                   *
+    * @param  qint64 p_lDbId                                  //                                   *
     * @param   QString p_qstrKey                             //                                   *
     * @param   QString p_qstrKeyname                         //                                   *
     * @param   QString p_qstrValueKeyname = ""               //                                   *

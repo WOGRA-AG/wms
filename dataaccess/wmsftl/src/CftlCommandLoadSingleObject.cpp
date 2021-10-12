@@ -9,7 +9,7 @@
 #include "CftlCommandLoadObjects.h"
 #include "CftlCommandLoadSingleObject.h"
 
-CftlCommandLoadSingleObject::CftlCommandLoadSingleObject(CdmObjectContainer* p_pContainer, long p_lObjectId, CftlDataAccess* p_pDataAccess)
+CftlCommandLoadSingleObject::CftlCommandLoadSingleObject(CdmObjectContainer* p_pContainer,qint64 p_lObjectId, CftlDataAccess* p_pDataAccess)
     : CftlAbstractCommand(p_pDataAccess),
       m_rpContainer(p_pContainer),
       m_lObjectId(p_lObjectId),
@@ -44,12 +44,12 @@ bool CftlCommandLoadSingleObject::CheckValid()
 
 int CftlCommandLoadSingleObject::Execute()
 {
-    long lRet = CdmLogging::eDmObjectAccessError;
+   qint64 lRet = CdmLogging::eDmObjectAccessError;
     QScopedPointer<CftlCommandLoadObjects> pCommand;
 
     if (m_lObjectId > 0)
     {
-        QList<long> qllObjects;
+        QList<qint64> qllObjects;
         qllObjects.append(m_lObjectId);
         pCommand.reset(new CftlCommandLoadObjects(m_rpContainer, qllObjects, GetDataAccess()));
     }

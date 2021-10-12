@@ -3,7 +3,7 @@
 #include "CftlCommandGetNewSession.h"
 
 CftlCommandGetNewSession::CftlCommandGetNewSession(QString p_qstrApplication,
-                                                 long p_lUserId,
+                                                qint64 p_lUserId,
                                                  CftlDataAccess* p_ppDataAccess)
     : CftlAbstractTransactionalCommand(p_ppDataAccess),
       m_qstrApplication(p_qstrApplication),
@@ -25,7 +25,7 @@ int CftlCommandGetNewSession::Execute()
     m_qstrApplication = QUuid::createUuid().toString();
     cQSqlQuery.prepare("insert into WMS_UM_SESSION(UserId, State, LoginDate, Application, LAST_REQUEST) "
                         "values(?, ?, ?, ?, ?)");
-    cQSqlQuery.addBindValue((int)m_lUserId);
+    cQSqlQuery.addBindValue(m_lUserId);
     cQSqlQuery.addBindValue(true);
     cQSqlQuery.addBindValue(qdtLoginDate);
     cQSqlQuery.addBindValue(m_qstrApplication);
@@ -37,7 +37,7 @@ int CftlCommandGetNewSession::Execute()
         QSqlQuery cQuerySelect(database);
         cQuerySelect.prepare("select SessionId, LoginDate from WMS_UM_SESSION "
                            "where UserId = ? and State = ? and Application = ?");
-       cQuerySelect.addBindValue((int)m_lUserId);
+       cQuerySelect.addBindValue(m_lUserId);
        cQuerySelect.addBindValue(true);
        cQuerySelect.addBindValue(m_qstrApplication);
 

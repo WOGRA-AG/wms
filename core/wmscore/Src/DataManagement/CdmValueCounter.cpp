@@ -9,8 +9,8 @@
 #include "CdmMember.h"
 #include "CdmValueCounter.h"
 
-CdmValueCounter::CdmValueCounter(  long p_lDatabaseId,
-                        long p_lId,
+CdmValueCounter::CdmValueCounter( qint64 p_lDatabaseId,
+                       qint64 p_lId,
                         QString p_qstrKeyname,
                         CdmObject* p_pCdmObject )
    : CdmValueLong( p_lDatabaseId, p_lId, p_qstrKeyname,eDmValueCounter, p_pCdmObject)

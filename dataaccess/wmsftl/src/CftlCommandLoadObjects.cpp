@@ -42,7 +42,7 @@
 #include "CftlContainerTableSelect.h"
 #include "CftlCommandLoadObjects.h"
 
-CftlCommandLoadObjects::CftlCommandLoadObjects(CdmObjectContainer* p_pContainer, QList<long>& p_qlObjectIds, CftlDataAccess* p_pDataAccess)
+CftlCommandLoadObjects::CftlCommandLoadObjects(CdmObjectContainer* p_pContainer, QList<qint64>& p_qlObjectIds, CftlDataAccess* p_pDataAccess)
     : CftlAbstractCommand(p_pDataAccess),
       m_rpContainer(p_pContainer),
       m_qvlObjectIds(p_qlObjectIds)
@@ -77,7 +77,7 @@ bool CftlCommandLoadObjects::CheckValid()
 
 int CftlCommandLoadObjects::Execute()
 {
-    long lRet = CdmLogging::eDmObjectAccessError;
+   qint64 lRet = CdmLogging::eDmObjectAccessError;
     CdmObject* pObject = nullptr;
     CftlContainerTableSelect selector(m_rpContainer, GetDialect());
     selector.SetObjectList(m_qvlObjectIds);
@@ -88,16 +88,16 @@ int CftlCommandLoadObjects::Execute()
 
     while (cQSqlQuery.isValid())
     {
-        long lObjectId       = cQSqlQuery.value(0).toInt();
+       qint64 lObjectId       = cQSqlQuery.value(0).toInt();
         QString qstrKeyname  = cQSqlQuery.value(1).toString();
         QString qstrCaption  = cQSqlQuery.value(2).toString();
         QDateTime qdLastChange = cQSqlQuery.value(3).toDateTime();
-        long lCreatorId      = cQSqlQuery.value(4).toInt();
-        long lLastModifierId = cQSqlQuery.value(5).toInt();
-        long lParent         = cQSqlQuery.value(6).toInt();
+       qint64 lCreatorId      = cQSqlQuery.value(4).toInt();
+       qint64 lLastModifierId = cQSqlQuery.value(5).toInt();
+       qint64 lParent         = cQSqlQuery.value(6).toInt();
         QString qstrConfig   = cQSqlQuery.value(7).toString(); // TODO derive object from config class!!!
-        long lClassId        = m_rpContainer->GetClassId();
-        long lDataBaseId     = m_rpContainer->GetSchemeId();
+       qint64 lClassId        = m_rpContainer->GetClassId();
+       qint64 lDataBaseId     = m_rpContainer->GetSchemeId();
 
         pObject = CdmDataAccessHelper::CreateObject(lDataBaseId,
                                                    lObjectId,

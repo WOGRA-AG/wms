@@ -10,13 +10,13 @@ class CdbDataAccess;
 class CdbCommandGetGroupUserList : public CdbAbstractCommand
 {
 private:
-    long m_lGroupId;
+   qint64 m_lGroupId;
     QList<CumUser*> m_qllUserList;
 
     int ReadAllUsers();
     int ReadGroupUsers();
 public:
-    CdbCommandGetGroupUserList(long p_lGroup, CdbDataAccess* p_pDataAccess);
+    CdbCommandGetGroupUserList(qint64 p_lGroup, CdbDataAccess* p_pDataAccess);
     virtual ~CdbCommandGetGroupUserList();
     QList<CumUser*> GetResult();
 protected:

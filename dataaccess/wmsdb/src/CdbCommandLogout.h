@@ -10,9 +10,9 @@ class CumUser;
 class CdbCommandLogout : public CdbAbstractCommandTransactional
 {
 private:
-    long m_lSessionId;
+   qint64 m_lSessionId;
 public:
-    CdbCommandLogout(long p_lSessionId, CdbDataAccess* p_pDataAccess);
+    CdbCommandLogout(qint64 p_lSessionId, CdbDataAccess* p_pDataAccess);
     virtual ~CdbCommandLogout();
 
 protected:

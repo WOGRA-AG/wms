@@ -113,7 +113,7 @@ void CwmsMiscDataFiller::FillLibraries(QTreeWidgetItem* p_pItem)
          for (int iPos = 0; iPos < pQuery->GetResultCount(); ++iPos)
          {
             QTreeWidgetItem* pItem = new QTreeWidgetItem(p_pItem);
-            pItem->setData(0, Qt::UserRole, (int)pQuery->GetObjectIdAt(iPos));
+            pItem->setData(0, Qt::UserRole, pQuery->GetObjectIdAt(iPos));
             pItem->setData(1, Qt::UserRole, eWmsTreeItemTypeFormLibrary);
             pItem->setText(0, pQuery->GetResultAt(0, iPos).toString());
             pItem->setText(1, pQuery->GetResultAt(1, iPos).toString());
@@ -141,7 +141,7 @@ void CwmsMiscDataFiller::FillResources(QTreeWidgetItem* p_pItem)
          for (int iPos = 0; iPos < pQuery->GetResultCount(); ++iPos)
          {
             QTreeWidgetItem* pItem = new QTreeWidgetItem(p_pItem);
-            pItem->setData(0, Qt::UserRole, (int)pQuery->GetObjectIdAt(iPos));
+            pItem->setData(0, Qt::UserRole, pQuery->GetObjectIdAt(iPos));
             pItem->setData(1, Qt::UserRole, eWmsTreeItemTypeResource);
             pItem->setText(0, pQuery->GetResultAt(0, iPos).toString());
             pItem->setText(1, pQuery->GetResultAt(1, iPos).toString());
@@ -165,7 +165,7 @@ void CwmsMiscDataFiller::FillInteractiveComponents(QTreeWidgetItem* p_pItem)
          for (int iPos = 0; iPos < pQuery->GetResultCount(); ++iPos)
          {
             QTreeWidgetItem* pItem = new QTreeWidgetItem(p_pItem);
-            pItem->setData(0, Qt::UserRole, (int)pQuery->GetObjectIdAt(iPos));
+            pItem->setData(0, Qt::UserRole, pQuery->GetObjectIdAt(iPos));
             pItem->setData(1, Qt::UserRole, eWmsTreeItemTypeInteractiveComponentForm);
             pItem->setText(0, pQuery->GetResultAt(0, iPos).toString());
          }
@@ -356,7 +356,7 @@ void CwmsMiscDataFiller::FillReports(QTreeWidgetItem* pParent, CdmClass* p_pClas
       QTreeWidgetItem* pqlviClass = new QTreeWidgetItem(pParent);
       pqlviClass->setText(0, p_pClass->GetCaption() + " (" + p_pClass->GetFullQualifiedName() + ")");
       pqlviClass->setText(1, p_pClass->GetFullQualifiedName());
-      pqlviClass->setData(0, Qt::UserRole, (int)p_pClass->GetId());
+      pqlviClass->setData(0, Qt::UserRole, p_pClass->GetId());
       pqlviClass->setData(1, Qt::UserRole, eWmsTreeItemTypeClass);
 
       CdmQueryEnhanced* pQuery = cManager.GetReportsByClassKeyname(p_pClass->GetFullQualifiedName());
@@ -480,7 +480,7 @@ void CwmsMiscDataFiller::FillViews(QTreeWidgetItem* p_pParent)
       {
          QTreeWidgetItem* pqItem = new QTreeWidgetItem(p_pParent);
          pqItem->setText(0, cCwmsView.GetName());
-         pqItem->setData(0, Qt::UserRole, QVariant((int)cCwmsView.GetObjectId()));
+         pqItem->setData(0, Qt::UserRole, QVariant(cCwmsView.GetObjectId()));
          pqItem->setData(1, Qt::UserRole, eWmsTreeItemTypeView);
       }
    }
@@ -563,7 +563,7 @@ void CwmsMiscDataFiller::FillWorkflows(QTreeWidgetItem* p_pParent)
       {
          QTreeWidgetItem* pqItem = new QTreeWidgetItem(p_pParent);
          pqItem->setText(0, cCwmsWorkflow.GetName());
-         pqItem->setData(0, Qt::UserRole, QVariant((int)cCwmsWorkflow.GetObjectId()));
+         pqItem->setData(0, Qt::UserRole, QVariant(cCwmsWorkflow.GetObjectId()));
          pqItem->setData(1, Qt::UserRole, eWmsTreeItemTypeWorkflow);
       }
    }

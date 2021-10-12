@@ -52,11 +52,11 @@ QObject* CsaClass::findMember(QString p_qstrKeyname)
 QVariantList CsaClass::getMembers()
 {
    QVariantList qlMembers;
-   QMap<long, CdmMember*> qmMembers;
+   QMap<qint64, CdmMember*> qmMembers;
    getInternals()->GetMemberMap(qmMembers);
 
-   QMap<long, CdmMember*>::iterator qIt = qmMembers.begin();
-   QMap<long, CdmMember*>::iterator qItEnd = qmMembers.end();
+   QMap<qint64, CdmMember*>::iterator qIt = qmMembers.begin();
+   QMap<qint64, CdmMember*>::iterator qItEnd = qmMembers.end();
 
    for (; qIt != qItEnd; ++qIt)
    {
@@ -73,10 +73,10 @@ QVariantList CsaClass::getMembers()
 QVariantList CsaClass::getBaseClasses()
 {
    QVariantList qlBaseClasses;
-   QMap<long, long> qmBaseClasses = getInternals()->GetBaseClasses();
+   QMap<qint64,qint64> qmBaseClasses = getInternals()->GetBaseClasses();
 
-   QMap<long, long>::iterator qIt = qmBaseClasses.begin();
-   QMap<long, long>::iterator qItEnd = qmBaseClasses.end();
+   QMap<qint64,qint64>::iterator qIt = qmBaseClasses.begin();
+   QMap<qint64,qint64>::iterator qItEnd = qmBaseClasses.end();
 
    for (; qIt != qItEnd; ++qIt)
    {
@@ -177,7 +177,7 @@ void CsaClass::addStaticFunctionsToClass()
 void CsaClass::addMembersToVariant(CdmClass* pClass, QVariantMap& qvm)
 {
     CwmsTimeMeassurement cTime(true, "addMembersToVariant");
-   QMap<long, CdmMember*> qmMembers = pClass->GetClassMemberMap();
+   QMap<qint64, CdmMember*> qmMembers = pClass->GetClassMemberMap();
    QList<CdmMember*> qlMembers =  qmMembers.values();
    QVariantList qvlMembers;
    cTime.finishedTask("Get MemberMap");
@@ -206,9 +206,9 @@ void CsaClass::addMembersToVariant(CdmClass* pClass, QVariantMap& qvm)
 
 void CsaClass::addBaseClassesToVariant(CdmClass* pClass, CdmClassManager* pClassManager, QVariantMap& qvm)
 {
-   QMap<long, long> qmBaseClasses = pClass->GetBaseClasses();
+   QMap<qint64,qint64> qmBaseClasses = pClass->GetBaseClasses();
    QVariantList qvlBaseClasses;
-   QList<long> qlBaseClassIds =  qmBaseClasses.values();
+   QList<qint64> qlBaseClassIds =  qmBaseClasses.values();
 
    for (int iPos = 0; iPos < qlBaseClassIds.count(); ++iPos)
    {

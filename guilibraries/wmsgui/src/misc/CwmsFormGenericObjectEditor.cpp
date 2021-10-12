@@ -305,11 +305,11 @@ void CwmsFormGenericObjectEditor::UpdateComboBoxes()
 {
    if (m_rpCdmClass)
    {
-      QMap<long, CdmMember*> qmMembers;
+      QMap<qint64, CdmMember*> qmMembers;
       m_rpCdmClass->GetMemberMap(qmMembers);
 
-      QMap<long, CdmMember*>::iterator qmIt = qmMembers.begin();
-      QMap<long, CdmMember*>::iterator qmItEnd = qmMembers.end();
+      QMap<qint64, CdmMember*>::iterator qmIt = qmMembers.begin();
+      QMap<qint64, CdmMember*>::iterator qmItEnd = qmMembers.end();
 
       for (; qmIt != qmItEnd; ++qmIt)
       {

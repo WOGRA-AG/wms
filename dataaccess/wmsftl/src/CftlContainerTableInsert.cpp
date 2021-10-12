@@ -25,9 +25,9 @@ CftlContainerTableInsert::~CftlContainerTableInsert()
 {
 }
 
-long CftlContainerTableInsert::Execute(CftlInterface *p_pInterface)
+qint64 CftlContainerTableInsert::Execute(CftlInterface *p_pInterface)
 {
-    long lRet = CdmLogging::eDmOk;
+   qint64 lRet = CdmLogging::eDmOk;
     if (CheckValid() && CHKPTR(p_pInterface))
     {
         const CdmClass* pClass = m_rpObject->GetClass();
@@ -78,10 +78,10 @@ void CftlContainerTableInsert::ReadCreatedObjectId(CftlInterface *p_pInterface, 
 
 void CftlContainerTableInsert::BuildFieldValuesForInsert(const CdmClass* p_pClass, CftlInterface *p_pInterface)
 {
-    QMap<long, CdmMember*> qmMembers;
+    QMap<qint64, CdmMember*> qmMembers;
     p_pClass->GetMemberMap(qmMembers);
 
-    QMapIterator<long, CdmMember*> qmIt(qmMembers);
+    QMapIterator<qint64, CdmMember*> qmIt(qmMembers);
     bool bFirst = true;
 
     while (qmIt.hasNext())
@@ -145,11 +145,11 @@ void CftlContainerTableInsert::BuildFieldValuesForInsert(const CdmClass* p_pClas
         }
     }
 
-    AddObjectProperties(FTL_CREATOR_ID, (int)CdmSessionManager::GetSessionManager()->GetCurrentUserId());
-    AddObjectProperties(FTL_MODIFIER_ID, (int)CdmSessionManager::GetSessionManager()->GetCurrentUserId());
+    AddObjectProperties(FTL_CREATOR_ID, CdmSessionManager::GetSessionManager()->GetCurrentUserId());
+    AddObjectProperties(FTL_MODIFIER_ID, CdmSessionManager::GetSessionManager()->GetCurrentUserId());
     AddObjectProperties(FTL_LAST_MODIFIED, QDateTime::currentDateTime());
     AddObjectProperties(FTL_CREATED, QDateTime::currentDateTime());
-    AddObjectProperties(FTL_CONTAINER_ID_FIELD_NAME, (int)m_rpObject->GetObjectContainerId());
+    AddObjectProperties(FTL_CONTAINER_ID_FIELD_NAME, m_rpObject->GetObjectContainerId());
     AddObjectProperties(FTL_OBJECT_CAPTION_FIELD_NAME, m_rpObject->GetCaption());
 
 }
@@ -161,7 +161,7 @@ void CftlContainerTableInsert::AddObjectProperties(QString p_qstrFieldName, QVar
     m_qvmFieldValues.insert(":" + p_qstrFieldName, p_qvValue);
 }
 
-long CftlContainerTableInsert::GetCreatedObjectId()
+qint64 CftlContainerTableInsert::GetCreatedObjectId()
 {
     return m_lObjectId;
 }

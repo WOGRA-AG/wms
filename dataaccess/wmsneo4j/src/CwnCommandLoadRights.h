@@ -9,14 +9,14 @@
 class CwnCommandLoadRights : public CwnCommandBase
 {
 public:
-    CwnCommandLoadRights(CdmRights& p_rCcdmRights, long p_lObjectId, QString p_qstrTableName, CwnDataAccess* p_DataAccess);
+    CwnCommandLoadRights(CdmRights& p_rCcdmRights,qint64 p_lObjectId, QString p_qstrTableName, CwnDataAccess* p_DataAccess);
     virtual ~CwnCommandLoadRights();
 
     QString createQuery();
     QString queryCausedError;
 
 private:
-    long m_lObjectId;
+   qint64 m_lObjectId;
     CdmRights& m_prCcdmRights;
     QString m_pqstrTableName;
 

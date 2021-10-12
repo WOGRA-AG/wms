@@ -16,7 +16,7 @@ public slots:
     virtual QDateTime getLastChanged() = 0;
     virtual int getCreatorId() = 0;
     virtual int getModifierId() = 0;
-    virtual long getId() = 0;
+    virtual qint64 getId() = 0;
 };
 
 #endif // ISAMODELELEMENT_H

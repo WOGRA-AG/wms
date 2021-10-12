@@ -12,22 +12,22 @@ private:
 
 
     bool CheckType(QString p_qstrKeyname, EdmValueType p_eNeeded);
-    long ReadBinaryDocuments();
-    long ReadValues();
-    long ReadBools();
-    CdmValueCharacterDocument *CreateCharDocValue(CdbDataAccess::EodbcBaseType p_eType, long p_lDatabaseId, long p_lId, QString p_qstrKeyname);
-    long ReadCharacterDocuments(CdbDataAccess::EodbcBaseType p_eType);
-    long ReadCounters();
-    long ReadDates();
-    long ReadDateTimes();
-    long ReadDoubles();
-    long ReadInts(CdbDataAccess::EodbcBaseType p_eOdbcType);
-    long ReadLongs();
-    long ReadObjectRefs();
-    long ReadObjectListRefs();
-    long ReadStrings();
-    long ReadFloats();
-    long ReadTimes();
+   qint64 ReadBinaryDocuments();
+   qint64 ReadValues();
+   qint64 ReadBools();
+    CdmValueCharacterDocument *CreateCharDocValue(CdbDataAccess::EodbcBaseType p_eType,qint64 p_lDatabaseId,qint64 p_lId, QString p_qstrKeyname);
+   qint64 ReadCharacterDocuments(CdbDataAccess::EodbcBaseType p_eType);
+   qint64 ReadCounters();
+   qint64 ReadDates();
+   qint64 ReadDateTimes();
+   qint64 ReadDoubles();
+   qint64 ReadInts(CdbDataAccess::EodbcBaseType p_eOdbcType);
+   qint64 ReadLongs();
+   qint64 ReadObjectRefs();
+   qint64 ReadObjectListRefs();
+   qint64 ReadStrings();
+   qint64 ReadFloats();
+   qint64 ReadTimes();
 public:
     CdbCommandRefreshObject(CdmObject* m_rpCdmObject, CdbDataAccess* p_pDataAccess);
     virtual ~CdbCommandRefreshObject();

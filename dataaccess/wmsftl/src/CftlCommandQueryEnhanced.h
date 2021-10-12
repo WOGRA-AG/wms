@@ -67,10 +67,10 @@ class CftlCommandlQueryEnhanced
    public:
    /** +-=---------------------------------------------------------Do 11. Nov 09:40:25 2010-------*
     * @method  CftlQueryEnhanced::Execute                   // public                            *
-    * @return  long                                          //                                   *
+    * @return qint64                                          //                                   *
     * @comment                                                                                    *
     *----------------last changed: -----------------------------Do 11. Nov 09:40:25 2010----------*/
-    long Execute();
+   qint64 Execute();
 
    private:
    /** +-=---------------------------------------------------------Do 11. Nov 11:29:36 2010-------*
@@ -121,11 +121,11 @@ class CftlCommandlQueryEnhanced
    private:
    /** +-=---------------------------------------------------------Fr 12. Nov 09:15:57 2010-------*
     * @method  CftlQueryEnhanced::ExecuteQuery              // private                           *
-    * @return  long                                          //                                   *
+    * @return qint64                                          //                                   *
     * @param   QString p_qstrSql                             //                                   *
     * @comment                                                                                    *
     *----------------last changed: -----------------------------Fr 12. Nov 09:15:57 2010----------*/
-    long ExecuteQuery(QString p_qstrSql);
+   qint64 ExecuteQuery(QString p_qstrSql);
 
    private:
    /** +-=---------------------------------------------------------Mi 4. Mai 13:31:21 2011--------*

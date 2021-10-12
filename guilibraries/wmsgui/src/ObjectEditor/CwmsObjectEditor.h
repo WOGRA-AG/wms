@@ -195,19 +195,19 @@ bool IsReadOnly(  );
    public:
    /** +-=---------------------------------------------------------Fr 6. Jan 18:17:58 2006*
     * @method  CwmsObjectEditor::GetSortMemberList            // public                            *
-    * @return  QValueList<long>                              // the list of members               *
+    * @return  QValueList<qint64>                              // the list of members               *
     * @comment                                                                                    *
     *----------------last changed: Wolfgang Graßhof-------------Fr 6. Jan 18:17:58 2006-----------*/
-QList<long> GetSortMemberList(  );
-QList<long> getEventClassMemberList(CdmClass *pClass);
+QList<qint64> GetSortMemberList(  );
+QList<qint64> getEventClassMemberList(CdmClass *pClass);
    private:
    /** +-=---------------------------------------------------------Fr 6. Jan 18:14:58 2006*
     * @method  CwmsObjectEditor::FindValueByMemberId          // private                           *
     * @return  CdmValue*                                     //                                   *
-    * @param   long p_lMemberId                              //                                   *
+    * @param  qint64 p_lMemberId                              //                                   *
     * @comment This method finds a value by MemberId                                              *
     *----------------last changed: Wolfgang Graßhof-------------Fr 6. Jan 18:14:58 2006-----------*/
-CdmValue* FindValueByMemberId(  long p_lMemberId );
+CdmValue* FindValueByMemberId( qint64 p_lMemberId );
 
    public:
    /** +-=---------------------------------------------------------Do 19. Jan 20:16:16 2006*
@@ -244,11 +244,11 @@ void AddObjectRefData(  QString p_qstrValue,
    public:
    /** +-=---------------------------------------------------------Fr 20. Jan 22:43:03 2006*
     * @method  CwmsObjectEditor::GetSortedMemberListFromStringList // public                       *
-    * @return  QValueList<long>                              //                                   *
+    * @return  QValueList<qint64>                              //                                   *
     * @comment This method creates the sorted memberlist with the helb of the string list.        *
     *----------------last changed: Wolfgang Graßhof-------------Fr 20. Jan 22:43:03 2006----------*/
-QList<long> GetSortedMemberListFromStringList(  );
-QList<long> getEventClassMemberListFromStringList(CdmClass *pClass);
+QList<qint64> GetSortedMemberListFromStringList(  );
+QList<qint64> getEventClassMemberListFromStringList(CdmClass *pClass);
 
     private slots:
    /** +-=---------------------------------------------------------Di 24. Jan 22:49:24 2006*
@@ -487,21 +487,21 @@ void GroupChangedSlot(CdmClass* pClass);
    /** +-=---------------------------------------------------------Mo 5. Nov 09:19:48 2012--------*
     * @method  CwmsObjectEditor::GetClassMembers             // private                           *
     * @return  void                                          //                                   *
-    * @param   QMap<long, CdmMember*>& p_rqmMembers          //                                   *
+    * @param   QMap<qint64, CdmMember*>& p_rqmMembers          //                                   *
     * @comment                                                                                    *
     *----------------last changed: -----------------------------Mo 5. Nov 09:19:48 2012-----------*/
-    void GetClassMembers(QMap<long, CdmMember*>& p_rqmMembers);
-    void GetClassMembers(QMap<long, CdmMember *> &p_rqmMembers, CdmClass *pClass);
+    void GetClassMembers(QMap<qint64, CdmMember*>& p_rqmMembers);
+    void GetClassMembers(QMap<qint64, CdmMember *> &p_rqmMembers, CdmClass *pClass);
 
    private:
    /** +-=---------------------------------------------------------Mo 5. Nov 09:19:39 2012--------*
     * @method  CwmsObjectEditor::GetMemberById               // private                           *
     * @return  CdmMember*                                    //                                   *
-    * @param   long p_lId                                    //                                   *
+    * @param  qint64 p_lId                                    //                                   *
     * @comment                                                                                    *
     *----------------last changed: -----------------------------Mo 5. Nov 09:19:39 2012-----------*/
-    CdmMember* GetMemberById(long p_lId);
-    CdmMember* GetMemberById(long p_lId, CdmClass *pClass);
+    CdmMember* GetMemberById(qint64 p_lId);
+    CdmMember* GetMemberById(qint64 p_lId, CdmClass *pClass);
 
    private:
    /** +-=---------------------------------------------------------Mo 5. Nov 11:16:02 2012--------*

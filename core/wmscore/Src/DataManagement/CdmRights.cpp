@@ -328,7 +328,7 @@ QVariant CdmRights::GetVariant() const
 
    for (; qmIt != qmItEnd; ++qmIt)
    {
-      long lId = qmIt.key();
+     qint64 lId = qmIt.key();
       EdmRight eDmRight = qmIt.value();
       QString qstrUri = GetUserUri(lId);
       qvRights.insert(qstrUri, QString::number(eDmRight));
@@ -342,7 +342,7 @@ QMap<int, EdmRight> CdmRights::GetRights() const
    return m_qmRights;
 }
 
-QString CdmRights::GetUserUri(long p_iUserId) const
+QString CdmRights::GetUserUri(qint64 p_iUserId) const
 {
     QString qstrUri;
     CdmDataProvider* pManager = CdmSessionManager::GetDataProvider();

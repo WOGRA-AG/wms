@@ -36,12 +36,12 @@ int CdbAbstractCommand::Run()
     return iRet;
 }
 
-long CdbAbstractCommand::ExecuteQuery(QString p_qstrQuery, QSqlQuery& p_rqsqlQuery)
+qint64 CdbAbstractCommand::ExecuteQuery(QString p_qstrQuery, QSqlQuery& p_rqsqlQuery)
 {
     return m_rpDataAccess->ExecuteQuery(p_qstrQuery,p_rqsqlQuery);
 }
 
-long CdbAbstractCommand::ExecuteQuery(QSqlQuery& p_rqsqlQuery)
+qint64 CdbAbstractCommand::ExecuteQuery(QSqlQuery& p_rqsqlQuery)
 {
     return m_rpDataAccess->ExecuteQuery(p_rqsqlQuery);
 }
@@ -69,14 +69,14 @@ bool CdbAbstractCommand::NeedsActiveSession()
 
 void CdbAbstractCommand::UpdateSession()
 {
-    long lSessionId = CdmSessionManager::GetSessionManager()->GetCurrentSessionId();
+   qint64 lSessionId = CdmSessionManager::GetSessionManager()->GetCurrentSessionId();
     CdbCommandUpdateSession command(lSessionId, GetDataAccess());
     command.Run();
 }
 
 int CdbAbstractCommand::SessionCheck()
 {
-    long lRet = CdmLogging::eDmUnknownSqlError;
+   qint64 lRet = CdmLogging::eDmUnknownSqlError;
     CdbInterface* pInterface = GetInterface();
 
     if (CHKPTR(pInterface))
@@ -87,8 +87,8 @@ int CdbAbstractCommand::SessionCheck()
 
             if (CHKPTR(pSessionManager))
             {
-                long iSessionId = pSessionManager->GetCurrentSessionId();
-                long iUserId = pSessionManager->GetCurrentUserId();
+               qint64 iSessionId = pSessionManager->GetCurrentSessionId();
+               qint64 iUserId = pSessionManager->GetCurrentUserId();
                 CdbCommandFindSession command(iSessionId, iUserId, m_rpDataAccess);
                 lRet = command.Run();
 

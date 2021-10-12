@@ -45,7 +45,7 @@ public slots:
     virtual QDateTime getLastChanged();
     virtual int getCreatorId();
     virtual int getModifierId();
-    virtual long getId();
+    virtual qint64 getId();
 };
 
 #endif //

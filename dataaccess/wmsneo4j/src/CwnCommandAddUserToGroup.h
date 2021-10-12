@@ -16,18 +16,18 @@ public:
     CwnCommandAddUserToGroup(CwnDataAccess* m_rpDataAccess);
     virtual ~CwnCommandAddUserToGroup();
 
-    void setGroupId(long groupId);
-    long getGroupId();
+    void setGroupId(qint64 groupId);
+   qint64 getGroupId();
 
-    void setUserId(long userId);
-    long getUserId();
+    void setUserId(qint64 userId);
+   qint64 getUserId();
 
     QString createQuery();
     QString queryCausedError;
 
 private:
-    long groupId;
-    long userId;
+   qint64 groupId;
+   qint64 userId;
 
 protected:
     void interpretAnswer(QVariant& Ret);

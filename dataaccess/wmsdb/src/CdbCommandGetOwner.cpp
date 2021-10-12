@@ -1,6 +1,6 @@
 #include "CdbCommandGetOwner.h"
 
-CdbCommandGetOwner::CdbCommandGetOwner(long p_lContainerId, long p_lObjectId, CdbDataAccess* p_pDataAccess)
+CdbCommandGetOwner::CdbCommandGetOwner(qint64 p_lContainerId,qint64 p_lObjectId, CdbDataAccess* p_pDataAccess)
     : CdbAbstractCommand(p_pDataAccess),
       m_lContainerId(p_lContainerId),
       m_lObjectId(p_lObjectId),
@@ -21,7 +21,7 @@ bool CdbCommandGetOwner::CheckValid()
 
 int CdbCommandGetOwner::Execute()
 {
-    long lRet = CdmLogging::eDmObjectAccessError;
+   qint64 lRet = CdmLogging::eDmObjectAccessError;
 
     if (m_lObjectId > 0)
     {
@@ -35,23 +35,23 @@ int CdbCommandGetOwner::Execute()
     return lRet;
 }
 
-long CdbCommandGetOwner::GetOwnerObjectId()
+qint64 CdbCommandGetOwner::GetOwnerObjectId()
 {
     return m_lOwnerObjectId;
 }
 
-long CdbCommandGetOwner::GetOwnerContainerId()
+qint64 CdbCommandGetOwner::GetOwnerContainerId()
 {
     return m_lOwnerContainerId;
 }
-long CdbCommandGetOwner::FindObjectOwner()
+qint64 CdbCommandGetOwner::FindObjectOwner()
 {
     QString qstrSql = QString ("select objectlistid, objectid from V_VALUE_OBJECTREFERENCE where Val = %1 and orefobjectlist = %2 and Owner = true")
                                .arg(m_lObjectId)
                                .arg(m_lContainerId);
 
     QSqlQuery cQSqlQuery;
-    long lRet = GetDataAccess()->ExecuteQuery(qstrSql, cQSqlQuery);
+   qint64 lRet = GetDataAccess()->ExecuteQuery(qstrSql, cQSqlQuery);
 
     if(lRet > 0)
     {
@@ -71,13 +71,13 @@ long CdbCommandGetOwner::FindObjectOwner()
     return lRet;
 }
 
-long CdbCommandGetOwner::FindContainerOwner()
+qint64 CdbCommandGetOwner::FindContainerOwner()
 {
     QString qstrSql = QString ("select objectlistid, objectid from V_VALUE_OBJECTLISTREFERENCE where Val = %1 and Owner = true")
        .arg(m_lContainerId);
 
     QSqlQuery cQSqlQuery;
-    long lRet = GetDataAccess()->ExecuteQuery(qstrSql, cQSqlQuery);
+   qint64 lRet = GetDataAccess()->ExecuteQuery(qstrSql, cQSqlQuery);
 
     if(lRet > 0)
     {

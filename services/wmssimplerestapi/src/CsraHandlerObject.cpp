@@ -102,7 +102,7 @@ QVariant CsraHandlerObject::handlePutRequest(CsaLocatedElement *p_pElement, CwsH
             CdmJsonToObjectMapper mapper;
             QString qstrBody = p_pRequest->GetBody();
             mapper.ConvertJson(pCdmObject, qstrBody);
-            qvm["ObjectID"] = (int)pCdmObject->GetId();
+            qvm["ObjectID"] = pCdmObject->GetId();
 
             if (SUCCESSFULL(pObject->commit()))
             {

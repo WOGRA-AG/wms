@@ -3,7 +3,7 @@
 #include "CwnCommandCheckObjectLocked.h"
 #include "CwnCommandUnlockObject.h"
 
-CwnCommandCheckObjectLocked::CwnCommandCheckObjectLocked(long p_lObjectId, long p_lSessionId, CwnDataAccess* p_pDataAccess): CwnCommandBase(p_pDataAccess),
+CwnCommandCheckObjectLocked::CwnCommandCheckObjectLocked(qint64 p_lObjectId,qint64 p_lSessionId, CwnDataAccess* p_pDataAccess): CwnCommandBase(p_pDataAccess),
       m_lObjectId(p_lObjectId),
       m_lSessionId(p_lSessionId)
 {
@@ -66,7 +66,7 @@ void CwnCommandCheckObjectLocked::interpretAnswer(QVariant &Ret)
 
             //Object is locked
 
-            long lSessionId = list->at(0).toLongLong();
+           qint64 lSessionId = list->at(0).toLongLong();
             INFO("Object with ID" + QString::number(m_lObjectId) +
                  " is locked by session " + QString::number(m_lSessionId));
 

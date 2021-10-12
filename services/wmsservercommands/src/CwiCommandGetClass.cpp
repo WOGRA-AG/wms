@@ -16,7 +16,7 @@ CwiCommandGetClass::~CwiCommandGetClass()
 
 void CwiCommandGetClass::Execute()
 {
-    long iDbId = m_rpData->GetValue("DatabaseId").toInt();
+   qint64 iDbId = m_rpData->GetValue("DatabaseId").toInt();
     CwmscomDataResult* pResult = nullptr;
     CdmDataProvider* pManager = CdmSessionManager::GetDataProvider();
 

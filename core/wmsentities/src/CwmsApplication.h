@@ -61,7 +61,7 @@ class BASETOOLS_API CwmsApplication: public CdmObjectAdaptor
       void SetDesktop(bool p_bValue);
       bool GetMobile();
       void SetMobile(bool p_bValue);
-      long GetModulesId();
+     qint64 GetModulesId();
       bool GetLicenceCheck();
       void SetLicenceCheck(bool p_bValue);
       bool GetWeb();
@@ -70,7 +70,7 @@ class BASETOOLS_API CwmsApplication: public CdmObjectAdaptor
       QString GetMain();
       void SetMain(QString p_qstrValue);
 
-      CdmObject *LoadModule(long p_lObjectId);
+      CdmObject *LoadModule(qint64 p_lObjectId);
       CdmObject *LoadDefaultModule();
 public:
       static CwmsApplication Create();

@@ -6,7 +6,7 @@
 #include "CftlCommandFindUser.h"
 #include "CftlCommandGetGroupUserList.h"
 
-CftlCommandGetGroupUserList::CftlCommandGetGroupUserList(long p_lGroup, CftlDataAccess* p_pDataAccess)
+CftlCommandGetGroupUserList::CftlCommandGetGroupUserList(qint64 p_lGroup, CftlDataAccess* p_pDataAccess)
     : CftlAbstractCommand(p_pDataAccess),
       m_lGroupId(p_lGroup)
 {
@@ -25,7 +25,7 @@ QList<CumUser *> CftlCommandGetGroupUserList::GetResult()
 
 int CftlCommandGetGroupUserList::Execute()
 {
-    long lRet = CdmLogging::eDmUnknownUserQueryError;
+   qint64 lRet = CdmLogging::eDmUnknownUserQueryError;
 
     if(m_lGroupId <= 0)
     {
@@ -41,7 +41,7 @@ int CftlCommandGetGroupUserList::Execute()
 
 int CftlCommandGetGroupUserList::ReadAllUsers()
 {
-    long lRet = CdmLogging::eDmUnknownUserQueryError;
+   qint64 lRet = CdmLogging::eDmUnknownUserQueryError;
     CftlCommandGetUserList command(GetDataAccess());
     lRet = command.Run();
     m_qllUserList = command.GetResult();
@@ -55,10 +55,10 @@ QString CftlCommandGetGroupUserList::CreateSelectPart()
 
 int CftlCommandGetGroupUserList::ReadGroupUsers()
 {
-    long lRet = CdmLogging::eDmUnknownUserQueryError;
+   qint64 lRet = CdmLogging::eDmUnknownUserQueryError;
     QSqlQuery cQSqlQuery(GetSqlDatabase());
     cQSqlQuery.prepare(CreateSelectPart() + "inner join WMS_UM_GROUPMEMBER member on user.userid = member.userid where member.GroupId = ?");
-    cQSqlQuery.addBindValue((int)m_lGroupId);
+    cQSqlQuery.addBindValue(m_lGroupId);
 
     if(SUCCESSFULL(ExecuteQuery(cQSqlQuery)))
     {

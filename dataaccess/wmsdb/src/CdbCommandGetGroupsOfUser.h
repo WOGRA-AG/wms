@@ -10,11 +10,11 @@ class CdbDataAccess;
 class CdbCommandGetGroupsOfUser : public CdbAbstractCommand
 {
 private:
-    long m_lUserId;
+   qint64 m_lUserId;
     QList<CumUserGroup*> m_qllGroups;
 
 public:
-    CdbCommandGetGroupsOfUser(long p_lUser, CdbDataAccess* p_pDataAccess);
+    CdbCommandGetGroupsOfUser(qint64 p_lUser, CdbDataAccess* p_pDataAccess);
     virtual ~CdbCommandGetGroupsOfUser();
     QList<CumUserGroup*> GetResult();
 protected:

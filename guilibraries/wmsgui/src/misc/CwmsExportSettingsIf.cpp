@@ -126,11 +126,11 @@ void CwmsExportSettingsIf::FillMemberListView(const CdmClass* p_pCdmClass)
 {
    if (CHKPTR(p_pCdmClass))
    {
-      QMap<long,CdmMember*> qmMembers;
+      QMap<qint64,CdmMember*> qmMembers;
       p_pCdmClass->GetMemberMap(qmMembers);
 
-	  QMap<long, CdmMember*>::iterator qmIt    = qmMembers.begin();
-	  QMap<long, CdmMember*>::iterator qmItEnd = qmMembers.end();
+	  QMap<qint64, CdmMember*>::iterator qmIt    = qmMembers.begin();
+	  QMap<qint64, CdmMember*>::iterator qmItEnd = qmMembers.end();
 
       for(; qmIt != qmItEnd; ++qmIt)
       {
@@ -195,11 +195,11 @@ void CwmsExportSettingsIf::FillChildMembers(CdmMember* p_pCdmMember,
          
             if (pCdmClass)
             {
-               QMap<long,CdmMember*> qmMembers;
+               QMap<qint64,CdmMember*> qmMembers;
                pCdmClass->GetMemberMap(qmMembers);
                
-			   QMap<long, CdmMember*>::iterator qmIt    = qmMembers.begin();
-			   QMap<long, CdmMember*>::iterator qmItEnd = qmMembers.end();
+			   QMap<qint64, CdmMember*>::iterator qmIt    = qmMembers.begin();
+			   QMap<qint64, CdmMember*>::iterator qmItEnd = qmMembers.end();
             QTreeWidgetItem* pqchItem = nullptr;
                
                for(; qmIt != qmItEnd; ++qmIt)
@@ -689,7 +689,7 @@ void CwmsExportSettingsIf::ReduceExportSlot()
 
       if (pCwmsSearchDlg->exec() == QDialog::Accepted)
       {
-         QList<long> qllObjects;
+         QList<qint64> qllObjects;
          pCwmsSearchWidget->GetDisplayList(qllObjects);
 
          int iCount = qllObjects.count();

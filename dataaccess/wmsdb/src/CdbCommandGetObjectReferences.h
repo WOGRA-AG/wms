@@ -6,14 +6,14 @@
 class CdbCommandGetObjectReferences : public CdbAbstractCommand
 {
 private:
-    long m_lContainerId;
-    long m_lObjectId;
-    QMap<long, long> m_qmReferences;
+   qint64 m_lContainerId;
+   qint64 m_lObjectId;
+    QMap<qint64,qint64> m_qmReferences;
 public:
-    CdbCommandGetObjectReferences(long p_lContainerId, long p_lObjectId, CdbDataAccess* p_pDataAccess);
+    CdbCommandGetObjectReferences(qint64 p_lContainerId,qint64 p_lObjectId, CdbDataAccess* p_pDataAccess);
     virtual ~CdbCommandGetObjectReferences();
 
-    QMap<long, long> GetResult();
+    QMap<qint64,qint64> GetResult();
 protected:
     bool CheckValid();
     int Execute();

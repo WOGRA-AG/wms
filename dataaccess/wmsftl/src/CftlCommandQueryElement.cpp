@@ -209,7 +209,7 @@ QString CftlCommandQueryElement::GenerateValueConditionObjectId()
 
         if (CHKPTR(pQuery))
         {
-            long containerId = pQuery->GetContainerId();
+           qint64 containerId = pQuery->GetContainerId();
 
             if (containerId > 0)
             {

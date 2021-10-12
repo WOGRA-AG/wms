@@ -214,7 +214,7 @@ EslSmtpAuthType CwmsSmtpConfiguration::GetSmtpAuthentication()
  *----------------last changed: --------------------------------Sa 9. Jan 10:48:23 2010-----------*/
 void CwmsSmtpConfiguration::SetSmtpAuthentication(EslSmtpAuthType p_eSlSmtpAuthType)
 {
-   SetValue("Smtp_Authentification", (int)p_eSlSmtpAuthType);
+   SetValue("Smtp_Authentification", p_eSlSmtpAuthType);
 }
 
 /** +-=---------------------------------------------------------Sa 9. Jan 10:47:37 2010-----------*

@@ -42,7 +42,7 @@ CdbQueryElement::~CdbQueryElement()
     CLEANUP_LINKEDLIST_PTR(CdbQueryElement, m_qvlChilds);
 }
 
-long CdbQueryElement::Execute(QMap<long,long> &p_rqvlResultList)
+qint64 CdbQueryElement::Execute(QMap<qint64,qint64> &p_rqvlResultList)
 {
     int lRet = CdmLogging::eDmUnknownDBQueryError;
     lRet = ExecuteValue(p_rqvlResultList);
@@ -50,9 +50,9 @@ long CdbQueryElement::Execute(QMap<long,long> &p_rqvlResultList)
     return lRet;
 }
 
-long CdbQueryElement::ExecuteValue(QMap<long, long> &p_rqvlResults)
+qint64 CdbQueryElement::ExecuteValue(QMap<qint64,qint64> &p_rqvlResults)
 {
-    long lRet = CdmLogging::eDmUnknownDBQueryError;
+   qint64 lRet = CdmLogging::eDmUnknownDBQueryError;
 
     if (m_rpCdmQueryElement->GetCompareKeyname().toUpper() == "OBJECT_ID" &&
             m_rpCdmQueryElement->GetValueType() == eDmValueObjectRef)
@@ -67,7 +67,7 @@ long CdbQueryElement::ExecuteValue(QMap<long, long> &p_rqvlResults)
 
         if (CHKPTR(pQuery))
         {
-            long containerId = pQuery->GetContainerId();
+           qint64 containerId = pQuery->GetContainerId();
 
             if (containerId > 0)
             {
@@ -281,7 +281,7 @@ QString CdbQueryElement::GenerateValueQuery()
 
             if (CHKPTR(pQuery))
             {
-                long containerId = pQuery->GetContainerId();
+               qint64 containerId = pQuery->GetContainerId();
 
                 if (containerId > 0)
                 {
@@ -372,7 +372,7 @@ QString CdbQueryElement::GenerateValueQuery()
                 // Based in Class expected only one objectlist in this class or used in subqueries
                 else if (pClass)
                 {
-                    QList<long> qllClasses = pClass->GetDerivedClasses();
+                    QList<qint64> qllClasses = pClass->GetDerivedClasses();
                     qllClasses.append(pClass->GetId());
 
                     QString qstrClasses = "(";

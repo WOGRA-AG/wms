@@ -109,11 +109,11 @@ void CwmsTreeCompletionItem::fillClassTypeFunctions()
 {
     if (CHKPTR(m_rpClass))
     {
-        QMap<long, CdmMember*> qmMembers;
+        QMap<qint64, CdmMember*> qmMembers;
         m_rpClass->GetMemberMap(qmMembers);
 
-        QMap<long, CdmMember*>::iterator qmIt = qmMembers.begin();
-        QMap<long, CdmMember*>::iterator qmItEnd = qmMembers.end();
+        QMap<qint64, CdmMember*>::iterator qmIt = qmMembers.begin();
+        QMap<qint64, CdmMember*>::iterator qmItEnd = qmMembers.end();
 
         for (; qmIt != qmItEnd; ++qmIt)
         {
@@ -272,7 +272,7 @@ void CwmsTreeCompletionItem::fillMemberTypeFunctions()
              m_rpMember->GetValueType() == eDmValueContainerRef)
     {
         CdmClass* pClass = nullptr;
-        long lClassId = m_rpMember->GetClassReference();
+       qint64 lClassId = m_rpMember->GetClassReference();
 
         if (lClassId > 0)
         {

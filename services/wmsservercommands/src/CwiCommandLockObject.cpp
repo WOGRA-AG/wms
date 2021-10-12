@@ -18,9 +18,9 @@ CwiCommandLockObject::~CwiCommandLockObject()
 
 void CwiCommandLockObject::Execute()
 {
-    long lObjectId = m_rpData->GetValue("ObjectId").toInt();
-    long lObjectListId = m_rpData->GetValue("ObjectListId").toInt();
-    long lDbId = m_rpData->GetValue("DatabaseId").toInt();
+   qint64 lObjectId = m_rpData->GetValue("ObjectId").toInt();
+   qint64 lObjectListId = m_rpData->GetValue("ObjectListId").toInt();
+   qint64 lDbId = m_rpData->GetValue("DatabaseId").toInt();
 
     CdmDataProvider* pCdmManager = CdmSessionManager::GetDataProvider();
 

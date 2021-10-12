@@ -37,10 +37,10 @@ class CwtQuery : public CwtTestBase
 
 private:
     QTime m_qTimeStart;
-    long m_lObjectId;
-    long m_lClassId;
-    long m_lRefObjectId;
-    long m_lRefRefObjectId;
+   qint64 m_lObjectId;
+   qint64 m_lClassId;
+   qint64 m_lRefObjectId;
+   qint64 m_lRefRefObjectId;
     QTime m_qTestTimeWithPreparation;
     QDateTime m_qdTestDateTime;
     QString m_qstrDbName;
@@ -56,7 +56,7 @@ private:
     void CreateDoubleReferencingObject(CdmObject* p_pObject);
     void PrepareMultiInheritanceTestCase();
 
-public: static long mem;
+public: static qint64 mem;
 
 public:
     CwtQuery( );

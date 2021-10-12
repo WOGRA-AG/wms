@@ -135,7 +135,7 @@ void CoedtwObjectRef::GetComboBoxEdit(QWidget* pqWidget, QHBoxLayout* pqLayout)
     pqLayout->addWidget(m_pqcbObjectChoice);
 
     connect(m_pqcbObjectChoice,
-            SIGNAL(activated(int)),
+            SIGNAL(activated),
             this,
             SLOT(ValueChangedSlotByUser()));
 }
@@ -170,7 +170,7 @@ void CoedtwObjectRef::GetComboBoxEdit(CdmObjectContainer* pContainer, QWidget* p
     pqLayout->addWidget(m_pqcbObjectChoice);
 
     connect(m_pqcbObjectChoice,
-            SIGNAL(activated(int)),
+            SIGNAL(activated),
             this,
             SLOT(ValueChangedSlotByUser()));
 }
@@ -358,7 +358,7 @@ void CoedtwObjectRef::ChooseClickedSlot()
 
    if (CHKPTR(pCdmMember))
    {
-      long lClassId = pCdmMember->GetClassReference();
+     qint64 lClassId = pCdmMember->GetClassReference();
       CdmObjectContainer* pContainer = CwmsContainerSelectionIf::GetObjectContainer(pCdmMember->GetSchemeId(),
                                                                                     lClassId,
                                                                                     nullptr);
@@ -410,12 +410,12 @@ CdmObjectContainer* CoedtwObjectRef::GetSingleObjectList(  )
 
       if(CHKPTR(pIdmDataAccess))
       {
-         QMap<long, QString> qmObjectLists;
+         QMap<qint64, QString> qmObjectLists;
          const CdmMember* pCdmMember = m_rpCdmValue->GetMember();
 
          if (CHKPTR(pCdmMember))
          {
-            long lClassId = pCdmMember->GetClassReference();
+           qint64 lClassId = pCdmMember->GetClassReference();
 
             if (lClassId > 0)
             {
@@ -427,7 +427,7 @@ CdmObjectContainer* CoedtwObjectRef::GetSingleObjectList(  )
 
                 if(qmObjectLists.count() == 1)
                 {
-                   QMap<long, QString>::iterator qmIt = qmObjectLists.begin();
+                   QMap<qint64, QString>::iterator qmIt = qmObjectLists.begin();
                    CdmContainerManager* pContainerManager = pCdmManager->GetContainerManager(pCdmMember->GetSchemeId());
 
                    if(CHKPTR(pContainerManager))

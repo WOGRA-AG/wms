@@ -96,7 +96,7 @@ void CwmsClassSelectionIf::FillDialog(bool p_bShowAbstractClasses)
                if (bInsertClass)
                {
                   QTreeWidgetItem* pqlviItem = new QTreeWidgetItem(m_pqlvClasses);
-                  pqlviItem->setData(0, Qt::UserRole, (int)pCdmClass->GetId());
+                  pqlviItem->setData(0, Qt::UserRole, pCdmClass->GetId());
                   pqlviItem->setText(0, pCdmClass->GetFullQualifiedName());
                   pqlviItem->setText(1, pCdmClass->GetCaption());
                }
@@ -120,12 +120,12 @@ void CwmsClassSelectionIf::ShowTechnicalClassesClickedSlot()
 
 /** +-=---------------------------------------------------------Mo 19. Mai 20:30:46 2008----------*
  * @method  CwmsClassSelectionIf::GetSelectedClass           // public                            *
- * @return  long                                             //                                   *
+ * @return qint64                                             //                                   *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------Mo 19. Mai 20:30:46 2008----------*/
-long CwmsClassSelectionIf::GetSelectedClass()
+qint64 CwmsClassSelectionIf::GetSelectedClass()
 {
-   long lRet = 0;
+  qint64 lRet = 0;
 
    QTreeWidgetItem* pqlviItem = CwmsTreeWidgetHelper::GetSelectedItem(m_pqlvClasses);
 
@@ -151,7 +151,7 @@ CdmClass* CwmsClassSelectionIf::GetClass(QWidget* p_pqwParent, bool p_bShowAbstr
 
    if (pCdmSelector->exec() == QDialog::Accepted)
    {
-      long lClassId = pCdmSelector->GetSelectedClass();
+     qint64 lClassId = pCdmSelector->GetSelectedClass();
       CdmDataProvider* pCdmManager = CdmSessionManager::GetDataProvider();
 
       if (CHKPTR(pCdmManager) && CHKPTR(pCdmManager->GetCurrentScheme()))

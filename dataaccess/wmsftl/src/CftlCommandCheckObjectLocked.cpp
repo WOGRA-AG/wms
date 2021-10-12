@@ -29,7 +29,7 @@ bool CftlCommandCheckObjectLocked::CheckValid()
 
 int CftlCommandCheckObjectLocked::Execute()
 {
-    long lRet = CdmLogging::eDmObjectAccessError;
+   qint64 lRet = CdmLogging::eDmObjectAccessError;
     QString qstrTableName = GetClassTableNameFromObject(m_rpObject);
 
     if (!qstrTableName.isEmpty())
@@ -42,7 +42,7 @@ int CftlCommandCheckObjectLocked::Execute()
                 .arg(FTL_OBJECT_ID_FIELD_NAME);
 
         cQSqlQuery.prepare(qstrQuery);
-        cQSqlQuery.addBindValue((int)m_rpObject->GetId());
+        cQSqlQuery.addBindValue(m_rpObject->GetId());
 
         if (SUCCESSFULL(ExecuteQuery(cQSqlQuery)))
         {
@@ -51,7 +51,7 @@ int CftlCommandCheckObjectLocked::Execute()
             {
                 if (!cQSqlQuery.value(0).isNull())
                 {
-                    long lSessionId = cQSqlQuery.value(0).toInt();
+                   qint64 lSessionId = cQSqlQuery.value(0).toInt();
                     QDateTime qdtLockTimeStamp = cQSqlQuery.value(1).toDateTime();
 
                     QDateTime current = QDateTime::currentDateTime();

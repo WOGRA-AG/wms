@@ -98,21 +98,21 @@ bool CdmClassDiamondValidator::ValidateMembers()
 
    if (CHKPTR(m_rpClass))
    {
-      QMap<long,long> qmBaseClasses = m_rpClass->GetBaseClasses();
-      QMap<long,CdmMember*> qmClassMembers =  m_rpClass->GetClassMemberMap();
+      QMap<qint64,qint64> qmBaseClasses = m_rpClass->GetBaseClasses();
+      QMap<qint64,CdmMember*> qmClassMembers =  m_rpClass->GetClassMemberMap();
       bRet = ValidateBaseClassesMembers(m_rpClass, qmClassMembers);
    }
 
    return bRet;
 }
 
-bool CdmClassDiamondValidator::ValidateBaseClassesMembers(CdmClass* p_pClass, QMap<long,CdmMember*>& p_qmExistingMembers)
+bool CdmClassDiamondValidator::ValidateBaseClassesMembers(CdmClass* p_pClass, QMap<qint64,CdmMember*>& p_qmExistingMembers)
 {
    bool bRet = false;
-   QMap<long,long> qmBaseClasses = p_pClass->GetBaseClasses();
+   QMap<qint64,qint64> qmBaseClasses = p_pClass->GetBaseClasses();
    
-   QMap<long,long>::iterator qmIt = qmBaseClasses.begin();
-   QMap<long,long>::iterator qmItEnd = qmBaseClasses.end();
+   QMap<qint64,qint64>::iterator qmIt = qmBaseClasses.begin();
+   QMap<qint64,qint64>::iterator qmItEnd = qmBaseClasses.end();
    bool bCheckResult = true;
 
    for (; qmIt != qmItEnd; ++qmIt)
@@ -135,7 +135,7 @@ bool CdmClassDiamondValidator::ValidateBaseClassesMembers(CdmClass* p_pClass, QM
    return bRet;
 }
 
-bool CdmClassDiamondValidator::ValidateBaseClassMembers(CdmClass* p_pClass, QMap<long,CdmMember*>& p_qmExistingMembers)
+bool CdmClassDiamondValidator::ValidateBaseClassMembers(CdmClass* p_pClass, QMap<qint64,CdmMember*>& p_qmExistingMembers)
 {
    bool bRet = false;
 
@@ -144,11 +144,11 @@ bool CdmClassDiamondValidator::ValidateBaseClassMembers(CdmClass* p_pClass, QMap
       bRet = ValidateBaseClassesMembers(p_pClass, p_qmExistingMembers);
    }
 
-   QMap<long,CdmMember*> qmBaseClassMembers =  p_pClass->GetClassMemberMap();      
+   QMap<qint64,CdmMember*> qmBaseClassMembers =  p_pClass->GetClassMemberMap();      
 
 
-   QMap<long,CdmMember*>::iterator qmIt = qmBaseClassMembers.begin();
-   QMap<long,CdmMember*>::iterator qmItEnd = qmBaseClassMembers.end();
+   QMap<qint64,CdmMember*>::iterator qmIt = qmBaseClassMembers.begin();
+   QMap<qint64,CdmMember*>::iterator qmItEnd = qmBaseClassMembers.end();
     bool bCheckResult = true;
 
    for (; qmIt != qmItEnd; ++qmIt)
@@ -170,13 +170,13 @@ bool CdmClassDiamondValidator::ValidateBaseClassMembers(CdmClass* p_pClass, QMap
    return bRet;
 }
 
-bool CdmClassDiamondValidator::CheckMember(CdmMember* p_pMember, QMap<long,CdmMember*>& p_qmExistingMembers)
+bool CdmClassDiamondValidator::CheckMember(CdmMember* p_pMember, QMap<qint64,CdmMember*>& p_qmExistingMembers)
 {
    bool bRet = true;
    bool bInsert = true;
 
-   QMap<long,CdmMember*>::iterator qmIt = p_qmExistingMembers.begin();
-   QMap<long,CdmMember*>::iterator qmItEnd = p_qmExistingMembers.end();
+   QMap<qint64,CdmMember*>::iterator qmIt = p_qmExistingMembers.begin();
+   QMap<qint64,CdmMember*>::iterator qmItEnd = p_qmExistingMembers.end();
 
    for (; qmIt != qmItEnd; ++qmIt)
    {
@@ -206,7 +206,7 @@ bool CdmClassDiamondValidator::CheckMember(CdmMember* p_pMember, QMap<long,CdmMe
    return bRet;
 }
 
-CdmClass* CdmClassDiamondValidator::FindClassById(long p_lId)
+CdmClass* CdmClassDiamondValidator::FindClassById(qint64 p_lId)
 {
    CdmClass* pClass = nullptr;
    CdmClassManager* pClassManager = m_rpClass->GetClassManager();
@@ -225,7 +225,7 @@ bool CdmClassDiamondValidator::ValidateMethods()
 
    if (CHKPTR(m_rpClass))
    {
-      QMap<long,long> qmBaseClasses = m_rpClass->GetBaseClasses();
+      QMap<qint64,qint64> qmBaseClasses = m_rpClass->GetBaseClasses();
       QMap<QString, CdmClassMethod*> qmClassMethods =  m_rpClass->GetMethods();
       bRet = ValidateBaseClassesMethods(m_rpClass, qmClassMethods);
    }
@@ -236,10 +236,10 @@ bool CdmClassDiamondValidator::ValidateMethods()
 bool CdmClassDiamondValidator::ValidateBaseClassesMethods(CdmClass* p_pClass, QMap<QString,CdmClassMethod*>& p_qmExistingMethods)
 {
    bool bRet = false;
-   QMap<long,long> qmBaseClasses = p_pClass->GetBaseClasses();
+   QMap<qint64,qint64> qmBaseClasses = p_pClass->GetBaseClasses();
 
-   QMap<long,long>::iterator qmIt = qmBaseClasses.begin();
-   QMap<long,long>::iterator qmItEnd = qmBaseClasses.end();
+   QMap<qint64,qint64>::iterator qmIt = qmBaseClasses.begin();
+   QMap<qint64,qint64>::iterator qmItEnd = qmBaseClasses.end();
    bool bCheckResult = true;
 
    for (; qmIt != qmItEnd; ++qmIt)

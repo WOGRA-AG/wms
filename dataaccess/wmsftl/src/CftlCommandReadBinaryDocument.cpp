@@ -47,7 +47,7 @@ int CftlCommandReadBinaryDocument::Execute()
                 .arg(FTL_OBJECT_ID_FIELD_NAME);
 
         cQSqlQuery.prepare((qstrQuery));
-        cQSqlQuery.addBindValue((int)pObject->GetId());
+        cQSqlQuery.addBindValue(pObject->GetId());
 
         if(SUCCESSFULL(ExecuteQuery(cQSqlQuery)))
         {

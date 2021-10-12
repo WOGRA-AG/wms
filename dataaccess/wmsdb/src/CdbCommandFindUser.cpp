@@ -11,7 +11,7 @@
 // Own includes
 #include "CdbCommandFindUser.h"
 
-CdbCommandFindUser::CdbCommandFindUser(long p_lUserId, CdbDataAccess* p_pDataAccess)
+CdbCommandFindUser::CdbCommandFindUser(qint64 p_lUserId, CdbDataAccess* p_pDataAccess)
     : CdbAbstractCommand(p_pDataAccess),
       m_lUserId(p_lUserId),
       m_rpUser(nullptr)
@@ -294,19 +294,19 @@ void CdbCommandFindUser::EncryptAllPasswords()
     if(ExecuteQuery(qstrSelect, cQSqlQuery) > 0)
     {
         cQSqlQuery.first();
-        QMap<long, QString> qmEncryptedPasswords;
+        QMap<qint64, QString> qmEncryptedPasswords;
         if(cQSqlQuery.isValid())
         {
             do // loading each password and converting it
             {
-                long     lId                = cQSqlQuery.value(0).toInt();
+               qint64     lId                = cQSqlQuery.value(0).toInt();
                 QString qstrPassword        = cQSqlQuery.value(1).toString();
                 qmEncryptedPasswords.insert(lId, CwmsUtilities::EncryptPassword(qstrPassword));
             }
             while(cQSqlQuery.next());
 
-            QMap<long, QString>::iterator qmIt = qmEncryptedPasswords.begin();
-            QMap<long, QString>::iterator qmItEnd = qmEncryptedPasswords.end();
+            QMap<qint64, QString>::iterator qmIt = qmEncryptedPasswords.begin();
+            QMap<qint64, QString>::iterator qmItEnd = qmEncryptedPasswords.end();
 
             for (; qmIt != qmItEnd; ++qmIt) // update passwords in db
             {

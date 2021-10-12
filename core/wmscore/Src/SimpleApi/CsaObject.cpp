@@ -488,9 +488,9 @@ int CsaObject::getValueInt(QString p_qstrKeyname) const
     return iRet;
 }
 
-long CsaObject::getValueLong(QString p_qstrKeyname) const
+qint64 CsaObject::getValueLong(QString p_qstrKeyname) const
 {
-    long lRet = 0;
+   qint64 lRet = 0;
     CdmObject* pCdmObject =  (const_cast<CsaObject*>(this))->getInternals();
 
     if(CHKPTR(pCdmObject))
@@ -604,7 +604,7 @@ void CsaObject::setValueInt(QString p_qstrKeyname, int p_iValue)
     }
 }
 
-void CsaObject::setValueLong(QString p_qstrKeyname, long p_lValue)
+void CsaObject::setValueLong(QString p_qstrKeyname,qint64 p_lValue)
 {
     CdmObject* pCdmObject = getInternals();
 

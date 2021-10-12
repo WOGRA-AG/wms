@@ -63,12 +63,12 @@ CdbQuery::~CdbQuery(  )
 
 /** +-=---------------------------------------------------------Do 11. Nov 08:35:32 2010----------*
  * @method  CdbQuery::ExecuteEnhanced                      // private                           *
- * @return  long                                             //                                   *
+ * @return qint64                                             //                                   *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------Do 11. Nov 08:35:32 2010----------*/
-long CdbQuery::ExecuteEnhanced()
+qint64 CdbQuery::ExecuteEnhanced()
 {
-    long lRet = CdmLogging::eDmUnknownDBQueryError;
+   qint64 lRet = CdmLogging::eDmUnknownDBQueryError;
 
     if(CHKPTR(m_rpCdbDataAccess) &&
             CHKPTR(m_rpCdmQuery))
@@ -82,12 +82,12 @@ long CdbQuery::ExecuteEnhanced()
 
 /** +-=---------------------------------------------------------Do 11. Nov 08:36:07 2010----------*
  * @method  CdbQuery::Execute                              // public                            *
- * @return  long                                             //                                   *
+ * @return qint64                                             //                                   *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------Do 11. Nov 08:36:07 2010----------*/
-long CdbQuery::Execute()
+qint64 CdbQuery::Execute()
 {
-    long lRet = CdmLogging::eDmUnknownDBQueryError;
+   qint64 lRet = CdmLogging::eDmUnknownDBQueryError;
 
     if (m_rpCdmQuery->HasResultElements())
     {
@@ -103,18 +103,18 @@ long CdbQuery::Execute()
 
 /** +-=---------------------------------------------------------Do 11. Nov 08:35:47 2010----------*
  * @method  CdbQuery::ExecuteQuery                         // public                            *
- * @return  long                                             //                                   *
+ * @return qint64                                             //                                   *
  * @comment Executes the query without any parameters. Works with the faster query                *
  *          algorithm.                                                                            *
  *----------------last changed: --------------------------------Do 11. Nov 08:35:47 2010----------*/
-long CdbQuery::ExecuteQuery()
+qint64 CdbQuery::ExecuteQuery()
 {
-    long lRet = CdmLogging::eDmUnknownDBQueryError;
+   qint64 lRet = CdmLogging::eDmUnknownDBQueryError;
 
     if(CHKPTR(m_rpCdbDataAccess) &&
             CHKPTR(m_rpCdmQuery))
     {
-        QMap<long,long> qvlResults;
+        QMap<qint64,qint64> qvlResults;
         QString  qstrQuery = GenerateQuerySql();
 
 
@@ -122,8 +122,8 @@ long CdbQuery::ExecuteQuery()
         {
             lRet = ExecuteSqlQuery(qvlResults, qstrQuery);
 
-            QMap<long,long>::iterator qmIt = qvlResults.begin();
-            QMap<long,long>::iterator qvlItEnd = qvlResults.end();
+            QMap<qint64,qint64>::iterator qmIt = qvlResults.begin();
+            QMap<qint64,qint64>::iterator qvlItEnd = qvlResults.end();
 
             for(; qmIt != qvlItEnd; ++qmIt)
             {
@@ -135,9 +135,9 @@ long CdbQuery::ExecuteQuery()
     return lRet;
 }
 
-long CdbQuery::ExecuteSqlQuery(QMap<long,long>& p_rqllResults, QString qstrSql)
+qint64 CdbQuery::ExecuteSqlQuery(QMap<qint64,qint64>& p_rqllResults, QString qstrSql)
 {
-    long lRet =  CdmLogging::eDmUnknownDBQueryError;
+   qint64 lRet =  CdmLogging::eDmUnknownDBQueryError;
     QSqlQuery cQSqlQuery;
     p_rqllResults.clear();
 
@@ -172,11 +172,11 @@ long CdbQuery::ExecuteSqlQuery(QMap<long,long>& p_rqllResults, QString qstrSql)
     return lRet;
 }
 
-long CdbQuery::ExecuteObjectListQuery(QMap<long,long>& p_rqllResults)
+qint64 CdbQuery::ExecuteObjectListQuery(QMap<qint64,qint64>& p_rqllResults)
 {
-    long lRet = CdmLogging::eDmUnknownDBQueryError;
-    long lObjectListId = m_rpCdmQuery->GetContainerId();
-    long lClassId = m_rpCdmQuery->GetClassId();
+   qint64 lRet = CdmLogging::eDmUnknownDBQueryError;
+   qint64 lObjectListId = m_rpCdmQuery->GetContainerId();
+   qint64 lClassId = m_rpCdmQuery->GetClassId();
 
     if (lObjectListId > 0 || lClassId > 0)
     {
@@ -459,15 +459,15 @@ void CdbQuery::ReadMemberIdAndBaseType(QString p_qstrSortKey,
 /** +-=---------------------------------------------------------Sa 10. Nov 13:20:22 2007----------*
  * @method  CdbQuery::CreateStringFromResultList           // private                           *
  * @return  QString                                          //                                   *
- * @param   QValueList<long>& p_rqvlResults                  //                                   *
+ * @param   QValueList<qint64>& p_rqvlResults                  //                                   *
  * @comment                                                                                       *
  *----------------last changed: Wolfgang Graßhof----------------Sa 10. Nov 13:20:22 2007----------*/
-QString CdbQuery::CreateStringFromResultList(QMap<long,long>& p_rqvlResults)
+QString CdbQuery::CreateStringFromResultList(QMap<qint64,qint64>& p_rqvlResults)
 {
     QString qstrRet;
 
-    QMap<long,long>::iterator qvlIt = p_rqvlResults.begin();
-    QMap<long,long>::iterator qvlItEnd = p_rqvlResults.end();
+    QMap<qint64,qint64>::iterator qvlIt = p_rqvlResults.begin();
+    QMap<qint64,qint64>::iterator qvlItEnd = p_rqvlResults.end();
 
     int iObjectId = qvlIt.key();
     qstrRet += QString::number(iObjectId);

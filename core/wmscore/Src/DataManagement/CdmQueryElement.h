@@ -282,7 +282,7 @@ public slots:
 
     void SetComparisonValue(QString p_qstrKeyname, bool p_bValue);
     void SetComparisonValue(QString p_qstrKeyname, int p_iValue);
-    void SetComparisonValue(QString p_qstrKeyname, long p_lValue);
+    void SetComparisonValue(QString p_qstrKeyname,qint64 p_lValue);
     void SetComparisonValue(QString p_qstrKeyname, float p_fValue);
 
     /** +-=---------------------------------------------------------Di 20. Nov 11:20:47 2012-------*

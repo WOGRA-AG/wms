@@ -41,7 +41,7 @@ class WMSMANAGER_API CdmModelElementBase : public CdmLocatedElement
       /*
        * The db id of this manager
        */
-      QAtomicInteger<long> m_lSchemeId;
+      QAtomicInteger<qint64> m_lSchemeId;
 
    public:
    /** +-=---------------------------------------------------------Sa 20. Aug 12:35:52 2005*
@@ -67,10 +67,10 @@ virtual ~CdmModelElementBase(  );
     public slots:
          /** +-=---------------------------------------------------------Fr 23. Nov 14:47:04 2012-------*
     * @method  CdmModelElementBase::GetSchemeId            // public, const, slots              *
-    * @return  long                                          //                                   *
+    * @return qint64                                          //                                   *
     * @comment This method returns the DatabaseId.                                                *
     *----------------last changed: -----------------------------Fr 23. Nov 14:47:04 2012----------*/
-long GetSchemeId( ) const;
+qint64 GetSchemeId( ) const;
    public:
    /** +-=---------------------------------------------------------Fr 23. Nov 14:50:16 2012-------*
     * @method  CdmModelElementBase::GetClassManager          // public, const                     *
@@ -96,10 +96,10 @@ long GetSchemeId( ) const;
    public:
    /** +-=---------------------------------------------------------Sa 9. Feb 11:51:57 2013--------*
     * @method  CdmModelElementBase::GetSessionId             // public, const                     *
-    * @return  long                                          //                                   *
+    * @return qint64                                          //                                   *
     * @comment This method returns the userId.                                                    *
     *----------------last changed: -----------------------------Sa 9. Feb 11:51:57 2013-----------*/
-    long GetSessionId() const;
+   qint64 GetSessionId() const;
 
     public slots:
          /** +-=---------------------------------------------------------Sa 9. Feb 11:49:29 2013--------*
@@ -113,28 +113,28 @@ QString GetSchemeName( ) const;
    public:
    /** +-=---------------------------------------------------------Fr 12. Aug 00:36:58 2005*
     * @method  CdmModelElementBase::GetUserId                     // public, const                     *
-    * @return  long                                          //                                   *
+    * @return qint64                                          //                                   *
     * @comment This method returns the Id of the logged in user.                                  *
     *----------------last changed: -----------------------------Fr 12. Aug 00:36:58 2005----------*/
-long GetUserId(  ) const;
+qint64 GetUserId(  ) const;
 
    public:
    /** +-=---------------------------------------------------------Fr 23. Nov 14:24:16 2012-------*
     * @method  CdmModelElementBase::CdmModelElementBase                // public                            *
     * @return                                                //                                   *
-    * @param   long p_lDbId                                  //                                   *
+    * @param  qint64 p_lDbId                                  //                                   *
     * @comment The cosntructor.                                                                   *
     *----------------last changed: -----------------------------Fr 23. Nov 14:24:16 2012----------*/
-    CdmModelElementBase( long p_lDbId);
+    CdmModelElementBase(qint64 p_lDbId);
 
    public:
    /** +-=---------------------------------------------------------Fr 23. Nov 14:53:44 2012-------*
     * @method  CdmModelElementBase::SetSchemeId            // public                            *
     * @return  void                                          //                                   *
-    * @param   long p_lDbId                                  //                                   *
+    * @param  qint64 p_lDbId                                  //                                   *
     * @comment sets the db id in the base object.                                                 *
     *----------------last changed: -----------------------------Fr 23. Nov 14:53:44 2012----------*/
-    void SetSchemeId(long p_lDbId);
+    void SetSchemeId(qint64 p_lDbId);
 
     public slots:
          /** +-=---------------------------------------------------------Sa 9. Feb 11:50:37 2013--------*

@@ -32,7 +32,7 @@ private:
     QString m_qstrContainerKeyname;
 
 public:
-    CdmValueContainerRef(long p_lDatabaseId, long p_lId, QString p_qstrKeyname, CdmObject* p_pCdmObject);
+    CdmValueContainerRef(qint64 p_lDatabaseId,qint64 p_lId, QString p_qstrKeyname, CdmObject* p_pCdmObject);
     CdmValueContainerRef(QVariantMap& p_rqvHash, CdmObject* p_pCdmObject);
     virtual ~CdmValueContainerRef();
     void SetDefaultValue(const CdmMember* p_pCdmMember);
@@ -45,15 +45,15 @@ public:
     virtual void SetValue(QString p_qstrValue, QString p_qstrValue2);
     virtual void Restore(QString p_qstrValue);
     CdmObjectContainer* GetContainer();
-    long GetClassId() const;
+   qint64 GetClassId() const;
     CdmObjectContainer* GetEmptyContainer();
 
 public slots:
     QString GetDisplayString() const;
     bool IsTypeOf(QString p_qstrClassName) const;
     void SetValue(CdmObjectContainer* p_pContainer);
-    void SetValue(long p_lObjectListId, QString p_qstrContainerKeyname);
-    void SetValue(long p_lObjectListId);
+    void SetValue(qint64 p_lObjectListId, QString p_qstrContainerKeyname);
+    void SetValue(qint64 p_lObjectListId);
     virtual bool HasValue( ) const;
 
 };

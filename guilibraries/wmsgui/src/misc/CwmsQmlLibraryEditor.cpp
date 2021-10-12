@@ -92,7 +92,7 @@ bool CwmsQmlLibraryEditor::Save()
         {
             m_rpItem->setText(0, ui->m_pqleName->text());
             m_rpItem->setText(1, ui->m_pqleVersion->text());
-            m_rpItem->setData(0, Qt::UserRole, (int)m_cForm.GetObjectId());
+            m_rpItem->setData(0, Qt::UserRole, m_cForm.GetObjectId());
         }
     }
 

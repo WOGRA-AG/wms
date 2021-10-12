@@ -23,10 +23,10 @@ CftlContainerTableAlter::~CftlContainerTableAlter()
 
 void CftlContainerTableAlter::GenerateMemberSqls(QStringList& qstrlQueries)
 {
-    QMap<long, CdmMember*> qmMembers;
+    QMap<qint64, CdmMember*> qmMembers;
     m_rpClass->GetMemberMap(qmMembers);
 
-    QMapIterator<long, CdmMember*> qmIt(qmMembers);
+    QMapIterator<qint64, CdmMember*> qmIt(qmMembers);
     QList<CdmMember*> qlNewMembers;
     QList<CdmMember*> qlModifiedMembers;
     QList<CdmMember*> qlDeletedMembers;
@@ -64,7 +64,7 @@ void CftlContainerTableAlter::GenerateMemberSqls(QStringList& qstrlQueries)
     }
 
     QString qstrTableName = m_rpClass->GetConfigItem(FTL_CLASS_TABLE_NAME).toString();
-    QList<long> qlDerivedClasses = m_rpClass->GetDerivedClasses();
+    QList<qint64> qlDerivedClasses = m_rpClass->GetDerivedClasses();
     CdmClassManager* pClassManager = m_rpClass->GetClassManager();
 
     if (CHKPTR(pClassManager))
@@ -75,7 +75,7 @@ void CftlContainerTableAlter::GenerateMemberSqls(QStringList& qstrlQueries)
 
             for (int pos = 0; pos < qlDerivedClasses.count(); ++pos)
             {
-                long lId = qlDerivedClasses[pos];
+               qint64 lId = qlDerivedClasses[pos];
                 CdmClass* pClass = pClassManager->FindClassById(lId);
 
                 if (CHKPTR(pClass) && !pClass->IsAbstract())
@@ -93,7 +93,7 @@ void CftlContainerTableAlter::GenerateMemberSqls(QStringList& qstrlQueries)
 
             for (int pos = 0; pos < qlDerivedClasses.count(); ++pos)
             {
-                long lId = qlDerivedClasses[pos];
+               qint64 lId = qlDerivedClasses[pos];
                 CdmClass* pClass = pClassManager->FindClassById(lId);
 
                 if (CHKPTR(pClass) && !pClass->IsAbstract())
@@ -110,7 +110,7 @@ void CftlContainerTableAlter::GenerateMemberSqls(QStringList& qstrlQueries)
 
             for (int pos = 0; pos < qlDerivedClasses.count(); ++pos)
             {
-                long lId = qlDerivedClasses[pos];
+               qint64 lId = qlDerivedClasses[pos];
                 CdmClass* pClass = pClassManager->FindClassById(lId);
 
                 if (CHKPTR(pClass) && !pClass->IsAbstract())
@@ -142,12 +142,12 @@ void CftlContainerTableAlter::GenerateBaseClassChangesSqls(QStringList& qstrlQue
 {
     if (m_rpClass->HasBaseClassChanges())
     {
-        QList<long> qlChangedBaseClasses = m_rpClass->GetBaseClassChanges();
-        QMap<long,long> qmBaseClasses = m_rpClass->GetBaseClasses();
+        QList<qint64> qlChangedBaseClasses = m_rpClass->GetBaseClassChanges();
+        QMap<qint64,qint64> qmBaseClasses = m_rpClass->GetBaseClasses();
 
         for (int iPos = 0; iPos < qlChangedBaseClasses.count(); ++iPos)
         {
-            long lClassId = qlChangedBaseClasses[iPos];
+           qint64 lClassId = qlChangedBaseClasses[iPos];
             CdmClassManager* pClassManager = m_rpClass->GetClassManager();
 
             if (CHKPTR(pClassManager))
@@ -156,10 +156,10 @@ void CftlContainerTableAlter::GenerateBaseClassChangesSqls(QStringList& qstrlQue
 
                 if (CHKPTR(pClass))
                 {
-                    QMap<long, CdmMember*> qmMembers;
+                    QMap<qint64, CdmMember*> qmMembers;
                     pClass->GetMemberMap(qmMembers);
 
-                    QMapIterator<long, CdmMember*> qmIt(qmMembers);
+                    QMapIterator<qint64, CdmMember*> qmIt(qmMembers);
                     QList<CdmMember*> qlMembers;
 
                     while (qmIt.hasNext())
@@ -176,9 +176,9 @@ void CftlContainerTableAlter::GenerateBaseClassChangesSqls(QStringList& qstrlQue
                         }
                     }
 
-                    QList<long> qlBaseClasses = qmBaseClasses.values();
+                    QList<qint64> qlBaseClasses = qmBaseClasses.values();
                     QString qstrTableName = m_rpClass->GetConfigItem(FTL_CLASS_TABLE_NAME).toString();
-                    QList<long> qlDerivedClasses = m_rpClass->GetDerivedClasses();
+                    QList<qint64> qlDerivedClasses = m_rpClass->GetDerivedClasses();
                     CdmClassManager* pClassManager = m_rpClass->GetClassManager();
 
                     if (CHKPTR(pClassManager))
@@ -188,7 +188,7 @@ void CftlContainerTableAlter::GenerateBaseClassChangesSqls(QStringList& qstrlQue
                             qstrlQueries.append(AddNewMemberSql(qlMembers, qstrTableName));
                             for (int pos = 0; pos < qlDerivedClasses.count(); ++pos)
                             {
-                                long lId = qlDerivedClasses[pos];
+                               qint64 lId = qlDerivedClasses[pos];
                                 CdmClass* pClass = pClassManager->FindClassById(lId);
 
                                 if (CHKPTR(pClass) && !pClass->IsAbstract())
@@ -204,7 +204,7 @@ void CftlContainerTableAlter::GenerateBaseClassChangesSqls(QStringList& qstrlQue
 
                             for (int pos = 0; pos < qlDerivedClasses.count(); ++pos)
                             {
-                                long lId = qlDerivedClasses[pos];
+                               qint64 lId = qlDerivedClasses[pos];
                                 CdmClass* pClass = pClassManager->FindClassById(lId);
 
                                 if (CHKPTR(pClass) && !pClass->IsAbstract())

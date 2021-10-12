@@ -6,12 +6,12 @@
 class CftlCommandDeleteClass : public CftlAbstractTransactionalCommand
 {
 private:
-    long m_lClassId;
+   qint64 m_lClassId;
 
-    long DropClassTable();
+   qint64 DropClassTable();
     
 public:
-    CftlCommandDeleteClass(long p_lClassId, CftlDataAccess* p_pDataAccess);
+    CftlCommandDeleteClass(qint64 p_lClassId, CftlDataAccess* p_pDataAccess);
     virtual ~CftlCommandDeleteClass();
 
 protected:

@@ -6,7 +6,7 @@
 #include "CdbCommandUpdateObject.h"
 #include "CdbCommandUpdateContainer.h"
 
-CdbCommandUpdateContainer::CdbCommandUpdateContainer(CdmObjectContainer*& p_pContainer, long p_lSessionId, CdbDataAccess* p_pDataAccess)
+CdbCommandUpdateContainer::CdbCommandUpdateContainer(CdmObjectContainer*& p_pContainer,qint64 p_lSessionId, CdbDataAccess* p_pDataAccess)
     : CdbAbstractCommandTransactional(p_pDataAccess),
       m_rpObjectContainer(p_pContainer),
       m_lSessionId(p_lSessionId)
@@ -25,7 +25,7 @@ bool CdbCommandUpdateContainer::CheckValid()
 
 int CdbCommandUpdateContainer::Execute()
 {
-    long lRet = CdmLogging::eDmObjectAccessError;
+   qint64 lRet = CdmLogging::eDmObjectAccessError;
 
     if(m_rpObjectContainer->IsModified() || m_rpObjectContainer->IsNew())
     {
@@ -82,11 +82,11 @@ int CdbCommandUpdateContainer::Execute()
     return lRet;
  }
 
- long CdbCommandUpdateContainer::UpdateObjects(CdmObjectContainer* p_pContainer,
+qint64 CdbCommandUpdateContainer::UpdateObjects(CdmObjectContainer* p_pContainer,
                                        QList<CdmObject*>& p_rqlObjects,
-                                       long p_lSessionId)
+                                      qint64 p_lSessionId)
  {
-    long lRet = CdmLogging::eDmObjectAccessError;
+   qint64 lRet = CdmLogging::eDmObjectAccessError;
     QList<CdmObject*>::iterator qvlIt    = p_rqlObjects.begin();
     QList<CdmObject*>::iterator qvlItEnd = p_rqlObjects.end();
 
@@ -103,7 +103,7 @@ int CdbCommandUpdateContainer::Execute()
 
           }
  #endif //
-          long lObjectId = pCdmObject->GetId();
+         qint64 lObjectId = pCdmObject->GetId();
 
           CdbCommandUpdateObject command(p_lSessionId, pCdmObject, GetDataAccess());
           lRet = command.Run();
@@ -128,11 +128,11 @@ int CdbCommandUpdateContainer::Execute()
     return lRet;
  }
 
- long CdbCommandUpdateContainer::DeleteObjects(CdmObjectContainer* p_pContainer,
+qint64 CdbCommandUpdateContainer::DeleteObjects(CdmObjectContainer* p_pContainer,
                                        QList<CdmObject*>& p_rqlObjects,
-                                       long p_lSessionId)
+                                      qint64 p_lSessionId)
  {
-    long lRet = CdmLogging::eDmObjectAccessError;
+   qint64 lRet = CdmLogging::eDmObjectAccessError;
     QList<CdmObject*>::iterator qvlIt    = p_rqlObjects.begin();
     QList<CdmObject*>::iterator qvlItEnd = p_rqlObjects.end();
 
@@ -149,7 +149,7 @@ int CdbCommandUpdateContainer::Execute()
 
           }
  #endif //
-          long lObjectId = pCdmObject->GetId();
+         qint64 lObjectId = pCdmObject->GetId();
           CdbCommandDeleteObject command(lObjectId, p_lSessionId, GetDataAccess());
           lRet = command.Run();
 
@@ -189,9 +189,9 @@ int CdbCommandUpdateContainer::Execute()
     return lRet;
  }
 
- long CdbCommandUpdateContainer::UpdateRights(CdmObjectContainer*& p_pContainer)
+qint64 CdbCommandUpdateContainer::UpdateRights(CdmObjectContainer*& p_pContainer)
  {
-    long lRet = CdmLogging::eDmObjectAccessError;
+   qint64 lRet = CdmLogging::eDmObjectAccessError;
 
     if(CHKPTR(p_pContainer))
     {

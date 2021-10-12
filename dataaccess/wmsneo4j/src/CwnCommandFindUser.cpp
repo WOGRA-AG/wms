@@ -41,12 +41,12 @@ QString CwnCommandFindUser::getPassw()
     return passw;
 }
 
-void CwnCommandFindUser::setUserId(long userid)
+void CwnCommandFindUser::setUserId(qint64 userid)
 {
     this->userid = userid;
 }
 
-long CwnCommandFindUser::getUserId()
+qint64 CwnCommandFindUser::getUserId()
 {
     return userid;
 }

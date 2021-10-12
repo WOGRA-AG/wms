@@ -6,7 +6,7 @@
 #include "CwmsUtilities.h"
 #include "CdbCommandGetNewObjectId.h"
 
-CdbCommandGetNewObjectId::CdbCommandGetNewObjectId(long p_lContainerId, long p_lSessionId, CdbDataAccess* p_pDataAccess)
+CdbCommandGetNewObjectId::CdbCommandGetNewObjectId(qint64 p_lContainerId,qint64 p_lSessionId, CdbDataAccess* p_pDataAccess)
 : CdbAbstractCommandTransactional(p_pDataAccess),
   m_lContainerId(p_lContainerId),
   m_lSessionId(p_lSessionId)
@@ -25,7 +25,7 @@ bool CdbCommandGetNewObjectId::CheckValid()
 
 int CdbCommandGetNewObjectId::Execute()
 {
-    long lRet = CdmLogging::eDmObjectAccessError;
+   qint64 lRet = CdmLogging::eDmObjectAccessError;
 
     if(CHKPTR(GetDataAccess()))
     {

@@ -13,12 +13,12 @@ class CumUserGroup;
 class CdbCommandFindUserGroup : public CdbAbstractCommand
 {
 private:
-    long m_lGroupId;
+   qint64 m_lGroupId;
     CumUserGroup* m_pGroup;
     QString m_qstrGroupName;
 
 public:
-    CdbCommandFindUserGroup(long p_lGroup, CdbDataAccess* p_pDataAccess);
+    CdbCommandFindUserGroup(qint64 p_lGroup, CdbDataAccess* p_pDataAccess);
     CdbCommandFindUserGroup(QString p_lGroup, CdbDataAccess* p_DataAccess);
     virtual ~CdbCommandFindUserGroup();
     CumUserGroup* GetResult();

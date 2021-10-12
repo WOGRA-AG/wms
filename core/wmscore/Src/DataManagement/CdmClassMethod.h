@@ -41,7 +41,7 @@ class WMSMANAGER_API CdmClassMethodParameter
 public:
     int m_iPos;
     EdmValueType m_eType;
-    long m_lReference;
+   qint64 m_lReference;
 
 private:
     QString m_qstrName;
@@ -92,7 +92,7 @@ public:
     void SetAccess(EdmMemberAccess p_eType);
     void SetReturnType(EdmValueType p_eType);
     void SetParameters(QList<CdmClassMethodParameter> p_qmParameters);
-    void AddParameter(QString p_qstrName, EdmValueType p_eValueType, long p_lClassId = 0);
+    void AddParameter(QString p_qstrName, EdmValueType p_eValueType,qint64 p_lClassId = 0);
     QString GetParametersAsString() const;
     CdmClassMethod( QVariantMap& p_rvHash);
     void SetVariant(QVariantMap& p_rqvHash);

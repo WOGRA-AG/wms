@@ -125,7 +125,7 @@ void CwmsClassDataFiller::FillClass(CdmClass* p_pCdmClass,
 
       pqlviItem->setText(0, p_pCdmClass->GetKeyname());
       pqlviItem->setText(1, p_pCdmClass->GetCaption());
-      pqlviItem->setData(0, Qt::UserRole, (int)p_pCdmClass->GetId());
+      pqlviItem->setData(0, Qt::UserRole, p_pCdmClass->GetId());
       pqlviItem->setData(1, Qt::UserRole, eWmsTreeItemTypeClass);
 
       if (!p_pCdmClass->IsAbstract() && p_bAddObjectContainers)
@@ -172,12 +172,12 @@ void CwmsClassDataFiller::FillMembersAndGroups(CdmClass* p_pCdmClass, QTreeWidge
          }
       }
    
-      QMap<long, CdmMember*> qmMembers;
+      QMap<qint64, CdmMember*> qmMembers;
       p_pCdmClass->GetMemberMap(qmMembers);
 
 
-      QMap<long, CdmMember*>::iterator qmItMember = qmMembers.begin();
-      QMap<long, CdmMember*>::iterator qmItMemberEnd = qmMembers.end();
+      QMap<qint64, CdmMember*>::iterator qmItMember = qmMembers.begin();
+      QMap<qint64, CdmMember*>::iterator qmItMemberEnd = qmMembers.end();
 
       for (; qmItMember != qmItMemberEnd; ++qmItMember)
       {

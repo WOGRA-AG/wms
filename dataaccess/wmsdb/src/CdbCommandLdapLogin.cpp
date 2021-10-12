@@ -41,7 +41,7 @@ CdbCommandLdapLogin::~CdbCommandLdapLogin()
 
 int CdbCommandLdapLogin::Execute()
 {
-    long lRet = CdmLogging::eDmUnknownLoginManagerError;
+   qint64 lRet = CdmLogging::eDmUnknownLoginManagerError;
     CdbCommandLicenceCheck command(m_qstrApplication, m_qstrVersion, GetDataAccess());
 
     if(SUCCESSFULL(command.Run()))
@@ -174,11 +174,11 @@ CumUser* CdbCommandLdapLogin::GetUser()
     return m_pUser;
 }
 
-long CdbCommandLdapLogin::GetNewSession()
+qint64 CdbCommandLdapLogin::GetNewSession()
 {
     CdbCommandGetNewSession commandNewSession(m_qstrApplication, m_pUser->GetId(), m_pUser->GetBaseAuth(), GetDataAccess());
 
-    long lRet = commandNewSession.Run();
+   qint64 lRet = commandNewSession.Run();
 
     if (SUCCESSFULL(lRet))
     {

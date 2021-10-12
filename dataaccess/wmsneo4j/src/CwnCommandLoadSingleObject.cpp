@@ -40,7 +40,7 @@
 
 #include "CwnCommandStdHeader.h"
 
-CwnCommandLoadSingleObject::CwnCommandLoadSingleObject(long p_lContainerId, long p_lObjectId, CwnDataAccess* p_pDataAccess)
+CwnCommandLoadSingleObject::CwnCommandLoadSingleObject(qint64 p_lContainerId,qint64 p_lObjectId, CwnDataAccess* p_pDataAccess)
     : CwnCommandBase(p_pDataAccess),
       m_lContainerId(p_lContainerId),
       m_lObjectId(p_lObjectId),
@@ -48,7 +48,7 @@ CwnCommandLoadSingleObject::CwnCommandLoadSingleObject(long p_lContainerId, long
 {
 }
 
-CwnCommandLoadSingleObject::CwnCommandLoadSingleObject(long p_lContainerId, QString p_qstrKeyname, CwnDataAccess* p_pDataAccess)
+CwnCommandLoadSingleObject::CwnCommandLoadSingleObject(qint64 p_lContainerId, QString p_qstrKeyname, CwnDataAccess* p_pDataAccess)
     : CwnCommandBase(p_pDataAccess),
       m_lContainerId(p_lContainerId),
       m_lObjectId(-1),
@@ -120,16 +120,16 @@ bool CwnCommandLoadSingleObject::interpretAnswerForLoadObjects(const QVariantLis
         ERR("Object must be null");
     }
 
-    long lObjectId       = list->at(15).toInt();
+   qint64 lObjectId       = list->at(15).toInt();
     QString qstrKeyname  = list->at(16).toString();
     QDateTime qdLastChange = list->at(17).toDateTime();
-    //long lCreatorId      = (list->at(6).isNull())?0:list->at(6).toInt();
-    //long lLastModifierId = (list->at(7).isNull())?0:list->at(7).toInt();
+    //qint64 lCreatorId      = (list->at(6).isNull())?0:list->at(6).toInt();
+    //qint64 lLastModifierId = (list->at(7).isNull())?0:list->at(7).toInt();
     QString qstrCaption  = list->at(18).toString();
-    long lClassId        = list->at(21).toInt();
-    long lDataBaseId     = list->at(22).toInt();
+   qint64 lClassId        = list->at(21).toInt();
+   qint64 lDataBaseId     = list->at(22).toInt();
     //QString qstrCache    = list->at(126).toString();
-    long lParent     = (list->at(20).isNull())?0:list->at(20).toInt();
+   qint64 lParent     = (list->at(20).isNull())?0:list->at(20).toInt();
     QString qstrConfig = (list->at(24).isNull())?"":CwnHelper::base64_decode(list->at(24).toString());
 
     m_rpObject = CdmDataAccessHelper::CreateObject(lDataBaseId,
@@ -157,12 +157,12 @@ bool CwnCommandLoadSingleObject::interpretAnswerForBools(const QVariantList* lis
 {
     bool bRet=true;
 
-    long      lId                = list->at(0).toInt();
+   qint64      lId                = list->at(0).toInt();
     bool      bValue             = list->at(2).toBool();
-    long      lMemberId          = list->at(12).toInt();
+   qint64      lMemberId          = list->at(12).toInt();
     QDateTime qdtLastChange      = list->at(3).toDateTime();
-    long      lCreatorId         = (list->at(6).isNull())?0:list->at(6).toInt();
-    long      lModifierId        = (list->at(7).isNull())?0:list->at(7).toInt();
+   qint64      lCreatorId         = (list->at(6).isNull())?0:list->at(6).toInt();
+   qint64      lModifierId        = (list->at(7).isNull())?0:list->at(7).toInt();
     QString   qstrKeyname        = list->at(13).toString();
     QString   qstrCaption        = list->at(18).toString();
 
@@ -186,13 +186,13 @@ bool CwnCommandLoadSingleObject::interpretAnswerForBinDoc(const QVariantList* li
 {
     bool bRet=true;
 
-    long      lId                = list->at(0).toInt();
+   qint64      lId                = list->at(0).toInt();
     QString   qstrType           = list->at(4).toString();
     QString   qstrFilename       = list->at(5).toString();
-    long      lMemberId          = list->at(12).toInt();
+   qint64      lMemberId          = list->at(12).toInt();
     QDateTime qdtLastChange      = list->at(3).toDateTime();
-    long      lCreatorId         = (list->at(6).isNull())?0:list->at(6).toInt();
-    long      lModifierId        = (list->at(7).isNull())?0:list->at(7).toInt();
+   qint64      lCreatorId         = (list->at(6).isNull())?0:list->at(6).toInt();
+   qint64      lModifierId        = (list->at(7).isNull())?0:list->at(7).toInt();
     QString   qstrKeyname        = list->at(13).toString();
     QString   qstrCaption        = list->at(18).toString();
 
@@ -222,12 +222,12 @@ bool CwnCommandLoadSingleObject::interpretAnswerForCharDoc(const QVariantList* l
 {
     bool bRet=true;
 
-    long      lId                = list->at(0).toInt();
+   qint64      lId                = list->at(0).toInt();
     QString   qstrValue          = CwnHelper::base64_decode(list->at(2).toString());
-    long      lMemberId          = list->at(12).toInt();
+   qint64      lMemberId          = list->at(12).toInt();
     QDateTime qdtLastChange      = list->at(3).toDateTime();
-    long      lCreatorId         = (list->at(6).isNull())?0:list->at(6).toInt();
-    long      lModifierId        = (list->at(7).isNull())?0:list->at(7).toInt();
+   qint64      lCreatorId         = (list->at(6).isNull())?0:list->at(6).toInt();
+   qint64      lModifierId        = (list->at(7).isNull())?0:list->at(7).toInt();
     QString   qstrKeyname        = list->at(13).toString();
     QString   qstrCaption        = list->at(18).toString();
 
@@ -259,12 +259,12 @@ bool CwnCommandLoadSingleObject::interpretAnswerForCounters(const QVariantList* 
 {
     bool bRet=true;
 
-    long      lId                = list->at(0).toInt();
-    long      lValue             = list->at(2).toInt();
-    long      lMemberId          = list->at(12).toInt();
+   qint64      lId                = list->at(0).toInt();
+   qint64      lValue             = list->at(2).toInt();
+   qint64      lMemberId          = list->at(12).toInt();
     QDateTime qdtLastChange      = list->at(3).toDateTime();
-    long      lCreatorId         = (list->at(6).isNull())?0:list->at(6).toInt();
-    long      lModifierId        = (list->at(7).isNull())?0:list->at(7).toInt();
+   qint64      lCreatorId         = (list->at(6).isNull())?0:list->at(6).toInt();
+   qint64      lModifierId        = (list->at(7).isNull())?0:list->at(7).toInt();
     QString   qstrKeyname        = list->at(13).toString();
     QString   qstrCaption        = list->at(18).toString();
 
@@ -292,12 +292,12 @@ bool CwnCommandLoadSingleObject::interpretAnswerForDates(const QVariantList* lis
 {
     bool bRet=true;
 
-    long      lId                = list->at(0).toInt();
+   qint64      lId                = list->at(0).toInt();
     QDate     qdValue            = QDate::fromJulianDay(list->at(2).toInt());
-    long      lMemberId          = list->at(12).toInt();
+   qint64      lMemberId          = list->at(12).toInt();
     QDateTime qdtLastChange      = list->at(3).toDateTime();
-    long      lCreatorId         = (list->at(6).isNull())?0:list->at(6).toInt();
-    long      lModifierId        = (list->at(7).isNull())?0:list->at(7).toInt();
+   qint64      lCreatorId         = (list->at(6).isNull())?0:list->at(6).toInt();
+   qint64      lModifierId        = (list->at(7).isNull())?0:list->at(7).toInt();
     QString   qstrKeyname        = list->at(13).toString();
     QString   qstrCaption        = list->at(18).toString();
 
@@ -324,17 +324,17 @@ bool CwnCommandLoadSingleObject::interpretAnswerForDateTimes(const QVariantList*
 {
     bool bRet=true;
 
-    long      lId                = list->at(0).toInt();
+   qint64      lId                = list->at(0).toInt();
     QDateTime qdtValue           = QDateTime::fromTime_t(static_cast<time_t>(list->at(2).toInt()));
 
     if (qdtValue.date() >= QDate(2037,12,31))
     {
         qdtValue = QDateTime();
     }
-    long      lMemberId          = list->at(12).toInt();
+   qint64      lMemberId          = list->at(12).toInt();
     QDateTime qdtLastChange      = list->at(3).toDateTime();
-    long      lCreatorId         = (list->at(6).isNull())?0:list->at(6).toInt();
-    long      lModifierId        = (list->at(7).isNull())?0:list->at(7).toInt();
+   qint64      lCreatorId         = (list->at(6).isNull())?0:list->at(6).toInt();
+   qint64      lModifierId        = (list->at(7).isNull())?0:list->at(7).toInt();
     QString   qstrKeyname        = list->at(13).toString();
     QString   qstrCaption        = list->at(18).toString();
 
@@ -358,13 +358,13 @@ bool CwnCommandLoadSingleObject::interpretAnswerForTimes(const QVariantList* lis
 {
     bool bRet=true;
 
-    long      lId                = list->at(0).toInt();
+   qint64      lId                = list->at(0).toInt();
     QTime n(0,0);
     QTime     qtValue            = n.addSecs(list->at(2).toInt());
-    long      lMemberId          = list->at(12).toInt();
+   qint64      lMemberId          = list->at(12).toInt();
     QDateTime qdtLastChange      = list->at(3).toDateTime();
-    long      lCreatorId         = (list->at(6).isNull())?0:list->at(6).toInt();
-    long      lModifierId        = (list->at(7).isNull())?0:list->at(7).toInt();
+   qint64      lCreatorId         = (list->at(6).isNull())?0:list->at(6).toInt();
+   qint64      lModifierId        = (list->at(7).isNull())?0:list->at(7).toInt();
     QString   qstrKeyname        = list->at(13).toString();
     QString   qstrCaption        = list->at(18).toString();
 
@@ -388,12 +388,12 @@ bool CwnCommandLoadSingleObject::interpretAnswerForDoubles(const QVariantList* l
 {
     bool bRet=true;
 
-    long      lId                = list->at(0).toInt();
+   qint64      lId                = list->at(0).toInt();
     double    dValue             = list->at(2).toDouble();
-    long      lMemberId          = list->at(12).toInt();
+   qint64      lMemberId          = list->at(12).toInt();
     QDateTime qdtLastChange      = list->at(3).toDateTime();
-    long      lCreatorId         = (list->at(6).isNull())?0:list->at(6).toInt();
-    long      lModifierId        = (list->at(7).isNull())?0:list->at(7).toInt();
+   qint64      lCreatorId         = (list->at(6).isNull())?0:list->at(6).toInt();
+   qint64      lModifierId        = (list->at(7).isNull())?0:list->at(7).toInt();
     QString   qstrKeyname        = list->at(13).toString();
     QString   qstrCaption        = list->at(18).toString();
 
@@ -419,12 +419,12 @@ bool CwnCommandLoadSingleObject::interpretAnswerForFloats(const QVariantList *li
 {
     bool bRet=true;
 
-    long      lId                = list->at(0).toInt();
+   qint64      lId                = list->at(0).toInt();
     float     fValue             = list->at(2).toFloat();
-    long      lMemberId          = list->at(12).toInt();
+   qint64      lMemberId          = list->at(12).toInt();
     QDateTime qdtLastChange      = list->at(3).toDateTime();
-    long      lCreatorId         = (list->at(6).isNull())?0:list->at(6).toInt();
-    long      lModifierId        = (list->at(7).isNull())?0:list->at(7).toInt();
+   qint64      lCreatorId         = (list->at(6).isNull())?0:list->at(6).toInt();
+   qint64      lModifierId        = (list->at(7).isNull())?0:list->at(7).toInt();
     QString   qstrKeyname        = list->at(13).toString();
     QString   qstrCaption        = list->at(18).toString();
 
@@ -453,12 +453,12 @@ bool CwnCommandLoadSingleObject::interpretAnswerForInts(const QVariantList *list
 {
     bool bRet=true;
 
-    long      lId                = list->at(0).toInt();
+   qint64      lId                = list->at(0).toInt();
     int       iValue             = 0;
-    long      lMemberId          = list->at(12).toInt();
+   qint64      lMemberId          = list->at(12).toInt();
     QDateTime qdtLastChange      = list->at(3).toDateTime();
-    long      lCreatorId         = (list->at(6).isNull())?0:list->at(6).toInt();
-    long      lModifierId        = (list->at(7).isNull())?0:list->at(7).toInt();
+   qint64      lCreatorId         = (list->at(6).isNull())?0:list->at(6).toInt();
+   qint64      lModifierId        = (list->at(7).isNull())?0:list->at(7).toInt();
     QString   qstrKeyname        = list->at(13).toString();
     QString   qstrCaption        = list->at(18).toString();
 
@@ -505,12 +505,12 @@ bool CwnCommandLoadSingleObject::interpretAnswerForLongs(const QVariantList *lis
 {
     bool bRet=true;
 
-    long      lId                = list->at(0).toInt();
-    long      lValue             = list->at(2).toInt();
-    long      lMemberId          = list->at(12).toInt();
+   qint64      lId                = list->at(0).toInt();
+   qint64      lValue             = list->at(2).toInt();
+   qint64      lMemberId          = list->at(12).toInt();
     QDateTime qdtLastChange      = list->at(3).toDateTime();
-    long      lCreatorId         = (list->at(6).isNull())?0:list->at(6).toInt();
-    long      lModifierId        = (list->at(7).isNull())?0:list->at(7).toInt();
+   qint64      lCreatorId         = (list->at(6).isNull())?0:list->at(6).toInt();
+   qint64      lModifierId        = (list->at(7).isNull())?0:list->at(7).toInt();
     QString   qstrKeyname        = list->at(13).toString();
     QString   qstrCaption        = list->at(18).toString();
 
@@ -537,13 +537,13 @@ bool CwnCommandLoadSingleObject::interpretAnswerForObjectRefs(const QVariantList
 {
     bool bRet=true;
 
-    long      lId                = list->at(0).toInt();
-    long      lValue             = list->at(9).toInt();
-    long      lObjectListId      = list->at(10).toInt();
-    long      lMemberId          = list->at(12).toInt();
+   qint64      lId                = list->at(0).toInt();
+   qint64      lValue             = list->at(9).toInt();
+   qint64      lObjectListId      = list->at(10).toInt();
+   qint64      lMemberId          = list->at(12).toInt();
     QDateTime qdtLastChange      = list->at(3).toDateTime();
-    long      lCreatorId         = (list->at(6).isNull())?0:list->at(6).toInt();
-    long      lModifierId        = (list->at(7).isNull())?0:list->at(7).toInt();
+   qint64      lCreatorId         = (list->at(6).isNull())?0:list->at(6).toInt();
+   qint64      lModifierId        = (list->at(7).isNull())?0:list->at(7).toInt();
     QString   qstrKeyname        = list->at(13).toString();
     QString   qstrCaption        = list->at(18).toString();
     // TODO Read Object and COntainer Keynames
@@ -572,12 +572,12 @@ bool CwnCommandLoadSingleObject::interpretAnswerForObjectListRefs(const QVariant
 {
     bool bRet=true;
 
-    long      lId                = list->at(0).toInt();
-    long      lValue             = list->at(11).toInt();
-    long      lMemberId          = list->at(12).toInt();
+   qint64      lId                = list->at(0).toInt();
+   qint64      lValue             = list->at(11).toInt();
+   qint64      lMemberId          = list->at(12).toInt();
     QDateTime qdtLastChange      = list->at(3).toDateTime();
-    long      lCreatorId         = (list->at(6).isNull())?0:list->at(6).toInt();
-    long      lModifierId        = (list->at(7).isNull())?0:list->at(7).toInt();
+   qint64      lCreatorId         = (list->at(6).isNull())?0:list->at(6).toInt();
+   qint64      lModifierId        = (list->at(7).isNull())?0:list->at(7).toInt();
     QString   qstrKeyname        = list->at(13).toString();
     QString   qstrCaption        = list->at(18).toString();
 
@@ -604,12 +604,12 @@ bool CwnCommandLoadSingleObject::interpretAnswerForStrings(const QVariantList *l
 {
     bool bRet=true;
 
-    long      lId                = list->at(0).toInt();
+   qint64      lId                = list->at(0).toInt();
     QString   qstrValue          = list->at(2).toString();
-    long      lMemberId          = list->at(12).toInt();
+   qint64      lMemberId          = list->at(12).toInt();
     QDateTime qdtLastChange      = list->at(3).toDateTime();
-    long      lCreatorId         = (list->at(6).isNull())?0:list->at(6).toInt();
-    long      lModifierId        = (list->at(7).isNull())?0:list->at(7).toInt();
+   qint64      lCreatorId         = (list->at(6).isNull())?0:list->at(6).toInt();
+   qint64      lModifierId        = (list->at(7).isNull())?0:list->at(7).toInt();
     QString   qstrKeyname        = list->at(13).toString();
     QString   qstrCaption        = list->at(18).toString();
 
@@ -791,7 +791,7 @@ void CwnCommandLoadSingleObject::interpretAnswer(QVariant &Ret)
 
 int CwnCommandLoadSingleObject::Execute()
 {
-    long lRet = CdmLogging::eDmObjectAccessError;
+   qint64 lRet = CdmLogging::eDmObjectAccessError;
     QString qstrQuery;
 
     qstrQuery = GetLoadAllObjectQuery();
@@ -808,8 +808,8 @@ int CwnCommandLoadSingleObject::Execute()
 }
 
 CdmValueCharacterDocument* CwnCommandLoadSingleObject::CreateCharDocValue(
-        long p_lDatabaseId,
-        long p_lId,
+       qint64 p_lDatabaseId,
+       qint64 p_lId,
         QString p_qstrKeyname)
 {
     CdmValueCharacterDocument* pDocument = nullptr;

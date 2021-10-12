@@ -7,11 +7,11 @@ class CwnCommandCheckMethodLocked : public CwnCommandBase
 {
 
 private:
-    long m_lMethodId;
-    long m_lSessionId;
+   qint64 m_lMethodId;
+   qint64 m_lSessionId;
 
 public:
-    CwnCommandCheckMethodLocked(long p_lMethodId, long p_lSessionId, CwnDataAccess* p_pDataAccess);
+    CwnCommandCheckMethodLocked(qint64 p_lMethodId,qint64 p_lSessionId, CwnDataAccess* p_pDataAccess);
     virtual ~CwnCommandCheckMethodLocked();
 
     QString createQuery();

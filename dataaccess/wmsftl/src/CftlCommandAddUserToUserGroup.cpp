@@ -1,6 +1,6 @@
 #include "CftlCommandAddUserToUserGroup.h"
 
-CftlCommandAddUserToUserGroup::CftlCommandAddUserToUserGroup(long p_lUser, long p_lGroup, CftlDataAccess* p_pDataAccess)
+CftlCommandAddUserToUserGroup::CftlCommandAddUserToUserGroup(qint64 p_lUser,qint64 p_lGroup, CftlDataAccess* p_pDataAccess)
 : CftlAbstractTransactionalCommand(p_pDataAccess),
   m_lGroupId(p_lGroup),
   m_lUserId(p_lUser)
@@ -14,12 +14,12 @@ CftlCommandAddUserToUserGroup::~CftlCommandAddUserToUserGroup()
 
 int CftlCommandAddUserToUserGroup::Execute()
 {
-    long lRet = CdmLogging::eDmUnknownUserQueryError;
+   qint64 lRet = CdmLogging::eDmUnknownUserQueryError;
 
     QSqlQuery cQSqlQuery(GetSqlDatabase());
     cQSqlQuery.prepare("insert into WMS_UM_GROUPMEMBER (GroupId, UserId) values (?, ?)");
-    cQSqlQuery.addBindValue((int)m_lGroupId);
-    cQSqlQuery.addBindValue((int)m_lUserId);
+    cQSqlQuery.addBindValue(m_lGroupId);
+    cQSqlQuery.addBindValue(m_lUserId);
 
     if(SUCCESSFULL(ExecuteQuery(cQSqlQuery)))
     {

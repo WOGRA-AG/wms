@@ -93,7 +93,7 @@ void CwmsGenerateDatabaseCode::GenerateDatabaseCode(QString p_qstrDirectory)
 
          if (CHKPTR(pCdmClass))
          {
-            QMap<long, long> qmBaseClasses = pCdmClass->GetBaseClasses();
+            QMap<qint64,qint64> qmBaseClasses = pCdmClass->GetBaseClasses();
             
             if (AreAllBaseClassesGenerated(qmBaseClasses.keys()))
             {
@@ -114,10 +114,10 @@ void CwmsGenerateDatabaseCode::GenerateDatabaseCode(QString p_qstrDirectory)
 /** +-=---------------------------------------------------------Do 10. Nov 19:17:36 2011----------*
  * @method  CwmsGenerateDatabaseCode::AreAllBaseClassesGenerated // private                       *
  * @return  bool                                             //                                   *
- * @param   QList<long> p_qllBaseClasses                     //                                   *
+ * @param   QList<qint64> p_qllBaseClasses                     //                                   *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------Do 10. Nov 19:17:36 2011----------*/
-bool CwmsGenerateDatabaseCode::AreAllBaseClassesGenerated(QList<long> p_qllBaseClasses)
+bool CwmsGenerateDatabaseCode::AreAllBaseClassesGenerated(QList<qint64> p_qllBaseClasses)
 {
    bool bRet = true;
 
@@ -168,9 +168,9 @@ void CwmsGenerateDatabaseCode::GenerateClassCode(CdmClass* p_pCdmClass)
 void CwmsGenerateDatabaseCode::AddBaseClassData(CdmClass* p_pCdmClass,
                                                 CwmsCodeGeneratorC& p_rCwmsGenerator)
 {
-   QMap<long, long> qmBaseClasses = p_pCdmClass->GetBaseClasses();
-   QMap<long, long>::iterator qmIt = qmBaseClasses.begin();
-   QMap<long, long>::iterator qmItEnd = qmBaseClasses.end();
+   QMap<qint64,qint64> qmBaseClasses = p_pCdmClass->GetBaseClasses();
+   QMap<qint64,qint64>::iterator qmIt = qmBaseClasses.begin();
+   QMap<qint64,qint64>::iterator qmItEnd = qmBaseClasses.end();
 
    for (; qmIt != qmItEnd; ++qmIt)
    {
@@ -196,7 +196,7 @@ void CwmsGenerateDatabaseCode::GenerateNotCreatedClasses()
 
       if (CHKPTR(pCdmClass))
       {
-         QMap<long, long> qmBaseClasses = pCdmClass->GetBaseClasses();
+         QMap<qint64,qint64> qmBaseClasses = pCdmClass->GetBaseClasses();
 
          if (AreAllBaseClassesGenerated(qmBaseClasses.keys()))
          {

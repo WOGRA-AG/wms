@@ -5,7 +5,7 @@
 #include "CftlCommandFindUserGroup.h"
 #include "CftlCommandGetGroupsOfUser.h"
 
-CftlCommandGetGroupsOfUser::CftlCommandGetGroupsOfUser(long p_lUser, CftlDataAccess* p_pDataAccess)
+CftlCommandGetGroupsOfUser::CftlCommandGetGroupsOfUser(qint64 p_lUser, CftlDataAccess* p_pDataAccess)
     : CftlAbstractCommand(p_pDataAccess),
       m_lUserId(p_lUser)
 {
@@ -24,10 +24,10 @@ QList<CumUserGroup *> CftlCommandGetGroupsOfUser::GetResult()
 
 int CftlCommandGetGroupsOfUser::Execute()
 {
-    long lRet = CdmLogging::eDmUnknownUserQueryError;
+   qint64 lRet = CdmLogging::eDmUnknownUserQueryError;
     QSqlQuery cQSqlQuery(GetSqlDatabase());
     cQSqlQuery.prepare("select GroupId from WMS_UM_GROUPMEMBER where UserId = ?");
-    cQSqlQuery.addBindValue((int)m_lUserId);
+    cQSqlQuery.addBindValue(m_lUserId);
 
     if(SUCCESSFULL(ExecuteQuery(cQSqlQuery)))
     {
@@ -38,7 +38,7 @@ int CftlCommandGetGroupsOfUser::Execute()
 
          do // loading each bool
          {
-            long lGroupId = cQSqlQuery.value(0).toInt();
+           qint64 lGroupId = cQSqlQuery.value(0).toInt();
 
             CftlCommandFindUserGroup command(lGroupId, GetDataAccess());
             if (SUCCESSFULL(command.Run()))

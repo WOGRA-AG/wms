@@ -12,7 +12,7 @@ class WMSCOMMONS_API CwmsUtilities
 public:
     static bool isNumberValid(double dNumber);
     static bool isNumberValid(float dNumber);
-    static bool isNumberValid(long lNumber);
+    static bool isNumberValid(qint64 lNumber);
     static bool isNumberValid(int iNumber);
     static bool IsNumber(QString& p_qstrValue);
     static QString EncryptPassword(QString p_qstrPassword);
@@ -38,6 +38,7 @@ public:
     static QString GetInvalidDateStringOld();
     static bool CreateArchive(QString p_rArchiveFileName, QString p_qstrOutPath, QStringList p_qstrlFileNamesForArchive);
     static QString TeaserText(const QString &p_rqstrText, int p_iLength, const QString &p_rqstrTruncateHint);
+    static bool IsFileWritable(QString qstrFilename);
 };
 
 #endif // CWMSUTILITIES_H

@@ -15,7 +15,7 @@ private:
     CdmObject* m_rpObject;
     QString m_qstrFields;
     QString m_qstrFieldPlaceholders;
-    long m_lObjectId;
+   qint64 m_lObjectId;
     QVariantMap m_qvmFieldValues;
     void BuildFieldValuesForInsert(const CdmClass* p_pClass, CftlInterface *p_pInterface);
     void AddObjectProperties(QString p_qstrFieldName, QVariant p_qvValue);
@@ -23,9 +23,9 @@ private:
 public:
     CftlContainerTableInsert(CdmObject* p_Object, CftlDialect* p_ppDialect);
     virtual ~CftlContainerTableInsert();
-    virtual long Execute(CftlInterface* p_pInterface);
+    virtual qint64 Execute(CftlInterface* p_pInterface);
 
-    long GetCreatedObjectId();
+   qint64 GetCreatedObjectId();
 protected:
     virtual QStringList GenerateSqls();
     virtual bool IsValid();

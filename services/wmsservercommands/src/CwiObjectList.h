@@ -106,108 +106,108 @@ class WMSINTERFACE_API CwiObjectContainer : public CwmscomResourceBase
    /** +-=---------------------------------------------------------Mi 18. Apr 11:04:58 2012-------*
     * @method  CwiObjectContainer::GetEmptyObjectList          // public                            *
     * @return  CdmObjectContainer*                                //                                   *
-    * @param   long p_lDatabaseId                            //                                   *
-    * @param   long p_lObjectListId                          //                                   *
+    * @param  qint64 p_lDatabaseId                            //                                   *
+    * @param  qint64 p_lObjectListId                          //                                   *
     * @comment                                                                                    *
     *----------------last changed: -----------------------------Mi 18. Apr 11:04:58 2012----------*/
-    CdmObjectContainer* GetEmptyObjectList(long p_lDatabaseId, long p_lObjectListId);
+    CdmObjectContainer* GetEmptyObjectList(qint64 p_lDatabaseId,qint64 p_lObjectListId);
 
    private:
    /** +-=---------------------------------------------------------Mi 18. Apr 10:53:25 2012-------*
     * @method  CwiObjectContainer::Refresh                     // private                           *
     * @return  void                                          //                                   *
     * @param   CwmscomData* p_pData                          //                                   *
-    * @param   long p_lDbId                                  //                                   *
-    * @param   long p_ObjectListId                           //                                   *
+    * @param  qint64 p_lDbId                                  //                                   *
+    * @param  qint64 p_ObjectListId                           //                                   *
     * @comment                                                                                    *
     *----------------last changed: -----------------------------Mi 18. Apr 10:53:25 2012----------*/
-    void Refresh(CwmscomData* p_pData, long p_lDbId, long p_ObjectListId);
+    void Refresh(CwmscomData* p_pData,qint64 p_lDbId,qint64 p_ObjectListId);
 
    private:
    /** +-=---------------------------------------------------------Mi 18. Apr 10:53:39 2012-------*
     * @method  CwiObjectContainer::Count                       // private                           *
     * @return  void                                          //                                   *
     * @param   CwmscomData* p_pData                          //                                   *
-    * @param   long p_lDbId                                  //                                   *
-    * @param   long p_ObjectListId                           //                                   *
+    * @param  qint64 p_lDbId                                  //                                   *
+    * @param  qint64 p_ObjectListId                           //                                   *
     * @comment                                                                                    *
     *----------------last changed: -----------------------------Mi 18. Apr 10:53:39 2012----------*/
-    void Count(CwmscomData* p_pData, long p_lDbId, long p_ObjectListId);
+    void Count(CwmscomData* p_pData,qint64 p_lDbId,qint64 p_ObjectListId);
 
    private:
    /** +-=---------------------------------------------------------Mi 18. Apr 10:54:08 2012-------*
     * @method  CwiObjectContainer::GetEmptyList                // private                           *
     * @return  void                                          //                                   *
     * @param   CwmscomData* p_pData                          //                                   *
-    * @param   long p_lDbId                                  //                                   *
-    * @param   long p_ObjectListId                           //                                   *
+    * @param  qint64 p_lDbId                                  //                                   *
+    * @param  qint64 p_ObjectListId                           //                                   *
     * @comment                                                                                    *
     *----------------last changed: -----------------------------Mi 18. Apr 10:54:08 2012----------*/
-    void GetEmptyList(CwmscomData* p_pData, long p_lDbId, long p_ObjectListId);
+    void GetEmptyList(CwmscomData* p_pData,qint64 p_lDbId,qint64 p_ObjectListId);
 
    private:
    /** +-=---------------------------------------------------------Mi 18. Apr 10:54:23 2012-------*
     * @method  CwiObjectContainer::GetCompleteList             // private                           *
     * @return  void                                          //                                   *
     * @param   CwmscomData* p_pData                          //                                   *
-    * @param   long p_lDbId                                  //                                   *
-    * @param   long p_ObjectListId                           //                                   *
+    * @param  qint64 p_lDbId                                  //                                   *
+    * @param  qint64 p_ObjectListId                           //                                   *
     * @comment                                                                                    *
     *----------------last changed: -----------------------------Mi 18. Apr 10:54:23 2012----------*/
-    void GetCompleteList(CwmscomData* p_pData, long p_lDbId, long p_ObjectListId);
+    void GetCompleteList(CwmscomData* p_pData,qint64 p_lDbId,qint64 p_ObjectListId);
 
    public:
    /** +-=---------------------------------------------------------Mi 18. Apr 15:18:11 2012-------*
     * @method  CwiObjectContainer::GetObjectListInternal       // public                            *
     * @return  CdmObjectContainer*                                //                                   *
-    * @param   long p_lDatabaseId                            //                                   *
+    * @param  qint64 p_lDatabaseId                            //                                   *
     * @param   QVariant qValue                               //                                   *
     * @param   bool p_bEmpty                                 //                                   *
     * @comment                                                                                    *
     *----------------last changed: -----------------------------Mi 18. Apr 15:18:11 2012----------*/
-    CdmObjectContainer* GetObjectListInternal(long p_lDatabaseId, QVariant qValue, bool p_bEmpty);
+    CdmObjectContainer* GetObjectListInternal(qint64 p_lDatabaseId, QVariant qValue, bool p_bEmpty);
 
    public:
    /** +-=---------------------------------------------------------Mi 18. Apr 13:23:28 2012-------*
     * @method  CwiObjectContainer::GetCompleteObjectList       // public                            *
     * @return  CdmObjectContainer*                                //                                   *
-    * @param   long p_lDatabaseId                            //                                   *
+    * @param  qint64 p_lDatabaseId                            //                                   *
     * @param   QString p_qstrKeyname                         //                                   *
     * @comment                                                                                    *
     *----------------last changed: -----------------------------Mi 18. Apr 13:23:28 2012----------*/
-    CdmObjectContainer* GetCompleteObjectList(long p_lDatabaseId, QString p_qstrKeyname);
+    CdmObjectContainer* GetCompleteObjectList(qint64 p_lDatabaseId, QString p_qstrKeyname);
 
    public:
    /** +-=---------------------------------------------------------Mi 18. Apr 13:24:07 2012-------*
     * @method  CwiObjectContainer::GetEmptyObjectList          // public                            *
     * @return  CdmObjectContainer*                                //                                   *
-    * @param   long p_lDatabaseId                            //                                   *
+    * @param  qint64 p_lDatabaseId                            //                                   *
     * @param   QString p_qstrKeyname                         //                                   *
     * @comment                                                                                    *
     *----------------last changed: -----------------------------Mi 18. Apr 13:24:07 2012----------*/
-    CdmObjectContainer* GetEmptyObjectList(long p_lDatabaseId, QString p_qstrKeyname);
+    CdmObjectContainer* GetEmptyObjectList(qint64 p_lDatabaseId, QString p_qstrKeyname);
 
    private:
    /** +-=---------------------------------------------------------Mi 18. Apr 13:42:48 2012-------*
     * @method  CwiObjectContainer::GetCompleteList             // private                           *
     * @return  void                                          //                                   *
     * @param   CwmscomData* p_pData                          //                                   *
-    * @param   long p_lDbId                                  //                                   *
+    * @param  qint64 p_lDbId                                  //                                   *
     * @param   QString p_qstrKeyname                         //                                   *
     * @comment                                                                                    *
     *----------------last changed: -----------------------------Mi 18. Apr 13:42:48 2012----------*/
-    void GetCompleteList(CwmscomData* p_pData, long p_lDbId, QString p_qstrKeyname);
+    void GetCompleteList(CwmscomData* p_pData,qint64 p_lDbId, QString p_qstrKeyname);
 
    private:
    /** +-=---------------------------------------------------------Mi 18. Apr 13:43:04 2012-------*
     * @method  CwiObjectContainer::GetEmptyList                // private                           *
     * @return  void                                          //                                   *
     * @param   CwmscomData* p_pData                          //                                   *
-    * @param   long p_lDbId                                  //                                   *
+    * @param  qint64 p_lDbId                                  //                                   *
     * @param   QString p_qstrKeyname                         //                                   *
     * @comment                                                                                    *
     *----------------last changed: -----------------------------Mi 18. Apr 13:43:04 2012----------*/
-    void GetEmptyList(CwmscomData* p_pData, long p_lDbId, QString p_qstrKeyname);
+    void GetEmptyList(CwmscomData* p_pData,qint64 p_lDbId, QString p_qstrKeyname);
 
    public:
    /** +-=---------------------------------------------------------Mi 18. Apr 15:29:10 2012-------*
@@ -222,11 +222,11 @@ class WMSINTERFACE_API CwiObjectContainer : public CwmscomResourceBase
    /** +-=---------------------------------------------------------Mi 18. Apr 18:22:21 2012-------*
     * @method  CwiObjectContainer::GetCompleteObjectList       // public                            *
     * @return  CdmObjectContainer*                                //                                   *
-    * @param   long p_lDatabaseId                            //                                   *
-    * @param   long p_lObjectListId                          //                                   *
+    * @param  qint64 p_lDatabaseId                            //                                   *
+    * @param  qint64 p_lObjectListId                          //                                   *
     * @comment                                                                                    *
     *----------------last changed: -----------------------------Mi 18. Apr 18:22:21 2012----------*/
-    CdmObjectContainer* GetCompleteObjectList(long p_lDatabaseId, long p_lObjectListId);
+    CdmObjectContainer* GetCompleteObjectList(qint64 p_lDatabaseId,qint64 p_lObjectListId);
 
    private:
    /** +-=---------------------------------------------------------Mi 18. Apr 19:08:42 2012-------*
@@ -250,10 +250,10 @@ class WMSINTERFACE_API CwiObjectContainer : public CwmscomResourceBase
    /** +-=---------------------------------------------------------Di 1. Mai 11:31:59 2012--------*
     * @method  CwiObjectContainer::GetEmptyObjectList          // public                            *
     * @return  CdmObjectContainer*                                //                                   *
-    * @param   long p_lObjectListId                          //                                   *
+    * @param  qint64 p_lObjectListId                          //                                   *
     * @comment                                                                                    *
     *----------------last changed: -----------------------------Di 1. Mai 11:31:59 2012-----------*/
-    CdmObjectContainer* GetEmptyObjectList(long p_lObjectListId);
+    CdmObjectContainer* GetEmptyObjectList(qint64 p_lObjectListId);
 
    private:
    /** +-=---------------------------------------------------------Do 14. Mrz 14:15:45 2013-------*
@@ -282,7 +282,7 @@ class WMSINTERFACE_API CwiObjectContainer : public CwmscomResourceBase
     QString getVersion();
 
     private:
-    void GetContainerList(CwmscomData* p_pData, long p_lDbId);
+    void GetContainerList(CwmscomData* p_pData,qint64 p_lDbId);
     void saveEvent(CdmObjectContainer *pContainer);
     void subcribeSubscribersForEventSourcing(CdmClassManager *pClassManager, IdmEventStoreManager *pEventStoreManager);
 };

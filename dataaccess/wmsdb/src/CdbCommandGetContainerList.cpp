@@ -6,7 +6,7 @@
 
 #include "CdbCommandGetContainerList.h"
 
-CdbCommandGetContainerList::CdbCommandGetContainerList(long p_lSchemeId, long p_lClassId, CdbDataAccess* p_pDataAccess)
+CdbCommandGetContainerList::CdbCommandGetContainerList(qint64 p_lSchemeId,qint64 p_lClassId, CdbDataAccess* p_pDataAccess)
 : CdbAbstractCommand(p_pDataAccess),
   m_lSchemeId(p_lSchemeId),
   m_lClassId(p_lClassId)
@@ -18,7 +18,7 @@ CdbCommandGetContainerList::~CdbCommandGetContainerList()
 
 }
 
-void CdbCommandGetContainerList::GetResult(QMap<long, QString> &p_rqmContainerList)
+void CdbCommandGetContainerList::GetResult(QMap<qint64, QString> &p_rqmContainerList)
 {
     p_rqmContainerList = m_qmContainer;
 }
@@ -31,7 +31,7 @@ bool CdbCommandGetContainerList::CheckValid()
 
 int CdbCommandGetContainerList::Execute()
 {
-   long lRet = CdmLogging::eDmObjectAccessError;
+  qint64 lRet = CdmLogging::eDmObjectAccessError;
    QSqlQuery cQSqlQuery;
    QString qstrQuery;
 
@@ -59,7 +59,7 @@ int CdbCommandGetContainerList::Execute()
       {
          do
          {
-            long lId = cQSqlQuery.value(0).toInt();
+           qint64 lId = cQSqlQuery.value(0).toInt();
             QString qstrKeyname = cQSqlQuery.value(1).toString();
             m_qmContainer.insert(lId, qstrKeyname);
          }
@@ -84,7 +84,7 @@ int CdbCommandGetContainerList::Execute()
 QString CdbCommandGetContainerList::GetClassListString()
 {
     QString qstrClassList;
-    QList<long> qlClasses = GetClassList();
+    QList<qint64> qlClasses = GetClassList();
 
     if (qlClasses.count() > 0)
     {
@@ -109,9 +109,9 @@ QString CdbCommandGetContainerList::GetClassListString()
     return qstrClassList;
 }
 
-QList<long> CdbCommandGetContainerList::GetClassList()
+QList<qint64> CdbCommandGetContainerList::GetClassList()
 {
-    QList<long> qlClasses;
+    QList<qint64> qlClasses;
     CdmDataProvider* pManager = CdmSessionManager::GetDataProvider();
     if (CHKPTR(pManager))
     {

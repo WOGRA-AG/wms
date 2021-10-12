@@ -52,7 +52,7 @@ private:
 
     QString m_qstrDbName;
     int m_iObjectToCreate;
-    long m_lObjectId;
+   qint64 m_lObjectId;
     QString m_qstrObjectKeyname;
     QDateTime m_qdtDateTime;
 

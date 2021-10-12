@@ -21,7 +21,7 @@ class WMSMANAGER_API CdmValueCounter : public CdmValueLong
     Q_OBJECT
 
 public:
-    CdmValueCounter(  long p_lDatabaseId, long p_lId, QString p_qstrKeyname, CdmObject* p_pCdmObject );
+    CdmValueCounter( qint64 p_lDatabaseId,qint64 p_lId, QString p_qstrKeyname, CdmObject* p_pCdmObject );
     virtual ~CdmValueCounter(  );
     void SetDefaultValue(const CdmMember* p_pCdmMember);
     virtual void SetValue(QString p_qstrValue, QString p_qstrValue2);

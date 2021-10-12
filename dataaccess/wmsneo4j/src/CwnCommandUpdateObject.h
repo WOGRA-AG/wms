@@ -36,7 +36,7 @@ class CwnCommandUpdateObject : public CwnCommandBase
         QString getLabel(EdmValueType p_eBaseType);
 
         QString payload;
-        long m_lSessionId;
+       qint64 m_lSessionId;
         CdmObject* m_rpObject;
 
         QQueue<CdmValue*> editValues;
@@ -44,7 +44,7 @@ class CwnCommandUpdateObject : public CwnCommandBase
         bool counterAdded=false;
         QVector<CdmValueCounter*> counterValueList;
 
-        //long UpdateNewOrModifiedObject();
+        //qint64 UpdateNewOrModifiedObject();
         void InsertOrUpdateValue(CdmValue *p_pValue);
         void InsertValue(CdmValue *p_pValue);
         void UpdateValue(CdmValue *p_pValue);
@@ -76,7 +76,7 @@ class CwnCommandUpdateObject : public CwnCommandBase
         void InsertCounter(CdmValueCounter *p_pCdmCounter);
         void UpdateCounter(CdmValueCounter *p_pCdmCounter, QString &qstrQuery, bool insert);
         void GetCounterValue();
-        long GetCounterValue(long p_lObjectListId, long p_lValueId, QString p_qstrKeyname);
+       qint64 GetCounterValue(qint64 p_lObjectListId,qint64 p_lValueId, QString p_qstrKeyname);
         int MakeCounterValueUnique(int p_iCounter, int p_iTimeStamp, QString p_qstrKeyname, int p_lObjectId, int p_iValueId);
         bool CheckIncreaseCounterNeeded(int p_iCounter, int p_iTimeStamp, QString p_qstrKeyname, int p_lObjectId, int);
         int IncreaseCounterValue(int p_iCounter, int p_iTimeStamp, QString p_qstrKeyname, int p_lObjectId, int p_iValueId);
@@ -91,7 +91,7 @@ class CwnCommandUpdateObject : public CwnCommandBase
 
 
     public:
-        CwnCommandUpdateObject(long p_lSessionId, CdmObject* p_pObject, CwnDataAccess* p_pDataAccess);
+        CwnCommandUpdateObject(qint64 p_lSessionId, CdmObject* p_pObject, CwnDataAccess* p_pDataAccess);
         ~CwnCommandUpdateObject();
         QString queryCausedError;
 

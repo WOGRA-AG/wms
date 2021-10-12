@@ -16,7 +16,7 @@ CftlCommandUpdateUser::~CftlCommandUpdateUser()
 
 int CftlCommandUpdateUser::Execute()
 {
-    long lRet = CdmLogging::eDmUnknownUserQueryError;
+   qint64 lRet = CdmLogging::eDmUnknownUserQueryError;
     QSqlQuery cQSqlQuery(GetSqlDatabase());
 
     if (!m_rpUser->GetPassword().isEmpty())
@@ -34,7 +34,7 @@ int CftlCommandUpdateUser::Execute()
         cQSqlQuery.addBindValue(m_rpUser->IsAdministrator());
         cQSqlQuery.addBindValue(m_rpUser->IsActive());
         cQSqlQuery.addBindValue(m_rpUser->GetEmail());
-        cQSqlQuery.addBindValue((int)m_rpUser->GetId());
+        cQSqlQuery.addBindValue(m_rpUser->GetId());
     }
     else // Don't aks me when this is possible??? I cann't remember WG 8.6.2017
     {
@@ -45,7 +45,7 @@ int CftlCommandUpdateUser::Execute()
         cQSqlQuery.addBindValue(m_rpUser->IsAdministrator());
         cQSqlQuery.addBindValue(m_rpUser->IsActive());
         cQSqlQuery.addBindValue(m_rpUser->GetEmail());
-        cQSqlQuery.addBindValue((int)m_rpUser->GetId());
+        cQSqlQuery.addBindValue(m_rpUser->GetId());
     }
 
     if(SUCCESSFULL(ExecuteQuery(cQSqlQuery)))
@@ -65,7 +65,7 @@ void CftlCommandUpdateUser::UpdateSchemeUri()
 {
     QSqlQuery cQSqlQuery(GetSqlDatabase());
     cQSqlQuery.prepare("delete from WMS_UM_ACCESSOR_SCHEME where accessorId = ?");
-    cQSqlQuery.addBindValue((int)m_rpUser->GetId());
+    cQSqlQuery.addBindValue(m_rpUser->GetId());
 
 
     if (SUCCESSFULL(ExecuteQuery(cQSqlQuery)))
@@ -78,7 +78,7 @@ void CftlCommandUpdateUser::UpdateSchemeUri()
 
             for (int pos = 0; pos < qstrlSchemes.count(); ++pos)
             {
-                qvlUser.append((int)m_rpUser->GetId());
+                qvlUser.append(m_rpUser->GetId());
                 qvlSchemes.append(qstrlSchemes[pos]);
             }
 

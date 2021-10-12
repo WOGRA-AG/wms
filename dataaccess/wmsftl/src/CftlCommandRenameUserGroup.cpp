@@ -1,6 +1,6 @@
 #include "CftlCommandRenameUserGroup.h"
 
-CftlCommandRenameUserGroup::CftlCommandRenameUserGroup(long p_lGroupId, QString p_qstrName, CftlDataAccess* p_pDataAccess)
+CftlCommandRenameUserGroup::CftlCommandRenameUserGroup(qint64 p_lGroupId, QString p_qstrName, CftlDataAccess* p_pDataAccess)
     : CftlAbstractTransactionalCommand(p_pDataAccess),
       m_lGroupId(p_lGroupId),
       m_qstrNewName(p_qstrName)
@@ -15,13 +15,13 @@ CftlCommandRenameUserGroup::~CftlCommandRenameUserGroup()
 
 int CftlCommandRenameUserGroup::Execute()
 {
-    long lRet = CdmLogging::eDmUnknownUserQueryError;
+   qint64 lRet = CdmLogging::eDmUnknownUserQueryError;
     QSqlQuery cQSqlQuery(GetSqlDatabase());
     QString qstrQuery;
 
     cQSqlQuery.prepare("update WMS_UM_GROUP set Name = ? where GroupId = ?");
     cQSqlQuery.addBindValue(m_qstrNewName);
-    cQSqlQuery.addBindValue((int)m_lGroupId);
+    cQSqlQuery.addBindValue(m_lGroupId);
 
     if(SUCCESSFULL(ExecuteQuery(cQSqlQuery)))
     {

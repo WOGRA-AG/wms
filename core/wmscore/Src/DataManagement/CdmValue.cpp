@@ -52,8 +52,8 @@
 #include "CdmValueUserGroup.h"
 #include "CdmValue.h"
 
-CdmValue::CdmValue(long p_lDatabaseId,
-                   long p_lId,
+CdmValue::CdmValue(qint64 p_lDatabaseId,
+                  qint64 p_lId,
                    QString p_qstrKeyname,
                    EdmValueType p_eDmValue,
                    CdmObject* p_pCdmObject )
@@ -316,8 +316,8 @@ CdmValue* CdmValue::CreateDeployValue(QVariantMap& p_rqvHash, CdmObject* p_pCdmO
    CdmValue* pCdmValue = nullptr;
 
    EdmValueType eDmValue  = static_cast<EdmValueType>(p_rqvHash[WMS_VALUETYPE].toInt());
-   long lDatabaseId = p_rqvHash[WMS_DATABASEID].toInt();
-   long lMemberId = p_rqvHash[WMS_MEMBERID].toInt();
+  qint64 lDatabaseId = p_rqvHash[WMS_DATABASEID].toInt();
+  qint64 lMemberId = p_rqvHash[WMS_MEMBERID].toInt();
    QString qstrKeyname = p_rqvHash[WMS_KEYNAME].toString();
 
    switch(eDmValue)
@@ -427,7 +427,7 @@ CdmValue* CdmValue::CreateValue(QVariantMap& p_rqvHash, CdmObject* p_pCdmObject)
 
    if (CHKPTR(pClass))
    {
-      long lMemberId = p_rqvHash[WMS_MEMBERID].toInt();
+     qint64 lMemberId = p_rqvHash[WMS_MEMBERID].toInt();
 
       if (lMemberId > 0)
       {
@@ -601,7 +601,7 @@ CdmValue* CdmValue::CopyValue(const CdmValue* p_pCdmValue, CdmObject* p_pCdmObje
                   {
                     pCdmValue = new CdmValueObjectRef(p_pCdmValue->GetSchemeId(), p_pCdmValue->GetId(), p_pCdmValue->GetKeyname(), p_pCdmObject);
                     pCdmValue->SetMemberId(p_pCdmValue->GetMemberId());
-                    long lObjectListId = pCdmObjectRef->GetObjectListId();
+                   qint64 lObjectListId = pCdmObjectRef->GetObjectListId();
 
                     if (lObjectListId > 0)
                     {
@@ -847,7 +847,7 @@ CdmValue* CdmValue::CopyEventValue(const CdmValue* p_pCdmEventValue, CdmObject *
 
                   if(CHKPTR(pContainerManager))
                   {
-                     long lObjectListId = pCdmObjectRef->GetObjectListId();
+                    qint64 lObjectListId = pCdmObjectRef->GetObjectListId();
 
                      if (lObjectListId > 0)
                      {
@@ -1095,7 +1095,7 @@ CdmValue *CdmValue::CopyObjectValueToEventValue(const CdmValue* p_pCdmEventValue
 
                    if(CHKPTR(pContainerManager))
                    {
-                      long lObjectListId = pCdmObjectRef->GetObjectListId();
+                     qint64 lObjectListId = pCdmObjectRef->GetObjectListId();
 
                       if (lObjectListId > 0)
                       {
@@ -1276,12 +1276,12 @@ CdmValue *CdmValue::CopyObjectValueToEventValue(const CdmValue* p_pCdmEventValue
     return pCdmValue;
 }
 
-void CdmValue::SetMemberId(long p_lId)
+void CdmValue::SetMemberId(qint64 p_lId)
 {
    m_lMemberId = p_lId;
 }
 
-long CdmValue::GetMemberId() const
+qint64 CdmValue::GetMemberId() const
 {
    return m_lMemberId;
 }
@@ -1395,9 +1395,9 @@ EdmValueType CdmValue::GetEvenValueType(const CdmObject *pEventObject) const
     return eValue;
 }
 
-long CdmValue::GetSize() const
+qint64 CdmValue::GetSize() const
 {
-   long lRet = 0;
+  qint64 lRet = 0;
    const CdmMember* pMember = GetMember();
 
    if (CHKPTR(pMember))
@@ -1561,7 +1561,7 @@ QVariant CdmValue::GetVariant() const
    QVariantMap qmVariant;
 
    qmVariant = CdmModelElement::GetVariant().toMap();
-   qmVariant.insert("MemberId", (int)m_lMemberId);
+   qmVariant.insert("MemberId", m_lMemberId);
 
    if (IsInDeploymentMode())
    {

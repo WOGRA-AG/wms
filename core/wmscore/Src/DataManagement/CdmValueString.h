@@ -22,7 +22,7 @@ private:
     QString m_qstrValue;
 
 public:
-    CdmValueString(  long p_lDatabaseId, long p_lId, QString p_qstrKeyname, CdmObject* p_pCdmObject );
+    CdmValueString( qint64 p_lDatabaseId,qint64 p_lId, QString p_qstrKeyname, CdmObject* p_pCdmObject );
     CdmValueString( QVariantMap& p_rqvHash, CdmObject* p_pCdmObject);
     virtual ~CdmValueString(  );
     void SetDefaultValue(  const CdmMember* p_pCdmMember );

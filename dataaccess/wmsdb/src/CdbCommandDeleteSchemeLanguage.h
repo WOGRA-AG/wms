@@ -11,11 +11,11 @@
 class CdbCommandDeleteSchemeLanguage : public CdbAbstractCommandTransactional
 {
 private:
-    long m_lSchemeId;
-    long m_lLanguage;
+   qint64 m_lSchemeId;
+   qint64 m_lLanguage;
 
 public:
-    CdbCommandDeleteSchemeLanguage(long p_lSchemeId, int p_lLanguage, CdbDataAccess* p_pDataAccess);
+    CdbCommandDeleteSchemeLanguage(qint64 p_lSchemeId, int p_lLanguage, CdbDataAccess* p_pDataAccess);
     virtual ~CdbCommandDeleteSchemeLanguage();
 
 protected:

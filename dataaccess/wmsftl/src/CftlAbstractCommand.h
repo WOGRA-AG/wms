@@ -29,13 +29,13 @@ public:
 
 protected:
     bool Validate();
-    long ExecuteQuery(QString p_qstrQuery, QSqlQuery &p_rqsqlQuery);
+   qint64 ExecuteQuery(QString p_qstrQuery, QSqlQuery &p_rqsqlQuery);
     CftlDataAccess *GetDataAccess();
-    long ExecuteQuery(QSqlQuery &p_rqsqlQuery);
+   qint64 ExecuteQuery(QSqlQuery &p_rqsqlQuery);
     CftlDialect* GetDialect();
     CftlInterface* GetInterface();
-    virtual const CdmClass *GetClassFromContainerId(long p_lId);
-    QString GetClassTableNameFromContainerId(long p_lId);
+    virtual const CdmClass *GetClassFromContainerId(qint64 p_lId);
+    QString GetClassTableNameFromContainerId(qint64 p_lId);
     QSqlDatabase GetSqlDatabase();
     QString GetClassTableNameFromObject(const CdmObject *p_pObject);
     QString GetClassTableNameFromContainer(const CdmObjectContainer *p_pContainer);

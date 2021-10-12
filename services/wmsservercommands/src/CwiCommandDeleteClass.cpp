@@ -16,7 +16,7 @@ CwiCommandDeleteClass::~CwiCommandDeleteClass()
 
 void CwiCommandDeleteClass::Execute()
 {
-    long iClassId = m_rpData->GetValue("ClassId").toInt();
+   qint64 iClassId = m_rpData->GetValue("ClassId").toInt();
     CdmDataProvider* pCdmManager = CdmSessionManager::GetDataProvider();
 
     if (pCdmManager)

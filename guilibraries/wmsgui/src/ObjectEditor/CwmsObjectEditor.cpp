@@ -510,10 +510,10 @@ void CwmsObjectEditor::BuildContainerWidget()
 /** +-=---------------------------------------------------------Mo 5. Nov 09:19:48 2012-----------*
  * @method  CwmsObjectEditor::GetClassMembers                // private                           *
  * @return  void                                             //                                   *
- * @param   QMap<long, CdmMember*>& p_rqmMembers             //                                   *
+ * @param   QMap<qint64, CdmMember*>& p_rqmMembers             //                                   *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------Mo 5. Nov 09:19:48 2012-----------*/
-void CwmsObjectEditor::GetClassMembers(QMap<long, CdmMember*>& p_rqmMembers)
+void CwmsObjectEditor::GetClassMembers(QMap<qint64, CdmMember*>& p_rqmMembers)
 {
     CdmObject* pCdmObject = GetObject();
     CdmClass* pCdmClass = pCdmObject->GetClass();
@@ -524,7 +524,7 @@ void CwmsObjectEditor::GetClassMembers(QMap<long, CdmMember*>& p_rqmMembers)
     }
 }
 
-void CwmsObjectEditor::GetClassMembers(QMap<long, CdmMember *> &p_rqmMembers, CdmClass *pClass)
+void CwmsObjectEditor::GetClassMembers(QMap<qint64, CdmMember *> &p_rqmMembers, CdmClass *pClass)
 {
     if (CHKPTR(pClass))
     {
@@ -535,13 +535,13 @@ void CwmsObjectEditor::GetClassMembers(QMap<long, CdmMember *> &p_rqmMembers, Cd
 /** +-=---------------------------------------------------------Mo 5. Nov 09:19:39 2012-----------*
  * @method  CwmsObjectEditor::GetMemberById                  // private                           *
  * @return  CdmMember*                                       //                                   *
- * @param   long p_lId                                       //                                   *
+ * @param  qint64 p_lId                                       //                                   *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------Mo 5. Nov 09:19:39 2012-----------*/
-CdmMember* CwmsObjectEditor::GetMemberById(long p_lId)
+CdmMember* CwmsObjectEditor::GetMemberById(qint64 p_lId)
 {
     CdmMember* pCdmMember = nullptr;
-    QMap<long,CdmMember*> qmMemberMap;
+    QMap<qint64,CdmMember*> qmMemberMap;
     GetClassMembers(qmMemberMap);
 
     if (qmMemberMap.contains(p_lId))
@@ -552,10 +552,10 @@ CdmMember* CwmsObjectEditor::GetMemberById(long p_lId)
     return pCdmMember;
 }
 
-CdmMember *CwmsObjectEditor::GetMemberById(long p_lId, CdmClass *pClass)
+CdmMember *CwmsObjectEditor::GetMemberById(qint64 p_lId, CdmClass *pClass)
 {
     CdmMember *pCdmMember = nullptr;
-    QMap<long, CdmMember*> qmMemberMap;
+    QMap<qint64, CdmMember*> qmMemberMap;
     GetClassMembers(qmMemberMap, pClass);
 
     if (qmMemberMap.contains(p_lId))
@@ -753,9 +753,9 @@ void CwmsObjectEditor::FillMembers()
     QFormLayout* pLayout = nullptr;
     GetParentWidgetAndLayout(nullptr, pParentWidget, pLayout, pqTab);
 
-    QList<long> qvlMembers         = GetSortMemberList();
-    QList<long>::iterator qvlIt    = qvlMembers.begin();
-    QList<long>::iterator qvlItEnd = qvlMembers.end();
+    QList<qint64> qvlMembers         = GetSortMemberList();
+    QList<qint64>::iterator qvlIt    = qvlMembers.begin();
+    QList<qint64>::iterator qvlItEnd = qvlMembers.end();
 
     for (; qvlIt != qvlItEnd; ++qvlIt)
     {
@@ -783,9 +783,9 @@ void CwmsObjectEditor::FillMembers(CdmClass *pEventClass)
     QFormLayout* pLayout = nullptr;
     GetParentWidgetAndEventLayout(nullptr, pParentWidget, pLayout, pqTab, pEventClass);
 
-    QList<long> qvlMembers         = getEventClassMemberList(pEventClass);
-    QList<long>::iterator qvlIt    = qvlMembers.begin();
-    QList<long>::iterator qvlItEnd = qvlMembers.end();
+    QList<qint64> qvlMembers         = getEventClassMemberList(pEventClass);
+    QList<qint64>::iterator qvlIt    = qvlMembers.begin();
+    QList<qint64>::iterator qvlItEnd = qvlMembers.end();
 
     if(!qvlMembers.isEmpty())
     {
@@ -848,11 +848,11 @@ int CwmsObjectEditor::CountAdditionalTabs(CdmClassGroup* p_pCdmGroup)
 int CwmsObjectEditor::CountAditionalTabsforNoneGroupMembers()
 {
     int iRet = 0;
-    QMap<long,CdmMember*> qmMemberMap;
+    QMap<qint64,CdmMember*> qmMemberMap;
     GetClassMembers(qmMemberMap);
 
-    QMap<long,CdmMember*>::iterator qmIt = qmMemberMap.begin();
-    QMap<long,CdmMember*>::iterator qmItEnd = qmMemberMap.end();
+    QMap<qint64,CdmMember*>::iterator qmIt = qmMemberMap.begin();
+    QMap<qint64,CdmMember*>::iterator qmItEnd = qmMemberMap.end();
 
     for (; qmIt != qmItEnd; ++qmIt)
     {
@@ -873,11 +873,11 @@ int CwmsObjectEditor::CountAditionalTabsforNoneGroupMembers()
 int CwmsObjectEditor::CountAditionalTabsforNoneGroupMembers(CdmClass *pEventClass)
 {
     int iRet = 0;
-    QMap<long, CdmMember*> qmMemberMap;
+    QMap<qint64, CdmMember*> qmMemberMap;
     pEventClass->GetMemberMap(qmMemberMap);
 
-    QMap<long,CdmMember*>::iterator qmIt = qmMemberMap.begin();
-    QMap<long,CdmMember*>::iterator qmItEnd = qmMemberMap.end();
+    QMap<qint64,CdmMember*>::iterator qmIt = qmMemberMap.begin();
+    QMap<qint64,CdmMember*>::iterator qmItEnd = qmMemberMap.end();
     for(; qmIt != qmItEnd; ++qmIt)
     {
         CdmMember *pCdmEventMember = qmIt.value();
@@ -1121,11 +1121,11 @@ bool CwmsObjectEditor::HasMembersWithoutGroup()
 
     if (CHKPTR(pCdmClass))
     {
-        QMap<long,CdmMember*> qmMemberMap;
+        QMap<qint64,CdmMember*> qmMemberMap;
         pCdmClass->GetMemberMap(qmMemberMap);
 
-        QMap<long,CdmMember*>::iterator qmIt = qmMemberMap.begin();
-        QMap<long,CdmMember*>::iterator qmItEnd = qmMemberMap.end();
+        QMap<qint64,CdmMember*>::iterator qmIt = qmMemberMap.begin();
+        QMap<qint64,CdmMember*>::iterator qmItEnd = qmMemberMap.end();
 
         for (; qmIt != qmItEnd; ++qmIt)
         {
@@ -1414,12 +1414,12 @@ void CwmsObjectEditor::CaptionChangedSlot(  const QString & p_qstrCaption )
 
 /** +-=---------------------------------------------------------Fr 6. Jan 18:17:58 2006-----------*
  * @method  CwmsObjectEditor::GetSortMemberList               // public                            *
- * @return  QValueList<long>                                 // the list of members               *
+ * @return  QValueList<qint64>                                 // the list of members               *
  * @comment                                                                                       *
  *----------------last changed: Wolfgang GraÃŸhof----------------Fr 6. Jan 18:17:58 2006-----------*/
-QList<long> CwmsObjectEditor::GetSortMemberList(  )
+QList<qint64> CwmsObjectEditor::GetSortMemberList(  )
 {
-    QList<long> qvlMembers;
+    QList<qint64> qvlMembers;
 
     if(m_qstrlSortedMembers.isEmpty())
     {
@@ -1431,11 +1431,11 @@ QList<long> CwmsObjectEditor::GetSortMemberList(  )
 
             if (qvSequence.isEmpty())
             {
-                QMap<long,CdmMember*> qmMembers;
+                QMap<qint64,CdmMember*> qmMembers;
                 pCdmClass->GetMemberMap(qmMembers);
 
-                QMap<long, CdmMember*>::iterator qmIt    = qmMembers.begin();
-                QMap<long, CdmMember*>::iterator qmItEnd = qmMembers.end();
+                QMap<qint64, CdmMember*>::iterator qmIt    = qmMembers.begin();
+                QMap<qint64, CdmMember*>::iterator qmItEnd = qmMembers.end();
 
                 for (; qmIt != qmItEnd; ++qmIt)
                 {
@@ -1443,7 +1443,7 @@ QList<long> CwmsObjectEditor::GetSortMemberList(  )
 
                     if (pCdmMember)
                     {
-                        long lMemberId = pCdmMember->GetId();
+                       qint64 lMemberId = pCdmMember->GetId();
                         qvlMembers.append(lMemberId);
                     }
                 }
@@ -1470,9 +1470,9 @@ QList<long> CwmsObjectEditor::GetSortMemberList(  )
     return qvlMembers;
 }
 
-QList<long> CwmsObjectEditor::getEventClassMemberList(CdmClass *pClass)
+QList<qint64> CwmsObjectEditor::getEventClassMemberList(CdmClass *pClass)
 {
-    QList<long> qvlMembers;
+    QList<qint64> qvlMembers;
 
     if(m_qstrlEventClassMembers.isEmpty())
     {
@@ -1482,11 +1482,11 @@ QList<long> CwmsObjectEditor::getEventClassMemberList(CdmClass *pClass)
 
             if(qvSequence.isEmpty())
             {
-                QMap<long,CdmMember*> qmMembers;
+                QMap<qint64,CdmMember*> qmMembers;
                 pClass->GetMemberMap(qmMembers);
 
-                QMap<long, CdmMember*>::iterator qmIt = qmMembers.begin();
-                QMap<long, CdmMember*>::iterator qmItEnd = qmMembers.end();
+                QMap<qint64, CdmMember*>::iterator qmIt = qmMembers.begin();
+                QMap<qint64, CdmMember*>::iterator qmItEnd = qmMembers.end();
 
                 for(; qmIt != qmItEnd; ++qmIt)
                 {
@@ -1494,7 +1494,7 @@ QList<long> CwmsObjectEditor::getEventClassMemberList(CdmClass *pClass)
 
                     if(pMember)
                     {
-                        long lMemberId = pMember->GetId();
+                       qint64 lMemberId = pMember->GetId();
                         qvlMembers.append(lMemberId);
                     }
                 }
@@ -1523,12 +1523,12 @@ QList<long> CwmsObjectEditor::getEventClassMemberList(CdmClass *pClass)
 
 /** +-=---------------------------------------------------------Fr 20. Jan 22:43:03 2006----------*
  * @method  CwmsObjectEditor::GetSortedMemberListFromStringList // public                          *
- * @return  QValueList<long>                                 //                                   *
+ * @return  QValueList<qint64>                                 //                                   *
  * @comment This method creates the sorted memberlist with the helb of the string list.           *
  *----------------last changed: Wolfgang GraÃŸhof----------------Fr 20. Jan 22:43:03 2006----------*/
-QList<long> CwmsObjectEditor::GetSortedMemberListFromStringList(  )
+QList<qint64> CwmsObjectEditor::GetSortedMemberListFromStringList(  )
 {
-    QList<long> qvlMembers;
+    QList<qint64> qvlMembers;
 
     QStringList::Iterator  qstrIt    = m_qstrlSortedMembers.begin();
     QStringList::Iterator  qstrItEnd = m_qstrlSortedMembers.end();
@@ -1539,7 +1539,7 @@ QList<long> CwmsObjectEditor::GetSortedMemberListFromStringList(  )
 
         if(CHKPTR(pCdmValue))
         {
-            long lMemberId = pCdmValue->GetMemberId();
+           qint64 lMemberId = pCdmValue->GetMemberId();
             qvlMembers.append(lMemberId);
         }
         else
@@ -1554,9 +1554,9 @@ QList<long> CwmsObjectEditor::GetSortedMemberListFromStringList(  )
     return qvlMembers;
 }
 
-QList<long> CwmsObjectEditor::getEventClassMemberListFromStringList(CdmClass *pClass)
+QList<qint64> CwmsObjectEditor::getEventClassMemberListFromStringList(CdmClass *pClass)
 {
-    QList<long> qvlMembers;
+    QList<qint64> qvlMembers;
 
     QStringList::Iterator qstrIt = m_qstrlEventClassMembers.begin();
     QStringList::Iterator qstrItEnd = m_qstrlEventClassMembers.end();
@@ -1566,7 +1566,7 @@ QList<long> CwmsObjectEditor::getEventClassMemberListFromStringList(CdmClass *pC
         const CdmMember *pMember = pClass->FindMember(*qstrIt);
         if(pMember)
         {
-            long lMemberId = pMember->GetId();
+           qint64 lMemberId = pMember->GetId();
             qvlMembers.append(lMemberId);
         }
     }
@@ -1576,10 +1576,10 @@ QList<long> CwmsObjectEditor::getEventClassMemberListFromStringList(CdmClass *pC
 /** +-=---------------------------------------------------------Fr 6. Jan 18:14:58 2006-----------*
  * @method  CwmsObjectEditor::FindValueByMemberId             // private                           *
  * @return  CdmValue*                                        //                                   *
- * @param   long p_lMemberId                                 //                                   *
+ * @param  qint64 p_lMemberId                                 //                                   *
  * @comment This method finds a value by MemberId                                                 *
  *----------------last changed: Wolfgang GraÃŸhof----------------Fr 6. Jan 18:14:58 2006-----------*/
-CdmValue* CwmsObjectEditor::FindValueByMemberId(  long p_lMemberId )
+CdmValue* CwmsObjectEditor::FindValueByMemberId( qint64 p_lMemberId )
 {
     CdmValue* pCdmValueRet = nullptr;
     QMap<QString, CdmValue*> qmValues;

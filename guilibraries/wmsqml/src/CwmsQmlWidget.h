@@ -20,7 +20,7 @@ private:
     CdmLocatedElement* m_rpElement;
     bool m_bMainWindow;
     QString m_qstrUiName;
-    long m_lModuleId;
+   qint64 m_lModuleId;
 
 
 public:
@@ -35,8 +35,8 @@ public slots:
     void setMainWindow(bool bMainWindow);
     QString getUiName() const;
     void setUiName(const QString &value);
-    long getModuleId() const;
-    void setModuleId(const long &value);
+   qint64 getModuleId() const;
+    void setModuleId(const qint64 &value);
     bool isContainerEditor() const;
     bool isObjectEditor() const;
 };

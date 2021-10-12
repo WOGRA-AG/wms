@@ -51,7 +51,7 @@ QString CwmsQmlApplicationModule::getName()
     return m_Module.GetName();
 }
 
-long CwmsQmlApplicationModule::getId()
+qint64 CwmsQmlApplicationModule::getId()
 {
     return m_Module.GetObjectId();
 }

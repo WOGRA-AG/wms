@@ -17,7 +17,7 @@ class CdbCommandLogin : public CdbAbstractCommand
         QString m_qstrVersion;
         bool m_bDemo;
         int m_iModules;
-        long m_lNewSession;
+       qint64 m_lNewSession;
         CumUser* m_pCumUser;
 
     public:
@@ -29,7 +29,7 @@ class CdbCommandLogin : public CdbAbstractCommand
                         CdbUserManager* p_pUserManager);
 
         virtual ~CdbCommandLogin();
-        long GetSessionId();
+       qint64 GetSessionId();
         bool IsDemo();
         int GetModules();
         CumUser *GetUser();

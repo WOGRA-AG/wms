@@ -42,9 +42,9 @@ bool CwmsUtilities::IsNumber(QString& p_qstrValue)
     return true;
 }
 
-bool CwmsUtilities::isNumberValid(long lNumber)
+bool CwmsUtilities::isNumberValid(qint64 lNumber)
 {
-    long lTemp = lNumber;
+   qint64 lTemp = lNumber;
     return (lTemp == lNumber);
 }
 
@@ -1015,5 +1015,20 @@ QString CwmsUtilities::TeaserText(const QString& p_rqstrText, int p_iLength, con
     }
 
     return(qstrTeaserText);
+}
+
+bool CwmsUtilities::IsFileWritable(QString qstrFilename)
+{
+    bool bRet = false;
+    QFile::remove(qstrFilename);
+    QFile qFile(qstrFilename);
+
+    if (qFile.open(QIODevice::WriteOnly))
+    {
+        bRet = true;
+        qFile.close();
+    }
+
+    return bRet;
 }
 

@@ -1853,9 +1853,9 @@
   </connection>
   <connection>
    <sender>tabWidget</sender>
-   <signal>currentChanged(int)</signal>
+   <signal>currentChanged</signal>
    <receiver>CwmsClassEditor</receiver>
-   <slot>CurrentTabChangedSlot(int)</slot>
+   <slot>CurrentTabChangedSlot</slot>
    <hints>
     <hint type="sourcelabel">
      <x>545</x>
@@ -2028,7 +2028,7 @@
   <slot>DeleteValidationClickedSlot()</slot>
   <slot>ExecuteFunctionClickedSlot()</slot>
   <slot>DebugClickedSlot()</slot>
-  <slot>CurrentTabChangedSlot(int)</slot>
+  <slot>CurrentTabChangedSlot</slot>
   <slot>EditEventClickedSlot()</slot>
   <slot>UpdateEventClickedSlot()</slot>
   <slot>CancelEventClickedSlot()</slot>

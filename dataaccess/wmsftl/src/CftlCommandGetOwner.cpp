@@ -33,7 +33,7 @@ bool CftlCommandGetOwner::CheckValid()
 
 int CftlCommandGetOwner::Execute()
 {
-    long lRet = CdmLogging::eDmObjectAccessError;
+   qint64 lRet = CdmLogging::eDmObjectAccessError;
 
     if (m_rpObject != nullptr)
     {
@@ -47,24 +47,24 @@ int CftlCommandGetOwner::Execute()
     return lRet;
 }
 
-long CftlCommandGetOwner::GetOwnerObjectId()
+qint64 CftlCommandGetOwner::GetOwnerObjectId()
 {
     return m_lOwnerObjectId;
 }
 
-long CftlCommandGetOwner::GetOwnerContainerId()
+qint64 CftlCommandGetOwner::GetOwnerContainerId()
 {
     return m_lOwnerContainerId;
 }
 
-long CftlCommandGetOwner::FindObjectOwner()
+qint64 CftlCommandGetOwner::FindObjectOwner()
 {
-    long lRet = -1;
+   qint64 lRet = -1;
     QSqlQuery cQSqlQuery(GetSqlDatabase());
 
     cQSqlQuery.prepare("select Ref_Container_ID, Ref_Object_ID from WMS_DM_OBJECT_REFERENCE where ObjectId = ? and ContainerId = ? and owner = ?");
-    cQSqlQuery.addBindValue((int)m_rpObject->GetId());
-    cQSqlQuery.addBindValue((int)m_rpObject->GetObjectContainerId());
+    cQSqlQuery.addBindValue(m_rpObject->GetId());
+    cQSqlQuery.addBindValue(m_rpObject->GetObjectContainerId());
     cQSqlQuery.addBindValue(true);
 
     lRet = ExecuteQuery(cQSqlQuery);
@@ -87,13 +87,13 @@ long CftlCommandGetOwner::FindObjectOwner()
     return lRet;
 }
 
-long CftlCommandGetOwner::FindContainerOwner()
+qint64 CftlCommandGetOwner::FindContainerOwner()
 {
-    long lRet = -1;
+   qint64 lRet = -1;
     QSqlQuery cQSqlQuery(GetSqlDatabase());
 
     cQSqlQuery.prepare("select Ref_Container_ID, Ref_Object_ID from WMS_DM_CONTAINER_REFERENCE where ContainerId = ? and owner = ?");
-    cQSqlQuery.addBindValue((int)m_rpContainer->GetId());
+    cQSqlQuery.addBindValue(m_rpContainer->GetId());
     cQSqlQuery.addBindValue(true);
 
     lRet = ExecuteQuery(cQSqlQuery);

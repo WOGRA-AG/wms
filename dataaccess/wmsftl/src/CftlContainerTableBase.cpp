@@ -26,9 +26,9 @@ CftlDialect *CftlContainerTableBase::GetDialect()
     return m_rpDialect;
 }
 
-long CftlContainerTableBase::Execute(CftlInterface *p_pInterface)
+qint64 CftlContainerTableBase::Execute(CftlInterface *p_pInterface)
 {
-    long lRet = CdmLogging::eDmOk;
+   qint64 lRet = CdmLogging::eDmOk;
 
     if (CHKPTR(p_pInterface))
     {

@@ -9,18 +9,18 @@ class CdmContainer;
 class CftlCommandLoadContainer : public CftlAbstractCommand
 {
 private:
-    long m_lContainerId;
+   qint64 m_lContainerId;
     bool m_bLoadObjects;
-    long m_lSchemeId;
+   qint64 m_lSchemeId;
     QString m_qstrKeyname;
     CdmObjectContainer* m_rpContainer;
 
-    long LoadContainerRights();
+   qint64 LoadContainerRights();
     void LoadObjects();
     void GenerateContainerQuery(QSqlQuery& p_rQuery);
 public:
-    CftlCommandLoadContainer(long p_lContainerId, bool p_bLoadObjects, CftlDataAccess* p_pDataAccess);
-    CftlCommandLoadContainer(long p_lSchemeId, QString p_qstrKeyname, bool p_bLoadObjects, CftlDataAccess* p_pDataAccess);
+    CftlCommandLoadContainer(qint64 p_lContainerId, bool p_bLoadObjects, CftlDataAccess* p_pDataAccess);
+    CftlCommandLoadContainer(qint64 p_lSchemeId, QString p_qstrKeyname, bool p_bLoadObjects, CftlDataAccess* p_pDataAccess);
     virtual ~CftlCommandLoadContainer();
 
     CdmObjectContainer *GetResult();

@@ -162,10 +162,10 @@ class WMSGUI_API CwmsRuntimeBase
    /** +-=---------------------------------------------------------Sa 6. Okt 09:32:02 2012--------*
     * @method  CwmsRuntimeBase::OpenModule                   // protected                         *
     * @return  void                                          //                                   *
-    * @param   long p_lObjectId                              //                                   *
+    * @param  qint64 p_lObjectId                              //                                   *
     * @comment                                                                                    *
     *----------------last changed: -----------------------------Sa 6. Okt 09:32:02 2012-----------*/
-    void OpenModule(long p_lObjectId);
+    void OpenModule(qint64 p_lObjectId);
 
     void OpenDefaultModule();
 

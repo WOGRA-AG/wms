@@ -45,8 +45,8 @@
 #include "CdmMessageManager.h"
 
 
-CdmObjectContainer::CdmObjectContainer(  long p_lDatabaseId,
-                                         long p_lId,
+CdmObjectContainer::CdmObjectContainer( qint64 p_lDatabaseId,
+                                        qint64 p_lId,
                                          QString p_qstrKeyname,
                                          CdmClass* p_pCdmClass )
     : CdmModelElement( p_lDatabaseId, p_lId, p_qstrKeyname),
@@ -70,7 +70,7 @@ CdmObjectContainer::CdmObjectContainer(  long p_lDatabaseId,
 
 }
 
-CdmObjectContainer::CdmObjectContainer(long p_lId, CdmObjectContainer* p_pContainer )
+CdmObjectContainer::CdmObjectContainer(qint64 p_lId, CdmObjectContainer* p_pContainer )
     : CdmModelElement( p_pContainer->GetSchemeId(), p_lId, p_pContainer->GetKeyname() + QDateTime::currentDateTime().toString()),
       m_lClassId(p_pContainer->m_lClassId),
       m_bIsAccessorListModified(false),
@@ -91,7 +91,7 @@ CdmObjectContainer::CdmObjectContainer(long p_lId, CdmObjectContainer* p_pContai
 }
 
 
-CdmObjectContainer::CdmObjectContainer(long p_lDatabaseId, long p_lId, QString p_qstrKeyname, long p_lClassId)
+CdmObjectContainer::CdmObjectContainer(qint64 p_lDatabaseId,qint64 p_lId, QString p_qstrKeyname,qint64 p_lClassId)
     : CdmModelElement( p_lDatabaseId, p_lId, p_qstrKeyname),
       m_lClassId(p_lClassId),
       m_bIsAccessorListModified(false),
@@ -131,8 +131,8 @@ CdmObjectContainer::~CdmObjectContainer(  )
 {
     SYNCHRONIZED;
     CdmObject* pCdmObject = nullptr;
-    QMap<long,CdmObject*>::iterator iIt = m_qmObjects.begin();
-    QMap<long,CdmObject*>::iterator iItEnd = m_qmObjects.end();
+    QMap<qint64,CdmObject*>::iterator iIt = m_qmObjects.begin();
+    QMap<qint64,CdmObject*>::iterator iItEnd = m_qmObjects.end();
 
     for(; iIt != iItEnd; ++iIt)
     {
@@ -191,7 +191,7 @@ void CdmObjectContainer::SetObjects(QVariantList& p_rqvObjects)
     for (; qvhIt != qvhItEnd; ++qvhIt)
     {
         QVariantMap qvhObject = (*qvhIt).toMap();
-        long lId = qvhObject[WMS_ID].toInt();
+       qint64 lId = qvhObject[WMS_ID].toInt();
 
         CdmObject* pCdmObjectLocal = FindObjectById(lId);
 
@@ -237,8 +237,8 @@ QVariant CdmObjectContainer::GetVariant() const
 
         if(!m_qmObjects.isEmpty())
         {
-            QMap<long, CdmObject*>::const_iterator qIt = m_qmObjects.begin();
-            QMap<long, CdmObject*>::const_iterator qItEnd = m_qmObjects.end();
+            QMap<qint64, CdmObject*>::const_iterator qIt = m_qmObjects.begin();
+            QMap<qint64, CdmObject*>::const_iterator qItEnd = m_qmObjects.end();
 
             if (!pCdmManager->IsClientServerMode()) // only in odbc and sqlite mode you need to pack all objects (because you are the server)
             {
@@ -321,8 +321,8 @@ void CdmObjectContainer::CopyObjects(CdmObjectContainer* p_pContainerSource)
     {
         CdmObject* pCdmObject = nullptr;
 
-        QMap<long,CdmObject*>::iterator iIt = p_pContainerSource->m_qmObjects.begin();
-        QMap<long,CdmObject*>::iterator iItEnd = p_pContainerSource->m_qmObjects.end();
+        QMap<qint64,CdmObject*>::iterator iIt = p_pContainerSource->m_qmObjects.begin();
+        QMap<qint64,CdmObject*>::iterator iItEnd = p_pContainerSource->m_qmObjects.end();
         iObjectCount = p_pContainerSource->m_qmObjects.count();
 
         for(; iIt != iItEnd; ++iIt)
@@ -330,7 +330,7 @@ void CdmObjectContainer::CopyObjects(CdmObjectContainer* p_pContainerSource)
             pCdmObject = iIt.value();
             if (CHKPTR(pCdmObject))
             {
-                long lNewObjectId = GetNewObjectId();
+               qint64 lNewObjectId = GetNewObjectId();
                 CdmObject* pCdmNewObject = new CdmObject(this, pCdmObject, lNewObjectId);
                 pCdmNewObject->SetCreatorId(GetUserId());
                 pCdmNewObject->SetModifierId(GetUserId());
@@ -449,8 +449,8 @@ void CdmObjectContainer::ClearContainerLocal()
 {
     SYNCHRONIZED;
     CdmObject* pCdmObject = nullptr;
-    QMap<long,CdmObject*>::iterator iIt = m_qmObjects.begin();
-    QMap<long,CdmObject*>::iterator iItEnd = m_qmObjects.end();
+    QMap<qint64,CdmObject*>::iterator iIt = m_qmObjects.begin();
+    QMap<qint64,CdmObject*>::iterator iItEnd = m_qmObjects.end();
 
     for(; iIt != iItEnd; ++iIt)
     {
@@ -463,7 +463,7 @@ void CdmObjectContainer::ClearContainerLocal()
     m_qlDeletedObjects.clear();
 }
 
-void CdmObjectContainer::RemoveObjectLocal(long p_lObjectId)
+void CdmObjectContainer::RemoveObjectLocal(qint64 p_lObjectId)
 {
     SYNCHRONIZED;
     CdmObject* pCdmObject = FindObjectById(p_lObjectId);
@@ -479,13 +479,13 @@ void CdmObjectContainer::RemoveObjectLocal(long p_lObjectId)
     }
 }
 
-void CdmObjectContainer::GetObjects(QList<long>&  p_rqllObjectIds,
+void CdmObjectContainer::GetObjects(QList<qint64>&  p_rqllObjectIds,
                                     QList<CdmObject*>& p_rqllObjects)
 {
     SYNCHRONIZED;
     LoadObjects(p_rqllObjectIds);
-    QList<long>::iterator qlIt = p_rqllObjectIds.begin();
-    QList<long>::iterator qlItEnd = p_rqllObjectIds.end();
+    QList<qint64>::iterator qlIt = p_rqllObjectIds.begin();
+    QList<qint64>::iterator qlItEnd = p_rqllObjectIds.end();
 
     for (; qlIt != qlItEnd; ++qlIt)
     {
@@ -498,7 +498,7 @@ void CdmObjectContainer::GetObjects(QList<long>&  p_rqllObjectIds,
     }
 }
 
-void CdmObjectContainer::RemoveObjectLocalWithoutDelete(long p_lObjectId)
+void CdmObjectContainer::RemoveObjectLocalWithoutDelete(qint64 p_lObjectId)
 {
     SYNCHRONIZED;
     CdmObject* pCdmObject = FindObjectByIdLocal(p_lObjectId);
@@ -510,7 +510,7 @@ void CdmObjectContainer::RemoveObjectLocalWithoutDelete(long p_lObjectId)
         disconnect(pCdmObject, SIGNAL(ObjectModifiedSignal(CdmObject*)), this, SLOT(ObjectModifiedSlot(CdmObject*)));
         disconnect(pCdmObject, SIGNAL(ObjectDeletedSignal(CdmObject*)), this, SLOT(ObjectDeletedSlot(CdmObject*)));
         disconnect(pCdmObject, SIGNAL(ObjectRefModifiedSignal(CdmObject*)), this, SLOT(ObjectRefModifiedSlot(CdmObject*)));
-        disconnect(pCdmObject, SIGNAL(ObjectCommitedSignal(i)), this, SLOT(ObjectCommitedSlot(int)));
+        disconnect(pCdmObject, SIGNAL(ObjectCommitedSignal(i)), this, SLOT(ObjectCommitedSlot));
 
         QList<CdmContainerAdaptor*>::iterator qvlIt    = m_qvlObjectFactories.begin();
         QList<CdmContainerAdaptor*>::iterator qvlItEnd = m_qvlObjectFactories.end();
@@ -532,8 +532,8 @@ CdmObject* CdmObjectContainer::FindObjectByKeyname(QString p_qstrKeyname)
     SYNCHRONIZED;
     CdmObject* pCdmObject = nullptr;
 
-    QMap<long,CdmObject*>::iterator qmIt = m_qmObjects.begin();
-    QMap<long,CdmObject*>::iterator qmItEnd = m_qmObjects.end();
+    QMap<qint64,CdmObject*>::iterator qmIt = m_qmObjects.begin();
+    QMap<qint64,CdmObject*>::iterator qmItEnd = m_qmObjects.end();
 
     for (; qmIt != qmItEnd; ++qmIt)
     {
@@ -597,7 +597,7 @@ CdmObject* CdmObjectContainer::FindObjectByKeyname(QString p_qstrKeyname)
     return pCdmObject;
 }
 
-CdmObject* CdmObjectContainer::FindObjectById(long p_lObjectId)
+CdmObject* CdmObjectContainer::FindObjectById(qint64 p_lObjectId)
 {
     CdmObject* pCdmObject = nullptr;
 
@@ -665,7 +665,7 @@ CdmObject* CdmObjectContainer::FindObjectById(long p_lObjectId)
     return pCdmObject;
 }
 
-CdmObject* CdmObjectContainer::FindObjectByIdLocal(long p_lObjectId)
+CdmObject* CdmObjectContainer::FindObjectByIdLocal(qint64 p_lObjectId)
 {
     CdmObject* pCdmObject = nullptr;
 
@@ -710,13 +710,13 @@ CdmObject* CdmObjectContainer::FindObjectByIdLocal(long p_lObjectId)
     return pCdmObject;
 }
 
-long CdmObjectContainer::LoadObjects(const QList<long>& p_rqvlObjectIds, bool p_bWithChildren)
+qint64 CdmObjectContainer::LoadObjects(const QList<qint64>& p_rqvlObjectIds, bool p_bWithChildren)
 {
     SYNCHRONIZED;
-    long lRet = CdmLogging::eDmUnknownObjectError;
-    QList<long> qvlObjectIds;
-    QList<long>::const_iterator qvlIt = p_rqvlObjectIds.begin();
-    QList<long>::const_iterator qvlItEnd = p_rqvlObjectIds.end();
+   qint64 lRet = CdmLogging::eDmUnknownObjectError;
+    QList<qint64> qvlObjectIds;
+    QList<qint64>::const_iterator qvlIt = p_rqvlObjectIds.begin();
+    QList<qint64>::const_iterator qvlItEnd = p_rqvlObjectIds.end();
 
     for (; qvlIt != qvlItEnd; ++qvlIt)
     {
@@ -748,21 +748,21 @@ long CdmObjectContainer::LoadObjects(const QList<long>& p_rqvlObjectIds, bool p_
     return lRet;
 }
 
-void CdmObjectContainer::LoadChildrenObjects(const QList<long>& p_rqvlObjectIds)
+void CdmObjectContainer::LoadChildrenObjects(const QList<qint64>& p_rqvlObjectIds)
 {
     SYNCHRONIZED;
     const CdmClass* pCdmClass = GetClass();
 
     if (CHKPTR(pCdmClass))
     {
-        QMap<long, long> qmObjectToLoad; //<objectid,objectlistid>
-        QMap<long, CdmMember*> qmMembers;
+        QMap<qint64,qint64> qmObjectToLoad; //<objectid,objectlistid>
+        QMap<qint64, CdmMember*> qmMembers;
         pCdmClass->GetMemberMap(qmMembers);
 
 
         // Iterating over all members to findout which members are objectrefs
-        QMap<long, CdmMember*>::iterator qmIt = qmMembers.begin();
-        QMap<long, CdmMember*>::iterator qmItEnd = qmMembers.end();
+        QMap<qint64, CdmMember*>::iterator qmIt = qmMembers.begin();
+        QMap<qint64, CdmMember*>::iterator qmItEnd = qmMembers.end();
 
         for (; qmIt != qmItEnd; ++qmIt)
         {
@@ -771,8 +771,8 @@ void CdmObjectContainer::LoadChildrenObjects(const QList<long>& p_rqvlObjectIds)
 
             if (CHKPTR(pCdmMember) && pCdmMember->GetValueType() == eDmValueObjectRef)
             {
-                QList<long>::const_iterator qvlIt = p_rqvlObjectIds.begin();
-                QList<long>::const_iterator qvlItEnd = p_rqvlObjectIds.end();
+                QList<qint64>::const_iterator qvlIt = p_rqvlObjectIds.begin();
+                QList<qint64>::const_iterator qvlItEnd = p_rqvlObjectIds.end();
 
                 for (; qvlIt != qvlItEnd; ++qvlIt)
                 {
@@ -803,22 +803,22 @@ void CdmObjectContainer::LoadChildrenObjects(const QList<long>& p_rqvlObjectIds)
     }
 }
 
-void CdmObjectContainer::LoadObjectRefs(QMap<long,long>& p_rqmObjectRefs)
+void CdmObjectContainer::LoadObjectRefs(QMap<qint64,qint64>& p_rqmObjectRefs)
 {
     SYNCHRONIZED;
     CdmContainerManager* pContainerManager = GetContainerManager();
 
     if (CHKPTR(pContainerManager))
     {
-        QList<long> qvlObjectLists;
+        QList<qint64> qvlObjectLists;
 
-        QMap<long, long>::iterator qmIt = p_rqmObjectRefs.begin();
-        QMap<long, long>::iterator qmItEnd = p_rqmObjectRefs.end();
+        QMap<qint64,qint64>::iterator qmIt = p_rqmObjectRefs.begin();
+        QMap<qint64,qint64>::iterator qmItEnd = p_rqmObjectRefs.end();
 
         //iterator over the map and find out how many different objectlists there are
         for (; qmIt != qmItEnd; ++qmIt)
         {
-            long lObjectListId = qmIt.value();
+           qint64 lObjectListId = qmIt.value();
 
             if(!qvlObjectLists.contains(lObjectListId))
             {
@@ -828,18 +828,18 @@ void CdmObjectContainer::LoadObjectRefs(QMap<long,long>& p_rqmObjectRefs)
 
 
         // now find all objecttids to one ojectlist
-        QList<long>::iterator qvlIt = qvlObjectLists.begin();
-        QList<long>::iterator qvlItEnd = qvlObjectLists.end();
+        QList<qint64>::iterator qvlIt = qvlObjectLists.begin();
+        QList<qint64>::iterator qvlItEnd = qvlObjectLists.end();
 
         for (; qvlIt != qvlItEnd; ++qvlIt)
         {
-            long lObjectListId = (*qvlIt);
+           qint64 lObjectListId = (*qvlIt);
 
             CdmObjectContainer* pContainer = pContainerManager->FindEmptyContainerById(lObjectListId);
 
             if (CHKPTR(pContainer))
             {
-                QList<long> qvlObjects;
+                QList<qint64> qvlObjects;
 
                 qmIt = p_rqmObjectRefs.begin();
                 qmItEnd = p_rqmObjectRefs.end();
@@ -865,8 +865,8 @@ CdmObject* CdmObjectContainer::FindObjectByIndex(int p_iIndex)
     SYNCHRONIZED;
     CdmObject* pCdmObject = nullptr;
 
-    QMap<long,CdmObject*>::iterator qmIt    = m_qmObjects.begin();
-    QMap<long,CdmObject*>::iterator qmItEnd = m_qmObjects.end();
+    QMap<qint64,CdmObject*>::iterator qmIt    = m_qmObjects.begin();
+    QMap<qint64,CdmObject*>::iterator qmItEnd = m_qmObjects.end();
 
     int iCounter = 0;
 
@@ -901,7 +901,7 @@ int CdmObjectContainer::AddObject(CdmObject* p_pCdmObject)
                 connect(p_pCdmObject, SIGNAL(ObjectModifiedSignal(CdmObject*)), this, SLOT(ObjectModifiedSlot(CdmObject*)));
                 connect(p_pCdmObject, SIGNAL(ObjectDeletedSignal(CdmObject*)), this, SLOT(ObjectDeletedSlot(CdmObject*)));
                 connect(p_pCdmObject, SIGNAL(ObjectRefModifiedSignal(CdmObject*)), this, SLOT(ObjectRefModifiedSlot(CdmObject*)));
-                //connect(p_pCdmObject, SIGNAL(ObjectCommitedSignal(int)), this, SLOT(ObjectCommitedSlot(int)));
+                //connect(p_pCdmObject, SIGNAL(ObjectCommitedSignal), this, SLOT(ObjectCommitedSlot));
 
                 p_pCdmObject->SetObjectContainer(this);
 
@@ -932,14 +932,14 @@ int CdmObjectContainer::AddObject(CdmObject* p_pCdmObject)
     return iRet;
 }
 
-long CdmObjectContainer::CountObjects() const
+qint64 CdmObjectContainer::CountObjects() const
 {
    return m_qmObjects.count();
 }
 
-long CdmObjectContainer::Refresh()
+qint64 CdmObjectContainer::Refresh()
 {
-   long lRet = 0;
+  qint64 lRet = 0;
    IdmDataAccess* pIdmDataAccess = GetDataAccess();
 
    if (CHKPTR(pIdmDataAccess))
@@ -952,15 +952,15 @@ long CdmObjectContainer::Refresh()
 
 /** +-=---------------------------------------------------------So 10. Feb 09:48:45 2013----------*
  * @method  CdmObjectContainer::CountModifiedObjects              // public, const, slots              *
- * @return  long                                             //                                   *
+ * @return qint64                                             //                                   *
  * @comment This method counts the number of modified objects.                                    *
  *----------------last changed: --------------------------------So 10. Feb 09:48:45 2013----------*/
-long CdmObjectContainer::CountModifiedObjects() const
+qint64 CdmObjectContainer::CountModifiedObjects() const
 {
     SYNCHRONIZED;
-    long lRet = 0;
-    QMap<long,CdmObject*>::const_iterator iIt = m_qmObjects.begin();
-    QMap<long,CdmObject*>::const_iterator iItEnd = m_qmObjects.end();
+   qint64 lRet = 0;
+    QMap<qint64,CdmObject*>::const_iterator iIt = m_qmObjects.begin();
+    QMap<qint64,CdmObject*>::const_iterator iItEnd = m_qmObjects.end();
 
     for(; iIt != iItEnd; ++iIt)
     {
@@ -995,7 +995,7 @@ CdmObject* CdmObjectContainer::CreateNewObject(QString p_qstrKeyname)
     {
         if(m_lClassId >= 0)
         {
-            long lNewObjectId = GetNewObjectId();
+           qint64 lNewObjectId = GetNewObjectId();
 
             if(lNewObjectId > 0)
             {
@@ -1047,7 +1047,7 @@ CdmObject* CdmObjectContainer::CreateNewObject()
     return CreateNewObject(qstrKeyname);
 }
 
-CdmObject* CdmObjectContainer::CreateObject(long p_lObjectId)
+CdmObject* CdmObjectContainer::CreateObject(qint64 p_lObjectId)
 {
     return new CdmObject(m_lSchemeId,
                          p_lObjectId,
@@ -1055,9 +1055,9 @@ CdmObject* CdmObjectContainer::CreateObject(long p_lObjectId)
                          GetId());
 }
 
-long CdmObjectContainer::GetNewObjectId()
+qint64 CdmObjectContainer::GetNewObjectId()
 {
-    long lId = CdmLogging::eDmUnknownObjectError;
+   qint64 lId = CdmLogging::eDmUnknownObjectError;
 
     IdmDataAccess* pIdmDataAccess = GetDataAccess();
 
@@ -1074,7 +1074,7 @@ long CdmObjectContainer::GetNewObjectId()
     return lId;
 }
 
-long CdmObjectContainer::GetClassId() const
+qint64 CdmObjectContainer::GetClassId() const
 {
     return m_lClassId;
 }
@@ -1100,7 +1100,7 @@ CdmObject* CdmObjectContainer::CopyObject(const CdmObject* p_pCdmObject)
     if(CHKPTR(p_pCdmObject))
     {
         // using copy constructor
-        long lNewObjectId = GetNewObjectId();
+       qint64 lNewObjectId = GetNewObjectId();
 
         pCdmCopiedObject = new CdmObject(*p_pCdmObject, lNewObjectId);
         pCdmCopiedObject->SetObjectContainer(this);
@@ -1146,8 +1146,8 @@ int CdmObjectContainer::DeleteObject(CdmObject* p_pCdmObject)
 void CdmObjectContainer::DeleteAllObjects()
 {
     SYNCHRONIZED;
-    QMap<long,CdmObject*>::iterator iIt = m_qmObjects.begin();
-    QMap<long,CdmObject*>::iterator iItEnd = m_qmObjects.end();
+    QMap<qint64,CdmObject*>::iterator iIt = m_qmObjects.begin();
+    QMap<qint64,CdmObject*>::iterator iItEnd = m_qmObjects.end();
 
     for(; iIt != iItEnd; ++iIt)
     {
@@ -1163,7 +1163,7 @@ void CdmObjectContainer::DeleteAllObjects()
     ClearContainerLocal();
 }
 
-int CdmObjectContainer::DeleteObject(long p_lObjectId)
+int CdmObjectContainer::DeleteObject(qint64 p_lObjectId)
 {
     int iRet = CdmLogging::eDmUnknownObjectError;
 
@@ -1184,8 +1184,8 @@ int CdmObjectContainer::DeleteObject(long p_lObjectId)
 void CdmObjectContainer::GetObjectList(QList<CdmObject*>& p_rqvlObjects)
 {
     SYNCHRONIZED;
-    QMap<long,CdmObject*>::iterator qmIt    = m_qmObjects.begin();
-    QMap<long,CdmObject*>::iterator qmItEnd = m_qmObjects.end();
+    QMap<qint64,CdmObject*>::iterator qmIt    = m_qmObjects.begin();
+    QMap<qint64,CdmObject*>::iterator qmItEnd = m_qmObjects.end();
 
     CdmObject* pCdmObject = nullptr;
 
@@ -1286,11 +1286,11 @@ bool CdmObjectContainer::IsExactTypeOf(CdmClass* p_pClass) const
     return bRet;
 }
 
-void CdmObjectContainer::GetObjectList(QList<long>& p_rqvlObjects)
+void CdmObjectContainer::GetObjectList(QList<qint64>& p_rqvlObjects)
 {
     SYNCHRONIZED;
-    QMap<long,CdmObject*>::iterator qmIt    = m_qmObjects.begin();
-    QMap<long,CdmObject*>::iterator qmItEnd = m_qmObjects.end();
+    QMap<qint64,CdmObject*>::iterator qmIt    = m_qmObjects.begin();
+    QMap<qint64,CdmObject*>::iterator qmItEnd = m_qmObjects.end();
 
     CdmObject* pCdmObject = nullptr;
 
@@ -1307,8 +1307,8 @@ void CdmObjectContainer::GetObjectList(QList<long>& p_rqvlObjects)
 void CdmObjectContainer::SetAllLocalObjectsDeleted()
 {
     SYNCHRONIZED;
-    QMap<long,CdmObject*>::iterator qmIt    = m_qmObjects.begin();
-    QMap<long,CdmObject*>::iterator qmItEnd = m_qmObjects.end();
+    QMap<qint64,CdmObject*>::iterator qmIt    = m_qmObjects.begin();
+    QMap<qint64,CdmObject*>::iterator qmItEnd = m_qmObjects.end();
 
     CdmObject* pCdmObject = nullptr;
 
@@ -1594,7 +1594,7 @@ QString CdmObjectContainer::GetComment() const
     return qstrComment;
 }
 
-void CdmObjectContainer::AddAccessorRight(long p_lUserId, EdmRight p_eUmAccessRight)
+void CdmObjectContainer::AddAccessorRight(qint64 p_lUserId, EdmRight p_eUmAccessRight)
 {
     m_cCdmRights.AddRight(p_lUserId, p_eUmAccessRight);
     SetModified();
@@ -1606,7 +1606,7 @@ QMap<int, EdmRight> CdmObjectContainer::GetAccessorMap() const
     return m_cCdmRights.GetRights();
 }
 
-void CdmObjectContainer::RemoveAccessorRight(long p_lUserId)
+void CdmObjectContainer::RemoveAccessorRight(qint64 p_lUserId)
 {
     if (m_cCdmRights.HasRightConfigured(p_lUserId))
     {
@@ -1616,7 +1616,7 @@ void CdmObjectContainer::RemoveAccessorRight(long p_lUserId)
     }
 }
 
-void CdmObjectContainer::UpdateAccessorRight(long p_lUserId, EdmRight p_eUmAccessRight)
+void CdmObjectContainer::UpdateAccessorRight(qint64 p_lUserId, EdmRight p_eUmAccessRight)
 {
     RemoveAccessorRight(p_lUserId);
     AddAccessorRight(p_lUserId, p_eUmAccessRight);
@@ -1633,9 +1633,9 @@ void CdmObjectContainer::SetDeleted()
 }
 
 
-long CdmObjectContainer::CountObjectsOnDb()
+qint64 CdmObjectContainer::CountObjectsOnDb()
 {
-    long lRet = 0;
+   qint64 lRet = 0;
     IdmDataAccess* pIdmDataAccess = GetDataAccess();
 
     if (CHKPTR(pIdmDataAccess))

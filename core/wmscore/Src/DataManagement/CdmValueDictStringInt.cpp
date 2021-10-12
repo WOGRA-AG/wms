@@ -7,8 +7,8 @@
 #include "CdmLogging.h"
 #include "CdmValueDictStringInt.h"
 
-CdmValueDictStringInt::CdmValueDictStringInt(long p_lDatabaseId,
-                                   long p_lId,
+CdmValueDictStringInt::CdmValueDictStringInt(qint64 p_lDatabaseId,
+                                  qint64 p_lId,
                                    QString p_qstrKeyname,
                                    CdmObject* p_pCdmObject)
    : CdmValueCharacterDocument(p_lDatabaseId, p_lId, p_qstrKeyname, eDmValueDictStringInt, p_pCdmObject)

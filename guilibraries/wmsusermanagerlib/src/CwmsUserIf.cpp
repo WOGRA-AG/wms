@@ -51,7 +51,7 @@ void CwmsUserIf::FillGroups()
         {
             QTreeWidgetItem* pItem = new QTreeWidgetItem(m_pqlvGroups);
             pItem->setText(0, QString::number(pCumUserGroup->GetId()));
-            pItem->setData(0, Qt::UserRole, (int)pCumUserGroup->GetId());
+            pItem->setData(0, Qt::UserRole, pCumUserGroup->GetId());
             pItem->setText(1, pCumUserGroup->GetGroupName());
         }
     }
@@ -153,7 +153,7 @@ void CwmsUserIf::RemoveScheme()
 
 void CwmsUserIf::AddGroup()
 {
-    long lGroupId = CwmsUserGroupChoiceIf::GetGroupSelection(this);
+   qint64 lGroupId = CwmsUserGroupChoiceIf::GetGroupSelection(this);
 
     if (lGroupId >= 0)
     {
@@ -168,7 +168,7 @@ void CwmsUserIf::AddGroup()
             {
                 QTreeWidgetItem* pItem = new QTreeWidgetItem(m_pqlvGroups);
                 pItem->setText(0, QString::number(pGroup->GetId()));
-                pItem->setData(0, Qt::UserRole, (int)pGroup->GetId());
+                pItem->setData(0, Qt::UserRole, pGroup->GetId());
                 pItem->setText(1, pGroup->GetGroupName());
             }
         }

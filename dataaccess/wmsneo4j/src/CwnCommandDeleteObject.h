@@ -8,11 +8,11 @@
 class CwnCommandDeleteObject : public CwnCommandBase
 {
 private:
-    long m_lObjectId;
-    long m_lSessionId;
+   qint64 m_lObjectId;
+   qint64 m_lSessionId;
 
 public:
-    CwnCommandDeleteObject(long p_lObjectId, long p_lSessionId, CwnDataAccess* p_pDataAccess);
+    CwnCommandDeleteObject(qint64 p_lObjectId,qint64 p_lSessionId, CwnDataAccess* p_pDataAccess);
     virtual ~CwnCommandDeleteObject();
     QString createQuery();
     QString queryCausedError;

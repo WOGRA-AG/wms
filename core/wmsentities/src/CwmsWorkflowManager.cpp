@@ -127,10 +127,10 @@ void CwmsWorkflowManager::GetWorkflowList(QList<CdmObject*>& p_rqlViews)
 /** +-=---------------------------------------------------------Fr 21. Dez 11:09:11 2012----------*
  * @method  CwmsWorkflowManager::FindWorkflowById            // public                            *
  * @return  CdmObject*                                       //                                   *
- * @param   long p_lObjectId                                 //                                   *
+ * @param  qint64 p_lObjectId                                 //                                   *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------Fr 21. Dez 11:09:11 2012----------*/
-CdmObject* CwmsWorkflowManager::FindWorkflowById(long p_lObjectId)
+CdmObject* CwmsWorkflowManager::FindWorkflowById(qint64 p_lObjectId)
 {
     CdmObject* pObject = nullptr;
     CdmObjectContainer* pContainer = GetObjectList();
@@ -157,7 +157,7 @@ CdmObject* CwmsWorkflowManager::FindWorkflowByName(QString p_qstrName)
 
     if (pQuery)
     {
-        QList<long> qllResults = pQuery->GetResultList();
+        QList<qint64> qllResults = pQuery->GetResultList();
 
         if (qllResults.count() > 0)
         {

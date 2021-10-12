@@ -114,21 +114,21 @@ CftlObjectAccess::~CftlObjectAccess(  )
    // nothing to do at the moment
 }
 
-long CftlObjectAccess::DeleteObjectList(long p_lObjectListId)
+qint64 CftlObjectAccess::DeleteObjectList(qint64 p_lObjectListId)
 {
     CftlCommandDeleteContainer command(p_lObjectListId, m_rpCftlDataAccess);
     return command.Run();
 }
 
-long CftlObjectAccess::DeleteObject(CdmObject* p_pObject)
+qint64 CftlObjectAccess::DeleteObject(CdmObject* p_pObject)
 {
    CftlCommandDeleteObject command(p_pObject, m_rpCftlDataAccess);
    return command.Run();
 }
 
-long CftlObjectAccess::ExecuteQuery(CdmQuery* p_pCdmQuery)
+qint64 CftlObjectAccess::ExecuteQuery(CdmQuery* p_pCdmQuery)
 {
-   long lRet = CdmLogging::eDmObjectAccessError;
+  qint64 lRet = CdmLogging::eDmObjectAccessError;
 
    if(CHKPTR(m_rpCftlDataAccess) && CHKPTR(p_pCdmQuery))
    {
@@ -142,49 +142,49 @@ long CftlObjectAccess::ExecuteQuery(CdmQuery* p_pCdmQuery)
    return lRet;
 }
 
-long CftlObjectAccess::ExistObjectList(long p_lClassId, QString p_qstrObjectListKeyname)
+qint64 CftlObjectAccess::ExistObjectList(qint64 p_lClassId, QString p_qstrObjectListKeyname)
 {
     Q_UNUSED(p_lClassId);
    CftlCommandExistContainer command(p_qstrObjectListKeyname, m_rpCftlDataAccess);
    return command.Run();
 }
 
-long CftlObjectAccess::GetNewObjectId(const CdmObjectContainer* p_pContainer)
+qint64 CftlObjectAccess::GetNewObjectId(const CdmObjectContainer* p_pContainer)
 {
     CftlCommandGetNewObjectId command(p_pContainer, m_rpCftlDataAccess);
     return command.Run();
 }
 
-long CftlObjectAccess::GetNewContainerId(long p_lClassId)
+qint64 CftlObjectAccess::GetNewContainerId(qint64 p_lClassId)
 {
    CftlCommandGetNewContainerId command(p_lClassId,  m_rpCftlDataAccess);
    return command.Run();
 }
 
-long CftlObjectAccess::GetObjectListsList(  long p_lDbId,
-                                            long p_lClassId,
-                                            QMap<long,
+qint64 CftlObjectAccess::GetObjectListsList( qint64 p_lDbId,
+                                           qint64 p_lClassId,
+                                            QMap<qint64,
                                            QString>& p_rqmObjectListsList )
 {
-   long lRet = CdmLogging::eDmObjectAccessError;
+  qint64 lRet = CdmLogging::eDmObjectAccessError;
    CftlCommandGetContainerList command(p_lDbId, p_lClassId, m_rpCftlDataAccess);
    lRet = command.Run();
    command.GetResult(p_rqmObjectListsList);
    return lRet;
 }
 
-long CftlObjectAccess::LoadObjects(CdmObjectContainer* p_pContainer,
-                                    QList<long>& p_rqvlObjectIds)
+qint64 CftlObjectAccess::LoadObjects(CdmObjectContainer* p_pContainer,
+                                    QList<qint64>& p_rqvlObjectIds)
 {
     CftlCommandLoadObjects command(p_pContainer, p_rqvlObjectIds, m_rpCftlDataAccess);
     return command.Run();
 }
 
-long CftlObjectAccess::LoadObject(const CdmObjectContainer* p_pContainer,
-                                  long p_lObjectId,
+qint64 CftlObjectAccess::LoadObject(const CdmObjectContainer* p_pContainer,
+                                 qint64 p_lObjectId,
                                   CdmObject*& p_pCdmObject)
 {
-   long lRet = CdmLogging::eDmObjectAccessError;
+  qint64 lRet = CdmLogging::eDmObjectAccessError;
    CftlCommandLoadSingleObject command(const_cast<CdmObjectContainer*>(p_pContainer), p_lObjectId, m_rpCftlDataAccess);
    lRet = command.Run();
 
@@ -197,11 +197,11 @@ long CftlObjectAccess::LoadObject(const CdmObjectContainer* p_pContainer,
    return lRet;
 }
 
-long CftlObjectAccess::LoadObject(const CdmObjectContainer* p_pContainer,
+qint64 CftlObjectAccess::LoadObject(const CdmObjectContainer* p_pContainer,
                                   QString p_qstrKeyname,
                                   CdmObject*& p_pCdmObject)
 {
-   long lRet = CdmLogging::eDmObjectAccessError;
+  qint64 lRet = CdmLogging::eDmObjectAccessError;
    CftlCommandLoadSingleObject command(const_cast<CdmObjectContainer*>(p_pContainer), p_qstrKeyname, m_rpCftlDataAccess);
    lRet = command.Run();
 
@@ -214,9 +214,9 @@ long CftlObjectAccess::LoadObject(const CdmObjectContainer* p_pContainer,
    return lRet;
 }
 
-long CftlObjectAccess::LoadObjectList(long p_lObjectListId, CdmObjectContainer*& p_pContainer)
+qint64 CftlObjectAccess::LoadObjectList(qint64 p_lObjectListId, CdmObjectContainer*& p_pContainer)
 {
-   long lRet = CdmLogging::eDmObjectAccessError;
+  qint64 lRet = CdmLogging::eDmObjectAccessError;
 
    if (p_pContainer)
    {
@@ -230,11 +230,11 @@ long CftlObjectAccess::LoadObjectList(long p_lObjectListId, CdmObjectContainer*&
    return lRet;
 }
 
-long CftlObjectAccess::LoadEmptyObjectList(long p_lDbId,
+qint64 CftlObjectAccess::LoadEmptyObjectList(qint64 p_lDbId,
                                            QString p_qstrKeyname,
                                            CdmObjectContainer*& p_pContainer)
 {
-    long lRet = CdmLogging::eDmObjectAccessError;
+   qint64 lRet = CdmLogging::eDmObjectAccessError;
 
     if (p_pContainer)
     {
@@ -248,11 +248,11 @@ long CftlObjectAccess::LoadEmptyObjectList(long p_lDbId,
     return lRet;
 }
 
-long CftlObjectAccess::LoadEmptyObjectList(long p_lDbId,
-                                          long p_lId,
+qint64 CftlObjectAccess::LoadEmptyObjectList(qint64 p_lDbId,
+                                         qint64 p_lId,
                                           CdmObjectContainer*& p_pContainer)
 {
-    long lRet = CdmLogging::eDmObjectAccessError;
+   qint64 lRet = CdmLogging::eDmObjectAccessError;
     Q_UNUSED(p_lDbId);
 
     if (p_pContainer)
@@ -267,11 +267,11 @@ long CftlObjectAccess::LoadEmptyObjectList(long p_lDbId,
     return lRet;
 }
 
-long CftlObjectAccess::LoadObjectList(long p_lDbId,
+qint64 CftlObjectAccess::LoadObjectList(qint64 p_lDbId,
                                       QString p_qstrKeyname,
                                       CdmObjectContainer*& p_pContainer)
 {
-    long lRet = CdmLogging::eDmObjectAccessError;
+   qint64 lRet = CdmLogging::eDmObjectAccessError;
 
     if (p_pContainer)
     {
@@ -285,37 +285,37 @@ long CftlObjectAccess::LoadObjectList(long p_lDbId,
     return lRet;
 }
 
-long CftlObjectAccess::LockObject(CdmObject* p_pObject, bool & p_bResult )
+qint64 CftlObjectAccess::LockObject(CdmObject* p_pObject, bool & p_bResult )
 {
    p_bResult = false;
    CftlCommandLockObject command(p_pObject, m_rpCftlDataAccess);
-   long lRet  = command.Run();
+  qint64 lRet  = command.Run();
    p_bResult = SUCCESSFULL(lRet);
    return lRet;
 }
 
-long CftlObjectAccess::IsObjectLocked(CdmObject* p_pObject)
+qint64 CftlObjectAccess::IsObjectLocked(CdmObject* p_pObject)
 {
     CftlCommandCheckObjectLocked command(p_pObject, m_rpCftlDataAccess);
     return command.Run();
 }
 
-long CftlObjectAccess::UnLockObject(CdmObject* p_pObject, bool & p_bResult )
+qint64 CftlObjectAccess::UnLockObject(CdmObject* p_pObject, bool & p_bResult )
 {
     p_bResult = false;
     CftlCommandUnlockObject command(p_pObject, m_rpCftlDataAccess);
-    long lRet  = command.Run();
+   qint64 lRet  = command.Run();
     p_bResult = SUCCESSFULL(lRet);
     return lRet;
 }
 
-long CftlObjectAccess::UpdateObject(CdmObject*& p_pCdmObject)
+qint64 CftlObjectAccess::UpdateObject(CdmObject*& p_pCdmObject)
 {
     CftlCommandUpdateObject command(p_pCdmObject, m_rpCftlDataAccess);
     return command.Run();
 }
 
-long CftlObjectAccess::UpdateContainer(CdmObjectContainer*& p_pContainer)
+qint64 CftlObjectAccess::UpdateContainer(CdmObjectContainer*& p_pContainer)
 {
     CftlCommandUpdateContainer command(p_pContainer, m_rpCftlDataAccess);
    return command.Run();
@@ -344,7 +344,7 @@ void CftlObjectAccess::GetCounterValue(CdmValueCounter* p_pCdmCounter)
    command.Run();
 }
 
-long CftlObjectAccess::GetCounterValue(const CdmObjectContainer* p_pContainer, CdmValue* p_pValue)
+qint64 CftlObjectAccess::GetCounterValue(const CdmObjectContainer* p_pContainer, CdmValue* p_pValue)
 {
     CftlCommandGetCounterValue command(p_pContainer, p_pValue, m_rpCftlDataAccess);
     return command.Run();
@@ -356,31 +356,31 @@ int CftlObjectAccess::IsObjectUsed(const CdmObject* p_pObject)
     return command.Run();
 }
 
-long CftlObjectAccess::RefreshObject(CdmObject* p_pCdmObject)
+qint64 CftlObjectAccess::RefreshObject(CdmObject* p_pCdmObject)
 {
     CftlCommandRefreshObject command(p_pCdmObject, m_rpCftlDataAccess);
     return command.Run();
 }
 
-long CftlObjectAccess::RefreshObjectList(CdmObjectContainer* p_pContainer)
+qint64 CftlObjectAccess::RefreshObjectList(CdmObjectContainer* p_pContainer)
 {
     CftlCommandRefreshComtainer command(p_pContainer, m_rpCftlDataAccess);
     return command.Run();
 }
 
-long CftlObjectAccess::CountObjectsOnDb(CdmObjectContainer* p_pContainer)
+qint64 CftlObjectAccess::CountObjectsOnDb(CdmObjectContainer* p_pContainer)
 {
    CftlCommandCountObjectsOnDb command(p_pContainer, m_rpCftlDataAccess);
    return command.Run();
 }
 
-bool CftlObjectAccess::GetReferences(long p_lObjectListId,
-                                      long p_lObjectId,
-                                      QMap<long,
-                                      long>& p_rqmReferences)
+bool CftlObjectAccess::GetReferences(qint64 p_lObjectListId,
+                                     qint64 p_lObjectId,
+                                      QMap<qint64,
+                                     qint64>& p_rqmReferences)
 {
    CftlCommandGetObjectReferences command(p_lObjectListId, p_lObjectId, m_rpCftlDataAccess);
-   long lRet = command.Run();
+  qint64 lRet = command.Run();
    p_rqmReferences = command.GetResult();
    return SUCCESSFULL(lRet);
 }
@@ -393,8 +393,8 @@ bool CftlObjectAccess::GetOwner(const CdmObjectContainer* p_pContainer, CdmObjec
    CftlCommandGetOwner command(p_pContainer, m_rpCftlDataAccess);
    command.Run();
 
-   long lOwnerObjectListId = command.GetOwnerContainerId();
-   long lOwnerObjectId = command.GetOwnerObjectId();
+  qint64 lOwnerObjectListId = command.GetOwnerContainerId();
+  qint64 lOwnerObjectId = command.GetOwnerObjectId();
    p_pOwnerObject = nullptr;
 
    if (lOwnerObjectId > 0 && lOwnerObjectListId > 0)
@@ -407,7 +407,7 @@ bool CftlObjectAccess::GetOwner(const CdmObjectContainer* p_pContainer, CdmObjec
    return bRet;
 }
 
-CdmObject* CftlObjectAccess::GetObject(long p_lContainerId, long p_lObjectId)
+CdmObject* CftlObjectAccess::GetObject(qint64 p_lContainerId,qint64 p_lObjectId)
 {
     CdmObject* pObject = nullptr;
     CdmDataProvider* pDataProvider = CdmSessionManager::GetDataProvider();
@@ -433,8 +433,8 @@ bool CftlObjectAccess::GetOwner(const CdmObject* p_pObject, CdmObject*& p_pOwner
    CftlCommandGetOwner command(p_pObject, m_rpCftlDataAccess);
    command.Run();
 
-   long lOwnerObjectListId = command.GetOwnerContainerId();
-   long lOwnerObjectId = command.GetOwnerObjectId();
+  qint64 lOwnerObjectListId = command.GetOwnerContainerId();
+  qint64 lOwnerObjectId = command.GetOwnerObjectId();
 
    p_pOwnerObject = GetObject(lOwnerObjectListId, lOwnerObjectId);
    bRet = (p_pOwnerObject != nullptr);

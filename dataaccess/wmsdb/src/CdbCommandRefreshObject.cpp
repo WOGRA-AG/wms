@@ -56,7 +56,7 @@ bool CdbCommandRefreshObject::CheckValid()
 
 int CdbCommandRefreshObject::Execute()
 {
-    long lRet = CdmLogging::eDmObjectAccessError;
+   qint64 lRet = CdmLogging::eDmObjectAccessError;
 
     if (CHKPTR(m_rpObject))
     {
@@ -77,7 +77,7 @@ int CdbCommandRefreshObject::Execute()
           if(cQSqlQuery.isValid())
           {
              qdtLastChange   = cQSqlQuery.value(0).toDateTime();
-             long lLastModifierId = cQSqlQuery.value(1).toInt();
+            qint64 lLastModifierId = cQSqlQuery.value(1).toInt();
              QString qstrCaption  = cQSqlQuery.value(2).toString();
              lRet = EC(eDmTrue);
              m_rpObject->SetModifierId(lLastModifierId);
@@ -102,9 +102,9 @@ int CdbCommandRefreshObject::Execute()
     return lRet;
 }
 
-long CdbCommandRefreshObject::ReadValues()
+qint64 CdbCommandRefreshObject::ReadValues()
 {
-   long lRet = CdmLogging::eDmObjectAccessError;
+  qint64 lRet = CdmLogging::eDmObjectAccessError;
 
    if(CHKPTR(m_rpObject))
    {
@@ -118,14 +118,14 @@ long CdbCommandRefreshObject::ReadValues()
       if(GetDataAccess()->ExecuteQuery(qstrQuery, cQSqlQuery) > 0)
       {
          lRet = CdmLogging::eDmOk;
-         QList<long> qvlBaseTypes;
+         QList<qint64> qvlBaseTypes;
          cQSqlQuery.first();
 
          if(cQSqlQuery.isValid())
          {
             do // finding out which type of values are in this object
             {
-               long lBaseType = cQSqlQuery.value(0).toInt();
+              qint64 lBaseType = cQSqlQuery.value(0).toInt();
                qvlBaseTypes.append(lBaseType);
             }
             while(cQSqlQuery.next());
@@ -284,9 +284,9 @@ long CdbCommandRefreshObject::ReadValues()
    return lRet;
 }
 
-long CdbCommandRefreshObject::ReadBinaryDocuments()
+qint64 CdbCommandRefreshObject::ReadBinaryDocuments()
 {
-   long lRet = CdmLogging::eDmObjectAccessError;
+  qint64 lRet = CdmLogging::eDmObjectAccessError;
 
    if(CHKPTR(m_rpObject))
    {
@@ -310,13 +310,13 @@ long CdbCommandRefreshObject::ReadBinaryDocuments()
 
             do // loading each class
             {
-               long      lId                = cQSqlQuery.value(0).toInt();
+              qint64      lId                = cQSqlQuery.value(0).toInt();
                QString   qstrType           = cQSqlQuery.value(1).toString();
                QString   qstrFilename       = cQSqlQuery.value(2).toString();
-               long      lMemberId          = cQSqlQuery.value(3).toInt();
+              qint64      lMemberId          = cQSqlQuery.value(3).toInt();
                QDateTime qdtLastChange      = cQSqlQuery.value(4).toDateTime();
-               long      lCreatorId         = cQSqlQuery.value(5).toInt();
-               long      lModifierId        = cQSqlQuery.value(6).toInt();
+              qint64      lCreatorId         = cQSqlQuery.value(5).toInt();
+              qint64      lModifierId        = cQSqlQuery.value(6).toInt();
                QString   qstrKeyname        = cQSqlQuery.value(7).toString();
                QString   qstrCaption        = cQSqlQuery.value(8).toString();
 
@@ -356,9 +356,9 @@ long CdbCommandRefreshObject::ReadBinaryDocuments()
    return lRet;
 }
 
-long CdbCommandRefreshObject::ReadBools()
+qint64 CdbCommandRefreshObject::ReadBools()
 {
-   long lRet = CdmLogging::eDmObjectAccessError;
+  qint64 lRet = CdmLogging::eDmObjectAccessError;
 
    if(CHKPTR(m_rpObject))
    {
@@ -378,12 +378,12 @@ long CdbCommandRefreshObject::ReadBools()
          {
             do // reading each bool
             {
-               long     lId                = cQSqlQuery.value(0).toInt();
+              qint64     lId                = cQSqlQuery.value(0).toInt();
                bool     bValue             = cQSqlQuery.value(1).toBool();
-               long     lMemberId          = cQSqlQuery.value(2).toInt();
+              qint64     lMemberId          = cQSqlQuery.value(2).toInt();
                QDateTime qdtLastChange     = cQSqlQuery.value(3).toDateTime();
-               long     lCreatorId         = cQSqlQuery.value(4).toInt();
-               long     lModifierId        = cQSqlQuery.value(5).toInt();
+              qint64     lCreatorId         = cQSqlQuery.value(4).toInt();
+              qint64     lModifierId        = cQSqlQuery.value(5).toInt();
                QString  qstrKeyname        = cQSqlQuery.value(6).toString();
                QString  qstrCaption        = cQSqlQuery.value(7).toString();
 
@@ -419,9 +419,9 @@ long CdbCommandRefreshObject::ReadBools()
    return lRet;
 }
 
-long CdbCommandRefreshObject::ReadCharacterDocuments(CdbDataAccess::EodbcBaseType p_eType)
+qint64 CdbCommandRefreshObject::ReadCharacterDocuments(CdbDataAccess::EodbcBaseType p_eType)
 {
-   long lRet = CdmLogging::eDmObjectAccessError;
+  qint64 lRet = CdmLogging::eDmObjectAccessError;
 
    if(CHKPTR(m_rpObject))
    {
@@ -445,12 +445,12 @@ long CdbCommandRefreshObject::ReadCharacterDocuments(CdbDataAccess::EodbcBaseTyp
 
             do // loading each class
             {
-               long      lId                = cQSqlQuery.value(0).toInt();
+              qint64      lId                = cQSqlQuery.value(0).toInt();
                QString   qstrValue          = cQSqlQuery.value(1).toString();
-               long      lMemberId          = cQSqlQuery.value(2).toInt();
+              qint64      lMemberId          = cQSqlQuery.value(2).toInt();
                QDateTime qdtLastChange      = cQSqlQuery.value(3).toDateTime();
-               long      lCreatorId         = cQSqlQuery.value(4).toInt();
-               long      lModifierId        = cQSqlQuery.value(5).toInt();
+              qint64      lCreatorId         = cQSqlQuery.value(4).toInt();
+              qint64      lModifierId        = cQSqlQuery.value(5).toInt();
                QString   qstrKeyname        = cQSqlQuery.value(6).toString();
                QString   qstrCaption        = cQSqlQuery.value(7).toString();
 
@@ -489,9 +489,9 @@ long CdbCommandRefreshObject::ReadCharacterDocuments(CdbDataAccess::EodbcBaseTyp
    return lRet;
 }
 
-long CdbCommandRefreshObject::ReadCounters()
+qint64 CdbCommandRefreshObject::ReadCounters()
 {
-   long lRet = CdmLogging::eDmObjectAccessError;
+  qint64 lRet = CdmLogging::eDmObjectAccessError;
 
    if(CHKPTR(m_rpObject))
    {
@@ -513,12 +513,12 @@ long CdbCommandRefreshObject::ReadCounters()
 
             do // reading each counter
             {
-               long      lId                = cQSqlQuery.value(0).toInt();
-               long      lValue             = cQSqlQuery.value(1).toInt();
-               long      lMemberId          = cQSqlQuery.value(2).toInt();
+              qint64      lId                = cQSqlQuery.value(0).toInt();
+              qint64      lValue             = cQSqlQuery.value(1).toInt();
+              qint64      lMemberId          = cQSqlQuery.value(2).toInt();
                QDateTime qdtLastChange      = cQSqlQuery.value(3).toDateTime();
-               long      lCreatorId         = cQSqlQuery.value(4).toInt();
-               long      lModifierId        = cQSqlQuery.value(5).toInt();
+              qint64      lCreatorId         = cQSqlQuery.value(4).toInt();
+              qint64      lModifierId        = cQSqlQuery.value(5).toInt();
                QString   qstrKeyname        = cQSqlQuery.value(6).toString();
                QString   qstrCaption        = cQSqlQuery.value(7).toString();
 
@@ -553,9 +553,9 @@ long CdbCommandRefreshObject::ReadCounters()
    return lRet;
 }
 
-long CdbCommandRefreshObject::ReadDates()
+qint64 CdbCommandRefreshObject::ReadDates()
 {
-   long lRet = CdmLogging::eDmObjectAccessError;
+  qint64 lRet = CdmLogging::eDmObjectAccessError;
 
    if(CHKPTR(m_rpObject))
    {
@@ -577,12 +577,12 @@ long CdbCommandRefreshObject::ReadDates()
          {
             do // loading each class
             {
-               long      lId                = cQSqlQuery.value(0).toInt();
+              qint64      lId                = cQSqlQuery.value(0).toInt();
                QDate     qdValue            = cQSqlQuery.value(1).toDate();
-               long      lMemberId          = cQSqlQuery.value(2).toInt();
+              qint64      lMemberId          = cQSqlQuery.value(2).toInt();
                QDateTime qdtLastChange      = cQSqlQuery.value(3).toDateTime();
-               long      lCreatorId         = cQSqlQuery.value(4).toInt();
-               long      lModifierId        = cQSqlQuery.value(5).toInt();
+              qint64      lCreatorId         = cQSqlQuery.value(4).toInt();
+              qint64      lModifierId        = cQSqlQuery.value(5).toInt();
                QString   qstrKeyname        = cQSqlQuery.value(6).toString();
                QString   qstrCaption        = cQSqlQuery.value(7).toString();
 
@@ -623,9 +623,9 @@ long CdbCommandRefreshObject::ReadDates()
    return lRet;
 }
 
-long CdbCommandRefreshObject::ReadDateTimes()
+qint64 CdbCommandRefreshObject::ReadDateTimes()
 {
-   long lRet = CdmLogging::eDmObjectAccessError;
+  qint64 lRet = CdmLogging::eDmObjectAccessError;
 
    if(CHKPTR(m_rpObject))
    {
@@ -646,12 +646,12 @@ long CdbCommandRefreshObject::ReadDateTimes()
 
             do // loading each class
             {
-               long      lId                = cQSqlQuery.value(0).toInt();
+              qint64      lId                = cQSqlQuery.value(0).toInt();
                QDateTime qdtValue           = cQSqlQuery.value(1).toDateTime();
-               long      lMemberId          = cQSqlQuery.value(2).toInt();
+              qint64      lMemberId          = cQSqlQuery.value(2).toInt();
                QDateTime qdtLastChange      = cQSqlQuery.value(3).toDateTime();
-               long      lCreatorId         = cQSqlQuery.value(4).toInt();
-               long      lModifierId        = cQSqlQuery.value(5).toInt();
+              qint64      lCreatorId         = cQSqlQuery.value(4).toInt();
+              qint64      lModifierId        = cQSqlQuery.value(5).toInt();
                QString   qstrKeyname        = cQSqlQuery.value(6).toString();
                QString   qstrCaption        = cQSqlQuery.value(7).toString();
 
@@ -691,16 +691,16 @@ long CdbCommandRefreshObject::ReadDateTimes()
    return lRet;
 }
 
-long CdbCommandRefreshObject::ReadDoubles()
+qint64 CdbCommandRefreshObject::ReadDoubles()
 {
-   long lRet = CdmLogging::eDmObjectAccessError;
+  qint64 lRet = CdmLogging::eDmObjectAccessError;
 
    if(CHKPTR(m_rpObject))
    {
       QSqlQuery cQSqlQuery;
       QString qstrQuery;
 
-      // query for reading long values for one object
+      // query for reading qint64 values for one object
       qstrQuery = QString("select val.ValueId, dou.Val, val.MemberId, val.LastChange, val.CreatorId, "
                           "val.ModifierId, mem.Keyname, mem.Caption from WMS_VALUE_DOUBLE dou, "
                           "WMS_VALUE val, WMS_CLASS_MEMBER mem  where dou.DoubleId = val.ValueId and "
@@ -717,12 +717,12 @@ long CdbCommandRefreshObject::ReadDoubles()
          {
             do // loading each class
             {
-               long      lId                = cQSqlQuery.value(0).toInt();
+              qint64      lId                = cQSqlQuery.value(0).toInt();
                double    dValue             = cQSqlQuery.value(1).toDouble();
-               long      lMemberId          = cQSqlQuery.value(2).toInt();
+              qint64      lMemberId          = cQSqlQuery.value(2).toInt();
                QDateTime qdtLastChange      = cQSqlQuery.value(3).toDateTime();
-               long      lCreatorId         = cQSqlQuery.value(4).toInt();
-               long      lModifierId        = cQSqlQuery.value(5).toInt();
+              qint64      lCreatorId         = cQSqlQuery.value(4).toInt();
+              qint64      lModifierId        = cQSqlQuery.value(5).toInt();
                QString   qstrKeyname        = cQSqlQuery.value(6).toString();
                QString   qstrCaption        = cQSqlQuery.value(7).toString();
 
@@ -758,16 +758,16 @@ long CdbCommandRefreshObject::ReadDoubles()
    return lRet;
 }
 
-long CdbCommandRefreshObject::ReadFloats()
+qint64 CdbCommandRefreshObject::ReadFloats()
 {
-   long lRet = CdmLogging::eDmObjectAccessError;
+  qint64 lRet = CdmLogging::eDmObjectAccessError;
 
    if(CHKPTR(m_rpObject))
    {
       QSqlQuery cQSqlQuery;
       QString qstrQuery;
 
-      // query for reading long values for one object
+      // query for reading qint64 values for one object
       qstrQuery = QString("select val.ValueId, fl.Val, val.MemberId, val.LastChange, val.CreatorId, "
                           "val.ModifierId, mem.Keyname, mem.Caption from WMS_VALUE_FLOAT fl, "
                           "WMS_VALUE val, WMS_CLASS_MEMBER mem  where fl.FloatId = val.ValueId and "
@@ -783,12 +783,12 @@ long CdbCommandRefreshObject::ReadFloats()
          {
             do // reading each float
             {
-               long      lId                = cQSqlQuery.value(0).toInt();
+              qint64      lId                = cQSqlQuery.value(0).toInt();
                float     fValue             = cQSqlQuery.value(1).toDouble();
-               long      lMemberId          = cQSqlQuery.value(2).toInt();
+              qint64      lMemberId          = cQSqlQuery.value(2).toInt();
                QDateTime qdtLastChange      = cQSqlQuery.value(3).toDateTime();
-               long      lCreatorId         = cQSqlQuery.value(4).toInt();
-               long      lModifierId        = cQSqlQuery.value(5).toInt();
+              qint64      lCreatorId         = cQSqlQuery.value(4).toInt();
+              qint64      lModifierId        = cQSqlQuery.value(5).toInt();
                QString   qstrKeyname        = cQSqlQuery.value(6).toString();
                QString   qstrCaption        = cQSqlQuery.value(7).toString();
 
@@ -824,9 +824,9 @@ long CdbCommandRefreshObject::ReadFloats()
    return lRet;
 }
 
-long CdbCommandRefreshObject::ReadInts(CdbDataAccess::EodbcBaseType  p_eOdbcType)
+qint64 CdbCommandRefreshObject::ReadInts(CdbDataAccess::EodbcBaseType  p_eOdbcType)
 {
-   long lRet = CdmLogging::eDmObjectAccessError;
+  qint64 lRet = CdmLogging::eDmObjectAccessError;
 
    if(CHKPTR(m_rpObject))
    {
@@ -849,12 +849,12 @@ long CdbCommandRefreshObject::ReadInts(CdbDataAccess::EodbcBaseType  p_eOdbcType
 
             do // reading each int
             {
-               long     lId                = cQSqlQuery.value(0).toInt();
+              qint64     lId                = cQSqlQuery.value(0).toInt();
                int      iValue             = cQSqlQuery.value(1).toInt();
-               long     lMemberId          = cQSqlQuery.value(2).toInt();
+              qint64     lMemberId          = cQSqlQuery.value(2).toInt();
                QDateTime qdtLastChange     = cQSqlQuery.value(3).toDateTime();
-               long     lCreatorId         = cQSqlQuery.value(4).toInt();
-               long     lModifierId        = cQSqlQuery.value(5).toInt();
+              qint64     lCreatorId         = cQSqlQuery.value(4).toInt();
+              qint64     lModifierId        = cQSqlQuery.value(5).toInt();
                QString  qstrKeyname        = cQSqlQuery.value(6).toString();
                QString  qstrCaption        = cQSqlQuery.value(7).toString();
 
@@ -908,16 +908,16 @@ long CdbCommandRefreshObject::ReadInts(CdbDataAccess::EodbcBaseType  p_eOdbcType
    return lRet;
 }
 
-long CdbCommandRefreshObject::ReadLongs()
+qint64 CdbCommandRefreshObject::ReadLongs()
 {
-   long lRet = CdmLogging::eDmObjectAccessError;
+  qint64 lRet = CdmLogging::eDmObjectAccessError;
 
    if(CHKPTR(m_rpObject))
    {
       QSqlQuery cQSqlQuery;
       QString qstrQuery;
 
-      // query for reading long values for one object
+      // query for reading qint64 values for one object
       qstrQuery = QString("select val.ValueId, long1.Val, val.MemberId, val.LastChange, val.CreatorId, "
                           "val.ModifierId, mem.Keyname, mem.Caption from WMS_VALUE_LONG long1, "
                           "WMS_VALUE val, WMS_CLASS_MEMBER mem  where long1.LongId = val.ValueId and "
@@ -930,14 +930,14 @@ long CdbCommandRefreshObject::ReadLongs()
          cQSqlQuery.first();
          if(cQSqlQuery.isValid())
          {
-            do // reading each long
+            do // reading each qint64
             {
-               long      lId                = cQSqlQuery.value(0).toInt();
-               long      lValue             = cQSqlQuery.value(1).toInt();
-               long      lMemberId          = cQSqlQuery.value(2).toInt();
+              qint64      lId                = cQSqlQuery.value(0).toInt();
+              qint64      lValue             = cQSqlQuery.value(1).toInt();
+              qint64      lMemberId          = cQSqlQuery.value(2).toInt();
                QDateTime qdtLastChange      = cQSqlQuery.value(3).toDateTime();
-               long      lCreatorId         = cQSqlQuery.value(4).toInt();
-               long      lModifierId        = cQSqlQuery.value(5).toInt();
+              qint64      lCreatorId         = cQSqlQuery.value(4).toInt();
+              qint64      lModifierId        = cQSqlQuery.value(5).toInt();
                QString   qstrKeyname        = cQSqlQuery.value(6).toString();
                QString   qstrCaption        = cQSqlQuery.value(7).toString();
 
@@ -974,9 +974,9 @@ long CdbCommandRefreshObject::ReadLongs()
    return lRet;
 }
 
-long CdbCommandRefreshObject::ReadObjectRefs()
+qint64 CdbCommandRefreshObject::ReadObjectRefs()
 {
-   long lRet = CdmLogging::eDmObjectAccessError;
+  qint64 lRet = CdmLogging::eDmObjectAccessError;
 
    if(CHKPTR(m_rpObject))
    {
@@ -1003,13 +1003,13 @@ long CdbCommandRefreshObject::ReadObjectRefs()
          {
             do // reading each objectreference
             {
-               long      lId                = cQSqlQuery.value(0).toInt();
-               long      lObjectListId      = cQSqlQuery.value(2).toInt();
-               long      lValue             = cQSqlQuery.value(3).toInt();
-               long      lMemberId          = cQSqlQuery.value(4).toInt();
+              qint64      lId                = cQSqlQuery.value(0).toInt();
+              qint64      lObjectListId      = cQSqlQuery.value(2).toInt();
+              qint64      lValue             = cQSqlQuery.value(3).toInt();
+              qint64      lMemberId          = cQSqlQuery.value(4).toInt();
                QDateTime qdtLastChange      = cQSqlQuery.value(5).toDateTime();
-               long      lCreatorId         = cQSqlQuery.value(6).toInt();
-               long      lModifierId        = cQSqlQuery.value(7).toInt();
+              qint64      lCreatorId         = cQSqlQuery.value(6).toInt();
+              qint64      lModifierId        = cQSqlQuery.value(7).toInt();
                QString   qstrKeyname        = cQSqlQuery.value(8).toString();
                QString   qstrCaption        = cQSqlQuery.value(9).toString();
                QString   qstrObjectKeyname  = cQSqlQuery.value(10).toString();
@@ -1047,9 +1047,9 @@ long CdbCommandRefreshObject::ReadObjectRefs()
    return lRet;
 }
 
-long CdbCommandRefreshObject::ReadObjectListRefs()
+qint64 CdbCommandRefreshObject::ReadObjectListRefs()
 {
-   long lRet = CdmLogging::eDmObjectAccessError;
+  qint64 lRet = CdmLogging::eDmObjectAccessError;
 
    if(CHKPTR(m_rpObject))
    {
@@ -1075,12 +1075,12 @@ long CdbCommandRefreshObject::ReadObjectListRefs()
 
             do // reading each objectlistreference
             {
-               long      lId                = cQSqlQuery.value(0).toInt();
-               long      lValue             = cQSqlQuery.value(2).toInt();
-               long      lMemberId          = cQSqlQuery.value(3).toInt();
+              qint64      lId                = cQSqlQuery.value(0).toInt();
+              qint64      lValue             = cQSqlQuery.value(2).toInt();
+              qint64      lMemberId          = cQSqlQuery.value(3).toInt();
                QDateTime qdtLastChange      = cQSqlQuery.value(4).toDateTime();
-               long      lCreatorId         = cQSqlQuery.value(5).toInt();
-               long      lModifierId        = cQSqlQuery.value(6).toInt();
+              qint64      lCreatorId         = cQSqlQuery.value(5).toInt();
+              qint64      lModifierId        = cQSqlQuery.value(6).toInt();
                QString   qstrKeyname        = cQSqlQuery.value(7).toString();
                QString   qstrCaption        = cQSqlQuery.value(8).toString();
 
@@ -1116,16 +1116,16 @@ long CdbCommandRefreshObject::ReadObjectListRefs()
    return lRet;
 }
 
-long CdbCommandRefreshObject::ReadStrings()
+qint64 CdbCommandRefreshObject::ReadStrings()
 {
-   long lRet = CdmLogging::eDmObjectAccessError;
+  qint64 lRet = CdmLogging::eDmObjectAccessError;
 
    if(CHKPTR(m_rpObject))
    {
       QSqlQuery cQSqlQuery;
       QString qstrQuery;
 
-      // query for reading long values for one object
+      // query for reading qint64 values for one object
       qstrQuery = QString("select val.ValueId, str.Val, val.MemberId, val.LastChange, val.CreatorId, val.ModifierId, mem.Keyname, mem.Caption from WMS_VALUE_STRING str, WMS_VALUE val, WMS_CLASS_MEMBER mem  where str.StringId = val.ValueId and "
                           "val.MemberId = mem.MemberId and val.ObjectId= %1 and val.BaseType = %2")
                           .arg(m_rpObject->GetId())
@@ -1138,12 +1138,12 @@ long CdbCommandRefreshObject::ReadStrings()
          {
             do // reading each string
             {
-               long      lId                = cQSqlQuery.value(0).toInt();
+              qint64      lId                = cQSqlQuery.value(0).toInt();
                QString   qstrValue          = cQSqlQuery.value(1).toString();
-               long      lMemberId          = cQSqlQuery.value(2).toInt();
+              qint64      lMemberId          = cQSqlQuery.value(2).toInt();
                QDateTime qdtLastChange      = cQSqlQuery.value(3).toDateTime();
-               long      lCreatorId         = cQSqlQuery.value(4).toInt();
-               long      lModifierId        = cQSqlQuery.value(5).toInt();
+              qint64      lCreatorId         = cQSqlQuery.value(4).toInt();
+              qint64      lModifierId        = cQSqlQuery.value(5).toInt();
                QString   qstrKeyname        = cQSqlQuery.value(6).toString();
                QString   qstrCaption        = cQSqlQuery.value(7).toString();
 
@@ -1179,9 +1179,9 @@ long CdbCommandRefreshObject::ReadStrings()
    return lRet;
 }
 
-long CdbCommandRefreshObject::ReadTimes()
+qint64 CdbCommandRefreshObject::ReadTimes()
 {
-   long lRet = CdmLogging::eDmObjectAccessError;
+  qint64 lRet = CdmLogging::eDmObjectAccessError;
 
    if(CHKPTR(m_rpObject))
    {
@@ -1203,12 +1203,12 @@ long CdbCommandRefreshObject::ReadTimes()
          {
             do // reading each time value
             {
-               long      lId                = cQSqlQuery.value(0).toInt();
+              qint64      lId                = cQSqlQuery.value(0).toInt();
                QTime     qtValue            = cQSqlQuery.value(1).toTime();
-               long      lMemberId          = cQSqlQuery.value(2).toInt();
+              qint64      lMemberId          = cQSqlQuery.value(2).toInt();
                QDateTime qdtLastChange      = cQSqlQuery.value(3).toDateTime();
-               long      lCreatorId         = cQSqlQuery.value(4).toInt();
-               long      lModifierId        = cQSqlQuery.value(5).toInt();
+              qint64      lCreatorId         = cQSqlQuery.value(4).toInt();
+              qint64      lModifierId        = cQSqlQuery.value(5).toInt();
                QString   qstrKeyname        = cQSqlQuery.value(6).toString();
                QString   qstrCaption        = cQSqlQuery.value(7).toString();
 
@@ -1280,8 +1280,8 @@ bool CdbCommandRefreshObject::CheckType(QString p_qstrKeyname, EdmValueType p_eN
 }
 
 CdmValueCharacterDocument* CdbCommandRefreshObject::CreateCharDocValue(CdbDataAccess::EodbcBaseType p_eType,
-                                                            long p_lDatabaseId,
-                                                            long p_lId,
+                                                           qint64 p_lDatabaseId,
+                                                           qint64 p_lId,
                                                             QString p_qstrKeyname)
 {
    CdmValueCharacterDocument* pDocument = nullptr;

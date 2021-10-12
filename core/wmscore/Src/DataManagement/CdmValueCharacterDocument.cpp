@@ -12,8 +12,8 @@
 #include "CdmValueCharacterDocument.h"
 
 
-CdmValueCharacterDocument::CdmValueCharacterDocument(  long p_lDatabaseId,
-                                            long p_lId,
+CdmValueCharacterDocument::CdmValueCharacterDocument( qint64 p_lDatabaseId,
+                                           qint64 p_lId,
                                             QString p_qstrKeyname,
                                             CdmObject* p_pCdmObject )
    : CdmValue( p_lDatabaseId, p_lId, p_qstrKeyname,eDmValueCharacterDocument, p_pCdmObject)
@@ -21,8 +21,8 @@ CdmValueCharacterDocument::CdmValueCharacterDocument(  long p_lDatabaseId,
    // nothing to do
 }
 
-CdmValueCharacterDocument::CdmValueCharacterDocument(long p_lDatabaseId,
-                                           long p_lId,
+CdmValueCharacterDocument::CdmValueCharacterDocument(qint64 p_lDatabaseId,
+                                          qint64 p_lId,
                                            QString p_qstrKeyname,
                                            EdmValueType p_edmValue,
                                            CdmObject* p_pCdmObject)

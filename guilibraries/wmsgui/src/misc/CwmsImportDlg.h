@@ -45,7 +45,7 @@ class WMSGUI_API CwmsImportDlg : public QDialog, public Ui::CwmsImportSettingsDl
    private:
       CwmsImportSettings* m_rpCwmsImportSettings;
       CwmsImport* m_rpCwmsImport;
-      long m_lClassId;
+     qint64 m_lClassId;
    
 
 

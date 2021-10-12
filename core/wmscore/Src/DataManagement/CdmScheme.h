@@ -49,7 +49,7 @@ class WMSMANAGER_API CdmScheme : public CdmLocatedElement
 private:
     CdmDataProvider* m_rpCdmManager;
     QThreadStorage <CdmContainerManager*> m_pCdmContainerManager;
-    QAtomicInteger<long> m_lId;
+    QAtomicInteger<qint64> m_lId;
     QString m_qstrSchemeName;
     QAtomicInteger<int> m_iVersion;
     CdmRights m_cCdmRights;
@@ -58,13 +58,13 @@ private:
     CumUserManager* m_pCumSchemeUserManager;
     QAtomicInteger<bool> m_bDeploymentMode;
     QList<QString> m_qlDeploymentRelevantEelements; // contains the uri.
-    QList<long> m_qlDeployedContainerIds;
+    QList<qint64> m_qlDeployedContainerIds;
 
     friend class IdmDataAccess;
     friend class CdmDataAccessHelper;
 
 public:
-    CdmScheme(long p_lId, QString p_qstrDatabaseName, int p_iVersion);
+    CdmScheme(qint64 p_lId, QString p_qstrDatabaseName, int p_iVersion);
     virtual ~CdmScheme();
     IdmDataAccess* GetDataAccess(  );
     void SetVersion(int p_iVersion);
@@ -74,7 +74,7 @@ public:
     QMap<int, QString> GetLanguageMap();
     void AddLanguage(QString& p_qstrName);
     void AddLanguage(int p_iId, QString& p_qstrName);
-    long Commit();
+   qint64 Commit();
     QString GetLanguage(int p_iId) const;
     void RemoveLanguage(int p_iId);
     QVariant GetVariantCompleteDatabase() const;
@@ -82,8 +82,8 @@ public:
     bool Deploy(QString &p_qstrFilename);
     bool IsInDeploymentMode() const;
     void AddDeploymentRelevantElement(QString &p_qstrUri);
-    void AddDeployedContainerId(long p_Id);
-    bool IsDeployedContainerId(long p_Id);
+    void AddDeployedContainerId(qint64 p_Id);
+    bool IsDeployedContainerId(qint64 p_Id);
     bool DeployJsonContent(QString &p_rqstrJson);
     bool IsScheme() const;
     QString GetUri() const;
@@ -92,11 +92,11 @@ public:
 
     void ResetContainerManager();
 public slots:
-    long GetId() const;
+   qint64 GetId() const;
     QString GetSchemeName() const;
     CdmClassManager* GetClassManager( );
     CdmContainerManager* GetContainerManager( ) const;
-    long GetUserId() const;
+   qint64 GetUserId() const;
     int GetVersion( ) const;
     CdmRights& GetRights( );
     bool CheckReadAccess( ) const;

@@ -29,12 +29,12 @@
 #include "CumUserGroup.h"
 
 
-CumUserGroup::CumUserGroup(long p_lId, CumUserManager* p_pUserManager)
+CumUserGroup::CumUserGroup(qint64 p_lId, CumUserManager* p_pUserManager)
    : CumAccessor(p_lId, p_pUserManager)
 {
 }
 
-CumUserGroup::CumUserGroup(long p_lId, QString p_qstrGroupName, CumUserManager* p_pUserManager)
+CumUserGroup::CumUserGroup(qint64 p_lId, QString p_qstrGroupName, CumUserManager* p_pUserManager)
    : CumAccessor(p_lId, p_pUserManager),
    m_qstrGroupName(p_qstrGroupName)
 {
@@ -74,7 +74,7 @@ void CumUserGroup::GetUserListNewPointers(QList<CumUser*>& p_rllUsers) const
     }
 }
 
-bool CumUserGroup::HasUser(long p_lUserId) const
+bool CumUserGroup::HasUser(qint64 p_lUserId) const
 {
     bool bRet = false;
 
@@ -154,7 +154,7 @@ QVariant CumUserGroup::GetVariant() const
 {
    QVariantMap qMap;
 
-   qMap.insert(WMS_ID, (int)GetId());
+   qMap.insert(WMS_ID, GetId());
    qMap.insert(WMS_NAME, GetGroupName());
    qMap.insert(WMS_URI, GetUri());
    qMap.insert(WMS_TYPE, "Usergroup");
@@ -169,7 +169,7 @@ QVariant CumUserGroup::GetVariant() const
 
    for (; qllIt != qllItEnd; ++qllIt)
    {
-      qvlUsers.append((int)(*qllIt)->GetId());
+      qvlUsers.append((*qllIt)->GetId());
    }
 
    qMap.insert("Users", qvlUsers);
@@ -181,7 +181,7 @@ QVariant CumUserGroup::GetVariantForDeplyoment() const
 {
     QVariantMap qMap;
 
-    qMap.insert("Id", (int)GetId());
+    qMap.insert("Id", GetId());
     qMap.insert("Name", GetGroupName());
     qMap.insert("Uri", GetUriInternal());
     return qMap;

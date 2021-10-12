@@ -1,6 +1,6 @@
 #include "CdbCommandDeleteClass.h"
 
-CdbCommandDeleteClass::CdbCommandDeleteClass(long p_lClassId, CdbDataAccess* p_pDataAccess)
+CdbCommandDeleteClass::CdbCommandDeleteClass(qint64 p_lClassId, CdbDataAccess* p_pDataAccess)
 : CdbAbstractCommandTransactional(p_pDataAccess),
   m_lClassId(p_lClassId)
 {

@@ -5,7 +5,7 @@
 #include "CftlCommandFindUserGroup.h"
 
 
-CftlCommandFindUserGroup::CftlCommandFindUserGroup(long p_lGroupId, CftlDataAccess* p_pDataAccess)
+CftlCommandFindUserGroup::CftlCommandFindUserGroup(qint64 p_lGroupId, CftlDataAccess* p_pDataAccess)
 : CftlAbstractCommand(p_pDataAccess),
   m_lGroupId(p_lGroupId),
   m_pGroup(nullptr)
@@ -52,7 +52,7 @@ int CftlCommandFindUserGroup::FindUserGroupById()
     QString qstrQuery;
 
     cQSqlQuery.prepare("select GroupId, Name from WMS_UM_GROUP where GroupId = ?");
-    cQSqlQuery.addBindValue((int)m_lGroupId);
+    cQSqlQuery.addBindValue(m_lGroupId);
 
     if(SUCCESSFULL(ExecuteQuery(cQSqlQuery)))
     {

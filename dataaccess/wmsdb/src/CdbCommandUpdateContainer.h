@@ -7,13 +7,13 @@ class CdbCommandUpdateContainer : public CdbAbstractCommandTransactional
 {
 private:
     CdmObjectContainer* m_rpObjectContainer;
-    long m_lSessionId;
+   qint64 m_lSessionId;
 
-    long DeleteObjects(CdmObjectContainer *p_pContainer, QList<CdmObject *> &p_rqlObjects, long p_lSessionId);
-    long UpdateObjects(CdmObjectContainer *p_pContainer, QList<CdmObject *> &p_rqlObjects, long p_lSessionId);
-    long UpdateRights(CdmObjectContainer *&p_pContainer);
+   qint64 DeleteObjects(CdmObjectContainer *p_pContainer, QList<CdmObject *> &p_rqlObjects,qint64 p_lSessionId);
+   qint64 UpdateObjects(CdmObjectContainer *p_pContainer, QList<CdmObject *> &p_rqlObjects,qint64 p_lSessionId);
+   qint64 UpdateRights(CdmObjectContainer *&p_pContainer);
 public:
-    CdbCommandUpdateContainer(CdmObjectContainer*& p_pContainer, long p_lSessionId, CdbDataAccess* p_pDataAccess);
+    CdbCommandUpdateContainer(CdmObjectContainer*& p_pContainer,qint64 p_lSessionId, CdbDataAccess* p_pDataAccess);
     virtual ~CdbCommandUpdateContainer();
 
 protected:

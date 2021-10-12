@@ -79,7 +79,7 @@ public:
     static QString GetMemberFieldName(const CdmMember *p_pMember);
 private:
     static void GetCounterValue(CdmValueCounter *p_pCdmCounter, CftlInterface *p_pInterface);
-    static long GetCounterValue(long p_lObjectListId, QString &p_qstrTableName, QString &p_qstrMemberFieldName, CftlInterface *p_pInterface);
+    static qint64 GetCounterValue(qint64 p_lObjectListId, QString &p_qstrTableName, QString &p_qstrMemberFieldName, CftlInterface *p_pInterface);
 };
 
 #endif // CODBCHELPER_H

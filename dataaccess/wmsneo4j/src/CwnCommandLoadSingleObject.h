@@ -13,16 +13,16 @@ class CdmObject;
 class CwnCommandLoadSingleObject : public CwnCommandBase
 {
 private:
-    long m_lContainerId;
-    long m_lObjectId;
+   qint64 m_lContainerId;
+   qint64 m_lObjectId;
     QString m_qstrKeyname;
     CdmObject* m_rpObject;
 
     EdmValueType m_eType = eDmValueNone;
 
-    CdmValueCharacterDocument *CreateCharDocValue(long p_lDatabaseId, long p_lId, QString p_qstrKeyname);
+    CdmValueCharacterDocument *CreateCharDocValue(qint64 p_lDatabaseId,qint64 p_lId, QString p_qstrKeyname);
 
-    long ReadValues();
+   qint64 ReadValues();
 
     QString GetLoadAllObjectQuery();
 
@@ -43,8 +43,8 @@ private:
     bool interpretAnswerForTimes(const QVariantList *list);
 
 public:
-    CwnCommandLoadSingleObject(long p_lContainerId, long p_lObjectId, CwnDataAccess* p_pDataAccess);
-    CwnCommandLoadSingleObject(long p_lContainerId, QString p_qstrKeyname, CwnDataAccess* p_pDataAccess);
+    CwnCommandLoadSingleObject(qint64 p_lContainerId,qint64 p_lObjectId, CwnDataAccess* p_pDataAccess);
+    CwnCommandLoadSingleObject(qint64 p_lContainerId, QString p_qstrKeyname, CwnDataAccess* p_pDataAccess);
     virtual ~CwnCommandLoadSingleObject();
     CdmObject* GetResult();
     QString queryCausedError;

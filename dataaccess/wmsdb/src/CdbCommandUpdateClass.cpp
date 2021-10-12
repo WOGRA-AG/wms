@@ -28,11 +28,11 @@ int CdbCommandUpdateClass::Execute()
     // First of save the groups for correct ID assignments of members.
     SaveGroups(m_rpClass);
     // Updating class Data
-    QMap<long, CdmMember*> qmMembers;
+    QMap<qint64, CdmMember*> qmMembers;
     m_rpClass->GetClassMemberMap(qmMembers);
 
-    QMap<long,CdmMember*>::iterator iIt    = qmMembers.begin();
-    QMap<long,CdmMember*>::iterator iItEnd = qmMembers.end();
+    QMap<qint64,CdmMember*>::iterator iIt    = qmMembers.begin();
+    QMap<qint64,CdmMember*>::iterator iItEnd = qmMembers.end();
 
     for(; iIt != iItEnd; ++iIt)
     {
@@ -223,7 +223,7 @@ void CdbCommandUpdateClass::SaveMethods(CdmClass*& p_rCdmClass)
                    cQSqlQuery.prepare("update WMS_CLASS_METHOD set ClassId = :classid, MethodType = :methodtype, Name = :name, Code = :code, Version = :version, "
                                       "AccessMode = :accessmode, Parameters = :parameters, Comment = :comment, Static = :static, Caption = :caption, Icon = :icon "
                                       "where Id = :id");
-                   cQSqlQuery.bindValue(":classid", (int)p_rCdmClass->GetId());
+                   cQSqlQuery.bindValue(":classid", p_rCdmClass->GetId());
                    cQSqlQuery.bindValue(":methodtype", pCdmMethod->GetReturnType());
                    cQSqlQuery.bindValue(":name", pCdmMethod->GetMethodName());
                    cQSqlQuery.bindValue(":code", pCdmMethod->GetSourceCode());
@@ -242,7 +242,7 @@ void CdbCommandUpdateClass::SaveMethods(CdmClass*& p_rCdmClass)
 
                 cQSqlQuery.prepare("insert into WMS_CLASS_METHOD (ClassId, MethodType, Name, Code, Version, AccessMode, Parameters, Id, Static, Comment, Caption, Icon)"
                                     " values (:classid, :methodtype, :name, :code, :version, :accessmode, :parameters, :id, :static, :comment, :caption, :icon)");
-                cQSqlQuery.bindValue(":classid", (int)p_rCdmClass->GetId());
+                cQSqlQuery.bindValue(":classid", p_rCdmClass->GetId());
                 cQSqlQuery.bindValue(":methodtype", pCdmMethod->GetReturnType());
                 cQSqlQuery.bindValue(":name", pCdmMethod->GetMethodName());
                 cQSqlQuery.bindValue(":code", pCdmMethod->GetSourceCode());
@@ -336,9 +336,9 @@ void CdbCommandUpdateClass::SaveValidators(CdmClass*& p_rCdmClass)
    }
 }
 
-long CdbCommandUpdateClass::InsertOrUpdateMember(CdmMember* p_pCdmMember, CdmClass* p_pCdmClass)
+qint64 CdbCommandUpdateClass::InsertOrUpdateMember(CdmMember* p_pCdmMember, CdmClass* p_pCdmClass)
 {
-   long lRet = CdmLogging::eDmUnknownClassAccessError;
+  qint64 lRet = CdmLogging::eDmUnknownClassAccessError;
 
    if(CHKPTR(p_pCdmMember) && CHKPTR(p_pCdmClass))
    {
@@ -389,9 +389,9 @@ long CdbCommandUpdateClass::InsertOrUpdateMember(CdmMember* p_pCdmMember, CdmCla
    return lRet;
 }
 
-long CdbCommandUpdateClass::InsertMember(CdmMember* p_pCdmMember, CdmClass* p_pCdmClass)
+qint64 CdbCommandUpdateClass::InsertMember(CdmMember* p_pCdmMember, CdmClass* p_pCdmClass)
 {
-   long lRet = CdmLogging::eDmUnknownClassAccessError;
+  qint64 lRet = CdmLogging::eDmUnknownClassAccessError;
 
    if(CHKPTR(p_pCdmMember) && CHKPTR(p_pCdmClass))
    {
@@ -415,14 +415,14 @@ long CdbCommandUpdateClass::InsertMember(CdmMember* p_pCdmMember, CdmClass* p_pC
       cQSqlQuery.bindValue(":keyname", p_pCdmMember->GetKeyname());
       cQSqlQuery.bindValue(":datatype", p_pCdmMember->GetValueType());
       cQSqlQuery.bindValue(":must", p_pCdmMember->IsMust());
-      cQSqlQuery.bindValue(":size", (int)p_pCdmMember->GetSize());
-      cQSqlQuery.bindValue(":objrefclassid",(int) p_pCdmMember->GetClassReference());
-      cQSqlQuery.bindValue(":counterstart",(int) p_pCdmMember->GetCounterStart());
-      cQSqlQuery.bindValue(":classid", (int)p_pCdmMember->GetClassId());
+      cQSqlQuery.bindValue(":size", p_pCdmMember->GetSize());
+      cQSqlQuery.bindValue(":objrefclassid", p_pCdmMember->GetClassReference());
+      cQSqlQuery.bindValue(":counterstart", p_pCdmMember->GetCounterStart());
+      cQSqlQuery.bindValue(":classid", p_pCdmMember->GetClassId());
       cQSqlQuery.bindValue(":defaultValue", p_pCdmMember->GetDefaultValue().toString());
       cQSqlQuery.bindValue(":caption", p_pCdmMember->GetCaption());
-      cQSqlQuery.bindValue(":creatorId", (int)p_pCdmMember->GetCreatorId());
-      cQSqlQuery.bindValue(":modifierId", (int)p_pCdmMember->GetModifierId());
+      cQSqlQuery.bindValue(":creatorId", p_pCdmMember->GetCreatorId());
+      cQSqlQuery.bindValue(":modifierId", p_pCdmMember->GetModifierId());
       cQSqlQuery.bindValue(":comment", p_pCdmMember->GetComment());
       cQSqlQuery.bindValue(":owner", p_pCdmMember->IsOwner());
       cQSqlQuery.bindValue(":explicit", p_pCdmMember->IsUnique());
@@ -480,9 +480,9 @@ long CdbCommandUpdateClass::InsertMember(CdmMember* p_pCdmMember, CdmClass* p_pC
 }
 
 
-long CdbCommandUpdateClass::UpdateMember(CdmMember* p_pCdmMember, CdmClass* p_pCdmClass )
+qint64 CdbCommandUpdateClass::UpdateMember(CdmMember* p_pCdmMember, CdmClass* p_pCdmClass )
 {
-   long lRet = CdmLogging::eDmUnknownClassAccessError;
+  qint64 lRet = CdmLogging::eDmUnknownClassAccessError;
 
    if(CHKPTR(p_pCdmMember) && CHKPTR(p_pCdmClass))
    {
@@ -502,14 +502,14 @@ long CdbCommandUpdateClass::UpdateMember(CdmMember* p_pCdmMember, CdmClass* p_pC
       cQSqlQuery.bindValue(":keyname", p_pCdmMember->GetKeyname());
       cQSqlQuery.bindValue(":datatype", p_pCdmMember->GetValueType());
       cQSqlQuery.bindValue(":must", p_pCdmMember->IsMust());
-      cQSqlQuery.bindValue(":size", (int)p_pCdmMember->GetSize());
-      cQSqlQuery.bindValue(":objrefclassid",(int) p_pCdmMember->GetClassReference());
-      cQSqlQuery.bindValue(":counterstart",(int) p_pCdmMember->GetCounterStart());
-      cQSqlQuery.bindValue(":classid", (int)p_pCdmMember->GetClassId());
+      cQSqlQuery.bindValue(":size", p_pCdmMember->GetSize());
+      cQSqlQuery.bindValue(":objrefclassid", p_pCdmMember->GetClassReference());
+      cQSqlQuery.bindValue(":counterstart", p_pCdmMember->GetCounterStart());
+      cQSqlQuery.bindValue(":classid", p_pCdmMember->GetClassId());
       cQSqlQuery.bindValue(":defaultValue", p_pCdmMember->GetDefaultValue().toString());
       cQSqlQuery.bindValue(":caption", p_pCdmMember->GetCaption());
-      cQSqlQuery.bindValue(":creatorId", (int)p_pCdmMember->GetCreatorId());
-      cQSqlQuery.bindValue(":modifierId", (int)p_pCdmMember->GetModifierId());
+      cQSqlQuery.bindValue(":creatorId", p_pCdmMember->GetCreatorId());
+      cQSqlQuery.bindValue(":modifierId", p_pCdmMember->GetModifierId());
       cQSqlQuery.bindValue(":comment", p_pCdmMember->GetComment());
       cQSqlQuery.bindValue(":owner", p_pCdmMember->IsOwner());
       cQSqlQuery.bindValue(":explicit", p_pCdmMember->IsUnique());
@@ -521,7 +521,7 @@ long CdbCommandUpdateClass::UpdateMember(CdmMember* p_pCdmMember, CdmClass* p_pC
       cQSqlQuery.bindValue(":nonPersistent", !p_pCdmMember->IsPersistent());
       cQSqlQuery.bindValue(":isTree", p_pCdmMember->IsTree());
       cQSqlQuery.bindValue(":config", p_pCdmMember->GetConfig());
-      cQSqlQuery.bindValue(":memberId", (int)p_pCdmMember->GetId());
+      cQSqlQuery.bindValue(":memberId", p_pCdmMember->GetId());
 
 
       if(SUCCESSFULL(GetDataAccess()->ExecuteQuery(cQSqlQuery)))
@@ -543,9 +543,9 @@ long CdbCommandUpdateClass::UpdateMember(CdmMember* p_pCdmMember, CdmClass* p_pC
 
 }
 
-long CdbCommandUpdateClass::DeleteMember(long p_lMemberId)
+qint64 CdbCommandUpdateClass::DeleteMember(qint64 p_lMemberId)
 {
-   long lRet = CdmLogging::eDmUnknownClassAccessError;
+  qint64 lRet = CdmLogging::eDmUnknownClassAccessError;
 
 
       QSqlQuery cQSqlQuery;
@@ -560,9 +560,9 @@ long CdbCommandUpdateClass::DeleteMember(long p_lMemberId)
    return lRet;
 }
 
-long CdbCommandUpdateClass::InsertOrUpdateBaseClasses(CdmClass* p_pCdmClass)
+qint64 CdbCommandUpdateClass::InsertOrUpdateBaseClasses(CdmClass* p_pCdmClass)
 {
-   long lRet = CdmLogging::eDmUnknownClassAccessError;
+  qint64 lRet = CdmLogging::eDmUnknownClassAccessError;
 
    if(CHKPTR(p_pCdmClass))
    {
@@ -592,11 +592,11 @@ long CdbCommandUpdateClass::InsertOrUpdateBaseClasses(CdmClass* p_pCdmClass)
             INFO("No Baseclasses found");
          }
 
-         QMap<long,long> qmBaseClasses = p_pCdmClass->GetBaseClasses();
+         QMap<qint64,qint64> qmBaseClasses = p_pCdmClass->GetBaseClasses();
 
          // checking if a base class must be inserted to DB
-         QMap<long,long>::iterator qmIt    = qmBaseClasses.begin();
-         QMap<long,long>::iterator qmItEnd = qmBaseClasses.end();
+         QMap<qint64,qint64>::iterator qmIt    = qmBaseClasses.begin();
+         QMap<qint64,qint64>::iterator qmItEnd = qmBaseClasses.end();
 
          for(; qmIt != qmItEnd; ++qmIt)
          {
@@ -631,16 +631,16 @@ long CdbCommandUpdateClass::InsertOrUpdateBaseClasses(CdmClass* p_pCdmClass)
    return lRet;
 }
 
-bool CdbCommandUpdateClass::FindValueInMap(  long p_lValue, QMap<long, long>& p_rqmMap )
+bool CdbCommandUpdateClass::FindValueInMap( qint64 p_lValue, QMap<qint64,qint64>& p_rqmMap )
 {
    bool bRet = false;
 
-   QMap<long,long>::iterator qmIt    = p_rqmMap.begin();
-   QMap<long,long>::iterator qmItEnd = p_rqmMap.end();
+   QMap<qint64,qint64>::iterator qmIt    = p_rqmMap.begin();
+   QMap<qint64,qint64>::iterator qmItEnd = p_rqmMap.end();
 
    for(; qmIt != qmItEnd; ++qmIt)
    {
-      long lValue = qmIt.value();
+     qint64 lValue = qmIt.value();
       if(lValue == p_lValue)
       {
          bRet = true;
@@ -671,9 +671,9 @@ bool CdbCommandUpdateClass::FindValueInList(  int p_iValue, QList<int>& p_rqvlLi
    return bRet;
 }
 
-long CdbCommandUpdateClass::InsertBaseClass(  long p_lClassId, long p_lBaseClassId )
+qint64 CdbCommandUpdateClass::InsertBaseClass( qint64 p_lClassId,qint64 p_lBaseClassId )
 {
-   long lRet = CdmLogging::eDmUnknownClassAccessError;
+  qint64 lRet = CdmLogging::eDmUnknownClassAccessError;
   QSqlQuery cQSqlQuery;
   QString qstrQuery;
 
@@ -698,9 +698,9 @@ long CdbCommandUpdateClass::InsertBaseClass(  long p_lClassId, long p_lBaseClass
    return lRet;
 }
 
-long CdbCommandUpdateClass::DeleteBaseClassFromDb(  long p_lClassId, long p_lBaseClassId )
+qint64 CdbCommandUpdateClass::DeleteBaseClassFromDb( qint64 p_lClassId,qint64 p_lBaseClassId )
 {
-   long lRet = CdmLogging::eDmUnknownClassAccessError;
+  qint64 lRet = CdmLogging::eDmUnknownClassAccessError;
   QSqlQuery cQSqlQuery;
   QString qstrQuery;
 
@@ -721,7 +721,7 @@ long CdbCommandUpdateClass::DeleteBaseClassFromDb(  long p_lClassId, long p_lBas
    return lRet;
 }
 
-int CdbCommandUpdateClass::GetNewIdForClassMembers(long p_lClassId,
+int CdbCommandUpdateClass::GetNewIdForClassMembers(qint64 p_lClassId,
                                               QString p_qstrName,
                                               QString p_qstrTable)
 {

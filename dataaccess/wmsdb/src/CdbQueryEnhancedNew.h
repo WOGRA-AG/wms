@@ -54,11 +54,11 @@ private:
 public:
     CdbQueryEnhancedNew(CdmQueryEnhanced* p_pCdmQueryEnhanced, CdbDataAccess* p_pCdbDataAccess);
     virtual ~CdbQueryEnhancedNew( );
-    long Execute();
+   qint64 Execute();
     virtual QString GenerateSql();
 
 private:
-    long ExecuteQuery(QString p_qstrSql);
+   qint64 ExecuteQuery(QString p_qstrSql);
     QString MakeKeynameSave(QString p_qstrKeyname);
     void BuildMemberMap(QVector<QString> &p_qvKeynames);
     void BuildTypeAndReferenceList(QVector<QString> &p_qvKeynames);

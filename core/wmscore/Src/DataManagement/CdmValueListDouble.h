@@ -23,7 +23,7 @@ private:
     QList<double> m_qvlDoubles;
 
 public:
-    CdmValueListDouble(long p_lDatabaseId, long p_lId, QString p_qstrKeyname, CdmObject* p_pCdmObject);
+    CdmValueListDouble(qint64 p_lDatabaseId,qint64 p_lId, QString p_qstrKeyname, CdmObject* p_pCdmObject);
     virtual ~CdmValueListDouble();
     virtual void SetValue(QString p_qstrValue);
     virtual QString GetValue() const;

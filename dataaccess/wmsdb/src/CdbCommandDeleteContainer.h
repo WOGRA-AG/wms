@@ -7,9 +7,9 @@
 class CdbCommandDeleteContainer : public CdbAbstractCommandTransactional
 {
 private:
-    long m_lContainerId;
+   qint64 m_lContainerId;
 public:
-    CdbCommandDeleteContainer(long p_lContainerId, CdbDataAccess* p_pDataAccess);
+    CdbCommandDeleteContainer(qint64 p_lContainerId, CdbDataAccess* p_pDataAccess);
     virtual ~CdbCommandDeleteContainer();
 
 protected:

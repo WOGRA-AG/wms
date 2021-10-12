@@ -22,7 +22,7 @@ bool CdbCommandGetSchemeList::CheckValid()
 
 int CdbCommandGetSchemeList::Execute()
 {
-    long lRet = CdmLogging::eDmUnknownDbAccessError;
+   qint64 lRet = CdmLogging::eDmUnknownDbAccessError;
     m_qllSchemes.clear();
     QSqlQuery cQSqlQuery;
     QString qstrQuery;

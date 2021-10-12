@@ -10,12 +10,12 @@ class CdbDataAccess;
 class CdbCommandExistClass : public CdbAbstractCommand
 {
 private:
-    long m_lSchemeId;
+   qint64 m_lSchemeId;
     QString m_qstrKeyname;
     bool m_bResult;
 
 public:
-    CdbCommandExistClass(long p_lSchemeId, QString p_qstrKeyname, CdbDataAccess* p_pDataAccess);
+    CdbCommandExistClass(qint64 p_lSchemeId, QString p_qstrKeyname, CdbDataAccess* p_pDataAccess);
     virtual ~CdbCommandExistClass();
     bool GetResult();
 

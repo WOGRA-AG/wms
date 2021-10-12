@@ -8,11 +8,11 @@ class CdbCommandGetNewSession : public CdbAbstractCommandTransactional
 private:
     QString m_qstrApplication;
     QString m_qstrBaseAuth;
-    long m_lUserId;
-    long m_lSessionId;
+   qint64 m_lUserId;
+   qint64 m_lSessionId;
 
 public:
-    CdbCommandGetNewSession(QString p_qstrApplication, long p_lUserId, QString p_qstrBaseAuth, CdbDataAccess* p_ppDataAccess);
+    CdbCommandGetNewSession(QString p_qstrApplication,qint64 p_lUserId, QString p_qstrBaseAuth, CdbDataAccess* p_ppDataAccess);
     virtual ~CdbCommandGetNewSession();
 
 

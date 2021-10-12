@@ -107,7 +107,7 @@ void CloseClickedSlot(  );
    /** +-=---------------------------------------------------------Wed Dec 21 16:12:14 2005-------*
     * @method  CwmsRightsManagerIf::FillUserGroupList        // private                           *
     * @return  void                                          //                                   *
-    * @param   QMap<long, CumAccessorRight*>& p_rqmAccessorRights//                               *
+    * @param   QMap<qint64, CumAccessorRight*>& p_rqmAccessorRights//                               *
     * @comment                                                                                    *
     *---------------------------------------------------------------Wed Dec 21 16:12:14 2005------*/
    private:
@@ -116,7 +116,7 @@ void CloseClickedSlot(  );
    /** +-=---------------------------------------------------------Wed Dec 21 16:12:36 2005-------*
     * @method  CwmsRightsManagerIf::FillRights               // private                           *
     * @return  void                                          //                                   *
-    * @param   QMap<long, CumAccessorRight*>& p_rqmAccessorRights//                               *
+    * @param   QMap<qint64, CumAccessorRight*>& p_rqmAccessorRights//                               *
     * @comment                                                                                    *
     *---------------------------------------------------------------Wed Dec 21 16:12:36 2005------*/
    private:
@@ -125,18 +125,18 @@ void CloseClickedSlot(  );
    /** +-=---------------------------------------------------------So 3. Mai 13:02:33 2009--------*
     * @method  CwmsRightsManagerIf::FindUser                 // protected, virtual                *
     * @return  CumUser*                                      //                                   *
-    * @param   long p_lUserId                                //                                   *
+    * @param  qint64 p_lUserId                                //                                   *
     * @comment                                                                                    *
     *----------------last changed: -----------------------------So 3. Mai 13:02:33 2009-----------*/
-    virtual CumUser* FindUser(long p_lUserId);
+    virtual CumUser* FindUser(qint64 p_lUserId);
    protected:
    /** +-=---------------------------------------------------------So 3. Mai 13:02:19 2009--------*
     * @method  CwmsRightsManagerIf::FindUserGroup            // protected, virtual                *
     * @return  CumUserGroup*                                 //                                   *
-    * @param   long p_lUserId                                //                                   *
+    * @param  qint64 p_lUserId                                //                                   *
     * @comment                                                                                    *
     *----------------last changed: -----------------------------So 3. Mai 13:02:19 2009-----------*/
-    virtual CumUserGroup* FindUserGroup(long p_lUserId);
+    virtual CumUserGroup* FindUserGroup(qint64 p_lUserId);
    protected:
    /** +-=---------------------------------------------------------So 3. Mai 13:02:11 2009--------*
     * @method  CwmsRightsManagerIf::FindUserGroup            // protected, virtual                *
@@ -157,7 +157,7 @@ void CloseClickedSlot(  );
    /** +-=---------------------------------------------------------Wed Dec 21 16:11:51 2005-------*
     * @method  CwmsRightsManagerIf::FillUserList             // private                           *
     * @return  void                                          //                                   *
-    * @param   QMap<long, CumAccessorRight*>& p_rqmAccessorRights//                               *
+    * @param   QMap<qint64, CumAccessorRight*>& p_rqmAccessorRights//                               *
     * @comment                                                                                    *
     *---------------------------------------------------------------Wed Dec 21 16:11:51 2005------*/
    private:

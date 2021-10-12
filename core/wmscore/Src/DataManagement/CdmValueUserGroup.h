@@ -25,8 +25,8 @@ class WMSMANAGER_API CdmValueUserGroup : public CdmValueInt
     Q_OBJECT
 
 public:
-    CdmValueUserGroup( long p_lDatabaseId,
-                       long p_lId,
+    CdmValueUserGroup(qint64 p_lDatabaseId,
+                      qint64 p_lId,
                        QString p_qstrKeyname,
                        CdmObject* p_pCdmObject);
     CdmValueUserGroup( QVariantMap& p_rqvHash, CdmObject* p_pCdmObject);

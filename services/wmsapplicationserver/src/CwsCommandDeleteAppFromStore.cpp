@@ -25,7 +25,7 @@ int CwsCommandDeleteAppFromStore::Execute(CwsRequest &p_rRequest, CwsResponse &p
 {
      int iRet = 0;
     CwmsAppStoreData cAppStore;
-    long lId = p_rRequest.GetValue(ID).toInt();
+   qint64 lId = p_rRequest.GetValue(ID).toInt();
 
     if (cAppStore.DeleteAppScheme(lId))
     {

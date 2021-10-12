@@ -10,7 +10,7 @@
 
 #define INIT_CONTAINER_NAME "New_Container"
 
-CftlCommandGetNewContainerId::CftlCommandGetNewContainerId(long p_lClassId, CftlDataAccess* p_pDataAccess)
+CftlCommandGetNewContainerId::CftlCommandGetNewContainerId(qint64 p_lClassId, CftlDataAccess* p_pDataAccess)
 : CftlAbstractTransactionalCommand(p_pDataAccess),
   m_lClassId(p_lClassId)
 {
@@ -28,7 +28,7 @@ bool CftlCommandGetNewContainerId::CheckValid()
 
 int CftlCommandGetNewContainerId::Execute()
 {
-   long lRet = CdmLogging::eDmObjectAccessError;
+  qint64 lRet = CdmLogging::eDmObjectAccessError;
    QSqlQuery cQSqlQuery(GetSqlDatabase());
 
 
@@ -37,11 +37,11 @@ int CftlCommandGetNewContainerId::Execute()
                        "(ClassId, Keyname, LastChange, CreatorId, ModifierId, Caption, TempSessionId)"
                        "values(?, ?, ?, ?, ?, ?, ?)");
 
-   cQSqlQuery.addBindValue((int)m_lClassId);
+   cQSqlQuery.addBindValue(m_lClassId);
    cQSqlQuery.addBindValue(INIT_CONTAINER_NAME);
    cQSqlQuery.addBindValue(QDateTime::currentDateTime());
-   cQSqlQuery.addBindValue((int)CdmSessionManager::GetSessionManager()->GetCurrentUserId());
-   cQSqlQuery.addBindValue((int)CdmSessionManager::GetSessionManager()->GetCurrentUserId());
+   cQSqlQuery.addBindValue(CdmSessionManager::GetSessionManager()->GetCurrentUserId());
+   cQSqlQuery.addBindValue(CdmSessionManager::GetSessionManager()->GetCurrentUserId());
    cQSqlQuery.addBindValue(INIT_CONTAINER_NAME);
    cQSqlQuery.addBindValue(CdmSessionManager::GetSessionManager()->GetCurrentSessionId());
 
@@ -50,7 +50,7 @@ int CftlCommandGetNewContainerId::Execute()
    {
       // query for reading new id
       cQSqlQuery.prepare("select ContainerId from WMS_DM_CONTAINER where ClassId = ? AND TempSessionId = ?");
-      cQSqlQuery.addBindValue((int)m_lClassId);
+      cQSqlQuery.addBindValue(m_lClassId);
       cQSqlQuery.addBindValue(CdmSessionManager::GetSessionManager()->GetCurrentSessionId());
 
       if(SUCCESSFULL(ExecuteQuery(cQSqlQuery)))

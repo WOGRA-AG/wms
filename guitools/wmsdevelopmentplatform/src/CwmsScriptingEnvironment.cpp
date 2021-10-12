@@ -271,7 +271,7 @@ QTreeWidgetItem* CwmsScriptingEnvironment::CreateItemToObject(CdmObject* p_pObje
         pItem = new QTreeWidgetItem(m_pFormItem);
         pItem->setText(0, cForm.GetName());
         pItem->setData(1, Qt::UserRole, eWmsTreeItemTypeFormUserDefined);
-        pItem->setData(0, Qt::UserRole, (int)p_pObject->GetId());
+        pItem->setData(0, Qt::UserRole, p_pObject->GetId());
     }
     else if (p_pObject->IsExactTypeOf("Technical_Form_Library"))
     {
@@ -279,7 +279,7 @@ QTreeWidgetItem* CwmsScriptingEnvironment::CreateItemToObject(CdmObject* p_pObje
         pItem = new QTreeWidgetItem(m_pLibraryItem);
         pItem->setText(0, cForm.GetName());
         pItem->setData(1, Qt::UserRole, eWmsTreeItemTypeFormLibrary);
-        pItem->setData(0, Qt::UserRole, (int)p_pObject->GetId());
+        pItem->setData(0, Qt::UserRole, p_pObject->GetId());
     }
 
     return pItem;
@@ -669,7 +669,7 @@ void CwmsScriptingEnvironment::NewLibrary(QTreeWidgetItem* p_pItem)
              QTreeWidgetItem* pNewForm = new QTreeWidgetItem(pParent);
              pNewForm->setText(0, form.GetName());
              pNewForm->setData(1, Qt::UserRole, eWmsTreeItemTypeFormLibrary);
-             pNewForm->setData(0, Qt::UserRole, (int)pObject->GetId());
+             pNewForm->setData(0, Qt::UserRole, pObject->GetId());
              pEditor->SetItem(pNewForm);
         }
     }
@@ -713,7 +713,7 @@ void CwmsScriptingEnvironment::NewForm(QTreeWidgetItem* p_pItem)
           QTreeWidgetItem* pNewForm = new QTreeWidgetItem(pParent);
           pNewForm->setText(0, cForm.GetName());
           pNewForm->setData(1, Qt::UserRole, eWmsTreeItemTypeFormUserDefined);
-          pNewForm->setData(0, Qt::UserRole, (int)pObject->GetId());
+          pNewForm->setData(0, Qt::UserRole, pObject->GetId());
           pEditor->SetItem(pNewForm);
        }
     }
@@ -818,7 +818,7 @@ CdmClass* CwmsScriptingEnvironment::GetClassFromItem(QTreeWidgetItem* p_pItem)
          else if (eType == eWmsTreeItemTypeFunctionParent || eType == eWmsTreeItemTypeMemberParent)
          {
              QTreeWidgetItem* pClassItem = p_pItem->parent();
-             long lClassId = pClassItem->data(0, Qt::UserRole).toInt();
+            qint64 lClassId = pClassItem->data(0, Qt::UserRole).toInt();
              pClass = CdmSessionManager::GetDataProvider()->GetClassManager()->FindClassById(lClassId);
          }
          else if (eType == eWmsTreeItemTypeMember)
@@ -1079,7 +1079,7 @@ void CwmsScriptingEnvironment::EditLibrarySlot(QTreeWidgetItem* p_pItem)
 
         if (eType == eWmsTreeItemTypeFormLibrary)
         {
-            long lObjectId = p_pItem->data(0, Qt::UserRole).toInt();
+           qint64 lObjectId = p_pItem->data(0, Qt::UserRole).toInt();
             CwmsFormManager cFormManager;
             CdmObjectContainer* pContainer = cFormManager.GetFormLibrary();
 
@@ -1127,7 +1127,7 @@ void CwmsScriptingEnvironment::EditResourceSlot(QTreeWidgetItem* p_pItem)
 
         if (eType == eWmsTreeItemTypeResource)
         {
-            long lObjectId = p_pItem->data(0, Qt::UserRole).toInt();
+           qint64 lObjectId = p_pItem->data(0, Qt::UserRole).toInt();
             CwmsFormManager cFormManager;
             CdmObjectContainer* pContainer = cFormManager.GetResourceContainer();
 
@@ -1283,7 +1283,7 @@ void CwmsScriptingEnvironment::DeleteLibrarySlot(QTreeWidgetItem* pCurrent)
 
         if (eType == eWmsTreeItemTypeFormLibrary)
         {
-            long lObjectId = pCurrent->data(0, Qt::UserRole).toInt();
+           qint64 lObjectId = pCurrent->data(0, Qt::UserRole).toInt();
             CwmsFormManager cFormManager;
             CdmObjectContainer* pContainer = cFormManager.GetFormLibrary();
 
@@ -1318,7 +1318,7 @@ void CwmsScriptingEnvironment::DeleteResourceSlot(QTreeWidgetItem* pCurrent)
 
         if (eType == eWmsTreeItemTypeResource)
         {
-            long lObjectId = pCurrent->data(0, Qt::UserRole).toInt();
+           qint64 lObjectId = pCurrent->data(0, Qt::UserRole).toInt();
             CwmsFormManager cFormManager;
             CdmObjectContainer* pContainer = cFormManager.GetResourceContainer();
 

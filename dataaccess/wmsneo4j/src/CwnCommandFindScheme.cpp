@@ -16,7 +16,7 @@ CwnCommandFindScheme::CwnCommandFindScheme(QString p_qstrSchemeName, CwnDataAcce
 {
 }
 
-CwnCommandFindScheme::CwnCommandFindScheme(long p_lId, CwnDataAccess *p_pDataAccess)
+CwnCommandFindScheme::CwnCommandFindScheme(qint64 p_lId, CwnDataAccess *p_pDataAccess)
 :CwnCommandBase(p_pDataAccess),
   m_lSchemeId(p_lId),
   m_pScheme(nullptr)
@@ -92,7 +92,7 @@ void CwnCommandFindScheme::interpretAnswer(QVariant &Ret)
             // Value in col 2 is Version
 
 
-            long lDBId = list->at(0).toInt();
+           qint64 lDBId = list->at(0).toInt();
 
             const QVariantMap* rowMap = static_cast<const QVariantMap*>(list->at(1).data());
 

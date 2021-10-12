@@ -40,9 +40,9 @@ QVariantList CwiCommandGetGroupUserList::GetResultToVariant(QList<CumUser*> ql_u
     return m_qlUserListToVariant;
 }
 
-long CwiCommandGetGroupUserList::ReadAllUsers()
+qint64 CwiCommandGetGroupUserList::ReadAllUsers()
 {
-    long lRet = CdmLogging::eDmUnknownUserQueryError;
+   qint64 lRet = CdmLogging::eDmUnknownUserQueryError;
     QList<CumUser*> qll_userList;
     lRet = pCumUserManager->GetUserListUnmanaged(qll_userList);
 
@@ -70,7 +70,7 @@ void CwiCommandGetGroupUserList::Execute()
         pCumUserManager = pCdmManager->GetUserManager();
         if(pCumUserManager)
         {
-            long lRetAllUsers = ReadAllUsers();
+           qint64 lRetAllUsers = ReadAllUsers();
             if(lRetAllUsers > 0)
             {
                 //QList<CumUser*> qll_UserList = GetResult();

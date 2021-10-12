@@ -9,7 +9,7 @@
 
 #include "CwnCommandStdHeader.h"
 
-CwnCommandDeleteContainer::CwnCommandDeleteContainer(long p_lContainerId, CwnDataAccess* p_pDataAccess)
+CwnCommandDeleteContainer::CwnCommandDeleteContainer(qint64 p_lContainerId, CwnDataAccess* p_pDataAccess)
     : CwnCommandBase(p_pDataAccess),
       m_lContainerId(p_lContainerId)
 {
@@ -62,7 +62,7 @@ void CwnCommandDeleteContainer::interpretAnswer(QVariant &Ret)
 
             if(pJournal)
             {
-                long lRet = pJournal->ObjectListDeleted(static_cast<int>(m_lContainerId));
+               qint64 lRet = pJournal->ObjectListDeleted(static_cast<int>(m_lContainerId));
 
                 if(lRet>0)
                     Ret=1;

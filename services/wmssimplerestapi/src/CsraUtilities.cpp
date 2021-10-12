@@ -133,7 +133,7 @@ QStringList CsraUtilities::getDisplayMembers(const CdmClass* p_pClass)
     QStringList qstrlMembers;
     if (CHKPTR(p_pClass))
     {
-        QMap<long, CdmMember*> qmMembers;
+        QMap<qint64, CdmMember*> qmMembers;
         p_pClass->GetMemberMap(qmMembers);
         QList<CdmMember*> qlMembers = qmMembers.values();
 

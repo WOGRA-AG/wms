@@ -33,7 +33,7 @@ public slots:
     CsaObject* getObjectModule();
     CsaObjectContainer* getContainerModule();
     QString getName();
-    long getId();
+   qint64 getId();
 };
 
 #endif // CWMSQMLAPPLICATIONMODULE_H

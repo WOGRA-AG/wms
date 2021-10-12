@@ -22,7 +22,7 @@ QList<CumUserGroup *> CdbCommandGetUserGroupList::GetResult()
 
 int CdbCommandGetUserGroupList::Execute()
 {
-    long lRet = CdmLogging::eDmUnknownUserQueryError;
+   qint64 lRet = CdmLogging::eDmUnknownUserQueryError;
     QSqlQuery cQSqlQuery;
     QString qstrQuery;
 
@@ -41,7 +41,7 @@ int CdbCommandGetUserGroupList::Execute()
       {
          do // loading each bool
          {
-            long     lId                = cQSqlQuery.value(0).toInt();
+           qint64     lId                = cQSqlQuery.value(0).toInt();
             QString qstrName            = cQSqlQuery.value(1).toString();
 
             CumUserGroup* pCumUserGroup = new CumUserGroup(lId, nullptr);

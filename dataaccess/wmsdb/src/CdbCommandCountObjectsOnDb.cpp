@@ -20,11 +20,11 @@ bool CdbCommandCountObjectsOnDb::CheckValid()
 
 int CdbCommandCountObjectsOnDb::Execute()
 {
-    long lRet = CdmLogging::eDmObjectAccessError;
+   qint64 lRet = CdmLogging::eDmObjectAccessError;
 
     if (CHKPTR(m_rpContainer))
     {
-       long lObjectListId = m_rpContainer->GetId();
+      qint64 lObjectListId = m_rpContainer->GetId();
 
        if (lObjectListId > 0)
        {

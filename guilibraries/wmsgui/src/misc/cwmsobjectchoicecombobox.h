@@ -40,7 +40,7 @@ class WMSGUI_API CwmsObjectChoiceComboBox : public QComboBox, public CdmContaine
 
 private:
    CdmEnhancedQueryProxy* m_rpCdmProxy;
-   QMap<QString, long> m_qmEntries; // <entry index, Objectid>
+   QMap<QString,qint64> m_qmEntries; // <entry index, Objectid>
    QString m_qstrDisplayName;
 
 public:
@@ -54,10 +54,10 @@ public:
    void AddEntry(CdmObject* p_pCdmObject, QString p_qstrValue);
    void FillEntries();
    void FillWidget(CdmQuery& p_rcCdmQuery);
-   void AddEntry(long p_lObjectId, QString p_qstrValue);
+   void AddEntry(qint64 p_lObjectId, QString p_qstrValue);
    void SetContainerAndDisplayValue(QString p_qstrObjectListKeyname, QString p_qstrValueKeyname);
-   void SetCurrentObjectId(long p_lId);
-   long GetSelectedObjectId();
+   void SetCurrentObjectId(qint64 p_lId);
+  qint64 GetSelectedObjectId();
    void ClearEntries();
    void FillProxyData();
    CdmObject* GetSelectedObject();
@@ -68,11 +68,11 @@ public slots:
    void Refresh();
 
 protected:
-   void ObjectRefModifiedEvent(long p_lObjectId);
-   virtual void ObjectModifiedEvent(long p_lObjectId);
-   virtual void ObjectCreatedEvent(long p_lObjectId);
-   virtual void ObjectDeletedEvent(long p_lObjectId);
-   virtual void ObjectCommitedEvent(long p_lObjectId);
+   void ObjectRefModifiedEvent(qint64 p_lObjectId);
+   virtual void ObjectModifiedEvent(qint64 p_lObjectId);
+   virtual void ObjectCreatedEvent(qint64 p_lObjectId);
+   virtual void ObjectDeletedEvent(qint64 p_lObjectId);
+   virtual void ObjectCommitedEvent(qint64 p_lObjectId);
 
 private slots:
    void ComboBoxActivatedSlot();
@@ -91,10 +91,10 @@ private:
    void FillDialog(CdmObjectContainer* p_pContainer, QString p_qstrValueKeyname);
    void FillDialog(CdmObjectContainer* p_pContainer,
                    QString p_qstrValueKeyname,
-                   QList<long>& p_rqvlObjects);
+                   QList<qint64>& p_rqvlObjects);
 
    void keyPressEvent(QKeyEvent * p_pqKeyEvent);
-   int FindIndexById(long p_lObjectId);
+   int FindIndexById(qint64 p_lObjectId);
 };
 
 #endif //

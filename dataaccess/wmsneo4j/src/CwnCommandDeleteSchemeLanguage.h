@@ -11,11 +11,11 @@
 class CwnCommandDeleteSchemeLanguage : public CwnCommandBase
 {
 private:
-    long m_lSchemeId;
-    long m_lLanguage;
+   qint64 m_lSchemeId;
+   qint64 m_lLanguage;
 
 public:
-    CwnCommandDeleteSchemeLanguage(long p_lSchemeId, int p_lLanguage, CwnDataAccess* p_pDataAccess);
+    CwnCommandDeleteSchemeLanguage(qint64 p_lSchemeId, int p_lLanguage, CwnDataAccess* p_pDataAccess);
     virtual ~CwnCommandDeleteSchemeLanguage();
 
     QString createQuery();

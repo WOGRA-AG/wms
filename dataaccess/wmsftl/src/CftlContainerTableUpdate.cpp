@@ -25,9 +25,9 @@ CftlContainerTableUpdate::~CftlContainerTableUpdate()
 
 }
 
-long CftlContainerTableUpdate::Execute(CftlInterface *p_pInterface)
+qint64 CftlContainerTableUpdate::Execute(CftlInterface *p_pInterface)
 {
-    long lRet = CdmLogging::eDmOk;
+   qint64 lRet = CdmLogging::eDmOk;
 
     if (CheckValid() && CHKPTR(p_pInterface))
     {
@@ -110,7 +110,7 @@ void CftlContainerTableUpdate::AddModifierFields()
 
     m_qstrSetArea += ", ";
     m_qstrSetArea += FTL_MODIFIER_ID  " = :" FTL_MODIFIER_ID;
-    m_qvValueBindings.insert(":" FTL_MODIFIER_ID, (int)CdmSessionManager::GetSessionManager()->GetCurrentUserId());
+    m_qvValueBindings.insert(":" FTL_MODIFIER_ID, CdmSessionManager::GetSessionManager()->GetCurrentUserId());
 
     m_qstrSetArea += ", ";
     m_qstrSetArea += FTL_OBJECT_KEYNAME_FIELD_NAME  " = :" FTL_OBJECT_KEYNAME_FIELD_NAME;
@@ -126,7 +126,7 @@ void CftlContainerTableUpdate::AddModifierFields()
     {
         m_qstrSetArea += ", ";
         m_qstrSetArea += FTL_PARENT  " = :" FTL_PARENT;
-        m_qvValueBindings.insert(":" FTL_PARENT,(int)pParent->GetId());
+        m_qvValueBindings.insert(":" FTL_PARENT,pParent->GetId());
     }
 
 }
@@ -178,7 +178,7 @@ QString CftlContainerTableUpdate::BuildWhereCondition()
     QString qstrRet;
 
     qstrRet = FTL_OBJECT_ID_FIELD_NAME " = :" FTL_OBJECT_ID_FIELD_NAME;
-    m_qvValueBindings.insert(":" FTL_OBJECT_ID_FIELD_NAME, (int)m_rpObject->GetId());
+    m_qvValueBindings.insert(":" FTL_OBJECT_ID_FIELD_NAME, m_rpObject->GetId());
     return qstrRet;
 }
 

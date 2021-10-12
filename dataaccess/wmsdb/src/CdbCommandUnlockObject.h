@@ -6,10 +6,10 @@
 class CdbCommandUnlockObject : public CdbAbstractCommandTransactional
 {
 private:
-        long m_lSessionId;
-        long m_lObjectId;
+       qint64 m_lSessionId;
+       qint64 m_lObjectId;
 public:
-    CdbCommandUnlockObject(long p_lSessionId, long p_lObjectId,CdbDataAccess* p_pDataAccess);
+    CdbCommandUnlockObject(qint64 p_lSessionId,qint64 p_lObjectId,CdbDataAccess* p_pDataAccess);
     ~CdbCommandUnlockObject();
 
 protected:

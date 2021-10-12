@@ -149,11 +149,11 @@ void CwmsMemberSequenceEditor::FillGroups()
  *----------------last changed: --------------------------------Mi 22. Aug 18:13:31 2012----------*/
 void CwmsMemberSequenceEditor::FillMembers()
 {
-   QMap<long, CdmMember*> qmMembers; 
+   QMap<qint64, CdmMember*> qmMembers; 
    m_rpCdmClass->GetMemberMap(qmMembers);
 
-   QMap<long, CdmMember*>::iterator qmIt = qmMembers.begin();
-   QMap<long, CdmMember*>::iterator qmItEnd = qmMembers.end();
+   QMap<qint64, CdmMember*>::iterator qmIt = qmMembers.begin();
+   QMap<qint64, CdmMember*>::iterator qmItEnd = qmMembers.end();
 
    for (; qmIt != qmItEnd; ++qmIt)
    {
@@ -170,11 +170,11 @@ void CwmsMemberSequenceEditor::FillMembers()
  *----------------last changed: --------------------------------Di 6. Nov 16:11:14 2012-----------*/
 void CwmsMemberSequenceEditor::FillMembersNotInHash(QVector<QString>& p_rqvHash)
 {
-   QMap<long, CdmMember*> qmMembers; 
+   QMap<qint64, CdmMember*> qmMembers; 
    m_rpCdmClass->GetMemberMap(qmMembers);
 
-   QMap<long, CdmMember*>::iterator qmIt = qmMembers.begin();
-   QMap<long, CdmMember*>::iterator qmItEnd = qmMembers.end();
+   QMap<qint64, CdmMember*>::iterator qmIt = qmMembers.begin();
+   QMap<qint64, CdmMember*>::iterator qmItEnd = qmMembers.end();
 
    for (; qmIt != qmItEnd; ++qmIt)
    {
@@ -248,7 +248,7 @@ void CwmsMemberSequenceEditor::SetMemberToTreeViewItem(const CdmMember* p_pCdmMe
    {
       p_pqItem->setText(0, p_pCdmMember->GetCaption());
       p_pqItem->setText(1, p_pCdmMember->GetKeyname());
-      p_pqItem->setData(0, Qt::UserRole, QVariant((int)p_pCdmMember->GetId()));
+      p_pqItem->setData(0, Qt::UserRole, QVariant(p_pCdmMember->GetId()));
       p_pqItem->setData(1, Qt::UserRole, QVariant(false));
    }
 }

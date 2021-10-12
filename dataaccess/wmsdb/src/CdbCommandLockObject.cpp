@@ -2,7 +2,7 @@
 #include "CdbCommandCheckObjectLocked.h"
 #include "CdbCommandLockObject.h"
 
-CdbCommandLockObject::CdbCommandLockObject(long p_lSessionId, long p_lObjectId,CdbDataAccess* p_pDataAccess)
+CdbCommandLockObject::CdbCommandLockObject(qint64 p_lSessionId,qint64 p_lObjectId,CdbDataAccess* p_pDataAccess)
     : CdbAbstractCommandTransactional(p_pDataAccess),
       m_lSessionId(p_lSessionId),
       m_lObjectId(p_lObjectId)
@@ -21,7 +21,7 @@ bool CdbCommandLockObject::CheckValid()
 
 int CdbCommandLockObject::Execute()
 {
-    long lRet = CdmLogging::eDmObjectAccessError;
+   qint64 lRet = CdmLogging::eDmObjectAccessError;
 
     CdbCommandCheckObjectLocked command(m_lObjectId, m_lSessionId, GetDataAccess());
     lRet = command.Run();

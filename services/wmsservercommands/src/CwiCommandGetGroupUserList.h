@@ -12,7 +12,7 @@ private:
     QVariantList m_qlUserListToVariant;
     CumUserManager* pCumUserManager;
 
-    long ReadAllUsers();
+   qint64 ReadAllUsers();
     QVariantList GetResultToVariant(QList<CumUser*> ql_userList);
 
 public:

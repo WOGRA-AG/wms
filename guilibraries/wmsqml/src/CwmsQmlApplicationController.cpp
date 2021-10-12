@@ -127,7 +127,7 @@ QQuickWindow* CwmsQmlApplicationController::getCentralWindow()
     return m_pCentralWindow;
 }
 
-void CwmsQmlApplicationController::pushViewToStack(long p_lModuleId, QString p_qstrUiName, QString p_qstrModelElementUri)
+void CwmsQmlApplicationController::pushViewToStack(qint64 p_lModuleId, QString p_qstrUiName, QString p_qstrModelElementUri)
 {
     CwmsQmlWidget* pWidget = new CwmsQmlWidget();
 

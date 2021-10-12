@@ -24,7 +24,7 @@ bool CdbCommandCreateScheme::CheckValid()
 
 int CdbCommandCreateScheme::Execute()
 {
-    long lRet = CdmLogging::eDmUnknownDbAccessError;
+   qint64 lRet = CdmLogging::eDmUnknownDbAccessError;
     QSqlQuery cQSqlQuery;
     QString qstrQuery;
 
@@ -47,7 +47,7 @@ int CdbCommandCreateScheme::Execute()
             // Value in col 1 is DataBaseName
             // Value in col 2 is Version
 
-            long lDBId = cQSqlQuery.value(0).toInt();
+           qint64 lDBId = cQSqlQuery.value(0).toInt();
             int iVersion = cQSqlQuery.value(2).toInt();
 
             // this is just for test if the correct one was found

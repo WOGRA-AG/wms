@@ -6,10 +6,10 @@
 class CdbCommandDeleteClass : public CdbAbstractCommandTransactional
 {
 private:
-    long m_lClassId;
+   qint64 m_lClassId;
 
 public:
-    CdbCommandDeleteClass(long p_lClassId, CdbDataAccess* p_pDataAccess);
+    CdbCommandDeleteClass(qint64 p_lClassId, CdbDataAccess* p_pDataAccess);
     virtual ~CdbCommandDeleteClass();
 
 protected:

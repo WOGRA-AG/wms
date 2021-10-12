@@ -21,7 +21,7 @@ CdbCommandCreateUser::~CdbCommandCreateUser()
 
 int CdbCommandCreateUser::Execute()
 {
-    long lRet = CdmLogging::eDmUnknownUserQueryError;
+   qint64 lRet = CdmLogging::eDmUnknownUserQueryError;
     int iAccessorId = InsertInAccessorTable();
 
     if(SUCCESSFULL(iAccessorId))

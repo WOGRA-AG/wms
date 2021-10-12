@@ -217,20 +217,20 @@ void CwmsImportSettings::SetObjectList(CdmObjectContainer* p_pContainer)
 
 /** +-=---------------------------------------------------------Mi 6. Feb 11:11:28 2013-----------*
  * @method  CwmsImportSettings::GetClassId                   // public                            *
- * @return  long                                             //                                   *
+ * @return qint64                                             //                                   *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------Mi 6. Feb 11:11:28 2013-----------*/
-long CwmsImportSettings::GetClassId()
+qint64 CwmsImportSettings::GetClassId()
 {
    return m_lClassId;
 }
 
 /** +-=---------------------------------------------------------Di 21. Okt 17:54:54 2008----------*
  * @method  CwmsImportSettings::GetObjectListId              // public                            *
- * @return  long                                             //                                   *
+ * @return qint64                                             //                                   *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------Di 21. Okt 17:54:54 2008----------*/
-long CwmsImportSettings::GetObjectListId()
+qint64 CwmsImportSettings::GetObjectListId()
 {
    return m_lObjectListId;
 }
@@ -255,10 +255,10 @@ CdmObjectContainer* CwmsImportSettings::GetObjectList()
 
 /** +-=---------------------------------------------------------Di 21. Okt 17:55:21 2008----------*
  * @method  CwmsImportSettings::GetDatabaseId                // public                            *
- * @return  long                                             //                                   *
+ * @return qint64                                             //                                   *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------Di 21. Okt 17:55:21 2008----------*/
-long CwmsImportSettings::GetDatabaseId()
+qint64 CwmsImportSettings::GetDatabaseId()
 {
    return m_lDbId;
 }
@@ -555,10 +555,10 @@ void CwmsImportSettings::SaveSettings(QString p_qstrName)
  * @method  CwmsImportSettings::LoadSettings                 // public                            *
  * @return  void                                             //                                   *
  * @param   QString p_qstrName                               //                                   *
- * @param   long p_lClassId                                  //                                   *
+ * @param  qint64 p_lClassId                                  //                                   *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------Mi 6. Feb 12:09:28 2013-----------*/
-void CwmsImportSettings::LoadSettings(QString p_qstrName, long p_lClassId)
+void CwmsImportSettings::LoadSettings(QString p_qstrName,qint64 p_lClassId)
 {
    SetSettingName(p_qstrName);
    CwmsImExportManager cManager;

@@ -21,8 +21,8 @@
 #include "CdmValueObjectRef.h"
 
 
-CdmValueObjectRef::CdmValueObjectRef(  long p_lDatabaseId,
-                            long p_lId,
+CdmValueObjectRef::CdmValueObjectRef( qint64 p_lDatabaseId,
+                           qint64 p_lId,
                             QString p_qstrKeyname,
                             CdmObject* p_pCdmObject )
    : CdmValueLong(p_lDatabaseId, p_lId, p_qstrKeyname, eDmValueObjectRef, p_pCdmObject),
@@ -82,7 +82,7 @@ void CdmValueObjectRef::Deploy(QVariantMap& p_rqvHash)
     }
 }
 
-void CdmValueObjectRef::SetValue(long p_lObjectListId, long p_lObjectId,
+void CdmValueObjectRef::SetValue(qint64 p_lObjectListId,qint64 p_lObjectId,
                                  QString p_qstrObjectKeyname, QString p_qstrContainerKeyname)
 {
    CdmValueLong::SetValue(p_lObjectId);
@@ -220,7 +220,7 @@ CdmObject* CdmValueObjectRef::GetObject()
 
          if(CHKPTR(pContainer))
          {
-            long lObjectId = GetValue();
+           qint64 lObjectId = GetValue();
 
             if (lObjectId > 0)
             {
@@ -284,7 +284,7 @@ CdmObject *CdmValueObjectRef::GetEventObject()
 
            if(CHKPTR(pContainer))
            {
-              long lObjectId = GetValue();
+             qint64 lObjectId = GetValue();
 
               if (lObjectId > 0)
               {
@@ -408,12 +408,12 @@ CdmObject* CdmValueObjectRef::TryToGetOwnerObject()
 
              if (CHKPTR(pCdmList))
              {
-                 QList<long> qllObjects;
+                 QList<qint64> qllObjects;
                  pCdmList->GetObjectList(qllObjects);
-                 QList<long>::iterator qmIt = qllObjects.begin();
-                 QList<long>::iterator qmItEnd = qllObjects.end();
-                 long lRefObjVal = this->GetValue();
-                 long lObjId = -1;
+                 QList<qint64>::iterator qmIt = qllObjects.begin();
+                 QList<qint64>::iterator qmItEnd = qllObjects.end();
+                qint64 lRefObjVal = this->GetValue();
+                qint64 lObjId = -1;
 
                  for(; qmIt != qmItEnd; ++qmIt)
                  {
@@ -497,7 +497,7 @@ CdmObject *CdmValueObjectRef::TryToGetOwnerObjectByEventObject(CdmObject *pEvent
 
              if (CHKPTR(pCdmList))
              {
-                 QList<long> qllObjects;
+                 QList<qint64> qllObjects;
                  pCdmList->GetObjectList(qllObjects);
 
                  QList<CdmObject*> qlObjects;
@@ -508,7 +508,7 @@ CdmObject *CdmValueObjectRef::TryToGetOwnerObjectByEventObject(CdmObject *pEvent
                  if(pCdmObjRefValue)
                  {
                      CdmValueObjectRef *pCdmObjectRefFromEvent = ((CdmValueObjectRef*)pCdmObjRefValue);
-                     long lObjRefValue = pCdmObjectRefFromEvent->GetValue();
+                    qint64 lObjRefValue = pCdmObjectRefFromEvent->GetValue();
                      qllObjects.append(lObjRefValue);
                      pCdmList->GetObjects(qllObjects, qlObjects);
                  }
@@ -546,7 +546,7 @@ bool CdmValueObjectRef::IsTypeOf(QString p_qstrClassName) const
 
    if (CHKPTR(pCdmMember))
    {
-      long lClassId = pCdmMember->GetClassReference();
+     qint64 lClassId = pCdmMember->GetClassReference();
 
       CdmDataProvider* pCdmManager = CdmSessionManager::GetDataProvider();
 
@@ -577,7 +577,7 @@ void CdmValueObjectRef::ObjectRefModifiedSlot()
    emit ObjectRefModifiedSignal(GetObject(), this);
 }
 
-long CdmValueObjectRef::GetObjectListId()
+qint64 CdmValueObjectRef::GetObjectListId()
 {
    return m_lObjectListId;
 }
@@ -601,9 +601,9 @@ CdmClass* CdmValueObjectRef::GetClass() const
    return pClass;
 }
 
-long CdmValueObjectRef::GetClassId() const
+qint64 CdmValueObjectRef::GetClassId() const
 {
-   long lRet = 0;
+  qint64 lRet = 0;
    const CdmMember* pMember = GetMember();
 
    if (CHKPTR(pMember))
@@ -629,7 +629,7 @@ QString CdmValueObjectRef::GetDisplayString() const
 QVariant CdmValueObjectRef::GetVariant() const
 {
    QVariantMap qmVariant = CdmValueLong::GetVariant().toMap();
-   qmVariant.insert(WMS_CONTAINER, (int)m_lObjectListId);
+   qmVariant.insert(WMS_CONTAINER, m_lObjectListId);
    const CdmObject* pObject = (const_cast<CdmValueObjectRef*>(this))->GetObject();
    if (pObject)
    {
@@ -668,7 +668,7 @@ QVariant CdmValueObjectRef::GetValueVariant() const
    {
        if (m_qstrObjectKeyname.isEmpty() || m_qstrContainerKeyname.isEmpty())
        {
-           qstrUri = CdmLocatedElement::CreateUri(WMS_OBJECT, GetSchemeName(), QString::number((int) m_lObjectListId), QString::number((int) GetValue()));
+           qstrUri = CdmLocatedElement::CreateUri(WMS_OBJECT, GetSchemeName(), QString::number( m_lObjectListId), QString::number( GetValue()));
        }
        else
        {

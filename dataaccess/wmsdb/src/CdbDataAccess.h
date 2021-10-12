@@ -129,7 +129,7 @@ private:
     int m_iInterfaceCallCounter;
 
     QSqlDatabase RefreshConnection();
-    CdmObject *GetObject(long p_lContainerId, long p_lObjectId);
+    CdmObject *GetObject(qint64 p_lContainerId,qint64 p_lObjectId);
 
 public:
     virtual ~CdbDataAccess();
@@ -138,92 +138,92 @@ public:
     bool IsInServerMode() const;
     int GetInterfaceCallCounter() const;
     void PrintLastErrorFromDb(  );
-    long ExecuteQuery(QString p_qstrQuery, QSqlQuery& p_rqsqlQuery);
-    int LoadObject(const CdmObjectContainer* p_pContainer, long p_lObjectId, CdmObject*& p_pCdmObject);
-    int LoadObjectContainer(long p_lObjectListId, CdmObjectContainer*& p_pContainer);
-    long GetNewContainerId(long p_lClassId);
-    long GetNewClassId(long p_lDbId);
+   qint64 ExecuteQuery(QString p_qstrQuery, QSqlQuery& p_rqsqlQuery);
+    int LoadObject(const CdmObjectContainer* p_pContainer,qint64 p_lObjectId, CdmObject*& p_pCdmObject);
+    int LoadObjectContainer(qint64 p_lObjectListId, CdmObjectContainer*& p_pContainer);
+   qint64 GetNewContainerId(qint64 p_lClassId);
+   qint64 GetNewClassId(qint64 p_lDbId);
     int UpdateObject(CdmObject*& p_pCdmObject);
-    long GetNewObjectId(const CdmObjectContainer* p_pContainer);
+   qint64 GetNewObjectId(const CdmObjectContainer* p_pContainer);
     int UpdateObjectContainer(CdmObjectContainer*& p_pContainer);
     int CreateScheme(QString p_qstrKeyname, CdmScheme*& p_pCdmDatabaseManager);
     int LoadSchemeBaseData(QString p_qstrKeyname, CdmScheme*& p_pCdmDatabaseManager);
-    int LoadSchemeBaseData(long p_lDb, CdmScheme*& p_pCdmDatabaseManager);
+    int LoadSchemeBaseData(qint64 p_lDb, CdmScheme*& p_pCdmDatabaseManager);
     int Login(QString p_qstrApplication,
               QString p_qstrLogin,
               QString p_qstrPassword,
               bool& p_bDemo,
               int& p_iModules,
               QString p_qstrVersion,
-              long& p_lSessionId,
+             qint64& p_lSessionId,
               CumUser*& p_rpCumUser);
     int Logout();
     int CreateUser(CumUser* p_pUser);
     int DeleteUser(QString p_qstrLogin);
-    int LoadClassManager(long p_lDatabaseId, CdmClassManager*& p_pCdmClassManager);
+    int LoadClassManager(qint64 p_lDatabaseId, CdmClassManager*& p_pCdmClassManager);
     int UpdateClass(CdmClass*& p_pCdmClass);
-    int DeleteClass(long p_lClassId);
+    int DeleteClass(qint64 p_lClassId);
     int DeleteScheme(QString p_qstrKeyname);
-    int DeleteObjectContainer(long p_lObjectListId);
+    int DeleteObjectContainer(qint64 p_lObjectListId);
     int GetUserList(QList<CumUser*>& p_rqvlUser);
     int UpdateUser(CumUser* p_pUser);
-    int GetContainerList(long p_lDbId, long p_lClassId, QMap<long, QString>& p_rqmObjectListsLList);
+    int GetContainerList(qint64 p_lDbId,qint64 p_lClassId, QMap<qint64, QString>& p_rqmObjectListsLList);
     int ExecuteQuery(CdmQuery* p_pCdmQuery);
     int ExistScheme(QString p_qstrKeyname, bool& p_bResult);
-    int ExistClass(long p_lDbId, QString p_qstrClassKeyname, bool& p_bResult);
-    int ExistObjectContainer(long p_lDbId, QString p_qstrObjectListKeyname);
+    int ExistClass(qint64 p_lDbId, QString p_qstrClassKeyname, bool& p_bResult);
+    int ExistObjectContainer(qint64 p_lDbId, QString p_qstrObjectListKeyname);
     int LockObject(CdmObject* p_pObject, bool & p_bResult);
     int UnLockObject(CdmObject* p_pObject, bool & p_bResult);
-    int LoadObjectContainer(long p_lDatabaseId, QString p_qstrKeyname, CdmObjectContainer*& p_pContainer);
-    int LoadEmptyObjectContainer(long p_lDataBaseId, QString p_qstrKeyname, CdmObjectContainer*& p_pContainer);
-    QByteArray ReadBinaryDocument(long p_lDbId, CdmValueBinaryDocument* p_pCdmBinaryDocument);
-    int UpdateBinaryDocument(long p_lDbId, CdmValueBinaryDocument* p_pCdmBinaryDocument);
-    long RenameUserGroup(long p_lGroupId, QString p_qstrNewName);
-    long CreateUserGroup(QString p_qstrGroupName);
-    long DeleteUserGroup(long p_llGroupId);
-    long AddUserToUserGroup(long p_lChangeUserId, long p_lUserGroupId);
-    long RemoveUserFromGroup(long p_lChangeUserId, long p_lUserGroupId);
-    long GetUserGroupList(QList<CumUserGroup*>& p_rqvlUserGroups, QString p_qstrSchemeUri);
-    long GetListOfUsersInList(long p_lUserGroupId, QList<CumUser*>& p_rqvlUserList);
-    long GetUserGroupMemberList(long p_lChangeUserId, QList<CumUserGroup*>& p_qvlUserGroups);
-    long AddLicense(QString p_qstrApplication, QString p_qstrLicensee, QString p_qstrLicensekey);
-    long FreeLicense();
-    long GetSchemeList(QList<QString>& p_qvlDatabases);
-    long UpdateScheme(CdmScheme* p_pCdmDatabase);
+    int LoadObjectContainer(qint64 p_lDatabaseId, QString p_qstrKeyname, CdmObjectContainer*& p_pContainer);
+    int LoadEmptyObjectContainer(qint64 p_lDataBaseId, QString p_qstrKeyname, CdmObjectContainer*& p_pContainer);
+    QByteArray ReadBinaryDocument(qint64 p_lDbId, CdmValueBinaryDocument* p_pCdmBinaryDocument);
+    int UpdateBinaryDocument(qint64 p_lDbId, CdmValueBinaryDocument* p_pCdmBinaryDocument);
+   qint64 RenameUserGroup(qint64 p_lGroupId, QString p_qstrNewName);
+   qint64 CreateUserGroup(QString p_qstrGroupName);
+   qint64 DeleteUserGroup(qint64 p_llGroupId);
+   qint64 AddUserToUserGroup(qint64 p_lChangeUserId,qint64 p_lUserGroupId);
+   qint64 RemoveUserFromGroup(qint64 p_lChangeUserId,qint64 p_lUserGroupId);
+   qint64 GetUserGroupList(QList<CumUserGroup*>& p_rqvlUserGroups, QString p_qstrSchemeUri);
+   qint64 GetListOfUsersInList(qint64 p_lUserGroupId, QList<CumUser*>& p_rqvlUserList);
+   qint64 GetUserGroupMemberList(qint64 p_lChangeUserId, QList<CumUserGroup*>& p_qvlUserGroups);
+   qint64 AddLicense(QString p_qstrApplication, QString p_qstrLicensee, QString p_qstrLicensekey);
+   qint64 FreeLicense();
+   qint64 GetSchemeList(QList<QString>& p_qvlDatabases);
+   qint64 UpdateScheme(CdmScheme* p_pCdmDatabase);
     int Init(CdbDataAccessConfigurator* p_pConfig);
     virtual int Init(QString p_qstrApplicationName, QString p_qstrVersion);
-    long GetCounterValue(const CdmObjectContainer* p_pContainer, CdmValue* p_pValue);
+   qint64 GetCounterValue(const CdmObjectContainer* p_pContainer, CdmValue* p_pValue);
     virtual QString GetConnectionDisplayString();
-    int LoadEmptyObjectContainer(long p_lDataBaseId, long p_lId, CdmObjectContainer*& p_pContainer);
+    int LoadEmptyObjectContainer(qint64 p_lDataBaseId,qint64 p_lId, CdmObjectContainer*& p_pContainer);
     int GetQueryCount();
     int GetSuccessfullQueryCount();
-    virtual int LoadObjects(QList<long>& p_rqvlObjects, CdmObjectContainer*& p_pCdmObject);
+    virtual int LoadObjects(QList<qint64>& p_rqvlObjects, CdmObjectContainer*& p_pCdmObject);
     virtual int IsDemo(QString p_qstrApplication, QString p_qstrVersion);
-    virtual long IsObjectUsed(const CdmObject* p_pObject);
+    virtual qint64 IsObjectUsed(const CdmObject* p_pObject);
     bool LicenceCheck(QString p_qstrApplication, bool& p_bDemo, int& p_iModules, QString p_qstrVersion);
     bool CheckAuthorisationAdmin(QString p_qstrLogin, QString p_qstrPassword);
     bool CheckAuthorisation(QString p_qstrLogin, QString p_qstrPassword);
     virtual CumUser* FindUserById(int p_iId);
-    virtual long RefreshObject(CdmObject* p_pCdmObject);
-    virtual long RefreshObjectContainer(CdmObjectContainer* p_pCdmObject);
-    virtual long CountObjectsOnDb(CdmObjectContainer* p_pCdmObject);
-    int SaveRights(CdmRights& p_rCcdmRights, long p_lObjectId, QString p_qstrTableName, QString p_qstrIdFieldName);
-    int LoadRights(CdmRights& p_rCcdmRights, long p_lObjectId, QString p_qstrTableName, QString p_qstrIdFieldName);
-    int DeleteRights(long p_lObjectId, QString p_qstrTableName, QString p_qstrIdFieldName);
-    virtual int AddLanguage(long p_lDatabaseId, QString p_qstrLanguage);
-    virtual int DeleteLanguage(long p_lDatabaseId, int p_iLanguageId);
+    virtual qint64 RefreshObject(CdmObject* p_pCdmObject);
+    virtual qint64 RefreshObjectContainer(CdmObjectContainer* p_pCdmObject);
+    virtual qint64 CountObjectsOnDb(CdmObjectContainer* p_pCdmObject);
+    int SaveRights(CdmRights& p_rCcdmRights,qint64 p_lObjectId, QString p_qstrTableName, QString p_qstrIdFieldName);
+    int LoadRights(CdmRights& p_rCcdmRights,qint64 p_lObjectId, QString p_qstrTableName, QString p_qstrIdFieldName);
+    int DeleteRights(qint64 p_lObjectId, QString p_qstrTableName, QString p_qstrIdFieldName);
+    virtual int AddLanguage(qint64 p_lDatabaseId, QString p_qstrLanguage);
+    virtual int DeleteLanguage(qint64 p_lDatabaseId, int p_iLanguageId);
     CdbJournal* GetJournal();
     int GetObjectModifications(const CdmObject* p_pObject, QDate p_qdFrom, QDate p_qdTo, QList<CdmJournalItem*>& p_qlItems);
     int GetObjectContainerModifications(const CdmObjectContainer* p_pContainer, QDate p_qdFrom, QDate p_qdTo, QList<CdmJournalItem*>& p_qlItems);
-    int GetSchemeModifications(long p_lDatabaseId, QDate p_qdFrom, QDate p_qdTo, QList<CdmJournalItem*>& p_qlItems);
+    int GetSchemeModifications(qint64 p_lDatabaseId, QDate p_qdFrom, QDate p_qdTo, QList<CdmJournalItem*>& p_qlItems);
     virtual bool GetOwner(const CdmObject* p_pObject, CdmObject*& p_pOwnerObject);
     virtual bool GetReferences(const CdmObject* p_pObject, QList<CdmObject*>& p_rqmReferences);
     virtual bool GetOwner(const CdmObjectContainer* p_pContainer, CdmObject*& p_pOwnerObject);
     virtual CdmObject* CreateObject(CdmObjectContainer* p_pContainer);
     void CreateDatabase(EdbSupportedDatabase p_eDatabase);
     void CreateDatabase(QString p_qstrFilename);
-    bool UnlockClassMethod(long p_lMethodId);
-    bool LockClassMethod(long p_lMethodId);
+    bool UnlockClassMethod(qint64 p_lMethodId);
+    bool LockClassMethod(qint64 p_lMethodId);
     virtual QVariant ExecuteFunction(CdmObject* p_PObject, QString p_qstrFunctionName, QVariantList p_qvlParameters);
     virtual QVariant EvaluateFormula(const CdmObject* p_pObject, QString p_qstrFormula);
     virtual bool GetRfcExecution()const {return false;}
@@ -233,9 +233,9 @@ public:
     virtual CumUser *FindUserByEmail(QString p_qstrEmail, QString p_qstrSchemeUri);
     virtual CumUser *FindUserByLogin(QString p_qstrLogin, QString p_qstrSchemeUri);
     virtual CumUser *FindUser(QString p_qstrLogin, QString p_qstrPassword, QString p_qstrSchemeUri);
-    virtual int LoginLdap(QString p_qstrApplication, QString p_qstrLogin, QString p_qstrPassword, long& p_lSessionId, CumUser*& p_rUser);
+    virtual int LoginLdap(QString p_qstrApplication, QString p_qstrLogin, QString p_qstrPassword,qint64& p_lSessionId, CumUser*& p_rUser);
     virtual int UpdatePackage(CdmPackage*& p_pCdmPackage);
-    virtual int DeleteUser(long p_lUserToDeleteId);
+    virtual int DeleteUser(qint64 p_lUserToDeleteId);
     virtual CdmSession* FindSession(int p_iSessionId);
     virtual CdmSession* FindSession(QString p_qstrBaseAuth);
     void UpdateSession(int p_iSessionId);
@@ -246,7 +246,7 @@ public:
     CumUserGroup* FindUserGroupById(int p_iId);
     CumUserGroup* FindUserGroupByName(QString p_qstrName, QString p_qstrSchemeUri);
     CdbInterface *GetDbInterface();
-    long ExecuteQuery(QSqlQuery &p_rqsqlQuery);
+   qint64 ExecuteQuery(QSqlQuery &p_rqsqlQuery);
     virtual QList<CumUserGroup*> FindUserGroups(QString p_qstrName, QString p_qstrSchemeUri);
     virtual int LoadObject(const CdmObjectContainer* p_pContainer, QString p_qstrKeyname, CdmObject*& p_pCdmObject);
     static EodbcBaseType ConvertValueType(EdmValueType p_eValue);

@@ -2,7 +2,7 @@
 
 #include "CwnCommandStdHeader.h"
 
-CwnCommandGetObjectReferences::CwnCommandGetObjectReferences(long p_lContainerId, long p_lObjectId, CwnDataAccess* p_pDataAccess)
+CwnCommandGetObjectReferences::CwnCommandGetObjectReferences(qint64 p_lContainerId,qint64 p_lObjectId, CwnDataAccess* p_pDataAccess)
 : CwnCommandBase(p_pDataAccess),
   m_lContainerId(p_lContainerId),
   m_lObjectId(p_lObjectId)
@@ -67,8 +67,8 @@ void CwnCommandGetObjectReferences::interpretAnswer(QVariant &Ret)
                const QVariantList* row = static_cast<const QVariantList*>(rowTemp->find("row")->data());
 
 
-               long lObjectListId = row->at(1).toInt();
-               long lObjectId = row->at(0).toInt();
+              qint64 lObjectListId = row->at(1).toInt();
+              qint64 lObjectId = row->at(0).toInt();
                m_qmReferences.insert(lObjectId, lObjectListId);
             }
             Ret=1;
@@ -81,7 +81,7 @@ void CwnCommandGetObjectReferences::interpretAnswer(QVariant &Ret)
     }
 }
 
-QMap<long,long> CwnCommandGetObjectReferences::GetResult()
+QMap<qint64,qint64> CwnCommandGetObjectReferences::GetResult()
 {
     return m_qmReferences;
 }

@@ -276,7 +276,7 @@ void CwiRuntime::GetApplicationList(CwmscomData* p_pData)
 void CwiRuntime::GetExportList(CwmscomData* p_pData)
 {
    CwmscomDataResult* pResult = nullptr;
-   long lObjectListId = p_pData->GetValue("ObjectListId").toInt();
+  qint64 lObjectListId = p_pData->GetValue("ObjectListId").toInt();
    CdmObjectContainer* pList = GetContainer(lObjectListId);
 
    if (CHKPTR(pList))
@@ -326,7 +326,7 @@ void CwiRuntime::GetExportList(CwmscomData* p_pData)
 void CwiRuntime::GetImportList(CwmscomData* p_pData)
 {
    CwmscomDataResult* pResult = nullptr;
-   long lObjectListId = p_pData->GetValue("ObjectListId").toInt();
+  qint64 lObjectListId = p_pData->GetValue("ObjectListId").toInt();
    CdmObjectContainer* pList = GetContainer(lObjectListId);
 
    if (CHKPTR(pList))
@@ -389,7 +389,7 @@ void CwiRuntime::Export(CwmscomData* p_pData)
 {
    CwmscomDataResult* pResult = nullptr;
    QString qstrConfigName = p_pData->GetValue("ConfigurationName").toString();
-   long lObjectListId = p_pData->GetValue("ObjectListId").toInt();
+  qint64 lObjectListId = p_pData->GetValue("ObjectListId").toInt();
    CdmObjectContainer* pList = GetContainer(lObjectListId);
 
    if (CHKPTR(pList))
@@ -451,7 +451,7 @@ void CwiRuntime::Export(CwmscomData* p_pData)
 void CwiRuntime::Import(CwmscomData* p_pData)
 {
    QString qstrConfigName = p_pData->GetValue("ConfigurationName").toString();
-   long lObjectListId = p_pData->GetValue("ObjectListId").toInt();
+  qint64 lObjectListId = p_pData->GetValue("ObjectListId").toInt();
    QString qstrContent = p_pData->GetValue("Content").toString();
    CdmObjectContainer* pList = GetContainer(lObjectListId);
 
@@ -503,9 +503,9 @@ void CwiRuntime::Import(CwmscomData* p_pData)
  *----------------last changed: --------------------------------Mo 25. Feb 14:55:24 2013----------*/
 void CwiRuntime::ExecuteFunction(CwmscomData* p_pData)
 {
-   long lObjectListId = p_pData->GetValue("ObjectListId").toInt();
-   long lObjectId  = p_pData->GetValue("ObjectId").toInt();
-   long lClassId = p_pData->GetValue("ClassId").toInt();
+  qint64 lObjectListId = p_pData->GetValue("ObjectListId").toInt();
+  qint64 lObjectId  = p_pData->GetValue("ObjectId").toInt();
+  qint64 lClassId = p_pData->GetValue("ClassId").toInt();
    QString qstrFunction = p_pData->GetValue("Function").toString();
    QVariantList qvlParameters = p_pData->GetValue("Parameters").toList();
 
@@ -535,8 +535,8 @@ void CwiRuntime::ExecuteFunction(CwmscomData* p_pData)
 void CwiRuntime::EvaluateFormula(CwmscomData* p_pData)
 {
    CwmscomDataResult* pResult = nullptr;
-   long lObjectListId = p_pData->GetValue("ObjectListId").toInt();
-   long lObjectId  = p_pData->GetValue("ObjectId").toInt();
+  qint64 lObjectListId = p_pData->GetValue("ObjectListId").toInt();
+  qint64 lObjectId  = p_pData->GetValue("ObjectId").toInt();
    QString qstrFormula = p_pData->GetValue("Formula").toString();
 
    CdmDataProvider* pManager = CdmSessionManager::GetDataProvider();
@@ -589,15 +589,15 @@ void CwiRuntime::EvaluateFormula(CwmscomData* p_pData)
  * @method  CwiRuntime::ExecuteObjectMethod               // private                           *
  * @return  void                                             //                                   *
  * @param   CwmscomData* p_pData                             //                                   *
- * @param   long p_lObjectListId                             //                                   *
- * @param   long p_lObjectId                                 //                                   *
+ * @param  qint64 p_lObjectListId                             //                                   *
+ * @param  qint64 p_lObjectId                                 //                                   *
  * @param   QString p_qstrFunction                           //                                   *
  * @param   QVariantList p_qvlParameters                     //                                   *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------Do 28. Feb 10:34:58 2013----------*/
 void CwiRuntime::ExecuteObjectMethod(CwmscomData* p_pData,
-                                     long p_lObjectListId,
-                                     long p_lObjectId,
+                                    qint64 p_lObjectListId,
+                                    qint64 p_lObjectId,
                                      QString p_qstrFunction,
                                      QVariantList p_qvlParameters)
 {
@@ -636,13 +636,13 @@ void CwiRuntime::ExecuteObjectMethod(CwmscomData* p_pData,
  * @method  CwiRuntime::ExecuteStaticMethod               // private                           *
  * @return  void                                             //                                   *
  * @param   CwmscomData* p_pData                             //                                   *
- * @param   long p_lCassId                                   //                                   *
+ * @param  qint64 p_lCassId                                   //                                   *
  * @param   QString p_qstrFunction                           //                                   *
  * @param   QVariantList p_qvlParameters                     //                                   *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------Do 28. Feb 10:27:46 2013----------*/
 void CwiRuntime::ExecuteStaticMethod(CwmscomData* p_pData,
-                                        long p_lCassId,
+                                       qint64 p_lCassId,
                                         QString p_qstrFunction,
                                         QVariantList p_qvlParameters)
 {
@@ -692,11 +692,11 @@ void CwiRuntime::ExecuteStaticMethod(CwmscomData* p_pData,
 /** +-=---------------------------------------------------------Mi 27. Feb 14:20:15 2013----------*
  * @method  CwiRuntime::GetObject                         // public                            *
  * @return  CdmObject*                                       //                                   *
- * @param   long p_lObjectListId                             //                                   *
- * @param   long p_lObjectId                                 //                                   *
+ * @param  qint64 p_lObjectListId                             //                                   *
+ * @param  qint64 p_lObjectId                                 //                                   *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------Mi 27. Feb 14:20:15 2013----------*/
-CdmObject* CwiRuntime::GetObject(long p_lObjectListId, long p_lObjectId)
+CdmObject* CwiRuntime::GetObject(qint64 p_lObjectListId,qint64 p_lObjectId)
 {
    CdmObject* pObject = nullptr;
    CdmDataProvider* pManager = CdmSessionManager::GetDataProvider();
@@ -717,10 +717,10 @@ CdmObject* CwiRuntime::GetObject(long p_lObjectListId, long p_lObjectId)
 /** +-=---------------------------------------------------------Do 28. Feb 10:21:21 2013----------*
  * @method  CwiRuntime::GetContainer                     // public                            *
  * @return  CdmObjectContainer*                                   //                                   *
- * @param   long p_lObjectList                               //                                   *
+ * @param  qint64 p_lObjectList                               //                                   *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------Do 28. Feb 10:21:21 2013----------*/
-CdmObjectContainer* CwiRuntime::GetContainer(long p_lObjectList)
+CdmObjectContainer* CwiRuntime::GetContainer(qint64 p_lObjectList)
 {
    CdmObjectContainer* pList = nullptr;
    CdmDataProvider* pManager = CdmSessionManager::GetDataProvider();

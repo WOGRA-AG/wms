@@ -102,7 +102,7 @@ private:
     QTreeWidgetItem* m_pqlviForms;
     QTreeWidgetItem* m_pqlviReports;
     QWidget* m_pqwEditor;
-    QMap<long, QString>  m_qmObjectLists;
+    QMap<qint64, QString>  m_qmObjectLists;
     CwmsUserManagerIf* m_pCwmsUserManager;
     CwmsRuntime* m_pRuntime;
     QTreeWidget* m_rpqCurrentWidget;

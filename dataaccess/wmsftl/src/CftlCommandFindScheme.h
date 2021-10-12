@@ -16,13 +16,13 @@ class CftlCommandFindScheme : public CftlAbstractCommand
 {
 private:
     QString m_qstrSchemeName;
-    long m_lSchemeId;
+   qint64 m_lSchemeId;
     CdmScheme* m_pScheme;
 
     void LoadLanguages();
 public:
     CftlCommandFindScheme(QString p_qstrSchemeName, CftlDataAccess* p_pDataAccess);
-    CftlCommandFindScheme(long m_lSchemeId, CftlDataAccess* p_pDataAccess);
+    CftlCommandFindScheme(qint64 m_lSchemeId, CftlDataAccess* p_pDataAccess);
     virtual ~CftlCommandFindScheme();
 
     CdmScheme *GetResult();

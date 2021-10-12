@@ -81,13 +81,13 @@ void CwmsUserChoiceIf::CancelClickedSlot(  )
 
 /** +-=---------------------------------------------------------Do 27. Jan 07:42:30 2005----------*
  * @method  CwmsUserChoiceIf::GetUserSelection               // public, static                    *
- * @return  long                                             // UserId                            *
+ * @return qint64                                             // UserId                            *
  * @param   QWidget* parent                                  //                                   *
  * @comment This static member function gets a selected user from the complete user list.         *
  *----------------last changed: --------------------------------Do 27. Jan 07:42:30 2005----------*/
-long CwmsUserChoiceIf::GetUserSelection(  QWidget* parent )
+qint64 CwmsUserChoiceIf::GetUserSelection(  QWidget* parent )
 {
-   long lUserId = -1;
+  qint64 lUserId = -1;
    CwmsUserChoiceIf* pCwmsUserChoiceIf = new CwmsUserChoiceIf(parent);
 
    if(pCwmsUserChoiceIf->exec() == QDialog::Accepted)
@@ -119,7 +119,7 @@ void CwmsUserChoiceIf::SearchUserClickedSlot()
        {
           QTreeWidgetItem* pItem = new QTreeWidgetItem(m_pqlvUsers);
           pItem->setText(0, QString::number(pCumUser->GetId()));
-          pItem->setData(0, Qt::UserRole, (int)pCumUser->GetId());
+          pItem->setData(0, Qt::UserRole, pCumUser->GetId());
           pItem->setText(1, pCumUser->GetFirstName());
           pItem->setText(2, pCumUser->GetLastName());
           pItem->setText(3, pCumUser->GetLogin());

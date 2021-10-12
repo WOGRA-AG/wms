@@ -97,10 +97,10 @@ class CwmsUniversalRightsManagerIf : public QDialog, public Ui::CwmsRightsManage
    /** +-=---------------------------------------------------------Do 16. Aug 14:17:02 2012-------*
     * @method  CwmsUniversalRightsManagerIf::FindUser        // protected, virtual                *
     * @return  CumUser*                                      //                                   *
-    * @param   long p_lUserId                                //                                   *
+    * @param  qint64 p_lUserId                                //                                   *
     * @comment                                                                                    *
     *----------------last changed: -----------------------------Do 16. Aug 14:17:02 2012----------*/
-    virtual CumUser* FindUser(long p_lUserId);
+    virtual CumUser* FindUser(qint64 p_lUserId);
 
    protected:
    /** +-=---------------------------------------------------------Do 16. Aug 14:17:18 2012-------*
@@ -115,10 +115,10 @@ class CwmsUniversalRightsManagerIf : public QDialog, public Ui::CwmsRightsManage
    /** +-=---------------------------------------------------------Do 16. Aug 14:17:24 2012-------*
     * @method  CwmsUniversalRightsManagerIf::FindUserGroup   // protected, virtual                *
     * @return  CumUserGroup*                                 //                                   *
-    * @param   long p_lUserId                                //                                   *
+    * @param  qint64 p_lUserId                                //                                   *
     * @comment                                                                                    *
     *----------------last changed: -----------------------------Do 16. Aug 14:17:24 2012----------*/
-    virtual CumUserGroup* FindUserGroup(long p_lUserId);
+    virtual CumUserGroup* FindUserGroup(qint64 p_lUserId);
 
    protected:
    /** +-=---------------------------------------------------------Do 16. Aug 14:17:30 2012-------*

@@ -25,7 +25,7 @@ class WMSMANAGER_API CdmSession : public CwmsSynchronizable
     friend class CdmDataAccessHelper;
 
     private:
-    long m_lSessionId;
+   qint64 m_lSessionId;
     CumUser* m_pSessionUser;
     CdmDataProvider* m_pDataProvider;
     QDateTime m_qdtLastRequest;
@@ -38,7 +38,7 @@ public:
     CdmSession();
     virtual ~CdmSession();
     const CumUser *GetCurrentUser() const;
-    long GetCurrentUserId() const;
+   qint64 GetCurrentUserId() const;
     bool IsExpired() const;
     void LdapLogin(QString p_qstrLogin, QString p_qstrPassword, IdmDataAccess *p_pDataAccess);
     void Login(QString p_qstrLogin, QString p_qstrPassword, IdmDataAccess *p_pDataAccess);
@@ -46,9 +46,9 @@ public:
 
     QDateTime GetLastRequest() const;
     void SetLastRequest(const QDateTime &qdtLastRequest);
-    long GetId();
+   qint64 GetId();
     QString GetBaseAuth() const;
-    long Logout();
+   qint64 Logout();
     void SetServerRequestPath(QString p_qstrPath);
     QString GetServerRequestPath() const;
     void setEventStoreManager(IdmEventStoreManager *pEventStore);

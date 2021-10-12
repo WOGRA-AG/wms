@@ -198,10 +198,10 @@ public:
    /** +-=---------------------------------------------------------Fr 21. Dez 11:09:11 2012-------*
     * @method  CwmsWorkflowManager::FindWorkflowById         // public                            *
     * @return  CdmObject*                                    //                                   *
-    * @param   long p_lObjectId                              //                                   *
+    * @param  qint64 p_lObjectId                              //                                   *
     * @comment                                                                                    *
     *----------------last changed: -----------------------------Fr 21. Dez 11:09:11 2012----------*/
-    CdmObject* FindWorkflowById(long p_lObjectId);
+    CdmObject* FindWorkflowById(qint64 p_lObjectId);
 
    public:
    /** +-=---------------------------------------------------------Mo 31. Dez 10:10:38 2012-------*

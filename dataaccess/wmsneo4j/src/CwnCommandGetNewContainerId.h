@@ -7,11 +7,11 @@
 class CwnCommandGetNewContainerId : public CwnCommandBase
 {
 private:
-    long m_lClassId;
-    long m_lSessionId;
+   qint64 m_lClassId;
+   qint64 m_lSessionId;
 
 public:
-    CwnCommandGetNewContainerId(long p_lClassId, long p_lSessionId, CwnDataAccess* p_pDataAccess);
+    CwnCommandGetNewContainerId(qint64 p_lClassId,qint64 p_lSessionId, CwnDataAccess* p_pDataAccess);
     virtual ~CwnCommandGetNewContainerId();
     QString createQuery();
     QString queryCausedError;

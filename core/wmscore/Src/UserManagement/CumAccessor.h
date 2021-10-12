@@ -39,13 +39,13 @@ class WMSMANAGER_API CumAccessor : public CdmLocatedElement
     friend class CumUserManager;
 
 private:
-    long m_lId;
+   qint64 m_lId;
     CumUserManager* m_rpUserManager;
     QStringList m_qstrlSchemes;
     void SetUserManager(CumUserManager* p_pUserManager);
 
 public:
-    CumAccessor(long p_lId, CumUserManager* p_pUserManager);
+    CumAccessor(qint64 p_lId, CumUserManager* p_pUserManager);
     virtual ~CumAccessor();
 
     void AddSchemeUri(QString p_qstrUri);
@@ -53,7 +53,7 @@ public:
     void RemoveSchemeUri(QString p_qstrUri);
 
 public slots:
-    long GetId( ) const;
+   qint64 GetId( ) const;
     CumUserManager* GetUserManager( ) const;
     virtual bool IsUser( ) const;
     virtual bool IsGroup( ) const;

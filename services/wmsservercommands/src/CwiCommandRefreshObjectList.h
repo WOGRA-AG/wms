@@ -9,10 +9,10 @@ class CwiCommandRefreshObjectList : public CwiAbstractCommand
 
 private:
     CwmscomData* m_rpData;
-    long m_rlDbId;
-    long m_rObjectListId;
+   qint64 m_rlDbId;
+   qint64 m_rObjectListId;
 public:
-    CwiCommandRefreshObjectList(CwmscomData* p_pData, long p_lDbId, long p_ObjectListId);
+    CwiCommandRefreshObjectList(CwmscomData* p_pData,qint64 p_lDbId,qint64 p_ObjectListId);
     virtual ~CwiCommandRefreshObjectList();
     virtual void Execute();
 };

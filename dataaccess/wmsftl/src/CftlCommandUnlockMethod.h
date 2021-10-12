@@ -7,12 +7,12 @@
 class CftlCommandUnlockMethod : public CftlAbstractTransactionalCommand
 {
 private:
-    long m_lMethodId;
+   qint64 m_lMethodId;
     bool m_bResult;
 
 
 public:
-    CftlCommandUnlockMethod(long p_lMethodId,CftlDataAccess* p_pDataAccess);
+    CftlCommandUnlockMethod(qint64 p_lMethodId,CftlDataAccess* p_pDataAccess);
     virtual ~CftlCommandUnlockMethod();
     bool GetResult();
 protected:

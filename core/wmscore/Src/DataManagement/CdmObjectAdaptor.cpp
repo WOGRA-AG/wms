@@ -46,12 +46,12 @@
 /** +-=---------------------------------------------------------Sa 20. Aug 10:08:22 2005----------*
  * @method  CdmObjectAdaptor::CdmObjectAdaptor               // public                            *
  * @return                                                   //                                   *
- * @param   long p_lDbId                                     //                                   *
- * @param   long p_lObjectId                                 //                                   *
- * @param   long p_lObjectListId                             //                                   *
+ * @param  qint64 p_lDbId                                     //                                   *
+ * @param  qint64 p_lObjectId                                 //                                   *
+ * @param  qint64 p_lObjectListId                             //                                   *
  * @comment the cosntructor of dataccess.                                                         *
  *----------------last changed: --------------------------------Sa 20. Aug 10:08:22 2005----------*/
-CdmObjectAdaptor::CdmObjectAdaptor(long p_lDbId, long p_lObjectId, long p_lObjectListId )
+CdmObjectAdaptor::CdmObjectAdaptor(qint64 p_lDbId,qint64 p_lObjectId,qint64 p_lObjectListId )
    : m_lDbId(p_lDbId),
   m_lObjectId(p_lObjectId),
   m_lObjectListId(p_lObjectListId)
@@ -391,10 +391,10 @@ QString CdmObjectAdaptor::GetCaption() const
 
 /** +-=---------------------------------------------------------So 10. Feb 09:38:10 2013----------*
  * @method  CdmObjectAdaptor::GetObjectId                    // public, const                     *
- * @return  long                                             //                                   *
+ * @return qint64                                             //                                   *
  * @comment returns the object id of this obejct.                                                 *
  *----------------last changed: --------------------------------So 10. Feb 09:38:10 2013----------*/
-long CdmObjectAdaptor::GetObjectId() const
+qint64 CdmObjectAdaptor::GetObjectId() const
 {
    return m_lObjectId;
 }
@@ -589,13 +589,13 @@ CdmValue* CdmObjectAdaptor::GetEventValue(QString p_qstrKeyname, CdmObject* p_pC
 
 /** +-=---------------------------------------------------------So 10. Feb 09:40:00 2013----------*
  * @method  CdmObjectAdaptor::GetLong                        // public, const                     *
- * @return  long                                             //                                   *
+ * @return qint64                                             //                                   *
  * @param   QString p_qstrKeyname                            //                                   *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------So 10. Feb 09:40:00 2013----------*/
-long CdmObjectAdaptor::GetLong(QString p_qstrKeyname) const
+qint64 CdmObjectAdaptor::GetLong(QString p_qstrKeyname) const
 {
-   long lRet = 0;
+  qint64 lRet = 0;
    CdmObject* pCdmObject = (const_cast<CdmObjectAdaptor*>(this))->GetObject();
 
    if (CHKPTR(pCdmObject))
@@ -789,10 +789,10 @@ void CdmObjectAdaptor::SetValue(QString p_qstrKeyname, int p_iValue)
  * @method  CdmObjectAdaptor::SetValue                       // public                            *
  * @return  void                                             //                                   *
  * @param   QString p_qstrKeyname                            //                                   *
- * @param   long p_lValue                                    //                                   *
+ * @param  qint64 p_lValue                                    //                                   *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------Di 8. Feb 16:21:15 2011-----------*/
-void CdmObjectAdaptor::SetValue(QString p_qstrKeyname, long p_lValue)
+void CdmObjectAdaptor::SetValue(QString p_qstrKeyname,qint64 p_lValue)
 {
 
    CdmObject* pCdmObject = GetObject();
@@ -892,13 +892,13 @@ CdmObject* CdmObjectAdaptor::FindObjectBySelfLink(QString qstrSelfLink)
 
 /** +-=---------------------------------------------------------Di 8. Feb 16:21:35 2011-----------*
  * @method  CdmObjectAdaptor::GetObjectRef                   // public                            *
- * @return  long                                             //                                   *
+ * @return qint64                                             //                                   *
  * @param   QString p_qstrKeyname                            //                                   *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------Di 8. Feb 16:21:35 2011-----------*/
-long CdmObjectAdaptor::GetObjectRef(QString p_qstrKeyname)
+qint64 CdmObjectAdaptor::GetObjectRef(QString p_qstrKeyname)
 {
-   long lObjectRef = 0;
+  qint64 lObjectRef = 0;
    CdmObject* pCdmObject = GetObject();
 
    if(CHKPTR(pCdmObject))
@@ -920,13 +920,13 @@ long CdmObjectAdaptor::GetObjectRef(QString p_qstrKeyname)
 
 /** +-=---------------------------------------------------------Di 8. Feb 16:21:42 2011-----------*
  * @method  CdmObjectAdaptor::GetObjectListRef               // public                            *
- * @return  long                                             //                                   *
+ * @return qint64                                             //                                   *
  * @param   QString p_qstrKeyname                            //                                   *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------Di 8. Feb 16:21:42 2011-----------*/
-long CdmObjectAdaptor::GetContainerRef(QString p_qstrKeyname)
+qint64 CdmObjectAdaptor::GetContainerRef(QString p_qstrKeyname)
 {
-   long lRet = 0;
+  qint64 lRet = 0;
    CdmObject* pCdmObject = GetObject();
 
    if(CHKPTR(pCdmObject))
@@ -946,10 +946,10 @@ long CdmObjectAdaptor::GetContainerRef(QString p_qstrKeyname)
  * @method  CdmObjectAdaptor::SetContainerRefValue          // public                            *
  * @return  void                                             //                                   *
  * @param   QString p_qstrKeyname                            //                                   *
- * @param   long p_lObjectListId                             //                                   *
+ * @param  qint64 p_lObjectListId                             //                                   *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------Di 8. Feb 16:21:48 2011-----------*/
-void CdmObjectAdaptor::SetContainerRefValue(QString p_qstrKeyname, long p_lObjectListId)
+void CdmObjectAdaptor::SetContainerRefValue(QString p_qstrKeyname,qint64 p_lObjectListId)
 {
 
    CdmObject* pCdmObject = GetObject();
@@ -989,7 +989,7 @@ void CdmObjectAdaptor::SetContainerRefValue(QString p_qstrKeyname, CdmObjectCont
          }
          else
          {
-            ((CdmValueContainerRef*)pCdmValue)->SetValue((long)0);
+            ((CdmValueContainerRef*)pCdmValue)->SetValue((qint64)0);
          }
       }
    }
@@ -2139,7 +2139,7 @@ void CdmObjectAdaptor::SetVariant(QVariant& p_rqVariant, QString p_qstrOLKeyname
 
    if (CHKPTR(pContainer))
    {
-      long lObjectId = qHash["ObjectId"].toInt();
+     qint64 lObjectId = qHash["ObjectId"].toInt();
       CdmObject* pCdmObject = nullptr;
 
       if (lObjectId > 0)
@@ -2213,12 +2213,12 @@ CdmObject* CdmObjectAdaptor::GetParentObject()
 
 /** +-=---------------------------------------------------------So 14. Okt 09:45:19 2012----------*
  * @method  CdmObjectAdaptor::GetParentObjectId              // public                            *
- * @return  long                                             //                                   *
+ * @return qint64                                             //                                   *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------So 14. Okt 09:45:19 2012----------*/
-long CdmObjectAdaptor::GetParentObjectId()
+qint64 CdmObjectAdaptor::GetParentObjectId()
 {
-   long lRet = 0;
+  qint64 lRet = 0;
    CdmObject* pCdmObject = GetObject();
    
    if (pCdmObject)
@@ -2313,7 +2313,7 @@ QVariantMap CdmObjectAdaptor::GetVariantGraph(bool p_bFollowNonOwnerObjectlist,
                 {
                     CdmObjectContainer* pObjectlist = ((CdmValueContainerRef*)pCdmValue)->GetContainer();
                     CdmContainerManager* pManager = pObjectlist->GetContainerManager();
-                    long lId = pObjectlist->GetId();
+                   qint64 lId = pObjectlist->GetId();
                     pManager->ReloadContainerComplete(lId);
                     pObjectlist = pManager->FindContainerById(lId);
 

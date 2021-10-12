@@ -118,13 +118,13 @@ public:
    /** +-=---------------------------------------------------------Di 9. Sep 08:18:25 2008--------*
     * @method  CwmsSearchWidgetIf::GetDisplayList            // public                            *
     * @return  void                                          //                                   *
-    * @param   QList<long>& p_rqvlResults              // The list of objects or objectlists*
+    * @param   QList<qint64>& p_rqvlResults              // The list of objects or objectlists*
     *                                                        //  which can be used                *
     * @comment This is the abstract method which must be overwritten be the derived class. the    *
     *          gui components which uses proxies uses the list of results for displaying their    *
     *          contents.                                                                          *
     *----------------last changed: -----------------------------Di 9. Sep 08:18:25 2008-----------*/
-    void GetDisplayList(QList<long>& p_rqvlResults);
+    void GetDisplayList(QList<qint64>& p_rqvlResults);
 
     private slots:
    /** +-=---------------------------------------------------------Sa 6. Sep 09:44:34 2008--------*

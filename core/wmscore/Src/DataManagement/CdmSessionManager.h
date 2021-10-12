@@ -72,7 +72,7 @@ private:
     friend class CdmSession;
 
 signals:
-    void SessionTimedOut(long p_lSessionId);
+    void SessionTimedOut(qint64 p_lSessionId);
     void SessionTimedOut(QString p_qstrBaseAuth);
 
 
@@ -94,7 +94,7 @@ public:
     void SetServerMode(bool bServerMode);
     int GetSessionTimeoutMinutes() const;
     void SetSessionTimeoutMinutes(int iSessionTimeoutMinutes);
-    long GetCurrentUserId() const;
+   qint64 GetCurrentUserId() const;
     const CumUser *GetCurrentUser() const;
     int CreateNewSessionLdap(QString p_qstrLogin, QString p_qstrPassword);
     CdmGlobalContext *GetGlobalContext();

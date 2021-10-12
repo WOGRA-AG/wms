@@ -28,11 +28,11 @@ class WMSMANAGER_API CdmValueListObjects : public CdmValueCharacterDocument
     Q_OBJECT
 
 private:
-    QList<QPair<long, long> > m_qllObjects;
+    QList<QPair<qint64,qint64> > m_qllObjects;
 
 public:
-    CdmValueListObjects( long p_lDatabaseId,
-                         long p_lId,
+    CdmValueListObjects(qint64 p_lDatabaseId,
+                        qint64 p_lId,
                          QString p_qstrKeyname,
                          CdmObject* p_pCdmObject);
     CdmValueListObjects( QVariantMap& p_rqvHash, CdmObject* p_pCdmObject);
@@ -44,7 +44,7 @@ public:
     void SetList(QList<CdmObject*>& p_rqvlObjects);
     void Deserialize();
     void Serialize() const;
-    void RemoveValue(long p_iKey);
+    void RemoveValue(qint64 p_iKey);
     void SetValue(int p_iKey, int p_iData);
     void ClearList();
     void SetValueVariant(QVariant &p_rVariant);

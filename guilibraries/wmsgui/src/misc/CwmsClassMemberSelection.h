@@ -62,10 +62,10 @@ class CwmsClassMemberSelection : public QDialog, public Ui::CwmsClassMemberSelec
    /** +-=---------------------------------------------------------Mo 10. Sep 13:48:51 2012-------*
     * @method  CwmsClassMemberSelection::FillDialog          // private                           *
     * @return  void                                          //                                   *
-    * @param   QMap<long,CdmMember*>& p_rqmMembers           //                                   *
+    * @param   QMap<qint64,CdmMember*>& p_rqmMembers           //                                   *
     * @comment                                                                                    *
     *----------------last changed: -----------------------------Mo 10. Sep 13:48:51 2012----------*/
-    void FillDialog(QMap<long,CdmMember*>& p_rqmMembers);
+    void FillDialog(QMap<qint64,CdmMember*>& p_rqmMembers);
 
    public:
    /** +-=---------------------------------------------------------Mo 10. Sep 13:50:29 2012-------*

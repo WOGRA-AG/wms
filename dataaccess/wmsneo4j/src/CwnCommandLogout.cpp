@@ -5,7 +5,7 @@
 
 #include "CwnCommandStdHeader.h"
 
-CwnCommandLogout::CwnCommandLogout(long p_lSessionId,CwnDataAccess* p_pDataAccess)
+CwnCommandLogout::CwnCommandLogout(qint64 p_lSessionId,CwnDataAccess* p_pDataAccess)
     : CwnCommandBase(p_pDataAccess),
       m_lSessionId(p_lSessionId)
 {

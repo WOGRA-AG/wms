@@ -2,7 +2,7 @@
 
 #include "CftlCommandUnlockMethod.h"
 
-CftlCommandUnlockMethod::CftlCommandUnlockMethod(long p_lMethodId, CftlDataAccess* p_pDataAccess)
+CftlCommandUnlockMethod::CftlCommandUnlockMethod(qint64 p_lMethodId, CftlDataAccess* p_pDataAccess)
 : CftlAbstractTransactionalCommand(p_pDataAccess),
   m_lMethodId(p_lMethodId),
   m_bResult(true)
@@ -24,8 +24,8 @@ int CftlCommandUnlockMethod::Execute()
     int iRet = CdmLogging::eDmUnknownClassAccessError;
     QSqlQuery cQuery(GetSqlDatabase());
     cQuery.prepare("delete from WMS_CLASS_LOCKEDMETHOD where SessionId = ? AND MethodId = ?");
-    cQuery.addBindValue((int)CdmSessionManager::GetSessionManager()->GetCurrentSessionId());
-    cQuery.addBindValue((int)m_lMethodId);
+    cQuery.addBindValue(CdmSessionManager::GetSessionManager()->GetCurrentSessionId());
+    cQuery.addBindValue(m_lMethodId);
 
     if (SUCCESSFULL(ExecuteQuery(cQuery)))
     {

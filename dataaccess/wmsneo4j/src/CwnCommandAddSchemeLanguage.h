@@ -7,11 +7,11 @@ class CwnCommandAddSchemeLanguage : public CwnCommandBase
 {
 
 private:
-    long m_lSchemeId;
+   qint64 m_lSchemeId;
     QString m_qstrLanguage;
 
 public:
-    CwnCommandAddSchemeLanguage(long p_lSchemeId, QString p_qstrLanguage, CwnDataAccess* p_pDataAccess);
+    CwnCommandAddSchemeLanguage(qint64 p_lSchemeId, QString p_qstrLanguage, CwnDataAccess* p_pDataAccess);
     virtual ~CwnCommandAddSchemeLanguage();
 
     QString createQuery();

@@ -19,11 +19,11 @@ CwnLoginManager::~CwnLoginManager()
     //Nothing to do.
 }
 
-long CwnLoginManager::Login(QString p_qstrApplication, QString p_qstrLogin, QString p_qstrPassword, CumUser*& p_rpCumUser, bool& p_bDemo, int& p_iModules, QString& p_qstrVersion)
+qint64 CwnLoginManager::Login(QString p_qstrApplication, QString p_qstrLogin, QString p_qstrPassword, CumUser*& p_rpCumUser, bool& p_bDemo, int& p_iModules, QString& p_qstrVersion)
 {
     CwnCommandLogin loginSessionCheck(p_qstrApplication,p_qstrVersion,p_qstrLogin,p_qstrPassword,m_rpCwnDataAccess,m_rpCwnUserManager);
 
-    long Ret=loginSessionCheck.Run();
+   qint64 Ret=loginSessionCheck.Run();
 
     if(Ret>0)
         p_rpCumUser = loginSessionCheck.GetUser();
@@ -31,21 +31,21 @@ long CwnLoginManager::Login(QString p_qstrApplication, QString p_qstrLogin, QStr
     return loginSessionCheck.GetSessionId();
 }
 
-long CwnLoginManager::Logout(  long p_lSessionId )
+qint64 CwnLoginManager::Logout( qint64 p_lSessionId )
 {
     CwnCommandLogout logoutSession(p_lSessionId,m_rpCwnDataAccess);
 
     return logoutSession.Run();
 }
 
-long CwnLoginManager::FindSession(  long p_lSessionId, long p_lUserId )
+qint64 CwnLoginManager::FindSession( qint64 p_lSessionId,qint64 p_lUserId )
 {
     CwnCommandFindSession findSession(p_lSessionId,p_lUserId,m_rpCwnDataAccess);
 
     return findSession.Run();
 }
 
-long CwnLoginManager::GetNewSession(QString p_qstrApplication, long p_lUserId)
+qint64 CwnLoginManager::GetNewSession(QString p_qstrApplication,qint64 p_lUserId)
 {
     CwnCommandGetNewSession getNewSession(p_qstrApplication,p_lUserId,m_rpCwnDataAccess);
     int Ret = getNewSession.Run();
@@ -62,11 +62,11 @@ bool CwnLoginManager::LicenceCheck(QString p_qstrApplication, bool& p_bDemo, int
     return true;
 }
 
-long CwnLoginManager::LoginLdap(QString p_qstrApplication, QString p_qstrLogin, QString p_qstrPassword, CumUser*& p_rUser)
+qint64 CwnLoginManager::LoginLdap(QString p_qstrApplication, QString p_qstrLogin, QString p_qstrPassword, CumUser*& p_rUser)
 {
     #ifndef WMS_NO_LDAP
         CwnCommandLdapLogin command(p_qstrApplication, "", p_qstrLogin, p_qstrPassword, m_rpCwnDataAccess, m_rpCwnUserManager);
-        long lRet = command.Run();
+       qint64 lRet = command.Run();
 
         if (lRet>0)
         {

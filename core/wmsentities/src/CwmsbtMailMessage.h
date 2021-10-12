@@ -293,7 +293,7 @@ void MessageTransmittedSlot( bool p_bSuccess);
     *----------------last changed: -----------------------------Do 4. Okt 14:36:26 2012-----------*/
     QString ExtractMonthOfYear();
     
-    bool WaitForMessageSent(long p_iTimeout = 5000);
+    bool WaitForMessageSent(qint64 p_iTimeout = 5000);
 
     QByteArray encodeQuotedPrintable(const QString &input);
 public:

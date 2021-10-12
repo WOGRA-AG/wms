@@ -1,6 +1,6 @@
 #include "CdbCommandUnlockMethod.h"
 
-CdbCommandUnlockMethod::CdbCommandUnlockMethod(long p_lMethodId, long p_lSessionId, CdbDataAccess* p_pDataAccess)
+CdbCommandUnlockMethod::CdbCommandUnlockMethod(qint64 p_lMethodId,qint64 p_lSessionId, CdbDataAccess* p_pDataAccess)
 : CdbAbstractCommandTransactional(p_pDataAccess),
   m_lSessionId(p_lSessionId),
   m_lMethodId(p_lMethodId),

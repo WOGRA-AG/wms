@@ -139,10 +139,10 @@ void CwmsRuntimeBase::InstallBaseFunctionsToExecutor()
 /** +-=---------------------------------------------------------Sa 6. Okt 09:32:02 2012-----------*
  * @method  CwmsRuntimeBase::OpenModule                      // protected                         *
  * @return  void                                             //                                   *
- * @param   long p_lObjectId                                 //                                   *
+ * @param  qint64 p_lObjectId                                 //                                   *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------Sa 6. Okt 09:32:02 2012-----------*/
-void CwmsRuntimeBase::OpenModule(long p_lObjectId)
+void CwmsRuntimeBase::OpenModule(qint64 p_lObjectId)
 {
    if (p_lObjectId > 0)
    {

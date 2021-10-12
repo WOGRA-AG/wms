@@ -40,14 +40,14 @@ class WMSMANAGER_API CdmValueDictIntString : public CdmValueCharacterDocument
    /** +-=---------------------------------------------------------Sa 11. Aug 20:51:34 2007-------*
     * @method  CdmValueDictIntString::CdmValueDictIntString            // public                            *
     * @return  void                                          //                                   *
-    * @param   long p_lDatabaseId                            //                                   *
-    * @param   long p_lId                                    //                                   *
+    * @param  qint64 p_lDatabaseId                            //                                   *
+    * @param  qint64 p_lId                                    //                                   *
     * @param   QString p_qstrKeyname                         //                                   *
     * @param   CdmObject* p_pCdmObject                       //                                   *
     * @comment The constructor of the stringlist.                                                 *
     *----------------last changed: Wolfgang Graßhof-------------Sa 11. Aug 20:51:34 2007----------*/
-    CdmValueDictIntString( long p_lDatabaseId,
-                      long p_lId,
+    CdmValueDictIntString(qint64 p_lDatabaseId,
+                     qint64 p_lId,
                       QString p_qstrKeyname,
                       CdmObject* p_pCdmObject);
 

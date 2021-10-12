@@ -35,24 +35,24 @@ class WMSMANAGER_API CdmObjectAdaptor : public CdmLocatedElement
 {
 private:
     // Datbase ID
-    long m_lDbId;
+   qint64 m_lDbId;
 
     // Object ID
-    long m_lObjectId;
+   qint64 m_lObjectId;
 
     // ObjectList ID
-    long m_lObjectListId;
+   qint64 m_lObjectListId;
 
 public:
    /** +-=---------------------------------------------------------Sa 20. Aug 10:08:22 2005*
     * @method  CdmObjectAdaptor::CdmObjectAdaptor            // public                            *
     * @return                                                //                                   *
-    * @param   long p_lDbId                                  //                                   *
-    * @param   long p_lObjectId                              //                                   *
-    * @param   long p_lObjectListId                          //                                   *
+    * @param  qint64 p_lDbId                                  //                                   *
+    * @param  qint64 p_lObjectId                              //                                   *
+    * @param  qint64 p_lObjectListId                          //                                   *
     * @comment the cosntructor of dataccess.                                                      *
     *----------------last changed: -----------------------------Sa 20. Aug 10:08:22 2005----------*/
-CdmObjectAdaptor(  long p_lDbId, long p_lObjectId, long p_lObjectListId );
+CdmObjectAdaptor( qint64 p_lDbId,qint64 p_lObjectId,qint64 p_lObjectListId );
 
 public:
    /** +-=---------------------------------------------------------Sa 20. Aug 10:08:34 2005*
@@ -80,10 +80,10 @@ public:
    public:
    /** +-=---------------------------------------------------------So 10. Feb 09:38:10 2013-------*
     * @method  CdmObjectAdaptor::GetObjectId                 // public, const                     *
-    * @return  long                                          //                                   *
+    * @return qint64                                          //                                   *
     * @comment returns the object id of this obejct.                                              *
     *----------------last changed: -----------------------------So 10. Feb 09:38:10 2013----------*/
-    long GetObjectId() const;
+   qint64 GetObjectId() const;
 
    public:
    /** +-=---------------------------------------------------------So 10. Feb 09:38:24 2013-------*
@@ -195,10 +195,10 @@ public:
     * @method  CdmObjectAdaptor::SetValue                    // public                            *
     * @return  void                                          //                                   *
     * @param   QString p_qstrKeyname                         //                                   *
-    * @param   long p_lValue                                 //                                   *
+    * @param  qint64 p_lValue                                 //                                   *
     * @comment                                                                                    *
     *----------------last changed: -----------------------------Di 8. Feb 16:21:15 2011-----------*/
-    void SetValue(QString p_qstrKeyname, long p_lValue);
+    void SetValue(QString p_qstrKeyname,qint64 p_lValue);
 
    public:
    /** +-=---------------------------------------------------------Di 8. Feb 16:21:21 2011--------*
@@ -222,30 +222,30 @@ public:
    public:
    /** +-=---------------------------------------------------------Di 8. Feb 16:21:35 2011--------*
     * @method  CdmObjectAdaptor::GetObjectRef                // public                            *
-    * @return  long                                          //                                   *
+    * @return qint64                                          //                                   *
     * @param   QString p_qstrKeyname                         //                                   *
     * @comment                                                                                    *
     *----------------last changed: -----------------------------Di 8. Feb 16:21:35 2011-----------*/
-    long GetObjectRef(QString p_qstrKeyname);
+   qint64 GetObjectRef(QString p_qstrKeyname);
 
    public:
    /** +-=---------------------------------------------------------Di 8. Feb 16:21:42 2011--------*
     * @method  CdmObjectAdaptor::GetObjectListRef            // public                            *
-    * @return  long                                          //                                   *
+    * @return qint64                                          //                                   *
     * @param   QString p_qstrKeyname                         //                                   *
     * @comment                                                                                    *
     *----------------last changed: -----------------------------Di 8. Feb 16:21:42 2011-----------*/
-    long GetContainerRef(QString p_qstrKeyname);
+   qint64 GetContainerRef(QString p_qstrKeyname);
 
    public:
    /** +-=---------------------------------------------------------Di 8. Feb 16:21:48 2011--------*
     * @method  CdmObjectAdaptor::SetContainerRefValue       // public                            *
     * @return  void                                          //                                   *
     * @param   QString p_qstrKeyname                         //                                   *
-    * @param   long p_lObjectListId                          //                                   *
+    * @param  qint64 p_lObjectListId                          //                                   *
     * @comment                                                                                    *
     *----------------last changed: -----------------------------Di 8. Feb 16:21:48 2011-----------*/
-    void SetContainerRefValue(QString p_qstrKeyname, long p_lObjectListId);
+    void SetContainerRefValue(QString p_qstrKeyname,qint64 p_lObjectListId);
 
 
    public:
@@ -385,11 +385,11 @@ public:
    public:
    /** +-=---------------------------------------------------------So 10. Feb 09:40:00 2013-------*
     * @method  CdmObjectAdaptor::GetLong                     // public, const                     *
-    * @return  long                                          //                                   *
+    * @return qint64                                          //                                   *
     * @param   QString p_qstrKeyname                         //                                   *
     * @comment                                                                                    *
     *----------------last changed: -----------------------------So 10. Feb 09:40:00 2013----------*/
-    long GetLong(QString p_qstrKeyname) const;
+   qint64 GetLong(QString p_qstrKeyname) const;
 
    public:
    /** +-=---------------------------------------------------------So 19. Nov 16:11:29 2006-------*
@@ -894,10 +894,10 @@ public:
    public:
    /** +-=---------------------------------------------------------So 14. Okt 09:45:19 2012-------*
     * @method  CdmObjectAdaptor::GetParentObjectId           // public                            *
-    * @return  long                                          //                                   *
+    * @return qint64                                          //                                   *
     * @comment                                                                                    *
     *----------------last changed: -----------------------------So 14. Okt 09:45:19 2012----------*/
-    long GetParentObjectId();
+   qint64 GetParentObjectId();
 
    public:
    /** +-=---------------------------------------------------------Do 25. Okt 13:54:43 2012-------*

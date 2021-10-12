@@ -40,21 +40,21 @@ class WMSMANAGER_API CdmValue : public CdmModelElement
     friend class CdmDataAccessHelper;
 
 private:
-    long m_lMemberId;
+   qint64 m_lMemberId;
     CdmObject* m_rpCdmObject;
 
 public:
     EdmValueType GetValueType() const;
     EdmValueType GetEvenValueType(const CdmObject *pEventObject) const;
     bool IsMustValue() const;
-    long GetSize() const;
-    long GetMemberId() const;
+   qint64 GetSize() const;
+   qint64 GetMemberId() const;
     const CdmMember* GetMember() const;
     const CdmMember* GetEventMember(const CdmObject *pEventObject) const;
     bool IsUnique() const;
     bool IsOwner() const;
     int DeleteValue();
-    void SetMemberId(long p_lId);
+    void SetMemberId(qint64 p_lId);
     int FromStringToValue(QString p_qstrValue);
     const CdmObject* GetObject() const;
     const CdmObject* GetDataObject() const;
@@ -90,8 +90,8 @@ public:
 
 
 protected:
-    CdmValue(long p_lDatabaseId,
-             long p_lId,
+    CdmValue(qint64 p_lDatabaseId,
+            qint64 p_lId,
              QString p_qstrKeyname,
              EdmValueType p_eDmValue,
              CdmObject* p_pCdmObject);

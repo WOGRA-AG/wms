@@ -105,12 +105,12 @@ class WMSINTERFACE_API CwiObject : public CwmscomResourceBase
    /** +-=---------------------------------------------------------Mi 18. Apr 10:01:28 2012-------*
     * @method  CwiObject::GetObject                       // public                            *
     * @return  CdmObject*                                    //                                   *
-    * @param   long p_lDatabaseId                            //                                   *
-    * @param   long p_lObjectListId                          //                                   *
-    * @param   long p_lObjectId                              //                                   *
+    * @param  qint64 p_lDatabaseId                            //                                   *
+    * @param  qint64 p_lObjectListId                          //                                   *
+    * @param  qint64 p_lObjectId                              //                                   *
     * @comment                                                                                    *
     *----------------last changed: -----------------------------Mi 18. Apr 10:01:28 2012----------*/
-    static CdmObject* GetObject(long p_lDatabaseId, long p_lObjectListId, long p_lObjectId);
+    static CdmObject* GetObject(qint64 p_lDatabaseId,qint64 p_lObjectListId,qint64 p_lObjectId);
 
    public:
    /** +-=---------------------------------------------------------Mi 18. Apr 15:42:18 2012-------*

@@ -17,7 +17,7 @@ private:
     CwmscomHandler* m_pHandler;
     CdmClass* m_pClassDerived1;
     CdmClass* m_pClassDerived2;
-    long m_lObjectId;
+   qint64 m_lObjectId;
     bool m_bTimeMeassurementActive;
 
     void LoadFunctionPlugins();

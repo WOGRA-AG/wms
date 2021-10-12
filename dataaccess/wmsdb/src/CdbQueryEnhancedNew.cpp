@@ -60,9 +60,9 @@ CdbQueryEnhancedNew::~CdbQueryEnhancedNew()
 {
 }
 
-long CdbQueryEnhancedNew::Execute()
+qint64 CdbQueryEnhancedNew::Execute()
 {
-    long lRet = CdmLogging::eDmUnknownDBQueryError;
+   qint64 lRet = CdmLogging::eDmUnknownDBQueryError;
 
     if(CHKPTR(m_rpCdbDataAccess) &&
             CHKPTR(m_rpCdmQuery))
@@ -112,9 +112,9 @@ QString CdbQueryEnhancedNew::GenerateSql()
     return qstrSql;
 }
 
-long CdbQueryEnhancedNew::ExecuteQuery(QString p_qstrSql)
+qint64 CdbQueryEnhancedNew::ExecuteQuery(QString p_qstrSql)
 {
-    long lRet = CdmLogging::eDmUnknownDBQueryError;
+   qint64 lRet = CdmLogging::eDmUnknownDBQueryError;
     QSqlQuery cQSqlQuery;
 
     if (!p_qstrSql.isEmpty())
@@ -141,8 +141,8 @@ long CdbQueryEnhancedNew::ExecuteQuery(QString p_qstrSql)
                     else
                     {
                         QVariant qvObjectId = cQSqlQuery.value(iColumnCount);
-                        long lObjectId = cQSqlQuery.value(iColumnCount).toInt();
-                        long lContainerId = cQSqlQuery.value(iColumnCount + 1).toInt();
+                       qint64 lObjectId = cQSqlQuery.value(iColumnCount).toInt();
+                       qint64 lContainerId = cQSqlQuery.value(iColumnCount + 1).toInt();
 
                         for (int iCounter = 0; iCounter < iColumnCount; ++iCounter)
                         {
@@ -534,7 +534,7 @@ QMap<QString, QString> CdbQueryEnhancedNew::BuildObjectRefSubQueries(QString &p_
             QString qstrCurrentTable = OBJREF_TABLE_PREFIX + QString::number(iTablesPos);
             QString qstrTable = CdbDataStructureHelper::GetTableName(pRefMember->GetValueType()) + " " + qstrCurrentTable;
             QString qstrKeyname = pRefMember->GetKeyname();
-            long lMemberId = pRefMember->GetId();
+           qint64 lMemberId = pRefMember->GetId();
 
             /* append delimiters to incrementelly built QStrings,
              * build Where Condition,
@@ -610,7 +610,7 @@ QMap<QString, QString> CdbQueryEnhancedNew::BuildObjectRefSubQueries(QString &p_
             ++iTablesPos;
         }
 
-        QMultiMap<QString, long> qmmValueTableMemberIds;
+        QMultiMap<QString,qint64> qmmValueTableMemberIds;
 
         for (int iPos = 0; iPos < qlMembers.size(); ++iPos)
         {
@@ -618,7 +618,7 @@ QMap<QString, QString> CdbQueryEnhancedNew::BuildObjectRefSubQueries(QString &p_
 
             QString qstrTable = CdbDataStructureHelper::GetTableName(pRefMember->GetValueType());
             QString qstrKeyname = pRefMember->GetKeyname();
-            long lMemberId = pRefMember->GetId();
+           qint64 lMemberId = pRefMember->GetId();
 
             if (bFirstTable)
             {
@@ -676,10 +676,10 @@ QMap<QString, QString> CdbQueryEnhancedNew::BuildObjectRefSubQueries(QString &p_
                 qlKeynames[i] = "'" + qlKeynames[i] + "'";
             }*/
             QStringList qstrlMemberIds;
-            QListIterator<long> qlIt(qmmValueTableMemberIds.values(qstrValueTable));
+            QListIterator<qint64> qlIt(qmmValueTableMemberIds.values(qstrValueTable));
             while (qlIt.hasNext())
             {
-                long lMemberId = qlIt.next();
+               qint64 lMemberId = qlIt.next();
                 qstrlMemberIds.append(QString::number(lMemberId));
             }
             qstrWhereConditions += qstrValueTable + ".memberid IN (" + qstrlMemberIds.join(',') + ")";
@@ -818,7 +818,7 @@ QMap<QString, QString> CdbQueryEnhancedNew::BuildObjectRefSubQueriesPerDepth(QSt
 
                 QString qstrCurrentTable = qstrlReferenceTables.at(iTablePos);
                 QString qstrKeyname = pRefMember->GetKeyname();
-                long lMemberId = pRefMember->GetId();
+               qint64 lMemberId = pRefMember->GetId();
 
                 if (bFirstReference)
                 {
@@ -847,7 +847,7 @@ QMap<QString, QString> CdbQueryEnhancedNew::BuildObjectRefSubQueriesPerDepth(QSt
                 qstrWhereConditions += " or " + qstrReferenceWhereCondition;
             }
 
-            QMultiMap<QString, long> qmmLocalValueTableMemberIds;
+            QMultiMap<QString,qint64> qmmLocalValueTableMemberIds;
 
             for (int iPos = 0; iPos < qlMembers.size(); ++iPos)
             {
@@ -855,7 +855,7 @@ QMap<QString, QString> CdbQueryEnhancedNew::BuildObjectRefSubQueriesPerDepth(QSt
 
                 QString qstrTable = CdbDataStructureHelper::GetTableName(pRefMember->GetValueType());
                 QString qstrKeyname = pRefMember->GetKeyname();
-                long lMemberId = pRefMember->GetId();
+               qint64 lMemberId = pRefMember->GetId();
 
                 if (bFirstTable)
                 {
@@ -911,10 +911,10 @@ QMap<QString, QString> CdbQueryEnhancedNew::BuildObjectRefSubQueriesPerDepth(QSt
                 }
                 QString qstrValueTable = qlKeyIterator.next();
                 QStringList qstrlMemberIds;
-                QListIterator<long> qlIt(qmmLocalValueTableMemberIds.values(qstrValueTable));
+                QListIterator<qint64> qlIt(qmmLocalValueTableMemberIds.values(qstrValueTable));
                 while (qlIt.hasNext())
                 {
-                    long lMemberId = qlIt.next();
+                   qint64 lMemberId = qlIt.next();
                     qstrlMemberIds.append(QString::number(lMemberId));
                 }
                 qstrWhereConditions += qstrValueTable + ".memberid IN (" + qstrlMemberIds.join(',') + ")";

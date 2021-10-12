@@ -22,11 +22,11 @@ bool CdbCommandRefreshComtainer::CheckValid()
 
 int CdbCommandRefreshComtainer::Execute()
 {
-   long lRet = CdmLogging::eDmObjectAccessError;
+  qint64 lRet = CdmLogging::eDmObjectAccessError;
    QSqlQuery cQSqlQuery;
    QString qstrQuery;
    QDateTime qdtLastChange;
-   QList<long> qvlObjects;
+   QList<qint64> qvlObjects;
 
    // query for reading new id
    qstrQuery = QString("Select ObjectId from WMS_DM_OBJECT where ObjectListId = %1").arg(m_rpContainer->GetId());
@@ -63,7 +63,7 @@ int CdbCommandRefreshComtainer::Execute()
       if(cQSqlQuery.isValid())
       {
          qdtLastChange           = cQSqlQuery.value(0).toDateTime();
-         long lLastModifierId    = cQSqlQuery.value(1).toInt();
+        qint64 lLastModifierId    = cQSqlQuery.value(1).toInt();
          QString qstrCaption     = cQSqlQuery.value(2).toString();
          QString qstrComment     = cQSqlQuery.value(3).toString();
 

@@ -104,7 +104,7 @@ void CwmsContext::Init()
         }
         else
         {
-            connect(pSessionManager, SIGNAL(SessionTimedOut(long)), this, SLOT(SessionTimedOutSlot()));
+            connect(pSessionManager, SIGNAL(SessionTimedOut(qint64)), this, SLOT(SessionTimedOutSlot()));
         }
     }
 }

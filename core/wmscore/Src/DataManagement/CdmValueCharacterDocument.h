@@ -38,8 +38,8 @@ protected:
 
 public:
     CdmValueCharacterDocument(QVariantMap& p_rqHash, CdmObject* p_pCdmObject);
-    CdmValueCharacterDocument(long p_lDatabaseId,
-                              long p_lId,
+    CdmValueCharacterDocument(qint64 p_lDatabaseId,
+                             qint64 p_lId,
                               QString p_qstrKeyname,
                               CdmObject* p_pCdmObject);
     virtual ~CdmValueCharacterDocument();
@@ -51,8 +51,8 @@ public:
 
 public:
     virtual void SetValue(QString p_qstrValue, QString p_qstrValue2);
-    CdmValueCharacterDocument( long p_lDatabaseId,
-                               long p_lId,
+    CdmValueCharacterDocument(qint64 p_lDatabaseId,
+                              qint64 p_lId,
                                QString p_qstrKeyname,
                                EdmValueType p_edmValue,
                                CdmObject* p_pCdmObject);

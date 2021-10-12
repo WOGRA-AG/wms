@@ -288,7 +288,7 @@ public:
     static int AddErrorCode(EdmErrorCode p_eDmErrorCode);
     static void AddAdaptor(CdmLoggingAdaptor* p_pCdmErrorAdaptor);
     static void RemoveAdaptor(CdmLoggingAdaptor* p_pCdmErrorAdaptor);
-    static bool WasSuccessFull(long p_lReturnCode);
+    static bool WasSuccessFull(qint64 p_lReturnCode);
     static bool Deprecated(QString p_qstrFile, int p_iLine);
 
 };

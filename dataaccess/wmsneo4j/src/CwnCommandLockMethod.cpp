@@ -3,7 +3,7 @@
 
 #include "CwnCommandStdHeader.h"
 
-CwnCommandLockMethod::CwnCommandLockMethod(long p_lSessionId, long p_lMethodId,CwnDataAccess* p_pDataAccess)
+CwnCommandLockMethod::CwnCommandLockMethod(qint64 p_lSessionId,qint64 p_lMethodId,CwnDataAccess* p_pDataAccess)
     : CwnCommandBase(p_pDataAccess),
       m_lSessionId(p_lSessionId),
       m_lMethodId(p_lMethodId)
@@ -61,7 +61,7 @@ void CwnCommandLockMethod::interpretAnswer(QVariant &Ret)
 
 int CwnCommandLockMethod::Execute()
 {
-    long lRet = 0;
+   qint64 lRet = 0;
 
     CwnCommandCheckMethodLocked command(m_lMethodId, m_lSessionId, GetDataAccess());
     lRet = command.Run();

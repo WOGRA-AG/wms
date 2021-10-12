@@ -11,7 +11,7 @@
 
 
 /*
- * This class implements the long value
+ * This class implements the qint64 value
  * of the framework
  */
 class WMSMANAGER_API CdmValueLong : public CdmValue 
@@ -20,12 +20,12 @@ class WMSMANAGER_API CdmValueLong : public CdmValue
 
 private:
     /*
-       * The long value
+       * The qint64 value
        */
-    long m_lValue;
+   qint64 m_lValue;
 
 public:
-    CdmValueLong(  long p_lDatabaseId, long p_lId, QString p_qstrKeyname, CdmObject* p_pCdmObject );
+    CdmValueLong( qint64 p_lDatabaseId,qint64 p_lId, QString p_qstrKeyname, CdmObject* p_pCdmObject );
     CdmValueLong( QVariantMap& p_rqvHash, CdmObject* p_pCdmObject);
     virtual ~CdmValueLong(  );
     void SetDefaultValue(  const CdmMember* p_pCdmMember );
@@ -41,13 +41,13 @@ public:
 public slots:
     virtual QVariant GetValueVariant( ) const;
     virtual QString GetValueAsString( ) const;
-    void SetValue( long p_lValue);
-    long GetValue( ) const;
+    void SetValue(qint64 p_lValue);
+   qint64 GetValue( ) const;
 
 
 protected:
-    CdmValueLong(long p_lDatabaseId,
-                 long p_lId,
+    CdmValueLong(qint64 p_lDatabaseId,
+                qint64 p_lId,
                  QString p_qstrKeyname,
                  EdmValueType p_eDmValue,
                  CdmObject* p_pCdmObject );

@@ -113,7 +113,7 @@ void CwmsGroupIf::FillUserList(  )
 void CwmsGroupIf::AddClickedSlot(  )
 {
     BODY_TRY
-    long lUserId = CwmsUserChoiceIf::GetUserSelection(this);
+   qint64 lUserId = CwmsUserChoiceIf::GetUserSelection(this);
 
     if (lUserId >= 0)
     {
@@ -199,7 +199,7 @@ void CwmsGroupIf::UpdateClickedSlot(  )
 
                 if (CHKPTR(pCumUserManager))
                 {
-                    long lSuccess = pCumUserManager->RenameUserGroup(m_rpCumUserGroup->GetId(), m_pqleGroupName->text());
+                   qint64 lSuccess = pCumUserManager->RenameUserGroup(m_rpCumUserGroup->GetId(), m_pqleGroupName->text());
 
                     if (lSuccess > 0)
                     {

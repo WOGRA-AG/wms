@@ -4,7 +4,7 @@
 #include "CftlCommandUpdateSession.h"
 
 
-CftlCommandUpdateSession::CftlCommandUpdateSession(long p_lSessionId, CftlDataAccess* p_pDataAccess)
+CftlCommandUpdateSession::CftlCommandUpdateSession(qint64 p_lSessionId, CftlDataAccess* p_pDataAccess)
 : CftlAbstractTransactionalCommand(p_pDataAccess),
   m_lSessionId(p_lSessionId)
 {
@@ -30,7 +30,7 @@ int CftlCommandUpdateSession::Execute()
     {
         cQuery.prepare("update WMS_UM_SESSION set LAST_REQUEST = ? where SessionId = ?");
         cQuery.addBindValue(qdtDateTime);
-        cQuery.addBindValue((int)m_lSessionId);
+        cQuery.addBindValue(m_lSessionId);
     }
     else if (!m_qstrBaseAuth.isEmpty())
     {

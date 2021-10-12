@@ -38,9 +38,9 @@ const CumUser* CdmSession::GetCurrentUser() const
     return m_pSessionUser;
 }
 
-long CdmSession::GetCurrentUserId() const
+qint64 CdmSession::GetCurrentUserId() const
 {
-    long lRet = CdmLogging::eDmUnknownUserManagerError;
+   qint64 lRet = CdmLogging::eDmUnknownUserManagerError;
 
     if(CHKPTR(m_pSessionUser))
     {
@@ -123,7 +123,7 @@ void CdmSession::SetLastRequest(const QDateTime &qdtLastRequest)
     m_qdtLastRequest = qdtLastRequest;
 }
 
-long CdmSession::GetId()
+qint64 CdmSession::GetId()
 {
     return m_lSessionId;
 }
@@ -167,9 +167,9 @@ void CdmSession::InitNewManager(IdmDataAccess* p_pDataAccess)
     }
 }
 
-long CdmSession::Logout()
+qint64 CdmSession::Logout()
 {
-    long lRet = CdmLogging::eDmUnknownDataAccessError;
+   qint64 lRet = CdmLogging::eDmUnknownDataAccessError;
     CdmDataProvider* pManager = GetDataProvider();
 
     if (CHKPTR(pManager))

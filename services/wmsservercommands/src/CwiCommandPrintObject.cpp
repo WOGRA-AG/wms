@@ -18,8 +18,8 @@ CwiCommandPrintObject::~CwiCommandPrintObject()
 void CwiCommandPrintObject::Execute()
 {
     CwmscomDataResult* pResult = nullptr;
-    long lObjectListId = m_rpData->GetValue("ObjectListId").toInt();
-    long lObjectId  = m_rpData->GetValue("ObjectId").toInt();
+   qint64 lObjectListId = m_rpData->GetValue("ObjectListId").toInt();
+   qint64 lObjectId  = m_rpData->GetValue("ObjectId").toInt();
     QString qstrTemplateName = m_rpData->GetValue("Template").toString();
     QByteArray qbaPdfOutput;
 

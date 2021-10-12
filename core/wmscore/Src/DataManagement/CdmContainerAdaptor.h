@@ -39,41 +39,41 @@ class WMSMANAGER_API CdmContainerAdaptor
       /*
        * The Database Id
        */
-      long m_lDbId;
+     qint64 m_lDbId;
 
       /*
        * The Objectlist Id
        */
-      long m_lContainerId;
+     qint64 m_lContainerId;
 
       friend class CdmObjectContainer;
 
    public:
     CdmContainerAdaptor(CdmObjectContainer* p_pContainer);
-    CdmContainerAdaptor(long m_lDbId, long m_lObjectListId);
+    CdmContainerAdaptor(qint64 m_lDbId,qint64 m_lObjectListId);
     CdmContainerAdaptor();
     virtual ~CdmContainerAdaptor();
-    long DeleteObject(CdmObjectAdaptor* p_pCdmObjectAdaptor);
-    long DeleteObject(long p_lObjectId);
+   qint64 DeleteObject(CdmObjectAdaptor* p_pCdmObjectAdaptor);
+   qint64 DeleteObject(qint64 p_lObjectId);
     CdmObjectContainer* GetContainer() const;
     void Commit();
     CdmObject* CreateObject(QString p_qstrCaption);
-    virtual void SetContainer(long p_lDbId, long p_lObjectListId);
+    virtual void SetContainer(qint64 p_lDbId,qint64 p_lObjectListId);
     virtual void SetContainer(CdmObjectContainer* p_pContainer);
-    CdmObject* FindObject(long p_lObjectId);
+    CdmObject* FindObject(qint64 p_lObjectId);
     const CdmClass* GetClass() const;
-    long GetSchemeId() const;
-    virtual void ObjectRefModifiedEvent(long p_lObjectId);
+   qint64 GetSchemeId() const;
+    virtual void ObjectRefModifiedEvent(qint64 p_lObjectId);
     void ResetContainer();
-    virtual void ObjectCommitedEvent(long p_lObjectId);
+    virtual void ObjectCommitedEvent(qint64 p_lObjectId);
     void SetContainer(QString p_qstrObjectListKeyname);
 
     bool IsValid();
     void ReloadContainerComplete() const;
 protected:
-    virtual void ObjectDeletedEvent(long p_lObjectId);
-    virtual void ObjectCreatedEvent(long p_lObjectId);
-    virtual void ObjectModifiedEvent(long p_lObjectId);
+    virtual void ObjectDeletedEvent(qint64 p_lObjectId);
+    virtual void ObjectCreatedEvent(qint64 p_lObjectId);
+    virtual void ObjectModifiedEvent(qint64 p_lObjectId);
 };
 
 #endif //

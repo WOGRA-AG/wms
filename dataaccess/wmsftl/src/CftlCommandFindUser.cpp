@@ -5,7 +5,7 @@
 // Own includes
 #include "CftlCommandFindUser.h"
 
-CftlCommandFindUser::CftlCommandFindUser(long p_lUserId, CftlDataAccess* p_pDataAccess)
+CftlCommandFindUser::CftlCommandFindUser(qint64 p_lUserId, CftlDataAccess* p_pDataAccess)
     : CftlAbstractTransactionalCommand(p_pDataAccess),
       m_lUserId(p_lUserId)
 {
@@ -99,7 +99,7 @@ int CftlCommandFindUser::FindUserById()
    int iRet = CdmLogging::eDmUnknownUserQueryError;
    QSqlQuery cQSqlQuery(GetSqlDatabase());
    cQSqlQuery.prepare(CreateSelectPart() + " where UserId = ?");
-   cQSqlQuery.addBindValue((int)m_lUserId);
+   cQSqlQuery.addBindValue(m_lUserId);
 
    if(SUCCESSFULL(ExecuteQuery(cQSqlQuery)))
    {
@@ -301,26 +301,26 @@ void CftlCommandFindUser::EncryptAllPasswords()
    if(SUCCESSFULL(ExecuteQuery(cQSqlQuery)))
    {
       cQSqlQuery.first();
-      QMap<long, QString> qmEncryptedPasswords;
+      QMap<qint64, QString> qmEncryptedPasswords;
       if(cQSqlQuery.isValid())
       {
          do // loading each password and converting it
          {
-            long     lId                = cQSqlQuery.value(0).toInt();
+           qint64     lId                = cQSqlQuery.value(0).toInt();
             QString qstrPassword        = cQSqlQuery.value(1).toString();
             qmEncryptedPasswords.insert(lId, CwmsUtilities::EncryptPassword(qstrPassword));
          }
          while(cQSqlQuery.next());
 
-         QMap<long, QString>::iterator qmIt = qmEncryptedPasswords.begin();
-         QMap<long, QString>::iterator qmItEnd = qmEncryptedPasswords.end();
+         QMap<qint64, QString>::iterator qmIt = qmEncryptedPasswords.begin();
+         QMap<qint64, QString>::iterator qmItEnd = qmEncryptedPasswords.end();
 
          for (; qmIt != qmItEnd; ++qmIt) // update passwords in db
          {
             QSqlQuery cQSqlQueryTemp(GetSqlDatabase());
             cQSqlQueryTemp.prepare("update WMS_UM_USER set pass = ?, encrypted = 1 where userid = ?");
             cQSqlQueryTemp.addBindValue(qmIt.value());
-            cQSqlQueryTemp.addBindValue((int)qmIt.key());
+            cQSqlQueryTemp.addBindValue(qmIt.key());
 
             if(!SUCCESSFULL(ExecuteQuery(cQSqlQueryTemp)))
             {

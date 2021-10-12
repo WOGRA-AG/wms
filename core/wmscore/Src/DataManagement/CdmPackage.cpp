@@ -11,7 +11,7 @@
 #include "CdmDataProvider.h"
 #include "CdmPackage.h"
 
-CdmPackage::CdmPackage(long p_lSchemeId, QString p_qstrKeyname)
+CdmPackage::CdmPackage(qint64 p_lSchemeId, QString p_qstrKeyname)
 : CdmModelElement(p_lSchemeId, -1, p_qstrKeyname, ""),
   m_bSystemPackage(false),
   m_rParent(nullptr)

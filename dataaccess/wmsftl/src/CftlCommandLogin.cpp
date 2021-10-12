@@ -77,7 +77,7 @@ bool CftlCommandLogin::NeedsSessionCheck()
     return false;
 }
 
-long CftlCommandLogin::GetSessionId()
+qint64 CftlCommandLogin::GetSessionId()
 {
     return m_lNewSession;
 }

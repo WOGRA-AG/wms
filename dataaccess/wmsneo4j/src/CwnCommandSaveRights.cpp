@@ -5,7 +5,7 @@
 #include "CdmDataProvider.h"
 #include "CumAccessor.h"
 
-CwnCommandSaveRights::CwnCommandSaveRights(CdmRights& p_rCcdmRights, long p_lObjectId, QString p_qstrTableName)
+CwnCommandSaveRights::CwnCommandSaveRights(CdmRights& p_rCcdmRights,qint64 p_lObjectId, QString p_qstrTableName)
 : CwnCommandBase(nullptr),
 m_lObjectId(p_lObjectId),
 m_prCcdmRights(p_rCcdmRights),

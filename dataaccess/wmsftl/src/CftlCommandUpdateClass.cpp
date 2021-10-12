@@ -51,11 +51,11 @@ int CftlCommandUpdateClass::Execute()
         // First of save the groups for correct ID assignments of members.
         iRet = SaveGroups(m_rpClass);
         // Updating class Data
-        QMap<long, CdmMember*> qmMembers;
+        QMap<qint64, CdmMember*> qmMembers;
         m_rpClass->GetClassMemberMap(qmMembers);
 
-        QMap<long,CdmMember*>::iterator iIt    = qmMembers.begin();
-        QMap<long,CdmMember*>::iterator iItEnd = qmMembers.end();
+        QMap<qint64,CdmMember*>::iterator iIt    = qmMembers.begin();
+        QMap<qint64,CdmMember*>::iterator iItEnd = qmMembers.end();
 
         for(; iIt != iItEnd; ++iIt)
         {
@@ -97,18 +97,18 @@ int CftlCommandUpdateClass::Execute()
                            "Package_URI = ?, config = ? where ClassId = ?");
         cQSqlQuery.addBindValue(m_rpClass->GetKeyname());
         cQSqlQuery.addBindValue(QDateTime::currentDateTime());
-        cQSqlQuery.addBindValue((int)m_rpClass->GetSchemeId());
-        cQSqlQuery.addBindValue((int)m_rpClass->GetCreatorId());
-        cQSqlQuery.addBindValue((int)m_rpClass->GetModifierId());
+        cQSqlQuery.addBindValue(m_rpClass->GetSchemeId());
+        cQSqlQuery.addBindValue(m_rpClass->GetCreatorId());
+        cQSqlQuery.addBindValue(m_rpClass->GetModifierId());
         cQSqlQuery.addBindValue(m_rpClass->GetCaption());
         cQSqlQuery.addBindValue(m_rpClass->GetComment());
         cQSqlQuery.addBindValue(m_rpClass->IsAbstract());
         cQSqlQuery.addBindValue(m_rpClass->GetMemberSequenceString());
         cQSqlQuery.addBindValue(m_rpClass->GetVersion());
-        cQSqlQuery.addBindValue((int)m_rpClass->GetCaptionMemberId());
+        cQSqlQuery.addBindValue(m_rpClass->GetCaptionMemberId());
         cQSqlQuery.addBindValue(qstrPackage);
         cQSqlQuery.addBindValue(m_rpClass->GetConfig());
-        cQSqlQuery.addBindValue((int)m_rpClass->GetId());
+        cQSqlQuery.addBindValue(m_rpClass->GetId());
 
         if(SUCCESSFULL(ExecuteQuery(cQSqlQuery)))
         {
@@ -137,13 +137,13 @@ bool CftlCommandUpdateClass::CheckValid()
     return (CHKPTR(m_rpClass));
 }
 
-long CftlCommandUpdateClass::SaveGroups(CdmClass*& p_rCdmClass)
+qint64 CftlCommandUpdateClass::SaveGroups(CdmClass*& p_rCdmClass)
 {
-    long lRet = CdmLogging::eDmUnknownDbError;
+   qint64 lRet = CdmLogging::eDmUnknownDbError;
 
     QSqlQuery cQuery(GetSqlDatabase());
     cQuery.prepare("delete from WMS_CLASS_GROUP where classid = ?");
-    cQuery.addBindValue((int)p_rCdmClass->GetId());
+    cQuery.addBindValue(p_rCdmClass->GetId());
 
     lRet = ExecuteQuery(cQuery);
 
@@ -170,7 +170,7 @@ long CftlCommandUpdateClass::SaveGroups(CdmClass*& p_rCdmClass)
                     if (iId > 0)
                     {
                         cQuery.prepare("update WMS_CLASS_GROUP set ClassId = ?,  Name = ?, Version = ?, Position = ?, Parent = ? where Id = ?");
-                        cQuery.addBindValue((int)p_rCdmClass->GetId());
+                        cQuery.addBindValue(p_rCdmClass->GetId());
                         cQuery.addBindValue(pCdmGroup->GetName());
                         cQuery.addBindValue(pCdmGroup->GetVersion());
                         cQuery.addBindValue(pCdmGroup->GetPosition());
@@ -189,7 +189,7 @@ long CftlCommandUpdateClass::SaveGroups(CdmClass*& p_rCdmClass)
                 {
                     cQuery.prepare("insert into WMS_CLASS_GROUP (ClassId, Id, Name, Version, Position, Parent)"
                                    " values (?, ?, ?, ?, ?, ?)");
-                    cQuery.addBindValue((int)p_rCdmClass->GetId());
+                    cQuery.addBindValue(p_rCdmClass->GetId());
                     cQuery.addBindValue(iId);
                     cQuery.addBindValue(pCdmGroup->GetName());
                     cQuery.addBindValue(pCdmGroup->GetVersion());
@@ -219,7 +219,7 @@ void CftlCommandUpdateClass::SaveMethods(CdmClass*& p_rCdmClass)
 {
     QSqlQuery cQuery(GetSqlDatabase());
     cQuery.prepare("delete from WMS_CLASS_METHOD where classid = ?");
-    cQuery.addBindValue((int)p_rCdmClass->GetId());
+    cQuery.addBindValue(p_rCdmClass->GetId());
 
     if (SUCCESSFULL(ExecuteQuery(cQuery)))
     {
@@ -247,7 +247,7 @@ void CftlCommandUpdateClass::SaveMethods(CdmClass*& p_rCdmClass)
                     {
                         cQuery.prepare("update WMS_CLASS_METHOD set ClassId = ?, MethodType = ?, Name = ?, Code = ?, Version = ?, AccessMode = ?, Parameters = ?, Comment = ?, Static = ?, "
                                        "Caption = ?, Icon = ? where Id = ?");
-                        cQuery.addBindValue((int)p_rCdmClass->GetId());
+                        cQuery.addBindValue(p_rCdmClass->GetId());
                         cQuery.addBindValue(pCdmMethod->GetReturnType());
                         cQuery.addBindValue(pCdmMethod->GetMethodName());
                         cQuery.addBindValue(pCdmMethod->GetSourceCode());
@@ -265,7 +265,7 @@ void CftlCommandUpdateClass::SaveMethods(CdmClass*& p_rCdmClass)
                 {
                     cQuery.prepare("insert into WMS_CLASS_METHOD (ClassId, MethodType, Name, Code, Version, AccessMode, Parameters, Id, Static, Comment, Caption, Icon)"
                                    " values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-                    cQuery.addBindValue((int)p_rCdmClass->GetId());
+                    cQuery.addBindValue(p_rCdmClass->GetId());
                     cQuery.addBindValue(pCdmMethod->GetReturnType());
                     cQuery.addBindValue(pCdmMethod->GetMethodName());
                     cQuery.addBindValue(pCdmMethod->GetSourceCode());
@@ -296,7 +296,7 @@ void CftlCommandUpdateClass::SaveValidators(CdmClass*& p_rCdmClass)
 {
     QSqlQuery cQuery(GetSqlDatabase());
     cQuery.prepare("delete from WMS_CLASS_VALIDATION where classid = ?");
-    cQuery.addBindValue((int)p_rCdmClass->GetId());
+    cQuery.addBindValue(p_rCdmClass->GetId());
 
     if (ExecuteQuery(cQuery) > 0)
     {
@@ -321,7 +321,7 @@ void CftlCommandUpdateClass::SaveValidators(CdmClass*& p_rCdmClass)
                     if (iId > 0)
                     {
                         cQuery.prepare("update WMS_CLASS_VALIDATION set ClassId = ?, Name = ?, Code = ?, Version = ?, ValidationType = ?, Message = ? where Id = ?");
-                        cQuery.addBindValue((int)p_rCdmClass->GetId());
+                        cQuery.addBindValue(p_rCdmClass->GetId());
                         cQuery.addBindValue(pCdmValidator->GetName());
                         cQuery.addBindValue(pCdmValidator->GetCode());
                         cQuery.addBindValue(pCdmValidator->GetVersion());
@@ -334,7 +334,7 @@ void CftlCommandUpdateClass::SaveValidators(CdmClass*& p_rCdmClass)
                 {
                     cQuery.prepare("insert into WMS_CLASS_VALIDATION (ClassId, Name, Code, Version, ValidationType, Message, Id)"
                                    " values (?, ?, ?, ?, ?, ?, ?)");
-                    cQuery.addBindValue((int)p_rCdmClass->GetId());
+                    cQuery.addBindValue(p_rCdmClass->GetId());
                     cQuery.addBindValue(pCdmValidator->GetName());
                     cQuery.addBindValue(pCdmValidator->GetCode());
                     cQuery.addBindValue(pCdmValidator->GetVersion());
@@ -352,9 +352,9 @@ void CftlCommandUpdateClass::SaveValidators(CdmClass*& p_rCdmClass)
     }
 }
 
-long CftlCommandUpdateClass::InsertOrUpdateMember(CdmMember* p_pCdmMember, CdmClass* p_pCdmClass)
+qint64 CftlCommandUpdateClass::InsertOrUpdateMember(CdmMember* p_pCdmMember, CdmClass* p_pCdmClass)
 {
-    long lRet = CdmLogging::eDmUnknownClassAccessError;
+   qint64 lRet = CdmLogging::eDmUnknownClassAccessError;
 
     if(CHKPTR(p_pCdmMember) && CHKPTR(p_pCdmClass))
     {
@@ -405,9 +405,9 @@ long CftlCommandUpdateClass::InsertOrUpdateMember(CdmMember* p_pCdmMember, CdmCl
     return lRet;
 }
 
-long CftlCommandUpdateClass::InsertMember(CdmMember* p_pCdmMember, CdmClass* p_pCdmClass)
+qint64 CftlCommandUpdateClass::InsertMember(CdmMember* p_pCdmMember, CdmClass* p_pCdmClass)
 {
-    long lRet = CdmLogging::eDmUnknownClassAccessError;
+   qint64 lRet = CdmLogging::eDmUnknownClassAccessError;
 
     if(CHKPTR(p_pCdmMember) && CHKPTR(p_pCdmClass))
     {
@@ -428,14 +428,14 @@ long CftlCommandUpdateClass::InsertMember(CdmMember* p_pCdmMember, CdmClass* p_p
         cQSqlQuery.addBindValue(p_pCdmMember->GetKeyname());
         cQSqlQuery.addBindValue(p_pCdmMember->GetValueType());
         cQSqlQuery.addBindValue(p_pCdmMember->IsMust());
-        cQSqlQuery.addBindValue((int)p_pCdmMember->GetSize());
-        cQSqlQuery.addBindValue((int)p_pCdmMember->GetClassReference());
-        cQSqlQuery.addBindValue((int)p_pCdmMember->GetCounterStart());
-        cQSqlQuery.addBindValue((int)p_pCdmMember->GetClassId()); // to Identify which to which class this belongs to
+        cQSqlQuery.addBindValue(p_pCdmMember->GetSize());
+        cQSqlQuery.addBindValue(p_pCdmMember->GetClassReference());
+        cQSqlQuery.addBindValue(p_pCdmMember->GetCounterStart());
+        cQSqlQuery.addBindValue(p_pCdmMember->GetClassId()); // to Identify which to which class this belongs to
         cQSqlQuery.addBindValue(p_pCdmMember->GetDefaultValue());
         cQSqlQuery.addBindValue(p_pCdmMember->GetCaption());
-        cQSqlQuery.addBindValue((int)p_pCdmMember->GetCreatorId());
-        cQSqlQuery.addBindValue((int)p_pCdmMember->GetModifierId());
+        cQSqlQuery.addBindValue(p_pCdmMember->GetCreatorId());
+        cQSqlQuery.addBindValue(p_pCdmMember->GetModifierId());
         cQSqlQuery.addBindValue(p_pCdmMember->GetComment());
         cQSqlQuery.addBindValue(p_pCdmMember->IsOwner());
         cQSqlQuery.addBindValue(p_pCdmMember->IsUnique());
@@ -453,7 +453,7 @@ long CftlCommandUpdateClass::InsertMember(CdmMember* p_pCdmMember, CdmClass* p_p
             QString qstrKeyname =  p_pCdmMember->GetKeyname();
             cQSqlQuery.prepare("select MemberId from WMS_CLASS_MEMBER where Keyname = ? and ClassId = ?");
             cQSqlQuery.addBindValue(qstrKeyname);
-            cQSqlQuery.addBindValue((int)p_pCdmMember->GetClassId());
+            cQSqlQuery.addBindValue(p_pCdmMember->GetClassId());
 
             if(SUCCESSFULL(ExecuteQuery(cQSqlQuery)))
             {
@@ -492,9 +492,9 @@ long CftlCommandUpdateClass::InsertMember(CdmMember* p_pCdmMember, CdmClass* p_p
 }
 
 
-long CftlCommandUpdateClass::UpdateMember(CdmMember* p_pCdmMember, CdmClass* p_pCdmClass )
+qint64 CftlCommandUpdateClass::UpdateMember(CdmMember* p_pCdmMember, CdmClass* p_pCdmClass )
 {
-    long lRet = CdmLogging::eDmUnknownClassAccessError;
+   qint64 lRet = CdmLogging::eDmUnknownClassAccessError;
 
     if(CHKPTR(p_pCdmMember) && CHKPTR(p_pCdmClass))
     {
@@ -515,14 +515,14 @@ long CftlCommandUpdateClass::UpdateMember(CdmMember* p_pCdmMember, CdmClass* p_p
         cQSqlQuery.addBindValue(p_pCdmMember->GetKeyname());
         cQSqlQuery.addBindValue(p_pCdmMember->GetValueType());
         cQSqlQuery.addBindValue(p_pCdmMember->IsMust());
-        cQSqlQuery.addBindValue((int)p_pCdmMember->GetSize());
-        cQSqlQuery.addBindValue((int)p_pCdmMember->GetClassReference());
-        cQSqlQuery.addBindValue((int)p_pCdmMember->GetCounterStart());
-        cQSqlQuery.addBindValue((int)p_pCdmMember->GetClassId()); // to Identify which to which class this belongs to
+        cQSqlQuery.addBindValue(p_pCdmMember->GetSize());
+        cQSqlQuery.addBindValue(p_pCdmMember->GetClassReference());
+        cQSqlQuery.addBindValue(p_pCdmMember->GetCounterStart());
+        cQSqlQuery.addBindValue(p_pCdmMember->GetClassId()); // to Identify which to which class this belongs to
         cQSqlQuery.addBindValue(p_pCdmMember->GetDefaultValue());
         cQSqlQuery.addBindValue(p_pCdmMember->GetCaption());
-        cQSqlQuery.addBindValue((int)p_pCdmMember->GetCreatorId());
-        cQSqlQuery.addBindValue((int)p_pCdmMember->GetModifierId());
+        cQSqlQuery.addBindValue(p_pCdmMember->GetCreatorId());
+        cQSqlQuery.addBindValue(p_pCdmMember->GetModifierId());
         cQSqlQuery.addBindValue(p_pCdmMember->GetComment());
         cQSqlQuery.addBindValue(p_pCdmMember->IsOwner());
         cQSqlQuery.addBindValue(p_pCdmMember->IsUnique());
@@ -534,7 +534,7 @@ long CftlCommandUpdateClass::UpdateMember(CdmMember* p_pCdmMember, CdmClass* p_p
         cQSqlQuery.addBindValue(!p_pCdmMember->IsPersistent());
         cQSqlQuery.addBindValue(p_pCdmMember->IsTree());
         cQSqlQuery.addBindValue(p_pCdmMember->GetConfig());
-        cQSqlQuery.addBindValue((int)p_pCdmMember->GetId());
+        cQSqlQuery.addBindValue(p_pCdmMember->GetId());
 
         if(SUCCESSFULL(ExecuteQuery(cQSqlQuery)))
         {
@@ -555,21 +555,21 @@ long CftlCommandUpdateClass::UpdateMember(CdmMember* p_pCdmMember, CdmClass* p_p
 
 }
 
-long CftlCommandUpdateClass::DeleteMember(long p_lMemberId)
+qint64 CftlCommandUpdateClass::DeleteMember(qint64 p_lMemberId)
 {
-    long lRet = CdmLogging::eDmUnknownClassAccessError;
+   qint64 lRet = CdmLogging::eDmUnknownClassAccessError;
     QSqlQuery cQSqlQuery(GetSqlDatabase());
     cQSqlQuery.prepare("delete from WMS_CLASS_MEMBER where MemberId = ?");
-    cQSqlQuery.addBindValue((int)p_lMemberId);
+    cQSqlQuery.addBindValue(p_lMemberId);
 
     lRet = ExecuteQuery(cQSqlQuery);
 
     return lRet;
 }
 
-long CftlCommandUpdateClass::InsertOrUpdateBaseClasses(CdmClass* p_pCdmClass)
+qint64 CftlCommandUpdateClass::InsertOrUpdateBaseClasses(CdmClass* p_pCdmClass)
 {
-    long lRet = CdmLogging::eDmUnknownClassAccessError;
+   qint64 lRet = CdmLogging::eDmUnknownClassAccessError;
 
     if(CHKPTR(p_pCdmClass))
     {
@@ -578,7 +578,7 @@ long CftlCommandUpdateClass::InsertOrUpdateBaseClasses(CdmClass* p_pCdmClass)
 
         // first step load all classes with DataBaseId == p_lDataBaseId
         cQSqlQuery.prepare("select BaseClassId from WMS_CLASS_BASECLASS where ClassId = ?");
-        cQSqlQuery.addBindValue((int)p_pCdmClass->GetId());
+        cQSqlQuery.addBindValue(p_pCdmClass->GetId());
 
         if(SUCCESSFULL(ExecuteQuery(cQSqlQuery)))
         {
@@ -599,11 +599,11 @@ long CftlCommandUpdateClass::InsertOrUpdateBaseClasses(CdmClass* p_pCdmClass)
                 INFO("No Baseclasses found");
             }
 
-            QMap<long,long> qmBaseClasses = p_pCdmClass->GetBaseClasses();
+            QMap<qint64,qint64> qmBaseClasses = p_pCdmClass->GetBaseClasses();
 
             // checking if a base class must be inserted to DB
-            QMap<long,long>::iterator qmIt    = qmBaseClasses.begin();
-            QMap<long,long>::iterator qmItEnd = qmBaseClasses.end();
+            QMap<qint64,qint64>::iterator qmIt    = qmBaseClasses.begin();
+            QMap<qint64,qint64>::iterator qmItEnd = qmBaseClasses.end();
 
             for(; qmIt != qmItEnd; ++qmIt)
             {
@@ -638,16 +638,16 @@ long CftlCommandUpdateClass::InsertOrUpdateBaseClasses(CdmClass* p_pCdmClass)
     return lRet;
 }
 
-bool CftlCommandUpdateClass::FindValueInMap(long p_lValue, QMap<long, long>& p_rqmMap)
+bool CftlCommandUpdateClass::FindValueInMap(qint64 p_lValue, QMap<qint64,qint64>& p_rqmMap)
 {
     bool bRet = false;
 
-    QMap<long,long>::iterator qmIt    = p_rqmMap.begin();
-    QMap<long,long>::iterator qmItEnd = p_rqmMap.end();
+    QMap<qint64,qint64>::iterator qmIt    = p_rqmMap.begin();
+    QMap<qint64,qint64>::iterator qmItEnd = p_rqmMap.end();
 
     for(; qmIt != qmItEnd; ++qmIt)
     {
-        long lValue = qmIt.value();
+       qint64 lValue = qmIt.value();
         if(lValue == p_lValue)
         {
             bRet = true;
@@ -678,15 +678,15 @@ bool CftlCommandUpdateClass::FindValueInList(int p_iValue, QList<int>& p_rqvlLis
     return bRet;
 }
 
-long CftlCommandUpdateClass::InsertBaseClass(long p_lClassId, long p_lBaseClassId)
+qint64 CftlCommandUpdateClass::InsertBaseClass(qint64 p_lClassId,qint64 p_lBaseClassId)
 {
-    long lRet = CdmLogging::eDmUnknownClassAccessError;
+   qint64 lRet = CdmLogging::eDmUnknownClassAccessError;
     QSqlQuery cQSqlQuery(GetSqlDatabase());
 
     // first step load all classes with DataBaseId == p_lDataBaseId
     cQSqlQuery.prepare("insert into WMS_CLASS_BASECLASS (ClassId, BaseClassId) values(?, ?)");
-    cQSqlQuery.addBindValue((int)p_lClassId);
-    cQSqlQuery.addBindValue((int)p_lBaseClassId);
+    cQSqlQuery.addBindValue(p_lClassId);
+    cQSqlQuery.addBindValue(p_lBaseClassId);
 
     lRet = ExecuteQuery(cQSqlQuery);
 
@@ -704,15 +704,15 @@ long CftlCommandUpdateClass::InsertBaseClass(long p_lClassId, long p_lBaseClassI
     return lRet;
 }
 
-long CftlCommandUpdateClass::DeleteBaseClassFromDb(  long p_lClassId, long p_lBaseClassId )
+qint64 CftlCommandUpdateClass::DeleteBaseClassFromDb( qint64 p_lClassId,qint64 p_lBaseClassId )
 {
-    long lRet = CdmLogging::eDmUnknownClassAccessError;
+   qint64 lRet = CdmLogging::eDmUnknownClassAccessError;
     QSqlQuery cQSqlQuery(GetSqlDatabase());
 
     // first step load all classes with DataBaseId == p_lDataBaseId
     cQSqlQuery.prepare("delete from WMS_CLASS_BASECLASS where ClassId = ? AND BaseClassId = ?");
-    cQSqlQuery.addBindValue((int)p_lClassId);
-    cQSqlQuery.addBindValue((int)p_lBaseClassId);
+    cQSqlQuery.addBindValue(p_lClassId);
+    cQSqlQuery.addBindValue(p_lBaseClassId);
 
     lRet = ExecuteQuery(cQSqlQuery);
 
@@ -726,7 +726,7 @@ long CftlCommandUpdateClass::DeleteBaseClassFromDb(  long p_lClassId, long p_lBa
     return lRet;
 }
 
-int CftlCommandUpdateClass::GetNewIdForClassMembers(long p_lClassId,
+int CftlCommandUpdateClass::GetNewIdForClassMembers(qint64 p_lClassId,
                                                     QString p_qstrName,
                                                     QString p_qstrTable)
 {
@@ -736,7 +736,7 @@ int CftlCommandUpdateClass::GetNewIdForClassMembers(long p_lClassId,
             .arg(p_qstrTable);
 
     cQuery.prepare(qstrInsert);
-    cQuery.addBindValue((int)p_lClassId);
+    cQuery.addBindValue(p_lClassId);
     cQuery.addBindValue(p_qstrName);
 
     if (SUCCESSFULL(ExecuteQuery(cQuery)))
@@ -745,7 +745,7 @@ int CftlCommandUpdateClass::GetNewIdForClassMembers(long p_lClassId,
                 .arg(p_qstrTable);
 
         cQuery.prepare(qstrSelect);
-        cQuery.addBindValue((int)p_lClassId);
+        cQuery.addBindValue(p_lClassId);
         cQuery.addBindValue(p_qstrName);
 
         if (ExecuteQuery(cQuery) > 0)
@@ -783,7 +783,7 @@ void CftlCommandUpdateClass::SaveTranslations(CdmMember* p_pCdmMember)
         {
             QSqlQuery cQueryDelete(GetSqlDatabase());
             cQueryDelete.prepare("delete from WMS_CLASS_MEMBER_TRANSLATION where MemberId = ?");
-            cQueryDelete.addBindValue((int)p_pCdmMember->GetId());
+            cQueryDelete.addBindValue(p_pCdmMember->GetId());
 
 
             if (SUCCESSFULL(ExecuteQuery(cQueryDelete)))
@@ -798,7 +798,7 @@ void CftlCommandUpdateClass::SaveTranslations(CdmMember* p_pCdmMember)
                 for (; qmIt != qmItEnd; ++qmIt)
                 {
                     StringPair qPair = qmIt.value();
-                    qvlMemberids.append((int)p_pCdmMember->GetId());
+                    qvlMemberids.append(p_pCdmMember->GetId());
                     qvlLanguage.append(qmIt.key());
                     qvlCaptions.append(qPair.first);
                     qvlComments.append(qPair.second);

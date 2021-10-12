@@ -25,18 +25,18 @@ private:
     /**
      * @brief the classmanagers of diefferent schemes.
      */
-    QMap<long, CdmClassManager*> m_qmClassManagers;
+    QMap<qint64, CdmClassManager*> m_qmClassManagers;
     EdmSettingsMode m_eDmSettingsMode;
-    QList<long> m_qlLoadingClassManagers;
+    QList<qint64> m_qlLoadingClassManagers;
     CdmSettings* m_pCdmSettings;
 
-    CdmClassManager *LoadClassManager(long p_lSchemeId);
+    CdmClassManager *LoadClassManager(qint64 p_lSchemeId);
 public:
     CdmGlobalContext(EdmSettingsMode p_eMode);
     virtual ~CdmGlobalContext();
-    CdmClassManager* GetClassManager(long p_lSchemeId);
-    void DeleteClassManager(long p_lSchemeId);
-    void UpdateClassManager(long p_lSchemeId);
+    CdmClassManager* GetClassManager(qint64 p_lSchemeId);
+    void DeleteClassManager(qint64 p_lSchemeId);
+    void UpdateClassManager(qint64 p_lSchemeId);
     void DeleteAllClassManagers();
     EdmSettingsMode GetMode();
     CdmSettings *GetSettings();

@@ -19,7 +19,7 @@
 
 #include "CwnCommandStdHeader.h"
 
-CwnCommandGetClasses::CwnCommandGetClasses(CdmClassManager *p_ppClassManager, QList<long> &p_lClassIds, CwnDataAccess *p_pDataAccess):
+CwnCommandGetClasses::CwnCommandGetClasses(CdmClassManager *p_ppClassManager, QList<qint64> &p_lClassIds, CwnDataAccess *p_pDataAccess):
     CwnCommandBase(p_pDataAccess),
     m_rpClass(nullptr),
     m_rpClassManager(p_ppClassManager)
@@ -32,11 +32,11 @@ CwnCommandGetClasses::~CwnCommandGetClasses()
 {
 }
 
-long CwnCommandGetClasses::interpretAnswerForLoadMembers(const QVariantList* dataList,long &ldatabaseid, long &lclassid)
+qint64 CwnCommandGetClasses::interpretAnswerForLoadMembers(const QVariantList* dataList,qint64 &ldatabaseid,qint64 &lclassid)
 {
 
-    long lRet = -1;
-    QMap<long,QString> ForPosAndMembers;
+   qint64 lRet = -1;
+    QMap<qint64,QString> ForPosAndMembers;
 
     if(CHKPTR(m_rpClass))
     {
@@ -51,7 +51,7 @@ long CwnCommandGetClasses::interpretAnswerForLoadMembers(const QVariantList* dat
                 return true;//no Members
             }
 
-            long lId = map->value("id").toInt();
+           qint64 lId = map->value("id").toInt();
             const QVariantMap* props= static_cast<const QVariantMap*>(map->find("props")->data());
 
             QVariantMap::ConstIterator it = props->begin();
@@ -72,7 +72,7 @@ long CwnCommandGetClasses::interpretAnswerForLoadMembers(const QVariantList* dat
             if(props->contains("Config"))
                 qstrConfig = CwnHelper::base64_decode(it++->toString());
 
-            long     lCounterSize       = 0;
+           qint64     lCounterSize       = 0;
             if(props->contains("CounterStart"))
                 lCounterSize = it++->toInt();
 
@@ -84,7 +84,7 @@ long CwnCommandGetClasses::interpretAnswerForLoadMembers(const QVariantList* dat
             bool     bMust              = it++->toBool();
             bool bNonPersistent         = it++->toBool();
             bool     bOwner             = it++->toBool();
-            long     lSize              = it++->toInt();
+           qint64     lSize              = it++->toInt();
 
             bool     bSystem            = true;
             bool     bUnique            = false;
@@ -111,14 +111,14 @@ long CwnCommandGetClasses::interpretAnswerForLoadMembers(const QVariantList* dat
                 lGroupId = VGroupId->toInt();
 
             const QVariant* VRefClassId = static_cast<const QVariant*>(map->find("refClassId")->data());
-            long lRefClassId = 0;
+           qint64 lRefClassId = 0;
             if (!VRefClassId->isNull())
                 lRefClassId = VRefClassId->toInt();
             else if(propClassRef != 0)
                 lRefClassId = propClassRef;
 
-            long lCreatorId = map->value("creator").toLongLong();
-            long lModifierId = map->value("modifier").toLongLong();
+           qint64 lCreatorId = map->value("creator").toLongLong();
+           qint64 lModifierId = map->value("modifier").toLongLong();
 
             CdmMember* pCdmMember = nullptr;
 
@@ -202,7 +202,7 @@ bool CwnCommandGetClasses::interpretAnswerForLoadMethods(const QVariantList* dat
             return true;//no METHODS
         }
 
-        long lMethodId = map->find("id")->toInt();
+       qint64 lMethodId = map->find("id")->toInt();
         const QVariantMap* props= static_cast<const QVariantMap*>(map->find("props")->data());
         QVariantMap::ConstIterator it = props->begin();
 
@@ -253,7 +253,7 @@ bool CwnCommandGetClasses::interpretAnswerForLoadValidators(const QVariantList* 
             if(!list->at(0).isValid())
                 return true;
 
-            long lValidationId = list->at(0).toInt();
+           qint64 lValidationId = list->at(0).toInt();
             const QVariantMap* props= static_cast<const QVariantMap*>(list->at(1).data());
             QVariantMap::ConstIterator it = props->begin();
 
@@ -292,7 +292,7 @@ bool CwnCommandGetClasses::interpretAnswerForLoadGroups(const QVariantList* data
         if(!map->value("id").isValid())
             return true;//no GROUPS
 
-        long lGroupId = map->value("id").toInt();
+       qint64 lGroupId = map->value("id").toInt();
 
         const QVariantMap* props= static_cast<const QVariantMap*>(map->value("props").data());
 
@@ -348,7 +348,7 @@ bool CwnCommandGetClasses::interpretAnswerForLoadGroups(const QVariantList* data
 
 bool CwnCommandGetClasses::interpretAnswerForBaseClasses(const QVariantList* dataList)
 {
-    long lRet = -1;
+   qint64 lRet = -1;
 
     if(CHKPTR(m_rpClass))
     {
@@ -357,7 +357,7 @@ bool CwnCommandGetClasses::interpretAnswerForBaseClasses(const QVariantList* dat
             QVariantList::ConstIterator it;
             for(it=dataList->begin();it!=dataList->end();++it)
             {
-                long lBaseClassId = it->toLongLong();
+               qint64 lBaseClassId = it->toLongLong();
                 if(lBaseClassId>0)
                     CdmDataAccessHelper::AddBaseClassToClass(m_rpClass, lBaseClassId);
             }
@@ -378,7 +378,7 @@ bool CwnCommandGetClasses::interpretAnswerForBaseClasses(const QVariantList* dat
      return lRet;
 }
 
-bool CwnCommandGetClasses::interpretAnswerForClassLoad(long &ldatabaseid, long &lclassid, const QVariantList *dataList)
+bool CwnCommandGetClasses::interpretAnswerForClassLoad(qint64 &ldatabaseid,qint64 &lclassid, const QVariantList *dataList)
 {
     // first step reading the WMS_Class data
 
@@ -390,7 +390,7 @@ bool CwnCommandGetClasses::interpretAnswerForClassLoad(long &ldatabaseid, long &
 
     bool bAbstract=false;
     QString qstrCaption;
-    long lCaptionMember = 0;
+   qint64 lCaptionMember = 0;
     QString qstrComment="";
     QString qstrConfig;
     QString qstrKeyname;
@@ -418,8 +418,8 @@ bool CwnCommandGetClasses::interpretAnswerForClassLoad(long &ldatabaseid, long &
     if (listMap->contains("Version"))
         iVersion =  it++->toInt();
 
-    long modifier = 0;
-    long creator = 0;
+   qint64 modifier = 0;
+   qint64 creator = 0;
 
     creator = (list->at(1).isValid())?list->at(1).toLongLong():0;
     modifier = (list->at(2).isValid())?list->at(2).toLongLong():0;
@@ -536,8 +536,8 @@ void CwnCommandGetClasses::interpretAnswer(QVariant &Ret)
                QList<QVariant>::ConstIterator itc;
                itc=row->begin();
 
-               long schemeId=itc++->toLongLong();
-               long classId=itc++->toLongLong();
+              qint64 schemeId=itc++->toLongLong();
+              qint64 classId=itc++->toLongLong();
                const QVariantList* classloadlist =static_cast<const QVariantList*>(itc++->data());
                const QVariantList* baseclasslist =static_cast<const QVariantList*>(itc++->data());
                const QVariantList* grouplist =static_cast<const QVariantList*>(itc++->data());
@@ -581,7 +581,7 @@ int CwnCommandGetClasses::Execute()
 {
     //qDebug()<<m_qstrClassIds;
 
-    long lRet = -1;
+   qint64 lRet = -1;
     //qDebug() << createQuery();
     QString payload = createJson(createQuery());
 

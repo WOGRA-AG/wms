@@ -307,11 +307,11 @@ void CwmsClassEditorIf::FillBaseData()
         m_pqteComment->setPlainText(m_rpCdmClass->GetComment());
         m_pqchbAbstract->setChecked(m_rpCdmClass->IsAbstract());
 
-        QMap<long,CdmMember*> qmMembers;
+        QMap<qint64,CdmMember*> qmMembers;
         m_rpCdmClass->GetMemberMap(qmMembers);
 
-        QMap<long,CdmMember*>::iterator qmIt = qmMembers.begin();
-        QMap<long,CdmMember*>::iterator qmItEnd = qmMembers.end();
+        QMap<qint64,CdmMember*>::iterator qmIt = qmMembers.begin();
+        QMap<qint64,CdmMember*>::iterator qmItEnd = qmMembers.end();
 
         m_pqcbCaptionMember->addItem("-");
 
@@ -336,15 +336,15 @@ void CwmsClassEditorIf::FillBaseClasses()
         // filling Baseclasses
         m_pqlbBaseClasses->clear();
         CdmClassManager* pCdmClassManager = m_rpCdmClass->GetClassManager();
-        QMap<long,long> qmBaseClasses = m_rpCdmClass->GetBaseClasses();
-        QMap<long,long>::iterator qmItBaseClasses = qmBaseClasses.begin();
-        QMap<long,long>::iterator qmItBaseClassesEnd = qmBaseClasses.end();
+        QMap<qint64,qint64> qmBaseClasses = m_rpCdmClass->GetBaseClasses();
+        QMap<qint64,qint64>::iterator qmItBaseClasses = qmBaseClasses.begin();
+        QMap<qint64,qint64>::iterator qmItBaseClassesEnd = qmBaseClasses.end();
 
         if (qmBaseClasses.count() > 0)
         {
             for (; qmItBaseClasses != qmItBaseClassesEnd; ++qmItBaseClasses)
             {
-                long lId = qmItBaseClasses.value();
+               qint64 lId = qmItBaseClasses.value();
 
                 CdmClass* pCdmBaseClass = pCdmClassManager->FindClassById(lId);
 
@@ -363,12 +363,12 @@ void CwmsClassEditorIf::FillMembers()
     {
         m_pqlvMembers->clear();
         CdmClassManager* pCdmClassManager = m_rpCdmClass->GetClassManager();
-        QMap<long, CdmMember*> qmMembers;
+        QMap<qint64, CdmMember*> qmMembers;
         qmMembers = m_rpCdmClass->GetClassMemberMap();
 
 
-        QMap<long, CdmMember*>::iterator qmItMember = qmMembers.begin();
-        QMap<long, CdmMember*>::iterator qmItMemberEnd = qmMembers.end();
+        QMap<qint64, CdmMember*>::iterator qmItMember = qmMembers.begin();
+        QMap<qint64, CdmMember*>::iterator qmItMemberEnd = qmMembers.end();
 
         for (; qmItMember != qmItMemberEnd; ++qmItMember)
         {
@@ -429,7 +429,7 @@ void CwmsClassEditorIf::FillMembers()
                         pCdmMember->GetValueType() == eDmValueContainerRef ||
                         pCdmMember->GetValueType() == eDmValueListObjects)
                 {
-                    long lRefId = pCdmMember->GetClassReference();
+                   qint64 lRefId = pCdmMember->GetClassReference();
 
                     if (lRefId > 0)
                     {

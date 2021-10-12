@@ -22,14 +22,14 @@
 /** +-=---------------------------------------------------------Sa 11. Aug 20:48:44 2007----------*
  * @method  CdmValueDictIntInt::CdmValueDictIntInt                     // public                            *
  * @return  void                                             //                                   *
- * @param   long p_lDatabaseId                               //                                   *
- * @param   long p_lId                                       //                                   *
+ * @param  qint64 p_lDatabaseId                               //                                   *
+ * @param  qint64 p_lId                                       //                                   *
  * @param   QString p_qstrKeyname                            //                                   *
  * @param   CdmObject* p_pCdmObject                          //                                   *
  * @comment The constructor of the stringlist.                                                    *
  *----------------last changed: Wolfgang Graßhof----------------Sa 11. Aug 20:48:44 2007----------*/
-CdmValueDictIntInt::CdmValueDictIntInt(long p_lDatabaseId,
-                             long p_lId,
+CdmValueDictIntInt::CdmValueDictIntInt(qint64 p_lDatabaseId,
+                            qint64 p_lId,
                              QString p_qstrKeyname,
                              CdmObject* p_pCdmObject)
 : CdmValueCharacterDocument(p_lDatabaseId, p_lId, p_qstrKeyname, eDmValueDictIntInt, p_pCdmObject)
@@ -40,15 +40,15 @@ CdmValueDictIntInt::CdmValueDictIntInt(long p_lDatabaseId,
  * @method  CdmValueDictIntInt::CdmValueDictIntInt           // public                            *
  * @return  void                                             //                                   *
  * @param   EdmValue p_eDmValue                              //                                   *
- * @param   long p_lDatabaseId                               //                                   *
- * @param   long p_lId                                       //                                   *
+ * @param  qint64 p_lDatabaseId                               //                                   *
+ * @param  qint64 p_lId                                       //                                   *
  * @param   QString p_qstrKeyname                            //                                   *
  * @param   CdmObject* p_pCdmObject                          //                                   *
  * @comment The constructor of the stringlist.                                                    *
  *----------------last changed: --------------------------------Sa 11. Apr 09:48:28 2009----------*/
 CdmValueDictIntInt::CdmValueDictIntInt(EdmValueType p_eDmValue,
-                                       long p_lDatabaseId,
-                                       long p_lId,
+                                      qint64 p_lDatabaseId,
+                                      qint64 p_lId,
                                        QString p_qstrKeyname,
                                        CdmObject* p_pCdmObject)
    : CdmValueCharacterDocument(p_lDatabaseId, p_lId, p_qstrKeyname, p_eDmValue, p_pCdmObject)

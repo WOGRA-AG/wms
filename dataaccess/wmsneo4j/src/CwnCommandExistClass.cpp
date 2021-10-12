@@ -3,7 +3,7 @@
 #include "CwnCommandStdHeader.h"
 
 
-CwnCommandExistClass::CwnCommandExistClass(long p_lSchemeId, QString p_qstrKeyname, CwnDataAccess* p_pDataAccess)
+CwnCommandExistClass::CwnCommandExistClass(qint64 p_lSchemeId, QString p_qstrKeyname, CwnDataAccess* p_pDataAccess)
 : CwnCommandBase(p_pDataAccess),
   m_lSchemeId(p_lSchemeId),
   m_qstrKeyname(p_qstrKeyname)

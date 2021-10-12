@@ -10,11 +10,11 @@ class CdbDataAccess;
 class CdbCommandAddUserToUserGroup : public CdbAbstractCommandTransactional
 {
 private:
-    long m_lGroupId;
-    long m_lUserId;
+   qint64 m_lGroupId;
+   qint64 m_lUserId;
 
 public:
-    CdbCommandAddUserToUserGroup(long p_lUser, long p_lGroup, CdbDataAccess* p_pDataAccess);
+    CdbCommandAddUserToUserGroup(qint64 p_lUser,qint64 p_lGroup, CdbDataAccess* p_pDataAccess);
     virtual ~CdbCommandAddUserToUserGroup();
 
 protected:

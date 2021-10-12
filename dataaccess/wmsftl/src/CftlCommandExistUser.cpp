@@ -12,7 +12,7 @@ CftlCommandExistUser::~CftlCommandExistUser()
 
 int CftlCommandExistUser::Execute()
 {
-    long lRet = CdmLogging::eDmUnknownUserQueryError;
+   qint64 lRet = CdmLogging::eDmUnknownUserQueryError;
     QSqlQuery cQSqlQuery(GetSqlDatabase());
 
 

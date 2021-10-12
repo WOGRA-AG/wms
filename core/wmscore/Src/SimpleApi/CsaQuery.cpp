@@ -64,7 +64,7 @@ QObject *CsaQuery::getObjectAt(int p_iIndex)
    return pObject;
 }
 
-long CsaQuery::getObjectIdAt(int p_iIndex)
+qint64 CsaQuery::getObjectIdAt(int p_iIndex)
 {
    return m_pQuery->GetObjectIdAt(p_iIndex);
 }
@@ -95,12 +95,12 @@ QVariant CsaQuery::getResultAt(int p_iColumn, int p_iRow)
 }
 
 
-int CsaQuery::getRowPosOfObjectInResultTree(long p_lObjectId)
+int CsaQuery::getRowPosOfObjectInResultTree(qint64 p_lObjectId)
 {
    return m_pQuery->GetRowPosOfObjectInResultTree(p_lObjectId);
 }
 
-bool CsaQuery::isObjectInResultTree(long p_lObejctId)
+bool CsaQuery::isObjectInResultTree(qint64 p_lObejctId)
 {
    return m_pQuery->IsObjectInResultTree(p_lObejctId);
 }
@@ -161,7 +161,7 @@ QObject *CsaQuery::getContainer()
    return pContainer;
 }
 
-void CsaQuery::setContainerId(long p_lId)
+void CsaQuery::setContainerId(qint64 p_lId)
 {
    m_pQuery->SetContainerId(p_lId);
 }
@@ -169,12 +169,12 @@ void CsaQuery::setContainerId(long p_lId)
 const QVariantList CsaQuery::getResultList()
 {
     QVariantList qvResults;
-    QList<long> qllResults = m_pQuery->GetResultList();
-    QListIterator<long> qllIt(qllResults);
+    QList<qint64> qllResults = m_pQuery->GetResultList();
+    QListIterator<qint64> qllIt(qllResults);
 
     while (qllIt.hasNext())
     {
-        qvResults.append((int)qllIt.next());
+        qvResults.append(qllIt.next());
     }
 
     return qvResults;
@@ -192,7 +192,7 @@ bool CsaQuery::containsResultObject(CsaObject* p_pObject)
    return bRet;
 }
 
-bool CsaQuery::containsResultObject(long p_lObjectId)
+bool CsaQuery::containsResultObject(qint64 p_lObjectId)
 {
    return m_pQuery->ContainsResultObject(p_lObjectId);
 }

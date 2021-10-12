@@ -74,43 +74,43 @@ protected:
 public:
     CftlObjectAccess(CftlDataAccess* p_pCftlDataAccess);
     virtual ~CftlObjectAccess();
-    virtual long DeleteObjectList(long p_lObjectListId);
-    long ExecuteQuery(CdmQuery* p_pCdmQuery);
-    long ExistObjectList(long p_lClassId, QString p_qstrObjectListKeyname);
-    virtual long GetNewObjectId(const CdmObjectContainer* p_pContainer);
-    virtual long GetNewContainerId(long p_lClassId);
-    long GetObjectListsList(long p_lDbId, long p_lClassId, QMap<long,QString>& p_rqmObjectListsList);
-    long LoadObject(const CdmObjectContainer* p_pContainer, long p_lObjectId, CdmObject*& p_pCdmObject);
-    long LoadObjectList(long p_lObjectListId, CdmObjectContainer*& p_pContainer);
-    long LockObject(CdmObject* p_pObject, bool & p_bResult);
-    long UnLockObject(CdmObject* p_pObject, bool & p_bResult );
-    long UpdateObject(CdmObject*& p_pCdmObject);
-    virtual long UpdateContainer(CdmObjectContainer*& p_pContainer);
+    virtual qint64 DeleteObjectList(qint64 p_lObjectListId);
+   qint64 ExecuteQuery(CdmQuery* p_pCdmQuery);
+   qint64 ExistObjectList(qint64 p_lClassId, QString p_qstrObjectListKeyname);
+    virtual qint64 GetNewObjectId(const CdmObjectContainer* p_pContainer);
+    virtual qint64 GetNewContainerId(qint64 p_lClassId);
+   qint64 GetObjectListsList(qint64 p_lDbId,qint64 p_lClassId, QMap<qint64,QString>& p_rqmObjectListsList);
+   qint64 LoadObject(const CdmObjectContainer* p_pContainer,qint64 p_lObjectId, CdmObject*& p_pCdmObject);
+   qint64 LoadObjectList(qint64 p_lObjectListId, CdmObjectContainer*& p_pContainer);
+   qint64 LockObject(CdmObject* p_pObject, bool & p_bResult);
+   qint64 UnLockObject(CdmObject* p_pObject, bool & p_bResult );
+   qint64 UpdateObject(CdmObject*& p_pCdmObject);
+    virtual qint64 UpdateContainer(CdmObjectContainer*& p_pContainer);
     virtual void GetCounterValue(CdmValueCounter* p_pCdmCounter);
-    virtual bool GetReferences(long p_lObjectListId,
-                               long p_lObjectId,
-                               QMap<long,
-                               long>& p_rqmReferences);
+    virtual bool GetReferences(qint64 p_lObjectListId,
+                              qint64 p_lObjectId,
+                               QMap<qint64,
+                              qint64>& p_rqmReferences);
     virtual bool GetOwner(const CdmObjectContainer* p_pContainer, CdmObject *&p_pOwnerObject);
     virtual bool GetOwner(const CdmObject* p_pObject, CdmObject *&p_pOwnerObject);
-    long LoadObject(const CdmObjectContainer* p_pContainer, QString p_qstrKeyname, CdmObject *&p_pCdmObject);
-    long LoadObjectList(long p_lDbId, QString p_qstrKeyname, CdmObjectContainer*& p_pContainer);
-    long LoadEmptyObjectList(long p_lDbId, QString p_qstrKeyname, CdmObjectContainer*& p_pContainer);
+   qint64 LoadObject(const CdmObjectContainer* p_pContainer, QString p_qstrKeyname, CdmObject *&p_pCdmObject);
+   qint64 LoadObjectList(qint64 p_lDbId, QString p_qstrKeyname, CdmObjectContainer*& p_pContainer);
+   qint64 LoadEmptyObjectList(qint64 p_lDbId, QString p_qstrKeyname, CdmObjectContainer*& p_pContainer);
     QByteArray ReadBinaryDocument(CdmValueBinaryDocument* p_pCdmBinaryDocument);
     virtual int UpdateBinaryDocument(CdmValueBinaryDocument* p_pCdmBinaryDocument);
-    virtual long GetCounterValue(const CdmObjectContainer* p_pContainer, CdmValue* p_pValue);
+    virtual qint64 GetCounterValue(const CdmObjectContainer* p_pContainer, CdmValue* p_pValue);
 
-    long LoadEmptyObjectList(long p_lDbId, long p_lId, CdmObjectContainer*& p_pContainer);
-    long LoadObjects(CdmObjectContainer* p_pContainer, QList<long>& p_rqvlObjectIds);
+   qint64 LoadEmptyObjectList(qint64 p_lDbId,qint64 p_lId, CdmObjectContainer*& p_pContainer);
+   qint64 LoadObjects(CdmObjectContainer* p_pContainer, QList<qint64>& p_rqvlObjectIds);
     int IsObjectUsed(const CdmObject* p_pObject);
-    virtual long CountObjectsOnDb(CdmObjectContainer* p_pContainer);
-    virtual long RefreshObjectList(CdmObjectContainer* p_pContainer);
-    virtual long RefreshObject(CdmObject* p_pCdmObject);
-    virtual long DeleteObject(CdmObject* p_pObject);
-    long IsObjectLocked(CdmObject* p_pObject);
+    virtual qint64 CountObjectsOnDb(CdmObjectContainer* p_pContainer);
+    virtual qint64 RefreshObjectList(CdmObjectContainer* p_pContainer);
+    virtual qint64 RefreshObject(CdmObject* p_pCdmObject);
+    virtual qint64 DeleteObject(CdmObject* p_pObject);
+   qint64 IsObjectLocked(CdmObject* p_pObject);
 
 private:
-    CdmObject *GetObject(long p_lContainerId, long p_lObjectId);
+    CdmObject *GetObject(qint64 p_lContainerId,qint64 p_lObjectId);
 };
 
 #endif //

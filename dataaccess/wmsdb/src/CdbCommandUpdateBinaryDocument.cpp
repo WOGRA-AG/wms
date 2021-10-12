@@ -40,7 +40,7 @@ int CdbCommandUpdateBinaryDocument::Execute()
     if(GetDataAccess()->ExecuteQuery(qstrQuery, cQSqlQuery) > 0)
     {
         // adding new dataset
-        int iValueId = (int)m_rpValue->GetId();
+        int iValueId = m_rpValue->GetId();
         QString qstrFileType = m_rpValue->GetFileType();
         QString qstrFilename = ShortFilename(m_rpValue->GetFilename());
         cQSqlQuery.prepare("insert into WMS_VALUE_BINARYDOCUMENT (BinaryDocumentId, Type, Filename, Val) "

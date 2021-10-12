@@ -64,11 +64,11 @@ void CwmsImportColumnDlg::FillMemberListView(const CdmClass* p_pCdmClass, CwmsIm
 {
    if (CHKPTR(p_pCdmClass) && CHKPTR(p_pCwmsImport))
    {
-      QMap<long,CdmMember*> qmMembers;
+      QMap<qint64,CdmMember*> qmMembers;
       p_pCdmClass->GetMemberMap(qmMembers);
 
-      QMap<long, CdmMember*>::iterator qmIt    = qmMembers.begin();
-      QMap<long, CdmMember*>::iterator qmItEnd = qmMembers.end();
+      QMap<qint64, CdmMember*>::iterator qmIt    = qmMembers.begin();
+      QMap<qint64, CdmMember*>::iterator qmItEnd = qmMembers.end();
       QStringList qstrlHiddenMembers = p_pCwmsImport->GetHiddenMembersList();
       QTreeWidgetItem* pqchItem = nullptr;
 
@@ -142,11 +142,11 @@ void CwmsImportColumnDlg::FillChildMembers(CdmMember* p_pCdmMember,
 
             if (pCdmClass)
             {
-               QMap<long,CdmMember*> qmMembers;
+               QMap<qint64,CdmMember*> qmMembers;
                pCdmClass->GetMemberMap(qmMembers);
 
-               QMap<long, CdmMember*>::iterator qmIt    = qmMembers.begin();
-               QMap<long, CdmMember*>::iterator qmItEnd = qmMembers.end();
+               QMap<qint64, CdmMember*>::iterator qmIt    = qmMembers.begin();
+               QMap<qint64, CdmMember*>::iterator qmItEnd = qmMembers.end();
                QTreeWidgetItem* pqchItem = nullptr;
 
                for(; qmIt != qmItEnd; ++qmIt)

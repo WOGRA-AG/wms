@@ -26,8 +26,8 @@ void CwiCommandGetObjectChanges::Execute()
     if (m_rpData)
     {
         int iDatabaseId = m_rpData->GetValue("DatabaseId").toInt();
-        long lContainerId = m_rpData->GetValue("ObjectListId").toInt();
-        long lObjectId = m_rpData->GetValue("ObjectId").toInt();
+       qint64 lContainerId = m_rpData->GetValue("ObjectListId").toInt();
+       qint64 lObjectId = m_rpData->GetValue("ObjectId").toInt();
         QDate qdFrom = m_rpData->GetValue("From").toDate();
         QDate qdTo = m_rpData->GetValue("To").toDate();
 

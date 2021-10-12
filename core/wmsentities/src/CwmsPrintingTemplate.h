@@ -40,7 +40,7 @@ class BASETOOLS_API CwmsPrintingTemplate : public CdmObjectAdaptor
     void SetName(QString p_qstrName);
     virtual void SetLanguage(QString p_iId);
     QString GetLanguage();
-    long GetLanguageId();
+   qint64 GetLanguageId();
     void SetTemplate(QString p_qstrContent);
     QString GetTemplate();
     bool ReadTemplateFromFile(QString p_qstrFilename);

@@ -36,7 +36,7 @@ private:
 
 public:
     virtual ~CdmValueBool();
-    CdmValueBool(long p_lDatabaseId, long p_lId, QString p_qstrKeyname, CdmObject* p_pCdmObject);
+    CdmValueBool(qint64 p_lDatabaseId,qint64 p_lId, QString p_qstrKeyname, CdmObject* p_pCdmObject);
     CdmValueBool(QVariantMap& p_qVariant, CdmObject* p_pCdmObject);
     void SetDefaultValue(const CdmMember* p_pCdmMember);
     void FromStringToValue(QString p_qstrValue);

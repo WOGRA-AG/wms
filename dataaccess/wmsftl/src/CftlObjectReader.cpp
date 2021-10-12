@@ -40,12 +40,12 @@
 // Own Includes
 #include "CftlObjectReader.h"
 
-long CftlObjectReader::ReadValues(CftlContainerTableSelect& selector, QSqlQuery& cQSqlQuery, CdmObject* p_pObject)
+qint64 CftlObjectReader::ReadValues(CftlContainerTableSelect& selector, QSqlQuery& cQSqlQuery, CdmObject* p_pObject)
 {
-    long lRet = CdmLogging::eDmObjectAccessError;
+   qint64 lRet = CdmLogging::eDmObjectAccessError;
 
-    QMap<long, CdmMember*>& qmMembers = selector.GetMemberMap();
-    QMapIterator<long, CdmMember*> qmIt(qmMembers);
+    QMap<qint64, CdmMember*>& qmMembers = selector.GetMemberMap();
+    QMapIterator<qint64, CdmMember*> qmIt(qmMembers);
     int iPos = selector.GetValueStartPos();
 
 
@@ -202,7 +202,7 @@ long CftlObjectReader::ReadValues(CftlContainerTableSelect& selector, QSqlQuery&
 
 int CftlObjectReader::ReadBinaryDocument(QSqlQuery& p_rQuery, int& p_riPos, CdmMember* p_pMember, CdmObject* p_pObject)
 {
-    long lRet = CdmLogging::eDmObjectAccessError;
+   qint64 lRet = CdmLogging::eDmObjectAccessError;
 
     if (CHKPTR(p_pMember) && CHKPTR(p_pObject))
     {
@@ -250,7 +250,7 @@ void CftlObjectReader::SetObjectDataToValue(CdmValue* p_pValue, CdmObject* p_pOb
 
 int CftlObjectReader::ReadBool(QSqlQuery& p_rQuery, int& p_riPos, CdmMember* p_pMember, CdmObject* p_pObject)
 {
-    long lRet = CdmLogging::eDmObjectAccessError;
+   qint64 lRet = CdmLogging::eDmObjectAccessError;
 
     if (CHKPTR(p_pMember) && CHKPTR(p_pObject))
     {
@@ -272,7 +272,7 @@ int CftlObjectReader::ReadBool(QSqlQuery& p_rQuery, int& p_riPos, CdmMember* p_p
 
 int CftlObjectReader::ReadCharacterDocument(QSqlQuery& p_rQuery, int& p_riPos, CdmMember* p_pMember, CdmObject* p_pObject)
 {
-    long lRet = CdmLogging::eDmObjectAccessError;
+   qint64 lRet = CdmLogging::eDmObjectAccessError;
 
     if (CHKPTR(p_pMember) && CHKPTR(p_pObject))
     {
@@ -296,11 +296,11 @@ int CftlObjectReader::ReadCharacterDocument(QSqlQuery& p_rQuery, int& p_riPos, C
 
 int CftlObjectReader::ReadCounter(QSqlQuery& p_rQuery, int& p_riPos, CdmMember* p_pMember, CdmObject* p_pObject)
 {
-    long lRet = CdmLogging::eDmObjectAccessError;
+   qint64 lRet = CdmLogging::eDmObjectAccessError;
 
     if (CHKPTR(p_pMember) && CHKPTR(p_pObject))
     {
-        long lValue = p_rQuery.value(p_riPos++).toInt();
+       qint64 lValue = p_rQuery.value(p_riPos++).toInt();
 
         CdmValueCounter* pValue = new CdmValueCounter(p_pObject->GetSchemeId(),
                                                       p_pMember->GetId(),
@@ -319,7 +319,7 @@ int CftlObjectReader::ReadCounter(QSqlQuery& p_rQuery, int& p_riPos, CdmMember* 
 
 int CftlObjectReader::ReadDate(QSqlQuery& p_rQuery, int& p_riPos, CdmMember* p_pMember, CdmObject* p_pObject)
 {
-    long lRet = CdmLogging::eDmObjectAccessError;
+   qint64 lRet = CdmLogging::eDmObjectAccessError;
 
     if (CHKPTR(p_pMember) && CHKPTR(p_pObject))
     {
@@ -341,7 +341,7 @@ int CftlObjectReader::ReadDate(QSqlQuery& p_rQuery, int& p_riPos, CdmMember* p_p
 
 int CftlObjectReader::ReadDateTime(QSqlQuery& p_rQuery, int& p_riPos, CdmMember* p_pMember, CdmObject* p_pObject)
 {
-    long lRet = CdmLogging::eDmObjectAccessError;
+   qint64 lRet = CdmLogging::eDmObjectAccessError;
 
     if (CHKPTR(p_pMember) && CHKPTR(p_pObject))
     {
@@ -363,7 +363,7 @@ int CftlObjectReader::ReadDateTime(QSqlQuery& p_rQuery, int& p_riPos, CdmMember*
 
 int CftlObjectReader::ReadDouble(QSqlQuery& p_rQuery, int& p_riPos, CdmMember* p_pMember, CdmObject* p_pObject)
 {
-    long lRet = CdmLogging::eDmObjectAccessError;
+   qint64 lRet = CdmLogging::eDmObjectAccessError;
 
     if (CHKPTR(p_pMember) && CHKPTR(p_pObject))
     {
@@ -385,7 +385,7 @@ int CftlObjectReader::ReadDouble(QSqlQuery& p_rQuery, int& p_riPos, CdmMember* p
 
 int CftlObjectReader::ReadFloat(QSqlQuery& p_rQuery, int& p_riPos, CdmMember* p_pMember, CdmObject* p_pObject)
 {
-    long lRet = CdmLogging::eDmObjectAccessError;
+   qint64 lRet = CdmLogging::eDmObjectAccessError;
 
     if (CHKPTR(p_pMember) && CHKPTR(p_pObject))
     {
@@ -407,7 +407,7 @@ int CftlObjectReader::ReadFloat(QSqlQuery& p_rQuery, int& p_riPos, CdmMember* p_
 
 int CftlObjectReader::ReadInt(QSqlQuery& p_rQuery, int& p_riPos, CdmMember* p_pMember, CdmObject* p_pObject)
 {
-    long lRet = CdmLogging::eDmObjectAccessError;
+   qint64 lRet = CdmLogging::eDmObjectAccessError;
 
     if (CHKPTR(p_pMember) && CHKPTR(p_pObject))
     {
@@ -430,11 +430,11 @@ int CftlObjectReader::ReadInt(QSqlQuery& p_rQuery, int& p_riPos, CdmMember* p_pM
 
 int CftlObjectReader::ReadLong(QSqlQuery& p_rQuery, int& p_riPos, CdmMember* p_pMember, CdmObject* p_pObject)
 {
-    long lRet = CdmLogging::eDmObjectAccessError;
+   qint64 lRet = CdmLogging::eDmObjectAccessError;
 
     if (CHKPTR(p_pMember) && CHKPTR(p_pObject))
     {
-        long lValue = p_rQuery.value(p_riPos++).toInt();
+       qint64 lValue = p_rQuery.value(p_riPos++).toInt();
 
         CdmValueLong* pValue = new CdmValueLong(p_pObject->GetSchemeId(),
                                                       p_pMember->GetId(),
@@ -452,12 +452,12 @@ int CftlObjectReader::ReadLong(QSqlQuery& p_rQuery, int& p_riPos, CdmMember* p_p
 
 int CftlObjectReader::ReadObjectRef(QSqlQuery& p_rQuery, int& p_riPos, CdmMember* p_pMember, CdmObject* p_pObject)
 {
-    long lRet = CdmLogging::eDmObjectAccessError;
+   qint64 lRet = CdmLogging::eDmObjectAccessError;
 
     if (CHKPTR(p_pMember) && CHKPTR(p_pObject))
     {
-        long lContainerId = p_rQuery.value(p_riPos++).toInt();
-        long lObjectId = p_rQuery.value(p_riPos++).toInt();
+       qint64 lContainerId = p_rQuery.value(p_riPos++).toInt();
+       qint64 lObjectId = p_rQuery.value(p_riPos++).toInt();
         QString qstrObjectKeyname = p_rQuery.value(p_riPos++).toString();
         QString qstrContainerKeyname = p_rQuery.value(p_riPos++).toString();
 
@@ -477,11 +477,11 @@ int CftlObjectReader::ReadObjectRef(QSqlQuery& p_rQuery, int& p_riPos, CdmMember
 
 int CftlObjectReader::ReadContainerRef(QSqlQuery& p_rQuery, int& p_riPos, CdmMember* p_pMember, CdmObject* p_pObject)
 {
-    long lRet = CdmLogging::eDmObjectAccessError;
+   qint64 lRet = CdmLogging::eDmObjectAccessError;
 
     if (CHKPTR(p_pMember) && CHKPTR(p_pObject))
     {
-        long lContainerId = p_rQuery.value(p_riPos++).toInt();
+       qint64 lContainerId = p_rQuery.value(p_riPos++).toInt();
         QString qstrContainerKeyname = p_rQuery.value(p_riPos++).toString();
 
         CdmValueContainerRef* pValue = new CdmValueContainerRef(p_pObject->GetSchemeId(),
@@ -500,7 +500,7 @@ int CftlObjectReader::ReadContainerRef(QSqlQuery& p_rQuery, int& p_riPos, CdmMem
 
 int CftlObjectReader::ReadString(QSqlQuery& p_rQuery, int& p_riPos, CdmMember* p_pMember, CdmObject* p_pObject)
 {
-    long lRet = CdmLogging::eDmObjectAccessError;
+   qint64 lRet = CdmLogging::eDmObjectAccessError;
 
     if (CHKPTR(p_pMember) && CHKPTR(p_pObject))
     {
@@ -522,7 +522,7 @@ int CftlObjectReader::ReadString(QSqlQuery& p_rQuery, int& p_riPos, CdmMember* p
 
 int CftlObjectReader::ReadTime(QSqlQuery& p_rQuery, int& p_riPos, CdmMember* p_pMember, CdmObject* p_pObject)
 {
-    long lRet = CdmLogging::eDmObjectAccessError;
+   qint64 lRet = CdmLogging::eDmObjectAccessError;
 
     if (CHKPTR(p_pMember) && CHKPTR(p_pObject))
     {
@@ -543,8 +543,8 @@ int CftlObjectReader::ReadTime(QSqlQuery& p_rQuery, int& p_riPos, CdmMember* p_p
 }
 
 CdmValueCharacterDocument* CftlObjectReader::CreateCharDocValue(EdmValueType p_eType,
-                                                                      long p_lDatabaseId,
-                                                                      long p_lId,
+                                                                     qint64 p_lDatabaseId,
+                                                                     qint64 p_lId,
                                                                       QString p_qstrKeyname,
                                                                       CdmObject* p_pObjectOwner)
 {

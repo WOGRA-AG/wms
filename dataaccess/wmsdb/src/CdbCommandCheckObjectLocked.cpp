@@ -3,7 +3,7 @@
 
 #include "CdbCommandCheckObjectLocked.h"
 
-CdbCommandCheckObjectLocked::CdbCommandCheckObjectLocked(long p_lObjectId, long p_lSessionId, CdbDataAccess* p_pDataAccess)
+CdbCommandCheckObjectLocked::CdbCommandCheckObjectLocked(qint64 p_lObjectId,qint64 p_lSessionId, CdbDataAccess* p_pDataAccess)
 : CdbAbstractCommand(p_pDataAccess),
   m_lObjectId(p_lObjectId),
   m_lSessionId(p_lSessionId)
@@ -22,7 +22,7 @@ bool CdbCommandCheckObjectLocked::CheckValid()
 
 int CdbCommandCheckObjectLocked::Execute()
 {
-    long lRet = CdmLogging::eDmObjectAccessError;
+   qint64 lRet = CdmLogging::eDmObjectAccessError;
 
     QSqlQuery cQSqlQuery;
     QString qstrQuery;
@@ -36,7 +36,7 @@ int CdbCommandCheckObjectLocked::Execute()
        cQSqlQuery.first();
        if(cQSqlQuery.isValid())
        {
-          long lSessionId = cQSqlQuery.value(0).toInt();
+         qint64 lSessionId = cQSqlQuery.value(0).toInt();
           INFO("Object with ID" + QString::number(m_lObjectId) +
                " is locked by session " + QString::number(m_lSessionId));
 

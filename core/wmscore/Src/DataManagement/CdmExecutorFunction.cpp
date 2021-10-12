@@ -96,10 +96,10 @@ void CdmExecutorFunction::CallConstructor(CdmObject* p_pObject, CdmClass* p_pCla
     if (CHKPTR(p_pObject) && CHKPTR(p_pObject))
     {
         CdmClassManager* pClassManager = p_pClass->GetClassManager();
-        const QMap<long,long> qmBaseClasses = p_pClass->GetBaseClasses();
+        const QMap<qint64,qint64> qmBaseClasses = p_pClass->GetBaseClasses();
 
-        QMap<long,long>::const_iterator qmIt = qmBaseClasses.begin();
-        QMap<long,long>::const_iterator qmItEnd = qmBaseClasses.end();
+        QMap<qint64,qint64>::const_iterator qmIt = qmBaseClasses.begin();
+        QMap<qint64,qint64>::const_iterator qmItEnd = qmBaseClasses.end();
 
         for (; qmIt != qmItEnd; ++qmIt)
         {
@@ -155,10 +155,10 @@ void CdmExecutorFunction::CallDestructor(CdmObject* p_pObject, CdmClass* p_pClas
     if (CHKPTR(p_pObject) && CHKPTR(p_pClass))
     {
         CdmClassManager* pClassManager = p_pClass->GetClassManager();
-        const QMap<long,long> qmBaseClasses = p_pClass->GetBaseClasses();
+        const QMap<qint64,qint64> qmBaseClasses = p_pClass->GetBaseClasses();
 
-        QMap<long,long>::const_iterator qmIt = qmBaseClasses.begin();
-        QMap<long,long>::const_iterator qmItEnd = qmBaseClasses.end();
+        QMap<qint64,qint64>::const_iterator qmIt = qmBaseClasses.begin();
+        QMap<qint64,qint64>::const_iterator qmItEnd = qmBaseClasses.end();
 
         for (; qmIt != qmItEnd; ++qmIt)
         {

@@ -2,7 +2,7 @@
 
 #include "CwnCommandStdHeader.h"
 
-CwnCommandCheckObjectUsed::CwnCommandCheckObjectUsed(long p_lObjectId, long p_lContainerId, CwnDataAccess* p_pDataAccess)
+CwnCommandCheckObjectUsed::CwnCommandCheckObjectUsed(qint64 p_lObjectId,qint64 p_lContainerId, CwnDataAccess* p_pDataAccess)
 : CwnCommandBase(p_pDataAccess),
   m_lObjectId(p_lObjectId),
   m_lContainerId(p_lContainerId)

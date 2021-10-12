@@ -27,7 +27,7 @@ public:
     CwnLoginManager(CwnDataAccess* p_pCwnDataAccess, CwnUserManager* p_pCwnUserManager);
     virtual ~CwnLoginManager();
 public:
-    long Login(QString p_qstrApplication,
+   qint64 Login(QString p_qstrApplication,
                QString p_qstrLogin,
                QString p_qstrPassword,
                CumUser*& p_rpCumUser,
@@ -35,15 +35,15 @@ public:
                int& p_iModules,
                QString& p_qstrVersion);
 public:
-    virtual long Logout(  long p_lSessionId );
-    virtual long FindSession(  long p_lSessionId, long p_lUserId );
-    virtual long GetNewSession(QString p_qstrApplication, long p_lUserId);
+    virtual qint64 Logout( qint64 p_lSessionId );
+    virtual qint64 FindSession( qint64 p_lSessionId,qint64 p_lUserId );
+    virtual qint64 GetNewSession(QString p_qstrApplication,qint64 p_lUserId);
     bool LicenceCheck(QString p_qstrApplication,
                       bool& p_bDemo,
                       int& p_iModules,
                       QString p_qstrVersion);
 
-    long LoginLdap(QString p_qstrApplication, QString p_qstrLogin, QString p_qstrPassword, CumUser*& p_rUser);
+   qint64 LoginLdap(QString p_qstrApplication, QString p_qstrLogin, QString p_qstrPassword, CumUser*& p_rUser);
     virtual CdmSession* FindSession(int p_iSessionId);
     virtual CdmSession* FindSession(QString p_qstrBaseAuth);
     void UpdateSession(int p_iSessionId);

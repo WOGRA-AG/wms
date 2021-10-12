@@ -8,7 +8,7 @@
 
 #include "CwnCommandStdHeader.h"
 
-CwnCommandDeleteClass::CwnCommandDeleteClass(long p_lClassId, CwnDataAccess* p_pDataAccess)
+CwnCommandDeleteClass::CwnCommandDeleteClass(qint64 p_lClassId, CwnDataAccess* p_pDataAccess)
     : CwnCommandBase(p_pDataAccess),
       m_lClassId(p_lClassId)
 {

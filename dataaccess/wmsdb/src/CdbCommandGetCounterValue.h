@@ -11,7 +11,7 @@ class CdbCommandGetCounterValue : public CdbAbstractCommandTransactional
 private:
     CdmValueCounter* m_rpCdmCounter;
 
-    long GetCounterValue(long p_lObjectListId, long p_lMemberId);
+   qint64 GetCounterValue(qint64 p_lObjectListId,qint64 p_lMemberId);
 public:
     CdbCommandGetCounterValue(CdmValueCounter* p_pCdmCounter, CdbDataAccess* p_pDataAccess);
     virtual ~CdbCommandGetCounterValue();

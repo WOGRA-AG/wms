@@ -30,7 +30,7 @@ int CftlCommandUpdatePackage::Execute()
     cQuery.prepare("update WMS_CLASS_PACKAGE set URI = ?, System_Package = ? where SchemeId = ? and URI = ?");
     cQuery.addBindValue(m_pPackage->GetKeyname());
     cQuery.addBindValue(qstrSystemPackage);
-    cQuery.addBindValue((int)m_pPackage->GetSchemeId());
+    cQuery.addBindValue(m_pPackage->GetSchemeId());
     cQuery.addBindValue(m_pPackage->GetOriginalPackgeString());
 
     if (SUCCESSFULL(ExecuteQuery(cQuery)))

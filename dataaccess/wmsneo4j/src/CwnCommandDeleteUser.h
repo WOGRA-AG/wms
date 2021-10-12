@@ -15,7 +15,7 @@ class CwnCommandDeleteUser : public CwnCommandBase
 {
 public:
     CwnCommandDeleteUser(CwnDataAccess* m_rpDataAccess);
-    CwnCommandDeleteUser(long p_lUserId, CwnDataAccess *p_pDataAccess);
+    CwnCommandDeleteUser(qint64 p_lUserId, CwnDataAccess *p_pDataAccess);
 
     virtual ~CwnCommandDeleteUser();
 
@@ -27,7 +27,7 @@ public:
 
 private:
     QString login;
-    long m_iUserId;
+   qint64 m_iUserId;
 
 protected:
     void interpretAnswer(QVariant& Ret);

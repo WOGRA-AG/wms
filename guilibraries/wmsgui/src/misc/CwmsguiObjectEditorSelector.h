@@ -236,7 +236,7 @@ class WMSGUI_API CwmsguiObjectEditorSelector
     static void Init();
 
 private:
-    bool ShowQmlForm(CdmObject* p_pCdmObject, long p_lObjectId, QWidget* p_pqParent);
+    bool ShowQmlForm(CdmObject* p_pCdmObject,qint64 p_lObjectId, QWidget* p_pqParent);
     QString GenerateQmlQuery(const CdmClass* p_pClass);
     bool DisplayQmlForm(CdmObject* p_pCdmObject, EwmsGuiDisplayMode p_eDisplayMode, QWidget* p_pqwParent);
 };

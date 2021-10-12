@@ -558,7 +558,7 @@ QString CwnQueryElement::getLabel(EdmValueType type)
     case eDmValueInt:
         return ":INTEGER";
     case eDmValueLong:
-        return ":LONG";
+        return ":qint64";
     case eDmValueBool:
         return ":BOOLEAN";
     case eDmValueFloat:

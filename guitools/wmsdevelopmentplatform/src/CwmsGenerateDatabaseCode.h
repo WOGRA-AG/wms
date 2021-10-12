@@ -44,10 +44,10 @@ class CwmsGenerateDatabaseCode
       CdmClassManager* m_rpCdmClassManager;
       QString m_qstrClassPrefix;
       QString m_qstrDirectory;
-      QVector<long> m_qvGeneratedClasses;
+      QVector<qint64> m_qvGeneratedClasses;
       QList<CdmClass*> m_qllNotGeneratedClasses;
-      QMap<long, QString> m_qmClassNames;
-      QMap<long, QString> m_qmFilenames;
+      QMap<qint64, QString> m_qmClassNames;
+      QMap<qint64, QString> m_qmFilenames;
 
 
    public:
@@ -99,10 +99,10 @@ class CwmsGenerateDatabaseCode
    /** +-=---------------------------------------------------------Do 10. Nov 19:17:36 2011-------*
     * @method  CwmsGenerateDatabaseCode::AreAllBaseClassesGenerated // private                    *
     * @return  bool                                          //                                   *
-    * @param   QList<long> p_qllBaseClasses                  //                                   *
+    * @param   QList<qint64> p_qllBaseClasses                  //                                   *
     * @comment                                                                                    *
     *----------------last changed: -----------------------------Do 10. Nov 19:17:36 2011----------*/
-    bool AreAllBaseClassesGenerated(QList<long> p_qllBaseClasses);
+    bool AreAllBaseClassesGenerated(QList<qint64> p_qllBaseClasses);
 
    private:
    /** +-=---------------------------------------------------------Do 10. Nov 19:26:05 2011-------*

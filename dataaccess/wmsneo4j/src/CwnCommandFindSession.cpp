@@ -7,7 +7,7 @@
 
 #include "CwnCommandStdHeader.h"
 
-CwnCommandFindSession::CwnCommandFindSession(long p_lSessionId, long p_lUserId, CwnDataAccess* p_pDataAccess)
+CwnCommandFindSession::CwnCommandFindSession(qint64 p_lSessionId,qint64 p_lUserId, CwnDataAccess* p_pDataAccess)
 : CwnCommandBase(p_pDataAccess),
   m_lSessionId(p_lSessionId),
   m_lUserId(p_lUserId)
@@ -15,7 +15,7 @@ CwnCommandFindSession::CwnCommandFindSession(long p_lSessionId, long p_lUserId, 
 
 }
 
-CwnCommandFindSession::CwnCommandFindSession(long p_lSessionId, CwnDataAccess* p_pDataAccess)
+CwnCommandFindSession::CwnCommandFindSession(qint64 p_lSessionId, CwnDataAccess* p_pDataAccess)
 : CwnCommandBase(p_pDataAccess),
   m_lSessionId(p_lSessionId),
   m_lUserId(0),

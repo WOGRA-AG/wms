@@ -11,7 +11,7 @@
 #include "CwnCommandDeleteObject.h"
 #include "CwnCommandStdHeader.h"
 
-CwnCommandDeleteObject::CwnCommandDeleteObject(long p_lObjectId, long p_lSessionId, CwnDataAccess* p_pDataAccess)
+CwnCommandDeleteObject::CwnCommandDeleteObject(qint64 p_lObjectId,qint64 p_lSessionId, CwnDataAccess* p_pDataAccess)
 : CwnCommandBase(p_pDataAccess),
   m_lObjectId(p_lObjectId),
   m_lSessionId(p_lSessionId)
@@ -62,7 +62,7 @@ void CwnCommandDeleteObject::interpretAnswer(QVariant &Ret)
            CwnJournal* pJournal = GetDataAccess()->GetJournal();
            if(pJournal)
            {
-              long lRet = pJournal->ObjectDeleted(static_cast<int>(m_lObjectId));
+             qint64 lRet = pJournal->ObjectDeleted(static_cast<int>(m_lObjectId));
 
               if(lRet>0)
                   Ret=1;

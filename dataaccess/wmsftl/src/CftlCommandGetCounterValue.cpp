@@ -51,10 +51,10 @@ int CftlCommandGetCounterValue::Execute()
     return EC(eDmOk);
 }
 
-long CftlCommandGetCounterValue::GetCounterValue(const CdmObject* p_pObject)
+qint64 CftlCommandGetCounterValue::GetCounterValue(const CdmObject* p_pObject)
 {
     ++m_iRecursionCount;
-    long lRet = CdmLogging::eDmObjectAccessError;
+   qint64 lRet = CdmLogging::eDmObjectAccessError;
 
     if (CHKPTR(p_pObject))
     {
@@ -73,11 +73,11 @@ long CftlCommandGetCounterValue::GetCounterValue(const CdmObject* p_pObject)
                         .arg(qstrTableName)
                         .arg(FTL_CONTAINER_ID_FIELD_NAME);
                 cQSqlQuery.prepare(qstrQuery);
-                cQSqlQuery.addBindValue((int)p_pObject->GetObjectContainerId());
+                cQSqlQuery.addBindValue(p_pObject->GetObjectContainerId());
 
                 if(SUCCESSFULL(ExecuteQuery(cQSqlQuery)))
                 {
-                    long lValue = 0;
+                   qint64 lValue = 0;
                     cQSqlQuery.first();
 
                     if(cQSqlQuery.isValid())
@@ -94,9 +94,9 @@ long CftlCommandGetCounterValue::GetCounterValue(const CdmObject* p_pObject)
                             .arg(FTL_LAST_MODIFIED)
                             .arg(FTL_CONTAINER_ID_FIELD_NAME);
                     cQuery.prepare(qstrQuery);
-                    cQuery.addBindValue((int)lValue);
+                    cQuery.addBindValue(lValue);
                     cQuery.addBindValue(qdCurrent);
-                    cQuery.addBindValue((int)p_pObject->GetObjectContainerId());
+                    cQuery.addBindValue(p_pObject->GetObjectContainerId());
 
                     if(SUCCESSFULL(ExecuteQuery(cQSqlQuery)))
                     {
@@ -120,7 +120,7 @@ int CftlCommandGetCounterValue::MakeCounterValueUnique(int p_iCounter,
                                                        QDateTime qdCurrentDateTime,
                                                        QString p_qstrTableName,
                                                        QString p_qstrFieldName,
-                                                       long p_lContainerId)
+                                                      qint64 p_lContainerId)
 {
     int iRet = 0;
     QSqlQuery cQSqlQuery(GetSqlDatabase());
@@ -130,11 +130,11 @@ int CftlCommandGetCounterValue::MakeCounterValueUnique(int p_iCounter,
             .arg(FTL_CONTAINER_ID_FIELD_NAME);
     cQSqlQuery.prepare(qstrQuery);
     cQSqlQuery.addBindValue(p_iCounter);
-    cQSqlQuery.addBindValue((int)p_lContainerId);
+    cQSqlQuery.addBindValue(p_lContainerId);
 
     if(ExecuteQuery(cQSqlQuery))
     {
-        long lValue = 0;
+       qint64 lValue = 0;
         cQSqlQuery.first();
 
         if(cQSqlQuery.isValid())
@@ -164,7 +164,7 @@ int CftlCommandGetCounterValue::IncreaseCounterValue(int p_iCounter,
                                                      QDateTime qdCurrentDateTime,
                                                      QString p_qstrTableName,
                                                      QString p_qstrFieldName,
-                                                     long p_lContainerId)
+                                                    qint64 p_lContainerId)
 {
     int iRet = p_iCounter;
 
@@ -184,7 +184,7 @@ bool CftlCommandGetCounterValue::CheckIncreaseCounterNeeded(int p_iCounter,
                                                             QDateTime qdCurrentDateTime,
                                                             QString p_qstrTableName,
                                                             QString p_qstrFieldName,
-                                                            long p_lContainerId)
+                                                           qint64 p_lContainerId)
 {
     if (m_iRecursionCount > MAX_RECURSION)
     {
@@ -200,7 +200,7 @@ bool CftlCommandGetCounterValue::CheckIncreaseCounterNeeded(int p_iCounter,
             .arg(FTL_CONTAINER_ID_FIELD_NAME);
     cQSqlQuery.prepare(qstrQuery);
     cQSqlQuery.addBindValue(p_iCounter);
-    cQSqlQuery.addBindValue((int)p_lContainerId);
+    cQSqlQuery.addBindValue(p_lContainerId);
 
     if(SUCCESSFULL(ExecuteQuery(cQSqlQuery)))
     {

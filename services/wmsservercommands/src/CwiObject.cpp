@@ -267,8 +267,8 @@ void CwiObject::Refresh(CwmscomData* p_pData)
 void CwiObject::GetObject(CwmscomData* p_pData)
 {
    CwmscomDataResult* pResult = nullptr;
-   long lObjectId     =  p_pData->GetValue("ObjectId").toInt();
-   long lObjectListId =  p_pData->GetValue("ObjectListId").toInt();
+  qint64 lObjectId     =  p_pData->GetValue("ObjectId").toInt();
+  qint64 lObjectListId =  p_pData->GetValue("ObjectListId").toInt();
 
    CdmDataProvider* pCdmManager = CdmSessionManager::GetDataProvider();
 
@@ -302,12 +302,12 @@ void CwiObject::GetObject(CwmscomData* p_pData)
 /** +-=---------------------------------------------------------Mi 18. Apr 10:01:28 2012----------*
  * @method  CwiObject::GetObject                          // public                            *
  * @return  CdmObject*                                       //                                   *
- * @param   long p_lDatabaseId                               //                                   *
- * @param   long p_lObjectListId                             //                                   *
- * @param   long p_lObjectId                                 //                                   *
+ * @param  qint64 p_lDatabaseId                               //                                   *
+ * @param  qint64 p_lObjectListId                             //                                   *
+ * @param  qint64 p_lObjectId                                 //                                   *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------Mi 18. Apr 10:01:28 2012----------*/
-CdmObject* CwiObject::GetObject(long p_lDatabaseId, long p_lObjectListId, long p_lObjectId)
+CdmObject* CwiObject::GetObject(qint64 p_lDatabaseId,qint64 p_lObjectListId,qint64 p_lObjectId)
 {
    CdmObject* pCdmObject = nullptr;
    CdmDataProvider* pCdmManager = CdmSessionManager::GetDataProvider();

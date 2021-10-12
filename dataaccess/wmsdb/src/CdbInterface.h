@@ -50,12 +50,12 @@ public:
     ~CdbInterface();
 
     int Init(CdbDataAccessConfigurator &p_pConfig);
-    long ExecuteQuery(QString p_qstrQuery, QSqlQuery &p_rqsqlQuery);
+   qint64 ExecuteQuery(QString p_qstrQuery, QSqlQuery &p_rqsqlQuery);
     QString GetConnectionDisplayString();
-    long BeginTransaction();
-    long Rollback();
-    long Commit();
-    long ExecuteQuery(QSqlQuery &p_rqsqlQuery);
+   qint64 BeginTransaction();
+   qint64 Rollback();
+   qint64 Commit();
+   qint64 ExecuteQuery(QSqlQuery &p_rqsqlQuery);
     QSqlDatabase GetSqlDatabase();
     bool IsTransactionRunning();
 

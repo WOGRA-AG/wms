@@ -605,7 +605,7 @@ QString CwmsguiObjectEditorSelector::GenerateQmlQuery(const CdmClass* p_pClass)
     return qstrWql;
 }
 
-bool CwmsguiObjectEditorSelector::ShowQmlForm(CdmObject* p_pCdmObject, long p_lObjectId, QWidget* p_pqParent)
+bool CwmsguiObjectEditorSelector::ShowQmlForm(CdmObject* p_pCdmObject,qint64 p_lObjectId, QWidget* p_pqParent)
 {
     bool bRet = false;
     CwmsFormManager cFormManager;
@@ -660,7 +660,7 @@ bool CwmsguiObjectEditorSelector::DisplayQmlForm(CdmObject* p_pCdmObject, EwmsGu
 
        if (pQuery)
        {
-           const QList<long>& qllResults = pQuery->GetResultList();
+           const QList<qint64>& qllResults = pQuery->GetResultList();
 
            if (qllResults.count() > 0)
            {
@@ -669,7 +669,7 @@ bool CwmsguiObjectEditorSelector::DisplayQmlForm(CdmObject* p_pCdmObject, EwmsGu
                    WARNING("More than one default dialog found. take first one.");
                }
 
-               long lObjectId = (*qllResults.begin());
+              qint64 lObjectId = (*qllResults.begin());
                bRet = ShowQmlForm(p_pCdmObject, lObjectId, p_pqwParent);
            }
        }
@@ -689,7 +689,7 @@ bool CwmsguiObjectEditorSelector::ExistQmlForThisPlattform(const CdmClass* p_pCl
 
       if (CHKPTR(pQuery))
       {
-          const QList<long>& qllResults = pQuery->GetResultList();
+          const QList<qint64>& qllResults = pQuery->GetResultList();
 
           if (qllResults.count() > 0)
           {

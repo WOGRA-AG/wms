@@ -3,7 +3,7 @@
 
 #include "CwnCommandStdHeader.h"
 
-CwnCommandAddSchemeLanguage::CwnCommandAddSchemeLanguage(long p_lSchemeId, QString p_qstrLanguage, CwnDataAccess* p_pDataAccess)
+CwnCommandAddSchemeLanguage::CwnCommandAddSchemeLanguage(qint64 p_lSchemeId, QString p_qstrLanguage, CwnDataAccess* p_pDataAccess)
     : CwnCommandBase(p_pDataAccess),
       m_lSchemeId(p_lSchemeId),
       m_qstrLanguage(p_qstrLanguage)

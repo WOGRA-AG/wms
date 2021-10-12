@@ -16,12 +16,12 @@ CwnCommandFindUserGroup::~CwnCommandFindUserGroup()
 
 }
 
-void CwnCommandFindUserGroup::setGroupid(long groupid)
+void CwnCommandFindUserGroup::setGroupid(qint64 groupid)
 {
     this->groupid = groupid;
 }
 
-long CwnCommandFindUserGroup::getGroupid()
+qint64 CwnCommandFindUserGroup::getGroupid()
 {
     return groupid;
 }

@@ -17,8 +17,8 @@ public:
     CwnCommandUpdateUser(CwnDataAccess* m_rpDataAccess);
     virtual ~CwnCommandUpdateUser();
 
-    void setUserId(long userid);
-    long getUserId();
+    void setUserId(qint64 userid);
+   qint64 getUserId();
 
     void setFirstname(QString Surname);
     QString getFirstname();
@@ -45,7 +45,7 @@ public:
     QString queryCausedError;
 
 private:
-    long userid;
+   qint64 userid;
     QString firstname;
     QString lastname;
     QString login;

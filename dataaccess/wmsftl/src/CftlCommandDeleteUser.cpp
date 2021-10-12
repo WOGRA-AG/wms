@@ -1,6 +1,6 @@
 #include "CftlCommandDeleteUser.h"
 
-CftlCommandDeleteUser::CftlCommandDeleteUser(long p_lUserId, CftlDataAccess* p_pDataAccess)
+CftlCommandDeleteUser::CftlCommandDeleteUser(qint64 p_lUserId, CftlDataAccess* p_pDataAccess)
     : CftlAbstractTransactionalCommand(p_pDataAccess),
       m_iUserId(p_lUserId)
 {
@@ -37,7 +37,7 @@ int CftlCommandDeleteUser::Execute()
 
 int CftlCommandDeleteUser::DeleteUserById()
 {
-    long lRet = CdmLogging::eDmUnknownUserQueryError;
+   qint64 lRet = CdmLogging::eDmUnknownUserQueryError;
     QSqlQuery cQSqlQuery(GetSqlDatabase());
     cQSqlQuery.prepare("delete from WMS_UM_ACCESSOR where AccessorId = ?");
     cQSqlQuery.addBindValue(m_iUserId);
@@ -68,7 +68,7 @@ int CftlCommandDeleteUser::DeleteUserById()
 
 int CftlCommandDeleteUser::DeleteUserByLogin()
 {
-    long lRet = CdmLogging::eDmUnknownUserQueryError;
+   qint64 lRet = CdmLogging::eDmUnknownUserQueryError;
     QSqlQuery cQSqlQuery(GetSqlDatabase());
     cQSqlQuery.prepare("select UserId from WMS_UM_USER where Login = ?");
     cQSqlQuery.addBindValue(m_qstrLogin);

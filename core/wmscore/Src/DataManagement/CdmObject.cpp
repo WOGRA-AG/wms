@@ -53,8 +53,8 @@
 #include "CdmObject.h"
 #include "CdmMessageManager.h"
 
-CdmObject::CdmObject(long p_lDatbaseId,
-                     long p_lId,
+CdmObject::CdmObject(qint64 p_lDatbaseId,
+                    qint64 p_lId,
                      QString p_qstrKeyname,
                      const CdmClass* p_pCdmClass,
                      CdmObjectContainer* p_pContainer)
@@ -93,10 +93,10 @@ CdmObject::CdmObject(long p_lDatbaseId,
     InitObject();
 }
 
-CdmObject::CdmObject(long p_lDatbaseId,
-                     long p_lId,
+CdmObject::CdmObject(qint64 p_lDatbaseId,
+                    qint64 p_lId,
                      QString p_qstrKeyname,
-                     long p_lClassId,
+                    qint64 p_lClassId,
                      CdmObjectContainer* p_pContainer )
     : CdmModelElement(p_lDatbaseId, p_lId, p_qstrKeyname),
       m_iValueIdCounter(0),
@@ -123,7 +123,7 @@ CdmObject::CdmObject(long p_lDatbaseId,
     InitObject();
 }
 
-CdmObject::CdmObject(long p_lDatbaseId, long p_lId, long p_lClassId, long p_lObjectListId)
+CdmObject::CdmObject(qint64 p_lDatbaseId,qint64 p_lId,qint64 p_lClassId,qint64 p_lObjectListId)
     : CdmModelElement(p_lDatbaseId, p_lId, ""),
       m_iValueIdCounter(0),
       m_lClassId(p_lClassId),
@@ -136,7 +136,7 @@ CdmObject::CdmObject(long p_lDatbaseId, long p_lId, long p_lClassId, long p_lObj
 {
 }
 
-CdmObject::CdmObject(const CdmObject& p_rCdmObject, long p_lId)
+CdmObject::CdmObject(const CdmObject& p_rCdmObject,qint64 p_lId)
     : CdmModelElement( p_rCdmObject.GetSchemeId(), p_lId, "" ),
       m_iValueIdCounter(0),
       m_lClassId(0),
@@ -156,7 +156,7 @@ CdmObject::CdmObject(const CdmObject& p_rCdmObject, long p_lId)
     CopyFromSourceObject(p_rCdmObject);
 }
 
-CdmObject::CdmObject(CdmObjectContainer* p_pContainer, CdmObject* p_pCdmObject, long p_lId)
+CdmObject::CdmObject(CdmObjectContainer* p_pContainer, CdmObject* p_pCdmObject,qint64 p_lId)
     : CdmModelElement(p_pCdmObject->GetSchemeId(), p_lId, ""),
       m_iValueIdCounter(0),
       m_lClassId(0),
@@ -544,13 +544,13 @@ int CdmObject::InitObject()
     {
 
         CdmClass* pClass = pClassManager->FindClassById(m_lClassId);
-        QMap<long,CdmMember*> qvlMembers;
+        QMap<qint64,CdmMember*> qvlMembers;
         pClass->GetMemberMap(qvlMembers);
 
         if(qvlMembers.count() > 0)
         {
-            QMap<long,CdmMember*>::iterator qvlIt    = qvlMembers.begin();
-            QMap<long,CdmMember*>::iterator qvlItEnd = qvlMembers.end();
+            QMap<qint64,CdmMember*>::iterator qvlIt    = qvlMembers.begin();
+            QMap<qint64,CdmMember*>::iterator qvlItEnd = qvlMembers.end();
 
             for ( ; qvlIt != qvlItEnd; ++ qvlIt )
             {
@@ -695,7 +695,7 @@ bool CdmObject::IsExactTypeOf(CdmClass* p_pClass) const
     return bRet;
 }
 
-long CdmObject::GetClassId() const
+qint64 CdmObject::GetClassId() const
 {
     return m_lClassId;
 }
@@ -717,7 +717,7 @@ CdmValue* CdmObject::CreateObjectValue(CdmMember* p_pCdmMember)
             if(p_pCdmMember->IsOwner() && pCdmValue->GetValueType() == eDmValueContainerRef)
             {
                 CdmValueContainerRef* pCdmObjRef = dynamic_cast<CdmValueContainerRef*>(pCdmValue);
-                long lClassId = pCdmObjRef->GetClassId();
+               qint64 lClassId = pCdmObjRef->GetClassId();
                 CdmClassManager* pCdmClassManager = GetClassManager();
 
                 if(CHKPTR(pCdmClassManager))
@@ -968,13 +968,13 @@ void CdmObject::GetValueMap(QMap<QString, CdmValue*>& p_qmValues) const
 void CdmObject::CheckAllValuesCreated()
 {
     CdmClass* pClass = GetClass();
-    QMap<long,CdmMember*> qvlMembers;
+    QMap<qint64,CdmMember*> qvlMembers;
     pClass->GetMemberMap(qvlMembers);
 
     if(qvlMembers.count() > 0)
     {
-        QMap<long,CdmMember*>::iterator qvlIt    = qvlMembers.begin();
-        QMap<long,CdmMember*>::iterator qvlItEnd = qvlMembers.end();
+        QMap<qint64,CdmMember*>::iterator qvlIt    = qvlMembers.begin();
+        QMap<qint64,CdmMember*>::iterator qvlItEnd = qvlMembers.end();
 
         for ( ; qvlIt != qvlItEnd; ++ qvlIt )
         {
@@ -1502,7 +1502,7 @@ int CdmObject::GetValue(const QString& p_qstrKeyname, int& p_iValue)
     return iRet;
 }
 
-int CdmObject::GetValue(const QString& p_qstrKeyname, long& p_lValue)
+int CdmObject::GetValue(const QString& p_qstrKeyname,qint64& p_lValue)
 {
     int iRet = CdmLogging::eDmUnknownObjectError;
 
@@ -1540,7 +1540,7 @@ int CdmObject::GetValue(const QString& p_qstrKeyname, long& p_lValue)
     return iRet;
 }
 
-int CdmObject::SetValue(const QString& p_qstrKeyname, const long p_lValue)
+int CdmObject::SetValue(const QString& p_qstrKeyname, const qint64 p_lValue)
 {
     int iRet = CdmLogging::eDmUnknownObjectError;
     SYNCHRONIZED;
@@ -1804,7 +1804,7 @@ void CdmObject::SetObjectContainer(  CdmObjectContainer* p_pContainer )
     }
 }
 
-void CdmObject::SetObjectContainer(long lObjectContainerId)
+void CdmObject::SetObjectContainer(qint64 lObjectContainerId)
 {
     if(m_rpContainer == nullptr || m_rpContainer->GetId() != lObjectContainerId)
     {
@@ -1822,7 +1822,7 @@ void CdmObject::SetObjectContainer(long lObjectContainerId)
     }
 }
 
-long CdmObject::GetObjectContainerId() const
+qint64 CdmObject::GetObjectContainerId() const
 {
     if (m_lContainerId == 0)
     {
@@ -1937,12 +1937,12 @@ void CdmObject::GetCounterValues()
 
                     if(CHKPTR(pIdmDataAccess))
                     {
-                        long lValue = 0;
+                       qint64 lValue = 0;
                         lValue = pIdmDataAccess->GetCounterValue(GetObjectContainer(), pCdmValue);
 
                         if(lValue >= 0)
                         {
-                            // Cast to long because every counter is a long value
+                            // Cast to qint64 because every counter is a qint64 value
                             dynamic_cast<CdmValueLong*> (pCdmValue)->SetValue(lValue);
 
                         }
@@ -2131,7 +2131,7 @@ void CdmObject::Refresh()
 
     if (CHKPTR(pIdmDataAccess) && !IsNew())
     {
-        long lSuccess = pIdmDataAccess->RefreshObject(this);
+       qint64 lSuccess = pIdmDataAccess->RefreshObject(this);
 
         if (lSuccess == CdmLogging::eDmObjectNotFound)
         {
@@ -2333,7 +2333,7 @@ void CdmObject::SetParentObject(CdmObject* p_pCdmObject)
     }
 }
 
-void CdmObject::SetParent(long p_lObjectId)
+void CdmObject::SetParent(qint64 p_lObjectId)
 {
     if( m_lParentId != p_lObjectId)
     {
@@ -2372,7 +2372,7 @@ CdmObject* CdmObject::GetParent()
     return pCdmObject;
 }
 
-long CdmObject::GetParentId() const
+qint64 CdmObject::GetParentId() const
 {
     return m_lParentId;
 }

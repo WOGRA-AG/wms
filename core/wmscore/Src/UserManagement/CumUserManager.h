@@ -57,30 +57,30 @@ private:
 public:
     CumUserManager(IdmDataAccess* p_pIdmDataAccess, QString p_qstrSchemeUri = "");
     virtual ~CumUserManager();
-    long UpdateUser(CumUser* p_pUser);
-    long DeleteUser(QString p_qstrLogin);
-    long CreateUser(CumUser* p_pUser);
-    long LogOut();
-    long LogIn(QString p_qstrApplication,
+   qint64 UpdateUser(CumUser* p_pUser);
+   qint64 DeleteUser(QString p_qstrLogin);
+   qint64 CreateUser(CumUser* p_pUser);
+   qint64 LogOut();
+   qint64 LogIn(QString p_qstrApplication,
                QString p_qstrLogin,
                QString p_qstrPassword,
                bool& p_bDemoMode,
                int& p_iModules,
                QString& p_qstrVersion);
-    long RenameUserGroup(long p_lGroupId, QString p_qstrNewName);
-    long CreateUserGroup(QString p_qstrGroupName);
-    long DeleteUserGroup(long p_llGroupId);
-    long AddUserToUserGroup(long p_lUserId, long p_lUserGroupId);
-    long RemoveUserFromGroup(long p_lUserId, long p_lUserGroupId);
+   qint64 RenameUserGroup(qint64 p_lGroupId, QString p_qstrNewName);
+   qint64 CreateUserGroup(QString p_qstrGroupName);
+   qint64 DeleteUserGroup(qint64 p_llGroupId);
+   qint64 AddUserToUserGroup(qint64 p_lUserId,qint64 p_lUserGroupId);
+   qint64 RemoveUserFromGroup(qint64 p_lUserId,qint64 p_lUserGroupId);
     void LoadUserGroups();
-    long GetSessionId();
-    long GetCurrentUserId();
+   qint64 GetSessionId();
+   qint64 GetCurrentUserId();
     CumUserGroup* FindUserGroupById(int p_iId);
-    void GetUserBaseIds(QList<long>& p_rqllUserBaseIds);
+    void GetUserBaseIds(QList<qint64>& p_rqllUserBaseIds);
     QVariant GetVariant() const;
     void ClearUsers();
     void ClearUserGroups();
-    long RegisterUser(QString p_qstrLogin,
+   qint64 RegisterUser(QString p_qstrLogin,
                       QString p_qstrPassword,
                       QString p_qstrName,
                       QString p_qstrSurName,
@@ -88,24 +88,24 @@ public:
                       QString p_qstrIdentKey);
     CumUser* FindUserByEmail(QString p_qstrUserEmail);
     CumUser* FindUserByLogin(QString p_qstrUserLogin);
-    long DeleteUser(long p_lUserId);
+   qint64 DeleteUser(qint64 p_lUserId);
     CumUser *FindUserByIdentityKey(QString p_qstrIdentityKey);
     QList<CumUser *> FindUsersUnmanaged(QString p_qstrSearchString);
-    long DeleteUserGroup(QString p_qstrGroup);
+   qint64 DeleteUserGroup(QString p_qstrGroup);
     CumUserGroup *FindUserGroupByName(QString p_qstrName);
-    long RemoveUserFromGroup(QString p_qstrLogin, QString p_qstrGroup);
-    long AddUserToUserGroup(QString p_qstrLogin, QString p_qstrGroup);
-    long RenameUserGroup(QString qstrOldName, QString p_qstrNewName);
+   qint64 RemoveUserFromGroup(QString p_qstrLogin, QString p_qstrGroup);
+   qint64 AddUserToUserGroup(QString p_qstrLogin, QString p_qstrGroup);
+   qint64 RenameUserGroup(QString qstrOldName, QString p_qstrNewName);
     QList<CumUserGroup *> FindUserGroupsByNameUnmanaged(QString p_qstrName);
     QVariant GetGroupVariant() const;
     QString GetSchemeUri() const;
 
     bool IsCurrentUserAdmin();
 public slots:
-    long GetUserGroupList(QList<CumUserGroup*>& p_rqvlUserGroups);
-    long GetListOfUsersInList(long p_lUserGroupId, QList<CumUser*>& p_rqvlUserList);
-    long GetUserGroupMemberList(long p_lUserId, QList<CumUserGroup*>& p_qvlUserGroups);
-    long GetUserListUnmanaged(QList<CumUser*>& p_rqvlUsers);
+   qint64 GetUserGroupList(QList<CumUserGroup*>& p_rqvlUserGroups);
+   qint64 GetListOfUsersInList(qint64 p_lUserGroupId, QList<CumUser*>& p_rqvlUserList);
+   qint64 GetUserGroupMemberList(qint64 p_lUserId, QList<CumUserGroup*>& p_qvlUserGroups);
+   qint64 GetUserListUnmanaged(QList<CumUser*>& p_rqvlUsers);
     CumUser* FindUserById(int p_iUserId);
 
 };

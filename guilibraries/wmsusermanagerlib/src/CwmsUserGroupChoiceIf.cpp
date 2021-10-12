@@ -73,9 +73,9 @@ void CwmsUserGroupChoiceIf::CancelClickedSlot(  )
    reject();
 }
 
-long CwmsUserGroupChoiceIf::GetGroupSelection(QWidget* parent)
+qint64 CwmsUserGroupChoiceIf::GetGroupSelection(QWidget* parent)
 {
-   long lGroupId = -1;
+  qint64 lGroupId = -1;
    CwmsUserGroupChoiceIf* pCwmsUserGroupChoiceIf = new CwmsUserGroupChoiceIf(parent);
 
    if(pCwmsUserGroupChoiceIf->exec() == QDialog::Accepted)
@@ -106,7 +106,7 @@ void CwmsUserGroupChoiceIf::SearchGroupClickedSlot()
        {
           QTreeWidgetItem* pItem = new QTreeWidgetItem(m_pqlvGroups);
           pItem->setText(0, QString::number(pGroup->GetId()));
-          pItem->setData(0, Qt::UserRole, (int)pGroup->GetId());
+          pItem->setData(0, Qt::UserRole, pGroup->GetId());
           pItem->setText(1, pGroup->GetGroupName());
        }
 

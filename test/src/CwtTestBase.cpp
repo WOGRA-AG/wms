@@ -332,7 +332,7 @@ void CwtTestBase::FillObjectData(CdmObject* p_pObject)
     p_pObject->SetValue(MEMBER_ENUM_KEYNAME, VALUE_ENUM);
     p_pObject->SetValue(MEMBER_FLOAT_KEYNAME, VALUE_FLOAT);
     p_pObject->SetValue(MEMBER_INT_KEYNAME, VALUE_INT);
-    long lValue = VALUE_LONG;
+   qint64 lValue = VALUE_LONG;
     p_pObject->SetValue(MEMBER_LONG_KEYNAME, lValue);
     p_pObject->SetValue(MEMBER_TIME_KEYNAME, qTime);
     p_pObject->SetValue(MEMBER_USER_KEYNAME, 0);

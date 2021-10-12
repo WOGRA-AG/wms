@@ -25,7 +25,7 @@ bool CftlCommandUpdateContainer::CheckValid()
 
 int CftlCommandUpdateContainer::Execute()
 {
-    long lRet = CdmLogging::eDmObjectAccessError;
+   qint64 lRet = CdmLogging::eDmObjectAccessError;
 
     if(m_rpObjectContainer->IsModified() || m_rpObjectContainer->IsNew())
     {
@@ -61,11 +61,11 @@ int CftlCommandUpdateContainer::Execute()
                            " where ContainerId = ?");
         cQSqlQuery.addBindValue(m_rpObjectContainer->GetKeyname());
         cQSqlQuery.addBindValue(QDateTime::currentDateTime());
-        cQSqlQuery.addBindValue((int)m_rpObjectContainer->GetModifierId());
+        cQSqlQuery.addBindValue(m_rpObjectContainer->GetModifierId());
         cQSqlQuery.addBindValue(m_rpObjectContainer->GetCaption());
         cQSqlQuery.addBindValue(m_rpObjectContainer->GetComment());
         cQSqlQuery.addBindValue(m_rpObjectContainer->IsTree());
-        cQSqlQuery.addBindValue((int)m_rpObjectContainer->GetId());
+        cQSqlQuery.addBindValue(m_rpObjectContainer->GetId());
 
         if(SUCCESSFULL(ExecuteQuery(cQSqlQuery)))
         {
@@ -86,10 +86,10 @@ int CftlCommandUpdateContainer::Execute()
     return lRet;
 }
 
-long CftlCommandUpdateContainer::UpdateObjects(CdmObjectContainer* p_pContainer,
+qint64 CftlCommandUpdateContainer::UpdateObjects(CdmObjectContainer* p_pContainer,
                                                QList<CdmObject*>& p_rqlObjects)
 {
-    long lRet = CdmLogging::eDmObjectAccessError;
+   qint64 lRet = CdmLogging::eDmObjectAccessError;
     QList<CdmObject*>::iterator qvlIt    = p_rqlObjects.begin();
     QList<CdmObject*>::iterator qvlItEnd = p_rqlObjects.end();
 
@@ -99,7 +99,7 @@ long CftlCommandUpdateContainer::UpdateObjects(CdmObjectContainer* p_pContainer,
 
         if(CHKPTR(pCdmObject))
         {
-            long lObjectId = pCdmObject->GetId();
+           qint64 lObjectId = pCdmObject->GetId();
             CftlCommandUpdateObject command(pCdmObject, GetDataAccess());
             lRet = command.Run();
 
@@ -123,10 +123,10 @@ long CftlCommandUpdateContainer::UpdateObjects(CdmObjectContainer* p_pContainer,
     return lRet;
 }
 
-long CftlCommandUpdateContainer::DeleteObjects(CdmObjectContainer* p_pContainer,
+qint64 CftlCommandUpdateContainer::DeleteObjects(CdmObjectContainer* p_pContainer,
                                                QList<CdmObject*>& p_rqlObjects)
 {
-    long lRet = CdmLogging::eDmObjectAccessError;
+   qint64 lRet = CdmLogging::eDmObjectAccessError;
     QList<CdmObject*>::iterator qvlIt    = p_rqlObjects.begin();
     QList<CdmObject*>::iterator qvlItEnd = p_rqlObjects.end();
 
@@ -136,7 +136,7 @@ long CftlCommandUpdateContainer::DeleteObjects(CdmObjectContainer* p_pContainer,
 
         if(CHKPTR(pCdmObject))
         {
-            long lObjectId = pCdmObject->GetId();
+           qint64 lObjectId = pCdmObject->GetId();
             CftlCommandDeleteObject command(pCdmObject, GetDataAccess());
             lRet = command.Run();
 
@@ -169,9 +169,9 @@ long CftlCommandUpdateContainer::DeleteObjects(CdmObjectContainer* p_pContainer,
     return lRet;
 }
 
-long CftlCommandUpdateContainer::UpdateRights(CdmObjectContainer*& p_pContainer)
+qint64 CftlCommandUpdateContainer::UpdateRights(CdmObjectContainer*& p_pContainer)
 {
-    long lRet = CdmLogging::eDmObjectAccessError;
+   qint64 lRet = CdmLogging::eDmObjectAccessError;
 
     if(CHKPTR(p_pContainer))
     {
@@ -180,7 +180,7 @@ long CftlCommandUpdateContainer::UpdateRights(CdmObjectContainer*& p_pContainer)
             QSqlQuery cQSqlQuery(GetSqlDatabase());
             // query for reading new id
             cQSqlQuery.prepare("delete from WMS_DM_ACCESSORRIGHT where ObjectListId = ?");
-            cQSqlQuery.addBindValue((int)p_pContainer->GetId());
+            cQSqlQuery.addBindValue(p_pContainer->GetId());
 
             lRet = ExecuteQuery(cQSqlQuery);
 
@@ -198,7 +198,7 @@ long CftlCommandUpdateContainer::UpdateRights(CdmObjectContainer*& p_pContainer)
                     for (; qmIt != qmItEnd; ++qmIt)
                     {
                         qvlAccessorId.append(qmIt.key());
-                        qvlContainerId.append((int)p_pContainer->GetId());
+                        qvlContainerId.append(p_pContainer->GetId());
                         qvlRights.append(qmIt.value());
 
                     }

@@ -19,17 +19,17 @@ private:
     CdmClassManager* m_rpClassManager;
 
 
-    long interpretAnswerForLoadMembers(const QVariantList *dataList, long &ldatabaseid, long &lclassid);
+   qint64 interpretAnswerForLoadMembers(const QVariantList *dataList,qint64 &ldatabaseid,qint64 &lclassid);
     bool interpretAnswerForLoadMethods(const QVariantList *dataList);
     bool interpretAnswerForLoadValidators(const QVariantList *dataList);
     bool interpretAnswerForLoadGroups(const QVariantList *dataList);
     bool interpretAnswerForBaseClasses(const QVariantList *dataList);
     bool interpretAnswerForPosAndMembers(const QVariantList &dataList);
-    bool interpretAnswerForClassLoad(long &ldatabaseid, long &lclassid, const QVariantList *dataList);
+    bool interpretAnswerForClassLoad(qint64 &ldatabaseid,qint64 &lclassid, const QVariantList *dataList);
     bool interpretAnswerForPackageLoad(const QVariantList *dataList);
 
 public:
-    CwnCommandGetClasses(CdmClassManager* p_ppClassManager, QList<long> &p_lClassIds, CwnDataAccess* p_pDataAccess);
+    CwnCommandGetClasses(CdmClassManager* p_ppClassManager, QList<qint64> &p_lClassIds, CwnDataAccess* p_pDataAccess);
     virtual ~CwnCommandGetClasses();
     QString queryCausedError;
 

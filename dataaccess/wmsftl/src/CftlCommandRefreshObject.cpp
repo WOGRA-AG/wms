@@ -60,7 +60,7 @@ int CftlCommandRefreshObject::Execute()
 {
     int lRet = CdmLogging::eDmObjectAccessError;
     CftlContainerTableSelect selector(m_rpObject->GetObjectContainer(), GetDialect());
-    QList<long> qllIds;
+    QList<qint64> qllIds;
     qllIds.append(m_rpObject->GetId());
     selector.SetObjectList(qllIds);
     selector.Execute(GetInterface());
@@ -72,9 +72,9 @@ int CftlCommandRefreshObject::Execute()
         QString qstrKeyname  = cQSqlQuery.value(1).toString();
         QString qstrCaption  = cQSqlQuery.value(2).toString();
         QDateTime qdLastChange = cQSqlQuery.value(3).toDateTime();
-        long lCreatorId      = cQSqlQuery.value(4).toInt();
-        long lLastModifierId = cQSqlQuery.value(5).toInt();
-        long lParent         = cQSqlQuery.value(6).toInt();
+       qint64 lCreatorId      = cQSqlQuery.value(4).toInt();
+       qint64 lLastModifierId = cQSqlQuery.value(5).toInt();
+       qint64 lParent         = cQSqlQuery.value(6).toInt();
         QString qstrConfig   = cQSqlQuery.value(7).toString(); // TODO derive object from config class!!!
 
         m_rpObject->SetCaption(qstrCaption);

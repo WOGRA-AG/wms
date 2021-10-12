@@ -41,9 +41,9 @@ private:
     * Position means that number of the base class in this class this value will be
     * calculated with the help of the baseclasscounter
     */
-    QMap<long,long> m_qmBaseClasses;
+    QMap<qint64,qint64> m_qmBaseClasses;
 
-    QList<long> m_qlModifedBaseClasses;
+    QList<qint64> m_qlModifedBaseClasses;
     /*
     * The InUse Flag if this flag is set this class cannot be deleted
     */
@@ -52,7 +52,7 @@ private:
     /*
     * Counts the number of baseclasses
     */
-    QAtomicInteger<long> m_lBaseClassCounter;
+    QAtomicInteger<qint64> m_lBaseClassCounter;
 
     /*
     * The class comment for creating documentation
@@ -73,7 +73,7 @@ private:
     /*
     * This member identfies te membervalue which should be used as caption
     */
-    QAtomicInteger<long> m_lCaptionMember;
+    QAtomicInteger<qint64> m_lCaptionMember;
 
     QAtomicInt m_iVersion;
 
@@ -104,7 +104,7 @@ private:
     /*
     * The member map it contains all members of the class itselves.
     */
-    QMap<long,CdmMember*>  m_qmMembers;
+    QMap<qint64,CdmMember*>  m_qmMembers;
 
     /*
     * The grouping of the members in the class
@@ -122,7 +122,7 @@ private:
     QMap<QString, CdmClassValidator*> m_qmValidators;
 
 private:
-    CdmClass(long p_lDatabaseId, long p_lId, QString p_qstrKeyname);
+    CdmClass(qint64 p_lDatabaseId,qint64 p_lId, QString p_qstrKeyname);
     CdmClass(QDomElement& p_rqDomElement);
     CdmClass(QVariantMap& p_qvClass);
     virtual ~CdmClass();
@@ -130,26 +130,26 @@ private:
 public:
     int AddBaseClass(CdmClass* p_pCdmClass);
     void SetClassInUse(bool p_bInUse);
-    int GetMemberMap(QMap<long, CdmMember*>& p_rqlMembers) const;
-    int RemoveBaseClass(long p_lClassId);
+    int GetMemberMap(QMap<qint64, CdmMember*>& p_rqlMembers) const;
+    int RemoveBaseClass(qint64 p_lClassId);
     int DeleteMember(QString p_qstrKeyname);
-    const QMap<long,long>& GetBaseClasses() const;
+    const QMap<qint64,qint64>& GetBaseClasses() const;
     bool IsInUse() const;
     int CheckObject(CdmObject* p_pCdmObject) const;
-    CdmMember* CreateMember(QString p_qstrKeyname, EdmValueType p_eDmValue, bool p_bMust, long p_lSize);
-    long GetNewMemberId();
-    int GetClassMemberMap(QMap<long,CdmMember*>& p_rqlValues) const;
+    CdmMember* CreateMember(QString p_qstrKeyname, EdmValueType p_eDmValue, bool p_bMust,qint64 p_lSize);
+   qint64 GetNewMemberId();
+    int GetClassMemberMap(QMap<qint64,CdmMember*>& p_rqlValues) const;
     int Commit();
     void SetComment(QString p_qstrComment);
     int XmlExport(QDomElement& p_rqdeClassManager) const;
     void XmlImport(QDomElement& p_rqDomElement);
-    const QMap<long, CdmMember*> GetClassMemberMap() const;
+    const QMap<qint64, CdmMember*> GetClassMemberMap() const;
     int RemoveBaseClass(QString p_qstrBaseClass);
     int AddBaseClass(QString p_qstrBaseClass);
     void SetAbstract(bool p_bAbstract);
     QString GetCaptionMemberKeyname() const;
     void SetCaptionMember(QString p_qstrCaptionMember);
-    void SetMemberSequenceString(QMap<long, QString> &p_Sequence);
+    void SetMemberSequenceString(QMap<qint64, QString> &p_Sequence);
     void SetMemberSequenceString(QString p_qstrSequence);
     void SetMemberSequence(QVector<QString>& p_qvlSequence);
     virtual void ResetNewModified();
@@ -177,8 +177,8 @@ public:
     void Deploy(QVariantMap& p_rqvHash);
     void SetVersion(int p_iVersion);
     void SetCaptionMember(CdmMember* p_pMember);
-    void SetCaptionMember(long p_lMemberId);
-    long GetCaptionMemberId() const;
+    void SetCaptionMember(qint64 p_lMemberId);
+   qint64 GetCaptionMemberId() const;
     const CdmMember* GetCaptionMember() const;
     void ClearValidators();
     void ClearMethods();
@@ -189,8 +189,8 @@ public:
     QString GetFullQualifiedName() const;
     void SetKeyname(QString p_qstrKeyname);
     virtual QString GetUri() const;
-    bool IsTypeOf(long p_lClassId);
-    QList<long> GetDerivedClasses() const;
+    bool IsTypeOf(qint64 p_lClassId);
+    QList<qint64> GetDerivedClasses() const;
     QList<CdmClass*> getDerivedClasses();
     bool IsSingleton() const;
     bool IsImmutable() const;
@@ -224,7 +224,7 @@ public:
     QStringList getUpdateEventClassStringList() const;
     void SetUpdateEventClassStringList(QStringList p_qstrlList);
     CdmMember *FindEventClassMember(QString p_qstrKeyname);
-    QList<long> GetBaseClassChanges();
+    QList<qint64> GetBaseClassChanges();
     bool HasBaseClassChanges();
     const CdmMember* FindMember(QString p_qstrKeyname) const;
     int IsInherited(const CdmClass* p_pCdmClass) const;
@@ -232,8 +232,8 @@ public:
     const CdmMember* FindMember(QString p_qstrKeyname, int p_iRecursionLevel) const;
     bool HasValidator(QString p_qstrName) const;
     bool HasMethod(QString p_qstrName) const;
-    CdmClassGroup* FindGroupById( long p_lGroupId);
-    int FindGroupPosById( long p_lGroupId);
+    CdmClassGroup* FindGroupById(qint64 p_lGroupId);
+    int FindGroupPosById(qint64 p_lGroupId);
     void GetGroups(QMap<int, CdmClassGroup*>& p_qmGroups, int iIteration = 1) const;
     const CdmMember* FindMember(int p_iId) const;
     CdmClassMethod* GetMethod(QString p_qstrName);

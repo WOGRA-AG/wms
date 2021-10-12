@@ -256,7 +256,7 @@ bool CwmsQmlEditor::Save()
             if (m_rpItem)
             {
                 m_rpItem->setText(0,m_Form.GetName());
-                m_rpItem->setData(0, Qt::UserRole, (int)m_Form.GetObjectId());
+                m_rpItem->setData(0, Qt::UserRole, m_Form.GetObjectId());
             }
         }
     }

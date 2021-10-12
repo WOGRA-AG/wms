@@ -12,7 +12,7 @@
 #include "CdmValueBool.h"
 
 
-CdmValueBool::CdmValueBool(  long p_lDatabaseId, long p_lId, QString p_qstrKeyname, CdmObject* p_pCdmObject )
+CdmValueBool::CdmValueBool( qint64 p_lDatabaseId,qint64 p_lId, QString p_qstrKeyname, CdmObject* p_pCdmObject )
 : CdmValue(p_lDatabaseId, p_lId, p_qstrKeyname,eDmValueBool, p_pCdmObject),
   m_bValue(false)
 {

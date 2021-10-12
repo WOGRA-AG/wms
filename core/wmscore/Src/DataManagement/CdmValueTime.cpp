@@ -11,7 +11,7 @@
 #include "CdmValueTime.h"
 
 
-CdmValueTime::CdmValueTime(  long p_lDatabaseId, long p_lId, QString p_qstrKeyname, CdmObject* p_pCdmObject )
+CdmValueTime::CdmValueTime( qint64 p_lDatabaseId,qint64 p_lId, QString p_qstrKeyname, CdmObject* p_pCdmObject )
    : CdmValue( p_lDatabaseId, p_lId, p_qstrKeyname, eDmValueTime, p_pCdmObject)
 {
     m_qtValue = QTime::currentTime();

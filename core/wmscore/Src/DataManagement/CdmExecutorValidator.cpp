@@ -120,10 +120,10 @@ bool CdmExecutorValidator::ClassValidation(CdmObject* p_pCdmObject, CdmClass* p_
     if (CHKPTR(p_pCdmObject) && CHKPTR(p_pClass))
     {
         CdmClassManager* pClassManager = p_pClass->GetClassManager();
-        const QMap<long,long> qmBaseClasses = p_pClass->GetBaseClasses();
+        const QMap<qint64,qint64> qmBaseClasses = p_pClass->GetBaseClasses();
 
-        QMap<long,long>::const_iterator qmIt = qmBaseClasses.begin();
-        QMap<long,long>::const_iterator qmItEnd = qmBaseClasses.end();
+        QMap<qint64,qint64>::const_iterator qmIt = qmBaseClasses.begin();
+        QMap<qint64,qint64>::const_iterator qmItEnd = qmBaseClasses.end();
 
         for (; qmIt != qmItEnd; ++qmIt)
         {
@@ -394,7 +394,7 @@ bool CdmExecutorValidator::CheckUnique(CdmValue* p_pCdmValue)
 
                    if(CHKPTR(pCdmQuery))
                    {
-                       QList<long> qllResult = pCdmQuery->GetResultList();
+                       QList<qint64> qllResult = pCdmQuery->GetResultList();
 
                        if (qllResult.count() > 1)
                        {

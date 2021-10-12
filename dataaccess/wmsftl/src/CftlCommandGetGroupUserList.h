@@ -10,7 +10,7 @@ class CftlDataAccess;
 class CftlCommandGetGroupUserList : public CftlAbstractCommand
 {
 private:
-    long m_lGroupId;
+   qint64 m_lGroupId;
     QList<CumUser*> m_qllUserList;
 
     int ReadAllUsers();
@@ -18,7 +18,7 @@ private:
     QString CreateSelectPart();
     CumUser *CreateUserObjectFromQuery(QSqlQuery &p_rQuery);
 public:
-    CftlCommandGetGroupUserList(long p_lGroup, CftlDataAccess* p_pDataAccess);
+    CftlCommandGetGroupUserList(qint64 p_lGroup, CftlDataAccess* p_pDataAccess);
     virtual ~CftlCommandGetGroupUserList();
     QList<CumUser*> GetResult();
 protected:

@@ -34,7 +34,7 @@ int CftlCommandGetUserList::Execute()
 
 int CftlCommandGetUserList::FindAllUsers()
 {
-    long lRet = CdmLogging::eDmUnknownUserQueryError;
+   qint64 lRet = CdmLogging::eDmUnknownUserQueryError;
     QSqlQuery cQSqlQuery(GetSqlDatabase());
     cQSqlQuery.prepare("select UserId, FirstName, LastName, Login, Email, Pass, Admin, Active from WMS_UM_USER");
 

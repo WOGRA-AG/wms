@@ -14,13 +14,13 @@ CftlCommandLogout::~CftlCommandLogout()
 
 int CftlCommandLogout::Execute()
 {
-   long lRet = CdmLogging::eDmUnknownLoginManagerError;
+  qint64 lRet = CdmLogging::eDmUnknownLoginManagerError;
    QSqlQuery cQSqlQuery(GetSqlDatabase());
    QString qstrQuery;
    cQSqlQuery.prepare("update WMS_UM_SESSION set State = ?, LogOutDate = ? where SessionId = ?");
    cQSqlQuery.addBindValue(false);
    cQSqlQuery.addBindValue(QDateTime::currentDateTime());
-   cQSqlQuery.addBindValue((int)CdmSessionManager::GetSessionManager()->GetCurrentSessionId());
+   cQSqlQuery.addBindValue(CdmSessionManager::GetSessionManager()->GetCurrentSessionId());
 
    if(SUCCESSFULL(ExecuteQuery(cQSqlQuery)))
    {

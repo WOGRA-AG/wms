@@ -1,7 +1,7 @@
 /******************************************************************************
  ** WOGRA Middleware Server Data Manager Module
  **
- ** @Author Wolfgang Graßhof 
+ ** @Author Wolfgang Graâ€—hof 
  **
  ** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
  ** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. 
@@ -53,10 +53,10 @@ class WMSMANAGER_API CdmClassDiamondValidator
       bool ValidateMembers();
       bool ValidateMethods();
       bool ValidateValidators();
-      CdmClass* FindClassById(long p_lId);
-      bool ValidateBaseClassesMembers(CdmClass* p_pClass, QMap<long,CdmMember*>& p_qmExistingMembers);
-      bool ValidateBaseClassMembers(CdmClass* p_pClass, QMap<long,CdmMember*>& p_qmExistingMembers);
-      bool CheckMember(CdmMember* pMember, QMap<long,CdmMember*>& p_qmExistingMembers);
+      CdmClass* FindClassById(qint64 p_lId);
+      bool ValidateBaseClassesMembers(CdmClass* p_pClass, QMap<qint64,CdmMember*>& p_qmExistingMembers);
+      bool ValidateBaseClassMembers(CdmClass* p_pClass, QMap<qint64,CdmMember*>& p_qmExistingMembers);
+      bool CheckMember(CdmMember* pMember, QMap<qint64,CdmMember*>& p_qmExistingMembers);
       bool ValidateBaseClassesMethods(CdmClass* p_pClass, QMap<QString,CdmClassMethod*>& p_qmExistingMethods);
       bool ValidateBaseClassMethods(CdmClass* p_pClass, QMap<QString,CdmClassMethod*>& p_qmExistingMethods);
       bool CheckMethod(CdmClassMethod* p_pMethod, QMap<QString,CdmClassMethod*>& p_qmExistingMethods);

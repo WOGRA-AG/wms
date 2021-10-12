@@ -6,16 +6,16 @@
 class CwnCommandGetObjectReferences : public CwnCommandBase
 {
 private:
-    long m_lContainerId;
-    long m_lObjectId;
-    QMap<long, long> m_qmReferences;
+   qint64 m_lContainerId;
+   qint64 m_lObjectId;
+    QMap<qint64,qint64> m_qmReferences;
     QString createQuery();
 
 public:
-    CwnCommandGetObjectReferences(long p_lContainerId, long p_lObjectId, CwnDataAccess* p_pDataAccess);
+    CwnCommandGetObjectReferences(qint64 p_lContainerId,qint64 p_lObjectId, CwnDataAccess* p_pDataAccess);
     virtual ~CwnCommandGetObjectReferences();
 
-    QMap<long, long> GetResult();
+    QMap<qint64,qint64> GetResult();
     QString queryCausedError;
 
 protected:

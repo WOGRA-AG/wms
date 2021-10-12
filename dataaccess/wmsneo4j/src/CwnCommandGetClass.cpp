@@ -18,7 +18,7 @@
 
 #include "CwnCommandStdHeader.h"
 
-CwnCommandGetClass::CwnCommandGetClass(CdmClassManager* p_ppClassManager, long p_lClassId, CwnDataAccess* p_pDataAccess)
+CwnCommandGetClass::CwnCommandGetClass(CdmClassManager* p_ppClassManager,qint64 p_lClassId, CwnDataAccess* p_pDataAccess)
 : CwnCommandBase(p_pDataAccess),
   m_lClassId(p_lClassId),
   m_rpClass(nullptr),
@@ -30,10 +30,10 @@ CwnCommandGetClass::~CwnCommandGetClass()
 {
 }
 
-long CwnCommandGetClass::interpretAnswerForLoadMembers(QVariantList& dataList)
+qint64 CwnCommandGetClass::interpretAnswerForLoadMembers(QVariantList& dataList)
 {
 
-    long lRet = CdmLogging::eDmUnknownClassAccessError;
+   qint64 lRet = CdmLogging::eDmUnknownClassAccessError;
 
     if(CHKPTR(m_rpClass))
     {
@@ -46,16 +46,16 @@ long CwnCommandGetClass::interpretAnswerForLoadMembers(QVariantList& dataList)
                 QVariantMap rowTemp = dataList[i].toMap();
                 QVariantList list = rowTemp["row"].toList();
 
-                long     lCreatorId         = (list[2]!=0)?list[2].toInt():0;
-                long     lModifierId        = (list[3]!=0)?list[3].toInt():0;
-                long     lId                = list[4].toInt();
-                long     lDatabaseId        = list[5].toInt();
+               qint64     lCreatorId         = (list[2]!=0)?list[2].toInt():0;
+               qint64     lModifierId        = (list[3]!=0)?list[3].toInt():0;
+               qint64     lId                = list[4].toInt();
+               qint64     lDatabaseId        = list[5].toInt();
                 QVariantMap props           = list[6].toMap();
                 int      iValue             = props["Datatype"].toInt();
                 bool     bMust              = props["Must"].toBool();
-                long     lSize              = props["Size"].toInt();
-                long     lCounterSize       = props["CounterSize"].toInt();
-                long     lClassId           = m_lClassId;
+               qint64     lSize              = props["Size"].toInt();
+               qint64     lCounterSize       = props["CounterSize"].toInt();
+               qint64     lClassId           = m_lClassId;
                 QVariant qvDefaultValue     = props["DefaultValue"];
                 QString  qstrKeyname        = props["Keyname"].toString();
                 QString  qstrCaption        = props["Caption"].toString();
@@ -66,13 +66,13 @@ long CwnCommandGetClass::interpretAnswerForLoadMembers(QVariantList& dataList)
                 int      propClassRef       = props["ClassRef"].toInt();
 
 
-                long lGroupId = 0;
+               qint64 lGroupId = 0;
                 if (!list[0].isNull())
                 {
                     lGroupId = list[0].toInt();
                 }
 
-                long lRefClassId = 0;
+               qint64 lRefClassId = 0;
                 if (!list[1].isNull())
                 {
                     lRefClassId = list[1].toInt();
@@ -179,7 +179,7 @@ bool CwnCommandGetClass::interpretAnswerForLoadMethods(QVariantList& dataList)
             QVariantMap rowTemp = dataList[i].toMap();
             QVariantList list = rowTemp["row"].toList();
 
-            long lMethodId = list[0].toInt();
+           qint64 lMethodId = list[0].toInt();
             QVariantMap props = list[1].toMap();
             QString qstrName = props["Name"].toString();
             int iVersion = props["Version"].toInt();
@@ -228,7 +228,7 @@ bool CwnCommandGetClass::interpretAnswerForLoadValidators(QVariantList& dataList
             QVariantMap rowTemp = dataList[i].toMap();
             QVariantList list = rowTemp["row"].toList();
 
-            long lValidationId = list[0].toInt();
+           qint64 lValidationId = list[0].toInt();
             QVariantMap props = list[1].toMap();
             QString qstrName = props["Name"].toString();
             int iVersion = props["Version"].toInt();
@@ -264,7 +264,7 @@ bool CwnCommandGetClass::interpretAnswerForLoadGroups(QVariantList& dataList)
         QVariantMap rowTemp = dataList[i].toMap();
         QVariantList list = rowTemp["row"].toList();
 
-        long lGroupId = list[0].toInt();
+       qint64 lGroupId = list[0].toInt();
         QVariantMap props = list[1].toMap();
 
         QString qstrName = props["Name"].toString();
@@ -307,7 +307,7 @@ bool CwnCommandGetClass::interpretAnswerForLoadGroups(QVariantList& dataList)
 
 bool CwnCommandGetClass::interpretAnswerForBaseClasses(QVariantList& dataList)
 {
-    long lRet = CdmLogging::eDmUnknownClassAccessError;
+   qint64 lRet = CdmLogging::eDmUnknownClassAccessError;
 
     if(CHKPTR(m_rpClass))
     {
@@ -318,7 +318,7 @@ bool CwnCommandGetClass::interpretAnswerForBaseClasses(QVariantList& dataList)
                 QVariantMap rowTemp = dataList[i].toMap();
                 QVariantList list = rowTemp["row"].toList();
 
-                long lBaseClassId = list[i].toLongLong();
+               qint64 lBaseClassId = list[i].toLongLong();
                 if(lBaseClassId>0)
                     CdmDataAccessHelper::AddBaseClassToClass(m_rpClass, lBaseClassId);
             }
@@ -344,7 +344,7 @@ bool CwnCommandGetClass::interpretAnswerForPosAndMembers(QVariantList& dataList)
 
     //qDebug() << dataList;
 
-    QMap<long,QString> ForPosAndMembers;
+    QMap<qint64,QString> ForPosAndMembers;
 
     for(int i=0;i<dataList.count();i++)
     {
@@ -363,13 +363,13 @@ bool CwnCommandGetClass::interpretAnswerForClassLoad(QVariantList& dataList)
 {
     // first step reading the WMS_Class data
 
-    //long lCaptionMember = cQSqlQuery.value(8).toInt();
+    //qint64 lCaptionMember = cQSqlQuery.value(8).toInt();
 
     QVariantMap rowMap = dataList[0].toMap();
     QVariantList list = rowMap["row"].toList();
 
     //qDebug() << dataList;
-    long lClassId   = list[0].toLongLong();
+   qint64 lClassId   = list[0].toLongLong();
     QVariantMap listMap = list[1].toMap();
     //qDebug() << listMap;
 
@@ -382,7 +382,7 @@ bool CwnCommandGetClass::interpretAnswerForClassLoad(QVariantList& dataList)
     QString qstrComment;
     bool bAbstract;
     int iVersion;
-    long lCaptionMember;
+   qint64 lCaptionMember;
 
     if (listMap.contains("Comment"))
         qstrComment  = listMap["Comment"].toString();
@@ -407,9 +407,9 @@ bool CwnCommandGetClass::interpretAnswerForClassLoad(QVariantList& dataList)
     if (listMap.contains("Config"))
         qstrConfig = CwnHelper::base64_decode(listMap["Config"].toString());
 
-    long lDatabaseId = list[2].toLongLong();
-    long modifier = 0;
-    long creator = 0;
+   qint64 lDatabaseId = list[2].toLongLong();
+   qint64 modifier = 0;
+   qint64 creator = 0;
 
     if(list.length()>3){
         creator = list[4].toLongLong();

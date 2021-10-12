@@ -16,8 +16,8 @@ class CdbCommandDeleteScheme : public CdbAbstractCommandTransactional
 private:
     QString m_qstrSchemeName;
 
-    long GetSchemeId();
-    void DeleteLanguages(long p_lSchemeId);
+   qint64 GetSchemeId();
+    void DeleteLanguages(qint64 p_lSchemeId);
 public:
     CdbCommandDeleteScheme(QString p_qstrSchemeName, CdbDataAccess* p_pDataAccess);
     virtual ~CdbCommandDeleteScheme();

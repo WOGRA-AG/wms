@@ -13,22 +13,22 @@ CwnCommandAddUserToGroup::~CwnCommandAddUserToGroup()
 
 }
 
-void CwnCommandAddUserToGroup::setGroupId(long groupId)
+void CwnCommandAddUserToGroup::setGroupId(qint64 groupId)
 {
     this->groupId = groupId;
 }
 
-long CwnCommandAddUserToGroup::getGroupId()
+qint64 CwnCommandAddUserToGroup::getGroupId()
 {
     return groupId;
 }
 
-void CwnCommandAddUserToGroup::setUserId(long userId)
+void CwnCommandAddUserToGroup::setUserId(qint64 userId)
 {
     this->userId = userId;
 }
 
-long CwnCommandAddUserToGroup::getUserId()
+qint64 CwnCommandAddUserToGroup::getUserId()
 {
     return userId;
 }

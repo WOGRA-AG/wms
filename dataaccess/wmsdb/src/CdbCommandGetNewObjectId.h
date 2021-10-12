@@ -8,10 +8,10 @@
 class CdbCommandGetNewObjectId : public CdbAbstractCommandTransactional
 {
 private:
-    long m_lContainerId;
-    long m_lSessionId;
+   qint64 m_lContainerId;
+   qint64 m_lSessionId;
 public:
-    CdbCommandGetNewObjectId(long p_lContainerId, long p_lSessionId, CdbDataAccess* p_pDataAccess);
+    CdbCommandGetNewObjectId(qint64 p_lContainerId,qint64 p_lSessionId, CdbDataAccess* p_pDataAccess);
     virtual ~CdbCommandGetNewObjectId();
 
 protected:

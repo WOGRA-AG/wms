@@ -7,7 +7,7 @@
 #include "CdbCommandGetClass.h"
 #include "CdbCommandLoadPackages.h"
 
-CdbCommandLoadClassManager::CdbCommandLoadClassManager(long p_lSchemeId, CdbDataAccess* p_pDataAccess)
+CdbCommandLoadClassManager::CdbCommandLoadClassManager(qint64 p_lSchemeId, CdbDataAccess* p_pDataAccess)
 : CdbAbstractCommand(p_pDataAccess),
   m_lSchemeId(p_lSchemeId),
   m_pClassManager(nullptr)
@@ -43,14 +43,14 @@ int CdbCommandLoadClassManager::Execute()
 
           do // loading each class
           {
-             long lClassId = cQSqlQuery.value(0).toInt();
+            qint64 lClassId = cQSqlQuery.value(0).toInt();
              qlClasses.append(lClassId);
           }
           while(cQSqlQuery.next());
 
           for (int iCounter = 0; iCounter < qlClasses.count(); ++iCounter)
           {
-             long lClassId = qlClasses[iCounter];
+            qint64 lClassId = qlClasses[iCounter];
              if (!m_pClassManager->FindClassById(lClassId))
              {
                 INFO("Load class with ID '" + QString::number(lClassId) + "'");

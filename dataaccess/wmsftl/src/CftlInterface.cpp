@@ -184,9 +184,9 @@ void CftlInterface::PrintLastErrorFromDb()
    ERR("Database Error: " + qstrText);
 }
 
-long CftlInterface::ExecuteQuery(QSqlQuery& p_rqsqlQuery)
+qint64 CftlInterface::ExecuteQuery(QSqlQuery& p_rqsqlQuery)
 {
-    long lRet = CdmLogging::eDmUnknownSqlError;
+   qint64 lRet = CdmLogging::eDmUnknownSqlError;
     QMutexLocker locker(&m_qMutex);
 
     if(!p_rqsqlQuery.exec())
@@ -233,9 +233,9 @@ long CftlInterface::ExecuteQuery(QSqlQuery& p_rqsqlQuery)
     return lRet;
 }
 
-long CftlInterface::ExecuteQuery(QString& p_qstrQuery, QSqlQuery& p_rqsqlQuery)
+qint64 CftlInterface::ExecuteQuery(QString& p_qstrQuery, QSqlQuery& p_rqsqlQuery)
 {
-   long lRet = CdmLogging::eDmUnknownSqlError;
+  qint64 lRet = CdmLogging::eDmUnknownSqlError;
    CwmsTimeMeassurement cTime(false, "ExecuteQuery");
    QMutexLocker locker(&m_qMutex);
    cTime.finishedTask("Mutex access granted");
@@ -317,10 +317,10 @@ QString CftlInterface::GetConnectionDisplayString()
    return "DB Host: " + m_qstrDbHostName + " User: " + m_qstrDbUserName + " Password: " + m_qstrDbUserPassword;
 }
 
-long CftlInterface::BeginTransaction()
+qint64 CftlInterface::BeginTransaction()
 {
     QMutexLocker locker(&m_qMutex);
-   long lRet = CdmLogging::eDmOk;
+  qint64 lRet = CdmLogging::eDmOk;
    INFO("Beginn Transaction");
 
    if(m_iTransactionCount == 0)
@@ -340,10 +340,10 @@ long CftlInterface::BeginTransaction()
    return lRet;
 }
 
-long CftlInterface::Rollback()
+qint64 CftlInterface::Rollback()
 {
     QMutexLocker locker(&m_qMutex);
-   long lRet = CdmLogging::eDmOk;
+  qint64 lRet = CdmLogging::eDmOk;
    INFO("Transaction count: " + QString::number(--m_iTransactionCount));
    INFO("In Rollback");
 
@@ -371,11 +371,11 @@ long CftlInterface::Rollback()
    return lRet;
 }
 
-long CftlInterface::Commit()
+qint64 CftlInterface::Commit()
 {
     QMutexLocker locker(&m_qMutex);
     INFO("Commiting changes");
-   long lRet = CdmLogging::eDmOk;
+  qint64 lRet = CdmLogging::eDmOk;
    INFO("Transaction count: " + QString::number(--m_iTransactionCount));
 
    if (m_iTransactionCount == 0)

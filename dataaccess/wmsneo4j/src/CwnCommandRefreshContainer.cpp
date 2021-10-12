@@ -60,7 +60,7 @@ bool CwnCommandRefreshContainer::interpretAnswerForRights(const QVariantList *da
             const QVariantMap* rowTemp = static_cast<const QVariantMap*>(it->data());
             const QVariantList* row = static_cast<const QVariantList*>(rowTemp->find("row")->data());
 
-            long lAccessorId = (row->at(2).isValid())?row->at(2).toInt():0;
+           qint64 lAccessorId = (row->at(2).isValid())?row->at(2).toInt():0;
             int iRight = (row->at(1).isValid())?row->at(1).toInt():0;
             if(lAccessorId!=0)
                 m_rpContainer->AddAccessorRight(lAccessorId, static_cast<EdmRight>(iRight));
@@ -110,7 +110,7 @@ bool CwnCommandRefreshContainer::interpretAnswerForRefreshContainer(const QVaria
         const QVariantList* list = static_cast<const QVariantList*>(rowTemp->find("row")->data());
 
         qdtLastChange           = list->at(0).toDateTime();
-        long lLastModifierId    = (list->at(1).isNull())?0:list->at(1).toInt();
+       qint64 lLastModifierId    = (list->at(1).isNull())?0:list->at(1).toInt();
         QString qstrCaption     = list->at(2).toString();
         QString qstrComment     = list->at(3).toString();
         QString qstrConfig      = CwnHelper::base64_decode(list->at(4).toString());

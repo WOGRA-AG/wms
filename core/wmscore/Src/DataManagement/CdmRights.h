@@ -56,7 +56,7 @@ private:
     CdmModelElement* m_rpElement;
 
     CdmRights( const CdmRights&);
-    QString GetUserUri(long p_iUserId) const;
+    QString GetUserUri(qint64 p_iUserId) const;
     EdmRight FindRight(const CumUser* p_pCumUser) const;
 
 

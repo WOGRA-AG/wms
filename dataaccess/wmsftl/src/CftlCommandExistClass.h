@@ -10,12 +10,12 @@ class CftlDataAccess;
 class CftlCommandExistClass : public CftlAbstractCommand
 {
 private:
-    long m_lSchemeId;
+   qint64 m_lSchemeId;
     QString m_qstrKeyname;
     bool m_bResult;
 
 public:
-    CftlCommandExistClass(long p_lSchemeId, QString p_qstrKeyname, CftlDataAccess* p_pDataAccess);
+    CftlCommandExistClass(qint64 p_lSchemeId, QString p_qstrKeyname, CftlDataAccess* p_pDataAccess);
     virtual ~CftlCommandExistClass();
     bool GetResult();
 

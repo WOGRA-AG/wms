@@ -8,30 +8,30 @@ class CftlCommandLoadSingleObject : public CftlAbstractCommand
 private:
     CdmObjectContainer* m_rpContainer;
     QString m_qstrKeyname;
-    long m_lObjectId;
+   qint64 m_lObjectId;
     CdmObject* m_rpObject;
 
 
     bool CheckType(QString p_qstrKeyname, EdmValueType p_eNeeded);
-    long ReadBinaryDocuments();
-    long ReadValues();
-    long ReadBools();
-    CdmValueCharacterDocument *CreateCharDocValue(CftlDataAccess::EodbcBaseType p_eType, long p_lDatabaseId, long p_lId, QString p_qstrKeyname);
-    long ReadCharacterDocuments(CftlDataAccess::EodbcBaseType p_eType);
-    long ReadCounters();
-    long ReadDates();
-    long ReadDateTimes();
-    long ReadDoubles();
-    long ReadInts(CftlDataAccess::EodbcBaseType p_eOdbcType);
-    long ReadLongs();
-    long ReadObjectRefs();
-    long ReadObjectListRefs();
-    long ReadStrings();
-    long ReadFloats();
-    long ReadTimes();
+   qint64 ReadBinaryDocuments();
+   qint64 ReadValues();
+   qint64 ReadBools();
+    CdmValueCharacterDocument *CreateCharDocValue(CftlDataAccess::EodbcBaseType p_eType,qint64 p_lDatabaseId,qint64 p_lId, QString p_qstrKeyname);
+   qint64 ReadCharacterDocuments(CftlDataAccess::EodbcBaseType p_eType);
+   qint64 ReadCounters();
+   qint64 ReadDates();
+   qint64 ReadDateTimes();
+   qint64 ReadDoubles();
+   qint64 ReadInts(CftlDataAccess::EodbcBaseType p_eOdbcType);
+   qint64 ReadLongs();
+   qint64 ReadObjectRefs();
+   qint64 ReadObjectListRefs();
+   qint64 ReadStrings();
+   qint64 ReadFloats();
+   qint64 ReadTimes();
     QString GenerateDbQuery();
 public:
-    CftlCommandLoadSingleObject(CdmObjectContainer* p_pContainer, long p_lObjectId, CftlDataAccess* p_pDataAccess);
+    CftlCommandLoadSingleObject(CdmObjectContainer* p_pContainer,qint64 p_lObjectId, CftlDataAccess* p_pDataAccess);
     CftlCommandLoadSingleObject(CdmObjectContainer* p_pContainer, QString p_qstrKeyname, CftlDataAccess* p_pDataAccess);
     virtual ~CftlCommandLoadSingleObject();
     CdmObject* GetResult();

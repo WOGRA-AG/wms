@@ -7,14 +7,14 @@
 class CftlCommandDeleteContainer : public CftlAbstractTransactionalCommand
 {
 private:
-    long m_lContainerId;
+   qint64 m_lContainerId;
 public:
-    CftlCommandDeleteContainer(long p_lContainerId, CftlDataAccess* p_pDataAccess);
+    CftlCommandDeleteContainer(qint64 p_lContainerId, CftlDataAccess* p_pDataAccess);
     virtual ~CftlCommandDeleteContainer();
 
 protected:
     bool CheckValid();
-    virtual const CdmClass *GetClassFromContainerId(long p_lId);
+    virtual const CdmClass *GetClassFromContainerId(qint64 p_lId);
     int Execute();
 };
 

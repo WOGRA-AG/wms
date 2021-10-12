@@ -7,7 +7,7 @@
 #include "CftlCommandGetClass.h"
 #include "CftlCommandLoadPackages.h"
 
-CftlCommandLoadClassManager::CftlCommandLoadClassManager(long p_lSchemeId, CftlDataAccess* p_pDataAccess)
+CftlCommandLoadClassManager::CftlCommandLoadClassManager(qint64 p_lSchemeId, CftlDataAccess* p_pDataAccess)
 : CftlAbstractCommand(p_pDataAccess),
   m_lSchemeId(p_lSchemeId),
   m_pClassManager(nullptr)
@@ -28,7 +28,7 @@ int CftlCommandLoadClassManager::Execute()
     commandLoadPackages.Run();
 
     cQSqlQuery.prepare("select ClassId from WMS_CLASS where SchemeId = ?");
-    cQSqlQuery.addBindValue((int)m_lSchemeId);
+    cQSqlQuery.addBindValue(m_lSchemeId);
 
     if(SUCCESSFULL(ExecuteQuery(cQSqlQuery)))
     {
@@ -40,14 +40,14 @@ int CftlCommandLoadClassManager::Execute()
 
           do // loading each class
           {
-             long lClassId = cQSqlQuery.value(0).toInt();
+            qint64 lClassId = cQSqlQuery.value(0).toInt();
              qlClasses.append(lClassId);
           }
           while(cQSqlQuery.next());
 
           for (int iCounter = 0; iCounter < qlClasses.count(); ++iCounter)
           {
-             long lClassId = qlClasses[iCounter];
+            qint64 lClassId = qlClasses[iCounter];
              if (!m_pClassManager->FindClassById(lClassId))
              {
                 INFO("Load class with ID '" + QString::number(lClassId) + "'");

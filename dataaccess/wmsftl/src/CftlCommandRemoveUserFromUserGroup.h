@@ -10,11 +10,11 @@ class CftlDataAccess;
 class CftlCommandRemoveUserFromUserGroup : public CftlAbstractTransactionalCommand
 {
 private:
-    long m_lGroupId;
-    long m_lUserId;
+   qint64 m_lGroupId;
+   qint64 m_lUserId;
 
 public:
-    CftlCommandRemoveUserFromUserGroup(long p_lUser, long p_lGroup, CftlDataAccess* p_pDataAccess);
+    CftlCommandRemoveUserFromUserGroup(qint64 p_lUser,qint64 p_lGroup, CftlDataAccess* p_pDataAccess);
     virtual ~CftlCommandRemoveUserFromUserGroup();
 
 protected:

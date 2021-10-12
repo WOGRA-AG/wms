@@ -10,7 +10,7 @@ class CumUser;
 class CftlCommandFindUser : public CftlAbstractTransactionalCommand
 {
 private:
-    long m_lUserId;
+   qint64 m_lUserId;
     QString m_qstrLogin;
     QString m_qstrPassword;
     QString m_qstrEmail;
@@ -29,7 +29,7 @@ private:
     QString GenerateJoin();
 
 public:
-    CftlCommandFindUser(long p_lUserId, CftlDataAccess* p_pDataAccess);
+    CftlCommandFindUser(qint64 p_lUserId, CftlDataAccess* p_pDataAccess);
     CftlCommandFindUser(QString p_qstrValue, bool p_bEmail, QString p_qstrSchemeUri, CftlDataAccess* p_pDataAccess);
     CftlCommandFindUser(QString p_qstrLogin, QString p_qstrPassword, QString p_qstrSchemeUri, CftlDataAccess *p_pDataAccess);
     CftlCommandFindUser(QString p_qstrIdentKey, QString p_qstrSchemeUri, CftlDataAccess *p_pDataAccess);

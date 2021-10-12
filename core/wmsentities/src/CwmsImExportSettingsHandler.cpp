@@ -74,7 +74,7 @@ bool CwmsImExportSettingsHandler::Load(QString p_qstrName, QString p_qstrContent
  * @method  CwmsImExportSettingsHandler::Save                // public                            *
  * @return  bool                                             //                                   *
  * @param   QString p_qstrName                               //                                   *
- * @param   long p_lCassId                                   //                                   *
+ * @param  qint64 p_lCassId                                   //                                   *
  * @param   EwmsImExportMode p_eMode                         //                                   *
  * @comment Save the Sessionfile under an other filename.                                         *
  *----------------last changed: --------------------------------Mi 6. Feb 11:44:17 2013-----------*/

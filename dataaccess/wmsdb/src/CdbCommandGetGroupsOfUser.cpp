@@ -5,7 +5,7 @@
 #include "CdbCommandFindUserGroup.h"
 #include "CdbCommandGetGroupsOfUser.h"
 
-CdbCommandGetGroupsOfUser::CdbCommandGetGroupsOfUser(long p_lUser, CdbDataAccess* p_pDataAccess)
+CdbCommandGetGroupsOfUser::CdbCommandGetGroupsOfUser(qint64 p_lUser, CdbDataAccess* p_pDataAccess)
     : CdbAbstractCommand(p_pDataAccess),
       m_lUserId(p_lUser)
 {
@@ -24,7 +24,7 @@ QList<CumUserGroup *> CdbCommandGetGroupsOfUser::GetResult()
 
 int CdbCommandGetGroupsOfUser::Execute()
 {
-    long lRet = CdmLogging::eDmUnknownUserQueryError;
+   qint64 lRet = CdmLogging::eDmUnknownUserQueryError;
     INFO("Looking for group memberships of user " + QString::number(m_lUserId));
     QSqlQuery cQSqlQuery;
     QString qstrQuery;
@@ -41,7 +41,7 @@ int CdbCommandGetGroupsOfUser::Execute()
 
          do // loading each bool
          {
-            long lGroupId = cQSqlQuery.value(0).toInt();
+           qint64 lGroupId = cQSqlQuery.value(0).toInt();
 
             CdbCommandFindUserGroup command(lGroupId, GetDataAccess());
             if (SUCCESSFULL(command.Run()))

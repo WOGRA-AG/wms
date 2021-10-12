@@ -3,7 +3,7 @@
 
 #include "CftlCommandLockMethod.h"
 
-CftlCommandLockMethod::CftlCommandLockMethod(long p_lMethodId, CftlDataAccess* p_pDataAccess)
+CftlCommandLockMethod::CftlCommandLockMethod(qint64 p_lMethodId, CftlDataAccess* p_pDataAccess)
 : CftlAbstractTransactionalCommand(p_pDataAccess),
   m_lMethodId(p_lMethodId),
   m_bResult(true)
@@ -23,7 +23,7 @@ bool CftlCommandLockMethod::CheckValid()
 int CftlCommandLockMethod::Execute()
 {
     int iRet = CdmLogging::eDmUnknownClassAccessError;
-    long lSessionId = CdmSessionManager::GetSessionManager()->GetCurrentSessionId();
+   qint64 lSessionId = CdmSessionManager::GetSessionManager()->GetCurrentSessionId();
     QSqlQuery cQuery(GetSqlDatabase());
     QString qstrSql;
     // first check if method is locked
@@ -31,15 +31,15 @@ int CftlCommandLockMethod::Execute()
                       "inner join WMS_UM_SESSION ses  on ses.Sessionid = lmet.Sessionid "
                       "inner join WMS_UM_USER wmsuser on wmsuser.UserID = ses.UserId  "
                       "where lmet.SessionId <> ? and ses.State = 1 and lmet.MethodId = ?");
-    cQuery.addBindValue((int)lSessionId);
-    cQuery.addBindValue((int)m_lMethodId);
+    cQuery.addBindValue(lSessionId);
+    cQuery.addBindValue(m_lMethodId);
 
     if (SUCCESSFULL(ExecuteQuery(cQuery)))
     {
        cQuery.first();
        if(cQuery.isValid())
        {
-          long lSessionId = cQuery.value(0).toInt();
+         qint64 lSessionId = cQuery.value(0).toInt();
           QString qstrLogin = cQuery.value(1).toString();
           ERR("The method is under examination by User " + qstrLogin + ". SessionId: "
               + QString::number(lSessionId));
@@ -48,8 +48,8 @@ int CftlCommandLockMethod::Execute()
        {
           // lock method
           cQuery.prepare("insert into WMS_CLASS_LOCKEDMETHOD (SessionId, MethodId) values(?, ?)");
-          cQuery.addBindValue((int)lSessionId);
-          cQuery.addBindValue((int)m_lMethodId);
+          cQuery.addBindValue(lSessionId);
+          cQuery.addBindValue(m_lMethodId);
 
           if (SUCCESSFULL(ExecuteQuery(cQuery)))
           {

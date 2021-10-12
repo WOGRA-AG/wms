@@ -40,7 +40,7 @@ private:
     QMap<const CdmMember*, CftlJoinData*> m_qmLeftJoins;
 
 private:
-    long ExecuteQueryP();
+   qint64 ExecuteQueryP();
     bool IsQueryElementValid(CdmQueryElement *p_pElement);
     CftlInterface *GetInterface();
     CftlDialect *GetDialect();
@@ -55,9 +55,9 @@ private:
 public:
     CftlCommandQuery(CftlDataAccess* p_pCdbDataAccess, CdmQuery* p_pCdmQuery);
     virtual ~CftlCommandQuery();
-    long ExecuteQuery();
+   qint64 ExecuteQuery();
     QString GenerateSql();
-    static long Execute(CftlDataAccess *p_pCftlDataAccess, CdmQuery *p_pCdmQuery);
+    static qint64 Execute(CftlDataAccess *p_pCftlDataAccess, CdmQuery *p_pCdmQuery);
     QString AddOrUpdateLeftJoin(const CdmMember*p_pMember, QString &p_qstrJoin, QString &p_qstrCompareKeyname);
     QString AddOrUpdateLeftJoin(const CdmMember*p_pMember, QString &p_qstrJoin, QString &p_qstrCompareKeyname, QString &p_qstrJoinPartner);
     /*bool ContainsLeftJoin(QString &p_qstrMember);

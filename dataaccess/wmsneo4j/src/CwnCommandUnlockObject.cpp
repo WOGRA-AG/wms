@@ -2,7 +2,7 @@
 
 #include "CwnCommandStdHeader.h"
 
-CwnCommandUnlockObject::CwnCommandUnlockObject(long p_lSessionId, long p_lObjectId, CwnDataAccess *p_pDataAccess)
+CwnCommandUnlockObject::CwnCommandUnlockObject(qint64 p_lSessionId,qint64 p_lObjectId, CwnDataAccess *p_pDataAccess)
     : CwnCommandBase(p_pDataAccess),
       m_lSessionId(p_lSessionId),
       m_lObjectId(p_lObjectId)

@@ -13,7 +13,7 @@
 #include "CftlJournal.h"
 #include "CftlCommandDeleteContainer.h"
 
-CftlCommandDeleteContainer::CftlCommandDeleteContainer(long p_lContainerId, CftlDataAccess* p_pDataAccess)
+CftlCommandDeleteContainer::CftlCommandDeleteContainer(qint64 p_lContainerId, CftlDataAccess* p_pDataAccess)
     : CftlAbstractTransactionalCommand(p_pDataAccess),
       m_lContainerId(p_lContainerId)
 {
@@ -28,7 +28,7 @@ bool CftlCommandDeleteContainer::CheckValid()
     return (m_lContainerId > 0);
 }
 
-const CdmClass *CftlCommandDeleteContainer::GetClassFromContainerId(long p_lId)
+const CdmClass *CftlCommandDeleteContainer::GetClassFromContainerId(qint64 p_lId)
 {
     const CdmClass* pClass = nullptr;
     CdmDataProvider* pDataProvider = CdmSessionManager::GetSessionManager()->GetDataProvider();
@@ -55,7 +55,7 @@ const CdmClass *CftlCommandDeleteContainer::GetClassFromContainerId(long p_lId)
 
 int CftlCommandDeleteContainer::Execute()
 {
-    long lRet = CdmLogging::eDmObjectAccessError;
+   qint64 lRet = CdmLogging::eDmObjectAccessError;
 
     if(CHKPTR(GetDataAccess()))
     {
@@ -69,17 +69,17 @@ int CftlCommandDeleteContainer::Execute()
                     .arg(FTL_CONTAINER_ID_FIELD_NAME);
 
             cQSqlQuery.prepare(qstrQuery);
-            cQSqlQuery.addBindValue((int)m_lContainerId);
+            cQSqlQuery.addBindValue(m_lContainerId);
 
             if(SUCCESSFULL(ExecuteQuery(cQSqlQuery)))
             {
                 cQSqlQuery.prepare("delete from WMS_DM_CONTAINER_REFERENCE where ContainerId = ?");
-                cQSqlQuery.addBindValue((int)m_lContainerId);
+                cQSqlQuery.addBindValue(m_lContainerId);
 
                 if(SUCCESSFULL(ExecuteQuery(cQSqlQuery)))
                 {
                     cQSqlQuery.prepare("delete from WMS_DM_CONTAINER where ContainerId = ?");
-                    cQSqlQuery.addBindValue((int)m_lContainerId);
+                    cQSqlQuery.addBindValue(m_lContainerId);
                     if(SUCCESSFULL(ExecuteQuery(cQSqlQuery)))
                     {
                         CftlJournal* pJournal = GetDataAccess()->GetJournal();

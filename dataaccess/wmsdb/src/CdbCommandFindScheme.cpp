@@ -12,7 +12,7 @@ CdbCommandFindScheme::CdbCommandFindScheme(QString p_qstrSchemeName, CdbDataAcce
 {
 }
 
-CdbCommandFindScheme::CdbCommandFindScheme(long p_lSchemeId, CdbDataAccess* p_pDataAccess)
+CdbCommandFindScheme::CdbCommandFindScheme(qint64 p_lSchemeId, CdbDataAccess* p_pDataAccess)
 : CdbAbstractCommand(p_pDataAccess),
   m_lSchemeId(p_lSchemeId),
   m_pScheme(nullptr)
@@ -31,7 +31,7 @@ bool CdbCommandFindScheme::CheckValid()
 
 int CdbCommandFindScheme::Execute()
 {
-   long lRet = CdmLogging::eDmUnknownDbAccessError;
+  qint64 lRet = CdmLogging::eDmUnknownDbAccessError;
    QSqlQuery cQSqlQuery;
    QString qstrQuery;
 
@@ -57,7 +57,7 @@ int CdbCommandFindScheme::Execute()
          // Value in col 1 is DataBaseName
          // Value in col 2 is Version
 
-         long lDBId = cQSqlQuery.value(0).toInt();
+        qint64 lDBId = cQSqlQuery.value(0).toInt();
 
          // this is just for test if the correct one was found
          QString qstrKeyname = cQSqlQuery.value(1).toString();

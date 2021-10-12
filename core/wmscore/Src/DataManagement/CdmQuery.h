@@ -74,7 +74,7 @@ protected:
     /*
      * This member is the id of the referencing objectlist.
      */
-    long m_lContainerId;
+   qint64 m_lContainerId;
 
     /*
      * The class which is the base for the query
@@ -84,7 +84,7 @@ protected:
     /*
      * The classid which is the base for the query
      */
-    long m_lClassId;
+   qint64 m_lClassId;
 
     /*
      * Limit configuration in query
@@ -160,17 +160,17 @@ public:
     QVariant GetResultAt(QString p_qstrKeyname, int p_iPos) const;
     QVariant GetResultAt(const QModelIndex &p_Index) const;
     QString GetResultAsStringAt(int p_iRow) const;
-    long GetObjectIdAt(int p_iPos) const;
+   qint64 GetObjectIdAt(int p_iPos) const;
     CdmObject* GetFirstResultObject() const;
     CdmObject* GetObjectAt(int p_iPos) const;
     CdmObject *GetResultObjectAt(int p_iPos) const;
-    long GetObjectListIdAt(int p_iPos) const;
-    long GetContainerIdAt(int p_iRow) const;
-    int GetRowPosOfObjectInResultTree(long p_lObjectId) const;
-    bool IsObjectInResultTree(long p_lObejctId) const;
-    bool ContainsResultObject(long p_lObjectId) const;
+   qint64 GetObjectListIdAt(int p_iPos) const;
+   qint64 GetContainerIdAt(int p_iRow) const;
+    int GetRowPosOfObjectInResultTree(qint64 p_lObjectId) const;
+    bool IsObjectInResultTree(qint64 p_lObejctId) const;
+    bool ContainsResultObject(qint64 p_lObjectId) const;
     bool ContainsResultObject(CdmObject* p_pObject) const;
-    //const QList<long> GetResultListAsList();
+    //const QList<qint64> GetResultListAsList();
     QVariant GetResultsAsVariant() const;
     QVariant GetResultElementsAsVariant() const;
 
@@ -184,14 +184,14 @@ public slots:
     void ClearAll();
     void AddAllMembers();
     QString GetResultAsString() const;
-    const QList<long> GetResultList() const;
+    const QList<qint64> GetResultList() const;
     QVariant GetFirstResultList(QString p_qstrKeyname) const;
     void GetResultElementList(QString p_qstrKeyname, QVector<QVariant> &p_rqllResults) const;
-    int CountQueryiedChildren(long p_lParentId) const;
-    QList<CdmObject*> GetChildList(long lParentId) const;
-    long GetParentObjectId(const QModelIndex &p_rqIndex) const;
-    CdmObject* GetChildAt(long p_lParentId, int p_iRow);
-    long GetPositionObjectId(long p_lParentId, int p_iPosition);
+    int CountQueryiedChildren(qint64 p_lParentId) const;
+    QList<CdmObject*> GetChildList(qint64 lParentId) const;
+   qint64 GetParentObjectId(const QModelIndex &p_rqIndex) const;
+    CdmObject* GetChildAt(qint64 p_lParentId, int p_iRow);
+   qint64 GetPositionObjectId(qint64 p_lParentId, int p_iPosition);
     int GetResultCount() const;
     bool HasResultElements() const;
     CdmQueryResultObject* GetRootElement() const;
@@ -204,21 +204,21 @@ public slots:
     void SetContainer(QString p_qstrKeyname);
     void SetContainer(CdmObjectContainer* p_pContainer);
     CdmObjectContainer* GetContainer() const;
-    void SetContainerId(long p_lId);
-    long GetContainerId() const;
+    void SetContainerId(qint64 p_lId);
+   qint64 GetContainerId() const;
     void SetClass(CdmClass *p_pClass);
     const CdmClass* GetClass() const;
-    void SetClassId(long p_lId);
-    long GetClassId() const;
+    void SetClassId(qint64 p_lId);
+   qint64 GetClassId() const;
 
 private:
     int ExecuteDb();
     bool IsExecuted() const;
     EdmQueryResultElementMode ReadModeFromString(QString p_qstrMode);
-    void AddResult(long p_lObjectId, long p_lContainerId);
-    void AddResultToColumn(int p_iColumn, QVariant p_qvValue, long p_lObjectId, long p_lContainerId);
+    void AddResult(qint64 p_lObjectId,qint64 p_lContainerId);
+    void AddResultToColumn(int p_iColumn, QVariant p_qvValue,qint64 p_lObjectId,qint64 p_lContainerId);
     void AddResultToColumnInRow(int p_iColumn, int p_iRow, QVariant& p_qvValue);
-    void SetResultInternal(int p_iColumn, QVariant p_qvValue, long p_lObjectId, long p_lContainerId);
+    void SetResultInternal(int p_iColumn, QVariant p_qvValue,qint64 p_lObjectId,qint64 p_lContainerId);
     void IndexOutOfRangeError(int p_iPos, int p_iResultCount) const;
     bool IsEnhancedQuery() const;
 

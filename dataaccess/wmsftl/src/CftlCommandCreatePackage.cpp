@@ -31,7 +31,7 @@ int CftlCommandCreatePackage::Execute()
                               "values(?, ?, ?)");
     cQuery.addBindValue(m_pPackage->GetPackageString());
     cQuery.addBindValue(m_pPackage->IsSystemPackage());
-    cQuery.addBindValue((int)m_pPackage->GetSchemeId());
+    cQuery.addBindValue(m_pPackage->GetSchemeId());
 
     if (SUCCESSFULL(ExecuteQuery(cQuery)))
     {

@@ -10,7 +10,7 @@ CwnCommandDeleteUser::CwnCommandDeleteUser(CwnDataAccess *m_rpDataAccess)
     // Start Transaction
 }
 
-CwnCommandDeleteUser::CwnCommandDeleteUser(long p_lUserId, CwnDataAccess* p_pDataAccess)
+CwnCommandDeleteUser::CwnCommandDeleteUser(qint64 p_lUserId, CwnDataAccess* p_pDataAccess)
     :CwnCommandBase(p_pDataAccess),
       m_iUserId(p_lUserId)
 {

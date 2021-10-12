@@ -8,11 +8,11 @@
 class CdbCommandGetNewContainerId : public CdbAbstractCommandTransactional
 {
 private:
-    long m_lClassId;
-    long m_lSessionId;
+   qint64 m_lClassId;
+   qint64 m_lSessionId;
 
 public:
-    CdbCommandGetNewContainerId(long p_lClassId, long p_lSessionId, CdbDataAccess* p_pDataAccess);
+    CdbCommandGetNewContainerId(qint64 p_lClassId,qint64 p_lSessionId, CdbDataAccess* p_pDataAccess);
     virtual ~CdbCommandGetNewContainerId();
 
 protected:

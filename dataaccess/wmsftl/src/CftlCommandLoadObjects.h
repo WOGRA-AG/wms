@@ -16,11 +16,11 @@ class CftlCommandLoadObjects : public CftlAbstractCommand
 {
 private:
     CdmObjectContainer* m_rpContainer;
-    QList<long> m_qvlObjectIds;
+    QList<qint64> m_qvlObjectIds;
     QList<QString> m_qvlObjectKeynames;
 
 public:
-    CftlCommandLoadObjects(CdmObjectContainer* p_pContainer, QList<long>& p_qlObjectIds, CftlDataAccess* p_pDataAccess);
+    CftlCommandLoadObjects(CdmObjectContainer* p_pContainer, QList<qint64>& p_qlObjectIds, CftlDataAccess* p_pDataAccess);
     CftlCommandLoadObjects(CdmObjectContainer* p_pContainer, QList<QString>& p_qlObjectKeynames, CftlDataAccess* p_pDataAccess);
     CftlCommandLoadObjects(CdmObjectContainer* p_pContainer, CftlDataAccess* p_pDataAccess);
     virtual ~CftlCommandLoadObjects();

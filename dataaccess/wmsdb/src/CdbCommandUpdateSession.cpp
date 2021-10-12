@@ -4,7 +4,7 @@
 #include "CdbCommandUpdateSession.h"
 
 
-CdbCommandUpdateSession::CdbCommandUpdateSession(long p_lSessionId, CdbDataAccess* p_pDataAccess)
+CdbCommandUpdateSession::CdbCommandUpdateSession(qint64 p_lSessionId, CdbDataAccess* p_pDataAccess)
 : CdbAbstractCommandTransactional(p_pDataAccess),
   m_lSessionId(p_lSessionId)
 {

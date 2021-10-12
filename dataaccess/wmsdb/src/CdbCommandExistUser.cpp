@@ -12,7 +12,7 @@ CdbCommandExistUser::~CdbCommandExistUser()
 
 int CdbCommandExistUser::Execute()
 {
-    long lRet = CdmLogging::eDmUnknownUserQueryError;
+   qint64 lRet = CdmLogging::eDmUnknownUserQueryError;
     QSqlQuery cQSqlQuery;
     QString qstrQuery;
 

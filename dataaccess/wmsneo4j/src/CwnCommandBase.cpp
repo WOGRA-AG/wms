@@ -40,9 +40,9 @@ bool CwnCommandBase::CheckSession()
     return bRet;
 }
 
-long CwnCommandBase::Run()
+qint64 CwnCommandBase::Run()
 {
-    long lRet = 0;
+   qint64 lRet = 0;
 
     //CreateUser needs to pass
     //if (Validate())

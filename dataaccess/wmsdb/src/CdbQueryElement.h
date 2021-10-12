@@ -27,7 +27,7 @@ public:
     CdbQueryElement(CdbDataAccess* p_pCdbDataAccess, CdmQueryElement* p_pCdmQueryElement );
     ~CdbQueryElement();
     QString GenerateQuery();
-    long Execute(QMap<long, long>& p_rqvlResultList);
+   qint64 Execute(QMap<qint64,qint64>& p_rqvlResultList);
     QString GetCompareSign();
     QString GetTableName();
     QString GetTableIdName();
@@ -37,7 +37,7 @@ public:
 
 private:
     void CreateChilds(QList<CdmQueryElement*> &p_qvlChilds);
-    long ExecuteValue(QMap<long,long> &p_rqvlResults);
+   qint64 ExecuteValue(QMap<qint64,qint64> &p_rqvlResults);
     QString GenerateValueQuery();
     QString GenerateOrQuery();
     QString GenerateAndQuery();

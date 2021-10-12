@@ -156,7 +156,7 @@ void CwmsFunctionEditor::FillParameters()
       pItem->setText(1, CdmMember::GetValueTypeAsString(cParam.m_eType));
       pItem->setText(2, cParam.GetName());
       pItem->setData(0, Qt::UserRole, cParam.m_eType);
-      pItem->setData(1, Qt::UserRole, (int)cParam.m_lReference);
+      pItem->setData(1, Qt::UserRole, cParam.m_lReference);
    }
 }
 
@@ -220,7 +220,7 @@ void CwmsFunctionEditor::AddClassesToComboBox()
             if (CHKPTR(pClass))
             {
                m_pqcbClass->addItem(pClass->GetCaption() + "(" + pClass->GetKeyname() + ")", 
-                                    (int)pClass->GetId());
+                                    pClass->GetId());
             }
          }
 

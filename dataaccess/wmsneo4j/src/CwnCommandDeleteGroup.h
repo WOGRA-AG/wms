@@ -15,13 +15,13 @@ public:
     CwnCommandDeleteGroup(CwnDataAccess* m_rpDataAccess);
     virtual ~CwnCommandDeleteGroup();
 
-    void setGroupId(long groupId);
-    long getGroupId();
+    void setGroupId(qint64 groupId);
+   qint64 getGroupId();
     QString createQuery();
     QString queryCausedError;
 
 private:
-    long groupId;
+   qint64 groupId;
 
 protected:
     void interpretAnswer(QVariant& Ret);

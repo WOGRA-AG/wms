@@ -11,7 +11,7 @@ class CwiCommandPrintContainer : public CwiAbstractCommand
 private:
     CwmscomData* m_rpData;
 
-    CdmObjectContainer *GetObjectList(long p_lObjectList);
+    CdmObjectContainer *GetObjectList(qint64 p_lObjectList);
 public:
     CwiCommandPrintContainer(CwmscomData* p_pData);
     virtual ~CwiCommandPrintContainer();

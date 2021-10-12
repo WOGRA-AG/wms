@@ -38,17 +38,17 @@ bool CwmsPluginsCommandListPlugins::Run(QMap<QString, QString> p_qmArgs)
 
         if (CHKPTR(pQuery))
         {
-           QList<long> qllResults = pQuery->GetResultList();
+           QList<qint64> qllResults = pQuery->GetResultList();
 
            if (qllResults.count() > 0)
            {
-               QList<long>::iterator qllIt = qllResults.begin();
-               QList<long>::iterator qllItEnd = qllResults.end();
+               QList<qint64>::iterator qllIt = qllResults.begin();
+               QList<qint64>::iterator qllItEnd = qllResults.end();
                QString qstrOutput = "Name;Version;Active;File\r\n";
 
                for (; qllIt != qllItEnd; ++qllIt)
                {
-                  long lObjectId = (*qllIt);
+                 qint64 lObjectId = (*qllIt);
                   CdmObject* pObject = pContainer->FindObjectById(lObjectId);
 
                   if (pObject)

@@ -110,12 +110,12 @@ class CwmsCodeGeneratorBase : public IwmsCodeGenerator
     * @return  void                                          //                                   *
     * @param   CdmClass* p_pCdmClass                         //                                   *
     * @param   bool p_bIncludeBaseClassMembers               //                                   *
-    * @param   QMap<long, CdmMember*>& p_rqmMembers          //                                   *
+    * @param   QMap<qint64, CdmMember*>& p_rqmMembers          //                                   *
     * @comment                                                                                    *
     *----------------last changed: -----------------------------Mi 18. Jul 08:42:40 2012----------*/
     void GetClassMembers(CdmClass* p_pCdmClass,
                          bool p_bIncludeBaseClassMembers,
-                         QMap<long,
+                         QMap<qint64,
                          CdmMember*>& p_rqmMembers);
 };
 

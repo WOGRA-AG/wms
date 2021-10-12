@@ -16,7 +16,7 @@ public:
     CftlContainerTableBase(CftlDialect* p_ppDialect);
     virtual ~CftlContainerTableBase();
     CftlDialect* GetDialect();
-    virtual long Execute(CftlInterface* p_pInterface);
+    virtual qint64 Execute(CftlInterface* p_pInterface);
     QSqlQuery& GetQuery();
 protected:
     bool CheckValid();

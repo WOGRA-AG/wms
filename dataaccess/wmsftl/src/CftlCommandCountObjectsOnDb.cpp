@@ -20,11 +20,11 @@ bool CftlCommandCountObjectsOnDb::CheckValid()
 
 int CftlCommandCountObjectsOnDb::Execute()
 {
-    long lRet = CdmLogging::eDmObjectAccessError;
+   qint64 lRet = CdmLogging::eDmObjectAccessError;
 
     if (CHKPTR(m_rpContainer))
     {
-        long lContainerId = m_rpContainer->GetId();
+       qint64 lContainerId = m_rpContainer->GetId();
 
         if (lContainerId > 0)
         {
@@ -37,7 +37,7 @@ int CftlCommandCountObjectsOnDb::Execute()
                         .arg(qstrTableName)
                         .arg(FTL_CONTAINER_ID_FIELD_NAME);
                 cQSqlQuery.prepare(qstrQuery);
-                cQSqlQuery.addBindValue((int)lContainerId);
+                cQSqlQuery.addBindValue(lContainerId);
 
                 lRet = GetDataAccess()->ExecuteQuery(cQSqlQuery);
 

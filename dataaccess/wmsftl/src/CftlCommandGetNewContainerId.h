@@ -8,10 +8,10 @@
 class CftlCommandGetNewContainerId : public CftlAbstractTransactionalCommand
 {
 private:
-    long m_lClassId;
+   qint64 m_lClassId;
 
 public:
-    CftlCommandGetNewContainerId(long p_lClassId, CftlDataAccess* p_pDataAccess);
+    CftlCommandGetNewContainerId(qint64 p_lClassId, CftlDataAccess* p_pDataAccess);
     virtual ~CftlCommandGetNewContainerId();
 
 protected:

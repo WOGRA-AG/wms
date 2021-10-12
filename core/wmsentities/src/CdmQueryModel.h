@@ -96,7 +96,7 @@ public slots:
     void Clear();
 protected:
     virtual void sort(int p_iColumn, Qt::SortOrder p_eSortOrder);
-    virtual void ObjectCommitedEvent(long p_lObjectId);
+    virtual void ObjectCommitedEvent(qint64 p_lObjectId);
     CdmQuery* m_pCdmQuery;
 
 protected slots:

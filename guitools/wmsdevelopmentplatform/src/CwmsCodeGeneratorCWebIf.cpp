@@ -318,7 +318,7 @@ void CwmsCodeGeneratorCWebIf::GenerateDeleteSource()
    m_qstrSource += AddIndent(1);
    m_qstrSource += "{\n";
    m_qstrSource += AddIndent(2);
-   m_qstrSource += "long lObjectId = p_pData->GetValue(\"ObjectId\").toInt();\n\n";
+   m_qstrSource += "qint64 lObjectId = p_pData->GetValue(\"ObjectId\").toInt();\n\n";
    m_qstrSource += AddIndent(2);
    m_qstrSource += "if (lObjectId > 0)\n";
    m_qstrSource += AddIndent(2);
@@ -481,7 +481,7 @@ void CwmsCodeGeneratorCWebIf::GenerateDetailsSource()
    m_qstrSource += AddIndent(2);
    m_qstrSource += "CwmscomDataResult* pResult = nullptr;\n";
    m_qstrSource += AddIndent(2);
-   m_qstrSource += "long lObjectId = p_pData->GetValue(\"ObjectId\").toInt();\n";
+   m_qstrSource += "qint64 lObjectId = p_pData->GetValue(\"ObjectId\").toInt();\n";
    m_qstrSource += AddIndent(2);
    m_qstrSource += "if (lObjectId > 0)\n";
    m_qstrSource += AddIndent(2);

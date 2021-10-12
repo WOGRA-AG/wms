@@ -34,11 +34,11 @@ private:
     int m_iValue;
 
 public:
-    CdmValueInt(long p_lDatabaseId, long p_lId, QString p_qstrKeyname, CdmObject* p_pCdmObject);
+    CdmValueInt(qint64 p_lDatabaseId,qint64 p_lId, QString p_qstrKeyname, CdmObject* p_pCdmObject);
     CdmValueInt( QVariantMap& p_rqvHash, CdmObject* p_pCdmObject);
     CdmValueInt( EdmValueType p_eDmValue,
-                 long p_lDatabaseId,
-                 long p_lId,
+                qint64 p_lDatabaseId,
+                qint64 p_lId,
                  QString p_qstrKeyname,
                  CdmObject* p_pCdmObject);
     virtual ~CdmValueInt();

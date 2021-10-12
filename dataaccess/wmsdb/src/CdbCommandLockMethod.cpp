@@ -1,6 +1,6 @@
 #include "CdbCommandLockMethod.h"
 
-CdbCommandLockMethod::CdbCommandLockMethod(long p_lMethodId, long p_lSessionId, CdbDataAccess* p_pDataAccess)
+CdbCommandLockMethod::CdbCommandLockMethod(qint64 p_lMethodId,qint64 p_lSessionId, CdbDataAccess* p_pDataAccess)
 : CdbAbstractCommandTransactional(p_pDataAccess),
   m_lSessionId(p_lSessionId),
   m_lMethodId(p_lMethodId),
@@ -36,7 +36,7 @@ int CdbCommandLockMethod::Execute()
        cQuery.first();
        if(cQuery.isValid())
        {
-          long lSessionId = cQuery.value(0).toInt();
+         qint64 lSessionId = cQuery.value(0).toInt();
           QString qstrLogin = cQuery.value(1).toString();
           ERR("The method is under examination by User " + qstrLogin + ". SessionId: "
               + QString::number(lSessionId));

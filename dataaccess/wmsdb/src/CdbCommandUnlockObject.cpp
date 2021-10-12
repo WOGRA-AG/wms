@@ -1,6 +1,6 @@
 #include "CdbCommandUnlockObject.h"
 
-CdbCommandUnlockObject::CdbCommandUnlockObject(long p_lSessionId, long p_lObjectId,CdbDataAccess* p_pDataAccess)
+CdbCommandUnlockObject::CdbCommandUnlockObject(qint64 p_lSessionId,qint64 p_lObjectId,CdbDataAccess* p_pDataAccess)
     : CdbAbstractCommandTransactional(p_pDataAccess),
       m_lSessionId(p_lSessionId),
       m_lObjectId(p_lObjectId)
@@ -19,7 +19,7 @@ bool CdbCommandUnlockObject::CheckValid()
 
 int CdbCommandUnlockObject::Execute()
 {
-    long lRet = CdmLogging::eDmObjectAccessError;
+   qint64 lRet = CdmLogging::eDmObjectAccessError;
     QSqlQuery cQSqlQuery;
     QString qstrQuery;
 

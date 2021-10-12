@@ -274,11 +274,11 @@ CdmObject* CwmsWorkflowStepExecution::FindEscalation(int p_iPos)
 
          if (pCdmQuery)
          {
-            QList<long> qllResults = pCdmQuery->GetResultList();
+            QList<qint64> qllResults = pCdmQuery->GetResultList();
 
             if (qllResults.count() > 0)
             {
-               long lObjectId = *qllResults.begin();
+              qint64 lObjectId = *qllResults.begin();
 
                pCdmRet = pCdmList->FindObjectById(lObjectId);
             }

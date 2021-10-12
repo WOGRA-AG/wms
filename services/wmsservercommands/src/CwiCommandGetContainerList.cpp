@@ -4,7 +4,7 @@
 
 
 
-CwiCommandGetContainerList::CwiCommandGetContainerList(CwmscomData *p_pData, long p_lDbId)
+CwiCommandGetContainerList::CwiCommandGetContainerList(CwmscomData *p_pData,qint64 p_lDbId)
     :m_rpData(p_pData),
      m_rlDbId(p_lDbId)
 {
@@ -22,7 +22,7 @@ void CwiCommandGetContainerList::Execute()
 
     if (CHKPTR(m_rpData))
     {
-       long lClassId = m_rpData->GetValue("ClassId").toInt();
+      qint64 lClassId = m_rpData->GetValue("ClassId").toInt();
 
        CdmDataProvider* pManager = CdmSessionManager::GetDataProvider();
 
@@ -32,7 +32,7 @@ void CwiCommandGetContainerList::Execute()
 
           if (CHKPTR(pDataAccess))
           {
-             QMap<long, QString> qmContainers;
+             QMap<qint64, QString> qmContainers;
              if (pDataAccess->GetContainerList(m_rlDbId,
                                                lClassId,
                                                qmContainers) > 0)
@@ -44,8 +44,8 @@ void CwiCommandGetContainerList::Execute()
 
                 QVariantMap qMap;
 
-                QMap<long, QString>::iterator qmIt = qmContainers.begin();
-                QMap<long, QString>::iterator qmItEnd = qmContainers.end();
+                QMap<qint64, QString>::iterator qmIt = qmContainers.begin();
+                QMap<qint64, QString>::iterator qmItEnd = qmContainers.end();
 
                 for (; qmIt != qmItEnd; ++qmIt)
                 {

@@ -174,8 +174,8 @@ void CwmsSearchWindow::DeleteClickedSlot()
     bool bContinue = false;
     bool bDeleteReferencedObjects = false;
 
-    if(CdmMessageManager::Ask(tr("Objekte wirklich löschen?"),
-                              tr("Wollen Sie die Objekte wirklich löschen?")))
+    if(CdmMessageManager::Ask(QStringLiteral("Objekte wirklich löschen?"),
+                              QStringLiteral("Wollen Sie die Objekte wirklich löschen?")))
     {
        bContinue = true;
     }
@@ -183,8 +183,8 @@ void CwmsSearchWindow::DeleteClickedSlot()
     if (bReferencedObjectFound)
     {
        // Ask the user if he really wants to delete the object
-       if(CdmMessageManager::Ask(tr("Wollen Sie wirklich löschen?"),
-          tr("Ein oder mehrere Objekte werden noch refrenziert. Eine Löschung kann zu Inkonsistenzen in der Datenhaltung führen."
+       if(CdmMessageManager::Ask(QStringLiteral("Wollen Sie wirklich löschen?"),
+          QStringLiteral("Ein oder mehrere Objekte werden noch refrenziert. Eine Löschung kann zu Inkonsistenzen in der Datenhaltung führen."
           "Wollen Sie referenzierte Objekte wirklich löschen?")))
        {
           bDeleteReferencedObjects = true;

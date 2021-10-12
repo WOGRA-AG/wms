@@ -212,8 +212,8 @@ QWidget* CoedtwTime::GetSearchWidget(QWidget* p_pqwParent)
 
    RelevantCheckBoxClickedSlot();
 
-   connect(m_pqcbComboBox, SIGNAL(currentIndexChanged(int)), 
-      this, SLOT(CompareComboBoxIndexChangedSlot(int)));
+   connect(m_pqcbComboBox, SIGNAL(currentIndexChanged), 
+      this, SLOT(CompareComboBoxIndexChangedSlot));
 
    return pqwWidget;
 }

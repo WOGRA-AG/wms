@@ -13,8 +13,8 @@
 #include "CdmLogging.h"
 #include "CdmValueListObjects.h"
 
-CdmValueListObjects::CdmValueListObjects(long p_lDatabaseId,
-                                         long p_lId,
+CdmValueListObjects::CdmValueListObjects(qint64 p_lDatabaseId,
+                                        qint64 p_lId,
                                          QString p_qstrKeyname,
                                          CdmObject* p_pCdmObject)
 : CdmValueCharacterDocument(p_lDatabaseId, p_lId, p_qstrKeyname, eDmValueListObjects, p_pCdmObject)
@@ -73,14 +73,14 @@ void CdmValueListObjects::GetList(QList<CdmObject*>& p_rqvlObjects) const
 
       if (CHKPTR(pCdmOLManager))
       {
-            QList<QPair<long, long> >::const_iterator qllIt = m_qllObjects.begin();
-            QList<QPair<long, long> >::const_iterator qllItEnd = m_qllObjects.end();
+            QList<QPair<qint64,qint64> >::const_iterator qllIt = m_qllObjects.begin();
+            QList<QPair<qint64,qint64> >::const_iterator qllItEnd = m_qllObjects.end();
 
             for (; qllIt != qllItEnd; ++qllIt)
          {
-                QPair<long,long> qPair = *qllIt;
-                long lObjectId = qPair.first;
-                long lContainerId = qPair.second;
+                QPair<qint64,qint64> qPair = *qllIt;
+               qint64 lObjectId = qPair.first;
+               qint64 lContainerId = qPair.second;
                 CdmObjectContainer* pContainer = pCdmOLManager->FindContainerById(lContainerId);
 
             if (CHKPTR(pContainer))
@@ -156,16 +156,16 @@ CdmObject* CdmValueListObjects::FindObjectById(int p_iId)
 
       if (CHKPTR(pCdmOLManager))
       {
-            QList<QPair<long, long> >::const_iterator qllIt = m_qllObjects.begin();
-            QList<QPair<long, long> >::const_iterator qllItEnd = m_qllObjects.end();
+            QList<QPair<qint64,qint64> >::const_iterator qllIt = m_qllObjects.begin();
+            QList<QPair<qint64,qint64> >::const_iterator qllItEnd = m_qllObjects.end();
 
             for (; qllIt != qllItEnd; ++qllIt)
          {
-                QPair<long,long> qPair = *qllIt;
+                QPair<qint64,qint64> qPair = *qllIt;
 
                 if (qPair.first == p_iId)
                 {
-                    long lContainerId = qPair.second;
+                   qint64 lContainerId = qPair.second;
                     CdmObjectContainer* pContainer = pCdmOLManager->FindContainerById(lContainerId);
 
             if (CHKPTR(pContainer))
@@ -189,12 +189,12 @@ void CdmValueListObjects::Serialize() const
     qddDocument.appendChild(qdeElement);
     int iCounter = 1;
 
-    QList<QPair<long, long> >::const_iterator qllIt = m_qllObjects.begin();
-    QList<QPair<long, long> >::const_iterator qllItEnd = m_qllObjects.end();
+    QList<QPair<qint64,qint64> >::const_iterator qllIt = m_qllObjects.begin();
+    QList<QPair<qint64,qint64> >::const_iterator qllItEnd = m_qllObjects.end();
 
     for (; qllIt != qllItEnd; ++qllIt)
     {
-        QPair<long,long> qPair = *qllIt;
+        QPair<qint64,qint64> qPair = *qllIt;
         QDomElement qdeMapEntry = qddDocument.createElement(WMS_ENTRY);
         qdeMapEntry.setAttribute(WMS_COUNT, iCounter);
         qdeMapEntry.setAttribute(WMS_KEY, QString::number(qPair.first));
@@ -233,14 +233,14 @@ void CdmValueListObjects::Deserialize()
     }
 }
 
-void CdmValueListObjects::RemoveValue(long p_iObjectId)
+void CdmValueListObjects::RemoveValue(qint64 p_iObjectId)
 {
-    QList<QPair<long, long> >::iterator qllIt = m_qllObjects.begin();
-    QList<QPair<long, long> >::iterator qllItEnd = m_qllObjects.end();
+    QList<QPair<qint64,qint64> >::iterator qllIt = m_qllObjects.begin();
+    QList<QPair<qint64,qint64> >::iterator qllItEnd = m_qllObjects.end();
 
     for (; qllIt != qllItEnd; ++qllIt)
     {
-        QPair<long,long> qPair = *qllIt;
+        QPair<qint64,qint64> qPair = *qllIt;
 
         if (qPair.first == p_iObjectId)
         {
@@ -254,7 +254,7 @@ void CdmValueListObjects::RemoveValue(long p_iObjectId)
 
 void CdmValueListObjects::SetValue(int p_iObjectId, int p_iContainerId)
 {
-    QPair<long, long> qPair;
+    QPair<qint64,qint64> qPair;
     qPair.first = p_iObjectId;
     qPair.second = p_iContainerId;
     m_qllObjects.append(qPair);
@@ -272,12 +272,12 @@ QString CdmValueListObjects::GetValueAsString() const
 {
     QString qstrList;
 
-    QList<QPair<long, long> >::const_iterator qllIt = m_qllObjects.begin();
-    QList<QPair<long, long> >::const_iterator qllItEnd = m_qllObjects.end();
+    QList<QPair<qint64,qint64> >::const_iterator qllIt = m_qllObjects.begin();
+    QList<QPair<qint64,qint64> >::const_iterator qllItEnd = m_qllObjects.end();
 
     for (; qllIt != qllItEnd; ++qllIt)
     {
-        QPair<long,long> qPair = *qllIt;
+        QPair<qint64,qint64> qPair = *qllIt;
         qstrList += QString::number(qPair.first) + "|" + QString::number(qPair.second) + "\n";
          }
 
@@ -288,12 +288,12 @@ QVariant CdmValueListObjects::GetValueVariant() const
 {
     QVariantList qvVariant;
 
-    QList<QPair<long, long> >::const_iterator qllIt = m_qllObjects.begin();
-    QList<QPair<long, long> >::const_iterator qllItEnd = m_qllObjects.end();
+    QList<QPair<qint64,qint64> >::const_iterator qllIt = m_qllObjects.begin();
+    QList<QPair<qint64,qint64> >::const_iterator qllItEnd = m_qllObjects.end();
 
     for (; qllIt != qllItEnd; ++qllIt)
     {
-        QPair<long,long> qPair = *qllIt;
+        QPair<qint64,qint64> qPair = *qllIt;
         QVariantMap qvmEntry;
         qvmEntry.insert(WMS_URI, CdmLocatedElement::CreateUri(WMS_OBJECT, GetSchemeName(), QString::number(qPair.second), QString::number(qPair.first)));
         qvVariant.append(qvmEntry);
@@ -325,7 +325,7 @@ void CdmValueListObjects::SetValueVariant(QVariant& p_rVariant)
                 {
                     int iKey = qstrlDictEntry[0].toInt();
                     int iValue = qstrlDictEntry[1].toInt();
-                    m_qllObjects.append(QPair<long,long>(iKey,iValue));
+                    m_qllObjects.append(QPair<qint64,qint64>(iKey,iValue));
                 }
             }
         }

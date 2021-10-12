@@ -8,10 +8,10 @@
 class CwnCommandDeleteContainer : public CwnCommandBase
 {
 private:
-    long m_lContainerId;
+   qint64 m_lContainerId;
 
 public:
-    CwnCommandDeleteContainer(long p_lContainerId, CwnDataAccess* p_pDataAccess);
+    CwnCommandDeleteContainer(qint64 p_lContainerId, CwnDataAccess* p_pDataAccess);
     virtual ~CwnCommandDeleteContainer();
     QString createQuery();
     QString queryCausedError;

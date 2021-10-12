@@ -25,7 +25,7 @@ class WMSMANAGER_API CdmValueFormula : public CdmValue
     Q_OBJECT
 
 public:
-    CdmValueFormula(long p_lDatabaseId, long p_lId, QString p_qstrKeyname, CdmObject* p_pCdmObject);
+    CdmValueFormula(qint64 p_lDatabaseId,qint64 p_lId, QString p_qstrKeyname, CdmObject* p_pCdmObject);
     virtual ~CdmValueFormula();
     void SetDefaultValue(const CdmMember*p_pCdmMember);
 

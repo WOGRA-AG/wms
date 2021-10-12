@@ -46,7 +46,7 @@ class WMSGUI_API CwmsExportSettingsIf : public QDialog, public Ui::CwmsExportDlg
       CwmsExportSettings& m_rCwmsExportSettings;
       QList<QString> m_qstrlHiddenMembers;
       QString m_qstrFilename;
-      long m_lClassId;
+     qint64 m_lClassId;
 
 
    public:

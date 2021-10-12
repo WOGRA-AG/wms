@@ -80,7 +80,7 @@ int CsaModelElement::getModifierId()
     return dynamic_cast<CdmModelElement*>(getElement())->GetModifierId();
 }
 
-long CsaModelElement::getId()
+qint64 CsaModelElement::getId()
 {
     return dynamic_cast<CdmModelElement*>(getElement())->GetId();
 }

@@ -63,29 +63,29 @@ protected:
    public:
    /** +-=---------------------------------------------------------Mi 29. Aug 11:39:55 2012-------*
     * @method  CftlJournal::ValueModified                   // public                            *
-    * @return  long                                          //                                   *
+    * @return qint64                                          //                                   *
     * @param   CdmValue* p_pCdmValue                         //                                   *
     * @comment                                                                                    *
     *----------------last changed: -----------------------------Mi 29. Aug 11:39:55 2012----------*/
-    long ValueModified(CdmValue* p_pCdmValue);
+   qint64 ValueModified(CdmValue* p_pCdmValue);
 
    public:
    /** +-=---------------------------------------------------------Mi 29. Aug 11:40:06 2012-------*
     * @method  CftlJournal::ObjectModified                  // public                            *
-    * @return  long                                          //                                   *
+    * @return qint64                                          //                                   *
     * @param   CdmObject* p_pCdmObject                       //                                   *
     * @comment                                                                                    *
     *----------------last changed: -----------------------------Mi 29. Aug 11:40:06 2012----------*/
-    long ObjectModified(CdmObject* p_pCdmObject);
+   qint64 ObjectModified(CdmObject* p_pCdmObject);
 
    public:
    /** +-=---------------------------------------------------------Mi 29. Aug 11:39:46 2012-------*
     * @method  CftlJournal::ObjectListModified              // public                            *
-    * @return  long                                          //                                   *
+    * @return qint64                                          //                                   *
     * @param   CdmObjectContainer* p_pContainer               //                                   *
     * @comment                                                                                    *
     *----------------last changed: -----------------------------Mi 29. Aug 11:39:46 2012----------*/
-    long ObjectListModified(CdmObjectContainer* p_pContainer);
+   qint64 ObjectListModified(CdmObjectContainer* p_pContainer);
 
 
 
@@ -93,14 +93,14 @@ protected:
    public:
    /** +-=---------------------------------------------------------Mi 29. Aug 13:54:17 2012-------*
     * @method  CftlJournal::GetDatabaseModifications        // public                            *
-    * @return  long                                          //                                   *
+    * @return qint64                                          //                                   *
     * @param   int p_iDatabaseId                             //                                   *
     * @param   QDate p_qdFrom                                //                                   *
     * @param   QDate p_qdTo                                  //                                   *
     * @param   QList<CdmJournalItem*>& p_rqlItems            //                                   *
     * @comment                                                                                    *
     *----------------last changed: -----------------------------Mi 29. Aug 13:54:17 2012----------*/
-    long GetDatabaseModifications(int p_iDatabaseId,
+   qint64 GetDatabaseModifications(int p_iDatabaseId,
                                   QDate p_qdFrom,
                                   QDate p_qdTo,
                                   QList<CdmJournalItem*>& p_rqlItems);
@@ -108,14 +108,14 @@ protected:
    public:
    /** +-=---------------------------------------------------------Mi 29. Aug 13:55:15 2012-------*
     * @method  CftlJournal::GetObjectListModifications      // public                            *
-    * @return  long                                          //                                   *
+    * @return qint64                                          //                                   *
     * @param   int p_iObjectListId                           //                                   *
     * @param   QDate p_qdFrom                                //                                   *
     * @param   QDate p_qdTo                                  //                                   *
     * @param   QList<CdmJournalItem*>& p_rqlItems            //                                   *
     * @comment                                                                                    *
     *----------------last changed: -----------------------------Mi 29. Aug 13:55:15 2012----------*/
-    long GetObjectListModifications(int p_iObjectListId,
+   qint64 GetObjectListModifications(int p_iObjectListId,
                                     QDate p_qdFrom,
                                     QDate p_qdTo,
                                     QList<CdmJournalItem*>& p_rqlItems);
@@ -123,14 +123,14 @@ protected:
    public:
    /** +-=---------------------------------------------------------Mi 29. Aug 13:57:31 2012-------*
     * @method  CftlJournal::GetObjectModifications          // public                            *
-    * @return  long                                          //                                   *
+    * @return qint64                                          //                                   *
     * @param   int p_iObjectId                               //                                   *
     * @param   QDate p_qdFrom                                //                                   *
     * @param   QDate p_qdTo                                  //                                   *
     * @param   QList<CdmJournalItem*>& p_rqlItems            //                                   *
     * @comment                                                                                    *
     *----------------last changed: -----------------------------Mi 29. Aug 13:57:31 2012----------*/
-    long GetObjectModifications(const CdmObject *p_pObject,
+   qint64 GetObjectModifications(const CdmObject *p_pObject,
                                 QDate p_qdFrom,
                                 QDate p_qdTo,
                                 QList<CdmJournalItem*>& p_rqlItems);
@@ -138,20 +138,20 @@ protected:
    public:
    /** +-=---------------------------------------------------------Mi 29. Aug 14:22:55 2012-------*
     * @method  CftlJournal::ObjectListDeleted               // public                            *
-    * @return  long                                          //                                   *
+    * @return qint64                                          //                                   *
     * @param   int p_iObjectListId                           //                                   *
     * @comment                                                                                    *
     *----------------last changed: -----------------------------Mi 29. Aug 14:22:55 2012----------*/
-    long ObjectListDeleted(int p_iObjectListId);
+   qint64 ObjectListDeleted(int p_iObjectListId);
 
    public:
    /** +-=---------------------------------------------------------Mi 29. Aug 14:26:05 2012-------*
     * @method  CftlJournal::ObjectDeleted                   // public                            *
-    * @return  long                                          //                                   *
+    * @return qint64                                          //                                   *
     * @param   int p_iObjectId                               //                                   *
     * @comment                                                                                    *
     *----------------last changed: -----------------------------Mi 29. Aug 14:26:05 2012----------*/
-    long ObjectDeleted(int p_iObjectId);
+   qint64 ObjectDeleted(int p_iObjectId);
 };
 
 #endif // CODBCJOURNAL_H

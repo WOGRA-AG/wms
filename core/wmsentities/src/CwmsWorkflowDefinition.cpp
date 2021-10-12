@@ -148,7 +148,7 @@ CwmsWorkflowStepDefinition CwmsWorkflowDefinition::GetStartingStep()
          if (iResultCount > 1)
          {
             CdmMessageManager::warning(tr("Mehrere Startprozessschritte vorhanden"), 
-               tr("Zu diesem GeschÃ¤ftsprozess existieren mehrere Startprozessschritte. Der erst Gefundene wird verwendet!"));
+               tr("Zu diesem Geschäftsprozess existieren mehrere Startprozessschritte. Der erst Gefundene wird verwendet!"));
          }
 
 
@@ -161,7 +161,7 @@ CwmsWorkflowStepDefinition CwmsWorkflowDefinition::GetStartingStep()
          else
          {
             CdmMessageManager::critical(tr("Kein Startprozessschritt vorhanden"), 
-               tr("Zu diesem GeschÃ¤ftsprozess existiert kein Startprozessschritt. Die Prozessverarbeitung kann nicht durchgefÃ¼hrt werden!"));
+               tr("Zu diesem Geschäftsprozess existiert kein Startprozessschritt. Die Prozessverarbeitung kann nicht durchgefÃ¼hrt werden!"));
          }
       }
    }

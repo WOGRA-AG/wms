@@ -10,7 +10,7 @@
 #include "CftlContainerTableDrop.h"
 #include "CftlCommandDeleteClass.h"
 
-CftlCommandDeleteClass::CftlCommandDeleteClass(long p_lClassId, CftlDataAccess* p_pDataAccess)
+CftlCommandDeleteClass::CftlCommandDeleteClass(qint64 p_lClassId, CftlDataAccess* p_pDataAccess)
 : CftlAbstractTransactionalCommand(p_pDataAccess),
   m_lClassId(p_lClassId)
 {
@@ -27,9 +27,9 @@ bool CftlCommandDeleteClass::CheckValid()
     return (m_lClassId >0);
 }
 
-long CftlCommandDeleteClass::DropClassTable()
+qint64 CftlCommandDeleteClass::DropClassTable()
 {
-    long lRet = CdmLogging::eDmUnknownDBQueryError;
+   qint64 lRet = CdmLogging::eDmUnknownDBQueryError;
     CdmDataProvider* pDataProvider = CdmSessionManager::GetSessionManager()->GetDataProvider();
 
     if (CHKPTR(pDataProvider))
@@ -61,7 +61,7 @@ int CftlCommandDeleteClass::Execute()
 
     // query for reading new id
     cQSqlQuery.prepare("delete from WMS_CLASS where ClassID = ?");
-    cQSqlQuery.addBindValue((int)m_lClassId);
+    cQSqlQuery.addBindValue(m_lClassId);
 
     // Deleting class itselves
     if(SUCCESSFULL(ExecuteQuery(cQSqlQuery)))

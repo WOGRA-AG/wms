@@ -11,7 +11,7 @@
 #include "CwnCommandStdHeader.h"
 
 
-CwnCommandLoadContainer::CwnCommandLoadContainer(long p_lContainerId, bool p_bLoadObjects, CwnDataAccess* p_pDataAccess)
+CwnCommandLoadContainer::CwnCommandLoadContainer(qint64 p_lContainerId, bool p_bLoadObjects, CwnDataAccess* p_pDataAccess)
     : CwnCommandBase(p_pDataAccess),
       m_lContainerId(p_lContainerId),
       m_bLoadObjects(p_bLoadObjects),
@@ -20,7 +20,7 @@ CwnCommandLoadContainer::CwnCommandLoadContainer(long p_lContainerId, bool p_bLo
 {
 }
 
-CwnCommandLoadContainer::CwnCommandLoadContainer(long p_lSchemeId, QString p_qstrKeyname, bool p_bLoadObjects, CwnDataAccess* p_pDataAccess)
+CwnCommandLoadContainer::CwnCommandLoadContainer(qint64 p_lSchemeId, QString p_qstrKeyname, bool p_bLoadObjects, CwnDataAccess* p_pDataAccess)
     : CwnCommandBase(p_pDataAccess),
       m_lContainerId(0),
       m_bLoadObjects(p_bLoadObjects),
@@ -59,7 +59,7 @@ bool CwnCommandLoadContainer::interpretAnswerForRights(const QVariantList *dataL
             const QVariantList* row = static_cast<const QVariantList*>(rowTemp->find("row")->data());
 
             int iRight = (row->at(1).isValid())?row->at(1).toInt():0;
-            long lAccessorId = (row->at(2).isValid())?row->at(2).toInt():0;
+           qint64 lAccessorId = (row->at(2).isValid())?row->at(2).toInt():0;
             if(lAccessorId!=0)
                 m_rpContainer->AddAccessorRight(lAccessorId, static_cast<EdmRight>(iRight));
         }
@@ -102,7 +102,7 @@ bool CwnCommandLoadContainer::interpretAnswerForObjects(const QVariantList *data
 }
 bool CwnCommandLoadContainer::interpretAnswerForContainerLoad(const QVariantList* dataList)
 {
-    long lRet = CdmLogging::eDmObjectAccessError;
+   qint64 lRet = CdmLogging::eDmObjectAccessError;
     QDateTime qdtLastChange;
 
     if(dataList == nullptr)
@@ -113,14 +113,14 @@ bool CwnCommandLoadContainer::interpretAnswerForContainerLoad(const QVariantList
         const QVariantMap* rowTemp = static_cast<const QVariantMap*>(dataList->at(0).data());
         const QVariantList* list = static_cast<const QVariantList*>(rowTemp->find("row")->data());
 
-        long lClassId           = list->at(0).toInt();
+       qint64 lClassId           = list->at(0).toInt();
         m_lContainerId          = list->at(1).toInt();
         QString qstrKeyname     = list->at(2).toString();
         qdtLastChange           = list->at(3).toDateTime();
-        long lLastModifierId    = (list->at(4).isNull())?0:list->at(4).toInt();
+       qint64 lLastModifierId    = (list->at(4).isNull())?0:list->at(4).toInt();
         QString qstrCaption     = list->at(5).toString();
         QString qstrComment     = list->at(6).toString();
-        long lDatabaseId        = list->at(7).toInt();
+       qint64 lDatabaseId        = list->at(7).toInt();
         bool bTree              = list->at(8).toBool();
         QString qstrTempConfig  = list->at(9).toString();
         QString qstrConfig      = CwnHelper::base64_decode(qstrTempConfig);

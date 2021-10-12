@@ -28,8 +28,8 @@ int CftlCommandCheckObjectUsed::Execute()
     cQSqlQuery.prepare("select COUNT(*) from "
                         "WMS_DM_OBJECT_REFERENCE where ObjectId = ? "
                         "and ContainerId = ?");
-    cQSqlQuery.addBindValue((int)m_rpObject->GetId());
-    cQSqlQuery.addBindValue((int)m_rpObject->GetObjectContainerId());
+    cQSqlQuery.addBindValue(m_rpObject->GetId());
+    cQSqlQuery.addBindValue(m_rpObject->GetObjectContainerId());
 
     lRet = ExecuteQuery(cQSqlQuery);
 

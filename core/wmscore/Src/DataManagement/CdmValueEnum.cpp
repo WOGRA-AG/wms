@@ -8,8 +8,8 @@
 #include "CdmValueEnum.h"
 #include "CdmLogging.h"
 
-CdmValueEnum::CdmValueEnum(long p_lDatabaseId,
-                           long p_lId,
+CdmValueEnum::CdmValueEnum(qint64 p_lDatabaseId,
+                          qint64 p_lId,
                            QString p_qstrKeyname,
                            CdmObject* p_pCdmObject)
    : CdmValueInt(eDmValueEnum, p_lDatabaseId, p_lId, p_qstrKeyname, p_pCdmObject)

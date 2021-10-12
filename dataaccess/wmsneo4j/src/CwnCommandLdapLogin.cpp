@@ -41,7 +41,7 @@ CwnCommandLdapLogin::~CwnCommandLdapLogin()
 
 int CwnCommandLdapLogin::Execute()
 {
-    long lRet = CdmLogging::eDmUnknownLoginManagerError;
+   qint64 lRet = CdmLogging::eDmUnknownLoginManagerError;
     CwnCommandLicenceCheck command(m_qstrApplication, m_qstrVersion, GetDataAccess());
 
     if(SUCCESSFULL(command.Run()))
@@ -174,11 +174,11 @@ CumUser* CwnCommandLdapLogin::GetUser()
     return m_pUser;
 }
 
-long CwnCommandLdapLogin::GetNewSession()
+qint64 CwnCommandLdapLogin::GetNewSession()
 {
     CwnCommandGetNewSession commandNewSession(m_qstrApplication, m_pUser->GetId(), GetDataAccess());
 
-    long lRet = commandNewSession.Run();
+   qint64 lRet = commandNewSession.Run();
 
     if (SUCCESSFULL(lRet))
     {

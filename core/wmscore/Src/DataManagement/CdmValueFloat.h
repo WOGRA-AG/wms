@@ -24,7 +24,7 @@ private:
     float m_fValue;
 
 public:
-    CdmValueFloat(  long p_lDatabaseId, long p_lId, QString p_qstrKeyname, CdmObject* p_pCdmObject );
+    CdmValueFloat( qint64 p_lDatabaseId,qint64 p_lId, QString p_qstrKeyname, CdmObject* p_pCdmObject );
     CdmValueFloat(  QDomElement& p_rqDomElement, CdmObject* p_pCdmObject );
     CdmValueFloat( QVariantMap& p_rqHash, CdmObject* p_pCdmObject);
     virtual ~CdmValueFloat(  );

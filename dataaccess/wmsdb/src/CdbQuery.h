@@ -67,11 +67,11 @@ virtual ~CdbQuery(  );
    public:
    /** +-=---------------------------------------------------------Do 11. Nov 08:35:47 2010-------*
     * @method  CdbQuery::ExecuteQuery                      // public                            *
-    * @return  long                                          //                                   *
+    * @return qint64                                          //                                   *
     * @comment Executes the query without any parameters. Works with the faster query             *
     *          algorithm.                                                                         *
     *----------------last changed: -----------------------------Do 11. Nov 08:35:47 2010----------*/
-    long ExecuteQuery();
+   qint64 ExecuteQuery();
 
    private:
     void SortResults(QString& p_qstrQuery);
@@ -107,10 +107,10 @@ virtual ~CdbQuery(  );
    /** +-=---------------------------------------------------------Sa 10. Nov 13:20:22 2007-------*
     * @method  CdbQuery::CreateStringFromResultList        // private                           *
     * @return  QString                                       //                                   *
-    * @param   QValueList<long>& p_rqvlResults               //                                   *
+    * @param   QValueList<qint64>& p_rqvlResults               //                                   *
     * @comment                                                                                    *
     *----------------last changed: Wolfgang Gra�of-------------Sa 10. Nov 13:20:22 2007----------*/
-    QString CreateStringFromResultList(QMap<long,long>& p_rqvlResults);
+    QString CreateStringFromResultList(QMap<qint64,qint64>& p_rqvlResults);
 
    private:
     void SortResultsOwnMember(QStringList p_qstrSortKey, QString& p_qstrQuery);
@@ -133,30 +133,30 @@ virtual ~CdbQuery(  );
    private:
    /** +-=---------------------------------------------------------Do 11. Nov 08:35:32 2010-------*
     * @method  CdbQuery::ExecuteEnhanced                   // private                           *
-    * @return  long                                          //                                   *
+    * @return qint64                                          //                                   *
     * @comment                                                                                    *
     *----------------last changed: -----------------------------Do 11. Nov 08:35:32 2010----------*/
-    long ExecuteEnhanced();
+   qint64 ExecuteEnhanced();
 
    public:
    /** +-=---------------------------------------------------------Do 11. Nov 08:36:07 2010-------*
     * @method  CdbQuery::Execute                           // public                            *
-    * @return  long                                          //                                   *
+    * @return qint64                                          //                                   *
     * @comment                                                                                    *
     *----------------last changed: -----------------------------Do 11. Nov 08:36:07 2010----------*/
-    long Execute();
+   qint64 Execute();
 
    private:
    /** +-=---------------------------------------------------------Mo 9. Mai 15:56:25 2011--------*
     * @method  CdbQuery::ExecuteObjectListQuery            // private                           *
-    * @return  long                                          //                                   *
-    * @param   QList<long>& p_rqllResults              //                                   *
+    * @return qint64                                          //                                   *
+    * @param   QList<qint64>& p_rqllResults              //                                   *
     * @comment                                                                                    *
     *----------------last changed: -----------------------------Mo 9. Mai 15:56:25 2011-----------*/
-    long ExecuteObjectListQuery(QMap<long,long>& p_rqllResults);
+   qint64 ExecuteObjectListQuery(QMap<qint64,qint64>& p_rqllResults);
 
     bool IsQueryElementValid(CdmQueryElement *p_pElement);
-    long ExecuteSqlQuery(QMap<long,long>& p_rqllResults, QString qstrSql);
+   qint64 ExecuteSqlQuery(QMap<qint64,qint64>& p_rqllResults, QString qstrSql);
 
 public:
    /** +-=---------------------------------------------------------So 5. Jun 11:47:27 2011--------*

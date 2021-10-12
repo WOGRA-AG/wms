@@ -31,13 +31,13 @@
 /** +-=---------------------------------------------------------Fr 12. Aug 00:30:46 2005----------*
  * @method  CdmModelElement::CdmModelElement                                 // public                            *
  * @return                                                   //                                   *
- * @param   long p_lDatabaseId                               //                                   *
- * @param   long p_lId                                       //                                   *
+ * @param  qint64 p_lDatabaseId                               //                                   *
+ * @param  qint64 p_lId                                       //                                   *
  * @param   QString p_qstrKeyname                            //                                   *
  * @param   QString p_qstrCaption = ""                       //                                   *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------Fr 12. Aug 00:30:46 2005----------*/
-CdmModelElement::CdmModelElement(  long p_lDatabaseId, long p_lId, QString p_qstrKeyname, QString p_qstrCaption )
+CdmModelElement::CdmModelElement( qint64 p_lDatabaseId,qint64 p_lId, QString p_qstrKeyname, QString p_qstrCaption )
 : CdmModelElementBase(p_lDatabaseId),
    m_lId(p_lId),
    m_lModifierId(0),
@@ -226,10 +226,10 @@ void CdmModelElement::Deploy(QVariantMap& p_rqvHash)
 /** +-=---------------------------------------------------------Fr 12. Aug 00:31:19 2005----------*
  * @method  CdmModelElement::SetId                           // private                           *
  * @return  void                                             //                                   *
- * @param   long p_lId                                       //                                   *
+ * @param  qint64 p_lId                                       //                                   *
  * @comment sets the Id of this base object.                                                      *
  *----------------last changed: --------------------------------Fr 12. Aug 00:31:19 2005----------*/
-void CdmModelElement::SetId(long p_lId)
+void CdmModelElement::SetId(qint64 p_lId)
 {
    m_lId = p_lId;
 }
@@ -237,10 +237,10 @@ void CdmModelElement::SetId(long p_lId)
 
 /** +-=---------------------------------------------------------Mo 19. Nov 15:45:35 2012----------*
  * @method  CdmModelElement::GetId                           // public, const, slots              *
- * @return  long                                             //                                   *
+ * @return qint64                                             //                                   *
  * @comment returns the Id of this base object.                                                   *
  *----------------last changed: --------------------------------Mo 19. Nov 15:45:35 2012----------*/
-long CdmModelElement::GetId() const
+qint64 CdmModelElement::GetId() const
 {
    return m_lId.load();
 }
@@ -387,20 +387,20 @@ bool CdmModelElement::IsModified() const
 /** +-=---------------------------------------------------------Fr 12. Aug 00:33:00 2005----------*
  * @method  CdmModelElement::SetCreatorId                            // public                            *
  * @return  void                                             //                                   *
- * @param   long p_lUserId                                   //                                   *
+ * @param  qint64 p_lUserId                                   //                                   *
  * @comment This method sets the creator of this object.                                          *
  *----------------last changed: --------------------------------Fr 12. Aug 00:33:00 2005----------*/
-void CdmModelElement::SetCreatorId(  long p_lUserId )
+void CdmModelElement::SetCreatorId( qint64 p_lUserId )
 {
    m_lCreatorId = p_lUserId;
 }
 
 /** +-=---------------------------------------------------------Fr 12. Aug 00:33:03 2005----------*
  * @method  CdmModelElement::GetCreatorId                            // public, const                     *
- * @return  long                                             //                                   *
+ * @return qint64                                             //                                   *
  * @comment returns the Id of the creator or nullptr if the system has created this object.          *
  *----------------last changed: --------------------------------Fr 12. Aug 00:33:03 2005----------*/
-long CdmModelElement::GetCreatorId(  ) const
+qint64 CdmModelElement::GetCreatorId(  ) const
 {
    return m_lCreatorId.load();
 }
@@ -408,20 +408,20 @@ long CdmModelElement::GetCreatorId(  ) const
 /** +-=---------------------------------------------------------Fr 12. Aug 00:33:06 2005----------*
  * @method  CdmModelElement::SetModifierId                           // public                            *
  * @return  void                                             //                                   *
- * @param   long p_lUserId                                   //                                   *
+ * @param  qint64 p_lUserId                                   //                                   *
  * @comment Sets the Modifier Id.                                                                 *
  *----------------last changed: --------------------------------Fr 12. Aug 00:33:06 2005----------*/
-void CdmModelElement::SetModifierId(  long p_lUserId )
+void CdmModelElement::SetModifierId( qint64 p_lUserId )
 {
    m_lModifierId = p_lUserId;
 }
 
 /** +-=---------------------------------------------------------Mo 19. Nov 15:49:09 2012----------*
  * @method  CdmModelElement::GetModifierId                           // public, const, slots              *
- * @return  long                                             //                                   *
+ * @return qint64                                             //                                   *
  * @comment returns the id of the modifier or 0 for system modifier.                              *
  *----------------last changed: --------------------------------Mo 19. Nov 15:49:09 2012----------*/
-long CdmModelElement::GetModifierId() const
+qint64 CdmModelElement::GetModifierId() const
 {
    return m_lModifierId.load();
 }
@@ -521,14 +521,14 @@ QString CdmModelElement::GetCaption() const
 
 /** +-=---------------------------------------------------------Sa 9. Feb 11:47:12 2013-----------*
  * @method  CdmModelElement::ChangeDateToLong                // public, static                    *
- * @return  long                                             //                                   *
+ * @return qint64                                             //                                   *
  * @param   const QDate p_qdDate                             //                                   *
- * @comment This method changes a date to a long value. This long value means the number of       *
+ * @comment This method changes a date to a qint64 value. This qint64 value means the number of       *
  *          days since 1.1.1900.                                                                  *
  *----------------last changed: --------------------------------Sa 9. Feb 11:47:12 2013-----------*/
-long CdmModelElement::ChangeDateToLong(const QDate p_qdDate)
+qint64 CdmModelElement::ChangeDateToLong(const QDate p_qdDate)
 {
-   long lRet = 0;
+  qint64 lRet = 0;
 
    lRet = QDate(1900,1,1).daysTo(p_qdDate);
 
@@ -538,10 +538,10 @@ long CdmModelElement::ChangeDateToLong(const QDate p_qdDate)
 /** +-=---------------------------------------------------------Fr 12. Aug 00:34:21 2005----------*
  * @method  CdmModelElement::ChangeLongToDate                        // public, static                    *
  * @return  QDate                                            //                                   *
- * @param   long p_lDate                                     //                                   *
- * @comment This method converts a long value whixh contains the number of days sind 1.1.1970 to a valid qdate.*
+ * @param  qint64 p_lDate                                     //                                   *
+ * @comment This method converts a qint64 value whixh contains the number of days sind 1.1.1970 to a valid qdate.*
  *----------------last changed: --------------------------------Fr 12. Aug 00:34:21 2005----------*/
-QDate CdmModelElement::ChangeLongToDate(  long p_lDate )
+QDate CdmModelElement::ChangeLongToDate( qint64 p_lDate )
 {
    QDate qdDate(1900,1,1);
 
@@ -591,7 +591,7 @@ QTime CdmModelElement::ChangeDoubleToTime(  double p_dTime )
  *----------------last changed: --------------------------------So 10. Feb 18:25:16 2013----------*/
 double CdmModelElement::ChangeDateTimeToDouble(QDateTime p_qdtDateTime) const
 {
-   long lDate = ChangeDateToLong(p_qdtDateTime.date());
+  qint64 lDate = ChangeDateToLong(p_qdtDateTime.date());
    double dTime = ChangeTimeToDouble(p_qdtDateTime.time());
 
    return dTime + lDate;
@@ -607,7 +607,7 @@ QDateTime CdmModelElement::ChangeDoubleToDateTime(  double p_dDateTime )
 {
    QDateTime qdtDateTime;
 
-   long lDate = (long)p_dDateTime;
+  qint64 lDate = (qint64)p_dDateTime;
    double dTime = lDate - p_dDateTime;
    QDate qdDate = ChangeLongToDate(lDate);
    QTime qtTime = ChangeDoubleToTime(dTime);
@@ -770,11 +770,10 @@ QVariant CdmModelElement::GetVariant() const
 {
    SYNCHRONIZED_READ;
    QVariantMap qmVariant;
-   QVariantMap qvChangeInfo;
 
-   qmVariant.insert(WMS_ID,(int) m_lId);
+   qmVariant.insert(WMS_ID, m_lId.load());
    qmVariant.insert(WMS_KEYNAME, m_qstrKeyname);
-   qmVariant.insert(WMS_DATABASEID, (int)GetSchemeId());
+   qmVariant.insert(WMS_DATABASEID, GetSchemeId());
    qmVariant.insert(WMS_CAPTION, m_qstrCaption);
    qmVariant.insert(WMS_URI, GetUriInternal());
    return qmVariant;
@@ -806,7 +805,7 @@ QString CdmModelElement::GetDisplayTypeAsString(EdmStringDisplayType p_eType)
          qstrRet = tr("Datei");
          break;
       case edmStringDisplayTypeEncrypted:
-         qstrRet = tr("Verschlüsselt");
+         qstrRet = QStringLiteral("Verschlüsselt");
          break;
       case edmStringDisplayTypeLink:
          qstrRet = tr("Link");

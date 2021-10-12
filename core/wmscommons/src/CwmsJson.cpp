@@ -185,9 +185,9 @@ QByteArray CwmsJson::serialize(const QVariant &data, bool &success)
    {
       str = QByteArray::number(data.value<qlonglong>());
    }
-   else if (data.canConvert<long>())
+   else if (data.canConvert<qint64>())
    {
-      str = QString::number(data.value<long>()).toUtf8();
+      str = QString::number(data.value<qint64>()).toUtf8();
    }
    else if (data.type() == QVariant::Date)
    {

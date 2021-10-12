@@ -12,15 +12,15 @@
 #include "CdmValueLong.h"
 
 
-CdmValueLong::CdmValueLong(  long p_lDatabaseId, long p_lId, QString p_qstrKeyname, CdmObject* p_pCdmObject )
+CdmValueLong::CdmValueLong( qint64 p_lDatabaseId,qint64 p_lId, QString p_qstrKeyname, CdmObject* p_pCdmObject )
    : CdmValue( p_lDatabaseId, p_lId, p_qstrKeyname,eDmValueLong, p_pCdmObject),
   m_lValue(0)
 {
    // nothing to do
 }
 
-CdmValueLong::CdmValueLong(  long p_lDatabaseId,
-                  long p_lId,
+CdmValueLong::CdmValueLong( qint64 p_lDatabaseId,
+                 qint64 p_lId,
                   QString p_qstrKeyname,
                   EdmValueType p_eDmValue,
                   CdmObject* p_pCdmObject )
@@ -56,7 +56,7 @@ void CdmValueLong::SetDefaultValue(  const CdmMember* p_pCdmMember )
    }
 }
 
-void CdmValueLong::SetValue(long p_lValue)
+void CdmValueLong::SetValue(qint64 p_lValue)
 {
    if(p_lValue != m_lValue)
    {
@@ -71,7 +71,7 @@ void CdmValueLong::SetValue(QString p_qstrValue, QString p_qstrValue2)
    SetValue(p_qstrValue.toInt());
 }
 
-long CdmValueLong::GetValue() const
+qint64 CdmValueLong::GetValue() const
 {
    return m_lValue;
 }
@@ -118,7 +118,7 @@ int CdmValueLong::FromStringToValue(QString p_qstrValue)
 QVariant CdmValueLong::GetVariant() const
 {
    QVariantMap qmVariant = CdmValue::GetVariant().toMap();
-   qmVariant.insert(WMS_VALUE, (int)m_lValue);
+   qmVariant.insert(WMS_VALUE, m_lValue);
    return qmVariant;
 }
 
@@ -134,7 +134,7 @@ QString CdmValueLong::GetValueAsString() const
 
 QVariant CdmValueLong::GetValueVariant() const
 {
-   return QVariant((int) m_lValue);
+   return QVariant(m_lValue);
 }
 
 void CdmValueLong::SetValueVariant(QVariant& p_rqVariant)

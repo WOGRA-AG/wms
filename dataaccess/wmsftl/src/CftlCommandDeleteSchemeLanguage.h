@@ -11,11 +11,11 @@
 class CftlCommandDeleteSchemeLanguage : public CftlAbstractTransactionalCommand
 {
 private:
-    long m_lSchemeId;
-    long m_lLanguage;
+   qint64 m_lSchemeId;
+   qint64 m_lLanguage;
 
 public:
-    CftlCommandDeleteSchemeLanguage(long p_lSchemeId, int p_lLanguage, CftlDataAccess* p_pDataAccess);
+    CftlCommandDeleteSchemeLanguage(qint64 p_lSchemeId, int p_lLanguage, CftlDataAccess* p_pDataAccess);
     virtual ~CftlCommandDeleteSchemeLanguage();
 
 protected:

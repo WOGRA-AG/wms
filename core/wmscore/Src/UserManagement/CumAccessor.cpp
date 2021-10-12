@@ -22,7 +22,7 @@
 #include "CumUserManager.h"
 #include "CumAccessor.h"
 
-CumAccessor::CumAccessor(long p_lId, CumUserManager* p_pUserManager)
+CumAccessor::CumAccessor(qint64 p_lId, CumUserManager* p_pUserManager)
    : m_lId(p_lId),
      m_rpUserManager(p_pUserManager)
 {
@@ -44,10 +44,10 @@ void CumAccessor::SetUserManager(CumUserManager *p_pUserManager)
 
 /** +-=---------------------------------------------------------So 10. Feb 11:43:23 2013----------*
  * @method  CumAccessor::GetId                               // public, const, slots              *
- * @return  long                                             //                                   *
+ * @return qint64                                             //                                   *
  * @comment returns the AccessorId                                                                *
  *----------------last changed: --------------------------------So 10. Feb 11:43:23 2013----------*/
-long CumAccessor::GetId() const
+qint64 CumAccessor::GetId() const
 {
    return m_lId;
 }

@@ -284,7 +284,7 @@ void CwmsCodeGeneratorTestC::GenerateDeleteTestObjectClassMethod()
    m_qstrSource += AddIndent(1);
    m_qstrSource += "{\n";
    m_qstrSource += AddIndent(2);
-   m_qstrSource += "long lObjectId = m_rpCdmObject->GetId();\n";
+   m_qstrSource += "qint64 lObjectId = m_rpCdmObject->GetId();\n";
    m_qstrSource += AddIndent(2);
    m_qstrSource += "m_rpCdmObject->SetDeleted();\n";
    m_qstrSource += AddIndent(2);
@@ -305,11 +305,11 @@ void CwmsCodeGeneratorTestC::GenerateTestCodeForMembers()
 {
    if (CHKPTR(m_rpCdmClass))
    {
-      QMap<long, CdmMember*> qmMembers;
+      QMap<qint64, CdmMember*> qmMembers;
       m_rpCdmClass->GetClassMemberMap(qmMembers);
 
-      QMap<long, CdmMember*>::iterator qmIt = qmMembers.begin();
-      QMap<long, CdmMember*>::iterator qmItEnd = qmMembers.end();
+      QMap<qint64, CdmMember*>::iterator qmIt = qmMembers.begin();
+      QMap<qint64, CdmMember*>::iterator qmItEnd = qmMembers.end();
 
       for (; qmIt != qmItEnd; ++qmIt)
       {

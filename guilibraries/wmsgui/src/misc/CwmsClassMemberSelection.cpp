@@ -65,13 +65,13 @@ void CwmsClassMemberSelection::FillDialog(QMap<QString,
 /** +-=---------------------------------------------------------Mo 10. Sep 13:48:51 2012----------*
  * @method  CwmsClassMemberSelection::FillDialog             // private                           *
  * @return  void                                             //                                   *
- * @param   QMap<long,CdmMember*>& p_rqmMembers              //                                   *
+ * @param   QMap<qint64,CdmMember*>& p_rqmMembers              //                                   *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------Mo 10. Sep 13:48:51 2012----------*/
-void CwmsClassMemberSelection::FillDialog(QMap<long,CdmMember*>& p_rqmMembers)
+void CwmsClassMemberSelection::FillDialog(QMap<qint64,CdmMember*>& p_rqmMembers)
 {
-   QMap<long,CdmMember*>::iterator qmIt = p_rqmMembers.begin();
-   QMap<long,CdmMember*>::iterator qmItEnd = p_rqmMembers.end();
+   QMap<qint64,CdmMember*>::iterator qmIt = p_rqmMembers.begin();
+   QMap<qint64,CdmMember*>::iterator qmItEnd = p_rqmMembers.end();
 
    for (; qmIt != qmItEnd; ++qmIt)
    {
@@ -161,7 +161,7 @@ QStringList CwmsClassMemberSelection::GetMemberSelection(const CdmClass* p_pCdmC
    if (CHKPTR(p_pCdmClass))
    {
       CwmsClassMemberSelection* pSelector = new CwmsClassMemberSelection(p_pqwParent);
-      QMap<long,CdmMember*> qmMembers;
+      QMap<qint64,CdmMember*> qmMembers;
       p_pCdmClass->GetMemberMap(qmMembers);
       pSelector->FillDialog(qmMembers);
 

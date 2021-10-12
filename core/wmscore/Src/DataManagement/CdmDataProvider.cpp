@@ -141,9 +141,9 @@ CdmScheme* CdmDataProvider::GetCurrentScheme()
     return m_pCdmSchemeCurrent;
 }
 
-long CdmDataProvider::CreateScheme(QString &p_qstrDbName)
+qint64 CdmDataProvider::CreateScheme(QString &p_qstrDbName)
 {
-    long lRet = CdmLogging::eDmUnknownDataAccessError;
+   qint64 lRet = CdmLogging::eDmUnknownDataAccessError;
 
     if(CHKPTR(m_rpIdmDataAccess))
     {
@@ -170,9 +170,9 @@ long CdmDataProvider::CreateScheme(QString &p_qstrDbName)
 }
 
 
-long CdmDataProvider::LoadScheme(QString &p_qstrDatabaseName)
+qint64 CdmDataProvider::LoadScheme(QString &p_qstrDatabaseName)
 {
-    long lRet = CdmLogging::eDmUnknownDataAccessError;
+   qint64 lRet = CdmLogging::eDmUnknownDataAccessError;
 
     if(CHKPTR(m_rpIdmDataAccess))
     {
@@ -201,9 +201,9 @@ long CdmDataProvider::LoadScheme(QString &p_qstrDatabaseName)
     return lRet;
 }
 
-long CdmDataProvider::LoadScheme(int p_iSchemeId)
+qint64 CdmDataProvider::LoadScheme(int p_iSchemeId)
 {
-    long lRet = CdmLogging::eDmUnknownDataAccessError;
+   qint64 lRet = CdmLogging::eDmUnknownDataAccessError;
 
     if(CHKPTR(m_rpIdmDataAccess))
     {
@@ -236,7 +236,7 @@ bool CdmDataProvider::IsSchemeLoaded(QString &p_qstrSchemeName)
     return (GetSchemeLocal(p_qstrSchemeName) != nullptr);
 }
 
-bool CdmDataProvider::IsSchemeLoaded(long p_lSchemeName)
+bool CdmDataProvider::IsSchemeLoaded(qint64 p_lSchemeName)
 {
     return (GetSchemeLocal(p_lSchemeName) != nullptr);
 }
@@ -264,7 +264,7 @@ CdmScheme* CdmDataProvider::GetSchemeLocal(QString &p_qstrSchemeName)
     return pLocal;
 }
 
-CdmScheme* CdmDataProvider::GetSchemeLocal(long p_lSchemeId)
+CdmScheme* CdmDataProvider::GetSchemeLocal(qint64 p_lSchemeId)
 {
     CdmScheme* pLocal = nullptr;
     QList<CdmScheme*>::iterator qIt = m_qlSchemes.begin();
@@ -282,9 +282,9 @@ CdmScheme* CdmDataProvider::GetSchemeLocal(long p_lSchemeId)
     return pLocal;
 }
 
-long CdmDataProvider::ExistScheme(QString p_qstrKeyname)
+qint64 CdmDataProvider::ExistScheme(QString p_qstrKeyname)
 {
-    long lRet = CdmLogging::eDmUnknownDataAccessError;
+   qint64 lRet = CdmLogging::eDmUnknownDataAccessError;
 
     if(CHKPTR(m_rpIdmDataAccess))
     {
@@ -313,7 +313,7 @@ long CdmDataProvider::ExistScheme(QString p_qstrKeyname)
 }
 
 
-CdmScheme* CdmDataProvider::FindSchemeById(long p_lId)
+CdmScheme* CdmDataProvider::FindSchemeById(qint64 p_lId)
 {
     CdmScheme* pCdmScheme = nullptr;
 
@@ -440,7 +440,7 @@ QString CdmDataProvider::GetBuild()
     return qstrBuild;
 }
 
-CdmClassManager* CdmDataProvider::GetClassManager(long p_lDatabaseId)
+CdmClassManager* CdmDataProvider::GetClassManager(qint64 p_lDatabaseId)
 {
     CdmClassManager* pCdmClassManager = nullptr;
     CdmScheme* pCdmDatabase = FindSchemeById(p_lDatabaseId);
@@ -495,7 +495,7 @@ CdmContainerManager* CdmDataProvider::GetContainerManager(CdmScheme* p_pCdmDatab
     return pContainerManager;
 }
 
-CdmContainerManager* CdmDataProvider::GetContainerManager(long p_lDatabaseId)
+CdmContainerManager* CdmDataProvider::GetContainerManager(qint64 p_lDatabaseId)
 {
     CdmContainerManager* pContainerManager = nullptr;
 
@@ -547,9 +547,9 @@ IdmDataAccess* CdmDataProvider::GetDataAccess()
     return m_rpIdmDataAccess;
 }
 
-long CdmDataProvider::RemoveScheme(long p_lDatabaseId)
+qint64 CdmDataProvider::RemoveScheme(qint64 p_lDatabaseId)
 {
-    long lRet = CdmLogging::eDmUnknownDataAccessError;
+   qint64 lRet = CdmLogging::eDmUnknownDataAccessError;
 
     CdmScheme* pScheme = nullptr;
 
@@ -587,9 +587,9 @@ long CdmDataProvider::RemoveScheme(long p_lDatabaseId)
     return lRet;
 }
 
-long CdmDataProvider::RemoveScheme(QString &p_qstrDatabaseName)
+qint64 CdmDataProvider::RemoveScheme(QString &p_qstrDatabaseName)
 {
-    long lRet = CdmLogging::eDmUnknownDataAccessError;
+   qint64 lRet = CdmLogging::eDmUnknownDataAccessError;
 
     if (CHKPTR(m_rpIdmDataAccess))
     {
@@ -662,7 +662,7 @@ QVariant CdmDataProvider::GetVariant() const
     return QVariant();
 }
 
-long CdmDataProvider::GetSessionId() const
+qint64 CdmDataProvider::GetSessionId() const
 {
     return CdmSessionManager::GetSessionManager()->GetCurrentSessionId();
 }
@@ -685,7 +685,7 @@ CdmObjectContainer* CdmDataProvider::GetObjectContainer(QString p_qstrObjectList
     return pContainer;
 }
 
-CdmObjectContainer* CdmDataProvider::GetObjectContainer(long ObjectListId)
+CdmObjectContainer* CdmDataProvider::GetObjectContainer(qint64 ObjectListId)
 {
     CdmObjectContainer* pContainer = nullptr;
     CdmDataProvider* pCdmManager = CdmSessionManager::GetDataProvider();
@@ -779,9 +779,9 @@ CdmClass* CdmDataProvider::GetClass(QString& p_qstrDatabase, QString& p_qstrClas
     return pCdmClass;
 }
 
-long CdmDataProvider::LoadClassManager(long p_lDbId)
+qint64 CdmDataProvider::LoadClassManager(qint64 p_lDbId)
 {
-    long lRet = CdmLogging::eDmUnknownDbError;
+   qint64 lRet = CdmLogging::eDmUnknownDbError;
     CdmScheme* pCdmDatabase = FindSchemeById(p_lDbId);
 
     if(!CHKPTR(pCdmDatabase))
@@ -793,10 +793,10 @@ long CdmDataProvider::LoadClassManager(long p_lDbId)
     return lRet;
 }
 
-long CdmDataProvider::LoadClassManager(QString &p_qstrDbKeyname)
+qint64 CdmDataProvider::LoadClassManager(QString &p_qstrDbKeyname)
 {
     CdmScheme* pCdmDatabase = FindSchemeByName(p_qstrDbKeyname);
-    long lRet = CdmLogging::eDmUnknownDbError;
+   qint64 lRet = CdmLogging::eDmUnknownDbError;
 
     if(!CHKPTR(pCdmDatabase))
     {
@@ -812,7 +812,7 @@ CumUserManager* CdmDataProvider::GetUserManager()
     return m_pCumUserManager;
 }
 
-long CdmDataProvider::GetUserId() const
+qint64 CdmDataProvider::GetUserId() const
 {
     return CdmSessionManager::GetSessionManager()->GetCurrentUserId();
 }

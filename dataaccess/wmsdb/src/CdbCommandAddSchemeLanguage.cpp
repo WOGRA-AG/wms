@@ -1,6 +1,6 @@
 #include "CdbCommandAddSchemeLanguage.h"
 
-CdbCommandAddSchemeLanguage::CdbCommandAddSchemeLanguage(long p_lSchemeId,
+CdbCommandAddSchemeLanguage::CdbCommandAddSchemeLanguage(qint64 p_lSchemeId,
                                                          QString p_qstrLanguage,
                                                          CdbDataAccess* p_pDataAccess)
 : CdbAbstractCommandTransactional(p_pDataAccess),
@@ -22,7 +22,7 @@ bool CdbCommandAddSchemeLanguage::CheckValid()
 
 int CdbCommandAddSchemeLanguage::Execute()
 {
-    long lRet = CdmLogging::eDmUnknownDbAccessError;
+   qint64 lRet = CdmLogging::eDmUnknownDbAccessError;
     QSqlQuery cQuery;
     QString qstrQuery;
 

@@ -23,7 +23,7 @@ CdmGlobalContext::~CdmGlobalContext()
    DELPTR(m_pCdmSettings);
 }
 
-CdmClassManager *CdmGlobalContext::GetClassManager(long p_lSchemeId)
+CdmClassManager *CdmGlobalContext::GetClassManager(qint64 p_lSchemeId)
 {
     CdmClassManager* pClassManager = nullptr;
     SYNCHRONIZED;
@@ -54,7 +54,7 @@ CdmClassManager *CdmGlobalContext::GetClassManager(long p_lSchemeId)
     return pClassManager;
 }
 
-void CdmGlobalContext::DeleteClassManager(long p_lSchemeId)
+void CdmGlobalContext::DeleteClassManager(qint64 p_lSchemeId)
 {
     if (!CdmSessionManager::GetSessionManager()->GetServerMode())
     {
@@ -80,7 +80,7 @@ void CdmGlobalContext::DeleteClassManager(long p_lSchemeId)
     }
 }
 
-CdmClassManager* CdmGlobalContext::LoadClassManager(long p_lSchemeId)
+CdmClassManager* CdmGlobalContext::LoadClassManager(qint64 p_lSchemeId)
 {
    CdmClassManager* pClassManager = nullptr;
    CdmDataProvider* pManager = CdmSessionManager::GetDataProvider();
@@ -115,7 +115,7 @@ CdmClassManager* CdmGlobalContext::LoadClassManager(long p_lSchemeId)
    return pClassManager;
 }
 
-void CdmGlobalContext::UpdateClassManager(long p_lSchemeId)
+void CdmGlobalContext::UpdateClassManager(qint64 p_lSchemeId)
 {
     if (!CdmSessionManager::GetSessionManager()->GetServerMode())
     {
@@ -143,8 +143,8 @@ void CdmGlobalContext::UpdateClassManager(long p_lSchemeId)
 void CdmGlobalContext::DeleteAllClassManagers()
 {
     SYNCHRONIZED;
-    QMap<long, CdmClassManager*>::iterator qmIt = m_qmClassManagers.begin();
-    QMap<long, CdmClassManager*>::iterator qmItEnd = m_qmClassManagers.end();
+    QMap<qint64, CdmClassManager*>::iterator qmIt = m_qmClassManagers.begin();
+    QMap<qint64, CdmClassManager*>::iterator qmItEnd = m_qmClassManagers.end();
 
     for (; qmIt != qmItEnd; qmIt++)
     {

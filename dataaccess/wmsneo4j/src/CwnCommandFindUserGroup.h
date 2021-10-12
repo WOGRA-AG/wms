@@ -18,15 +18,15 @@ public:
     CwnCommandFindUserGroup(CwnDataAccess* m_rpDataAccess);
     virtual ~CwnCommandFindUserGroup();
 
-    void setGroupid(long groupid);
-    long getGroupid();
+    void setGroupid(qint64 groupid);
+   qint64 getGroupid();
 
     QString createQuery();
     CumUserGroup *getResult();
     QString queryCausedError;
 
 private:
-    long groupid;
+   qint64 groupid;
     CumUserGroup* result;
 
 protected:

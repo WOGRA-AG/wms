@@ -42,12 +42,12 @@
 /** +-=---------------------------------------------------------Sa 13. Aug 21:07:15 2005----------*
  * @method  CdmClass::CdmClass                               // protected                         *
  * @return                                                   //                                   *
- * @param   long p_lDatabaseId                               // Database Id                       *
- * @param   long p_lId                                       // Class Id                          *
+ * @param  qint64 p_lDatabaseId                               // Database Id                       *
+ * @param  qint64 p_lId                                       // Class Id                          *
  * @param   QString p_qstrKeyname                            // Class keyname                     *
  * @comment The cosntructor                                                                       *
  *----------------last changed: --------------------------------Sa 13. Aug 21:07:15 2005----------*/
-CdmClass::CdmClass(  long p_lDatabaseId, long p_lId, QString p_qstrKeyname )
+CdmClass::CdmClass( qint64 p_lDatabaseId,qint64 p_lId, QString p_qstrKeyname )
     : CdmModelElement(p_lDatabaseId, p_lId, p_qstrKeyname),
       m_bIsInUse(false),
       m_lBaseClassCounter(0),
@@ -182,8 +182,8 @@ QString CdmClass::GetFullQualifiedName() const
 void CdmClass::ClearMembers()
 {
     SYNCHRONIZED_WRITE;
-    QMap<long, CdmMember*>::iterator iIt = m_qmMembers.begin();
-    QMap<long, CdmMember*>::iterator iItEnd = m_qmMembers.end();
+    QMap<qint64, CdmMember*>::iterator iIt = m_qmMembers.begin();
+    QMap<qint64, CdmMember*>::iterator iItEnd = m_qmMembers.end();
 
     for (; iIt != iItEnd; ++iIt)
     {
@@ -339,7 +339,7 @@ bool CdmClass::HasBaseClassChanges()
     return (m_qlModifedBaseClasses.count() > 0);
 }
 
-QList<long> CdmClass::GetBaseClassChanges()
+QList<qint64> CdmClass::GetBaseClassChanges()
 {
     return m_qlModifedBaseClasses;
 }
@@ -381,20 +381,20 @@ int CdmClass::AddBaseClass(QString p_qstrBaseClass)
  * @param   QString p_qstrKeyname                            //                                   *
  * @param   EdmValue p_eDmValue                              //                                   *
  * @param   bool p_bMust                                     //                                   *
- * @param   long p_lSize                                     //                                   *
+ * @param  qint64 p_lSize                                     //                                   *
  * @comment This method is the only way to generates objects of type Valuedescritpion. this is a monopol of CdmClass.*
  *----------------last changed: --------------------------------Sa 13. Aug 21:08:09 2005----------*/
 CdmMember* CdmClass::CreateMember(QString p_qstrKeyname,
                                   EdmValueType p_eDmValue,
                                   bool p_bMust,
-                                  long p_lSize)
+                                 qint64 p_lSize)
 {
     SYNCHRONIZED_WRITE;
     CdmMember* pCdmMember = nullptr;
 
     if (CheckMemberKeyname(p_qstrKeyname))
     {
-        long lId = GetNewMemberId();
+       qint64 lId = GetNewMemberId();
 
         if (lId > 0)
         {
@@ -436,13 +436,13 @@ CdmMember* CdmClass::CreateMember(QString p_qstrKeyname,
 
 /** +-=---------------------------------------------------------Sa 13. Aug 21:08:19 2005----------*
  * @method  CdmClass::GetNewMemberId                         // public                            *
- * @return  long                                             //                                   *
+ * @return qint64                                             //                                   *
  * @comment This method returns a new Value Description Id or -1 if not possible.                 *
  *----------------last changed: --------------------------------Sa 13. Aug 21:08:19 2005----------*/
-long CdmClass::GetNewMemberId(  )
+qint64 CdmClass::GetNewMemberId(  )
 {
     SYNCHRONIZED_READ;
-    long lRet = 0;
+   qint64 lRet = 0;
 
     while (true)
     {
@@ -543,8 +543,8 @@ bool CdmClass::CheckMemberKeyname(QString p_qstrKeyname) const
 
     if (!p_qstrKeyname.isEmpty())
     {
-        QMap<long, CdmMember*>::const_iterator iIt = m_qmMembers.begin();
-        QMap<long, CdmMember*>::const_iterator iItEnd = m_qmMembers.end();
+        QMap<qint64, CdmMember*>::const_iterator iIt = m_qmMembers.begin();
+        QMap<qint64, CdmMember*>::const_iterator iItEnd = m_qmMembers.end();
 
         for (; iIt != iItEnd; ++iIt)
         {
@@ -581,8 +581,8 @@ bool CdmClass::HasMustMembers() const
     SYNCHRONIZED_READ;
     bool bRet = false;
 
-    QMap<long, CdmMember*>::const_iterator iIt = m_qmMembers.begin();
-    QMap<long, CdmMember*>::const_iterator iItEnd = m_qmMembers.end();
+    QMap<qint64, CdmMember*>::const_iterator iIt = m_qmMembers.begin();
+    QMap<qint64, CdmMember*>::const_iterator iItEnd = m_qmMembers.end();
 
     for (; iIt != iItEnd; ++iIt)
     {
@@ -611,11 +611,11 @@ bool CdmClass::HasNonSystemMembers() const
     SYNCHRONIZED_READ;
     bool bRet = false;
 
-    QMap<long,CdmMember*> qmMap;
+    QMap<qint64,CdmMember*> qmMap;
     GetMemberMap(qmMap);
 
-    QMap<long,CdmMember*>::iterator iIt = qmMap.begin();
-    QMap<long,CdmMember*>::iterator iItEnd = qmMap.end();
+    QMap<qint64,CdmMember*>::iterator iIt = qmMap.begin();
+    QMap<qint64,CdmMember*>::iterator iItEnd = qmMap.end();
 
     for(; iIt != iItEnd; ++iIt)
     {
@@ -657,8 +657,8 @@ void CdmClass::SetClassInUse(  bool p_bInUse )
             {
                 CdmClass* pCdmClass = nullptr;
 
-                QMap<long,long>::iterator iItClasses = m_qmBaseClasses.begin();
-                QMap<long,long>::iterator iItClassesEnd = m_qmBaseClasses.end();
+                QMap<qint64,qint64>::iterator iItClasses = m_qmBaseClasses.begin();
+                QMap<qint64,qint64>::iterator iItClassesEnd = m_qmBaseClasses.end();
 
                 for(; iItClasses != iItClassesEnd; ++iItClasses)
                 {
@@ -758,8 +758,8 @@ CdmMember* CdmClass::FindClassMember(QString p_qstrKeyname)
 {
     SYNCHRONIZED_READ;
     CdmMember* pCdmMember = nullptr;
-    QMap<long,CdmMember*>::iterator iIt = m_qmMembers.begin();
-    QMap<long,CdmMember*>::iterator iItEnd = m_qmMembers.end();
+    QMap<qint64,CdmMember*>::iterator iIt = m_qmMembers.begin();
+    QMap<qint64,CdmMember*>::iterator iItEnd = m_qmMembers.end();
 
     for(; iIt != iItEnd; ++iIt)
     {
@@ -784,8 +784,8 @@ CdmMember* CdmClass::FindClassMember(QString p_qstrKeyname)
             {
                 CdmClass* pCdmClass = nullptr;
 
-                QMap<long,long>::iterator iItClasses = m_qmBaseClasses.begin();
-                QMap<long,long>::iterator iItClassesEnd = m_qmBaseClasses.end();
+                QMap<qint64,qint64>::iterator iItClasses = m_qmBaseClasses.begin();
+                QMap<qint64,qint64>::iterator iItClassesEnd = m_qmBaseClasses.end();
 
                 for (; iItClasses != iItClassesEnd; ++iItClasses)
                 {
@@ -835,7 +835,7 @@ CdmMember* CdmClass::FindReferencedMember(QString p_qstrKeyname, int p_iRecusrio
 
         if(pCdmMember && pCdmMember->GetValueType() == eDmValueObjectRef)
         {
-            long lClassId = pCdmMember->GetClassReference();
+           qint64 lClassId = pCdmMember->GetClassReference();
 
             if (lClassId > 0)
             {
@@ -895,11 +895,11 @@ QList<QString> CdmClass::GetVisibleUserDefinedMembers() const
 {
     SYNCHRONIZED_READ;
     QList<QString> qllUserDefinedMembers;
-    QMap<long,CdmMember*> qmMembers;
+    QMap<qint64,CdmMember*> qmMembers;
     GetMemberMap(qmMembers);
 
-    QMap<long,CdmMember*>::iterator qmIt = qmMembers.begin();
-    QMap<long,CdmMember*>::iterator qmItEnd = qmMembers.end();
+    QMap<qint64,CdmMember*>::iterator qmIt = qmMembers.begin();
+    QMap<qint64,CdmMember*>::iterator qmItEnd = qmMembers.end();
 
     for (; qmIt != qmItEnd; ++qmIt)
     {
@@ -920,15 +920,15 @@ QList<QString> CdmClass::GetVisibleUserDefinedMembers() const
 /** +-=---------------------------------------------------------Sa 9. Feb 12:04:01 2013-----------*
  * @method  CdmClass::GetMemberMap                           // public, const                     *
  * @return  int                                              // quantity of Values.               *
- * @param   QMap<long,CdmMember*>& p_rqlMembers              //                                   *
+ * @param   QMap<qint64,CdmMember*>& p_rqlMembers              //                                   *
  * @comment This method returns all Values of this and all base classes.                          *
  *----------------last changed: --------------------------------Sa 9. Feb 12:04:01 2013-----------*/
-int CdmClass::GetMemberMap(QMap<long, CdmMember*>& p_rqlMembers) const
+int CdmClass::GetMemberMap(QMap<qint64, CdmMember*>& p_rqlMembers) const
 {
     SYNCHRONIZED_READ;
     int iRet = CdmLogging::eDmUnknownMemberError;
-    QMap<long,CdmMember*>::const_iterator iIt    = m_qmMembers.begin();
-    QMap<long,CdmMember*>::const_iterator iItEnd = m_qmMembers.end();
+    QMap<qint64,CdmMember*>::const_iterator iIt    = m_qmMembers.begin();
+    QMap<qint64,CdmMember*>::const_iterator iItEnd = m_qmMembers.end();
 
     for ( ; iIt != iItEnd; ++iIt)
     {
@@ -948,8 +948,8 @@ int CdmClass::GetMemberMap(QMap<long, CdmMember*>& p_rqlMembers) const
 
         if (pCdmClassManager)
         {
-            QMap<long,long>::const_iterator iItClasses    = m_qmBaseClasses.begin();
-            QMap<long,long>::const_iterator iItClassesEnd = m_qmBaseClasses.end();
+            QMap<qint64,qint64>::const_iterator iItClasses    = m_qmBaseClasses.begin();
+            QMap<qint64,qint64>::const_iterator iItClassesEnd = m_qmBaseClasses.end();
 
             for ( ; iItClasses != iItClassesEnd; ++iItClasses)
             {
@@ -982,10 +982,10 @@ int CdmClass::GetMemberMap(QMap<long, CdmMember*>& p_rqlMembers) const
 
 /** +-=---------------------------------------------------------Sa 9. Feb 12:04:46 2013-----------*
  * @method  CdmClass::GetClassMemberMap                      // public, const                     *
- * @return  const QMap<long, CdmMember*>&                    //                                   *
+ * @return  const QMap<qint64, CdmMember*>&                    //                                   *
  * @comment This method returns the membermap of this class.                                      *
  *----------------last changed: --------------------------------Sa 9. Feb 12:04:46 2013-----------*/
-const QMap<long, CdmMember*> CdmClass::GetClassMemberMap() const
+const QMap<qint64, CdmMember*> CdmClass::GetClassMemberMap() const
 {
     return m_qmMembers;
 }
@@ -993,17 +993,17 @@ const QMap<long, CdmMember*> CdmClass::GetClassMemberMap() const
 /** +-=---------------------------------------------------------Sa 9. Feb 12:05:05 2013-----------*
  * @method  CdmClass::GetClassMemberMap                      // public, const                     *
  * @return  int                                              // quantity of Values.               *
- * @param   QMap<long,CdmMember*>& p_rqlValues               //                                   *
+ * @param   QMap<qint64,CdmMember*>& p_rqlValues               //                                   *
  * @comment This method returns only the members of this class. Base classes will be              *
  *          ignored.                                                                              *
  *----------------last changed: --------------------------------Sa 9. Feb 12:05:05 2013-----------*/
-int CdmClass::GetClassMemberMap(QMap<long,CdmMember*>& p_rqlValues) const
+int CdmClass::GetClassMemberMap(QMap<qint64,CdmMember*>& p_rqlValues) const
 {
     SYNCHRONIZED_READ;
     int iRet = CdmLogging::eDmUnknownMemberError;
 
-    QMap<long,CdmMember*>::const_iterator iIt    = m_qmMembers.begin();
-    QMap<long,CdmMember*>::const_iterator iItEnd = m_qmMembers.end();
+    QMap<qint64,CdmMember*>::const_iterator iIt    = m_qmMembers.begin();
+    QMap<qint64,CdmMember*>::const_iterator iItEnd = m_qmMembers.end();
 
     for ( ; iIt != iItEnd; ++iIt )
     {
@@ -1053,19 +1053,19 @@ int CdmClass::RemoveBaseClass(QString p_qstrBaseClass)
 /** +-=---------------------------------------------------------Sa 13. Aug 21:09:01 2005----------*
  * @method  CdmClass::RemoveBaseClass                        // public                            *
  * @return  int                                              //                                   *
- * @param   long p_lClassId                                  //                                   *
+ * @param  qint64 p_lClassId                                  //                                   *
  * @comment Removes a baseclass from this class. This is only possible, if this class is not      *
  *          in use.                                                                               *
  *----------------last changed: --------------------------------Sa 13. Aug 21:09:01 2005----------*/
-int CdmClass::RemoveBaseClass(long p_lClassId)
+int CdmClass::RemoveBaseClass(qint64 p_lClassId)
 {
     SYNCHRONIZED_WRITE;
     int iRet = CdmLogging::eDmBaseClassRemovalError;
 
     if (!m_bIsInUse)
     {
-        QMap<long,long>::iterator iItClasses = m_qmBaseClasses.begin();
-        QMap<long,long>::iterator iItClassesEnd = m_qmBaseClasses.end();
+        QMap<qint64,qint64>::iterator iItClasses = m_qmBaseClasses.begin();
+        QMap<qint64,qint64>::iterator iItClassesEnd = m_qmBaseClasses.end();
 
         for ( ; iItClasses != iItClassesEnd; ++iItClasses )
         {
@@ -1110,8 +1110,8 @@ int CdmClass::DeleteMember(  QString p_qstrKeyname )
 
     if (!m_bIsInUse)
     {
-        QMap<long, CdmMember*>::iterator iIt    = m_qmMembers.begin();
-        QMap<long, CdmMember*>::iterator iItEnd = m_qmMembers.end();
+        QMap<qint64, CdmMember*>::iterator iIt    = m_qmMembers.begin();
+        QMap<qint64, CdmMember*>::iterator iItEnd = m_qmMembers.end();
 
         for(; iIt != iItEnd; ++iIt)
         {
@@ -1256,8 +1256,8 @@ int CdmClass::IsInherited(const CdmClass* p_pCdmClass) const
                 {
                     CdmClass* pCdmClass = nullptr;
 
-                    QMap<long,long>::const_iterator iItClasses = m_qmBaseClasses.begin();
-                    QMap<long,long>::const_iterator iItClassesEnd = m_qmBaseClasses.end();
+                    QMap<qint64,qint64>::const_iterator iItClasses = m_qmBaseClasses.begin();
+                    QMap<qint64,qint64>::const_iterator iItClassesEnd = m_qmBaseClasses.end();
 
                     for(; iItClasses != iItClassesEnd; ++iItClasses)
                     {
@@ -1309,10 +1309,10 @@ int CdmClass::IsInherited(const CdmClass* p_pCdmClass) const
 
 /** +-=---------------------------------------------------------Sa 9. Feb 12:07:10 2013-----------*
  * @method  CdmClass::GetBaseClasses                         // public, const                     *
- * @return  const QMap<long,long>&                           //                                   *
+ * @return  const QMap<qint64,qint64>&                           //                                   *
  * @comment returns a list of base classes.                                                       *
  *----------------last changed: --------------------------------Sa 9. Feb 12:07:10 2013-----------*/
-const QMap<long,long>& CdmClass::GetBaseClasses() const
+const QMap<qint64,qint64>& CdmClass::GetBaseClasses() const
 {
     SYNCHRONIZED_READ;
     return m_qmBaseClasses;
@@ -1344,8 +1344,8 @@ int CdmClass::CheckObject(CdmObject* p_pCdmObject) const
     {
         if(p_pCdmObject->GetClass() == this)
         {
-            QMap<long,CdmMember*>::const_iterator iIt    = m_qmMembers.begin();
-            QMap<long,CdmMember*>::const_iterator iItEnd = m_qmMembers.end();
+            QMap<qint64,CdmMember*>::const_iterator iIt    = m_qmMembers.begin();
+            QMap<qint64,CdmMember*>::const_iterator iItEnd = m_qmMembers.end();
 
             for(; iIt != iItEnd; ++iIt) // Check the member of this class
             {
@@ -1378,8 +1378,8 @@ int CdmClass::CheckObject(CdmObject* p_pCdmObject) const
                     {
                         CdmClass* pCdmClass = nullptr;
 
-                        QMap<long,long>::const_iterator iItClasses = m_qmBaseClasses.begin();
-                        QMap<long,long>::const_iterator iItClassesEnd = m_qmBaseClasses.end();
+                        QMap<qint64,qint64>::const_iterator iItClasses = m_qmBaseClasses.begin();
+                        QMap<qint64,qint64>::const_iterator iItClassesEnd = m_qmBaseClasses.end();
 
                         for(; iItClasses != iItClassesEnd; ++iItClasses)
                         {
@@ -1474,8 +1474,8 @@ void CdmClass::ResetNewModified()
     SYNCHRONIZED_WRITE;
     CdmModelElement::ResetNewModified();
 
-    QMap<long,CdmMember*>::iterator qmIt    = m_qmMembers.begin();
-    QMap<long,CdmMember*>::iterator qmItEnd = m_qmMembers.end();
+    QMap<qint64,CdmMember*>::iterator qmIt    = m_qmMembers.begin();
+    QMap<qint64,CdmMember*>::iterator qmItEnd = m_qmMembers.end();
 
     for ( ; qmIt != qmItEnd; ++qmIt )
     {
@@ -1534,8 +1534,8 @@ QString CdmClass::GenerateDocumentation() const
         qstrDocument += "<h3>Baseclasses:</h3>\n";
         qstrDocument += "<p>";
 
-        QMap<long,long>::const_iterator iItClasses = m_qmBaseClasses.begin();
-        QMap<long,long>::const_iterator iItClassesEnd = m_qmBaseClasses.end();
+        QMap<qint64,qint64>::const_iterator iItClasses = m_qmBaseClasses.begin();
+        QMap<qint64,qint64>::const_iterator iItClassesEnd = m_qmBaseClasses.end();
 
         if(pCdmClassManager)
         {
@@ -1569,8 +1569,8 @@ QString CdmClass::GenerateDocumentation() const
         qstrDocument += "<td><b>References</b></td>";
         qstrDocument += "</tr>";
 
-        QMap<long,CdmMember*>::const_iterator iIt = m_qmMembers.begin();
-        QMap<long,CdmMember*>::const_iterator iItEnd = m_qmMembers.end();
+        QMap<qint64,CdmMember*>::const_iterator iIt = m_qmMembers.begin();
+        QMap<qint64,CdmMember*>::const_iterator iItEnd = m_qmMembers.end();
 
         for ( ; iIt != iItEnd; ++iIt )
         {
@@ -1612,8 +1612,8 @@ int CdmClass::XmlExport(QDomElement& p_rqdeClassManager) const
     QDomElement qdeTag = qddDocument.createElement("Base Classes");
     qdeRoot.appendChild(qdeTag);
 
-    QMap<long,long>::const_iterator iItClasses = m_qmBaseClasses.begin();
-    QMap<long,long>::const_iterator iItClassesEnd = m_qmBaseClasses.end();
+    QMap<qint64,qint64>::const_iterator iItClasses = m_qmBaseClasses.begin();
+    QMap<qint64,qint64>::const_iterator iItClassesEnd = m_qmBaseClasses.end();
 
     CdmClassManager* pCdmClassManager = GetClassManager();
 
@@ -1632,8 +1632,8 @@ int CdmClass::XmlExport(QDomElement& p_rqdeClassManager) const
     qdeTag = qddDocument.createElement("Class Members");
     qdeRoot.appendChild(qdeTag);
 
-    QMap<long,CdmMember*>::const_iterator iIt = m_qmMembers.begin();
-    QMap<long,CdmMember*>::const_iterator iItEnd = m_qmMembers.end();
+    QMap<qint64,CdmMember*>::const_iterator iIt = m_qmMembers.begin();
+    QMap<qint64,CdmMember*>::const_iterator iItEnd = m_qmMembers.end();
 
     for ( ; iIt != iItEnd; ++iIt )
     {
@@ -1791,10 +1791,10 @@ void CdmClass::SetAbstract(bool p_bAbstract)
 
 /** +-=---------------------------------------------------------Mi 7. Aug 20:04:39 2013-----------*
  * @method  CdmClass::GetCaptionMemberId                     // public, const                     *
- * @return  long                                             //                                   *
+ * @return qint64                                             //                                   *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------Mi 7. Aug 20:04:39 2013-----------*/
-long CdmClass::GetCaptionMemberId() const
+qint64 CdmClass::GetCaptionMemberId() const
 {
     return m_lCaptionMember.load();
 }
@@ -1853,8 +1853,8 @@ QString CdmClass::GetCaptionMemberKeyname() const
         }
         else // if not take the first member in class
         {
-            QMap<long, CdmMember*>::const_iterator qmIt = m_qmMembers.begin();
-            QMap<long, CdmMember*>::const_iterator qmItEnd = m_qmMembers.end();
+            QMap<qint64, CdmMember*>::const_iterator qmIt = m_qmMembers.begin();
+            QMap<qint64, CdmMember*>::const_iterator qmItEnd = m_qmMembers.end();
             WARNING("No Caption Member and no non private Name member found. Looking for the first non private Member for displaying")
 
             for (; qmIt != qmItEnd; ++qmIt)
@@ -1916,10 +1916,10 @@ void CdmClass::SetCaptionMember(CdmMember* p_pMember)
 /** +-=---------------------------------------------------------Mi 7. Aug 19:50:11 2013-----------*
  * @method  CdmClass::SetCaptionMember                       // public                            *
  * @return  void                                             //                                   *
- * @param   long p_lMemberId                                 //                                   *
+ * @param  qint64 p_lMemberId                                 //                                   *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------Mi 7. Aug 19:50:11 2013-----------*/
-void CdmClass::SetCaptionMember(long p_lMemberId)
+void CdmClass::SetCaptionMember(qint64 p_lMemberId)
 {
     if (p_lMemberId != m_lCaptionMember.load())
     {
@@ -1928,12 +1928,12 @@ void CdmClass::SetCaptionMember(long p_lMemberId)
     }
 }
 
-void CdmClass::SetMemberSequenceString(QMap<long,QString>& p_Sequence)
+void CdmClass::SetMemberSequenceString(QMap<qint64,QString>& p_Sequence)
 {
     SYNCHRONIZED_WRITE;
     if (!p_Sequence.isEmpty())
     {
-        QMapIterator<long,QString> i(p_Sequence);
+        QMapIterator<qint64,QString> i(p_Sequence);
         while (i.hasNext()) {
             i.next();
 
@@ -1945,10 +1945,10 @@ void CdmClass::SetMemberSequenceString(QMap<long,QString>& p_Sequence)
     }
     else
     {
-        QMap<long, CdmMember*> qmMembers;
+        QMap<qint64, CdmMember*> qmMembers;
         GetMemberMap(qmMembers);
 
-        QMapIterator<long, CdmMember*> qmIt(qmMembers);
+        QMapIterator<qint64, CdmMember*> qmIt(qmMembers);
         while (qmIt.hasNext())
         {
             qmIt.next();
@@ -1993,10 +1993,10 @@ void CdmClass::SetMemberSequenceString(QString p_qstrSequence)
     }
     else
     {
-        QMap<long, CdmMember*> qmMembers;
+        QMap<qint64, CdmMember*> qmMembers;
         GetMemberMap(qmMembers);
 
-        QMapIterator<long, CdmMember*> qmIt(qmMembers);
+        QMapIterator<qint64, CdmMember*> qmIt(qmMembers);
         while (qmIt.hasNext())
         {
             qmIt.next();
@@ -2043,11 +2043,11 @@ QVector<QString> CdmClass::GetMemberSequence() const
     SYNCHRONIZED_READ;
     if (m_qlMemberSequence.isEmpty() || m_qlMemberSequence.count() < m_qmMembers.count())
     {
-        QMap<long, CdmMember*> qmMembers;
+        QMap<qint64, CdmMember*> qmMembers;
         GetMemberMap(qmMembers);
         bool bModified = false;
-        QMap<long, CdmMember*>::const_iterator qmIt = qmMembers.begin();
-        QMap<long, CdmMember*>::const_iterator qmItEnd = qmMembers.end();
+        QMap<qint64, CdmMember*>::const_iterator qmIt = qmMembers.begin();
+        QMap<qint64, CdmMember*>::const_iterator qmItEnd = qmMembers.end();
 
         for (; qmIt != qmItEnd; ++qmIt)
         {
@@ -2189,11 +2189,11 @@ void CdmClass::DeleteGroup(int p_iId)
             }
 
             m_qmGroups = qmGroupMap;
-            QMap<long,CdmMember*> qmMap;
+            QMap<qint64,CdmMember*> qmMap;
             GetMemberMap(qmMap);
 
-            QMap<long,CdmMember*>::iterator iIt = qmMap.begin();
-            QMap<long,CdmMember*>::iterator iItEnd = qmMap.end();
+            QMap<qint64,CdmMember*>::iterator iIt = qmMap.begin();
+            QMap<qint64,CdmMember*>::iterator iItEnd = qmMap.end();
 
             for(; iIt != iItEnd; ++iIt)
             {
@@ -2361,8 +2361,8 @@ void CdmClass::GetGroups(QMap<int, CdmClassGroup*>& p_qmGroups, int iIteration) 
         {
             CdmClass* pCdmClass = nullptr;
 
-            QMap<long,long>::const_iterator iItClasses = m_qmBaseClasses.begin();
-            QMap<long,long>::const_iterator iItClassesEnd = m_qmBaseClasses.end();
+            QMap<qint64,qint64>::const_iterator iItClasses = m_qmBaseClasses.begin();
+            QMap<qint64,qint64>::const_iterator iItClassesEnd = m_qmBaseClasses.end();
 
             for (int iCounter = 1; iItClasses != iItClassesEnd; ++iItClasses, ++iCounter)
             {
@@ -2463,12 +2463,12 @@ bool CdmClass::HasMethod(QString p_qstrName) const
 
         if(pCdmClassManager)
         {
-            QMap<long,long>::const_iterator iItClasses = m_qmBaseClasses.begin();
-            QMap<long,long>::const_iterator iItClassesEnd = m_qmBaseClasses.end();
+            QMap<qint64,qint64>::const_iterator iItClasses = m_qmBaseClasses.begin();
+            QMap<qint64,qint64>::const_iterator iItClassesEnd = m_qmBaseClasses.end();
 
             for (; iItClasses != iItClassesEnd; ++iItClasses)
             {
-                long lId = iItClasses.value();
+               qint64 lId = iItClasses.value();
                 CdmClass* pCdmClass = pCdmClassManager->FindClassById(lId);
 
                 if(pCdmClass)
@@ -2513,8 +2513,8 @@ CdmClassMethod* CdmClass::FindMethod(QString p_qstrName)
             {
                 CdmClass* pCdmClass = nullptr;
 
-                QMap<long,long>::iterator iItClasses = m_qmBaseClasses.begin();
-                QMap<long,long>::iterator iItClassesEnd = m_qmBaseClasses.end();
+                QMap<qint64,qint64>::iterator iItClasses = m_qmBaseClasses.begin();
+                QMap<qint64,qint64>::iterator iItClassesEnd = m_qmBaseClasses.end();
 
                 for (; iItClasses != iItClassesEnd; ++iItClasses)
                 {
@@ -2624,8 +2624,8 @@ CdmClassValidator* CdmClass::FindValidation(QString p_qstrName)
             {
                 CdmClass* pCdmClass = nullptr;
 
-                QMap<long,long>::iterator iItClasses = m_qmBaseClasses.begin();
-                QMap<long,long>::iterator iItClassesEnd = m_qmBaseClasses.end();
+                QMap<qint64,qint64>::iterator iItClasses = m_qmBaseClasses.begin();
+                QMap<qint64,qint64>::iterator iItClassesEnd = m_qmBaseClasses.end();
 
                 for (; iItClasses != iItClassesEnd; ++iItClasses)
                 {
@@ -2737,11 +2737,11 @@ QVariant CdmClass::GetVariant() const
         qmVariant.insert(WMS_PACKAGE, "");
     }
 
-    qmVariant.insert(WMS_BASECLASSCOUNTER, (int)m_lBaseClassCounter.load());
+    qmVariant.insert(WMS_BASECLASSCOUNTER, m_lBaseClassCounter.load());
     qvAnnotation.insert(WMS_COMMENT, m_qstrComment);
 
-    QMap<long,CdmMember*>::const_iterator qmIt = m_qmMembers.begin();
-    QMap<long,CdmMember*>::const_iterator qmItEnd = m_qmMembers.end();
+    QMap<qint64,CdmMember*>::const_iterator qmIt = m_qmMembers.begin();
+    QMap<qint64,CdmMember*>::const_iterator qmItEnd = m_qmMembers.end();
 
     for (; qmIt != qmItEnd; ++qmIt)
     {
@@ -2769,8 +2769,8 @@ QVariant CdmClass::GetVariant() const
 
     qmVariant.insert(WMS_MEMBERSEQUENCE, qlMemberSequence);
 
-    QMap<long,long>::const_iterator qmItBC = m_qmBaseClasses.begin();
-    QMap<long,long>::const_iterator qmItEndBC = m_qmBaseClasses.end();
+    QMap<qint64,qint64>::const_iterator qmItBC = m_qmBaseClasses.begin();
+    QMap<qint64,qint64>::const_iterator qmItEndBC = m_qmBaseClasses.end();
     QVariantMap qmBaseclasses;
 
     for (; qmItBC != qmItEndBC; ++qmItBC)
@@ -2784,8 +2784,8 @@ QVariant CdmClass::GetVariant() const
             if (CHKPTR(pClass))
             {
                 QVariantMap qvHash;
-                qvHash.insert(WMS_CLASSID, (int)pClass->GetId());
-                qvHash.insert(WMS_POS, (int)qmItBC.key());
+                qvHash.insert(WMS_CLASSID, pClass->GetId());
+                qvHash.insert(WMS_POS, qmItBC.key());
                 qvHash.insert(WMS_KEYNAME, pClass->GetFullQualifiedName());
                 qvHash.insert(WMS_URI, pClass->GetUriInternal());
 
@@ -2853,10 +2853,10 @@ QVariant CdmClass::GetVariant() const
 /** +-=---------------------------------------------------------Mo 19. Nov 16:58:40 2012----------*
  * @method  CdmClass::FindGroupById                          // public, slots                     *
  * @return  CdmClassGroup*                                   //                                   *
- * @param   long p_lGroupId                                  //                                   *
+ * @param  qint64 p_lGroupId                                  //                                   *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------Mo 19. Nov 16:58:40 2012----------*/
-CdmClassGroup* CdmClass::FindGroupById(long p_lGroupId)
+CdmClassGroup* CdmClass::FindGroupById(qint64 p_lGroupId)
 {
     SYNCHRONIZED_READ;
     CdmClassGroup* pCdmGroup = nullptr;
@@ -2886,8 +2886,8 @@ CdmClassGroup* CdmClass::FindGroupById(long p_lGroupId)
         CdmClassManager* pCdmClassManager = GetClassManager();
         if (pCdmClassManager)
         {
-            QMap<long,long>::const_iterator iItClasses = m_qmBaseClasses.begin();
-            QMap<long,long>::const_iterator iItClassesEnd = m_qmBaseClasses.end();
+            QMap<qint64,qint64>::const_iterator iItClasses = m_qmBaseClasses.begin();
+            QMap<qint64,qint64>::const_iterator iItClassesEnd = m_qmBaseClasses.end();
 
             for (int iCounter = 1; iItClasses != iItClassesEnd; ++iItClasses, ++iCounter)
             {
@@ -2912,10 +2912,10 @@ CdmClassGroup* CdmClass::FindGroupById(long p_lGroupId)
 /** +-=---------------------------------------------------------Mo 19. Nov 16:58:49 2012----------*
  * @method  CdmClass::FindGroupPosById                       // public, slots                     *
  * @return  int                                              //                                   *
- * @param   long p_lGroupId                                  //                                   *
+ * @param  qint64 p_lGroupId                                  //                                   *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------Mo 19. Nov 16:58:49 2012----------*/
-int CdmClass::FindGroupPosById(long p_lGroupId)
+int CdmClass::FindGroupPosById(qint64 p_lGroupId)
 {
     SYNCHRONIZED_READ;
     int iRet = 0;
@@ -2971,8 +2971,8 @@ CdmClassGroup* CdmClass::FindGroupByName(QString p_qstrName)
         CdmClassManager* pCdmClassManager = GetClassManager();
         if (pCdmClassManager)
         {
-            QMap<long,long>::const_iterator iItClasses = m_qmBaseClasses.begin();
-            QMap<long,long>::const_iterator iItClassesEnd = m_qmBaseClasses.end();
+            QMap<qint64,qint64>::const_iterator iItClasses = m_qmBaseClasses.begin();
+            QMap<qint64,qint64>::const_iterator iItClassesEnd = m_qmBaseClasses.end();
 
             for (int iCounter = 1; iItClasses != iItClassesEnd; ++iItClasses, ++iCounter)
             {
@@ -3011,8 +3011,8 @@ void CdmClass::ParseBaseClasses(QVariantMap& p_rqHash)
     {
         QString qstrKeyname = qIt.key();
         QVariantMap qvHash = qIt.value().toMap();
-        long lPos = qvHash["Pos"].toInt();
-        long lClassId = qvHash["ClassId"].toInt();
+       qint64 lPos = qvHash["Pos"].toInt();
+       qint64 lClassId = qvHash["ClassId"].toInt();
         m_qmBaseClasses.insert(lPos, lClassId);
     }
 }
@@ -3037,7 +3037,7 @@ void CdmClass::ParseMembers(QVariantList& p_rqHash)
         if (pCdmMember == nullptr)
         {
             pCdmMember = new CdmMember(qMember, GetId());
-            long lId = pCdmMember->GetId();
+           qint64 lId = pCdmMember->GetId();
             m_qmMembers.insert(lId, pCdmMember);
         }
         else
@@ -3147,8 +3147,8 @@ QMap<QString, CdmClassMethod*> CdmClass::GetAllMethods()
     if(CHKPTR(pCdmClassManager))
     {
         CdmClass* pCdmClass = nullptr;
-        QMap<long,long>::iterator iItClasses = m_qmBaseClasses.begin();
-        QMap<long,long>::iterator iItClassesEnd = m_qmBaseClasses.end();
+        QMap<qint64,qint64>::iterator iItClasses = m_qmBaseClasses.begin();
+        QMap<qint64,qint64>::iterator iItClassesEnd = m_qmBaseClasses.end();
 
         for (; iItClasses != iItClassesEnd; ++iItClasses)
         {
@@ -3242,8 +3242,8 @@ const CdmMember* CdmClass::FindMember(int p_iId) const
     else
     {
         CdmClassManager* pCdmClassManager = GetClassManager();
-        QMap<long,long>::const_iterator iItClasses = m_qmBaseClasses.begin();
-        QMap<long,long>::const_iterator iItClassesEnd = m_qmBaseClasses.end();
+        QMap<qint64,qint64>::const_iterator iItClasses = m_qmBaseClasses.begin();
+        QMap<qint64,qint64>::const_iterator iItClassesEnd = m_qmBaseClasses.end();
 
         for (int iCounter = 1; iItClasses != iItClassesEnd; ++iItClasses, ++iCounter)
         {
@@ -3475,7 +3475,7 @@ void CdmClass::DeployBaseClasses(QVariantMap& p_rqHash)
     for (; qIt != qItEnd; ++qIt)
     {
         QVariantMap qvHash = qIt.value().toMap();
-        long lPos = qvHash[WMS_POS].toInt();
+       qint64 lPos = qvHash[WMS_POS].toInt();
         QString qstrKeyname = qvHash[WMS_KEYNAME].toString();
 
         CdmClassManager* pClassManager = GetClassManager();
@@ -3486,7 +3486,7 @@ void CdmClass::DeployBaseClasses(QVariantMap& p_rqHash)
 
             if (CHKPTR(pClass))
             {
-                long lId = pClass->GetId();
+               qint64 lId = pClass->GetId();
 
                 if (m_qmBaseClasses.contains(lPos))
                 {
@@ -3539,7 +3539,7 @@ QString CdmClass::GetUriInternal() const
     return CreateUriPath(qstrType, GetFullQualifiedName(), "", "");
 }
 
-bool CdmClass::IsTypeOf(long p_lClassId)
+bool CdmClass::IsTypeOf(qint64 p_lClassId)
 {
     SYNCHRONIZED_READ;
     bool bRet = false;
@@ -3548,8 +3548,8 @@ bool CdmClass::IsTypeOf(long p_lClassId)
 
     if (CHKPTR(pClassManager))
     {
-        QMap<long,long>::const_iterator qmIt = m_qmBaseClasses.begin();
-        QMap<long,long>::const_iterator qmItEnd = m_qmBaseClasses.end();
+        QMap<qint64,qint64>::const_iterator qmIt = m_qmBaseClasses.begin();
+        QMap<qint64,qint64>::const_iterator qmItEnd = m_qmBaseClasses.end();
 
         for (; qmIt != qmItEnd; ++qmIt)
         {
@@ -3578,10 +3578,10 @@ bool CdmClass::IsTypeOf(long p_lClassId)
     return bRet;
 }
 
-QList<long> CdmClass::GetDerivedClasses() const
+QList<qint64> CdmClass::GetDerivedClasses() const
 {
     SYNCHRONIZED_READ;
-    QList<long> qlDerivedClasses;
+    QList<qint64> qlDerivedClasses;
     CdmClassManager* pClassManager = GetClassManager();
 
     if (CHKPTR(pClassManager))

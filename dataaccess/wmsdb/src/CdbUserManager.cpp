@@ -69,7 +69,7 @@ CdbUserManager::~CdbUserManager(  )
    // nothing to do here
 }
 
-long CdbUserManager::CreateUser(CumUser* p_pUser)
+qint64 CdbUserManager::CreateUser(CumUser* p_pUser)
 {
     CdbCommandCreateUser command(p_pUser,
                                  m_pCdbDataAccess);
@@ -78,17 +78,17 @@ long CdbUserManager::CreateUser(CumUser* p_pUser)
 
 /** +-=---------------------------------------------------------Sa 20. Aug 12:15:01 2005----------*
  * @method  CdbUserManager::DeleteUser                     // public                            *
- * @return  long                                             //                                   *
+ * @return qint64                                             //                                   *
  * @param   QString p_qstrLogin                              //                                   *
  * @comment This method deletes an user.                                                          *
  *----------------last changed: --------------------------------Sa 20. Aug 12:15:01 2005----------*/
-long CdbUserManager::DeleteUser(  QString p_qstrLogin )
+qint64 CdbUserManager::DeleteUser(  QString p_qstrLogin )
 {
    CdbCommandDeleteUser command(p_qstrLogin, m_pCdbDataAccess);
    return command.Run();
 }
 
-long CdbUserManager::DeleteUser(long p_lUserId)
+qint64 CdbUserManager::DeleteUser(qint64 p_lUserId)
 {
     CdbCommandDeleteUser command(p_lUserId, m_pCdbDataAccess);
     return command.Run();
@@ -170,10 +170,10 @@ bool CdbUserManager::CheckAuthorisation(QString p_qstrLogin, QString p_qstrPassw
 /** +-=---------------------------------------------------------Sa 20. Aug 12:16:30 2005----------*
  * @method  CdbUserManager::FindUser                       // public                            *
  * @return  CumUser*                                         //                                   *
- * @param   long p_lUserId                                   //                                   *
+ * @param  qint64 p_lUserId                                   //                                   *
  * @comment This emthod finds an user and returns it if found, if not nullptr will returned.         *
  *----------------last changed: --------------------------------Sa 20. Aug 12:16:30 2005----------*/
-CumUser* CdbUserManager::FindUser(long p_lUserId)
+CumUser* CdbUserManager::FindUser(qint64 p_lUserId)
 {
     CumUser* pCumUser = nullptr;
     CdbCommandFindUser command(p_lUserId, m_pCdbDataAccess);
@@ -213,7 +213,7 @@ CumUser* CdbUserManager::FindUserByEmail(QString p_qstrEmail, QString p_qstrSche
     return pCumUser;
 }
 
-long CdbUserManager::UpdateUser(CumUser* p_pUser)
+qint64 CdbUserManager::UpdateUser(CumUser* p_pUser)
 {
     CdbCommandUpdateUser command(p_pUser,
                                  m_pCdbDataAccess);
@@ -221,9 +221,9 @@ long CdbUserManager::UpdateUser(CumUser* p_pUser)
    return command.Run();
 }
 
-long CdbUserManager::GetUserList(QList<CumUser*>& p_qvlUsers)
+qint64 CdbUserManager::GetUserList(QList<CumUser*>& p_qvlUsers)
 {
-    long lRet = 0;
+   qint64 lRet = 0;
     CdbCommandGetUserList command(m_pCdbDataAccess);
     lRet = command.Run();
     p_qvlUsers = command.GetResult();
@@ -232,11 +232,11 @@ long CdbUserManager::GetUserList(QList<CumUser*>& p_qvlUsers)
 
 /** +-=---------------------------------------------------------Sa 20. Aug 12:17:07 2005----------*
  * @method  CdbUserManager::ExistUser                      // public                            *
- * @return  long                                             //                                   *
+ * @return qint64                                             //                                   *
  * @param   QString p_qstrLogin                              //                                   *
  * @comment returns true if the user exists or false if not.                                      *
  *----------------last changed: --------------------------------Sa 20. Aug 12:17:07 2005----------*/
-long CdbUserManager::ExistUser(QString p_qstrLogin)
+qint64 CdbUserManager::ExistUser(QString p_qstrLogin)
 {
    CdbCommandExistUser command(p_qstrLogin, m_pCdbDataAccess);
    return command.Run();
@@ -244,12 +244,12 @@ long CdbUserManager::ExistUser(QString p_qstrLogin)
 
 /** +-=---------------------------------------------------------Mo 5. Sep 19:40:05 2005-----------*
  * @method  CdbUserManager::RenameUserGroup                // public, virtual                   *
- * @return  long                                             //                                   *
- * @param   long p_lGroupId                                  //                                   *
+ * @return qint64                                             //                                   *
+ * @param  qint64 p_lGroupId                                  //                                   *
  * @param   QString p_qstrNewName                            //                                   *
  * @comment This method renames the Usergroup.                                                    *
  *----------------last changed: --------------------------------Mo 5. Sep 19:40:05 2005-----------*/
-long CdbUserManager::RenameUserGroup(long p_lGroupId, QString p_qstrNewName)
+qint64 CdbUserManager::RenameUserGroup(qint64 p_lGroupId, QString p_qstrNewName)
 {
     CdbCommandRenameUserGroup command(p_lGroupId, p_qstrNewName, m_pCdbDataAccess);
     return command.Run();
@@ -257,11 +257,11 @@ long CdbUserManager::RenameUserGroup(long p_lGroupId, QString p_qstrNewName)
 
 /** +-=---------------------------------------------------------Mo 5. Sep 19:40:44 2005-----------*
  * @method  CdbUserManager::CreateUserGroup                // public, virtual                   *
- * @return  long                                             //                                   *
+ * @return qint64                                             //                                   *
  * @param   QString p_qstrGroupName                          //                                   *
  * @comment This method creates a new usergroup.                                                  *
  *----------------last changed: --------------------------------Mo 5. Sep 19:40:44 2005-----------*/
-long CdbUserManager::CreateUserGroup(QString p_qstrGroupName)
+qint64 CdbUserManager::CreateUserGroup(QString p_qstrGroupName)
 {
     CdbCommandCreateUserGroup command(p_qstrGroupName, m_pCdbDataAccess);
     return command.Run();
@@ -269,11 +269,11 @@ long CdbUserManager::CreateUserGroup(QString p_qstrGroupName)
 
 /** +-=---------------------------------------------------------Sa 20. Aug 12:17:20 2005----------*
  * @method  CdbUserManager::DeleteUserGroup                // public                            *
- * @return  long                                             //                                   *
- * @param   long p_llGroupId                                 //                                   *
+ * @return qint64                                             //                                   *
+ * @param  qint64 p_llGroupId                                 //                                   *
  * @comment This method deletes a usergroup.                                                      *
  *----------------last changed: --------------------------------Sa 20. Aug 12:17:20 2005----------*/
-long CdbUserManager::DeleteUserGroup(long p_llGroupId)
+qint64 CdbUserManager::DeleteUserGroup(qint64 p_llGroupId)
 {
    CdbCommandDeleteUserGroup command(p_llGroupId, m_pCdbDataAccess);
    return command.Run();
@@ -281,12 +281,12 @@ long CdbUserManager::DeleteUserGroup(long p_llGroupId)
 
 /** +-=---------------------------------------------------------Sa 20. Aug 12:17:23 2005----------*
  * @method  CdbUserManager::AddUserToUserGroup             // public                            *
- * @return  long                                             //                                   *
- * @param   long p_lUserId                                   //                                   *
- * @param   long p_lUserGroupId                              //                                   *
+ * @return qint64                                             //                                   *
+ * @param  qint64 p_lUserId                                   //                                   *
+ * @param  qint64 p_lUserGroupId                              //                                   *
  * @comment This method adds an user to an usergroup.                                             *
  *----------------last changed: --------------------------------Sa 20. Aug 12:17:23 2005----------*/
-long CdbUserManager::AddUserToUserGroup(long p_lUserId, long p_lUserGroupId)
+qint64 CdbUserManager::AddUserToUserGroup(qint64 p_lUserId,qint64 p_lUserGroupId)
 {
    CdbCommandAddUserToUserGroup command(p_lUserId, p_lUserGroupId, m_pCdbDataAccess);
    return command.Run();
@@ -294,20 +294,20 @@ long CdbUserManager::AddUserToUserGroup(long p_lUserId, long p_lUserGroupId)
 
 /** +-=---------------------------------------------------------Sa 20. Aug 12:17:26 2005----------*
  * @method  CdbUserManager::RemoveUserFromGroup            // public                            *
- * @return  long                                             //                                   *
- * @param   long p_lUserId                                   //                                   *
- * @param   long p_lUserGroupId                              //                                   *
+ * @return qint64                                             //                                   *
+ * @param  qint64 p_lUserId                                   //                                   *
+ * @param  qint64 p_lUserGroupId                              //                                   *
  * @comment This method removes an user from an usergroup.                                        *
  *----------------last changed: --------------------------------Sa 20. Aug 12:17:26 2005----------*/
-long CdbUserManager::RemoveUserFromGroup(long p_lUserId, long p_lUserGroupId)
+qint64 CdbUserManager::RemoveUserFromGroup(qint64 p_lUserId,qint64 p_lUserGroupId)
 {
     CdbCommandRemoveUserFromUserGroup command(p_lUserId, p_lUserGroupId, m_pCdbDataAccess);
     return command.Run();
 }
 
-long CdbUserManager::GetUserGroupList(QList<CumUserGroup*>& p_rqvlUserGroups, QString p_qstrSchemeUri)
+qint64 CdbUserManager::GetUserGroupList(QList<CumUserGroup*>& p_rqvlUserGroups, QString p_qstrSchemeUri)
 {
-   long lRet = CdmLogging::eDmUnknownUserQueryError;
+  qint64 lRet = CdmLogging::eDmUnknownUserQueryError;
    CdbCommandGetUserGroupList command(m_pCdbDataAccess, p_qstrSchemeUri);
    lRet = command.Run();
    p_rqvlUserGroups = command.GetResult();
@@ -316,31 +316,31 @@ long CdbUserManager::GetUserGroupList(QList<CumUserGroup*>& p_rqvlUserGroups, QS
 
 /** +-=---------------------------------------------------------Sa 20. Aug 12:17:33 2005----------*
  * @method  CdbUserManager::GetListOfUsersInList           // public                            *
- * @return  long                                             //                                   *
- * @param   long p_lUserGroupId                              //                                   *
+ * @return qint64                                             //                                   *
+ * @param  qint64 p_lUserGroupId                              //                                   *
  * @param   QValueList<CumUser*>& p_rqvlUserList             //                                   *
  * @comment This method returns a list of User in usergroup p_lUserGroupId.                       *
  *----------------last changed: --------------------------------Sa 20. Aug 12:17:33 2005----------*/
-long CdbUserManager::GetListOfUsersInList(long p_lUserGroupId,
+qint64 CdbUserManager::GetListOfUsersInList(qint64 p_lUserGroupId,
                                           QList<CumUser*>& p_rqvlUserList)
 {
    CdbCommandGetGroupUserList command(p_lUserGroupId, m_pCdbDataAccess);
-   long lRet = command.Run();
+  qint64 lRet = command.Run();
    p_rqvlUserList = command.GetResult();
    return lRet;
 }
 
 /** +-=---------------------------------------------------------Sa 20. Aug 12:17:37 2005----------*
  * @method  CdbUserManager::GetUserGroupMemberList         // public                            *
- * @return  long                                             //                                   *
- * @param   long p_lUserId                                   //                                   *
+ * @return qint64                                             //                                   *
+ * @param  qint64 p_lUserId                                   //                                   *
  * @param   QValueList<CumUserGroup*>& p_qvlUserGroups       //                                   *
  * @comment This method returns a list of groups in which a is member.                            *
  *----------------last changed: --------------------------------Sa 20. Aug 12:17:37 2005----------*/
-long CdbUserManager::GetUserGroupMemberList(long p_lUserId,
+qint64 CdbUserManager::GetUserGroupMemberList(qint64 p_lUserId,
                                             QList<CumUserGroup*>& p_qvlUserGroups)
 {
-   long lRet = CdmLogging::eDmUnknownUserQueryError;
+  qint64 lRet = CdmLogging::eDmUnknownUserQueryError;
    CdbCommandGetGroupsOfUser command(p_lUserId, m_pCdbDataAccess);
    lRet = command.Run();
    p_qvlUserGroups = command.GetResult();
@@ -350,10 +350,10 @@ long CdbUserManager::GetUserGroupMemberList(long p_lUserId,
 /** +-=---------------------------------------------------------Sa 20. Aug 12:17:49 2005----------*
  * @method  CdbUserManager::FindUserGroup                  // public                            *
  * @return  CumUserGroup*                                    //                                   *
- * @param   long p_lGroupId                                  //                                   *
+ * @param  qint64 p_lGroupId                                  //                                   *
  * @comment This emthod returns the group with the id.                                            *
  *----------------last changed: --------------------------------Sa 20. Aug 12:17:49 2005----------*/
-CumUserGroup* CdbUserManager::FindUserGroup(long p_lGroupId)
+CumUserGroup* CdbUserManager::FindUserGroup(qint64 p_lGroupId)
 {
    CdbCommandFindUserGroup command(p_lGroupId, m_pCdbDataAccess);
    command.Run();

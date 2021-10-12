@@ -3,7 +3,7 @@
 
 #include "CdbCommandFindSession.h"
 
-CdbCommandFindSession::CdbCommandFindSession(long p_lSessionId, long p_lUserId, CdbDataAccess* p_pDataAccess)
+CdbCommandFindSession::CdbCommandFindSession(qint64 p_lSessionId,qint64 p_lUserId, CdbDataAccess* p_pDataAccess)
 : CdbAbstractCommand(p_pDataAccess),
   m_lSessionId(p_lSessionId),
   m_lUserId(p_lUserId),
@@ -11,7 +11,7 @@ CdbCommandFindSession::CdbCommandFindSession(long p_lSessionId, long p_lUserId, 
 {
 }
 
-CdbCommandFindSession::CdbCommandFindSession(long p_lSessionId, CdbDataAccess* p_pDataAccess)
+CdbCommandFindSession::CdbCommandFindSession(qint64 p_lSessionId, CdbDataAccess* p_pDataAccess)
 : CdbAbstractCommand(p_pDataAccess),
   m_lSessionId(p_lSessionId),
   m_lUserId(0),

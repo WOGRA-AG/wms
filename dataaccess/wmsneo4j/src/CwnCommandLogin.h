@@ -19,7 +19,7 @@ private:
     QString m_qstrVersion;
     bool m_bDemo;
     int m_iModules;
-    long m_lNewSession;
+   qint64 m_lNewSession;
     CumUser* m_pCumUser;
 
 public:
@@ -32,7 +32,7 @@ public:
 
     virtual ~CwnCommandLogin();
 
-    long GetSessionId();
+   qint64 GetSessionId();
     bool IsDemo();
     int GetModules();
     CumUser *GetUser();

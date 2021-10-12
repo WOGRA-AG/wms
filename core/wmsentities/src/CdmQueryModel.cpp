@@ -326,7 +326,7 @@ CdmObject* CdmQueryModel::GetObject(const QModelIndex & p_qmIndex)
     CdmObject* pCdmObject = nullptr;
 
     BODY_TRY
-    long lObjectId = 0;
+   qint64 lObjectId = 0;
 
     if (m_pCdmQuery && m_pCdmQuery->IsObjectListTree())
     {
@@ -693,7 +693,7 @@ bool CdmQueryModel::hasChildren(const QModelIndex & parent) const
     return bRet;
 }
 
-void CdmQueryModel::ObjectCommitedEvent(long)
+void CdmQueryModel::ObjectCommitedEvent(qint64)
 {
     UpdateSlot();
 }

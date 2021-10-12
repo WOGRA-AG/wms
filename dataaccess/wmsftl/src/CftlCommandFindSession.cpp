@@ -2,7 +2,7 @@
 
 #include "CftlCommandFindSession.h"
 
-CftlCommandFindSession::CftlCommandFindSession(long p_lSessionId, long p_lUserId, CftlDataAccess* p_pDataAccess)
+CftlCommandFindSession::CftlCommandFindSession(qint64 p_lSessionId,qint64 p_lUserId, CftlDataAccess* p_pDataAccess)
 : CftlAbstractCommand(p_pDataAccess),
   m_lSessionId(p_lSessionId),
   m_lUserId(p_lUserId),
@@ -10,7 +10,7 @@ CftlCommandFindSession::CftlCommandFindSession(long p_lSessionId, long p_lUserId
 {
 }
 
-CftlCommandFindSession::CftlCommandFindSession(long p_lSessionId, CftlDataAccess* p_pDataAccess)
+CftlCommandFindSession::CftlCommandFindSession(qint64 p_lSessionId, CftlDataAccess* p_pDataAccess)
 : CftlAbstractCommand(p_pDataAccess),
   m_lSessionId(p_lSessionId),
   m_lUserId(0),
@@ -56,8 +56,8 @@ int CftlCommandFindSession::FindSessionBySessionIdAndUserId()
     int iRet = CdmLogging::eDmUnknownLoginManagerError;
     QSqlQuery cQSqlQuery(GetSqlDatabase());
     cQSqlQuery.prepare("select State, SessionId, UserId from WMS_UM_SESSION where SessionId = ? and UserId = ?");
-    cQSqlQuery.addBindValue((int)m_lSessionId);
-    cQSqlQuery.addBindValue((int)m_lUserId);
+    cQSqlQuery.addBindValue(m_lSessionId);
+    cQSqlQuery.addBindValue(m_lUserId);
 
     if(SUCCESSFULL(ExecuteQuery(cQSqlQuery)))
     {
@@ -94,7 +94,7 @@ int CftlCommandFindSession::FindSessionBySessionId()
     int iRet = CdmLogging::eDmUnknownLoginManagerError;
     QSqlQuery cQSqlQuery(GetSqlDatabase());
     cQSqlQuery.prepare("select State, SessionId, UserId from WMS_UM_SESSION where SessionId = ?");
-    cQSqlQuery.addBindValue((int)m_lSessionId);
+    cQSqlQuery.addBindValue(m_lSessionId);
 
     if(SUCCESSFULL(ExecuteQuery(cQSqlQuery)))
     {

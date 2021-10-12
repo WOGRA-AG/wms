@@ -91,11 +91,11 @@ void CwmsSymbolSearch::MemberSearch(CdmClass* p_pClass)
 {
     if (CHKPTR(p_pClass))
     {
-        QMap<long, CdmMember*> qmMembers;
+        QMap<qint64, CdmMember*> qmMembers;
         p_pClass->GetMemberMap(qmMembers);
 
-        QMap<long, CdmMember*>::iterator qmIt = qmMembers.begin();
-        QMap<long, CdmMember*>::iterator qmItEnd = qmMembers.end();
+        QMap<qint64, CdmMember*>::iterator qmIt = qmMembers.begin();
+        QMap<qint64, CdmMember*>::iterator qmItEnd = qmMembers.end();
 
         for (; qmIt != qmItEnd; ++qmIt)
         {

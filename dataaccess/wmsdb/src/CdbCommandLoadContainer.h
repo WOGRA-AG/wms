@@ -9,19 +9,19 @@ class CdmContainer;
 class CdbCommandLoadContainer : public CdbAbstractCommand
 {
 private:
-    long m_lContainerId;
+   qint64 m_lContainerId;
     bool m_bLoadObjects;
-    long m_lSchemeId;
+   qint64 m_lSchemeId;
     QString m_qstrKeyname;
     CdmObjectContainer* m_rpContainer;
 
-    long LoadObjectListRights();
+   qint64 LoadObjectListRights();
     void LoadObjects();
     QString GetObjectQuery();
     QString GetContainerQuery();
 public:
-    CdbCommandLoadContainer(long p_lContainerId, bool p_bLoadObjects, CdbDataAccess* p_pDataAccess);
-    CdbCommandLoadContainer(long p_lSchemeId, QString p_qstrKeyname, bool p_bLoadObjects, CdbDataAccess* p_pDataAccess);
+    CdbCommandLoadContainer(qint64 p_lContainerId, bool p_bLoadObjects, CdbDataAccess* p_pDataAccess);
+    CdbCommandLoadContainer(qint64 p_lSchemeId, QString p_qstrKeyname, bool p_bLoadObjects, CdbDataAccess* p_pDataAccess);
     virtual ~CdbCommandLoadContainer();
 
     CdmObjectContainer *GetResult();

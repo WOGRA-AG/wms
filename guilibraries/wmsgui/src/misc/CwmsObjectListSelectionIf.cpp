@@ -67,11 +67,11 @@ void CwmsContainerSelectionIf::SetClass(  CdmClass* pCdmClass )
 /** +-=---------------------------------------------------------Mo 23. Jan 21:52:52 2006----------*
  * @method  CwmsObjectListSelectionIf::SetClass              // public                            *
  * @return  void                                             //                                   *
- * @param   long p_lDbId                                     //                                   *
- * @param   long p_lClassId                                  //                                   *
+ * @param  qint64 p_lDbId                                     //                                   *
+ * @param  qint64 p_lClassId                                  //                                   *
  * @comment                                                                                       *
  *----------------last changed: Wolfgang Graßhof----------------Mo 23. Jan 21:52:52 2006----------*/
-void CwmsContainerSelectionIf::SetClass(  long p_lDbId, long p_lClassId )
+void CwmsContainerSelectionIf::SetClass( qint64 p_lDbId,qint64 p_lClassId )
 {
    if(p_lClassId >= 0)
    {
@@ -84,15 +84,15 @@ void CwmsContainerSelectionIf::SetClass(  long p_lDbId, long p_lClassId )
 
          if(CHKPTR(pIdmDataAccess))
          {
-            QMap<long, QString> qmObjectLists;
+            QMap<qint64, QString> qmObjectLists;
             pIdmDataAccess->GetContainerList(p_lDbId,
                                              p_lClassId,
                                              qmObjectLists);
 
 
             
-            QMap<long, QString>::iterator qmIt = qmObjectLists.begin();
-            QMap<long, QString>::iterator qmItEnd = qmObjectLists.end();
+            QMap<qint64, QString>::iterator qmIt = qmObjectLists.begin();
+            QMap<qint64, QString>::iterator qmItEnd = qmObjectLists.end();
 
             for(; qmIt != qmItEnd; ++qmIt)
             {
@@ -153,13 +153,13 @@ CdmObjectContainer* CwmsContainerSelectionIf::GetSelectedObjectContainer(  )
 /** +-=---------------------------------------------------------Mo 23. Jan 22:35:56 2006----------*
  * @method  CwmsObjectListSelectionIf::GetObjectContainer         // public, static                    *
  * @return  CdmObjectContainer*                                   //                                   *
- * @param   long p_lDbId                                     //                                   *
- * @param   long p_lClassId                                  //                                   *
+ * @param  qint64 p_lDbId                                     //                                   *
+ * @param  qint64 p_lClassId                                  //                                   *
  * @param   QWidget* p_pqwParent                             //                                   *
  * @comment This method does the static method call.                                              *
  *----------------last changed: Wolfgang Graßhof----------------Mo 23. Jan 22:35:56 2006----------*/
-CdmObjectContainer* CwmsContainerSelectionIf::GetObjectContainer(  long p_lDbId,
-                                                         long p_lClassId,
+CdmObjectContainer* CwmsContainerSelectionIf::GetObjectContainer( qint64 p_lDbId,
+                                                        qint64 p_lClassId,
                                                          QWidget* p_pqwParent )
 {
    CdmObjectContainer* pContainer = nullptr;

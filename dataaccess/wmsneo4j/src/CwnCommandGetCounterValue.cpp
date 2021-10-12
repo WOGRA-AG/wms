@@ -16,7 +16,7 @@ CwnCommandGetCounterValue::CwnCommandGetCounterValue(CdmValueCounter* p_pCdmCoun
 
 }
 
-CwnCommandGetCounterValue::CwnCommandGetCounterValue(long p_lObjectListId, long p_lValueId, QString p_qstrKeyname, CwnDataAccess *p_pDataAccess)
+CwnCommandGetCounterValue::CwnCommandGetCounterValue(qint64 p_lObjectListId,qint64 p_lValueId, QString p_qstrKeyname, CwnDataAccess *p_pDataAccess)
     : CwnCommandBase(p_pDataAccess),
       m_rpCdmCounter(nullptr),
       m_lObjectListId(p_lObjectListId),
@@ -43,7 +43,7 @@ int CwnCommandGetCounterValue::Execute()
 
         if (CHKPTR(pCdmObject))
         {
-           long lObjectListId = pCdmObject->GetObjectContainerId();
+          qint64 lObjectListId = pCdmObject->GetObjectContainerId();
            ((CdmValueLong*)m_rpCdmCounter)->SetValue(GetCounterValue(lObjectListId,
                                                                     m_rpCdmCounter->GetId(),
                                                                     m_rpCdmCounter->GetKeyname()));
@@ -60,11 +60,11 @@ int CwnCommandGetCounterValue::Execute()
 }
 
 
-long CwnCommandGetCounterValue::GetCounterValue(long p_lObjectListId,
-                                             long p_lValueId,
+qint64 CwnCommandGetCounterValue::GetCounterValue(qint64 p_lObjectListId,
+                                            qint64 p_lValueId,
                                              QString p_qstrKeyname)
 {
-   long lRet = CdmLogging::eDmObjectAccessError;
+  qint64 lRet = CdmLogging::eDmObjectAccessError;
    QString qstrQuery;
 
 
@@ -78,7 +78,7 @@ long CwnCommandGetCounterValue::GetCounterValue(long p_lObjectListId,
    ConnectAndExecute(executeCommit,payload,nullptr,nullptr);
    QVariant Ret;
    interpretAnswer(Ret);
-   long lValue = Ret.toInt();
+  qint64 lValue = Ret.toInt();
    lRet = Ret.toInt();
 
    QTime qtCurrent = QTime::currentTime();
@@ -134,7 +134,7 @@ int CwnCommandGetCounterValue::MakeCounterValueUnique(int p_iCounter,
 
    if(iSuccess > 0)
    {
-      long lValue = iSuccess;
+     qint64 lValue = iSuccess;
       if (lValue == 1)
       {
         iRet = p_iCounter;
@@ -200,7 +200,7 @@ bool CwnCommandGetCounterValue::CheckIncreaseCounterNeeded(int p_iCounter,
 
    if(iSuccess > 0)
    {
-      long lValue = iSuccess;
+     qint64 lValue = iSuccess;
 
       if (lValue != p_iTimeStamp)
       {

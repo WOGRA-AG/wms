@@ -278,17 +278,17 @@ CdmObject* CwmsImport::ExecuteObjectQuery(QStringList p_rqstrlParseData)
 
       if (cCdmQuery.Execute() > 0)
       {
-         QList<long> qvlResults;
+         QList<qint64> qvlResults;
          qvlResults = cCdmQuery.GetResultList();
 
          if (qvlResults.count() > 0)
          {
-            QList<long>::iterator qvlIt = qvlResults.begin();
-            QList<long>::iterator qvlItEnd = qvlResults.end();
+            QList<qint64>::iterator qvlIt = qvlResults.begin();
+            QList<qint64>::iterator qvlItEnd = qvlResults.end();
 
             for (; qvlIt != qvlItEnd; ++qvlIt)
             {
-               long lId = (*qvlIt);
+              qint64 lId = (*qvlIt);
 
                pCdmObject = pContainer->FindObjectById(lId);
 

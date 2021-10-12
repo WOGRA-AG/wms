@@ -102,10 +102,10 @@ class BASETOOLS_API CwmsReportManager : public QObject
    /** +-=---------------------------------------------------------Mo 27. Aug 14:43:22 2012-------*
     * @method  CwmsReportManager::GetReport                  // public                            *
     * @return  CwmsPrintingTemplate                          //                                   *
-    * @param   long p_lObjectId                              //                                   *
+    * @param  qint64 p_lObjectId                              //                                   *
     * @comment                                                                                    *
     *----------------last changed: -----------------------------Mo 27. Aug 14:43:22 2012----------*/
-    CwmsPrintingTemplate GetReport(long p_lObjectId);
+    CwmsPrintingTemplate GetReport(qint64 p_lObjectId);
 
    public:
    /** +-=---------------------------------------------------------Mi 20. Feb 16:20:42 2013-------*
@@ -139,50 +139,50 @@ class BASETOOLS_API CwmsReportManager : public QObject
    /** +-=---------------------------------------------------------Di 26. Feb 15:57:00 2013-------*
     * @method  CwmsReportManager::GetPdf                     // public                            *
     * @return  QByteArray                                    //                                   *
-    * @param   long p_ObjectListId                           //                                   *
+    * @param  qint64 p_ObjectListId                           //                                   *
     * @param   QString p_qstrTemplate                        //                                   *
     * @comment                                                                                    *
     *----------------last changed: -----------------------------Di 26. Feb 15:57:00 2013----------*/
-    QByteArray GetPdf(long p_ObjectListId, QString p_qstrTemplate);
+    QByteArray GetPdf(qint64 p_ObjectListId, QString p_qstrTemplate);
 
    public:
    /** +-=---------------------------------------------------------Di 26. Feb 15:57:19 2013-------*
     * @method  CwmsReportManager::GetPdf                     // public                            *
     * @return  QByteArray                                    //                                   *
-    * @param   long p_ObjectListId                           //                                   *
-    * @param   long p_ObjectId                               //                                   *
+    * @param  qint64 p_ObjectListId                           //                                   *
+    * @param  qint64 p_ObjectId                               //                                   *
     * @param   QString p_qstrTemplate                        //                                   *
     * @comment                                                                                    *
     *----------------last changed: -----------------------------Di 26. Feb 15:57:19 2013----------*/
-    QByteArray GetPdf(long p_ObjectListId, long p_ObjectId, QString p_qstrTemplate);
+    QByteArray GetPdf(qint64 p_ObjectListId,qint64 p_ObjectId, QString p_qstrTemplate);
 
    public:
    /** +-=---------------------------------------------------------Di 26. Feb 15:57:38 2013-------*
     * @method  CwmsReportManager::GetPdf                     // public                            *
     * @return  QByteArray                                    //                                   *
-    * @param   long p_ObjectListId                           //                                   *
+    * @param  qint64 p_ObjectListId                           //                                   *
     * @comment                                                                                    *
     *----------------last changed: -----------------------------Di 26. Feb 15:57:38 2013----------*/
-    QByteArray GetPdf(long p_ObjectListId);
+    QByteArray GetPdf(qint64 p_ObjectListId);
 
    public:
    /** +-=---------------------------------------------------------Di 26. Feb 15:57:52 2013-------*
     * @method  CwmsReportManager::GetPdf                     // public                            *
     * @return  QByteArray                                    //                                   *
-    * @param   long p_ObjectListId                           //                                   *
-    * @param   long p_ObjectId                               //                                   *
+    * @param  qint64 p_ObjectListId                           //                                   *
+    * @param  qint64 p_ObjectId                               //                                   *
     * @comment                                                                                    *
     *----------------last changed: -----------------------------Di 26. Feb 15:57:52 2013----------*/
-    QByteArray GetPdf(long p_ObjectListId, long p_ObjectId);
+    QByteArray GetPdf(qint64 p_ObjectListId,qint64 p_ObjectId);
 
    private:
    /** +-=---------------------------------------------------------Di 26. Feb 15:59:55 2013-------*
     * @method  CwmsReportManager::FindObjectListForPDFCreation // private                         *
     * @return  CdmObjectContainer*                                //                                   *
-    * @param   long p_lObjectListId                          //                                   *
+    * @param  qint64 p_lObjectListId                          //                                   *
     * @comment                                                                                    *
     *----------------last changed: -----------------------------Di 26. Feb 15:59:55 2013----------*/
-    CdmObjectContainer* FindObjectListForPDFCreation(long p_lObjectListId);
+    CdmObjectContainer* FindObjectListForPDFCreation(qint64 p_lObjectListId);
 
    public:
    /** +-=---------------------------------------------------------Mi 27. Feb 09:24:24 2013-------*
@@ -197,7 +197,7 @@ class BASETOOLS_API CwmsReportManager : public QObject
 
     static IwmsPrinting *GetPrintingObject();
     static bool HasPrintingPlugin();
-    static void OpenReportEditor(long p_lObjectId, QWidget* p_pParent);
+    static void OpenReportEditor(qint64 p_lObjectId, QWidget* p_pParent);
 	static void OpenReportEditor(CdmObject* p_pObject, QWidget* p_pParent);
 
 private:

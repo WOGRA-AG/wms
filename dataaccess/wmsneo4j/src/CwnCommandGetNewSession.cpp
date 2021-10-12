@@ -9,7 +9,7 @@
 
 #include "CwnCommandStdHeader.h"
 
-CwnCommandGetNewSession::CwnCommandGetNewSession(QString p_qstrApplication, long p_lUserId, CwnDataAccess *m_rpDataAccess)
+CwnCommandGetNewSession::CwnCommandGetNewSession(QString p_qstrApplication,qint64 p_lUserId, CwnDataAccess *m_rpDataAccess)
     : CwnCommandBase(m_rpDataAccess),
     m_qstrApplication(p_qstrApplication),
     m_lUserId(p_lUserId),

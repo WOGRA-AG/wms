@@ -6,14 +6,14 @@
 class CftlCommandGetObjectReferences : public CftlAbstractCommand
 {
 private:
-    long m_lContainerId;
-    long m_lObjectId;
-    QMap<long, long> m_qmReferences;
+   qint64 m_lContainerId;
+   qint64 m_lObjectId;
+    QMap<qint64,qint64> m_qmReferences;
 public:
-    CftlCommandGetObjectReferences(long p_lContainerId, long p_lObjectId, CftlDataAccess* p_pDataAccess);
+    CftlCommandGetObjectReferences(qint64 p_lContainerId,qint64 p_lObjectId, CftlDataAccess* p_pDataAccess);
     virtual ~CftlCommandGetObjectReferences();
 
-    QMap<long, long> GetResult();
+    QMap<qint64,qint64> GetResult();
 protected:
     bool CheckValid();
     int Execute();

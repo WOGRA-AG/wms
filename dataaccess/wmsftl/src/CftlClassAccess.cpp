@@ -72,14 +72,14 @@ CftlClassAccess::~CftlClassAccess(  )
 
 /** +-=---------------------------------------------------------So 11. Sep 11:41:31 2005----------*
  * @method  CftlClassAccess::GetNewClassId                  // public, virtual                   *
- * @return  long                                             //                                   *
- * @param   long p_lDataBaseId                               //                                   *
- * @param   long p_lSessionId                                //                                   *
+ * @return qint64                                             //                                   *
+ * @param  qint64 p_lDataBaseId                               //                                   *
+ * @param  qint64 p_lSessionId                                //                                   *
  * @comment This mehtod returns a new class id for a new class.                                   *
  *----------------last changed: --------------------------------So 11. Sep 11:41:31 2005----------*/
-long CftlClassAccess::GetNewClassId(  long p_lDataBaseId, long p_lSessionId )
+qint64 CftlClassAccess::GetNewClassId( qint64 p_lDataBaseId,qint64 p_lSessionId )
 {
-   long lRet = CdmLogging::eDmUnknownClassAccessError;
+  qint64 lRet = CdmLogging::eDmUnknownClassAccessError;
 
    CftlCommandGetNewClassId command(p_lSessionId, p_lDataBaseId, m_rpCftlDataAccess);
    lRet = command.Run();
@@ -89,15 +89,15 @@ long CftlClassAccess::GetNewClassId(  long p_lDataBaseId, long p_lSessionId )
 
 /** +-=---------------------------------------------------------Sa 20. Aug 11:41:10 2005----------*
  * @method  CftlClassAccess::ExistClass                     // public                            *
- * @return  long                                             //                                   *
- * @param   long p_lDataBaseId                               //                                   *
+ * @return qint64                                             //                                   *
+ * @param  qint64 p_lDataBaseId                               //                                   *
  * @param   QString p_qstrKeyname                            //                                   *
  * @param   bool& p_bRet                                     //                                   *
  * @comment This method checks if the class with the overgiven keyname exists.                    *
  *----------------last changed: --------------------------------Sa 20. Aug 11:41:10 2005----------*/
-long CftlClassAccess::ExistClass(  long p_lDataBaseId, QString p_qstrKeyname, bool& p_bRet )
+qint64 CftlClassAccess::ExistClass( qint64 p_lDataBaseId, QString p_qstrKeyname, bool& p_bRet )
 {
-   long lRet = CdmLogging::eDmUnknownClassAccessError;
+  qint64 lRet = CdmLogging::eDmUnknownClassAccessError;
 
    CftlCommandExistClass command(p_lDataBaseId, p_qstrKeyname, m_rpCftlDataAccess);
    lRet = command.Run();
@@ -108,13 +108,13 @@ long CftlClassAccess::ExistClass(  long p_lDataBaseId, QString p_qstrKeyname, bo
 
 /** +-=---------------------------------------------------------Di 23. Aug 15:49:41 2005----------*
  * @method  CftlClassAccess::DeleteClass                    // public, virtual                   *
- * @return  long                                             //                                   *
- * @param   long p_lClassId                                  //                                   *
+ * @return qint64                                             //                                   *
+ * @param  qint64 p_lClassId                                  //                                   *
  * @comment This method deletes a class from db.                                                  *
  *----------------last changed: --------------------------------Di 23. Aug 15:49:41 2005----------*/
-long CftlClassAccess::DeleteClass(  long p_lClassId )
+qint64 CftlClassAccess::DeleteClass( qint64 p_lClassId )
 {
-   long lRet = CdmLogging::eDmUnknownClassAccessError;
+  qint64 lRet = CdmLogging::eDmUnknownClassAccessError;
 
    CftlCommandDeleteClass command(p_lClassId, m_rpCftlDataAccess);
    lRet = command.Run();
@@ -124,16 +124,16 @@ long CftlClassAccess::DeleteClass(  long p_lClassId )
 
 /** +-=---------------------------------------------------------Sa 20. Aug 11:41:33 2005----------*
  * @method  CftlClassAccess::LoadClassManager               // public                            *
- * @return  long                                             //                                   *
- * @param   long p_lDataBaseId                               //                                   *
+ * @return qint64                                             //                                   *
+ * @param  qint64 p_lDataBaseId                               //                                   *
  * @param   CdmClassManager*& p_rpCdmClassManager            //                                   *
  * @comment This method loads the complete class manager of a class.                              *
  *----------------last changed: --------------------------------Sa 20. Aug 11:41:33 2005----------*/
-long CftlClassAccess::LoadClassManager(  long p_lDataBaseId,
+qint64 CftlClassAccess::LoadClassManager( qint64 p_lDataBaseId,
                                          CdmClassManager*& p_rpCdmClassManager )
 {
    INFO("Loading all classes!");
-   long lRet = CdmLogging::eDmUnknownClassAccessError;
+  qint64 lRet = CdmLogging::eDmUnknownClassAccessError;
    
    CftlCommandLoadClassManager command(p_lDataBaseId, m_rpCftlDataAccess);
    lRet = command.Run();
@@ -146,13 +146,13 @@ long CftlClassAccess::LoadClassManager(  long p_lDataBaseId,
 
 /** +-=---------------------------------------------------------Fr 8. Aug 21:18:37 2008-----------*
  * @method  CftlClassAccess::UpdateClass                    // public, virtual                   *
- * @return  long                                             //                                   *
+ * @return qint64                                             //                                   *
  * @param   CdmClass*& p_rpCdmClass                          //                                   *
  * @comment This method updates a class.                                                          *
  *----------------last changed: --------------------------------Fr 8. Aug 21:18:37 2008-----------*/
-long CftlClassAccess::UpdateClass(CdmClass*& p_rpCdmClass)
+qint64 CftlClassAccess::UpdateClass(CdmClass*& p_rpCdmClass)
 {
-   long lRet = CdmLogging::eDmUnknownClassAccessError;
+  qint64 lRet = CdmLogging::eDmUnknownClassAccessError;
 
    CftlCommandUpdateClass command(p_rpCdmClass, m_rpCftlDataAccess);
    lRet = command.Run();

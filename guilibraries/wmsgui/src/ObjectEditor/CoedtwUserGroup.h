@@ -29,7 +29,7 @@ class CoedtwUserGroup : public CoeValueWidget
    private:
       QPushButton* m_pqbButton;
       QLineEdit* m_qleGroup;
-      long m_lCurrentGroupId;
+     qint64 m_lCurrentGroupId;
 
    public:
    /** +-=---------------------------------------------------------Di 28. Aug 15:33:23 2012-------*

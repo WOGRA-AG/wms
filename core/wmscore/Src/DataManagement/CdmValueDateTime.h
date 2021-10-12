@@ -18,7 +18,7 @@ private:
     QDateTime m_qdtValue;
 
 public:
-    CdmValueDateTime(  long p_lDatabaseId, long p_lId, QString p_qstrKeyname, CdmObject* p_pCdmObject );
+    CdmValueDateTime( qint64 p_lDatabaseId,qint64 p_lId, QString p_qstrKeyname, CdmObject* p_pCdmObject );
     virtual ~CdmValueDateTime(  );
     void SetDefaultValue(  const CdmMember* p_pCdmMember );
     CdmValueDateTime(  QDomElement& p_rqDomElement, CdmObject* p_pCdmObject );

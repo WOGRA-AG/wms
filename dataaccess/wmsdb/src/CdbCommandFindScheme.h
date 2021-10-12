@@ -16,13 +16,13 @@ class CdbCommandFindScheme : public CdbAbstractCommand
 {
 private:
     QString m_qstrSchemeName;
-    long m_lSchemeId;
+   qint64 m_lSchemeId;
     CdmScheme* m_pScheme;
 
     void LoadLanguages();
 public:
     CdbCommandFindScheme(QString p_qstrSchemeName, CdbDataAccess* p_pDataAccess);
-    CdbCommandFindScheme(long p_lId, CdbDataAccess* p_pDataAccess);
+    CdbCommandFindScheme(qint64 p_lId, CdbDataAccess* p_pDataAccess);
     virtual ~CdbCommandFindScheme();
 
     CdmScheme *GetResult();

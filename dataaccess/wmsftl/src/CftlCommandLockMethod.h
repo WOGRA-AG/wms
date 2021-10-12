@@ -7,12 +7,12 @@
 class CftlCommandLockMethod : public CftlAbstractTransactionalCommand
 {
 private:
-    long m_lMethodId;
+   qint64 m_lMethodId;
     bool m_bResult;
 
 
 public:
-    CftlCommandLockMethod(long p_lMethodId, CftlDataAccess* p_pDataAccess);
+    CftlCommandLockMethod(qint64 p_lMethodId, CftlDataAccess* p_pDataAccess);
     virtual ~CftlCommandLockMethod();
 
     bool GetResult();

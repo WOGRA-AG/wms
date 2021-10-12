@@ -32,13 +32,13 @@
 /** +-=---------------------------------------------------------Mo 15. Okt 08:44:50 2012----------*
  * @method  CdmQueryResultObject::CdmQueryResultObject       // public                            *
  * @return                                                   //                                   *
- * @param   long p_lObjectId                                 //                                   *
+ * @param  qint64 p_lObjectId                                 //                                   *
  * @param   CdmQueryResultObject* p_pParent                  //                                   *
  * @param   CdmQueryEnhanced* p_pQuery                       //                                   *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------Mo 15. Okt 08:44:50 2012----------*/
-CdmQueryResultObject::CdmQueryResultObject(long p_lObjectId,
-                                           long p_lContainerId,
+CdmQueryResultObject::CdmQueryResultObject(qint64 p_lObjectId,
+                                          qint64 p_lContainerId,
                                            CdmQueryResultObject* p_pParent,
                                            CdmQuery* p_pQuery)
 : m_rpCdmQuery(p_pQuery),
@@ -82,7 +82,7 @@ int CdmQueryResultObject::GetRow() const
 void CdmQueryResultObject::ClearResults()
 {
    m_qmResultValues.clear();
-   QMapIterator<long, CdmQueryResultObject*> qmIt(m_qmChildrenByObject);
+   QMapIterator<qint64, CdmQueryResultObject*> qmIt(m_qmChildrenByObject);
 
    while (qmIt.hasNext())
    {
@@ -124,10 +124,10 @@ CdmQueryResultObject* CdmQueryResultObject::GetParent()
 
 /** +-=---------------------------------------------------------Di 20. Nov 11:41:17 2012----------*
  * @method  CdmQueryResultObject::GetObjectParentId          // public, slots                     *
- * @return  long                                             //                                   *
+ * @return qint64                                             //                                   *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------Di 20. Nov 11:41:17 2012----------*/
-long CdmQueryResultObject::GetObjectParentId()
+qint64 CdmQueryResultObject::GetObjectParentId()
 {
    return CdmQueryResultObject::GetObjectParentId(m_lObjectId, m_lContainerId, m_rpCdmQuery);
 }
@@ -216,10 +216,10 @@ void CdmQueryResultObject::AddResult(int p_iColumn, QVariant qvResult)
 /** +-=---------------------------------------------------------Di 20. Nov 11:42:02 2012----------*
  * @method  CdmQueryResultObject::GetChild                   // public, slots                     *
  * @return  CdmQueryResultObject*                            //                                   *
- * @param   long p_lObjectId                                 //                                   *
+ * @param  qint64 p_lObjectId                                 //                                   *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------Di 20. Nov 11:42:02 2012----------*/
-CdmQueryResultObject* CdmQueryResultObject::GetChild(long p_lObjectId)
+CdmQueryResultObject* CdmQueryResultObject::GetChild(qint64 p_lObjectId)
 {
    CdmQueryResultObject* pRet = nullptr;
 
@@ -233,7 +233,7 @@ CdmQueryResultObject* CdmQueryResultObject::GetChild(long p_lObjectId)
 
        if (pContainer && pContainer->IsTree())
        {
-           QMapIterator<long, CdmQueryResultObject*> qmIt(m_qmChildrenByObject);
+           QMapIterator<qint64, CdmQueryResultObject*> qmIt(m_qmChildrenByObject);
 
            while (qmIt.hasNext())
            {
@@ -318,10 +318,10 @@ QVariant CdmQueryResultObject::GetResult(int p_iRow, int p_iColumn)
  * @return  QVariant                                         //                                   *
  * @param   int p_iRow                                       //                                   *
  * @param   int p_iColumn                                    //                                   *
- * @param   long p_lParentId                                 //                                   *
+ * @param  qint64 p_lParentId                                 //                                   *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------Di 20. Nov 11:43:01 2012----------*/
-QVariant CdmQueryResultObject::GetResult(int p_iRow, int p_iColumn, long p_lParentId)
+QVariant CdmQueryResultObject::GetResult(int p_iRow, int p_iColumn,qint64 p_lParentId)
 {
    QVariant qvRet;
 
@@ -361,20 +361,20 @@ int CdmQueryResultObject::GetColumnCount() const
 
 /** +-=---------------------------------------------------------So 10. Feb 10:17:36 2013----------*
  * @method  CdmQueryResultObject::GetObjectId                // public, const, slots              *
- * @return  long                                             //                                   *
+ * @return qint64                                             //                                   *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------So 10. Feb 10:17:36 2013----------*/
-long CdmQueryResultObject::GetObjectId() const
+qint64 CdmQueryResultObject::GetObjectId() const
 {
    return m_lObjectId;
 }
 
-long CdmQueryResultObject::GetContainerId() const
+qint64 CdmQueryResultObject::GetContainerId() const
 {
    return m_lContainerId;
 }
 
-long CdmQueryResultObject::SetContainerId(long p_lContainerId)
+qint64 CdmQueryResultObject::SetContainerId(qint64 p_lContainerId)
 {
    return m_lContainerId = p_lContainerId;
 }
@@ -391,7 +391,7 @@ QList<CdmObject*> CdmQueryResultObject::GetChildList()
 
    if (CHKPTR(pContainer))
    {
-       QMapIterator<long, CdmQueryResultObject*> qmIt(m_qmChildrenByObject);
+       QMapIterator<qint64, CdmQueryResultObject*> qmIt(m_qmChildrenByObject);
 
        while (qmIt.hasNext())
        {
@@ -400,7 +400,7 @@ QList<CdmObject*> CdmQueryResultObject::GetChildList()
 
            if (pChild)
            {
-               long lObjectId = pChild->GetObjectId();
+              qint64 lObjectId = pChild->GetObjectId();
 
                CdmObject* pCdmObject = pContainer->FindObjectById(lObjectId);
 
@@ -457,15 +457,15 @@ CdmObject* CdmQueryResultObject::GetObject()
  * @return  CdmQueryResultObject*                            //                                   *
  * @param   CdmQueryEnhanced* p_pQuery                       //                                   *
  * @param   CdmQueryResultObject* p_pRoot                    //                                   *
- * @param   long p_lObjectId                                 //                                   *
- * @param   long p_lParentId                                 //                                   *
+ * @param  qint64 p_lObjectId                                 //                                   *
+ * @param  qint64 p_lParentId                                 //                                   *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------Mo 15. Okt 08:47:25 2012----------*/
 CdmQueryResultObject* CdmQueryResultObject::CreateResultObject(CdmQuery* p_pQuery,
                                                                CdmQueryResultObject* p_pRoot,
-                                                               long p_lObjectId,
-                                                               long p_lContainerId,
-                                                               long p_lParentId)
+                                                              qint64 p_lObjectId,
+                                                              qint64 p_lContainerId,
+                                                              qint64 p_lParentId)
 {
    CdmQueryResultObject* pRet = nullptr;
    CdmQueryResultObject* pParent = nullptr;
@@ -504,13 +504,13 @@ CdmQueryResultObject* CdmQueryResultObject::CreateResultObject(CdmQuery* p_pQuer
 /** +-=---------------------------------------------------------Mo 15. Okt 10:17:00 2012----------*
  * @method  CdmQueryResultObject::FindOrCreateResultObject   // public, static                    *
  * @return  CdmQueryResultObject*                            //                                   *
- * @param   long p_lObjectId                                 //                                   *
+ * @param  qint64 p_lObjectId                                 //                                   *
  * @param   CdmQueryResultObject* p_pRoot                    //                                   *
  * @param   CdmQueryEnhanced* p_pQuery                       //                                   *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------Mo 15. Okt 10:17:00 2012----------*/
-CdmQueryResultObject* CdmQueryResultObject::FindOrCreateResultObject(long p_lObjectId,
-                                                                     long p_lContainerId,
+CdmQueryResultObject* CdmQueryResultObject::FindOrCreateResultObject(qint64 p_lObjectId,
+                                                                    qint64 p_lContainerId,
                                                                      CdmQueryResultObject* p_pRoot,
                                                                      CdmQuery* p_pQuery)
 {
@@ -535,14 +535,14 @@ CdmQueryResultObject* CdmQueryResultObject::FindOrCreateResultObject(long p_lObj
 
 /** +-=---------------------------------------------------------Mo 15. Okt 10:17:38 2012----------*
  * @method  CdmQueryResultObject::GetObjectParentId          // private, static                   *
- * @return  long                                             //                                   *
- * @param   long p_lObjectId                                 //                                   *
+ * @return qint64                                             //                                   *
+ * @param  qint64 p_lObjectId                                 //                                   *
  * @param   CdmQueryEnhanced* p_pQuery                       //                                   *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------Mo 15. Okt 10:17:38 2012----------*/
-long CdmQueryResultObject::GetObjectParentId(long p_lObjectId, long p_lContainerId, CdmQuery* p_pQuery)
+qint64 CdmQueryResultObject::GetObjectParentId(qint64 p_lObjectId,qint64 p_lContainerId, CdmQuery* p_pQuery)
 {
-    long lRet = -1;
+   qint64 lRet = -1;
 
     if (CHKPTR(p_pQuery))
     {
@@ -586,9 +586,9 @@ long CdmQueryResultObject::GetObjectParentId(long p_lObjectId, long p_lContainer
 QVariant CdmQueryResultObject::GetVariant()
 {
    QVariantMap qvHash;
-   qvHash["ObjectId"] = (int)m_lObjectId;
-   qvHash["ObjectListId"] = (int)m_lContainerId;
-   qvHash["Row"] = (int)m_iRow;
+   qvHash["ObjectId"] = m_lObjectId;
+   qvHash["ObjectListId"] = m_lContainerId;
+   qvHash["Row"] = m_iRow;
 
    QMap<int, QVariant>::iterator qmIt = m_qmResultValues.begin();
    QMap<int, QVariant>::iterator qmItEnd = m_qmResultValues.end();
@@ -604,7 +604,7 @@ QVariant CdmQueryResultObject::GetVariant()
 
    QVariantList qvChildren;
 
-   QMapIterator<long, CdmQueryResultObject*> qmItChildren(m_qmChildrenByObject);
+   QMapIterator<qint64, CdmQueryResultObject*> qmItChildren(m_qmChildrenByObject);
 
    while (qmItChildren.hasNext())
    {

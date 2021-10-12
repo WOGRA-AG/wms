@@ -45,7 +45,7 @@
 #include "CdmScheme.h"
 
 
-CdmScheme::CdmScheme(long p_lId, QString p_qstrDatabaseName, int p_iVersion)
+CdmScheme::CdmScheme(qint64 p_lId, QString p_qstrDatabaseName, int p_iVersion)
     : m_rpCdmManager(nullptr),
       m_lId(p_lId),
       m_qstrSchemeName(p_qstrDatabaseName),
@@ -91,7 +91,7 @@ QVariant CdmScheme::GetVariant() const
     SYNCHRONIZED_READ;
     QVariantMap qvHash;
 
-    qvHash.insert(WMS_ID, (int)m_lId.load());
+    qvHash.insert(WMS_ID, m_lId.load());
     qvHash.insert(WMS_NAME, m_qstrSchemeName);
     qvHash.insert(WMS_VERSION, m_iVersion.load());
 
@@ -109,7 +109,7 @@ QVariant CdmScheme::GetVariantCompleteDatabase() const
     return qvHash;
 }
 
-long CdmScheme::GetId() const
+qint64 CdmScheme::GetId() const
 {
     return m_lId.load();
 }
@@ -166,10 +166,10 @@ void CdmScheme::SetVersion(  int p_iVersion )
     m_iVersion = p_iVersion;
 }
 
-long CdmScheme::GetUserId() const
+qint64 CdmScheme::GetUserId() const
 {
     SYNCHRONIZED_READ;
-    long lRet = CdmLogging::eDmUnknownDbError;
+   qint64 lRet = CdmLogging::eDmUnknownDbError;
 
     if(CHKPTR(m_rpCdmManager))
     {
@@ -302,7 +302,7 @@ void CdmScheme::GetChanges(QDate& p_qdFrom, QDate& p_qdTo, QList<CdmJournalItem*
 
     if (CHKPTR(pCdmAccess))
     {
-        long lId = GetId();
+       qint64 lId = GetId();
         pCdmAccess->GetSchemeModifications(lId,
                                              p_qdFrom,
                                              p_qdTo,
@@ -310,9 +310,9 @@ void CdmScheme::GetChanges(QDate& p_qdFrom, QDate& p_qdTo, QList<CdmJournalItem*
     }
 }
 
-long CdmScheme::Commit()
+qint64 CdmScheme::Commit()
 {
-    long lRet = CdmLogging::eDmUnknownDbError;
+   qint64 lRet = CdmLogging::eDmUnknownDbError;
     SYNCHRONIZED_WRITE;
     CdmDataProvider* pCdmManager = CdmSessionManager::GetDataProvider();
 
@@ -594,13 +594,13 @@ bool CdmScheme::GenerateDeploymentFile(QString& p_qstrFilename)
     return bRet;
 }
 
-bool CdmScheme::IsDeployedContainerId(long p_Id)
+bool CdmScheme::IsDeployedContainerId(qint64 p_Id)
 {
     SYNCHRONIZED_READ;
     return m_qlDeployedContainerIds.contains(p_Id);
 }
 
-void CdmScheme::AddDeployedContainerId(long p_Id)
+void CdmScheme::AddDeployedContainerId(qint64 p_Id)
 {
     SYNCHRONIZED_WRITE;
     if (!m_qlDeployedContainerIds.contains(p_Id))

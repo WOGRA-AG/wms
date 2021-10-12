@@ -22,8 +22,8 @@ CwiCommandPrintContainer::~CwiCommandPrintContainer()
 void CwiCommandPrintContainer::Execute()
 {
    CwmscomDataResult* pResult = nullptr;
-   long lObjectListId = m_rpData->GetValue("ObjectListId").toInt();
-   long lObjectId = m_rpData->GetValue("ObjectId").toInt();
+  qint64 lObjectListId = m_rpData->GetValue("ObjectListId").toInt();
+  qint64 lObjectId = m_rpData->GetValue("ObjectId").toInt();
 
    CdmObjectContainer* pList = GetObjectList(lObjectListId);
 
@@ -85,7 +85,7 @@ void CwiCommandPrintContainer::Execute()
    }
 }
 
-CdmObjectContainer* CwiCommandPrintContainer::GetObjectList(long p_lObjectList)
+CdmObjectContainer* CwiCommandPrintContainer::GetObjectList(qint64 p_lObjectList)
 {
    CdmObjectContainer* pList = nullptr;
    CdmDataProvider* pManager = CdmSessionManager::GetDataProvider();

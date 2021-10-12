@@ -93,7 +93,7 @@ private:
 
 
 public:
-    CumUser(long p_lId, CumUserManager* p_pUserManager);
+    CumUser(qint64 p_lId, CumUserManager* p_pUserManager);
     CumUser(CumUserManager* p_pUserManager);
     virtual ~CumUser(  );
     QString GetPassword() const;

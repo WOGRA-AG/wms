@@ -24,7 +24,7 @@ bool CftlCommandCreateScheme::CheckValid()
 
 int CftlCommandCreateScheme::Execute()
 {
-    long lRet = CdmLogging::eDmUnknownDbAccessError;
+   qint64 lRet = CdmLogging::eDmUnknownDbAccessError;
     QSqlQuery cQSqlQuery(GetSqlDatabase());
 
 
@@ -43,7 +43,7 @@ int CftlCommandCreateScheme::Execute()
          cQSqlQuery.first();
          if(cQSqlQuery.isValid())
          {
-            long lSchemeId = cQSqlQuery.value(0).toInt();
+           qint64 lSchemeId = cQSqlQuery.value(0).toInt();
             int iVersion = cQSqlQuery.value(1).toInt();
             m_pScheme = new CdmScheme(lSchemeId, m_qstrSchemeName, iVersion);
 

@@ -31,10 +31,10 @@
 /** +-=---------------------------------------------------------Sa 20. Aug 11:24:20 2005----------*
  * @method  CumUser::CumUser                                 // public                            *
  * @return                                                   //                                   *
- * @param   long p_lId                                       //                                   *
+ * @param  qint64 p_lId                                       //                                   *
  * @comment The construcotr of the user.                                                          *
  *----------------last changed: --------------------------------Sa 20. Aug 11:24:20 2005----------*/
-CumUser::CumUser(long p_lId, CumUserManager* p_pUserManager)
+CumUser::CumUser(qint64 p_lId, CumUserManager* p_pUserManager)
    : CumAccessor(p_lId,p_pUserManager),
      m_bAdministrator(false),
      m_bActive(true),
@@ -241,7 +241,7 @@ bool CumUser::Update(  )
    
    if(CHKPTR(pCumUserManager))
    {
-      long lSuccess = pCumUserManager->UpdateUser(this);
+     qint64 lSuccess = pCumUserManager->UpdateUser(this);
 
       if(lSuccess > 0)
       {
@@ -261,7 +261,7 @@ QVariant CumUser::GetVariant() const
 {
    QVariantMap qMap;
 
-   qMap.insert(WMS_USER_ID, (int)GetId());
+   qMap.insert(WMS_USER_ID, GetId());
    qMap.insert(WMS_USER_LOGIN, GetLogin());
    qMap.insert(WMS_USER_FIRST_NAME, GetFirstName());
    qMap.insert(WMS_USER_LAST_NAME, GetLastName());

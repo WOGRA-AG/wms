@@ -33,7 +33,7 @@ void CwiCommandExecuteFunction::Execute()
 
     if (pCdmManager)
     {
-       long iDbId = m_rpData->GetValue("DatabaseId").toInt();
+      qint64 iDbId = m_rpData->GetValue("DatabaseId").toInt();
        CdmClassManager* pCdmClassManager = pCdmManager->GetClassManager(iDbId);
        CdmContainerManager* pContainerManager = pCdmManager->GetContainerManager(iDbId);
 
@@ -148,8 +148,8 @@ QVariant CwiCommandExecuteFunction::ExecuteStaticFunction(CdmClassManager* pCdmC
 QVariant CwiCommandExecuteFunction::ExecuteFunction(CdmContainerManager* pContainerManager)
 {
     QVariant qvResult;
-    long iObjectListId = m_rpData->GetValue("ObjectListId").toInt();
-    long iObjectId = m_rpData->GetValue("ObjectId").toInt();
+   qint64 iObjectListId = m_rpData->GetValue("ObjectListId").toInt();
+   qint64 iObjectId = m_rpData->GetValue("ObjectId").toInt();
 
     CdmObjectContainer* pContainer = pContainerManager->FindContainerById(iObjectListId);
 

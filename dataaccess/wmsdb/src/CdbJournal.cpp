@@ -38,9 +38,9 @@ CdbJournal::CdbJournal(CdbDataAccess* p_pCdbDataAccess)
     // all the hard work was done above
 }
 
-long CdbJournal::ValueModified(CdmValue* p_pCdmValue)
+qint64 CdbJournal::ValueModified(CdmValue* p_pCdmValue)
 {
-   long lRet = CdmLogging::eDmObjectAccessError;
+  qint64 lRet = CdmLogging::eDmObjectAccessError;
 
    BODY_TRY
    if (CHKPTR(p_pCdmValue) && (p_pCdmValue->GetValueType() != eDmValueBinaryDocument))
@@ -49,14 +49,14 @@ long CdbJournal::ValueModified(CdmValue* p_pCdmValue)
 
       cQSqlQuery.prepare("insert into WMS_JOURNAL (UserId, SessionId, DatabaseId, DateTime, ChangeMode, ObjectListId, ObjectId, `Member`, DisplayValue, Json_Changes) values"
                          "(:userid, :sessionId, :databaseId, :dateTime, :changeMode, :objListId, :objId, :member, :displayvalue, :json)");
-      cQSqlQuery.bindValue(":userid", (int) p_pCdmValue->GetUserId());
-      cQSqlQuery.bindValue(":sessionId", (int)p_pCdmValue->GetSessionId());
-      cQSqlQuery.bindValue(":databaseId", (int)p_pCdmValue->GetSchemeId());
+      cQSqlQuery.bindValue(":userid",  p_pCdmValue->GetUserId());
+      cQSqlQuery.bindValue(":sessionId", p_pCdmValue->GetSessionId());
+      cQSqlQuery.bindValue(":databaseId", p_pCdmValue->GetSchemeId());
       cQSqlQuery.bindValue(":dateTime", QDateTime::currentDateTime());
       cQSqlQuery.bindValue(":changeMode", eDmChangeModeModified);
-      cQSqlQuery.bindValue(":objListId", (int)p_pCdmValue->GetDataObject()->GetObjectContainerId());
-      cQSqlQuery.bindValue(":objId", (int)p_pCdmValue->GetDataObject()->GetId());
-      cQSqlQuery.bindValue(":member", (int)p_pCdmValue->GetMemberId());
+      cQSqlQuery.bindValue(":objListId", p_pCdmValue->GetDataObject()->GetObjectContainerId());
+      cQSqlQuery.bindValue(":objId", p_pCdmValue->GetDataObject()->GetId());
+      cQSqlQuery.bindValue(":member", p_pCdmValue->GetMemberId());
       cQSqlQuery.bindValue(":displayvalue", p_pCdmValue->GetDisplayString());
       cQSqlQuery.bindValue(":json", p_pCdmValue->GetValueVariant().toString());
 
@@ -71,9 +71,9 @@ long CdbJournal::ValueModified(CdmValue* p_pCdmValue)
    return lRet;
 }
 
-long CdbJournal::ObjectDeleted(int p_iObjectId)
+qint64 CdbJournal::ObjectDeleted(int p_iObjectId)
 {
-   long lRet = CdmLogging::eDmObjectAccessError;
+  qint64 lRet = CdmLogging::eDmObjectAccessError;
 
    BODY_TRY
    if (p_iObjectId > 0)
@@ -100,9 +100,9 @@ long CdbJournal::ObjectDeleted(int p_iObjectId)
    return lRet;
 }
 
-long CdbJournal::ObjectModified(CdmObject* p_pCdmObject)
+qint64 CdbJournal::ObjectModified(CdmObject* p_pCdmObject)
 {
-   long lRet = CdmLogging::eDmObjectAccessError;
+  qint64 lRet = CdmLogging::eDmObjectAccessError;
 
    if (CHKPTR(p_pCdmObject))
    {
@@ -140,9 +140,9 @@ long CdbJournal::ObjectModified(CdmObject* p_pCdmObject)
    return lRet;
 }
 
-long CdbJournal::ObjectListModified(CdmObjectContainer* p_pContainer)
+qint64 CdbJournal::ObjectListModified(CdmObjectContainer* p_pContainer)
 {
-   long lRet = CdmLogging::eDmObjectAccessError;
+  qint64 lRet = CdmLogging::eDmObjectAccessError;
    if (CHKPTR(p_pContainer))
    {
       QSqlQuery cQSqlQuery;
@@ -184,9 +184,9 @@ long CdbJournal::ObjectListModified(CdmObjectContainer* p_pContainer)
    return lRet;
 }
 
-long CdbJournal::ObjectListDeleted(int p_iObjectListId)
+qint64 CdbJournal::ObjectListDeleted(int p_iObjectListId)
 {
-   long lRet = CdmLogging::eDmObjectAccessError;
+  qint64 lRet = CdmLogging::eDmObjectAccessError;
    if (p_iObjectListId > 0)
    {
       CdmDataProvider* pCdmManager = CdmSessionManager::GetDataProvider();
@@ -211,12 +211,12 @@ long CdbJournal::ObjectListDeleted(int p_iObjectListId)
    return lRet;
 }
 
-long CdbJournal::GetObjectModifications(const CdmObject* p_pObject,
+qint64 CdbJournal::GetObjectModifications(const CdmObject* p_pObject,
                                           QDate p_qdFrom,
                                           QDate p_qdTo,
                                           QList<CdmJournalItem*>& p_rqlItems)
 {
-   long lRet = CdmLogging::eDmObjectAccessError;
+  qint64 lRet = CdmLogging::eDmObjectAccessError;
 
    if (CHKPTR(p_pObject))
    {
@@ -273,12 +273,12 @@ long CdbJournal::GetObjectModifications(const CdmObject* p_pObject,
    return lRet;
 }
 
-long CdbJournal::GetContainerModifications(int p_iObjectListId,
+qint64 CdbJournal::GetContainerModifications(int p_iObjectListId,
                                               QDate p_qdFrom,
                                               QDate p_qdTo,
                                               QList<CdmJournalItem*>& p_rqlItems)
 {
-   long lRet = CdmLogging::eDmObjectAccessError;
+  qint64 lRet = CdmLogging::eDmObjectAccessError;
 
    if (p_iObjectListId > 0)
    {
@@ -336,12 +336,12 @@ long CdbJournal::GetContainerModifications(int p_iObjectListId,
    return lRet;
 }
 
-long CdbJournal::GetDatabaseModifications(int p_iDatabaseId,
+qint64 CdbJournal::GetDatabaseModifications(int p_iDatabaseId,
                                             QDate p_qdFrom,
                                             QDate p_qdTo,
                                             QList<CdmJournalItem*>& p_rqlItems)
 {
-   long lRet = CdmLogging::eDmObjectAccessError;
+  qint64 lRet = CdmLogging::eDmObjectAccessError;
 
    if (p_iDatabaseId > 0)
    {

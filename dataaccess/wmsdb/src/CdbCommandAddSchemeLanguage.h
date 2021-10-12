@@ -11,10 +11,10 @@
 class CdbCommandAddSchemeLanguage : public CdbAbstractCommandTransactional
 {
 private:
-    long m_lSchemeId;
+   qint64 m_lSchemeId;
     QString m_qstrLanguage;
 public:
-    CdbCommandAddSchemeLanguage(long p_lSchemeId, QString p_qstrLanguage, CdbDataAccess* p_pDataAccess);
+    CdbCommandAddSchemeLanguage(qint64 p_lSchemeId, QString p_qstrLanguage, CdbDataAccess* p_pDataAccess);
     virtual ~CdbCommandAddSchemeLanguage();
 
 protected:

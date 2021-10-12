@@ -17,14 +17,14 @@ class CwnCommandFindSession : public CwnCommandBase
 {
 
 private:
-    long m_lSessionId;
-    long m_lUserId;
+   qint64 m_lSessionId;
+   qint64 m_lUserId;
     QString m_qstrBaseAuth;
     CdmSession* m_pSession;
 
 public:
-    CwnCommandFindSession(long p_lSessionId, long p_lUserId, CwnDataAccess* p_pDataAccess);
-    CwnCommandFindSession(long p_lSessionId, CwnDataAccess* p_pDataAccess);
+    CwnCommandFindSession(qint64 p_lSessionId,qint64 p_lUserId, CwnDataAccess* p_pDataAccess);
+    CwnCommandFindSession(qint64 p_lSessionId, CwnDataAccess* p_pDataAccess);
     CwnCommandFindSession(QString p_qstrBaseAuth, CwnDataAccess* p_pDataAccess);
     virtual ~CwnCommandFindSession();
 

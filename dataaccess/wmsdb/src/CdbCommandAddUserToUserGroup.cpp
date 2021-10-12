@@ -1,6 +1,6 @@
 #include "CdbCommandAddUserToUserGroup.h"
 
-CdbCommandAddUserToUserGroup::CdbCommandAddUserToUserGroup(long p_lUser, long p_lGroup, CdbDataAccess* p_pDataAccess)
+CdbCommandAddUserToUserGroup::CdbCommandAddUserToUserGroup(qint64 p_lUser,qint64 p_lGroup, CdbDataAccess* p_pDataAccess)
 : CdbAbstractCommandTransactional(p_pDataAccess),
   m_lGroupId(p_lGroup),
   m_lUserId(p_lUser)
@@ -14,7 +14,7 @@ CdbCommandAddUserToUserGroup::~CdbCommandAddUserToUserGroup()
 
 int CdbCommandAddUserToUserGroup::Execute()
 {
-    long lRet = CdmLogging::eDmUnknownUserQueryError;
+   qint64 lRet = CdmLogging::eDmUnknownUserQueryError;
 
     QSqlQuery cQSqlQuery;
     QString qstrQuery;

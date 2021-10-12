@@ -15,21 +15,21 @@ class CwnCommandGetOwner : public CwnCommandBase
 {
 
 private:
-    long m_lContainerId;
-    long m_lObjectId;
-    long m_lOwnerContainerId;
-    long m_lOwnerObjectId;
+   qint64 m_lContainerId;
+   qint64 m_lObjectId;
+   qint64 m_lOwnerContainerId;
+   qint64 m_lOwnerObjectId;
 
 public:
-    CwnCommandGetOwner(long p_lContainerId, long p_lObjectId, CwnDataAccess *p_pDataAccess);
+    CwnCommandGetOwner(qint64 p_lContainerId,qint64 p_lObjectId, CwnDataAccess *p_pDataAccess);
     virtual ~CwnCommandGetOwner();
 
     QString createQueryForFindObjectOwner();
     QString createQueryForFindContainerOwner();
 
 
-    long GetOwnerObjectId();
-    long GetOwnerContainerId();
+   qint64 GetOwnerObjectId();
+   qint64 GetOwnerContainerId();
     QString queryCausedError;
 
 protected:

@@ -6,12 +6,12 @@
 class CftlCommandUpdateSession : public CftlAbstractTransactionalCommand
 {
 private:
-    long m_lSessionId;
+   qint64 m_lSessionId;
     QString m_qstrBaseAuth;
 
 
 public:
-    CftlCommandUpdateSession(long p_lSessionId, CftlDataAccess* p_pDataAccess);
+    CftlCommandUpdateSession(qint64 p_lSessionId, CftlDataAccess* p_pDataAccess);
     CftlCommandUpdateSession(QString p_qstrBaseAuth, CftlDataAccess* p_pDataAccess);
     virtual ~CftlCommandUpdateSession();
 

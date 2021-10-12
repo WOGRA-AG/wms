@@ -45,23 +45,23 @@ public:
 public slots:
    bool containsGrouping();
    QObject* getObjectAt(int p_iIndex);
-   long getObjectIdAt(int p_iIndex);
+  qint64 getObjectIdAt(int p_iIndex);
    QString getResultAsStringAt(int p_iIndex);
    QVariant getResultAt(QModelIndex& p_index);
    QVariant getResultAt(QString p_qstrKeyname, int p_iPos);
    QVariant getResultAt(int p_iColumn, int p_iRow);
-   int getRowPosOfObjectInResultTree(long p_lObjectId);
-   bool isObjectInResultTree(long p_lObejctId);
+   int getRowPosOfObjectInResultTree(qint64 p_lObjectId);
+   bool isObjectInResultTree(qint64 p_lObejctId);
    void addGroupByElement(QString p_qstrElement);
    QObject *getFirstResultObject();
    int execute();
    void setContainer(CsaObjectContainer* p_pContainer);
    void clear();
    QObject* getContainer();
-   void setContainerId(long p_lId);
+   void setContainerId(qint64 p_lId);
    const QVariantList getResultList();
    bool containsResultObject(CsaObject* p_pObject);
-   bool containsResultObject(long p_lObjectId);
+   bool containsResultObject(qint64 p_lObjectId);
    int getResultCount();
    int getColumnCount();
    QString getKeynameAt(int p_iSection);

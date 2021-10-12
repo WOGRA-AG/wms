@@ -5,7 +5,7 @@
 
 #include "CwnCommandStdHeader.h"
 
-CwnCommandGetNewClassId::CwnCommandGetNewClassId(long p_lSessionId, long p_lSchemeId, CwnDataAccess* p_pDataAccess):
+CwnCommandGetNewClassId::CwnCommandGetNewClassId(qint64 p_lSessionId,qint64 p_lSchemeId, CwnDataAccess* p_pDataAccess):
     CwnCommandBase(p_pDataAccess),
     m_lSchemeId(p_lSchemeId),
     m_lSessionId(p_lSessionId)

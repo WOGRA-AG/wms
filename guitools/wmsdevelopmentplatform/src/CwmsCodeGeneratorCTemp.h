@@ -56,10 +56,10 @@ class CwmsCodeGeneratorCTemp : public CwmsCodeGeneratorCBase
    /** +-=---------------------------------------------------------Mi 6. Jun 18:07:01 2012--------*
     * @method  CwmsCodeGeneratorCTemp::GenerateMembersAccess // private                           *
     * @return  void                                          //                                   *
-    * @param   QMap<long, CdmMember*>& p_rMap                //                                   *
+    * @param   QMap<qint64, CdmMember*>& p_rMap                //                                   *
     * @comment                                                                                    *
     *----------------last changed: -----------------------------Mi 6. Jun 18:07:01 2012-----------*/
-    void GenerateMembersAccess(QMap<long, CdmMember*>& p_rMap);
+    void GenerateMembersAccess(QMap<qint64, CdmMember*>& p_rMap);
 
    private:
    /** +-=---------------------------------------------------------Mi 6. Jun 15:32:55 2012--------*
@@ -359,10 +359,10 @@ class CwmsCodeGeneratorCTemp : public CwmsCodeGeneratorCBase
    /** +-=---------------------------------------------------------Mi 6. Jun 17:47:00 2012--------*
     * @method  CwmsCodeGeneratorCTemp::GenerateCopyConstructorMembers // private                  *
     * @return  void                                          //                                   *
-    * @param   QMap<long, CdmMember*>& p_rMap                //                                   *
+    * @param   QMap<qint64, CdmMember*>& p_rMap                //                                   *
     * @comment                                                                                    *
     *----------------last changed: -----------------------------Mi 6. Jun 17:47:00 2012-----------*/
-    void GenerateCopyConstructorMembers(QMap<long, CdmMember*>& p_rMap);
+    void GenerateCopyConstructorMembers(QMap<qint64, CdmMember*>& p_rMap);
 
    private:
    /** +-=---------------------------------------------------------Mi 6. Jun 17:47:18 2012--------*
