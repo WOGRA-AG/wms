@@ -52,7 +52,7 @@ qint64 CdbQueryElement::Execute(QMap<qint64,qint64> &p_rqvlResultList)
 
 qint64 CdbQueryElement::ExecuteValue(QMap<qint64,qint64> &p_rqvlResults)
 {
-   qint64 lRet = CdmLogging::eDmUnknownDBQueryError;
+    qint64 lRet = CdmLogging::eDmUnknownDBQueryError;
 
     if (m_rpCdmQueryElement->GetCompareKeyname().toUpper() == "OBJECT_ID" &&
             m_rpCdmQueryElement->GetValueType() == eDmValueObjectRef)
@@ -67,7 +67,7 @@ qint64 CdbQueryElement::ExecuteValue(QMap<qint64,qint64> &p_rqvlResults)
 
         if (CHKPTR(pQuery))
         {
-           qint64 containerId = pQuery->GetContainerId();
+            qint64 containerId = pQuery->GetContainerId();
 
             if (containerId > 0)
             {
@@ -281,47 +281,38 @@ QString CdbQueryElement::GenerateValueQuery()
 
             if (CHKPTR(pQuery))
             {
-               qint64 containerId = pQuery->GetContainerId();
-
-                if (containerId > 0)
+                if (m_rpCdmQueryElement->GetCompareType() == eDmQueryCompareTypeEqual)
                 {
-                    if (m_rpCdmQueryElement->GetCompareType() == eDmQueryCompareTypeEqual)
-                    {
-                        qstrQuery = "select distinct objectid, objectlistid from WMS_DM_OBJECT where Objectid = " + m_rpCdmQueryElement->GetValue().toString();
-                    }
-                    else if (m_rpCdmQueryElement->GetCompareType() == eDmQueryCompareTypeIn)
-                    {
+                    qstrQuery = "select distinct objectid, objectlistid from WMS_DM_OBJECT where Objectid = " + m_rpCdmQueryElement->GetValue().toString();
+                }
+                else if (m_rpCdmQueryElement->GetCompareType() == eDmQueryCompareTypeIn)
+                {
 
-                        QList<QVariant>::iterator qlIt = m_rpCdmQueryElement->GetList().begin();
-                        QList<QVariant>::iterator qlItEnd = m_rpCdmQueryElement->GetList().end();
-                        qstrQuery = "(";
-                        bool bFirst = true;
+                    QList<QVariant>::iterator qlIt = m_rpCdmQueryElement->GetList().begin();
+                    QList<QVariant>::iterator qlItEnd = m_rpCdmQueryElement->GetList().end();
+                    qstrQuery = "(";
+                    bool bFirst = true;
 
-                        for (; qlIt  != qlItEnd; ++qlIt)
+                    for (; qlIt  != qlItEnd; ++qlIt)
+                    {
+                        if (!bFirst)
                         {
-                            if (!bFirst)
-                            {
-                                qstrQuery += ", ";
-                            }
-                            else
-                            {
-                                bFirst = false;
-                            }
-
-                            qstrQuery += (*qlIt).toString();
+                            qstrQuery += ", ";
+                        }
+                        else
+                        {
+                            bFirst = false;
                         }
 
-                        qstrQuery += ")";
-                        qstrQuery = "select objectid, objectlistid from WMS_DM_OBJECT where Objectid in " + qstrQuery;
+                        qstrQuery += (*qlIt).toString();
                     }
-                    else
-                    {
-                        ERR("For Object_ID only '='' or 'IN' as operator is allowed");
-                    }
+
+                    qstrQuery += ")";
+                    qstrQuery = "select objectid, objectlistid from WMS_DM_OBJECT where Objectid in " + qstrQuery;
                 }
                 else
                 {
-                    ERR("Request works only on containers.");
+                    ERR("For Object_ID only '='' or 'IN' as operator is allowed");
                 }
             }
         }
