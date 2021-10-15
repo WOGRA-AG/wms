@@ -60,3 +60,8 @@ QString CwmsScriptableUtilities::formatIsoDateToLocaleDate(QString p_qstrIsoDate
     QLocale loc;
     return qdDate.toString("dd.MM.yyyy");
 }
+
+QString CwmsScriptableUtilities::fromDateToIsoString(QDate p_qdDate)
+{
+    return p_qdDate.toString(Qt::ISODate);
+}

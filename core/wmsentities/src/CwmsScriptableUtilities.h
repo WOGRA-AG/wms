@@ -22,6 +22,7 @@ public slots:
     QString formatIntValueToLocaleString(int p_iValue);
     QDate getDateFromIsoString(QString p_qstrIsoDate);
     QString formatIsoDateToLocaleDate(QString p_qstrIsoDate);
+    QString fromDateToIsoString(QDate p_qdDate);
 
 };
 
