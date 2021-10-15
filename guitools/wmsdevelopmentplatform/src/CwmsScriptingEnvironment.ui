@@ -84,6 +84,7 @@
     <addaction name="m_pqaCut"/>
     <addaction name="m_pqaInsert"/>
     <addaction name="m_pqaDelete"/>
+    <addaction name="separator"/>
    </widget>
    <widget class="QMenu" name="menuExtras">
     <property name="title">
@@ -207,6 +208,8 @@
    <addaction name="separator"/>
    <addaction name="m_pqaExecute"/>
    <addaction name="m_pqaDebug"/>
+   <addaction name="separator"/>
+   <addaction name="m_pqaQueryEditor"/>
   </widget>
   <action name="m_pqaSave">
    <property name="icon">
@@ -361,6 +364,15 @@
    </property>
    <property name="text">
     <string>Bearbeiten</string>
+   </property>
+  </action>
+  <action name="m_pqaQueryEditor">
+   <property name="icon">
+    <iconset resource="../../../guilibraries/wmsgui/src/misc/wmsgui.qrc">
+     <normaloff>:/icons/articleunit.png</normaloff>:/icons/articleunit.png</iconset>
+   </property>
+   <property name="text">
+    <string>Abfrage erstellen</string>
    </property>
   </action>
  </widget>
@@ -672,6 +684,22 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>m_pqaQueryEditor</sender>
+   <signal>triggered()</signal>
+   <receiver>CwmsScriptingEnvironmentClass</receiver>
+   <slot>QueryEditorClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>537</x>
+     <y>349</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>537</x>
+     <y>331</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>SaveSlot()</slot>
@@ -689,5 +717,6 @@
   <slot>TreeViewSelectionChangedSlot()</slot>
   <slot>RefreshSlot()</slot>
   <slot>ShowTechnicalClassesChangedSlot()</slot>
+  <slot>QueryEditorClickedSlot()</slot>
  </slots>
 </ui>

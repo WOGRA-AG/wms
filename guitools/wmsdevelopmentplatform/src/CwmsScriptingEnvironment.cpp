@@ -13,6 +13,7 @@
 #include "CdmClass.h"
 #include "CdmClassManager.h"
 #include "CdmObjectContainer.h"
+#include "CwmsQueryEditor.h"
 
 // own Includes
 #include "CwmsguiObjectEditorSelector.h"
@@ -1373,4 +1374,40 @@ void CwmsScriptingEnvironment::DeleteUserDefinedFormSlot(QTreeWidgetItem* pItem)
 void CwmsScriptingEnvironment::ShowTechnicalClassesChangedSlot()
 {
     FillClasses();
+}
+
+void CwmsScriptingEnvironment::QueryEditorClickedSlot()
+{
+    CdmDataProvider* pCdmManager = CdmSessionManager::GetDataProvider();
+
+    if (CHKPTR(pCdmManager))
+    {
+       if (pCdmManager->GetCurrentScheme())
+       {
+          CwmsQueryEditor* pEditor = new CwmsQueryEditor(ui->m_pqMdi);
+          QMdiSubWindow* pSubWindow = AddMdiWindow(pEditor);
+
+          if (CHKPTR(pSubWindow))
+          {
+             QList<QMdiSubWindow*> qlSubWindows = ui->m_pqMdi->subWindowList();
+             int iQueryCounter = 0;
+
+             for (int iCounter = 0; iCounter < qlSubWindows.count(); ++iCounter)
+             {
+                 QMdiSubWindow* sub = qlSubWindows[iCounter];
+                if (sub->windowTitle().startsWith(tr("Abfrage ")))
+                {
+                   ++iQueryCounter;
+                }
+             }
+
+             pSubWindow->setWindowTitle(tr("Abfrage ") + QString::number(iQueryCounter+1));
+          }
+       }
+       else
+       {
+          CdmMessageManager::information(tr("Kein Schema ausgewählt"),
+             tr("Sie können den Query Editor nur mit einem gewählten Schema öffnen"));
+       }
+    }
 }

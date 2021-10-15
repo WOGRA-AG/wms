@@ -38,6 +38,7 @@ public:
 public slots:
     void ClassesExpandedSlot();
     void UisExpandedSlot();
+    void QueryEditorClickedSlot();
 protected:
     virtual void closeEvent(QCloseEvent *p_pqCloseEvent);
 private slots:
