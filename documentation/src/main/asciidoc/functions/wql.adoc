@@ -37,4 +37,40 @@ if (result != null) {
    }
 }
 ----
+
+==== WqlResultObject
+Class for readiing result data from an excuted qurey.
+
+===== Function Reference
+todo
+
+   bool containsGrouping();
+   
+   
+   WmsObject getObjectAt(int p_iIndex);
+   
+   
+   int64 getObjectIdAt(int p_iIndex);
+   
+   String getResultAsStringAt(int p_iIndex);
+   
+   var getResultAt(QModelIndex& p_index);
+   var getResultAt(QString p_qstrKeyname, int p_iPos);
+   var getResultAt(int p_iColumn, int p_iRow);
+   int getRowPosOfObjectInResultTree(int64 p_lObjectId);
+   bool isObjectInResultTree(int64 p_lObejctId);
+   void addGroupByElement(QString p_qstrElement);
+   WmsObject getFirstResultObject();
+   int execute();
+   void clear();
+   WmsObjectCcontainer getContainer();
+   void setContainerId(qint64 p_lId);
+   const QVariantList getResultList();
+   bool containsResultObject(WmsObject p_pObject);
+   bool containsResultObject(int64 p_lObjectId);
+   int getResultCount();
+   int getColumnCount();
+   QString getKeynameAt(int p_iSection);
+   QVector<QString> getResultElements();
+   QString getResultAsDisplayStringAt(int p_iColumn, int p_iRow);
   
