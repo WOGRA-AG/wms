@@ -168,7 +168,7 @@ QVariant CdmExecutor::ExecuteFunction(CdmClassMethod* p_pMethod,
       pFunction->CreateEngine();
    }
 
-   return ExecuteFunction(p_pMethod, pObject, p_qlParams, false, false, false, true);
+   return ExecuteFunction(p_pMethod, pObject, p_qlParams, false, true, false, true);
 }
 
 

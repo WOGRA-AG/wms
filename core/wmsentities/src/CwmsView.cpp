@@ -158,7 +158,7 @@ CdmClassMethod* CwmsView::FindModelMethod(QString& p_qstrModelMethod)
 
                  if (CHKPTR(pMethod))
                  {
-                    if (pMethod->IsStatic() && pMethod->GetParameterCount() == 0 && pMethod->GetReturnType() == eDmValueQObject)
+                    if (pMethod->IsStatic() /*&& pMethod->GetParameterCount() == 0*/ && pMethod->GetReturnType() == eDmValueQObject)
                     {
                          return pMethod;
                     }
@@ -169,10 +169,10 @@ CdmClassMethod* CwmsView::FindModelMethod(QString& p_qstrModelMethod)
                             CdmMessageManager::critical("Funktion ist nicht statisch", "Eine View Funktion muss statisch sein.");
                         }
 
-                        if (pMethod->GetParameterCount() != 0)
-                        {
-                            CdmMessageManager::critical("Funktion hat Parameter", "Eine View Funktion darf keine Parameter haben.");
-                        }
+//                        if (pMethod->GetParameterCount() != 0)
+//                        {
+//                            CdmMessageManager::critical("Funktion hat Parameter", "Eine View Funktion darf keine Parameter haben.");
+//                        }
 
                         if (pMethod->GetReturnType() == eDmValueQObject)
                         {
