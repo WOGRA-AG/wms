@@ -1,15 +1,4 @@
-﻿/******************************************************************************
- ** WOGRA Middleware Server Data Manager Module
- **
- ** @Author Wolfgang GraÃŸhof 
- **
- ** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
- ** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. 
- **(C) copyright by WOGRA technologies All rights reserved
- ******************************************************************************/
-
-
-// System and Qt Includes
+﻿// System and Qt Includes
 #include <QList>
 #include <QKeyEvent>
 
@@ -31,36 +20,18 @@
 #include "cwmsobjectchoicecombobox.h"
 
 
-/** +-=---------------------------------------------------------So 8. Jan 21:53:55 2006-----------*
- * @method  CwmsObjectChoiceComboBox::CwmsObjectChoiceComboBox // public                          *
- * @return                                                   //                                   *
- * @param   QWidget* parent = nullptr                           //                                   *
- * @comment The constructor.                                                                      *
- *----------------last changed: Wolfgang GraÃŸhof----------------So 8. Jan 21:53:55 2006-----------*/
 CwmsObjectChoiceComboBox::CwmsObjectChoiceComboBox(  QWidget* parent)
 : QComboBox(parent),
   m_rpCdmProxy(nullptr)
 {
-   connect(this, SIGNAL(activated), this, SLOT(ComboBoxActivatedSlot()));
+   connect(this, SIGNAL(activated(int)), this, SLOT(ComboBoxActivatedSlot()));
 }
 
-/** +-=---------------------------------------------------------So 8. Jan 21:54:07 2006-----------*
- * @method  CwmsObjectChoiceComboBox::~CwmsObjectChoiceComboBox // public, virtual                *
- * @return  void                                             //                                   *
- * @comment The Destructor of Class CwmsObjectChoiceComboBox                                      *
- *                                                                                                *
- *----------------last changed: Wolfgang GraÃŸhof----------------So 8. Jan 21:54:07 2006-----------*/
 CwmsObjectChoiceComboBox::~CwmsObjectChoiceComboBox(  )
 {
    // nothing to do because the map contains only references
 }
 
-/** +-=---------------------------------------------------------Mi 3. Okt 11:44:55 2012-----------*
- * @method  CwmsObjectChoiceComboBox::SetProxy               // public                            *
- * @return  void                                             //                                   *
- * @param   CdmEnhancedQueryProxy* p_pCdmProxy               //                                   *
- * @comment This method sets the proxy.                                                           *
- *----------------last changed: --------------------------------Mi 3. Okt 11:44:55 2012-----------*/
 void CwmsObjectChoiceComboBox::SetProxy(CdmEnhancedQueryProxy* p_pCdmProxy)
 {
    m_rpCdmProxy = p_pCdmProxy;
@@ -71,13 +42,6 @@ void CwmsObjectChoiceComboBox::SetProxy(CdmEnhancedQueryProxy* p_pCdmProxy)
    }
 }
 
-/** +-=---------------------------------------------------------Fr 10. Feb 10:12:16 2012----------*
- * @method  CwmsObjectChoiceComboBox::SetObjectListAndDisplayValue // public                      *
- * @return  void                                             //                                   *
- * @param   QString p_qstrObjectListKeyname                  //                                   *
- * @param   QString p_qstrValueKeyname                       //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Fr 10. Feb 10:12:16 2012----------*/
 void CwmsObjectChoiceComboBox::SetContainerAndDisplayValue(QString p_qstrObjectListKeyname,
                                                             QString p_qstrValueKeyname)
 {
@@ -110,15 +74,8 @@ void CwmsObjectChoiceComboBox::FillProxyData()
     }
 }
 
-/** +-=---------------------------------------------------------So 8. Jan 21:55:22 2006-----------*
- * @method  CwmsObjectChoiceComboBox::SetObjectListAndDisplayValue // public                      *
- * @return  void                                             //                                   *
- * @param   CdmObjectContainer* p_pContainer                  //                                   *
- * @param   QString p_qstrValueKeyname                       //                                   *
- * @comment                                                                                       *
- *----------------last changed: Wolfgang GraÃŸhof----------------So 8. Jan 21:55:22 2006-----------*/
-void CwmsObjectChoiceComboBox::SetContainerAndDisplayValue(  CdmObjectContainer* p_pContainer,
-                                                             QString p_qstrValueKeyname )
+void CwmsObjectChoiceComboBox::SetContainerAndDisplayValue(CdmObjectContainer* p_pContainer,
+                                                           QString p_qstrValueKeyname )
 {
    if(p_pContainer)
    {
@@ -224,8 +181,6 @@ void CwmsObjectChoiceComboBox::SetContainerAndDisplayFilteredValue(CdmObjectCont
    }
 }
 
-
-
 void CwmsObjectChoiceComboBox::SetContainerAndDisplayValueByWql(CdmObjectContainer* p_pContainer, QString qstrWql)
 {
     if(CHKPTR(p_pContainer) && !qstrWql.isEmpty())
@@ -272,12 +227,6 @@ void CwmsObjectChoiceComboBox::SetContainerAndDisplayValueByWql(QString qstrWql)
     }
 }
 
-/** +-=---------------------------------------------------------Sa 7. Mai 13:58:23 2011-----------*
- * @method  CwmsObjectChoiceComboBox::FillWidget             // private                           *
- * @return  void                                             //                                   *
- * @param   CdmQueryEnhanced& p_rcCdmQuery                   //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Sa 7. Mai 13:58:23 2011-----------*/
 void CwmsObjectChoiceComboBox::FillWidget(CdmQuery& p_rcCdmQuery)
 {
     ClearEntries();
@@ -346,19 +295,11 @@ void CwmsObjectChoiceComboBox::FillWidget(CdmQuery& p_rcCdmQuery)
    FillEntries();
 }
 
-/** +-=---------------------------------------------------------Fr 12. Jan 19:54:58 2007----------*
- * @method  CwmsObjectChoiceComboBox::FillDialog             // private                           *
- * @return  void                                             //                                   *
- * @param   CdmObjectContainer* p_pContainer                  //                                   *
- * @param   QString p_qstrValueKeyname                       //                                   *
- * @param   QValueList<qint64>& p_rqvlObjects                  //                                   *
- * @comment This method fills the Combobox with the results of the proxy.                         *
- *----------------last changed: Wolfgang GraÃŸhof----------------Fr 12. Jan 19:54:58 2007----------*/
 void CwmsObjectChoiceComboBox::FillDialog(CdmObjectContainer* p_pContainer,
                                           QString p_qstrValueKeyname,
                                           QList<qint64>& p_rqvlObjects)
 {
-	ClearEntries();
+    ClearEntries();
    QString qstrValueKeyname = p_qstrValueKeyname;
 
    if (p_pContainer)
@@ -388,13 +329,6 @@ void CwmsObjectChoiceComboBox::FillDialog(CdmObjectContainer* p_pContainer,
    }
 }
 
-/** +-=---------------------------------------------------------Do 23. Feb 15:45:10 2006----------*
- * @method  CwmsObjectChoiceComboBox::FillDialog             // private                           *
- * @return  void                                             //                                   *
- * @param   CdmObjectContainer* p_pContainer                  //                                   *
- * @param   QString p_qstrValueKeyname                       //                                   *
- * @comment This method fills the objectlist without proxy limitations.                           *
- *----------------last changed: Wolfgang GraÃŸhof----------------Do 23. Feb 15:45:10 2006----------*/
 void CwmsObjectChoiceComboBox::FillDialog(CdmObjectContainer* p_pContainer,
                                           QString p_qstrValueKeyname)
 {
@@ -427,13 +361,6 @@ void CwmsObjectChoiceComboBox::FillDialog(CdmObjectContainer* p_pContainer,
    }
 }
 
-/** +-=---------------------------------------------------------Mo 4. Jan 15:40:53 2010-----------*
- * @method  CwmsObjectChoiceComboBox::AddEntry               // public                            *
- * @return  void                                             //                                   *
- * @param   CdmObject* p_pCdmObject                          //                                   *
- * @param   QString p_qstrValue                              //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mo 4. Jan 15:40:53 2010-----------*/
 void CwmsObjectChoiceComboBox::AddEntry(CdmObject* p_pCdmObject, QString p_qstrValue)
 {
    if(CHKPTR(p_pCdmObject))
@@ -442,13 +369,6 @@ void CwmsObjectChoiceComboBox::AddEntry(CdmObject* p_pCdmObject, QString p_qstrV
    }
 }
 
-/** +-=---------------------------------------------------------Sa 7. Mai 14:33:00 2011-----------*
- * @method  CwmsObjectChoiceComboBox::AddEntry               // public                            *
- * @return  void                                             //                                   *
- * @param  qint64 p_lObjectId                                 //                                   *
- * @param   QString p_qstrValue                              //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Sa 7. Mai 14:33:00 2011-----------*/
 void CwmsObjectChoiceComboBox::AddEntry(qint64 p_lObjectId, QString p_qstrValue)
 {
     if(m_qmEntries.value(p_qstrValue) != p_lObjectId)
@@ -463,11 +383,6 @@ void CwmsObjectChoiceComboBox::ClearEntries()
    m_qmEntries.clear();
 }
 
-/** +-=---------------------------------------------------------So 4. Apr 18:42:33 2010-----------*
- * @method  CwmsObjectChoiceComboBox::FillEntries            // public                            *
- * @return  void                                             //                                   *
- * @comment fills the entries to the combobox.                                                    *
- *----------------last changed: --------------------------------So 4. Apr 18:42:33 2010-----------*/
 void CwmsObjectChoiceComboBox::FillEntries()
 {
    if (!m_qmEntries.contains("-"))
@@ -485,11 +400,6 @@ void CwmsObjectChoiceComboBox::FillEntries()
    }
 }
 
-/** +-=---------------------------------------------------------Sa 24. Jun 13:35:08 2006----------*
- * @method  CwmsObjectChoiceComboBox::Refresh                // public, slots                     *
- * @return  void                                             //                                   *
- * @comment This method refreshes the dialog and shows the changed data.                          *
- *----------------last changed: Wolfgang GraÃŸhof----------------Sa 24. Jun 13:35:08 2006----------*/
 void CwmsObjectChoiceComboBox::Refresh()
 {
    // storing the old value
@@ -509,12 +419,6 @@ void CwmsObjectChoiceComboBox::Refresh()
 
 }
 
-/** +-=---------------------------------------------------------Fr 1. Jun 10:06:02 2012-----------*
- * @method  CwmsObjectChoiceComboBox::SetCurrentObjectId     // public                            *
- * @return  void                                             //                                   *
- * @param  qint64 p_lId                                       //                                   *
- * @comment This method sets the current selected object in the combobox.                         *
- *----------------last changed: --------------------------------Fr 1. Jun 10:06:02 2012-----------*/
 void CwmsObjectChoiceComboBox::SetCurrentObjectId(qint64 p_lId)
 {
    if(p_lId > 0)
@@ -536,12 +440,6 @@ void CwmsObjectChoiceComboBox::SetCurrentObjectId(qint64 p_lId)
    }
 }
 
-/** +-=---------------------------------------------------------So 23. Sep 13:59:53 2012----------*
- * @method  CwmsObjectChoiceComboBox::SetCurrentObject       // public                            *
- * @return  void                                             //                                   *
- * @param   CdmObject* p_pCdmObject                          //                                   *
- * @comment This method sets the current selected object in the combobox.                         *
- *----------------last changed: --------------------------------So 23. Sep 13:59:53 2012----------*/
 void CwmsObjectChoiceComboBox::SetCurrentObject(CdmObject* p_pCdmObject)
 {
    if(p_pCdmObject)
@@ -554,12 +452,6 @@ void CwmsObjectChoiceComboBox::SetCurrentObject(CdmObject* p_pCdmObject)
    }
 }
 
-/** +-=---------------------------------------------------------Fr 1. Jun 10:05:31 2012-----------*
- * @method  CwmsObjectChoiceComboBox::FindIndexById          // private                           *
- * @return  int                                              //                                   *
- * @param  qint64 p_lObjectId                                 //                                   *
- * @comment This method finds the idnex of the object.                                            *
- *----------------last changed: --------------------------------Fr 1. Jun 10:05:31 2012-----------*/
 int CwmsObjectChoiceComboBox::FindIndexById(qint64 p_lObjectId)
 {
    int iRet = -1;
@@ -585,26 +477,12 @@ int CwmsObjectChoiceComboBox::FindIndexById(qint64 p_lObjectId)
    return iRet;
 }
 
-/** +-=---------------------------------------------------------Fr 1. Jun 10:34:08 2012-----------*
- * @method  CwmsObjectChoiceComboBox::GetSelectedObjectId    // public                            *
- * @return qint64                                             //                                   *
- * @comment This method returns the selected object.                                              *
- *----------------last changed: --------------------------------Fr 1. Jun 10:34:08 2012-----------*/
 qint64 CwmsObjectChoiceComboBox::GetSelectedObjectId()
 {
    QString qstrCurrent = currentText();
    return m_qmEntries[qstrCurrent];
 }
 
-
-/** +-=---------------------------------------------------------Fr 1. Jun 10:35:50 2012-----------*
- * @method  CwmsObjectChoiceComboBox::GetSelectedObject      // public                            *
- * @return  CdmObject*                                       //                                   *
- * @comment This method returns the selected object.                                              *
- *                                                                                                *
- *          This loads the object from server if it is doesn't there use it only if you want      *
- *          to change or display the object.                                                      *
- *----------------last changed: --------------------------------Fr 1. Jun 10:35:50 2012-----------*/
 CdmObject* CwmsObjectChoiceComboBox::GetSelectedObject()
 {
    CdmObject* pCdmObject = nullptr;
@@ -632,13 +510,7 @@ CdmObject *CwmsObjectChoiceComboBox::GetSelectedObjectByIndex(int iIndex)
     return pCurrentObject;
 }
 
-
-/** +-=---------------------------------------------------------So 8. Jan 22:12:14 2006-----------*
- * @method  CwmsObjectChoiceComboBox::ComboBoxActivatedSlot  // private, slots                    *
- * @return  void                                             //                                   *
- * @comment This slot will be called if the combobox was activated.                               *
- *----------------last changed: Wolfgang GraÃŸhof----------------So 8. Jan 22:12:14 2006-----------*/
-void CwmsObjectChoiceComboBox::ComboBoxActivatedSlot(  )
+void CwmsObjectChoiceComboBox::ComboBoxActivatedSlot()
 {
    CdmObject* pCdmObject = GetSelectedObject();
 
@@ -646,17 +518,11 @@ void CwmsObjectChoiceComboBox::ComboBoxActivatedSlot(  )
    emit ObjectSelectedSignal(pCdmObject);
 }
 
-/** +-=---------------------------------------------------------Do 27. Dez 12:54:40 2007----------*
- * @method  CwmsObjectChoiceComboBox::TextChangedSlot        // private, slots                    *
- * @return  void                                             //                                   *
- * @comment This slot will be called if the text in the combobox was changed.                     *
- *----------------last changed: Wolfgang GraÃŸhof----------------Do 27. Dez 12:54:40 2007----------*/
 void CwmsObjectChoiceComboBox::TextChangedSlot()
 {
    int iCount = count();
    QString qstrText = currentText();
    QPalette qPalette = palette();
-
 
    for (int iCounter = 0; iCounter < iCount; ++iCounter)
    {
@@ -669,12 +535,6 @@ void CwmsObjectChoiceComboBox::TextChangedSlot()
    }
 }
 
-/** +-=---------------------------------------------------------So 13. Jan 13:16:02 2008----------*
- * @method  CwmsObjectChoiceComboBox::keyPressEvent          // private                           *
- * @return  void                                             //                                   *
- * @param   QKeyEvent * p_pqKeyEvent                         //                                   *
- * @comment                                                                                       *
- *----------------last changed: Wolfgang GraÃŸhof----------------So 13. Jan 13:16:02 2008----------*/
 void CwmsObjectChoiceComboBox::keyPressEvent(QKeyEvent * p_pqKeyEvent)
 {
    if (CHKPTR(p_pqKeyEvent))
@@ -704,98 +564,25 @@ void CwmsObjectChoiceComboBox::keyPressEvent(QKeyEvent * p_pqKeyEvent)
    QComboBox::keyPressEvent(p_pqKeyEvent);
 }
 
-/** +-=---------------------------------------------------------Do 16. Sep 20:32:01 2010----------*
- * @method  CwmsObjectChoiceComboBox::ObjectCreatedEvent     // protected, virtual                *
- * @return  void                                             //                                   *
- * @param  qint64# p_lObjectId                                //                                   *
- * @comment This method will be called if a new object was created.                               *
- *----------------last changed: --------------------------------Do 16. Sep 20:32:01 2010----------*/
 void CwmsObjectChoiceComboBox::ObjectCreatedEvent(qint64)
 {
    Refresh();
 }
 
-/** +-=---------------------------------------------------------Do 16. Sep 20:32:14 2010----------*
- * @method  CwmsObjectChoiceComboBox::ObjectModifiedEvent    // protected, virtual                *
- * @return  void                                             //                                   *
- * @param  qint64# p_lObjectId                                //                                   *
- * @comment This mehtod will be called if a object was modified.                                  *
- *----------------last changed: --------------------------------Do 16. Sep 20:32:14 2010----------*/
 void CwmsObjectChoiceComboBox::ObjectModifiedEvent(qint64)
 {
 }
 
-/** +-=---------------------------------------------------------Do 16. Sep 20:32:26 2010----------*
- * @method  CwmsObjectChoiceComboBox::ObjectRefModifiedEvent // protected                         *
- * @return  void                                             //                                   *
- * @param  qint64# p_lObjectId                                //                                   *
- * @comment This mehtod will be called if a object was modified.                                  *
- *----------------last changed: --------------------------------Do 16. Sep 20:32:26 2010----------*/
 void CwmsObjectChoiceComboBox::ObjectRefModifiedEvent(qint64)
 {
 }
 
-/** +-=---------------------------------------------------------Do 16. Sep 20:32:37 2010----------*
- * @method  CwmsObjectChoiceComboBox::ObjectDeletedEvent     // protected, virtual                *
- * @return  void                                             //                                   *
- * @param  qint64# p_lObjectId                                //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Do 16. Sep 20:32:37 2010----------*/
 void CwmsObjectChoiceComboBox::ObjectDeletedEvent(qint64)
 {
    Refresh();
 }
 
-/** +-=---------------------------------------------------------Do 16. Sep 20:33:05 2010----------*
- * @method  CwmsObjectChoiceComboBox::ObjectCommitedEvent    // protected, virtual                *
- * @return  void                                             //                                   *
- * @param  qint64# p_lObjectId                                //                                   *
- * @comment This mehtod will be called if a object was modified.                                  *
- *----------------last changed: --------------------------------Do 16. Sep 20:33:05 2010----------*/
 void CwmsObjectChoiceComboBox::ObjectCommitedEvent(qint64)
 {
    Refresh();
 }
-
-/** +-=---------------------------------------------------------So 13. Jan 13:16:13 2008----------*
- * @method  CwmsObjectChoiceComboBox::PlusPressedSignal      // private, signals                  *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: Wolfgang GraÃŸhof----------------So 13. Jan 13:16:13 2008----------*/
-
-
-/** +-=---------------------------------------------------------So 13. Jan 13:16:20 2008----------*
- * @method  CwmsObjectChoiceComboBox::MinusPressedSignal     // private, signals                  *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: Wolfgang GraÃŸhof----------------So 13. Jan 13:16:20 2008----------*/
-
-
-/** +-=---------------------------------------------------------So 13. Jan 13:16:28 2008----------*
- * @method  CwmsObjectChoiceComboBox::DivisionPressedSignal  // private, signals                  *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: Wolfgang GraÃŸhof----------------So 13. Jan 13:16:28 2008----------*/
-
-
-/** +-=---------------------------------------------------------So 13. Jan 13:16:34 2008----------*
- * @method  CwmsObjectChoiceComboBox::MultiplyPressedSignal  // private, signals                  *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: Wolfgang GraÃŸhof----------------So 13. Jan 13:16:34 2008----------*/
-
-/** +-=---------------------------------------------------------So 8. Jan 22:14:37 2006-----------*
- * @method  CwmsObjectChoiceComboBox::ObjectSelectedSignal   // public, signals                   *
- * @return  void                                             //                                   *
- * @param   CdmObject*                                       //                                   *
- * @comment                                                                                       *
- *----------------last changed: Wolfgang GraÃŸhof----------------So 8. Jan 22:14:37 2006-----------*/
-
-
-
-/** +-=---------------------------------------------------------So 8. Jan 22:14:47 2006-----------*
- * @method  CwmsObjectChoiceComboBox::ObjectSelectedSignal   // public, signals                   *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: Wolfgang GraÃŸhof----------------So 8. Jan 22:14:47 2006-----------*/
-
