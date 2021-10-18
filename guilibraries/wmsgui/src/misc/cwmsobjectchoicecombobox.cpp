@@ -250,7 +250,7 @@ void CwmsObjectChoiceComboBox::FillWidget(CdmQuery& p_rcCdmQuery)
             qstrlDisplayValue.append(", ");
          }
 
-         QString qstrValue = p_rcCdmQuery.GetResultAt(iColPos, iRowPos).toString();
+         QString qstrValue = p_rcCdmQuery.GetResultAsDisplayStringAt(iColPos, iRowPos);
 
          if(!qstrValue.isEmpty())
          {
