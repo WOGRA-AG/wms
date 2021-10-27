@@ -80,7 +80,16 @@ void CwmsQueryEditor::ExecuteClickedSlot()
     qstrQuery = qstrQuery.replace("\n", " ");
     CwmsErrorCollector cErrorCollector;
     CdmLogging::AddAdaptor(&cErrorCollector);
-    m_cCdmModel.Execute(qstrQuery);
+
+    if (m_pqsbMaxResults->isEnabled() && m_pqsbMaxResults->value() > 0)
+    {
+        m_cCdmModel.Execute(qstrQuery, m_pqsbMaxResults->value());
+    }
+    else
+    {
+        m_cCdmModel.Execute(qstrQuery);
+    }
+
     CdmLogging::RemoveAdaptor(&cErrorCollector);
 
     if (cErrorCollector.HasEntries())
