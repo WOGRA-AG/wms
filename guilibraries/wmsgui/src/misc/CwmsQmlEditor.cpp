@@ -140,25 +140,25 @@ bool CwmsQmlEditor::Validate()
 
    if (m_pqleName->text().isEmpty())
    {
-      CdmMessageManager::critical(tr("Validierung fehlgeschlagen"),tr("Name ist Pflichtfeld."));
+      MSG_CRIT("Validierung fehlgeschlagen","Name ist Pflichtfeld.");
       success = false;
    }
 
    if (m_pqleClass->text().isEmpty() && !m_pqrbWmsContext->isChecked())
    {
-      CdmMessageManager::critical(tr("Validierung fehlgeschlagen"),tr("Wenn Wms Kontext nicht ausgewählt ist, muss eine Klasse selektiert werden."));
+      MSG_CRIT("Validierung fehlgeschlagen","Wenn Wms Kontext nicht ausgewählt ist, muss eine Klasse selektiert werden.");
       success = false;
    }
 
    if (!m_pqchbDesktop->isChecked() && !m_pqchbMobile->isChecked() && !m_pqchbTablet->isChecked())
    {
-      CdmMessageManager::critical(tr("Validierung fehlgeschlagen"), tr("Es muss eine Verwendungsart für den Dialog gewählt werden."));
+      MSG_CRIT("Validierung fehlgeschlagen", "Es muss eine Verwendungsart für den Dialog gewählt werden.");
       success = false;
    }
 
    if (m_pqteCode->toPlainText().isEmpty())
    {
-      CdmMessageManager::critical(tr("Validierung fehlgeschlagen"), tr("Der Dialogcode muss gefüllt sein."));
+      MSG_CRIT("Validierung fehlgeschlagen", "Der Dialogcode muss gefüllt sein.");
       success = false;
    }
    
@@ -341,7 +341,7 @@ bool CwmsQmlEditor::IsModified()
 
 void CwmsQmlEditor::Debug()
 {
-    CdmMessageManager::critical(tr("Nicht unterstützt"), tr("Debugging ist nicht für Benutzeroberflächen unterstützt"));
+    MSG_CRIT("Nicht unterstützt", "Debugging ist nicht für Benutzeroberflächen unterstützt");
 }
 
 void CwmsQmlEditor::Execute()

@@ -122,13 +122,13 @@ bool CwmsWorkflowDefinitionEditor::Validate()
    if (m_pqleName->text().isEmpty())
    {
       bRet = false;
-      CdmMessageManager::critical(tr("Fehlende Angabe"), tr("Das Feld Name muss gefüllt sein!"));
+      MSG_CRIT("Fehlende Angabe", "Das Feld Name muss gefüllt sein!");
    }
 
    if (!m_rpCdmClass)
    {
       bRet = false;
-      CdmMessageManager::critical(tr("Fehlende Angabe"), tr("Sie müssen eine Klasse gewählt haben!"));
+      MSG_CRIT("Fehlende Angabe", "Sie müssen eine Klasse gewählt haben!");
    }
    
    return bRet;

@@ -292,8 +292,8 @@ bool CwmsApplicationModuleEditor::Validate()
     if (!m_rpCdmData && !m_rpCdmDataOL && !m_rpCdmView &&! m_rpCdmForm)
     {
         bRet = false;
-        CdmMessageManager::critical(tr("Fehlende Informationen"),
-                                    tr("Die Auswahl ist nicht vollständig mindestens ein Auswahlfeld muss gefüllt sein."));
+        MSG_CRIT("Fehlende Informationen",
+                 "Die Auswahl ist nicht vollständig mindestens ein Auswahlfeld muss gefüllt sein.");
     }
 
     if (!m_rpCdmData && m_rpCdmForm &&
@@ -324,8 +324,8 @@ bool CwmsApplicationModuleEditor::Validate()
         if (bError)
         {
             bRet = false;
-            CdmMessageManager::critical(tr("Fehlende Informationen"),
-                                        tr("Zum ausgewählten Formular muss ein Objekt ausgewählt sein."));
+            MSG_CRIT("Fehlende Informationen",
+                     "Zum ausgewählten Formular muss ein Objekt ausgewählt sein.");
         }
     }
 
@@ -334,15 +334,15 @@ bool CwmsApplicationModuleEditor::Validate()
              m_rpCdmForm->IsTypeOf("Technical_Form_Object_ObjectList")))
     {
         bRet = false;
-        CdmMessageManager::critical(tr("Fehlende Informationen"),
-                                    tr("Zum ausgewählten Formular muss eine Objektliste ausgewählt sein."));
+        MSG_CRIT("Fehlende Informationen",
+                 "Zum ausgewählten Formular muss eine Objektliste ausgewählt sein.");
     }
 
     if (m_pqleName->text().isEmpty())
     {
         bRet = true;
-        CdmMessageManager::critical(tr("Fehlende Informationen"),
-                                    tr("Das Modul benötigt einen Namen."));
+        MSG_CRIT("Fehlende Informationen",
+                 "Das Modul benötigt einen Namen.");
 
     }
 

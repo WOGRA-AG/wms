@@ -111,13 +111,13 @@ void CwmsDataSearchDlg::SearchContainerById()
             }
             else
             {
-                CdmMessageManager::critical(tr("Container nicht gefunden"), tr("Der Container wurde nicht gefunden"));
+                MSG_CRIT("Container nicht gefunden", "Der Container wurde nicht gefunden");
             }
         }
     }
     else
     {
-        CdmMessageManager::critical(tr("Falsche Eingaben"), tr("Es wird eine ID rößer 0 erwartet."));
+        MSG_CRIT("Falsche Eingaben", "Es wird eine ID rößer 0 erwartet.");
     }
 }
 
@@ -139,13 +139,13 @@ void CwmsDataSearchDlg::SearchContainerByKeyname()
             }
             else
             {
-                CdmMessageManager::critical(tr("Container nicht gefunden"), tr("Der Container wurde nicht gefunden"));
+                MSG_CRIT("Container nicht gefunden", "Der Container wurde nicht gefunden");
             }
         }
     }
     else
     {
-        CdmMessageManager::critical(tr("Falsche Eingaben"), tr("Es ein Keyname für den Container erwartet."));
+        MSG_CRIT("Falsche Eingaben", "Es ein Keyname für den Container erwartet.");
     }
 }
 
@@ -171,18 +171,18 @@ void CwmsDataSearchDlg::SearchContainerByUri()
                 }
                 else
                 {
-                    CdmMessageManager::critical(tr("Uri ist kein Objekt"), tr("Die eingegebene Uri ist kein Objekt."));
+                    MSG_CRIT("Uri ist kein Objekt", "Die eingegebene Uri ist kein Objekt.");
                 }
             }
             else
             {
-                CdmMessageManager::critical(tr("Uri nicht gefunden"), tr("Die eingegebene Uri konnte nicht aufgelöst werden."));
+                MSG_CRIT("Uri nicht gefunden", "Die eingegebene Uri konnte nicht aufgelöst werden.");
             }
         }
     }
     else
     {
-        CdmMessageManager::critical(tr("Falsche Eingaben"), tr("Die Uri darf nicht leer sein."));
+        MSG_CRIT("Falsche Eingaben", "Die Uri darf nicht leer sein.");
     }
 }
 
@@ -226,18 +226,18 @@ void CwmsDataSearchDlg::SearchObjectById()
                 }
                 else
                 {
-                    CdmMessageManager::critical(tr("Objekt nicht gefunden"), tr("Das Objekt wurde nicht gefunden"));
+                    MSG_CRIT("Objekt nicht gefunden", "Das Objekt wurde nicht gefunden");
                 }
             }
             else
             {
-                CdmMessageManager::critical(tr("Container nicht gefunden"), tr("Der Container wurde nicht gefunden"));
+                MSG_CRIT("Container nicht gefunden", "Der Container wurde nicht gefunden");
             }
         }
     }
     else
     {
-        CdmMessageManager::critical(tr("Eingabefehler"), tr("Beide Eingaberfelder müssen eine ID sein. Such kann nicht durchgeführt werden."));
+        MSG_CRIT("Eingabefehler", "Beide Eingaberfelder müssen eine ID sein. Such kann nicht durchgeführt werden.");
     }
 }
 
@@ -278,18 +278,18 @@ void CwmsDataSearchDlg::SearchObjectByKeyname()
                 }
                 else
                 {
-                    CdmMessageManager::critical(tr("Objekt nicht gefunden"), tr("Das Objekt wurde nicht gefunden"));
+                    MSG_CRIT(("Objekt nicht gefunden"), ("Das Objekt wurde nicht gefunden"));
                 }
             }
             else
             {
-                CdmMessageManager::critical(tr("Container nicht gefunden"), tr("Der Container wurde nicht gefunden"));
+                MSG_CRIT(("Container nicht gefunden"), ("Der Container wurde nicht gefunden"));
             }
         }
     }
     else
     {
-        CdmMessageManager::critical(tr("Fehlende Angaben"), tr("Es muss sowohl der Container Keyname als auch der Objekt Keyname angegeben sein."));
+        MSG_CRIT(("Fehlende Angaben"), ("Es muss sowohl der Container Keyname als auch der Objekt Keyname angegeben sein."));
     }
 }
 
@@ -313,12 +313,12 @@ void CwmsDataSearchDlg::SearchObjectByUri()
             }
             else
             {
-                CdmMessageManager::critical(tr("Uri ist kein Objekt"), tr("Die eingegebene Uri ist kein Objekt."));
+                MSG_CRIT(("Uri ist kein Objekt"), ("Die eingegebene Uri ist kein Objekt."));
             }
         }
         else
         {
-            CdmMessageManager::critical(tr("Uri nicht gefunden"), tr("Die eingegebene Uri konnte nicht aufgelöst werden."));
+            MSG_CRIT(("Uri nicht gefunden"), ("Die eingegebene Uri konnte nicht aufgelöst werden."));
         }
     }
 }

@@ -118,8 +118,8 @@ bool CwmsQmlDatabaseSelection::loadSelection(QString p_qstrDatabase)
          }
          else
          {
-            CdmMessageManager::critical(tr("Fehler bei der Datenbankauswahl"), 
-                                  tr("Datenbank konnten nicht geladen werden!!!"));
+            MSG_CRIT("Fehler bei der Datenbankauswahl",
+                     "Datenbank konnten nicht geladen werden!!!");
          }
       }
    }

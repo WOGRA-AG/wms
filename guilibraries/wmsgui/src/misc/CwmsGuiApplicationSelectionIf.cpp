@@ -82,8 +82,8 @@ QString CwmsGuiApplicationSelectionIf::GetApplicationString()
    }
    else if (pCwmsApplicationSelectionIf->m_pqcbApplication->count() == 0)
    {
-      CdmMessageManager::critical(tr("Keine Anwendung installiert"),
-                            tr("Es ist keine Anwendung installiert für das das Programm geöffnet werden könnte.\n Oder keine ausreichenden Rechte vorhanden."));
+      MSG_CRIT("Keine Anwendung installiert",
+               "Es ist keine Anwendung installiert für das das Programm geöffnet werden könnte.\n Oder keine ausreichenden Rechte vorhanden.");
    }
    else
    {

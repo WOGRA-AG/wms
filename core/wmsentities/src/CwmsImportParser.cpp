@@ -205,9 +205,9 @@ void CwmsImportParser::ParseFile(CwmsImport* p_pCwmsImport)
             QStringList qstrlResult = ParseLine(qstrLine);
             if (!p_pCwmsImport->CreateData(qstrlResult))
             {
-               CdmMessageManager::critical(qApp->tr("Importzeile fehlerhaft"), 
-                  qApp->tr("Die Zeile ") + QString::number(iCounter) + qApp->tr(" enthielt Fehler und konnte nicht importiert werden.\n"
-                                                    "Der Import wird mit der nächsten Zeile fortgesetzt."));
+                QString qstrMessage = qApp->tr("Die Zeile ") + QString::number(iCounter) + " enthielt Fehler und konnte nicht importiert werden.\n"
+                                                    "Der Import wird mit der nächsten Zeile fortgesetzt.";
+               MSG_CRIT("Importzeile fehlerhaft", qstrMessage.toUtf8());
             }
             
             if (iCounter % 10 == 0 && p_pCwmsImport->GetDisplayProgress())
@@ -252,13 +252,6 @@ void CwmsImportParser::ParseFile(CwmsImport* p_pCwmsImport)
       }
    }
 }
-
-/** +-=---------------------------------------------------------Di 21. Okt 19:30:30 2008----------*
- * @method  CwmsImportParser::ParseLine                      // protected, p virtual              *
- * @return  QStringList                                      //                                   *
- * @param   QString p_qstrLine                               //                                   *
- * @comment This method parses one line.                                                          *
- *----------------last changed: --------------------------------Di 21. Okt 19:30:30 2008----------*/
 
 /** +-=---------------------------------------------------------Di 21. Okt 18:51:24 2008----------*
  * @method  CwmsImportParser::ParserFactory                  // public, static                    *

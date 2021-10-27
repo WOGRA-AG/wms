@@ -663,8 +663,7 @@ IwmsPrinting* CwmsReportManager::GetPrintingObject()
         }
         else
         {
-            CdmMessageManager::critical(QStringLiteral("Druck Plugin nicht gefunden"),
-                                        tr("Das Druck Plugin wurde nicht gefunden. Drucken nicht möglich!"));
+            MSG_CRIT("Druck Plugin nicht gefunden", "Das Druck Plugin wurde nicht gefunden. Drucken nicht möglich!");
         }
     }
 
@@ -688,8 +687,7 @@ void CwmsReportManager::OpenReportEditor(CdmObject* p_pObject, QWidget* p_pParen
     }
     else
     {
-        CdmMessageManager::critical(tr("Druck Plugin nicht gefunden"),
-                                    tr("Der Druckausgabe Designer kann nicht geöffnet werden!"));
+        MSG_CRIT("Druck Plugin nicht gefunden", "Der Druckausgabe Designer kann nicht geöffnet werden!");
     }
 }
 

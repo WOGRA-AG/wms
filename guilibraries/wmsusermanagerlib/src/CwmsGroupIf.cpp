@@ -131,8 +131,8 @@ void CwmsGroupIf::AddClickedSlot(  )
                 }
                 else
                 {
-                    CdmMessageManager::critical(tr("Benutzer bereits in Gruppe"),
-                                                tr("Der Benutzer ist bereits dieser Gruppe zugeordnet."));
+                    MSG_CRIT("Benutzer bereits in Gruppe",
+                             "Der Benutzer ist bereits dieser Gruppe zugeordnet.");
                 }
             }
         }

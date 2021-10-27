@@ -322,6 +322,7 @@ QString CwmsMessenger::AskForSaveFile(QString p_qstrMessage, QString p_qstrPathT
                                          p_qstrPathToOpen,
                                          p_qstrFilter);
 
+    p_qstrFilter = p_qstrFilter.remove("*");
 
     if(!p_qstrFilter.isEmpty() && !qstrDirectory.endsWith(p_qstrFilter))
     {

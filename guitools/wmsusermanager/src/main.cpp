@@ -88,12 +88,11 @@ int main( int argc, char ** argv )
            }
            else
            {
-              CdmMessageManager::information(qApplication.tr("Keine Administratorenrechte"),
-                                       qApplication.tr("Sie haben keine Administratorenrechte.\n"
-                                                                 "Die Anwendung wird beendet."));
+              MSG_INFO(("Keine Administratorenrechte"),
+                        ("Sie haben keine Administratorenrechte.\n"
+                         "Die Anwendung wird beendet."));
            }
         }
-
       }
       else
       {

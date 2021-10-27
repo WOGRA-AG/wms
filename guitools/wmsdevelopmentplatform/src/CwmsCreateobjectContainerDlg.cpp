@@ -77,14 +77,13 @@ void CwmsCreateObjectContainerDlg::OKClickedSlot()
         }
         else
         {
-            CdmMessageManager::critical(tr("Schlüsselbezeichnung entspricht nicht den Regeln"),
-                                        tr("Schlüsselbezeichnung nicht erlaubt (muss mit einem Buchstaben beginnen und darf keine Umlaute oder Sonderzeichen außer \"_\" enthalten."));
+            MSG_CRIT("Schlüsselbezeichnung entspricht nicht den Regeln", "Schlüsselbezeichnung nicht erlaubt (muss mit einem Buchstaben beginnen und darf keine Umlaute oder Sonderzeichen außer \"_\" enthalten.");
         }
     }
     else
     {
-        CdmMessageManager::information(tr("Objektcontainer konnte nicht angelegt werden"),
-                                       tr("Keyname, Caption, Klasse und Comment sind Pflichtfelder"));
+        MSG_INFO(("Objektcontainer konnte nicht angelegt werden"),
+                                       ("Keyname, Caption, Klasse und Comment sind Pflichtfelder"));
 
     }
 }
@@ -128,21 +127,21 @@ CdmObjectContainer* CwmsCreateObjectContainerDlg::CreateObjectContainer(QWidget*
                     }
                     else
                     {
-                        CdmMessageManager::information(tr("Objektcontainer konnte nicht angelegt werden"),
-                                                       tr("Die Objektcontainer konnte nicht angelegt werden (Interner Fehler)."));
+                        MSG_INFO(("Objektcontainer konnte nicht angelegt werden"),
+                                                       ("Die Objektcontainer konnte nicht angelegt werden (Interner Fehler)."));
                     }
                 }
             }
             else
             {
-                CdmMessageManager::critical(tr("Schlüsselbezeichnung entspricht nicht den Regeln"),
-                                            tr("Schlüsselbezeichnung nicht erlaubt (muss mit einem Buchstaben beginnen und darf keine Umlaute oder Sonderzeichen außer \"_\" enthalten."));
+                MSG_CRIT("Schlüsselbezeichnung entspricht nicht den Regeln",
+                         "Schlüsselbezeichnung nicht erlaubt (muss mit einem Buchstaben beginnen und darf keine Umlaute oder Sonderzeichen außer \"_\" enthalten.");
             }
         }
         else
         {
-            CdmMessageManager::information(tr("Objektcontainer konnte nicht angelegt werden"),
-                                           tr("Keyname, Caption, Klasse und Comment sind Pflichtfelder"));
+            MSG_INFO("Objektcontainer konnte nicht angelegt werden",
+                                           "Keyname, Caption, Klasse und Comment sind Pflichtfelder");
 
         }
     }

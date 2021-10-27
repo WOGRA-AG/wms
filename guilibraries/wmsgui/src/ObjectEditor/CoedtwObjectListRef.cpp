@@ -291,8 +291,8 @@ void CoedtwContainerRef::EditClickedSlot(  )
       }
       else
       {
-         CdmMessageManager::critical(tr("Error in Editing Objectlist"), 
-                               tr("No Objectlist choosen"));
+         MSG_CRIT("Error in Editing Container",
+                  "No Objectlist choosen");
       }
    }
 }

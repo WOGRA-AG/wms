@@ -262,14 +262,4 @@ void CwmsImportColumnDlg::CancelClickedSlot()
 void CwmsImportColumnDlg::OKClickedSlot()
 {
    accept();
-   /*
-   if (m_pqleEndPos->text().toInt() > m_pqleStartPos->text().toInt())
-   {
-      accept();
-   }
-   else
-   {
-      CdmMessageManager::critical(tr("Ungültige Eingabe"), tr("Die Startposition der Spalte muss kleiner sein als die Endposition."));
-   }
-   */
 }

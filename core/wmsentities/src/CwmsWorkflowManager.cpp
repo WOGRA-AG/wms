@@ -189,8 +189,8 @@ CwmsWorkflowDefinition CwmsWorkflowManager::FindMajorWorkflowByClassUri(QString 
 
         if (iResultCount > 1)
         {
-            CdmMessageManager::warning(tr("Mehrere Hauptprozesse vorhanden"),
-                                       tr("Zu dieser Klasse existieren mehrere Hauptprozesse. Der erst Gefundene wird verwendet!"));
+            MSG_WARN(("Mehrere Hauptprozesse vorhanden"),
+                                       ("Zu dieser Klasse existieren mehrere Hauptprozesse. Der erst Gefundene wird verwendet!"));
         }
 
 

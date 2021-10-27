@@ -84,13 +84,13 @@ bool CwmsDataAccessConfigurator::Validate()
     if (ui->m_pqleDatasourceName->text().isEmpty())
     {
         bRet = false;
-        CdmMessageManager::critical(tr("Validation failed"), tr("Please enter a datasource name."));
+        MSG_CRIT("Validation failed", "Please enter a datasource name.");
     }
 
     if (ui->m_pqcbDatasourceType->currentText().isEmpty())
     {
         bRet = false;
-        CdmMessageManager::critical(tr("Validation failed"), tr("Please select a datasource type."));
+        MSG_CRIT("Validation failed", "Please select a datasource type.");
     }
 
     return bRet;

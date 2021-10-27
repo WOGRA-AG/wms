@@ -173,10 +173,10 @@ void CwmsObjectContainerEditorWidget::SetModule(CwmsApplicationModule p_cModule)
             }
             else
             {
-               CdmMessageManager::critical(tr("Ungültige Konfiguration"), 
-                                           tr("Die Konfiguration der UI Komponente ist ungültig.\n"
-                                              "Wenden Sie sich an Ihren Hersteller.\n"
-                                              "Weitere Informationen: Kein View oder keine Objektliste mit Darstellungsfeldern definiert."));
+               MSG_CRIT("Ungültige Konfiguration",
+                        "Die Konfiguration der UI Komponente ist ungültig.\n"
+                        "Wenden Sie sich an Ihren Hersteller.\n"
+                        "Weitere Informationen: Kein View oder keine Objektliste mit Darstellungsfeldern definiert.");
             }
          }
       }

@@ -174,8 +174,8 @@ void CwsServerConfig::DataAccessClickedSlot()
 
     if (QDialog::Accepted == pEditor->exec())
     {
-        CdmMessageManager::information(tr("Settings changed"),
-            tr("The settings were changed."));
+        MSG_INFO(("Einstellungen geändert"),
+            ("Die Einstellungen wurden geändert"));
     }
 
     delete pEditor;

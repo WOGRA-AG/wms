@@ -64,21 +64,21 @@ bool CwmsAddNewClassIf::Validate()
    if (m_pqleCaption->text().isEmpty())
    {
       bRet = false;
-      CdmMessageManager::critical(tr("Pflichtfeld nicht gefüllt"), tr("Das Feld Name ist nicht gefüllt."));
+      MSG_CRIT("Pflichtfeld nicht gefüllt", "Das Feld Name ist nicht gefüllt.");
    }
 
    if (m_pqleKeyname->text().isEmpty())
    {
       bRet = false;
-      CdmMessageManager::critical(tr("Pflichtfeld nicht gefüllt"), tr("Das Feld Schlüssel ist nicht gefüllt."));
+      MSG_CRIT("Pflichtfeld nicht gefüllt", "Das Feld Schlüssel ist nicht gefüllt.");
    }
    else
    {
        if (!CdmModelElement::CheckKeyname(m_pqleKeyname->text()))
        {
            bRet = false;
-           CdmMessageManager::critical(tr("Schlüsselbezeichnung entspricht nicht den Regeln"),
-                                       tr("Schlüsselbezeichnung nicht erlaubt (muss mit einem Buchstaben beginnen und darf keine Umlaute oder Sonderzeichen außer \"_\" enthalten."));
+           MSG_CRIT("Schlüsselbezeichnung entspricht nicht den Regeln",
+                    "Schlüsselbezeichnung nicht erlaubt (muss mit einem Buchstaben beginnen und darf keine Umlaute oder Sonderzeichen außer \"_\" enthalten.");
        }
 
    }
@@ -86,7 +86,7 @@ bool CwmsAddNewClassIf::Validate()
    if (m_pqteComment->toPlainText().isEmpty())
    {
       bRet = false;
-      CdmMessageManager::critical(tr("Pflichtfeld nicht gefüllt"), tr("Das Feld Beschreibung ist nicht gefüllt."));
+      MSG_CRIT("Pflichtfeld nicht gefüllt", "Das Feld Beschreibung ist nicht gefüllt.");
    }
 
    return bRet;

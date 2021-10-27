@@ -72,8 +72,8 @@ void CwmsQmlApplicationSelection::selectApplication()
    }
    else if(qstrlApps.count() == 0)
    {
-      CdmMessageManager::critical(tr("Keine Anwendung installiert"),
-         tr("Es ist keine Anwendung installiert für das das Programm geöffnet werden könnte.\n Oder Sie haben keine ausreichende Berechtigung."));
+      MSG_CRIT("Keine Anwendung installiert",
+         "Es ist keine Anwendung installiert für das das Programm geöffnet werden könnte.\n Oder Sie haben keine ausreichende Berechtigung.");
       m_pInit->StateFinished(false);
       deleteLater();
    }

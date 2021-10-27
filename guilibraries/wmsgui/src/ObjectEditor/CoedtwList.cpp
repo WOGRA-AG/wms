@@ -643,8 +643,8 @@ void CoedtwList::EditClickedSlot()
    }
    else
    {
-      CdmMessageManager::warning(tr("Bitte Auswahl anpassen"), 
-                           tr("Es darf höchstens eine Zeile ausgewählt sein."));
+      MSG_WARN(("Bitte Auswahl anpassen"),
+                           ("Es darf höchstens eine Zeile ausgewählt sein."));
    }
 }
 

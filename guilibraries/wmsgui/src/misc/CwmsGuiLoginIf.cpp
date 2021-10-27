@@ -110,12 +110,12 @@ bool CwmsGuiLoginIf::Login(QString p_qstrApplicationName,
             {
                 if (iTrials > iMaxTrials)
                 {
-                    CdmMessageManager::information(tr("Login fehlgeschlagen"), tr("Login fehlgeschlagen. Zu viele Fehlversuche die Anwendung wird beendet."));
+                    MSG_INFO(("Login fehlgeschlagen"), ("Login fehlgeschlagen. Zu viele Fehlversuche die Anwendung wird beendet."));
                     break;
                 }
                 else
                 {
-                    CdmMessageManager::information(tr("Fehler bei der Authentifizierung"), tr("Ungültiger Benutzername oder falsches Passwort"));
+                    MSG_INFO(("Fehler bei der Authentifizierung"), ("Ungültiger Benutzername oder falsches Passwort"));
                 }
             }
         }
@@ -156,7 +156,7 @@ void CwmsGuiLoginIf::ClientSettingsClickedSlot()
 
     if (QDialog::Accepted == pEditor->exec())
     {
-        CdmMessageManager::information(tr("Einstellungen übernommen"), tr("Die Einstellungen wurden übernommen."));
+        MSG_INFO(("Einstellungen übernommen"), ("Die Einstellungen wurden übernommen."));
     }
 
     DELPTR(pEditor)
@@ -169,7 +169,7 @@ void CwmsGuiLoginIf::LdapSettingsClickedSlot()
 
     if (QDialog::Accepted == lEditor->exec())
     {
-        CdmMessageManager::information(tr("Einstellungen übernommen"), tr("Die Einstellungen wurden übernommen."));
+        MSG_INFO(("Einstellungen übernommen"), ("Die Einstellungen wurden übernommen."));
     }
 
     DELPTR(lEditor)

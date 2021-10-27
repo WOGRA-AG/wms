@@ -256,9 +256,9 @@ void CwmsAddMemberIf::ClassSelectionClickedSlot()
    }
    else
    {
-      CdmMessageManager::critical(tr("Fehler beim Datentyp"), 
-                            tr("Für diesen Datentyp wird keine Klassenreferenz benötigt.\n"
-                               "Diese Funktion steht nur für Objektcontainer, Listen von Objekten und Objektreferenzen zur Verfügung."));
+      MSG_CRIT("Fehler beim Datentyp",
+               "Für diesen Datentyp wird keine Klassenreferenz benötigt.\n"
+               "Diese Funktion steht nur für Objektcontainer, Listen von Objekten und Objektreferenzen zur Verfügung.");
    }
 }
 
@@ -317,21 +317,21 @@ bool CwmsAddMemberIf::Validate()
    if (m_pqleCaption->text().isEmpty())
    {
       bRet = false;
-      CdmMessageManager::critical(tr("Pflichtfeldangabe fehlt"), tr("Der Member braucht einen Namen"));
+      MSG_CRIT("Pflichtfeldangabe fehlt", "Der Member braucht einen Namen");
    }
 
    if (m_pqleKeyname->text().isEmpty())
    {
       bRet = false;
-      CdmMessageManager::critical(tr("Pflichtfeldangabe fehlt"), tr("Der Member braucht einen Schlüssel"));
+      MSG_CRIT("Pflichtfeldangabe fehlt", "Der Member braucht einen Schlüssel");
    }
    else
    {
        if (!CdmModelElement::CheckKeyname(m_pqleKeyname->text()))
        {
            bRet = false;
-           CdmMessageManager::critical(tr("Schlüsselbezeichnung entspricht nicht den Regeln"),
-                                       tr("Schlüsselbezeichnung nicht erlaubt (muss mit einem Buchstaben beginnen und darf keine Umlaute oder Sonderzeichen außer \"_\" enthalten."));
+           MSG_CRIT("Schlüsselbezeichnung entspricht nicht den Regeln",
+                    "Schlüsselbezeichnung nicht erlaubt (muss mit einem Buchstaben beginnen und darf keine Umlaute oder Sonderzeichen außer \"_\" enthalten.");
        }
    }
 
@@ -344,8 +344,8 @@ bool CwmsAddMemberIf::Validate()
       if (m_pqchbOwner->isChecked() && m_pqleClassReference->text().isEmpty())
       {
          bRet = false;
-         CdmMessageManager::critical(tr("Pflichtfeldangabe fehlt"), 
-            tr("Wenn einer Referenz als Owner gekennzeichnet wird, muss eine Klassenreferenz ausgewählt werden!"));
+         MSG_CRIT("Pflichtfeldangabe fehlt",
+                  "Wenn einer Referenz als Owner gekennzeichnet wird, muss eine Klassenreferenz ausgewählt werden!");
       }
       else if (m_pqchbOwner->isChecked())
       {
@@ -364,14 +364,14 @@ bool CwmsAddMemberIf::Validate()
                if (pClass && pClass->IsAbstract())
                {
                   bRet = false;
-                  CdmMessageManager::critical(tr("Abstrakte Klasse nicht erlaubt"), 
-                     tr("Wenn das Besitzerflag gesetzt ist, darf keine Abstrakte Klasse gewählt werden."));
+                  MSG_CRIT("Abstrakte Klasse nicht erlaubt",
+                     "Wenn das Besitzerflag gesetzt ist, darf keine Abstrakte Klasse gewählt werden.");
                }
                else if (!pClass)
                {
                   bRet = false;
-                  CdmMessageManager::critical(tr("Pflichtfeldangabe fehlt"), 
-                     tr("Wenn einer Referenz als Owner gekennzeichnet wird, muss eine Klassenreferenz ausgewählt werden! Die Klasse ist unbekannt."));
+                  MSG_CRIT("Pflichtfeldangabe fehlt",
+                     "Wenn einer Referenz als Owner gekennzeichnet wird, muss eine Klassenreferenz ausgewählt werden! Die Klasse ist unbekannt.");
                }
             }
          }
@@ -679,8 +679,8 @@ void CwmsAddMemberIf::TestValidationClickedSlot()
    if (qEngine.hasUncaughtException()) 
    {
       int line = qEngine.uncaughtExceptionLineNumber();
-      CdmMessageManager::critical(tr("Fehler im Validierungscode des Members "), 
-         tr("In Zeile ") + QString::number(line)+ "\n" + qScriptValue.toString());
+      QString qstrMessage = "In Zeile " + QString::number(line)+ "\n" + qScriptValue.toString();
+      MSG_CRIT("Fehler im Validierungscode des Members", qstrMessage.toUtf8());
    }
    else
    {
@@ -688,13 +688,13 @@ void CwmsAddMemberIf::TestValidationClickedSlot()
 
       if (!bRet)
       {
-         CdmMessageManager::critical(tr("Validierung fehlgeschlagen "), 
-                                     tr("Die Eingabeprüfung schlug fehl. Prüfung:\n") + qstrCode);
+         QString qstrMessage = QString::fromUtf8("Die Eingabeprüfung schlug fehl. Prüfung:\n") + qstrCode;
+         MSG_CRIT("Validierung fehlgeschlagen", qstrMessage.toUtf8());
       }
       else
       {
-         CdmMessageManager::information(tr("Validierung erfolgreich"), 
-                                        tr("Die Validierung war erfolgreich!"));
+         MSG_INFO(("Validierung erfolgreich"),
+                                        ("Die Validierung war erfolgreich!"));
       }
    }
 }

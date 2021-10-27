@@ -512,8 +512,8 @@ void CwmsFormStandardContainerEditor::SelectSelectionViewClickedSlot()
           }
           else
           {
-             CdmMessageManager::critical(tr("Sicht ungültig"),
-                tr("Bei der Überprüfung der Sicht ist ein Fehler aufgetreten.\n Bitte überprüfen Sie die Sicht."));
+             MSG_CRIT("Sicht ungültig",
+                "Bei der Überprüfung der Sicht ist ein Fehler aufgetreten.\n Bitte überprüfen Sie die Sicht.");
           }
       }
    }
@@ -576,8 +576,8 @@ void CwmsFormStandardContainerEditor::AddSelectionMemberClickedSlot()
    }
    else
    {
-      CdmMessageManager::critical(tr("Kein View oder Objektliste gewählt"), 
-         tr("Um die Darstellung zu konfigurieren müssen Sie einen View oder eine Objektliste wählen."));
+      MSG_CRIT("Kein View oder Objektliste gewählt",
+         "Um die Darstellung zu konfigurieren müssen Sie einen View oder eine Objektliste wählen.");
    }
 }
 

@@ -106,8 +106,7 @@ void CwmsGuiInitApplication::DbSelection()
                 }
                 else
                 {
-                    CdmMessageManager::critical(tr("Fehler beim Laden des Schemas"),
-                                                tr("Schema konnte nicht geladen werden!!!"));
+                    MSG_CRIT("Fehler beim Laden des Schemas", "Schema konnte nicht geladen werden!!!");
                     StateFinished(false);
                 }
             }

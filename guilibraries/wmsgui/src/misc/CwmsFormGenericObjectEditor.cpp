@@ -673,7 +673,7 @@ bool CwmsFormGenericObjectEditor::Validate()
    if (!m_rpCdmClass)
    {
       bRet = false;
-      CdmMessageManager::critical(tr("Keine Klasse gewählt"), tr("Der Objekteditor benötigt die Klasse als Pflichtfeld"));
+      MSG_CRIT("Keine Klasse gewählt", "Der Objekteditor benötigt die Klasse als Pflichtfeld");
    }
 
 

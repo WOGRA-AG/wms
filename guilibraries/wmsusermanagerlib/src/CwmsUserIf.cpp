@@ -107,13 +107,12 @@ void CwmsUserIf::ChangePasswordClickedSlot(  )
 {
     if(CwmsPasswordIf::ChangePassword(m_rpCumUser, this))
     {
-        CdmMessageManager::information(tr("Passwort wurde geändert"),
-                                       tr("Das Passwort wurde erfolgreich geändert."));
+        MSG_INFO(("Passwort wurde geändert"),
+                                       ("Das Passwort wurde erfolgreich geändert."));
     }
     else
     {
-        CdmMessageManager::critical(tr("Fehler bei der Passwortänderung"),
-                                    tr("Das Passwort konnte nicht geändert werden."));
+        MSG_CRIT("Fehler bei der Passwortänderung", "Das Passwort konnte nicht geändert werden.");
     }
 }
 
@@ -221,12 +220,12 @@ void CwmsUserIf::UpdateCLickedSlot(  )
 
             if (SUCCESSFULL(pUserManager->UpdateUser(m_rpCumUser)))
             {
-                CdmMessageManager::information(tr("Benutzer wurde erfolgreich gespeichert"),
-                                               tr("Der Benutzer wurde erfolgreich gespeichert."));
+                MSG_INFO(("Benutzer wurde erfolgreich gespeichert"),
+                                               ("Der Benutzer wurde erfolgreich gespeichert."));
             }
             else
             {//reset User and GUI fields
-                CdmMessageManager::critical(tr("Benutzer kann nicht gespeichert werden"), tr("Login und E-Mail müssen eindeutig sein."));
+                MSG_CRIT("Benutzer kann nicht gespeichert werden", "Login und E-Mail müssen eindeutig sein.");
                 m_pqchbAdmin->setChecked(bOldIsAdmin);
                 m_pqleLogin->setText(qstrOldLogin);
                 m_pqleName->setText(qstrOldLastName);

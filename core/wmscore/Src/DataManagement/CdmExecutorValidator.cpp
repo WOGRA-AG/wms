@@ -410,8 +410,8 @@ bool CdmExecutorValidator::CheckUnique(CdmValue* p_pCdmValue)
 
                    if (!bRet)
                    {
-                       CdmMessageManager::critical(qApp->tr("Speichern nicht möglich."),
-                                                   qApp->tr("Speichern nicht möglich. Feld %1 muss eindeutig sein.").arg(p_pCdmValue->GetCaption()));
+                       QString qstrMessage = qApp->tr("Speichern nicht möglich. Feld %1 muss eindeutig sein.").arg(p_pCdmValue->GetCaption());
+                       MSG_CRIT("Speichern nicht möglich.",qstrMessage.toUtf8());
                    }
                 }
              }
@@ -473,8 +473,8 @@ bool CdmExecutorValidator::CheckMust( const CdmMember* p_pCdmMember, CdmValue* p
          if (CHKPTR(pClass))
          {
             bRet = false;
-            CdmMessageManager::critical(qApp->tr("Speichern nicht möglich."),
-                                        qApp->tr("Speichern nicht möglich. Pflichtfeld wurde nicht ausgefüllt: ")+ p_pCdmValue->GetCaption() + qApp->tr(" Datenklasse: ") + pClass->GetKeyname());
+            QString qstrMessage = QString::fromUtf8("Speichern nicht möglich. Pflichtfeld wurde nicht ausgefüllt: ")+ p_pCdmValue->GetCaption() + QString::fromUtf8(" Datenklasse: ") + pClass->GetKeyname();
+            MSG_CRIT("Speichern nicht möglich.",qstrMessage.toUtf8());
          }
       }
    }
@@ -491,8 +491,8 @@ bool CdmExecutorValidator::CheckSize(CdmValue* p_pCdmValue)
       if(iSize > 0 && iSize < p_pCdmValue->GetDisplayString().length())
       {
          bRet = false;
-         CdmMessageManager::critical(qApp->tr("Speichern nicht möglich."),
-                                     qApp->tr("Speichern nicht möglich. Feldlänge überschritten Feld: ")+ p_pCdmValue->GetCaption());
+         QString qstrMessage = QString::fromUtf8("Speichern nicht möglich. Feldlänge überschritten Feld: ")+ p_pCdmValue->GetCaption();
+         MSG_CRIT("Speichern nicht möglich.",qstrMessage.toUtf8());
       }
    }
    return bRet;

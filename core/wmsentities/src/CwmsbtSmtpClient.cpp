@@ -67,16 +67,16 @@ void CwmsbtSmtpClient::SendMail()
 {
    if (m_bSending) 
    {
-      CdmMessageManager::critical(tr("Senden nicht möglich"),
-                                  tr("Es wird gerade eine Mail versendet. Daher ist derzeit das Senden nicht möglich"));
+      MSG_CRIT("Senden nicht möglich",
+               "Es wird gerade eine Mail versendet. Daher ist derzeit das Senden nicht möglich");
       return;
    }
 
    if (m_rpIslSmtpConfiguration->GetSmtpServer().isEmpty()) 
    {
       m_eSlStatus = Done;
-      CdmMessageManager::critical(tr("Senden nicht möglich"),
-                                  tr("Smtp Server in Einstellungen nicht definiert"));
+      MSG_CRIT("Senden nicht möglich",
+               "Smtp Server in Einstellungen nicht definiert");
 
       return;
    }
@@ -868,7 +868,7 @@ void CwmsbtSmtpClient::TransportErrorSlot(int p_iErrorCode, QString p_qstrErrorM
    QString qstrMessage = tr("Fehlercode: ") + QString::number(p_iErrorCode) 
                           + "\n" + tr("Nachricht:") + "\n" + p_qstrErrorMessage;
 
-  CdmMessageManager::critical(tr("Senden nicht möglich"), qstrMessage);
+  MSG_CRIT("Senden nicht möglich", qstrMessage.toUtf8());
 }
 
 /** +-=---------------------------------------------------------Sa 9. Jan 12:45:25 2010-----------*

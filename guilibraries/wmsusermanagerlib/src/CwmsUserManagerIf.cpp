@@ -189,7 +189,7 @@ void CwmsUserManagerIf::DeleteUserSlot()
                 }
                 else
                 {
-                    CdmMessageManager::critical(tr("Löschen nicht erlaubt"),tr("Man darf sich nicht selbst löschen!"));
+                    MSG_CRIT("Löschen nicht erlaubt","Man darf sich nicht selbst löschen!");
                 }
             }
         }

@@ -83,7 +83,7 @@ void CwmsClassValidationEditor::SyntaxCheckClickedSlot()
 
     if (CdmExecutor::GetExecutor()->GetValidator()->GetEngine()->SyntaxCheck(m_pCode->toPlainText()))
     {
-       CdmMessageManager::information(tr("Syntax gültig"), tr("Die Syntax des Codes ist gültig."));
+       MSG_INFO(("Syntax gültig"), ("Die Syntax des Codes ist gültig."));
     }
 }
 
@@ -98,17 +98,17 @@ bool CwmsClassValidationEditor::Validate()
 
    if (m_pqleName->text().isEmpty())
    {
-      CdmMessageManager::critical(tr("Unvollständige Daten"), tr("Das Feld Name muss gefüllt werden."));
+      MSG_CRIT("Unvollständige Daten", "Das Feld Name muss gefüllt werden.");
    }
 
    if (m_pqteErrorMessage->toPlainText().isEmpty())
    {
-      CdmMessageManager::critical(tr("Unvollständige Daten"), tr("Das Feld Fehlermeldung muss gefüllt werden."));
+      MSG_CRIT("Unvollständige Daten", "Das Feld Fehlermeldung muss gefüllt werden.");
    }
 
    if (m_pCode->toPlainText().isEmpty())
    {
-      CdmMessageManager::critical(tr("Unvollständige Daten"), tr("Ein Validator ohne Validierungscode ist ungültig."));
+      MSG_CRIT("Unvollständige Daten", "Ein Validator ohne Validierungscode ist ungültig.");
    }
 
    return bRet;

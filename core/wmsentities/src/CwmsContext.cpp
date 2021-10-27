@@ -121,7 +121,7 @@ CwmsPluginManager* CwmsContext::GetPluginManager()
 
 void CwmsContext::SessionTimedOutSlot()
 {
-    CdmMessageManager::critical(tr("Session ist abgelaufen"), tr("Die Session ist abgelaufen. Anwendung wird beendet."));
+    MSG_CRIT("Session ist abgelaufen", "Die Session ist abgelaufen. Anwendung wird beendet.");
     m_bTimedOut = true;
     emit ApplicationShutdownSignal();
 }

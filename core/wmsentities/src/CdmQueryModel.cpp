@@ -461,6 +461,26 @@ void CdmQueryModel::Execute(QString p_qstrQuery)
     }
 }
 
+void CdmQueryModel::Execute(QString p_qstrQuery, int p_iLimit)
+{
+    CdmQuery* pCdmQuery = CdmQueryBuilder::BuildQuery(p_qstrQuery);
+
+    if (pCdmQuery != nullptr)
+    {
+        pCdmQuery->setParent(this);
+        if (p_iLimit > 0)
+        {
+            pCdmQuery->SetLimitResultCount(p_iLimit);
+        }
+
+        Execute(pCdmQuery);
+    }
+    else
+    {
+        //ERR("No enhanced query. Can not be executed in query model.");
+    }
+}
+
 void CdmQueryModel::Execute(CdmQuery* p_pCdmQuery)
 {
     if (CHKPTR(p_pCdmQuery) && (p_pCdmQuery != m_pCdmQuery))
@@ -484,10 +504,10 @@ void CdmQueryModel::Execute()
         beginResetModel();
         m_pCdmQuery->ClearResults();
 
-        if (m_pCdmQuery->GetLimitResultCount() == 0)
-        {
-            m_pCdmQuery->SetLimitResultCount(5000);
-        }
+//        if (m_pCdmQuery->GetLimitResultCount() == 0)
+//        {
+//            m_pCdmQuery->SetLimitResultCount(5000);
+//        }
 
         if (m_pCdmQuery->GetContainer())
         {

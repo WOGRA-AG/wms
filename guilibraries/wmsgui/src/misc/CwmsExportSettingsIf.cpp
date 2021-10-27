@@ -330,8 +330,8 @@ void CwmsExportSettingsIf::OKClickedSlot()
          CdmMessageManager::StartAsyncMessageCollection();
          CwmsExportWriter cCwmsExportFileWriter(m_rCwmsExportSettings);
          cCwmsExportFileWriter.Export();
-         CdmMessageManager::information(tr("Export beendet"), 
-                                  tr("Der Export wurde abgeschlossen."));
+         MSG_INFO(("Export beendet"),
+                  ("Der Export wurde abgeschlossen."));
          CdmMessageManager::EndAndShowAsyncMessageCollection();
          accept();
    }
@@ -530,8 +530,8 @@ void CwmsExportSettingsIf::SaveClickedSlot()
       if (FillExportSettings())
       {
          m_rCwmsExportSettings.Save(qstrName);
-         CdmMessageManager::information(tr("Speichern erfolgreich"), 
-                                        tr("Die Konfiguration wurde erfolgreich gespeichert."));
+         MSG_INFO(("Speichern erfolgreich"),
+                  ("Die Konfiguration wurde erfolgreich gespeichert."));
       }
    }
 }
@@ -608,7 +608,7 @@ void CwmsExportSettingsIf::LoadClickedSlot()
    }
    else
    {
-      CdmMessageManager::critical(tr("Keine Konfigurationen gefunden"), tr("Zu diesen Datenstrukturen wurden keine Konfigurationen gefunden.\n Laden daher nicht möglich."));
+      MSG_CRIT("Keine Konfigurationen gefunden", "Zu diesen Datenstrukturen wurden keine Konfigurationen gefunden.\n Laden daher nicht möglich.");
    }
 }
 
@@ -638,13 +638,13 @@ bool CwmsExportSettingsIf::FillExportSettings()
             else
             {
                 bExecute = false;
-                CdmMessageManager::critical(tr("Fehler"), tr("Es wurde kein Feldtrennzeichen angegeben"));
+                MSG_CRIT("Fehler", "Es wurde kein Feldtrennzeichen angegeben");
             }
         }
         else
         {
             bExecute = false;
-            CdmMessageManager::critical(tr("Fehler"), tr("Es wurde kein Texttrennzeichen angegeben."));
+            MSG_CRIT("Fehler", "Es wurde kein Texttrennzeichen angegeben.");
         }
     }
     else if (m_pqrbHtml->isChecked())
@@ -666,7 +666,7 @@ bool CwmsExportSettingsIf::FillExportSettings()
         }
         else
         {
-            CdmMessageManager::critical(tr("Fehler"), tr("Es wurden keine Ausgabedaten gewählt."));
+            MSG_CRIT("Fehler", "Es wurden keine Ausgabedaten gewählt.");
         }
     }
 
@@ -696,15 +696,15 @@ void CwmsExportSettingsIf::ReduceExportSlot()
 
          if (iCount > 0)
          {
-            CdmMessageManager::information(tr("Datenobjekte wurden für den Export ausgewählt"), 
-                                     tr("Es wurden ") + QString::number(iCount) + 
-                                        tr(" Datenobjekte für den Export ausgewählt."));
+             QString qstrMessage = tr("Es wurden ") + QString::number(iCount) +
+                     QString::fromUtf8(" Datenobjekte für den Export ausgewählt.");
+            MSG_INFO(("Datenobjekte wurden für den Export ausgewählt"), qstrMessage.toUtf8());
             m_rCwmsExportSettings.SetExportList(qllObjects);
          }
          else
          {
-            CdmMessageManager::warning(tr("Keine Datenobjekte für den Export ausgewählt"), 
-                                 tr("Die Einschränkung lieferte kein Ergebnis. \n"
+            MSG_WARN(("Keine Datenobjekte für den Export ausgewählt"),
+                                 ("Die Einschränkung lieferte kein Ergebnis. \n"
                                     "Aus diesem Grund wird der Export nicht eingeschränkt."));
          }
       }

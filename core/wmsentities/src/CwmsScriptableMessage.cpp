@@ -46,7 +46,7 @@ CwmsScriptableMessage::~CwmsScriptableMessage()
  *----------------last changed: --------------------------------Di 13. Nov 11:24:15 2012----------*/
 void CwmsScriptableMessage::information(QString p_qstrTitle, QString p_qstrMessage)
 {
-   CdmMessageManager::information(p_qstrTitle, p_qstrMessage);
+   MSG_INFO(p_qstrTitle.toUtf8(), p_qstrMessage.toUtf8());
 }
 
 /** +-=---------------------------------------------------------Di 13. Nov 11:24:33 2012----------*
@@ -58,7 +58,7 @@ void CwmsScriptableMessage::information(QString p_qstrTitle, QString p_qstrMessa
  *----------------last changed: --------------------------------Di 13. Nov 11:24:33 2012----------*/
 void CwmsScriptableMessage::warning(QString p_qstrTitle, QString p_qstrMessage)
 {
-   CdmMessageManager::warning(p_qstrTitle, p_qstrMessage);
+   MSG_WARN(p_qstrTitle.toUtf8(), p_qstrMessage.toUtf8());
 }
 
 /** +-=---------------------------------------------------------Di 13. Nov 11:24:51 2012----------*
@@ -70,7 +70,7 @@ void CwmsScriptableMessage::warning(QString p_qstrTitle, QString p_qstrMessage)
  *----------------last changed: --------------------------------Di 13. Nov 11:24:51 2012----------*/
 void CwmsScriptableMessage::critical(QString p_qstrTitle, QString p_qstrMessage)
 {
-   CdmMessageManager::critical(p_qstrTitle, p_qstrMessage);
+   MSG_CRIT(p_qstrTitle.toUtf8(), p_qstrMessage.toUtf8());
 }
 
 /** +-=---------------------------------------------------------Fr 8. Feb 15:07:32 2013-----------*

@@ -166,17 +166,17 @@ CdmClassMethod* CwmsView::FindModelMethod(QString& p_qstrModelMethod)
                     {
                         if (!pMethod->IsStatic())
                         {
-                            CdmMessageManager::critical("Funktion ist nicht statisch", "Eine View Funktion muss statisch sein.");
+                            MSG_CRIT("Funktion ist nicht statisch", "Eine View Funktion muss statisch sein.");
                         }
 
 //                        if (pMethod->GetParameterCount() != 0)
 //                        {
-//                            CdmMessageManager::critical("Funktion hat Parameter", "Eine View Funktion darf keine Parameter haben.");
+//                            MSG_CRIT("Funktion hat Parameter", "Eine View Funktion darf keine Parameter haben.");
 //                        }
 
                         if (pMethod->GetReturnType() == eDmValueQObject)
                         {
-                            CdmMessageManager::critical("Funktion hat falschen Rückgabewert", "Eine View Funktion muss QOBject als Rückgabewert haben.");
+                            MSG_CRIT("Funktion hat falschen Rückgabewert", "Eine View Funktion muss QOBject als Rückgabewert haben.");
                         }
                     }
                  }

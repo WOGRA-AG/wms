@@ -341,8 +341,8 @@ void CoedtwObjectRef::EditClickedSlot()
       }
       else
       {
-         CdmMessageManager::information(tr("Kein Object ausgewählt"), 
-                                  tr("Sie können kein Feld bearbeiten in dem kein Wert ausgewählt ist."));
+         MSG_INFO(("Kein Object ausgewählt"),
+                                  ("Sie können kein Feld bearbeiten in dem kein Wert ausgewählt ist."));
       }
    }
 }

@@ -550,19 +550,19 @@ bool CwmsbtMailMessage::CheckMail()
    }
    else
    {
-      CdmMessageManager::critical(tr("Fehlende Angabe zur Mail"), tr("Bei der Mail ist kein Empfänger angegeben."));
+      MSG_CRIT("Fehlende Angabe zur Mail", "Bei der Mail ist kein Empfänger angegeben.");
    }
 
    if (m_qstrSubject.isEmpty())
    {
-      bRet = CdmMessageManager::Ask(tr("Hinweis bei der Mailversendung"), 
-                                    tr("Es wurde kein Betreff angegeben. Wollen Sie die Mail tortzdem senden?"));
+      bRet = CdmMessageManager::Ask("Hinweis bei der Mailversendung",
+                                    "Es wurde kein Betreff angegeben. Wollen Sie die Mail tortzdem senden?");
    }
 
    if (m_qstrBody.isEmpty())
    {
-      bRet = CdmMessageManager::Ask(tr("Hinweis bei der Mailversendung"), 
-                                    tr("Die Mail hat keinen Inhalt. Wollen Sie sie trotzdem senden?"));
+      bRet = CdmMessageManager::Ask("Hinweis bei der Mailversendung",
+                                    "Die Mail hat keinen Inhalt. Wollen Sie sie trotzdem senden?");
    }
 
    return bRet;
@@ -595,15 +595,11 @@ void CwmsbtMailMessage::MessageTransmittedSlot(bool p_bSuccess)
 {
     m_bMessageSent = true;
     m_bSuccess = p_bSuccess;
-    if(m_bSuccess)
+
+    if(!m_bSuccess)
     {
-//        CdmMessageManager::information("E-Mail wurde versendet",
-//                                       "E-Mail wurde versendet.");
-    }
-    else
-    {
-        CdmMessageManager::information("E-Mail wurde nicht versendet",
-                                       "E-Mail konnte nicht versendet werden (technisches Problem).");
+        MSG_INFO("E-Mail wurde nicht versendet",
+                 "E-Mail konnte nicht versendet werden (technisches Problem).");
     }
 }
 

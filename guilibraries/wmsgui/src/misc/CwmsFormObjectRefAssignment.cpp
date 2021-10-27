@@ -88,7 +88,7 @@ bool CwmsFormObjectRefAssignment::Validate()
 
     if (GetReference().isEmpty())
     {
-        CdmMessageManager::critical(tr("Fehlende Auswahl"), tr("Es wurde entweder kein Container gewählt, oder die WQL nicht ausgewählt."));
+        MSG_CRIT("Fehlende Auswahl", "Es wurde entweder kein Container gewählt, oder die WQL nicht ausgewählt.");
         bRet = false;
     }
 

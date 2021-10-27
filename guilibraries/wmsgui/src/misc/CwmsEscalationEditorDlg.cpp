@@ -155,8 +155,8 @@ bool CwmsEscalationEditorDlg::Validate()
    if (m_pqtwEmployees->topLevelItemCount() == 0)
    {
       bRet = false;
-      CdmMessageManager::critical(tr("Fehlende Angabe"), 
-                                  tr("Mindestens ein Mitarbeiter muss dem Eskalationsschritt hinzguefügt werden!"));
+      MSG_CRIT("Fehlende Angabe",
+               "Mindestens ein Mitarbeiter muss dem Eskalationsschritt hinzguefügt werden!");
    }
 
    return bRet;

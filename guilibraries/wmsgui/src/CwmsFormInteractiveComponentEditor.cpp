@@ -32,19 +32,19 @@ bool CwmsFormInteractiveComponentEditorIf::Validate()
 
     if (ui->m_pqleName->text().isEmpty())
     {
-        CdmMessageManager::critical(tr("Pflichtfeld nicht gefüllt"), tr("Name fehlt!"));
+        MSG_CRIT("Pflichtfeld nicht gefüllt", "Name fehlt!");
         bRet = false;
     }
 
     if (ui->m_pqteView->toPlainText().isEmpty())
     {
-        CdmMessageManager::critical(tr("Pflichtfeld nicht gefüllt"), tr("View JSON fehlt!"));
+        MSG_CRIT("Pflichtfeld nicht gefüllt", "View JSON fehlt!");
         bRet = false;
     }
 
     if (ui->m_pqteModelView->toPlainText().isEmpty())
     {
-        CdmMessageManager::critical(tr("Pflichtfeld nicht gefüllt"), tr("ModelView JSON fehlt!"));
+        MSG_CRIT("Pflichtfeld nicht gefüllt", "ModelView JSON fehlt!");
         bRet = false;
     }
 

@@ -69,7 +69,7 @@ void CwmsScriptableModel::appendFromQuery(QObject* p_pQuery)
         }
         else
         {
-            CdmMessageManager::critical("Fehler im Modell", "Die Spaltenanzahl entspricht nicht dem Originalmodell");
+            MSG_CRIT("Fehler im Modell", "Die Spaltenanzahl entspricht nicht dem Originalmodell");
         }
     }
 }
@@ -139,7 +139,7 @@ void CwmsScriptableModel::appendFromItemModel(QAbstractItemModel &p_rModel, int 
     }
     else
     {
-        CdmMessageManager::critical("Fehler im Modell", "Die Spaltenanzahl entspricht nicht dem Originalmodell");
+        MSG_CRIT("Fehler im Modell", "Die Spaltenanzahl entspricht nicht dem Originalmodell");
     }
 }
 
@@ -240,13 +240,13 @@ bool CwmsScriptableModel::checkRowColumn(int p_iRow, int p_iColumn)
     if (!existRowHeader(p_iRow))
     {
         bRet = false;
-        CdmMessageManager::critical("Fehler im Modell", "Zeile wurde nicht angelegt");
+        MSG_CRIT("Fehler im Modell", "Zeile wurde nicht angelegt");
     }
 
     if (!existColumnHeader(p_iColumn))
     {
         bRet = false;
-        CdmMessageManager::critical("Fehler im Modell", "Spalte wurde nicht angelegt");
+        MSG_CRIT("Fehler im Modell", "Spalte wurde nicht angelegt");
     }
 
     return bRet;

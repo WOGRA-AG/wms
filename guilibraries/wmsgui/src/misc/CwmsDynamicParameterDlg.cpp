@@ -34,7 +34,7 @@ void CwmsDynamicParameterDlg::FillDialog(QList<QPair<QString, EdmValueType> >& p
         m_qlParamWidgets.append(pWidget);
     }
 
-    auto pSpacer = new QSpacerItem(20, 20, QSizePolicy::Minimum, QSizePolicy::Expanding);
+    auto pSpacer = new QSpacerItem(20, 20, QSizePolicy::Expanding, QSizePolicy::Expanding);
     pLayout->addItem(pSpacer);
 
     ui->m_pqsaParams->setWidget(pContainer);

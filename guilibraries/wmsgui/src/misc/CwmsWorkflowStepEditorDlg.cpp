@@ -274,7 +274,7 @@ void CwmsWorkflowStepEditorDlg::RemoveValueChangeMemberClickedSlot()
    }
    else
    {
-      CdmMessageManager::critical(tr("Kein Wert gewÃ¤hlt"), tr("Um einen Wert lÃ¶schen zu kÃ¶nnen mÃ¼ssen Sie diesen markieren."));
+      MSG_CRIT("Kein Wert gewählt", "Um einen Wert löschen zu können müssen Sie diesen markieren.");
    }
 }
 
@@ -349,7 +349,7 @@ void CwmsWorkflowStepEditorDlg::RemoveHiddenMemberClickedSlot()
    }
    else
    {
-      CdmMessageManager::critical(tr("Kein Wert gewÃ¤hlt"), tr("Um einen Wert lÃ¶schen zu kÃ¶nnen mÃ¼ssen Sie diesen markieren."));
+      MSG_CRIT("Kein Wert gewählt", "Um einen Wert löschen zu können müssen Sie diesen markieren.");
    }
 }
 
@@ -388,7 +388,7 @@ void CwmsWorkflowStepEditorDlg::RemoveReadOnlyMemberClickedSlot()
    }
    else
    {
-      CdmMessageManager::critical(tr("Kein Wert gewÃ¤hlt"), tr("Um einen Wert lÃ¶schen zu kÃ¶nnen mÃ¼ssen Sie diesen markieren."));
+      MSG_CRIT("Kein Wert gewählt", "Um einen Wert löschen zu können müssen Sie diesen markieren.");
    }
 }
 
@@ -403,13 +403,13 @@ bool CwmsWorkflowStepEditorDlg::Validate()
 
    if (m_pqleName->text().isEmpty())
    {
-      CdmMessageManager::critical(tr("Pflichtfeld nicht gefÃ¼llt"), tr("Das Feld Name muss gefÃ¼llt sein."));
+      MSG_CRIT("Pflichtfeld nicht gefüllt", "Das Feld Name muss gefüllt sein.");
       bRet = false;
    }
    
    if (!m_pCwmsTeam->GetSelectedObject())
    {
-      CdmMessageManager::critical(tr("Pflichtfeld nicht gefÃ¼llt"), tr("Das Bearbeitungsteam muss gefÃ¼llt sein."));
+      MSG_CRIT("Pflichtfeld nicht gefüllt", "Das Bearbeitungsteam muss gefüllt sein.");
       bRet = false;
    }
 

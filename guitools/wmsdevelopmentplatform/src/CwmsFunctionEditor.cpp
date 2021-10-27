@@ -541,7 +541,7 @@ void CwmsFunctionEditor::ExecuteFunction(bool p_bDebugger)
                   }
                   else
                   {
-                      CdmMessageManager::information(tr("Funktion wird nicht ausgeführt"), tr("Die Funktion kann nicht ausgeführt werden, da kein Objekt gewählt wurde."));
+                      MSG_INFO(("Funktion wird nicht ausgeführt"), ("Die Funktion kann nicht ausgeführt werden, da kein Objekt gewählt wurde."));
                   }
                }
             }
@@ -552,12 +552,14 @@ void CwmsFunctionEditor::ExecuteFunction(bool p_bDebugger)
   CwmsJson CwmsJson;
   QString qstrResult = CwmsJson.serialize(qConvertedValue);
 
-  if (qstrResult.isEmpty())
+  if (qstrResult.isEmpty() || qstrResult == "NULL")
   {
-     qstrResult = tr("Kein Rückgabewert");
+     qstrResult = QString::fromUtf8("Kein Rückgabewert");
   }
 
-  CdmMessageManager::information(tr("Ergebnis"), tr("Funktion beendet. Rückgabewert: %1").arg(qstrResult));
+  QString qstrMessage = QString::fromUtf8("Funktion beendet. Rückgabewert: %1").arg(qstrResult);
+
+  MSG_INFO(("Ergebnis"), qstrMessage.toUtf8());
 }
 
 
@@ -574,30 +576,30 @@ bool CwmsFunctionEditor::Validate()
    if (m_pqleName->text().isEmpty())
    {
       bRet = false;
-      CdmMessageManager::critical(tr("Funktionsname fehlt"), tr("Funktion ohne Name kann nicht gespeichert werden!"));
+      MSG_CRIT("Funktionsname fehlt", "Funktion ohne Name kann nicht gespeichert werden!");
    }
    else
    {
        if (!CdmModelElement::CheckKeyname(m_pqleName->text()))
        {
            bRet = false;
-           CdmMessageManager::critical(tr("Funktionsname ungültig"), tr("Funktionsname muss mit einem Buchstaben beginnen und darf keine Umlaute und Sonderzeichen auße r\"_\" enthalten."));
+           MSG_CRIT("Funktionsname ungültig", "Funktionsname muss mit einem Buchstaben beginnen und darf keine Umlaute und Sonderzeichen auße r\"_\" enthalten.");
        }
    }
 
    if (m_pjsEditor->toPlainText().isEmpty())
    {
       bRet = false;
-      CdmMessageManager::critical(tr("Sourcecode fehlt"), tr("Funktion ohne Sourcecode kann nicht gespeichert werden!"));
+      MSG_CRIT("Sourcecode fehlt", "Funktion ohne Sourcecode kann nicht gespeichert werden!");
    }
 
    if (m_pqtwParameters->topLevelItemCount() > 10)
    {
       bRet = false;
-      CdmMessageManager::critical(tr("Zu viele Aufrufparameter"), 
-                                  tr("Funktion mit mehr als 10 Aufrufparametern ist nicht erlaubt.\n"
+      MSG_CRIT("Zu viele Aufrufparameter",
+                                  "Funktion mit mehr als 10 Aufrufparametern ist nicht erlaubt.\n"
                                      "Überprüfen Sie Ihren Programmierstil ;-)\n"
-                                     "Lehrgänge zur effizienten Programmierung können Sie bei WOGRA Consulting buchen."));
+                                     "Lehrgänge zur effizienten Programmierung können Sie bei WOGRA Consulting buchen.");
    }
 
    if (m_rpCdmClass->HasMethod(m_pqleName->text()))
@@ -605,8 +607,7 @@ bool CwmsFunctionEditor::Validate()
       if (m_rpCdmClass->FindMethod(m_pqleName->text()) != m_rpCdmFunction)
       {
          bRet = false;
-         CdmMessageManager::critical(tr("Funktion existiert bereits"), 
-            tr("Eine Funktion mit dem gleichen Namen existiert bereits."));
+         MSG_CRIT("Funktion existiert bereits", "Eine Funktion mit dem gleichen Namen existiert bereits.");
       }
    }
 
@@ -693,7 +694,7 @@ void CwmsFunctionEditor::SyntaxCheckClickedSlot()
 
    if (CdmExecutor::GetExecutor()->GetFunction()->GetEngine()->SyntaxCheck(qstrCode))
    {
-      CdmMessageManager::information(tr("Syntax gültig"), tr("Die Syntax des Codes ist gültig."));
+      MSG_INFO(("Syntax gültig"), ("Die Syntax des Codes ist gültig."));
    }
 }
 
@@ -710,7 +711,7 @@ void CwmsFunctionEditor::FindNextClickedSlot()
 
             if (!Find(0))
             {
-                CdmMessageManager::information(tr("Keine weiteren Treffer gefunden"), tr("Es wurden keine weiteren Treffer gefunden."));
+                MSG_INFO(("Keine weiteren Treffer gefunden"), ("Es wurden keine weiteren Treffer gefunden."));
             }
         }
     }
@@ -728,7 +729,7 @@ void CwmsFunctionEditor::FindPreviousClickedSlot()
 
             if (!Find(QTextDocument::FindBackward))
             {
-                CdmMessageManager::information(tr("Keine weiteren Treffer gefunden"), tr("Es wurden keine weiteren Treffer gefunden."));
+                MSG_INFO(("Keine weiteren Treffer gefunden"), ("Es wurden keine weiteren Treffer gefunden."));
             }
         }
     }
@@ -790,6 +791,7 @@ void CwmsFunctionEditor::ReplaceAllClickedSlot()
         ++iReplaceCount;
     }
 
-    CdmMessageManager::information(tr("Ersetzung durchgeführt"), tr("Es wurden ") + QString::number(iReplaceCount) + tr(" Ersetzungen durchgeführt."));
+    QString qstrMssage = QString::fromUtf8("Es wurden ") + QString::number(iReplaceCount) + QString::fromUtf8(" Ersetzungen durchgeführt.");
+    MSG_INFO(("Ersetzung durchgeführt"), qstrMssage.toUtf8());
     m_pjsEditor->setTextCursor(currentCursor);
 }

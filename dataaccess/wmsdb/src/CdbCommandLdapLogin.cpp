@@ -81,12 +81,7 @@ int CdbCommandLdapLogin::Execute()
 
        rc = func->checkPasswordwLdap(host,port,dn,adminDN,apasswd,0);
 
-       if(rc != "Erfolg")
-       {
-           //CdmMessageManager::critical(tr("Fehler beim Verbindungsaufbau mit der Administratorkennung"),
-           //tr("Es konnte keine Verbindung mit dem Server aufgebaut werden. Bitte überprüfen Sie die Ldap Verbindungseinstellungen."));
-       }
-       else
+       if(rc == "Erfolg")
        {
            rc = func->checkPasswordwLdap(host, port, dn, m_qstrLogin ,m_qstrPassword, 0);
 
@@ -102,16 +97,6 @@ int CdbCommandLdapLogin::Execute()
                    {
                        lRet = EC(eDmOk);
                    }
-                   else
-                   {
-                       //CdmMessageManager::critical(tr("Anmeldung fehlgeschlagen."),
-                       //tr("Der Benutzer ist nicht brechtigt sich am System anzumelden. Kontaktieren Sie einen Administrator."));
-                   }
-               }
-               else
-               {
-                   //CdmMessageManager::critical(tr("Anmeldung fehlgeschlagen."),
-                   //tr("Die Suche nach dem Benutzer ergab keinen Treffer oder ist fehlgeschlagen."));
                }
            }
        }

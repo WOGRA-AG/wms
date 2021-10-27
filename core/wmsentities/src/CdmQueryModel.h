@@ -84,6 +84,7 @@ public slots:
     void AddAllMembers();
     CdmObject *GetObject(const int p_iRow);
     void Execute(CdmQuery* p_pCdmQuery);
+    void Execute(QString p_qstrQuery, int p_iLimit);
     void Execute(QString p_qstrQuery);
     virtual void Execute();
     virtual CdmQuery* GetQuery();

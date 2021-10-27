@@ -184,11 +184,11 @@ void CwmsViewEditor::CheckClickedSlot()
 {
    if (Validate())
    {
-      CdmMessageManager::information(tr("Sicht ist in Ordnung"), tr("Keine Fehler gefunden."));
+      MSG_INFO(("Sicht ist in Ordnung"), ("Keine Fehler gefunden."));
    }
    else
    {
-      CdmMessageManager::critical(tr("Sicht ist fehlerhaft"), tr("In der Sicht sind Fehler enthalten!"));
+      MSG_CRIT("Sicht ist fehlerhaft", "In der Sicht sind Fehler enthalten!");
    }
 }
 

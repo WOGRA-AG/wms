@@ -121,7 +121,7 @@ void CoedtwAddValueDlgIf::OKClickedSlot()
 {
    if (m_pqleKey->text().isEmpty() || m_pqleValue->text().isEmpty())
    {
-      CdmMessageManager::critical(tr("Eingabefehler"), tr("Bitte fÃ¼llen Sie beiden Felder aus."));
+      MSG_CRIT("Eingabefehler", "Bitte fÃ¼llen Sie beiden Felder aus.");
    }
    else
    {

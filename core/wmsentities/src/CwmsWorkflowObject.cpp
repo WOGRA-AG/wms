@@ -225,8 +225,7 @@ bool CwmsWorkflowObject::ContinueWithNextSteps(CwmsWorkflowStepExecution p_cExec
 
       if (cStep.GetType() == 2)
       {
-         CdmMessageManager::critical(tr("Geschäftsprozess abgeschlossen"), 
-                                     tr("Der Geschäftsprozess wurde abgeschlossen"));
+         MSG_CRIT("Geschäftsprozess abgeschlossen", "Der Geschäftsprozess wurde abgeschlossen");
          SetState(5);
          CommitObject();
       }
@@ -250,10 +249,10 @@ bool CwmsWorkflowObject::ContinueWithNextSteps(CwmsWorkflowStepExecution p_cExec
          }
          else
          {
-               CdmMessageManager::critical(tr("Keinen Nachfolgeschritt ermittelt"), 
-                                           tr("Es wurde kein Nachfolgeschritt gültiger Nachfolgeschritt anhand der Selektionskriterien\n"
-                                              "des abgeschlossenen Schritts ") + cStep.GetName() + tr("gefunden. Bitte überprüfen Sie die\n"
-                                              "Geschäftsprozessmodellierung. Der Prozess wird aktuell nicht fortgeführt."));
+             QString qstrMessage = QString::fromUtf8("Es wurde kein Nachfolgeschritt gültiger Nachfolgeschritt anhand der Selektionskriterien\n"
+                                              "des abgeschlossenen Schritts ") + cStep.GetName() + QString::fromUtf8("gefunden. Bitte überprüfen Sie die\n"
+                                              "Geschäftsprozessmodellierung. Der Prozess wird aktuell nicht fortgeführt.");
+               MSG_CRIT("Keinen Nachfolgeschritt ermittelt",qstrMessage.toUtf8());
          }
       }
    }

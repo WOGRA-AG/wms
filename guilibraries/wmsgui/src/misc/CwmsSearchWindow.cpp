@@ -491,16 +491,16 @@ void CwmsSearchWindow::ImportClickedSlot()
                 CwmsImport cImport;
                 cImport.StartImport(m_CdmModel.GetContainer(), cCwmsImportSettings);
 
-                CdmMessageManager::information(tr("Import beendet"),
-                                               tr("Der Import wurde abgeschlossen."));
+                MSG_INFO(("Import beendet"),
+                                               ("Der Import wurde abgeschlossen."));
              }
           }
        }
    }
    else
    {
-       CdmMessageManager::information(tr("Import nicht möglich"),
-                                      tr("Import kann nicht gestartet werden, das Suche noch nicht ausgeführt wurde oder ungültig ist."));
+       MSG_INFO(("Import nicht möglich"),
+                                      ("Import kann nicht gestartet werden, das Suche noch nicht ausgeführt wurde oder ungültig ist."));
    }
 }
 
@@ -565,8 +565,8 @@ void CwmsSearchWindow::ExportClickedSlot()
                 cCwmsExportSettings.SetQuery(m_pCdmQuery);
                 CwmsExportWriter cCwmsExportFileWriter(cCwmsExportSettings);
                 cCwmsExportFileWriter.Export();
-                CdmMessageManager::information(tr("Export beendet"),
-                                               tr("Der Export wurde abgeschlossen."));
+                MSG_INFO(("Export beendet"),
+                                               ("Der Export wurde abgeschlossen."));
              }
           }
 
@@ -574,7 +574,7 @@ void CwmsSearchWindow::ExportClickedSlot()
    }
    else
    {
-       CdmMessageManager::information(tr("Export nicht möglich"), tr("Export kann nicht gestartet werden, das Suche noch nicht ausgeführt wurde oder ungültig ist."));
+       MSG_INFO(("Export nicht möglich"), ("Export kann nicht gestartet werden, das Suche noch nicht ausgeführt wurde oder ungültig ist."));
    }
 }
 

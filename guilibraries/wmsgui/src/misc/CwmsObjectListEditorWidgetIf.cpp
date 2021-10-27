@@ -514,7 +514,7 @@ void CwmsObjectListEditorWidgetIf::DeleteClicekdSlot()
             else if (m_eWmsLvObjectInUseHandling == eWmsLvForbid)
             {
                 // Inform the user, that it is not allowed to delete this object
-                CdmMessageManager::information(tr("Löschen von referenzierten Objekten nicht möglich"), tr("Ein oder mehrere Objekte werden noch referenziert. Deshalb ist das Löschen dieser Objekte nicht möglich!"));
+                MSG_INFO(("Löschen von referenzierten Objekten nicht möglich"), ("Ein oder mehrere Objekte werden noch referenziert. Deshalb ist das Löschen dieser Objekte nicht möglich!"));
                 bDeleteReferencedObjects = false;
             }
 
@@ -747,8 +747,7 @@ void CwmsObjectListEditorWidgetIf::ImportClickedSlot()
                     CwmsImport cImport;
                     cImport.StartImport(pModel->GetContainer(), cCwmsImportSettings);
 
-                    CdmMessageManager::information(tr("Import beendet"),
-                                                   tr("Der Import wurde abgeschlossen."));
+                    MSG_INFO(("Import beendet"), ("Der Import wurde abgeschlossen."));
                 }
 
                 Refresh();
@@ -835,8 +834,7 @@ void CwmsObjectListEditorWidgetIf::ExportClickedSlot()
 
                     CwmsExportWriter cCwmsExportFileWriter(cCwmsExportSettings);
                     cCwmsExportFileWriter.Export();
-                    CdmMessageManager::information(tr("Export beendet"),
-                                                   tr("Der Export wurde abgeschlossen."));
+                    MSG_INFO(("Export beendet"), ("Der Export wurde abgeschlossen."));
                 }
             }
         }
@@ -1441,8 +1439,8 @@ void CwmsObjectListEditorWidgetIf::FunctionClickedSlot()
                                 }
                                 else
                                 {
-                                    CdmMessageManager::critical(tr("Objekt nicht gewählt"),
-                                                                tr("Zur Ausführung der Funktion muss ein Objekt in der Liste ausgewählt werden!"));
+                                    MSG_CRIT("Objekt nicht gewählt",
+                                             "Zur Ausführung der Funktion muss ein Objekt in der Liste ausgewählt werden!");
                                 }
                             }
                         }
@@ -1454,7 +1452,7 @@ void CwmsObjectListEditorWidgetIf::FunctionClickedSlot()
                     }
                     else
                     {
-                        CdmMessageManager::critical(tr("Funktion nicht gefunden"), tr("Die Funktion wurde nicht gefunden."));
+                        MSG_CRIT("Funktion nicht gefunden", "Die Funktion wurde nicht gefunden.");
                     }
 
                 }

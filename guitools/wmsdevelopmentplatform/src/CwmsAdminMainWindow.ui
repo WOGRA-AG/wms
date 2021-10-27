@@ -657,7 +657,7 @@
   </widget>
   <widget class="QDockWidget" name="m_pqdwPrint">
    <property name="windowTitle">
-    <string>Druckausgabe</string>
+    <string>Berichtsvorlagen</string>
    </property>
    <attribute name="dockWidgetArea">
     <number>2</number>
@@ -1197,7 +1197,7 @@
      <normaloff>:/icons/reports32.png</normaloff>:/icons/reports32.png</iconset>
    </property>
    <property name="text">
-    <string>Neuer Bericht</string>
+    <string>Neue Berichtsvorlage</string>
    </property>
    <property name="iconText">
     <string>Bericht anlegen</string>

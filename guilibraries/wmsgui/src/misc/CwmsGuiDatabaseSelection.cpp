@@ -91,8 +91,8 @@ void CwmsGuiDatabaseSelection::FillDialog(QList<QString>& p_rqllDatabases)
       }
       else if (m_pqlbMandators->count() == 0) // no rights to databases quit application
       {
-         CdmMessageManager::critical(tr("Keine ausreichenden Berechtigungen"), 
-                                     tr("Sie haben keine ausreichende Berchtigungen. Die Applikation wird beendet."));
+         MSG_CRIT("Keine ausreichenden Berechtigungen",
+                  "Sie haben keine ausreichende Berchtigungen. Die Applikation wird beendet.");
          m_bNeedToShow = false;
          CancelClickedSlot();
       }
@@ -142,8 +142,8 @@ void CwmsGuiDatabaseSelection::OKClickedSlot()
    }
    else
    {
-      CdmMessageManager::critical(tr("Fehler bei der Schema Auswahl"), 
-                            tr("Kein Schema gewählt!!!"));
+      MSG_CRIT("Fehler bei der Schema Auswahl",
+               "Kein Schema gewählt!!!");
    }
 }
 
@@ -189,8 +189,8 @@ void CwmsGuiDatabaseSelection::LoadScheme(QString p_qstrScheme)
          }
          else
          {
-            CdmMessageManager::critical(tr("Fehler bei der Schemaauswahl"), 
-                                  tr("Schema konnte nicht geladen werden!!!"));
+            MSG_CRIT("Fehler bei der Schemaauswahl",
+                     "Schema konnte nicht geladen werden!!!");
          }
       }
    }

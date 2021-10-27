@@ -1285,8 +1285,8 @@ void CwmsAdminMainWindowIf::CreateDatabaseSlot()
          }
          else
          {
-            CdmMessageManager::information(tr("Schema konnte nicht angelegt werden"), 
-                                     tr("Das Schema konnte nicht angelegt werden. (Interner Fehler)"));
+            MSG_INFO(("Schema konnte nicht angelegt werden"),
+                                     ("Das Schema konnte nicht angelegt werden. (Interner Fehler)"));
          }
       }
 
@@ -1320,8 +1320,8 @@ void CwmsAdminMainWindowIf::DeleteClassSlot()
 
         if (pCdmClassManager->DeleteClass(pCdmClass) < 0)
         {
-           CdmMessageManager::information(tr("Klasse konnte nicht gelöscht werden"),
-                                    tr("Die Klasse konnte nicht gelöscht werden.\n "
+           MSG_INFO(("Klasse konnte nicht gelöscht werden"),
+                                    ("Die Klasse konnte nicht gelöscht werden.\n "
                                        "Stellen Sie sicher dass diese Klasse keine Objektcontainer besitzt und\n"
                                        "nirgends als Basisklasse verwendet wurde."));
 
@@ -1337,8 +1337,8 @@ void CwmsAdminMainWindowIf::DeleteClassSlot()
    }
    else
    {
-      CdmMessageManager::information(tr("Keine Klasse ausgewählt"), 
-                               tr("Sie haben kein Schema ausgewählt. Löschung kann nicht durchgeführt werden."));
+      MSG_INFO(("Keine Klasse ausgewählt"),
+                               ("Sie haben kein Schema ausgewählt. Löschung kann nicht durchgeführt werden."));
    }
 }
 
@@ -1411,14 +1411,14 @@ void CwmsAdminMainWindowIf::DeleteDatabaseSlot()
             {
                 m_pqcbDatabases->removeItem(m_pqcbDatabases->currentIndex());
                 m_pqcbDatabases->setCurrentIndex(0);
-                CdmMessageManager::information(tr("Schema erfoglreich gelöscht"), tr("Schema erfolgreich gelöscht."));
+                MSG_INFO(("Schema erfoglreich gelöscht"), ("Schema erfolgreich gelöscht."));
             }
         }
     }
     else
     {
-        CdmMessageManager::information(tr("Kein Schema ausgewählt"),
-                                       tr("Sie haben kein Schema ausgewählt. Löschung kann nicht durchgeführt werden."));
+        MSG_INFO(("Kein Schema ausgewählt"),
+                                       ("Sie haben kein Schema ausgewählt. Löschung kann nicht durchgeführt werden."));
     }
     BODY_CATCH
 }
@@ -1440,8 +1440,8 @@ void CwmsAdminMainWindowIf::DeleteObjectListSlot(QTreeWidgetItem* p_pItem)
    }
    else
    {
-      CdmMessageManager::information(tr("Keine ObjectList ausgewählt"), 
-                                     tr("Sie haben keine ObjectList ausgewählt. Löschung kann nicht durchgeführt werden."));
+      MSG_INFO(("Keinen Container ausgewählt"),
+                                     ("Sie haben keinen Container ausgewählt. Löschung kann nicht durchgeführt werden."));
    }
 }
 
@@ -1457,8 +1457,8 @@ void CwmsAdminMainWindowIf::ObjectListRightsSlot()
    }
    else
    {
-      CdmMessageManager::information(tr("Keine ObjectList ausgewählt"), 
-         tr("Sie haben keine ObjectList ausgewählt. Berechtigungsfenster kann nicht aufgerufen werden."));
+      MSG_INFO(("Keinen Container ausgewählt"),
+         ("Sie haben keinen Container ausgewählt. Berechtigungsfenster kann nicht aufgerufen werden."));
    }
 }
 
@@ -1481,8 +1481,8 @@ void CwmsAdminMainWindowIf::DeleteAllObjectsSlot()
 
          if (qvlObjects.isEmpty())
          {
-            CdmMessageManager::information(tr("Keine Objekte gefunden"), 
-               tr("Es wurden im Container keine Objekte zur Löschung gefunden."));
+            MSG_INFO(("Keine Objekte gefunden"),
+               ("Es wurden im Container keine Objekte zur Löschung gefunden."));
          }
          else
          {
@@ -1514,8 +1514,8 @@ void CwmsAdminMainWindowIf::DeleteAllObjectsSlot()
    }
    else
    {
-      CdmMessageManager::information(tr("Kein Objectcontainer ausgewählt"),
-                               tr("Sie haben keinen Objectcontainer ausgewählt. Löschung kann nicht durchgeführt werden."));
+      MSG_INFO(("Kein Objectcontainer ausgewählt"),
+                               ("Sie haben keinen Objectcontainer ausgewählt. Löschung kann nicht durchgeführt werden."));
    }
 }
 
@@ -1537,8 +1537,8 @@ void CwmsAdminMainWindowIf::DataExportSlot()
    }
    else
    {
-      CdmMessageManager::information(tr("Kein Objectcontainer ausgewählt"),
-                               tr("Sie haben keinen Objectcontainer ausgewählt. Ein Datenexport kann nicht durchgeführt werden."));
+      MSG_INFO(("Kein Objectcontainer ausgewählt"),
+                               ("Sie haben keinen Objectcontainer ausgewählt. Ein Datenexport kann nicht durchgeführt werden."));
    }
 
    CdmMessageManager::EndAndShowAsyncMessageCollection();
@@ -1577,8 +1577,8 @@ void CwmsAdminMainWindowIf::GenerateClassCodeSlot()
    }
    else
    {
-      CdmMessageManager::information(tr("Keine Klasse ausgewählt"), 
-                               tr("Sie haben keine Klasse ausgewählt. Eine Codegenerierung kann nicht durchgeführt werden."));
+      MSG_INFO(("Keine Klasse ausgewählt"),
+                               ("Sie haben keine Klasse ausgewählt. Eine Codegenerierung kann nicht durchgeführt werden."));
    }
 }
 
@@ -1639,8 +1639,8 @@ void CwmsAdminMainWindowIf::OpenQueryEditorSlot()
       }
       else
       {
-         CdmMessageManager::information(tr("Kein Schema ausgewählt"), 
-            tr("Sie können den Query Editor nur mit einem gewählten Schema öffnen"));
+         MSG_INFO(("Kein Schema ausgewählt"),
+            ("Sie können den Query Editor nur mit einem gewählten Schema öffnen"));
       }
    }
 }
@@ -1763,8 +1763,8 @@ void CwmsAdminMainWindowIf::NewReportSlot()
     }
     else
     {
-        CdmMessageManager::critical(tr("Kein Druckausgabe-Plugin Aktiv"),
-                                    tr("Es ist kein Druckausgabe-Plugin aktiviert. Ein neuer Report kann nicht erstellt werden."));
+        MSG_CRIT("Kein Druckausgabe-Plugin Aktiv",
+                 "Es ist kein Druckausgabe-Plugin aktiviert. Ein neuer Report kann nicht erstellt werden.");
     }
 }
 
@@ -1787,8 +1787,8 @@ void CwmsAdminMainWindowIf::EditReportSlot()
     }
     else
     {
-        CdmMessageManager::critical(tr("Kein Druckausgabe-Plugin Aktiv"),
-                                    tr("Es ist kein Druckausgabe-Plugin aktiviert. Ein neuer Report kann nicht erstellt werden."));
+        MSG_CRIT("Kein Druckausgabe-Plugin Aktiv",
+                 "Es ist kein Druckausgabe-Plugin aktiviert. Ein neuer Report kann nicht erstellt werden.");
     }
 }
 
@@ -1812,8 +1812,8 @@ void CwmsAdminMainWindowIf::ReportPropertiesSlot()
     }
     else
     {
-        CdmMessageManager::critical(tr("Kein Druckausgabe-Plugin Aktiv"),
-                                    tr("Es ist kein Druckausgabe-Plugin aktiviert. Ein neuer Report kann nicht erstellt werden."));
+        MSG_CRIT("Kein Druckausgabe-Plugin Aktiv",
+                 "Es ist kein Druckausgabe-Plugin aktiviert. Ein neuer Report kann nicht erstellt werden.");
     }
 }
 
@@ -1838,8 +1838,8 @@ void CwmsAdminMainWindowIf::DeleteReportSlot()
     }
     else
     {
-        CdmMessageManager::critical(tr("Kein Druckausgabe-Plugin Aktiv"),
-                                    tr("Es ist kein Druckausgabe-Plugin aktiviert. Ein neuer Report kann nicht erstellt werden."));
+        MSG_CRIT("Kein Druckausgabe-Plugin Aktiv",
+                 "Es ist kein Druckausgabe-Plugin aktiviert. Ein neuer Report kann nicht erstellt werden.");
     }
 }
 
@@ -2708,16 +2708,16 @@ void CwmsAdminMainWindowIf::ExportDeploymentFileSlot()
             }
 
             pScheme->GenerateDeploymentFile(qstrFilename);
-            CdmMessageManager::information(tr("Datei wurde erstellt"), 
-                                           tr("Die Deploymentdatei wurde erstellt."));
+            MSG_INFO(("Datei wurde erstellt"),
+                                           ("Die Deploymentdatei wurde erstellt."));
          }
 
          CdmMessageManager::EndAndShowAsyncMessageCollection();
       }
       else
       {
-          CdmMessageManager::information(tr("Kein Schema gewählt"),
-                                         tr("Für den Export einer Deplyomentdatei müssen Sie ein Schema auswählen."));
+          MSG_INFO(("Kein Schema gewählt"),
+                                         ("Für den Export einer Deplyomentdatei müssen Sie ein Schema auswählen."));
       }
    }
 }
@@ -2739,15 +2739,15 @@ void CwmsAdminMainWindowIf::ImportDeploymentFileSlot()
             CdmMessageManager::StartAsyncMessageCollection();
             pDatabase->Deploy(qstrFilename);
             RefreshClickedSlot();
-            CdmMessageManager::information(tr("Deploymentdatei importiert"),
-                                           tr("Die Deploymentdatei wurde importiert"));
+            MSG_INFO(("Deploymentdatei importiert"),
+                                           ("Die Deploymentdatei wurde importiert"));
             CdmMessageManager::EndAndShowAsyncMessageCollection();
          }
       }
       else
       {
-            CdmMessageManager::information(tr("Kein Schema gewählt"), 
-                                           tr("Das Deployment muss auf einem ausgewählten Schema stattfinden."));
+            MSG_INFO(("Kein Schema gewählt"),
+                                           ("Das Deployment muss auf einem ausgewählten Schema stattfinden."));
       }
    }
 }
@@ -2779,8 +2779,8 @@ void CwmsAdminMainWindowIf::ClientSettingsSlot()
 
             if (QDialog::Accepted == pEditor->exec())
             {
-                CdmMessageManager::information(tr("Einstellungen übernommen"),
-                    tr("Die Einstellungen wurden übernommen."));
+                MSG_INFO(("Einstellungen übernommen"),
+                    ("Die Einstellungen wurden übernommen."));
             }
 
             DELPTR(pEditor)
@@ -3314,8 +3314,8 @@ void CwmsAdminMainWindowIf::LdapSettingsSlot()
 
             if (QDialog::Accepted == lEditor.exec())
             {
-                CdmMessageManager::information(tr("Einstellungen übernommen"),
-                    tr("Die Einstellungen wurden übernommen."));
+                MSG_INFO(("Einstellungen übernommen"),
+                    ("Die Einstellungen wurden übernommen."));
             }
         }
     }
@@ -3473,7 +3473,7 @@ void CwmsAdminMainWindowIf::ReplayEventsClickedSlot()
             }
         }
 
-        CdmMessageManager::information("Replay beendet", "Alle Events wurden erfolgreich erneut abgespielt.");
+        MSG_INFO("Replay beendet", "Alle Events wurden erfolgreich erneut abgespielt.");
     }
     else
     {
@@ -3504,12 +3504,12 @@ void CwmsAdminMainWindowIf::DeleteAllEventsClickedSlot()
 
                 if (iRet > 0)
                 {
-                    CdmMessageManager::information("Events gelöscht", "Die Events wurden erfolgreich gelöscht.");
+                    MSG_INFO("Events gelöscht", "Die Events wurden erfolgreich gelöscht.");
                 }
             }
             else
             {
-                CdmMessageManager::information("Löschen abgelehnt", "Die Events wurden nicht gelöscht.");
+                MSG_INFO("Löschen abgelehnt", "Die Events wurden nicht gelöscht.");
             }
         }
     }

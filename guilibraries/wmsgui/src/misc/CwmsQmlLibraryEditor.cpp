@@ -56,19 +56,19 @@ bool CwmsQmlLibraryEditor::Validate()
 
     if (ui->m_pqleName->text().isEmpty())
     {
-        CdmMessageManager::critical(tr("Pflichtfeld nicht gefüllt"),tr("Bibliothek benötigt einen Namen"));
+        MSG_CRIT("Pflichtfeld nicht gefüllt","Bibliothek benötigt einen Namen");
         ret = false;
     }
 
     if (ui->m_pqleVersion->text().isEmpty())
     {
-        CdmMessageManager::critical(tr("Pflichtfeld nicht gefüllt"),tr("Bibliothek benötigt eine Version"));
+        MSG_CRIT("Pflichtfeld nicht gefüllt","Bibliothek benötigt eine Version");
         ret = false;
     }
 
     if (ui->m_pqteCode->toPlainText().isEmpty())
     {
-        CdmMessageManager::critical(tr("Pflichtfeld nicht gefüllt"),tr("Bibliothek bneötigt Programmcode"));
+        MSG_CRIT("Pflichtfeld nicht gefüllt","Bibliothek bneötigt Programmcode");
         ret = false;
     }
 
@@ -200,7 +200,7 @@ void CwmsQmlLibraryEditor::OpenInExternalEditorClickedSlot()
 
 void CwmsQmlLibraryEditor::Debug()
 {
-    CdmMessageManager::critical(tr("Nicht unterstützt"), tr("Debugging ist nicht für Benutzeroberflächen unterstützt"));
+    MSG_CRIT("Nicht unterstützt", "Debugging ist nicht für Benutzeroberflächen unterstützt");
 }
 
 void CwmsQmlLibraryEditor::Execute()

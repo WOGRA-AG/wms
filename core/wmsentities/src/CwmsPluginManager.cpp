@@ -296,8 +296,9 @@ void CwmsPluginManager::LoadPrintingPlugin(QString p_qstrFileName)
     }
     else
     {
-        WARNING("File " + qstrFileName + " is not a valid printing plugin and will be ignored. Errormessage:\n" + qLoader.errorString());
-        CdmMessageManager::critical(QObject::tr("Printing Plugin is not loaded"), QObject::tr("Datei ") + qstrFileName + QObject::tr(" ist kein gültiges Druck Plugin und wird nicht verwendet.\n") + qLoader.errorString());
+        QString qstrMessage = "File " + qstrFileName + " is not a valid printing plugin and will be ignored. Errormessage:\n" + qLoader.errorString();
+        WARNING(qstrMessage);
+        MSG_CRIT("Printing Plugin is not loaded", qstrMessage.toUtf8());
     }
 }
 

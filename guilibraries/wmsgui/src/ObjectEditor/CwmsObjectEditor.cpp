@@ -1542,13 +1542,6 @@ QList<qint64> CwmsObjectEditor::GetSortedMemberListFromStringList(  )
            qint64 lMemberId = pCdmValue->GetMemberId();
             qvlMembers.append(lMemberId);
         }
-        else
-        {
-#ifdef WOGRA_DEBUG
-            CdmMessageManager::critical(tr("Datenfehler"),
-                                        tr("Datum existiert nicht. Datum:") + *qstrIt);
-#endif //
-        }
     }
 
     return qvlMembers;

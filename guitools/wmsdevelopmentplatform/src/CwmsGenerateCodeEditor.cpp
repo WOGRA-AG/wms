@@ -81,8 +81,8 @@ bool CwmsGenerateCodeEditor::Validate()
        m_pqleObjectListKeyname->text() == "")
    {
       bRet = false;
-      CdmMessageManager::critical(tr("Fehlende Informationen"), 
-         tr("Wenn Sie ein Web Interface erzeugen wollen, muss entweder die Standard Objekliste erzeugt werden oder der Name der Objektliste angegeben werden."));
+      MSG_CRIT("Fehlende Informationen",
+         "Wenn Sie ein Web Interface erzeugen wollen, muss entweder die Standard Objekliste erzeugt werden oder der Name des Containers angegeben werden.");
    }
 
    return bRet;
@@ -131,8 +131,8 @@ void CwmsGenerateCodeEditor::ShowCodeGenerator(QWidget* p_pqwParent, CdmClass* p
          cCodeGenerator.GenerateCode();
       }
       
-      CdmMessageManager::information(tr("Code erzeugt"), 
-                               tr("Der Code wurde im Zielverzeichnis erzeugt."));
+      MSG_INFO(("Code erzeugt"),
+                               ("Der Code wurde im Zielverzeichnis erzeugt."));
    }
 
    DELPTR(pCwmsGenerator);

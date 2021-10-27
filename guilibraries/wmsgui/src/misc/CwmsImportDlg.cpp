@@ -307,8 +307,8 @@ void CwmsImportDlg::RemoveColumnClickedSlot()
    }
    else
    {
-      CdmMessageManager::critical(tr("Entfernung der Spalte nicht möglich"), 
-                            tr("Um eine Spalte zu entfernen muss diese markiert werden."));
+      MSG_CRIT("Entfernung der Spalte nicht möglich",
+               "Um eine Spalte zu entfernen muss diese markiert werden.");
    }
 }
 
@@ -328,8 +328,8 @@ void CwmsImportDlg::MoveUpClickedSlot()
    }
    else
    {
-      CdmMessageManager::critical(tr("Entfernung der Spalte nicht möglich"), 
-         tr("Um eine Spalte zu verschieben muss diese markiert werden."));
+      MSG_CRIT("Verschieben der Spalte nicht möglich",
+               "Um eine Spalte zu verschieben muss diese markiert werden.");
    }
 }
 
@@ -349,8 +349,8 @@ void CwmsImportDlg::MoveDownClickedSlot()
    }
    else
    {
-      CdmMessageManager::critical(tr("Entfernung der Spalte nicht möglich"), 
-                            tr("Um eine Spalte zu verschieben muss diese markiert werden."));
+       MSG_CRIT("Verschieben der Spalte nicht möglich",
+                "Um eine Spalte zu verschieben muss diese markiert werden.");
    }
 }
 
@@ -400,7 +400,7 @@ void CwmsImportDlg::SaveClickedSlot()
    if (!qstrName.isEmpty())
    {
       m_rpCwmsImportSettings->SaveSettings(qstrName);
-      CdmMessageManager::information(tr("Speichern erfolgreich"), tr("Die Konfiguration wurde erfolgreich gespeichert."));
+      MSG_INFO(("Speichern erfolgreich"), ("Die Konfiguration wurde erfolgreich gespeichert."));
    }
 }
 
@@ -470,8 +470,8 @@ bool CwmsImportDlg::ValidateSettings()
       if (m_pqleCsvSeperator->text().isEmpty() || m_pqleStringSeperator->text().isEmpty())
       {
          bRet = false;
-         CdmMessageManager::critical(tr("CSV Zeicheneinstellungen nicht vollständig"), 
-                               tr("Der CSV Trenner oder das Zeichenkettentrennzeichen ist nicht festgelegt."));
+         MSG_CRIT("CSV Zeicheneinstellungen nicht vollständig",
+                  "Der CSV Trenner oder das Zeichenkettentrennzeichen ist nicht festgelegt.");
       }
    }
    else
@@ -479,8 +479,8 @@ bool CwmsImportDlg::ValidateSettings()
       if (!m_rpCwmsImportSettings->ColumnsValidForTextImport())
       {
          bRet = false;
-         CdmMessageManager::critical(tr("Spaltendefinition nicht vollständig"), 
-                               tr("Es muss für jede Spalte eine Start und eine Endposition angegeben werden."));
+         MSG_CRIT("Spaltendefinition nicht vollständig",
+                  "Es muss für jede Spalte eine Start und eine Endposition angegeben werden.");
       }
    }
 
@@ -490,8 +490,8 @@ bool CwmsImportDlg::ValidateSettings()
           !m_rpCwmsImportSettings->HasUpdateRelevantColumn())
       {
          bRet = false;
-         CdmMessageManager::critical(tr("Aktualisierungsimport mit diesen Spalteneinstellungen nicht möglich"), 
-                               tr("Es muss mindestens eine Spalte Aktualisierungsrelevant sein und\n mindestens eine Spalte nicht Aktualisierungsrelevant."));
+         MSG_CRIT("Aktualisierungsimport mit diesen Spalteneinstellungen nicht möglich",
+                  "Es muss mindestens eine Spalte Aktualisierungsrelevant sein und\n mindestens eine Spalte nicht Aktualisierungsrelevant.");
       }
    }
 
@@ -501,14 +501,14 @@ bool CwmsImportDlg::ValidateSettings()
    if (qlColumns.count() == 0)
    {
       bRet = false;
-      CdmMessageManager::critical(tr("Spaltenpflege unvollständig"), 
-                            tr("Es muss mindestens eine Spalte importiert werden."));
+      MSG_CRIT("Spaltenpflege unvollständig",
+               "Es muss mindestens eine Spalte importiert werden.");
    }
 
    if (m_pqleFilename->text().isEmpty())
    {
-      CdmMessageManager::critical(tr("Dateiname für IMport fehlt"), 
-                            tr("Es muss der Quelldateiname angegeben werden."));
+      MSG_CRIT("Dateiname für Import fehlt",
+               "Es muss der Quelldateiname angegeben werden.");
    }
 
    return bRet;

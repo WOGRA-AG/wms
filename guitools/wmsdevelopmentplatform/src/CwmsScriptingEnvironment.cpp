@@ -416,7 +416,7 @@ void CwmsScriptingEnvironment::CopySlot()
     }
     else
     {
-        CdmMessageManager::information(tr("Operation nicht möglich"), tr("Es ist keine Selektion vorhanden.\n Aus diesem Grund kann diese Aktion icht ausgeführt werden."));
+        MSG_INFO(("Operation nicht möglich"), ("Es ist keine Selektion vorhanden.\n Aus diesem Grund kann diese Aktion icht ausgeführt werden."));
     }
 }
 
@@ -429,7 +429,7 @@ void CwmsScriptingEnvironment::CutSolt()
     }
     else
     {
-        CdmMessageManager::information(tr("Operation nicht möglich"), tr("Es ist keine Selektion vorhanden.\n Aus diesem Grund kann diese Aktion icht ausgeführt werden."));
+        MSG_INFO(("Operation nicht möglich"), ("Es ist keine Selektion vorhanden.\n Aus diesem Grund kann diese Aktion icht ausgeführt werden."));
     }
 }
 
@@ -467,8 +467,8 @@ CdmLocatedElement* CwmsScriptingEnvironment::GetCurrentElement()
         }
         else
         {
-            CdmMessageManager::critical(tr("Kopieren oder Ausschneiden nicht möglich"),
-                                        tr("Das markeirte Objekt kann nicht kopiert oder ausgeschnitten werden.\n"
+            MSG_CRIT(("Kopieren oder Ausschneiden nicht möglich"),
+                                        ("Das markeirte Objekt kann nicht kopiert oder ausgeschnitten werden.\n"
                                            "Diese Funktion gibt es nur für Funktionen, Benutzeroberflächen oder Bibliotheken."));
         }
     }
@@ -484,7 +484,7 @@ void CwmsScriptingEnvironment::DeleteSlot()
     }
     else
     {
-        CdmMessageManager::information(tr("Operation nicht möglich"), tr("Es ist keine Selektion vorhanden.\n Aus diesem Grund kann diese Aktion icht ausgeführt werden."));
+        MSG_INFO(("Operation nicht möglich"), ("Es ist keine Selektion vorhanden.\n Aus diesem Grund kann diese Aktion icht ausgeführt werden."));
     }
 }
 
@@ -518,7 +518,7 @@ void CwmsScriptingEnvironment::DeleteItem(QTreeWidgetItem* p_pItem)
        }
        else
        {
-           CdmMessageManager::critical(tr("Löschen nicht möglich"), tr("Dieses Objekt kann in der Skriptumgebung nicht gelöscht werden."));
+           MSG_CRIT(("Löschen nicht möglich"), ("Dieses Objekt kann in der Skriptumgebung nicht gelöscht werden."));
        }
     }
 }
@@ -580,12 +580,12 @@ void CwmsScriptingEnvironment::InsertSlot()
         }
         else
         {
-            CdmMessageManager::critical(tr("Einfügen nicht möglich"), tr("Es wurde keine Element in der Baumstruktur gewählt auf dass diese Operation ausgeführt werden soll."));
+            MSG_CRIT(("Einfügen nicht möglich"), ("Es wurde keine Element in der Baumstruktur gewählt auf dass diese Operation ausgeführt werden soll."));
         }
     }
     else
     {
-        CdmMessageManager::critical(tr("Einfügen nicht möglich"), tr("Es wurde keine Element gewählt, dass man an Einfügen kann"));
+        MSG_CRIT(("Einfügen nicht möglich"), ("Es wurde keine Element gewählt, dass man an Einfügen kann"));
     }
 }
 
@@ -597,7 +597,7 @@ void CwmsScriptingEnvironment::NewSlot()
     }
     else
     {
-        CdmMessageManager::information(tr("Operation nicht möglich"), tr("Es ist keine Selektion vorhanden.\n Aus diesem Grund kann diese Aktion icht ausgeführt werden."));
+        MSG_INFO(("Operation nicht möglich"), ("Es ist keine Selektion vorhanden.\n Aus diesem Grund kann diese Aktion icht ausgeführt werden."));
     }
 }
 
@@ -609,7 +609,7 @@ void CwmsScriptingEnvironment::NewItem(QTreeWidgetItem* p_pItem)
 
         if (eType == eWmsTreeItemTypeClass)
         {
-            CdmMessageManager::critical(tr("Neuanlage nicht möglich"), tr("Funktion steht bei der Selektion einer Klasse nicht zur Verfügung."));
+            MSG_CRIT(("Neuanlage nicht möglich"), ("Funktion steht bei der Selektion einer Klasse nicht zur Verfügung."));
         }
         else if (eType == eWmsTreeItemTypeFormLibrary || eType == eWmsTreeItemTypeFormLibraryParent)
         {
@@ -1406,8 +1406,8 @@ void CwmsScriptingEnvironment::QueryEditorClickedSlot()
        }
        else
        {
-          CdmMessageManager::information(tr("Kein Schema ausgewählt"),
-             tr("Sie können den Query Editor nur mit einem gewählten Schema öffnen"));
+          MSG_INFO(("Kein Schema ausgewählt"),
+             ("Sie können den Query Editor nur mit einem gewählten Schema öffnen"));
        }
     }
 }

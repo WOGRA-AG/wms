@@ -23,7 +23,7 @@ void CwmsErrorMessenger::AddError(CdmLogEntry &p_Entry)
 {
     if (m_iSeverity & eDmError)
     {
-        CdmMessageManager::critical(qApp->tr("Es ist ein Fehler aufgetreten"), p_Entry.GetEventText());
+        MSG_CRIT("Es ist ein Fehler aufgetreten", p_Entry.GetEventText().toUtf8());
     }
 }
 
@@ -31,7 +31,7 @@ void CwmsErrorMessenger::AddInfo(CdmLogEntry &p_Entry)
 {
     if (m_iSeverity & eDmInfo)
     {
-        CdmMessageManager::information(qApp->tr("Systeminformation"), p_Entry.GetEventText());
+        MSG_INFO(("Systeminformation"), p_Entry.GetEventText().toUtf8());
     }
 }
 
@@ -39,7 +39,7 @@ void CwmsErrorMessenger::AddWarning(CdmLogEntry &p_Entry)
 {
     if (m_iSeverity & eDmWarning)
     {
-        CdmMessageManager::warning(qApp->tr("Warnungshinweis des Systems"), p_Entry.GetEventText());
+        MSG_WARN(("Warnungshinweis des Systems"), p_Entry.GetEventText().toUtf8());
     }
 }
 
@@ -47,7 +47,7 @@ void CwmsErrorMessenger::AddFatal(CdmLogEntry &p_Entry)
 {
     if (m_iSeverity & eDmFatal)
     {
-        CdmMessageManager::critical(qApp->tr("Es ist ein schwerwiegender Fehler aufgetreten"), p_Entry.GetEventText());
+        MSG_CRIT("Es ist ein schwerwiegender Fehler aufgetreten", p_Entry.GetEventText().toUtf8());
     }
 }
 

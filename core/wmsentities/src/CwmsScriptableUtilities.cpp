@@ -33,7 +33,7 @@ void CwmsScriptableUtilities::deleteModel(QObject* p_pModel)
     }
     else
     {
-        CdmMessageManager::critical("Pointer Löschung nicht erlaubt","In dieser Funktion dürfen nur Models gelöscht werden");
+        MSG_CRIT("Pointer Löschung nicht erlaubt","In dieser Funktion dürfen nur Models gelöscht werden");
     }
 }
 

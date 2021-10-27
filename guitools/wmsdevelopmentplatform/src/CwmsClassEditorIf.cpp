@@ -554,9 +554,9 @@ void CwmsClassEditorIf::AddBaseClassClickedSlot()
         }
         else
         {
-            CdmMessageManager::critical(tr("Basisklasse kann nicht hinzugefügt werden."),
-                                        tr("Die selektierte Klasse hat diese Klasse bereits als Basisklasse.\n"
-                                           "Dies ist nicht erlaubt!"));
+            MSG_CRIT("Basisklasse kann nicht hinzugefügt werden.",
+                     "Die selektierte Klasse hat diese Klasse bereits als Basisklasse.\n"
+                     "Dies ist nicht erlaubt!");
         }
     }
 
@@ -587,20 +587,18 @@ void CwmsClassEditorIf::RemoveBaseClassClickedSlot()
             }
             else
             {
-                CdmMessageManager::critical(tr("Basisklasse kann nicht gelöscht werden!"),
-                                            tr("Das System meldet einen Fehler Fehlercode:") + QString::number(iSuccess));
+                QString qstrMessage = QString::fromUtf8("Das System meldet einen Fehler Fehlercode:") + QString::number(iSuccess);
+                MSG_CRIT("Basisklasse kann nicht gelöscht werden!", qstrMessage.toUtf8());
             }
         }
         else
         {
-            CdmMessageManager::critical(tr("Basisklasse kann nicht gelöscht werden!"),
-                                        tr("Es wurde keine Basisklasse ausgewÃ¤hlt."));
+            MSG_CRIT("Basisklasse kann nicht gelöscht werden!", "Es wurde keine Basisklasse ausgewählt.");
         }
     }
     else
     {
-        CdmMessageManager::critical(tr("Basisklasse kann nicht gelöscht werden!"),
-                                    tr("Da diese Klasse bereits verwendet wird, kann eine Basisklasse nicht mehr gelöscht werden."));
+        MSG_CRIT("Basisklasse kann nicht gelöscht werden!", "Da diese Klasse bereits verwendet wird, kann eine Basisklasse nicht mehr gelöscht werden.");
     }
 
     emit ClassModifiedSignal();
@@ -714,24 +712,23 @@ void CwmsClassEditorIf::DeleteMemberClickedSlot()
                 }
                 else
                 {
-                    CdmMessageManager::critical(tr("Member kann nicht gelöscht werden!"),
-                                                tr("Das System meldet einen Fehler. Fehlercode:") + QString::number(iSuccess));
+                    QString qstrMessage = "Das System meldet einen Fehler. Fehlercode:" + QString::number(iSuccess);
+                    MSG_CRIT("Member kann nicht gelöscht werden!",qstrMessage.toUtf8());
                 }
             }
         }
         else
         {
-            CdmMessageManager::critical(tr("Member kann nicht gelöscht werden!"),
-                                        tr("Es wurde kein Member ausgewählt."));
+            MSG_CRIT("Member kann nicht gelöscht werden!",
+                     "Es wurde kein Member ausgewählt.");
         }
     }
     else
     {
-        CdmMessageManager::critical(tr("Member kann nicht gelöscht werden!"),
-                                    tr("Da diese Klasse bereits verwendet wird, kann ein Member nicht mehr gelöscht werden."));
+        MSG_CRIT("Member kann nicht gelöscht werden!",
+                 "Da diese Klasse bereits verwendet wird, kann ein Member nicht mehr gelöscht werden.");
     }
 }
-
 
 /** +-=---------------------------------------------------------Fr 17. Aug 13:58:18 2012----------*
  * @method  CwmsClassEditorIf::NewGroupClickedSlot           // private, slots                    *
@@ -1248,7 +1245,7 @@ void CwmsClassEditorIf::ExecuteFunction(bool p_bDebugger)
                         }
                         else
                         {
-                            CdmMessageManager::information(tr("Funktion wird nicht ausgeführt"), tr("Die Funktion kann nicht ausgeführt werden, da kein Objekt gewählt wurde."));
+                            MSG_INFO(("Funktion wird nicht ausgeführt"), ("Die Funktion kann nicht ausgeführt werden, da kein Objekt gewählt wurde."));
                         }
                     }
                 }
@@ -1262,7 +1259,9 @@ void CwmsClassEditorIf::ExecuteFunction(bool p_bDebugger)
             qstrResult = tr("Kein Ergebnis");
         }
 
-        CdmMessageManager::information(tr("Ergebnis"), tr("Funktion endete mit dem Ergebnis %1").arg(qstrResult));
+        QString qstrMessage = QString::fromUtf8("Funktion endete mit dem Ergebnis %1").arg(qstrResult);
+
+        MSG_INFO(("Ergebnis"), qstrMessage.toUtf8());
     }
 }
 

@@ -163,7 +163,7 @@ void CwmsRuntime::ClientSettingsSlot()
 
         if (QDialog::Accepted == pEditor->exec())
         {
-            CdmMessageManager::information(tr("Einstellungen übernommen"), tr("Die Einstellungen wurden übernommen."));
+            MSG_INFO(("Einstellungen übernommen"), ("Die Einstellungen wurden übernommen."));
         }
 
         DELPTR(pEditor)
@@ -188,8 +188,8 @@ void CwmsRuntime::LdapSettingsSlot()
 
             if (QDialog::Accepted == lEditor.exec())
             {
-                CdmMessageManager::information(tr("Einstellungen übernommen"),
-                    tr("Die Einstellungen wurden übernommen."));
+                MSG_INFO(("Einstellungen übernommen"),
+                    ("Die Einstellungen wurden übernommen."));
             }
         }
     }
@@ -227,8 +227,8 @@ void CwmsRuntime::LanguageSlot()
          {
             pCdmManager->SetCurrentLanguage(qstrLanguage);
             m_cApp.SetCurrentUserLanguage(qstrLanguage);
-            CdmMessageManager::information(tr("Sprache geändert Programm neu starten"), 
-                                     tr("Die Spracheinstellung wurde geändert. Um diese vollständig zu aktivieren müssen Sie das Programm neu starten!"));
+            MSG_INFO(("Sprache geändert Programm neu starten"),
+                                     ("Die Spracheinstellung wurde geändert. Um diese vollständig zu aktivieren müssen Sie das Programm neu starten!"));
          }
       }
       

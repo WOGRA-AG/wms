@@ -81,7 +81,7 @@ void CwmsQueryModelExportCsv::ExportCsvToFile(QAbstractItemModel& p_rModel, QStr
         }
         else
         {
-            CdmMessageManager::critical("KeinDaten vorhanden","Es wurden keine Daten dargestellt, die exportiert werden konnten.");
+            MSG_CRIT("KeinDaten vorhanden","Es wurden keine Daten dargestellt, die exportiert werden konnten.");
         }
     }
 }

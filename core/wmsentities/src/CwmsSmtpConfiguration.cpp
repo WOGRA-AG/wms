@@ -249,19 +249,19 @@ bool CwmsSmtpConfiguration::CheckConfiguration()
 
    if (GetEmailAddress().isEmpty())
    {
-       CdmMessageManager::critical(tr("Smtp Konfiguration nicht vollstänidg"), tr("Absender E-Mail fehlt."));
+       MSG_CRIT("Smtp Konfiguration nicht vollstänidg", "Absender E-Mail fehlt.");
       bRet = false;
    }
 
    if (GetSmtpServer().isEmpty())
    {
       bRet = false;
-      CdmMessageManager::critical(tr("Smtp Konfiguration nicht vollstänidg"), tr("Smtp Server fehlt."));
+      MSG_CRIT("Smtp Konfiguration nicht vollstänidg", "Smtp Server fehlt.");
    }
 
    if (GetSmtpPort() <= 0)
    {
-       CdmMessageManager::critical(tr("Smtp Konfiguration nicht vollstänidg"), tr("Smtp Port fehlt."));
+       MSG_CRIT("Smtp Konfiguration nicht vollstänidg", "Smtp Port fehlt.");
       bRet = false;
    }
 

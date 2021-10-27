@@ -85,12 +85,12 @@ void CwmsPasswordIf::OKClickedSlot(  )
       }
       else
       {
-         CdmMessageManager::critical(tr("Ungültige Eingabe"), tr("Das neue Passwort und die Wiederholung des Passworts stimmen nicht überein!"));
+         MSG_CRIT("Ungültige Eingabe", "Das neue Passwort und die Wiederholung des Passworts stimmen nicht überein!");
       }
    }
    else
    {
-      CdmMessageManager::critical(tr("Ungültige Eingabe"), tr("Die Passwortverifikation schlug fehl das Originalpasswort ist falsch!"));
+      MSG_CRIT("Ungültige Eingabe", "Die Passwortverifikation schlug fehl das Originalpasswort ist falsch!");
    }
 
 }
@@ -118,7 +118,7 @@ bool CwmsPasswordIf::ChangePassword(CumUser* p_pCumUser, QWidget* parent )
 
          if (bRet)
          {
-             CdmMessageManager::information(tr("Passwort wurde geändert"), tr("Das Passwort wurde erfolgreich geändert."));
+             MSG_INFO(("Passwort wurde geändert"), ("Das Passwort wurde erfolgreich geändert."));
          }
 
       }

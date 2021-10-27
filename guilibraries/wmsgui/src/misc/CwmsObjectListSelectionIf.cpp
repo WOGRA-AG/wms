@@ -180,8 +180,8 @@ CdmObjectContainer* CwmsContainerSelectionIf::GetObjectContainer( qint64 p_lDbId
    }
    else
    {
-      CdmMessageManager::information(tr("Kein Container vorhanden"), 
-                                     tr("Es ist kein Container vom erwarteten Typ vorhanden.\n"
+      MSG_INFO(("Kein Container vorhanden"),
+                                     ("Es ist kein Container vom erwarteten Typ vorhanden.\n"
                                         "Auswahl kann nicht durchgeführt werden."));
    }
 
