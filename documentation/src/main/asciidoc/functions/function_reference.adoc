@@ -78,5 +78,6 @@ include::timer.adoc[]
 
 include::sql.adoc[]
 
+include::utilities.adoc[]
 
   
