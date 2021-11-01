@@ -491,6 +491,12 @@ void CdmQueryModel::Execute(CdmQuery* p_pCdmQuery)
         }
 
         m_pCdmQuery = p_pCdmQuery;
+
+        if (m_pCdmQuery->GetOrderBy().isEmpty() && m_pCdmQuery->GetResultElements().count() > 0)
+        {
+            m_pCdmQuery->AddOrderBy(m_pCdmQuery->GetResultElement(0)->GetKeyname(), false);
+        }
+
         SetContainer(m_pCdmQuery->GetContainer());
     }
 
