@@ -475,10 +475,6 @@ void CdmQueryModel::Execute(QString p_qstrQuery, int p_iLimit)
 
         Execute(pCdmQuery);
     }
-    else
-    {
-        //ERR("No enhanced query. Can not be executed in query model.");
-    }
 }
 
 void CdmQueryModel::Execute(CdmQuery* p_pCdmQuery)
@@ -491,13 +487,6 @@ void CdmQueryModel::Execute(CdmQuery* p_pCdmQuery)
         }
 
         m_pCdmQuery = p_pCdmQuery;
-
-        if (m_pCdmQuery->GetOrderBy().isEmpty() && m_pCdmQuery->GetResultElements().count() > 0)
-        {
-            m_pCdmQuery->AddOrderBy(m_pCdmQuery->GetResultElement(0)->GetKeyname(), false);
-        }
-
-        SetContainer(m_pCdmQuery->GetContainer());
     }
 
     Execute();
@@ -508,12 +497,13 @@ void CdmQueryModel::Execute()
     if (CHKPTR(m_pCdmQuery) && (m_pCdmQuery->GetClass() || m_pCdmQuery->GetContainer()))
     {
         beginResetModel();
-        m_pCdmQuery->ClearResults();
 
-//        if (m_pCdmQuery->GetLimitResultCount() == 0)
-//        {
-//            m_pCdmQuery->SetLimitResultCount(5000);
-//        }
+        if (m_pCdmQuery->GetOrderBy().isEmpty() && m_pCdmQuery->GetResultElements().count() > 0)
+        {
+            m_pCdmQuery->AddOrderBy(m_pCdmQuery->GetResultElement(0)->GetKeyname(), false);
+        }
+
+        m_pCdmQuery->ClearResults();
 
         if (m_pCdmQuery->GetContainer())
         {
