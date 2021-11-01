@@ -285,6 +285,7 @@ void CwmsSearchWidgetIf::CreateQuery(CdmQuery& p_rCdmQuery)
     if (m_rpClass)
     {
         p_rCdmQuery.SetClass(m_rpClass);
+        p_rCdmQuery.SetQueryCaseInsensitive(!m_pqchbCaseSensitive->isChecked());
 
         if (m_rpContainer != nullptr)
         {

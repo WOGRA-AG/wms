@@ -117,6 +117,8 @@ protected:
      */
     bool m_bValid;
 
+    bool m_bCaseInsensitiveSearch;
+
 public:
     CdmQuery(QObject* parent = nullptr);
     CdmQuery(CdmObjectContainer* p_pContainer, QObject* parent = nullptr);
@@ -184,6 +186,7 @@ public slots:
     void ClearAll();
     void AddAllMembers();
     QString GetResultAsString() const;
+    bool IsQueryCaseInsensitive();
     const QList<qint64> GetResultList() const;
     QVariant GetFirstResultList(QString p_qstrKeyname) const;
     void GetResultElementList(QString p_qstrKeyname, QVector<QVariant> &p_rqllResults) const;
@@ -211,6 +214,7 @@ public slots:
     void SetClassId(qint64 p_lId);
    qint64 GetClassId() const;
 
+   void SetQueryCaseInsensitive(bool bInsensitive);
 private:
     int ExecuteDb();
     bool IsExecuted() const;

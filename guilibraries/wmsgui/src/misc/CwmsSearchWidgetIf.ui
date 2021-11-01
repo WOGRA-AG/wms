@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>568</width>
+    <width>723</width>
     <height>403</height>
    </rect>
   </property>
@@ -81,7 +81,7 @@
           <rect>
            <x>0</x>
            <y>0</y>
-           <width>552</width>
+           <width>707</width>
            <height>336</height>
           </rect>
          </property>
@@ -110,6 +110,13 @@
          </size>
         </property>
        </spacer>
+      </item>
+      <item row="2" column="4">
+       <widget class="QCheckBox" name="m_pqchbCaseSensitive">
+        <property name="text">
+         <string>Groß/Kleinschreibung berücksichtigen</string>
+        </property>
+       </widget>
       </item>
      </layout>
     </widget>

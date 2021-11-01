@@ -441,7 +441,10 @@ QString CdbQueryElement::GetDataFieldName()
 
             if (eDmValueType == eDmValueString || eDmValueType == eDmValueCharacterDocument)
             {
-                qstrRet = "upper(" + qstrRet + ")";
+                if (m_rpCdmQueryElement->GetQuery()->IsQueryCaseInsensitive())
+                {
+                    qstrRet = "upper(" + qstrRet + ")";
+                }
             }
         }
         else
@@ -564,11 +567,27 @@ QString CdbQueryElement::GetCompareValueAsString()
                     if (m_rpCdmQueryElement->GetCompareType() == eDmQueryCompareTypeLike &&
                             !qstrValue.isEmpty() && !qstrValue.contains("%"))
                     {
-                        qstrValue = "'" + CwmsUtilities::MaskStringForChanges(qstrValue.toUpper()) + "%'";
+
+                        if (m_rpCdmQueryElement->GetQuery()->IsQueryCaseInsensitive())
+                        {
+                            qstrValue = "'" + CwmsUtilities::MaskStringForChanges(qstrValue.toUpper()) + "%'";
+                        }
+                        else
+                        {
+                            qstrValue = "'" + CwmsUtilities::MaskStringForChanges(qstrValue) + "%'";
+                        }
                     }
                     else
                     {
-                        qstrValue = "'" + CwmsUtilities::MaskStringForChanges(qstrValue.toUpper()) + "'";
+                        if (m_rpCdmQueryElement->GetQuery()->IsQueryCaseInsensitive())
+                        {
+                            qstrValue = "'" + CwmsUtilities::MaskStringForChanges(qstrValue.toUpper()) + "'";
+                        }
+                        else
+                        {
+                            qstrValue = "'" + CwmsUtilities::MaskStringForChanges(qstrValue) + "'";
+                        }
+
                     }
                     break;
                 case eDmValueDateTime:
@@ -637,6 +656,7 @@ QString CdbQueryElement::ExtractCompareEntriesFromList()
     QString qstrValueList;
     QList<QVariant> qvlSubList;
     qvlSubList += m_rpCdmQueryElement->GetList();
+    EdmValueType eDmValueType = m_rpCdmQueryElement->GetValueType();
 
     if (qvlSubList.size() > 0)
     {
@@ -655,7 +675,15 @@ QString CdbQueryElement::ExtractCompareEntriesFromList()
                 bFirst = false;
             }
 
-            qstrValueList += (*qvlIt).toString();
+            if (eDmValueType == eDmValueCharacterDocument ||
+                eDmValueType == eDmValueString)
+            {
+                qstrValueList += "'" + (*qvlIt).toString() + "'";
+            }
+            else
+            {
+                qstrValueList += (*qvlIt).toString();
+            }
         }
 
         qstrValueList += ")";

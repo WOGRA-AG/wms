@@ -44,7 +44,8 @@ CdmQuery::CdmQuery(QObject* parent)
   m_qstrlOrderBy(),
   m_bOrderAsc(true),
   m_bExecuted(false),
-  m_bValid(true)
+  m_bValid(true),
+  m_bCaseInsensitiveSearch(false)
 {
     m_pRoot = new CdmQueryResultObject(-1, -1, nullptr, this);
 }
@@ -1577,4 +1578,14 @@ const CdmMember* CdmQuery::FindMemberByKeyname(QString p_qstrKeyname) const
     }
 
     return pCdmMember;
+}
+
+bool CdmQuery::IsQueryCaseInsensitive()
+{
+    return m_bCaseInsensitiveSearch;
+}
+
+void CdmQuery::SetQueryCaseInsensitive(bool bInsensitive)
+{
+    m_bCaseInsensitiveSearch = bInsensitive;
 }
