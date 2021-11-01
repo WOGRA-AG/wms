@@ -27,6 +27,8 @@ class QStatusBar;
 #define MSG_WARN(a,b) CdmMessageManager::warning(QString::fromUtf8(a), QString::fromUtf8(b))
 #define MSG_INFO(a,b) CdmMessageManager::information(QString::fromUtf8(a), QString::fromUtf8(b))
 #define MSG_ASK(a,b) CdmMessageManager::Ask(QString::fromUtf8(a), QString::fromUtf8(b))
+#define MSG_ENC(a) QString::fromUtf8(a)
+#define MSG_DEC(a) a.toUtf8()
 
 /* 
 * This class implements the messagemanager.
