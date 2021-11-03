@@ -505,9 +505,9 @@ void CwmsMiscDataFiller::FilterTreeWidgetsUnderRootElement(QString p_qstrFilter,
                 }
                 else
                 {
-                    QString qstrView = pItem->text(0);
+                    QString qstrView = pItem->text(0).toUpper();
 
-                    if (qstrView.contains(qstrFilter))
+                    if (qstrView.contains(qstrFilter.toUpper()))
                     {
                         pItem->setHidden(false);
                     }
