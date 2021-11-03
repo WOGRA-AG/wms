@@ -463,6 +463,7 @@ void CwmsObjectEditor::AddGroupsToListWidget()
 
     bool bFirst = true;
     m_pqlwGroups->clear();
+    QMap<QString, QListWidgetItem*> qmGroupMapping;
 
     for ( ; qmIt != qmItEnd; ++qmIt)
     {
@@ -474,14 +475,30 @@ void CwmsObjectEditor::AddGroupsToListWidget()
 
             if (cCdmRight.HasCurrentUserReadAccess() || cCdmRight.HasCurrentUserWriteAccess())
             {
-                QListWidgetItem* pItem = new QListWidgetItem(m_pqlwGroups);
-                pItem->setText(pCdmGroup->GetCaption());
-                pItem->setData(Qt::UserRole, pCdmGroup->GetId());
+                QListWidgetItem* pItem = nullptr;
 
-                if (bFirst)
+                if (!qmGroupMapping.contains(pCdmGroup->GetCaption()))
                 {
-                    pItem->setSelected(true);
-                    bFirst = false;
+                    pItem = new QListWidgetItem(m_pqlwGroups);
+                    qmGroupMapping.insert(pCdmGroup->GetCaption(), pItem);
+                }
+                else
+                {
+                    pItem = qmGroupMapping[pCdmGroup->GetCaption()];
+                }
+
+                if (CHKPTR(pItem))
+                {
+                    pItem->setText(pCdmGroup->GetCaption());
+                    QVariantList qvlIds = pItem->data(Qt::UserRole).toList();
+                    qvlIds.append(pCdmGroup->GetId());
+                    pItem->setData(Qt::UserRole, qvlIds);
+
+                    if (bFirst)
+                    {
+                        pItem->setSelected(true);
+                        bFirst = false;
+                    }
                 }
             }
         }
@@ -649,38 +666,41 @@ void CwmsObjectEditor::GetParentWidgetAndEventLayout(CdmClassGroup* p_pGroup,
     }
 }
 
-/** +-=---------------------------------------------------------Mo 5. Nov 14:14:27 2012-----------*
- * @method  CwmsObjectEditor::FillMembers                    // private                           *
- * @return  void                                             //                                   *
- * @param   CdmClassGroup* p_pGroup                          //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mo 5. Nov 14:14:27 2012-----------*/
-void CwmsObjectEditor::FillMembers(CdmClassGroup* p_pGroup)
+void CwmsObjectEditor::FillMembers(QList<CdmClassGroup*>& p_qlGroups)
 {
-    if (p_pGroup)
+    if (p_qlGroups.count() > 0)
     {
         QWidget* pParentWidget = nullptr;
         QTabWidget* pqTab = nullptr;
         QFormLayout* pLayout = nullptr;
-        GetParentWidgetAndLayout(p_pGroup, pParentWidget, pLayout, pqTab);
 
-        QList<CdmMember*> qlMembers;
-        p_pGroup->GetMembers(qlMembers);
-
-        for (int iCounter = 0; iCounter < qlMembers.count(); ++iCounter)
+        for (int iPos = 0; iPos < p_qlGroups.count(); ++iPos)
         {
-            CdmMember* pCdmMember = qlMembers[iCounter];
+            CdmClassGroup* pGroup = p_qlGroups[iPos];
 
-            if (pCdmMember &&
-                    pCdmMember->GetAccessMode() != eDmMemberAccessPrivate)
+            if (iPos == 0)
             {
-                AddMember(pCdmMember, pParentWidget, pLayout, pqTab);
+                GetParentWidgetAndLayout(pGroup, pParentWidget, pLayout, pqTab);
             }
-        }
 
-        if (pLayout->count() == 0 && pqTab)
-        {
-            pqTab->removeTab(0);
+            QList<CdmMember*> qlMembers;
+            pGroup->GetMembers(qlMembers);
+
+            for (int iCounter = 0; iCounter < qlMembers.count(); ++iCounter)
+            {
+                CdmMember* pCdmMember = qlMembers[iCounter];
+
+                if (pCdmMember &&
+                        pCdmMember->GetAccessMode() != eDmMemberAccessPrivate)
+                {
+                    AddMember(pCdmMember, pParentWidget, pLayout, pqTab);
+                }
+            }
+
+            if (pLayout->count() == 0 && pqTab)
+            {
+                pqTab->removeTab(0);
+            }
         }
     }
 }
@@ -958,27 +978,56 @@ void CwmsObjectEditor::GroupChangedSlot()
 
     if (pItem)
     {
+        QList<CdmClassGroup*> qlGroups;
+        GetGroupList(pItem,qlGroups);
+
+        if (qlGroups.count() > 0)
+        {
+            FillMembers(qlGroups);
+        }
+        else
+        {
+            FillMembers();
+        }
+
+    }
+    else
+    {
+        FillMembers();
+    }
+}
+
+void CwmsObjectEditor::GetGroupList(QListWidgetItem* pItem, QList<CdmClassGroup*>& p_rqlGroups)
+{
+    if (CHKPTR(pItem))
+    {
         CdmObject* pCdmObject = GetObject();
         CdmClass* pCdmClass = pCdmObject->GetClass();
 
         if (CHKPTR(pCdmClass))
         {
-            int iGroupId = pItem->data(Qt::UserRole).toInt();
+            QVariantList qvlGroups = pItem->data(Qt::UserRole).toList();
 
-            if (iGroupId >= 0)
+            if (qvlGroups.count() > 0)
             {
-                CdmClassGroup* pGroup = pCdmClass->FindGroupById(iGroupId);
-                FillMembers(pGroup);
-            }
-            else
-            {
-                FillMembers();
+                QList<CdmClassGroup*> qlGroups;
+
+                for (int iPos = 0; iPos < qvlGroups.count(); ++iPos)
+                {
+                    int iGroupId = qvlGroups[iPos].toInt();
+
+                    if (iGroupId >= 0)
+                    {
+                        CdmClassGroup* pGroup = pCdmClass->FindGroupById(iGroupId);
+
+                        if (pGroup)
+                        {
+                            p_rqlGroups.append(pGroup);
+                        }
+                    }
+                }
             }
         }
-    }
-    else
-    {
-        FillMembers();
     }
 }
 
@@ -989,49 +1038,24 @@ void CwmsObjectEditor::GroupChangedSlot(CdmClass *pClass)
 
     if (pItem)
     {
-        if (CHKPTR(pClass))
-        {
-            int iGroupId = pItem->data(Qt::UserRole).toInt();
+        QList<CdmClassGroup*> qlGroups;
+        GetGroupList(pItem,qlGroups);
 
-            if (iGroupId >= 0)
-            {
-                CdmClassGroup* pGroup = pClass->FindGroupById(iGroupId);
-                FillMembers(pGroup);
-            }
-            else
-            {
-                if(m_bCheckEventMode)
-                {
-                    FillMembers(pClass);
-                }
-                FillMembers();
-            }
-        }
-    }
-    else
-    {
-        if(CHKPTR(pClass))
+        if (qlGroups.count() > 0)
         {
-            if(m_bCheckEventMode)
-            {
-                FillMembers(pClass);
-            }
+            FillMembers(qlGroups);
         }
         else
         {
             FillMembers();
         }
     }
+    else
+    {
+        FillMembers();
+    }
 }
 
-/** +-=---------------------------------------------------------Mo 5. Nov 11:09:07 2012-----------*
- * @method  CwmsObjectEditor::AddMemberInFormLayout          // private                           *
- * @return  void                                             //                                   *
- * @param   QString p_qstrKeyname                            //                                   *
- * @param   QWidget* p_qwParent                              //                                   *
- * @param   QFormLayout* p_qLayout                           //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mo 5. Nov 11:09:07 2012-----------*/
 void CwmsObjectEditor::AddMemberInFormLayout(QString p_qstrKeyname,
                                              QWidget* p_qwParent,
                                              QFormLayout* p_qLayout)

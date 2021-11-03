@@ -526,13 +526,7 @@ void GroupChangedSlot(CdmClass* pClass);
     bool CreateTabMemberUi(CdmValue* p_pCdmValue, QWidget* p_pqfParent, QVBoxLayout* p_qLayout);
 
    private:
-   /** +-=---------------------------------------------------------Mo 5. Nov 14:14:27 2012--------*
-    * @method  CwmsObjectEditor::FillMembers                 // private                           *
-    * @return  void                                          //                                   *
-    * @param   CdmClassGroup* p_pGroup                       //                                   *
-    * @comment                                                                                    *
-    *----------------last changed: -----------------------------Mo 5. Nov 14:14:27 2012-----------*/
-    void FillMembers(CdmClassGroup* p_pGroup);
+    void FillMembers(QList<CdmClassGroup *> &p_qlGroups);
 
    public:
    /** +-=---------------------------------------------------------Mo 5. Nov 14:31:46 2012--------*
@@ -602,6 +596,7 @@ void GroupChangedSlot(CdmClass* pClass);
     bool checkForEventMode(QString qstr_checkEventMode);
 
     int CountAditionalTabsforNoneGroupMembers(CdmClass *pEventClass);
+    void GetGroupList(QListWidgetItem *pItem, QList<CdmClassGroup *> &p_rqlGroups);
 private slots:
 void FunctionClickedSlot( );
 

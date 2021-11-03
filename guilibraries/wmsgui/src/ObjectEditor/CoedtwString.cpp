@@ -78,7 +78,10 @@ QWidget* CoedtwString::GetEditWidget(QWidget* p_pqwParent)
    {
        pqLayout->addWidget(m_pqleEdit);
       QPushButton* pqpbSearch = new QPushButton(pqwParent);
-      pqpbSearch->setText(tr("Suchen"));
+      pqpbSearch->setToolTip(tr("Suchen"));
+      QIcon icon8;
+      icon8.addFile(QString::fromUtf8(":/icons/search24.png"), QSize(), QIcon::Normal, QIcon::Off);
+      pqpbSearch->setIcon(icon8);
       connect(pqpbSearch, SIGNAL(clicked()), this, SLOT(SearchClickedSlot()));
       pqLayout->addWidget(pqpbSearch);
       return pqwParent;

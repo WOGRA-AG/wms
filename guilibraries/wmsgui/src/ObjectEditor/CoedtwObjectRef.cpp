@@ -116,7 +116,6 @@ QWidget* CoedtwObjectRef::GetTabEditWidget(QWidget* p_pqwParent)
    if (!m_pObjectEditor)
    {
       m_pObjectEditor = new CwmsObjectEditor(p_pqwParent);
-      //m_pObjectEditor->DeactivateOwnerMode();
    }
 
    return m_pObjectEditor;
@@ -182,13 +181,19 @@ void CoedtwObjectRef::GetSelectionEdit(QHBoxLayout* pqLayout, QWidget* pqWidget)
     pqLayout->addWidget(m_pqleObject);
 
     m_pqpbSelect = new QPushButton(pqWidget);
-    m_pqpbSelect->setText(tr("Auswählen"));
+    m_pqpbSelect->setToolTip(tr("Auswählen"));
+    QIcon icon8;
+    icon8.addFile(QString::fromUtf8(":/icons/search24.png"), QSize(), QIcon::Normal, QIcon::Off);
+    m_pqpbSelect->setIcon(icon8);
     connect(m_pqpbSelect, SIGNAL(clicked()),
             this, SLOT(ChooseClickedSlot()));
     pqLayout->addWidget(m_pqpbSelect);
 
     m_pqpbClear = new QPushButton(pqWidget);
-    m_pqpbClear->setText(tr("Entfernen"));
+    m_pqpbClear->setToolTip(tr("Entfernen"));
+    QIcon icon9;
+    icon9.addFile(QString::fromUtf8(":/icons/cancel24.png"), QSize(), QIcon::Normal, QIcon::Off);
+    m_pqpbClear->setIcon(icon9);
     connect(m_pqpbClear, SIGNAL(clicked()), this, SLOT(ClearClickedSlot()));
     pqLayout->addWidget(m_pqpbClear);
 }
@@ -233,7 +238,10 @@ QWidget* CoedtwObjectRef::GetEditWidget(QWidget* p_pqwParent)
    if (m_bShowEditButton)
    {
       m_pqpbEdit = new QPushButton(pqWidget);
-      m_pqpbEdit->setText(tr("Details"));
+      m_pqpbEdit->setToolTip(tr("Details"));
+      QIcon icon9;
+      icon9.addFile(QString::fromUtf8(":/icons/edit24.png"), QSize(), QIcon::Normal, QIcon::Off);
+      m_pqpbEdit->setIcon(icon9);
 
       connect(m_pqpbEdit, SIGNAL(clicked()), this, SLOT(EditClickedSlot()));
       pqLayout->addWidget(m_pqpbEdit);
