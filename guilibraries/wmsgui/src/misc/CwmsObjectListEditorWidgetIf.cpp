@@ -994,6 +994,10 @@ void CwmsObjectListEditorWidgetIf::SetView(CwmsView p_cCwmsView)
             {
                 HidePrintButton();
             }
+            else
+            {
+                m_pqpbPrint->show();
+            }
 
             //HideRefreshButton();
             HideSearchButton();
