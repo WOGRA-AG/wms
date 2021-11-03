@@ -493,7 +493,7 @@ qint64 CdbCommandUpdateObject::UpdateValue(CdmValue* p_pValue)
 }
 
 qint64 CdbCommandUpdateObject::InsertValue(CdmValue* p_pValue,
-                                  CdbDataAccess::EodbcBaseType p_eOdbcBaseType)
+                                           CdbDataAccess::EodbcBaseType p_eOdbcBaseType)
 {
   qint64 lRet = CdmLogging::eDmObjectAccessError;
 
@@ -512,11 +512,12 @@ qint64 CdbCommandUpdateObject::InsertValue(CdmValue* p_pValue,
       {
 
          // query for reading new id
-         qstrQuery = QString("Insert into WMS_VALUE (MemberId, BaseType, ObjectId, LastChange, CreatorId, ModifierId)"
-                           "values(%1, %2, %3, %4, %5, %6)")
+         qstrQuery = QString("Insert into WMS_VALUE (MemberId, BaseType, ObjectId, ContainerId, LastChange, CreatorId, ModifierId)"
+                           "values(%1, %2, %3, %4, %5, %6, %7)")
                            .arg(p_pValue->GetMemberId())
                            .arg(p_eOdbcBaseType)
                            .arg(m_rpObject->GetId())
+                            .arg(m_rpObject->GetObjectContainerId())
                            .arg(CwmsUtilities::ChangeDateToString(QDateTime::currentDateTime()))
                            .arg(p_pValue->GetCreatorId())
                            .arg(p_pValue->GetModifierId());
@@ -558,7 +559,6 @@ qint64 CdbCommandUpdateObject::InsertValue(CdmValue* p_pValue,
                lRet = EC(eDmNoNewIdCreated);
                ERR("Inserted object not found!!");
             }
-
          }
          else
          {
@@ -577,7 +577,7 @@ qint64 CdbCommandUpdateObject::InsertValue(CdmValue* p_pValue,
       lRet = EC(eDmInvalidPtr);
    }
 
-     return lRet;
+   return lRet;
 }
 
 qint64 CdbCommandUpdateObject::UpdateValueTable(CdmValue* p_pValue)
@@ -1634,10 +1634,6 @@ qint64 CdbCommandUpdateObject::UpdateCharacterDocument(CdmValueCharacterDocument
          cQSqlQuery.prepare("update WMS_VALUE_CHARACTERDOCUMENT set Val = :val where CharacterDocumentId = :id");
          cQSqlQuery.bindValue(":val", qstrValue);
          cQSqlQuery.bindValue(":id", p_pCdmCharacterDocument->GetId());
-
-//         qstrQuery = QString("update WMS_VALUE_CHARACTERDOCUMENT set Val = '%1' where CharacterDocumentId = %2")
-//                             .arg(CwmsUtilities::MaskStringForChanges(qstrValue))
-//                             .arg(p_pCdmCharacterDocument->GetId());
 
          lRet = GetDataAccess()->ExecuteQuery(cQSqlQuery);
 
