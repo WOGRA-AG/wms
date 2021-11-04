@@ -1632,7 +1632,7 @@ qint64 CdbCommandUpdateObject::UpdateCharacterDocument(CdmValueCharacterDocument
          QString qstrValue = p_pCdmCharacterDocument->GetValue();
 
          cQSqlQuery.prepare("update WMS_VALUE_CHARACTERDOCUMENT set Val = :val where CharacterDocumentId = :id");
-         cQSqlQuery.bindValue(":val", qstrValue);
+         cQSqlQuery.bindValue(":val", qstrValue.toLatin1());
          cQSqlQuery.bindValue(":id", p_pCdmCharacterDocument->GetId());
 
          lRet = GetDataAccess()->ExecuteQuery(cQSqlQuery);
