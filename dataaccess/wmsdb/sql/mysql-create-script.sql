@@ -1,12 +1,66 @@
-create table WMS_CLASS (Abstract boolean , Caption varchar(255) , CaptionMember int , ClassId int auto_increment , Comment varchar(1000) , CreatorId int , DatabaseId int , Keyname varchar(255) , LastChange timestamp , ModifierId int , PositionSequence varchar(5000) , TempSessionId int , primary key (ClassId));
+create table WMS_CLASS (
+Abstract boolean , 
+Caption varchar(255) , 
+CaptionMember int , 
+ClassId int auto_increment , 
+Comment varchar(1000) , 
+CreatorId int , 
+DatabaseId int , 
+Keyname varchar(255) , 
+LastChange timestamp , 
+ModifierId int , 
+PositionSequence varchar(5000) , 
+TempSessionId int , 
+primary key (ClassId));
 
-create table WMS_CLASS_MEMBER (Access int , Caption varchar(255) , ClassId int , Comment varchar(4000) , CounterStart int , CreatorId int , DataType int , DefaultValue varchar(1000) , Explicit boolean , Keyname varchar(255) , MemberId int auto_increment , ModifierId int , Must boolean , ObjectRefClassId int , Owner boolean , Size int , System boolean , primary key (MemberId));
+create table WMS_CLASS_MEMBER (
+Access int , 
+Caption varchar(255) , 
+ClassId int , 
+Comment varchar(4000) , 
+CounterStart int , 
+CreatorId int , 
+DataType int , 
+DefaultValue varchar(1000) , 
+Explicit boolean , 
+Keyname varchar(255) , 
+MemberId int auto_increment , 
+ModifierId int , 
+Must boolean , 
+ObjectRefClassId int , 
+Owner boolean , 
+Size int , 
+System boolean , 
+primary key (MemberId));
 
-create table WMS_CLASS_BASECLASS (BaseClassId int , ClassId int , primary key (BaseClassId, ClassId));
+create table WMS_CLASS_BASECLASS (
+BaseClassId int , 
+ClassId int , 
+primary key (BaseClassId, ClassId));
 
-create table WMS_DM_OBJECTLIST (Caption varchar(255) , ClassId int , Comment varchar(1000) , CreatorId int , Keyname varchar(255) , LastChange timestamp , ModifierId int , ObjectListId int auto_increment , TempSessionId int , primary key (ObjectListId));
+create table WMS_DM_OBJECTLIST (
+Caption varchar(255) , 
+ClassId int , 
+Comment varchar(1000) , 
+CreatorId int , 
+Keyname varchar(255) , 
+LastChange timestamp , 
+ModifierId int , 
+ObjectListId int auto_increment , 
+TempSessionId int , 
+primary key (ObjectListId));
 
-create table WMS_DM_OBJECT (Cache longtext , Caption varchar(255) , CreatorId int , Keyname varchar(255) , LastChange timestamp , ModifierId int , ObjectId int auto_increment , ObjectListId int , TempSessionId int , primary key (ObjectId));
+create table WMS_DM_OBJECT (
+Cache longtext , 
+Caption varchar(255) , 
+CreatorId int , 
+Keyname varchar(255) , 
+LastChange timestamp , 
+ModifierId int , 
+ObjectId int auto_increment , 
+ObjectListId int , 
+TempSessionId int , 
+primary key (ObjectId));
 
 create table WMS_DM_LOCKEDOBJECT (ObjectId int , SessionId int , primary key (ObjectId, SessionId));
 
@@ -206,6 +260,8 @@ insert into WMS_VERSION (Current_Version) values (4);
  ALTER TABLE `WMS_CLASS_MEMBER` ADD COLUMN `GroupId` INT NULL;  
  
  ALTER TABLE `WMS_CLASS` ADD COLUMN `Version` INT NULL;
+ 
+ ALTER TABLE `WMS_VALUE` ADD COLUMN `ContainerId` INT NULL;
 
  ALTER TABLE `WMS_CLASS_VALIDATION` ADD COLUMN `Name` VARCHAR(200) NULL;    
 
@@ -286,115 +342,101 @@ ALTER TABLE WMS_UM_SESSION add column `Last_Request` timestamp;
 ALTER TABLE WMS_UM_USER add column `IdentityKey` varchar(255);
 
 create or replace view V_VALUE_BINARYDOCUMENT as
-select v.valueid, v.objectid, o.objectlistid, v.memberid, cm.keyname, bd.val, bd.filename, bd.type, cm.classid as memberclassid
+select v.valueid, v.objectid, v.ContainerId as objectlistid, v.memberid, cm.keyname, bd.val, bd.filename, bd.type, cm.classid as memberclassid
 from 
 WMS_VALUE v 
 inner join WMS_VALUE_BINARYDOCUMENT bd on v.valueId = bd.binarydocumentId 
-inner join WMS_DM_OBJECT as o on o.objectid = v.objectid
 inner join WMS_CLASS_MEMBER as cm on cm.memberid = v.memberid;
 
 create or replace view V_VALUE_STRING as
-select v.valueid, v.objectid, o.objectlistid, v.memberid, cm.keyname, str.val, cm.classid as memberclassid
+select v.valueid, v.objectid, v.ContainerId as objectlistid, v.memberid, cm.keyname, str.val, cm.classid as memberclassid
 from 
 WMS_VALUE v 
 inner join WMS_VALUE_STRING str on v.valueId = str.stringId 
-inner join WMS_DM_OBJECT as o on o.objectid = v.objectid
 inner join WMS_CLASS_MEMBER as cm on cm.memberid = v.memberid;
 
 create or replace view V_VALUE_BOOL as
-select v.valueid, v.objectid, o.objectlistid, v.memberid, cm.keyname, b.val, cm.classid as memberclassid
+select v.valueid, v.objectid, v.ContainerId as objectlistid, v.memberid, cm.keyname, b.val, cm.classid as memberclassid
 from 
 WMS_VALUE v 
 inner join WMS_VALUE_BOOL b on v.valueId = b.boolId 
-inner join WMS_DM_OBJECT as o on o.objectid = v.objectid
 inner join WMS_CLASS_MEMBER as cm on cm.memberid = v.memberid;
 
 create or replace view V_VALUE_CHARACTERDOCUMENT as
-select v.valueid, v.objectid, o.objectlistid, v.memberid, cm.keyname, ch.val, cm.classid as memberclassid
+select v.valueid, v.objectid, v.ContainerId as objectlistid, v.memberid, cm.keyname, ch.val, cm.classid as memberclassid
 from 
 WMS_VALUE v 
 inner join WMS_VALUE_CHARACTERDOCUMENT ch on v.valueId = ch.CharacterDocumentId 
-inner join WMS_DM_OBJECT as o on o.objectid = v.objectid
 inner join WMS_CLASS_MEMBER as cm on cm.memberid = v.memberid;
 
 create or replace view V_VALUE_COUNTER as
-select v.valueid, v.objectid, o.objectlistid, v.memberid, cm.keyname, c.val, cm.classid as memberclassid
+select v.valueid, v.objectid, v.ContainerId as objectlistid, v.memberid, cm.keyname, c.val, cm.classid as memberclassid
 from 
 WMS_VALUE v 
 inner join WMS_VALUE_COUNTER c on v.valueId = c.CounterId 
-inner join WMS_DM_OBJECT as o on o.objectid = v.objectid
 inner join WMS_CLASS_MEMBER as cm on cm.memberid = v.memberid;
 
 create or replace view V_VALUE_DATE as
-select v.valueid, v.objectid, o.objectlistid, v.memberid, cm.keyname, d.val, cm.classid as memberclassid
+select v.valueid, v.objectid, v.ContainerId as objectlistid, v.memberid, cm.keyname, d.val, cm.classid as memberclassid
 from 
 WMS_VALUE v 
 inner join WMS_VALUE_DATE d on v.valueId = d.DateId 
-inner join WMS_DM_OBJECT as o on o.objectid = v.objectid
 inner join WMS_CLASS_MEMBER as cm on cm.memberid = v.memberid;
 
 create or replace view V_VALUE_DATETIME as
-select v.valueid, v.objectid, o.objectlistid, v.memberid, cm.keyname, dt.val, cm.classid as memberclassid
+select v.valueid, v.objectid, v.ContainerId as objectlistid, v.memberid, cm.keyname, dt.val, cm.classid as memberclassid
 from 
 WMS_VALUE v 
 inner join WMS_VALUE_DATETIME dt on v.valueId = dt.DateTimeId 
-inner join WMS_DM_OBJECT as o on o.objectid = v.objectid
 inner join WMS_CLASS_MEMBER as cm on cm.memberid = v.memberid;
 
 create or replace view V_VALUE_FLOAT as
-select v.valueid, v.objectid, o.objectlistid, v.memberid, cm.keyname, f.val, cm.classid as memberclassid
+select v.valueid, v.objectid, v.ContainerId as objectlistid, v.memberid, cm.keyname, f.val, cm.classid as memberclassid
 from 
 WMS_VALUE v 
 inner join WMS_VALUE_FLOAT f on v.valueId = f.FloatId 
-inner join WMS_DM_OBJECT as o on o.objectid = v.objectid
 inner join WMS_CLASS_MEMBER as cm on cm.memberid = v.memberid;
 
 create or replace view V_VALUE_INT as
-select v.valueid, v.objectid, o.objectlistid, v.memberid, cm.keyname, i.val, cm.classid as memberclassid
+select v.valueid, v.objectid, v.ContainerId as objectlistid, v.memberid, cm.keyname, i.val, cm.classid as memberclassid
 from 
 WMS_VALUE v 
 inner join WMS_VALUE_INT i on v.valueId = i.IntId 
-inner join WMS_DM_OBJECT as o on o.objectid = v.objectid
 inner join WMS_CLASS_MEMBER as cm on cm.memberid = v.memberid;
 
 create or replace view V_VALUE_LONG as
-select v.valueid, v.objectid, o.objectlistid, v.memberid, cm.keyname, l.val, cm.classid as memberclassid
+select v.valueid, v.objectid, v.ContainerId as objectlistid, v.memberid, cm.keyname, l.val, cm.classid as memberclassid
 from 
 WMS_VALUE v 
 inner join WMS_VALUE_LONG l on v.valueId = l.LongId 
-inner join WMS_DM_OBJECT as o on o.objectid = v.objectid
 inner join WMS_CLASS_MEMBER as cm on cm.memberid = v.memberid;
 
 create or replace view V_VALUE_OBJECTLISTREFERENCE as
-select v.valueid, v.objectid, o.objectlistid, v.memberid, cm.keyname, ol.ObjectListId as val, ol.classid, cm.owner, cm.classid as memberclassid
+select v.valueid, v.objectid, v.ContainerId as objectlistid, v.memberid, cm.keyname, ol.ObjectListId as val, ol.classid, cm.owner, cm.classid as memberclassid
 from 
 WMS_VALUE v 
 inner join WMS_VALUE_OBJECTLISTREFERENCE ol on v.valueId = ol.ObjectListReferenceId 
-inner join WMS_DM_OBJECT as o on o.objectid = v.objectid
 inner join WMS_CLASS_MEMBER as cm on cm.memberid = v.memberid;
 
 create or replace view V_VALUE_OBJECTREFERENCE as
-select v.valueid, v.objectid, o.objectlistid, v.memberid, cm.keyname, oref.ObjectId as val, oref.classid, oref.objectlistid as orefobjectlist, cm.owner, cm.classid as memberclassid
+select v.valueid, v.objectid, v.ContainerId as objectlistid, v.memberid, cm.keyname, oref.ObjectId as val, oref.classid, oref.objectlistid as orefobjectlist, cm.owner, cm.classid as memberclassid
 from 
 WMS_VALUE v 
 inner join WMS_VALUE_OBJECTREFERENCE oref on v.valueId = oref.ObjectReferenceId 
-inner join WMS_DM_OBJECT as o on o.objectid = v.objectid
 inner join WMS_CLASS_MEMBER as cm on cm.memberid = v.memberid;
 
 create or replace view V_VALUE_TIME  as
-select v.valueid, v.objectid, o.objectlistid, v.memberid, cm.keyname, t.val, cm.classid as memberclassid
+select v.valueid, v.objectid, v.ContainerId as objectlistid, v.memberid, cm.keyname, t.val, cm.classid as memberclassid
 from 
 WMS_VALUE v 
 inner join WMS_VALUE_TIME t on v.valueId = t.TimeId 
-inner join WMS_DM_OBJECT as o on o.objectid = v.objectid
 inner join WMS_CLASS_MEMBER as cm on cm.memberid = v.memberid;
 
 create or replace view V_VALUE_DOUBLE as
-select v.valueid, v.objectid, o.objectlistid, v.memberid, cm.keyname, f.val, cm.classid as memberclassid
+select v.valueid, v.objectid, v.ContainerId as objectlistid, v.memberid, cm.keyname, f.val, cm.classid as memberclassid
 from 
 WMS_VALUE v 
 inner join WMS_VALUE_DOUBLE f on v.valueId = f.DoubleId 
-inner join WMS_DM_OBJECT as o on o.objectid = v.objectid
 inner join WMS_CLASS_MEMBER as cm on cm.memberid = v.memberid;
 
 CREATE  OR REPLACE VIEW `v_active_sessions` AS
