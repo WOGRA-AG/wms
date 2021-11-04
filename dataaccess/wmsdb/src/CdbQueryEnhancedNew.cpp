@@ -119,10 +119,7 @@ qint64 CdbQueryEnhancedNew::ExecuteQuery(QString p_qstrSql)
 
     if (!p_qstrSql.isEmpty())
     {
-//        QTime qStart = QTime::currentTime();
         lRet = m_rpCdbDataAccess->ExecuteQuery(p_qstrSql, cQSqlQuery);
-//        QTime qDbExecuted = QTime::currentTime();
-//        QTime qResultFilled;
 
         if(lRet > 0)
         {
@@ -156,18 +153,6 @@ qint64 CdbQueryEnhancedNew::ExecuteQuery(QString p_qstrSql)
                 while(cQSqlQuery.next());
             }
         }
-
-//        qResultFilled = QTime::currentTime();
-
-//        int mSecsDurationOnDb = qStart.msecsTo(qDbExecuted);
-//        int mSecsDurationResultFilling = qDbExecuted.msecsTo(qResultFilled);
-//        int mSecsDurationComplete = qStart.msecsTo(qResultFilled);
-
-//        ERR("Query Execution Info:;Query Execution Duration:;" +
-//             QString::number(mSecsDurationOnDb) +
-//             ";FillData Duration:;" + QString::number(mSecsDurationResultFilling) +
-//             ";Complete Duration:;" + QString::number(mSecsDurationComplete) +
-//             ";Query:;" + p_qstrSql);
     }
     else
     {
