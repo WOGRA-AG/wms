@@ -548,4 +548,8 @@ accessorId INT(11) NOT NULL,
 SchemeUri VARCHAR(255) NOT NULL,
 PRIMARY KEY (accessorId, SchemeUri));
 
-UPDATE WMS_VERSION SET Current_Version=6 where Current_Version>0;
+
+alter table WMS_VALUE add column containerid int(11)
+update WMS_VALUE v inner join WMS_DM_OBJECT o on o.objectid = v.objectid set v.containerId = o.objectlistid where v.containerid is null
+UPDATE WMS_VERSION SET Current_Version=7 where Current_Version>0;
+
