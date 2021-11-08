@@ -98,6 +98,7 @@ qint64 CftlCommandQuery::ExecuteQueryP()
 
     if (!qstrSql.isEmpty())
     {
+        m_rpCdmQuery->SetDatabaseCommand(qstrSql);
         lRet = m_rpCftlDataAccess->ExecuteQuery(qstrSql, cQSqlQuery);
 
         if(lRet > 0)
