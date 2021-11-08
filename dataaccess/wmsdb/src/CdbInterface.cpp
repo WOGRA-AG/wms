@@ -197,6 +197,8 @@ qint64 CdbInterface::ExecuteQuery(QSqlQuery& p_rqsqlQuery)
 
        if (qError.isValid())
        {
+           QString qstrText = qError.text();
+
            if (QSqlError::ConnectionError == qError.type())
            {
                ERR("Connection error. System refreshes the connection and tries it again.")

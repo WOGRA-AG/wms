@@ -39,7 +39,7 @@ class CdmMember;
 /* 
  * This class implements the sql access for enhanced queries
  */
-class CdbQueryEnhancedNew
+class CdbQueryEnhancedDefault
 {
 private:
     CdmQueryEnhanced* m_rpCdmQuery;
@@ -52,8 +52,8 @@ private:
 
 
 public:
-    CdbQueryEnhancedNew(CdmQueryEnhanced* p_pCdmQueryEnhanced, CdbDataAccess* p_pCdbDataAccess);
-    virtual ~CdbQueryEnhancedNew( );
+    CdbQueryEnhancedDefault(CdmQueryEnhanced* p_pCdmQueryEnhanced, CdbDataAccess* p_pCdbDataAccess);
+    virtual ~CdbQueryEnhancedDefault( );
    qint64 Execute();
     virtual QString GenerateSql();
 

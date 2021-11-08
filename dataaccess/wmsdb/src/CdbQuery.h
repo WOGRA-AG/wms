@@ -25,6 +25,12 @@ class CdbDataAccess;
 class CdmQuery;
 class CdmQueryElement;
 
+enum EdbQueryEnhanceExecutionMode
+{
+    eDbQueryEnhancedExecutionModeDefault,
+    eDbQueryEnhancedExecutionModeDoubleRequest
+};
+
 /*
  * This class implements the queries on db side
  */
@@ -40,6 +46,8 @@ class CdbQuery
        * The soruce query
        */
       CdmQuery*        m_rpCdmQuery;
+
+      EdbQueryEnhanceExecutionMode m_eExecutionMode;
 
 
 

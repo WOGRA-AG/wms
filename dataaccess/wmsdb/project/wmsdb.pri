@@ -1,6 +1,8 @@
 PRECOMPILED_HEADER = precompile.h
 
 HEADERS += \
+    $$PWD/../src/CdbQueryEnhancedDefault.h \
+    $$PWD/../src/CdbQueryEnhancedDoubleRequest.h \
     $$PWD/precompile.h \
     ../src/CdbClassAccess.h \
     ../src/CdbDataAccess.h \
@@ -11,7 +13,6 @@ HEADERS += \
     ../src/CdbObjectAccess.h \
     ../src/CdbQuery.h \
     ../src/CdbQueryElement.h \
-    ../src/CdbQueryEnhancedNew.h \
     ../src/CdbUserManager.h \
     ../src/CdbDataAccessPlugin.h \
     ../src/CdbDataAccessConfigurator.h \
@@ -95,6 +96,8 @@ HEADERS += $$PWD/../src/CdbCommandLdapLogin.h
 }
 
 SOURCES += ../src/CdbClassAccess.cpp \
+    $$PWD/../src/CdbQueryEnhancedDefault.cpp \
+    $$PWD/../src/CdbQueryEnhancedDoubleRequest.cpp \
     ../src/CdbDataAccess.cpp \
     ../src/CdbDataStructureHelper.cpp \
     ../src/CdbDbAccess.cpp \
@@ -103,7 +106,6 @@ SOURCES += ../src/CdbClassAccess.cpp \
     ../src/CdbObjectAccess.cpp \
     ../src/CdbQuery.cpp \
     ../src/CdbQueryElement.cpp \
-    ../src/CdbQueryEnhancedNew.cpp \
     ../src/CdbUserManager.cpp \
     ../src/CdbDataAccessPlugin.cpp \
     ../src/CdbDataAccessConfigurator.cpp \

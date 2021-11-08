@@ -28,7 +28,8 @@
 #include "CdbDataStructureHelper.h"
 #include "CdbObjectAccess.h"
 #include "CdbDataAccess.h"
-#include "CdbQueryEnhancedNew.h"
+#include "CdbQueryEnhancedDefault.h"
+#include "CdbQueryEnhancedDoubleRequest.h"
 #include "CdbQueryElement.h"
 #include "CdbQuery.h"
 
@@ -45,7 +46,8 @@
  *----------------last changed: --------------------------------Sa 20. Aug 12:09:48 2005----------*/
 CdbQuery::CdbQuery(  CdbDataAccess* p_pCdbDataAccess, CdmQuery* p_pCdmQuery )
     : m_rpCdbDataAccess(p_pCdbDataAccess),
-      m_rpCdmQuery(p_pCdmQuery)
+      m_rpCdmQuery(p_pCdmQuery),
+      m_eExecutionMode(eDbQueryEnhancedExecutionModeDefault)
 {
 
 }
@@ -73,8 +75,16 @@ qint64 CdbQuery::ExecuteEnhanced()
     if(CHKPTR(m_rpCdbDataAccess) &&
             CHKPTR(m_rpCdmQuery))
     {
-        CdbQueryEnhancedNew cCdbQuery((CdmQueryEnhanced*)m_rpCdmQuery, m_rpCdbDataAccess);
-        lRet = cCdbQuery.Execute();
+        if (m_eExecutionMode == eDbQueryEnhancedExecutionModeDefault)
+        {
+            CdbQueryEnhancedDefault cCdbQuery((CdmQueryEnhanced*)m_rpCdmQuery, m_rpCdbDataAccess);
+            lRet = cCdbQuery.Execute();
+        }
+        else if (m_eExecutionMode == eDbQueryEnhancedExecutionModeDoubleRequest)
+        {
+            CdbQueryEnhancedDoubleRequest cCdbQuery((CdmQueryEnhanced*)m_rpCdmQuery, m_rpCdbDataAccess);
+            lRet = cCdbQuery.Execute();
+        }
     }
 
     return lRet;
@@ -116,6 +126,7 @@ qint64 CdbQuery::ExecuteQuery()
     {
         QMap<qint64,qint64> qvlResults;
         QString  qstrQuery = GenerateQuerySql();
+        m_rpCdmQuery->SetDatabaseCommand(qstrQuery);
 
 
         if(!qstrQuery.isEmpty())
@@ -201,7 +212,7 @@ QString CdbQuery::GenerateSql()
     {
         if (m_rpCdmQuery->HasResultElements())
         {
-            CdbQueryEnhancedNew cCdbQueryEnhanced((CdmQueryEnhanced*)m_rpCdmQuery, m_rpCdbDataAccess);
+            CdbQueryEnhancedDefault cCdbQueryEnhanced((CdmQueryEnhanced*)m_rpCdmQuery, m_rpCdbDataAccess);
             qstrRet = cCdbQueryEnhanced.GenerateSql();
         }
         else

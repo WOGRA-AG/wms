@@ -1,16 +1,3 @@
-/******************************************************************************
- ** WOGRA technologies GmbH & Co KG Modul Information
- ** Modulename: CdbQueryEnhancedNew.cpp
- ** Started Implementation: 2010/11/11
- ** Description:
- **
- ** This class implements the sql access for enhanced queries
- **
- ** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
- ** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
- **(C) copyright by WOGRA technologies GmbH & Co KG All rights reserved
- *****************************************************************************/
-
 // System and QT Includes
 #include <qsqlquery.h>
 
@@ -31,12 +18,13 @@
 #include "CdbDataStructureHelper.h"
 #include "CdbDataAccess.h"
 #include "CdbQueryElement.h"
-#include "CdbQueryEnhancedDefault.h"
+#include "CdbQueryEnhancedDoubleRequest.h"
 
 #define RESULT_MEMBER_PLACEHOLDER "$RESULT_MEMBERS"
 #define MEMBER_CONDITION_PLACEHOLDER "$MEMBER_CONDITION"
 #define TABLE_NAME_PLACEHOLDER "$TABLE_NAME"
 #define SUB_SELECT_NAME "$SUBSELECT_NAME"
+#define OBJECT_IDS ":objectids"
 #define OBJREF_TABLE_PREFIX "ref"
 #define OBJECT_PREFIX "obj"
 #define OBJECT_QUERY_PLACHOLDER "$OBJ"
@@ -44,8 +32,8 @@
 
 static int MaxObjectIdComplexity = 5;
 
-CdbQueryEnhancedDefault::CdbQueryEnhancedDefault(CdmQueryEnhanced* p_pCdmQueryEnhanced,
-                                         CdbDataAccess* p_pCdbDataAccess)
+CdbQueryEnhancedDoubleRequest::CdbQueryEnhancedDoubleRequest(CdmQueryEnhanced* p_pCdmQueryEnhanced,
+                                                             CdbDataAccess* p_pCdbDataAccess)
     : m_rpCdmQuery(p_pCdmQueryEnhanced),
       m_rpCdbDataAccess(p_pCdbDataAccess),
       m_iKeynameCount(0),
@@ -56,24 +44,29 @@ CdbQueryEnhancedDefault::CdbQueryEnhancedDefault(CdmQueryEnhanced* p_pCdmQueryEn
 {
 }
 
-CdbQueryEnhancedDefault::~CdbQueryEnhancedDefault()
+CdbQueryEnhancedDoubleRequest::~CdbQueryEnhancedDoubleRequest()
 {
 }
 
-qint64 CdbQueryEnhancedDefault::Execute()
+qint64 CdbQueryEnhancedDoubleRequest::Execute()
 {
-   qint64 lRet = CdmLogging::eDmUnknownDBQueryError;
+    qint64 lRet = CdmLogging::eDmUnknownDBQueryError;
 
     if(CHKPTR(m_rpCdbDataAccess) &&
             CHKPTR(m_rpCdmQuery))
     {
-        QString qstrSql = GenerateSql();
-        m_rpCdmQuery->SetDatabaseCommand(qstrSql);
+        QStringList qvlObjectIds;
+        QString qstrSql = GenerateSql(qvlObjectIds);
+        QString qstrObjIds = qvlObjectIds.join(",");
+        qstrSql = qstrSql.replace(OBJECT_IDS, qstrObjIds);
+
+        QSqlQuery cQSqlQuery(m_rpCdbDataAccess->GetDbInterface()->GetSqlDatabase());
+        cQSqlQuery.prepare(qstrSql);
 
         if (!qstrSql.isEmpty())
         {
-            INFO(qstrSql);
-            lRet = ExecuteQuery(qstrSql);
+            m_rpCdmQuery->SetDatabaseCommand(m_rpCdmQuery->GetDatabaseCommand() + "\n\n" + qstrSql);
+            lRet = ExecuteQuery(cQSqlQuery);
         }
         else
         {
@@ -84,111 +77,156 @@ qint64 CdbQueryEnhancedDefault::Execute()
     return lRet;
 }
 
-QString CdbQueryEnhancedDefault::GenerateSql()
+QString CdbQueryEnhancedDoubleRequest::GenerateSql(QStringList& qvlObjects)
 {
     QString qstrSql;
 
     if(CHKPTR(m_rpCdbDataAccess) &&
             CHKPTR(m_rpCdmQuery))
     {
-        QString qstrObjectIdQuery;
-        CdbQuery cCdbQuery(m_rpCdbDataAccess, m_rpCdmQuery);
-        qstrObjectIdQuery = cCdbQuery.GenerateQuerySql();
         QVector<QString> qvResultElements = m_rpCdmQuery->GetResultElements();
 
-        if (!qstrObjectIdQuery.isEmpty() && m_rpCdmQuery->HasResultElements())
+        if (m_rpCdmQuery->HasResultElements())
         {
-            qstrSql = GenerateCompleteSql(qvResultElements, qstrObjectIdQuery);
-        }
-        else if (!qstrObjectIdQuery.isEmpty())
-        {
-            qstrSql = qstrObjectIdQuery;
+            ExecuteIdQuery(qvlObjects);
+
+            if (!qvlObjects.isEmpty())
+            {
+                qstrSql = GenerateMemberSql(qvResultElements);
+            }
         }
         else
         {
-            ERR("Could not generate SQL Query!");
+            CdbQuery cCdbQuery(m_rpCdbDataAccess, m_rpCdmQuery);
+            qstrSql = cCdbQuery.GenerateQuerySql();
         }
     }
 
     return qstrSql;
 }
 
-qint64 CdbQueryEnhancedDefault::ExecuteQuery(QString p_qstrSql)
+void CdbQueryEnhancedDoubleRequest::ExecuteIdQuery(QStringList& qvlResults)
 {
-   qint64 lRet = CdmLogging::eDmUnknownDBQueryError;
+
+    QString qstrObjectIdQuery;
+    CdbQuery cCdbQuery(m_rpCdbDataAccess, m_rpCdmQuery);
+    qstrObjectIdQuery = cCdbQuery.GenerateQuerySql();
+    m_rpCdmQuery->SetDatabaseCommand(qstrObjectIdQuery);
+
     QSqlQuery cQSqlQuery;
 
-    if (!p_qstrSql.isEmpty())
+    if (!qstrObjectIdQuery.isEmpty())
     {
-        lRet = m_rpCdbDataAccess->ExecuteQuery(p_qstrSql, cQSqlQuery);
+        qint64 lRet = m_rpCdbDataAccess->ExecuteQuery(qstrObjectIdQuery, cQSqlQuery);
 
         if(lRet > 0)
         {
             if(cQSqlQuery.first())
             {
-                int iRowCount = 0;
-                int iColumnCount = m_rpCdmQuery->GetColumnCount();
                 do
                 {
-                    if (m_rpCdmQuery->ContainsGrouping() && iColumnCount == 1) // only one result means there is no objectid in result
-                    {
-                        QVariant qVariant = cQSqlQuery.value(0);
-                        QString qstrTemp = qVariant.toString();
-                        CdmDataAccessHelper::SetQueryEnhancedResult(m_rpCdmQuery, 0, qVariant, -1, -1);
-                    }
-                    else
-                    {
-                        QVariant qvObjectId = cQSqlQuery.value(iColumnCount);
-                       qint64 lObjectId = cQSqlQuery.value(iColumnCount).toInt();
-                       qint64 lContainerId = cQSqlQuery.value(iColumnCount + 1).toInt();
-
-                        for (int iCounter = 0; iCounter < iColumnCount; ++iCounter)
-                        {
-                            QVariant qVariant = cQSqlQuery.value(iCounter);
-                            CdmDataAccessHelper::SetQueryEnhancedResult(m_rpCdmQuery, iCounter, qVariant, lObjectId, lContainerId);
-                        }
-
-                        ++iRowCount;
-                    }
+                    qvlResults.append(cQSqlQuery.value(0).toString());
                 }
                 while(cQSqlQuery.next());
             }
         }
+        else
+        {
+            ERR("ID Query failed! " + qstrObjectIdQuery);
+        }
     }
-    else
+
+}
+
+
+qint64 CdbQueryEnhancedDoubleRequest::ExecuteQuery(QSqlQuery& cQSqlQuery)
+{
+    qint64 lRet = CdmLogging::eDmUnknownDBQueryError;
+    lRet = m_rpCdbDataAccess->ExecuteQuery(cQSqlQuery);
+
+    if(lRet > 0)
     {
-        lRet = 2;
+        if(cQSqlQuery.first())
+        {
+            int iRowCount = 0;
+            int iColumnCount = m_rpCdmQuery->GetColumnCount();
+            do
+            {
+                if (m_rpCdmQuery->ContainsGrouping() && iColumnCount == 1) // only one result means there is no objectid in result
+                {
+                    QVariant qVariant = cQSqlQuery.value(0);
+                    CdmDataAccessHelper::SetQueryEnhancedResult(m_rpCdmQuery, 0, qVariant, -1, -1);
+                }
+                else
+                {
+                    qint64 lObjectId = cQSqlQuery.value(iColumnCount).toInt();
+                    qint64 lContainerId = cQSqlQuery.value(iColumnCount + 1).toInt();
+
+                    for (int iCounter = 0; iCounter < iColumnCount; ++iCounter)
+                    {
+                        QVariant qVariant = cQSqlQuery.value(iCounter);
+                        CdmDataAccessHelper::SetQueryEnhancedResult(m_rpCdmQuery, iCounter, qVariant, lObjectId, lContainerId);
+                    }
+
+                    ++iRowCount;
+                }
+            }
+            while(cQSqlQuery.next());
+        }
     }
+
 
     return lRet;
 }
 
-QString CdbQueryEnhancedDefault::GenerateCompleteSql(QVector<QString> &p_qvKeynames,
-                                                 QString &p_qstrObjectIdSql)
+QString CdbQueryEnhancedDoubleRequest::GenerateMemberSql(QVector<QString> &p_qvKeynames)
 {
     QString qstrSql;
     BuildMemberMap(p_qvKeynames);
-    QMap<QString, QString> qmSubQueries = BuildSubQueries(p_qstrObjectIdSql);
-    qstrSql = ConcatenateQueries(p_qvKeynames, qmSubQueries, p_qstrObjectIdSql);
+    QMap<QString, QString> qmSubQueries = BuildSubQueries();
+    qstrSql = ConcatenateQueries(p_qvKeynames, qmSubQueries);
+
     return qstrSql;
 }
 
-QString CdbQueryEnhancedDefault::ConcatenateQueries(QVector<QString> &p_qvKeynames,
-                                                QMap<QString, QString> &p_qmSubQueries,
-                                                QString &p_qstrObjectIdSql)
+QString CdbQueryEnhancedDoubleRequest::ConcatenateQueries(QVector<QString> &p_qvKeynames,
+                                                          QMap<QString, QString> &p_qmSubQueries)
 {
     QString qstrSql = CreateHead(p_qvKeynames);
-    QString qstrObjectKey = OBJECT_PREFIX;
-    qstrSql += "(" + p_qstrObjectIdSql +") " + qstrObjectKey;
     QMapIterator<QString, QString> qmIt(p_qmSubQueries);
+    QString qstrFirstKey;
+    bool bFirst = true;
 
     while (qmIt.hasNext())
     {
         qmIt.next();
+        QString qstrSqlPart;
         QString qstrSubQuery = qmIt.value();
-        QString qstrSqlPart = " left join ";
-        qstrSqlPart +=  qstrSubQuery + " on " + qmIt.key() + ".objectid = " + qstrObjectKey + ".objectid";
+
+        if (bFirst)
+        {
+            qstrFirstKey = qmIt.key();
+            qstrSqlPart += qstrFirstKey + ".objectid, " + qstrFirstKey + ".objectlistid FROM ";
+
+            if (!qstrSubQuery.startsWith("("))
+            {
+                qstrSqlPart +=  "(";
+            }
+
+            qstrSqlPart += qstrSubQuery + " ";
+        }
+        else
+        {
+            qstrSqlPart = " left join ";
+            if (!qstrSubQuery.startsWith("("))
+            {
+                qstrSqlPart +=  "(";
+            }
+            qstrSqlPart +=  qstrSubQuery + " on " + qmIt.key() + ".objectid = " + qstrFirstKey + ".objectid";
+        }
+
         qstrSql += qstrSqlPart;
+        bFirst = false;
     }
 
     AddGroupByToSql(qstrSql);
@@ -197,7 +235,7 @@ QString CdbQueryEnhancedDefault::ConcatenateQueries(QVector<QString> &p_qvKeynam
 }
 
 
-void CdbQueryEnhancedDefault::AddOrderByToSql(QString &qstrSql)
+void CdbQueryEnhancedDoubleRequest::AddOrderByToSql(QString &qstrSql)
 {
     const QStringList qstrlOrderBy = m_rpCdmQuery->GetOrderBy();
     bool bFirst = true;
@@ -235,7 +273,7 @@ void CdbQueryEnhancedDefault::AddOrderByToSql(QString &qstrSql)
     }
 }
 
-void CdbQueryEnhancedDefault::AddGroupByToSql(QString &qstrSql)
+void CdbQueryEnhancedDoubleRequest::AddGroupByToSql(QString &qstrSql)
 {
     const QList<QString> qlGroupBy = m_rpCdmQuery->GetGroupByElements();
     bool bFirst = true;
@@ -264,7 +302,7 @@ void CdbQueryEnhancedDefault::AddGroupByToSql(QString &qstrSql)
     }
 }
 
-QString CdbQueryEnhancedDefault::CreateHead(QVector<QString> &p_qvKeynames)
+QString CdbQueryEnhancedDoubleRequest::CreateHead(QVector<QString> &p_qvKeynames)
 {
     QString qstrHead = "select ";
 
@@ -288,11 +326,10 @@ QString CdbQueryEnhancedDefault::CreateHead(QVector<QString> &p_qvKeynames)
         }
     }
 
-    qstrHead += OBJECT_PREFIX ".objectid, " OBJECT_PREFIX ".objectlistid FROM ";
     return qstrHead;
 }
 
-void CdbQueryEnhancedDefault::BuildMemberMap(QVector<QString> &p_qvKeynames)
+void CdbQueryEnhancedDoubleRequest::BuildMemberMap(QVector<QString> &p_qvKeynames)
 {
     QVector<QString> qvOrderBy = m_rpCdmQuery->GetOrderBy().toVector();
     QVector<QString> qvGroupBy = m_rpCdmQuery->GetGroupByElements().toVector();
@@ -308,7 +345,7 @@ void CdbQueryEnhancedDefault::BuildMemberMap(QVector<QString> &p_qvKeynames)
     }
 }
 
-void CdbQueryEnhancedDefault::BuildTypeAndReferenceList(QVector<QString> &p_qvKeynames)
+void CdbQueryEnhancedDoubleRequest::BuildTypeAndReferenceList(QVector<QString> &p_qvKeynames)
 {
     for (int i = 0; i < p_qvKeynames.size(); ++i)
     {
@@ -324,7 +361,7 @@ void CdbQueryEnhancedDefault::BuildTypeAndReferenceList(QVector<QString> &p_qvKe
     }
 }
 
-void CdbQueryEnhancedDefault::BuildType(QString p_qstrKeyname)
+void CdbQueryEnhancedDoubleRequest::BuildType(QString p_qstrKeyname)
 {
     const CdmClass* pCdmClass = m_rpCdmQuery->GetClass();
 
@@ -374,7 +411,7 @@ void CdbQueryEnhancedDefault::BuildType(QString p_qstrKeyname)
     }
 }
 
-void CdbQueryEnhancedDefault::BuildReference(QString p_qstrKeyname)
+void CdbQueryEnhancedDoubleRequest::BuildReference(QString p_qstrKeyname)
 {
     const CdmClass* pCdmClass = m_rpCdmQuery->GetClass();
 
@@ -437,7 +474,7 @@ void CdbQueryEnhancedDefault::BuildReference(QString p_qstrKeyname)
     }
 }
 
-QMap<QString, QString> CdbQueryEnhancedDefault::BuildSubQueries(QString &p_qstrIdQuery)
+QMap<QString, QString> CdbQueryEnhancedDoubleRequest::BuildSubQueries()
 {
     QMap<QString, QString> qmSubQueries;
     QMapIterator<EdmValueType, QList<const CdmMember*>> it(m_qmTypesResults);
@@ -461,7 +498,7 @@ QMap<QString, QString> CdbQueryEnhancedDefault::BuildSubQueries(QString &p_qstrI
         }
     }
 
-    QMapIterator<QString, QString> subRefIt(BuildObjectRefSubQueries(p_qstrIdQuery));
+    QMapIterator<QString, QString> subRefIt(BuildObjectRefSubQueries());
     while (subRefIt.hasNext())
     {
         subRefIt.next();
@@ -471,19 +508,10 @@ QMap<QString, QString> CdbQueryEnhancedDefault::BuildSubQueries(QString &p_qstrI
     return qmSubQueries;
 }
 
-QMap<QString, QString> CdbQueryEnhancedDefault::BuildObjectRefSubQueries(QString &p_qstrIdQuery, bool p_bNoJoins)
+QMap<QString, QString> CdbQueryEnhancedDoubleRequest::BuildObjectRefSubQueries(bool p_bNoJoins)
 {
     QMap<QString, QString> qmSubRefQueries;
-    bool bIdQuery = true;
     CdmQueryElement* pQueryElement = m_rpCdmQuery->GetQueryElement();
-    if (pQueryElement && pQueryElement->GetComplexity() > MaxObjectIdComplexity)
-    {
-        bIdQuery = false;
-    }
-    if (p_qstrIdQuery.isEmpty())
-    {
-        bIdQuery = false;
-    }
 
     QString qstrMemberidAndObjectTemplate = QString("%1.memberid = %2 and "
                                                    "%1.objectid = %3.val and "
@@ -520,7 +548,7 @@ QMap<QString, QString> CdbQueryEnhancedDefault::BuildObjectRefSubQueries(QString
             QString qstrCurrentTable = OBJREF_TABLE_PREFIX + QString::number(iTablesPos);
             QString qstrTable = CdbDataStructureHelper::GetTableName(pRefMember->GetValueType()) + " " + qstrCurrentTable;
             QString qstrKeyname = pRefMember->GetKeyname();
-           qint64 lMemberId = pRefMember->GetId();
+            qint64 lMemberId = pRefMember->GetId();
 
             /* append delimiters to incrementelly built QStrings,
              * build Where Condition,
@@ -552,33 +580,9 @@ QMap<QString, QString> CdbQueryEnhancedDefault::BuildObjectRefSubQueries(QString
                     qstrTables += " INNER JOIN " + qstrTable + " ON (" + qstrJoin + ")";
                 }
             }
-            else if (bIdQuery)
-            {
-                if (p_bNoJoins)
-                {
-                    qstrWhereConditions += QString("%1.memberid = %2 and "
-                                        "%1.objectid = %3.objectid and "
-                                        "%1.objectlistid = %3.objectlistid")
-                            .arg(qstrCurrentTable)
-                            .arg(lMemberId)
-                            .arg(OBJECT_PREFIX);
-                    qstrTables = "(" + p_qstrIdQuery + ") " OBJECT_PREFIX ", " + qstrTable;
-                }
-                else
-                {
-                    QString qstrJoin = QString("%1.objectid = %2.objectid and "
-                                               "%1.objectlistid = %2.objectlistid")
-                            .arg(qstrCurrentTable)
-                            .arg(OBJECT_PREFIX);
-
-                    qstrWhereConditions += qstrCurrentTable + ".memberid = " + QString::number(lMemberId);
-                    qstrTables = "(" + p_qstrIdQuery + ") " OBJECT_PREFIX " INNER JOIN " + qstrTable + " ON (" + qstrJoin + ")";
-                }
-                qstrResults += OBJECT_PREFIX ".objectid, " OBJECT_PREFIX ".objectlistid";
-            }
             else
             {
-                qstrWhereConditions += qstrCurrentTable + ".memberid = " + QString::number(lMemberId);
+                qstrWhereConditions += qstrCurrentTable + ".memberid = " + QString::number(lMemberId) + " and " + qstrCurrentTable + ".objectid in (" + OBJECT_IDS + ")";
                 qstrTables = qstrTable;
                 qstrResults += qstrCurrentTable + ".objectid, " + qstrCurrentTable + ".objectlistid";
             }
@@ -604,7 +608,7 @@ QMap<QString, QString> CdbQueryEnhancedDefault::BuildObjectRefSubQueries(QString
 
             QString qstrTable = CdbDataStructureHelper::GetTableName(pRefMember->GetValueType());
             QString qstrKeyname = pRefMember->GetKeyname();
-           qint64 lMemberId = pRefMember->GetId();
+            qint64 lMemberId = pRefMember->GetId();
 
             if (bFirstTable)
             {
@@ -665,7 +669,7 @@ QMap<QString, QString> CdbQueryEnhancedDefault::BuildObjectRefSubQueries(QString
             QListIterator<qint64> qlIt(qmmValueTableMemberIds.values(qstrValueTable));
             while (qlIt.hasNext())
             {
-               qint64 lMemberId = qlIt.next();
+                qint64 lMemberId = qlIt.next();
                 qstrlMemberIds.append(QString::number(lMemberId));
             }
             qstrWhereConditions += qstrValueTable + ".memberid IN (" + qstrlMemberIds.join(',') + ")";
@@ -685,243 +689,8 @@ QMap<QString, QString> CdbQueryEnhancedDefault::BuildObjectRefSubQueries(QString
     return qmSubRefQueries;
 }
 
-QMap<QString, QString> CdbQueryEnhancedDefault::BuildObjectRefSubQueriesPerDepth(QString &p_qstrIdQuery, bool p_bNoJoins)
-{
-    QMap<QString, QString> qmSubRefQueries;
-    bool bIdQuery = true;
-    CdmQueryElement* pQueryElement = m_rpCdmQuery->GetQueryElement();
-    if (pQueryElement && pQueryElement->GetComplexity() > MaxObjectIdComplexity)
-    {
-        bIdQuery = false;
-    }
-    if (p_qstrIdQuery.isEmpty())
-    {
-        bIdQuery = false;
-    }
 
-    QString qstrObjectIdTemplate = QString("%1.objectid = %2.objectid and "
-                                           "%1.objectlistid = %2.objectlistid");
-    QString qstrObjectTemplate = QString("%1.objectid = %2.val and "
-                                         "%1.objectlistid = %2.orefobjectlist");
-    QListIterator<int> depthIterator(m_qmmObjectRefMembers.uniqueKeys());
-    while(depthIterator.hasNext())
-    {
-        int iDepth = depthIterator.next();
-        bool bFirstTable = true;
-        QString qstrTables;
-        QStringList qstrlReferenceTables;
-        QStringList qstrlAddedValueTables;
-        QString qstrWhereConditions;
-        QString qstrResults;
-
-        // Add <iDepth> ObjectRef Tables to the from clause
-        for (int iPos = 0; iPos < iDepth; ++iPos)
-        {
-            QString qstrCurrentTable = OBJREF_TABLE_PREFIX + QString::number(iPos);
-            QString qstrTable = CdbDataStructureHelper::GetTableName(eDmValueObjectRef) + " " + qstrCurrentTable;
-            qstrlReferenceTables.append(qstrCurrentTable);
-
-            /* append delimiters to incrementelly built QStrings,
-             * build Where Condition,
-             * join Tables,
-             * add the IdQuery if necessary
-             * and select the objectid and objectlist of the first table
-             */
-            if (!bFirstTable)
-            {
-                qstrWhereConditions += " and ";
-
-                if (p_bNoJoins)
-                {
-                    qstrTables += ", " + qstrTable;
-
-                    qstrWhereConditions += qstrObjectTemplate
-                            .arg(qstrCurrentTable)
-                            .arg(qstrlReferenceTables.last());
-                }
-                else
-                {
-                    QString qstrJoin = qstrObjectTemplate
-                            .arg(qstrCurrentTable)
-                            .arg(qstrlReferenceTables.last());
-
-                    qstrTables += " INNER JOIN " + qstrTable + " ON (" + qstrJoin + ")";
-                }
-            }
-            else if (bIdQuery)
-            {
-                if (p_bNoJoins)
-                {
-                    qstrWhereConditions = qstrObjectIdTemplate
-                            .arg(qstrCurrentTable)
-                            .arg(OBJECT_PREFIX);
-                    qstrTables = "(" + p_qstrIdQuery + ") " OBJECT_PREFIX ", " + qstrTable;
-                }
-                else
-                {
-                    QString qstrJoin = qstrObjectIdTemplate
-                            .arg(qstrCurrentTable)
-                            .arg(OBJECT_PREFIX);
-
-                    qstrTables = "(" + p_qstrIdQuery + ") " OBJECT_PREFIX " INNER JOIN " + qstrTable + " ON (" + qstrJoin + ")";
-                }
-                qstrResults = OBJECT_PREFIX ".objectid, " OBJECT_PREFIX ".objectlistid";
-            }
-            else
-            {
-                qstrTables = qstrTable;
-                qstrResults = qstrCurrentTable + ".objectid, " + qstrCurrentTable + ".objectlistid";
-            }
-
-            // update bFirstTable
-            if (bFirstTable)
-            {
-                bFirstTable = false;
-            }
-        }
-
-        // Iterator over every ReferencePath of given depth
-        QListIterator<QPair<QList<const CdmMember*>, QList<const CdmMember*>>> pairIterator(m_qmmObjectRefMembers.values(iDepth));
-        while (pairIterator.hasNext())
-        {
-            QPair<QList<const CdmMember*>, QList<const CdmMember*>> qPair = pairIterator.next();
-            QList<const CdmMember*> qllReferences = qPair.first;
-            QList<const CdmMember*> qlMembers = qPair.second;
-            if (qllReferences.size() != iDepth || qlMembers.isEmpty())
-            {
-                continue;
-            }
-
-            QListIterator<const CdmMember*> refIterator(qllReferences);
-            bool bFirstReference = true;
-            int iTablePos = 0;
-            QString qstrFullReferenceKeyName;
-            QString qstrReferenceWhereCondition;
-
-            while (refIterator.hasNext())
-            {
-                const CdmMember* pRefMember = refIterator.next();
-
-                QString qstrCurrentTable = qstrlReferenceTables.at(iTablePos);
-                QString qstrKeyname = pRefMember->GetKeyname();
-               qint64 lMemberId = pRefMember->GetId();
-
-                if (bFirstReference)
-                {
-                    bFirstReference = false;
-                }
-                else
-                {
-                    qstrFullReferenceKeyName += ".";
-                    qstrReferenceWhereCondition += " and ";
-                }
-
-                qstrFullReferenceKeyName += qstrKeyname;
-                qstrReferenceWhereCondition += QString("%1.memberid = %2")
-                        .arg(qstrCurrentTable)
-                        .arg(lMemberId);
-
-                ++iTablePos;
-            }
-
-            if (qstrWhereConditions.isEmpty())
-            {
-                qstrWhereConditions = qstrReferenceWhereCondition;
-            }
-            else
-            {
-                qstrWhereConditions += " or " + qstrReferenceWhereCondition;
-            }
-
-            QMultiMap<QString,qint64> qmmLocalValueTableMemberIds;
-
-            for (int iPos = 0; iPos < qlMembers.size(); ++iPos)
-            {
-                const CdmMember* pRefMember = qlMembers.at(iPos);
-
-                QString qstrTable = CdbDataStructureHelper::GetTableName(pRefMember->GetValueType());
-                QString qstrKeyname = pRefMember->GetKeyname();
-               qint64 lMemberId = pRefMember->GetId();
-
-                if (bFirstTable)
-                {
-                    qstrTables = qstrTable;
-                    qstrResults = qstrTable + ".objectid, " + qstrTable + ".objectlistid";
-                    bFirstTable = false;
-                }
-                else if (!qstrlAddedValueTables.contains(qstrTable))
-                {
-                    if (p_bNoJoins)
-                    {
-                        qstrTables += ", " + qstrTable;
-
-                        qstrWhereConditions += " and " + qstrObjectTemplate
-                                .arg(qstrTable)
-                                .arg(qstrlReferenceTables.last());
-                    }
-                    else
-                    {
-                        qstrTables += " LEFT JOIN " + qstrTable + " ON (" + qstrObjectTemplate
-                                .arg(qstrTable)
-                                .arg(qstrlReferenceTables.last()) + ")";
-                    }
-                }
-
-                qstrlAddedValueTables.append(qstrTable);
-                qmmLocalValueTableMemberIds.insert(qstrTable, lMemberId);
-
-                QString qstrValueName = qstrFullReferenceKeyName + "." + qstrKeyname;
-                qstrValueName = MakeKeynameSave(qstrValueName);
-                m_qmKeynamesSave.insert(qstrFullReferenceKeyName + "." + qstrKeyname, qstrValueName);
-                QString qstrResultMember = QString("min(CASE WHEN %1.objectid = %2.val and "
-                                                   "%1.objectlistid = %2.orefobjectlist and "
-                                                   "%3 and "
-                                                   "%1.memberid = %4 "
-                                                   "THEN %1.val else null end)"
-                                                   " AS %5")
-                        .arg(qstrTable)
-                        .arg(qstrlReferenceTables.last())
-                        .arg(qstrReferenceWhereCondition)
-                        .arg(lMemberId)
-                        .arg(qstrValueName);
-
-                qstrResults += ", " + qstrResultMember;
-            }
-
-            QListIterator<QString> qlKeyIterator = QListIterator<QString>(qmmLocalValueTableMemberIds.uniqueKeys());
-            while (qlKeyIterator.hasNext())
-            {
-                if (!qstrWhereConditions.isEmpty())
-                {
-                    qstrWhereConditions += " and ";
-                }
-                QString qstrValueTable = qlKeyIterator.next();
-                QStringList qstrlMemberIds;
-                QListIterator<qint64> qlIt(qmmLocalValueTableMemberIds.values(qstrValueTable));
-                while (qlIt.hasNext())
-                {
-                   qint64 lMemberId = qlIt.next();
-                    qstrlMemberIds.append(QString::number(lMemberId));
-                }
-                qstrWhereConditions += qstrValueTable + ".memberid IN (" + qstrlMemberIds.join(',') + ")";
-            }
-        }
-
-        QString qstrSubSelectName = MakeKeynameSave("OBJREF_DEPTH_" + QString::number(iDepth) + "_SEL");
-
-        QString qstrSubSelect = GetPartialObjRefQueryTemplate();
-        qstrSubSelect = qstrSubSelect.replace(TABLE_NAME_PLACEHOLDER, qstrTables);
-        qstrSubSelect = qstrSubSelect.replace(WHERE_OBJREF_CONDITION_PLACEHOLDER, qstrWhereConditions);
-        qstrSubSelect = qstrSubSelect.replace(RESULT_MEMBER_PLACEHOLDER, qstrResults);
-        qstrSubSelect = qstrSubSelect.replace(SUB_SELECT_NAME, qstrSubSelectName);
-
-        qmSubRefQueries.insert(qstrSubSelectName, qstrSubSelect);
-    }
-
-    return qmSubRefQueries;
-}
-
-QString CdbQueryEnhancedDefault::BuildResultMembers(QList<const CdmMember*> &p_qlMembers)
+QString CdbQueryEnhancedDoubleRequest::BuildResultMembers(QList<const CdmMember*> &p_qlMembers)
 {
     QString qstrResult;
     bool bFirst = true;
@@ -961,7 +730,7 @@ QString CdbQueryEnhancedDefault::BuildResultMembers(QList<const CdmMember*> &p_q
     return qstrResult;
 }
 
-QString CdbQueryEnhancedDefault::BuildConditionMembers( QList<const CdmMember*> &p_qlMembers)
+QString CdbQueryEnhancedDoubleRequest::BuildConditionMembers( QList<const CdmMember*> &p_qlMembers)
 {
     QString qstrResult;
     bool bFirst = true;
@@ -983,33 +752,31 @@ QString CdbQueryEnhancedDefault::BuildConditionMembers( QList<const CdmMember*> 
     return qstrResult;
 }
 
-QString CdbQueryEnhancedDefault::GetPartialQueryTemplate()
+QString CdbQueryEnhancedDoubleRequest::GetPartialQueryTemplate()
 {
-    CdmObjectContainer *pCont = m_rpCdmQuery->GetContainer();
-    if(pCont)
-    {
-        return "(SELECT objectid, objectlistid, " RESULT_MEMBER_PLACEHOLDER  " FROM " TABLE_NAME_PLACEHOLDER
-                " where memberid in (" MEMBER_CONDITION_PLACEHOLDER ") and objectlistid = " + QString::number(pCont->GetId()) + " group by objectid, objectlistid) " SUB_SELECT_NAME;
-    }
-    else
-    {
-        return "(SELECT objectid, objectlistid, " RESULT_MEMBER_PLACEHOLDER  " FROM " TABLE_NAME_PLACEHOLDER
-                " where memberid in (" MEMBER_CONDITION_PLACEHOLDER ") group by objectid, objectlistid) " SUB_SELECT_NAME;
-    }
+    QString qstrTemplate;
+
+    qstrTemplate  = QString("SELECT objectid, objectlistid, %1 FROM %2 where memberid in (%3) and objectid in(%4) group by objectid, objectlistid) %5")
+            .arg(RESULT_MEMBER_PLACEHOLDER)
+            .arg(TABLE_NAME_PLACEHOLDER)
+            .arg(MEMBER_CONDITION_PLACEHOLDER)
+            .arg(OBJECT_IDS)
+            .arg(SUB_SELECT_NAME);
+    return qstrTemplate;
 }
 
-QString CdbQueryEnhancedDefault::GetPartialObjRefQueryTemplate()
+QString CdbQueryEnhancedDoubleRequest::GetPartialObjRefQueryTemplate()
 {
     return "(SELECT " RESULT_MEMBER_PLACEHOLDER " FROM " TABLE_NAME_PLACEHOLDER
             " where " WHERE_OBJREF_CONDITION_PLACEHOLDER " group by objectid, objectlistid) " SUB_SELECT_NAME;
 }
 
-QString CdbQueryEnhancedDefault::MakeKeynameSave(QString p_qstrKeyname)
+QString CdbQueryEnhancedDoubleRequest::MakeKeynameSave(QString p_qstrKeyname)
 {
     return CwmsUtilities::MakeKeynameSave(p_qstrKeyname, m_qmKeynames, m_iKeynameCount);
 }
 
-QString CdbQueryEnhancedDefault::GetSQlFunction(int pos)
+QString CdbQueryEnhancedDoubleRequest::GetSQlFunction(int pos)
 {
     QString qstrRet;
     CdmQueryResultElement* pCdmResultElement = m_rpCdmQuery->GetResultElement(pos);
