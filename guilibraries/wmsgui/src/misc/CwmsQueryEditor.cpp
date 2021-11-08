@@ -103,6 +103,8 @@ void CwmsQueryEditor::ExecuteClickedSlot()
         m_pqtvResult->setModel(&m_cCdmModel);
     }
 
+    m_pqtbDbCommand->setPlainText(m_cCdmModel.GetQuery()->GetDatabaseCommand());
+
     QLocale loc;
     cTimeMeassure.finished();
     m_pqleDuration->setText(loc.toString(cTimeMeassure.GetCompleteDuration()) + " " + tr("msecs"));

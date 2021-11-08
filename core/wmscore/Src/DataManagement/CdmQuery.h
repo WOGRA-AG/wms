@@ -119,6 +119,9 @@ protected:
 
     bool m_bCaseInsensitiveSearch;
 
+    // the executed databasecommand
+    QString m_qstrDatabaseCommand;
+
 public:
     CdmQuery(QObject* parent = nullptr);
     CdmQuery(CdmObjectContainer* p_pContainer, QObject* parent = nullptr);
@@ -180,6 +183,8 @@ public:
     QString GetResultAsDisplayStringAt(int p_iColumn, int p_iRow) const;
     QVariant GetColumnAlignment(QString p_qstrKeyname) const;
     QVariant GetColumnTooltip(QString p_qstrKeyname) const;
+    QString GetDatabaseCommand() const;
+    void SetDatabaseCommand(QString p_qstrCommand);
 public slots:
     int Execute();
     void Clear();

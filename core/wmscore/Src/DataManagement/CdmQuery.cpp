@@ -1556,6 +1556,16 @@ QVariant CdmQuery::GetColumnTooltip(QString p_qstrKeyname) const
     return qVariant;
 }
 
+QString CdmQuery::GetDatabaseCommand() const
+{
+    return m_qstrDatabaseCommand;
+}
+
+void CdmQuery::SetDatabaseCommand(QString p_qstrCommand)
+{
+    m_qstrDatabaseCommand = p_qstrCommand;
+}
+
 const CdmMember* CdmQuery::FindMemberByKeyname(QString p_qstrKeyname) const
 {
     const CdmMember* pCdmMember = nullptr;
