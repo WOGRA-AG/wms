@@ -150,3 +150,55 @@ void setImmutable(bool immutable)
 ----
 
 set's the immutable flag on the object. This has no effect if class or container are immutable. Then the object is still immutable.
+
+ToDo:
+        virtual QObject *findValue(QString p_qstrKeyname);
+        virtual QObject* getClass();
+        virtual QVariant getValuePrimitive(QString p_qstrKeyname);
+        virtual QObject* getValueReference(QString p_qstrKeyname);
+        virtual QDateTime getValueDateTime(QString p_qstrKeyname) const;
+        virtual QDate getValueDate(QString p_qstrKeyname) const;
+        virtual QTime getValueTime(QString p_qstrKeyname) const;
+        virtual QString getValueString(QString p_qstrKeyname) const;
+        virtual QObject* getContainer();
+        virtual QObject *getValueUser(QString p_qstrKeyname);
+        virtual double getValueDouble(QString p_qstrKeyname) const;
+        virtual qint64 getValueLong(QString p_qstrKeyname) const;
+        virtual int getValueInt(QString p_qstrKeyname) const;
+        virtual bool getValueBool(QString p_qstrKeyname) const;
+        virtual float getValueFloat(QString p_qstrKeyname) const;
+        virtual QString getJson();
+        virtual QVariant execute(QString p_qstrMethod, QScriptValue p_qArg1 = QScriptValue(), QScriptValue p_qArg2 = QScriptValue(), QScriptValue p_qArg3 = QScriptValue(), QScriptValue p_qArg4 = QScriptValue(), QScriptValue p_qArg5 = QScriptValue(), QScriptValue p_qArg6 = QScriptValue(), QScriptValue p_qArg7 = QScriptValue(), QScriptValue p_qArg8 = QScriptValue(), QScriptValue p_qArg9 = QScriptValue(), QScriptValue p_qArg10 = QScriptValue(), QScriptValue p_qArg11 = QScriptValue(), QScriptValue p_qArg12 = QScriptValue(), QScriptValue p_qArg13 = QScriptValue(), QScriptValue p_qArg14 = QScriptValue(), QScriptValue p_qArg15 = QScriptValue());
+        virtual QString getValueDisplayString(QString p_qstrKeyname);
+        virtual QVariant execute(QString p_qstrFunctionName, QJSValue p_qlArguments);
+        virtual bool hasOwner();
+        virtual bool hasOwner(QString qstrObjectKeyname);
+        virtual QObject *getOwner();
+        virtual QObject *getOwner(QString qstrObjectKeyname);
+        virtual bool isImmutable();
+        virtual QVariantMap getObjectGraphVariant(bool p_bFollowNonOwnerObjectlist, bool p_bFollowNonOwnerObject, QStringList p_qstrExcludedKeynames, int p_iMaxDepth, int p_iMaxObjects);
+        bool hasCurrentUserWriteAccess();
+        bool hasCurrentUserReadAccess();
+
+        void setValuePrimitive(QString p_qstrKeyname, QVariant p_Value);
+        void setValueReference(QString p_qstrKeyname, QObject* p_pRef);
+        int commit();
+        void refreshObject();
+        void setValueUser(QString p_qstrKeyname, QObject *p_pRef);
+        void setValueString(QString p_qstrKeyname, QString p_qstrValue);
+        void setValueDate(QString p_qstrKeyname, QDate p_qdDate);
+        void setValueDateTime(QString p_qstrKeyname, QDateTime p_qdtDateTime);
+        void setValueTime(QString p_qqstrkeyname, QTime p_qtTime);
+        void setValueFloat(QString p_qstrKeyname, float p_fValue);
+        void setValueDouble(QString p_qstrKeyname, double p_dValue);
+        void setValueInt(QString p_qstrKeyname, int p_iValue);
+        void setValueLong(QString p_qstrKeyname,qint64 p_lValue);
+        void setValueBool(QString p_qstrKeyname, bool p_bValue);
+        void addValueListObjectItem(QString p_qstrKeyname, QObject* p_qObject);
+        void removeValueListObjectItem(QString p_qstrKeyname, QObject* p_qObject);
+        void setValueBinaryDocument(QString p_qstrKeyname, QString p_qstrFilename, QString p_qstrFiletype, QString p_qstrBase64);
+        void setDeleted();
+        bool isDeleted();
+        bool isModified();
+        void setImmutable(bool p_bImmutable);
+        void deleteObjectOnDb();
