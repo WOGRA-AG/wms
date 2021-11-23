@@ -186,6 +186,8 @@ QString CwmsUtilities::MakeKeynameSave(QString p_qstrKeyname,
     p_qstrKeyname = p_qstrKeyname.replace(">", "_");
     p_qstrKeyname = p_qstrKeyname.replace("<", "_");
     p_qstrKeyname = p_qstrKeyname.replace("=", "_");
+    p_qstrKeyname = p_qstrKeyname.replace("(", "_");
+    p_qstrKeyname = p_qstrKeyname.replace(")", "_");
 
     if (!p_rqmMembers.contains(p_qstrKeyname))
     {
