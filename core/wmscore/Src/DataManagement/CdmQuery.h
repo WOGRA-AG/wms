@@ -184,7 +184,7 @@ public:
     QVariant GetColumnAlignment(QString p_qstrKeyname) const;
     QVariant GetColumnTooltip(QString p_qstrKeyname) const;
     QString GetDatabaseCommand() const;
-    void SetDatabaseCommand(QString p_qstrCommand);
+    void AddDatabaseCommand(QString p_qstrCommand);
 public slots:
     int Execute();
     void Clear();

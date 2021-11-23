@@ -1,16 +1,3 @@
-/******************************************************************************
- ** WOGRA technologies Gmbh & Co KG Modul Information
- ** Modulename: CdbQueryEnhanced.h
- ** Started Implementation: 2010/11/11
- ** Description:
- ** 
- ** This class implements the sql access for enhanced queries
- **
- ** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
- ** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. 
- **(C) copyright by WOGRA technologies GmbH & Co KG All rights reserved
- *****************************************************************************/ 
-
 #ifndef CODBCQUERYENHANCEDNEW_H
 #define CODBCQUERYENHANCEDNEW_H
 
@@ -49,7 +36,6 @@ private:
     QMap<QString, QString> m_qmKeynamesSave;
     QMap<EdmValueType, QList<const CdmMember*> > m_qmTypesResults;
     QMultiMap<int, QPair<QList<const CdmMember*>, QList<const CdmMember*>>> m_qmmObjectRefMembers;
-
 
 public:
     CdbQueryEnhancedDefault(CdmQueryEnhanced* p_pCdmQueryEnhanced, CdbDataAccess* p_pCdbDataAccess);

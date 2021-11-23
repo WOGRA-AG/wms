@@ -237,7 +237,14 @@ int CdmDataAccessHelper::AddQueryResult(CdmQuery* p_pCdmQuery,qint64 p_lObjectId
 
    if(CHKPTR(p_pCdmQuery))
    {
-      p_pCdmQuery->AddResult(p_lObjectId, p_lContainerId);
+       if (p_lContainerId == 0)
+       {
+           CdmDataAccessHelper::SetQueryEnhancedResult(p_pCdmQuery, 0, p_lObjectId, -1, -1);
+       }
+       else
+       {
+            p_pCdmQuery->AddResult(p_lObjectId, p_lContainerId);
+       }
       iRet = EC(eDmOk);
    }
    else
@@ -1197,18 +1204,7 @@ QDate CdmDataAccessHelper::GetLicenceExpirationDate(  QString p_qstrLicenceKey )
    return qdExpires;
 }
 
-
-
-/** +-=---------------------------------------------------------Mo 15. Okt 10:32:42 2012----------*
- * @method  CdmDataAccessHelper::SetQueryEnhancedResult            // public                            *
- * @return  void                                             //                                   *
- * @param   CdmQueryEnhanced* p_pCdmQuery                    //                                   *
- * @param   int p_iColumn                                    //                                   *
- * @param   QVariant p_qvValue                               //                                   *
- * @param  qint64 p_lObjectId                                 //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mo 15. Okt 10:32:42 2012----------*/
-void CdmDataAccessHelper::SetQueryEnhancedResult(CdmQueryEnhanced* p_pCdmQuery,
+void CdmDataAccessHelper::SetQueryEnhancedResult(CdmQuery* p_pCdmQuery,
                                            int p_iColumn,
                                            QVariant p_qvValue,
                                           qint64 p_lObjectId,

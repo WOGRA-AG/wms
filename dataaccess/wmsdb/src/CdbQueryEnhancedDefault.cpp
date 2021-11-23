@@ -1,16 +1,3 @@
-/******************************************************************************
- ** WOGRA technologies GmbH & Co KG Modul Information
- ** Modulename: CdbQueryEnhancedNew.cpp
- ** Started Implementation: 2010/11/11
- ** Description:
- **
- ** This class implements the sql access for enhanced queries
- **
- ** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
- ** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
- **(C) copyright by WOGRA technologies GmbH & Co KG All rights reserved
- *****************************************************************************/
-
 // System and QT Includes
 #include <qsqlquery.h>
 
@@ -68,7 +55,7 @@ qint64 CdbQueryEnhancedDefault::Execute()
             CHKPTR(m_rpCdmQuery))
     {
         QString qstrSql = GenerateSql();
-        m_rpCdmQuery->SetDatabaseCommand(qstrSql);
+        m_rpCdmQuery->AddDatabaseCommand(qstrSql);
 
         if (!qstrSql.isEmpty())
         {

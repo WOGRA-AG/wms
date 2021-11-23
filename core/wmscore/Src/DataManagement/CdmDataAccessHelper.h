@@ -462,7 +462,7 @@ static QDate GetLicenceExpirationDate(  QString p_qstrLicenceKey );
     * @param  qint64 p_lObjectId                              //                                   *
     * @comment                                                                                    *
     *----------------last changed: -----------------------------Mo 15. Okt 10:32:42 2012----------*/
-    static void SetQueryEnhancedResult(CdmQueryEnhanced* p_pCdmQuery,
+    static void SetQueryEnhancedResult(CdmQuery *p_pCdmQuery,
                                 int p_iColumn,
                                 QVariant p_qvValue,
                                qint64 p_lObjectId,

@@ -30,8 +30,6 @@
 #define OBJECT_QUERY_PLACHOLDER "$OBJ"
 #define WHERE_OBJREF_CONDITION_PLACEHOLDER "$WHERE"
 
-static int MaxObjectIdComplexity = 5;
-
 CdbQueryEnhancedDoubleRequest::CdbQueryEnhancedDoubleRequest(CdmQueryEnhanced* p_pCdmQueryEnhanced,
                                                              CdbDataAccess* p_pCdbDataAccess)
     : m_rpCdmQuery(p_pCdmQueryEnhanced),
@@ -65,7 +63,7 @@ qint64 CdbQueryEnhancedDoubleRequest::Execute()
 
         if (!qstrSql.isEmpty())
         {
-            m_rpCdmQuery->SetDatabaseCommand(m_rpCdmQuery->GetDatabaseCommand() + "\n\n" + qstrSql);
+            m_rpCdmQuery->AddDatabaseCommand(qstrSql);
             lRet = ExecuteQuery(cQSqlQuery);
         }
         else
@@ -111,7 +109,7 @@ void CdbQueryEnhancedDoubleRequest::ExecuteIdQuery(QStringList& qvlResults)
     QString qstrObjectIdQuery;
     CdbQuery cCdbQuery(m_rpCdbDataAccess, m_rpCdmQuery);
     qstrObjectIdQuery = cCdbQuery.GenerateQuerySql();
-    m_rpCdmQuery->SetDatabaseCommand(qstrObjectIdQuery);
+    m_rpCdmQuery->AddDatabaseCommand(qstrObjectIdQuery);
 
     QSqlQuery cQSqlQuery;
 
@@ -511,7 +509,7 @@ QMap<QString, QString> CdbQueryEnhancedDoubleRequest::BuildSubQueries()
 QMap<QString, QString> CdbQueryEnhancedDoubleRequest::BuildObjectRefSubQueries(bool p_bNoJoins)
 {
     QMap<QString, QString> qmSubRefQueries;
-    CdmQueryElement* pQueryElement = m_rpCdmQuery->GetQueryElement();
+    //CdmQueryElement* pQueryElement = m_rpCdmQuery->GetQueryElement();
 
     QString qstrMemberidAndObjectTemplate = QString("%1.memberid = %2 and "
                                                    "%1.objectid = %3.val and "
@@ -801,6 +799,7 @@ QString CdbQueryEnhancedDoubleRequest::GetSQlFunction(int pos)
             break;
         case eDmQueryResultElementModeCount:
             qstrRet = "count(*)";
+            m_qmKeynamesSave.insert("count", MakeKeynameSave(qstrRet));
             break;
         default: // no grouping mode
             qstrRet = RESULT_MEMBER_PLACEHOLDER;

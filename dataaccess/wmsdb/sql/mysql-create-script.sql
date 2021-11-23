@@ -346,6 +346,7 @@ select v.valueid, v.objectid, v.ContainerId as objectlistid, v.memberid, cm.keyn
 from 
 WMS_VALUE v 
 inner join WMS_VALUE_BINARYDOCUMENT bd on v.valueId = bd.binarydocumentId 
+inner JOIN WMS_DM_OBJECT obj ON v.ObjectId = obj.ObjectId
 inner join WMS_CLASS_MEMBER as cm on cm.memberid = v.memberid;
 
 create or replace view V_VALUE_STRING as
@@ -353,6 +354,7 @@ select v.valueid, v.objectid, v.ContainerId as objectlistid, v.memberid, cm.keyn
 from 
 WMS_VALUE v 
 inner join WMS_VALUE_STRING str on v.valueId = str.stringId 
+inner JOIN WMS_DM_OBJECT obj ON v.ObjectId = obj.ObjectId
 inner join WMS_CLASS_MEMBER as cm on cm.memberid = v.memberid;
 
 create or replace view V_VALUE_BOOL as
@@ -360,6 +362,7 @@ select v.valueid, v.objectid, v.ContainerId as objectlistid, v.memberid, cm.keyn
 from 
 WMS_VALUE v 
 inner join WMS_VALUE_BOOL b on v.valueId = b.boolId 
+inner JOIN WMS_DM_OBJECT obj ON v.ObjectId = obj.ObjectId
 inner join WMS_CLASS_MEMBER as cm on cm.memberid = v.memberid;
 
 create or replace view V_VALUE_CHARACTERDOCUMENT as
@@ -367,6 +370,7 @@ select v.valueid, v.objectid, v.ContainerId as objectlistid, v.memberid, cm.keyn
 from 
 WMS_VALUE v 
 inner join WMS_VALUE_CHARACTERDOCUMENT ch on v.valueId = ch.CharacterDocumentId 
+inner JOIN WMS_DM_OBJECT obj ON v.ObjectId = obj.ObjectId
 inner join WMS_CLASS_MEMBER as cm on cm.memberid = v.memberid;
 
 create or replace view V_VALUE_COUNTER as
@@ -374,6 +378,7 @@ select v.valueid, v.objectid, v.ContainerId as objectlistid, v.memberid, cm.keyn
 from 
 WMS_VALUE v 
 inner join WMS_VALUE_COUNTER c on v.valueId = c.CounterId 
+inner JOIN WMS_DM_OBJECT obj ON v.ObjectId = obj.ObjectId
 inner join WMS_CLASS_MEMBER as cm on cm.memberid = v.memberid;
 
 create or replace view V_VALUE_DATE as
@@ -381,6 +386,7 @@ select v.valueid, v.objectid, v.ContainerId as objectlistid, v.memberid, cm.keyn
 from 
 WMS_VALUE v 
 inner join WMS_VALUE_DATE d on v.valueId = d.DateId 
+inner JOIN WMS_DM_OBJECT obj ON v.ObjectId = obj.ObjectId
 inner join WMS_CLASS_MEMBER as cm on cm.memberid = v.memberid;
 
 create or replace view V_VALUE_DATETIME as
@@ -388,6 +394,7 @@ select v.valueid, v.objectid, v.ContainerId as objectlistid, v.memberid, cm.keyn
 from 
 WMS_VALUE v 
 inner join WMS_VALUE_DATETIME dt on v.valueId = dt.DateTimeId 
+inner JOIN WMS_DM_OBJECT obj ON v.ObjectId = obj.ObjectId
 inner join WMS_CLASS_MEMBER as cm on cm.memberid = v.memberid;
 
 create or replace view V_VALUE_FLOAT as
@@ -395,6 +402,7 @@ select v.valueid, v.objectid, v.ContainerId as objectlistid, v.memberid, cm.keyn
 from 
 WMS_VALUE v 
 inner join WMS_VALUE_FLOAT f on v.valueId = f.FloatId 
+inner JOIN WMS_DM_OBJECT obj ON v.ObjectId = obj.ObjectId
 inner join WMS_CLASS_MEMBER as cm on cm.memberid = v.memberid;
 
 create or replace view V_VALUE_INT as
@@ -402,6 +410,7 @@ select v.valueid, v.objectid, v.ContainerId as objectlistid, v.memberid, cm.keyn
 from 
 WMS_VALUE v 
 inner join WMS_VALUE_INT i on v.valueId = i.IntId 
+inner JOIN WMS_DM_OBJECT obj ON v.ObjectId = obj.ObjectId
 inner join WMS_CLASS_MEMBER as cm on cm.memberid = v.memberid;
 
 create or replace view V_VALUE_LONG as
@@ -409,6 +418,7 @@ select v.valueid, v.objectid, v.ContainerId as objectlistid, v.memberid, cm.keyn
 from 
 WMS_VALUE v 
 inner join WMS_VALUE_LONG l on v.valueId = l.LongId 
+inner JOIN WMS_DM_OBJECT obj ON v.ObjectId = obj.ObjectId
 inner join WMS_CLASS_MEMBER as cm on cm.memberid = v.memberid;
 
 create or replace view V_VALUE_OBJECTLISTREFERENCE as
@@ -416,6 +426,7 @@ select v.valueid, v.objectid, v.ContainerId as objectlistid, v.memberid, cm.keyn
 from 
 WMS_VALUE v 
 inner join WMS_VALUE_OBJECTLISTREFERENCE ol on v.valueId = ol.ObjectListReferenceId 
+inner JOIN WMS_DM_OBJECT obj ON v.ObjectId = obj.ObjectId
 inner join WMS_CLASS_MEMBER as cm on cm.memberid = v.memberid;
 
 create or replace view V_VALUE_OBJECTREFERENCE as
@@ -423,6 +434,7 @@ select v.valueid, v.objectid, v.ContainerId as objectlistid, v.memberid, cm.keyn
 from 
 WMS_VALUE v 
 inner join WMS_VALUE_OBJECTREFERENCE oref on v.valueId = oref.ObjectReferenceId 
+inner JOIN WMS_DM_OBJECT obj ON v.ObjectId = obj.ObjectId
 inner join WMS_CLASS_MEMBER as cm on cm.memberid = v.memberid;
 
 create or replace view V_VALUE_TIME  as
@@ -430,6 +442,7 @@ select v.valueid, v.objectid, v.ContainerId as objectlistid, v.memberid, cm.keyn
 from 
 WMS_VALUE v 
 inner join WMS_VALUE_TIME t on v.valueId = t.TimeId 
+inner JOIN WMS_DM_OBJECT obj ON v.ObjectId = obj.ObjectId
 inner join WMS_CLASS_MEMBER as cm on cm.memberid = v.memberid;
 
 create or replace view V_VALUE_DOUBLE as
@@ -437,6 +450,7 @@ select v.valueid, v.objectid, v.ContainerId as objectlistid, v.memberid, cm.keyn
 from 
 WMS_VALUE v 
 inner join WMS_VALUE_DOUBLE f on v.valueId = f.DoubleId 
+inner JOIN WMS_DM_OBJECT obj ON v.ObjectId = obj.ObjectId
 inner join WMS_CLASS_MEMBER as cm on cm.memberid = v.memberid;
 
 CREATE  OR REPLACE VIEW `v_active_sessions` AS

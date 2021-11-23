@@ -1,15 +1,4 @@
-﻿/******************************************************************************
- ** WOGRA Middleware Server Data Manager Module
- **
- ** @Author Wolfgang Graßhof
- **
- ** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
- ** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
- **(C) copyright by WOGRA technologies All rights reserved
- ******************************************************************************/
-
-
-// System and QT Includes
+﻿// System and QT Includes
 #include <QSqlQuery>
 #include <QList>
 #include <qvariant.h>
@@ -34,40 +23,20 @@
 #include "CdbQuery.h"
 
 
-
-
-
-/** +-=---------------------------------------------------------Sa 20. Aug 12:09:48 2005----------*
- * @method  CdbQuery::CdbQuery                           // public                            *
- * @return                                                   //                                   *
- * @param   CdbDataAccess* p_pCdbDataAccess              //                                   *
- * @param   CdmQuery* p_pCdmQuery                            //                                   *
- * @comment The cosntructor                                                                       *
- *----------------last changed: --------------------------------Sa 20. Aug 12:09:48 2005----------*/
-CdbQuery::CdbQuery(  CdbDataAccess* p_pCdbDataAccess, CdmQuery* p_pCdmQuery )
+CdbQuery::CdbQuery(CdbDataAccess* p_pCdbDataAccess, CdmQuery* p_pCdmQuery)
     : m_rpCdbDataAccess(p_pCdbDataAccess),
       m_rpCdmQuery(p_pCdmQuery),
-      m_eExecutionMode(eDbQueryEnhancedExecutionModeDefault)
+      m_eExecutionMode(eDbQueryEnhancedExecutionModeDoubleRequest)
 {
 
 }
 
 
-/** +-=---------------------------------------------------------Sa 20. Aug 12:09:55 2005----------*
- * @method  CdbQuery::~CdbQuery                          // public, virtual                   *
- * @return  void                                             //                                   *
- * @comment The Destructor of Class CdbQuery                                                    *
- *----------------last changed: --------------------------------Sa 20. Aug 12:09:55 2005----------*/
-CdbQuery::~CdbQuery(  )
+CdbQuery::~CdbQuery()
 {
     // nothing to do at the moment :-)
 }
 
-/** +-=---------------------------------------------------------Do 11. Nov 08:35:32 2010----------*
- * @method  CdbQuery::ExecuteEnhanced                      // private                           *
- * @return qint64                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Do 11. Nov 08:35:32 2010----------*/
 qint64 CdbQuery::ExecuteEnhanced()
 {
    qint64 lRet = CdmLogging::eDmUnknownDBQueryError;
@@ -77,11 +46,13 @@ qint64 CdbQuery::ExecuteEnhanced()
     {
         if (m_eExecutionMode == eDbQueryEnhancedExecutionModeDefault)
         {
+            m_rpCdmQuery->AddDatabaseCommand("Mode: eDbQueryEnhancedExecutionModeDefault");
             CdbQueryEnhancedDefault cCdbQuery((CdmQueryEnhanced*)m_rpCdmQuery, m_rpCdbDataAccess);
             lRet = cCdbQuery.Execute();
         }
         else if (m_eExecutionMode == eDbQueryEnhancedExecutionModeDoubleRequest)
         {
+            m_rpCdmQuery->AddDatabaseCommand("Mode: eDbQueryEnhancedExecutionModeDoubleRequest");
             CdbQueryEnhancedDoubleRequest cCdbQuery((CdmQueryEnhanced*)m_rpCdmQuery, m_rpCdbDataAccess);
             lRet = cCdbQuery.Execute();
         }
@@ -90,16 +61,28 @@ qint64 CdbQuery::ExecuteEnhanced()
     return lRet;
 }
 
-/** +-=---------------------------------------------------------Do 11. Nov 08:36:07 2010----------*
- * @method  CdbQuery::Execute                              // public                            *
- * @return qint64                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Do 11. Nov 08:36:07 2010----------*/
+bool CdbQuery::IsEnhancedQuery()
+{
+    bool bRet = false;
+
+    if (m_rpCdmQuery->HasResultElements())
+    {
+        QVector<QString> qvElements = m_rpCdmQuery->GetResultElements();
+
+        if (qvElements.count() > 1 || qvElements[0].toLower() != "count")
+        {
+            bRet = true;
+        }
+    }
+
+    return bRet;
+}
+
 qint64 CdbQuery::Execute()
 {
    qint64 lRet = CdmLogging::eDmUnknownDBQueryError;
 
-    if (m_rpCdmQuery->HasResultElements())
+    if (IsEnhancedQuery())
     {
         lRet = ExecuteEnhanced();
     }
@@ -111,12 +94,6 @@ qint64 CdbQuery::Execute()
     return lRet;
 }
 
-/** +-=---------------------------------------------------------Do 11. Nov 08:35:47 2010----------*
- * @method  CdbQuery::ExecuteQuery                         // public                            *
- * @return qint64                                             //                                   *
- * @comment Executes the query without any parameters. Works with the faster query                *
- *          algorithm.                                                                            *
- *----------------last changed: --------------------------------Do 11. Nov 08:35:47 2010----------*/
 qint64 CdbQuery::ExecuteQuery()
 {
    qint64 lRet = CdmLogging::eDmUnknownDBQueryError;
@@ -126,7 +103,7 @@ qint64 CdbQuery::ExecuteQuery()
     {
         QMap<qint64,qint64> qvlResults;
         QString  qstrQuery = GenerateQuerySql();
-        m_rpCdmQuery->SetDatabaseCommand(qstrQuery);
+        m_rpCdmQuery->AddDatabaseCommand(qstrQuery);
 
 
         if(!qstrQuery.isEmpty())
@@ -198,11 +175,6 @@ qint64 CdbQuery::ExecuteObjectListQuery(QMap<qint64,qint64>& p_rqllResults)
     return lRet;
 }
 
-/** +-=---------------------------------------------------------So 5. Jun 11:38:32 2011-----------*
- * @method  CdbQuery::GenerateSql                          // public, virtual                   *
- * @return  QString                                          //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------So 5. Jun 11:38:32 2011-----------*/
 QString CdbQuery::GenerateSql()
 {
     QString qstrRet;
@@ -224,14 +196,11 @@ QString CdbQuery::GenerateSql()
     return qstrRet;
 }
 
-/** +-=---------------------------------------------------------So 5. Jun 11:47:27 2011-----------*
- * @method  CdbQuery::GenerateQuerySql                     // public                            *
- * @return  QString                                          //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------So 5. Jun 11:47:27 2011-----------*/
 QString CdbQuery::GenerateQuerySql()
 {
     QString qstrRet;
+
+
 
     if(CHKPTR(m_rpCdbDataAccess) &&
             CHKPTR(m_rpCdmQuery))
@@ -242,18 +211,36 @@ QString CdbQuery::GenerateQuerySql()
         {
             QScopedPointer<CdbQueryElement> pCdbQueryElement(new CdbQueryElement(m_rpCdbDataAccess, pCdmQueryElement));
             qstrRet = pCdbQueryElement->GenerateQuery();
+
+            if(m_rpCdmQuery->HasResultElements() &&
+               m_rpCdmQuery->GetResultElement(0)->GetKeyname() == "count")
+            {
+                qstrRet = QString("select count(*) from (%1) a").arg(qstrRet);
+            }
         }
         else
         {
+            QString qstrFields = "WMS_DM_OBJECT.objectid, WMS_DM_OBJECT.objectlistid";
+
+            if(m_rpCdmQuery->HasResultElements() &&
+               m_rpCdmQuery->GetResultElement(0)->GetKeyname() == "count")
+            {
+                qstrFields = "count(*)";
+            }
+
             if (m_rpCdmQuery->GetContainerId() > 0)
             {
-                qstrRet = "select WMS_DM_OBJECT.objectid, WMS_DM_OBJECT.objectlistid from WMS_DM_OBJECT where objectlistid = " + QString::number(m_rpCdmQuery->GetContainerId());
+                qstrRet = QString("select %1 from WMS_DM_OBJECT where objectlistid = %2")
+                        .arg(qstrFields)
+                        .arg(m_rpCdmQuery->GetContainerId());
             }
             else if (m_rpCdmQuery->GetClassId() > 0)
             {
-                qstrRet = "select WMS_DM_OBJECT.objectid, WMS_DM_OBJECT.objectlistid from WMS_DM_OBJECT "
+                qstrRet = QString("select %1 from WMS_DM_OBJECT "
                           "inner join WMS_DM_OBJECTLIST objlist ON objlist.objectlistid = WMS_DM_OBJECT.ObjectListId "
-                          "where objlist.classId = " + QString::number(m_rpCdmQuery->GetClassId());
+                          "where objlist.classId = %2")
+                        .arg(qstrFields)
+                        .arg(m_rpCdmQuery->GetClassId());
             }
             else
             {
@@ -467,12 +454,6 @@ void CdbQuery::ReadMemberIdAndBaseType(QString p_qstrSortKey,
     }
 }
 
-/** +-=---------------------------------------------------------Sa 10. Nov 13:20:22 2007----------*
- * @method  CdbQuery::CreateStringFromResultList           // private                           *
- * @return  QString                                          //                                   *
- * @param   QValueList<qint64>& p_rqvlResults                  //                                   *
- * @comment                                                                                       *
- *----------------last changed: Wolfgang Graßhof----------------Sa 10. Nov 13:20:22 2007----------*/
 QString CdbQuery::CreateStringFromResultList(QMap<qint64,qint64>& p_rqvlResults)
 {
     QString qstrRet;
@@ -493,12 +474,6 @@ QString CdbQuery::CreateStringFromResultList(QMap<qint64,qint64>& p_rqvlResults)
     return qstrRet;
 }
 
-/** +-=---------------------------------------------------------Sa 10. Nov 13:13:20 2007----------*
- * @method  CdbQuery::GetTableIdName                       // public                            *
- * @return  QString                                          //                                   *
- * @param   CdbDataAccess::EodbcBaseType p_eType           //                                   *
- * @comment This method returns the name of the id field in the table.                            *
- *----------------last changed: Wolfgang Graßhof----------------Sa 10. Nov 13:13:20 2007----------*/
 QString CdbQuery::GetTableIdName(CdbDataAccess::EodbcBaseType p_eType)
 {
     QString qstrTableIdName;
@@ -586,12 +561,6 @@ QString CdbQuery::GetTableIdName(CdbDataAccess::EodbcBaseType p_eType)
     return qstrTableIdName;
 }
 
-/** +-=---------------------------------------------------------Do 23. Aug 15:22:34 2007----------*
- * @method  CdbQuery::GetTableName                         // public, static                    *
- * @return  QString                                          //                                   *
- * @param   CdbDataAccess::EodbcBaseType p_eType           //                                   *
- * @comment This method returns the tablename dependent to the queryelement.                      *
- *----------------last changed: --------------------------------Do 23. Aug 15:22:34 2007----------*/
 QString CdbQuery::GetTableName(CdbDataAccess::EodbcBaseType p_eType)
 {
     QString qstrTableName;
@@ -679,13 +648,6 @@ QString CdbQuery::GetTableName(CdbDataAccess::EodbcBaseType p_eType)
     return qstrTableName;
 }
 
-
-/** +-=---------------------------------------------------------Do 23. Aug 15:24:41 2007----------*
- * @method  CdbQuery::GetDataFieldName                     // public, static                    *
- * @return  QString                                          //                                   *
- * @param   CdbDataAccess::EodbcBaseType p_eType           //                                   *
- * @comment This method returns the name of the datafield.                                        *
- *----------------last changed: --------------------------------Do 23. Aug 15:24:41 2007----------*/
 QString CdbQuery::GetDataFieldName(CdbDataAccess::EodbcBaseType p_eType)
 {
     // the default

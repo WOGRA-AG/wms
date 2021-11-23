@@ -1561,9 +1561,14 @@ QString CdmQuery::GetDatabaseCommand() const
     return m_qstrDatabaseCommand;
 }
 
-void CdmQuery::SetDatabaseCommand(QString p_qstrCommand)
+void CdmQuery::AddDatabaseCommand(QString p_qstrCommand)
 {
-    m_qstrDatabaseCommand = p_qstrCommand;
+    if (!m_qstrDatabaseCommand.isEmpty())
+    {
+        m_qstrDatabaseCommand += "\n\n";
+    }
+
+    m_qstrDatabaseCommand += p_qstrCommand;
 }
 
 const CdmMember* CdmQuery::FindMemberByKeyname(QString p_qstrKeyname) const
