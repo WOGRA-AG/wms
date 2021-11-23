@@ -41,7 +41,54 @@
       <property name="bottomMargin">
        <number>3</number>
       </property>
-      <item row="0" column="0" colspan="2">
+      <item row="1" column="1">
+       <widget class="QPushButton" name="m_pqpbSaveAsCsv">
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset resource="wmsgui.qrc">
+          <normaloff>:/icons/save24.png</normaloff>:/icons/save24.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>24</width>
+          <height>24</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="3">
+       <spacer name="horizontalSpacer">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item row="1" column="0">
+       <widget class="QPushButton" name="m_pqpbRefresh">
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset resource="wmsgui.qrc">
+          <normaloff>:/icons/refresh32.png</normaloff>:/icons/refresh32.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>24</width>
+          <height>24</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="0" colspan="4">
        <widget class="QTreeView" name="m_pqtwResult">
         <property name="selectionMode">
          <enum>QAbstractItemView::ExtendedSelection</enum>
@@ -60,36 +107,6 @@
         </property>
        </widget>
       </item>
-      <item row="1" column="0">
-       <widget class="QPushButton" name="m_pqpbSaveAsCsv">
-        <property name="text">
-         <string/>
-        </property>
-        <property name="icon">
-         <iconset resource="wmsgui.qrc">
-          <normaloff>:/icons/save24.png</normaloff>:/icons/save24.png</iconset>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>24</width>
-          <height>24</height>
-         </size>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="1">
-       <spacer name="horizontalSpacer">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>40</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
      </layout>
     </widget>
    </item>
@@ -106,8 +123,8 @@
    <slot>SaveAsCsvClickedSlot()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>45</x>
-     <y>414</y>
+     <x>84</x>
+     <y>425</y>
     </hint>
     <hint type="destinationlabel">
      <x>129</x>
@@ -115,8 +132,25 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>m_pqpbRefresh</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsQueryResultViewerClass</receiver>
+   <slot>RefreshClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>26</x>
+     <y>410</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>54</x>
+     <y>522</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>SaveAsCsvClickedSlot()</slot>
+  <slot>RefreshClickedSlot()</slot>
  </slots>
 </ui>

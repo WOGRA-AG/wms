@@ -1,17 +1,4 @@
-﻿/******************************************************************************
- ** WOGRA technologies Gmbh & Co KG Modul Information
- ** Modulename: CwmsQueryResultViewer.h
- ** Started Implementation: 2012/08/24
- ** Description:
- ** 
- ** Implements the viewer for query results
- **
- ** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
- ** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. 
- **(C) copyright by WOGRA technologies GmbH & Co KG All rights reserved
- *****************************************************************************/ 
-
-#ifndef CWMSQUERYRESULTVIEWER_H
+﻿#ifndef CWMSQUERYRESULTVIEWER_H
 #define CWMSQUERYRESULTVIEWER_H
 
 #ifdef WURZELBLA
@@ -22,6 +9,8 @@
 
 //WMS INcludes
 #include "CdmQueryModel.h"
+
+#include "CwmsView.h"
 
 // Own Includes
 #include "ui_CwmsQueryResultViewer.h"
@@ -42,6 +31,7 @@ class WMSGUI_API CwmsQueryResultViewer : public QWidget, public Ui::CwmsQueryRes
 
    private:
       QAbstractItemModel* m_pModel;
+      CwmsView m_View;
 
    public:
     CwmsQueryResultViewer( QWidget* p_pqwParent);
@@ -49,8 +39,10 @@ class WMSGUI_API CwmsQueryResultViewer : public QWidget, public Ui::CwmsQueryRes
     void SetQuery(QString p_qstrQuery);
     void SetQuery(CdmQueryEnhanced* p_pQuery);
     void SetModel(QAbstractItemModel *p_pModel);
+    void SetView(CwmsView p_pView);
 public slots:
     void SaveAsCsvClickedSlot();
+    void RefreshClickedSlot();
 };
 
 #endif // CWMSQUERYRESULTVIEWER_H

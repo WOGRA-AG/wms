@@ -1,22 +1,11 @@
-﻿/******************************************************************************
- ** WOGRA technologies GmbH & Co. KG Modul Information
- ** Modulename: CwmsQueryResultViewer.cpp
- ** Started Implementation: 2012/08/24
- ** Description:
- **
- ** Implements the viewer for query results
- **
- ** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
- ** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
- **(C) copyright by WOGRA technologies GmbH & Co. KG All rights reserved
- *****************************************************************************/
-
-// System and QT Includes
+﻿// System and QT Includes
+#include <QStandardItemModel>
 
 // WMS Includes
 #include "CdmLogging.h"
 #include "CdmQueryEnhanced.h"
 
+#include "CwmsView.h"
 #include "CwmsQueryModelExportCsv.h"
 
 // own Includes
@@ -25,7 +14,8 @@
 
 CwmsQueryResultViewer::CwmsQueryResultViewer(QWidget* p_pqwParent)
     : QWidget(p_pqwParent),
-      m_pModel(nullptr)
+      m_pModel(nullptr),
+      m_View(nullptr)
 {
     setupUi(this);
 
@@ -60,9 +50,50 @@ void CwmsQueryResultViewer::SetModel(QAbstractItemModel* p_pModel)
     m_pModel = p_pModel;
     m_pqtwResult->setModel(m_pModel);
     CwmsTreeWidgetHelper::ResizeColumnsToContent(m_pqtwResult);
+
+    auto pModel = dynamic_cast<CdmQueryModel*>(m_pModel);
+
+    if (!pModel && !m_View.IsValid())
+    {
+        m_pqpbRefresh->hide();
+    }
+}
+
+void CwmsQueryResultViewer::SetView(CwmsView p_pView)
+{
+    m_View = p_pView;
+
+    if (m_View.IsValid())
+    {
+        if (m_View.IsWql())
+        {
+            SetQuery(m_View.GetViewCommand());
+        }
+        else if (m_View.IsModel())
+        {
+            SetModel(m_View.GetModel());
+        }
+    }
 }
 
 void CwmsQueryResultViewer::SaveAsCsvClickedSlot()
 {
     CwmsQueryModelExportCsv::SaveModel(*m_pModel);
+}
+
+void CwmsQueryResultViewer::RefreshClickedSlot()
+{
+     auto pModel = dynamic_cast<CdmQueryModel*>(m_pModel);
+
+     if (pModel)
+     {
+         pModel->Execute();
+     }
+     else if (m_View.IsValid())
+     {
+         if (m_View.IsModel())
+         {
+             SetModel(m_View.GetModel());
+         }
+     }
 }
