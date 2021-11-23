@@ -222,39 +222,6 @@ p, li { white-space: pre-wrap; }
         <property name="spacing">
          <number>0</number>
         </property>
-        <item row="2" column="4">
-         <spacer name="horizontalSpacer_2">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>645</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item row="2" column="0">
-         <widget class="QPushButton" name="m_pqpbClearResult">
-          <property name="toolTip">
-           <string>Ergebnisliste leeren</string>
-          </property>
-          <property name="text">
-           <string/>
-          </property>
-          <property name="icon">
-           <iconset resource="wmsgui.qrc">
-            <normaloff>:/icons/cancel24.png</normaloff>:/icons/cancel24.png</iconset>
-          </property>
-          <property name="iconSize">
-           <size>
-            <width>24</width>
-            <height>24</height>
-           </size>
-          </property>
-         </widget>
-        </item>
         <item row="2" column="3">
          <widget class="QPushButton" name="m_pqpbSaveResult">
           <property name="text">
@@ -263,33 +230,6 @@ p, li { white-space: pre-wrap; }
           <property name="icon">
            <iconset resource="wmsgui.qrc">
             <normaloff>:/icons/save24.png</normaloff>:/icons/save24.png</iconset>
-          </property>
-          <property name="iconSize">
-           <size>
-            <width>24</width>
-            <height>24</height>
-           </size>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="0" colspan="5">
-         <widget class="QTreeView" name="m_pqtvResult">
-          <property name="itemsExpandable">
-           <bool>false</bool>
-          </property>
-          <property name="sortingEnabled">
-           <bool>true</bool>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="1">
-         <widget class="QPushButton" name="m_pqpbEdit">
-          <property name="text">
-           <string/>
-          </property>
-          <property name="icon">
-           <iconset resource="wmsgui.qrc">
-            <normaloff>:/icons/EditDocument.png</normaloff>:/icons/EditDocument.png</iconset>
           </property>
           <property name="iconSize">
            <size>
@@ -316,6 +256,73 @@ p, li { white-space: pre-wrap; }
             <width>24</width>
             <height>24</height>
            </size>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="0">
+         <widget class="QPushButton" name="m_pqpbClearResult">
+          <property name="toolTip">
+           <string>Ergebnisliste leeren</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset resource="wmsgui.qrc">
+            <normaloff>:/icons/cancel24.png</normaloff>:/icons/cancel24.png</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>24</width>
+            <height>24</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="5">
+         <spacer name="horizontalSpacer_2">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>645</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="0" column="0" colspan="6">
+         <widget class="QTreeView" name="m_pqtvResult">
+          <property name="itemsExpandable">
+           <bool>false</bool>
+          </property>
+          <property name="sortingEnabled">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="1">
+         <widget class="QPushButton" name="m_pqpbEdit">
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset resource="wmsgui.qrc">
+            <normaloff>:/icons/EditDocument.png</normaloff>:/icons/EditDocument.png</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>24</width>
+            <height>24</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="4">
+         <widget class="QCheckBox" name="checkBox_2">
+          <property name="text">
+           <string>Sortierung über Ergebnisansicht aktivieren</string>
           </property>
          </widget>
         </item>
@@ -497,7 +504,7 @@ p, li { white-space: pre-wrap; }
    <slot>SaveResultClickedSlot()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>169</x>
+     <x>151</x>
      <y>484</y>
     </hint>
     <hint type="destinationlabel">
@@ -513,8 +520,8 @@ p, li { white-space: pre-wrap; }
    <slot>EditClickedSlot()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>81</x>
-     <y>464</y>
+     <x>79</x>
+     <y>484</y>
     </hint>
     <hint type="destinationlabel">
      <x>159</x>
@@ -577,8 +584,8 @@ p, li { white-space: pre-wrap; }
    <slot>DeleteClickedSlot()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>116</x>
-     <y>467</y>
+     <x>115</x>
+     <y>484</y>
     </hint>
     <hint type="destinationlabel">
      <x>208</x>
@@ -602,6 +609,22 @@ p, li { white-space: pre-wrap; }
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>checkBox_2</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>CwmsQueryEditorWidget</receiver>
+   <slot>EnableSorting(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>241</x>
+     <y>470</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>978</x>
+     <y>470</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>ExecuteClickedSlot()</slot>
@@ -612,5 +635,6 @@ p, li { white-space: pre-wrap; }
   <slot>SystemVariablesChangedSlot(QString)</slot>
   <slot>QueryChangedSlot()</slot>
   <slot>DeleteClickedSlot()</slot>
+  <slot>EnableSorting(bool)</slot>
  </slots>
 </ui>

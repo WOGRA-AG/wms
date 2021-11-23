@@ -357,3 +357,9 @@ void CwmsQueryEditor::QueryChangedSlot()
         }
     }
 }
+
+void CwmsQueryEditor::EnableSorting(bool p_bSorting)
+{
+    m_pqtvResult->setSortingEnabled(p_bSorting);
+    m_pqtvResult->sortByColumn(0, Qt::AscendingOrder);
+}

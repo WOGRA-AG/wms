@@ -109,6 +109,7 @@ public slots:
     void SystemVariablesChangedSlot(QString);
     void QueryChangedSlot();
     void DeleteClickedSlot();
+    void EnableSorting(bool p_bSorting);
 private:
    /** +-=---------------------------------------------------------Fr 24. Aug 13:53:43 2012-------*
     * @method  CwmsQueryEditor::AddQueryElement              // private, static                   *
