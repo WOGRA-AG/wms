@@ -1007,15 +1007,7 @@ void CwmsAdminMainWindowIf::OpenViewViewer(QTreeWidgetItem* p_pItem)
          {
             m_pqtbInfo->setText(cView.GetComment());
             CwmsQueryResultViewer* pEditor = new CwmsQueryResultViewer(m_pqMdiArea);
-
-            if (cView.IsWql())
-            {
-                pEditor->SetQuery(cView.GetViewCommand());
-            }
-            else if (cView.IsModel())
-            {
-                pEditor->SetModel(cView.GetModel());
-            }
+            pEditor->SetView(cView);
 
             QMdiSubWindow* pSubWindow = AddMdiWindow(pEditor);    
 
