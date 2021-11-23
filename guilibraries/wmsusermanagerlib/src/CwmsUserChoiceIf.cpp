@@ -1,12 +1,9 @@
-﻿// Header is missing impl started on 27.1.2005
-
-
-// System and QT includes
+﻿// System and QT includes
 
 
 // WMS Includes
 #include "CdmDataProvider.h"
- #include "CdmSessionManager.h"
+#include "CdmSessionManager.h"
 #include "CdmLogging.h"
 #include "CumUserManager.h"
 #include "CumUser.h"
@@ -17,86 +14,53 @@
 
 
 
-/** +-=---------------------------------------------------------Do 27. Jan 07:17:06 2005----------*
- * @method  CwmsUserChoiceIf::CwmsUserChoiceIf               // public                            *
- * @return                                                   //                                   *
- * @param   QWidget* parent = nullptr                           //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Do 27. Jan 07:17:06 2005----------*/
 CwmsUserChoiceIf::CwmsUserChoiceIf(QWidget* parent)
-: QDialog(parent)
+    : QDialog(parent)
 {
-   setupUi(this);
+    setupUi(this);
 }
 
 
-/** +-=---------------------------------------------------------Do 27. Jan 07:17:12 2005----------*
- * @method  CwmsUserChoiceIf::~CwmsUserChoiceIf              // public, virtual                   *
- * @return  void                                             //                                   *
- * @comment The Destructor of Class CwmsUserChoiceIf                                              *
- *                                                                                                *
- *----------------last changed: --------------------------------Do 27. Jan 07:17:12 2005----------*/
-CwmsUserChoiceIf::~CwmsUserChoiceIf(  )
+CwmsUserChoiceIf::~CwmsUserChoiceIf()
 {
 }
 
-/** +-=---------------------------------------------------------Mo 29. Okt 15:16:59 2012----------*
- * @method  CwmsUserChoiceIf::GetSelectedUserId              // public                            *
- * @return  int                                              //                                   *
- * @comment This method returns the selected User.                                                *
- *----------------last changed: --------------------------------Mo 29. Okt 15:16:59 2012----------*/
 int CwmsUserChoiceIf::GetSelectedUserId()
 {
-   int iUserId = -1;
-   QTreeWidgetItem* pItem = CwmsUserManagerIf::GetSelectedItem(m_pqlvUsers);
-   
-   if(pItem)
-   {
-      iUserId = pItem->data(0, Qt::UserRole).toInt();
-   }
+    int iUserId = -1;
+    QTreeWidgetItem* pItem = CwmsUserManagerIf::GetSelectedItem(m_pqlvUsers);
 
-   return iUserId;
+    if(pItem)
+    {
+        iUserId = pItem->data(0, Qt::UserRole).toInt();
+    }
+
+    return iUserId;
 }
 
-/** +-=---------------------------------------------------------Do 27. Jan 07:17:52 2005----------*
- * @method  CwmsUserChoiceIf::OKClickedSlot                  // private, slots                    *
- * @return  void                                             //                                   *
- * @comment This slot will be called if the OK Button was clicked.                                *
- *----------------last changed: --------------------------------Do 27. Jan 07:17:52 2005----------*/
-void CwmsUserChoiceIf::OKClickedSlot(  )
+void CwmsUserChoiceIf::OKClickedSlot()
 {
-   accept();
+    accept();
 }
 
-/** +-=---------------------------------------------------------Do 27. Jan 07:18:13 2005----------*
- * @method  CwmsUserChoiceIf::CancelClickedSlot              // private, slots                    *
- * @return  void                                             //                                   *
- * @comment This slot will be called if the cancel button was clicked.                            *
- *----------------last changed: --------------------------------Do 27. Jan 07:18:13 2005----------*/
-void CwmsUserChoiceIf::CancelClickedSlot(  )
+void CwmsUserChoiceIf::CancelClickedSlot()
 {
-   reject();
+    reject();
 }
 
 
-/** +-=---------------------------------------------------------Do 27. Jan 07:42:30 2005----------*
- * @method  CwmsUserChoiceIf::GetUserSelection               // public, static                    *
- * @return qint64                                             // UserId                            *
- * @param   QWidget* parent                                  //                                   *
- * @comment This static member function gets a selected user from the complete user list.         *
- *----------------last changed: --------------------------------Do 27. Jan 07:42:30 2005----------*/
-qint64 CwmsUserChoiceIf::GetUserSelection(  QWidget* parent )
+qint64 CwmsUserChoiceIf::GetUserSelection(QWidget* parent)
 {
-  qint64 lUserId = -1;
-   CwmsUserChoiceIf* pCwmsUserChoiceIf = new CwmsUserChoiceIf(parent);
+    qint64 lUserId = -1;
+    CwmsUserChoiceIf* pCwmsUserChoiceIf = new CwmsUserChoiceIf(parent);
 
-   if(pCwmsUserChoiceIf->exec() == QDialog::Accepted)
-   {
-      lUserId = pCwmsUserChoiceIf->GetSelectedUserId();
-   }
+    if(pCwmsUserChoiceIf->exec() == QDialog::Accepted)
+    {
+        lUserId = pCwmsUserChoiceIf->GetSelectedUserId();
+    }
 
-   delete pCwmsUserChoiceIf;
-   return lUserId;
+    delete pCwmsUserChoiceIf;
+    return lUserId;
 }
 
 void CwmsUserChoiceIf::SearchUserClickedSlot()
@@ -113,17 +77,17 @@ void CwmsUserChoiceIf::SearchUserClickedSlot()
 
     for(; qvlIt != qvlItEnd; ++qvlIt)
     {
-       CumUser* pCumUser = (*qvlIt);
+        CumUser* pCumUser = (*qvlIt);
 
-       if(pCumUser)
-       {
-          QTreeWidgetItem* pItem = new QTreeWidgetItem(m_pqlvUsers);
-          pItem->setText(0, QString::number(pCumUser->GetId()));
-          pItem->setData(0, Qt::UserRole, pCumUser->GetId());
-          pItem->setText(1, pCumUser->GetFirstName());
-          pItem->setText(2, pCumUser->GetLastName());
-          pItem->setText(3, pCumUser->GetLogin());
-       }
+        if(pCumUser && (pCumUser->IsActive() == m_pqchbActiveUser->isChecked() || !m_pqchbActiveUser->isChecked()))
+        {
+            QTreeWidgetItem* pItem = new QTreeWidgetItem(m_pqlvUsers);
+            pItem->setText(0, QString::number(pCumUser->GetId()));
+            pItem->setData(0, Qt::UserRole, pCumUser->GetId());
+            pItem->setText(1, pCumUser->GetFirstName());
+            pItem->setText(2, pCumUser->GetLastName());
+            pItem->setText(3, pCumUser->GetLogin());
+        }
     }
 
     qvlIt    = qllUsers.begin();

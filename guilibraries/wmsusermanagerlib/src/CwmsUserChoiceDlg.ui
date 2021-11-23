@@ -131,6 +131,16 @@ p, li { white-space: pre-wrap; }
    <item>
     <layout class="QHBoxLayout">
      <item>
+      <widget class="QCheckBox" name="m_pqchbActiveUser">
+       <property name="text">
+        <string>Nur aktive Benutzer</string>
+       </property>
+       <property name="checked">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
       <spacer name="spacer1">
        <property name="orientation">
         <enum>Qt::Horizontal</enum>
