@@ -105,6 +105,7 @@ public:
     QString GetUriInternal() const;
     void ExtractDataFromUri(QString &p_qstrUri, QString &p_qstrType, QString &p_qstrMajorId, QString &p_qstrMinorId, QString &p_qstrValue);
 
+    static CdmObjectContainer *GetObjectContainerEmpty(qint64 ObjectListId);
 public slots:
     CdmClassManager* GetClassManager(qint64 p_lSchemeId);
     CdmClassManager* GetClassManager(QString& p_qstrSchemeName);
