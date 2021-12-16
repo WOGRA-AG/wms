@@ -98,6 +98,8 @@ void CwmsImportDlg::FillSettingsData()
       m_rpCwmsImportSettings->SetIgnoreFirstLine(m_pqchbIgnoreFirstLine->isChecked());
       m_rpCwmsImportSettings->SetIgnoreLastLine(m_pqchbIgnoreLastLine->isChecked());
       m_rpCwmsImportSettings->SetEncoding(m_pqcbEncoding->currentText());
+      m_rpCwmsImportSettings->SetPreprocessorCall(m_pqlePreProcessorFucntion->text());
+      m_rpCwmsImportSettings->SetPostprocessorCall(m_pqlePostprocessorFunction->text());
    }
 }
 
@@ -156,8 +158,6 @@ void CwmsImportDlg::FilDialogWithSettings()
        m_pqcbEncoding->addItem(qlCodecs[i]);
    }
 
-   //m_pqcbEncoding->setAutoCompletion(true);
-
    if (m_rpCwmsImportSettings->GetEncoding().isEmpty())
    {
      QTextCodec* qtcDefault = QTextCodec::codecForLocale();
@@ -171,7 +171,8 @@ void CwmsImportDlg::FilDialogWithSettings()
        m_pqcbEncoding->setCurrentText(m_rpCwmsImportSettings->GetEncoding());
    }
 
-
+   m_pqlePreProcessorFucntion->setText(m_rpCwmsImportSettings->GetPreprocessorCall());
+   m_pqlePostprocessorFunction->setText(m_rpCwmsImportSettings->GetPostprocessorCall());
 }
 
 /** +-=---------------------------------------------------------So 26. Okt 12:13:28 2008----------*
@@ -267,7 +268,7 @@ void CwmsImportDlg::AddColumnClickedSlot()
    if (m_rpCwmsImport)
    {
       CwmsImportColumnDlg* pCwmsImportColumnDlg = new CwmsImportColumnDlg(this);
-      CdmObjectContainer* pContainer = m_rpCwmsImportSettings->GetObjectList();
+      CdmObjectContainer* pContainer = m_rpCwmsImportSettings->GetContainer();
 
       if (CHKPTR(pContainer))
       {
