@@ -703,6 +703,24 @@ CdmObjectContainer* CdmDataProvider::GetObjectContainer(qint64 ObjectListId)
     return pContainer;
 }
 
+CdmObjectContainer* CdmDataProvider::GetObjectContainerEmpty(qint64 ObjectListId)
+{
+    CdmObjectContainer* pContainer = nullptr;
+    CdmDataProvider* pCdmManager = CdmSessionManager::GetDataProvider();
+
+    if(CHKPTR(pCdmManager))
+    {
+        CdmContainerManager* pContainerManager = pCdmManager->GetContainerManager();
+
+        if(CHKPTR(pContainerManager))
+        {
+            pContainer = pContainerManager->FindEmptyContainerById(ObjectListId);
+        }
+    }
+
+    return pContainer;
+}
+
 CdmObjectContainer* CdmDataProvider::GetObjectContainerEmpty(QString &p_qstrObjectList)
 {
     CdmObjectContainer* pContainer = nullptr;
