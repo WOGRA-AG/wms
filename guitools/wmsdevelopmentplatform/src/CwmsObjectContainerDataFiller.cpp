@@ -16,8 +16,11 @@
 #include "CdmClass.h"
 #include "CdmClassManager.h"
 #include "CdmContainerManager.h"
+#include "CdmScheme.h"
 #include "CdmDataProvider.h"
 #include "CdmSessionManager.h"
+
+#include "CwmsTreeWidgetHelper.h"
 
 // Own Includes
 #include "CwmsAdminMainWindowIf.h"
@@ -69,34 +72,7 @@ void CwmsObjectContainerDataFiller::FillAllObjectContainersToView(QTreeWidget* p
                   if (!pClass->IsSingleton())
                   {
                       pqtwClassItem->setText(0, pClass->GetFullQualifiedName());
-                      QList<QString>  qvlObjectLists = pContainerManager->GetContainerList(pClass->GetId());
-
-                      QList<QString>::iterator qmIt    = qvlObjectLists.begin();
-                      QList<QString>::iterator qmItEnd = qvlObjectLists.end();
-
-                      QSet<QString> qsetAlreadyAddedContainers;
-                      int iCount = 0;
-
-                      for ( ; qmIt != qmItEnd; ++qmIt)
-                      {
-                          ++iCount;
-                          QString qstrKeyname = *qmIt;
-
-                          if (!qsetAlreadyAddedContainers.contains(qstrKeyname))
-                          {
-                              QTreeWidgetItem* pqlviOL = new QTreeWidgetItem(pqtwClassItem);
-                              pqlviOL->setText(0, qstrKeyname);
-                              pqlviOL->setData(1, Qt::UserRole, eWmsTreeItemTypeContainer);
-                              qsetAlreadyAddedContainers.insert(qstrKeyname);
-                          }
-
-                          if (iCount >= MAX_CONTAINERS)
-                          {
-                              QTreeWidgetItem* pqlviOL = new QTreeWidgetItem(pqtwClassItem);
-                              pqlviOL->setText(0, tr("0-Maximale Anzahl an dargestellten Containern (500) erreicht."));
-                              break;
-                          }
-                      }
+                      FillObjectContainersToClass(pClass, pqtwClassItem);
 
                       if (pqtwClassItem->childCount() <= 10)
                       {
@@ -111,6 +87,9 @@ void CwmsObjectContainerDataFiller::FillAllObjectContainersToView(QTreeWidget* p
                   }
               }
           }
+
+          CwmsTreeWidgetHelper::ResizeColumnsToContent(p_pTree);
+
       }
     }
     BODY_CATCH
@@ -129,30 +108,29 @@ void CwmsObjectContainerDataFiller::FillObjectContainersToClass(CdmClass* p_pCla
     BODY_TRY
     CdmDataProvider* pCdmManager = CdmSessionManager::GetDataProvider();
 
-    if (CHKPTR(pCdmManager))
+    if (CHKPTR(pCdmManager) && CHKPTR(p_pClass) && CHKPTR(p_pItem))
     {
-        CdmContainerManager* pContainerManager = pCdmManager->GetContainerManager(pCdmManager->GetCurrentScheme());
+        IdmDataAccess* pIdmDataAccess = pCdmManager->GetDataAccess();
 
-        if (CHKPTR(p_pItem)  &&
-            CHKPTR(p_pClass) &&
-            CHKPTR(pContainerManager))
+        if (CHKPTR(pIdmDataAccess))
         {
-            QTreeWidgetItem* pqlviOLItem = new QTreeWidgetItem(p_pItem);
-            QList<QString>  qvlObjectLists = pContainerManager->GetContainerList(p_pClass->GetId());
+            QMap<qint64, QString> qmObjectLists;
 
-            QList<QString>::iterator qmIt    = qvlObjectLists.begin();
-            QList<QString>::iterator qmItEnd = qvlObjectLists.end();
+            pIdmDataAccess->GetContainerList(pCdmManager->GetCurrentScheme()->GetId(),
+                                             p_pClass->GetId(),
+                                             qmObjectLists);
+
+            QMap<qint64, QString>::iterator qmIt    = qmObjectLists.begin();
+            QMap<qint64, QString>::iterator qmItEnd = qmObjectLists.end();
 
             for ( ; qmIt != qmItEnd; ++qmIt)
             {
                 QString qstrKeyname = *qmIt;
-                //CdmObjectContainer* pContainer = pContainerManager->FindEmptyContainerByKeyname(qstrKeyname);
-                QTreeWidgetItem* pqlviObjectContainer = new QTreeWidgetItem(pqlviOLItem);
-                pqlviObjectContainer->setText(0, qstrKeyname);
-                pqlviObjectContainer->setData(1, Qt::UserRole, eWmsTreeItemTypeContainer);
+                QTreeWidgetItem* pqlviOL = new QTreeWidgetItem(p_pItem);
+                pqlviOL->setText(0, qmIt.value());
+                pqlviOL->setData(0, Qt::UserRole, qmIt.key());
+                pqlviOL->setData(1, Qt::UserRole, eWmsTreeItemTypeContainer);
             }
-
-            pqlviOLItem->setText(0, QObject::tr("Objektcontainer") + " (" + QString::number(qvlObjectLists.count()) + ")");
         }
 
         p_pItem->setExpanded(true);
@@ -173,25 +151,28 @@ void CwmsObjectContainerDataFiller::FillObjectContainersToClass(CdmClass* p_pCla
     BODY_TRY
     CdmDataProvider* pCdmManager = CdmSessionManager::GetDataProvider();
 
-    if (CHKPTR(pCdmManager))
+    if (CHKPTR(pCdmManager) && CHKPTR(p_pClass) && CHKPTR(p_pTreeWidget))
     {
-        CdmContainerManager* pContainerManager = pCdmManager->GetContainerManager(pCdmManager->GetCurrentScheme());
+        IdmDataAccess* pIdmDataAccess = pCdmManager->GetDataAccess();
 
-        if (CHKPTR(p_pTreeWidget) &&
-            CHKPTR(p_pClass)      &&
-            CHKPTR(pContainerManager))
+        if (CHKPTR(pIdmDataAccess))
         {
-            p_pTreeWidget->clear();
-            QList<QString> qvlObjectLists = pContainerManager->GetContainerList(p_pClass->GetId());
+            QMap<qint64, QString> qmObjectLists;
 
-            QList<QString>::iterator qmIt    = qvlObjectLists.begin();
-            QList<QString>::iterator qmItEnd = qvlObjectLists.end();
+            pIdmDataAccess->GetContainerList(pCdmManager->GetCurrentScheme()->GetId(),
+                                             p_pClass->GetId(),
+                                             qmObjectLists);
+            p_pTreeWidget->clear();
+
+            QMap<qint64, QString>::iterator qmIt    = qmObjectLists.begin();
+            QMap<qint64, QString>::iterator qmItEnd = qmObjectLists.end();
 
             for ( ; qmIt != qmItEnd; ++qmIt)
             {
                 QString qstrKeyname = *qmIt;
                 QTreeWidgetItem* pqlviOL = new QTreeWidgetItem(p_pTreeWidget);
-                pqlviOL->setText(0, qstrKeyname);
+                pqlviOL->setText(0, qmIt.value());
+                pqlviOL->setData(0, Qt::UserRole, qmIt.key());
                 pqlviOL->setData(1, Qt::UserRole, eWmsTreeItemTypeContainer);
             }
         }

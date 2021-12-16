@@ -1025,8 +1025,8 @@ void CwmsAdminMainWindowIf::OpenContainerEditor(QTreeWidgetItem* p_pItem)
 {
    if (CHKPTR(p_pItem))
    {
-      QString qstrKeyname = p_pItem->text(0);
-      CdmObjectContainer* pContainer = CdmDataProvider::GetObjectContainerEmpty(qstrKeyname);
+      qint64 iContainerId = p_pItem->data(0, Qt::UserRole).toLongLong();
+      CdmObjectContainer* pContainer = CdmDataProvider::GetObjectContainerEmpty(iContainerId);
 
       if (CHKPTR(pContainer))
       {
