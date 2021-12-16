@@ -508,7 +508,7 @@ void CwmsSearchWindow::OpenImportConfigurator()
 {
 
    CwmsImportSettings cCwmsImportSettings;
-   cCwmsImportSettings.SetObjectList(m_CdmModel.GetContainer());
+   cCwmsImportSettings.SetContainer(m_CdmModel.GetContainer());
    CwmsImport cImport;
    CwmsImportDlg cImportDlg(&cCwmsImportSettings, &cImport, this);
 
