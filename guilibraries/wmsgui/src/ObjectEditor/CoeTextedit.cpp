@@ -197,7 +197,7 @@ void CoeTextEdit::SetupTextActions(  )
     comboStyle->addItem(tr("geordnete Liste (numerisch)"));
     comboStyle->addItem(tr("geordnete Liste (Alphanumerisch Kleinbuchstaben)"));
     comboStyle->addItem(tr("geordnete Liste (Alphanumerisch Großbuchstaben)"));
-    connect(comboStyle, SIGNAL(activated), this, SLOT(TextStyle));
+    connect(comboStyle, SIGNAL(activated(int)), this, SLOT(TextStyle(int)));
 
     comboFont = new QComboBox(tb);
     comboFont->setEditable(true);

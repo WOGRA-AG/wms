@@ -123,6 +123,7 @@ QWidget* CoedtwContainerRef::GetEditWidget(QWidget* p_pqwParent)
    m_pqpbView->setText(tr("Details"));
    connect( m_pqpbView, SIGNAL(clicked()), this, SLOT(EditClickedSlot()));
    pqLayout->addWidget(m_pqpbView);
+   pqLayout->setMargin(0);
 
    return pqwParent;
 }

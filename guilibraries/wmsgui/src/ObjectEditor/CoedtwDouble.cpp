@@ -83,14 +83,24 @@ QWidget* CoedtwDouble::GetEditWidget(QWidget* p_pqwParent)
     QWidget* pqwWidget = new QWidget(p_pqwParent);
     QHBoxLayout* pqLayout = new QHBoxLayout(pqwWidget);
 
-    m_pqlPrefix = new QLabel(pqwWidget);
-    pqLayout->addWidget(m_pqlPrefix);
+
+    if (!m_rpCdmMember->GetPrefix().isEmpty())
+    {
+        m_pqlPrefix = new QLabel(pqwWidget);
+        pqLayout->addWidget(m_pqlPrefix);
+    }
 
    m_pqleEdit = new QLineEdit(pqwWidget); // must be a special lineedit for double values.
+   m_pqleEdit->setAlignment(Qt::AlignmentFlag::AlignRight);
    pqLayout->addWidget(m_pqleEdit);
 
-   m_pqlSuffix = new QLabel(pqwWidget);
-   pqLayout->addWidget(m_pqlSuffix);
+   if (!m_rpCdmMember->GetSuffix().isEmpty())
+   {
+       m_pqlSuffix = new QLabel(pqwWidget);
+       pqLayout->addWidget(m_pqlSuffix);
+   }
+
+   pqLayout->setMargin(0);
 
    QDoubleValidator* pqdvValidator = new QDoubleValidator(m_pqleEdit);
    m_pqleEdit->setValidator(pqdvValidator);

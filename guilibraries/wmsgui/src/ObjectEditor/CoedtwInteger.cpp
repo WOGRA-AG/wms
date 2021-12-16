@@ -61,6 +61,7 @@ CoedtwInteger::~CoedtwInteger(  )
 QWidget* CoedtwInteger::GetEditWidget(QWidget* p_pqwParent)
 {
    m_pleEdit = new QLineEdit(p_pqwParent);
+   m_pleEdit->setAlignment(Qt::AlignmentFlag::AlignRight);
    QIntValidator* pqdvValidator = new QIntValidator(m_pleEdit);
    m_pleEdit->setValidator(pqdvValidator);
    

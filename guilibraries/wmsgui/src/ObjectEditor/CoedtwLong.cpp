@@ -59,6 +59,7 @@ CoedtwLong::~CoedtwLong(  )
 QWidget* CoedtwLong::GetEditWidget(QWidget* p_pqwParent)
 {
    m_pleEdit = new QLineEdit(p_pqwParent);
+   m_pleEdit->setAlignment(Qt::AlignmentFlag::AlignRight);
    QIntValidator* pqdvValidator = new QIntValidator(m_pleEdit); // rethink this, this is wrong
    m_pleEdit->setValidator(pqdvValidator);
    

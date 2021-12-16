@@ -1,15 +1,3 @@
-/******************************************************************************
- ** WOGRA Middleware Server Data Manager Module
- **
- ** @Author Wolfgang Graßhof 
- **
- ** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
- ** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. 
- **(C) copyright by WOGRA technologies All rights reserved
- ******************************************************************************/
-
-
-
 // System and QT Includes
 #include <qlineedit.h>
 #include <qlayout.h>
@@ -134,7 +122,7 @@ void CoedtwObjectRef::GetComboBoxEdit(QWidget* pqWidget, QHBoxLayout* pqLayout)
     pqLayout->addWidget(m_pqcbObjectChoice);
 
     connect(m_pqcbObjectChoice,
-            SIGNAL(activated),
+            SIGNAL(activated(int)),
             this,
             SLOT(ValueChangedSlotByUser()));
 }
@@ -169,16 +157,41 @@ void CoedtwObjectRef::GetComboBoxEdit(CdmObjectContainer* pContainer, QWidget* p
     pqLayout->addWidget(m_pqcbObjectChoice);
 
     connect(m_pqcbObjectChoice,
-            SIGNAL(activated),
+            SIGNAL(activated(int)),
             this,
             SLOT(ValueChangedSlotByUser()));
 }
 
 void CoedtwObjectRef::GetSelectionEdit(QHBoxLayout* pqLayout, QWidget* pqWidget)
 {
+    if (!m_bShowEditButton)
+    {
+        pqLayout->addItem(new QSpacerItem(1,1,QSizePolicy::Expanding));
+    }
+
     m_pqleObject = new QLineEdit(pqWidget);
     m_pqleObject->setReadOnly(true);
     pqLayout->addWidget(m_pqleObject);
+
+    if (m_bShowEditButton)
+    {
+       m_pqpbEdit = new QPushButton(pqWidget);
+       m_pqpbEdit->setToolTip(tr("Details"));
+       QIcon icon9;
+       icon9.addFile(QString::fromUtf8(":/icons/edit24.png"), QSize(), QIcon::Normal, QIcon::Off);
+       m_pqpbEdit->setIcon(icon9);
+
+       connect(m_pqpbEdit, SIGNAL(clicked()), this, SLOT(EditClickedSlot()));
+       pqLayout->addWidget(m_pqpbEdit);
+    }
+
+    m_pqpbClear = new QPushButton(pqWidget);
+    m_pqpbClear->setToolTip(tr("Auswahl entfernen"));
+    QIcon icon9;
+    icon9.addFile(QString::fromUtf8(":/icons/cancel24.png"), QSize(), QIcon::Normal, QIcon::Off);
+    m_pqpbClear->setIcon(icon9);
+    connect(m_pqpbClear, SIGNAL(clicked()), this, SLOT(ClearClickedSlot()));
+    pqLayout->addWidget(m_pqpbClear);
 
     m_pqpbSelect = new QPushButton(pqWidget);
     m_pqpbSelect->setToolTip(tr("Auswählen"));
@@ -188,14 +201,6 @@ void CoedtwObjectRef::GetSelectionEdit(QHBoxLayout* pqLayout, QWidget* pqWidget)
     connect(m_pqpbSelect, SIGNAL(clicked()),
             this, SLOT(ChooseClickedSlot()));
     pqLayout->addWidget(m_pqpbSelect);
-
-    m_pqpbClear = new QPushButton(pqWidget);
-    m_pqpbClear->setToolTip(tr("Entfernen"));
-    QIcon icon9;
-    icon9.addFile(QString::fromUtf8(":/icons/cancel24.png"), QSize(), QIcon::Normal, QIcon::Off);
-    m_pqpbClear->setIcon(icon9);
-    connect(m_pqpbClear, SIGNAL(clicked()), this, SLOT(ClearClickedSlot()));
-    pqLayout->addWidget(m_pqpbClear);
 }
 
 QWidget* CoedtwObjectRef::GetEditWidget(QWidget* p_pqwParent)
@@ -211,7 +216,7 @@ QWidget* CoedtwObjectRef::GetEditWidget(QWidget* p_pqwParent)
       {
          CdmObjectContainer* pContainer = pCdmOLManager->FindEmptyContainerByKeyname(m_qstrObjectList);
 
-         if(pContainer && pContainer->CountObjectsOnDb() < 30)
+         if(pContainer && pContainer->CountObjectsOnDb() < 50)
          {
              GetComboBoxEdit(pContainer, pqWidget, pqLayout);
          }
@@ -223,7 +228,7 @@ QWidget* CoedtwObjectRef::GetEditWidget(QWidget* p_pqwParent)
          {
             pContainer = GetSingleObjectList();
 
-            if(pContainer && pContainer->CountObjectsOnDb() < 30)
+            if(pContainer && pContainer->CountObjectsOnDb() < 50)
             {
                 GetComboBoxEdit(pContainer, pqWidget, pqLayout);
             }
@@ -235,17 +240,9 @@ QWidget* CoedtwObjectRef::GetEditWidget(QWidget* p_pqwParent)
       }
    }
    
-   if (m_bShowEditButton)
-   {
-      m_pqpbEdit = new QPushButton(pqWidget);
-      m_pqpbEdit->setToolTip(tr("Details"));
-      QIcon icon9;
-      icon9.addFile(QString::fromUtf8(":/icons/edit24.png"), QSize(), QIcon::Normal, QIcon::Off);
-      m_pqpbEdit->setIcon(icon9);
 
-      connect(m_pqpbEdit, SIGNAL(clicked()), this, SLOT(EditClickedSlot()));
-      pqLayout->addWidget(m_pqpbEdit);
-   }
+
+   pqLayout->setMargin(0);
 
    return pqWidget;
 }

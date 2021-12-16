@@ -52,13 +52,7 @@ QWidget* CoedtwUser::GetEditWidget(QWidget* p_pqwParent)
     m_pqleUser = new QLineEdit(pqWidget);
     m_pqleUser->setReadOnly(true);
     pqLayout->addWidget(m_pqleUser);
-    m_pqbButton = new QPushButton(pqWidget);
-    m_pqbButton->setToolTip(tr("Auswählen"));
-    QIcon icon8;
-    icon8.addFile(QString::fromUtf8(":/icons/search24.png"), QSize(), QIcon::Normal, QIcon::Off);
-    m_pqbButton->setIcon(icon8);
-    pqLayout->addWidget(m_pqbButton);
-    connect(m_pqbButton, SIGNAL(clicked(bool)), this, SLOT(openNewWindow()));
+
     m_pqpbClear = new QPushButton(pqWidget);
     m_pqpbClear->setToolTip(tr("Entfernen"));
     QIcon icon9;
@@ -66,6 +60,16 @@ QWidget* CoedtwUser::GetEditWidget(QWidget* p_pqwParent)
     m_pqpbClear->setIcon(icon9);
     connect(m_pqpbClear, SIGNAL(clicked()), this, SLOT(ClearClickedSlot()));
     pqLayout->addWidget(m_pqpbClear);
+
+    m_pqbButton = new QPushButton(pqWidget);
+    m_pqbButton->setToolTip(tr("Auswählen"));
+    QIcon icon8;
+    icon8.addFile(QString::fromUtf8(":/icons/search24.png"), QSize(), QIcon::Normal, QIcon::Off);
+    m_pqbButton->setIcon(icon8);
+    pqLayout->addWidget(m_pqbButton);
+    connect(m_pqbButton, SIGNAL(clicked(bool)), this, SLOT(openNewWindow()));
+
+    pqLayout->setMargin(0);
     return pqWidget;
 }
 
