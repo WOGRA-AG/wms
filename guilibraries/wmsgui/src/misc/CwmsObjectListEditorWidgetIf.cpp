@@ -253,9 +253,9 @@ void CwmsObjectListEditorWidgetIf::FillDialog()
                 m_pCwmsObjectListListView->expandAll();
             }
 
-            CwmsTreeWidgetHelper::ResizeColumnsToContent(m_pCwmsObjectListListView);
             AddFunctions();
             pModel->Execute();
+            CwmsTreeWidgetHelper::ResizeColumnsToContent(m_pCwmsObjectListListView);
         }
         else
         {
@@ -764,7 +764,7 @@ void CwmsObjectListEditorWidgetIf::OpenImportConfigurator()
     if (pModel != nullptr)
     {
         CwmsImportSettings cCwmsImportSettings;
-        cCwmsImportSettings.SetObjectList(pModel->GetContainer());
+        cCwmsImportSettings.SetContainer(pModel->GetContainer());
         CwmsImport cImport;
         CwmsImportDlg cImportDlg(&cCwmsImportSettings, &cImport, this);
 
