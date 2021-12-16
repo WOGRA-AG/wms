@@ -1,16 +1,3 @@
-/******************************************************************************
- ** WOGRA technologies GmbH & Co. KG Modul Information
- ** Modulename: CwmsTreeWidgetHelper.cpp
- ** Started Implementation: 2012/09/13
- ** Description:
- **
- ** implements helper functions for treewidget
- **
- ** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
- ** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
- **(C) copyright by WOGRA technologies GmbH & Co. KG All rights reserved
- *****************************************************************************/
-
 // System and QT Includes
 #include <CwmsQueryModelExportCsv.h>
 #include <QHeaderView>
@@ -27,12 +14,6 @@
 #include "CwmsTreeWidgetHelper.h"
 
 
-/** +-=---------------------------------------------------------Do 13. Sep 11:15:33 2012----------*
- * @method  CwmsTreeWidgetHelper::GetSelectedItem            // public, static                    *
- * @return  QTreeWidgetItem*                                 //                                   *
- * @param   QTreeWidget* p_pWidget                           //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Do 13. Sep 11:15:33 2012----------*/
 QTreeWidgetItem* CwmsTreeWidgetHelper::GetSelectedItem(QTreeWidget* p_pWidget)
 {
     QTreeWidgetItem* pItem = nullptr;
@@ -96,12 +77,6 @@ QList<QTreeWidgetItem*> CwmsTreeWidgetHelper::GetUncheckedItems(QTreeWidget* p_p
     return qlItems;
 }
 
-/** +-=---------------------------------------------------------Do 14. Mrz 12:33:05 2013----------*
- * @method  CwmsTreeWidgetHelper::GetSelectedObject          // public, static                    *
- * @return  CdmObject*                                       //                                   *
- * @param   QTreeWidget* p_pWidget                           //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Do 14. Mrz 12:33:05 2013----------*/
 CdmObject* CwmsTreeWidgetHelper::GetSelectedObject(QTreeWidget* p_pWidget)
 {
     CdmObject* pObject = nullptr;
@@ -137,128 +112,93 @@ QList<CdmObject*> CwmsTreeWidgetHelper::GetSelectedObjects(QTreeWidget* p_pWidge
     return qlObjects;
 }
 
-/** +-=---------------------------------------------------------Fr 15. Mrz 09:45:49 2013----------*
- * @method  CwmsTreeWidgetHelper::GetItemObject              // public, static                    *
- * @return  CdmObject*                                       //                                   *
- * @param   QTreeWidgetItem* p_pItem                         //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Fr 15. Mrz 09:45:49 2013----------*/
 CdmObject* CwmsTreeWidgetHelper::GetItemObject(QTreeWidgetItem* p_pItem)
 {
-   CdmObject* pObject = nullptr;
+    CdmObject* pObject = nullptr;
 
-   if (p_pItem)
-   {
-      QString qstrUri = p_pItem->data(0, Qt::UserRole).toString();
-      CdmDataProvider* pManager = CdmSessionManager::GetDataProvider();
+    if (p_pItem)
+    {
+        QString qstrUri = p_pItem->data(0, Qt::UserRole).toString();
+        CdmDataProvider* pManager = CdmSessionManager::GetDataProvider();
 
-      if (CHKPTR(pManager))
-      {
-         pObject = static_cast<CdmObject*>(pManager->GetUriObject(qstrUri));
-      }
-   }
+        if (CHKPTR(pManager))
+        {
+            pObject = static_cast<CdmObject*>(pManager->GetUriObject(qstrUri));
+        }
+    }
 
-   return pObject;
+    return pObject;
 }
 
-/** +-=---------------------------------------------------------Do 14. Mrz 12:41:01 2013----------*
- * @method  CwmsTreeWidgetHelper::SetObjectToItem            // public, static                    *
- * @return  void                                             //                                   *
- * @param   CdmObject* p_pObject                             //                                   *
- * @param   QTreeWidgetItem* p_pItem                         //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Do 14. Mrz 12:41:01 2013----------*/
 void CwmsTreeWidgetHelper::SetObjectToItem(CdmObject* p_pObject, QTreeWidgetItem* p_pItem)
 {
-   if (CHKPTR(p_pObject) && CHKPTR(p_pItem))
-   {
-      p_pItem->setData(0, Qt::UserRole, p_pObject->GetUriInternal());
-   }
+    if (CHKPTR(p_pObject) && CHKPTR(p_pItem))
+    {
+        p_pItem->setData(0, Qt::UserRole, p_pObject->GetUriInternal());
+    }
 }
 
-/** +-=---------------------------------------------------------So 28. Okt 11:28:05 2012----------*
- * @method  CwmsTreeWidgetHelper::CreateItemAtEnd            // public, static                    *
- * @return  QTreeWidgetItem*                                 //                                   *
- * @param   QTreeWidget* p_pqtwWidget                        //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------So 28. Okt 11:28:05 2012----------*/
 QTreeWidgetItem* CwmsTreeWidgetHelper::CreateItemAtEnd(QTreeWidget* p_pqtwWidget)
 {
-   QTreeWidgetItem* pqtwItem = nullptr;
+    QTreeWidgetItem* pqtwItem = nullptr;
 
-   if (CHKPTR(p_pqtwWidget))
-   {
-      if (p_pqtwWidget->topLevelItemCount() > 0)
-      {
-         pqtwItem = new QTreeWidgetItem(p_pqtwWidget, p_pqtwWidget->topLevelItem(p_pqtwWidget->topLevelItemCount() - 1));
-      }
-      else
-      {
-         pqtwItem = new QTreeWidgetItem(p_pqtwWidget);
-      }   
-   }
+    if (CHKPTR(p_pqtwWidget))
+    {
+        if (p_pqtwWidget->topLevelItemCount() > 0)
+        {
+            pqtwItem = new QTreeWidgetItem(p_pqtwWidget, p_pqtwWidget->topLevelItem(p_pqtwWidget->topLevelItemCount() - 1));
+        }
+        else
+        {
+            pqtwItem = new QTreeWidgetItem(p_pqtwWidget);
+        }
+    }
 
-   return pqtwItem;
+    return pqtwItem;
 }
 
-/** +-=---------------------------------------------------------So 28. Okt 12:06:44 2012----------*
- * @method  CwmsTreeWidgetHelper::GetItemAbove               // public, static                    *
- * @return  QTreeWidgetItem*                                 //                                   *
- * @param   QTreeWidgetItem* p_pqItem                        //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------So 28. Okt 12:06:44 2012----------*/
 QTreeWidgetItem* CwmsTreeWidgetHelper::GetItemAbove(QTreeWidgetItem* p_pqItem)
 {
-   QTreeWidgetItem* pqRet = nullptr;
+    QTreeWidgetItem* pqRet = nullptr;
 
-   if (CHKPTR(p_pqItem))
-   {
-      QTreeWidgetItemIterator it(p_pqItem);
-      pqRet = (*(--it));
-   }
+    if (CHKPTR(p_pqItem))
+    {
+        QTreeWidgetItemIterator it(p_pqItem);
+        pqRet = (*(--it));
+    }
 
-   return pqRet;
+    return pqRet;
 }
 
-/** +-=---------------------------------------------------------So 28. Okt 12:07:53 2012----------*
- * @method  CwmsTreeWidgetHelper::GetItemBelow               // public, static                    *
- * @return  QTreeWidgetItem*                                 //                                   *
- * @param   QTreeWidgetItem* p_pqItem                        //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------So 28. Okt 12:07:53 2012----------*/
 QTreeWidgetItem* CwmsTreeWidgetHelper::GetItemBelow(QTreeWidgetItem* p_pqItem)
 {
-   QTreeWidgetItem* pqRet = nullptr;
+    QTreeWidgetItem* pqRet = nullptr;
 
-   if (CHKPTR(p_pqItem))
-   {
-      QTreeWidgetItemIterator it(p_pqItem);
-      pqRet = (*(++it));
-   }
+    if (CHKPTR(p_pqItem))
+    {
+        QTreeWidgetItemIterator it(p_pqItem);
+        pqRet = (*(++it));
+    }
 
-   return pqRet;
+    return pqRet;
 }
 
-/** +-=---------------------------------------------------------Do 13. Jun 10:32:24 2013----------*
- * @method  CwmsTreeWidgetHelper::ResizeColumnsToContent     // public, static                    *
- * @return  void                                             //                                   *
- * @param   QTreeView* p_pView                               //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Do 13. Jun 10:32:24 2013----------*/
 void CwmsTreeWidgetHelper::ResizeColumnsToContent(QTreeView* p_pView)
 {
-   if (CHKPTR(p_pView) && p_pView->model())
-   {
-      int iColumns = p_pView->model()->columnCount();
+    if (CHKPTR(p_pView) && p_pView->model())
+    {
+        int iColumns = p_pView->model()->columnCount();
 
-      if (iColumns > 0)
-      {
-         for (int iCounter = 0; iCounter < iColumns; ++iCounter)
-         {
-            p_pView->resizeColumnToContents(iCounter);
-         }
-      }
-   }
+        if (iColumns > 0)
+        {
+            for (int iCounter = 0; iCounter < iColumns; ++iCounter)
+            {
+                p_pView->resizeColumnToContents(iCounter);
+            }
+        }
+
+        p_pView->sortByColumn(0, Qt::SortOrder::AscendingOrder);
+    }
 }
 
 void CwmsTreeWidgetHelper::SelectObject(QTreeWidget* p_pWidget, CdmObject* p_pObject)
