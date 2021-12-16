@@ -44,6 +44,8 @@ int main(int argc, char ** argv)
    qApplication.connect(&qApplication, SIGNAL(lastWindowClosed()),
                         &qApplication, SLOT(quit()));
 
+
+
    iRet = qApplication.exec();
    return iRet;
 }
