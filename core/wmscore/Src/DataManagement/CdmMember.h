@@ -264,5 +264,6 @@ public:
     void SetDisplayConfig(QString p_qstrPrefix);
     QString GetDisplayConfig() const;
     CdmClass *GetClassReferencePtr() const;
+    QMap<QString, int> GetSelectionMap() const;
 };
 #endif
