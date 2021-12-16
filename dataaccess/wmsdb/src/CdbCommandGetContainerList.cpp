@@ -7,9 +7,9 @@
 #include "CdbCommandGetContainerList.h"
 
 CdbCommandGetContainerList::CdbCommandGetContainerList(qint64 p_lSchemeId,qint64 p_lClassId, CdbDataAccess* p_pDataAccess)
-: CdbAbstractCommand(p_pDataAccess),
-  m_lSchemeId(p_lSchemeId),
-  m_lClassId(p_lClassId)
+    : CdbAbstractCommand(p_pDataAccess),
+      m_lSchemeId(p_lSchemeId),
+      m_lClassId(p_lClassId)
 {
 }
 
@@ -31,54 +31,61 @@ bool CdbCommandGetContainerList::CheckValid()
 
 int CdbCommandGetContainerList::Execute()
 {
-  qint64 lRet = CdmLogging::eDmObjectAccessError;
-   QSqlQuery cQSqlQuery;
-   QString qstrQuery;
+    qint64 lRet = CdmLogging::eDmObjectAccessError;
+    QSqlQuery cQSqlQuery;
+    QString qstrQuery;
 
-   if(m_lClassId == 0)
-   {
-      qstrQuery = QString("Select ol.ObjectListId, ol.Keyname from WMS_DM_OBJECTLIST ol, WMS_CLASS cl where "
+    if(m_lClassId == 0)
+    {
+        qstrQuery = QString("Select ol.ObjectListId, ol.Keyname, ol.Caption from WMS_DM_OBJECTLIST ol, WMS_CLASS cl where "
                           "cl.DatabaseId =  %1")
-                          .arg(m_lSchemeId);
-   }
-   else
-   {
-      qstrQuery = QString("Select ol.ObjectListId, ol.Keyname from WMS_DM_OBJECTLIST ol, WMS_CLASS cl where "
+                .arg(m_lSchemeId);
+    }
+    else
+    {
+        qstrQuery = QString("Select ol.ObjectListId, ol.Keyname, ol.Caption from WMS_DM_OBJECTLIST ol, WMS_CLASS cl where "
                           "cl.ClassId = ol.ClassId and cl.DatabaseId =  %1 and ol.ClassId in %2")
-                          .arg(m_lSchemeId)
-                          .arg(GetClassListString());
-   }
+                .arg(m_lSchemeId)
+                .arg(GetClassListString());
+    }
 
-   m_qmContainer.clear();
+    m_qmContainer.clear();
 
-   if(GetDataAccess()->ExecuteQuery(qstrQuery, cQSqlQuery) > 0)
-   {
-      cQSqlQuery.first();
+    if(GetDataAccess()->ExecuteQuery(qstrQuery, cQSqlQuery) > 0)
+    {
+        cQSqlQuery.first();
 
-      if(cQSqlQuery.isValid())
-      {
-         do
-         {
-           qint64 lId = cQSqlQuery.value(0).toInt();
-            QString qstrKeyname = cQSqlQuery.value(1).toString();
-            m_qmContainer.insert(lId, qstrKeyname);
-         }
-         while(cQSqlQuery.next());
+        if(cQSqlQuery.isValid())
+        {
+            do
+            {
+                qint64 lId = cQSqlQuery.value(0).toInt();
+                QString qstrKeyname = cQSqlQuery.value(1).toString();
+                QString qstrCaption = cQSqlQuery.value(2).toString();
 
-         lRet = EC(eDmTrue);
-      }
-      else
-      {
-         lRet = EC(eDmObjectListNotFound);
-         INFO("No ObjectLists found in Database!!");
-      }
-   }
-   else
-   {
-      lRet = EC(eDmInvalidSelectStatement);
-   }
+                if (qstrCaption != qstrKeyname)
+                {
+                    qstrKeyname = QString("%1 (%2)").arg(qstrCaption, qstrKeyname);
+                }
 
-   return lRet;
+                m_qmContainer.insert(lId, qstrKeyname);
+            }
+            while(cQSqlQuery.next());
+
+            lRet = EC(eDmTrue);
+        }
+        else
+        {
+            lRet = EC(eDmObjectListNotFound);
+            INFO("No ObjectLists found in Database!!");
+        }
+    }
+    else
+    {
+        lRet = EC(eDmInvalidSelectStatement);
+    }
+
+    return lRet;
 }
 
 QString CdbCommandGetContainerList::GetClassListString()

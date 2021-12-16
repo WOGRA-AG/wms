@@ -31,13 +31,13 @@ int CftlCommandGetContainerList::Execute()
 
    if(m_lClassId == 0)
    {
-       cQSqlQuery.prepare("Select ol.ContainerId, ol.Keyname from WMS_DM_CONTAINER ol, WMS_CLASS cl where "
+       cQSqlQuery.prepare("Select ol.ContainerId, ol.Keyname, ol.caption from WMS_DM_CONTAINER ol, WMS_CLASS cl where "
                           "cl.ClassId = ol.ClassId and cl.SchemeId =  ?");
        cQSqlQuery.addBindValue(m_lSchemeId);
    }
    else
    {
-      cQSqlQuery.prepare("Select ol.ContainerId, ol.Keyname from WMS_DM_CONTAINER ol, WMS_CLASS cl where "
+      cQSqlQuery.prepare("Select ol.ContainerId, ol.Keyname, ol.caption from WMS_DM_CONTAINER ol, WMS_CLASS cl where "
                           "cl.ClassId = ol.ClassId and cl.SchemeId =  ? and ol.ClassId = ?");
       cQSqlQuery.addBindValue(m_lSchemeId);
       cQSqlQuery.addBindValue(m_lClassId);
@@ -55,6 +55,13 @@ int CftlCommandGetContainerList::Execute()
          {
            qint64 lId = cQSqlQuery.value(0).toInt();
             QString qstrKeyname = cQSqlQuery.value(1).toString();
+            QString qstrCaption = cQSqlQuery.value(2).toString();
+
+            if (qstrCaption != qstrKeyname)
+            {
+                qstrKeyname = QString("%1 (%2)").arg(qstrCaption, qstrKeyname);
+            }
+
             m_qmContainer.insert(lId, qstrKeyname);
          }
          while(cQSqlQuery.next());
