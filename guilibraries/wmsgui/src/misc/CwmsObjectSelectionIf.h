@@ -31,7 +31,7 @@ private:
 public:
     virtual ~CwmsObjectSelectionIf(  );
     CdmObject* GetSelectedObject(  );
-    void SetObjectList(  CdmObjectContainer* p_pContainer );
+    void SetContainer(  CdmObjectContainer* p_pContainer );
     static CdmObject* GetObject(CdmObjectContainer* p_pContainer,
                                 CdmEnhancedQueryProxy* p_pCwmsProxy,
                                 QWidget* p_pqwParent,
