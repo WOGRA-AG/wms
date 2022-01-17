@@ -1,0 +1,17 @@
+    QVariant getValue(int p_iRow, int p_iColumn, int p_iDisplayType);
+    void addValue(int p_iRow, int p_iColumn, int p_iDisplayType, QVariant p_rValue);
+    void insertColumnHeader(int iPos, QString p_qstrHeader);
+    void insertRowHeader(int iPos, QString p_qstrHeader);
+    QString rowHeader(int p_iPos);
+    QString columnHeader(int p_iPos);
+    int rowCount();
+    int columnCount();
+    QStandardItemModel* generateItemModel();
+    int findRow(int p_iSearchColumn, QVariant qvValue);
+
+    bool existRowHeader(int p_iPos);
+    bool existColumnHeader(int p_iPos);
+    void setRowCount(int p_iCount);
+    void setColumnCount(int p_iCount);
+    void copyFromQuery(QObject *p_pQuery);
+    void appendFromQuery(QObject *p_pQuery);
