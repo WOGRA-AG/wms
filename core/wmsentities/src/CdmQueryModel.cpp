@@ -592,11 +592,10 @@ CdmQuery* CdmQueryModel::GetQuery()
     return m_pCdmQuery;
 }
 
-void CdmQueryModel::SetProxy(CdmEnhancedQueryProxy* p_pProxy)
+void CdmQueryModel::SetProxy(CdmQueryModel* p_pProxy)
 {
     if (p_pProxy && m_pCdmQuery)
     {
-        p_pProxy->CreateQuery(m_pCdmQuery->GetContainer());
         Execute(p_pProxy->GetQuery());
     }
 }
@@ -614,25 +613,8 @@ void CdmQueryModel::SetContainer(CdmObjectContainer* p_pList)
     }
 }
 
-void CdmQueryModel::SetContainer(QString p_qstrObjectListKeyname)
-{
-    CdmDataProvider* pCdmManager = CdmSessionManager::GetDataProvider();
 
-    if(CHKPTR(pCdmManager))
-    {
-        CdmContainerManager* pContainerManager =
-                pCdmManager->GetContainerManager(pCdmManager->GetCurrentScheme());
-
-        if(CHKPTR(pContainerManager))
-        {
-            CdmObjectContainer* pContainer = nullptr;
-            pContainer = pContainerManager->FindEmptyContainerByKeyname(p_qstrObjectListKeyname);
-            SetContainer(pContainer);
-        }
-    }
-}
-
-CdmObjectContainer* CdmQueryModel::GetContainer()
+CdmObjectContainer* CdmQueryModel::GetContainer() const
 {
     CdmObjectContainer* pList = nullptr;
 
@@ -801,3 +783,8 @@ const CdmMember* CdmQueryModel::FindMemberByKeyname(QString p_qstrKeyname) const
     return pCdmMember;
 }
 
+void CdmQueryModel::CreateQuery(CdmObjectContainer *p_pContainer)
+{
+    Q_UNUSED(p_pContainer)
+    // must be implemented in derived classes
+}

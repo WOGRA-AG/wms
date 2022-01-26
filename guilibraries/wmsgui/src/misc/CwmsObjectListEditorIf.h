@@ -28,7 +28,6 @@
 
 
 // forwards
-class CdmEnhancedQueryProxy;
 class CwmsguiValidator;
 class CdmObjectContainer;
 

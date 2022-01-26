@@ -1,13 +1,3 @@
-/******************************************************************************
- ** WOGRA Middleware Server Data Manager Module
- **
- ** @Author Wolfgang Graßhof
- **
- ** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
- ** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
- **(C) copyright by WOGRA technologies All rights reserved
- ******************************************************************************/
-
 // System and Qt Includes
 
 // WMS Commons Includes
@@ -15,10 +5,13 @@
 
 // own Includes
 #include "CdmQueryEnhanced.h"
+#include "CdmClass.h"
+#include "CdmMember.h"
 #include "CdmObject.h"
 #include "CdmObjectContainer.h"
 #include "CsaObject.h"
 #include "CsaModelElement.h"
+#include "CsaClass.h"
 #include "CsaObjectContainer.h"
 #include "CsaFactory.h"
 #include "CsaQuery.h"
@@ -161,6 +154,22 @@ QObject *CsaQuery::getContainer()
    return pContainer;
 }
 
+QObject *CsaQuery::getClass()
+{
+    CsaClass* pClass = nullptr;
+
+    CdmClass* pClassInternal = const_cast<CdmClass*>(m_pQuery->GetClass());
+    CsaFactory* pFactory = getFactory();
+
+    if (pClassInternal)
+    {
+        pClass = static_cast<CsaClass*>(pFactory->createScriptObject(pClassInternal));
+    }
+
+
+    return pClass;
+}
+
 void CsaQuery::setContainerId(qint64 p_lId)
 {
    m_pQuery->SetContainerId(p_lId);
@@ -208,8 +217,26 @@ int CsaQuery::getColumnCount()
 }
 
 QString CsaQuery::getKeynameAt(int p_iSection)
-{
+{    
    return m_pQuery->GetKeynameAt(p_iSection);
+}
+
+QString CsaQuery::getCaptionAt(int p_iSection)
+{
+   QString qstrKeyname = m_pQuery->GetKeynameAt(p_iSection);
+   CdmClass* pClass = const_cast<CdmClass*>(m_pQuery->GetClass());
+
+   if (CHKPTR(pClass) && !qstrKeyname.isEmpty())
+   {
+       const CdmMember *pMember = pClass->FindMember(qstrKeyname);
+
+       if (CHKPTR(pMember))
+       {
+           return pMember->GetCaption();
+       }
+   }
+
+   return "";
 }
 
 QVector<QString> CsaQuery::getResultElements()

@@ -16,8 +16,6 @@
 
 
 // forwards
-class CdmEnhancedQueryProxy;
-
 
 
 class WMSGUI_API CwmsObjectSelectionIf : public QDialog, public Ui::CwmsObjectSelection
@@ -33,19 +31,19 @@ public:
     CdmObject* GetSelectedObject(  );
     void SetContainer(  CdmObjectContainer* p_pContainer );
     static CdmObject* GetObject(CdmObjectContainer* p_pContainer,
-                                CdmEnhancedQueryProxy* p_pCwmsProxy,
+                                CdmQueryModel *p_pCwmsProxy,
                                 QWidget* p_pqwParent,
                                 QString p_qstrDisplayMember = "");
-    void SetProxy(CdmEnhancedQueryProxy* p_pCwmsProxy);
+    void SetProxy(CdmQueryModel *p_pCwmsProxy);
    qint64 GetSelectedObjectId();
     static qint64 GetObjectId(CdmObjectContainer* p_pContainer,
-                            CdmEnhancedQueryProxy* p_pCwmsProxy,
+                            CdmQueryModel *p_pCwmsProxy,
                             QWidget* p_pqwParent);
     void SetDisplayMember(QString p_qstrMember);
     bool SetWql(QString p_qstrWql);
     static CdmObject* GetObject(QString p_qstrWql, QWidget* p_pqwParent);
 
-    static QList<CdmObject *> GetListofObjects(CdmObjectContainer *p_pContainer, CdmEnhancedQueryProxy *p_pCwmsProxy, QWidget *p_pqwParent, QString p_qstrDisplayMember);
+    static QList<CdmObject *> GetListofObjects(CdmObjectContainer *p_pContainer, CdmQueryModel *p_pCwmsProxy, QWidget *p_pqwParent, QString p_qstrDisplayMember);
     QList<CdmObject *> GetSelectedListOfObject();
 private:
     CwmsObjectSelectionIf(QWidget* parent = NULL);

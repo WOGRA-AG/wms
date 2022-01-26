@@ -24,13 +24,6 @@
 #include "cwmsobjectchoicecombobox.h"
 
 
-/** +-=---------------------------------------------------------Mi 22. Aug 10:59:51 2012----------*
- * @method  CoedtwObjectRef::CoedtwObjectRef                 // public                            *
- * @return                                                   //                                   *
- * @param   CdmValue* p_pCdmValue                            //                                   *
- * @param   QWidget* p_pqwParent = nullptr                      //                                   *
- * @comment The Destructor of Class CoedtwObjectRef                                               *
- *----------------last changed: --------------------------------Mi 22. Aug 10:59:51 2012----------*/
 CoedtwObjectRef::CoedtwObjectRef(CdmValue* p_pCdmValue, QWidget* p_pqwParent)
    : CoeValueWidget(p_pCdmValue, p_pqwParent),
   m_pqcbObjectChoice(nullptr),
@@ -61,12 +54,6 @@ CoedtwObjectRef::CoedtwObjectRef(const CdmObject *pEventObject, CdmValue* p_pCdm
 
 }
 
-
-/** +-=---------------------------------------------------------Mon Dec 8 16:48:21 2003-----------*
- * @method  CoedtwObjectRef::~CoedtwObjectRef                // public, virtual                   *
- * @return  void                                             //                                   *
- * @comment The Destructor of Class CoedtwBinaryDocument                                          *
- *---------------------------------------------------------------Mon Dec 8 16:48:21 2003----------*/
 CoedtwObjectRef::~CoedtwObjectRef(  )
 {
    if (m_bProxyCreatedByThis)
@@ -75,30 +62,18 @@ CoedtwObjectRef::~CoedtwObjectRef(  )
    }
 }
 
-/** +-=---------------------------------------------------------Mi 3. Okt 11:58:15 2012-----------*
- * @method  CoedtwObjectRef::SetProxy                        // public                            *
- * @return  void                                             //                                   *
- * @param   CdmEnhancedQueryProxy* p_pCwmsProxy              //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mi 3. Okt 11:58:15 2012-----------*/
-void CoedtwObjectRef::SetProxy(CdmEnhancedQueryProxy* p_pCwmsProxy)
+void CoedtwObjectRef::SetProxy(CdmQueryModel* p_pCwmsProxy)
 {
    m_pCwmsProxy = p_pCwmsProxy;
 }
 
 void CoedtwObjectRef::SetProxy(QString p_qstrWql)
 {
-   m_pCwmsProxy = new CdmEnhancedQueryProxy();
-   m_pCwmsProxy->CdmQueryModel::Execute(p_qstrWql);
+   m_pCwmsProxy = new CdmQueryModel();
+   m_pCwmsProxy->Execute(p_qstrWql);
    m_bProxyCreatedByThis = true;
 }
 
-/** +-=---------------------------------------------------------Mo 5. Nov 11:46:54 2012-----------*
- * @method  CoedtwObjectRef::GetTabEditWidget                // public, virtual                   *
- * @return  QWidget*                                         //                                   *
- * @param   QWidget* p_pqwParent                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mo 5. Nov 11:46:54 2012-----------*/
 QWidget* CoedtwObjectRef::GetTabEditWidget(QWidget* p_pqwParent)
 {
    if (!m_pObjectEditor)
@@ -247,12 +222,6 @@ QWidget* CoedtwObjectRef::GetEditWidget(QWidget* p_pqwParent)
    return pqWidget;
 }
 
-/** +-=---------------------------------------------------------Wed Dec 10 16:50:38 2003----------*
- * @method  CoedtwObjectRef::SetValue                        // protected, virtual                *
- * @return  void                                             //                                   *
- * @param   CdmValue* p_pCdmValue                      //                                   *
- * @comment This method sets the value in the widget.                                             *
- *---------------------------------------------------------------Wed Dec 10 16:50:38 2003---------*/
 void CoedtwObjectRef::SetValue(CdmValue* p_pCdmValue)
 {
    if(p_pCdmValue)
@@ -310,11 +279,6 @@ void CoedtwObjectRef::setEventClassValue()
     //not needed here
 }
 
-/** +-=---------------------------------------------------------Wed Dec 10 16:52:40 2003----------*
- * @method  CoedtwObjectRef::ValueChangedSlot                // private, slots                    *
- * @return  void                                             //                                   *
- * @comment This slot will be called if the value has changed.                                    *
- *---------------------------------------------------------------Wed Dec 10 16:52:40 2003---------*/
 void CoedtwObjectRef::ValueChangedSlotByUser()
 {
    if(CHKPTR(m_rpCdmValue))
@@ -325,11 +289,6 @@ void CoedtwObjectRef::ValueChangedSlotByUser()
    setEventClassValue();
 }
 
-/** +-=---------------------------------------------------------Do 19. Jan 20:19:21 2006----------*
- * @method  CoedtwObjectRef::EditClickedSlot                 // private, slots                    *
- * @return  void                                             //                                   *
- * @comment This slot will be called if the user wants to view the obejctlist.                    *
- *----------------last changed: Wolfgang Graßhof----------------Do 19. Jan 20:19:21 2006----------*/
 void CoedtwObjectRef::EditClickedSlot()
 {
    if(CHKPTR(m_rpCdmValue))
@@ -352,11 +311,6 @@ void CoedtwObjectRef::EditClickedSlot()
    }
 }
 
-/** +-=---------------------------------------------------------Mo 23. Jan 22:10:22 2006----------*
- * @method  CoedtwObjectRef::ChooseClickedSlot               // private, slots                    *
- * @return  void                                             //                                   *
- * @comment This slot will be called if the choose button was clicked.                            *
- *----------------last changed: Wolfgang Graßhof----------------Mo 23. Jan 22:10:22 2006----------*/
 void CoedtwObjectRef::ChooseClickedSlot()
 {
    const CdmMember* pCdmMember = m_rpCdmValue->GetMember();
@@ -398,12 +352,7 @@ void CoedtwObjectRef::ClearClickedSlot()
    }
 }
 
-/** +-=---------------------------------------------------------Di 24. Jan 21:18:25 2006----------*
- * @method  CoedtwObjectRef::GetSingleObjectList             // public                            *
- * @return  CdmObjectContainer*                                   //                                   *
- * @comment                                                                                       *
- *----------------last changed: Wolfgang Graßhof----------------Di 24. Jan 21:18:25 2006----------*/
-CdmObjectContainer* CoedtwObjectRef::GetSingleObjectList(  )
+CdmObjectContainer* CoedtwObjectRef::GetSingleObjectList()
 {
    CdmObjectContainer* pContainer = nullptr;
 
@@ -448,12 +397,7 @@ CdmObjectContainer* CoedtwObjectRef::GetSingleObjectList(  )
    return pContainer;
 }
 
-/** +-=---------------------------------------------------------Fri Dec 12 10:36:10 2003----------*
- * @method  CoedtwObjectRef::SetReadOnly                     // public, virtual                   *
- * @return  void                                             //                                   *
- * @comment This method sets the current Value widget in ReadOnlymode.                         *
- *---------------------------------------------------------------Fri Dec 12 10:36:10 2003---------*/
-void CoedtwObjectRef::SetReadOnly(  )
+void CoedtwObjectRef::SetReadOnly()
 {
    if (m_pqleObject)
    {
@@ -519,24 +463,12 @@ void CoedtwObjectRef::SetEditable()
    }
 }
 
-/** +-=---------------------------------------------------------Di 10. Jun 12:40:30 2008----------*
- * @method  CoedtwObjectRef::HideEditButton                  // public                            *
- * @return  void                                             //                                   *
- * @comment This method hides the edit button of the objectref.                                   *
- *----------------last changed: --------------------------------Di 10. Jun 12:40:30 2008----------*/
 void CoedtwObjectRef::HideEditButton()
 {
    m_bShowEditButton = false;
 }
 
-/** +-=---------------------------------------------------------Do 19. Jan 20:43:13 2006----------*
- * @method  CoedtwObjectRef::SetObjectList                   // public                            *
- * @return  void                                             //                                   *
- * @param   QString p_qstrObjectList                         //                                   *
- * @param   QString p_qstrVisibleKeyname                     //                                   *
- * @comment This method sets the objectlist source, in which the user can choose the object for the objectreferenece.*
- *----------------last changed: Wolfgang Graßhof----------------Do 19. Jan 20:43:13 2006----------*/
-void CoedtwObjectRef::SetObjectList(  QString p_qstrObjectList, QString p_qstrVisibleKeyname )
+void CoedtwObjectRef::SetContainer(QString p_qstrObjectList, QString p_qstrVisibleKeyname)
 {
    m_qstrObjectList = p_qstrObjectList;
    m_qstrVisibleKeyname = p_qstrVisibleKeyname;

@@ -16,23 +16,23 @@
 
 
 // own Includes
-#include "CdmEnhancedQueryProxy.h"
+#include "CdmQueryModel.h"
 #include "cwmsobjectchoicecombobox.h"
 
 
-CwmsObjectChoiceComboBox::CwmsObjectChoiceComboBox(  QWidget* parent)
+CwmsObjectChoiceComboBox::CwmsObjectChoiceComboBox(QWidget* parent)
 : QComboBox(parent),
   m_rpCdmProxy(nullptr)
 {
    connect(this, SIGNAL(activated(int)), this, SLOT(ComboBoxActivatedSlot()));
 }
 
-CwmsObjectChoiceComboBox::~CwmsObjectChoiceComboBox(  )
+CwmsObjectChoiceComboBox::~CwmsObjectChoiceComboBox()
 {
    // nothing to do because the map contains only references
 }
 
-void CwmsObjectChoiceComboBox::SetProxy(CdmEnhancedQueryProxy* p_pCdmProxy)
+void CwmsObjectChoiceComboBox::SetProxy(CdmQueryModel* p_pCdmProxy)
 {
    m_rpCdmProxy = p_pCdmProxy;
    
@@ -68,14 +68,14 @@ void CwmsObjectChoiceComboBox::FillProxyData()
 {
     if (CHKPTR(m_rpCdmProxy))
     {
-       m_rpCdmProxy->CreateQuery(GetContainer());
+        m_rpCdmProxy->Execute();
         CdmQuery* pCdmQuery = m_rpCdmProxy->GetQuery();
         FillWidget(*pCdmQuery);
     }
 }
 
 void CwmsObjectChoiceComboBox::SetContainerAndDisplayValue(CdmObjectContainer* p_pContainer,
-                                                           QString p_qstrValueKeyname )
+                                                           QString p_qstrValueKeyname)
 {
    if(p_pContainer)
    {
@@ -88,9 +88,10 @@ void CwmsObjectChoiceComboBox::SetContainerAndDisplayValue(CdmObjectContainer* p
       
       if(m_rpCdmProxy)
       {
+         disconnect(m_rpCdmProxy, SIGNAL(UpdateSignal()), this, SLOT(Refresh()));
          QList<qint64> qvlResults;
-
          m_rpCdmProxy->CreateQuery(p_pContainer);
+         m_rpCdmProxy->Execute();
          CdmQuery* pCdmQuery = m_rpCdmProxy->GetQuery();
 
          if (CHKPTR(pCdmQuery))
@@ -103,6 +104,8 @@ void CwmsObjectChoiceComboBox::SetContainerAndDisplayValue(CdmObjectContainer* p
                FillWidget(*pCdmQuery);
             }
          }
+
+         connect(m_rpCdmProxy, SIGNAL(UpdateSignal()), this, SLOT(Refresh()));
       }
       else
       {
@@ -149,10 +152,9 @@ void CwmsObjectChoiceComboBox::SetContainerAndDisplayFilteredValue(CdmObjectCont
          CdmContainerAdaptor::SetContainer(p_pContainer);
       }
 
-      QString qstrWql = QString("select from %1").arg(p_pContainer->GetKeyname());
-      qstrWql += QString("where Name = \"%2\"").arg(qstrFilter);
-      CdmQueryEnhanced *pQuery = nullptr;
-      pQuery = dynamic_cast<CdmQueryEnhanced*> (CdmQueryBuilder::ExecuteQuery(qstrWql));
+      QString qstrWql = QString("select from %1 where Name = \"%2\"").arg(p_pContainer->GetKeyname(),qstrFilter);
+      CdmQuery *pQuery = nullptr;
+      pQuery = CdmQueryBuilder::ExecuteQuery(qstrWql);
 
       if (CHKPTR(pQuery))
       {
@@ -190,9 +192,8 @@ void CwmsObjectChoiceComboBox::SetContainerAndDisplayValueByWql(CdmObjectContain
           CdmContainerAdaptor::SetContainer(p_pContainer);
        }
 
-       QScopedPointer<CdmQueryEnhanced> pQuery(dynamic_cast<CdmQueryEnhanced*> (CdmQueryBuilder::ExecuteQuery(qstrWql)));
+       QScopedPointer<CdmQuery> pQuery(CdmQueryBuilder::ExecuteQuery(qstrWql));
 
-       //@Wolfi: hier hab ich die Query und er hat alles drin. Lediglich beim FillWidget befüllt er es noch nicht, obwohl der Ansprechpartner da ist.
        if (CHKPTR(pQuery))
        {
            FillWidget(*pQuery);
@@ -467,7 +468,6 @@ int CwmsObjectChoiceComboBox::FindIndexById(qint64 p_lObjectId)
 
          if(lObjectTemp == p_lObjectId)
          {
-            QString qstr = qmIt.key();
             iRet = findText(qmIt.key());
             break;
          }

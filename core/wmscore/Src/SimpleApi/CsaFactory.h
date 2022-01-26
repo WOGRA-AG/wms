@@ -53,7 +53,7 @@ private:
     CsaManager* m_pManager;
 
 private:
-    CsaLocatedElement* createScriptObjectInternal(CdmLocatedElement* p_pElement, bool p_bThis);
+    CsaLocatedElement* createScriptObjectInternal(CdmLocatedElement *p_pElement, bool p_bThis);
     void addFormulaMembersToEngine(CdmObject* p_pCdmObject);
 
 public:

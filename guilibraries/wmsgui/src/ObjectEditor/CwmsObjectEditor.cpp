@@ -1,13 +1,3 @@
-/******************************************************************************
- ** WOGRA Middleware Server Data Manager Module
- **
- ** @Author Wolfgang GraÃŸhof
- **
- ** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
- ** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
- **(C) copyright by WOGRA technologies All rights reserved
- ******************************************************************************/
-
 // System and QT Includes
 #include <qlabel.h>
 #include <qlineedit.h>
@@ -52,13 +42,6 @@
 #include "CoedtwObjectRef.h"
 #include "CwmsObjectEditor.h"
 
-/** +-=---------------------------------------------------------Mi 22. Aug 10:05:51 2012----------*
- * @method  CwmsObjectEditor::CwmsObjectEditor                 // public                            *
- * @return                                                   //                                   *
- * @param   CdmObject* p_pCdmObject                          //                                   *
- * @param   QWidget* p_pqwParent = nullptr                      //                                   *
- * @comment The Object Editor constructor.                                                        *
- *----------------last changed: --------------------------------Mi 22. Aug 10:05:51 2012----------*/
 CwmsObjectEditor::CwmsObjectEditor(CdmObject* p_pCdmObject, QWidget* p_pqwParent)
     : QWidget(p_pqwParent),
       m_pqwContainter(nullptr),
@@ -84,12 +67,6 @@ CwmsObjectEditor::CwmsObjectEditor(CdmObject* p_pCdmObject, QWidget* p_pqwParent
 
 }
 
-/** +-=---------------------------------------------------------Mi 22. Aug 10:06:04 2012----------*
- * @method  CwmsObjectEditor::CwmsObjectEditor                 // public                            *
- * @return                                                   //                                   *
- * @param   QWidget* p_pqwParent = nullptr                      //                                   *
- * @comment The Object Editor constructor.                                                        *
- *----------------last changed: --------------------------------Mi 22. Aug 10:06:04 2012----------*/
 CwmsObjectEditor::CwmsObjectEditor(QWidget* p_pqwParent)
     : QWidget(p_pqwParent),
       m_pqwContainter(nullptr),
@@ -111,21 +88,10 @@ CwmsObjectEditor::CwmsObjectEditor(QWidget* p_pqwParent)
     }
 }
 
-/** +-=---------------------------------------------------------Fri Dec 5 14:36:55 2003-----------*
-* @method  CwmsObjectEditor::~CwmsObjectEditor                // public, virtual                   *
-* @return  void                                             //                                   *
-* @comment The Destructor of Class CwmsObjectEditor                                               *
-*---------------------------------------------------------------Fri Dec 5 14:36:55 2003----------*/
 CwmsObjectEditor::~CwmsObjectEditor(  )
 {
 }
 
-/** +-=---------------------------------------------------------Di 12. Aug 20:11:42 2008----------*
- * @method  CwmsObjectEditor::SetObject                       // public                            *
- * @return  void                                             //                                   *
- * @param   CdmObject* p_pCdmObject                          //                                   *
- * @comment This method sets the object for this editor                                           *
- *----------------last changed: --------------------------------Di 12. Aug 20:11:42 2008----------*/
 void CwmsObjectEditor::SetObject(CdmObject* p_pCdmObject)
 {
     m_cCdmObjectAdaptor.SetObject(p_pCdmObject);
@@ -142,122 +108,56 @@ void CwmsObjectEditor::SetObject(CdmObject* p_pCdmObject)
     }
 }
 
-/** +-=---------------------------------------------------------Di 12. Aug 20:12:29 2008----------*
- * @method  CwmsObjectEditor::GetObject                       // public                            *
- * @return  CdmObject*                                       //                                   *
- * @comment returns the object.                                                                   *
- *----------------last changed: --------------------------------Di 12. Aug 20:12:29 2008----------*/
 CdmObject* CwmsObjectEditor::GetObject()
 {
     return m_cCdmObjectAdaptor.GetObject();
 }
 
-/** +-=---------------------------------------------------------Fr 6. Jan 14:07:53 2006-----------*
- * @method  CwmsObjectEditor::SetReadOnly                     // public                            *
- * @return  void                                             //                                   *
- * @param   bool p_bReadOnly                                 //                                   *
- * @comment This emthod sets the objecteditor in readonly mode or in edit mode.                   *
- *----------------last changed: Wolfgang GraÃŸhof----------------Fr 6. Jan 14:07:53 2006-----------*/
 void CwmsObjectEditor::SetReadOnly(bool p_bReadOnly)
 {
     m_bReadOnly = p_bReadOnly;
 }
 
-/** +-=---------------------------------------------------------So 10. Aug 21:44:51 2008----------*
- * @method  CwmsObjectEditor::SetSystemMembersHidden          // public                            *
- * @return  void                                             //                                   *
- * @param   bool p_bHidden                                   //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------So 10. Aug 21:44:51 2008----------*/
 void CwmsObjectEditor::SetSystemMembersHidden(bool p_bHidden)
 {
     m_bHideSystemMembers = p_bHidden;
 }
 
-/** +-=---------------------------------------------------------So 10. Aug 21:45:20 2008----------*
- * @method  CwmsObjectEditor::IsSystemMembersHidden           // private                           *
- * @return  bool                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------So 10. Aug 21:45:20 2008----------*/
 bool CwmsObjectEditor::IsSystemMembersHidden()
 {
     return m_bHideSystemMembers;
 }
 
-/** +-=---------------------------------------------------------Fr 6. Jan 14:08:20 2006-----------*
- * @method  CwmsObjectEditor::IsReadOnly                      // private                           *
- * @return  bool                                             //                                   *
- * @comment returns if the object editor is readonly or not.                                      *
- *----------------last changed: Wolfgang GraÃŸhof----------------Fr 6. Jan 14:08:20 2006-----------*/
 bool CwmsObjectEditor::IsReadOnly(  )
 {
     return m_bReadOnly;
 }
 
-/** +-=---------------------------------------------------------Di 10. Jun 12:31:10 2008----------*
- * @method  CwmsObjectEditor::SetShowEditButton               // public                            *
- * @return  void                                             //                                   *
- * @param   bool p_bShow                                     //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Di 10. Jun 12:31:10 2008----------*/
 void CwmsObjectEditor::SetShowEditButton(bool p_bShow)
 {
     m_bShowEditButton = p_bShow;
 }
 
-/** +-=---------------------------------------------------------Di 10. Jun 16:46:58 2008----------*
- * @method  CwmsObjectEditor::ShowEditButton                  // public                            *
- * @return  bool                                             //                                   *
- * @comment returns if the editbutton should be shown on objectreference.                         *
- *----------------last changed: --------------------------------Di 10. Jun 16:46:58 2008----------*/
 bool CwmsObjectEditor::ShowEditButton()
 {
     return m_bShowEditButton;
 }
 
-/** +-=---------------------------------------------------------Fri Dec 5 14:40:42 2003-----------*
- * @method  CwmsObjectEditor::AddHiddenValue               // public                            *
- * @return  void                                             //                                   *
- * @param   QString p_qstrKeyname                            //                                   *
- * @comment This method adds an Value which should be hidden in this editor.                   *
- *---------------------------------------------------------------Fri Dec 5 14:40:42 2003----------*/
 void CwmsObjectEditor::AddHiddenValue(  QString p_qstrKeyname )
 {
     m_qstrlHiddenValues.append(p_qstrKeyname);
 }
 
-/** +-=---------------------------------------------------------Fri Dec 5 14:41:38 2003-----------*
- * @method  CwmsObjectEditor::AddReadOnlyValue             // public                            *
- * @return  void                                             //                                   *
- * @param   QString p_qstrKeyname                            //                                   *
- * @comment This method adds an read only Value to the editor. Which means the dataype will    *
- *          be shown, but it will not be editable.                                                *
- *---------------------------------------------------------------Fri Dec 5 14:41:38 2003----------*/
 void CwmsObjectEditor::AddReadOnlyValue(  QString p_qstrKeyname )
 {
     m_qstrlReadOnlyValues.append(p_qstrKeyname);
 }
 
-/** +-=---------------------------------------------------------Mo 5. Nov 15:07:10 2012-----------*
- * @method  CwmsObjectEditor::DeactivateOwnerMode            // public                            *
- * @return  void                                             //                                   *
- * @comment The owner mode is used to display in an objecteditor an objecteditor of an owned      *
- *          object. if you deactivate this mode, objectreferences which are owned will only       *
- *          be displayed as an edit button and not as a child tab.                                *
- *----------------last changed: --------------------------------Mo 5. Nov 15:07:10 2012-----------*/
 void CwmsObjectEditor::DeactivateOwnerMode()
 {
     m_bOwnerMode = false;
 }
 
-/** +-=---------------------------------------------------------Fr 20. Jan 23:32:41 2006----------*
- * @method  CwmsObjectEditor::AddObjectRefData                // public                            *
- * @return  void                                             //                                   *
- * @param   QString p_qstrValue                              //                                   *
- * @param   QString p_qstrObjectListKeyname                  //                                   *
- * @param   QString p_qstrObjectValue                        //                                   *
- * @comment                                                                                       *
- *----------------last changed: Wolfgang GraÃŸhof----------------Fr 20. Jan 23:32:41 2006----------*/
 void CwmsObjectEditor::AddObjectRefData(QString p_qstrValue,
                                         QString p_qstrObjectListKeyname,
                                         QString p_qstrObjectValue )
@@ -266,26 +166,20 @@ void CwmsObjectEditor::AddObjectRefData(QString p_qstrValue,
     m_qmObjectRefs.insert(p_qstrValue, tStringPair);
 }
 
-/** +-=---------------------------------------------------------Mo 3. Sep 15:43:51 2012-----------*
- * @method  CwmsObjectEditor::SetDisplayType                  // public                            *
- * @return  void                                             //                                   *
- * @param   QString p_qstrValue                              //                                   *
- * @param   EdmStringDisplayType p_EoeDisplayType            //                                   *
- * @comment This method sets the displaytype for a value.                                         *
- *----------------last changed: --------------------------------Mo 3. Sep 15:43:51 2012-----------*/
+void CwmsObjectEditor::AddObjectRefData(QString p_qstrValue,
+                                        QString p_qstrWql)
+{
+    TStringPair tStringPair(p_qstrWql, "");
+    m_qmObjectRefs.insert(p_qstrValue, tStringPair);
+}
+
+
 void CwmsObjectEditor::SetDisplayType(QString p_qstrValue, EdmStringDisplayType p_EoeDisplayType)
 {
     m_qmDisplayType.insert(p_qstrValue, p_EoeDisplayType);
 }
 
-/** +-=---------------------------------------------------------Do 4. Okt 08:37:20 2012-----------*
- * @method  CwmsObjectEditor::AddProxy                        // public                            *
- * @return  void                                             //                                   *
- * @param   QString p_qstrKeyname                            //                                   *
- * @param   CdmEnhancedQueryProxy* p_pCwmsProxy              //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Do 4. Okt 08:37:20 2012-----------*/
-void CwmsObjectEditor::AddProxy(QString p_qstrKeyname, CdmEnhancedQueryProxy* p_pCwmsProxy)
+void CwmsObjectEditor::AddProxy(QString p_qstrKeyname, CdmQueryModel* p_pCwmsProxy)
 {
     if (CHKPTR(p_pCwmsProxy))
     {
@@ -293,11 +187,6 @@ void CwmsObjectEditor::AddProxy(QString p_qstrKeyname, CdmEnhancedQueryProxy* p_
     }
 }
 
-/** +-=---------------------------------------------------------Fr 6. Jan 14:08:54 2006-----------*
- * @method  CwmsObjectEditor::FillObjectEditor                // public                            *
- * @return  void                                             //                                   *
- * @comment Overwritten virtual method which shows the dialog.                                    *
- *----------------last changed: Wolfgang GraÃŸhof----------------Fr 6. Jan 14:08:54 2006-----------*/
 void CwmsObjectEditor::FillObjectEditor(  )
 {
     if (GetObject())
@@ -342,11 +231,6 @@ void CwmsObjectEditor::FillObjectEventEditor(CdmClass *pEventClass, QString even
     }
 }
 
-/** +-=---------------------------------------------------------Fri Dec 5 15:19:55 2003-----------*
- * @method  CwmsObjectEditor::BuildWidget                     // private                           *
- * @return  void                                             //                                   *
- * @comment This method builds the widget for all Values.                                      *
- *---------------------------------------------------------------Fri Dec 5 15:19:55 2003----------*/
 void CwmsObjectEditor::BuildWidget(CdmClass *pClass)
 {
     m_qlAddedMembers.clear();
@@ -375,11 +259,6 @@ void CwmsObjectEditor::BuildWidget()
     }
 }
 
-/** +-=---------------------------------------------------------So 4. Nov 11:20:29 2012-----------*
- * @method  CwmsObjectEditor::FillGroups                     // private                           *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------So 4. Nov 11:20:29 2012-----------*/
 void CwmsObjectEditor::FillGroups(CdmClass *pClass)
 {
     CdmObject* pCdmObject = GetObject();
@@ -442,11 +321,6 @@ void CwmsObjectEditor::FillGroups()
     GroupChangedSlot();
 }
 
-/** +-=---------------------------------------------------------So 4. Nov 11:44:23 2012-----------*
- * @method  CwmsObjectEditor::AddGroupsToListWidget          // private                           *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------So 4. Nov 11:44:23 2012-----------*/
 void CwmsObjectEditor::AddGroupsToListWidget()
 {
     CdmObject* pCdmObject = GetObject();
@@ -512,11 +386,6 @@ void CwmsObjectEditor::AddGroupsToListWidget()
     }
 }
 
-/** +-=---------------------------------------------------------So 4. Nov 11:58:51 2012-----------*
- * @method  CwmsObjectEditor::BuildContainerWidget           // private                           *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------So 4. Nov 11:58:51 2012-----------*/
 void CwmsObjectEditor::BuildContainerWidget()
 {
     DELPTR(m_pqwContainter)
@@ -524,12 +393,6 @@ void CwmsObjectEditor::BuildContainerWidget()
     m_pqfData->setWidget(m_pqwContainter);
 }
 
-/** +-=---------------------------------------------------------Mo 5. Nov 09:19:48 2012-----------*
- * @method  CwmsObjectEditor::GetClassMembers                // private                           *
- * @return  void                                             //                                   *
- * @param   QMap<qint64, CdmMember*>& p_rqmMembers             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mo 5. Nov 09:19:48 2012-----------*/
 void CwmsObjectEditor::GetClassMembers(QMap<qint64, CdmMember*>& p_rqmMembers)
 {
     CdmObject* pCdmObject = GetObject();
@@ -549,12 +412,6 @@ void CwmsObjectEditor::GetClassMembers(QMap<qint64, CdmMember *> &p_rqmMembers, 
     }
 }
 
-/** +-=---------------------------------------------------------Mo 5. Nov 09:19:39 2012-----------*
- * @method  CwmsObjectEditor::GetMemberById                  // private                           *
- * @return  CdmMember*                                       //                                   *
- * @param  qint64 p_lId                                       //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mo 5. Nov 09:19:39 2012-----------*/
 CdmMember* CwmsObjectEditor::GetMemberById(qint64 p_lId)
 {
     CdmMember* pCdmMember = nullptr;
@@ -583,15 +440,6 @@ CdmMember *CwmsObjectEditor::GetMemberById(qint64 p_lId, CdmClass *pClass)
     return pCdmMember;
 }
 
-/** +-=---------------------------------------------------------Mo 5. Nov 14:31:46 2012-----------*
- * @method  CwmsObjectEditor::GetParentWidgetAndLayout       // public                            *
- * @return  void                                             //                                   *
- * @param   CdmClassGroup* p_pGroup                          //                                   *
- * @param   QWidget*& p_rpWidget                             //                                   *
- * @param   QFormLayout*& p_rpLayout                         //                                   *
- * @param   QTabWidget*& p_rpTab                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mo 5. Nov 14:31:46 2012-----------*/
 void CwmsObjectEditor::GetParentWidgetAndLayout(CdmClassGroup* p_pGroup,
                                                 QWidget*& p_rpWidget,
                                                 QFormLayout*& p_rpLayout,
@@ -705,15 +553,6 @@ void CwmsObjectEditor::FillMembers(QList<CdmClassGroup*>& p_qlGroups)
     }
 }
 
-/** +-=---------------------------------------------------------Mo 5. Nov 14:26:45 2012-----------*
- * @method  CwmsObjectEditor::AddMember                      // private                           *
- * @return  void                                             //                                   *
- * @param   CdmMember* p_pCdmMember                          //                                   *
- * @param   QWidget* p_pqMain                                //                                   *
- * @param   QFormLayout* p_pLayout                           //                                   *
- * @param   QTabWidget* p_pqTab                              //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mo 5. Nov 14:26:45 2012-----------*/
 void CwmsObjectEditor::AddMember(CdmMember* p_pCdmMember,
                                  QWidget* p_pqMain,
                                  QFormLayout* p_pLayout,
@@ -761,11 +600,6 @@ void CwmsObjectEditor::AddEventClassMember(CdmMember* p_pCdmMember,
     }
 }
 
-/** +-=---------------------------------------------------------So 4. Nov 12:00:58 2012-----------*
- * @method  CwmsObjectEditor::FillMembers                    // private                           *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------So 4. Nov 12:00:58 2012-----------*/
 void CwmsObjectEditor::FillMembers()
 {
     QWidget* pParentWidget = nullptr;
@@ -829,12 +663,6 @@ void CwmsObjectEditor::FillMembers(CdmClass *pEventClass)
     }
 }
 
-/** +-=---------------------------------------------------------So 4. Nov 12:02:39 2012-----------*
- * @method  CwmsObjectEditor::CountAdditionalTabs            // private                           *
- * @return  int                                              //                                   *
- * @param   CdmClassGroup* p_pCdmGroup                       //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------So 4. Nov 12:02:39 2012-----------*/
 int CwmsObjectEditor::CountAdditionalTabs(CdmClassGroup* p_pCdmGroup)
 {
     int iRet = 0;
@@ -860,11 +688,6 @@ int CwmsObjectEditor::CountAdditionalTabs(CdmClassGroup* p_pCdmGroup)
     return iRet;
 }
 
-/** +-=---------------------------------------------------------Mo 5. Nov 11:12:33 2012-----------*
- * @method  CwmsObjectEditor::CountAditionalTabsforNoneGroupMembers // private                    *
- * @return  int                                              //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mo 5. Nov 11:12:33 2012-----------*/
 int CwmsObjectEditor::CountAditionalTabsforNoneGroupMembers()
 {
     int iRet = 0;
@@ -889,7 +712,7 @@ int CwmsObjectEditor::CountAditionalTabsforNoneGroupMembers()
 
     return iRet;
 }
-//Build Tabs for References --> Eventview
+
 int CwmsObjectEditor::CountAditionalTabsforNoneGroupMembers(CdmClass *pEventClass)
 {
     int iRet = 0;
@@ -912,12 +735,6 @@ int CwmsObjectEditor::CountAditionalTabsforNoneGroupMembers(CdmClass *pEventClas
     return iRet;
 }
 
-/** +-=---------------------------------------------------------So 4. Nov 12:04:13 2012-----------*
- * @method  CwmsObjectEditor::NeedsMemberTab                 // private                           *
- * @return  bool                                             //                                   *
- * @param   CdmMember* p_pCdmMember                          //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------So 4. Nov 12:04:13 2012-----------*/
 bool CwmsObjectEditor::NeedsMemberTab(CdmMember* p_pCdmMember)
 {
     bool bRet = false;
@@ -965,12 +782,6 @@ bool CwmsObjectEditor::NeedsMemberTab(CdmMember* p_pCdmMember)
     return bRet;
 }
 
-
-/** +-=---------------------------------------------------------So 4. Nov 11:40:11 2012-----------*
- * @method  CwmsObjectEditor::GroupChangedSlot               // private, slots                    *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------So 4. Nov 11:40:11 2012-----------*/
 void CwmsObjectEditor::GroupChangedSlot()
 {
     m_qlAddedMembers.clear();
@@ -1085,13 +896,6 @@ void CwmsObjectEditor::AddEventClassMemberInFormLayout(QString p_qstrKeyname,
     m_qlAddedMembers.append(p_qstrKeyname);
 }
 
-/** +-=---------------------------------------------------------Mo 5. Nov 11:16:02 2012-----------*
- * @method  CwmsObjectEditor::AddMemberInTab                 // private                           *
- * @return  void                                             //                                   *
- * @param   QString p_qstrKeyname                            //                                   *
- * @param   QTabWidget* p_qwParent                           //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mo 5. Nov 11:16:02 2012-----------*/
 void CwmsObjectEditor::AddMemberInTab(QString p_qstrKeyname, QTabWidget* p_qwParent)
 {
     CdmValue* pCdmValue = m_cCdmObjectAdaptor.GetValue(p_qstrKeyname);
@@ -1131,11 +935,6 @@ void CwmsObjectEditor::AddEventClassMemberInTab(QString p_qstrKeyname, QTabWidge
     m_qlAddedMembers.append(p_qstrKeyname);
 }
 
-/** +-=---------------------------------------------------------So 4. Nov 11:34:58 2012-----------*
- * @method  CwmsObjectEditor::HasMembersWithoutGroup         // private                           *
- * @return  bool                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------So 4. Nov 11:34:58 2012-----------*/
 bool CwmsObjectEditor::HasMembersWithoutGroup()
 {
     bool bRet = false;
@@ -1169,14 +968,6 @@ bool CwmsObjectEditor::HasMembersWithoutGroup()
     return bRet;
 }
 
-/** +-=---------------------------------------------------------Mo 5. Nov 11:28:07 2012-----------*
- * @method  CwmsObjectEditor::CreateTabMemberUi              // private                           *
- * @return  bool                                             //                                   *
- * @param   CdmValue* p_pCdmValue                            //                                   *
- * @param   QWidget* p_pqfParent                             //                                   *
- * @param   QVBoxLayout* p_qLayout                           //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mo 5. Nov 11:28:07 2012-----------*/
 bool CwmsObjectEditor::CreateTabMemberUi(CdmValue* p_pCdmValue,
                                          QWidget* p_pqfParent,
                                          QVBoxLayout* p_qLayout)
@@ -1244,13 +1035,6 @@ bool CwmsObjectEditor::CreateEventTabMemberUi(CdmValue* p_pCdmValue,
     return bRet;
 }
 
-/** +-=---------------------------------------------------------Mo 11. Feb 10:25:00 2013----------*
- * @method  CwmsObjectEditor::CheckReadOnly                  // private                           *
- * @return  void                                             //                                   *
- * @param   const CdmMember* p_pCdmMeber                     //                                   *
- * @param   CoeValueWidget* p_pWidget                        //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mo 11. Feb 10:25:00 2013----------*/
 void CwmsObjectEditor::CheckReadOnly(const CdmMember* p_pCdmMeber, CoeValueWidget* p_pWidget)
 {
     if (CHKPTR(p_pWidget) && CHKPTR(p_pCdmMeber))
@@ -1286,15 +1070,6 @@ void CwmsObjectEditor::CheckEditable(const CdmMember* p_pCdmMeber, CoeValueWidge
     }
 }
 
-
-/** +-=---------------------------------------------------------Mi 22. Aug 15:15:16 2012----------*
- * @method  CwmsObjectEditor::CreateMemberUi                  // private                           *
- * @return  void                                             //                                   *
- * @param   CdmValue* p_pCdmValue                            //                                   *
- * @param   QWidget* p_pqfParent                             //                                   *
- * @param   QFormLayout* p_qLayout                           //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mi 22. Aug 15:15:16 2012----------*/
 void CwmsObjectEditor::CreateMemberUi(CdmValue* p_pCdmValue,
                                       QWidget* p_pqfParent,
                                       QFormLayout* p_qLayout)
@@ -1328,7 +1103,7 @@ void CwmsObjectEditor::CreateMemberUi(CdmValue* p_pCdmValue,
 
                         if (!qstrKey.startsWith("select "))
                         {
-                            ((CoedtwObjectRef*)m_pCoeValueWidget)->SetObjectList(tStringPair.first, tStringPair.second);
+                            ((CoedtwObjectRef*)m_pCoeValueWidget)->SetContainer(tStringPair.first, tStringPair.second);
                         }
                         else
                         {
@@ -1394,7 +1169,7 @@ void CwmsObjectEditor::CreateEventMemberUi(CdmValue* p_pCdmValue,
 
                         if (!qstrKey.startsWith("select "))
                         {
-                            ((CoedtwObjectRef*)m_pCoeValueWidget)->SetObjectList(tStringPair.first, tStringPair.second);
+                            ((CoedtwObjectRef*)m_pCoeValueWidget)->SetContainer(tStringPair.first, tStringPair.second);
                         }
                         else
                         {
@@ -1425,22 +1200,11 @@ void CwmsObjectEditor::CreateEventMemberUi(CdmValue* p_pCdmValue,
     }
 }
 
-/** +-=---------------------------------------------------------Di 24. Jan 22:49:24 2006----------*
- * @method  CwmsObjectEditor::CaptionChangedSlot              // private, slots                    *
- * @return  void                                             //                                   *
- * @param   const QString & p_qstrCaption                    //                                   *
- * @comment This slot will be called if the user changes the caption.                             *
- *----------------last changed: Wolfgang GraÃŸhof----------------Di 24. Jan 22:49:24 2006----------*/
 void CwmsObjectEditor::CaptionChangedSlot(  const QString & p_qstrCaption )
 {
     GetObject()->SetCaption(p_qstrCaption);
 }
 
-/** +-=---------------------------------------------------------Fr 6. Jan 18:17:58 2006-----------*
- * @method  CwmsObjectEditor::GetSortMemberList               // public                            *
- * @return  QValueList<qint64>                                 // the list of members               *
- * @comment                                                                                       *
- *----------------last changed: Wolfgang GraÃŸhof----------------Fr 6. Jan 18:17:58 2006-----------*/
 QList<qint64> CwmsObjectEditor::GetSortMemberList(  )
 {
     QList<qint64> qvlMembers;
@@ -1545,11 +1309,6 @@ QList<qint64> CwmsObjectEditor::getEventClassMemberList(CdmClass *pClass)
     return qvlMembers;
 }
 
-/** +-=---------------------------------------------------------Fr 20. Jan 22:43:03 2006----------*
- * @method  CwmsObjectEditor::GetSortedMemberListFromStringList // public                          *
- * @return  QValueList<qint64>                                 //                                   *
- * @comment This method creates the sorted memberlist with the helb of the string list.           *
- *----------------last changed: Wolfgang GraÃŸhof----------------Fr 20. Jan 22:43:03 2006----------*/
 QList<qint64> CwmsObjectEditor::GetSortedMemberListFromStringList(  )
 {
     QList<qint64> qvlMembers;
@@ -1590,12 +1349,6 @@ QList<qint64> CwmsObjectEditor::getEventClassMemberListFromStringList(CdmClass *
     return qvlMembers;
 }
 
-/** +-=---------------------------------------------------------Fr 6. Jan 18:14:58 2006-----------*
- * @method  CwmsObjectEditor::FindValueByMemberId             // private                           *
- * @return  CdmValue*                                        //                                   *
- * @param  qint64 p_lMemberId                                 //                                   *
- * @comment This method finds a value by MemberId                                                 *
- *----------------last changed: Wolfgang GraÃŸhof----------------Fr 6. Jan 18:14:58 2006-----------*/
 CdmValue* CwmsObjectEditor::FindValueByMemberId( qint64 p_lMemberId )
 {
     CdmValue* pCdmValueRet = nullptr;
@@ -1622,13 +1375,7 @@ CdmValue* CwmsObjectEditor::FindValueByMemberId( qint64 p_lMemberId )
     return pCdmValueRet;
 }
 
-/** +-=---------------------------------------------------------Thu Dec 11 16:42:02 2003----------*
- * @method  CwmsObjectEditor::FindInHiddenList                // private                           *
- * @return  bool                                             //                                   *
- * @param   CdmValue* p_pCdmValue                      //                                   *
- * @comment This method checks if a Value is in Hidden list. If found true will be returned    *
- *---------------------------------------------------------------Thu Dec 11 16:42:02 2003---------*/
-bool CwmsObjectEditor::FindInHiddenList(  CdmValue* p_pCdmValue )
+bool CwmsObjectEditor::FindInHiddenList(CdmValue* p_pCdmValue)
 {
     bool bRet = false;
 
@@ -1675,12 +1422,6 @@ bool CwmsObjectEditor::FindInHiddenList(  CdmValue* p_pCdmValue )
     return bRet;
 }
 
-/** +-=---------------------------------------------------------Mo 11. Feb 10:52:23 2013----------*
- * @method  CwmsObjectEditor::IsReadOnly                     // private                           *
- * @return  bool                                             //                                   *
- * @param   const CdmMember* p_pCdmMember                    //                                   *
- * @comment This method checks if a Value is in Hidden list. If found true will be returned       *
- *----------------last changed: --------------------------------Mo 11. Feb 10:52:23 2013----------*/
 bool CwmsObjectEditor::IsReadOnly(const CdmMember* p_pCdmMember)
 {
     bool bRet = false;
@@ -1720,48 +1461,21 @@ bool CwmsObjectEditor::IsReadOnly(const CdmMember* p_pCdmMember)
     return bRet;
 }
 
-
-/** +-=---------------------------------------------------------Do 19. Jan 20:16:16 2006----------*
- * @method  CwmsObjectEditor::SetSortedList                   // public                            *
- * @return  void                                             //                                   *
- * @param   QStringList p_qstrlistSortedMembers              //                                   *
- * @comment This method sets a sorted memberlist.                                                 *
- *----------------last changed: Wolfgang GraÃŸhof----------------Do 19. Jan 20:16:16 2006----------*/
 void CwmsObjectEditor::SetSortedList(  QStringList p_qstrlistSortedMembers )
 {
     m_qstrlSortedMembers = p_qstrlistSortedMembers;
 }
 
-/** +-=---------------------------------------------------------Di 8. Mai 20:51:22 2007-----------*
- * @method  CwmsObjectEditor::SetCaptionValue                 // public                            *
- * @return  void                                             //                                   *
- * @param   QString p_qstrValue                              //                                   *
- * @comment Over this method you can set, from which value the objectcaption will be              *
- *          autmatically copied.                                                                  *
- *----------------last changed: Wolfgang GraÃŸhof----------------Di 8. Mai 20:51:22 2007-----------*/
 void CwmsObjectEditor::SetCaptionValue(QString p_qstrValue)
 {
     m_qstrCaptionValue = p_qstrValue;
 }
 
-/** +-=---------------------------------------------------------Di 12. Aug 19:57:38 2008----------*
- * @method  CwmsObjectEditor::setObjectName                   // public                            *
- * @return  void                                             //                                   *
- * @param   QString p_qstrName                               //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Di 12. Aug 19:57:38 2008----------*/
 void CwmsObjectEditor::setObjectName(QString p_qstrName)
 {
     setWindowTitle(p_qstrName);
 }
 
-/** +-=---------------------------------------------------------Di 23. Jul 12:37:05 2013----------*
- * @method  CwmsObjectEditor::ConnectRuntime                 // private                           *
- * @return  void                                             //                                   *
- * @param   CwmsRuntime* p_pRuntime                          //                                   *
- * @param   CwmsApplicationModule& p_cModule                 //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Di 23. Jul 12:37:05 2013----------*/
 void CwmsObjectEditor::ConnectRuntime(CwmsRuntime* p_pRuntime, CwmsApplicationModule& p_cModule)
 {
     if (p_pRuntime)
@@ -1811,12 +1525,6 @@ void CwmsObjectEditor::ConnectRuntime(CwmsRuntime* p_pRuntime, CwmsApplicationMo
     }
 }
 
-/** +-=---------------------------------------------------------Mo 17. Sep 16:13:00 2012----------*
- * @method  CwmsObjectEditor::SetModule                       // private                           *
- * @return  void                                             //                                   *
- * @param   CwmsApplicationModule p_cModule                  //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mo 17. Sep 16:13:00 2012----------*/
 void CwmsObjectEditor::SetModule(CwmsApplicationModule p_cModule)
 {
     if (p_cModule.IsValid())
@@ -1867,12 +1575,6 @@ void CwmsObjectEditor::SetModule(CwmsApplicationModule p_cModule)
     }
 }
 
-/** +-=---------------------------------------------------------Fr 14. Dez 14:47:26 2012----------*
- * @method  CwmsObjectEditor::SetFormConfiguration           // public                            *
- * @return  void                                             //                                   *
- * @param   CdmObject* p_pObject                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Fr 14. Dez 14:47:26 2012----------*/
 void CwmsObjectEditor::SetFormConfiguration(CdmObject* p_pObject)
 {
     if (CHKPTR(p_pObject))
@@ -1953,13 +1655,6 @@ void CwmsObjectEditor::SetFormConfiguration(CdmObject* p_pObject)
     }
 }
 
-/** +-=---------------------------------------------------------Mo 17. Sep 16:12:36 2012----------*
- * @method  CwmsObjectEditor::Initialize                      // public                            *
- * @return  void                                             //                                   *
- * @param   CwmsApplicationModule p_cModule                  //                                   *
- * @param   CwmsRuntime* p_pRuntime                          //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mo 17. Sep 16:12:36 2012----------*/
 void CwmsObjectEditor::Initialize(CwmsApplicationModule p_cModule, CwmsRuntime* p_pRuntime)
 {
     SetModule(p_cModule);
@@ -1978,11 +1673,6 @@ void CwmsObjectEditor::MetaDataClickedSlot()
     CwmsHelp::ShowTextHelp(qstrInfo, nullptr);
 }
 
-/** +-=---------------------------------------------------------Mo 17. Sep 16:21:08 2012----------*
- * @method  CwmsObjectEditor::JournalClickedSlot              // private, slots                    *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mo 17. Sep 16:21:08 2012----------*/
 void CwmsObjectEditor::JournalClickedSlot()
 {
     CwmsJournalViewer* pViewer = new CwmsJournalViewer(this);
@@ -1991,21 +1681,11 @@ void CwmsObjectEditor::JournalClickedSlot()
     DELPTR(pViewer)
 }
 
-/** +-=---------------------------------------------------------Mo 17. Sep 16:21:38 2012----------*
- * @method  CwmsObjectEditor::PrintClickedSlot                // private, slots                    *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mo 17. Sep 16:21:38 2012----------*/
 void CwmsObjectEditor::PrintClickedSlot()
 {
     CwmsReportManager::PrintDefaultForObject(GetObject());
 }
 
-/** +-=---------------------------------------------------------Fr 14. Dez 10:42:24 2012----------*
- * @method  CwmsObjectEditor::AddFunctions                   // private                           *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Fr 14. Dez 10:42:24 2012----------*/
 void CwmsObjectEditor::AddFunctions()
 {
     for (int iCounter = 0; iCounter < m_qstrlFunctions.count(); ++iCounter)
@@ -2061,11 +1741,6 @@ void CwmsObjectEditor::AddFunctions()
     }
 }
 
-/** +-=---------------------------------------------------------Fr 14. Dez 10:44:49 2012----------*
- * @method  CwmsObjectEditor::FunctionClickedSlot            // private, slots                    *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Fr 14. Dez 10:44:49 2012----------*/
 void CwmsObjectEditor::FunctionClickedSlot()
 {
     QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
@@ -2080,10 +1755,12 @@ void CwmsObjectEditor::FunctionClickedSlot()
             m_cCdmObjectAdaptor.Execute(qstrFunction);
         }
     }
+
     if(GetObject()->GetClass()->IsEventSourcingActive())
     {
-    GroupChangedSlot(GetObject()->GetClass()); // updates the data in current displayed group
+        GroupChangedSlot(GetObject()->GetClass()); // updates the data in current displayed group
     }
+
     GroupChangedSlot(); // updates the data in current displayed group
     QApplication::restoreOverrideCursor();
     CdmMessageManager::EndAndShowAsyncMessageCollection();
@@ -2097,10 +1774,12 @@ void CwmsObjectEditor::ResetClickedSlot()
     if (CHKPTR(pObject))
     {
         pObject->Refresh();
+
         if(pObject->GetClass()->IsEventSourcingActive())
         {
-        GroupChangedSlot(GetObject()->GetClass()); // updates the data in current displayed group
+            GroupChangedSlot(GetObject()->GetClass()); // updates the data in current displayed group
         }
+
         GroupChangedSlot(); // updates the data in current displayed group
     }
 }

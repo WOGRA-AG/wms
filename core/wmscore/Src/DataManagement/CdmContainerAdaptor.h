@@ -1,10 +1,10 @@
 ﻿/******************************************************************************
  ** WOGRA Middleware Server Data Manager Module
  **
- ** @Author Wolfgang Graßhof 
+ ** @Author Wolfgang Graßhof
  **
  ** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
- ** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. 
+ ** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
  **(C) copyright by WOGRA technologies All rights reserved
  ******************************************************************************/
 
@@ -35,40 +35,40 @@ class CdmObjectAdaptor;
 class WMSMANAGER_API CdmContainerAdaptor
 {
 
-   private:
-      /*
+private:
+    /*
        * The Database Id
        */
-     qint64 m_lDbId;
+    qint64 m_lDbId;
 
-      /*
+    /*
        * The Objectlist Id
        */
-     qint64 m_lContainerId;
+    qint64 m_lContainerId;
 
-      friend class CdmObjectContainer;
+    friend class CdmObjectContainer;
 
-   public:
+    void SetContainerV(CdmObjectContainer *p_pContainer);
+public:
     CdmContainerAdaptor(CdmObjectContainer* p_pContainer);
     CdmContainerAdaptor(qint64 m_lDbId,qint64 m_lObjectListId);
     CdmContainerAdaptor();
     virtual ~CdmContainerAdaptor();
-   qint64 DeleteObject(CdmObjectAdaptor* p_pCdmObjectAdaptor);
-   qint64 DeleteObject(qint64 p_lObjectId);
-    CdmObjectContainer* GetContainer() const;
-    void Commit();
-    CdmObject* CreateObject(QString p_qstrCaption);
-    virtual void SetContainer(qint64 p_lDbId,qint64 p_lObjectListId);
+    virtual CdmObjectContainer* GetContainer() const;
+    virtual void SetContainer(qint64 p_lObjectListId);
     virtual void SetContainer(CdmObjectContainer* p_pContainer);
+    virtual void ObjectRefModifiedEvent(qint64 p_lObjectId);
+    virtual void ObjectCommitedEvent(qint64 p_lObjectId);
     CdmObject* FindObject(qint64 p_lObjectId);
     const CdmClass* GetClass() const;
-   qint64 GetSchemeId() const;
-    virtual void ObjectRefModifiedEvent(qint64 p_lObjectId);
-    void ResetContainer();
-    virtual void ObjectCommitedEvent(qint64 p_lObjectId);
+    qint64 GetSchemeId() const;
     void SetContainer(QString p_qstrObjectListKeyname);
-
+    void ResetContainer();
+    qint64 DeleteObject(CdmObjectAdaptor* p_pCdmObjectAdaptor);
+    qint64 DeleteObject(qint64 p_lObjectId);
     bool IsValid();
+    void Commit();
+    CdmObject* CreateObject(QString p_qstrCaption);
     void ReloadContainerComplete() const;
 protected:
     virtual void ObjectDeletedEvent(qint64 p_lObjectId);

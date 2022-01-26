@@ -20,11 +20,11 @@ CwmsObjectSelectionIf::CwmsObjectSelectionIf(QWidget* parent)
     setupUi(this);
 }
 
-CwmsObjectSelectionIf::~CwmsObjectSelectionIf(  )
+CwmsObjectSelectionIf::~CwmsObjectSelectionIf()
 {
 }
 
-void CwmsObjectSelectionIf::SetProxy(CdmEnhancedQueryProxy* p_pCwmsProxy)
+void CwmsObjectSelectionIf::SetProxy(CdmQueryModel* p_pCwmsProxy)
 {
     m_cModel.SetProxy(p_pCwmsProxy);
 }
@@ -217,7 +217,7 @@ CdmObject* CwmsObjectSelectionIf::GetObject(QString p_qstrWql, QWidget* p_pqwPar
 }
 
 QList<CdmObject*> CwmsObjectSelectionIf::GetListofObjects(CdmObjectContainer* p_pContainer,
-                                                          CdmEnhancedQueryProxy* p_pCwmsProxy,
+                                                          CdmQueryModel* p_pCwmsProxy,
                                                           QWidget* p_pqwParent,
                                                           QString p_qstrDisplayMember)
 {
@@ -249,7 +249,7 @@ QList<CdmObject*> CwmsObjectSelectionIf::GetListofObjects(CdmObjectContainer* p_
 }
 
 CdmObject* CwmsObjectSelectionIf::GetObject(CdmObjectContainer* p_pContainer,
-                                            CdmEnhancedQueryProxy* p_pCwmsProxy,
+                                            CdmQueryModel* p_pCwmsProxy,
                                             QWidget* p_pqwParent,
                                             QString p_qstrDisplayMember)
 {
@@ -280,7 +280,7 @@ CdmObject* CwmsObjectSelectionIf::GetObject(CdmObjectContainer* p_pContainer,
 }
 
 qint64 CwmsObjectSelectionIf::GetObjectId(CdmObjectContainer* p_pContainer,
-                                          CdmEnhancedQueryProxy* p_pCwmsProxy,
+                                          CdmQueryModel* p_pCwmsProxy,
                                           QWidget* p_pqwParent)
 {
     qint64 lObjectId = 0;

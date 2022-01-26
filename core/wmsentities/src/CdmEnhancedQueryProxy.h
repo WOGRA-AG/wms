@@ -37,21 +37,10 @@ protected:
 public:
     CdmEnhancedQueryProxy();
     virtual ~CdmEnhancedQueryProxy();
-    virtual void GetDisplayListV(CdmObjectContainer* p_pContainer, QList<qint64>& p_rqvlResults);
-    virtual CdmQuery* GetQuery();
-    virtual void CreateQuery(CdmObjectContainer* p_pContainer);
-
-protected:
-    virtual void ValueChanged();
-    virtual void sort(int p_iColumn, Qt::SortOrder p_eSortOrder);
-    virtual void ObjectCommitedEvent(qint64);
-    void ClearOrderBy();
-public:
     QStringList GetOrderBy();
     void SetOrderByMode(bool p_bAsc);
     bool GetOrderByMode();
     void AddOrderBy(QString p_qstrOrderBy);
-
 
 public slots:
     virtual void Execute();
@@ -61,6 +50,16 @@ public slots:
     int GetFirstResult(CdmObjectContainer* p_pContainer);
     void GetDisplaySet(CdmObjectContainer* p_pContainer, QSet<qint64>& p_rqsResult);
     virtual void GetDisplaySetV(CdmObjectContainer* p_pContainer, QSet<qint64>& p_rqsResult);
+    virtual void GetDisplayListV(CdmObjectContainer* p_pContainer, QList<qint64>& p_rqvlResults);
+
+protected:
+    virtual void ValueChanged();
+    virtual void sort(int p_iColumn, Qt::SortOrder p_eSortOrder);
+    virtual void ObjectCommitedEvent(qint64);
+    void ClearOrderBy();
+
+private:
+
 };
 
 #endif //

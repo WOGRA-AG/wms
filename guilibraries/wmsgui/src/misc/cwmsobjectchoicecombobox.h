@@ -21,7 +21,7 @@
 // forwards
 class CdmObject;
 class CdmObjectContainer;
-class CdmEnhancedQueryProxy;
+class CdmQueryModel;
 
 
 class WMSGUI_API CwmsObjectChoiceComboBox : public QComboBox, public CdmContainerAdaptor
@@ -29,7 +29,7 @@ class WMSGUI_API CwmsObjectChoiceComboBox : public QComboBox, public CdmContaine
    Q_OBJECT
 
 private:
-   CdmEnhancedQueryProxy* m_rpCdmProxy;
+   CdmQueryModel* m_rpCdmProxy;
    QMap<QString,qint64> m_qmEntries; // <entry index, Objectid>
    QString m_qstrDisplayName;
 
@@ -40,7 +40,7 @@ public:
    void SetContainerAndDisplayFilteredValue(CdmObjectContainer* p_pContainer, QString p_qstrValueKeyname, QString qstrFilter);
    void SetContainerAndDisplayValueByWql(CdmObjectContainer* p_pContainer, QString qstrWql);
    void SetCurrentObject(CdmObject* p_pCdmObject);
-   void SetProxy(CdmEnhancedQueryProxy* p_pCdmProxy);
+   void SetProxy(CdmQueryModel* p_pCdmProxy);
    void AddEntry(CdmObject* p_pCdmObject, QString p_qstrValue);
    void FillEntries();
    void FillWidget(CdmQuery& p_rcCdmQuery);

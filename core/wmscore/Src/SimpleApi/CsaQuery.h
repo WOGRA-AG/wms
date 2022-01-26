@@ -69,6 +69,8 @@ public slots:
    void setQuery(CdmQuery* p_pEnhanced);
    // CsaLocatedElement interface
    QString getResultAsDisplayStringAt(int p_iColumn, int p_iRow);
+   QObject *getClass();
+   QString getCaptionAt(int p_iSection);
 public:
    virtual QVariant getDetailedVariant();
 
