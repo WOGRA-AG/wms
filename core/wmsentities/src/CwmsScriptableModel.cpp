@@ -26,19 +26,9 @@ void CwmsScriptableModel::copyFromQuery(QObject* p_pQuery)
     if (CHKPTR(pQuery))
     {
         m_qmData.clear();
-        int iRowCount    = pQuery->getResultCount();
         int iColumnCount = pQuery->getColumnCount();
-
         copyHeaderData(pQuery, m_qstrlColumnHeaders, iColumnCount);
-
-        for (int iRowCounter = 0; iRowCounter < iRowCount; ++iRowCounter)
-        {
-            for(int iColumnCounter = 0; iColumnCounter < iColumnCount; ++iColumnCounter)
-            {
-                QVariant qValue = pQuery->getResultAt(iColumnCounter, iRowCounter);
-                addValue(iRowCounter, iColumnCounter, Qt::DisplayRole, qValue);
-            }
-        }
+        appendFromQuery(p_pQuery);
     }
 }
 
@@ -60,8 +50,9 @@ void CwmsScriptableModel::appendFromQuery(QObject* p_pQuery)
             {
                 for(int iColumnCounter = 0; iColumnCounter < iColumnCount; ++iColumnCounter)
                 {
-                    QVariant qValue = pQuery->getResultAt(iColumnCounter, iCurrentRow);
+                    QVariant qValue = pQuery->getResultAsDisplayStringAt(iColumnCounter, iCurrentRow);
                     addValue(iRowCounter, iColumnCounter, Qt::DisplayRole, qValue);
+                    addValue(iRowCounter, iColumnCounter, Qt::UserRole, pQuery->getResultAt(iColumnCounter, iCurrentRow));
                 }
 
                 ++iCurrentRow;
@@ -79,7 +70,7 @@ void CwmsScriptableModel::copyHeaderData(CsaQuery* pQuery, QMap<int,QString>& qm
     setHeaderCount(qmHeader, count);
     for(int iCounter = 0; iCounter < count; ++iCounter)
     {
-        QString qstrHeader = pQuery->getKeynameAt(iCounter);
+        QString qstrHeader = pQuery->getCaptionAt(iCounter);
         insertHeader(qmHeader, iCounter, qstrHeader);
     }
 }
