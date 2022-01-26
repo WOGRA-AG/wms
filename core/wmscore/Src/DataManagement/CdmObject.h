@@ -41,6 +41,7 @@ private:
    qint64                       m_lParentId;
     bool                       m_bIsImmutable;
     bool                       m_bCommitRunning;
+    bool                       m_bUpdateOwnerRefsCaptions;
     mutable QPointer<CdmClass> m_rpClass = {};
 
 private:

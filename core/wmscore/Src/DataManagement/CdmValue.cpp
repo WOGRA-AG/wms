@@ -1468,6 +1468,26 @@ bool CdmValue::IsOwner() const
    return bRet;
 }
 
+bool CdmValue::IsClassDisplayString()
+{
+    auto pMember = GetMember();
+
+    if (CHKPTR(pMember))
+    {
+        auto pClass = pMember->GetClass();
+
+        if (CHKPTR(pClass))
+        {
+            if (pClass->GetCaptionMember() == pMember)
+            {
+                return true;
+            }
+        }
+    }
+
+    return false;
+}
+
 void CdmValue::Restore(QString p_qstrValue)
 {
     // todo error message that this value type is not restorable

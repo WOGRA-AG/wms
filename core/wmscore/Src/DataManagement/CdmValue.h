@@ -53,6 +53,7 @@ public:
     const CdmMember* GetEventMember(const CdmObject *pEventObject) const;
     bool IsUnique() const;
     bool IsOwner() const;
+    bool IsClassDisplayString();
     int DeleteValue();
     void SetMemberId(qint64 p_lId);
     int FromStringToValue(QString p_qstrValue);

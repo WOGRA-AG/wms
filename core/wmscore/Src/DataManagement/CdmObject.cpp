@@ -66,7 +66,8 @@ CdmObject::CdmObject(qint64 p_lDatbaseId,
       m_bIsInitialized(false),
       m_lParentId(0),
       m_bIsImmutable(false),
-      m_bCommitRunning(false)
+      m_bCommitRunning(false),
+      m_bUpdateOwnerRefsCaptions(false)
 {
 
     if(CHKPTR(p_pCdmClass))
@@ -106,7 +107,8 @@ CdmObject::CdmObject(qint64 p_lDatbaseId,
       m_bIsInitialized(false),
       m_lParentId(0),
       m_bIsImmutable(false),
-      m_bCommitRunning(false)
+      m_bCommitRunning(false),
+      m_bUpdateOwnerRefsCaptions(false)
 {
     m_rpContainer = p_pContainer;
 
@@ -132,7 +134,8 @@ CdmObject::CdmObject(qint64 p_lDatbaseId,qint64 p_lId,qint64 p_lClassId,qint64 p
       m_bIsInitialized(false),
       m_lParentId(0),
       m_bIsImmutable(false),
-      m_bCommitRunning(false)
+      m_bCommitRunning(false),
+      m_bUpdateOwnerRefsCaptions(false)
 {
 }
 
@@ -145,7 +148,8 @@ CdmObject::CdmObject(const CdmObject& p_rCdmObject,qint64 p_lId)
       m_bIsInitialized(false),
       m_lParentId(0),
       m_bIsImmutable(false),
-      m_bCommitRunning(false)
+      m_bCommitRunning(false),
+      m_bUpdateOwnerRefsCaptions(false)
 {
     if (p_rCdmObject.IsValid())
     {
@@ -165,7 +169,8 @@ CdmObject::CdmObject(CdmObjectContainer* p_pContainer, CdmObject* p_pCdmObject,q
       m_bIsInitialized(false),
       m_lParentId(0),
       m_bIsImmutable(false),
-      m_bCommitRunning(false)
+      m_bCommitRunning(false),
+      m_bUpdateOwnerRefsCaptions(false)
 {
     if (!p_pCdmObject->IsValid())
     {
@@ -191,7 +196,8 @@ CdmObject::CdmObject()
       m_bIsInitialized(false),
       m_lParentId(0),
       m_bIsImmutable(false),
-      m_bCommitRunning(false)
+      m_bCommitRunning(false),
+      m_bUpdateOwnerRefsCaptions(false)
 {
     FATAL("DO NOT CALL THIS. This method is for providing QML support!!!");
 }
@@ -1674,6 +1680,21 @@ void CdmObject::CommitOwnRefs()
     CdmClass* pCdmClass = GetClass();
     if(CHKPTR(pCdmClass))
     {
+        QString qstrCaptionMemberKeyname = pCdmClass->GetCaptionMemberKeyname();
+        QString qstrDisplayString;
+        if (m_bUpdateOwnerRefsCaptions)
+        {
+            if (!qstrCaptionMemberKeyname.isEmpty())
+            {
+                qstrDisplayString = GetDisplayString(qstrCaptionMemberKeyname);
+            }
+        }
+
+        if (!qstrDisplayString.isEmpty())
+        {
+            SetCaption(qstrDisplayString);
+        }
+
         QMap<QString,CdmValue*>::iterator qmIt    = m_qmValues.begin();
         QMap<QString,CdmValue*>::iterator qmItEnd = m_qmValues.end();
 
@@ -1695,6 +1716,11 @@ void CdmObject::CommitOwnRefs()
 
                         if(pContainer)  // can be nullptr if it was deleted before
                         {
+                            if (!qstrDisplayString.isEmpty())
+                            {
+                                pContainer->SetCaption(qstrDisplayString);
+                            }
+
                             pContainer->Commit();
                         }
                     }
@@ -1705,6 +1731,11 @@ void CdmObject::CommitOwnRefs()
 
                         if(pCdmObject) // can be nullptr if it was deleted before
                         {
+                            if (!qstrDisplayString.isEmpty())
+                            {
+                                pCdmObject->SetCaption(qstrDisplayString);
+                            }
+
                             pCdmObject->Commit();
                         }
                     }
@@ -1765,7 +1796,7 @@ void CdmObject::DeleteOwnerRefs(  )
     }
 }
 
-void CdmObject::ValueChangedSlot(  CdmValue* p_pCdmValue )
+void CdmObject::ValueChangedSlot(CdmValue* p_pCdmValue)
 {
     if(CHKPTR(p_pCdmValue))
     {
@@ -1777,13 +1808,18 @@ void CdmObject::ValueChangedSlot(  CdmValue* p_pCdmValue )
             {
                 CdmModelElement::SetModified();
             }
+
+            if (p_pCdmValue->IsClassDisplayString())
+            {
+                m_bUpdateOwnerRefsCaptions = true;
+            }
         }
 
         ObjectModifiedSlot();
     }
 }
 
-void CdmObject::ObjectModifiedSlot(  )
+void CdmObject::ObjectModifiedSlot()
 {
     emit ObjectModifiedSignal(this);
 }
@@ -1915,6 +1951,7 @@ int CdmObject::Commit()
         iRet = CdmLogging::eDmOk;
     }
 
+    m_bUpdateOwnerRefsCaptions = false;
     return iRet;
 }
 
