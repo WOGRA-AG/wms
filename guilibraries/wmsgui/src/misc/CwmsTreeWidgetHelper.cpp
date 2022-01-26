@@ -197,7 +197,7 @@ void CwmsTreeWidgetHelper::ResizeColumnsToContent(QTreeView* p_pView)
             }
         }
 
-        p_pView->sortByColumn(0, Qt::SortOrder::AscendingOrder);
+        //p_pView->sortByColumn(0, Qt::SortOrder::AscendingOrder);
     }
 }
 
