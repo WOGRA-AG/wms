@@ -55,16 +55,24 @@ qint64 CdbQueryEnhancedDoubleRequest::Execute()
     {
         QStringList qvlObjectIds;
         QString qstrSql = GenerateSql(qvlObjectIds);
-        QString qstrObjIds = qvlObjectIds.join(",");
-        qstrSql = qstrSql.replace(OBJECT_IDS, qstrObjIds);
-
-        QSqlQuery cQSqlQuery(m_rpCdbDataAccess->GetDbInterface()->GetSqlDatabase());
-        cQSqlQuery.prepare(qstrSql);
 
         if (!qstrSql.isEmpty())
         {
-            m_rpCdmQuery->AddDatabaseCommand(qstrSql);
-            lRet = ExecuteQuery(cQSqlQuery);
+            QString qstrObjIds = qvlObjectIds.join(",");
+            qstrSql = qstrSql.replace(OBJECT_IDS, qstrObjIds);
+
+            QSqlQuery cQSqlQuery(m_rpCdbDataAccess->GetDbInterface()->GetSqlDatabase());
+            cQSqlQuery.prepare(qstrSql);
+
+            if (!qstrSql.isEmpty())
+            {
+                m_rpCdmQuery->AddDatabaseCommand(qstrSql);
+                lRet = ExecuteQuery(cQSqlQuery);
+            }
+            else
+            {
+                lRet = CdmLogging::eDmFalse;
+            }
         }
         else
         {
