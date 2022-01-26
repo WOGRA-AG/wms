@@ -192,7 +192,7 @@
             <item>
              <widget class="QCheckBox" name="m_pqchbOwner">
               <property name="text">
-               <string>Besitzer</string>
+               <string>Eigentümer</string>
               </property>
              </widget>
             </item>

@@ -626,8 +626,6 @@ void CwmsAdminMainWindowIf::CloseClassSubWindows()
                pClassEditor->FillFunctions();
                pClassEditor->FillMembers();
            }
-
-           //DELPTR(pTempWindow)
        }
     }
 }
@@ -655,6 +653,8 @@ void CwmsAdminMainWindowIf::FillClasses(CdmClassManager* p_pCdmClassManager)
           pQCompleter->setMaxVisibleItems(30);
           pQCompleter->setFilterMode(Qt::MatchContains);
       }
+
+      ClassFilterEnterPressedSlot();
    }
 }
 
