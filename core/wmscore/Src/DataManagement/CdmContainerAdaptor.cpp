@@ -91,12 +91,12 @@ void CdmContainerAdaptor::SetContainer(CdmObjectContainer* p_pContainer)
         if (p_pContainer->GetSchemeId() != m_lDbId || p_pContainer->GetId() != m_lContainerId)
         {
             ResetContainer();
-
+            SetContainerP(p_pContainer);
         }
     }
 }
 
-void CdmContainerAdaptor::SetContainerV(CdmObjectContainer* p_pContainer)
+void CdmContainerAdaptor::SetContainerP(CdmObjectContainer* p_pContainer)
 {
     if (CHKPTR(p_pContainer))
     {

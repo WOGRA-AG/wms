@@ -48,7 +48,7 @@ private:
 
     friend class CdmObjectContainer;
 
-    void SetContainerV(CdmObjectContainer *p_pContainer);
+    void SetContainerP(CdmObjectContainer *p_pContainer);
 public:
     CdmContainerAdaptor(CdmObjectContainer* p_pContainer);
     CdmContainerAdaptor(qint64 m_lDbId,qint64 m_lObjectListId);
