@@ -52,7 +52,7 @@ include::wmsusergroup.adoc[]
 
 additional classes added to the script engine to provide additional WMS features beside Javascript core functions like Math …
 
-include::message.adoc[]
+include::message.adoc[Message]
 
 include::mail.adoc[]
 
@@ -80,4 +80,4 @@ include::sql.adoc[]
 
 include::utilities.adoc[]
 
-  
+include::scriptablemodel.adoc[]  
