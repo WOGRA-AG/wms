@@ -1,16 +1,3 @@
-/******************************************************************************
- ** WOGRA technologies GmbH & Co. KG Modul Information
- ** Modulename: CwmsFunctionEditor.cpp
- ** Started Implementation: 2012/09/20
- ** Description:
- **
- ** implements the function editor
- **
- ** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
- ** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. 
- **(C) copyright by WOGRA technologies GmbH & Co. KG All rights reserved
- *****************************************************************************/
-
 // System and QT Includes
 #include <QFileDialog>
 
@@ -32,6 +19,7 @@
 #include "CwmsObjectListSelectionIf.h"
 
 // own Includes
+#include "CwmsPlatformServices.h"
 #include "CwmsTreeWidgetHelper.h"
 #include "CwmsUniversalRightsManager.h"
 #include "CwmsClassDataFiller.h"
@@ -39,12 +27,6 @@
 #include "CwmsJson.h"
 #include "CsaFactory.h"
 
-/** +-=---------------------------------------------------------Do 20. Sep 14:54:01 2012----------*
- * @method  CwmsFunctionEditor::CwmsFunctionEditor           // public                            *
- * @return                                                   //                                   *
- * @param   QWidget* p_pqwParent                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Do 20. Sep 14:54:01 2012----------*/
 CwmsFunctionEditor::CwmsFunctionEditor(QWidget* p_pqwParent)
 : QWidget(p_pqwParent),
   m_rpItem(nullptr),
@@ -53,30 +35,16 @@ CwmsFunctionEditor::CwmsFunctionEditor(QWidget* p_pqwParent)
    setupUi(this);
 }
 
-/** +-=---------------------------------------------------------Do 20. Sep 14:54:26 2012----------*
- * @method  CwmsFunctionEditor::~CwmsFunctionEditor          // public, virtual                   *
- * @return  void                                             //                                   *
- * @comment The Destructor of Class CwmsFunctionEditor                                            *
- *----------------last changed: --------------------------------Do 20. Sep 14:54:26 2012----------*/
 CwmsFunctionEditor::~CwmsFunctionEditor()
 {
-    if (IsModified())
-    {
-        if (CdmMessageManager::Ask(tr("Änderungen vorhanden"), tr("Sie haben Änderungen an der Funktion vorgenommen.\n Wollen Sie die Speichern?")))
-        {
-            Save();
-        }
-    }
+
 }
 
-/** +-=---------------------------------------------------------Do 20. Sep 16:35:47 2012----------*
- * @method  CwmsFunctionEditor::FillDialog                   // public                           *
- * @return  void                                             //                                   *
- * @param   CdmClassMethod* p_pMethod                        //                                   *
- * @param   CdmClass* p_pCdmClass                            //                                   *
- * @param   bool p_bNew                                      //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Do 20. Sep 16:35:47 2012----------*/
+void CwmsFunctionEditor::FillDialog(CdmClassMethod* p_pMethod)
+{
+    FillDialog(p_pMethod, p_pMethod->GetClass(), false);
+}
+
 void CwmsFunctionEditor::FillDialog(CdmClassMethod* p_pMethod, CdmClass* p_pCdmClass, bool p_bNew)
 {
    if (CHKPTR(p_pMethod) && CHKPTR(p_pCdmClass))
@@ -138,11 +106,6 @@ void CwmsFunctionEditor::FillDialog(CdmClassMethod* p_pMethod, CdmClass* p_pCdmC
    }
 }
 
-/** +-=---------------------------------------------------------Do 20. Sep 15:06:26 2012----------*
- * @method  CwmsFunctionEditor::FillParameters               // private                           *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Do 20. Sep 15:06:26 2012----------*/
 void CwmsFunctionEditor::FillParameters()
 {
    m_pqtwParameters->clear();
@@ -160,11 +123,6 @@ void CwmsFunctionEditor::FillParameters()
    }
 }
 
-/** +-=---------------------------------------------------------Do 20. Sep 15:43:48 2012----------*
- * @method  CwmsFunctionEditor::AddTypesToTypeBox            // private                           *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Do 20. Sep 15:43:48 2012----------*/
 void CwmsFunctionEditor::AddTypesToTypeBox()
 {
     AddTypesToTypeBox(m_pqcbType);
@@ -191,12 +149,6 @@ void CwmsFunctionEditor::AddTypesToTypeBox(QComboBox* p_pComboBox)
     p_pComboBox->addItem(tr("QObject"), eDmValueQObject);
 }
 
-
-/** +-=---------------------------------------------------------Do 22. Nov 11:22:56 2012----------*
- * @method  CwmsFunctionEditor::AddClassesToComboBox         // private                           *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Do 22. Nov 11:22:56 2012----------*/
 void CwmsFunctionEditor::AddClassesToComboBox()
 {
    CdmDataProvider* pManager = CdmSessionManager::GetDataProvider();
@@ -228,11 +180,6 @@ void CwmsFunctionEditor::AddClassesToComboBox()
    }
 }
 
-/** +-=---------------------------------------------------------Do 22. Nov 11:16:30 2012----------*
- * @method  CwmsFunctionEditor::TypeIndexChangedSlot         // private, slots                    *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Do 22. Nov 11:16:30 2012----------*/
 void CwmsFunctionEditor::TypeIndexChangedSlot()
 {
    m_pqlClass->hide();
@@ -248,11 +195,6 @@ void CwmsFunctionEditor::TypeIndexChangedSlot()
    }
 }
 
-/** +-=---------------------------------------------------------Do 22. Nov 10:38:16 2012----------*
- * @method  CwmsFunctionEditor::AddParameterClickedSlot      // private, slots                    *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Do 22. Nov 10:38:16 2012----------*/
 void CwmsFunctionEditor::AddParameterClickedSlot()
 {
    QString qstrName = m_pqleParameterName->text();
@@ -272,11 +214,6 @@ void CwmsFunctionEditor::AddParameterClickedSlot()
    FillParameters();
 }
 
-/** +-=---------------------------------------------------------Do 20. Sep 15:56:02 2012----------*
- * @method  CwmsFunctionEditor::DeleteParameterClickedSlot   // private, slots                    *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Do 20. Sep 15:56:02 2012----------*/
 void CwmsFunctionEditor::DeleteParameterClickedSlot()
 {
    QTreeWidgetItem* pItem = CwmsTreeWidgetHelper::GetSelectedItem(m_pqtwParameters);
@@ -289,11 +226,6 @@ void CwmsFunctionEditor::DeleteParameterClickedSlot()
    }
 }
 
-/** +-=---------------------------------------------------------Do 20. Sep 15:57:20 2012----------*
- * @method  CwmsFunctionEditor::MoveParameterDownClickedSlot // private, slots                    *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Do 20. Sep 15:57:20 2012----------*/
 void CwmsFunctionEditor::MoveParameterDownClickedSlot()
 {
    QTreeWidgetItem* pItem = CwmsTreeWidgetHelper::GetSelectedItem(m_pqtwParameters);
@@ -312,11 +244,6 @@ void CwmsFunctionEditor::SetParameterSelected(QString p_qstrName)
     CwmsTreeWidgetHelper::SelectItem(m_pqtwParameters, 2, p_qstrName);
 }
 
-/** +-=---------------------------------------------------------Do 20. Sep 15:57:46 2012----------*
- * @method  CwmsFunctionEditor::MoveParameterUpClickedSlot   // private, slots                    *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Do 20. Sep 15:57:46 2012----------*/
 void CwmsFunctionEditor::MoveParameterUpClickedSlot()
 {
    QTreeWidgetItem* pItem = CwmsTreeWidgetHelper::GetSelectedItem(m_pqtwParameters);
@@ -331,11 +258,6 @@ void CwmsFunctionEditor::MoveParameterUpClickedSlot()
 }
 
 
-/** +-=---------------------------------------------------------Do 20. Sep 15:58:14 2012----------*
- * @method  CwmsFunctionEditor::EnlargeCodeViewClickedSlot   // private, slots                    *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Do 20. Sep 15:58:14 2012----------*/
 void CwmsFunctionEditor::EnlargeCodeViewClickedSlot()
 {
    if (m_pqgbComment->isVisible())
@@ -352,11 +274,6 @@ void CwmsFunctionEditor::EnlargeCodeViewClickedSlot()
    }
 }
 
-/** +-=---------------------------------------------------------Do 20. Sep 15:58:45 2012----------*
- * @method  CwmsFunctionEditor::RightsClickedSlot            // private, slots                    *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Do 20. Sep 15:58:45 2012----------*/
 void CwmsFunctionEditor::RightsClickedSlot()
 {
    if (m_rpCdmFunction)
@@ -370,13 +287,6 @@ void CwmsFunctionEditor::RightsClickedSlot()
    }
 }
 
-
-
-/** +-=---------------------------------------------------------Mo 4. Feb 16:47:07 2013-----------*
- * @method  CwmsFunctionEditor::SelectIconClickedSlot        // private, slots                    *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mo 4. Feb 16:47:07 2013-----------*/
 void CwmsFunctionEditor::SelectIconClickedSlot()
 {
    QString qstrIconName = QFileDialog::getOpenFileName(this, tr("Bitte wählen Sie ein Icon aus dem Dateisystem aus"),
@@ -400,6 +310,11 @@ void CwmsFunctionEditor::SelectIconClickedSlot()
          }  
       }
    }
+}
+
+void CwmsFunctionEditor::SaveClickedSlot()
+{
+    Save();
 }
 
 bool CwmsFunctionEditor::Save()
@@ -488,14 +403,37 @@ bool CwmsFunctionEditor::IsModified()
     return bRet;
 }
 
+void CwmsFunctionEditor::DebugClickedSlot()
+{
+    Debug();
+}
+
 void CwmsFunctionEditor::Debug()
 {
     ExecuteFunction(true);
 }
 
+void CwmsFunctionEditor::ExecuteClickedSlot()
+{
+    Execute();
+}
+
 void CwmsFunctionEditor::Execute()
 {
     ExecuteFunction(false);
+}
+
+void CwmsFunctionEditor::closeEvent(QCloseEvent *event)
+{
+    if (IsModified())
+    {
+        if (CdmMessageManager::Ask(tr("Änderungen vorhanden"), tr("Sie haben Änderungen an der Funktion vorgenommen.\n Wollen Sie die Speichern?")))
+        {
+            Save();
+        }
+    }
+
+    event->accept();
 }
 
 void CwmsFunctionEditor::ExecuteFunction(bool p_bDebugger)
@@ -504,71 +442,10 @@ void CwmsFunctionEditor::ExecuteFunction(bool p_bDebugger)
 
     if (Save())
     {
-         if (CHKPTR(m_rpCdmFunction))
-         {
-            if (m_rpCdmFunction->IsStatic())
-            {
-               QVariantList qlParameters;
-
-               if (p_bDebugger)
-               {
-                  qvResult = CdmExecutor::DebugFunction(m_rpCdmFunction, nullptr, qlParameters, true, true);
-               }
-               else
-               {
-                  qvResult = CdmExecutor::ExecuteFunction(m_rpCdmFunction, nullptr, qlParameters, true, true, false, false);
-               }
-            }
-            else
-            {
-               CdmObjectContainer* pList = CwmsContainerSelectionIf::GetObjectContainer(m_rpCdmClass->GetSchemeId(), m_rpCdmClass->GetId(), this);
-
-               if (pList)
-               {
-                  CdmObject* pObject = CwmsObjectSelectionIf::GetObject(pList, nullptr, this);
-
-                  if (pObject)
-                  {
-                     QVariantList qlParameters;
-                     if (p_bDebugger)
-                     {
-                        qvResult = CdmExecutor::DebugFunction(m_rpCdmFunction, pObject, qlParameters, true, true);
-                     }
-                     else
-                     {
-                        qvResult = CdmExecutor::ExecuteFunction(m_rpCdmFunction, pObject, qlParameters, true, true, false, false);
-                     }
-                  }
-                  else
-                  {
-                      MSG_INFO(("Funktion wird nicht ausgeführt"), ("Die Funktion kann nicht ausgeführt werden, da kein Objekt gewählt wurde."));
-                  }
-               }
-            }
-         }
-  }
-
-  QVariant qConvertedValue = CsaFactory::convertToResultVariant(qvResult);
-  CwmsJson CwmsJson;
-  QString qstrResult = CwmsJson.serialize(qConvertedValue);
-
-  if (qstrResult.isEmpty() || qstrResult == "NULL")
-  {
-     qstrResult = QString::fromUtf8("Kein Rückgabewert");
-  }
-
-  QString qstrMessage = QString::fromUtf8("Funktion beendet. Rückgabewert: %1").arg(qstrResult);
-
-  MSG_INFO(("Ergebnis"), qstrMessage.toUtf8());
+        CwmsPlatformServices::ExecuteFunction(m_rpCdmFunction, p_bDebugger, this);
+    }
 }
 
-
-
-/** +-=---------------------------------------------------------Do 20. Sep 15:59:25 2012----------*
- * @method  CwmsFunctionEditor::Validate                     // private                           *
- * @return  bool                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Do 20. Sep 15:59:25 2012----------*/
 bool CwmsFunctionEditor::Validate()
 {
    bool bRet = true;
@@ -614,11 +491,6 @@ bool CwmsFunctionEditor::Validate()
    return bRet;
 }
 
-/** +-=---------------------------------------------------------Fr 9. Nov 15:27:40 2012-----------*
- * @method  CwmsFunctionEditor::SaveData                     // private                           *
- * @return  bool                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Fr 9. Nov 15:27:40 2012-----------*/
 bool CwmsFunctionEditor::SaveData()
 {
    bool bRet = false;
@@ -682,11 +554,6 @@ bool CwmsFunctionEditor::SaveData()
    return bRet;
 }
 
-/** +-=---------------------------------------------------------Mo 12. Nov 13:53:47 2012----------*
- * @method  CwmsFunctionEditor::SyntaxCheckClickedSlot       // private, slots                    *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mo 12. Nov 13:53:47 2012----------*/
 void CwmsFunctionEditor::SyntaxCheckClickedSlot()
 {
    QString qstrCode = m_pjsEditor->toPlainText();
@@ -697,7 +564,6 @@ void CwmsFunctionEditor::SyntaxCheckClickedSlot()
       MSG_INFO(("Syntax gültig"), ("Die Syntax des Codes ist gültig."));
    }
 }
-
 
 void CwmsFunctionEditor::FindNextClickedSlot()
 {

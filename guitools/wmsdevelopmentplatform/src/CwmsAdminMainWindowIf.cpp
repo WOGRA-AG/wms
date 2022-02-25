@@ -132,86 +132,87 @@
 CwmsErrorIf* CwmsAdminMainWindowIf::m_pCwmsErrorIf = nullptr;
 
 CwmsAdminMainWindowIf::CwmsAdminMainWindowIf(QWidget* parent)
-   : QMainWindow(parent),
-   m_pqlviClasses(nullptr),
-   m_pqlviViews(nullptr),
-   m_pqlviForms(nullptr),
-   m_pqlviReports(nullptr),
-   m_pqwEditor(nullptr),
-   m_pCwmsUserManager(nullptr),
-   m_pRuntime(nullptr),
-   m_rpqCurrentWidget(nullptr),
-   m_pScriptEnvironment(nullptr)
+    : QMainWindow(parent),
+      m_pqlviClasses(nullptr),
+      m_pqlviViews(nullptr),
+      m_pqlviForms(nullptr),
+      m_pqlviReports(nullptr),
+      m_pqwEditor(nullptr),
+      m_pCwmsUserManager(nullptr),
+      m_pRuntime(nullptr),
+      m_rpqCurrentWidget(nullptr),
+      m_pScriptEnvironment(nullptr)
 {
-   CwmsApplicationServices::InstallTranslationFiles();
-   setupUi(this);
-   m_pqpbClearFilter->setVisible(false);
-   m_pqaLicenceManager->setVisible(false);
-   RestoreWindowsSlot();
-   QSettings settings("WOGRA", "WMS");
-   settings.beginGroup("wms_dp");
-   restoreGeometry(settings.value("geometry").toByteArray());
-   restoreState(settings.value("windowState").toByteArray());
-   UpdateDockWidgetVisibility();
-   CreateErrorDlg();
-   FillDialog();
-   AddContextMenus();
-   CwmsServerSchemeManager cServerSchemeManager;
-   cServerSchemeManager.CheckServerScheme();
-   connect(CwmsContext::GetContext(), SIGNAL(ApplicationShutdownSignal()), this, SLOT(close()));
-   connect(m_pqaLogoutExit, SIGNAL(triggered()), this, SLOT(LogoutAndExitSlot()));
-   setEventStoreManager();
+    //m_pqdwWorkflows->hide();
+    CwmsApplicationServices::InstallTranslationFiles();
+    setupUi(this);
+    m_pqpbClearFilter->setVisible(false);
+    m_pqaLicenceManager->setVisible(false);
+    RestoreWindowsSlot();
+    QSettings settings("WOGRA", "WMS");
+    settings.beginGroup("wms_dp");
+    restoreGeometry(settings.value("geometry").toByteArray());
+    restoreState(settings.value("windowState").toByteArray());
+    UpdateDockWidgetVisibility();
+    CreateErrorDlg();
+    FillDialog();
+    AddContextMenus();
+    CwmsServerSchemeManager cServerSchemeManager;
+    cServerSchemeManager.CheckServerScheme();
+    connect(CwmsContext::GetContext(), SIGNAL(ApplicationShutdownSignal()), this, SLOT(close()));
+    connect(m_pqaLogoutExit, SIGNAL(triggered()), this, SLOT(LogoutAndExitSlot()));
+    setEventStoreManager();
 }
 
 CwmsAdminMainWindowIf::~CwmsAdminMainWindowIf()
 {
-   DELPTR(m_pCwmsUserManager)
-   DELPTR(m_pRuntime)
-   DELPTR(m_pScriptEnvironment)
+    DELPTR(m_pCwmsUserManager)
+            DELPTR(m_pRuntime)
+            DELPTR(m_pScriptEnvironment)
 }
 
 void CwmsAdminMainWindowIf::AddContextMenus()
 {
-   connect(m_pqlvModel, SIGNAL(customContextMenuRequested(const QPoint &)), 
-           this, SLOT(CustomContextMenuSlot(const QPoint &)));
+    connect(m_pqlvModel, SIGNAL(customContextMenuRequested(const QPoint &)),
+            this, SLOT(CustomContextMenuSlot(const QPoint &)));
 
-   connect(m_pqlvModel, SIGNAL(expanded(const QModelIndex&)),
-           this, SLOT(ModelTreeWidgetExpandedSlot()));
+    connect(m_pqlvModel, SIGNAL(expanded(const QModelIndex&)),
+            this, SLOT(ModelTreeWidgetExpandedSlot()));
 
-   m_pqlvModel->setContextMenuPolicy(Qt::CustomContextMenu);
+    m_pqlvModel->setContextMenuPolicy(Qt::CustomContextMenu);
 
-   connect(m_pqlvUis, SIGNAL(customContextMenuRequested(const QPoint &)), 
-           this, SLOT(CustomContextMenuSlot(const QPoint &)));
+    connect(m_pqlvUis, SIGNAL(customContextMenuRequested(const QPoint &)),
+            this, SLOT(CustomContextMenuSlot(const QPoint &)));
 
-   m_pqlvUis->setContextMenuPolicy(Qt::CustomContextMenu);
+    m_pqlvUis->setContextMenuPolicy(Qt::CustomContextMenu);
 
-   if (m_pqdwPrint)
-   {
-       connect(m_pqlvPrint, SIGNAL(customContextMenuRequested(const QPoint &)),
-               this, SLOT(CustomContextMenuSlot(const QPoint &)));
+    if (m_pqdwPrint)
+    {
+        connect(m_pqlvPrint, SIGNAL(customContextMenuRequested(const QPoint &)),
+                this, SLOT(CustomContextMenuSlot(const QPoint &)));
 
-       m_pqlvPrint->setContextMenuPolicy(Qt::CustomContextMenu);
-   }
+        m_pqlvPrint->setContextMenuPolicy(Qt::CustomContextMenu);
+    }
 
-   connect(m_pqlvApplications, SIGNAL(customContextMenuRequested(const QPoint &)), 
-           this, SLOT(CustomContextMenuSlot(const QPoint &)));
+    connect(m_pqlvApplications, SIGNAL(customContextMenuRequested(const QPoint &)),
+            this, SLOT(CustomContextMenuSlot(const QPoint &)));
 
-   m_pqlvApplications->setContextMenuPolicy(Qt::CustomContextMenu);
+    m_pqlvApplications->setContextMenuPolicy(Qt::CustomContextMenu);
 
-   connect(m_pqlvViews, SIGNAL(customContextMenuRequested(const QPoint &)), 
-           this, SLOT(CustomContextMenuSlot(const QPoint &)));
+    connect(m_pqlvViews, SIGNAL(customContextMenuRequested(const QPoint &)),
+            this, SLOT(CustomContextMenuSlot(const QPoint &)));
 
-   m_pqlvViews->setContextMenuPolicy(Qt::CustomContextMenu);
+    m_pqlvViews->setContextMenuPolicy(Qt::CustomContextMenu);
 
-   connect(m_pqlvData, SIGNAL(customContextMenuRequested(const QPoint &)), 
-           this, SLOT(CustomContextMenuSlot(const QPoint &)));
+    connect(m_pqlvData, SIGNAL(customContextMenuRequested(const QPoint &)),
+            this, SLOT(CustomContextMenuSlot(const QPoint &)));
 
-   m_pqlvData->setContextMenuPolicy(Qt::CustomContextMenu);
+    m_pqlvData->setContextMenuPolicy(Qt::CustomContextMenu);
 
-   connect(m_pqlvWorkflows, SIGNAL(customContextMenuRequested(const QPoint &)), 
-           this, SLOT(CustomContextMenuSlot(const QPoint &)));
+    connect(m_pqlvWorkflows, SIGNAL(customContextMenuRequested(const QPoint &)),
+            this, SLOT(CustomContextMenuSlot(const QPoint &)));
 
-   m_pqlvWorkflows->setContextMenuPolicy(Qt::CustomContextMenu);
+    m_pqlvWorkflows->setContextMenuPolicy(Qt::CustomContextMenu);
 }
 
 void CwmsAdminMainWindowIf::ModelTreeWidgetExpandedSlot()
@@ -221,309 +222,307 @@ void CwmsAdminMainWindowIf::ModelTreeWidgetExpandedSlot()
 
 void CwmsAdminMainWindowIf::CreateErrorDlg()
 {
-   if (!m_pCwmsErrorIf)
-   {
-      m_pCwmsErrorIf = new CwmsErrorIf();
-      CdmLogging::AddAdaptor(m_pCwmsErrorIf);
-   }
+    if (!m_pCwmsErrorIf)
+    {
+        m_pCwmsErrorIf = new CwmsErrorIf();
+        CdmLogging::AddAdaptor(m_pCwmsErrorIf);
+    }
 
-   new CwmsMessenger(this, statusBar());
+    new CwmsMessenger(this, statusBar());
 }
 
 void CwmsAdminMainWindowIf::FillDialog()
 {
-   CdmDataProvider* pCdmManager = CdmSessionManager::GetDataProvider();
+    CdmDataProvider* pCdmManager = CdmSessionManager::GetDataProvider();
 
-   if (CHKPTR(pCdmManager))
-   {
-      QList<QString> qvlDatabases;
-      
-      pCdmManager->GetSchemeList(qvlDatabases);
+    if (CHKPTR(pCdmManager))
+    {
+        QList<QString> qvlDatabases;
 
-      if (qvlDatabases.count() > 1)
-      {
-         m_pqcbDatabases->addItem("");
-      }
+        pCdmManager->GetSchemeList(qvlDatabases);
 
-      QList<QString>::iterator qvlIt = qvlDatabases.begin();
-      QList<QString>::iterator qvlItEnd = qvlDatabases.end();
+        if (qvlDatabases.count() > 1)
+        {
+            m_pqcbDatabases->addItem("");
+        }
 
-      for (; qvlIt != qvlItEnd; ++ qvlIt)
-      {
-         QString qstrDatabase = (*qvlIt);
-         m_pqcbDatabases->addItem(qstrDatabase);
-      }
+        QList<QString>::iterator qvlIt = qvlDatabases.begin();
+        QList<QString>::iterator qvlItEnd = qvlDatabases.end();
 
-      if (m_pqcbDatabases->count() == 1)
-      {
-         m_pqcbDatabases->setCurrentIndex(0);
-         DatabaseSelectedSlot();
-      }
-   }
+        for (; qvlIt != qvlItEnd; ++ qvlIt)
+        {
+            QString qstrDatabase = (*qvlIt);
+            m_pqcbDatabases->addItem(qstrDatabase);
+        }
 
-   UpdateActionState();
-   InstallBaseFunctionsToExecutor();
+        if (m_pqcbDatabases->count() == 1)
+        {
+            m_pqcbDatabases->setCurrentIndex(0);
+            DatabaseSelectedSlot();
+        }
+    }
 
-   if (!CwmsContext::GetContext()->GetPluginManager()->HasPrintingPlugin())
-   {
-       m_pqdwPrint->setEnabled(false);
-       m_pqaNewReport->setEnabled(false);
-       m_pqaReportProperties->setEnabled(false);
-   }
+    UpdateActionState();
+    InstallBaseFunctionsToExecutor();
+
+    if (!CwmsContext::GetContext()->GetPluginManager()->HasPrintingPlugin())
+    {
+        m_pqdwPrint->setEnabled(false);
+        m_pqaNewReport->setEnabled(false);
+        m_pqaReportProperties->setEnabled(false);
+    }
 }
 
 void CwmsAdminMainWindowIf::UpdateActionState()
 {
-   QString qstrDbName = m_pqcbDatabases->currentText();
+    QString qstrDbName = m_pqcbDatabases->currentText();
 
-   if (!qstrDbName.isEmpty())
-   {
-      EnableActionOnContext();
-   }
-   else
-   {
-      DisableAllContentActions();
-   }
+    if (!qstrDbName.isEmpty())
+    {
+        EnableActionOnContext();
+    }
+    else
+    {
+        DisableAllContentActions();
+    }
 }
 
 void CwmsAdminMainWindowIf::EnableActionOnContext()
 {
-   DisableAllContentActions();
-   m_pqaCreateClass->setEnabled(true);
-   m_pqaNewPackage->setEnabled(true);
-   m_pqaCreateObjectList->setEnabled(true);
-   m_pqaCreateDbCode->setEnabled(true);
-   m_pqaCreateDbQueries->setEnabled(true);
-   m_pqaCreateDocumentation->setEnabled(true);
-   m_pqaDatabaseJournal->setEnabled(true);
-   m_pqaDbRights_2->setEnabled(true);
-   m_pqaDeleteDatabase->setEnabled(true);
-   m_pqaExportJson->setEnabled(true);
-   m_pqaLanguages->setEnabled(true);
-   m_pqaNewApplication->setEnabled(true);
-   m_pqaNewGenericObjectForm->setEnabled(true);
-   m_pqaNewObjectObjectListForm->setEnabled(true);
-   m_pqaNewFormLibrary->setEnabled(true);
-   m_pqaNewResource->setEnabled(true);
-   m_pqaScriptEnvironment->setEnabled(true);
+    DisableAllContentActions();
+    m_pqaCreateClass->setEnabled(true);
+    m_pqaNewPackage->setEnabled(true);
+    m_pqaCreateObjectList->setEnabled(true);
+    m_pqaCreateDbCode->setEnabled(true);
+    m_pqaCreateDbQueries->setEnabled(true);
+    m_pqaCreateDocumentation->setEnabled(true);
+    m_pqaDatabaseJournal->setEnabled(true);
+    m_pqaDbRights_2->setEnabled(true);
+    m_pqaDeleteDatabase->setEnabled(true);
+    m_pqaExportJson->setEnabled(true);
+    m_pqaLanguages->setEnabled(true);
+    m_pqaNewApplication->setEnabled(true);
+    m_pqaNewGenericObjectForm->setEnabled(true);
+    m_pqaNewObjectObjectListForm->setEnabled(true);
+    m_pqaNewFormLibrary->setEnabled(true);
+    m_pqaNewResource->setEnabled(true);
+    m_pqaScriptEnvironment->setEnabled(true);
 
-
-   if (!CwmsContext::GetContext()->GetPluginManager()->HasPrintingPlugin())
-   {
+    if (!CwmsContext::GetContext()->GetPluginManager()->HasPrintingPlugin())
+    {
         m_pqaNewReport->setEnabled(true);
         m_pqaReportProperties->setEnabled(true);
-   }
+    }
 
+    m_pqaNewStandardObjectListForm->setEnabled(true);
+    m_pqaNewUserDefinedForm->setEnabled(true);
+    m_pqaNewView->setEnabled(true);
+    m_pqaNewViewObjectListForm->setEnabled(true);
+    m_pqaNewFormSearch->setEnabled(true);
+    m_pqaRefresh->setEnabled(true);
+    m_pqaWorkflowTeams->setEnabled(true);
+    m_pqaImportDeployment->setEnabled(true);
 
-   m_pqaNewStandardObjectListForm->setEnabled(true);
-   m_pqaNewUserDefinedForm->setEnabled(true);
-   m_pqaNewView->setEnabled(true);
-   m_pqaNewViewObjectListForm->setEnabled(true);
-   m_pqaNewFormSearch->setEnabled(true);
-   m_pqaRefresh->setEnabled(true);
-   m_pqaWorkflowTeams->setEnabled(true);
-   m_pqaImportDeployment->setEnabled(true);
-   
-   QTreeWidgetItem* pqlviItem = GetSelectedItem();
-   QString qstrDbName = m_pqcbDatabases->currentText();
+    QTreeWidgetItem* pqlviItem = GetSelectedItem();
+    QString qstrDbName = m_pqcbDatabases->currentText();
 
-   if (pqlviItem && !qstrDbName.isEmpty())
-   {
-      EwmsTreeItemType eType = static_cast<EwmsTreeItemType>(pqlviItem->data(1, Qt::UserRole).toInt());
+    if (pqlviItem && !qstrDbName.isEmpty())
+    {
+        EwmsTreeItemType eType = static_cast<EwmsTreeItemType>(pqlviItem->data(1, Qt::UserRole).toInt());
 
-      if (eType != eWmsTreeItemTypeNone)
-      {
-         m_pqaEdit_2->setEnabled(true);
-         m_pqaDelete->setEnabled(true);
-      }
+        if (eType != eWmsTreeItemTypeNone)
+        {
+            m_pqaEdit_2->setEnabled(true);
+            m_pqaDelete->setEnabled(true);
+        }
 
-      if (eType == eWmsTreeItemTypeClass)
-      {
-         m_pqaGenerateCode->setEnabled(true);
-         m_pqaCreateObjectList->setEnabled(true);
+        if (eType == eWmsTreeItemTypeClass)
+        {
+            m_pqaGenerateCode->setEnabled(true);
+            m_pqaCreateObjectList->setEnabled(true);
 
-      }
-      else if (eType == eWmsTreeItemTypeContainer)
-      {
-         m_pqaExport->setEnabled(true);
-         m_pqaDeleteAllObjects->setEnabled(true);
-         m_pqaObjectListJournal->setEnabled(true);
-         m_pqaObjectListProperties->setEnabled(true);
-      }
-      else if (eType == eWmsTreeItemTypeReport)
-      {
-         m_pqaReportProperties->setEnabled(true);
-      }
-      else if (eType == eWmsTreeItemTypeApplication)
-      {
-         m_pqaExecuteApplication->setEnabled(true);
-      }
-   }
+        }
+        else if (eType == eWmsTreeItemTypeContainer)
+        {
+            m_pqaExport->setEnabled(true);
+            m_pqaDeleteAllObjects->setEnabled(true);
+            m_pqaObjectListJournal->setEnabled(true);
+            m_pqaObjectListProperties->setEnabled(true);
+        }
+        else if (eType == eWmsTreeItemTypeReport)
+        {
+            m_pqaReportProperties->setEnabled(true);
+        }
+        else if (eType == eWmsTreeItemTypeApplication)
+        {
+            m_pqaExecuteApplication->setEnabled(true);
+        }
+    }
 }
 
 void CwmsAdminMainWindowIf::DisableAllContentActions()
 {
     if (!CwmsContext::GetContext()->IsTimedOut())
     {
-       m_pqaCreateClass->setEnabled(false);
-       m_pqaNewPackage->setEnabled(false);
-       m_pqaCreateDbCode->setEnabled(false);
-       m_pqaCreateDbQueries->setEnabled(false);
-       m_pqaCreateDocumentation->setEnabled(false);
-       m_pqaCreateObjectList->setEnabled(false);
-       m_pqaDatabaseJournal->setEnabled(false);
-       m_pqaDbRights_2->setEnabled(false);
-       m_pqaDelete->setEnabled(false);
-       m_pqaDeleteAllObjects->setEnabled(false);
-       m_pqaDeleteDatabase->setEnabled(false);
-       m_pqaEdit_2->setEnabled(false);
-       m_pqaExecuteApplication->setEnabled(false);
-       m_pqaExport->setEnabled(false);
-       m_pqaExportJson->setEnabled(false);
-       m_pqaGenerateCode->setEnabled(false);
-       m_pqaLanguages->setEnabled(false);
-       m_pqaNewApplication->setEnabled(false);
-       m_pqaNewGenericObjectForm->setEnabled(false);
-       m_pqaNewObjectObjectListForm->setEnabled(false);
-       m_pqaNewFormLibrary->setEnabled(false);
-       m_pqaNewResource->setEnabled(false);
-       m_pqaScriptEnvironment->setEnabled(false);
+        m_pqaCreateClass->setEnabled(false);
+        m_pqaNewPackage->setEnabled(false);
+        m_pqaCreateDbCode->setEnabled(false);
+        m_pqaCreateDbQueries->setEnabled(false);
+        m_pqaCreateDocumentation->setEnabled(false);
+        m_pqaCreateObjectList->setEnabled(false);
+        m_pqaDatabaseJournal->setEnabled(false);
+        m_pqaDbRights_2->setEnabled(false);
+        m_pqaDelete->setEnabled(false);
+        m_pqaDeleteAllObjects->setEnabled(false);
+        m_pqaDeleteDatabase->setEnabled(false);
+        m_pqaEdit_2->setEnabled(false);
+        m_pqaExecuteApplication->setEnabled(false);
+        m_pqaExport->setEnabled(false);
+        m_pqaExportJson->setEnabled(false);
+        m_pqaGenerateCode->setEnabled(false);
+        m_pqaLanguages->setEnabled(false);
+        m_pqaNewApplication->setEnabled(false);
+        m_pqaNewGenericObjectForm->setEnabled(false);
+        m_pqaNewObjectObjectListForm->setEnabled(false);
+        m_pqaNewFormLibrary->setEnabled(false);
+        m_pqaNewResource->setEnabled(false);
+        m_pqaScriptEnvironment->setEnabled(false);
 
 
-       if (!CwmsContext::GetContext()->GetPluginManager()->HasPrintingPlugin())
-       {
+        if (!CwmsContext::GetContext()->GetPluginManager()->HasPrintingPlugin())
+        {
             m_pqaNewReport->setEnabled(false);
             m_pqaReportProperties->setEnabled(false);
-       }
+        }
 
-       m_pqaNewStandardObjectListForm->setEnabled(false);
-       m_pqaNewUserDefinedForm->setEnabled(false);
-       m_pqaNewView->setEnabled(false);
-       m_pqaNewViewObjectListForm->setEnabled(false);
-       m_pqaObjectListJournal->setEnabled(false);
-       m_pqaRefresh->setEnabled(false);
-       m_pqaReportProperties->setEnabled(false);
-       m_pqaNewFormSearch->setEnabled(false);
-       m_pqaWorkflowTeams->setEnabled(false);
-       m_pqaObjectListProperties->setEnabled(false);
+        m_pqaNewStandardObjectListForm->setEnabled(false);
+        m_pqaNewUserDefinedForm->setEnabled(false);
+        m_pqaNewView->setEnabled(false);
+        m_pqaNewViewObjectListForm->setEnabled(false);
+        m_pqaObjectListJournal->setEnabled(false);
+        m_pqaRefresh->setEnabled(false);
+        m_pqaReportProperties->setEnabled(false);
+        m_pqaNewFormSearch->setEnabled(false);
+        m_pqaWorkflowTeams->setEnabled(false);
+        m_pqaObjectListProperties->setEnabled(false);
     }
 }
 
 void CwmsAdminMainWindowIf::DatabaseSelectedSlot()
 {
-   ClearEditor();
-   QString qstrDbName = m_pqcbDatabases->currentText();
+    ClearEditor();
+    QString qstrDbName = m_pqcbDatabases->currentText();
 
-   if (!qstrDbName.isEmpty())
-   {
-      FillSchemeContent(qstrDbName);
-   }
+    if (!qstrDbName.isEmpty())
+    {
+        FillSchemeContent(qstrDbName);
+    }
 }
 
 void CwmsAdminMainWindowIf::ClearEditor()
 {
-   m_pqMdiArea->closeAllSubWindows();
-   m_pqlvApplications->clear();
-   m_pqlvModel->clear();
-   m_pqlvData->clear();
+    m_pqMdiArea->closeAllSubWindows();
+    m_pqlvApplications->clear();
+    m_pqlvModel->clear();
+    m_pqlvData->clear();
 
-   if (!CwmsContext::GetContext()->GetPluginManager()->HasPrintingPlugin())
-   {
+    if (!CwmsContext::GetContext()->GetPluginManager()->HasPrintingPlugin())
+    {
         m_pqlvPrint->clear();
-   }
+    }
 
-   m_pqlvUis->clear();
-   m_pqlvWorkflows->clear();
-   m_pqlvViews->clear();
-   m_pqcbLanguage->clear();
+    m_pqlvUis->clear();
+    m_pqlvWorkflows->clear();
+    m_pqlvViews->clear();
+    m_pqcbLanguage->clear();
 }
 
 void CwmsAdminMainWindowIf::RefreshClickedSlot()
 {
-   DatabaseSelectedSlot();
+    DatabaseSelectedSlot();
 }
 
 void CwmsAdminMainWindowIf::FillSchemeContent(QString p_qstrDbName)
 {
-   CdmMessageManager::StartAsyncMessageCollection();
-   int iSteps = 0;
-   CdmMessageManager::StartProgressBar("LoadScheme", tr("Lade Schema"), tr("Beginne Schema zu laden"), 9);
-   QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
-   m_pqcbLanguage->clear();
-   CdmDataProvider* pCdmManager = CdmSessionManager::GetDataProvider();
+    CdmMessageManager::StartAsyncMessageCollection();
+    int iSteps = 0;
+    CdmMessageManager::StartProgressBar("LoadScheme", tr("Lade Schema"), tr("Beginne Schema zu laden"), 9);
+    QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+    m_pqcbLanguage->clear();
+    CdmDataProvider* pCdmManager = CdmSessionManager::GetDataProvider();
 
-   if (CHKPTR(pCdmManager))
-   {
-      if (pCdmManager->GetCurrentScheme())
-      {
-        CwmsContext::GetContext()->GetServiceManager()->DeleteAllServices();
-      }
+    if (CHKPTR(pCdmManager))
+    {
+        if (pCdmManager->GetCurrentScheme())
+        {
+            CwmsContext::GetContext()->GetServiceManager()->DeleteAllServices();
+        }
 
-      pCdmManager->RemoveAllLocalSchemes();
-      pCdmManager->LoadScheme(p_qstrDbName);
-      CdmClassManager* pCdmClassManager = pCdmManager->GetClassManager(p_qstrDbName);
-      
-      if (CHKPTR(pCdmClassManager))
-      {
-          CdmMessageManager::SetProgress("LoadScheme", tr("Lade Reports"), ++iSteps);
-          FillReports();
-          CdmMessageManager::SetProgress("LoadScheme", tr("Lade Sichten"), ++iSteps);
-          FillViews();
-          CwmsFormManager formManager;
-          Q_UNUSED(formManager)
-          CdmMessageManager::SetProgress("LoadScheme", tr("Aktualisiere Plugins"), ++iSteps);
-         CwmsContext::GetContext()->GetPluginManager()->RefreshPlugins(this);
+        pCdmManager->RemoveAllLocalSchemes();
+        pCdmManager->LoadScheme(p_qstrDbName);
+        CdmClassManager* pCdmClassManager = pCdmManager->GetClassManager(p_qstrDbName);
 
-         if (!CwmsContext::GetContext()->GetPluginManager()->HasPrintingPlugin())
-         {
-             m_pqdwPrint->setEnabled(false);
-             m_pqaNewReport->setEnabled(false);
-             m_pqaReportProperties->setEnabled(false);
-         }
-         else
-         {
-             m_pqdwPrint->setEnabled(true);
-             m_pqaNewReport->setEnabled(true);
-             m_pqaReportProperties->setEnabled(true);
-         }
+        if (CHKPTR(pCdmClassManager))
+        {
+            CdmMessageManager::SetProgress("LoadScheme", tr("Lade Reports"), ++iSteps);
+            FillReports();
+            CdmMessageManager::SetProgress("LoadScheme", tr("Lade Sichten"), ++iSteps);
+            FillViews();
+            CwmsFormManager formManager;
+            Q_UNUSED(formManager)
+            CdmMessageManager::SetProgress("LoadScheme", tr("Aktualisiere Plugins"), ++iSteps);
+            CwmsContext::GetContext()->GetPluginManager()->RefreshPlugins(this);
 
-         CwmsImExportManager cManager;
-         CdmMessageManager::SetProgress("LoadScheme", tr("Fülle Klassen"), ++iSteps);
-         FillClasses(pCdmClassManager);
-         CdmMessageManager::SetProgress("LoadScheme", tr("Fülle Objectcontainer"), ++iSteps);
-         CwmsObjectContainerDataFiller::FillAllObjectContainersToView(m_pqlvData, m_pqchbShowTechnicalItems->isChecked());
-         CwmsTreeWidgetHelper::ResizeColumnsToContent(m_pqlvData);
+            if (!CwmsContext::GetContext()->GetPluginManager()->HasPrintingPlugin())
+            {
+                m_pqdwPrint->setEnabled(false);
+                m_pqaNewReport->setEnabled(false);
+                m_pqaReportProperties->setEnabled(false);
+            }
+            else
+            {
+                m_pqdwPrint->setEnabled(true);
+                m_pqaNewReport->setEnabled(true);
+                m_pqaReportProperties->setEnabled(true);
+            }
 
-         CdmMessageManager::SetProgress("LoadScheme", tr("Fülle Formulare"), ++iSteps);
-         FillForms();
-         CdmMessageManager::SetProgress("LoadScheme", tr("Fülle Applikationen"), ++iSteps);
-         FillApplications();
-         CdmMessageManager::SetProgress("LoadScheme", tr("Fülle Sprachen"), ++iSteps);
-         FillLanguages();
-         CdmMessageManager::SetProgress("LoadScheme", tr("Fülle Workflows"), ++iSteps);
-         FillWorkflows();
+            CwmsImExportManager cManager;
+            CdmMessageManager::SetProgress("LoadScheme", tr("Fülle Klassen"), ++iSteps);
+            FillClasses(pCdmClassManager);
+            CdmMessageManager::SetProgress("LoadScheme", tr("Fülle Objectcontainer"), ++iSteps);
+            CwmsObjectContainerDataFiller::FillAllObjectContainersToView(m_pqlvData, m_pqchbShowTechnicalItems->isChecked());
+            CwmsTreeWidgetHelper::ResizeColumnsToContent(m_pqlvData);
 
-         if (!CwmsContext::GetContext()->GetPluginManager()->HasPrintingPlugin())
-         {
-             m_pqdwPrint->setEnabled(false);
-             m_pqaNewReport->setEnabled(false);
-             m_pqaReportProperties->setEnabled(false);
-         }
-         else
-         {
-             m_pqdwPrint->setEnabled(true);
-             m_pqaNewReport->setEnabled(true);
-             m_pqaReportProperties->setEnabled(true);
-         }
-      }
+            CdmMessageManager::SetProgress("LoadScheme", tr("Fülle Formulare"), ++iSteps);
+            FillForms();
+            CdmMessageManager::SetProgress("LoadScheme", tr("Fülle Applikationen"), ++iSteps);
+            FillApplications();
+            CdmMessageManager::SetProgress("LoadScheme", tr("Fülle Sprachen"), ++iSteps);
+            FillLanguages();
+            CdmMessageManager::SetProgress("LoadScheme", tr("Fülle Workflows"), ++iSteps);
+            FillWorkflows();
 
-      SubscribeEventMethods(pCdmClassManager);
-   }
+            if (!CwmsContext::GetContext()->GetPluginManager()->HasPrintingPlugin())
+            {
+                m_pqdwPrint->setEnabled(false);
+                m_pqaNewReport->setEnabled(false);
+                m_pqaReportProperties->setEnabled(false);
+            }
+            else
+            {
+                m_pqdwPrint->setEnabled(true);
+                m_pqaNewReport->setEnabled(true);
+                m_pqaReportProperties->setEnabled(true);
+            }
+        }
 
-   EnableActionOnContext();
-   QApplication::restoreOverrideCursor();
-   CdmMessageManager::CloseProgressBar("LoadScheme");
-   CdmMessageManager::EndAndShowAsyncMessageCollection();
+        SubscribeEventMethods(pCdmClassManager);
+    }
+
+    EnableActionOnContext();
+    QApplication::restoreOverrideCursor();
+    CdmMessageManager::CloseProgressBar("LoadScheme");
+    CdmMessageManager::EndAndShowAsyncMessageCollection();
 }
 
 void CwmsAdminMainWindowIf::SubscribeEventMethods(CdmClassManager *pCdmClassManager)
@@ -562,34 +561,34 @@ void CwmsAdminMainWindowIf::FillLanguages()
 
 void CwmsAdminMainWindowIf::FillApplications()
 {
-   CwmsMiscDataFiller::FillApplications(m_pqlvApplications);
-   CwmsTreeWidgetHelper::ResizeColumnsToContent(m_pqlvApplications);
+    CwmsMiscDataFiller::FillApplications(m_pqlvApplications);
+    CwmsTreeWidgetHelper::ResizeColumnsToContent(m_pqlvApplications);
 }
 
 void CwmsAdminMainWindowIf::FillForms()
 {
-   CwmsMiscDataFiller::FillForms(m_pqlvUis);
-   CwmsTreeWidgetHelper::ResizeColumnsToContent(m_pqlvUis);
+    CwmsMiscDataFiller::FillForms(m_pqlvUis);
+    CwmsTreeWidgetHelper::ResizeColumnsToContent(m_pqlvUis);
 }
 
 void CwmsAdminMainWindowIf::FillReports()
 {
-   CwmsReportManager cReportManager; //will be done for creating the datastructure
-   CwmsMiscDataFiller::FillReports(m_pqlvPrint);
-   CwmsTreeWidgetHelper::ResizeColumnsToContent(m_pqlvPrint);
+    CwmsReportManager cReportManager; //will be done for creating the datastructure
+    CwmsMiscDataFiller::FillReports(m_pqlvPrint);
+    CwmsTreeWidgetHelper::ResizeColumnsToContent(m_pqlvPrint);
 }
 
 void CwmsAdminMainWindowIf::FillViews()
 {
-   CwmsMiscDataFiller::FillViews(m_pqlvViews);
-   CwmsTreeWidgetHelper::ResizeColumnsToContent(m_pqlvViews);
-   ViewFilterEnterPressedSlot();
+    CwmsMiscDataFiller::FillViews(m_pqlvViews);
+    CwmsTreeWidgetHelper::ResizeColumnsToContent(m_pqlvViews);
+    ViewFilterEnterPressedSlot();
 }
 
 void CwmsAdminMainWindowIf::FillWorkflows()
 {
-   CwmsMiscDataFiller::FillWorkflows(m_pqlvWorkflows);
-   CwmsTreeWidgetHelper::ResizeColumnsToContent(m_pqlvWorkflows);
+    CwmsMiscDataFiller::FillWorkflows(m_pqlvWorkflows);
+    CwmsTreeWidgetHelper::ResizeColumnsToContent(m_pqlvWorkflows);
 }
 
 void CwmsAdminMainWindowIf::RefreshClasses()
@@ -598,12 +597,12 @@ void CwmsAdminMainWindowIf::RefreshClasses()
 
     if (CHKPTR(pCdmManager))
     {
-       CdmClassManager* pCdmClassManager = pCdmManager->GetClassManager();
+        CdmClassManager* pCdmClassManager = pCdmManager->GetClassManager();
 
-       if (CHKPTR(pCdmClassManager))
-       {
-           FillClasses(pCdmClassManager);
-       }
+        if (CHKPTR(pCdmClassManager))
+        {
+            FillClasses(pCdmClassManager);
+        }
     }
 }
 
@@ -613,574 +612,649 @@ void CwmsAdminMainWindowIf::CloseClassSubWindows()
 
     for (int iCounter = 0; iCounter < qlSubWindows.count(); ++iCounter)
     {
-       QMdiSubWindow* pTempWindow = qlSubWindows[iCounter];
-       QString qstrUri = pTempWindow->objectName();
-       CdmLocatedElement* pElement = CdmSessionManager::GetDataProvider()->GetUriObject(qstrUri);
+        QMdiSubWindow* pTempWindow = qlSubWindows[iCounter];
+        QString qstrUri = pTempWindow->objectName();
+        CdmLocatedElement* pElement = CdmSessionManager::GetDataProvider()->GetUriObject(qstrUri);
 
-       if (pElement && pElement->IsClass())
-       {
-           auto pClassEditor = dynamic_cast<CwmsClassEditorIf*> (pTempWindow->widget());
+        if (pElement && pElement->IsClass())
+        {
+            auto pClassEditor = dynamic_cast<CwmsClassEditorIf*> (pTempWindow->widget());
 
-           if (CHKPTR(pClassEditor))
-           {
-               pClassEditor->FillFunctions();
-               pClassEditor->FillMembers();
-           }
-       }
+            if (CHKPTR(pClassEditor))
+            {
+                pClassEditor->FillFunctions();
+                pClassEditor->FillMembers();
+            }
+        }
     }
 }
 
 void CwmsAdminMainWindowIf::FillClasses(CdmClassManager* p_pCdmClassManager)
 {
-   if (CHKPTR(p_pCdmClassManager))
-   {
-      m_pqlvModel->clear();
-      QTreeWidgetItem* pItem = new QTreeWidgetItem(m_pqlvModel);
-      pItem->setText(0, tr("Klassen"));
-      CwmsClassDataFiller::FillClasses(p_pCdmClassManager, pItem, false, m_pqchbShowTechnicalItems->isChecked());
-      CwmsTreeWidgetHelper::ResizeColumnsToContent(m_pqlvModel);
-      m_pqcbClassFilter->clear();
-      disconnect(m_pqcbClassFilter, SIGNAL(currentTextChanged(QString)), this, SLOT(ClassFilterChangedSlot()));
-      CwmsClassDataFiller::FillClassesToComboBox(m_pqcbClassFilter, false, true, m_pqchbShowTechnicalItems->isChecked());
-      connect(m_pqcbClassFilter, SIGNAL(currentTextChanged(QString)), this, SLOT(ClassFilterChangedSlot()));
-	  m_pqlvModel->sortItems(0, Qt::AscendingOrder);
-	  
-      QCompleter* pQCompleter = m_pqcbClassFilter->completer();
+    if (CHKPTR(p_pCdmClassManager))
+    {
+        m_pqlvModel->clear();
+        QTreeWidgetItem* pItem = new QTreeWidgetItem(m_pqlvModel);
+        pItem->setText(0, tr("Klassen"));
+        CwmsClassDataFiller::FillClasses(p_pCdmClassManager, pItem, false, m_pqchbShowTechnicalItems->isChecked());
+        CwmsTreeWidgetHelper::ResizeColumnsToContent(m_pqlvModel);
+        m_pqcbClassFilter->clear();
+        disconnect(m_pqcbClassFilter, SIGNAL(currentTextChanged(QString)), this, SLOT(ClassFilterChangedSlot()));
+        CwmsClassDataFiller::FillClassesToComboBox(m_pqcbClassFilter, false, true, m_pqchbShowTechnicalItems->isChecked());
+        connect(m_pqcbClassFilter, SIGNAL(currentTextChanged(QString)), this, SLOT(ClassFilterChangedSlot()));
+        m_pqlvModel->sortItems(0, Qt::AscendingOrder);
 
-      if (pQCompleter)
-      {
-          pQCompleter->setCompletionMode(QCompleter::PopupCompletion);
-          pQCompleter->setMaxVisibleItems(30);
-          pQCompleter->setFilterMode(Qt::MatchContains);
-      }
+        QCompleter* pQCompleter = m_pqcbClassFilter->completer();
 
-      ClassFilterEnterPressedSlot();
-   }
+        if (pQCompleter)
+        {
+            pQCompleter->setCompletionMode(QCompleter::PopupCompletion);
+            pQCompleter->setMaxVisibleItems(30);
+            pQCompleter->setFilterMode(Qt::MatchContains);
+        }
+
+        ClassFilterEnterPressedSlot();
+    }
 }
 
 void CwmsAdminMainWindowIf::FillObjectLists(CdmClass* p_pCdmClass, QTreeWidgetItem* p_pqtwClass)
 {
-   CwmsObjectContainerDataFiller::FillObjectContainersToClass(p_pCdmClass, p_pqtwClass);
+    CwmsObjectContainerDataFiller::FillObjectContainersToClass(p_pCdmClass, p_pqtwClass);
 }
 
 void CwmsAdminMainWindowIf::SchemeContentSelectedSlot()
 {
-   BODY_TRY
-   m_rpqCurrentWidget = static_cast<QTreeWidget*> (sender());
-   QTreeWidgetItem* p_pItem = GetSelectedItem();
-   QString qstrDbName = m_pqcbDatabases->currentText();
+    BODY_TRY
+            m_rpqCurrentWidget = static_cast<QTreeWidget*> (sender());
+    QTreeWidgetItem* p_pItem = GetSelectedItem();
+    QString qstrDbName = m_pqcbDatabases->currentText();
 
-   if (p_pItem && !qstrDbName.isEmpty())
-   {
-      EwmsTreeItemType eType = static_cast<EwmsTreeItemType>(p_pItem->data(1, Qt::UserRole).toInt());
+    if (p_pItem && !qstrDbName.isEmpty())
+    {
+        EwmsTreeItemType eType = static_cast<EwmsTreeItemType>(p_pItem->data(1, Qt::UserRole).toInt());
 
-      if (eType == eWmsTreeItemTypeContainer) // a objectlist is marked
-      {
-         OpenContainerEditor(p_pItem);
-      }
-      else if (eType == eWmsTreeItemTypeView) // a class is marked
-      {
-         OpenViewViewer(p_pItem);
-      }
-      else if (eType == eWmsTreeItemTypeClass)
-      {
-         OpenClassEditor(p_pItem);
-      }
-      else if (eType == eWmsTreeItemTypeApplication)
-      {
-         OpenApplicationEditor();
-      }
-   }
+        if (eType == eWmsTreeItemTypeContainer) // a objectlist is marked
+        {
+            OpenContainerEditor(p_pItem);
+        }
+        else if (eType == eWmsTreeItemTypeView) // a class is marked
+        {
+            OpenViewViewer(p_pItem);
+        }
+        else if (eType == eWmsTreeItemTypeClass)
+        {
+            OpenClassEditor(p_pItem);
+        }
+        else if (eType == eWmsTreeItemTypeApplication)
+        {
+            OpenApplicationEditor();
+        }
+    }
 
-   if (!CwmsContext::GetContext()->IsTimedOut())
-   {
+    if (!CwmsContext::GetContext()->IsTimedOut())
+    {
         EnableActionOnContext();
-   }
-   BODY_CATCH
+    }
+    BODY_CATCH
 }
 
 void CwmsAdminMainWindowIf::EditSlot()
 {
-   QObject* pObject = sender();
-   QString qstrClassName = pObject->metaObject()->className();
+    QObject* pObject = sender();
+    QString qstrClassName = pObject->metaObject()->className();
 
-   if (qstrClassName == "QTreeWidget")
-   {
-      m_rpqCurrentWidget = static_cast<QTreeWidget*> (sender());
-   }
+    if (qstrClassName == "QTreeWidget")
+    {
+        m_rpqCurrentWidget = static_cast<QTreeWidget*> (sender());
+    }
 
-   QTreeWidgetItem* pItem = GetSelectedItem();
-   EditSlot(pItem);
+    QTreeWidgetItem* pItem = GetSelectedItem();
+    EditSlot(pItem);
 }
 
 void CwmsAdminMainWindowIf::EditSlot(QTreeWidgetItem* p_pItem)
 {
-   QString qstrDbName = m_pqcbDatabases->currentText();
+    QString qstrDbName = m_pqcbDatabases->currentText();
 
-   if (p_pItem && !qstrDbName.isEmpty())
-   {
-      EwmsTreeItemType eType = static_cast<EwmsTreeItemType>(p_pItem->data(1, Qt::UserRole).toInt());
+    if (p_pItem && !qstrDbName.isEmpty())
+    {
+        EwmsTreeItemType eType = static_cast<EwmsTreeItemType>(p_pItem->data(1, Qt::UserRole).toInt());
 
-      if (eType == eWmsTreeItemTypeContainer) // a objectlist is marked
-      {
-         OpenContainerEditor(p_pItem);
-      }
-      else if (eType == eWmsTreeItemTypeView) // a class is marked
-      {
-         EditViewSlot();
-      }
-      else if (eType == eWmsTreeItemTypeClass)
-      {
-         OpenClassEditor(p_pItem);
-      }
-      else if (eType == eWmsTreeItemTypeApplication)
-      {
-         OpenApplicationEditor();
-      }
-      else if (eType == eWmsTreeItemTypeFormGenericObject)
-      {
-         EditGenericObjectFormSlot();            
-      }
-      else if (eType == eWmsTreeItemTypeFormObjectObjectList)
-      {
-         EditObjectObjectListFormSlot();
-      }
-      else if (eType == eWmsTreeItemTypeFormStandardObjectList)
-      {
-         EditStandardObjectListFormSlot();
-      }
-      else if (eType == eWmsTreeItemTypeFormUserDefined)
-      {
-         EditUserDefinedFormSlot();
-      }
-      else if (eType == eWmsTreeItemTypeFormViewObjectList)
-      {
-         EditViewObjectListFormSlot();
-      }
-      else if (eType == eWmsTreeItemTypeMember)
-      {
-         EditMemberSlot();
-      }
-      else if (eType == eWmsTreeItemTypeView)
-      {
-         EditViewSlot();
-      }
-      else if (eType == eWmsTreeItemTypeReport)
-      {
-         EditReportSlot();
-      }
-      else if (eType == eWmsTreeItemTypeFormSearch)
-      {
-         EditSearchFormSlot();
-      }
-      else if (eType == eWmsTreeItemTypeWorkflow)
-      {
-         EditWorkflowSlot();
-      }
-      else if (eType == eWmsTreeItemTypePackage)
-      {
-         EditPackageSlot();
-      }
-	  else if (eType == eWmsTreeItemTypeFunction)
-	  {
-		  EditFunctionSlot();
-	  }
-	  else if (eType == eWmsTreeItemTypeMember)
-	  {
-		  EditMemberSlot();
-	  }
-      else if (eType == eWmsTreeItemTypeFormLibrary)
-      {
-          EditLibrarySlot();
-      }
-      else if (eType == eWmsTreeItemTypeResource)
-      {
-          EditResourceSlot();
-      }
-      else if (eType == eWmsTreeItemTypeInteractiveComponentForm)
-      {
-          EditInteractiveComponentFormSlot();
-      }
-      else if (eType == eWmsTreeItemTypeSingletonClass)
-      {
-          EditSingleton();
-      }
-   }
+        if (eType == eWmsTreeItemTypeContainer) // a objectlist is marked
+        {
+            OpenContainerEditor(p_pItem);
+        }
+        else if (eType == eWmsTreeItemTypeView) // a class is marked
+        {
+            EditViewSlot();
+        }
+        else if (eType == eWmsTreeItemTypeClass)
+        {
+            OpenClassEditor(p_pItem);
+        }
+        else if (eType == eWmsTreeItemTypeApplication)
+        {
+            OpenApplicationEditor();
+        }
+        else if (eType == eWmsTreeItemTypeFormGenericObject)
+        {
+            EditGenericObjectFormSlot();
+        }
+        else if (eType == eWmsTreeItemTypeFormObjectObjectList)
+        {
+            EditObjectObjectListFormSlot();
+        }
+        else if (eType == eWmsTreeItemTypeFormStandardObjectList)
+        {
+            EditStandardObjectListFormSlot();
+        }
+        else if (eType == eWmsTreeItemTypeFormUserDefined)
+        {
+            EditUserDefinedFormSlot();
+        }
+        else if (eType == eWmsTreeItemTypeFormViewObjectList)
+        {
+            EditViewObjectListFormSlot();
+        }
+        else if (eType == eWmsTreeItemTypeMember)
+        {
+            EditMemberSlot();
+        }
+        else if (eType == eWmsTreeItemTypeView)
+        {
+            EditViewSlot();
+        }
+        else if (eType == eWmsTreeItemTypeReport)
+        {
+            EditReportSlot();
+        }
+        else if (eType == eWmsTreeItemTypeFormSearch)
+        {
+            EditSearchFormSlot();
+        }
+        else if (eType == eWmsTreeItemTypeWorkflow)
+        {
+            EditWorkflowSlot();
+        }
+        else if (eType == eWmsTreeItemTypePackage)
+        {
+            EditPackageSlot();
+        }
+        else if (eType == eWmsTreeItemTypeFunction)
+        {
+            EditFunctionSlot();
+        }
+        else if (eType == eWmsTreeItemTypeMember)
+        {
+            EditMemberSlot();
+        }
+        else if (eType == eWmsTreeItemTypeFormLibrary)
+        {
+            EditLibrarySlot();
+        }
+        else if (eType == eWmsTreeItemTypeResource)
+        {
+            EditResourceSlot();
+        }
+        else if (eType == eWmsTreeItemTypeInteractiveComponentForm)
+        {
+            EditInteractiveComponentFormSlot();
+        }
+        else if (eType == eWmsTreeItemTypeSingletonClass)
+        {
+            EditSingleton();
+        }
+    }
 }
 
 void CwmsAdminMainWindowIf::DeleteSlot()
 {
-   QList<QTreeWidgetItem*> qlItems = GetSelectedItems();
-   QString qstrDbName = m_pqcbDatabases->currentText();
+    QList<QTreeWidgetItem*> qlItems = GetSelectedItems();
+    QString qstrDbName = m_pqcbDatabases->currentText();
 
-   if (qlItems.count() > 0 && !qstrDbName.isEmpty())
-   {
-      if (CdmMessageManager::Ask(tr("Wirklich löschen?"),
-         tr("Die gewählten Objekte werden unwiderruflich gelöscht."
-         "Wollen Sie das wirklich?")))
-      {
-          for (int iPos = 0; iPos < qlItems.count(); ++iPos)
-          {
-         EwmsTreeItemType eType = static_cast<EwmsTreeItemType>(qlItems[iPos]->data(1, Qt::UserRole).toInt());
+    if (qlItems.count() > 0 && !qstrDbName.isEmpty())
+    {
+        if (CdmMessageManager::Ask(tr("Wirklich löschen?"),
+                                   tr("Die gewählten Objekte werden unwiderruflich gelöscht."
+                                      "Wollen Sie das wirklich?")))
+        {
+            for (int iPos = 0; iPos < qlItems.count(); ++iPos)
+            {
+                EwmsTreeItemType eType = static_cast<EwmsTreeItemType>(qlItems[iPos]->data(1, Qt::UserRole).toInt());
 
-         if (eType == eWmsTreeItemTypeContainer) // a objectlist is marked
-         {
-            DeleteObjectListSlot(qlItems[iPos]);
-         }
-         else if (eType == eWmsTreeItemTypeView) // a class is marked
-         {
-            DeleteViewSlot();
-         }
-         else if (eType == eWmsTreeItemTypeClass)
-         {
-            DeleteClassSlot();
-         }
-         else if (eType == eWmsTreeItemTypeApplication)
-         {
-            DeleteApplicationSlot();
-         }
-         else if (eType == eWmsTreeItemTypeFormGenericObject)
-         {
-            DeleteGenericObjectFormSlot();            
-         }
-         else if (eType == eWmsTreeItemTypeFormObjectObjectList)
-         {
-            DeleteObjectObjectListFormSlot();
-         }
-         else if (eType == eWmsTreeItemTypeFormStandardObjectList)
-         {
-            DeleteStandardObjectListFormSlot();
-         }
-         else if (eType == eWmsTreeItemTypeFormUserDefined)
-         {
-            DeleteUserDefinedFormSlot();
-         }
-         else if (eType == eWmsTreeItemTypeFormViewObjectList)
-         {
-            DeleteViewObjectListFormSlot();
-         }
-         else if (eType == eWmsTreeItemTypeMember)
-         {
-            DeleteMemberSlot();
-         }
-         else if (eType == eWmsTreeItemTypeFunction)
-         {
-            DeleteFunctionSlot();
-         }
-         else if (eType == eWmsTreeItemTypeView)
-         {
-            DeleteViewSlot();
-         }
-         else if (eType == eWmsTreeItemTypeReport)
-         {
-            DeleteReportSlot();
-         }
-         else if (eType == eWmsTreeItemTypeFormSearch)
-         {
-            DeleteSearchFormSlot();
-         }
-         else if (eType == eWmsTreeItemTypeWorkflow)
-         {
-            DeleteWorkflowSlot();
-         }
-         else if (eType == eWmsTreeItemTypePackage)
-         {
-            DeletePackageSlot();
-         }
-         else if (eType == eWmsTreeItemTypeFormLibrary)
-         {
-             DeleteLibrarySlot();
-         }
-         else if (eType == eWmsTreeItemTypeResource)
-         {
-             DeleteResourceSlot();
-         }
-         else if (eType == eWmsTreeItemTypeInteractiveComponentForm)
-         {
-             DeleteInteractiveComponentFormSlot();
-         }
-          }
-      }
-   }
+                if (eType == eWmsTreeItemTypeContainer) // a objectlist is marked
+                {
+                    DeleteObjectListSlot(qlItems[iPos]);
+                }
+                else if (eType == eWmsTreeItemTypeView) // a class is marked
+                {
+                    DeleteViewSlot();
+                }
+                else if (eType == eWmsTreeItemTypeClass)
+                {
+                    DeleteClassSlot();
+                }
+                else if (eType == eWmsTreeItemTypeApplication)
+                {
+                    DeleteApplicationSlot();
+                }
+                else if (eType == eWmsTreeItemTypeFormGenericObject)
+                {
+                    DeleteGenericObjectFormSlot();
+                }
+                else if (eType == eWmsTreeItemTypeFormObjectObjectList)
+                {
+                    DeleteObjectObjectListFormSlot();
+                }
+                else if (eType == eWmsTreeItemTypeFormStandardObjectList)
+                {
+                    DeleteStandardObjectListFormSlot();
+                }
+                else if (eType == eWmsTreeItemTypeFormUserDefined)
+                {
+                    DeleteUserDefinedFormSlot();
+                }
+                else if (eType == eWmsTreeItemTypeFormViewObjectList)
+                {
+                    DeleteViewObjectListFormSlot();
+                }
+                else if (eType == eWmsTreeItemTypeMember)
+                {
+                    DeleteMemberSlot();
+                }
+                else if (eType == eWmsTreeItemTypeFunction)
+                {
+                    DeleteFunctionSlot();
+                }
+                else if (eType == eWmsTreeItemTypeView)
+                {
+                    DeleteViewSlot();
+                }
+                else if (eType == eWmsTreeItemTypeReport)
+                {
+                    DeleteReportSlot();
+                }
+                else if (eType == eWmsTreeItemTypeFormSearch)
+                {
+                    DeleteSearchFormSlot();
+                }
+                else if (eType == eWmsTreeItemTypeWorkflow)
+                {
+                    DeleteWorkflowSlot();
+                }
+                else if (eType == eWmsTreeItemTypePackage)
+                {
+                    DeletePackageSlot();
+                }
+                else if (eType == eWmsTreeItemTypeFormLibrary)
+                {
+                    DeleteLibrarySlot();
+                }
+                else if (eType == eWmsTreeItemTypeResource)
+                {
+                    DeleteResourceSlot();
+                }
+                else if (eType == eWmsTreeItemTypeInteractiveComponentForm)
+                {
+                    DeleteInteractiveComponentFormSlot();
+                }
+            }
+        }
+    }
 }
 
 void CwmsAdminMainWindowIf::OpenClassEditor(QTreeWidgetItem* p_pItem)
 {
-   CdmDataProvider* pCdmManager = CdmSessionManager::GetDataProvider();
+    CdmDataProvider* pCdmManager = CdmSessionManager::GetDataProvider();
 
-   if (pCdmManager && p_pItem && pCdmManager->GetCurrentScheme())
-   {
-	  CdmClass* pCdmClass = GetSelectedClass();
-      if (pCdmClass)
-      {
-        OpenClassEditor(pCdmClass);
-      }
-   }
+    if (pCdmManager && p_pItem && pCdmManager->GetCurrentScheme())
+    {
+        auto pCdmClass = GetSelectedClass();
+
+        if (pCdmClass)
+        {
+            OpenClassEditor(pCdmClass);
+        }
+    }
+}
+
+void CwmsAdminMainWindowIf::OpenClassEditor(QString p_qstrKeyname)
+{
+    CdmDataProvider* pCdmManager = CdmSessionManager::GetDataProvider();
+
+    if (CHKPTR(pCdmManager))
+    {
+        CdmClassManager* pCdmClassManager = pCdmManager->GetClassManager();
+
+        if (CHKPTR(pCdmClassManager))
+        {
+            auto pClass = pCdmClassManager->FindClassByKeyname(p_qstrKeyname);
+
+            if (pClass)
+            {
+                OpenClassEditor(pClass);
+            }
+        }
+    }
 }
 
 void CwmsAdminMainWindowIf::OpenClassEditor(CdmClass* p_pClass)
 {
-  if (CHKPTR(p_pClass))
-  {
-     if (!FindAndSetSubWindow(p_pClass->GetUriInternal()))
-     {
-        m_pqtbInfo->setText(p_pClass->GetInfo());
-        CwmsClassEditorIf* pEditor = new CwmsClassEditorIf(p_pClass, m_pqMdiArea);
-        connect(pEditor, SIGNAL(ClassModifiedSignal()), this, SLOT(ClassModifiedSlot()));
-        pEditor->SetMainWindow(this);
-        QMdiSubWindow* pSubWindow = AddMdiWindow(pEditor);
-
-        if (CHKPTR(pSubWindow))
+    if (CHKPTR(p_pClass))
+    {
+        if (!FindAndSetSubWindow(p_pClass->GetUriInternal()))
         {
-           pSubWindow->setWindowTitle(tr("Klasse ") + p_pClass->GetKeyname());
-           pSubWindow->setObjectName(p_pClass->GetUriInternal());
+            m_pqtbInfo->setText(p_pClass->GetInfo());
+            CwmsClassEditorIf* pEditor = new CwmsClassEditorIf(p_pClass, m_pqMdiArea);
+            connect(pEditor, SIGNAL(ClassModifiedSignal()), this, SLOT(ClassModifiedSlot()));
+            pEditor->SetMainWindow(this);
+            QMdiSubWindow* pSubWindow = AddMdiWindow(pEditor);
+
+            if (CHKPTR(pSubWindow))
+            {
+                pSubWindow->setWindowTitle(tr("Klasse ") + p_pClass->GetKeyname());
+                pSubWindow->setObjectName(p_pClass->GetUriInternal());
+            }
         }
-     }
-  }
+    }
 }
 
 bool CwmsAdminMainWindowIf::FindAndSetSubWindow(QString p_qstrUri)
 {
-   bool bRet = false;
-   QMdiSubWindow* pWindow = FindSubWindowByUri(p_qstrUri);
+    bool bRet = false;
+    QMdiSubWindow* pWindow = FindSubWindowByUri(p_qstrUri);
 
-   if (pWindow)
-   {
-      bRet = true;
-      m_pqMdiArea->setActiveSubWindow(pWindow);
-   }
+    if (pWindow)
+    {
+        bRet = true;
+        m_pqMdiArea->setActiveSubWindow(pWindow);
+    }
 
-   return bRet;
+    return bRet;
 }
 
 QMdiSubWindow* CwmsAdminMainWindowIf::FindSubWindowByUri(QString p_qstrUri)
 {
-   QMdiSubWindow* pSubWindow = nullptr;
+    QMdiSubWindow* pSubWindow = nullptr;
 
-   if (!p_qstrUri.isEmpty())
-   {
-      QList<QMdiSubWindow*> qlSubWindows = m_pqMdiArea->subWindowList();
+    if (!p_qstrUri.isEmpty())
+    {
+        QList<QMdiSubWindow*> qlSubWindows = m_pqMdiArea->subWindowList();
 
-      for (int iCounter = 0; iCounter < qlSubWindows.count(); ++iCounter)
-      {
-         QMdiSubWindow* pTempWindow = qlSubWindows[iCounter];
+        for (int iCounter = 0; iCounter < qlSubWindows.count(); ++iCounter)
+        {
+            QMdiSubWindow* pTempWindow = qlSubWindows[iCounter];
 
-         if (pTempWindow->objectName() == p_qstrUri)
-         {
-            pSubWindow = pTempWindow;
-            break;
-         }
-      }
-   }
-   
-   return pSubWindow;
+            if (pTempWindow->objectName() == p_qstrUri)
+            {
+                pSubWindow = pTempWindow;
+                break;
+            }
+        }
+    }
+
+    return pSubWindow;
 }
 
 
 QMdiSubWindow* CwmsAdminMainWindowIf::AddMdiWindow(QWidget* p_pWidget)
 {
-   QMdiSubWindow* pSubWindow = nullptr;
+    QMdiSubWindow* pSubWindow = nullptr;
     
-   if (CHKPTR(p_pWidget))
-   {
-      pSubWindow = m_pqMdiArea->addSubWindow(p_pWidget);
+    if (CHKPTR(p_pWidget))
+    {
+        pSubWindow = m_pqMdiArea->addSubWindow(p_pWidget);
 
-      if (CHKPTR(pSubWindow))
-      {
-         p_pWidget->show();
-      }
-   }
+        if (CHKPTR(pSubWindow))
+        {
+            p_pWidget->show();
+        }
+    }
 
-   return pSubWindow;
+    return pSubWindow;
 }
 
 void CwmsAdminMainWindowIf::OpenViewViewer(QTreeWidgetItem* p_pItem)
 {
-   if (p_pItem)
-   {
-      CwmsViewManager cCViewManager;
-      CwmsView cView = cCViewManager.GetViewByName(p_pItem->text(0));
+    if (p_pItem)
+    {
+        CwmsViewManager cCViewManager;
+        CwmsView cView = cCViewManager.GetViewByName(p_pItem->text(0));
 
-      if (cView.IsValid())
-      {
-         if (!FindAndSetSubWindow(cView.GetUriInternal()))
-         {
-            m_pqtbInfo->setText(cView.GetComment());
-            CwmsQueryResultViewer* pEditor = new CwmsQueryResultViewer(m_pqMdiArea);
-            pEditor->SetView(cView);
-
-            QMdiSubWindow* pSubWindow = AddMdiWindow(pEditor);    
-
-            if (CHKPTR(pSubWindow))
+        if (cView.IsValid())
+        {
+            if (!FindAndSetSubWindow(cView.GetUriInternal()))
             {
-               pSubWindow->setWindowTitle(tr("Sicht ") + cView.GetName());
-               pSubWindow->setObjectName(cView.GetUriInternal());
+                m_pqtbInfo->setText(cView.GetComment());
+                CwmsQueryResultViewer* pEditor = new CwmsQueryResultViewer(m_pqMdiArea);
+                pEditor->SetView(cView);
+
+                QMdiSubWindow* pSubWindow = AddMdiWindow(pEditor);
+
+                if (CHKPTR(pSubWindow))
+                {
+                    pSubWindow->setWindowTitle(tr("Sicht ") + cView.GetName());
+                    pSubWindow->setObjectName(cView.GetUriInternal());
+                }
             }
-         }
-      }
-   }
+        }
+    }
 }
 
 void CwmsAdminMainWindowIf::OpenContainerEditor(QTreeWidgetItem* p_pItem)
 {
-   if (CHKPTR(p_pItem))
-   {
-      qint64 iContainerId = p_pItem->data(0, Qt::UserRole).toLongLong();
-      CdmObjectContainer* pContainer = CdmDataProvider::GetObjectContainerEmpty(iContainerId);
+    if (CHKPTR(p_pItem))
+    {
+        qint64 iContainerId = p_pItem->data(0, Qt::UserRole).toLongLong();
+        CdmObjectContainer* pContainer = CdmDataProvider::GetObjectContainerEmpty(iContainerId);
 
-      if (CHKPTR(pContainer))
-      {
-         OpenObjectContainerEditor(pContainer);
-      }
-   }
+        if (CHKPTR(pContainer))
+        {
+            OpenObjectContainerEditor(pContainer);
+        }
+    }
 }
 
 void CwmsAdminMainWindowIf::OpenObjectContainerEditor(CdmObjectContainer* p_pContainer)
 {
-   if (CHKPTR(p_pContainer))
-      {
-         int iObjectCount = p_pContainer->CountObjectsOnDb();
+    if (CHKPTR(p_pContainer))
+    {
+        int iObjectCount = p_pContainer->CountObjectsOnDb();
 
-         if (iObjectCount < 100)
-         {
+        if (iObjectCount < 100)
+        {
             OpenContainerEditor(p_pContainer);
-         }
-         else
-         {
+        }
+        else
+        {
             OpenObjectListSearch(p_pContainer);
-         }
-   }
+        }
+    }
 }
 
 void CwmsAdminMainWindowIf::OpenObjectListSearch(CdmObjectContainer* p_pList)
 {
-   if (CHKPTR(p_pList))
-   {
-      if (!FindAndSetSubWindow("Suche " + p_pList->GetUriInternal()))
-      {
-         CwmsSearchWindow* pSearch = new CwmsSearchWindow(m_pqMdiArea);
-         m_pqtbInfo->setText(p_pList->GetInfo());
-         pSearch->show();
-         pSearch->FillDialog(p_pList);
+    if (CHKPTR(p_pList))
+    {
+        if (!FindAndSetSubWindow("Suche " + p_pList->GetUriInternal()))
+        {
+            CwmsSearchWindow* pSearch = new CwmsSearchWindow(m_pqMdiArea);
+            m_pqtbInfo->setText(p_pList->GetInfo());
+            pSearch->show();
+            pSearch->FillDialog(p_pList);
 
-         QMdiSubWindow* pSubWindow = AddMdiWindow(pSearch);    
+            QMdiSubWindow* pSubWindow = AddMdiWindow(pSearch);
 
-         if (CHKPTR(pSubWindow))
-         {
-            pSubWindow->setWindowTitle(tr("Suche ") + p_pList->GetKeyname());
-            pSubWindow->setObjectName("Suche " + p_pList->GetUriInternal());
-         }
-      }
-   }
+            if (CHKPTR(pSubWindow))
+            {
+                pSubWindow->setWindowTitle(tr("Suche ") + p_pList->GetKeyname());
+                pSubWindow->setObjectName("Suche " + p_pList->GetUriInternal());
+            }
+        }
+    }
 }
 
 void CwmsAdminMainWindowIf::OpenContainerEditor(CdmObjectContainer* p_pList)
 {
-   if (CHKPTR(p_pList))
-   {
-      if (!FindAndSetSubWindow(p_pList->GetUriInternal()))
-      {
-         CwmsObjectListEditorWidgetIf* pEditor = new CwmsObjectListEditorWidgetIf(p_pList, m_pqMdiArea);
-         m_pqtbInfo->setText(p_pList->GetInfo());
-         pEditor->SetShowEditButton(true);
-         pEditor->FillDialog();
-         QMdiSubWindow* pSubWindow = AddMdiWindow(pEditor);    
+    if (CHKPTR(p_pList))
+    {
+        if (!FindAndSetSubWindow(p_pList->GetUriInternal()))
+        {
+            CwmsObjectListEditorWidgetIf* pEditor = new CwmsObjectListEditorWidgetIf(p_pList, m_pqMdiArea);
+            m_pqtbInfo->setText(p_pList->GetInfo());
+            pEditor->SetShowEditButton(true);
+            pEditor->FillDialog();
+            QMdiSubWindow* pSubWindow = AddMdiWindow(pEditor);
 
-         if (CHKPTR(pSubWindow))
-         {
-            pSubWindow->setWindowTitle(tr("Objektcontainer ") + p_pList->GetKeyname());
-            pSubWindow->setObjectName(p_pList->GetUriInternal());
-         }
-      }
-   }
+            if (CHKPTR(pSubWindow))
+            {
+                pSubWindow->setWindowTitle(tr("Objektcontainer ") + p_pList->GetKeyname());
+                pSubWindow->setObjectName(p_pList->GetUriInternal());
+            }
+        }
+    }
 }
 
 QTreeWidgetItem* CwmsAdminMainWindowIf::GetSelectedItem()
 {
-   QTreeWidgetItem* pItem = nullptr;
+    QTreeWidgetItem* pItem = nullptr;
 
-   if (m_rpqCurrentWidget)
-   {
-      pItem = CwmsTreeWidgetHelper::GetSelectedItem(m_rpqCurrentWidget);
-   }
+    if (m_rpqCurrentWidget)
+    {
+        pItem = CwmsTreeWidgetHelper::GetSelectedItem(m_rpqCurrentWidget);
+    }
 
-   return pItem;
+    return pItem;
 }
 
 QList<QTreeWidgetItem*> CwmsAdminMainWindowIf::GetSelectedItems()
 {
-   QList<QTreeWidgetItem*> qlItems;
+    QList<QTreeWidgetItem*> qlItems;
 
-   if (m_rpqCurrentWidget)
-   {
-      qlItems = m_rpqCurrentWidget->selectedItems();
-   }
+    if (m_rpqCurrentWidget)
+    {
+        qlItems = m_rpqCurrentWidget->selectedItems();
+    }
 
-   return qlItems;
+    return qlItems;
 }
 
 CdmClass* CwmsAdminMainWindowIf::GetSelectedClass()
 {
-   CdmClass* pCdmClass = nullptr;
-   QTreeWidgetItem* pqlviItem = GetSelectedItem();
-   QString qstrDbName = m_pqcbDatabases->currentText();
-   CdmDataProvider* pCdmManager = CdmSessionManager::GetDataProvider();
+    CdmClass* pCdmClass = nullptr;
+    QTreeWidgetItem* pqlviItem = GetSelectedItem();
+    QString qstrDbName = m_pqcbDatabases->currentText();
+    CdmDataProvider* pCdmManager = CdmSessionManager::GetDataProvider();
 
-   if (CHKPTR(pCdmManager))
-   {
-   
-	   if (pqlviItem && !qstrDbName.isEmpty())
-	   {
-          EwmsTreeItemType eType = static_cast<EwmsTreeItemType>(pqlviItem->data(1, Qt::UserRole).toInt());
+    if (CHKPTR(pCdmManager))
+    {
 
-		  if (eType == eWmsTreeItemTypeClass) 
-		  {
-              int iClassId = pqlviItem->data(0, Qt::UserRole).toInt();
+        if (pqlviItem && !qstrDbName.isEmpty())
+        {
+            EwmsTreeItemType eType = static_cast<EwmsTreeItemType>(pqlviItem->data(1, Qt::UserRole).toInt());
 
+            if (eType == eWmsTreeItemTypeFunctionParent || eType == eWmsTreeItemTypeMemberParent)
+            {
+                pqlviItem = pqlviItem->parent();
 
+                if (CHKPTR(pqlviItem))
+                {
+                    eType = static_cast<EwmsTreeItemType>(pqlviItem->data(1, Qt::UserRole).toInt());
+                }
+            }
+            else if (eType == eWmsTreeItemTypeFunction || eType == eWmsTreeItemTypeGroup)
+            {
+                pqlviItem = pqlviItem->parent();
 
-			 CdmClassManager* pClassManager = pCdmManager->GetClassManager();
+                if (CHKPTR(pqlviItem))
+                {
+                    pqlviItem = pqlviItem->parent();
+                }
 
-			 if (CHKPTR(pClassManager))
-			 {
-                 pCdmClass = pClassManager->FindClassById(iClassId);
-			 }
-         }
-      }
-   }
-   
-   return pCdmClass;
+                if (CHKPTR(pqlviItem))
+                {
+                    eType = static_cast<EwmsTreeItemType>(pqlviItem->data(1, Qt::UserRole).toInt());
+                }
+            }
+            else if (eType == eWmsTreeItemTypeMember)
+            {
+                pqlviItem = pqlviItem->parent();
+
+                if (CHKPTR(pqlviItem))
+                {
+                    eType = static_cast<EwmsTreeItemType>(pqlviItem->data(1, Qt::UserRole).toInt());
+
+                    if (eType == eWmsTreeItemTypeGroup)
+                    {
+                        pqlviItem = pqlviItem->parent();
+
+                        if (CHKPTR(pqlviItem))
+                        {
+                            pqlviItem = pqlviItem->parent();
+                        }
+
+                        if (CHKPTR(pqlviItem))
+                        {
+                            eType = static_cast<EwmsTreeItemType>(pqlviItem->data(1, Qt::UserRole).toInt());
+                        }
+                    }
+                    else if (eType == eWmsTreeItemTypeMemberParent)
+                    {
+                        pqlviItem = pqlviItem->parent();
+
+                        if (CHKPTR(pqlviItem))
+                        {
+                            eType = static_cast<EwmsTreeItemType>(pqlviItem->data(1, Qt::UserRole).toInt());
+                        }
+                    }
+                }
+            }
+
+            if (eType == eWmsTreeItemTypeClass)
+            {
+                int iClassId = pqlviItem->data(0, Qt::UserRole).toInt();
+                CdmClassManager* pClassManager = pCdmManager->GetClassManager();
+
+                if (CHKPTR(pClassManager))
+                {
+                    pCdmClass = pClassManager->FindClassById(iClassId);
+                }
+            }
+        }
+    }
+
+    return pCdmClass;
 }
 
 CdmObjectContainer* CwmsAdminMainWindowIf::GetSelectedObjectList()
 {
-   QTreeWidgetItem* pqlviItem = GetSelectedItem();
-   return GetContainerFromItem(pqlviItem);
+    QTreeWidgetItem* pqlviItem = GetSelectedItem();
+    return GetContainerFromItem(pqlviItem);
 }
 
 CdmObjectContainer* CwmsAdminMainWindowIf::GetContainerFromItem(QTreeWidgetItem* p_pItem)
 {
-   CdmObjectContainer* pContainer = nullptr;
-   CdmDataProvider* pCdmManager = CdmSessionManager::GetDataProvider();
-   QString qstrDbName = m_pqcbDatabases->currentText();
+    CdmObjectContainer* pContainer = nullptr;
+    CdmDataProvider* pCdmManager = CdmSessionManager::GetDataProvider();
+    QString qstrDbName = m_pqcbDatabases->currentText();
 
-   if (p_pItem && !qstrDbName.isEmpty())
-   {
+    if (p_pItem && !qstrDbName.isEmpty())
+    {
 
-      EwmsTreeItemType eType = static_cast<EwmsTreeItemType>(p_pItem->data(1, Qt::UserRole).toInt());
+        EwmsTreeItemType eType = static_cast<EwmsTreeItemType>(p_pItem->data(1, Qt::UserRole).toInt());
 
-      if (eType == eWmsTreeItemTypeContainer) // a objectlist is marked
-      {
-         QString qstrKeyname = p_pItem->text(0);
+        if (eType == eWmsTreeItemTypeContainer) // a objectlist is marked
+        {
+            QString qstrKeyname = p_pItem->text(0);
 
-         if (CHKPTR(pCdmManager))
-         {
-            pContainer = pCdmManager->GetObjectContainer(qstrDbName, qstrKeyname);
-         }
-      }
-   }
+            if (CHKPTR(pCdmManager))
+            {
+                pContainer = pCdmManager->GetObjectContainer(qstrDbName, qstrKeyname);
+            }
+        }
+    }
 
-   return pContainer;
+    return pContainer;
 }
 
 void CwmsAdminMainWindowIf::closeEvent(QCloseEvent* p_pqCloseEvent)
@@ -1192,12 +1266,12 @@ void CwmsAdminMainWindowIf::closeEvent(QCloseEvent* p_pqCloseEvent)
         CdmSessionManager::Logout();
     }
 
-   QSettings settings("WOGRA", "WMS");
-   settings.beginGroup(WMS_DP);
-   settings.setValue("geometry", saveGeometry());
-   settings.setValue("windowState", saveState());
+    QSettings settings("WOGRA", "WMS");
+    settings.beginGroup(WMS_DP);
+    settings.setValue("geometry", saveGeometry());
+    settings.setValue("windowState", saveState());
 
-   QMainWindow::closeEvent(p_pqCloseEvent);
+    QMainWindow::closeEvent(p_pqCloseEvent);
 }
 
 CdmClassManager* CwmsAdminMainWindowIf::GetCurrentClassManager()
@@ -1207,12 +1281,12 @@ CdmClassManager* CwmsAdminMainWindowIf::GetCurrentClassManager()
 
     if (!qstrDbName.isEmpty())
     {
-      CdmDataProvider* pCdmManager = CdmSessionManager::GetDataProvider();
+        CdmDataProvider* pCdmManager = CdmSessionManager::GetDataProvider();
 
-      if (CHKPTR(pCdmManager))
-      {
-         pCdmClassManager = pCdmManager->GetClassManager(qstrDbName);
-      }
+        if (CHKPTR(pCdmManager))
+        {
+            pCdmClassManager = pCdmManager->GetClassManager(qstrDbName);
+        }
     }
 
     return pCdmClassManager;
@@ -1234,20 +1308,20 @@ void CwmsAdminMainWindowIf::CreateClassSlot()
 
             if (!qstrCaption.isEmpty() && !qstrComment.isEmpty() && !qstrKeyname.isEmpty())
             {
-               CdmClass* pCdmClass = pCdmClassManager->CreateClass(qstrKeyname);
+                CdmClass* pCdmClass = pCdmClassManager->CreateClass(qstrKeyname);
 
-               if (CHKPTR(pCdmClass))
-               {
-                  pCdmClass->SetCaption(qstrCaption);
-                  pCdmClass->SetComment(qstrComment);
-                  pCdmClass->Commit();
+                if (CHKPTR(pCdmClass))
+                {
+                    pCdmClass->SetCaption(qstrCaption);
+                    pCdmClass->SetComment(qstrComment);
+                    pCdmClass->Commit();
 
-                  FillClasses(pCdmClassManager);
-                  m_pqcbClassFilter->addItem(pCdmClass->GetKeyname(), pCdmClass->GetUriInternal());
-                  OpenClassEditor(pCdmClass);
-               }
+                    FillClasses(pCdmClassManager);
+                    m_pqcbClassFilter->addItem(pCdmClass->GetKeyname(), pCdmClass->GetUriInternal());
+                    OpenClassEditor(pCdmClass);
+                }
             }
-         }
+        }
 
         delete pCwmsAddNewClassIf;
     }
@@ -1255,83 +1329,83 @@ void CwmsAdminMainWindowIf::CreateClassSlot()
 
 void CwmsAdminMainWindowIf::CreateDatabaseSlot()
 {
-   QString qstrDbName = QInputDialog::getText(this, tr("Schema anlegen"), 
-                                              tr("Bitte geben Sie den Namen des Schemas ein."), 
-                                              QLineEdit::Normal);
+    QString qstrDbName = QInputDialog::getText(this, tr("Schema anlegen"),
+                                               tr("Bitte geben Sie den Namen des Schemas ein."),
+                                               QLineEdit::Normal);
 
-   if (!qstrDbName.isEmpty())
-   {
-      CdmMessageManager::StartAsyncMessageCollection();
-      CdmDataProvider* pCdmManager = CdmSessionManager::GetDataProvider();
+    if (!qstrDbName.isEmpty())
+    {
+        CdmMessageManager::StartAsyncMessageCollection();
+        CdmDataProvider* pCdmManager = CdmSessionManager::GetDataProvider();
 
-      if (CHKPTR(pCdmManager))
-      {
-		  pCdmManager->RemoveAllLocalSchemes();
-         if (pCdmManager->CreateScheme(qstrDbName) > 0)
-         {
-            CwmsApplicationServices::InitCurrentScheme();
-            m_pqcbDatabases->addItem(qstrDbName);
-            ClearEditor();
-            m_pqcbDatabases->setCurrentText(qstrDbName);
-            FillSchemeContent(qstrDbName);
-         }
-         else
-         {
-            MSG_INFO(("Schema konnte nicht angelegt werden"),
-                                     ("Das Schema konnte nicht angelegt werden. (Interner Fehler)"));
-         }
-      }
+        if (CHKPTR(pCdmManager))
+        {
+            pCdmManager->RemoveAllLocalSchemes();
+            if (pCdmManager->CreateScheme(qstrDbName) > 0)
+            {
+                CwmsApplicationServices::InitCurrentScheme();
+                m_pqcbDatabases->addItem(qstrDbName);
+                ClearEditor();
+                m_pqcbDatabases->setCurrentText(qstrDbName);
+                FillSchemeContent(qstrDbName);
+            }
+            else
+            {
+                MSG_INFO(("Schema konnte nicht angelegt werden"),
+                         ("Das Schema konnte nicht angelegt werden. (Interner Fehler)"));
+            }
+        }
 
-      CdmMessageManager::EndAndShowAsyncMessageCollection();
-   }
+        CdmMessageManager::EndAndShowAsyncMessageCollection();
+    }
 
 }
 
 void CwmsAdminMainWindowIf::CreateObjectListSlot()
 {
-   CdmObjectContainer* pContainer = CwmsCreateObjectContainerDlg::CreateObjectContainer(this);
+    CdmObjectContainer* pContainer = CwmsCreateObjectContainerDlg::CreateObjectContainer(this);
 
-   if (pContainer)
-   {
-      ClassFilterChangedSlot();
-      OpenObjectContainerEditor(pContainer);
-   }
+    if (pContainer)
+    {
+        ClassFilterChangedSlot();
+        OpenObjectContainerEditor(pContainer);
+    }
 }
 
 void CwmsAdminMainWindowIf::DeleteClassSlot()
 {
-   CdmClass* pCdmClass = GetSelectedClass();
+    CdmClass* pCdmClass = GetSelectedClass();
 
-   if (pCdmClass)
-   {
-      CdmClassManager* pCdmClassManager = pCdmClass->GetClassManager();
+    if (pCdmClass)
+    {
+        CdmClassManager* pCdmClassManager = pCdmClass->GetClassManager();
 
-      if (CHKPTR(pCdmClassManager))
-      {
-         CloseClassRelatedUis(pCdmClass);
-
-        if (pCdmClassManager->DeleteClass(pCdmClass) < 0)
+        if (CHKPTR(pCdmClassManager))
         {
-           MSG_INFO(("Klasse konnte nicht gelöscht werden"),
-                                    ("Die Klasse konnte nicht gelöscht werden.\n "
-                                       "Stellen Sie sicher dass diese Klasse keine Objektcontainer besitzt und\n"
-                                       "nirgends als Basisklasse verwendet wurde."));
+            CloseClassRelatedUis(pCdmClass);
+
+            if (pCdmClassManager->DeleteClass(pCdmClass) < 0)
+            {
+                MSG_INFO(("Klasse konnte nicht gelöscht werden"),
+                         ("Die Klasse konnte nicht gelöscht werden.\n "
+                          "Stellen Sie sicher dass diese Klasse keine Objektcontainer besitzt und\n"
+                          "nirgends als Basisklasse verwendet wurde."));
+
+            }
+            else
+            {
+                QTreeWidgetItem* pqlviItem = GetSelectedItem();
+                delete pqlviItem;
+                CwmsObjectContainerDataFiller::FillAllObjectContainersToView(m_pqlvData, m_pqchbShowTechnicalItems->isChecked());
+            }
 
         }
-        else
-        {
-           QTreeWidgetItem* pqlviItem = GetSelectedItem();
-           delete pqlviItem;
-           CwmsObjectContainerDataFiller::FillAllObjectContainersToView(m_pqlvData, m_pqchbShowTechnicalItems->isChecked());
-        }
-
-      }
-   }
-   else
-   {
-      MSG_INFO(("Keine Klasse ausgewählt"),
-                               ("Sie haben kein Schema ausgewählt. Löschung kann nicht durchgeführt werden."));
-   }
+    }
+    else
+    {
+        MSG_INFO(("Keine Klasse ausgewählt"),
+                 ("Sie haben kein Schema ausgewählt. Löschung kann nicht durchgeführt werden."));
+    }
 }
 
 void CwmsAdminMainWindowIf::CloseClassRelatedUis(CdmClass* p_pClass)
@@ -1340,24 +1414,24 @@ void CwmsAdminMainWindowIf::CloseClassRelatedUis(CdmClass* p_pClass)
 
     for (int iCounter = 0; iCounter < qlSubWindows.count(); ++iCounter)
     {
-       QMdiSubWindow* pTempWindow = qlSubWindows[iCounter];
-       QString qstrUri = pTempWindow->objectName();
-       CdmLocatedElement* pElement = CdmSessionManager::GetDataProvider()->GetUriObject(qstrUri);
+        QMdiSubWindow* pTempWindow = qlSubWindows[iCounter];
+        QString qstrUri = pTempWindow->objectName();
+        CdmLocatedElement* pElement = CdmSessionManager::GetDataProvider()->GetUriObject(qstrUri);
 
-       if (pElement && pElement->IsContainer())
-       {
-           if (static_cast<CdmObjectContainer*>(pElement)->GetClass() == p_pClass)
-           {
-               DELPTR(pTempWindow)
-           }
-       }
-       else if (pElement && pElement->IsClass())
-       {
-           if (static_cast<CdmClass*>(pElement) == p_pClass)
-           {
-               DELPTR(pTempWindow)
-           }
-       }
+        if (pElement && pElement->IsContainer())
+        {
+            if (static_cast<CdmObjectContainer*>(pElement)->GetClass() == p_pClass)
+            {
+                DELPTR(pTempWindow)
+            }
+        }
+        else if (pElement && pElement->IsClass())
+        {
+            if (static_cast<CdmClass*>(pElement) == p_pClass)
+            {
+                DELPTR(pTempWindow)
+            }
+        }
     }
 
     CwmsObjectContainerDataFiller::FillAllObjectContainersToView(m_pqlvData, m_pqchbShowTechnicalItems->isChecked());
@@ -1369,17 +1443,17 @@ void CwmsAdminMainWindowIf::CloseClassRelatedContainerUis(CdmClass* p_pClass)
 
     for (int iCounter = 0; iCounter < qlSubWindows.count(); ++iCounter)
     {
-       QMdiSubWindow* pTempWindow = qlSubWindows[iCounter];
-       QString qstrUri = pTempWindow->objectName();
-       CdmLocatedElement* pElement = CdmSessionManager::GetDataProvider()->GetUriObject(qstrUri);
+        QMdiSubWindow* pTempWindow = qlSubWindows[iCounter];
+        QString qstrUri = pTempWindow->objectName();
+        CdmLocatedElement* pElement = CdmSessionManager::GetDataProvider()->GetUriObject(qstrUri);
 
-       if (pElement && pElement->IsContainer())
-       {
-           if (static_cast<CdmObjectContainer*>(pElement)->GetClass() == p_pClass)
-           {
-               DELPTR(pTempWindow)
-           }
-       }
+        if (pElement && pElement->IsContainer())
+        {
+            if (static_cast<CdmObjectContainer*>(pElement)->GetClass() == p_pClass)
+            {
+                DELPTR(pTempWindow)
+            }
+        }
     }
 
     CwmsObjectContainerDataFiller::FillAllObjectContainersToView(m_pqlvData, m_pqchbShowTechnicalItems->isChecked());
@@ -1388,7 +1462,7 @@ void CwmsAdminMainWindowIf::CloseClassRelatedContainerUis(CdmClass* p_pClass)
 void CwmsAdminMainWindowIf::DeleteDatabaseSlot()
 {
     BODY_TRY
-    CdmDataProvider* pCdmManager = CdmSessionManager::GetDataProvider();
+            CdmDataProvider* pCdmManager = CdmSessionManager::GetDataProvider();
     QString qstrDb = m_pqcbDatabases->currentText();
 
     if (pCdmManager && !qstrDb.isEmpty())
@@ -1410,307 +1484,307 @@ void CwmsAdminMainWindowIf::DeleteDatabaseSlot()
     else
     {
         MSG_INFO(("Kein Schema ausgewählt"),
-                                       ("Sie haben kein Schema ausgewählt. Löschung kann nicht durchgeführt werden."));
+                 ("Sie haben kein Schema ausgewählt. Löschung kann nicht durchgeführt werden."));
     }
     BODY_CATCH
 }
 
 void CwmsAdminMainWindowIf::DeleteObjectListSlot(QTreeWidgetItem* p_pItem)
 {
-   CdmObjectContainer* pContainer = GetContainerFromItem(p_pItem);
+    CdmObjectContainer* pContainer = GetContainerFromItem(p_pItem);
 
-   if (pContainer)
-   {
-      CdmContainerManager* pContainerManager = pContainer->GetContainerManager();
+    if (pContainer)
+    {
+        CdmContainerManager* pContainerManager = pContainer->GetContainerManager();
 
-      if (CHKPTR(pContainerManager))
-      {
-         pContainerManager->DeleteContainer(pContainer);
-         QTreeWidgetItem* pqlviItem = GetSelectedItem();
-         DELPTR(pqlviItem)
-      }
-   }
-   else
-   {
-      MSG_INFO(("Keinen Container ausgewählt"),
-                                     ("Sie haben keinen Container ausgewählt. Löschung kann nicht durchgeführt werden."));
-   }
+        if (CHKPTR(pContainerManager))
+        {
+            pContainerManager->DeleteContainer(pContainer);
+            QTreeWidgetItem* pqlviItem = GetSelectedItem();
+            DELPTR(pqlviItem)
+        }
+    }
+    else
+    {
+        MSG_INFO(("Keinen Container ausgewählt"),
+                 ("Sie haben keinen Container ausgewählt. Löschung kann nicht durchgeführt werden."));
+    }
 }
 
 void CwmsAdminMainWindowIf::ObjectListRightsSlot()
 {
-   CdmObjectContainer* pContainer = GetSelectedObjectList();
-   
-   if (pContainer)
-   {
-      CwmsRightsManagerIf* pCwmsRightsManagerIf = new CwmsRightsManagerIf(pContainer, this);
-      pCwmsRightsManagerIf->exec();
-      delete pCwmsRightsManagerIf;
-   }
-   else
-   {
-      MSG_INFO(("Keinen Container ausgewählt"),
-         ("Sie haben keinen Container ausgewählt. Berechtigungsfenster kann nicht aufgerufen werden."));
-   }
+    CdmObjectContainer* pContainer = GetSelectedObjectList();
+
+    if (pContainer)
+    {
+        CwmsRightsManagerIf* pCwmsRightsManagerIf = new CwmsRightsManagerIf(pContainer, this);
+        pCwmsRightsManagerIf->exec();
+        delete pCwmsRightsManagerIf;
+    }
+    else
+    {
+        MSG_INFO(("Keinen Container ausgewählt"),
+                 ("Sie haben keinen Container ausgewählt. Berechtigungsfenster kann nicht aufgerufen werden."));
+    }
 }
 
 void CwmsAdminMainWindowIf::DeleteAllObjectsSlot()
 {
-   CdmObjectContainer* pContainer = GetSelectedObjectList();
-   
-   if (pContainer)
-   {
-      if (CdmMessageManager::Ask(tr("Objekte des Objectcontainers wirklich löschen"),
-                                tr("Alle Objekte dieses Objectcontainers werden unwiderruflich gelöscht."
-                                   "Wollen Sie das wirklich?")))
-      {
-         CdmContainerManager* pManager = pContainer->GetContainerManager();
-         pManager->ReloadContainerComplete(pContainer);
-         QList<CdmObject*> qvlObjects;
-         pContainer->GetObjectList(qvlObjects);
-         QList<CdmObject*>::iterator qvlIt    = qvlObjects.begin();
-         QList<CdmObject*>::iterator qvlItEnd = qvlObjects.end();
+    CdmObjectContainer* pContainer = GetSelectedObjectList();
 
-         if (qvlObjects.isEmpty())
-         {
-            MSG_INFO(("Keine Objekte gefunden"),
-               ("Es wurden im Container keine Objekte zur Löschung gefunden."));
-         }
-         else
-         {
-            for (; qvlIt != qvlItEnd; ++qvlIt)
+    if (pContainer)
+    {
+        if (CdmMessageManager::Ask(tr("Objekte des Objectcontainers wirklich löschen"),
+                                   tr("Alle Objekte dieses Objectcontainers werden unwiderruflich gelöscht."
+                                      "Wollen Sie das wirklich?")))
+        {
+            CdmContainerManager* pManager = pContainer->GetContainerManager();
+            pManager->ReloadContainerComplete(pContainer);
+            QList<CdmObject*> qvlObjects;
+            pContainer->GetObjectList(qvlObjects);
+            QList<CdmObject*>::iterator qvlIt    = qvlObjects.begin();
+            QList<CdmObject*>::iterator qvlItEnd = qvlObjects.end();
+
+            if (qvlObjects.isEmpty())
             {
-               CdmObject* pCdmObject = (*qvlIt);
-
-               if (CHKPTR(pCdmObject))
-               {
-                  pCdmObject->SetDeleted();
-               }
+                MSG_INFO(("Keine Objekte gefunden"),
+                         ("Es wurden im Container keine Objekte zur Löschung gefunden."));
             }
-         
-            pContainer->Commit();
-            QMdiSubWindow* pSubWindow = FindSubWindowByUri(pContainer->GetUriInternal());
-
-            if (pSubWindow)
+            else
             {
-               CwmsObjectListEditorWidgetIf* pContainerEditor = 
-                  dynamic_cast<CwmsObjectListEditorWidgetIf*>(pSubWindow->widget());
+                for (; qvlIt != qvlItEnd; ++qvlIt)
+                {
+                    CdmObject* pCdmObject = (*qvlIt);
 
-               if (pContainerEditor)
-               {
-                  pContainerEditor->Refresh();
-               }
+                    if (CHKPTR(pCdmObject))
+                    {
+                        pCdmObject->SetDeleted();
+                    }
+                }
+
+                pContainer->Commit();
+                QMdiSubWindow* pSubWindow = FindSubWindowByUri(pContainer->GetUriInternal());
+
+                if (pSubWindow)
+                {
+                    CwmsObjectListEditorWidgetIf* pContainerEditor =
+                            dynamic_cast<CwmsObjectListEditorWidgetIf*>(pSubWindow->widget());
+
+                    if (pContainerEditor)
+                    {
+                        pContainerEditor->Refresh();
+                    }
+                }
             }
-         }
-      }
-   }
-   else
-   {
-      MSG_INFO(("Kein Objectcontainer ausgewählt"),
-                               ("Sie haben keinen Objectcontainer ausgewählt. Löschung kann nicht durchgeführt werden."));
-   }
+        }
+    }
+    else
+    {
+        MSG_INFO(("Kein Objectcontainer ausgewählt"),
+                 ("Sie haben keinen Objectcontainer ausgewählt. Löschung kann nicht durchgeführt werden."));
+    }
 }
 
 void CwmsAdminMainWindowIf::DataExportSlot()
 {
     CdmMessageManager::StartAsyncMessageCollection();
-   CdmObjectContainer* pContainer = GetSelectedObjectList();
-   
-   if (pContainer)
-   {
-      CwmsExportSettings cCwmsExportSettings;
-      cCwmsExportSettings.SetContainerId(pContainer->GetId());
-      cCwmsExportSettings.SetSchemeId(pContainer->GetSchemeId());
-      
-      CwmsExportSettingsIf* pCwmsExportSettingsIf = new CwmsExportSettingsIf(cCwmsExportSettings, this);
-      pCwmsExportSettingsIf->FillDialog();
-      pCwmsExportSettingsIf->exec();
-      delete pCwmsExportSettingsIf;
-   }
-   else
-   {
-      MSG_INFO(("Kein Objectcontainer ausgewählt"),
-                               ("Sie haben keinen Objectcontainer ausgewählt. Ein Datenexport kann nicht durchgeführt werden."));
-   }
+    CdmObjectContainer* pContainer = GetSelectedObjectList();
 
-   CdmMessageManager::EndAndShowAsyncMessageCollection();
+    if (pContainer)
+    {
+        CwmsExportSettings cCwmsExportSettings;
+        cCwmsExportSettings.SetContainerId(pContainer->GetId());
+        cCwmsExportSettings.SetSchemeId(pContainer->GetSchemeId());
+
+        CwmsExportSettingsIf* pCwmsExportSettingsIf = new CwmsExportSettingsIf(cCwmsExportSettings, this);
+        pCwmsExportSettingsIf->FillDialog();
+        pCwmsExportSettingsIf->exec();
+        delete pCwmsExportSettingsIf;
+    }
+    else
+    {
+        MSG_INFO(("Kein Objectcontainer ausgewählt"),
+                 ("Sie haben keinen Objectcontainer ausgewählt. Ein Datenexport kann nicht durchgeführt werden."));
+    }
+
+    CdmMessageManager::EndAndShowAsyncMessageCollection();
 
 }
 
 void CwmsAdminMainWindowIf::CreateDocumentationSlot()
 {
-  CdmMessageManager::StartAsyncMessageCollection();
-  CdmClassManager* pCdmClassManager = GetCurrentClassManager();
+    CdmMessageManager::StartAsyncMessageCollection();
+    CdmClassManager* pCdmClassManager = GetCurrentClassManager();
 
-  if (CHKPTR(pCdmClassManager))
-  {
-    QString qstrFilename = QFileDialog::getSaveFileName(this, tr("Speicherort für Dokumentation auswählen"));
-
-    if (!qstrFilename.isEmpty())
+    if (CHKPTR(pCdmClassManager))
     {
-        if (!qstrFilename.contains("."))
-        {
-           qstrFilename += ".html";
-        }
+        QString qstrFilename = QFileDialog::getSaveFileName(this, tr("Speicherort für Dokumentation auswählen"));
 
-        pCdmClassManager->GenerateClassDocumentation(pCdmClassManager->GetSchemeName(), qstrFilename);
+        if (!qstrFilename.isEmpty())
+        {
+            if (!qstrFilename.contains("."))
+            {
+                qstrFilename += ".html";
+            }
+
+            pCdmClassManager->GenerateClassDocumentation(pCdmClassManager->GetSchemeName(), qstrFilename);
+        }
     }
-  }
-  CdmMessageManager::EndAndShowAsyncMessageCollection();
+    CdmMessageManager::EndAndShowAsyncMessageCollection();
 }
 
 void CwmsAdminMainWindowIf::GenerateClassCodeSlot()
 {
-   CdmClass* pCdmClass = GetSelectedClass();
+    CdmClass* pCdmClass = GetSelectedClass();
 
-   if (pCdmClass)
-   {
-      CwmsGenerateCodeEditor::ShowCodeGenerator(this, pCdmClass);
-   }
-   else
-   {
-      MSG_INFO(("Keine Klasse ausgewählt"),
-                               ("Sie haben keine Klasse ausgewählt. Eine Codegenerierung kann nicht durchgeführt werden."));
-   }
+    if (pCdmClass)
+    {
+        CwmsGenerateCodeEditor::ShowCodeGenerator(this, pCdmClass);
+    }
+    else
+    {
+        MSG_INFO(("Keine Klasse ausgewählt"),
+                 ("Sie haben keine Klasse ausgewählt. Eine Codegenerierung kann nicht durchgeführt werden."));
+    }
 }
 
 void CwmsAdminMainWindowIf::GenerateDbCodeSlot()
 {
-  CdmClassManager* pCdmClassManager = GetCurrentClassManager();
+    CdmClassManager* pCdmClassManager = GetCurrentClassManager();
 
-  if (CHKPTR(pCdmClassManager))
-  {
-     CwmsGenerateDatabaseCode cCwmsGenerator(pCdmClassManager);
+    if (CHKPTR(pCdmClassManager))
+    {
+        CwmsGenerateDatabaseCode cCwmsGenerator(pCdmClassManager);
 
-     QString qstrDirectory = QFileDialog::getExistingDirectory(this, "Bitte wählen Sie das Verzeichnis zum speichern der Dateien aus.");
+        QString qstrDirectory = QFileDialog::getExistingDirectory(this, "Bitte wählen Sie das Verzeichnis zum speichern der Dateien aus.");
 
-     if (!qstrDirectory.isEmpty())
-     {
-        cCwmsGenerator.GenerateDatabaseCode(qstrDirectory);
-     }
-  }
+        if (!qstrDirectory.isEmpty())
+        {
+            cCwmsGenerator.GenerateDatabaseCode(qstrDirectory);
+        }
+    }
 }
 
 void CwmsAdminMainWindowIf::UserManagerSlot()
 {
-   if (!m_pCwmsUserManager)
-   {
-      m_pCwmsUserManager = new CwmsUserManagerIf(this);
-   }
+    if (!m_pCwmsUserManager)
+    {
+        m_pCwmsUserManager = new CwmsUserManagerIf(this);
+    }
 
-   m_pCwmsUserManager->show();
+    m_pCwmsUserManager->show();
 }
 
 void CwmsAdminMainWindowIf::OpenQueryEditorSlot()
 {
-   CdmDataProvider* pCdmManager = CdmSessionManager::GetDataProvider();
+    CdmDataProvider* pCdmManager = CdmSessionManager::GetDataProvider();
 
-   if (CHKPTR(pCdmManager))
-   {
-      if (pCdmManager->GetCurrentScheme())
-      {
-         CwmsQueryEditor* pEditor = new CwmsQueryEditor(m_pqMdiArea);
-         QMdiSubWindow* pSubWindow = AddMdiWindow(pEditor);    
+    if (CHKPTR(pCdmManager))
+    {
+        if (pCdmManager->GetCurrentScheme())
+        {
+            CwmsQueryEditor* pEditor = new CwmsQueryEditor(m_pqMdiArea);
+            QMdiSubWindow* pSubWindow = AddMdiWindow(pEditor);
 
-         if (CHKPTR(pSubWindow))
-         {
-            QList<QMdiSubWindow*> qlSubWindows = m_pqMdiArea->subWindowList();
-            int iQueryCounter = 0;
-
-            for (int iCounter = 0; iCounter < qlSubWindows.count(); ++iCounter)
+            if (CHKPTR(pSubWindow))
             {
-                QMdiSubWindow* sub = qlSubWindows[iCounter];
-               if (sub->windowTitle().startsWith(tr("Abfrage ")))
-               {
-                  ++iQueryCounter;
-               }
-            }
+                QList<QMdiSubWindow*> qlSubWindows = m_pqMdiArea->subWindowList();
+                int iQueryCounter = 0;
 
-            pSubWindow->setWindowTitle(tr("Abfrage ") + QString::number(iQueryCounter+1));
-         }
-      }
-      else
-      {
-         MSG_INFO(("Kein Schema ausgewählt"),
-            ("Sie können den Query Editor nur mit einem gewählten Schema öffnen"));
-      }
-   }
+                for (int iCounter = 0; iCounter < qlSubWindows.count(); ++iCounter)
+                {
+                    QMdiSubWindow* sub = qlSubWindows[iCounter];
+                    if (sub->windowTitle().startsWith(tr("Abfrage ")))
+                    {
+                        ++iQueryCounter;
+                    }
+                }
+
+                pSubWindow->setWindowTitle(tr("Abfrage ") + QString::number(iQueryCounter+1));
+            }
+        }
+        else
+        {
+            MSG_INFO(("Kein Schema ausgewählt"),
+                     ("Sie können den Query Editor nur mit einem gewählten Schema öffnen"));
+        }
+    }
 }
 
 void CwmsAdminMainWindowIf::SchemeRightsSlot()
 {
-   CdmDataProvider* pCdmManager = CdmSessionManager::GetDataProvider();
+    CdmDataProvider* pCdmManager = CdmSessionManager::GetDataProvider();
 
-   if (CHKPTR(pCdmManager))
-   {
-      CdmScheme* pCdmDatabase = pCdmManager->GetCurrentScheme();
-      if (pCdmDatabase)
-      {
-         CdmRights* pCdmRights = &pCdmDatabase->GetRights();
+    if (CHKPTR(pCdmManager))
+    {
+        CdmScheme* pCdmDatabase = pCdmManager->GetCurrentScheme();
+        if (pCdmDatabase)
+        {
+            CdmRights* pCdmRights = &pCdmDatabase->GetRights();
 
-         if (pCdmRights)
-         {
-            CwmsUniversalRightsManagerIf* pCwmsRights = new CwmsUniversalRightsManagerIf(pCdmRights, this);
-            pCwmsRights->exec();
-            DELPTR(pCwmsRights)
-         }
+            if (pCdmRights)
+            {
+                CwmsUniversalRightsManagerIf* pCwmsRights = new CwmsUniversalRightsManagerIf(pCdmRights, this);
+                pCwmsRights->exec();
+                DELPTR(pCwmsRights)
+            }
 
-         pCdmDatabase->Commit();
-      }
-   }
+            pCdmDatabase->Commit();
+        }
+    }
 }
 
 void CwmsAdminMainWindowIf::SchemeLanguagesSlot()
 {
-   CwmsLanguagesEditorDlg* pCwmsDlg = new CwmsLanguagesEditorDlg(this);
-   pCwmsDlg->FillDialog();
-   pCwmsDlg->exec();
-   DELPTR(pCwmsDlg)
-   FillLanguages();
+    CwmsLanguagesEditorDlg* pCwmsDlg = new CwmsLanguagesEditorDlg(this);
+    pCwmsDlg->FillDialog();
+    pCwmsDlg->exec();
+    DELPTR(pCwmsDlg)
+            FillLanguages();
 }
 
 void CwmsAdminMainWindowIf::NewViewSlot()
 {
-   CwmsView cView = CwmsView::Create();
-   CwmsViewEditor::Edit(cView, true, this);
-   FillViews();
+    CwmsView cView = CwmsView::Create();
+    CwmsViewEditor::Edit(cView, true, this);
+    FillViews();
 }
 
 void CwmsAdminMainWindowIf::EditViewSlot()
 {
-   QTreeWidgetItem* pqItem = GetSelectedItem();
+    QTreeWidgetItem* pqItem = GetSelectedItem();
 
-   if (pqItem)
-   {
-      CwmsViewManager cViewManager;
-      CwmsView cView = cViewManager.GetViewByName(pqItem->text(0));
+    if (pqItem)
+    {
+        CwmsViewManager cViewManager;
+        CwmsView cView = cViewManager.GetViewByName(pqItem->text(0));
 
-      if (cView.IsValid())
-      {
-         CwmsViewEditor::Edit(cView, false, this);
-         pqItem->setText(0, cView.GetName());
-      }
-   }
+        if (cView.IsValid())
+        {
+            CwmsViewEditor::Edit(cView, false, this);
+            pqItem->setText(0, cView.GetName());
+        }
+    }
 
-   FillViews();
+    FillViews();
 }
 
 void CwmsAdminMainWindowIf::DeleteViewSlot()
 {
-   QTreeWidgetItem* pqItem = GetSelectedItem();
+    QTreeWidgetItem* pqItem = GetSelectedItem();
 
-   if (pqItem && static_cast<EwmsTreeItemType>(pqItem->data(1, Qt::UserRole).toInt()) == eWmsTreeItemTypeView)
-   {
-      CwmsViewManager cViewManager;
-      CwmsView cView = cViewManager.GetViewByName(pqItem->text(0));
+    if (pqItem && static_cast<EwmsTreeItemType>(pqItem->data(1, Qt::UserRole).toInt()) == eWmsTreeItemTypeView)
+    {
+        CwmsViewManager cViewManager;
+        CwmsView cView = cViewManager.GetViewByName(pqItem->text(0));
 
-      if (cView.IsValid())
-      {
-         cView.SetDeleted();
-         cView.CommitObject();
-         DELPTR(pqItem)
-      }
-   }
+        if (cView.IsValid())
+        {
+            cView.SetDeleted();
+            cView.CommitObject();
+            DELPTR(pqItem)
+        }
+    }
 }
 
 void CwmsAdminMainWindowIf::RefreshViewsClickedSlot()
@@ -1720,38 +1794,38 @@ void CwmsAdminMainWindowIf::RefreshViewsClickedSlot()
 
 void CwmsAdminMainWindowIf::LanguageChangedSlot()
 {
-   CdmDataProvider* pCdmManager = CdmSessionManager::GetDataProvider();
+    CdmDataProvider* pCdmManager = CdmSessionManager::GetDataProvider();
 
-   if (CHKPTR(pCdmManager))
-   {
-      CdmScheme* pCdmDatabase = pCdmManager->GetCurrentScheme();
+    if (CHKPTR(pCdmManager))
+    {
+        CdmScheme* pCdmDatabase = pCdmManager->GetCurrentScheme();
 
-      if (CHKPTR(pCdmDatabase))
-      {
-          QString qstrLanguage = m_pqcbLanguage->itemData(m_pqcbLanguage->currentIndex()).toString();
-         pCdmDatabase->SetCurrentLanguage(qstrLanguage);
-      }
-   }
+        if (CHKPTR(pCdmDatabase))
+        {
+            QString qstrLanguage = m_pqcbLanguage->itemData(m_pqcbLanguage->currentIndex()).toString();
+            pCdmDatabase->SetCurrentLanguage(qstrLanguage);
+        }
+    }
 }
 
 void CwmsAdminMainWindowIf::NewReportSlot()
 {
     if (CwmsContext::GetContext()->GetPluginManager()->HasPrintingPlugin())
     {
-       CwmsReportManager cManager;
+        CwmsReportManager cManager;
 
-       CdmObjectContainer* pContainer = cManager.GetObjectList();
+        CdmObjectContainer* pContainer = cManager.GetObjectList();
 
-       if (CHKPTR(pContainer))
-       {
-          CdmObject* pCdmObject = pContainer->CreateNewObject();
+        if (CHKPTR(pContainer))
+        {
+            CdmObject* pCdmObject = pContainer->CreateNewObject();
 
-          if (CHKPTR(pCdmObject))
-          {
-             CwmsPrintingTemplateProperties::EditProperties(this, pCdmObject, true);
-             FillReports();
-          }
-       }
+            if (CHKPTR(pCdmObject))
+            {
+                CwmsPrintingTemplateProperties::EditProperties(this, pCdmObject, true);
+                FillReports();
+            }
+        }
     }
     else
     {
@@ -1764,18 +1838,18 @@ void CwmsAdminMainWindowIf::EditReportSlot()
 {
     if (CwmsContext::GetContext()->GetPluginManager()->HasPrintingPlugin())
     {
-       QTreeWidgetItem* pqItem = GetSelectedItem();
+        QTreeWidgetItem* pqItem = GetSelectedItem();
 
-       if (pqItem->data(1, Qt::UserRole).toInt() == eWmsTreeItemTypeReport)
-       {
-          CwmsReportManager cManager;
-          CwmsPrintingTemplate cTemplate = cManager.GetReport(pqItem->data(0, Qt::UserRole).toInt());
+        if (pqItem->data(1, Qt::UserRole).toInt() == eWmsTreeItemTypeReport)
+        {
+            CwmsReportManager cManager;
+            CwmsPrintingTemplate cTemplate = cManager.GetReport(pqItem->data(0, Qt::UserRole).toInt());
 
-          if (cTemplate.IsValid())
-          {
-             CwmsReportManager::OpenReportEditor(cTemplate.GetObjectId(), this);
-          }
-       }
+            if (cTemplate.IsValid())
+            {
+                CwmsReportManager::OpenReportEditor(cTemplate.GetObjectId(), this);
+            }
+        }
     }
     else
     {
@@ -1788,19 +1862,19 @@ void CwmsAdminMainWindowIf::ReportPropertiesSlot()
 {
     if (CwmsContext::GetContext()->GetPluginManager()->HasPrintingPlugin())
     {
-       QTreeWidgetItem* pqItem = GetSelectedItem();
+        QTreeWidgetItem* pqItem = GetSelectedItem();
 
-       if (pqItem->data(1, Qt::UserRole).toInt() == eWmsTreeItemTypeReport)
-       {
-          CwmsReportManager cManager;
-          CwmsPrintingTemplate cTemplate = cManager.GetReport(pqItem->data(0, Qt::UserRole).toInt());
+        if (pqItem->data(1, Qt::UserRole).toInt() == eWmsTreeItemTypeReport)
+        {
+            CwmsReportManager cManager;
+            CwmsPrintingTemplate cTemplate = cManager.GetReport(pqItem->data(0, Qt::UserRole).toInt());
 
-          if (cTemplate.IsValid())
-          {
-             CwmsPrintingTemplateProperties::EditProperties(this, cTemplate.GetObject(), false);
-             pqItem->setText(0, cTemplate.GetName());
-          }
-       }
+            if (cTemplate.IsValid())
+            {
+                CwmsPrintingTemplateProperties::EditProperties(this, cTemplate.GetObject(), false);
+                pqItem->setText(0, cTemplate.GetName());
+            }
+        }
     }
     else
     {
@@ -1813,20 +1887,20 @@ void CwmsAdminMainWindowIf::DeleteReportSlot()
 {
     if (CwmsContext::GetContext()->GetPluginManager()->HasPrintingPlugin())
     {
-       QTreeWidgetItem* pqItem = GetSelectedItem();
+        QTreeWidgetItem* pqItem = GetSelectedItem();
 
-       if (pqItem->data(1, Qt::UserRole).toInt() == eWmsTreeItemTypeReport)
-       {
-          CwmsReportManager cManager;
-          CwmsPrintingTemplate cTemplate = cManager.GetReport(pqItem->data(0, Qt::UserRole).toInt());
+        if (pqItem->data(1, Qt::UserRole).toInt() == eWmsTreeItemTypeReport)
+        {
+            CwmsReportManager cManager;
+            CwmsPrintingTemplate cTemplate = cManager.GetReport(pqItem->data(0, Qt::UserRole).toInt());
 
-          if (cTemplate.IsValid())
-          {
-             cTemplate.SetDeleted();
-             cTemplate.CommitObject();
-             DELPTR(pqItem)
-          }
-       }
+            if (cTemplate.IsValid())
+            {
+                cTemplate.SetDeleted();
+                cTemplate.CommitObject();
+                DELPTR(pqItem)
+            }
+        }
     }
     else
     {
@@ -1837,659 +1911,734 @@ void CwmsAdminMainWindowIf::DeleteReportSlot()
 
 void CwmsAdminMainWindowIf::NewFormSlot()
 {
-   // TODO
+    // TODO
 }
 
 void CwmsAdminMainWindowIf::EditFormSlot()
 {
-   QTreeWidgetItem* pqItem = GetSelectedItem();
+    QTreeWidgetItem* pqItem = GetSelectedItem();
 
-   if (pqItem->data(1, Qt::UserRole).toInt() == eWmsTreeItemTypeForm)
-   {
-      // TODO
-   }
+    if (pqItem->data(1, Qt::UserRole).toInt() == eWmsTreeItemTypeForm)
+    {
+        // TODO
+    }
 }
 
 void CwmsAdminMainWindowIf::DeleteFormSlot()
 {
-   QTreeWidgetItem* pqItem = GetSelectedItem();
+    QTreeWidgetItem* pqItem = GetSelectedItem();
 
-   if (pqItem->data(1, Qt::UserRole).toInt() == eWmsTreeItemTypeForm)
-   {
-      // TODO
-   }
+    if (pqItem->data(1, Qt::UserRole).toInt() == eWmsTreeItemTypeForm)
+    {
+        // TODO
+    }
 }
 
 void CwmsAdminMainWindowIf::DatabaseJournalSlot()
 {
-   CdmDataProvider* pCdmManager = CdmSessionManager::GetDataProvider();
+    CdmDataProvider* pCdmManager = CdmSessionManager::GetDataProvider();
 
-   if (CHKPTR(pCdmManager))
-   {
-      CdmScheme* pCdmDatabase = pCdmManager->GetCurrentScheme();
-      if (pCdmDatabase)
-      {
-         CwmsJournalViewer* pViewer = new CwmsJournalViewer(this);
-         pViewer->FillDialog(pCdmDatabase);
-         pViewer->exec();
-         DELPTR(pViewer)
-      }
-   }
+    if (CHKPTR(pCdmManager))
+    {
+        CdmScheme* pCdmDatabase = pCdmManager->GetCurrentScheme();
+        if (pCdmDatabase)
+        {
+            CwmsJournalViewer* pViewer = new CwmsJournalViewer(this);
+            pViewer->FillDialog(pCdmDatabase);
+            pViewer->exec();
+            DELPTR(pViewer)
+        }
+    }
 }
 
 void CwmsAdminMainWindowIf::ObjectListJournalSlot()
 {
-   CdmObjectContainer* pContainer = GetSelectedObjectList();
+    CdmObjectContainer* pContainer = GetSelectedObjectList();
 
-   if (pContainer)
-   {
-      CwmsJournalViewer* pViewer = new CwmsJournalViewer(this);
-      pViewer->FillDialog(pContainer);
-      pViewer->exec();
-      DELPTR(pViewer)
-   }
+    if (pContainer)
+    {
+        CwmsJournalViewer* pViewer = new CwmsJournalViewer(this);
+        pViewer->FillDialog(pContainer);
+        pViewer->exec();
+        DELPTR(pViewer)
+    }
 }
 
 void CwmsAdminMainWindowIf::OpenApplicationEditor()
 {
-   CwmsApplicationManager cAppManager;
+    CwmsApplicationManager cAppManager;
 
-   QTreeWidgetItem* pqItem = GetSelectedItem();
+    QTreeWidgetItem* pqItem = GetSelectedItem();
 
-   if (pqItem)
-   {
-      QString qstrName = pqItem->text(0);
-      CdmMessageManager::StartAsyncMessageCollection();
-      CwmsApplication cApp = cAppManager.FindApplication(qstrName);
+    if (pqItem)
+    {
+        QString qstrName = pqItem->text(0);
+        CdmMessageManager::StartAsyncMessageCollection();
+        CwmsApplication cApp = cAppManager.FindApplication(qstrName);
 
-      if (cApp.IsValid())
-      {
-         OpenApplicationEditor(cApp);
-      }
+        if (cApp.IsValid())
+        {
+            OpenApplicationEditor(cApp);
+        }
 
-      CdmMessageManager::EndAndShowAsyncMessageCollection();
-   }
+        CdmMessageManager::EndAndShowAsyncMessageCollection();
+    }
 }
 
 void CwmsAdminMainWindowIf::NewApplicationSlot()
 {
-   QString qstrApplicationName = CdmMessageManager::AskForInputText(tr("Neu Applikation anlegen"),
-                                                                    tr("Bitte geben Sie den Namen der Applikation ein."));
+    QString qstrApplicationName = CdmMessageManager::AskForInputText(tr("Neu Applikation anlegen"),
+                                                                     tr("Bitte geben Sie den Namen der Applikation ein."));
 
-   if (!qstrApplicationName.isEmpty())
-   {
-       CwmsApplication cApp = CwmsApplication::Create();
-       cApp.SetName(qstrApplicationName);
-       cApp.CommitObject();
-       FillApplications();
-       OpenApplicationEditor(cApp);
-   }
+    if (!qstrApplicationName.isEmpty())
+    {
+        CwmsApplication cApp = CwmsApplication::Create();
+        cApp.SetName(qstrApplicationName);
+        cApp.CommitObject();
+        FillApplications();
+        OpenApplicationEditor(cApp);
+    }
 }
 
 void CwmsAdminMainWindowIf::OpenApplicationEditor(CwmsApplication& p_rApp)
 {
     if (p_rApp.IsValid())
     {
-      if (!FindAndSetSubWindow(p_rApp.GetUriInternal()))
-      {
-         CdmMessageManager::StartAsyncMessageCollection();
-         CwmsApplicationEditor* pEditor = new CwmsApplicationEditor(m_pqMdiArea);
-         pEditor->FillWidget(p_rApp);
-         pEditor->show();
-         QMdiSubWindow* pSubWindow = AddMdiWindow(pEditor);    
+        if (!FindAndSetSubWindow(p_rApp.GetUriInternal()))
+        {
+            CdmMessageManager::StartAsyncMessageCollection();
+            CwmsApplicationEditor* pEditor = new CwmsApplicationEditor(m_pqMdiArea);
+            pEditor->FillWidget(p_rApp);
+            pEditor->show();
+            QMdiSubWindow* pSubWindow = AddMdiWindow(pEditor);
 
-         if (CHKPTR(pSubWindow))
-         {
-            pSubWindow->setWindowTitle(tr("Applikation ") + p_rApp.GetName());
-            pSubWindow->setObjectName(p_rApp.GetUriInternal());
-         }
+            if (CHKPTR(pSubWindow))
+            {
+                pSubWindow->setWindowTitle(tr("Applikation ") + p_rApp.GetName());
+                pSubWindow->setObjectName(p_rApp.GetUriInternal());
+            }
 
-         CdmMessageManager::EndAndShowAsyncMessageCollection();
-      }
+            CdmMessageManager::EndAndShowAsyncMessageCollection();
+        }
     }
 }
 
 void CwmsAdminMainWindowIf::DeleteApplicationSlot()
 {
-   CwmsApplicationManager cAppManager;
-   QTreeWidgetItem* pqItem = GetSelectedItem();
+    CwmsApplicationManager cAppManager;
+    QTreeWidgetItem* pqItem = GetSelectedItem();
 
-   if (pqItem)
-   {
-      QString qstrName = pqItem->text(0);
-      CwmsApplication cApp = cAppManager.FindApplication(qstrName);
+    if (pqItem)
+    {
+        QString qstrName = pqItem->text(0);
+        CwmsApplication cApp = cAppManager.FindApplication(qstrName);
 
-      if (cApp.IsValid())
-      {
-         CdmMessageManager::StartAsyncMessageCollection();
-         cApp.SetDeleted();
-         cApp.CommitObject();
-         DELPTR(pqItem)
-         CdmMessageManager::EndAndShowAsyncMessageCollection();
-      }
-   }
+        if (cApp.IsValid())
+        {
+            CdmMessageManager::StartAsyncMessageCollection();
+            cApp.SetDeleted();
+            cApp.CommitObject();
+            DELPTR(pqItem)
+                    CdmMessageManager::EndAndShowAsyncMessageCollection();
+        }
+    }
 }
 
 void CwmsAdminMainWindowIf::ExecuteApplicationSlot()
 {
-   QTreeWidgetItem* pItem = GetSelectedItem();
+    QTreeWidgetItem* pItem = GetSelectedItem();
 
-   if (pItem && pItem->data(1, Qt::UserRole) == eWmsTreeItemTypeApplication)
-   {
-      QString qstrApplication = pItem->text(0);
+    if (pItem && pItem->data(1, Qt::UserRole) == eWmsTreeItemTypeApplication)
+    {
+        QString qstrApplication = pItem->text(0);
 
-      if (!qstrApplication.isEmpty())
-      {
-         CwmsApplicationManager cAppManager;
-         CwmsApplication cApp = cAppManager.FindApplication(qstrApplication);
+        if (!qstrApplication.isEmpty())
+        {
+            CwmsApplicationManager cAppManager;
+            CwmsApplication cApp = cAppManager.FindApplication(qstrApplication);
 
-         if (cApp.IsValid())
-         {
-             QString qstrMain = cApp.GetMain();
+            if (cApp.IsValid())
+            {
+                QString qstrMain = cApp.GetMain();
 
-             if (!qstrMain.isEmpty())
-             {
-                 CwmsInitApplication::StartMainFunction(qstrMain);
-             }
-
-
-             CdmObject* pMainWindow = cApp.GetMainWindow();
-
-             if (pMainWindow)
-             {
-                   CwmsQmlApplicationController::createController(QString("Dev Plattform"), nullptr);
-                   CwmsFormUserDefined cForm(pMainWindow);
-                   CwmsQmlApplicationController::getController()->createCustomMainWindow(cForm.GetName(), cForm.GetUICode());
-             }
-             else
-             {
-                if (m_pRuntime)
+                if (!qstrMain.isEmpty())
                 {
-                   DELPTR(m_pRuntime)
+                    CwmsInitApplication::StartMainFunction(qstrMain);
                 }
 
-                m_pRuntime = new CwmsRuntime(this);
-                m_pRuntime->SetApplication(cApp);
-                m_pRuntime->show();
-                m_pRuntime->FillWidget();
-                m_pRuntime->SetLogoutOnExit(false);
-             }
-         }
-      }
-   }
+
+                CdmObject* pMainWindow = cApp.GetMainWindow();
+
+                if (pMainWindow)
+                {
+                    CwmsQmlApplicationController::createController(QString("Dev Plattform"), nullptr);
+                    CwmsFormUserDefined cForm(pMainWindow);
+                    CwmsQmlApplicationController::getController()->createCustomMainWindow(cForm.GetName(), cForm.GetUICode());
+                }
+                else
+                {
+                    if (m_pRuntime)
+                    {
+                        DELPTR(m_pRuntime)
+                    }
+
+                    m_pRuntime = new CwmsRuntime(this);
+                    m_pRuntime->SetApplication(cApp);
+                    m_pRuntime->show();
+                    m_pRuntime->FillWidget();
+                    m_pRuntime->SetLogoutOnExit(false);
+                }
+            }
+        }
+    }
 }
 
 void CwmsAdminMainWindowIf::ExportJsonSlot()
 {
-   CdmDataProvider* pCdmManager = CdmSessionManager::GetDataProvider();
+    CdmDataProvider* pCdmManager = CdmSessionManager::GetDataProvider();
 
-   if (CHKPTR(pCdmManager))
-   {
-      CdmScheme* pCdmDatabase = pCdmManager->GetCurrentScheme();
+    if (CHKPTR(pCdmManager))
+    {
+        CdmScheme* pCdmDatabase = pCdmManager->GetCurrentScheme();
 
-      if (CHKPTR(pCdmDatabase))
-      {
-         CdmMessageManager::StartAsyncMessageCollection();
-         QVariant qvDb = pCdmDatabase->GetVariantCompleteDatabase();
-         CwmsJson cJson;   
-         bool bOk = false;
-         QByteArray qbContent = cJson.serialize(qvDb, bOk);
+        if (CHKPTR(pCdmDatabase))
+        {
+            CdmMessageManager::StartAsyncMessageCollection();
+            QVariant qvDb = pCdmDatabase->GetVariantCompleteDatabase();
+            CwmsJson cJson;
+            bool bOk = false;
+            QByteArray qbContent = cJson.serialize(qvDb, bOk);
 
-         if (bOk)
-         {
-            QString qstrFilename = QFileDialog::getSaveFileName(this, tr("Speicherort für Json auswählen"));
-
-            if (!qstrFilename.isEmpty())
+            if (bOk)
             {
+                QString qstrFilename = QFileDialog::getSaveFileName(this, tr("Speicherort für Json auswählen"));
+
+                if (!qstrFilename.isEmpty())
+                {
 
 
-               if (!qstrFilename.contains("."))
-               {
-                  qstrFilename += ".json";
-               }
+                    if (!qstrFilename.contains("."))
+                    {
+                        qstrFilename += ".json";
+                    }
 
-               QFile qFile(qstrFilename);
+                    QFile qFile(qstrFilename);
 
-               if (qFile.open(QIODevice::WriteOnly))
-               {
-                  qFile.write(qbContent);
-                  qFile.close();
-               }
+                    if (qFile.open(QIODevice::WriteOnly))
+                    {
+                        qFile.write(qbContent);
+                        qFile.close();
+                    }
+                }
             }
-         }
 
-         CdmMessageManager::EndAndShowAsyncMessageCollection();
-      }
-   }
+            CdmMessageManager::EndAndShowAsyncMessageCollection();
+        }
+    }
 }
 
 void CwmsAdminMainWindowIf::NewGenericObjectFormSlot()
 {
-   CwmsFormManager cManager;
-   CdmObjectContainer* pCdmList = cManager.GetGenericFormContainer();
+    CwmsFormManager cManager;
+    CdmObjectContainer* pCdmList = cManager.GetGenericFormContainer();
 
-   if (CHKPTR(pCdmList))
-   {
-      CdmObject* pCdmObject = pCdmList->CreateNewObject();
+    if (CHKPTR(pCdmList))
+    {
+        CdmObject* pCdmObject = pCdmList->CreateNewObject();
 
-      if (CHKPTR(pCdmObject))
-      {
-         CwmsFormObject cForm(pCdmObject);
-         CwmsFormGenericObjectEditor::EditForm(cForm, true, this);
-         FillForms();
-      }
-   }
+        if (CHKPTR(pCdmObject))
+        {
+            CwmsFormObject cForm(pCdmObject);
+            CwmsFormGenericObjectEditor::EditForm(cForm, true, this);
+            FillForms();
+        }
+    }
 }
 
 void CwmsAdminMainWindowIf::EditGenericObjectFormSlot()
 {
-   CwmsFormManager cManager;
-   CdmObjectContainer* pCdmList = cManager.GetGenericFormContainer();
-   QTreeWidgetItem* pItem = GetSelectedItem();
+    CwmsFormManager cManager;
+    CdmObjectContainer* pCdmList = cManager.GetGenericFormContainer();
+    QTreeWidgetItem* pItem = GetSelectedItem();
 
-   if (CHKPTR(pCdmList))
-   {
-      CdmObject* pCdmObject = pCdmList->FindObjectById(pItem->data(0, Qt::UserRole).toInt());
+    if (CHKPTR(pCdmList))
+    {
+        CdmObject* pCdmObject = pCdmList->FindObjectById(pItem->data(0, Qt::UserRole).toInt());
 
-      if (CHKPTR(pCdmObject))
-      {
-         CwmsFormObject cForm(pCdmObject);
-         CwmsFormGenericObjectEditor::EditForm(cForm, false, this);
-         pItem->setText(0, cForm.GetName());
-      }
-   }
+        if (CHKPTR(pCdmObject))
+        {
+            CwmsFormObject cForm(pCdmObject);
+            CwmsFormGenericObjectEditor::EditForm(cForm, false, this);
+            pItem->setText(0, cForm.GetName());
+        }
+    }
 }
 
 void CwmsAdminMainWindowIf::DeleteGenericObjectFormSlot()
 {
-   CwmsFormManager cManager;
-   CdmObjectContainer* pCdmList = cManager.GetGenericFormContainer();
-   QTreeWidgetItem* pItem = GetSelectedItem();
+    CwmsFormManager cManager;
+    CdmObjectContainer* pCdmList = cManager.GetGenericFormContainer();
+    QTreeWidgetItem* pItem = GetSelectedItem();
 
-   if (CHKPTR(pCdmList))
-   {
-      CdmObject* pCdmObject = pCdmList->FindObjectById(pItem->data(0, Qt::UserRole).toInt());
+    if (CHKPTR(pCdmList))
+    {
+        CdmObject* pCdmObject = pCdmList->FindObjectById(pItem->data(0, Qt::UserRole).toInt());
 
-      if (CHKPTR(pCdmObject))
-      {
-         pCdmObject->SetDeleted();
-         pCdmObject->Commit();
-         DELPTR(pItem)
-      }
-   }
+        if (CHKPTR(pCdmObject))
+        {
+            pCdmObject->SetDeleted();
+            pCdmObject->Commit();
+            DELPTR(pItem)
+        }
+    }
 }
 
 void CwmsAdminMainWindowIf::NewObjectObjectListFormSlot()
 {
-   CwmsFormManager cManager;
-   CdmObjectContainer* pCdmList = cManager.GetFormObjectObjectContainer();
+    CwmsFormManager cManager;
+    CdmObjectContainer* pCdmList = cManager.GetFormObjectObjectContainer();
 
-   if (CHKPTR(pCdmList))
-   {
-      CdmObject* pCdmObject = pCdmList->CreateNewObject();
+    if (CHKPTR(pCdmList))
+    {
+        CdmObject* pCdmObject = pCdmList->CreateNewObject();
 
-      if (CHKPTR(pCdmObject))
-      {
-         CwmsFormObjectContainer cForm(pCdmObject);
-         CwmsFormObjectContainerEditor::EditForm(cForm, true, this);
-         FillForms();
-      }
-   }
+        if (CHKPTR(pCdmObject))
+        {
+            CwmsFormObjectContainer cForm(pCdmObject);
+            CwmsFormObjectContainerEditor::EditForm(cForm, true, this);
+            FillForms();
+        }
+    }
 }
 
 void CwmsAdminMainWindowIf::EditObjectObjectListFormSlot()
 {
-   CwmsFormManager cManager;
-   CdmObjectContainer* pCdmList = cManager.GetFormObjectObjectContainer();
-   QTreeWidgetItem* pItem = GetSelectedItem();
+    CwmsFormManager cManager;
+    CdmObjectContainer* pCdmList = cManager.GetFormObjectObjectContainer();
+    QTreeWidgetItem* pItem = GetSelectedItem();
 
-   if (CHKPTR(pCdmList))
-   {
-      CdmObject* pCdmObject = pCdmList->FindObjectById(pItem->data(0, Qt::UserRole).toInt());
+    if (CHKPTR(pCdmList))
+    {
+        CdmObject* pCdmObject = pCdmList->FindObjectById(pItem->data(0, Qt::UserRole).toInt());
 
-      if (CHKPTR(pCdmObject))
-      {
-         CwmsFormObjectContainer cForm(pCdmObject);
-         CwmsFormObjectContainerEditor::EditForm(cForm, false, this);
-         pItem->setText(0, cForm.GetName());
-      }
-   }
+        if (CHKPTR(pCdmObject))
+        {
+            CwmsFormObjectContainer cForm(pCdmObject);
+            CwmsFormObjectContainerEditor::EditForm(cForm, false, this);
+            pItem->setText(0, cForm.GetName());
+        }
+    }
 }
 
 void CwmsAdminMainWindowIf::DeleteObjectObjectListFormSlot()
 {
-   CwmsFormManager cManager;
-   CdmObjectContainer* pCdmList = cManager.GetFormObjectObjectContainer();
-   QTreeWidgetItem* pItem = GetSelectedItem();
+    CwmsFormManager cManager;
+    CdmObjectContainer* pCdmList = cManager.GetFormObjectObjectContainer();
+    QTreeWidgetItem* pItem = GetSelectedItem();
 
-   if (CHKPTR(pCdmList))
-   {
-      CdmObject* pCdmObject = pCdmList->FindObjectById(pItem->data(0, Qt::UserRole).toInt());
+    if (CHKPTR(pCdmList))
+    {
+        CdmObject* pCdmObject = pCdmList->FindObjectById(pItem->data(0, Qt::UserRole).toInt());
 
-      if (CHKPTR(pCdmObject))
-      {
-         pCdmObject->SetDeleted();
-         pCdmObject->Commit();
-         DELPTR(pItem)
-      }
-   }
+        if (CHKPTR(pCdmObject))
+        {
+            pCdmObject->SetDeleted();
+            pCdmObject->Commit();
+            DELPTR(pItem)
+        }
+    }
 }
 
 void CwmsAdminMainWindowIf::NewStandardObjectListFormSlot()
 {
-   CwmsFormManager cManager;
-   CdmObjectContainer* pCdmList = cManager.GetStandardFormContainer();
+    CwmsFormManager cManager;
+    CdmObjectContainer* pCdmList = cManager.GetStandardFormContainer();
 
-   if (CHKPTR(pCdmList))
-   {
-      CdmObject* pCdmObject = pCdmList->CreateNewObject();
+    if (CHKPTR(pCdmList))
+    {
+        CdmObject* pCdmObject = pCdmList->CreateNewObject();
 
-      if (CHKPTR(pCdmObject))
-      {
-         CwmsFormStandardContainer cForm(pCdmObject);
-         CwmsFormStandardContainerEditor::EditForm(cForm, true, this);
-         FillForms();
-      }
-   }
+        if (CHKPTR(pCdmObject))
+        {
+            CwmsFormStandardContainer cForm(pCdmObject);
+            CwmsFormStandardContainerEditor::EditForm(cForm, true, this);
+            FillForms();
+        }
+    }
 }
 
 void CwmsAdminMainWindowIf::EditStandardObjectListFormSlot()
 {
-   CwmsFormManager cManager;
-   CdmObjectContainer* pCdmList = cManager.GetStandardFormContainer();
-   QTreeWidgetItem* pItem = GetSelectedItem();
+    CwmsFormManager cManager;
+    CdmObjectContainer* pCdmList = cManager.GetStandardFormContainer();
+    QTreeWidgetItem* pItem = GetSelectedItem();
 
-   if (CHKPTR(pCdmList))
-   {
-      CdmObject* pCdmObject = pCdmList->FindObjectById(pItem->data(0, Qt::UserRole).toInt());
+    if (CHKPTR(pCdmList))
+    {
+        CdmObject* pCdmObject = pCdmList->FindObjectById(pItem->data(0, Qt::UserRole).toInt());
 
-      if (CHKPTR(pCdmObject))
-      {
-         CwmsFormStandardContainer cForm(pCdmObject);
-         CwmsFormStandardContainerEditor::EditForm(cForm, false, this);
-         pItem->setText(0, cForm.GetName());
-      }
-   }
+        if (CHKPTR(pCdmObject))
+        {
+            CwmsFormStandardContainer cForm(pCdmObject);
+            CwmsFormStandardContainerEditor::EditForm(cForm, false, this);
+            pItem->setText(0, cForm.GetName());
+        }
+    }
 }
 
 void CwmsAdminMainWindowIf::DeleteStandardObjectListFormSlot()
 {
-   CwmsFormManager cManager;
-   CdmObjectContainer* pCdmList = cManager.GetStandardFormContainer();
-   QTreeWidgetItem* pItem = GetSelectedItem();
+    CwmsFormManager cManager;
+    CdmObjectContainer* pCdmList = cManager.GetStandardFormContainer();
+    QTreeWidgetItem* pItem = GetSelectedItem();
 
-   if (CHKPTR(pCdmList))
-   {
-      CdmObject* pCdmObject = pCdmList->FindObjectById(pItem->data(0, Qt::UserRole).toInt());
+    if (CHKPTR(pCdmList))
+    {
+        CdmObject* pCdmObject = pCdmList->FindObjectById(pItem->data(0, Qt::UserRole).toInt());
 
-      if (CHKPTR(pCdmObject))
-      {
-         pCdmObject->SetDeleted();
-         pCdmObject->Commit();
-         DELPTR(pItem)
-      }
-   }
+        if (CHKPTR(pCdmObject))
+        {
+            pCdmObject->SetDeleted();
+            pCdmObject->Commit();
+            DELPTR(pItem)
+        }
+    }
 }
 
 void CwmsAdminMainWindowIf::NewUserDefinedFormSlot()
 {
-   CwmsFormManager cManager;
-   CdmObjectContainer* pCdmList = cManager.GetFormUserDefinedContainer();
+    CwmsFormManager cManager;
+    CdmObjectContainer* pCdmList = cManager.GetFormUserDefinedContainer();
 
-   if (CHKPTR(pCdmList))
-   {
-      CdmObject* pCdmObject = pCdmList->CreateNewObject();
+    if (CHKPTR(pCdmList))
+    {
+        CdmObject* pCdmObject = pCdmList->CreateNewObject();
 
-      if (CHKPTR(pCdmObject))
-      {
-          CwmsFormUserDefined cForm(pCdmObject);
-          cForm.SetName("New_Form");
-          ScriptEnvironmentSlot();
-
-          if (CHKPTR(m_pScriptEnvironment))
-          {
-              m_pScriptEnvironment->OpenObject(pCdmObject);
-          }
-      }
-   }
-}
-
-void CwmsAdminMainWindowIf::EditUserDefinedFormSlot()
-{
-   CwmsFormManager cManager;
-   CdmObjectContainer* pCdmList = cManager.GetFormUserDefinedContainer();
-   QTreeWidgetItem* pItem = GetSelectedItem();
-
-   if (CHKPTR(pCdmList))
-   {
-      CdmObject* pCdmObject = pCdmList->FindObjectById(pItem->data(0, Qt::UserRole).toInt());
-
-      if (CHKPTR(pCdmObject))
-      {
-          ScriptEnvironmentSlot();
-
-          if (CHKPTR(m_pScriptEnvironment))
-          {
-              m_pScriptEnvironment->OpenObject(pCdmObject);
-          }
-      }
-   }
-}
-
-void CwmsAdminMainWindowIf::DeleteUserDefinedFormSlot()
-{
-   CwmsFormManager cManager;
-   CdmObjectContainer* pCdmList = cManager.GetFormUserDefinedContainer();
-   QTreeWidgetItem* pItem = GetSelectedItem();
-
-   if (CHKPTR(pCdmList))
-   {
-      CdmObject* pCdmObject = pCdmList->FindObjectById(pItem->data(0, Qt::UserRole).toInt());
-
-      if (CHKPTR(pCdmObject))
-      {
-         pCdmObject->SetDeleted();
-         pCdmObject->Commit();
-         DELPTR(pItem)
-      }
-   }
-}
-
-void CwmsAdminMainWindowIf::NewViewObjectListFormSlot()
-{
-   CwmsFormManager cManager;
-   CdmObjectContainer* pCdmList = cManager.GetFormViewContainer();
-
-   if (CHKPTR(pCdmList))
-   {
-      CdmObject* pCdmObject = pCdmList->CreateNewObject();
-
-      if (CHKPTR(pCdmObject))
-      {
-         CwmsFormView cForm(pCdmObject);
-         CwmsFormViewEditor::EditForm(cForm, true, this);
-         FillForms();
-      }
-   }
-}
-
-void CwmsAdminMainWindowIf::EditViewObjectListFormSlot()
-{
-   CwmsFormManager cManager;
-   CdmObjectContainer* pCdmList = cManager.GetFormViewContainer();
-   QTreeWidgetItem* pItem = GetSelectedItem();
-
-   if (CHKPTR(pCdmList))
-   {
-      CdmObject* pCdmObject = pCdmList->FindObjectById(pItem->data(0, Qt::UserRole).toInt());
-
-      if (CHKPTR(pCdmObject))
-      {
-         CwmsFormView cForm(pCdmObject);
-         CwmsFormViewEditor::EditForm(cForm, false, this);
-         pItem->setText(0, cForm.GetName());
-      }
-   }
-}
-
-void CwmsAdminMainWindowIf::DeleteViewObjectListFormSlot()
-{
-   CwmsFormManager cManager;
-   CdmObjectContainer* pCdmList = cManager.GetFormViewContainer();
-   QTreeWidgetItem* pItem = GetSelectedItem();
-
-   if (CHKPTR(pCdmList))
-   {
-      CdmObject* pCdmObject = pCdmList->FindObjectById(pItem->data(0, Qt::UserRole).toInt());
-
-      if (CHKPTR(pCdmObject))
-      {
-         pCdmObject->SetDeleted();
-         pCdmObject->Commit();
-         DELPTR(pItem)
-      }
-   }
-}
-
-void CwmsAdminMainWindowIf::NewSearchFormSlot()
-{
-   CwmsFormManager cManager;
-   CdmObjectContainer* pCdmList = cManager.GetFormSearchContainer();
-
-   if (CHKPTR(pCdmList))
-   {
-      CdmObject* pCdmObject = pCdmList->CreateNewObject();
-
-      if (CHKPTR(pCdmObject))
-      {
-         CwmsFormSearch cForm(pCdmObject);
-         CwmsFormSearchEditor::EditForm(cForm, true, this);
-         FillForms();
-      }
-   }
-}
-
-void CwmsAdminMainWindowIf::EditSearchFormSlot()
-{
-   CwmsFormManager cManager;
-   CdmObjectContainer* pCdmList = cManager.GetFormSearchContainer();
-   QTreeWidgetItem* pItem = GetSelectedItem();
-
-   if (CHKPTR(pCdmList))
-   {
-      CdmObject* pCdmObject = pCdmList->FindObjectById(pItem->data(0, Qt::UserRole).toInt());
-
-      if (CHKPTR(pCdmObject))
-      {
-         CwmsFormSearch cForm(pCdmObject);
-         CwmsFormSearchEditor::EditForm(cForm, false, this);
-         pItem->setText(0, cForm.GetName());
-      }
-   }
-}
-
-void CwmsAdminMainWindowIf::DeleteSearchFormSlot()
-{
-   CwmsFormManager cManager;
-   CdmObjectContainer* pCdmList = cManager.GetFormSearchContainer();
-   QTreeWidgetItem* pItem = GetSelectedItem();
-
-   if (CHKPTR(pCdmList))
-   {
-      CdmObject* pCdmObject = pCdmList->FindObjectById(pItem->data(0, Qt::UserRole).toInt());
-
-      if (CHKPTR(pCdmObject))
-      {
-         pCdmObject->SetDeleted();
-         pCdmObject->Commit();
-         DELPTR(pItem)
-      }
-   }
-}
-
-void CwmsAdminMainWindowIf::NewWorkflowSlot()
-{
-   CwmsWorkflowManager cManager;
-   CdmObjectContainer* pCdmList = cManager.GetObjectList();
-
-   if (CHKPTR(pCdmList))
-   {
-      CdmObject* pCdmObject = pCdmList->CreateNewObject();
-
-      if (CHKPTR(pCdmObject))
-      {
-         CwmsguiObjectEditorSelector::Create(pCdmObject, this);
-         FillWorkflows();
-      }
-   }
-}
-
-void CwmsAdminMainWindowIf::EditWorkflowSlot()
-{
-   CwmsWorkflowManager cManager;
-   CdmObjectContainer* pCdmList = cManager.GetObjectList();
-   QTreeWidgetItem* pItem = GetSelectedItem();
-
-   if (CHKPTR(pCdmList))
-   {
-      CdmObject* pCdmObject = pCdmList->FindObjectById(pItem->data(0, Qt::UserRole).toInt());
-
-      if (CHKPTR(pCdmObject))
-      {
-         CwmsguiObjectEditorSelector::Edit(pCdmObject, this);
-      }
-   }
-}
-
-void CwmsAdminMainWindowIf::DeleteWorkflowSlot()
-{
-   CwmsWorkflowManager cManager;
-   CdmObjectContainer* pCdmList = cManager.GetObjectList();
-   QTreeWidgetItem* pItem = GetSelectedItem();
-
-   if (CHKPTR(pCdmList))
-   {
-      CdmObject* pCdmObject = pCdmList->FindObjectById(pItem->data(0, Qt::UserRole).toInt());
-
-      if (CHKPTR(pCdmObject))
-      {
-         pCdmObject->SetDeleted();
-         pCdmObject->Commit();
-         DELPTR(pItem)
-      }
-   }
-}
-
-void CwmsAdminMainWindowIf::EditFunctionSlot()
-{
-	CdmClassMethod* pMethod = nullptr;
-	QTreeWidgetItem* pqtwMethod = GetSelectedItem();
-	if (pqtwMethod)
-	{
-		QString qstrUri = pqtwMethod->data(0, Qt::UserRole).toString();
-		CdmLocatedElement* pElement = CdmSessionManager::GetDataProvider()->GetUriObject(qstrUri);
-
-		if (CHKPTR(pElement) && pElement->IsMethod())
-		{
-			pMethod = static_cast<CdmClassMethod*>(pElement);
-		}
-
-		if (pMethod)
-		{
+        if (CHKPTR(pCdmObject))
+        {
+            CwmsFormUserDefined cForm(pCdmObject);
+            cForm.SetName("New_Form");
             ScriptEnvironmentSlot();
 
             if (CHKPTR(m_pScriptEnvironment))
             {
-                m_pScriptEnvironment->OpenObject(pMethod);
+                m_pScriptEnvironment->OpenObject(pCdmObject);
             }
-		}
-	}
+        }
+    }
+}
+
+void CwmsAdminMainWindowIf::EditUserDefinedFormSlot()
+{
+    CwmsFormManager cManager;
+    CdmObjectContainer* pCdmList = cManager.GetFormUserDefinedContainer();
+    QTreeWidgetItem* pItem = GetSelectedItem();
+
+    if (CHKPTR(pCdmList))
+    {
+        CdmObject* pCdmObject = pCdmList->FindObjectById(pItem->data(0, Qt::UserRole).toInt());
+
+        if (CHKPTR(pCdmObject))
+        {
+            ScriptEnvironmentSlot();
+
+            if (CHKPTR(m_pScriptEnvironment))
+            {
+                m_pScriptEnvironment->OpenObject(pCdmObject);
+            }
+        }
+    }
+}
+
+void CwmsAdminMainWindowIf::DeleteUserDefinedFormSlot()
+{
+    CwmsFormManager cManager;
+    CdmObjectContainer* pCdmList = cManager.GetFormUserDefinedContainer();
+    QTreeWidgetItem* pItem = GetSelectedItem();
+
+    if (CHKPTR(pCdmList))
+    {
+        CdmObject* pCdmObject = pCdmList->FindObjectById(pItem->data(0, Qt::UserRole).toInt());
+
+        if (CHKPTR(pCdmObject))
+        {
+            pCdmObject->SetDeleted();
+            pCdmObject->Commit();
+            DELPTR(pItem)
+        }
+    }
+}
+
+void CwmsAdminMainWindowIf::NewViewObjectListFormSlot()
+{
+    CwmsFormManager cManager;
+    CdmObjectContainer* pCdmList = cManager.GetFormViewContainer();
+
+    if (CHKPTR(pCdmList))
+    {
+        CdmObject* pCdmObject = pCdmList->CreateNewObject();
+
+        if (CHKPTR(pCdmObject))
+        {
+            CwmsFormView cForm(pCdmObject);
+            CwmsFormViewEditor::EditForm(cForm, true, this);
+            FillForms();
+        }
+    }
+}
+
+void CwmsAdminMainWindowIf::EditViewObjectListFormSlot()
+{
+    CwmsFormManager cManager;
+    CdmObjectContainer* pCdmList = cManager.GetFormViewContainer();
+    QTreeWidgetItem* pItem = GetSelectedItem();
+
+    if (CHKPTR(pCdmList))
+    {
+        CdmObject* pCdmObject = pCdmList->FindObjectById(pItem->data(0, Qt::UserRole).toInt());
+
+        if (CHKPTR(pCdmObject))
+        {
+            CwmsFormView cForm(pCdmObject);
+            CwmsFormViewEditor::EditForm(cForm, false, this);
+            pItem->setText(0, cForm.GetName());
+        }
+    }
+}
+
+void CwmsAdminMainWindowIf::DeleteViewObjectListFormSlot()
+{
+    CwmsFormManager cManager;
+    CdmObjectContainer* pCdmList = cManager.GetFormViewContainer();
+    QTreeWidgetItem* pItem = GetSelectedItem();
+
+    if (CHKPTR(pCdmList))
+    {
+        CdmObject* pCdmObject = pCdmList->FindObjectById(pItem->data(0, Qt::UserRole).toInt());
+
+        if (CHKPTR(pCdmObject))
+        {
+            pCdmObject->SetDeleted();
+            pCdmObject->Commit();
+            DELPTR(pItem)
+        }
+    }
+}
+
+void CwmsAdminMainWindowIf::NewSearchFormSlot()
+{
+    CwmsFormManager cManager;
+    CdmObjectContainer* pCdmList = cManager.GetFormSearchContainer();
+
+    if (CHKPTR(pCdmList))
+    {
+        CdmObject* pCdmObject = pCdmList->CreateNewObject();
+
+        if (CHKPTR(pCdmObject))
+        {
+            CwmsFormSearch cForm(pCdmObject);
+            CwmsFormSearchEditor::EditForm(cForm, true, this);
+            FillForms();
+        }
+    }
+}
+
+void CwmsAdminMainWindowIf::EditSearchFormSlot()
+{
+    CwmsFormManager cManager;
+    CdmObjectContainer* pCdmList = cManager.GetFormSearchContainer();
+    QTreeWidgetItem* pItem = GetSelectedItem();
+
+    if (CHKPTR(pCdmList))
+    {
+        CdmObject* pCdmObject = pCdmList->FindObjectById(pItem->data(0, Qt::UserRole).toInt());
+
+        if (CHKPTR(pCdmObject))
+        {
+            CwmsFormSearch cForm(pCdmObject);
+            CwmsFormSearchEditor::EditForm(cForm, false, this);
+            pItem->setText(0, cForm.GetName());
+        }
+    }
+}
+
+void CwmsAdminMainWindowIf::DeleteSearchFormSlot()
+{
+    CwmsFormManager cManager;
+    CdmObjectContainer* pCdmList = cManager.GetFormSearchContainer();
+    QTreeWidgetItem* pItem = GetSelectedItem();
+
+    if (CHKPTR(pCdmList))
+    {
+        CdmObject* pCdmObject = pCdmList->FindObjectById(pItem->data(0, Qt::UserRole).toInt());
+
+        if (CHKPTR(pCdmObject))
+        {
+            pCdmObject->SetDeleted();
+            pCdmObject->Commit();
+            DELPTR(pItem)
+        }
+    }
+}
+
+void CwmsAdminMainWindowIf::NewWorkflowSlot()
+{
+    CwmsWorkflowManager cManager;
+    CdmObjectContainer* pCdmList = cManager.GetObjectList();
+
+    if (CHKPTR(pCdmList))
+    {
+        CdmObject* pCdmObject = pCdmList->CreateNewObject();
+
+        if (CHKPTR(pCdmObject))
+        {
+            CwmsguiObjectEditorSelector::Create(pCdmObject, this);
+            FillWorkflows();
+        }
+    }
+}
+
+void CwmsAdminMainWindowIf::EditWorkflowSlot()
+{
+    CwmsWorkflowManager cManager;
+    CdmObjectContainer* pCdmList = cManager.GetObjectList();
+    QTreeWidgetItem* pItem = GetSelectedItem();
+
+    if (CHKPTR(pCdmList))
+    {
+        CdmObject* pCdmObject = pCdmList->FindObjectById(pItem->data(0, Qt::UserRole).toInt());
+
+        if (CHKPTR(pCdmObject))
+        {
+            CwmsguiObjectEditorSelector::Edit(pCdmObject, this);
+        }
+    }
+}
+
+void CwmsAdminMainWindowIf::DeleteWorkflowSlot()
+{
+    CwmsWorkflowManager cManager;
+    CdmObjectContainer* pCdmList = cManager.GetObjectList();
+    QTreeWidgetItem* pItem = GetSelectedItem();
+
+    if (CHKPTR(pCdmList))
+    {
+        CdmObject* pCdmObject = pCdmList->FindObjectById(pItem->data(0, Qt::UserRole).toInt());
+
+        if (CHKPTR(pCdmObject))
+        {
+            pCdmObject->SetDeleted();
+            pCdmObject->Commit();
+            DELPTR(pItem)
+        }
+    }
+}
+
+void CwmsAdminMainWindowIf::NewFunction(CdmClass* pClass)
+{
+    if (CHKPTR(pClass))
+    {
+        auto pMethod = pClass->CreateMethod(tr("New_Function"));
+        pClass->Commit();
+        auto pItemParent = GetSelectedItem();
+        EwmsTreeItemType eType = static_cast<EwmsTreeItemType> (pItemParent->data(1, Qt::UserRole).toInt());
+
+        if (eType == eWmsTreeItemTypeFunction)
+        {
+            pItemParent = pItemParent->parent();
+        }
+
+        if (CHKPTR(pMethod) && CHKPTR(pItemParent))
+        {
+            QTreeWidgetItem* pItem = new QTreeWidgetItem(pItemParent);
+            pItem->setText(0, pMethod->GetMethodName());
+            pItem->setData(0, Qt::UserRole, pMethod->GetUriInternal());
+            pItem->setData(1, Qt::UserRole, eWmsTreeItemTypeFunction);
+
+            CwmsFunctionEditor* pEditor = new CwmsFunctionEditor(m_pqMdiArea);
+            pEditor->FillDialog(pMethod);
+            pEditor->SetItem(pItem);
+
+            QMdiSubWindow* pSubWindow = AddMdiWindow(pEditor);
+
+            if (CHKPTR(pSubWindow))
+            {
+               pSubWindow->setWindowTitle(tr("Funktion ") + pClass->GetKeyname() + "." + pMethod->GetMethodName());
+               pSubWindow->setObjectName(pMethod->GetUriInternal());
+               pSubWindow->setAttribute(Qt::WA_DeleteOnClose);
+            }
+        }
+    }
+}
+
+void CwmsAdminMainWindowIf::NewFunctionSlot()
+{
+    auto pClass = GetSelectedClass();
+
+    if (CHKPTR(pClass))
+    {
+        NewFunction(pClass);
+    }
+}
+
+void CwmsAdminMainWindowIf::EditFunction(CdmClassMethod* pMethod, QTreeWidgetItem* pqtwMethod)
+{
+
+
+    if (pMethod)
+    {
+        if (!pqtwMethod)
+        {
+            //pqtwMethod = FindClassViewItemByUri(pMethod->GetUri());
+        }
+
+        if (!FindAndSetSubWindow(pMethod->GetUriInternal()))
+        {
+            CdmMessageManager::StartAsyncMessageCollection();
+            CwmsFunctionEditor* pEditor = new CwmsFunctionEditor(m_pqMdiArea);
+            pEditor->FillDialog(pMethod);
+            pEditor->SetItem(pqtwMethod);
+            pEditor->show();
+            QMdiSubWindow* pSubWindow = AddMdiWindow(pEditor);
+
+            if (CHKPTR(pSubWindow))
+            {
+                auto pClass = pMethod->GetClass();
+                pSubWindow->setWindowTitle(tr("Funktion ") + pClass->GetKeyname() + "." + pMethod->GetMethodName());
+                pSubWindow->setObjectName(pMethod->GetUriInternal());
+                pSubWindow->setAttribute(Qt::WA_DeleteOnClose);
+            }
+
+            CdmMessageManager::EndAndShowAsyncMessageCollection();
+        }
+    }
+}
+
+void CwmsAdminMainWindowIf::EditFunctionSlot()
+{
+    CdmClassMethod* pMethod = nullptr;
+    QTreeWidgetItem* pqtwMethod = GetSelectedItem();
+    if (pqtwMethod)
+    {
+        QString qstrUri = pqtwMethod->data(0, Qt::UserRole).toString();
+        CdmLocatedElement* pElement = CdmSessionManager::GetDataProvider()->GetUriObject(qstrUri);
+
+        if (CHKPTR(pElement) && pElement->IsMethod())
+        {
+            pMethod = dynamic_cast<CdmClassMethod*>(pElement);
+        }
+
+        if (pMethod)
+        {
+            EditFunction(pMethod, pqtwMethod);
+        }
+    }
 }
 
 void CwmsAdminMainWindowIf::DeleteFunctionSlot()
 {
     BODY_TRY
-    CdmClassMethod* pMethod = nullptr;
+            CdmClassMethod* pMethod = nullptr;
     QTreeWidgetItem* pqtwMethod = GetSelectedItem();
 
     if (pqtwMethod)
@@ -2499,7 +2648,7 @@ void CwmsAdminMainWindowIf::DeleteFunctionSlot()
 
         if (CHKPTR(pElement) && pElement->IsMethod())
         {
-            pMethod = static_cast<CdmClassMethod*>(pElement);
+            pMethod = dynamic_cast<CdmClassMethod*>(pElement);
         }
 
         if (pMethod)
@@ -2519,34 +2668,34 @@ void CwmsAdminMainWindowIf::DeleteFunctionSlot()
 
 void CwmsAdminMainWindowIf::EditMemberSlot()
 {
-	CdmMember* pMember = nullptr;
-	QTreeWidgetItem* pqItem = GetSelectedItem();
-	QString qstrUri = pqItem->data(0, Qt::UserRole).toString();
-	CdmLocatedElement* pElement = CdmSessionManager::GetDataProvider()->GetUriObject(qstrUri);
+    CdmMember* pMember = nullptr;
+    QTreeWidgetItem* pqItem = GetSelectedItem();
+    QString qstrUri = pqItem->data(0, Qt::UserRole).toString();
+    CdmLocatedElement* pElement = CdmSessionManager::GetDataProvider()->GetUriObject(qstrUri);
 
-	if (CHKPTR(pElement) && pElement->IsMember())
-	{
-		pMember = static_cast<CdmMember*>(pElement);
-	}
+    if (CHKPTR(pElement) && pElement->IsMember())
+    {
+        pMember = dynamic_cast<CdmMember*>(pElement);
+    }
 
-	if (pMember)
-	{
-		CwmsAddMemberIf* pCwmsAddMemberIf = new CwmsAddMemberIf(pMember->GetClass(), this);
-		pCwmsAddMemberIf->SetMember(pMember);
+    if (pMember)
+    {
+        CwmsAddMemberIf* pCwmsAddMemberIf = new CwmsAddMemberIf(pMember->GetClass(), this);
+        pCwmsAddMemberIf->SetMember(pMember);
 
-		if (pCwmsAddMemberIf->exec())
-		{
-			pMember->GetClass()->Commit();
-		}
+        if (pCwmsAddMemberIf->exec())
+        {
+            pMember->GetClass()->Commit();
+        }
 
-		delete pCwmsAddMemberIf;
-	}
+        delete pCwmsAddMemberIf;
+    }
 }
 
 void CwmsAdminMainWindowIf::DeleteMemberSlot()
 {
     BODY_TRY
-    CdmMember* pMember = nullptr;
+            CdmMember* pMember = nullptr;
     QTreeWidgetItem* pqtwMember = GetSelectedItem();
 
     if (pqtwMember)
@@ -2580,97 +2729,103 @@ void CwmsAdminMainWindowIf::EditObjectListSlot()
 
 void CwmsAdminMainWindowIf::WorkflowTeamsSlot()
 {
-   CdmDataProvider* pCdmManager = CdmSessionManager::GetDataProvider();
+    CdmDataProvider* pCdmManager = CdmSessionManager::GetDataProvider();
 
-   if (CHKPTR(pCdmManager))
-   {
-      CdmObjectContainer* pContainer = pCdmManager->GetObjectContainer("Teams");   
+    if (CHKPTR(pCdmManager))
+    {
+        CdmObjectContainer* pContainer = pCdmManager->GetObjectContainer("Teams");
 
-      if(CHKPTR(pContainer))
-      {
-         CwmsObjectListEditorIf* pCwmsEditor = new CwmsObjectListEditorIf(pContainer, 
-                                                                          this);
-         pCwmsEditor->AddColumn("Name");
-         pCwmsEditor->SetCaptionValue("Name");
-         pCwmsEditor->FillDialog();
-         pCwmsEditor->setWindowTitle(QObject::tr("Teams"));
-         pCwmsEditor->exec();
-         DELPTR(pCwmsEditor)
-      }
-   }
+        if(CHKPTR(pContainer))
+        {
+            CwmsObjectListEditorIf* pCwmsEditor = new CwmsObjectListEditorIf(pContainer,
+                                                                             this);
+            pCwmsEditor->AddColumn("Name");
+            pCwmsEditor->SetCaptionValue("Name");
+            pCwmsEditor->FillDialog();
+            pCwmsEditor->setWindowTitle(QObject::tr("Teams"));
+            pCwmsEditor->exec();
+            DELPTR(pCwmsEditor)
+        }
+    }
 }
 
 void CwmsAdminMainWindowIf::CustomContextMenuSlot(const QPoint & p_Pos)
 {
-   QObject* pObject = sender();
-   QString qstrClassName = pObject->metaObject()->className();
+    QObject* pObject = sender();
+    QString qstrClassName = pObject->metaObject()->className();
 
-   if (qstrClassName == "QTreeWidget")
-   {
-      m_rpqCurrentWidget = static_cast<QTreeWidget*> (sender());
-   }
+    if (qstrClassName == "QTreeWidget")
+    {
+        m_rpqCurrentWidget = static_cast<QTreeWidget*> (sender());
+    }
 
-   if (m_rpqCurrentWidget)
-   {
-      QTreeWidgetItem* pItem = m_rpqCurrentWidget->itemAt(p_Pos);
+    if (m_rpqCurrentWidget)
+    {
+        QTreeWidgetItem* pItem = m_rpqCurrentWidget->itemAt(p_Pos);
 
-      if(pItem)
-      {
-         QMenu qMenu(this);
-         EwmsTreeItemType eType = static_cast<EwmsTreeItemType>(pItem->data(1, Qt::UserRole).toInt());
+        if(pItem)
+        {
+            QMenu qMenu(this);
+            EwmsTreeItemType eType = static_cast<EwmsTreeItemType>(pItem->data(1, Qt::UserRole).toInt());
 
-         qMenu.addAction(m_pqaCreateDbQueries);
-         qMenu.addAction(m_pqaRefresh);
-      
+            qMenu.addAction(m_pqaCreateDbQueries);
+            qMenu.addAction(m_pqaRefresh);
 
-         if (eType != eWmsTreeItemTypeNone)
-         {
-            qMenu.addAction(m_pqaEdit_2);
-            qMenu.addAction(m_pqaDelete);
-            qMenu.addSeparator();
-         }
-      
-         if (eType == eWmsTreeItemTypeApplication)
-         {
-            qMenu.addAction(m_pqaNewApplication);
-            qMenu.addAction(m_pqaExecuteApplication);
-         }
-         else if (eType == eWmsTreeItemTypeContainer)
-         {
-            qMenu.addAction(m_pqaExport);
-            qMenu.addAction(m_pqaObjectListJournal);
-            qMenu.addAction(m_pqaObjectListProperties);
-         }
-         else if (eType == eWmsTreeItemTypeClass)
-         {
-            qMenu.addAction(m_pqaCreateClass);
-            qMenu.addAction(m_pqaCreateObjectList);
-            qMenu.addAction(m_pqaGenerateCode);
-         }
-         else if (eType == eWmsTreeItemTypeReport)
-         {
-             if (CwmsContext::GetContext()->GetPluginManager()->HasPrintingPlugin())
-             {
-                qMenu.addAction(m_pqaNewReport);
-                qMenu.addAction(m_pqaReportProperties);
-             }
-         }
 
-         qMenu.exec(QCursor::pos());
-      }
-   }
+            if (eType != eWmsTreeItemTypeNone)
+            {
+                qMenu.addAction(m_pqaEdit_2);
+                qMenu.addAction(m_pqaDelete);
+                qMenu.addSeparator();
+            }
+
+            if (eType == eWmsTreeItemTypeApplication)
+            {
+                qMenu.addAction(m_pqaNewApplication);
+                qMenu.addAction(m_pqaExecuteApplication);
+            }
+            else if (eType == eWmsTreeItemTypeContainer)
+            {
+                qMenu.addAction(m_pqaExport);
+                qMenu.addAction(m_pqaObjectListJournal);
+                qMenu.addAction(m_pqaObjectListProperties);
+            }
+            else if (eType == eWmsTreeItemTypeClass)
+            {
+                qMenu.addAction(m_pqaCreateClass);
+                qMenu.addAction(m_pqaCreateObjectList);
+                qMenu.addAction(m_pqaGenerateCode);
+            }
+            else if (eType == eWmsTreeItemTypeFunctionParent ||
+                     eType == eWmsTreeItemTypeFunction)
+            {
+                qMenu.addAction(m_pqaNewFunction);
+
+            }
+            else if (eType == eWmsTreeItemTypeReport)
+            {
+                if (CwmsContext::GetContext()->GetPluginManager()->HasPrintingPlugin())
+                {
+                    qMenu.addAction(m_pqaNewReport);
+                    qMenu.addAction(m_pqaReportProperties);
+                }
+            }
+
+            qMenu.exec(QCursor::pos());
+        }
+    }
 }
 
 void CwmsAdminMainWindowIf::SmtpSlot()
 {
-   CwmsSmtpManager cManager;
-   CwmsSmtpConfiguration* pConfig = cManager.GetSmtpConfiguration();
+    CwmsSmtpManager cManager;
+    CwmsSmtpConfiguration* pConfig = cManager.GetSmtpConfiguration();
 
-   if (CHKPTR(pConfig))
-   {
-      CwmsSmtpSettings::Edit(*pConfig, this);
-      DELPTR(pConfig)
-   }
+    if (CHKPTR(pConfig))
+    {
+        CwmsSmtpSettings::Edit(*pConfig, this);
+        DELPTR(pConfig)
+    }
 }
 
 void CwmsAdminMainWindowIf::InstallBaseFunctionsToExecutor()
@@ -2681,79 +2836,79 @@ void CwmsAdminMainWindowIf::InstallBaseFunctionsToExecutor()
 
 void CwmsAdminMainWindowIf::ExportDeploymentFileSlot()
 {
-   CdmDataProvider* pManager = CdmSessionManager::GetDataProvider();
+    CdmDataProvider* pManager = CdmSessionManager::GetDataProvider();
 
-   if (CHKPTR(pManager))
-   {
-      CdmScheme* pScheme = pManager->GetCurrentScheme();
+    if (CHKPTR(pManager))
+    {
+        CdmScheme* pScheme = pManager->GetCurrentScheme();
 
-      if (pScheme)
-      {
-         CdmMessageManager::StartAsyncMessageCollection();
-         QString qstrFilename = QFileDialog::getSaveFileName(this, tr("Bitte geben Sie den Dateiname an."), "", "*.wdf");
+        if (pScheme)
+        {
+            CdmMessageManager::StartAsyncMessageCollection();
+            QString qstrFilename = QFileDialog::getSaveFileName(this, tr("Bitte geben Sie den Dateiname an."), "", "*.wdf");
 
-         if (!qstrFilename.isEmpty())
-         {
-            if (!qstrFilename.endsWith(".wdf"))
+            if (!qstrFilename.isEmpty())
             {
-               qstrFilename += ".wdf";
+                if (!qstrFilename.endsWith(".wdf"))
+                {
+                    qstrFilename += ".wdf";
+                }
+
+                pScheme->GenerateDeploymentFile(qstrFilename);
+                MSG_INFO(("Datei wurde erstellt"),
+                         ("Die Deploymentdatei wurde erstellt."));
             }
 
-            pScheme->GenerateDeploymentFile(qstrFilename);
-            MSG_INFO(("Datei wurde erstellt"),
-                                           ("Die Deploymentdatei wurde erstellt."));
-         }
-
-         CdmMessageManager::EndAndShowAsyncMessageCollection();
-      }
-      else
-      {
-          MSG_INFO(("Kein Schema gewählt"),
-                                         ("Für den Export einer Deplyomentdatei müssen Sie ein Schema auswählen."));
-      }
-   }
+            CdmMessageManager::EndAndShowAsyncMessageCollection();
+        }
+        else
+        {
+            MSG_INFO(("Kein Schema gewählt"),
+                     ("Für den Export einer Deplyomentdatei müssen Sie ein Schema auswählen."));
+        }
+    }
 }
 
 void CwmsAdminMainWindowIf::ImportDeploymentFileSlot()
 {
-   CdmDataProvider* pManager = CdmSessionManager::GetDataProvider();
+    CdmDataProvider* pManager = CdmSessionManager::GetDataProvider();
 
-   if (CHKPTR(pManager))
-   {
-      CdmScheme* pDatabase = pManager->GetCurrentScheme();
+    if (CHKPTR(pManager))
+    {
+        CdmScheme* pDatabase = pManager->GetCurrentScheme();
 
-      if (CHKPTR(pDatabase))
-      {
-         QString qstrFilename = QFileDialog::getOpenFileName(this, tr("Bitte wählen Sie die Deploymentdatei aus."), "", "*.wdf");
+        if (CHKPTR(pDatabase))
+        {
+            QString qstrFilename = QFileDialog::getOpenFileName(this, tr("Bitte wählen Sie die Deploymentdatei aus."), "", "*.wdf");
 
-         if (!qstrFilename.isEmpty())
-         {
-            CdmMessageManager::StartAsyncMessageCollection();
-            pDatabase->Deploy(qstrFilename);
-            RefreshClickedSlot();
-            MSG_INFO(("Deploymentdatei importiert"),
-                                           ("Die Deploymentdatei wurde importiert"));
-            CdmMessageManager::EndAndShowAsyncMessageCollection();
-         }
-      }
-      else
-      {
+            if (!qstrFilename.isEmpty())
+            {
+                CdmMessageManager::StartAsyncMessageCollection();
+                pDatabase->Deploy(qstrFilename);
+                RefreshClickedSlot();
+                MSG_INFO(("Deploymentdatei importiert"),
+                         ("Die Deploymentdatei wurde importiert"));
+                CdmMessageManager::EndAndShowAsyncMessageCollection();
+            }
+        }
+        else
+        {
             MSG_INFO(("Kein Schema gewählt"),
-                                           ("Das Deployment muss auf einem ausgewählten Schema stattfinden."));
-      }
-   }
+                     ("Das Deployment muss auf einem ausgewählten Schema stattfinden."));
+        }
+    }
 }
 
 void CwmsAdminMainWindowIf::ObjectListPropertiesSlot()
 {
-   CdmObjectContainer* pContainer = GetSelectedObjectList();
+    CdmObjectContainer* pContainer = GetSelectedObjectList();
 
-   if (pContainer)
-   {
-      CwmsContainerPropertiesDlg cDlg(this);
-      cDlg.FillDialog(pContainer);
-      cDlg.exec();
-   }
+    if (pContainer)
+    {
+        CwmsContainerPropertiesDlg cDlg(this);
+        cDlg.FillDialog(pContainer);
+        cDlg.exec();
+    }
 }
 
 void CwmsAdminMainWindowIf::ClientSettingsSlot()
@@ -2772,7 +2927,7 @@ void CwmsAdminMainWindowIf::ClientSettingsSlot()
             if (QDialog::Accepted == pEditor->exec())
             {
                 MSG_INFO(("Einstellungen übernommen"),
-                    ("Die Einstellungen wurden übernommen."));
+                         ("Die Einstellungen wurden übernommen."));
             }
 
             DELPTR(pEditor)
@@ -2782,60 +2937,60 @@ void CwmsAdminMainWindowIf::ClientSettingsSlot()
 
 void CwmsAdminMainWindowIf::LoggerClickedSlot()
 {
-   if (CHKPTR(m_pCwmsErrorIf)) 
-   {
-      m_pCwmsErrorIf->show();
-   }
+    if (CHKPTR(m_pCwmsErrorIf))
+    {
+        m_pCwmsErrorIf->show();
+    }
 }
 
 void CwmsAdminMainWindowIf::RestoreWindowsSlot()
 {
-   m_pqdwApplications->show();
-   m_pqdwData->show();
-   m_pqdwWorkflows->show();
-   m_pqdwUi->show();
-   m_pqdwPrint->show();
-   m_pqdwModel->show();
-   m_pqdwDatabase->show();
-   m_pqdwInformation->show();
+    m_pqdwApplications->show();
+    m_pqdwData->show();
+    //m_pqdwWorkflows->show();
+    m_pqdwUi->show();
+    m_pqdwPrint->show();
+    m_pqdwModel->show();
+    m_pqdwDatabase->show();
+    m_pqdwInformation->show();
 
-   addDockWidget(Qt::BottomDockWidgetArea, m_pqdwInformation);
+    addDockWidget(Qt::BottomDockWidgetArea, m_pqdwInformation);
 
-   addDockWidget(Qt::RightDockWidgetArea, m_pqdwWorkflows);
-   addDockWidget(Qt::RightDockWidgetArea, m_pqdwApplications);
-   addDockWidget(Qt::RightDockWidgetArea, m_pqdwPrint);
-   addDockWidget(Qt::RightDockWidgetArea, m_pqdwUi);
+    //addDockWidget(Qt::RightDockWidgetArea, m_pqdwWorkflows);
+    addDockWidget(Qt::RightDockWidgetArea, m_pqdwApplications);
+    addDockWidget(Qt::RightDockWidgetArea, m_pqdwPrint);
+    addDockWidget(Qt::RightDockWidgetArea, m_pqdwUi);
 
-   tabifyDockWidget(m_pqdwApplications, m_pqdwWorkflows);
-   tabifyDockWidget(m_pqdwWorkflows, m_pqdwPrint);
-   tabifyDockWidget(m_pqdwPrint, m_pqdwUi);
-   tabifyDockWidget(m_pqdwUi, m_pqdwModel);
+    //tabifyDockWidget(m_pqdwApplications, m_pqdwWorkflows);
+    tabifyDockWidget(m_pqdwApplications, m_pqdwPrint);
+    tabifyDockWidget(m_pqdwPrint, m_pqdwUi);
+    tabifyDockWidget(m_pqdwUi, m_pqdwModel);
 
-   addDockWidget(Qt::LeftDockWidgetArea, m_pqdwModel);
-   addDockWidget(Qt::LeftDockWidgetArea, m_pqdwData);
-   addDockWidget(Qt::LeftDockWidgetArea, m_pqdwDatabase);
+    addDockWidget(Qt::LeftDockWidgetArea, m_pqdwModel);
+    addDockWidget(Qt::LeftDockWidgetArea, m_pqdwData);
+    addDockWidget(Qt::LeftDockWidgetArea, m_pqdwDatabase);
 
-   tabifyDockWidget(m_pqdwData, m_pqdwModel);
+    tabifyDockWidget(m_pqdwData, m_pqdwModel);
 }
 
 void CwmsAdminMainWindowIf::UpdateDockWidgetVisibility()
 {
-   m_pqmViews->addAction(m_pqdwDatabase->toggleViewAction());
-   m_pqmViews->addAction(m_pqdwModel->toggleViewAction());
-   m_pqmViews->addAction(m_pqdwData->toggleViewAction());
-   m_pqmViews->addAction(m_pqdwApplications->toggleViewAction());
-   m_pqmViews->addAction(m_pqdwInformation->toggleViewAction());
-   m_pqmViews->addAction(m_pqdwWorkflows->toggleViewAction());
-   m_pqmViews->addAction(m_pqdwUi->toggleViewAction());
-   m_pqmViews->addAction(m_pqdwPrint->toggleViewAction());
-   m_pqmViews->addAction(m_pqdwSearch->toggleViewAction());
-   m_pqmViews->addAction(m_pqdwViews->toggleViewAction());
+    m_pqmViews->addAction(m_pqdwDatabase->toggleViewAction());
+    m_pqmViews->addAction(m_pqdwModel->toggleViewAction());
+    m_pqmViews->addAction(m_pqdwData->toggleViewAction());
+    m_pqmViews->addAction(m_pqdwApplications->toggleViewAction());
+    m_pqmViews->addAction(m_pqdwInformation->toggleViewAction());
+    //m_pqmViews->addAction(m_pqdwWorkflows->toggleViewAction());
+    m_pqmViews->addAction(m_pqdwUi->toggleViewAction());
+    m_pqmViews->addAction(m_pqdwPrint->toggleViewAction());
+    m_pqmViews->addAction(m_pqdwSearch->toggleViewAction());
+    m_pqmViews->addAction(m_pqdwViews->toggleViewAction());
 }
 
 void CwmsAdminMainWindowIf::ClassFilterChangedSlot()
 {
     BODY_TRY
-    if (m_pqcbDatabases->currentText().isEmpty()) return;
+            if (m_pqcbDatabases->currentText().isEmpty()) return;
 
     QString qstrClass = m_pqcbClassFilter->currentText();
     QFont qfontFilter = m_pqlabClassFilter->font();
@@ -2875,136 +3030,136 @@ void CwmsAdminMainWindowIf::ClassFilterChangedSlot()
                 m_pqlvData->clear();
             }
         }
-   }
+    }
 
-   m_pqlabClassFilter->setFont(qfontFilter);
-   BODY_CATCH
+    m_pqlabClassFilter->setFont(qfontFilter);
+    BODY_CATCH
 }
 
 void CwmsAdminMainWindowIf::CurrentTreeWidgetChangedSlot()
 {
-   m_rpqCurrentWidget = static_cast<QTreeWidget*> (sender());
+    m_rpqCurrentWidget = static_cast<QTreeWidget*> (sender());
 }
 
 
 void CwmsAdminMainWindowIf::SearchClickedSlot()
 {
-   QString qstrSearch = m_pqleSearch->text();
+    QString qstrSearch = m_pqleSearch->text();
 
-   bool bClassSearch = m_pqchbClasses->isChecked();
-   bool bMemberSearch = m_pqchbMembers->isChecked();
-   bool bMethodSearch = m_pqchbMethods->isChecked();
+    bool bClassSearch = m_pqchbClasses->isChecked();
+    bool bMemberSearch = m_pqchbMembers->isChecked();
+    bool bMethodSearch = m_pqchbMethods->isChecked();
 
-   if (!qstrSearch.isEmpty())
-   {
-      CwmsSymbolSearch cSearch(qstrSearch, bClassSearch, bMemberSearch, bMethodSearch);
-      cSearch.Execute();
-      QMap<CdmClass*,QTreeWidgetItem*> qmClassItems;
-      int iCounter = 0;
-      m_pqtwSearchResults->clear();
+    if (!qstrSearch.isEmpty())
+    {
+        CwmsSymbolSearch cSearch(qstrSearch, bClassSearch, bMemberSearch, bMethodSearch);
+        cSearch.Execute();
+        QMap<CdmClass*,QTreeWidgetItem*> qmClassItems;
+        int iCounter = 0;
+        m_pqtwSearchResults->clear();
 
-      if (bClassSearch)
-      {
-         QList<CdmClass*> qlClasses = cSearch.GetFoundClasses();
+        if (bClassSearch)
+        {
+            QList<CdmClass*> qlClasses = cSearch.GetFoundClasses();
 
-         for (iCounter = 0; iCounter < qlClasses.count(); ++iCounter)
-         {
-            CdmClass* pClass = qlClasses[iCounter];
-
-            if (pClass && !qmClassItems.contains(pClass))
+            for (iCounter = 0; iCounter < qlClasses.count(); ++iCounter)
             {
-               QTreeWidgetItem* pItem = new QTreeWidgetItem(m_pqtwSearchResults);
-			   pItem->setText(0, pClass->GetCaption() + " - " + pClass->GetKeyname());
-               pItem->setData(0, Qt::UserRole, static_cast<int>(pClass->GetId()));
-			   pItem->setData(1, Qt::UserRole, eWmsTreeItemTypeClass);
-               qmClassItems.insert(pClass, pItem);
+                CdmClass* pClass = qlClasses[iCounter];
+
+                if (pClass && !qmClassItems.contains(pClass))
+                {
+                    QTreeWidgetItem* pItem = new QTreeWidgetItem(m_pqtwSearchResults);
+                    pItem->setText(0, pClass->GetCaption() + " - " + pClass->GetKeyname());
+                    pItem->setData(0, Qt::UserRole, static_cast<int>(pClass->GetId()));
+                    pItem->setData(1, Qt::UserRole, eWmsTreeItemTypeClass);
+                    qmClassItems.insert(pClass, pItem);
+                }
             }
-         }
-      }
+        }
 
-      if (bMemberSearch)
-      {
-         QList<CdmMember*> qlMembers = cSearch.GetFoundMembers();
+        if (bMemberSearch)
+        {
+            QList<CdmMember*> qlMembers = cSearch.GetFoundMembers();
 
-         for (iCounter = 0; iCounter < qlMembers.count(); ++iCounter)
-         {
-            CdmMember* pMember = qlMembers[iCounter];
-
-            if (CHKPTR(pMember))
+            for (iCounter = 0; iCounter < qlMembers.count(); ++iCounter)
             {
-               CdmClass* pClass = pMember->GetClass();
-               QTreeWidgetItem* pParent = nullptr;
+                CdmMember* pMember = qlMembers[iCounter];
 
-               if (!qmClassItems.contains(pClass))
-               {
-                  pParent = new QTreeWidgetItem(m_pqtwSearchResults);
-				  pParent->setText(0, pClass->GetCaption() + " - " + pClass->GetKeyname());
-                  pParent->setData(0, Qt::UserRole, static_cast<int>(pClass->GetId()));
-				  pParent->setData(1, Qt::UserRole, eWmsTreeItemTypeClass);
-                  qmClassItems.insert(pClass, pParent);
-               }
-               else
-               {
-                  pParent = qmClassItems[pClass];
-               }
+                if (CHKPTR(pMember))
+                {
+                    CdmClass* pClass = pMember->GetClass();
+                    QTreeWidgetItem* pParent = nullptr;
 
-               if (pParent)
-               {
-                  QTreeWidgetItem* pItem = new QTreeWidgetItem(pParent);
-                  pItem->setData(0, Qt::UserRole, pMember->GetUriInternal());
-                  pItem->setText(0, pMember->GetKeyname());
+                    if (!qmClassItems.contains(pClass))
+                    {
+                        pParent = new QTreeWidgetItem(m_pqtwSearchResults);
+                        pParent->setText(0, pClass->GetCaption() + " - " + pClass->GetKeyname());
+                        pParent->setData(0, Qt::UserRole, static_cast<int>(pClass->GetId()));
+                        pParent->setData(1, Qt::UserRole, eWmsTreeItemTypeClass);
+                        qmClassItems.insert(pClass, pParent);
+                    }
+                    else
+                    {
+                        pParent = qmClassItems[pClass];
+                    }
 
-				  pItem->setText(0, pMember->GetCaption() + " - " + pMember->GetKeyname() + " (" + pMember->GetValueTypeAsString() + ")");
-                  pItem->setData(0, Qt::UserRole, pMember->GetUriInternal());
-				  pItem->setData(1, Qt::UserRole, eWmsTreeItemTypeMember);
-               }
+                    if (pParent)
+                    {
+                        QTreeWidgetItem* pItem = new QTreeWidgetItem(pParent);
+                        pItem->setData(0, Qt::UserRole, pMember->GetUriInternal());
+                        pItem->setText(0, pMember->GetKeyname());
+
+                        pItem->setText(0, pMember->GetCaption() + " - " + pMember->GetKeyname() + " (" + pMember->GetValueTypeAsString() + ")");
+                        pItem->setData(0, Qt::UserRole, pMember->GetUriInternal());
+                        pItem->setData(1, Qt::UserRole, eWmsTreeItemTypeMember);
+                    }
+                }
             }
-         }
-      }
-      
-      if (bMethodSearch)
-      {
-         QList<CdmClassMethod*> qlMethods = cSearch.GetFoundMethods();
+        }
 
-         for (iCounter = 0; iCounter < qlMethods.count(); ++iCounter)
-         {
-            CdmClassMethod* pMethod = qlMethods[iCounter];
+        if (bMethodSearch)
+        {
+            QList<CdmClassMethod*> qlMethods = cSearch.GetFoundMethods();
 
-            if (CHKPTR(pMethod))
+            for (iCounter = 0; iCounter < qlMethods.count(); ++iCounter)
             {
-               CdmClass* pClass = pMethod->GetClass();
-               QTreeWidgetItem* pParent = nullptr;
+                CdmClassMethod* pMethod = qlMethods[iCounter];
 
-               if (!qmClassItems.contains(pClass))
-               {
-                  pParent = new QTreeWidgetItem(m_pqtwSearchResults);
-				  pParent->setText(0, pClass->GetCaption() + " - " + pClass->GetKeyname());
-                  pParent->setData(0, Qt::UserRole, static_cast<int>(pClass->GetId()));
-				  pParent->setData(1, Qt::UserRole, eWmsTreeItemTypeClass);
-                  qmClassItems.insert(pClass, pParent);
-               }
-               else
-               {
-                  pParent = qmClassItems[pClass];
-               }
+                if (CHKPTR(pMethod))
+                {
+                    CdmClass* pClass = pMethod->GetClass();
+                    QTreeWidgetItem* pParent = nullptr;
 
-               if (pParent)
-               {
-                  QTreeWidgetItem* pItem = new QTreeWidgetItem(pParent);
-				  pItem->setText(0, pMethod->GetCallInterface());
-                  pItem->setData(0, Qt::UserRole, pMethod->GetUriInternal());
-				  pItem->setData(1, Qt::UserRole, eWmsTreeItemTypeFunction);
-               }
+                    if (!qmClassItems.contains(pClass))
+                    {
+                        pParent = new QTreeWidgetItem(m_pqtwSearchResults);
+                        pParent->setText(0, pClass->GetCaption() + " - " + pClass->GetKeyname());
+                        pParent->setData(0, Qt::UserRole, static_cast<int>(pClass->GetId()));
+                        pParent->setData(1, Qt::UserRole, eWmsTreeItemTypeClass);
+                        qmClassItems.insert(pClass, pParent);
+                    }
+                    else
+                    {
+                        pParent = qmClassItems[pClass];
+                    }
+
+                    if (pParent)
+                    {
+                        QTreeWidgetItem* pItem = new QTreeWidgetItem(pParent);
+                        pItem->setText(0, pMethod->GetCallInterface());
+                        pItem->setData(0, Qt::UserRole, pMethod->GetUriInternal());
+                        pItem->setData(1, Qt::UserRole, eWmsTreeItemTypeFunction);
+                    }
+                }
             }
-         }
-      }
-   }
+        }
+    }
 }
 
 void CwmsAdminMainWindowIf::ServerPluginsSlot()
 {
-    CdmObjectContainer* pContainer = 
-      CwmsContext::GetContext()->GetPluginManager()->GetServerPluginContainer();
+    CdmObjectContainer* pContainer =
+            CwmsContext::GetContext()->GetPluginManager()->GetServerPluginContainer();
 
     if (CHKPTR(pContainer))
     {
@@ -3077,7 +3232,7 @@ void CwmsAdminMainWindowIf::EditPackageSlot()
         if (!qstrName.isEmpty() && qstrName != qstrCaption)
         {
             pPackage->SetCaption(qstrName);
-			pPackage->Rename(qstrName);
+            pPackage->Rename(qstrName);
             FillClasses(GetCurrentClassManager());
         }
     }
@@ -3154,7 +3309,7 @@ void CwmsAdminMainWindowIf::EditLibrarySlot()
 
         if (eType == eWmsTreeItemTypeFormLibrary)
         {
-           qint64 lObjectId = pCurrent->data(0, Qt::UserRole).toInt();
+            qint64 lObjectId = pCurrent->data(0, Qt::UserRole).toInt();
             CwmsFormManager cFormManager;
             CdmObjectContainer* pContainer = cFormManager.GetFormLibrary();
 
@@ -3201,7 +3356,7 @@ void CwmsAdminMainWindowIf::EditResourceSlot()
 
         if (eType == eWmsTreeItemTypeResource)
         {
-           qint64 lObjectId = pCurrent->data(0, Qt::UserRole).toInt();
+            qint64 lObjectId = pCurrent->data(0, Qt::UserRole).toInt();
             CwmsFormManager cFormManager;
             CdmObjectContainer* pContainer = cFormManager.GetResourceContainer();
 
@@ -3228,7 +3383,7 @@ void CwmsAdminMainWindowIf::DeleteLibrarySlot()
 
         if (eType == eWmsTreeItemTypeFormLibrary)
         {
-           qint64 lObjectId = pCurrent->data(0, Qt::UserRole).toInt();
+            qint64 lObjectId = pCurrent->data(0, Qt::UserRole).toInt();
             CwmsFormManager cFormManager;
             CdmObjectContainer* pContainer = cFormManager.GetFormLibrary();
 
@@ -3257,7 +3412,7 @@ void CwmsAdminMainWindowIf::DeleteResourceSlot()
 
         if (eType == eWmsTreeItemTypeResource)
         {
-           qint64 lObjectId = pCurrent->data(0, Qt::UserRole).toInt();
+            qint64 lObjectId = pCurrent->data(0, Qt::UserRole).toInt();
             CwmsFormManager cFormManager;
             CdmObjectContainer* pContainer = cFormManager.GetResourceContainer();
 
@@ -3307,7 +3462,7 @@ void CwmsAdminMainWindowIf::LdapSettingsSlot()
             if (QDialog::Accepted == lEditor.exec())
             {
                 MSG_INFO(("Einstellungen übernommen"),
-                    ("Die Einstellungen wurden übernommen."));
+                         ("Die Einstellungen wurden übernommen."));
             }
         }
     }
@@ -3336,14 +3491,14 @@ void CwmsAdminMainWindowIf::NewInteractiveComponentFormSlot()
 
     if (CHKPTR(pCdmList))
     {
-       CdmObject* pCdmObject = pCdmList->CreateNewObject();
+        CdmObject* pCdmObject = pCdmList->CreateNewObject();
 
-       if (CHKPTR(pCdmObject))
-       {
-          CwmsFormInteractiveComponent cForm(pCdmObject);
-          CwmsFormInteractiveComponentEditorIf::EditInteractiveComponent(this, cForm, true);
-          FillForms();
-       }
+        if (CHKPTR(pCdmObject))
+        {
+            CwmsFormInteractiveComponent cForm(pCdmObject);
+            CwmsFormInteractiveComponentEditorIf::EditInteractiveComponent(this, cForm, true);
+            FillForms();
+        }
     }
 }
 
@@ -3355,14 +3510,14 @@ void CwmsAdminMainWindowIf::EditInteractiveComponentFormSlot()
 
     if (CHKPTR(pCdmList))
     {
-       CdmObject* pCdmObject = pCdmList->FindObjectById(pItem->data(0, Qt::UserRole).toInt());
+        CdmObject* pCdmObject = pCdmList->FindObjectById(pItem->data(0, Qt::UserRole).toInt());
 
-       if (CHKPTR(pCdmObject))
-       {
-          CwmsFormInteractiveComponent cForm(pCdmObject);
-          CwmsFormInteractiveComponentEditorIf::EditInteractiveComponent(this, cForm, false);
-          pItem->setText(0, cForm.GetName());
-       }
+        if (CHKPTR(pCdmObject))
+        {
+            CwmsFormInteractiveComponent cForm(pCdmObject);
+            CwmsFormInteractiveComponentEditorIf::EditInteractiveComponent(this, cForm, false);
+            pItem->setText(0, cForm.GetName());
+        }
     }
 }
 
@@ -3374,14 +3529,14 @@ void CwmsAdminMainWindowIf::DeleteInteractiveComponentFormSlot()
 
     if (CHKPTR(pCdmList))
     {
-       CdmObject* pCdmObject = pCdmList->FindObjectById(pItem->data(0, Qt::UserRole).toInt());
+        CdmObject* pCdmObject = pCdmList->FindObjectById(pItem->data(0, Qt::UserRole).toInt());
 
-       if (CHKPTR(pCdmObject))
-       {
-          pCdmObject->SetDeleted();
-          pCdmObject->Commit();
-          DELPTR(pItem)
-       }
+        if (CHKPTR(pCdmObject))
+        {
+            pCdmObject->SetDeleted();
+            pCdmObject->Commit();
+            DELPTR(pItem)
+        }
     }
 }
 
@@ -3428,7 +3583,7 @@ void CwmsAdminMainWindowIf::DataSearchClickedSlot()
 void CwmsAdminMainWindowIf::ReplayEventsClickedSlot()
 {
     BODY_TRY
-    CdmExecutor* pExecutor = CdmExecutor::GetExecutor();
+            CdmExecutor* pExecutor = CdmExecutor::GetExecutor();
     QList<CdmClassMethod*> qlSubscribers = getEventStoreManager()->getSubscribers();
 
     if (!qlSubscribers.isEmpty())
@@ -3477,15 +3632,15 @@ void CwmsAdminMainWindowIf::ReplayEventsClickedSlot()
 void CwmsAdminMainWindowIf::DeleteAllEventsClickedSlot()
 {
     BODY_TRY
-    CdmSessionManager *pSessionManager = CdmSessionManager::GetSessionManager();
+            CdmSessionManager *pSessionManager = CdmSessionManager::GetSessionManager();
 
     if (CHKPTR(pSessionManager))
     {
         CdmSession* pSession = pSessionManager->FindSession();
 
         if (CHKPTR(pSession)                    &&
-            CHKPTR(pSession->GetDataProvider()) &&
-            CHKPTR(pSession->GetDataProvider()->GetCurrentScheme()))
+                CHKPTR(pSession->GetDataProvider()) &&
+                CHKPTR(pSession->GetDataProvider()->GetCurrentScheme()))
         {
             int iDBId = pSession->GetDataProvider()->GetCurrentScheme()->GetId();
 
@@ -3511,7 +3666,7 @@ void CwmsAdminMainWindowIf::DeleteAllEventsClickedSlot()
 void CwmsAdminMainWindowIf::setEventStoreManager()
 {
     BODY_TRY
-    CdmSessionManager* pSessionManager = CdmSessionManager::GetSessionManager();
+            CdmSessionManager* pSessionManager = CdmSessionManager::GetSessionManager();
 
     if (pSessionManager)
     {
@@ -3533,12 +3688,12 @@ IdmEventStoreManager *CwmsAdminMainWindowIf::getEventStoreManager()
 void CwmsAdminMainWindowIf::LogoutAndExitSlot()
 {
     BODY_TRY
-    CwmsLogout* pLogout = new CwmsLogout();
+            CwmsLogout* pLogout = new CwmsLogout();
 
     if (pLogout->Logout())
     {
         INFO("Logout successfull!")
-        close();
+                close();
     }
     else
     {

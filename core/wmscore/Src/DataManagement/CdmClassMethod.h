@@ -1,17 +1,4 @@
-﻿/******************************************************************************
- ** WOGRA technologies Gmbh & Co KG Modul Information
- ** Modulename: CdmClassMethod.h
- ** Started Implementation: 2012/06/18
- ** Description:
- **
- ** Implements a class methods
- **
- ** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
- ** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
- **(C) copyright by WOGRA technologies GmbH & Co KG All rights reserved
- *****************************************************************************/
-
-#ifndef CDMCLASSMETHOD_H
+﻿#ifndef CDMCLASSMETHOD_H
 #define CDMCLASSMETHOD_H
 
 #ifdef WURZELBLA
@@ -138,6 +125,8 @@ public:
     QString GetCallInterface() const;
     QString GetComment() const;
 
+    QVariant ExecuteFunction(bool p_bDebugger, CdmObject *pObject);
+    QVariant ExecuteStaticFunction(bool p_bDebugger);
 };
 
 #endif //

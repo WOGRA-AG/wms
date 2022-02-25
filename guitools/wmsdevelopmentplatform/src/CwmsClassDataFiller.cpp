@@ -22,17 +22,6 @@
 #include "CwmsAdminMainWindowIf.h"
 #include "CwmsClassDataFiller.h"
 
-
-
-/** +-=---------------------------------------------------------Mi 18. Sep 19:10:00 2013----------*
- * @method  CwmsClassDataFiller::FillClasses                 // public, static                    *
- * @return  void                                             //                                   *
- * @param   CdmClassManager* p_pClassManager                 //                                   *
- * @param   QTreeWidgetItem* p_pParent                       //                                   *
- * @param   bool p_bAddObjectContainers                      //                                   *
- * @param   bool p_bShowTechnicalItems                       //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mi 18. Sep 19:10:00 2013----------*/
 void CwmsClassDataFiller::FillClasses(CdmClassManager* p_pClassManager,
                                       QTreeWidgetItem* p_pParent,
                                       bool p_bAddObjectContainers,
@@ -107,14 +96,6 @@ void CwmsClassDataFiller::FillPackage(CdmPackage* p_pPackage, QTreeWidgetItem* p
     }
 }
 
-/** +-=---------------------------------------------------------Mi 18. Sep 19:05:12 2013----------*
- * @method  CwmsClassDataFiller::FillClass                   // public, static                    *
- * @return  void                                             //                                   *
- * @param   CdmClass* p_pCdmClass                            //                                   *
- * @param   QTreeWidgetItem* p_pqtwClass                     //                                   *
- * @param   bool p_bAddObjectContainers                      //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mi 18. Sep 19:05:12 2013----------*/
 void CwmsClassDataFiller::FillClass(CdmClass* p_pCdmClass,
                                     QTreeWidgetItem* p_pqtwClass,
                                     bool p_bAddObjectContainers)

@@ -1,16 +1,3 @@
-/******************************************************************************
- ** WOGRA Middleware Tools WMS Enterprise Manager Module
- **
- ** @Author Wolfgang GraÃŸhof
- **
- ** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
- ** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
- **(C) copyright by WOGRA Solutions All rights reserved
- ******************************************************************************/
-
-
-
-
 // System and QT Includes
 #include <QPushButton>
 #include <QLineEdit>
@@ -33,6 +20,7 @@
 #include "CdmLogging.h"
 
 // own Includes
+#include "CwmsPlatformServices.h"
 #include "CwmsAdminMainWindowIf.h"
 #include "CwmsScriptingEnvironment.h"
 #include "CwmsClassValidationEditor.h"
@@ -48,13 +36,6 @@
 
 
 
-/** +-=---------------------------------------------------------Mo 20. Aug 15:36:48 2012----------*
- * @method  CwmsClassEditorIf::CwmsClassEditorIf             // public                            *
- * @return                                                   //                                   *
- * @param   CdmClass* p_pCdmClass                            //                                   *
- * @param   QWidget* parent = nullptr                           //                                   *
- * @comment The constructor of the classeditor. it fills the classeditor with data.               *
- *----------------last changed: --------------------------------Mo 20. Aug 15:36:48 2012----------*/
 CwmsClassEditorIf::CwmsClassEditorIf(CdmClass* p_pCdmClass, QWidget* parent)
     : QWidget(parent),
       m_rpCdmClass(p_pCdmClass),
@@ -70,20 +51,10 @@ CwmsClassEditorIf::CwmsClassEditorIf(CdmClass* p_pCdmClass, QWidget* parent)
     FillDialog();
 }
 
-/** +-=---------------------------------------------------------Do 17. Mai 09:55:49 2007----------*
- * @method  CwmsClassEditorIf::~CwmsClassEditorIf            // public, virtual                   *
- * @return  void                                             //                                   *
- * @comment The Destructor of Class CwmsClassEditorIf                                             *
- *----------------last changed: Wolfgang GraÃŸhof----------------Do 17. Mai 09:55:49 2007----------*/
 CwmsClassEditorIf::~CwmsClassEditorIf()
 {
 }
 
-/** +-=---------------------------------------------------------Do 17. Mai 10:19:07 2007----------*
- * @method  CwmsClassEditorIf::FillDialog                    // private                           *
- * @return  void                                             //                                   *
- * @comment fills the widget with relevant data.                                                  *
- *----------------last changed: Wolfgang GraÃŸhof----------------Do 17. Mai 10:19:07 2007----------*/
 void CwmsClassEditorIf::FillDialog()
 {
     if (CHKPTR(m_rpCdmClass))
@@ -96,6 +67,7 @@ void CwmsClassEditorIf::FillDialog()
         FillFunctions();
         FillValidations();
         FillCUDEvents();
+        delete m_pqwEventSourcing; // old stuff
     }
 }
 
@@ -197,7 +169,7 @@ void CwmsClassEditorIf::FillCreateEvent()
         }
         m_pqcbCreateEventClass->setEnabled(false);
         m_pqswWCreateEvent->setCurrentIndex(iIndex+1);
-    }    
+    }
     else
     {
         m_pqswWCreateEvent->hide();
@@ -279,11 +251,6 @@ void CwmsClassEditorIf::FillUpdateEvent()
     }
 }
 
-/** +-=---------------------------------------------------------Do 17. Mai 10:18:54 2007----------*
- * @method  CwmsClassEditorIf::FillBaseData                  // private                           *
- * @return  void                                             //                                   *
- * @comment fills the class basedata to the deitfields.                                           *
- *----------------last changed: Wolfgang GraÃŸhof----------------Do 17. Mai 10:18:54 2007----------*/
 void CwmsClassEditorIf::FillBaseData()
 {
     if (CHKPTR(m_rpCdmClass))
@@ -324,11 +291,6 @@ void CwmsClassEditorIf::FillBaseData()
     }
 }
 
-/** +-=---------------------------------------------------------Do 17. Mai 10:18:39 2007----------*
- * @method  CwmsClassEditorIf::FillBaseClasses               // private                           *
- * @return  void                                             //                                   *
- * @comment fills the baseclasses to the listbox                                                  *
- *----------------last changed: Wolfgang GraÃŸhof----------------Do 17. Mai 10:18:39 2007----------*/
 void CwmsClassEditorIf::FillBaseClasses()
 {
     if (CHKPTR(m_rpCdmClass))
@@ -344,13 +306,13 @@ void CwmsClassEditorIf::FillBaseClasses()
         {
             for (; qmItBaseClasses != qmItBaseClassesEnd; ++qmItBaseClasses)
             {
-               qint64 lId = qmItBaseClasses.value();
+                qint64 lId = qmItBaseClasses.value();
 
                 CdmClass* pCdmBaseClass = pCdmClassManager->FindClassById(lId);
 
                 if (CHKPTR(pCdmBaseClass))
                 {
-                   m_pqlbBaseClasses->addItem(pCdmBaseClass->GetFullQualifiedName());
+                    m_pqlbBaseClasses->addItem(pCdmBaseClass->GetFullQualifiedName());
                 }
             }
         }
@@ -429,7 +391,7 @@ void CwmsClassEditorIf::FillMembers()
                         pCdmMember->GetValueType() == eDmValueContainerRef ||
                         pCdmMember->GetValueType() == eDmValueListObjects)
                 {
-                   qint64 lRefId = pCdmMember->GetClassReference();
+                    qint64 lRefId = pCdmMember->GetClassReference();
 
                     if (lRefId > 0)
                     {
@@ -460,11 +422,6 @@ void CwmsClassEditorIf::FillMembers()
     }
 }
 
-/** +-=---------------------------------------------------------Mo 19. Mai 19:45:12 2008----------*
- * @method  CwmsClassEditorIf::CancelClickedSlot             // private, slots                    *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mo 19. Mai 19:45:12 2008----------*/
 void CwmsClassEditorIf::CancelClickedSlot()
 {
     m_pqleCaption->setReadOnly(true);
@@ -482,11 +439,6 @@ void CwmsClassEditorIf::CancelClickedSlot()
     m_bEditMode =false;
 }
 
-/** +-=---------------------------------------------------------Mo 19. Mai 19:45:20 2008----------*
- * @method  CwmsClassEditorIf::EditClickedSlot               // private, slots                    *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mo 19. Mai 19:45:20 2008----------*/
 void CwmsClassEditorIf::EditClickedSlot()
 {
     m_bEditMode = true;
@@ -513,11 +465,6 @@ void CwmsClassEditorIf::EditClickedSlot()
     m_pqpbUpdate->show();
 }
 
-/** +-=---------------------------------------------------------Mo 19. Mai 19:45:28 2008----------*
- * @method  CwmsClassEditorIf::UpdateClickedSlot             // private, slots                    *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mo 19. Mai 19:45:28 2008----------*/
 void CwmsClassEditorIf::UpdateClickedSlot()
 {
     m_rpCdmClass->SetCaption(m_pqleCaption->text());
@@ -535,11 +482,17 @@ void CwmsClassEditorIf::UpdateClickedSlot()
     emit ClassModifiedSignal();
 }
 
-/** +-=---------------------------------------------------------Mo 19. Mai 19:45:36 2008----------*
- * @method  CwmsClassEditorIf::AddBaseClassClickedSlot       // private, slots                    *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mo 19. Mai 19:45:36 2008----------*/
+void CwmsClassEditorIf::OpenBaseClassClickedSlot()
+{
+    QListWidgetItem* pqlbItem = GetSelectedBaseClassItem();
+
+    if (pqlbItem)
+    {
+        QString qstrBaseClass = pqlbItem->text();
+        m_rpMainWindow->OpenClassEditor(qstrBaseClass);
+    }
+}
+
 void CwmsClassEditorIf::AddBaseClassClickedSlot()
 {
     CdmClass* pBaseClass = CwmsClassSelectionIf::GetClass(this);
@@ -564,11 +517,7 @@ void CwmsClassEditorIf::AddBaseClassClickedSlot()
     emit ClassModifiedSignal();
 }
 
-/** +-=---------------------------------------------------------Mo 19. Mai 19:45:45 2008----------*
- * @method  CwmsClassEditorIf::RemoveBaseClassClickedSlot    // private, slots                    *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mo 19. Mai 19:45:45 2008----------*/
+
 void CwmsClassEditorIf::RemoveBaseClassClickedSlot()
 {
     if (!m_rpCdmClass->IsInUse())
@@ -604,11 +553,6 @@ void CwmsClassEditorIf::RemoveBaseClassClickedSlot()
     emit ClassModifiedSignal();
 }
 
-/** +-=---------------------------------------------------------Di 14. Aug 14:58:29 2012----------*
- * @method  CwmsClassEditorIf::GetSelectedBaseClassItem      // private                           *
- * @return  QListWidgetItem*                                 //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Di 14. Aug 14:58:29 2012----------*/
 QListWidgetItem* CwmsClassEditorIf::GetSelectedBaseClassItem()
 {
     QListWidgetItem* pItem = nullptr;
@@ -622,11 +566,6 @@ QListWidgetItem* CwmsClassEditorIf::GetSelectedBaseClassItem()
     return pItem;
 }
 
-/** +-=---------------------------------------------------------Di 14. Aug 14:59:59 2012----------*
- * @method  CwmsClassEditorIf::GetSelectedMemberItem         // private                           *
- * @return  QTreeWidgetItem*                                 //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Di 14. Aug 14:59:59 2012----------*/
 QTreeWidgetItem* CwmsClassEditorIf::GetSelectedMemberItem()
 {
     QTreeWidgetItem* pItem = nullptr;
@@ -640,11 +579,6 @@ QTreeWidgetItem* CwmsClassEditorIf::GetSelectedMemberItem()
     return pItem;
 }
 
-/** +-=---------------------------------------------------------Mo 19. Mai 19:45:54 2008----------*
- * @method  CwmsClassEditorIf::AddMemberClickedSlot          // private, slots                    *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mo 19. Mai 19:45:54 2008----------*/
 void CwmsClassEditorIf::AddMemberClickedSlot()
 {
     CwmsAddMemberIf pCwmsAddMemberIf(m_rpCdmClass, this);
@@ -655,11 +589,6 @@ void CwmsClassEditorIf::AddMemberClickedSlot()
     emit ClassModifiedSignal();
 }
 
-/** +-=---------------------------------------------------------Mo 19. Mai 19:46:04 2008----------*
- * @method  CwmsClassEditorIf::EditMemberClickedSlot         // private, slots                    *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mo 19. Mai 19:46:04 2008----------*/
 void CwmsClassEditorIf::EditMemberClickedSlot()
 {
     QTreeWidgetItem* pqlviItem = GetSelectedMemberItem();
@@ -684,11 +613,6 @@ void CwmsClassEditorIf::EditMemberClickedSlot()
     }
 }
 
-/** +-=---------------------------------------------------------Mo 19. Mai 19:46:12 2008----------*
- * @method  CwmsClassEditorIf::DeleteMemberClickedSlot       // private, slots                    *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mo 19. Mai 19:46:12 2008----------*/
 void CwmsClassEditorIf::DeleteMemberClickedSlot()
 {
     if (!m_rpCdmClass->IsInUse())
@@ -730,11 +654,6 @@ void CwmsClassEditorIf::DeleteMemberClickedSlot()
     }
 }
 
-/** +-=---------------------------------------------------------Fr 17. Aug 13:58:18 2012----------*
- * @method  CwmsClassEditorIf::NewGroupClickedSlot           // private, slots                    *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Fr 17. Aug 13:58:18 2012----------*/
 void CwmsClassEditorIf::NewGroupClickedSlot()
 {
     if (CHKPTR(m_rpCdmClass))
@@ -753,11 +672,6 @@ void CwmsClassEditorIf::NewGroupClickedSlot()
     }
 }
 
-/** +-=---------------------------------------------------------Fr 17. Aug 13:58:29 2012----------*
- * @method  CwmsClassEditorIf::EditGroupClickedSlot          // private, slots                    *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Fr 17. Aug 13:58:29 2012----------*/
 void CwmsClassEditorIf::EditGroupClickedSlot()
 {
     if (CHKPTR(m_rpCdmClass))
@@ -786,11 +700,6 @@ void CwmsClassEditorIf::EditGroupClickedSlot()
     }
 }
 
-/** +-=---------------------------------------------------------Fr 17. Aug 13:58:40 2012----------*
- * @method  CwmsClassEditorIf::DeleteGroupClickedSlot        // private, slots                    *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Fr 17. Aug 13:58:40 2012----------*/
 void CwmsClassEditorIf::DeleteGroupClickedSlot()
 {
     if (CHKPTR(m_rpCdmClass))
@@ -809,11 +718,6 @@ void CwmsClassEditorIf::DeleteGroupClickedSlot()
     }
 }
 
-/** +-=---------------------------------------------------------Fr 17. Aug 13:58:52 2012----------*
- * @method  CwmsClassEditorIf::MoveGroupUpClickedSlot        // private, slots                    *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Fr 17. Aug 13:58:52 2012----------*/
 void CwmsClassEditorIf::MoveGroupUpClickedSlot()
 {
     QTreeWidgetItem* pqtwItem = GetSelectedGroupItem();
@@ -832,11 +736,6 @@ void CwmsClassEditorIf::MoveGroupUpClickedSlot()
     }
 }
 
-/** +-=---------------------------------------------------------Fr 17. Aug 13:59:07 2012----------*
- * @method  CwmsClassEditorIf::MoveGroupDownClickedSlot      // private, slots                    *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Fr 17. Aug 13:59:07 2012----------*/
 void CwmsClassEditorIf::MoveGroupDownClickedSlot()
 {
     QTreeWidgetItem* pqtwItem = GetSelectedGroupItem();
@@ -856,12 +755,6 @@ void CwmsClassEditorIf::MoveGroupDownClickedSlot()
     }
 }
 
-/** +-=---------------------------------------------------------So 4. Nov 10:48:44 2012-----------*
- * @method  CwmsClassEditorIf::FillGroups                    // private                           *
- * @return  void                                             //                                   *
- * @param   int p_iSelectedId = -1                           //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------So 4. Nov 10:48:44 2012-----------*/
 void CwmsClassEditorIf::FillGroups(int p_iSelectedId)
 {
     if (CHKPTR(m_rpCdmClass))
@@ -893,11 +786,6 @@ void CwmsClassEditorIf::FillGroups(int p_iSelectedId)
     }
 }
 
-/** +-=---------------------------------------------------------Mo 20. Aug 15:45:48 2012----------*
- * @method  CwmsClassEditorIf::GetSelectedGroupItem          // public                            *
- * @return  QTreeWidgetItem*                                 //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mo 20. Aug 15:45:48 2012----------*/
 QTreeWidgetItem* CwmsClassEditorIf::GetSelectedGroupItem()
 {
     QTreeWidgetItem* pItem = nullptr;
@@ -911,11 +799,6 @@ QTreeWidgetItem* CwmsClassEditorIf::GetSelectedGroupItem()
     return pItem;
 }
 
-/** +-=---------------------------------------------------------Do 23. Aug 09:45:12 2012----------*
- * @method  CwmsClassEditorIf::SequenceClickedSlot           // private, slots                    *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Do 23. Aug 09:45:12 2012----------*/
 void CwmsClassEditorIf::SequenceClickedSlot()
 {
     CwmsMemberSequenceEditor pEditor(this);
@@ -929,11 +812,6 @@ void CwmsClassEditorIf::SequenceClickedSlot()
     }
 }
 
-/** +-=---------------------------------------------------------Do 23. Aug 13:50:57 2012----------*
- * @method  CwmsClassEditorIf::FillValidations               // private                           *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Do 23. Aug 13:50:57 2012----------*/
 void CwmsClassEditorIf::FillValidations()
 {
     QMap<QString, CdmClassValidator*>& qmValidators = m_rpCdmClass->GetValidators();
@@ -954,11 +832,6 @@ void CwmsClassEditorIf::FillValidations()
     }
 }
 
-/** +-=---------------------------------------------------------Do 23. Aug 13:51:12 2012----------*
- * @method  CwmsClassEditorIf::NewValidationClickedSlot      // private, slots                    *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Do 23. Aug 13:51:12 2012----------*/
 void CwmsClassEditorIf::NewValidationClickedSlot()
 {
     if (CHKPTR(m_rpCdmClass))
@@ -973,13 +846,6 @@ void CwmsClassEditorIf::NewValidationClickedSlot()
     }
 }
 
-/** +-=---------------------------------------------------------Mo 26. Nov 12:57:22 2012----------*
- * @method  CwmsClassEditorIf::FillValidationDataToTree      // private                           *
- * @return  void                                             //                                   *
- * @param   QTreeWidgetItem* p_pItem                         //                                   *
- * @param   CdmClassValidator* p_pValidation                 //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mo 26. Nov 12:57:22 2012----------*/
 void CwmsClassEditorIf::FillValidationDataToTree(QTreeWidgetItem* p_pItem,
                                                  CdmClassValidator* p_pValidation)
 {
@@ -999,11 +865,6 @@ void CwmsClassEditorIf::FillValidationDataToTree(QTreeWidgetItem* p_pItem,
     }
 }
 
-/** +-=---------------------------------------------------------Do 23. Aug 13:51:22 2012----------*
- * @method  CwmsClassEditorIf::EditValidationClickedSlot     // private, slots                    *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Do 23. Aug 13:51:22 2012----------*/
 void CwmsClassEditorIf::EditValidationClickedSlot()
 {
     if (CHKPTR(m_rpCdmClass))
@@ -1025,11 +886,6 @@ void CwmsClassEditorIf::EditValidationClickedSlot()
     }
 }
 
-/** +-=---------------------------------------------------------Do 23. Aug 13:51:34 2012----------*
- * @method  CwmsClassEditorIf::DeleteValidationClickedSlot   // private, slots                    *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Do 23. Aug 13:51:34 2012----------*/
 void CwmsClassEditorIf::DeleteValidationClickedSlot()
 {
     if (CHKPTR(m_rpCdmClass))
@@ -1049,7 +905,7 @@ void CwmsClassEditorIf::DeleteValidationClickedSlot()
 void CwmsClassEditorIf::FillFunctions()
 {
     m_pqtwMethods->clear();
-   QMap<QString, CdmClassMethod*> qmMethods = m_rpCdmClass->GetMethods();
+    QMap<QString, CdmClassMethod*> qmMethods = m_rpCdmClass->GetMethods();
 
     QMap<QString, CdmClassMethod*>::iterator qmIt = qmMethods.begin();
     QMap<QString, CdmClassMethod*>::iterator qmItEnd = qmMethods.end();
@@ -1069,13 +925,6 @@ void CwmsClassEditorIf::FillFunctions()
     CwmsTreeWidgetHelper::ResizeColumnsToContent(m_pqtwMethods);
 }
 
-/** +-=---------------------------------------------------------Fr 23. Nov 11:46:09 2012----------*
- * @method  CwmsClassEditorIf::FillFunctionDataToItem        // private                           *
- * @return  void                                             //                                   *
- * @param   QTreeWidgetItem* p_pItem                         //                                   *
- * @param   CdmClassMethod* p_pMethod                        //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Fr 23. Nov 11:46:09 2012----------*/
 void CwmsClassEditorIf::FillFunctionDataToItem(QTreeWidgetItem* p_pItem, CdmClassMethod* p_pMethod)
 {
     if (CHKPTR(p_pItem) && CHKPTR(p_pMethod))
@@ -1108,34 +957,17 @@ void CwmsClassEditorIf::FillFunctionDataToItem(QTreeWidgetItem* p_pItem, CdmClas
     }
 }
 
-/** +-=---------------------------------------------------------Do 23. Aug 13:51:59 2012----------*
- * @method  CwmsClassEditorIf::NewFunctionClickedSlot        // private, slots                    *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Do 23. Aug 13:51:59 2012----------*/
 void CwmsClassEditorIf::NewFunctionClickedSlot()
 {
     if (CHKPTR(m_rpCdmClass))
     {
         if (m_rpMainWindow)
         {
-            m_rpMainWindow->ScriptEnvironmentSlot();
-            CwmsScriptingEnvironment* pEnvironment = m_rpMainWindow->GetScriptingEnvironment();
-
-            if (pEnvironment)
-            {
-                pEnvironment->NewFunction(m_rpCdmClass);
-            }
-
+            m_rpMainWindow->NewFunction(m_rpCdmClass);
         }
     }
 }
 
-/** +-=---------------------------------------------------------Do 23. Aug 13:52:09 2012----------*
- * @method  CwmsClassEditorIf::EditFunctionClickedSlot       // private, slots                    *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Do 23. Aug 13:52:09 2012----------*/
 void CwmsClassEditorIf::EditFunctionClickedSlot()
 {
     if (CHKPTR(m_rpCdmClass))
@@ -1151,25 +983,13 @@ void CwmsClassEditorIf::EditFunctionClickedSlot()
             {
                 if (m_rpMainWindow)
                 {
-                    m_rpMainWindow->ScriptEnvironmentSlot();
-                    CwmsScriptingEnvironment* pEnvironment = m_rpMainWindow->GetScriptingEnvironment();
-
-                    if (pEnvironment)
-                    {
-                        pEnvironment->OpenObject(pMethod);
-                    }
-
+                    m_rpMainWindow->EditFunction(pMethod, nullptr);
                 }
             }
         }
     }
 }
 
-/** +-=---------------------------------------------------------Mo 12. Nov 14:21:37 2012----------*
- * @method  CwmsClassEditorIf::ExecuteFunctionClickedSlot    // private, slots                    *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mo 12. Nov 14:21:37 2012----------*/
 void CwmsClassEditorIf::ExecuteFunctionClickedSlot()
 {
     if (CHKPTR(m_rpCdmClass))
@@ -1178,11 +998,6 @@ void CwmsClassEditorIf::ExecuteFunctionClickedSlot()
     }
 }
 
-/** +-=---------------------------------------------------------Fr 30. Nov 15:05:52 2012----------*
- * @method  CwmsClassEditorIf::DebugClickedSlot              // private, slots                    *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Fr 30. Nov 15:05:52 2012----------*/
 void CwmsClassEditorIf::DebugClickedSlot()
 {
     if (CHKPTR(m_rpCdmClass))
@@ -1191,11 +1006,6 @@ void CwmsClassEditorIf::DebugClickedSlot()
     }
 }
 
-/** +-=---------------------------------------------------------So 2. Dez 11:52:22 2012-----------*
- * @method  CwmsClassEditorIf::ExecuteFunction               // private                           *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------So 2. Dez 11:52:22 2012-----------*/
 void CwmsClassEditorIf::ExecuteFunction(bool p_bDebugger)
 {
     if (CHKPTR(m_rpCdmClass))
@@ -1210,66 +1020,12 @@ void CwmsClassEditorIf::ExecuteFunction(bool p_bDebugger)
 
             if (CHKPTR(pMethod))
             {
-                if (pMethod->IsStatic())
-                {
-                    QVariantList qlParameters;
-
-                    if (p_bDebugger)
-                    {
-                        qvResult = CdmExecutor::DebugFunction(pMethod, nullptr, qlParameters, true, true);
-                    }
-                    else
-                    {
-                        qvResult = CdmExecutor::ExecuteFunction(pMethod, nullptr, qlParameters, true, true, false, false);
-                    }
-                }
-                else
-                {
-                    CdmObjectContainer* pList = CwmsContainerSelectionIf::GetObjectContainer(m_rpCdmClass->GetSchemeId(), m_rpCdmClass->GetId(), this);
-
-                    if (pList)
-                    {
-                        CdmObject* pObject = CwmsObjectSelectionIf::GetObject(pList, nullptr, this);
-
-                        if (pObject)
-                        {
-                            QVariantList qlParameters;
-                            if (p_bDebugger)
-                            {
-                                qvResult = CdmExecutor::DebugFunction(pMethod, pObject, qlParameters, true, true);
-                            }
-                            else
-                            {
-                                qvResult = CdmExecutor::ExecuteFunction(pMethod, pObject, qlParameters, true, true, false, false);
-                            }
-                        }
-                        else
-                        {
-                            MSG_INFO(("Funktion wird nicht ausgeführt"), ("Die Funktion kann nicht ausgeführt werden, da kein Objekt gewählt wurde."));
-                        }
-                    }
-                }
+                CwmsPlatformServices::ExecuteFunction(pMethod, p_bDebugger, this);
             }
         }
-
-        QString qstrResult = qvResult.toString();
-
-        if (qstrResult.isEmpty())
-        {
-            qstrResult = tr("Kein Ergebnis");
-        }
-
-        QString qstrMessage = QString::fromUtf8("Funktion endete mit dem Ergebnis %1").arg(qstrResult);
-
-        MSG_INFO(("Ergebnis"), qstrMessage.toUtf8());
     }
 }
 
-/** +-=---------------------------------------------------------Do 23. Aug 13:52:20 2012----------*
- * @method  CwmsClassEditorIf::DeleteFunctionClickedSlot     // private, slots                    *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Do 23. Aug 13:52:20 2012----------*/
 void CwmsClassEditorIf::DeleteFunctionClickedSlot()
 {
     if (CHKPTR(m_rpCdmClass))
@@ -1287,11 +1043,6 @@ void CwmsClassEditorIf::DeleteFunctionClickedSlot()
     }
 }
 
-/** +-=---------------------------------------------------------Do 23. Aug 14:10:30 2012----------*
- * @method  CwmsClassEditorIf::GetSelectedFunction           // private                           *
- * @return  QTreeWidgetItem*                                 //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Do 23. Aug 14:10:30 2012----------*/
 QTreeWidgetItem* CwmsClassEditorIf::GetSelectedFunction()
 {
     QTreeWidgetItem* pItem = nullptr;
@@ -1589,11 +1340,6 @@ void CwmsClassEditorIf::prepareEventClassLists()
     }
 }
 
-/** +-=---------------------------------------------------------Do 23. Aug 14:10:52 2012----------*
- * @method  CwmsClassEditorIf::GetSelectedValidation         // private                           *
- * @return  QTreeWidgetItem*                                 //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Do 23. Aug 14:10:52 2012----------*/
 QTreeWidgetItem* CwmsClassEditorIf::GetSelectedValidation()
 {
     QTreeWidgetItem* pItem = nullptr;

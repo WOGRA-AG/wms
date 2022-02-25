@@ -308,7 +308,7 @@
             <string/>
            </property>
            <property name="icon">
-            <iconset resource="../../../guilibraries/wmsqml/src/wmsqml.qrc">
+            <iconset resource="../../../guilibraries/wmsgui/src/misc/wmsgui.qrc">
              <normaloff>:/icons/edit24.png</normaloff>:/icons/edit24.png</iconset>
            </property>
            <property name="iconSize">
@@ -341,7 +341,7 @@
             <string/>
            </property>
            <property name="icon">
-            <iconset resource="../../../guilibraries/wmsqml/src/wmsqml.qrc">
+            <iconset resource="../../../guilibraries/wmsgui/src/misc/wmsgui.qrc">
              <normaloff>:/icons/cancel24.png</normaloff>:/icons/cancel24.png</iconset>
            </property>
            <property name="iconSize">
@@ -358,7 +358,7 @@
             <string/>
            </property>
            <property name="icon">
-            <iconset resource="../../../guilibraries/wmsqml/src/wmsqml.qrc">
+            <iconset resource="../../../guilibraries/wmsgui/src/misc/wmsgui.qrc">
              <normaloff>:/icons/ok24.png</normaloff>:/icons/ok24.png</iconset>
            </property>
            <property name="iconSize">
@@ -468,7 +468,7 @@
             <string/>
            </property>
            <property name="icon">
-            <iconset resource="../../../guilibraries/wmsqml/src/wmsqml.qrc">
+            <iconset resource="../../../guilibraries/wmsgui/src/misc/wmsgui.qrc">
              <normaloff>:/icons/new24.png</normaloff>:/icons/new24.png</iconset>
            </property>
            <property name="iconSize">
@@ -488,7 +488,7 @@
             <string/>
            </property>
            <property name="icon">
-            <iconset resource="../../../guilibraries/wmsqml/src/wmsqml.qrc">
+            <iconset resource="../../../guilibraries/wmsgui/src/misc/wmsgui.qrc">
              <normaloff>:/icons/edit24.png</normaloff>:/icons/edit24.png</iconset>
            </property>
            <property name="iconSize">
@@ -508,7 +508,7 @@
             <string/>
            </property>
            <property name="icon">
-            <iconset resource="../../../guilibraries/wmsqml/src/wmsqml.qrc">
+            <iconset resource="../../../guilibraries/wmsgui/src/misc/wmsgui.qrc">
              <normaloff>:/icons/delete24.png</normaloff>:/icons/delete24.png</iconset>
            </property>
            <property name="iconSize">
@@ -531,7 +531,7 @@
             <string/>
            </property>
            <property name="icon">
-            <iconset resource="../../../guilibraries/wmsqml/src/wmsqml.qrc">
+            <iconset resource="../../../guilibraries/wmsgui/src/misc/wmsgui.qrc">
              <normaloff>:/icons/LinkDocument.png</normaloff>:/icons/LinkDocument.png</iconset>
            </property>
            <property name="iconSize">
@@ -611,7 +611,7 @@
                <string/>
               </property>
               <property name="icon">
-               <iconset resource="../../../guilibraries/wmsqml/src/wmsqml.qrc">
+               <iconset resource="../../../guilibraries/wmsgui/src/misc/wmsgui.qrc">
                 <normaloff>:/icons/new24.png</normaloff>:/icons/new24.png</iconset>
               </property>
               <property name="iconSize">
@@ -628,7 +628,7 @@
                <string/>
               </property>
               <property name="icon">
-               <iconset resource="../../../guilibraries/wmsqml/src/wmsqml.qrc">
+               <iconset resource="../../../guilibraries/wmsgui/src/misc/wmsgui.qrc">
                 <normaloff>:/icons/delete24.png</normaloff>:/icons/delete24.png</iconset>
               </property>
               <property name="iconSize">
@@ -700,7 +700,7 @@
                <string/>
               </property>
               <property name="icon">
-               <iconset resource="../../../guilibraries/wmsqml/src/wmsqml.qrc">
+               <iconset resource="../../../guilibraries/wmsgui/src/misc/wmsgui.qrc">
                 <normaloff>:/icons/new.png</normaloff>:/icons/new.png</iconset>
               </property>
               <property name="iconSize">
@@ -717,7 +717,7 @@
                <string/>
               </property>
               <property name="icon">
-               <iconset resource="../../../guilibraries/wmsqml/src/wmsqml.qrc">
+               <iconset resource="../../../guilibraries/wmsgui/src/misc/wmsgui.qrc">
                 <normaloff>:/icons/edit24.png</normaloff>:/icons/edit24.png</iconset>
               </property>
               <property name="iconSize">
@@ -734,7 +734,7 @@
                <string/>
               </property>
               <property name="icon">
-               <iconset resource="../../../guilibraries/wmsqml/src/wmsqml.qrc">
+               <iconset resource="../../../guilibraries/wmsgui/src/misc/wmsgui.qrc">
                 <normaloff>:/icons/delete24.png</normaloff>:/icons/delete24.png</iconset>
               </property>
               <property name="iconSize">
@@ -751,7 +751,7 @@
                <string/>
               </property>
               <property name="icon">
-               <iconset resource="../../../guilibraries/wmsqml/src/wmsqml.qrc">
+               <iconset resource="../../../guilibraries/wmsgui/src/misc/wmsgui.qrc">
                 <normaloff>:/icons/arrow-up24.png</normaloff>:/icons/arrow-up24.png</iconset>
               </property>
               <property name="iconSize">
@@ -768,7 +768,7 @@
                <string/>
               </property>
               <property name="icon">
-               <iconset resource="../../../guilibraries/wmsqml/src/wmsqml.qrc">
+               <iconset resource="../../../guilibraries/wmsgui/src/misc/wmsgui.qrc">
                 <normaloff>:/icons/arrow-down24.png</normaloff>:/icons/arrow-down24.png</iconset>
               </property>
               <property name="iconSize">
@@ -843,7 +843,7 @@
             <string/>
            </property>
            <property name="icon">
-            <iconset resource="../../../guilibraries/wmsqml/src/wmsqml.qrc">
+            <iconset resource="../../../guilibraries/wmsgui/src/misc/wmsgui.qrc">
              <normaloff>:/icons/new24.png</normaloff>:/icons/new24.png</iconset>
            </property>
            <property name="iconSize">
@@ -860,7 +860,7 @@
             <string/>
            </property>
            <property name="icon">
-            <iconset resource="../../../guilibraries/wmsqml/src/wmsqml.qrc">
+            <iconset resource="../../../guilibraries/wmsgui/src/misc/wmsgui.qrc">
              <normaloff>:/icons/edit24.png</normaloff>:/icons/edit24.png</iconset>
            </property>
            <property name="iconSize">
@@ -877,7 +877,7 @@
             <string/>
            </property>
            <property name="icon">
-            <iconset resource="../../../guilibraries/wmsqml/src/wmsqml.qrc">
+            <iconset resource="../../../guilibraries/wmsgui/src/misc/wmsgui.qrc">
              <normaloff>:/icons/delete24.png</normaloff>:/icons/delete24.png</iconset>
            </property>
            <property name="iconSize">
@@ -897,7 +897,7 @@
             <string/>
            </property>
            <property name="icon">
-            <iconset resource="../../../guilibraries/wmsqml/src/wmsqml.qrc">
+            <iconset resource="../../../guilibraries/wmsgui/src/misc/wmsgui.qrc">
              <normaloff>:/icons/settingswizard.png</normaloff>:/icons/settingswizard.png</iconset>
            </property>
            <property name="iconSize">
@@ -917,7 +917,7 @@
             <string/>
            </property>
            <property name="icon">
-            <iconset resource="../../../guilibraries/wmsqml/src/wmsqml.qrc">
+            <iconset resource="../../../guilibraries/wmsgui/src/misc/wmsgui.qrc">
              <normaloff>:/icons/stats24.png</normaloff>:/icons/stats24.png</iconset>
            </property>
            <property name="iconSize">
@@ -989,7 +989,7 @@
             <string/>
            </property>
            <property name="icon">
-            <iconset resource="../../../guilibraries/wmsqml/src/wmsqml.qrc">
+            <iconset resource="../../../guilibraries/wmsgui/src/misc/wmsgui.qrc">
              <normaloff>:/icons/new24.png</normaloff>:/icons/new24.png</iconset>
            </property>
            <property name="iconSize">
@@ -1006,7 +1006,7 @@
             <string/>
            </property>
            <property name="icon">
-            <iconset resource="../../../guilibraries/wmsqml/src/wmsqml.qrc">
+            <iconset resource="../../../guilibraries/wmsgui/src/misc/wmsgui.qrc">
              <normaloff>:/icons/edit24.png</normaloff>:/icons/edit24.png</iconset>
            </property>
            <property name="iconSize">
@@ -1023,7 +1023,7 @@
             <string/>
            </property>
            <property name="icon">
-            <iconset resource="../../../guilibraries/wmsqml/src/wmsqml.qrc">
+            <iconset resource="../../../guilibraries/wmsgui/src/misc/wmsgui.qrc">
              <normaloff>:/icons/delete24.png</normaloff>:/icons/delete24.png</iconset>
            </property>
            <property name="iconSize">
@@ -1448,7 +1448,7 @@
             <string/>
            </property>
            <property name="icon">
-            <iconset resource="../resources/emresources.qrc">
+            <iconset resource="../../../guilibraries/wmsgui/src/misc/wmsgui.qrc">
              <normaloff>:/icons/edit24.png</normaloff>:/icons/edit24.png</iconset>
            </property>
            <property name="iconSize">
@@ -1478,7 +1478,7 @@
             <string/>
            </property>
            <property name="icon">
-            <iconset resource="../resources/emresources.qrc">
+            <iconset resource="../../../guilibraries/wmsgui/src/misc/wmsgui.qrc">
              <normaloff>:/icons/cancel24.png</normaloff>:/icons/cancel24.png</iconset>
            </property>
            <property name="iconSize">
@@ -1498,7 +1498,7 @@
             <string/>
            </property>
            <property name="icon">
-            <iconset resource="../resources/emresources.qrc">
+            <iconset resource="../../../guilibraries/wmsgui/src/misc/wmsgui.qrc">
              <normaloff>:/icons/ok24.png</normaloff>:/icons/ok24.png</iconset>
            </property>
            <property name="iconSize">
@@ -1528,7 +1528,7 @@
   <tabstop>m_pqpbDeleteMember</tabstop>
  </tabstops>
  <resources>
-  <include location="../../../guilibraries/wmsqml/src/wmsqml.qrc"/>
+  <include location="../../../guilibraries/wmsgui/src/misc/wmsgui.qrc"/>
  </resources>
  <connections>
   <connection>
@@ -1539,7 +1539,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>90</x>
-     <y>638</y>
+     <y>556</y>
     </hint>
     <hint type="destinationlabel">
      <x>184</x>
@@ -1555,7 +1555,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>48</x>
-     <y>638</y>
+     <y>556</y>
     </hint>
     <hint type="destinationlabel">
      <x>89</x>
@@ -1571,7 +1571,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>86</x>
-     <y>642</y>
+     <y>560</y>
     </hint>
     <hint type="destinationlabel">
      <x>20</x>
@@ -1587,7 +1587,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>128</x>
-     <y>642</y>
+     <y>560</y>
     </hint>
     <hint type="destinationlabel">
      <x>20</x>
@@ -1603,7 +1603,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>216</x>
-     <y>638</y>
+     <y>556</y>
     </hint>
     <hint type="destinationlabel">
      <x>393</x>
@@ -1619,7 +1619,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>44</x>
-     <y>642</y>
+     <y>560</y>
     </hint>
     <hint type="destinationlabel">
      <x>39</x>
@@ -1635,7 +1635,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>132</x>
-     <y>638</y>
+     <y>556</y>
     </hint>
     <hint type="destinationlabel">
      <x>249</x>
@@ -1651,7 +1651,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>86</x>
-     <y>642</y>
+     <y>560</y>
     </hint>
     <hint type="destinationlabel">
      <x>141</x>
@@ -1667,7 +1667,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>128</x>
-     <y>642</y>
+     <y>560</y>
     </hint>
     <hint type="destinationlabel">
      <x>228</x>
@@ -1682,8 +1682,8 @@
    <slot>CancelEventClickedSlot()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>704</x>
-     <y>600</y>
+     <x>716</x>
+     <y>554</y>
     </hint>
     <hint type="destinationlabel">
      <x>822</x>
@@ -1699,7 +1699,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>174</x>
-     <y>638</y>
+     <y>556</y>
     </hint>
     <hint type="destinationlabel">
      <x>314</x>
@@ -1747,7 +1747,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>170</x>
-     <y>642</y>
+     <y>560</y>
     </hint>
     <hint type="destinationlabel">
      <x>276</x>
@@ -1763,7 +1763,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>44</x>
-     <y>642</y>
+     <y>560</y>
     </hint>
     <hint type="destinationlabel">
      <x>-17</x>
@@ -1779,7 +1779,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>128</x>
-     <y>642</y>
+     <y>560</y>
     </hint>
     <hint type="destinationlabel">
      <x>825</x>
@@ -1811,7 +1811,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>86</x>
-     <y>642</y>
+     <y>560</y>
     </hint>
     <hint type="destinationlabel">
      <x>829</x>
@@ -1826,8 +1826,8 @@
    <slot>EditEventClickedSlot()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>30</x>
-     <y>607</y>
+     <x>36</x>
+     <y>554</y>
     </hint>
     <hint type="destinationlabel">
      <x>-1</x>
@@ -1843,7 +1843,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>170</x>
-     <y>642</y>
+     <y>560</y>
     </hint>
     <hint type="destinationlabel">
      <x>630</x>
@@ -1875,7 +1875,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>212</x>
-     <y>642</y>
+     <y>560</y>
     </hint>
     <hint type="destinationlabel">
      <x>437</x>
@@ -1890,8 +1890,8 @@
    <slot>UpdateEventClickedSlot()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>751</x>
-     <y>603</y>
+     <x>758</x>
+     <y>554</y>
     </hint>
     <hint type="destinationlabel">
      <x>775</x>
@@ -1907,7 +1907,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>90</x>
-     <y>327</y>
+     <y>288</y>
     </hint>
     <hint type="destinationlabel">
      <x>20</x>
@@ -1923,7 +1923,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>44</x>
-     <y>642</y>
+     <y>560</y>
     </hint>
     <hint type="destinationlabel">
      <x>20</x>
@@ -1939,7 +1939,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>722</x>
-     <y>642</y>
+     <y>560</y>
     </hint>
     <hint type="destinationlabel">
      <x>20</x>
@@ -1955,7 +1955,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>764</x>
-     <y>642</y>
+     <y>560</y>
     </hint>
     <hint type="destinationlabel">
      <x>20</x>
@@ -1987,7 +1987,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>44</x>
-     <y>642</y>
+     <y>560</y>
     </hint>
     <hint type="destinationlabel">
      <x>20</x>
@@ -2003,11 +2003,27 @@
    <hints>
     <hint type="sourcelabel">
      <x>48</x>
-     <y>327</y>
+     <y>288</y>
     </hint>
     <hint type="destinationlabel">
      <x>20</x>
      <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqlbBaseClasses</sender>
+   <signal>doubleClicked(QModelIndex)</signal>
+   <receiver>CwmsClassEditor</receiver>
+   <slot>OpenBaseClassClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>581</x>
+     <y>161</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>984</x>
+     <y>209</y>
     </hint>
    </hints>
   </connection>
@@ -2032,5 +2048,6 @@
   <slot>EditEventClickedSlot()</slot>
   <slot>UpdateEventClickedSlot()</slot>
   <slot>CancelEventClickedSlot()</slot>
+  <slot>OpenBaseClassClickedSlot()</slot>
  </slots>
 </ui>

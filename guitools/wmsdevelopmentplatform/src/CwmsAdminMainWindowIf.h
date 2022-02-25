@@ -125,6 +125,11 @@ public:
 
     void RefreshClasses();
     void CloseClassSubWindows();
+    void EditFunction(CdmClassMethod *pMethod, QTreeWidgetItem *pqtwMethod);
+
+    void NewFunction(CdmClass *pClass);
+
+    void OpenClassEditor(QString p_qstrKeyname);
 public slots:
     void EditSingleton();
     void SearchClickedSlot();
@@ -147,6 +152,7 @@ public slots:
     void DataSearchClickedSlot();
     void RefreshClickedSlot( );
 
+    void NewFunctionSlot();
 protected:
     void closeEvent(QCloseEvent* p_pqCloseEvent);
     virtual void InstallBaseFunctionsToExecutor();

@@ -1,5 +1,6 @@
 
 HEADERS += ../src/CwmsClassDataFiller.h \
+    $$PWD/../src/CwmsPlatformServices.h \
     ../src/CwmsMiscDataFiller.h \
     ../src/CwmsObjectContainerDataFiller.h \
     ../src/CwmsAddMemberIf.h \
@@ -30,6 +31,7 @@ HEADERS += ../src/CwmsClassDataFiller.h \
 ../src/CwmsDataSearchDlg.h \
     $$PWD/../src/CwmsScriptingEnvironment.h
 SOURCES += ../src/CwmsClassDataFiller.cpp \
+    $$PWD/../src/CwmsPlatformServices.cpp \
     ../src/CwmsAddMemberIf.cpp \
     ../src/CwmsAddNewClassIf.cpp \
     ../src/CwmsAdminMainWindowIf.cpp \

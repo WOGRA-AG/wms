@@ -80,7 +80,7 @@
      <x>0</x>
      <y>0</y>
      <width>1071</width>
-     <height>21</height>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="m_qmFile">
@@ -120,8 +120,8 @@
      <addaction name="m_pqaNewView"/>
      <addaction name="menuFormular"/>
      <addaction name="m_pqaNewReport"/>
-     <addaction name="m_pqaNewWorkflow"/>
      <addaction name="m_pqaNewApplication"/>
+     <addaction name="m_pqaNewFunction"/>
     </widget>
     <addaction name="menuNeu"/>
     <addaction name="separator"/>
@@ -143,8 +143,6 @@
     <addaction name="separator"/>
     <addaction name="m_pqaLogger"/>
     <addaction name="separator"/>
-    <addaction name="m_pqaReplayEvents"/>
-    <addaction name="m_pqaDeleteAllExistingEvents"/>
     <addaction name="separator"/>
    </widget>
    <widget class="QMenu" name="menuBearbeiten">
@@ -203,7 +201,6 @@
     <addaction name="separator"/>
     <addaction name="menuDatenbank"/>
     <addaction name="menuObjektliste"/>
-    <addaction name="m_pqaScriptEnvironment"/>
     <addaction name="separator"/>
     <addaction name="m_pqaReportProperties"/>
     <addaction name="separator"/>
@@ -213,8 +210,6 @@
     <addaction name="m_pqaDataSearch"/>
     <addaction name="separator"/>
     <addaction name="m_pqaExecuteApplication"/>
-    <addaction name="separator"/>
-    <addaction name="m_pqaWorkflowTeams"/>
    </widget>
    <widget class="QMenu" name="menuFenster">
     <property name="title">
@@ -460,7 +455,6 @@
    <addaction name="m_pqaEdit_2"/>
    <addaction name="m_pqaDelete"/>
    <addaction name="m_pqaCreateDbQueries"/>
-   <addaction name="m_pqaScriptEnvironment"/>
   </widget>
   <widget class="QDockWidget" name="m_pqdwModel">
    <property name="windowTitle">
@@ -1591,6 +1585,11 @@
     <string>Logout und Beenden</string>
    </property>
   </action>
+  <action name="m_pqaNewFunction">
+   <property name="text">
+    <string>Neue Funktion</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="3" margin="3"/>
  <resources>
@@ -2313,7 +2312,7 @@
     </hint>
     <hint type="destinationlabel">
      <x>130</x>
-     <y>765</y>
+     <y>763</y>
     </hint>
    </hints>
   </connection>
@@ -2485,7 +2484,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>71</x>
-     <y>762</y>
+     <y>760</y>
     </hint>
     <hint type="destinationlabel">
      <x>0</x>
@@ -2501,7 +2500,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>1067</x>
-     <y>471</y>
+     <y>453</y>
     </hint>
     <hint type="destinationlabel">
      <x>1070</x>
@@ -2565,7 +2564,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>1067</x>
-     <y>611</y>
+     <y>587</y>
     </hint>
     <hint type="destinationlabel">
      <x>1070</x>
@@ -2581,7 +2580,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>1067</x>
-     <y>331</y>
+     <y>318</y>
     </hint>
     <hint type="destinationlabel">
      <x>1070</x>
@@ -2613,7 +2612,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>17</x>
-     <y>762</y>
+     <y>760</y>
     </hint>
     <hint type="destinationlabel">
      <x>0</x>
@@ -2629,7 +2628,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>1067</x>
-     <y>738</y>
+     <y>722</y>
     </hint>
     <hint type="destinationlabel">
      <x>1070</x>
@@ -2645,7 +2644,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>1067</x>
-     <y>738</y>
+     <y>722</y>
     </hint>
     <hint type="destinationlabel">
      <x>1070</x>
@@ -2661,7 +2660,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>1067</x>
-     <y>611</y>
+     <y>587</y>
     </hint>
     <hint type="destinationlabel">
      <x>1070</x>
@@ -2677,7 +2676,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>1067</x>
-     <y>471</y>
+     <y>453</y>
     </hint>
     <hint type="destinationlabel">
      <x>1070</x>
@@ -2693,7 +2692,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>1067</x>
-     <y>331</y>
+     <y>318</y>
     </hint>
     <hint type="destinationlabel">
      <x>1070</x>
@@ -2741,7 +2740,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>131</x>
-     <y>762</y>
+     <y>760</y>
     </hint>
     <hint type="destinationlabel">
      <x>0</x>
@@ -2773,7 +2772,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>1067</x>
-     <y>738</y>
+     <y>722</y>
     </hint>
     <hint type="destinationlabel">
      <x>1070</x>
@@ -2789,7 +2788,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>1067</x>
-     <y>611</y>
+     <y>587</y>
     </hint>
     <hint type="destinationlabel">
      <x>1070</x>
@@ -2805,7 +2804,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>1067</x>
-     <y>471</y>
+     <y>453</y>
     </hint>
     <hint type="destinationlabel">
      <x>1070</x>
@@ -2821,7 +2820,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>1067</x>
-     <y>331</y>
+     <y>318</y>
     </hint>
     <hint type="destinationlabel">
      <x>1070</x>
@@ -3092,8 +3091,8 @@
    <slot>RefreshViewsClickedSlot()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>829</x>
-     <y>762</y>
+     <x>847</x>
+     <y>760</y>
     </hint>
     <hint type="destinationlabel">
      <x>1113</x>
@@ -3108,8 +3107,8 @@
    <slot>ViewFilterEnterPressedSlot()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>947</x>
-     <y>652</y>
+     <x>1067</x>
+     <y>640</y>
     </hint>
     <hint type="destinationlabel">
      <x>1224</x>
@@ -3130,6 +3129,22 @@
     <hint type="destinationlabel">
      <x>1259</x>
      <y>336</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqaNewFunction</sender>
+   <signal>triggered()</signal>
+   <receiver>CwmsAdminMainWindow</receiver>
+   <slot>NewFunctionSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>535</x>
+     <y>583</y>
     </hint>
    </hints>
   </connection>
@@ -3190,5 +3205,6 @@
   <slot>RefreshViewsClickedSlot()</slot>
   <slot>ViewFilterEnterPressedSlot()</slot>
   <slot>ClassFilterEnterPressedSlot()</slot>
+  <slot>NewFunctionSlot()</slot>
  </slots>
 </ui>

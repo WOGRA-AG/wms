@@ -6,15 +6,27 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1068</width>
+    <width>1133</width>
     <height>669</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Funktionseditor</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout_2">
-   <item>
+  <layout class="QGridLayout" name="gridLayout_5">
+   <property name="leftMargin">
+    <number>3</number>
+   </property>
+   <property name="topMargin">
+    <number>3</number>
+   </property>
+   <property name="rightMargin">
+    <number>3</number>
+   </property>
+   <property name="bottomMargin">
+    <number>3</number>
+   </property>
+   <item row="0" column="0">
     <widget class="QSplitter" name="splitter">
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
@@ -23,155 +35,6 @@
       <layout class="QVBoxLayout" name="verticalLayout">
        <item>
         <widget class="JSEdit" name="m_pjsEditor"/>
-       </item>
-       <item>
-        <widget class="QGroupBox" name="m_pqgbSearch">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="title">
-          <string>Suche</string>
-         </property>
-         <layout class="QVBoxLayout" name="verticalLayout_3">
-          <property name="leftMargin">
-           <number>3</number>
-          </property>
-          <property name="topMargin">
-           <number>3</number>
-          </property>
-          <property name="rightMargin">
-           <number>3</number>
-          </property>
-          <property name="bottomMargin">
-           <number>3</number>
-          </property>
-          <item>
-           <layout class="QGridLayout" name="gridLayout_5">
-            <item row="0" column="0">
-             <widget class="QLabel" name="label_6">
-              <property name="text">
-               <string>Suchen</string>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="1">
-             <widget class="QLineEdit" name="m_pqleSearch"/>
-            </item>
-            <item row="0" column="2">
-             <widget class="QPushButton" name="m_pqpbNext">
-              <property name="toolTip">
-               <string>NächsterTreffer</string>
-              </property>
-              <property name="text">
-               <string/>
-              </property>
-              <property name="icon">
-               <iconset resource="../resources/emresources.qrc">
-                <normaloff>:/icons/arrow-right24.png</normaloff>:/icons/arrow-right24.png</iconset>
-              </property>
-              <property name="iconSize">
-               <size>
-                <width>24</width>
-                <height>24</height>
-               </size>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="3">
-             <widget class="QPushButton" name="m_pqpbPRevious">
-              <property name="toolTip">
-               <string>Vorheriger Treffer</string>
-              </property>
-              <property name="text">
-               <string/>
-              </property>
-              <property name="icon">
-               <iconset resource="../resources/emresources.qrc">
-                <normaloff>:/icons/arrow-left24.png</normaloff>:/icons/arrow-left24.png</iconset>
-              </property>
-              <property name="iconSize">
-               <size>
-                <width>24</width>
-                <height>24</height>
-               </size>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="0">
-             <widget class="QLabel" name="label_7">
-              <property name="text">
-               <string>Ersetzen</string>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="1">
-             <widget class="QLineEdit" name="m_pqleReplace"/>
-            </item>
-            <item row="1" column="2">
-             <widget class="QPushButton" name="m_pqpbReplace">
-              <property name="toolTip">
-               <string>Ersetzen</string>
-              </property>
-              <property name="text">
-               <string>Ersetzen</string>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="3">
-             <widget class="QPushButton" name="m_pqpbReplaceAll">
-              <property name="toolTip">
-               <string>Alle Ersetzen</string>
-              </property>
-              <property name="text">
-               <string>Alle Ersetzen</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
-          <item>
-           <layout class="QHBoxLayout" name="horizontalLayout">
-            <item>
-             <widget class="QCheckBox" name="m_pqchbCaseSensitive">
-              <property name="text">
-               <string>Groß Kleinschreibung berücksichtigen</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QCheckBox" name="m_pqchbWholeWord">
-              <property name="text">
-               <string>Nach ganzen Wörtern suchen</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QCheckBox" name="m_pqchbRegExp">
-              <property name="text">
-               <string>Regulärer Ausdruck</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <spacer name="horizontalSpacer">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>40</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-           </layout>
-          </item>
-         </layout>
-        </widget>
        </item>
       </layout>
      </widget>
@@ -215,7 +78,7 @@
           </property>
          </widget>
         </item>
-        <item row="0" column="2">
+        <item row="0" column="1">
          <widget class="QLineEdit" name="m_pqleName"/>
         </item>
         <item row="1" column="0">
@@ -225,10 +88,10 @@
           </property>
          </widget>
         </item>
-        <item row="1" column="2">
+        <item row="1" column="1">
          <widget class="QComboBox" name="m_pqcbReturnType"/>
         </item>
-        <item row="2" column="0" colspan="3">
+        <item row="2" column="0" colspan="2">
          <widget class="QGroupBox" name="groupBox">
           <property name="title">
            <string>Aufrufparameter</string>
@@ -284,7 +147,7 @@
                 <string/>
                </property>
                <property name="icon">
-                <iconset resource="../resources/emresources.qrc">
+                <iconset resource="../../../guilibraries/wmsgui/src/misc/wmsgui.qrc">
                  <normaloff>:/icons/new24.png</normaloff>:/icons/new24.png</iconset>
                </property>
                <property name="iconSize">
@@ -324,7 +187,7 @@
                 <string/>
                </property>
                <property name="icon">
-                <iconset resource="../resources/emresources.qrc">
+                <iconset resource="../../../guilibraries/wmsgui/src/misc/wmsgui.qrc">
                  <normaloff>:/icons/delete24.png</normaloff>:/icons/delete24.png</iconset>
                </property>
                <property name="iconSize">
@@ -341,7 +204,7 @@
                 <string/>
                </property>
                <property name="icon">
-                <iconset resource="../resources/emresources.qrc">
+                <iconset resource="../../../guilibraries/wmsgui/src/misc/wmsgui.qrc">
                  <normaloff>:/icons/arrow-up24.png</normaloff>:/icons/arrow-up24.png</iconset>
                </property>
                <property name="iconSize">
@@ -358,7 +221,7 @@
                 <string/>
                </property>
                <property name="icon">
-                <iconset resource="../resources/emresources.qrc">
+                <iconset resource="../../../guilibraries/wmsgui/src/misc/wmsgui.qrc">
                  <normaloff>:/icons/arrow-down24.png</normaloff>:/icons/arrow-down24.png</iconset>
                </property>
                <property name="iconSize">
@@ -387,7 +250,7 @@
           </layout>
          </widget>
         </item>
-        <item row="3" column="0" colspan="3">
+        <item row="3" column="0" colspan="2">
          <widget class="QGroupBox" name="m_pqgbFunctionType">
           <property name="title">
            <string>Funktionsart</string>
@@ -426,7 +289,7 @@
           </layout>
          </widget>
         </item>
-        <item row="4" column="0" colspan="3">
+        <item row="4" column="0" colspan="2">
          <widget class="QGroupBox" name="m_pqgbAccess">
           <property name="title">
            <string>Zugriffsart</string>
@@ -484,42 +347,119 @@
           </layout>
          </widget>
         </item>
-        <item row="5" column="0">
-         <widget class="QPushButton" name="m_pqpbRights">
-          <property name="text">
-           <string/>
-          </property>
-          <property name="icon">
-           <iconset resource="../resources/emresources.qrc">
-            <normaloff>:/icons/usermanager24.png</normaloff>:/icons/usermanager24.png</iconset>
-          </property>
-          <property name="iconSize">
-           <size>
-            <width>24</width>
-            <height>24</height>
-           </size>
-          </property>
-         </widget>
-        </item>
-        <item row="5" column="1">
-         <widget class="QPushButton" name="m_pqpbSyntaxCheck">
-          <property name="toolTip">
-           <string>Syntaxprüfung</string>
-          </property>
-          <property name="text">
-           <string/>
-          </property>
-          <property name="icon">
-           <iconset resource="../resources/emresources.qrc">
-            <normaloff>:/icons/articleunit.png</normaloff>:/icons/articleunit.png</iconset>
-          </property>
-          <property name="iconSize">
-           <size>
-            <width>24</width>
-            <height>24</height>
-           </size>
-          </property>
-         </widget>
+        <item row="5" column="0" colspan="2">
+         <layout class="QHBoxLayout" name="horizontalLayout_5">
+          <item>
+           <widget class="QPushButton" name="m_pqpbRights">
+            <property name="text">
+             <string/>
+            </property>
+            <property name="icon">
+             <iconset resource="../../../guilibraries/wmsgui/src/misc/wmsgui.qrc">
+              <normaloff>:/icons/usermanager24.png</normaloff>:/icons/usermanager24.png</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>24</width>
+              <height>24</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="horizontalSpacer_5">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QPushButton" name="m_pqpbSyntaxCheck">
+            <property name="toolTip">
+             <string>Syntaxprüfung</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="icon">
+             <iconset resource="../../../guilibraries/wmsgui/src/misc/wmsgui.qrc">
+              <normaloff>:/icons/articleunit.png</normaloff>:/icons/articleunit.png</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>24</width>
+              <height>24</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="m_pqpbSave">
+            <property name="toolTip">
+             <string>Speichern</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="icon">
+             <iconset resource="../../../guilibraries/wmsgui/src/misc/wmsgui.qrc">
+              <normaloff>:/icons/save24.png</normaloff>:/icons/save24.png</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>24</width>
+              <height>24</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="m_pqpbDebug">
+            <property name="toolTip">
+             <string>Debuggen</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="icon">
+             <iconset resource="../../../guilibraries/wmsgui/src/misc/wmsgui.qrc">
+              <normaloff>:/icons/print-preview.png</normaloff>:/icons/print-preview.png</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>24</width>
+              <height>24</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="m_pqpbExecute">
+            <property name="toolTip">
+             <string>Ausführen</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="icon">
+             <iconset resource="../../../guilibraries/wmsgui/src/misc/wmsgui.qrc">
+              <normaloff>:/icons/task-accepted.png</normaloff>:/icons/task-accepted.png</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>24</width>
+              <height>24</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+         </layout>
         </item>
        </layout>
       </widget>
@@ -617,6 +557,175 @@
         </item>
        </layout>
       </widget>
+      <widget class="QWidget" name="m_pqwSearch">
+       <attribute name="title">
+        <string>Suche</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_2">
+        <property name="leftMargin">
+         <number>3</number>
+        </property>
+        <property name="topMargin">
+         <number>3</number>
+        </property>
+        <property name="rightMargin">
+         <number>3</number>
+        </property>
+        <property name="bottomMargin">
+         <number>3</number>
+        </property>
+        <item>
+         <widget class="QLabel" name="label_8">
+          <property name="text">
+           <string>Suche innerhalb der Funktion</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_9">
+          <item>
+           <widget class="QLabel" name="label_6">
+            <property name="text">
+             <string>Suchen</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="m_pqleSearch"/>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_8">
+          <item>
+           <widget class="QLabel" name="label_7">
+            <property name="text">
+             <string>Ersetzen</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="m_pqleReplace"/>
+          </item>
+          <item>
+           <widget class="QPushButton" name="m_pqpbReplace">
+            <property name="toolTip">
+             <string>Ersetzen</string>
+            </property>
+            <property name="text">
+             <string>Ersetzen</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="m_pqpbReplaceAll">
+            <property name="toolTip">
+             <string>Alle Ersetzen</string>
+            </property>
+            <property name="text">
+             <string>Alle Ersetzen</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_3">
+          <item>
+           <widget class="QCheckBox" name="m_pqchbWholeWord">
+            <property name="text">
+             <string>Nur ganzen Wörtern suchen</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="m_pqchbCaseSensitive">
+            <property name="text">
+             <string>Groß Kleinschreibung berücksichtigen</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="m_pqchbRegExp">
+            <property name="text">
+             <string>Regulärer Ausdruck</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_7">
+          <item>
+           <widget class="QPushButton" name="m_pqpbNext">
+            <property name="toolTip">
+             <string>NächsterTreffer</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="icon">
+             <iconset resource="../../../guilibraries/wmsgui/src/misc/wmsgui.qrc">
+              <normaloff>:/icons/arrow-right24.png</normaloff>:/icons/arrow-right24.png</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>24</width>
+              <height>24</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="m_pqpbPRevious">
+            <property name="toolTip">
+             <string>Vorheriger Treffer</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="icon">
+             <iconset resource="../../../guilibraries/wmsgui/src/misc/wmsgui.qrc">
+              <normaloff>:/icons/arrow-left24.png</normaloff>:/icons/arrow-left24.png</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>24</width>
+              <height>24</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="horizontalSpacer_6">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <spacer name="verticalSpacer">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>40</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+       </layout>
+      </widget>
      </widget>
     </widget>
    </item>
@@ -630,7 +739,7 @@
   </customwidget>
  </customwidgets>
  <resources>
-  <include location="../resources/emresources.qrc"/>
+  <include location="../../../guilibraries/wmsgui/src/misc/wmsgui.qrc"/>
  </resources>
  <connections>
   <connection>
@@ -640,12 +749,12 @@
    <slot>SyntaxCheckClickedSlot()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>754</x>
+     <x>995</x>
      <y>657</y>
     </hint>
     <hint type="destinationlabel">
      <x>372</x>
-     <y>779</y>
+     <y>668</y>
     </hint>
    </hints>
   </connection>
@@ -656,7 +765,7 @@
    <slot>RightsClickedSlot()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>716</x>
+     <x>771</x>
      <y>657</y>
     </hint>
     <hint type="destinationlabel">
@@ -672,8 +781,8 @@
    <slot>TypeIndexChangedSlot()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>746</x>
-     <y>125</y>
+     <x>832</x>
+     <y>134</y>
     </hint>
     <hint type="destinationlabel">
      <x>0</x>
@@ -688,8 +797,8 @@
    <slot>DeleteParameterClickedSlot()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>707</x>
-     <y>514</y>
+     <x>775</x>
+     <y>501</y>
     </hint>
     <hint type="destinationlabel">
      <x>597</x>
@@ -704,8 +813,8 @@
    <slot>AddParameterClickedSlot()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>1049</x>
-     <y>128</y>
+     <x>1117</x>
+     <y>139</y>
     </hint>
     <hint type="destinationlabel">
      <x>597</x>
@@ -720,8 +829,8 @@
    <slot>MoveParameterDownClickedSlot()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>783</x>
-     <y>514</y>
+     <x>859</x>
+     <y>501</y>
     </hint>
     <hint type="destinationlabel">
      <x>597</x>
@@ -740,7 +849,7 @@
      <y>89</y>
     </hint>
     <hint type="destinationlabel">
-     <x>1249</x>
+     <x>1132</x>
      <y>132</y>
     </hint>
    </hints>
@@ -752,12 +861,12 @@
    <slot>click()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>237</x>
-     <y>628</y>
+     <x>959</x>
+     <y>106</y>
     </hint>
     <hint type="destinationlabel">
-     <x>566</x>
-     <y>625</y>
+     <x>1040</x>
+     <y>107</y>
     </hint>
    </hints>
   </connection>
@@ -768,12 +877,12 @@
    <slot>click()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>282</x>
-     <y>599</y>
+     <x>1063</x>
+     <y>75</y>
     </hint>
     <hint type="destinationlabel">
-     <x>566</x>
-     <y>602</y>
+     <x>771</x>
+     <y>227</y>
     </hint>
    </hints>
   </connection>
@@ -784,12 +893,12 @@
    <slot>FindNextClickedSlot()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>566</x>
-     <y>602</y>
+     <x>771</x>
+     <y>227</y>
     </hint>
     <hint type="destinationlabel">
      <x>564</x>
-     <y>717</y>
+     <y>668</y>
     </hint>
    </hints>
   </connection>
@@ -800,12 +909,12 @@
    <slot>FindPreviousClickedSlot()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>650</x>
-     <y>602</y>
+     <x>813</x>
+     <y>227</y>
     </hint>
     <hint type="destinationlabel">
      <x>707</x>
-     <y>720</y>
+     <y>668</y>
     </hint>
    </hints>
   </connection>
@@ -816,12 +925,12 @@
    <slot>ReplaceClickedSlot()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>566</x>
-     <y>625</y>
+     <x>1040</x>
+     <y>107</y>
     </hint>
     <hint type="destinationlabel">
      <x>583</x>
-     <y>750</y>
+     <y>668</y>
     </hint>
    </hints>
   </connection>
@@ -832,12 +941,12 @@
    <slot>ReplaceAllClickedSlot()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>650</x>
-     <y>625</y>
+     <x>1121</x>
+     <y>107</y>
     </hint>
     <hint type="destinationlabel">
      <x>605</x>
-     <y>705</y>
+     <y>668</y>
     </hint>
    </hints>
   </connection>
@@ -848,12 +957,60 @@
    <slot>MoveParameterUpClickedSlot()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>732</x>
-     <y>504</y>
+     <x>817</x>
+     <y>501</y>
     </hint>
     <hint type="destinationlabel">
      <x>811</x>
-     <y>727</y>
+     <y>668</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqpbSave</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsFunctionEditorClass</receiver>
+   <slot>SaveClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1020</x>
+     <y>641</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1286</x>
+     <y>599</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqpbDebug</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsFunctionEditorClass</receiver>
+   <slot>DebugClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1067</x>
+     <y>637</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1203</x>
+     <y>554</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqpbExecute</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsFunctionEditorClass</receiver>
+   <slot>ExecuteClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1103</x>
+     <y>639</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1184</x>
+     <y>640</y>
     </hint>
    </hints>
   </connection>
@@ -873,5 +1030,8 @@
   <slot>FindPreviousClickedSlot()</slot>
   <slot>ReplaceClickedSlot()</slot>
   <slot>ReplaceAllClickedSlot()</slot>
+  <slot>SaveClickedSlot()</slot>
+  <slot>DebugClickedSlot()</slot>
+  <slot>ExecuteClickedSlot()</slot>
  </slots>
 </ui>
