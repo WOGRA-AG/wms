@@ -273,6 +273,15 @@ void CwmsSearchWidgetIf::CreateQuery()
 {
    CreateQuery(m_cCdmQuery);
 }
+void CwmsSearchWidgetIf::SetOrSearch()
+{
+    m_pqrbLogicOr->setChecked(true);
+}
+
+void CwmsSearchWidgetIf::SetAndSearch()
+{
+    m_pqrbLogicAnd->setChecked(true);
+}
 
 /** +-=---------------------------------------------------------Do 6. Sep 19:12:21 2012-----------*
  * @method  CwmsSearchWidgetIf::CreateQuery                  // public                            *

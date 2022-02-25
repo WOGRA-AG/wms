@@ -222,6 +222,8 @@ void SearchClickedSlot( );
     * @comment                                                                                    *
     *----------------last changed: -----------------------------Do 6. Sep 19:12:21 2012-----------*/
     void CreateQuery(CdmQuery& p_rCdmQuery);
+    void SetAndSearch();
+    void SetOrSearch();
 };
 
 #endif // // CWMSSEARCHWIDGETIF_H
