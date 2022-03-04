@@ -33,7 +33,17 @@ QString CwmsFormUserDefined::GetUICode()
 
 void CwmsFormUserDefined::SetUICode(QString p_qstrValue)
 {
-   SetValue("UI_Code", p_qstrValue);
+    SetValue("UI_Code", p_qstrValue);
+}
+
+QString CwmsFormUserDefined::GetXml()
+{
+    return GetString("xml");
+}
+
+void CwmsFormUserDefined::SetXml(QString p_qstrValue)
+{
+    SetValue("xml", p_qstrValue);
 }
 
 bool CwmsFormUserDefined::GetWebForm()
@@ -43,7 +53,17 @@ bool CwmsFormUserDefined::GetWebForm()
 
 void CwmsFormUserDefined::SetWebForm(bool p_bValue)
 {
-   SetValue("Web_Form", p_bValue);
+    SetValue("Web_Form", p_bValue);
+}
+
+bool CwmsFormUserDefined::IsModal()
+{
+    return GetBool("modal");
+}
+
+void CwmsFormUserDefined::SetModal(bool p_bValue)
+{
+    SetValue("modal", p_bValue);
 }
 
 bool CwmsFormUserDefined::GetDesktopForm()

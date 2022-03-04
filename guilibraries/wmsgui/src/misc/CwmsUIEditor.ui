@@ -1,0 +1,466 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>CwmsUIEditor</class>
+ <widget class="QWidget" name="CwmsUIEditor">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1128</width>
+    <height>566</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Benutzerdefinierte Oberflächen</string>
+  </property>
+  <layout class="QHBoxLayout" name="horizontalLayout_8">
+   <property name="leftMargin">
+    <number>3</number>
+   </property>
+   <property name="topMargin">
+    <number>3</number>
+   </property>
+   <property name="rightMargin">
+    <number>3</number>
+   </property>
+   <property name="bottomMargin">
+    <number>3</number>
+   </property>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout"/>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="groupBox_2">
+     <property name="title">
+      <string>UI Logik</string>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout">
+      <property name="leftMargin">
+       <number>3</number>
+      </property>
+      <property name="topMargin">
+       <number>3</number>
+      </property>
+      <property name="rightMargin">
+       <number>3</number>
+      </property>
+      <property name="bottomMargin">
+       <number>3</number>
+      </property>
+      <item>
+       <widget class="JSEdit" name="m_pqteCode">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="m_pqpbPropeties">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Maximum" vsizetype="Minimum">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="title">
+      <string>Eigenschaften</string>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_2">
+      <property name="leftMargin">
+       <number>3</number>
+      </property>
+      <property name="topMargin">
+       <number>3</number>
+      </property>
+      <property name="rightMargin">
+       <number>3</number>
+      </property>
+      <property name="bottomMargin">
+       <number>3</number>
+      </property>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_7">
+        <item>
+         <widget class="QLabel" name="label">
+          <property name="text">
+           <string>Name</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="m_pqleName"/>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_3">
+        <item>
+         <widget class="QLabel" name="label_2">
+          <property name="text">
+           <string>Klasse</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="m_pqleClass"/>
+        </item>
+        <item>
+         <widget class="QPushButton" name="m_pqpbRemoveClass">
+          <property name="toolTip">
+           <string>Klasse entfernen</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset resource="wmsgui.qrc">
+            <normaloff>:/icons/cancel24.png</normaloff>:/icons/cancel24.png</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>24</width>
+            <height>24</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="m_pqpbSelectClass">
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset resource="wmsgui.qrc">
+            <normaloff>:/icons/search24.png</normaloff>:/icons/search24.png</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>24</width>
+            <height>24</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_5">
+        <item>
+         <widget class="QPushButton" name="m_pqpbOpenInExternalEditor">
+          <property name="toolTip">
+           <string>UI Design bearbeiten</string>
+          </property>
+          <property name="statusTip">
+           <string>In externem Editor öffnen</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset resource="wmsgui.qrc">
+            <normaloff>:/icons/noticetypes.png</normaloff>:/icons/noticetypes.png</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>24</width>
+            <height>24</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="horizontalSpacer_5">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="m_pqchbDefault">
+        <property name="text">
+         <string>Standard</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="m_pqchbModal">
+        <property name="text">
+         <string>Modal</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QGroupBox" name="groupBox">
+        <property name="title">
+         <string>Dialogtyp</string>
+        </property>
+        <layout class="QHBoxLayout" name="horizontalLayout_2">
+         <item>
+          <widget class="QRadioButton" name="m_pqrbObject">
+           <property name="text">
+            <string>Objekt</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QRadioButton" name="m_pqrbObjectContainer">
+           <property name="text">
+            <string>Objektcontainer</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QRadioButton" name="m_pqrbWmsContext">
+           <property name="text">
+            <string>WMS Kontext</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_2">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item>
+       <widget class="QGroupBox" name="groupBox_3">
+        <property name="title">
+         <string>Formularart</string>
+        </property>
+        <layout class="QHBoxLayout" name="horizontalLayout_4">
+         <item>
+          <widget class="QRadioButton" name="m_pqrbDialog">
+           <property name="text">
+            <string>Dialog</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QRadioButton" name="m_pqrbWidget">
+           <property name="text">
+            <string>Widget</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QRadioButton" name="m_pqrbMainWindow">
+           <property name="text">
+            <string>Hauptfenster</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_4">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item>
+       <spacer name="verticalSpacer">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>40</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_6">
+        <item>
+         <spacer name="horizontalSpacer">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+         <widget class="QPushButton" name="m_pqpbSave">
+          <property name="toolTip">
+           <string>Speichern</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset resource="wmsgui.qrc">
+            <normaloff>:/icons/save24.png</normaloff>:/icons/save24.png</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>24</width>
+            <height>24</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="m_pqpbTest">
+          <property name="toolTip">
+           <string>Testen</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset resource="wmsgui.qrc">
+            <normaloff>:/icons/licencemanager24.png</normaloff>:/icons/licencemanager24.png</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>24</width>
+            <height>24</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>JSEdit</class>
+   <extends>QPlainTextEdit</extends>
+   <header location="global">jsedit.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources>
+  <include location="wmsgui.qrc"/>
+ </resources>
+ <connections>
+  <connection>
+   <sender>m_pqpbOpenInExternalEditor</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsUIEditor</receiver>
+   <slot>OpenInExternalEditorSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>818</x>
+     <y>125</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>147</x>
+     <y>502</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqpbRemoveClass</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsUIEditor</receiver>
+   <slot>RemoveClassClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1058</x>
+     <y>68</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1196</x>
+     <y>110</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqpbSelectClass</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsUIEditor</receiver>
+   <slot>SelectClassClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1111</x>
+     <y>67</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1215</x>
+     <y>70</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqpbSave</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsUIEditor</receiver>
+   <slot>SaveClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1059</x>
+     <y>543</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1050</x>
+     <y>633</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pqpbTest</sender>
+   <signal>clicked()</signal>
+   <receiver>CwmsUIEditor</receiver>
+   <slot>PreviewClickedSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1103</x>
+     <y>544</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1111</x>
+     <y>645</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>SelectClassClickedSlot()</slot>
+  <slot>PreviewClickedSlot()</slot>
+  <slot>OpenInExternalEditorSlot()</slot>
+  <slot>SaveClickedSlot()</slot>
+  <slot>RemoveClassClickedSlot()</slot>
+ </slots>
+</ui>

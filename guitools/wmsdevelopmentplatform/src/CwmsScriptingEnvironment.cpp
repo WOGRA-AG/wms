@@ -21,8 +21,7 @@
 #include "CwmsAddMemberIf.h"
 #include "CwmsFormLibrary.h"
 #include "CwmsFunctionEditor.h"
-#include "CwmsQmlEditor.h"
-#include "CwmsQmlLibraryEditor.h"
+#include "CwmsUIEditor.h"
 #include "CwmsFormManager.h"
 #include "CwmsClassDataFiller.h"
 #include "CwmsMiscDataFiller.h"
@@ -122,7 +121,7 @@ void CwmsScriptingEnvironment::FillClasses() // todo remove this function ShowTe
     pClassItem->setText(0, tr("Klassen"));
     pClassItem->setData(1, Qt::UserRole, eWmsTreeItemTypeClassParent);
     CdmClassManager* pClassManager = CdmSessionManager::GetDataProvider()->GetClassManager();
-    CwmsClassDataFiller::FillClasses(pClassManager, pClassItem, false, ui->m_pqchbShowTechnicalClasses->isChecked());
+    CwmsClassDataFiller::FillClasses(pClassManager, pClassItem, ui->m_pqchbShowTechnicalClasses->isChecked());
     CwmsTreeWidgetHelper::ResizeColumnsToContent(ui->m_pqtwClasses);
     ui->m_pqtwClasses->sortByColumn(0,Qt::SortOrder::AscendingOrder);
 }
@@ -636,44 +635,44 @@ void CwmsScriptingEnvironment::NewItem(QTreeWidgetItem* p_pItem)
 
 void CwmsScriptingEnvironment::NewLibrary(QTreeWidgetItem* p_pItem)
 {
-    CwmsFormManager cFormManager;
-    CdmObjectContainer* pContainer = cFormManager.GetFormLibrary();
+//    CwmsFormManager cFormManager;
+//    CdmObjectContainer* pContainer = cFormManager.GetFormLibrary();
 
-    if (CHKPTR(pContainer))
-    {
-        CdmObject* pObject = pContainer->CreateNewObject();
+//    if (CHKPTR(pContainer))
+//    {
+//        CdmObject* pObject = pContainer->CreateNewObject();
 
-        if (CHKPTR(pObject))
-        {
-            CwmsFormLibrary form(pObject);
-            form.SetName(tr("Neue Bibliothek_") + QDateTime::currentDateTime().toString());
-            CwmsQmlLibraryEditor* pEditor = new CwmsQmlLibraryEditor(ui->m_pqMdi);
-            pEditor->FillDialog(form);
+//        if (CHKPTR(pObject))
+//        {
+//            CwmsFormLibrary form(pObject);
+//            form.SetName(tr("Neue Bibliothek_") + QDateTime::currentDateTime().toString());
+//            CwmsQmlLibraryEditor* pEditor = new CwmsQmlLibraryEditor(ui->m_pqMdi);
+//            pEditor->FillDialog(form);
 
-            QMdiSubWindow* pSubWindow = AddMdiWindow(pEditor);
+//            QMdiSubWindow* pSubWindow = AddMdiWindow(pEditor);
 
-            if (CHKPTR(pSubWindow))
-            {
-               pSubWindow->setWindowTitle(tr("Bibliothek ") + form.GetName() + " Version " + form.GetVersion());
-               pSubWindow->setObjectName(pObject->GetUriInternal());
-               pSubWindow->setAttribute(Qt::WA_DeleteOnClose);
-            }
+//            if (CHKPTR(pSubWindow))
+//            {
+//               pSubWindow->setWindowTitle(tr("Bibliothek ") + form.GetName() + " Version " + form.GetVersion());
+//               pSubWindow->setObjectName(pObject->GetUriInternal());
+//               pSubWindow->setAttribute(Qt::WA_DeleteOnClose);
+//            }
 
-             EwmsTreeItemType eType = (EwmsTreeItemType)p_pItem->data(1, Qt::UserRole).toInt();
-             QTreeWidgetItem* pParent = p_pItem;
+//             EwmsTreeItemType eType = (EwmsTreeItemType)p_pItem->data(1, Qt::UserRole).toInt();
+//             QTreeWidgetItem* pParent = p_pItem;
 
-             if (eType != eWmsTreeItemTypeFormLibraryParent)
-             {
-                 pParent = p_pItem->parent();
-             }
+//             if (eType != eWmsTreeItemTypeFormLibraryParent)
+//             {
+//                 pParent = p_pItem->parent();
+//             }
 
-             QTreeWidgetItem* pNewForm = new QTreeWidgetItem(pParent);
-             pNewForm->setText(0, form.GetName());
-             pNewForm->setData(1, Qt::UserRole, eWmsTreeItemTypeFormLibrary);
-             pNewForm->setData(0, Qt::UserRole, pObject->GetId());
-             pEditor->SetItem(pNewForm);
-        }
-    }
+//             QTreeWidgetItem* pNewForm = new QTreeWidgetItem(pParent);
+//             pNewForm->setText(0, form.GetName());
+//             pNewForm->setData(1, Qt::UserRole, eWmsTreeItemTypeFormLibrary);
+//             pNewForm->setData(0, Qt::UserRole, pObject->GetId());
+//             pEditor->SetItem(pNewForm);
+//        }
+//    }
 }
 
 void CwmsScriptingEnvironment::NewForm(QTreeWidgetItem* p_pItem)
@@ -691,7 +690,7 @@ void CwmsScriptingEnvironment::NewForm(QTreeWidgetItem* p_pItem)
           cForm.SetName(tr("Neue Benutzeroberfläche_") + QDateTime::currentDateTime().toString());
           cForm.CommitObject();
 
-          CwmsQmlEditor* pEditor = new CwmsQmlEditor(ui->m_pqMdi);
+          CwmsUIEditor* pEditor = new CwmsUIEditor(ui->m_pqMdi);
           pEditor->FillDialog(cForm);
 
           QMdiSubWindow* pSubWindow = AddMdiWindow(pEditor);
@@ -985,7 +984,7 @@ void CwmsScriptingEnvironment::EditFormSlot(CdmObject* p_pObject, QTreeWidgetIte
         if (!FindAndSetSubWindow(p_pObject->GetUriInternal()))
         {
            CwmsFormUserDefined cForm(p_pObject);
-           CwmsQmlEditor* pEditor = new CwmsQmlEditor(ui->m_pqMdi);
+           CwmsUIEditor* pEditor = new CwmsUIEditor(ui->m_pqMdi);
            pEditor->FillDialog(cForm);
            pEditor->SetItem(p_pItem);
 
@@ -1099,25 +1098,25 @@ void CwmsScriptingEnvironment::EditLibrarySlot(QTreeWidgetItem* p_pItem)
 
 void CwmsScriptingEnvironment::EditLibrarySlot(CdmObject* p_pObject, QTreeWidgetItem* p_pItem)
 {
-    if (CHKPTR(p_pObject))
-    {
-        if (!FindAndSetSubWindow(p_pObject->GetUriInternal()))
-        {
-            CwmsFormLibrary form(p_pObject);
-            CwmsQmlLibraryEditor* pEditor = new CwmsQmlLibraryEditor(ui->m_pqMdi);
-            pEditor->FillDialog(form);
-            pEditor->SetItem(p_pItem);
+//    if (CHKPTR(p_pObject))
+//    {
+//        if (!FindAndSetSubWindow(p_pObject->GetUriInternal()))
+//        {
+//            CwmsFormLibrary form(p_pObject);
+//            CwmsQmlLibraryEditor* pEditor = new CwmsQmlLibraryEditor(ui->m_pqMdi);
+//            pEditor->FillDialog(form);
+//            pEditor->SetItem(p_pItem);
 
-            QMdiSubWindow* pSubWindow = AddMdiWindow(pEditor);
+//            QMdiSubWindow* pSubWindow = AddMdiWindow(pEditor);
 
-            if (CHKPTR(pSubWindow))
-            {
-               pSubWindow->setWindowTitle(tr("Bibliothek ") + form.GetName() + " Version " + form.GetVersion());
-               pSubWindow->setObjectName(p_pObject->GetUriInternal());
-               pSubWindow->setAttribute(Qt::WA_DeleteOnClose);
-            }
-        }
-    }
+//            if (CHKPTR(pSubWindow))
+//            {
+//               pSubWindow->setWindowTitle(tr("Bibliothek ") + form.GetName() + " Version " + form.GetVersion());
+//               pSubWindow->setObjectName(p_pObject->GetUriInternal());
+//               pSubWindow->setAttribute(Qt::WA_DeleteOnClose);
+//            }
+//        }
+//    }
 }
 
 void CwmsScriptingEnvironment::EditResourceSlot(QTreeWidgetItem* p_pItem)

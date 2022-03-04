@@ -16,6 +16,7 @@
 #include <qcombobox.h>
 #include <qinputdialog.h>
 #include <qlineedit.h>
+#include <CwmsFormUserDefinedExecutor.h>
 
 // WMS Includes
 #include "IwmsPluginInterface.h"
@@ -67,7 +68,6 @@
 
 // WMS GUI Includes
 #include "CwmsguiObjectEditorIf.h"
-#include "CwmsQmlLibraryEditor.h"
 #include "CwmsGuiDataAccessConfiguration.h"
 #include "CwmsPluginsDlg.h"
 #include "CwmsFormInteractiveComponentEditor.h"
@@ -106,8 +106,7 @@
 #include "CwmsGuiLdapAccessConfiguration.h"
 
 // WMS QML Includes
-#include "CwmsQmlEditor.h"
-#include "CwmsQmlApplicationController.h"
+#include "CwmsUIEditor.h"
 #include "CwmsDataSearchDlg.h"
 
 // Own Includes
@@ -129,6 +128,7 @@
 #include "ui_cwmscreatobjectlistdlg.h"
 
 #define WMS_DP "wms_dp"
+#define CONTAINER_DISPLAY_LIMIT 100
 CwmsErrorIf* CwmsAdminMainWindowIf::m_pCwmsErrorIf = nullptr;
 
 CwmsAdminMainWindowIf::CwmsAdminMainWindowIf(QWidget* parent)
@@ -490,7 +490,7 @@ void CwmsAdminMainWindowIf::FillSchemeContent(QString p_qstrDbName)
             CdmMessageManager::SetProgress("LoadScheme", tr("Fülle Klassen"), ++iSteps);
             FillClasses(pCdmClassManager);
             CdmMessageManager::SetProgress("LoadScheme", tr("Fülle Objectcontainer"), ++iSteps);
-            CwmsObjectContainerDataFiller::FillAllObjectContainersToView(m_pqlvData, m_pqchbShowTechnicalItems->isChecked());
+            CwmsObjectContainerDataFiller::FillAllObjectContainersToView(m_pqlvData, m_pqchbShowTechnicalItems->isChecked(), CONTAINER_DISPLAY_LIMIT);
             CwmsTreeWidgetHelper::ResizeColumnsToContent(m_pqlvData);
 
             CdmMessageManager::SetProgress("LoadScheme", tr("Fülle Formulare"), ++iSteps);
@@ -636,7 +636,7 @@ void CwmsAdminMainWindowIf::FillClasses(CdmClassManager* p_pCdmClassManager)
         m_pqlvModel->clear();
         QTreeWidgetItem* pItem = new QTreeWidgetItem(m_pqlvModel);
         pItem->setText(0, tr("Klassen"));
-        CwmsClassDataFiller::FillClasses(p_pCdmClassManager, pItem, false, m_pqchbShowTechnicalItems->isChecked());
+        CwmsClassDataFiller::FillClasses(p_pCdmClassManager, pItem, m_pqchbShowTechnicalItems->isChecked());
         CwmsTreeWidgetHelper::ResizeColumnsToContent(m_pqlvModel);
         m_pqcbClassFilter->clear();
         disconnect(m_pqcbClassFilter, SIGNAL(currentTextChanged(QString)), this, SLOT(ClassFilterChangedSlot()));
@@ -659,7 +659,7 @@ void CwmsAdminMainWindowIf::FillClasses(CdmClassManager* p_pCdmClassManager)
 
 void CwmsAdminMainWindowIf::FillObjectLists(CdmClass* p_pCdmClass, QTreeWidgetItem* p_pqtwClass)
 {
-    CwmsObjectContainerDataFiller::FillObjectContainersToClass(p_pCdmClass, p_pqtwClass);
+    CwmsObjectContainerDataFiller::FillObjectContainersToClass(p_pCdmClass, p_pqtwClass, CONTAINER_DISPLAY_LIMIT);
 }
 
 void CwmsAdminMainWindowIf::SchemeContentSelectedSlot()
@@ -1396,7 +1396,7 @@ void CwmsAdminMainWindowIf::DeleteClassSlot()
             {
                 QTreeWidgetItem* pqlviItem = GetSelectedItem();
                 delete pqlviItem;
-                CwmsObjectContainerDataFiller::FillAllObjectContainersToView(m_pqlvData, m_pqchbShowTechnicalItems->isChecked());
+                CwmsObjectContainerDataFiller::FillAllObjectContainersToView(m_pqlvData, m_pqchbShowTechnicalItems->isChecked(), CONTAINER_DISPLAY_LIMIT);
             }
 
         }
@@ -1434,7 +1434,7 @@ void CwmsAdminMainWindowIf::CloseClassRelatedUis(CdmClass* p_pClass)
         }
     }
 
-    CwmsObjectContainerDataFiller::FillAllObjectContainersToView(m_pqlvData, m_pqchbShowTechnicalItems->isChecked());
+    CwmsObjectContainerDataFiller::FillAllObjectContainersToView(m_pqlvData, m_pqchbShowTechnicalItems->isChecked(), CONTAINER_DISPLAY_LIMIT);
 }
 
 void CwmsAdminMainWindowIf::CloseClassRelatedContainerUis(CdmClass* p_pClass)
@@ -1456,7 +1456,7 @@ void CwmsAdminMainWindowIf::CloseClassRelatedContainerUis(CdmClass* p_pClass)
         }
     }
 
-    CwmsObjectContainerDataFiller::FillAllObjectContainersToView(m_pqlvData, m_pqchbShowTechnicalItems->isChecked());
+    CwmsObjectContainerDataFiller::FillAllObjectContainersToView(m_pqlvData, m_pqchbShowTechnicalItems->isChecked(), CONTAINER_DISPLAY_LIMIT);
 }
 
 void CwmsAdminMainWindowIf::DeleteDatabaseSlot()
@@ -2071,9 +2071,9 @@ void CwmsAdminMainWindowIf::ExecuteApplicationSlot()
 
                 if (pMainWindow)
                 {
-                    CwmsQmlApplicationController::createController(QString("Dev Plattform"), nullptr);
                     CwmsFormUserDefined cForm(pMainWindow);
-                    CwmsQmlApplicationController::getController()->createCustomMainWindow(cForm.GetName(), cForm.GetUICode());
+                    CwmsFormUserDefinedExecutor cExecutor;
+                    cExecutor.ExecuteUserDefinedFormMisc(cForm, nullptr);
                 }
                 else
                 {
@@ -2317,13 +2317,16 @@ void CwmsAdminMainWindowIf::NewUserDefinedFormSlot()
         if (CHKPTR(pCdmObject))
         {
             CwmsFormUserDefined cForm(pCdmObject);
-            cForm.SetName("New_Form");
-            ScriptEnvironmentSlot();
+            QString qstrFormName = "New_Form";
+            cForm.SetName(qstrFormName);
+            cForm.CommitObject();
+            FillForms();
 
-            if (CHKPTR(m_pScriptEnvironment))
-            {
-                m_pScriptEnvironment->OpenObject(pCdmObject);
-            }
+            CwmsTreeWidgetHelper::SelectObject(m_pqlvUis, cForm.GetObject());
+            auto pItem = CwmsTreeWidgetHelper::GetSelectedItem(m_pqlvUis);
+
+            EditFormSlot(pCdmObject, pItem);
+
         }
     }
 }
@@ -2340,13 +2343,31 @@ void CwmsAdminMainWindowIf::EditUserDefinedFormSlot()
 
         if (CHKPTR(pCdmObject))
         {
-            ScriptEnvironmentSlot();
-
-            if (CHKPTR(m_pScriptEnvironment))
-            {
-                m_pScriptEnvironment->OpenObject(pCdmObject);
-            }
+            EditFormSlot(pCdmObject, pItem);
         }
+    }
+}
+
+void CwmsAdminMainWindowIf::EditFormSlot(CdmObject* p_pObject, QTreeWidgetItem* p_pItem)
+{
+    if (CHKPTR(p_pObject))
+    {
+        if (!FindAndSetSubWindow(p_pObject->GetUriInternal()))
+        {
+           CwmsFormUserDefined cForm(p_pObject);
+           CwmsUIEditor* pEditor = new CwmsUIEditor(m_pqMdiArea);
+           pEditor->FillDialog(cForm);
+           pEditor->SetItem(p_pItem);
+
+           QMdiSubWindow* pSubWindow = AddMdiWindow(pEditor);
+
+           if (CHKPTR(pSubWindow))
+           {
+              pSubWindow->setWindowTitle(tr("Benutzeroberfläche ") + cForm.GetName());
+              pSubWindow->setObjectName(p_pObject->GetUriInternal());
+              pSubWindow->setAttribute(Qt::WA_DeleteOnClose);
+           }
+       }
     }
 }
 
@@ -2830,7 +2851,7 @@ void CwmsAdminMainWindowIf::SmtpSlot()
 
 void CwmsAdminMainWindowIf::InstallBaseFunctionsToExecutor()
 {
-    CwmsApplicationServices::InstallFunctionsAndPlugins();
+    CwmsguiApplicationServices::InstallFunctionsAndPlugins();
     CwmsguiApplicationServices::InstallUiEditors();
 }
 
@@ -3007,7 +3028,7 @@ void CwmsAdminMainWindowIf::ClassFilterChangedSlot()
     if (qstrClass == tr("Objektcontainer aller Klassen"))
     {
         QApplication::setOverrideCursor(Qt::WaitCursor);
-        CwmsObjectContainerDataFiller::FillAllObjectContainersToView(m_pqlvData, m_pqchbShowTechnicalItems->isChecked());
+        CwmsObjectContainerDataFiller::FillAllObjectContainersToView(m_pqlvData, m_pqchbShowTechnicalItems->isChecked(), CONTAINER_DISPLAY_LIMIT);
         QApplication::restoreOverrideCursor();
     }
     else

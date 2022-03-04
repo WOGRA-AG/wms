@@ -58,7 +58,6 @@ INCLUDEPATH += \
     ./../../../guilibraries/wmsusermanagerlib/project/$$WMS_ARCH/ui/$$WMS_MODE \
     $$OUT_PWD/../../../guilibraries/wmsusermanagerlib/project/$$WMS_ARCH/ui/$$WMS_MODE \
     ./../../../guilibraries/wmsusermanagerlib/src \
-    ./../../../guilibraries/wmsqml/src \
     ./../../../guilibraries/wmsgui/project \
     $$OUT_PWD/../../../guilibraries/wmsgui/project/$$WMS_ARCH/ui/$$WMS_MODE \
     ./../../../guilibraries/wmsgui/src \
@@ -74,7 +73,6 @@ LIBS += -L$$DESTDIR \
     -lwmsusermanagerlib \
     -lwmscommons \
     -lwmscore \
-    -lwmsqml
 
 QMAKE_RPATHDIR += $$DESTDIR
 

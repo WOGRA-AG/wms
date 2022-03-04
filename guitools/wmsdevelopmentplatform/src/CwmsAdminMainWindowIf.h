@@ -280,6 +280,7 @@ private:
     void FillViews();
     void FillReports();
     void FillForms();
+    void EditFormSlot(CdmObject *p_pObject, QTreeWidgetItem *p_pItem);
 };
 
 #endif //

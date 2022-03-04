@@ -1,17 +1,4 @@
-﻿/******************************************************************************
- ** WOGRA technologies GmbH & Co. KG Modul Information
- ** Modulename: CdmExecutorFunction.cpp
- ** Started Implementation: 2012/09/19
- ** Description:
- **
- ** Implements the executor for functions and validations in Objects
- **
- ** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
- ** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. 
- **(C) copyright by WOGRA technologies GmbH & Co. KG All rights reserved
- *****************************************************************************/
-
-// System and QT Includes
+﻿// System and QT Includes
 #include <QCoreApplication>
 #include <QObject>
 #include <QJsonValue>
@@ -64,19 +51,10 @@ CdmExecutorFunction::CdmExecutorFunction(CdmExecutor* p_pExecutor)
 {
 }
 
-/** +-=---------------------------------------------------------Mi 19. Sep 14:18:59 2012----------*
- * @method  CdmExecutorFunction::~CdmExecutorFunction                        // public, virtual                   *
- * @return  void                                             //                                   *
- * @comment The Destructor of Class CdmExecutorFunction                                                   *
- *----------------last changed: --------------------------------Mi 19. Sep 14:18:59 2012----------*/
 CdmExecutorFunction::~CdmExecutorFunction()
 {
 }
 
-///
-/// \brief CdmExecutorFunction::CallConstructor
-/// \param p_pObject
-///
 void CdmExecutorFunction::CallConstructor(CdmObject* p_pObject)
 {
     if (CHKPTR(p_pObject))
@@ -86,11 +64,6 @@ void CdmExecutorFunction::CallConstructor(CdmObject* p_pObject)
     }
 }
 
-///
-/// \brief CdmExecutorFunction::CallConstructor
-/// \param p_pObject
-/// \param p_pClass
-///
 void CdmExecutorFunction::CallConstructor(CdmObject* p_pObject, CdmClass* p_pClass)
 {
     if (CHKPTR(p_pObject) && CHKPTR(p_pObject))
@@ -135,10 +108,6 @@ void CdmExecutorFunction::CallClassConstructor(CdmObject* p_pObject, CdmClass* p
     }
 }
 
-///
-/// \brief CdmExecutorFunction::CallDestructor
-/// \param p_pObject
-///
 void CdmExecutorFunction::CallDestructor(CdmObject* p_pObject)
 {
     if (CHKPTR(p_pObject))
@@ -187,15 +156,6 @@ void CdmExecutorFunction::CallClassDestructor(CdmObject* p_pObject, CdmClass* p_
     }
 }
 
-
-/** +-=---------------------------------------------------------So 25. Nov 12:22:10 2012----------*
- * @method  CdmExecutorFunction::ExecuteObject                       // public, slots                     *
- * @return  QVariant                                         //                                   *
- * @param   QString p_qstrFunction                           //                                   *
- * @param   CdmObject* p_pCdmObject                          //                                   *
- * @param   QVariantList p_qlParameters                   //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------So 25. Nov 12:22:10 2012----------*/
 QVariant CdmExecutorFunction::ExecuteObject(QString p_qstrFunction,
                                     CdmObject* p_pCdmObject,
                                     QVariantList p_qlParameters)
@@ -239,13 +199,6 @@ QVariant CdmExecutorFunction::ExecuteObject(QString p_qstrFunction,
    return qvValue;
 }
 
-/** +-=---------------------------------------------------------So 25. Nov 12:23:19 2012----------*
- * @method  CdmExecutorFunction::ExecuteStatic                       // public, slots                     *
- * @return  QVariant                                         //                                   *
- * @param   CdmClassMethod* p_pMethod                        //                                   *
- * @param   QVariantList p_qlParameters                   //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------So 25. Nov 12:23:19 2012----------*/
 QVariant CdmExecutorFunction::ExecuteStatic(CdmClassMethod* p_pMethod, QVariantList p_qlParameters)
 {
    QVariant qvValue;
@@ -280,14 +233,6 @@ QVariant CdmExecutorFunction::ExecuteStatic(CdmClassMethod* p_pMethod, QVariantL
    return qvValue;
 }
 
-
-/** +-=---------------------------------------------------------So 25. Nov 11:20:17 2012----------*
- * @method  CdmExecutorFunction::Execute                             // private                           *
- * @return  QVariant                                         //                                   *
- * @param   CdmClassMethod* p_pMethod                        //                                   *
- * @param   CdmModelElement* p_pCdmBase                      // Object / ObjectList               *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------So 25. Nov 11:20:17 2012----------*/
 QVariant CdmExecutorFunction::Execute(CdmClassMethod* p_pMethod, CdmModelElement* p_pCdmBase)
 {
    QVariantList qlEmpty;
@@ -486,14 +431,6 @@ QString CdmExecutorFunction::ConvertToJsDateConstructor(
     return qResult;
 }
 
-/** +-=---------------------------------------------------------Di 13. Nov 15:39:16 2012----------*
- * @method  CdmExecutorFunction::Execute                             // public, slots                     *
- * @return  QVariant                                         //                                   *
- * @param   CdmClassMethod* p_pMethod                        //                                   *
- * @param   CdmModelElement* p_pCdmBase                              // Object / ObjectList               *
- * @param   QVariantList p_qlParams                        //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Di 13. Nov 15:39:16 2012----------*/
 QVariant CdmExecutorFunction::Execute(CdmClassMethod* p_pMethod,
                               CdmModelElement* p_pCdmBase,
                               QVariantList p_qlParams)
@@ -579,14 +516,6 @@ QVariant CdmExecutorFunction::Execute(CdmClassMethod* p_pMethod,
    return qvValue;
 }
 
-/** +-=---------------------------------------------------------Di 13. Nov 16:43:09 2012----------*
- * @method  CdmExecutorFunction::ExecuteFunction                     // public                    *
- * @return  QVariant                                         //                                   *
- * @param   QString p_qstrFunction                           //                                   *
- * @param   CdmObject* p_pCdmObject                          //                                   *
- * @param   QVariantList p_qlParameters                    //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Di 13. Nov 16:43:09 2012----------*/
 QVariant CdmExecutorFunction::ExecuteFunction(QString p_qstrFunction,
                                       CdmObject* p_pCdmObject,
                                       QVariantList p_qlParameters)
@@ -594,13 +523,6 @@ QVariant CdmExecutorFunction::ExecuteFunction(QString p_qstrFunction,
    return ExecuteObject(p_qstrFunction, p_pCdmObject, p_qlParameters);
 }
 
-/** +-=---------------------------------------------------------Di 13. Nov 16:42:53 2012----------*
- * @method  CdmExecutorFunction::ExecuteFunctionStatic               // public                    *
- * @return  QVariant                                         //                                   *
- * @param   CdmClassMethod* p_pMethod                        //                                   *
- * @param   QVariantList p_qlParameters                    //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Di 13. Nov 16:42:53 2012----------*/
 QVariant CdmExecutorFunction::ExecuteFunctionStatic(CdmClassMethod* p_pMethod,
                                             QVariantList p_qlParameters)
 {

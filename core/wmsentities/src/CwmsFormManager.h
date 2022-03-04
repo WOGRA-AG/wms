@@ -228,18 +228,21 @@ class BASETOOLS_API CwmsFormManager : public QObject
     void AddWqlMemberToClass(CdmClass *p_pClass);
     void CreateInteractiveComponentClass(CdmClass *pClass);
     void CreateInteractiveComponent();
+    void UpdateUserdefinedUiClass(CdmClass *p_pClass);
+    CdmObject *GetUserDefinedUiForClassUri(QString p_qstrClassUri);
 public:
     CdmObjectContainer* GetFormLibrary();
     QString GetClassUri(CdmModelElement* p_pElement);
-    QString GetUserDefinedUiForElement(CdmModelElement *p_pElement);
-	QString GetUserDefinedUi(CdmObject *p_pElement);
-	QString GetUserDefinedUi(CdmObjectContainer *p_pElement);
-    QString GetUserDefinedUi(QString p_qstrName);
+    CdmObject *GetUserDefinedUiForElement(CdmModelElement *p_pElement);
+    CdmObject *GetUserDefinedUi(CdmObject *p_pElement);
+    CdmObject *GetUserDefinedUi(CdmObjectContainer *p_pElement);
+    CdmObject *GetUserDefinedUi(QString p_qstrName);
     QString GetWmsLibrary(QString p_qstrName, QString p_qstrVersion);
     void CreateFormResourceClass(CdmClass* pCdmClassFormResources);
     QByteArray GetResource(QString p_qstrName, int p_iType);
     CdmObjectContainer *GetResourceContainer();
     CdmObjectContainer *GetInteractiveComponentContainer();
+    CdmObject *GetUserDefinedUi(const CdmClass *p_pClass);
 };
 
 #endif // CWMSFORMMANAGER_H

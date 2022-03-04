@@ -211,7 +211,7 @@ class WMSGUI_API CwmsguiObjectEditorSelector
                                          EwmsGuiDisplayMode p_eDisplayMode,
                                          QWidget* p_pqwParent);
 
-    bool ExistQmlForThisPlattform(const CdmClass* p_pClass);
+    bool ExistUserdefinedForm(const CdmClass* p_pClass);
 
    public:
    /** +-=---------------------------------------------------------Mo 17. Dez 10:13:48 2012-------*
@@ -236,9 +236,8 @@ class WMSGUI_API CwmsguiObjectEditorSelector
     static void Init();
 
 private:
-    bool ShowQmlForm(CdmObject* p_pCdmObject,qint64 p_lObjectId, QWidget* p_pqParent);
-    QString GenerateQmlQuery(const CdmClass* p_pClass);
-    bool DisplayQmlForm(CdmObject* p_pCdmObject, EwmsGuiDisplayMode p_eDisplayMode, QWidget* p_pqwParent);
+    bool DisplayUserdefinedForm(CdmObject* p_pCdmObject, QWidget* p_pqwParent);
+    bool DisplayUserdefinedForm(CdmObjectContainer *p_pCdmObject, QWidget *p_pqwParent);
 };
 
 #endif // CWMSGUIOBJECTEDITORSELECTOR_H

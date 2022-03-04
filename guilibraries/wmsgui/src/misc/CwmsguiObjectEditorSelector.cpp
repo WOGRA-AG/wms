@@ -21,9 +21,7 @@
 #include "CdmObject.h"
 #include "CdmObjectContainer.h"
 #include "CdmClass.h"
-
-// WMSQML Includes
-#include "CwqQmlObjectViewer.h"
+#include "CwmsFormUserDefinedExecutor.h"
 
 // WMS BASETOOLS Includes
 #include "CwmsFormUserDefined.h"
@@ -322,9 +320,9 @@ bool CwmsguiObjectEditorSelector::DisplayContainerEditor(CdmObjectContainer* p_p
                bRet = pDescriptor->DisplayEditor(p_pContainer, p_eDisplayMode, p_pqwParent);
             }
          }
-         else if (ExistQmlForThisPlattform(pCdmClass))
+         else if (ExistUserdefinedForm(pCdmClass))
          {
-
+            bRet = DisplayUserdefinedForm(p_pContainer, p_pqwParent);
          }
          else
          {
@@ -383,10 +381,9 @@ bool CwmsguiObjectEditorSelector::DisplayObjectEditor(CdmObject* p_pCdmObject,
                bRet = pDescriptor->DisplayEditor(p_pCdmObject, p_eDisplayMode, p_pqwParent);
             }
          }
-         // QML
-         else if (ExistQmlForThisPlattform(p_pCdmObject->GetClass()))
+         else if (ExistUserdefinedForm(p_pCdmObject->GetClass()))
          {
-               bRet = DisplayQmlForm(p_pCdmObject, p_eDisplayMode, p_pqwParent);
+               bRet = DisplayUserdefinedForm(p_pCdmObject, p_pqwParent);
          }
          // Configured UI
          else if (HasConfiguredObjectEditor(p_pCdmObject))
@@ -581,123 +578,44 @@ bool CwmsguiObjectEditorSelector::DisplayDefaultObjectEditor(CdmObject* p_pCdmOb
    return bRet;
 }
 
-QString CwmsguiObjectEditorSelector::GenerateQmlQuery(const CdmClass* p_pClass)
-{
-    QString qstrUri = p_pClass->GetUri();
-    CwmsbtPlattformInformation cPlattformInfo;
-    QString qstrWql = QString("select from \"TechnicalFormUserDefined\" where and(Class_Uri = \"%1\", Context = %2, Default = 1, ")
-    .arg(qstrUri)
-    .arg(0);
-
-    if (cPlattformInfo.isDesktop())
-    {
-        qstrWql += "Desktop_Form = 1)";
-    }
-    else if (cPlattformInfo.isMobile())
-    {
-        qstrWql += "Mobile_Form = 1)";
-    }
-    else if (cPlattformInfo.isTablet())
-    {
-        qstrWql += "Tablet_Form = 1)";
-    }
-
-    return qstrWql;
-}
-
-bool CwmsguiObjectEditorSelector::ShowQmlForm(CdmObject* p_pCdmObject,qint64 p_lObjectId, QWidget* p_pqParent)
+bool CwmsguiObjectEditorSelector::DisplayUserdefinedForm(CdmObject* p_pCdmObject, QWidget* p_pqwParent)
 {
     bool bRet = false;
-    CwmsFormManager cFormManager;
-    CdmObjectContainer* pContainer = cFormManager.GetFormUserDefinedContainer();
-
-    if (CHKPTR(pContainer))
-    {
-        CdmObject* pObject = pContainer->FindObjectById(p_lObjectId);
-
-        if (CHKPTR(pObject))
-        {
-            CwmsFormUserDefined cForm(pObject);
-            CwqQmlObjectViewer*  pViewer = new CwqQmlObjectViewer(p_pqParent);
-
-            QQuickWindow* pWindow = pViewer->CreateView(p_pCdmObject,
-                                                       cForm.GetName(),
-                                                       cForm.GetUICode());
-
-            if (pWindow)
-            {
-                if (cForm.GetFormType() == 1) // Widget
-                {
-                   QWidget::createWindowContainer(pWindow, p_pqParent);
-                   pViewer->ShowNoneModal();
-                }
-                else
-                {
-                  pViewer->ShowModal();
-                }
-                
-                bRet = true;
-            }
-            else
-            {
-                ERR("Could not create UI Form.");
-            }
-        }
-    }
-
-    return bRet;
-}
-
-bool CwmsguiObjectEditorSelector::DisplayQmlForm(CdmObject* p_pCdmObject, EwmsGuiDisplayMode p_eDisplayMode, QWidget* p_pqwParent)
-{
-    bool bRet = false;
-    Q_UNUSED(p_eDisplayMode);
 
     if (CHKPTR(p_pCdmObject))
     {
-       QString qstrWql = GenerateQmlQuery(p_pCdmObject->GetClass());
-       QScopedPointer<CdmQuery> pQuery(CdmQueryBuilder::ExecuteQuery(qstrWql));
-
-       if (pQuery)
-       {
-           const QList<qint64>& qllResults = pQuery->GetResultList();
-
-           if (qllResults.count() > 0)
-           {
-               if (qllResults.count() > 1)
-               {
-                   WARNING("More than one default dialog found. take first one.");
-               }
-
-              qint64 lObjectId = (*qllResults.begin());
-               bRet = ShowQmlForm(p_pCdmObject, lObjectId, p_pqwParent);
-           }
-       }
+        CwmsFormManager cFormManager;
+        CdmObject* pFormObj = cFormManager.GetUserDefinedUi(p_pCdmObject);
+        CwmsFormUserDefined cForm(pFormObj);
+        CwmsFormUserDefinedExecutor cExecutor;
+        cExecutor.ExecuteUserDefinedFormObject(cForm, p_pCdmObject, p_pqwParent);
+        bRet = true;
     }
 
     return bRet;
 }
 
-bool CwmsguiObjectEditorSelector::ExistQmlForThisPlattform(const CdmClass* p_pClass)
+bool CwmsguiObjectEditorSelector::DisplayUserdefinedForm(CdmObjectContainer* p_pContainer, QWidget* p_pqwParent)
 {
-   bool bRet = false;
+    bool bRet = false;
 
-   if (CHKPTR(p_pClass))
-   {
-      QString qstrWql = GenerateQmlQuery(p_pClass);
-      CdmQuery* pQuery = CdmQueryBuilder::ExecuteQuery(qstrWql);
+    if (CHKPTR(p_pContainer))
+    {
+        CwmsFormManager cFormManager;
+        CdmObject* pFormObj = cFormManager.GetUserDefinedUi(p_pContainer);
+        CwmsFormUserDefined cForm(pFormObj);
+        CwmsFormUserDefinedExecutor cExecutor;
+        cExecutor.ExecuteUserDefinedFormContainer(cForm, p_pContainer, p_pqwParent);
+        bRet = true;
+    }
 
-      if (CHKPTR(pQuery))
-      {
-          const QList<qint64>& qllResults = pQuery->GetResultList();
+    return bRet;
+}
 
-          if (qllResults.count() > 0)
-          {
-            bRet = true;
-          }
-      }
-   }
+bool CwmsguiObjectEditorSelector::ExistUserdefinedForm(const CdmClass* p_pClass)
+{
+   CwmsFormManager cFormManager;
 
-   return bRet;
+   return (cFormManager.GetUserDefinedUi(p_pClass) != nullptr);
 }
 

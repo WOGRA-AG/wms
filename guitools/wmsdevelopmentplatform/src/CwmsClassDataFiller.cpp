@@ -24,7 +24,6 @@
 
 void CwmsClassDataFiller::FillClasses(CdmClassManager* p_pClassManager,
                                       QTreeWidgetItem* p_pParent,
-                                      bool p_bAddObjectContainers,
                                       bool p_bShowTechnicalItems)
 {
    QList<CdmClass*> qvlClasses;
@@ -54,7 +53,7 @@ void CwmsClassDataFiller::FillClasses(CdmClassManager* p_pClassManager,
          {
             if (p_bShowTechnicalItems || !IsTechnicalClass(pCdmClass))
             {
-               FillClass(pCdmClass, p_pParent, p_bAddObjectContainers);
+               FillClass(pCdmClass, p_pParent);
             }
          }
       }
@@ -81,7 +80,7 @@ void CwmsClassDataFiller::FillPackage(CdmPackage* p_pPackage, QTreeWidgetItem* p
 
         for (int iClassPos = 0; iClassPos < qlClasses.count(); ++iClassPos)
         {
-            FillClass(qlClasses[iClassPos], pPackage, false);
+            FillClass(qlClasses[iClassPos], pPackage);
         }
 
         QList<CdmPackage*> qlChildren;
@@ -97,8 +96,7 @@ void CwmsClassDataFiller::FillPackage(CdmPackage* p_pPackage, QTreeWidgetItem* p
 }
 
 void CwmsClassDataFiller::FillClass(CdmClass* p_pCdmClass,
-                                    QTreeWidgetItem* p_pqtwClass,
-                                    bool p_bAddObjectContainers)
+                                    QTreeWidgetItem* p_pqtwClass)
 {
    if (CHKPTR(p_pCdmClass))
    {
@@ -108,11 +106,6 @@ void CwmsClassDataFiller::FillClass(CdmClass* p_pCdmClass,
       pqlviItem->setText(1, p_pCdmClass->GetCaption());
       pqlviItem->setData(0, Qt::UserRole, p_pCdmClass->GetId());
       pqlviItem->setData(1, Qt::UserRole, eWmsTreeItemTypeClass);
-
-      if (!p_pCdmClass->IsAbstract() && p_bAddObjectContainers)
-      {
-         CwmsObjectContainerDataFiller::FillObjectContainersToClass(p_pCdmClass, pqlviItem);
-      }
       
       FillMembersAndGroups(p_pCdmClass, pqlviItem);
       FillFunctions(p_pCdmClass, pqlviItem);
@@ -120,13 +113,6 @@ void CwmsClassDataFiller::FillClass(CdmClass* p_pCdmClass,
    }
 }
 
-/** +-=---------------------------------------------------------Mi 18. Sep 19:04:54 2013----------*
- * @method  CwmsClassDataFiller::FillMembersAndGroups        // private, static                   *
- * @return  void                                             //                                   *
- * @param   CdmClass* p_pCdmClass                            //                                   *
- * @param   QTreeWidgetItem* p_pqtwClass                     //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mi 18. Sep 19:04:54 2013----------*/
 void CwmsClassDataFiller::FillMembersAndGroups(CdmClass* p_pCdmClass, QTreeWidgetItem* p_pqtwClass)
 {
    if (CHKPTR(p_pqtwClass) && CHKPTR(p_pCdmClass))
@@ -190,13 +176,6 @@ void CwmsClassDataFiller::FillMembersAndGroups(CdmClass* p_pCdmClass, QTreeWidge
    }
 }
 
-/** +-=---------------------------------------------------------Mi 18. Sep 19:04:29 2013----------*
- * @method  CwmsClassDataFiller::FillFunctions               // private, static                   *
- * @return  void                                             //                                   *
- * @param   CdmClass* p_pCdmClass                            //                                   *
- * @param   QTreeWidgetItem* p_pqtwClass                     //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mi 18. Sep 19:04:29 2013----------*/
 void CwmsClassDataFiller::FillFunctions(CdmClass* p_pCdmClass, QTreeWidgetItem* p_pqtwClass)
 {
    BODY_TRY
@@ -226,15 +205,6 @@ void CwmsClassDataFiller::FillFunctions(CdmClass* p_pCdmClass, QTreeWidgetItem* 
    BODY_CATCH
 }
 
-/** +-=---------------------------------------------------------Fr 20. Sep 15:42:52 2013----------*
- * @method  CwmsClassDataFiller::FillClassesToComboBox       // public, static                    *
- * @return  void                                             //                                   *
- * @param   QComboBox* p_pComboBox                           //                                   *
- * @param   bool p_bAddAbstractClasses                       //                                   *
- * @param   bool p_bFilterMode                               //                                   *
- * @param   bool p_bShowTechnicalClasses                     //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Fr 20. Sep 15:42:52 2013----------*/
 void CwmsClassDataFiller::FillClassesToComboBox(QComboBox* p_pComboBox,
                                                 bool p_bAddAbstractClasses,
                                                 bool p_bFilterMode,
@@ -295,12 +265,6 @@ void CwmsClassDataFiller::FillClassesToComboBox(QComboBox* p_pComboBox,
    BODY_CATCH
 }
 
-/** +-=---------------------------------------------------------Do 19. Sep 08:16:59 2013----------*
- * @method  CwmsClassDataFiller::IsTechnicalClass            // public, static                    *
- * @return  bool                                             //                                   *
- * @param   CdmClass* p_pClass                               //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Do 19. Sep 08:16:59 2013----------*/
 bool CwmsClassDataFiller::IsTechnicalClass(CdmClass* p_pClass)
 {
     bool bRet = false;

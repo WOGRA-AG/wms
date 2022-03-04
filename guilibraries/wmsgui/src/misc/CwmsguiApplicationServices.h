@@ -13,6 +13,7 @@ class WMSGUI_API CwmsguiApplicationServices
 
 public:
     static void InstallUiEditors();
+    static void InstallFunctionsAndPlugins();
 };
 
 #endif // CWMSGUIAPPLICATIONSERVICES_H

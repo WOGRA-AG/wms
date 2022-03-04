@@ -21,7 +21,7 @@
 #include "CwmsScriptableMailer.h"
 #include "CwmsScriptableMessage.h"
 #include "CwmsScriptablePrinter.h"
-#include "CwmsScriptableUi.h"
+//#include "CwmsScriptableUi.h"
 #include "CwmsScriptableWorkflow.h"
 #include "CwmsScriptablePlugin.h"
 #include "CwmsScriptableStatic.h"
@@ -68,11 +68,6 @@ void CwmsApplicationServices::InstallFunctionsAndPlugins()
             if (!pAddOnManager->ContainsFunctionality("wql"))
             {
                 pAddOnManager->InstallAdditionalFunctionality("wql", new CwmsScriptableWql());
-            }
-
-            if (!pAddOnManager->ContainsFunctionality("ui"))
-            {
-                pAddOnManager->InstallAdditionalFunctionality("ui", new CwmsScriptableUi());
             }
 
             if (!pAddOnManager->ContainsFunctionality("workflow"))

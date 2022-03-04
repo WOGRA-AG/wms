@@ -35,9 +35,6 @@
 
 #include "CumUser.h"
 
-// WMSQML Includes
-#include "CwqObjectEditorController.h"
-
 // own Includes
 #include "CwmsExportFileWriter.h"
 #include "CwmsImExportManager.h"
@@ -1523,20 +1520,7 @@ void CwmsObjectListEditorWidgetIf::SaveAsCsvClickedSlot()
 
 void CwmsObjectListEditorWidgetIf::QMLGeneratorClickedSlot()
 {
-    auto pModel = dynamic_cast<CdmQueryModel*>(m_pModel);
-
-    if (pModel != nullptr)
-    {
-    CdmObject* pCdmObject = pModel->GetObject(m_pCwmsObjectListListView->currentIndex());
-    m_rpCdmObjectSelected = pCdmObject;
-
-    if (pCdmObject)
-    {
-        CwqObjectEditorController editorController(pCdmObject, this);
-        //        editorController.OpenObjectEditor();
-
-    }
-    }
+    NOTIMPLEMENTED;
 }
 
 void CwmsObjectListEditorWidgetIf::MetaDataClickedSlot()

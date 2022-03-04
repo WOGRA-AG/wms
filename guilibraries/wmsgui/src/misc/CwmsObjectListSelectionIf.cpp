@@ -100,7 +100,7 @@ CdmObjectContainer* CwmsContainerSelectionIf::GetSelectedObjectContainer()
 
          if(pqlviItem)
          {
-            pContainer = pContainerManager->FindContainerById(pqlviItem->text(0).toLong());
+            pContainer = pContainerManager->FindEmptyContainerById(pqlviItem->text(0).toLong());
          }
       }
    }
@@ -131,10 +131,16 @@ CdmObjectContainer* CwmsContainerSelectionIf::GetObjectContainer(qint64 p_lDbId,
    else
    {
       MSG_INFO(("Kein Container vorhanden"),
-                                     ("Es ist kein Container vom erwarteten Typ vorhanden.\n"
-                                        "Auswahl kann nicht durchgeführt werden."));
+               ("Es ist kein Container vom erwarteten Typ vorhanden.\n"
+                "Auswahl kann nicht durchgeführt werden."));
    }
 
    delete pCdmSelection;
    return pContainer;
+}
+
+CdmObjectContainer* CwmsContainerSelectionIf::GetObjectContainer(CdmClass* p_pClass,
+                                                                 QWidget* p_pqwParent)
+{
+   return GetObjectContainer(p_pClass->GetSchemeId(), p_pClass->GetId(), p_pqwParent);
 }

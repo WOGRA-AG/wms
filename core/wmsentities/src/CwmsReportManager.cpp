@@ -670,6 +670,23 @@ IwmsPrinting* CwmsReportManager::GetPrintingObject()
     return pPrinting;
 }
 
+bool CwmsReportManager::HasPrintingPlugin()
+{
+    CwmsContext* pContext = CwmsContext::GetContext();
+
+    if (CHKPTR(pContext))
+    {
+        CwmsPluginManager* pPluginManager = pContext->GetPluginManager();
+
+        if (CHKPTR(pPluginManager) && pPluginManager->HasPrintingPlugin())
+        {
+            return true;
+        }
+    }
+
+    return false;
+}
+
 
 void CwmsReportManager::OpenReportEditor(qint64 p_lObjectId, QWidget* p_pParent)
 {

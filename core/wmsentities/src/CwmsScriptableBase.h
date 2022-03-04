@@ -4,9 +4,11 @@
 #include <QObject>
 #include <QScriptable>
 
+#include "basetools.h"
+
 class CsaFactory;
 
-class CwmsScriptableBase : public QObject, protected QScriptable
+class BASETOOLS_API CwmsScriptableBase : public QObject, protected QScriptable
 {
     Q_OBJECT
 

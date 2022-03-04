@@ -9,6 +9,7 @@
 
 // Forwards
 class QScriptEngine;
+class QScriptEngineDebugger;
 class CsaFactory;
 
 class CdmExecutorEngineScript : public IdmExecutorEngine

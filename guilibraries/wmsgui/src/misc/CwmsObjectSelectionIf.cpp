@@ -11,6 +11,9 @@
 #include "CdmLogging.h"
 #include "CwmsSearchWindowDlg.h"
 #include "CwmsObjectSelectionIf.h"
+#include "CwmsObjectListSelectionIf.h"
+
+#include <CdmSessionManager.h>
 
 
 
@@ -215,6 +218,58 @@ CdmObject* CwmsObjectSelectionIf::GetObject(QString p_qstrWql, QWidget* p_pqwPar
 
     return pCdmObject;
 }
+
+CdmObject *CwmsObjectSelectionIf::GetObject(CdmClass *p_pClass, QWidget *p_pqwParent)
+{
+    CdmObjectContainer* pContainer = GetContainer(p_pClass, p_pqwParent);
+
+    if (pContainer)
+    {
+        QString qstrCaptionMember;
+
+        if (CHKPTR(p_pClass))
+        {
+            qstrCaptionMember = p_pClass->GetCaptionMemberKeyname();
+        }
+
+        QString qstrWql = QString("select %1 from %2").arg(qstrCaptionMember).arg(pContainer->GetKeyname());
+
+        return CwmsObjectSelectionIf::GetObject(qstrWql, p_pqwParent);
+    }
+
+    return nullptr;
+}
+
+CdmObject *CwmsObjectSelectionIf::GetObject(CdmObjectContainer* p_pContainer, QWidget *p_pqwParent)
+{
+    if (p_pContainer)
+    {
+        auto pClass = p_pContainer->GetClass();
+        QString qstrCaptionMember;
+
+        if (CHKPTR(pClass))
+        {
+            qstrCaptionMember = pClass->GetCaptionMemberKeyname();
+        }
+
+        QString qstrWql = QString("select %1 from %2").arg(qstrCaptionMember).arg(p_pContainer->GetKeyname());
+
+        return CwmsObjectSelectionIf::GetObject(qstrWql, p_pqwParent);
+    }
+
+    return nullptr;
+}
+
+CdmObjectContainer* CwmsObjectSelectionIf::GetContainer(CdmClass *p_pClass, QWidget *p_pqwParent)
+{
+    if (CHKPTR(p_pClass))
+    {
+        return CwmsContainerSelectionIf::GetObjectContainer(p_pClass, p_pqwParent);
+    }
+
+    return nullptr;
+}
+
 
 QList<CdmObject*> CwmsObjectSelectionIf::GetListofObjects(CdmObjectContainer* p_pContainer,
                                                           CdmQueryModel* p_pCwmsProxy,

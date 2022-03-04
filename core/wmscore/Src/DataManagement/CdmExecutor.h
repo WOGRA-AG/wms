@@ -1,17 +1,4 @@
-﻿/******************************************************************************
- ** WOGRA technologies Gmbh & Co KG Modul Information
- ** Modulename: CdmExecutor.h
- ** Started Implementation: 2012/09/19
- ** Description:
- ** 
- ** Implements the executor for functions and validations in Objects
- **
- ** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
- ** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. 
- **(C) copyright by WOGRA technologies GmbH & Co KG All rights reserved
- *****************************************************************************/ 
-
-#ifndef CDMEXECUTOR_H
+﻿#ifndef CDMEXECUTOR_H
 #define CDMEXECUTOR_H
 
 #ifdef WURZELBLA
@@ -76,8 +63,6 @@ class WMSMANAGER_API CdmExecutor : public QObject
       CdmExecutorRuntimeManager* m_pRuntimeManager;
       QList<qint64> m_qlCommitRunningContainers;
       
-      
-      
    public:
       CdmExecutorAddOnManager* GetAddOnManager() const { return m_rpAddOnManager; }
       CdmExecutorValidator* GetValidator() const { return m_pValidator; }
@@ -88,22 +73,10 @@ class WMSMANAGER_API CdmExecutor : public QObject
 
 
    protected:
-   /** +-=---------------------------------------------------------Mi 19. Sep 14:17:10 2012-------*
-    * @method  CdmExecutor::CdmExecutor                      // public                            *
-    * @return                                                //                                   *
-    * @comment                                                                                    *
-    *----------------last changed: -----------------------------Mi 19. Sep 14:17:10 2012----------*/
     CdmExecutor( );
 
    public:
-   /** +-=---------------------------------------------------------Mi 19. Sep 14:18:59 2012-------*
-    * @method  CdmExecutor::~CdmExecutor                     // public, virtual                   *
-    * @return  void                                          //                                   *
-    * @comment The Destructor of Class CdmExecutor                                                *
-    *----------------last changed: -----------------------------Mi 19. Sep 14:18:59 2012----------*/
     virtual ~CdmExecutor( );
-
-   public:
     virtual QVariant EvaluateFormula(const CdmObject* p_pCdmObject, QString p_qstrFormula);
     virtual QVariant ExecuteFunction(CdmClassMethod* p_pMethod, CdmObject* pObject, QVariantList& p_qlParams);
     void CreateEngines();

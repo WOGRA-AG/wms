@@ -109,9 +109,6 @@
       <addaction name="m_pqaNewObjectObjectListForm"/>
       <addaction name="m_pqaNewUserDefinedForm"/>
       <addaction name="m_pqaNewFormSearch"/>
-      <addaction name="m_pqaInteractiveComponent"/>
-      <addaction name="m_pqaNewFormLibrary"/>
-      <addaction name="m_pqaNewResource"/>
      </widget>
      <addaction name="m_pqaCreateDatabase"/>
      <addaction name="m_pqaNewPackage"/>

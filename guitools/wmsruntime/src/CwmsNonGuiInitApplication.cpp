@@ -17,10 +17,6 @@
 #include "CwmsFormUserDefined.h"
 #include "CwmsContext.h"
 
-// WMS QML Includes
-#include "CwmsQmlApplicationController.h"
-
-
 // Own Includes
 #include "CwmsGuiLoginIf.h"
 #include "CwmsGuiDatabaseSelection.h"

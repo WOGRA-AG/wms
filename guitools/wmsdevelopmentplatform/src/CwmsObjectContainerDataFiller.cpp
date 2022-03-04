@@ -3,7 +3,7 @@
  ** Modulename: CwmsObjectContainerDataFiller.h
  ** Started Implementation: 2013/09/18
  ** Description:
- ** 
+ **
  ** implements static helpers for filling objectcontainers in ui.
  **
  ** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
@@ -29,84 +29,72 @@
 
 #define MAX_CONTAINERS 500
 
-/** +-=---------------------------------------------------------Mo 23. Sep 08:40:16 2013----------*
- * @method  CwmsObjectContainerDataFiller::FillAllObjectContainersToView // public, static        *
- * @return  void                                             //                                   *
- * @param   QTreeWidget* p_pTree                             //                                   *
- * @param   bool p_bShowTechnicalClasses                     //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mo 23. Sep 08:40:16 2013----------*/
 void CwmsObjectContainerDataFiller::FillAllObjectContainersToView(QTreeWidget* p_pTree,
-                                                                  bool p_bShowTechnicalClasses)
+                                                                  bool p_bShowTechnicalClasses,
+                                                                  int p_iLimit)
 {
     BODY_TRY
-    CdmDataProvider* pCdmManager = CdmSessionManager::GetDataProvider();
+            CdmDataProvider* pCdmManager = CdmSessionManager::GetDataProvider();
 
     if (CHKPTR(pCdmManager))
     {
         CdmContainerManager* pContainerManager = pCdmManager->GetContainerManager();
         CdmClassManager* pClassManager = pCdmManager->GetClassManager();
 
-      if (CHKPTR(p_pTree)           &&
-          CHKPTR(pContainerManager) &&
-          CHKPTR(pClassManager))
-      {
-          p_pTree->clear();
-          QList<CdmClass*> qlClasses;
-          pClassManager->GetClassList(qlClasses);
+        if (CHKPTR(p_pTree)           &&
+                CHKPTR(pContainerManager) &&
+                CHKPTR(pClassManager))
+        {
+            p_pTree->clear();
+            QList<CdmClass*> qlClasses;
+            pClassManager->GetClassList(qlClasses);
 
-          QList<CdmClass*>::const_iterator qIt    = qlClasses.begin();
-          QList<CdmClass*>::const_iterator qItEnd = qlClasses.end();
+            QList<CdmClass*>::const_iterator qIt    = qlClasses.begin();
+            QList<CdmClass*>::const_iterator qItEnd = qlClasses.end();
 
-          for ( ; qIt != qItEnd; ++qIt)
-          {
-              CdmClass* pClass = *qIt;
+            for ( ; qIt != qItEnd; ++qIt)
+            {
+                CdmClass* pClass = *qIt;
 
-              if (CHKPTR(pClass) &&
-                  (p_bShowTechnicalClasses || !CwmsClassDataFiller::IsTechnicalClass(pClass)) &&
-                  !pClass->IsAbstract())
-              {
-                  QTreeWidgetItem* pqtwClassItem = new QTreeWidgetItem(p_pTree);
-                  pqtwClassItem->setText(0, pClass->GetFullQualifiedName());
+                if (CHKPTR(pClass) &&
+                        (p_bShowTechnicalClasses || !CwmsClassDataFiller::IsTechnicalClass(pClass)) &&
+                        !pClass->IsAbstract())
+                {
+                    QTreeWidgetItem* pqtwClassItem = new QTreeWidgetItem(p_pTree);
+                    pqtwClassItem->setText(0, pClass->GetFullQualifiedName());
 
-                  if (!pClass->IsSingleton())
-                  {
-                      pqtwClassItem->setText(0, pClass->GetFullQualifiedName());
-                      FillObjectContainersToClass(pClass, pqtwClassItem);
+                    if (!pClass->IsSingleton())
+                    {
+                        pqtwClassItem->setText(0, pClass->GetFullQualifiedName());
+                        FillObjectContainersToClass(pClass, pqtwClassItem, p_iLimit);
 
-                      if (pqtwClassItem->childCount() <= 10)
-                      {
-                          pqtwClassItem->setExpanded(true);
-                      }
-                  }
-                  else
-                  {
-                      pqtwClassItem->setText(0, pClass->GetFullQualifiedName() + " (Singleton)");
-                      pqtwClassItem->setData(0, Qt::UserRole, pClass->GetFullQualifiedName());
-                      pqtwClassItem->setData(1, Qt::UserRole, eWmsTreeItemTypeSingletonClass);
-                  }
-              }
-          }
+                        if (pqtwClassItem->childCount() <= 10)
+                        {
+                            pqtwClassItem->setExpanded(true);
+                        }
+                    }
+                    else
+                    {
+                        pqtwClassItem->setText(0, pClass->GetFullQualifiedName() + " (Singleton)");
+                        pqtwClassItem->setData(0, Qt::UserRole, pClass->GetFullQualifiedName());
+                        pqtwClassItem->setData(1, Qt::UserRole, eWmsTreeItemTypeSingletonClass);
+                    }
+                }
+            }
 
-          CwmsTreeWidgetHelper::ResizeColumnsToContent(p_pTree);
+            CwmsTreeWidgetHelper::ResizeColumnsToContent(p_pTree);
 
-      }
+        }
     }
     BODY_CATCH
 }
 
-/** +-=---------------------------------------------------------Mi 18. Sep 14:25:24 2013----------*
- * @method  CwmsObjectContainerDataFiller::FillObjectContainersToClass // public, static          *
- * @return  void                                             //                                   *
- * @param   CdmClass* p_pClass                               //                                   *
- * @param   QTreeWidgetItem* p_pItem                         //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mi 18. Sep 14:25:24 2013----------*/
 void CwmsObjectContainerDataFiller::FillObjectContainersToClass(CdmClass* p_pClass,
-                                                                QTreeWidgetItem* p_pItem)
+                                                                QTreeWidgetItem* p_pItem,
+                                                                int p_iLimit)
 {
     BODY_TRY
-    CdmDataProvider* pCdmManager = CdmSessionManager::GetDataProvider();
+            CdmDataProvider* pCdmManager = CdmSessionManager::GetDataProvider();
 
     if (CHKPTR(pCdmManager) && CHKPTR(p_pClass) && CHKPTR(p_pItem))
     {
@@ -122,9 +110,20 @@ void CwmsObjectContainerDataFiller::FillObjectContainersToClass(CdmClass* p_pCla
 
             QMap<qint64, QString>::iterator qmIt    = qmObjectLists.begin();
             QMap<qint64, QString>::iterator qmItEnd = qmObjectLists.end();
+            int iCounter = 0;
 
             for ( ; qmIt != qmItEnd; ++qmIt)
             {
+                if (iCounter > p_iLimit && p_iLimit > 0)
+                {
+                    break;
+                }
+                else
+                {
+                    ++iCounter;
+                }
+
+
                 QString qstrKeyname = *qmIt;
                 QTreeWidgetItem* pqlviOL = new QTreeWidgetItem(p_pItem);
                 pqlviOL->setText(0, qmIt.value());
@@ -138,18 +137,11 @@ void CwmsObjectContainerDataFiller::FillObjectContainersToClass(CdmClass* p_pCla
     BODY_CATCH
 }
 
-/** +-=---------------------------------------------------------Mi 18. Sep 15:07:56 2013----------*
- * @method  CwmsObjectContainerDataFiller::FillObjectContainersToClass // public, static          *
- * @return  void                                             //                                   *
- * @param   CdmClass* p_pClass                               //                                   *
- * @param   QTreeWidget* p_pTreeWidget                       //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mi 18. Sep 15:07:56 2013----------*/
 void CwmsObjectContainerDataFiller::FillObjectContainersToClass(CdmClass* p_pClass,
                                                                 QTreeWidget* p_pTreeWidget)
 {
     BODY_TRY
-    CdmDataProvider* pCdmManager = CdmSessionManager::GetDataProvider();
+            CdmDataProvider* pCdmManager = CdmSessionManager::GetDataProvider();
 
     if (CHKPTR(pCdmManager) && CHKPTR(p_pClass) && CHKPTR(p_pTreeWidget))
     {

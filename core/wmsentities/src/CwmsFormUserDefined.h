@@ -37,39 +37,26 @@ class BASETOOLS_API CwmsFormUserDefined : public CwmsFormBase
 
    public:
       CwmsFormUserDefined();
-   public:
       CwmsFormUserDefined(CdmObject* p_pCdmObject);
-   public:
       virtual ~CwmsFormUserDefined();
-   public:
       QString GetUICode();
-   public:
       void SetUICode(QString p_qstrValue);
-   public:
+      QString GetXml();
+      void SetXml(QString p_qstrValue);
       bool GetWebForm();
-   public:
       void SetWebForm(bool p_bValue);
-   public:
+      bool IsModal();
+      void SetModal(bool p_bValue);
       bool GetDesktopForm();
-   public:
       void SetDesktopForm(bool p_bValue);
-   public:
       bool GetMobileForm();
-   public:
       void SetMobileForm(bool p_bValue);
-   public:
       bool GetTabletForm();
-   public:
       void SetTabletForm(bool p_bValue);
-   public:
       static CwmsFormUserDefined Create(CdmObjectContainer* p_pContainer);
-   public:
       static bool Delete(CwmsFormUserDefined cCwmsFormUserDefined);
-   public:
       EwmsFormContext GetContext();
-   public:
       void SetContext(EwmsFormContext p_iValue);
-    public:
        EwmsFormType GetFormType();
     public:
        void SetFormType(EwmsFormType p_iValue);

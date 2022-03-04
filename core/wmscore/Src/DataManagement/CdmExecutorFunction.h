@@ -1,17 +1,4 @@
-﻿/******************************************************************************
- ** WOGRA technologies Gmbh & Co KG Modul Information
- ** Modulename: CdmExecutorFunction.h
- ** Started Implementation: 2013/11/15
- ** Description:
- ** 
- ** Implements the executor for formulas in Objects
- **
- ** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
- ** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. 
- **(C) copyright by WOGRA technologies GmbH & Co KG All rights reserved
- *****************************************************************************/ 
-
-#ifndef CDMEXECUTORFUNCTION_H
+﻿#ifndef CDMEXECUTORFUNCTION_H
 #define CDMEXECUTORFUNCTION_H
 
 #ifdef WURZELBLA
@@ -59,160 +46,50 @@ class CdmClassManager;
 class WMSMANAGER_API CdmExecutorFunction : public CdmExecutorBase
 {
 
-   private:
+private:
     bool m_bAllowAskForParameters;
     CdmExecutor* m_rpExecutor;
     bool m_bIsInitEvent;
 
-   public:
-   /** +-=---------------------------------------------------------Mi 19. Sep 14:17:10 2012-------*
-    * @method  CdmExecutorFunction::CdmExecutorFunction                      // public                            *
-    * @return                                                //                                   *
-    * @comment                                                                                    *
-    *----------------last changed: -----------------------------Mi 19. Sep 14:17:10 2012----------*/
+public:
     CdmExecutorFunction(CdmExecutor* p_pExecutor);
-
-   public:
-   /** +-=---------------------------------------------------------Mi 19. Sep 14:18:59 2012-------*
-    * @method  CdmExecutorFunction::~CdmExecutorFunction                     // public, virtual                   *
-    * @return  void                                          //                                   *
-    * @comment The Destructor of Class CdmExecutorFunction                                                *
-    *----------------last changed: -----------------------------Mi 19. Sep 14:18:59 2012----------*/
     virtual ~CdmExecutorFunction( );
-
-
-    public slots:
-   /** +-=---------------------------------------------------------So 25. Nov 12:22:10 2012-------*
-    * @method  CdmExecutorFunction::ExecuteObject                    // public, slots                     *
-    * @return  QVariant                                      //                                   *
-    * @param   QString p_qstrFunction                        //                                   *
-    * @param   CdmObject* p_pCdmObject                       //                                   *
-    * @param   QVariantList p_qlParameters                //                                   *
-    * @comment                                                                                    *
-    *----------------last changed: -----------------------------So 25. Nov 12:22:10 2012----------*/
-QVariant ExecuteObject( QString p_qstrFunction,
-                        CdmObject* p_pCdmObject,
-                        QVariantList p_qlParameters);
-
-
-
-
-    public slots:
-         /** +-=---------------------------------------------------------Di 13. Nov 15:39:16 2012-------*
-    * @method  CdmExecutorFunction::Execute                          // public, slots                     *
-    * @return  QVariant                                      //                                   *
-    * @param   CdmClassMethod* p_pMethod                     //                                   *
-    * @param   CdmModelElement* p_pCdmBase                           // Object / ObjectList               *
-    * @param   QVariantList p_qlParams                     //                                   *
-    * @comment                                                                                    *
-    *----------------last changed: -----------------------------Di 13. Nov 15:39:16 2012----------*/
-QVariant Execute( CdmClassMethod* p_pMethod, CdmModelElement* p_pCdmBase, QVariantList p_qlParams);
-QVariant Execute(CdmClassMethod* p_pMethod, CdmModelElement* p_pCdmBase);
-
-
-   
-    public slots:
-         /** +-=---------------------------------------------------------So 25. Nov 12:23:19 2012-------*
-    * @method  CdmExecutorFunction::ExecuteStatic                    // public, slots                     *
-    * @return  QVariant                                      //                                   *
-    * @param   CdmClassMethod* p_pMethod                     //                                   *
-    * @param   QVariantList p_qlParameters                //                                   *
-    * @comment                                                                                    *
-    *----------------last changed: -----------------------------So 25. Nov 12:23:19 2012----------*/
-QVariant ExecuteStatic( CdmClassMethod* p_pMethod, QVariantList p_qlParameters);
-
-
-   private:
-   /** +-=---------------------------------------------------------Di 13. Nov 15:16:36 2012-------*
-    * @method  CdmExecutorFunction::AddMethodDataToEngine            // private                           *
-    * @return  void                                          //                                   *
-    * @param   QScriptEngine& p_rqEngine                     //                                   *
-    * @param   CdmClassMethod* p_pMethod                     //                                   *
-    * @comment                                                                                    *
-    *----------------last changed: -----------------------------Di 13. Nov 15:16:36 2012----------*/
-    void AddMethodDataToEngine(QScriptEngine& p_rqEngine, CdmClassMethod* p_pMethod);
-
-   public:
-   /** +-=---------------------------------------------------------Di 13. Nov 17:38:57 2012-------*
-    * @method  CdmExecutorFunction::ExecStaticMethod                 // public                    *
-    * @return  QVariant                                  //                                   *
-    * @param   QString qstrObjectRefMember                   //                                   *
-    * @param   QString qstrFunctionMemberName                //                                   *
-    * @param   CdmClass* pCdmClass                           //                                   *
-    * @param   QScriptContext* p_pContext                    //                                   *
-    * @comment                                                                                    *
-    *----------------last changed: -----------------------------Di 13. Nov 17:38:57 2012----------*/
     QVariant ExecStaticMethod(QString qstrObjectRefMember,
-                                  QString qstrFunctionMemberName,
-                                  CdmClass* pCdmClass,
-                                  QScriptContext* p_pContext);
-
-   public:
-   /** +-=---------------------------------------------------------Di 13. Nov 17:40:38 2012-------*
-    * @method  CdmExecutorFunction::ExecStaticMethod                 // public                    *
-    * @return  QVariant                                  //                                   *
-    * @param   QString qstrObjectRefMember                   //                                   *
-    * @param   QString qstrFunctionMemberName                //                                   *
-    * @param   QScriptEngine* p_pEngine                      //                                   *
-    * @param   QScriptContext* p_pContext                    //                                   *
-    * @comment                                                                                    *
-    *----------------last changed: -----------------------------Di 13. Nov 17:40:38 2012----------*/
+                              QString qstrFunctionMemberName,
+                              CdmClass* pCdmClass,
+                              QScriptContext* p_pContext);
     QVariant ExecStaticMethod(QString qstrObjectRefMember,
-                                  QString qstrFunctionMemberName,
-                                  QScriptEngine* p_pEngine,
-                                  QScriptContext* p_pContext);
-
-   public:
-   /** +-=---------------------------------------------------------Di 13. Nov 17:55:38 2012-------*
-    * @method  CdmExecutorFunction::Exec                             // public                    *
-    * @return  QVariant                                  //                                   *
-    * @param   QScriptContext* p_pContext                    //                                   *
-    * @param   QScriptEngine* p_pEngine                      //                                   *
-    * @comment                                                                                    *
-    *----------------last changed: -----------------------------Di 13. Nov 17:55:38 2012----------*/
+                              QString qstrFunctionMemberName,
+                              QScriptEngine* p_pEngine,
+                              QScriptContext* p_pContext);
     QVariant Exec(QScriptContext* p_pContext, QScriptEngine* p_pEngine);
-
-   public:
-   /** +-=---------------------------------------------------------So 25. Nov 11:56:30 2012-------*
-    * @method  CdmExecutorFunction::ExecLocalObjectMethod            // public                    *
-    * @return  QVariant                                  //                                   *
-    * @param   QString qstrFunctionMemberName                //                                   *
-    * @param   QScriptEngine* p_pEngine                      //                                   *
-    * @param   QScriptContext* p_pContext                    //                                   *
-    * @comment                                                                                    *
-    *----------------last changed: -----------------------------So 25. Nov 11:56:30 2012----------*/
     QVariant ExecLocalObjectMethod(QString qstrFunctionMemberName,
-                                       QScriptEngine* p_pEngine,
-                                       QScriptContext* p_pContext,
-                                       CdmExecutorRuntime* p_pRuntime);
-
-   public:
-   /** +-=---------------------------------------------------------Di 27. Nov 16:30:00 2012-------*
-    * @method  CdmExecutorFunction::Delete                           // public                    *
-    * @return  QVariant                                  //                                   *
-    * @param   QScriptContext* p_pContext                    //                                   *
-    * @param   QScriptEngine* p_pEngine                      //                                   *
-    * @comment                                                                                    *
-    *----------------last changed: -----------------------------Di 27. Nov 16:30:00 2012----------*/
+                                   QScriptEngine* p_pEngine,
+                                   QScriptContext* p_pContext,
+                                   CdmExecutorRuntime* p_pRuntime);
     QVariant Delete(QScriptContext* p_pContext, QScriptEngine* p_pEngine);
-
-
-   public:
-   /** +-=---------------------------------------------------------Mo 3. Dez 11:13:16 2012--------*
-    * @method  CdmExecutorFunction::ExecObjectMethod                 // public                    *
-    * @return  QVariant                                  //                                   *
-    * @param   CdmObject* p_pCdmObject                       //                                   *
-    * @param   QString qstrFunctionMemberName                //                                   *
-    * @param   QScriptEngine* p_pEngine                      //                                   *
-    * @param   QScriptContext* p_pContext                    //                                   *
-    * @comment                                                                                    *
-    *----------------last changed: -----------------------------Mo 3. Dez 11:13:16 2012-----------*/
     QVariant ExecObjectMethod(CdmObject* p_pCdmObject,
-                                         QString qstrFunctionMemberName,
-                                         QScriptEngine* p_pEngine,
-                                         QScriptContext* p_pContext);
+                              QString qstrFunctionMemberName,
+                              QScriptEngine* p_pEngine,
+                              QScriptContext* p_pContext);
+    void CallConstructor(CdmObject *p_pObject);
+    void CallDestructor(CdmObject *p_pObject);
+    QVariant ExecuteFunction(QString p_qstrFunction, CdmObject* p_pCdmObject, QVariantList p_qlParameters);
+    QVariant ExecuteFunctionStatic(CdmClassMethod* p_pMethod, QVariantList p_qlParameters);
+    QVariant ExecStaticFunction(QString qstrMethodName, CdmClassManager* pClassManager, QScriptEngine* p_pEngine, QScriptContext* p_pContext, QString qstrRefName);
+    void setAskForParametersAllowed(bool bAllowAskForParameters);
+    bool IsAskForParametersAllowed() const;
+
+public slots:
+    QVariant ExecuteObject( QString p_qstrFunction,
+                            CdmObject* p_pCdmObject,
+                            QVariantList p_qlParameters);
+    QVariant Execute( CdmClassMethod* p_pMethod, CdmModelElement* p_pCdmBase, QVariantList p_qlParams);
+    QVariant Execute(CdmClassMethod* p_pMethod, CdmModelElement* p_pCdmBase);
+    QVariant ExecuteStatic( CdmClassMethod* p_pMethod, QVariantList p_qlParameters);
 
 private:
+    void AddMethodDataToEngine(QScriptEngine& p_rqEngine, CdmClassMethod* p_pMethod);
     void CallConstructor(CdmObject *p_pObject, CdmClass *p_pClass);
     void CallDestructor(CdmObject *p_pObject, CdmClass *p_pClass);
     void CallClassConstructor(CdmObject *p_pObject, CdmClass* p_pClass);
@@ -223,14 +100,5 @@ private:
     QVariant ExecFunction(QVariant qsPrototype, QScriptEngine* p_pEngine, CdmExecutorRuntime* pRuntime, QScriptContext* p_pContext);
     QVariant ConvertToResultVariant(const QVariant &p_rQVariant);
     QString ConvertToJsDateConstructor(int pYear, int pMonth, int pDay, int pHour, int pMinute, int pSecond);
-public:
-    void CallConstructor(CdmObject *p_pObject);
-    void CallDestructor(CdmObject *p_pObject);
-    QVariant ExecuteFunction(QString p_qstrFunction, CdmObject* p_pCdmObject, QVariantList p_qlParameters);
-    QVariant ExecuteFunctionStatic(CdmClassMethod* p_pMethod, QVariantList p_qlParameters);
-    QVariant ExecStaticFunction(QString qstrMethodName, CdmClassManager* pClassManager, QScriptEngine* p_pEngine, QScriptContext* p_pContext, QString qstrRefName);
-    void setAskForParametersAllowed(bool bAllowAskForParameters);
-    bool IsAskForParametersAllowed() const;
-
 };
 #endif

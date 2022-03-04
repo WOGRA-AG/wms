@@ -1,7 +1,5 @@
-HEADERS += ../src/CwmsGuiInitApplication.h \
-           ../src/CwmsQmlInitApplication.h
+HEADERS += ../src/CwmsGuiInitApplication.h
 
 
 SOURCES += ../src/main.cpp \
-           ../src/CwmsGuiInitApplication.cpp \
-           ../src/CwmsQmlInitApplication.cpp
+           ../src/CwmsGuiInitApplication.cpp

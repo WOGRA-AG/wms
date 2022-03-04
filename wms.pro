@@ -15,7 +15,6 @@ SUBDIRS += \
     wmsftl \
     wmsneo4j \
     wmsusermanagerlib \
-    wmsqml \
     wmsgui \
     wmsrequestmanager \
     wmsservercommands \
@@ -46,7 +45,6 @@ wmsdb.file = dataaccess/wmsdb/project/wmsdb.pro
 wmsftl.file = dataaccess/wmsftl/project/wmsftl.pro
 wmsneo4j.file = dataaccess/wmsneo4j/project/wmsneo4j.pro
 wmsusermanagerlib.file = guilibraries/wmsusermanagerlib/project/wmsusermanagerlib.pro
-wmsqml.file = guilibraries/wmsqml/project/wmsqml.pro
 wmsgui.file = guilibraries/wmsgui/project/wmsgui.pro
 wmsrequestmanager.file = services/wmsrequestmanager/project/wmsrequestmanager.pro
 wmsservercommands.file = services/wmsservercommands/project/wmsservercommands.pro
@@ -78,7 +76,6 @@ wmsftl.depends = wmscommons wmscore wmsentities
 wmsneo4j.depends = wmscommons wmscore wmsentities
 wmses.depends = wmscommons wmscore wmsentities
 wmsusermanagerlib.depends = wmscommons wmscore
-wmsqml.depends = wmscommons wmscore wmsentities
 wmsrequestmanager.depends = wmscommons wmscore wmsentities
 wmsdatainterface.depends = wmscommons wmscore wmsentities
 wmswql.depends = wmscommons wmscore wmsentities
@@ -87,14 +84,14 @@ wmsexec.depends = wmscommons wmscore wmsentities
 wmsplugin.depends = wmscommons wmscore wmsentities
 wmsuser.depends = wmscommons wmscore wmsentities
 
-wmsgui.depends = wmscommons wmscore wmsentities wmsusermanagerlib wmsqml
+wmsgui.depends = wmscommons wmscore wmsentities wmsusermanagerlib
 wmsservercommands.depends = wmscommons wmscore wmsentities wmsrequestmanager
 wmssimplerestapi.depends = wmscommons wmscore wmsentities wmsrequestmanager
 wmsapplicationserver.depends = wmscommons wmscore wmsentities qtservice wmsrequestmanager
 
 wmsusermanager.depends = wmscommons wmscore wmsusermanagerlib wmsgui
-wmsdevelopmentplatform.depends = wmscommons wmscore wmsentities wmsusermanagerlib wmsqml wmsgui
-wmsruntime.depends = wmscommons wmscore wmsentities wmsqml wmsgui
+wmsdevelopmentplatform.depends = wmscommons wmscore wmsentities wmsusermanagerlib wmsgui
+wmsruntime.depends = wmscommons wmscore wmsentities wmsgui
 wmstest.depends = wmscommons wmscore wmsentities wmsrequestmanager
 wmsservercontroller.depends = wmscommons wmscore wmsentities qtservice wmsgui
 
@@ -149,10 +146,6 @@ QMAKE_EXTRA_TARGETS += wmsestarget
 wmsusermanagerlibtarget.target = wmsusermanagerlib
 wmsusermanagerlibtarget.depends = sub-guilibraries-wmsusermanagerlib-project-wmsusermanagerlib-pro
 QMAKE_EXTRA_TARGETS += wmsusermanagerlibtarget
-
-wmsqmltarget.target = wmsqml
-wmsqmltarget.depends = sub-guilibraries-wmsqml-project-wmsqml-pro
-QMAKE_EXTRA_TARGETS += wmsqmltarget
 
 wmsguitarget.target = wmsgui
 wmsguitarget.depends = sub-guilibraries-wmsgui-project-wmsgui-pro

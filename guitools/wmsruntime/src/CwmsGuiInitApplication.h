@@ -23,6 +23,8 @@ protected:
     void DbSelection();
     void ApplicationSelection();
     void Logging();
+private:
+    void SetStyleSheet();
 };
 
 #endif // CWMSGUIINITAPPLICATION_H

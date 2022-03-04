@@ -1,13 +1,3 @@
-/******************************************************************************
-** WOGRA Middleware Server Licence Creator Module
-**
-** @Author Wolfgang Graßhof 
-**
-** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
-** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. 
-**(C) copyright by WOGRA Solutions All rights reserved
-******************************************************************************/
-
 // System and QT Includes
 #include <QApplication>
 #include <qdir.h>
@@ -27,7 +17,6 @@
 
 // own Incldudes
 #include "CwmsNonGuiInitApplication.h"
-#include "CwmsQmlInitApplication.h"
 #include "CwmsGuiInitApplication.h"
 #include "CwmsMessenger.h"
 
@@ -59,31 +48,11 @@ int main(int argc, char *argv[])
     CwmsbtPlattformInformation cInfo;
     QString qstrStartApplication;
 
-#ifdef WMS_LINK_STATIC
-    Q_INIT_RESOURCE(wmsqml);
-#endif
-
     QString qstrVersion = g_qstrMajor + "." + g_qstrMinor + "." + g_qstrRelease;
     QMap<QString,QString> qmArgs = CwmsArgumentParser::parseArgs(argc, argv);
     CwmsbtPlattformInformation::SetSimulationMode(CwmsArgumentParser::getArgValue(qmArgs, SIM_MODE_ARG));
 
-    if (cInfo.isMobile() || cInfo.isTablet())
-    {
-        pApp = new QApplication(argc, argv);
-        pApp->connect(pApp, SIGNAL(lastWindowClosed()), pApp, SLOT(quit()));
-        setApplicationData(*pApp,"WMS Runtime", qstrVersion, "www.wogra.com", "WOGRA Consulting GmbH");
-        pInit = new CwmsQmlInitApplication(pApp->applicationName(),
-                                           pApp->applicationVersion());
-
-        if (!qstrStartApplication.isEmpty())
-        {
-          pInit->SetWmsStartApplication(qstrStartApplication);
-        }
-
-        new CwmsMessenger(nullptr, nullptr);
-
-    }
-    else if (cInfo.IsNonGuiApp())
+    if (cInfo.IsNonGuiApp())
     {
         pApp = new QCoreApplication(argc, argv);
         setApplicationData(*pApp,"WMS Runtime", qstrVersion, "www.wogra.com", "WOGRA Consulting GmbH");
@@ -93,7 +62,6 @@ int main(int argc, char *argv[])
         QString qstrScheme   = CwmsArgumentParser::getArgValue(qmArgs, SCHEME_ARG);
         QString qstrApp   = CwmsArgumentParser::getArgValue(qmArgs, APPLICATION_ARG);
 
-
         pInit = new CwmsNonGuiInitApplication(pApp->applicationName(),
                                               pApp->applicationVersion(),
                                               qstrLogin,
@@ -101,8 +69,6 @@ int main(int argc, char *argv[])
                                               qstrScheme,
                                               qstrApp);
     }
-
-
     else
     {
         pApp = new QApplication(argc, argv);
@@ -118,9 +84,7 @@ int main(int argc, char *argv[])
         }
 
         new CwmsMessenger(nullptr, nullptr);
-
     }
-
 
     pInit->InitApplication();
     return pApp->exec();

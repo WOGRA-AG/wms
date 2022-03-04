@@ -30,6 +30,7 @@ public:
     CdmObjectContainer* GetSelectedObjectContainer(  );
     int GetContainerCount();
     static CdmObjectContainer* GetObjectContainer( qint64 p_lDbId,qint64 p_lClassId, QWidget* p_pqwParent );
+    static CdmObjectContainer *GetObjectContainer(CdmClass *p_pClass, QWidget *p_pqwParent);
 };
 
 #endif

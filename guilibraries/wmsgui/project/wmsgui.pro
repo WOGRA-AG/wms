@@ -3,7 +3,7 @@ TARGET = wmsgui
 
 !CONFIG(no_precompile_header):CONFIG += precompile_header
 
-QT += core sql network xml script widgets gui qml printsupport quick location positioning charts
+QT += core sql network xml script widgets gui qml printsupport quick location positioning charts uitools
 
 win32{
    WMS_ARCH = mingw32
@@ -54,8 +54,6 @@ INCLUDEPATH += \
     ./../../../core/wmscore/Src/DataManagement \
     ./../../../core/wmscore/Src/UserManagement \
     ./../../../core/wmscore/Src/SimpleApi \
-    ./../../../guilibraries/wmsqml/ui \
-    ./../../../guilibraries/wmsqml/src \
     ./../../../core/wmsentities/src \
     ./../../../core/wmscommons/src \
     ./../../../guilibraries/wmsusermanagerlib/project/GeneratedFiles \
@@ -70,7 +68,6 @@ INCLUDEPATH += \
     $$UI_DIR \
 .
 LIBS += -L$$DESTDIR \
-    -lwmsqml \
     -lwmsentities \
     -lwmsusermanagerlib \
     -lwmscore \
@@ -78,17 +75,8 @@ LIBS += -L$$DESTDIR \
 
 include(wmsgui.pri)
 
-SOURCES += \
-    ../src/misc/CwmsDynamicParameterDlg.cpp \
-    ../src/misc/CwmsQueryEditorDlg.cpp
 
-HEADERS += \
-    ../src/misc/CwmsDynamicParameterDlg.h \
-    ../src/misc/CwmsQueryEditorDlg.h
 
-FORMS += \
-    ../src/misc/CwmsDynamicParameterDlg.ui \
-    ../src/misc/CwmsQueryEditorDlg.ui
 
 
 

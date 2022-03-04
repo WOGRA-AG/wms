@@ -24,7 +24,6 @@
 #include "CdmQueryBuilder.h"
 
 // own Includes
-#include "CwmsQmlApplicationSelection.h"
 #include "CwmsApplication.h"
 #include "CwmsObjectSelectionIf.h"
 #include "CwmsApplicationModule.h"

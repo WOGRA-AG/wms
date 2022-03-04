@@ -1,5 +1,6 @@
 
 // System and QT Includes
+#include <CwmsFormUserDefinedExecutor.h>
 #include <QCoreApplication>
 #include <QDir>
 
@@ -17,16 +18,12 @@
 #include "CwmsFormUserDefined.h"
 #include "CwmsContext.h"
 
-// WMS QML Includes
-#include "CwmsQmlApplicationController.h"
-
-
 // Own Includes
 #include "CwmsErrorMessenger.h"
 #include "CwmsGuiLoginIf.h"
 #include "CwmsGuiDatabaseSelection.h"
 #include "CwmsGuiApplicationSelectionIf.h"
-#include "CwmsApplicationServices.h"
+#include "CwmsguiApplicationServices.h"
 #include "CwmsRuntime.h"
 #include "CwmsGuiInitApplication.h"
 
@@ -57,8 +54,27 @@ void CwmsGuiInitApplication::Logging()
     StateFinished(true);
 }
 
+void CwmsGuiInitApplication::SetStyleSheet()
+{
+    QString qstrStylesheetPath = qApp->applicationDirPath() + "/manjaro.qss";
+    QFile qFile(qstrStylesheetPath);
+
+    if (qFile.open(QIODevice::ReadOnly))
+    {
+        QTextStream qts(&qFile);
+        QString qstrStyleSheetDefinition = qts.readAll();
+
+        if (!qstrStyleSheetDefinition.isEmpty())
+        {
+            qApp->setStyleSheet(qstrStyleSheetDefinition);
+        }
+    }
+}
+
 void CwmsGuiInitApplication::Login()
 {
+//    SetStyleSheet();
+
     if (CwmsGuiLoginIf::Login(m_qstrApplicationName, nullptr))
     {
         StateFinished(true);
@@ -157,7 +173,7 @@ void CwmsGuiInitApplication::ApplicationStart()
         CdmObject* pCdmObject = CwmsApplication::GetApplication(m_qstrApplicationName);
         cApp.SetObject(pCdmObject);
         CwmsContext::CreateContext(pCdmObject);
-        CwmsApplicationServices::InstallFunctionsAndPlugins();
+        CwmsguiApplicationServices::InstallFunctionsAndPlugins();
 
         CdmObject* pMainWindow = cApp.GetMainWindow();
 
@@ -170,9 +186,9 @@ void CwmsGuiInitApplication::ApplicationStart()
 
         if (pMainWindow)
         {
-            CwmsQmlApplicationController::createController(GetApplication(), this);
             CwmsFormUserDefined cForm(pMainWindow);
-            CwmsQmlApplicationController::getController()->createCustomMainWindow(cForm.GetName(), cForm.GetUICode());
+            CwmsFormUserDefinedExecutor cExecutor;
+            cExecutor.ExecuteUserDefinedFormMisc(cForm, nullptr);
         }
         else
         {

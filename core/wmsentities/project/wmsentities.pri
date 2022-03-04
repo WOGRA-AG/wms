@@ -46,7 +46,6 @@ HEADERS += \
     ../src/CwmsScriptableMailer.h \
     ../src/CwmsScriptableMessage.h \
     ../src/CwmsScriptablePrinter.h \
-    ../src/CwmsScriptableUi.h \
     ../src/CwmsScriptableLogger.h \
     ../src/CwmsScriptableWorkflow.h \
     ../src/CwmsScriptableWql.h \
@@ -155,7 +154,6 @@ SOURCES += ../src/CwmsbtMailMessage.cpp \
     ../src/CwmsScriptableLogger.cpp \
     ../src/CwmsScriptableMessage.cpp \
     ../src/CwmsScriptablePrinter.cpp \
-    ../src/CwmsScriptableUi.cpp \
     ../src/CwmsScriptableWorkflow.cpp \
     ../src/CwmsScriptableWql.cpp \
     ../src/CwmsWorkflowStepExecution.cpp \

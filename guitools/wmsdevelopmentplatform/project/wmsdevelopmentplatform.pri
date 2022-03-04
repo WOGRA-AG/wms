@@ -29,7 +29,8 @@ HEADERS += ../src/CwmsClassDataFiller.h \
     ../src/CwmsCreateobjectContainerDlg.h \
     ../src/CwmsSymbolSearch.h \
 ../src/CwmsDataSearchDlg.h \
-    $$PWD/../src/CwmsScriptingEnvironment.h
+    $$PWD/../src/CwmsScriptingEnvironment.h \
+    ../src/CwmsInitAdmin.h
 SOURCES += ../src/CwmsClassDataFiller.cpp \
     $$PWD/../src/CwmsPlatformServices.cpp \
     ../src/CwmsAddMemberIf.cpp \
@@ -60,7 +61,8 @@ SOURCES += ../src/CwmsClassDataFiller.cpp \
     ../src/main.cpp \
     ../src/CwmsSymbolSearch.cpp \
    ../src/CwmsDataSearchDlg.cpp \
-    $$PWD/../src/CwmsScriptingEnvironment.cpp
+    $$PWD/../src/CwmsScriptingEnvironment.cpp \
+    ../src/CwmsInitAdmin.cpp
 FORMS += ../src/cwmsaddclassmemberdlg.ui \
     ../src/cwmsaddnewclass.ui \
     ../src/CwmsAdminMainWindow.ui \
@@ -76,12 +78,6 @@ FORMS += ../src/cwmsaddclassmemberdlg.ui \
 ../src/CwmsDataSearchDlg.ui \
     $$PWD/../src/CwmsScriptingEnvironment.ui
 
-
-HEADERS += \
-    ../src/CwmsInitAdmin.h
-
-SOURCES += \
-    ../src/CwmsInitAdmin.cpp
 
 TRANSLATIONS += ./wmsdevelopmentplatform_en.ts
 

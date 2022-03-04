@@ -2,6 +2,8 @@ PRECOMPILED_HEADER = precompile.h
 
 HEADERS += \
     $$PWD/../src/misc/CwmsDynamicParamWidget.h \
+    $$PWD/../src/misc/CwmsFormUserDefinedExecutor.h \
+    $$PWD/../src/misc/CwmsUIEditor.h \
     $$PWD/precompile.h \
     ../src/ObjectEditor/CoeDataTypeWidget.h \
     ../src/ObjectEditor/CoedtwAddValueDlgIf.h \
@@ -89,12 +91,10 @@ HEADERS += \
     ../src/misc/jstokenizer.h \
     ../src/misc/jsenv.h \
     ../src/wmsgui.h \
-    ../src/misc/CwmsQmlEditor.h \
     ../src/misc/CwmsErrorMessenger.h \
     ../src/misc/CwmsguiApplicationServices.h \
     ../src/misc/CwmsPluginsIf.h \
     ../src/misc/CwmsPluginsDlg.h \
-    ../src/misc/CwmsQmlLibraryEditor.h \
     ../src/misc/CwmsVariantMapEditor.h \
     ../src/misc/CwmsVariantMapEditorWidget.h \
     ../src/misc/CwmsGuiDataAccessConfiguration.h \
@@ -102,7 +102,6 @@ HEADERS += \
     ../src/misc/CwmsGuiApplicationSelectionIf.h \
     ../src/misc/CwmsGuiDatabaseSelection.h \
     ../src/misc/CwmsGuiLoginIf.h \
-    $$PWD/../src/misc/CwmsQmlPreviewDlg.h \
     $$PWD/../src/misc/IwmsSciprtEditor.h \
     $$PWD/../src/misc/CwmsTreeCompletionModel.h \
     $$PWD/../src/misc/CwmsTreeCompletionItem.h \
@@ -116,10 +115,14 @@ HEADERS += \
     $$PWD/../src/misc/CwmsLineEdit.h \
     $$PWD/../src/misc/CwmsTreeWidgetItem.h \
     $$PWD/../src/CwmsObjectBinder.h \
-    $$PWD/../src/misc/CwmsContainerUpdateLocker.h
+    $$PWD/../src/misc/CwmsContainerUpdateLocker.h \
+    ../src/misc/CwmsDynamicParameterDlg.h \
+    ../src/misc/CwmsQueryEditorDlg.h
 
-SOURCES += ../src/misc/CwmsQmlEditor.cpp \
+SOURCES += \
     $$PWD/../src/misc/CwmsDynamicParamWidget.cpp \
+    $$PWD/../src/misc/CwmsFormUserDefinedExecutor.cpp \
+    $$PWD/../src/misc/CwmsUIEditor.cpp \
     ../src/misc/jsedit.cpp \
     ../src/misc/jshighlighter.cpp \
     ../src/misc/jstokenizer.cpp \
@@ -205,7 +208,6 @@ SOURCES += ../src/misc/CwmsQmlEditor.cpp \
     ../src/misc/CwmsguiApplicationServices.cpp \
     ../src/misc/CwmsPluginsIf.cpp \
     ../src/misc/CwmsPluginsDlg.cpp \
-    ../src/misc/CwmsQmlLibraryEditor.cpp \
     ../src/misc/CwmsVariantMapEditor.cpp \
     ../src/misc/CwmsVariantMapEditorWidget.cpp \
     ../src/misc/CwmsGuiDataAccessConfiguration.cpp \
@@ -213,7 +215,6 @@ SOURCES += ../src/misc/CwmsQmlEditor.cpp \
     ../src/misc/CwmsGuiApplicationSelectionIf.cpp \
     ../src/misc/CwmsGuiDatabaseSelection.cpp \
     ../src/misc/CwmsGuiLoginIf.cpp \
-    $$PWD/../src/misc/CwmsQmlPreviewDlg.cpp \
     $$PWD/../src/misc/CwmsTreeCompletionModel.cpp \
     $$PWD/../src/misc/CwmsTreeCompletionItem.cpp \
     $$PWD/../src/misc/CwmsJsCompleter.cpp \
@@ -226,9 +227,12 @@ SOURCES += ../src/misc/CwmsQmlEditor.cpp \
     $$PWD/../src/misc/CwmsLineEdit.cpp \
     $$PWD/../src/misc/CwmsTreeWidgetItem.cpp \
     $$PWD/../src/CwmsObjectBinder.cpp \
-    $$PWD/../src/misc/CwmsContainerUpdateLocker.cpp
+    $$PWD/../src/misc/CwmsContainerUpdateLocker.cpp \
+    ../src/misc/CwmsDynamicParameterDlg.cpp \
+    ../src/misc/CwmsQueryEditorDlg.cpp
 
 FORMS += ../src/ObjectEditor/CoedtwAddValueDlgIf.ui \
+    $$PWD/../src/misc/CwmsUIEditor.ui \
     ../src/ObjectEditor/CoeInsertTableDlg.ui \
     ../src/ObjectEditor/CoeTextEditDlg.ui \
     ../src/ObjectEditor/CoeTextEditMainWindow.ui \
@@ -279,23 +283,26 @@ FORMS += ../src/ObjectEditor/CoedtwAddValueDlgIf.ui \
     ../src/misc/CwmsWorkflowMemberValueEditor.ui \
     ../src/misc/CwmsWorkflowStepEditorDlg.ui \
     ../src/misc/CwmsWorkflowStepExecutionEditorDlg.ui \
-    ../src/misc/CwmsqmlEditor.ui \
     ../src/misc/CwmsPluginManagerIf.ui \
     ../src/misc/CwmsPluginsDlg.ui \
-    ../src/misc/CwmsQmlLibraryEditor.ui \
     ../src/misc/CwmsGuiDataAccessConfiguration.ui \
     ../src/misc/CwmsGuiLdapAccessConfiguration.ui \
-    $$PWD/../src/misc/CwmsQmlPreviewDlg.ui \
     $$PWD/../src/misc/CwmsDataAccessConfigurator.ui \
     $$PWD/../src/misc/CwmsFormObjectRefAssignment.ui \
     $$PWD/../src/CwmsFormInteractiveComponentEditor.ui \
     $$PWD/../src/CwmsContainerEditorDlg.ui \
-    $$PWD/../src/misc/CwmsEventClassEditor.ui
+    $$PWD/../src/misc/CwmsEventClassEditor.ui \
+    ../src/misc/CwmsDynamicParameterDlg.ui \
+    ../src/misc/CwmsQueryEditorDlg.ui
+
+HEADERS += \
+    ../src/misc/CwmsScriptableUi.h
+
+SOURCES += \
+    ../src/misc/CwmsScriptableUi.cpp
+
 
 TRANSLATIONS += ./wmsgui_de.ts \
                 ./wmsgui_en.ts
 
 RESOURCES += ../src/misc/wmsgui.qrc
-
-
-

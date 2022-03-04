@@ -31,6 +31,7 @@ private:
     QSettings m_qSettings;
     QString m_qstrApplicationName;
 
+    static bool loginP(QString p_qstrApplication, QString p_qstrLogin, QString p_qstrPassword);
 public:
     virtual ~CwmsGuiLoginIf(  );
     void SetCaption(  QString p_qstrCaption );

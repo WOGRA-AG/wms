@@ -47,7 +47,6 @@ INCLUDEPATH += ./../../../core/wmscore/Src/DataManagement \
                ./../../../core/wmscore/Src/UserManagement \
                ./../../../core/wmscore/Src/SimpleApi \
                ./../src \
-               ./../../../guilibraries/wmsqml/src \
                ./../../../core/wmsentities/src \
                ./../../../guilibraries/wmsgui/project \
                ./../../../guilibraries/wmsusermanagerlib/project/$$WMS_ARCH/ui/$$WMS_MODE \
@@ -60,19 +59,12 @@ INCLUDEPATH += ./../../../core/wmscore/Src/DataManagement \
 
 LIBS +=  -L$$DESTDIR \
     -lwmsgui \
-    -lwmsqml \
     -lwmsentities \
     -lwmscommons \
     -lwmscore
 
 QMAKE_RPATHDIR += $$DESTDIR
 
-#contains(DEFINES, WMS_LINK_STATIC) {
-#LIBS +=  -L$$DESTDIR/dataaccess \
-#         -lwmswebclient \
-#         -lwmssqlite \
-#         -lwmsodbc \
-#}
 
 include(wmsruntime.pri)
 

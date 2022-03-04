@@ -29,6 +29,8 @@ CwmsInitAdmin::~CwmsInitAdmin()
 {
 }
 
+
+
 void CwmsInitAdmin::Logging()
 {
     INITERRORMANAGER();
@@ -46,8 +48,27 @@ void CwmsInitAdmin::Logging()
     StateFinished(true);
 }
 
+void CwmsInitAdmin::SetStyleSheet()
+{
+    QString qstrStylesheetPath = qApp->applicationDirPath() + "/manjaro.qss";
+    QFile qFile(qstrStylesheetPath);
+
+    if (qFile.open(QIODevice::ReadOnly))
+    {
+        QTextStream qts(&qFile);
+        QString qstrStyleSheetDefinition = qts.readAll();
+
+        if (!qstrStyleSheetDefinition.isEmpty())
+        {
+            qApp->setStyleSheet(qstrStyleSheetDefinition);
+        }
+    }
+}
+
+
 void CwmsInitAdmin::Login()
 {
+    //SetStyleSheet();
     if (CwmsGuiLoginIf::Login(m_qstrApplicationName, nullptr))
     {
         CdmDataProvider* pCdmManager = CdmSessionManager::GetDataProvider();

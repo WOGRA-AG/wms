@@ -84,18 +84,18 @@ void CwmsMiscDataFiller::FillForms(QTreeWidget* p_pTreeWidget)
   FillForms(pItem);
   pItem->setExpanded(true);
 
-  pItem = new QTreeWidgetItem(p_pTreeWidget);
-  pItem->setText(0, QObject::tr("Bibliotheken"));
-  pItem->setData(1, Qt::UserRole, eWmsTreeItemTypeForm);
-  FillLibraries(pItem);
-  pItem->setExpanded(true);
+//  pItem = new QTreeWidgetItem(p_pTreeWidget);
+//  pItem->setText(0, QObject::tr("Bibliotheken"));
+//  pItem->setData(1, Qt::UserRole, eWmsTreeItemTypeForm);
+//  FillLibraries(pItem);
+//  pItem->setExpanded(true);
 
-  pItem = new QTreeWidgetItem(p_pTreeWidget);
-  pItem->setText(0, QObject::tr("Resourcen"));
-  pItem->setData(1, Qt::UserRole, eWmsTreeItemTypeForm);
-  FillResources(pItem);
-  CwmsTreeWidgetHelper::ResizeColumnsToContent(p_pTreeWidget);
-  p_pTreeWidget->sortByColumn(0, Qt::AscendingOrder);
+//  pItem = new QTreeWidgetItem(p_pTreeWidget);
+//  pItem->setText(0, QObject::tr("Resourcen"));
+//  pItem->setData(1, Qt::UserRole, eWmsTreeItemTypeForm);
+//  FillResources(pItem);
+//  CwmsTreeWidgetHelper::ResizeColumnsToContent(p_pTreeWidget);
+//  p_pTreeWidget->sortByColumn(0, Qt::AscendingOrder);
 }
 
 void CwmsMiscDataFiller::FillLibraries(QTreeWidgetItem* p_pItem)
@@ -229,11 +229,11 @@ void CwmsMiscDataFiller::FillForms(QTreeWidgetItem* p_pItem)
    FillForms(pqlviItem, "TechnicalFormSearch", eWmsTreeItemTypeFormSearch);
    pqlviItem->setExpanded(true);
 
-   pqlviItem = new QTreeWidgetItem(pqlviItem);
-   pqlviItem->setText(0, QObject::tr("Interactive Components"));
-   pqlviItem->setData(1, Qt::UserRole, eWmsTreeItemTypeForm);
-   FillInteractiveComponents(pqlviItem);
-    pqlviItem->setExpanded(true);
+//   pqlviItem = new QTreeWidgetItem(pqlviItem);
+//   pqlviItem->setText(0, QObject::tr("Interactive Components"));
+//   pqlviItem->setData(1, Qt::UserRole, eWmsTreeItemTypeForm);
+//   FillInteractiveComponents(pqlviItem);
+//    pqlviItem->setExpanded(true);
 }
 
 /** +-=---------------------------------------------------------Fr 20. Sep 16:30:26 2013----------*

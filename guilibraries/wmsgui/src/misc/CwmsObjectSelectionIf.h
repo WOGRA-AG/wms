@@ -27,28 +27,37 @@ private:
     CdmQueryModel m_cModel;
 
 public:
-    virtual ~CwmsObjectSelectionIf(  );
-    CdmObject* GetSelectedObject(  );
-    void SetContainer(  CdmObjectContainer* p_pContainer );
+    virtual ~CwmsObjectSelectionIf();
+    CdmObject* GetSelectedObject();
+    void SetContainer(CdmObjectContainer* p_pContainer);
+    void SetProxy(CdmQueryModel *p_pCwmsProxy);
+    qint64 GetSelectedObjectId();
+    void SetDisplayMember(QString p_qstrMember);
+    bool SetWql(QString p_qstrWql);
+    QList<CdmObject *> GetSelectedListOfObject();
+
     static CdmObject* GetObject(CdmObjectContainer* p_pContainer,
                                 CdmQueryModel *p_pCwmsProxy,
                                 QWidget* p_pqwParent,
                                 QString p_qstrDisplayMember = "");
-    void SetProxy(CdmQueryModel *p_pCwmsProxy);
-   qint64 GetSelectedObjectId();
-    static qint64 GetObjectId(CdmObjectContainer* p_pContainer,
-                            CdmQueryModel *p_pCwmsProxy,
-                            QWidget* p_pqwParent);
-    void SetDisplayMember(QString p_qstrMember);
-    bool SetWql(QString p_qstrWql);
-    static CdmObject* GetObject(QString p_qstrWql, QWidget* p_pqwParent);
 
-    static QList<CdmObject *> GetListofObjects(CdmObjectContainer *p_pContainer, CdmQueryModel *p_pCwmsProxy, QWidget *p_pqwParent, QString p_qstrDisplayMember);
-    QList<CdmObject *> GetSelectedListOfObject();
+    static qint64 GetObjectId(CdmObjectContainer* p_pContainer,
+                              CdmQueryModel *p_pCwmsProxy,
+                              QWidget* p_pqwParent);
+    static CdmObject* GetObject(QString p_qstrWql, QWidget* p_pqwParent);
+    static CdmObject* GetObject(CdmClass* p_pClass, QWidget* p_pqwParent);
+    static CdmObject *GetObject(CdmObjectContainer *pContainer, QWidget *p_pqwParent);
+    static QList<CdmObject *> GetListofObjects(CdmObjectContainer *p_pContainer,
+                                               CdmQueryModel *p_pCwmsProxy,
+                                               QWidget *p_pqwParent,
+                                               QString p_qstrDisplayMember);
+
+
 private:
     CwmsObjectSelectionIf(QWidget* parent = NULL);
     CdmMember *getReferencedClassMemberForEvent(qint64 lReferencedClassId, CdmClassManager *pClassManager);
 
+    static CdmObjectContainer *GetContainer(CdmClass *p_pClass, QWidget *p_pqwParent);
 };
 
 

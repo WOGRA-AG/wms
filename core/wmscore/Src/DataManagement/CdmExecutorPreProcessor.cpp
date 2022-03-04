@@ -7,7 +7,7 @@
  **
  **
  ** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
- ** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. 
+ ** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
  **(C) copyright by WOGRA technologies GmbH & Co. KG All rights reserved
  *****************************************************************************/
 
@@ -49,9 +49,9 @@
 
 
 CdmExecutorPreProcessor::CdmExecutorPreProcessor(CdmExecutorBase* p_rpExecutor)
-:  m_rpExecutor(p_rpExecutor)
+    :  m_rpExecutor(p_rpExecutor)
 {
-   // nothing to do here
+    // nothing to do here
 }
 
 CdmExecutorPreProcessor::~CdmExecutorPreProcessor()
@@ -60,44 +60,44 @@ CdmExecutorPreProcessor::~CdmExecutorPreProcessor()
 
 QString CdmExecutorPreProcessor::GenerateScriptCode(CdmClassMethod* p_pMethod)
 {
-   QString qstrCode;
+    QString qstrCode;
 
-   if (CHKPTR(p_pMethod))
-   {
-      QString qstrArguments = p_pMethod->GetParametersAsStringForFunction();
-      qstrCode = "function " + GenerateMethodName(p_pMethod) + "("+ qstrArguments + ")\n";
-      qstrCode += "{\n";
-      qstrCode += p_pMethod->GetSourceCode() + "\n";
-      qstrCode += "}\n";
-   }
+    if (CHKPTR(p_pMethod))
+    {
+        QString qstrArguments = p_pMethod->GetParametersAsStringForFunction();
+        qstrCode = "function " + GenerateMethodName(p_pMethod) + "("+ qstrArguments + ")\n";
+        qstrCode += "{\n";
+        qstrCode += p_pMethod->GetSourceCode() + "\n";
+        qstrCode += "}\n";
+    }
 
-   return qstrCode;
+    return qstrCode;
 }
 
 QString CdmExecutorPreProcessor::GenerateScriptCode(QString p_qstrMethodName, QString p_qstrCode)
 {
-   QString qstrCode;
-   qstrCode = "function " + p_qstrMethodName + "()\n";
-   qstrCode += "{\n";
-   qstrCode += p_qstrCode + "\n";
-   qstrCode += "}\n";
-   return qstrCode;
+    QString qstrCode;
+    qstrCode = "function " + p_qstrMethodName + "()\n";
+    qstrCode += "{\n";
+    qstrCode += p_qstrCode + "\n";
+    qstrCode += "}\n";
+    return qstrCode;
 }
 
 
 void CdmExecutorPreProcessor::AddObjectValuesToEngine(CdmObject* p_pCdmObject, bool p_bFormula)
 {
-   if (p_pCdmObject)
-   {
-      if (!p_bFormula)
-      {
-         m_rpExecutor->GetFactory()->createThisScriptObject(p_pCdmObject);
-      }
-      else
-      {
-         m_rpExecutor->GetFactory()->createFormulaScriptObject(p_pCdmObject);
-      }
-   }
+    if (p_pCdmObject)
+    {
+        if (!p_bFormula)
+        {
+            m_rpExecutor->GetFactory()->createThisScriptObject(p_pCdmObject);
+        }
+        else
+        {
+            m_rpExecutor->GetFactory()->createFormulaScriptObject(p_pCdmObject);
+        }
+    }
 }
 
 QString CdmExecutorPreProcessor::GenerateMethodName(CdmClassMethod* p_pMethod)
@@ -110,29 +110,29 @@ QString CdmExecutorPreProcessor::GenerateMethodName(CdmClassMethod* p_pMethod)
 
 QVariantList CdmExecutorPreProcessor::AskForParameters(CdmClassMethod* p_pMethod)
 {
-   QVariantList qmRet;
+    QVariantList qmRet;
 
-   if (CHKPTR(p_pMethod))
-   {
-      QList<CdmClassMethodParameter> qmParams = p_pMethod->GetParameters();
-      qmRet = CdmMessageManager::AskForParameters(qmParams);
-   }
+    if (CHKPTR(p_pMethod))
+    {
+        QList<CdmClassMethodParameter> qmParams = p_pMethod->GetParameters();
+        qmRet = CdmMessageManager::AskForParameters(qmParams);
+    }
 
-   return qmRet;
+    return qmRet;
 }
 
 bool CdmExecutorPreProcessor::SyntaxCheck(IdmExecutorEngine* p_pEngine, CdmClassMethod* p_pCdmMethod)
 {
-   bool bRet = false;
+    bool bRet = false;
 
-   if (CHKPTR(p_pCdmMethod) && CHKPTR(p_pEngine))
-   {
-      QString qstrCode = GenerateScriptCode(p_pCdmMethod->GetMethodName(), 
-                                            p_pCdmMethod->GetSourceCode());
-      bRet = p_pEngine->SyntaxCheck(qstrCode);
-   }
+    if (CHKPTR(p_pCdmMethod) && CHKPTR(p_pEngine))
+    {
+        QString qstrCode = GenerateScriptCode(p_pCdmMethod->GetMethodName(),
+                                              p_pCdmMethod->GetSourceCode());
+        bRet = p_pEngine->SyntaxCheck(qstrCode);
+    }
 
-   return bRet;
+    return bRet;
 }
 
 QString CdmExecutorPreProcessor::PreProcessValidation(CdmObject* p_pObject, CdmClassValidator* p_pValidator, IdmExecutorEngine& p_rEngine)
@@ -196,7 +196,7 @@ bool CdmExecutorPreProcessor::ExceptionCheck(IdmExecutorEngine& p_rEngine)
 
     if (p_rEngine.HasUncaughtExceptions())
     {
-       bRet = false;
+        bRet = false;
     }
 
     return bRet;
@@ -212,16 +212,20 @@ void CdmExecutorPreProcessor::PrepareObjects(IdmExecutorEngine& p_rEngine, CdmMo
 
         if (CHKPTR(pRuntime))
         {
-            CdmObject* pObject = static_cast<CdmObject*>(p_pCdmBase);
+            CdmObject* pObject = dynamic_cast<CdmObject*>(p_pCdmBase);
 
-            if (pRuntime->NeedsCurrentThisObjectUpdate(pObject))
+            if (CHKPTR(pObject))
             {
-                if (pRuntime->IsScriptRunning())
-                {
-                    pRuntime->AddCurrentObjectToCommit();
-                }
 
-                AddObjectValuesToEngine(pObject);
+                if (pRuntime->NeedsCurrentThisObjectUpdate(pObject))
+                {
+                    if (pRuntime->IsScriptRunning())
+                    {
+                        pRuntime->AddCurrentObjectToCommit();
+                    }
+
+                    AddObjectValuesToEngine(pObject);
+                }
             }
         }
     }
@@ -237,16 +241,16 @@ QString CdmExecutorPreProcessor::PreProcessFunction(CdmClassMethod* p_pMethod,
 
     if (p_pCdmBase || p_pMethod->IsStatic())
     {
-       p_rEngine.Evaluate(qstrCode, qstrMethodName);
+        p_rEngine.Evaluate(qstrCode, qstrMethodName);
 
-       if (p_rEngine.HasUncaughtExceptions())
-       {
-         ERR("Error occurred while evaluating script");
-       }
+        if (p_rEngine.HasUncaughtExceptions())
+        {
+            ERR("Error occurred while evaluating script");
+        }
     }
     else
     {
-      ERR(qApp->tr("Funktion kann nicht ausgeführt werden.\nDie Funktion muss entweder statisch sein oder auf einem Objekt bzw. Objektliste ausgeführt werden."));
+        ERR(qApp->tr("Funktion kann nicht ausgeführt werden.\nDie Funktion muss entweder statisch sein oder auf einem Objekt bzw. Objektliste ausgeführt werden."));
     }
 
     return qstrMethodName;

@@ -12,7 +12,8 @@
 
 class CwmsInitAdmin : public CwmsInitApplication
 {
-   Q_OBJECT
+    Q_OBJECT
+    void SetStyleSheet();
 public:
     CwmsInitAdmin(QString p_qstrName, QString p_qstrVersion);
     virtual ~CwmsInitAdmin();
