@@ -1,4 +1,4 @@
-﻿/******************************************************************************
+/******************************************************************************
  ** WOGRA technologies Gmbh & Co KG Modul Information
  ** Modulename: CwmsFormGenericObjectEditor.h
  ** Started Implementation: 2012/09/12

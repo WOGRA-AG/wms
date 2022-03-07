@@ -1,4 +1,4 @@
-﻿/******************************************************************************
+/******************************************************************************
  ** WOGRA technologies GmbH & Co. KG Modul Information
  ** Modulename: CwmsShowResultMessageDlg.cpp
  ** Started Implementation: 2013/02/08

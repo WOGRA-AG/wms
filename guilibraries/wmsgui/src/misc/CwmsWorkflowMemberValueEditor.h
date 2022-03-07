@@ -1,4 +1,4 @@
-﻿/******************************************************************************
+/******************************************************************************
  ** WOGRA technologies Gmbh & Co KG Modul Information
  ** Modulename: CwmsWorkflowMemberValueEditor.h
  ** Started Implementation: 2012/12/19

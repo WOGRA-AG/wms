@@ -1,4 +1,4 @@
-﻿/******************************************************************************
+/******************************************************************************
  ** WOGRA technologies GmbH & Co KG Modul Information
  ** Modulename: CwmsUserSelectionBox.cpp
  ** Started Implementation: 2009/11/14

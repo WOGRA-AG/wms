@@ -1,16 +1,3 @@
-﻿/******************************************************************************
- ** WOGRA technologies GmbH & Co KG Modul Information
- ** Modulename: CwmsSearchDlg.h
- ** Started Implementation: 2009/08/20
- ** Description:
- ** 
- ** This class implements the searchdlg for viewing search widget 
- **
- ** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
- ** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. 
- **(C) copyright by WOGRA technologies GmbH & Co KG All rights reserved
- *****************************************************************************/ 
-
 #ifndef CWMSSEARCHDLG_H
 #define CWMSSEARCHDLG_H
 

@@ -1,4 +1,4 @@
-﻿#ifndef CWMSSCRIPTABLEUI_H
+#ifndef CWMSSCRIPTABLEUI_H
 #define CWMSSCRIPTABLEUI_H
 
 // System and QT Includes

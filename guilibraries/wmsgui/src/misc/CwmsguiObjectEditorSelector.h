@@ -1,4 +1,4 @@
-﻿/******************************************************************************
+/******************************************************************************
  ** WOGRA technologies Gmbh & Co KG Modul Information
  ** Modulename: CwmsguiObjectEditorSelector.h
  ** Started Implementation: 2011/07/14

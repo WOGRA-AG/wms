@@ -1,4 +1,4 @@
-﻿/******************************************************************************
+/******************************************************************************
  ** WOGRA technologies GmbH & Co. KG Modul Information
  ** Modulename: CwmsFormStandardContainerEditor.cpp
  ** Started Implementation: 2012/09/10

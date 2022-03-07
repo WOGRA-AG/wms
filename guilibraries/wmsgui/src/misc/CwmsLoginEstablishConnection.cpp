@@ -1,4 +1,4 @@
-﻿/******************************************************************************
+/******************************************************************************
  ** WOGRA technologies Modul Information
  ** Modulename: CwmsLoginEstablishConnection.cpp
  ** Started Implementation: 2008/03/23

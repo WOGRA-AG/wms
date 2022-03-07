@@ -1,16 +1,3 @@
-﻿/******************************************************************************
- ** WOGRA technologies GmbH & Co KG Modul Information
- ** Modulename: CwmsSearchDlg.cpp
- ** Started Implementation: 2009/08/20
- ** Description:
- ** 
- ** This class implements the searchdlg for viewing search widget 
- **
- ** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
- ** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. 
- **(C) copyright by WOGRA technologies GmbH & Co KG All rights reserved
- *****************************************************************************/ 
-
 // System and QT Includes
 
 // Data management includes
@@ -21,12 +8,6 @@
 
 #include "ui_CwmsSearchDlg.h"
 
-/** +-=---------------------------------------------------------Do 20. Aug 17:57:27 2009----------*
- * @method  CwmsSearchDlg::CwmsSearchDlg                     // public                            *
- * @return                                                   //                                   *
- * @param   QWidget *p_pqwParent                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Do 20. Aug 17:57:27 2009----------*/
 CwmsSearchDlg::CwmsSearchDlg(QWidget *p_pqwParent)
     : CwmsSearchDlg(p_pqwParent, new CdmQueryModel)
 {
@@ -61,11 +42,6 @@ void CwmsSearchDlg::DisableSearch()
    ui->m_pqtvResults->setHidden(true);
 }
 
-/** +-=---------------------------------------------------------Do 20. Aug 18:07:48 2009----------*
- * @method  CwmsSearchDlg::GetSearchWidget                   // public                            *
- * @return  CwmsSearchWidgetIf*                              //                                   *
- * @comment returns the search widget which is used in this dialog.                               *
- *----------------last changed: --------------------------------Do 20. Aug 18:07:48 2009----------*/
 CwmsSearchWidgetIf* CwmsSearchDlg::GetSearchWidget()
 {
    return ui->m_pCwmsSearchWidget;

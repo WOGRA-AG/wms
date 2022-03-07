@@ -1,4 +1,4 @@
-﻿/******************************************************************************
+/******************************************************************************
  ** WOGRA technologies Gmbh & Co KG Modul Information
  ** Modulename: CwmsShowMessageListDlg.h
  ** Started Implementation: 2013/02/08

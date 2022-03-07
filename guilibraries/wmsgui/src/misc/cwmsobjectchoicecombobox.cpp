@@ -1,4 +1,4 @@
-﻿// System and Qt Includes
+// System and Qt Includes
 #include <QList>
 #include <QKeyEvent>
 

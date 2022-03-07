@@ -1,4 +1,4 @@
-﻿#ifndef CWMSVIEWEDITOR_H
+#ifndef CWMSVIEWEDITOR_H
 #define CWMSVIEWEDITOR_H
 
 #ifdef WURZELBLA

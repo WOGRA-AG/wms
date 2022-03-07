@@ -1,4 +1,4 @@
-﻿/******************************************************************************
+/******************************************************************************
  ** WOGRA technologies GmbH & Co KG Modul Information
  ** Modulename: CwmsSmtpSettings.h
  ** Started Implementation: 2010/01/11

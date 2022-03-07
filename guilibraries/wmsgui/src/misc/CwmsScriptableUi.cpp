@@ -1,4 +1,4 @@
-﻿// System and QT Includes
+// System and QT Includes
 
 // WMS Includes
 #include "CdmLogging.h"

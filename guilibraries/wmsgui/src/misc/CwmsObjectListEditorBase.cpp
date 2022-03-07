@@ -1,4 +1,4 @@
-﻿/******************************************************************************
+/******************************************************************************
  ** WOGRA technologies Modul Information
  ** Modulename: CwmsObjectListEditorBase.cpp
  ** Started Implementation: 2008/08/19

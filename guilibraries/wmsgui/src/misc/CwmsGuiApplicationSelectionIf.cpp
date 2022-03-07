@@ -1,4 +1,4 @@
-﻿/******************************************************************************
+/******************************************************************************
  ** WOGRA technologies Modul Information
  ** Modulename: CwmsApplicationSelectionIf.cpp
  ** Started Implementation: 2008/05/18

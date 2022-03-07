@@ -1,4 +1,4 @@
-﻿// System and QT Includes
+// System and QT Includes
 #include <QMenu>
 #include <QAction>
 #include <qtoolbar.h>
@@ -499,8 +499,8 @@ void CwmsSearchWindow::ImportClickedSlot()
    }
    else
    {
-       MSG_INFO(("Import nicht möglich"),
-                                      ("Import kann nicht gestartet werden, das Suche noch nicht ausgeführt wurde oder ungültig ist."));
+       MSG_INFO("Import nicht möglich",
+                "Import kann nicht gestartet werden, das Suche noch nicht ausgeführt wurde oder ungültig ist.");
    }
 }
 

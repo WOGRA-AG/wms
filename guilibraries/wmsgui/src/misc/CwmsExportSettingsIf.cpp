@@ -1,4 +1,4 @@
-﻿/******************************************************************************
+/******************************************************************************
  ** WOGRA technologies Modul Information
  ** Modulename: CwmsExportSettingsIf.cpp
  ** Started Implementation: 2008/04/13

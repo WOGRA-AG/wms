@@ -1,4 +1,4 @@
-﻿/******************************************************************************
+/******************************************************************************
  ** WOGRA technologies GmbH & Co. KG Modul Information
  ** Modulename: CwmsObjectListPropertiesDlg.cpp
  ** Started Implementation: 2012/12/13

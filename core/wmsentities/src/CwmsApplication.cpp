@@ -285,11 +285,6 @@ bool CwmsApplication::Delete(CwmsApplication cCwmsApplication)
    return bSuccess;
 }
 
-/** +-=---------------------------------------------------------Fr 7. Sep 11:26:35 2012-----------*
- * @method  CwmsApplication::GetCurrentUserLanguageId        // public                            *
- * @return  int                                              //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Fr 7. Sep 11:26:35 2012-----------*/
 QString CwmsApplication::GetCurrentUserLanguage()
 {
    QString qstrLanguage;
@@ -304,12 +299,6 @@ QString CwmsApplication::GetCurrentUserLanguage()
    return qstrLanguage;
 }
 
-/** +-=---------------------------------------------------------Fr 7. Sep 11:27:39 2012-----------*
- * @method  CwmsApplication::SetCurrentUserLanguage          // public                            *
- * @return  void                                             //                                   *
- * @param   int p_iLanguage                                  //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Fr 7. Sep 11:27:39 2012-----------*/
 void CwmsApplication::SetCurrentUserLanguage(QString p_qstrqsLanguage)
 {
    CdmObject* pCdmObject = nullptr;
@@ -344,11 +333,6 @@ void CwmsApplication::SetCurrentUserLanguage(QString p_qstrqsLanguage)
    }
 }
 
-/** +-=---------------------------------------------------------Fr 7. Sep 11:35:40 2012-----------*
- * @method  CwmsApplication::CreateQuery                     // private                           *
- * @return  CdmQueryEnhanced*                                //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Fr 7. Sep 11:35:40 2012-----------*/
 CdmQueryEnhanced* CwmsApplication::CreateQuery()
 {
    CdmQueryEnhanced* pCdmQuery = nullptr;
@@ -366,11 +350,6 @@ CdmQueryEnhanced* CwmsApplication::CreateQuery()
    return pCdmQuery;
 }
 
-/** +-=---------------------------------------------------------Fr 7. Sep 11:41:12 2012-----------*
- * @method  CwmsApplication::HasApplicationRight             // public                            *
- * @return  bool                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Fr 7. Sep 11:41:12 2012-----------*/
 bool CwmsApplication::HasApplicationRight()
 {
 
@@ -410,11 +389,6 @@ QStringList CwmsApplication::GetModuleList()
 }
 
 
-/** +-=---------------------------------------------------------Di 26. Feb 10:29:13 2013----------*
- * @method  CwmsApplication::GetApplicationList              // public, static                    *
- * @return  QStringList                                      //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Di 26. Feb 10:29:13 2013----------*/
 QStringList CwmsApplication::GetApplicationList(bool p_bDesktop, bool p_bWeb, bool p_bMobile)
 {
    QStringList qstrlApps;
@@ -455,12 +429,6 @@ QStringList CwmsApplication::GetApplicationList(bool p_bDesktop, bool p_bWeb, bo
    return qstrlApps;
 }
 
-/** +-=---------------------------------------------------------Di 26. Feb 10:37:29 2013----------*
- * @method  CwmsApplication::GetApplication                  // public, static                    *
- * @return  CdmObject*                                       //                                   *
- * @param   QString p_qstrApplication                        //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Di 26. Feb 10:37:29 2013----------*/
 CdmObject* CwmsApplication::GetApplication(QString p_qstrApplication)
 {
    CdmObject* pCdmObject = nullptr;

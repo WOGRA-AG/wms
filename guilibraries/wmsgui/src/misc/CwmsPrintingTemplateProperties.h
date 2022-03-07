@@ -1,4 +1,4 @@
-﻿/******************************************************************************
+/******************************************************************************
  ** WOGRA technologies Gmbh & Co KG Modul Information
  ** Modulename: CbgPrintingTemplateProperties.h
  ** Started Implementation: 2010/11/09

@@ -1,4 +1,4 @@
-﻿/******************************************************************************
+/******************************************************************************
  ** WOGRA technologies GmbH & Co KG Modul Information
  ** Modulename: CwmsObjectListListViewConfigurator.h
  ** Started Implementation: 2010/05/17

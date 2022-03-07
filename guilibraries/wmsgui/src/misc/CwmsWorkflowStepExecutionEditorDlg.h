@@ -1,4 +1,4 @@
-﻿/******************************************************************************
+/******************************************************************************
  ** WOGRA technologies Gmbh & Co KG Modul Information
  ** Modulename: CbgWorkflowStepEditorDlg.h
  ** Started Implementation: 2012/10/10

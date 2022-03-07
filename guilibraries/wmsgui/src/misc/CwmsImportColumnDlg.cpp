@@ -1,4 +1,4 @@
-﻿/******************************************************************************
+/******************************************************************************
  ** WOGRA technologies Modul Information
  ** Modulename: CwmsImportColumnDlg.cpp
  ** Started Implementation: 2008/10/26
