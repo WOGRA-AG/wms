@@ -3,20 +3,20 @@
 link:mission.adoc[Mission]
 
 
-link::installation.adoc[Installation]
+link:installation.adoc[Installation]
 
-link::tutorial.adoc[Tutorial]
+link:tutorial.adoc[Tutorial]
 
-link::wmsdevelopment.adoc[WMS Development]
+link:wmsdevelopment.adoc[WMS Development]
 
-link::runtimes.adoc[Runtimes]
+link:runtimes.adoc[Runtimes]
 
-link::wms_server.adoc[WMS Server]
+link:wms_server.adoc[WMS Server]
 
-link::plugins.adoc[Plugins]
+link:plugins.adoc[Plugins]
 
-link::cli.adoc[Command Line Tools]
+link:cli.adoc[Command Line Tools]
 
-link::technology.adoc[Technology]
+link:technology.adoc[Technology]
 
 
