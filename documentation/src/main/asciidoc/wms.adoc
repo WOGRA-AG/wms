@@ -1,6 +1,6 @@
 
 
-[Mission](https://github.com/WOGRA-AG/wms/blob/main/documentation/src/main/asciidoc/mission.adoc)
+[Mission](mission.adoc)
 
 
 include::installation.adoc[]
