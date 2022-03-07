@@ -1,6 +1,6 @@
 
 
-include::mission.adoc[Mission]
+link:mission.adoc[Mission]
 
 
 include::installation.adoc[Installation]
