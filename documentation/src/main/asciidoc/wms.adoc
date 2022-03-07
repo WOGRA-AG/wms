@@ -1,9 +1,9 @@
 
 
-[Mission](mission.adoc)
+[Mission](include::mission.adoc)
 
 
-include::installation.adoc[]
+include::installation.adoc[Installation]
 
 include::tutorial.adoc[]
 
