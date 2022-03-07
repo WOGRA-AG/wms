@@ -1,27 +1,22 @@
-= WMS
-v2.3, 2016-08-05
-:toc:
-:homepage: http://www.wms-project.com/
 
 
-include::mission.adoc[]
+link:mission.adoc[Mission]
 
-include::installation.adoc[]
 
-include::tutorial.adoc[]
+link:installation.adoc[Installation]
 
-include::wmsdevelopment.adoc[]
+link:tutorial.adoc[Tutorial]
 
-include::runtimes.adoc[]
+link:wmsdevelopment.adoc[WMS Development]
 
-include::wms_server.adoc[]
+link:runtimes.adoc[Runtimes]
 
-include::plugins.adoc[]
+link:wms_server.adoc[WMS Server]
 
-include::mqtt.adoc[]
+link:plugins.adoc[Plugins]
 
-include::cli.adoc[]
+link:cli.adoc[Command Line Tools]
 
-include::technology.adoc[]
+link:technology.adoc[Technology]
 
 
