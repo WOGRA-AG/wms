@@ -3,22 +3,20 @@
 link:mission.adoc[Mission]
 
 
-include::installation.adoc[Installation]
+link::installation.adoc[Installation]
 
-include::tutorial.adoc[]
+link::tutorial.adoc[Tutorial]
 
-include::wmsdevelopment.adoc[]
+link::wmsdevelopment.adoc[WMS Development]
 
-include::runtimes.adoc[]
+link::runtimes.adoc[Runtimes]
 
-include::wms_server.adoc[]
+link::wms_server.adoc[WMS Server]
 
-include::plugins.adoc[]
+link::plugins.adoc[Plugins]
 
-include::mqtt.adoc[]
+link::cli.adoc[Command Line Tools]
 
-include::cli.adoc[]
-
-include::technology.adoc[]
+link::technology.adoc[Technology]
 
 
