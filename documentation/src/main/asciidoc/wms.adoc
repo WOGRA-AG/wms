@@ -3,8 +3,8 @@ v2.3, 2016-08-05
 :toc:
 :homepage: http://www.wms-project.com/
 
+[Mission](https://github.com/WOGRA-AG/wms/blob/main/documentation/src/main/asciidoc/mission.adoc)
 
-include::mission.adoc[]
 
 include::installation.adoc[]
 
