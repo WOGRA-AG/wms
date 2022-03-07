@@ -7,6 +7,9 @@ WMS consists of many libraries which are mostly developed in C++ with the mutlip
 **Links**
 
 http://qt-project.org/[Qt]   
-https://vaadin.com/[Vaadin]   
+
+https://vaadin.com/[Vaadin] 
+
 https://spring.io/[Spring]   
+
 http://www.antlr.org/[ANTLR] 
