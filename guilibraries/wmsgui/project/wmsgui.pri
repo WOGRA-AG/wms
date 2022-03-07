@@ -66,7 +66,6 @@ HEADERS += \
     ../src/RightsManager/CwmsRightsManagerIf.h \
     ../src/misc/CwmsRuntime.h \
     ../src/misc/CwmsRuntimeBase.h \
-    ../src/misc/CwmsRuntimeManager.h \
     ../src/misc/CwmsSearchDlg.h \
     ../src/misc/CwmsSearchWidgetIf.h \
     ../src/misc/CwmsSearchWindow.h \
@@ -187,7 +186,6 @@ SOURCES += \
     ../src/RightsManager/CwmsRightsManagerIf.cpp \
     ../src/misc/CwmsRuntime.cpp \
     ../src/misc/CwmsRuntimeBase.cpp \
-    ../src/misc/CwmsRuntimeManager.cpp \
     ../src/misc/CwmsSearchDlg.cpp \
     ../src/misc/CwmsSearchWidgetIf.cpp \
     ../src/misc/CwmsSearchWindow.cpp \

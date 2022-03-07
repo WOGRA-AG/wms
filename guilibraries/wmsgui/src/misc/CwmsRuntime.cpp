@@ -1,20 +1,10 @@
-/******************************************************************************
- ** WOGRA technologies GmbH & Co. KG Modul Information
- ** Modulename: CwmsRuntime.cpp
- ** Started Implementation: 2012/09/04
- ** Description:
- **
- ** implements the runtime for wms applications
- **
- ** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
- ** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. 
- **(C) copyright by WOGRA technologies GmbH & Co. KG All rights reserved
- *****************************************************************************/
-
 // System and QT Includes
 #include <QInputDialog>
 #include <QAction>
 #include <QApplication>
+#include <CwmsInitApplication.h>
+#include <CwmsFormUserDefined.h>
+#include <CwmsFormUserDefinedExecutor.h>
 
 // WMS Includes
 #include "CdmQueryEnhanced.h"
@@ -52,6 +42,8 @@
 #include "CwmsguiObjectEditorSelector.h"
 #include "CwmsObjectListEditorWidgetIf.h"
 #include "CwmsRuntime.h"
+
+QList<CwmsRuntime*> CwmsRuntime::m_qlRuntime;
 
 CwmsRuntime::CwmsRuntime(QWidget* p_pqwParent)
 : QMainWindow(p_pqwParent),
@@ -370,4 +362,39 @@ void CwmsRuntime::PluginsSlot()
     pDlg->FillDialog(m_cApp);
     pDlg->exec();
     DELPTR(pDlg);
+}
+
+CwmsRuntime *CwmsRuntime::Execute(CwmsApplication cApp, QWidget* parent)
+{
+    if (cApp.IsValid())
+    {
+        QString qstrMain = cApp.GetMain();
+
+        if (!qstrMain.isEmpty())
+        {
+            CwmsInitApplication::StartMainFunction(qstrMain);
+        }
+
+        CdmObject* pMainWindow = cApp.GetMainWindow();
+
+        if (pMainWindow)
+        {
+            CwmsFormUserDefined cForm(pMainWindow);
+            CwmsFormUserDefinedExecutor cExecutor;
+            cExecutor.ExecuteUserDefinedFormMisc(cForm, nullptr);
+        }
+        else
+        {
+            auto pRuntime = new CwmsRuntime(parent);
+            pRuntime->SetApplication(cApp);
+            pRuntime->show();
+            pRuntime->FillWidget();
+            pRuntime->SetLogoutOnExit(false);
+
+            m_qlRuntime.append(pRuntime);
+            return pRuntime;
+        }
+    }
+
+    return nullptr;
 }

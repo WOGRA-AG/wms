@@ -73,7 +73,7 @@ void CwmsGuiInitApplication::SetStyleSheet()
 
 void CwmsGuiInitApplication::Login()
 {
-//    SetStyleSheet();
+    //    SetStyleSheet();
 
     if (CwmsGuiLoginIf::Login(m_qstrApplicationName, nullptr))
     {
@@ -147,8 +147,6 @@ void CwmsGuiInitApplication::DbSelection()
 void CwmsGuiInitApplication::ApplicationSelection()
 {
     CwmsGuiApplicationSelectionIf cAppSelection;
-
-
     QString qstrApplication = CwmsGuiApplicationSelectionIf::GetApplicationString();
 
     if (!qstrApplication.isEmpty())
@@ -171,45 +169,13 @@ void CwmsGuiInitApplication::ApplicationStart()
         CwmsApplication cApp;
 
         CdmObject* pCdmObject = CwmsApplication::GetApplication(m_qstrApplicationName);
-        cApp.SetObject(pCdmObject);
-        CwmsContext::CreateContext(pCdmObject);
-        CwmsguiApplicationServices::InstallFunctionsAndPlugins();
 
-        CdmObject* pMainWindow = cApp.GetMainWindow();
-
-        QString qstrMain = cApp.GetMain();
-
-        if (!qstrMain.isEmpty())
+        if (CHKPTR(pCdmObject))
         {
-            StartMainFunction(qstrMain);
-        }
-
-        if (pMainWindow)
-        {
-            CwmsFormUserDefined cForm(pMainWindow);
-            CwmsFormUserDefinedExecutor cExecutor;
-            cExecutor.ExecuteUserDefinedFormMisc(cForm, nullptr);
-        }
-        else
-        {
-            CwmsRuntime* pCwmsRuntime = new CwmsRuntime(nullptr);
-            QString qstrCaption = m_qstrApplicationName + " V";
-            qstrCaption += QString::number(cApp.GetVersionMajor()) +
-                    "." +  QString::number(cApp.GetVersionMinor()) +
-                    "." + QString::number(cApp.GetVersionBugfix());
-
-            if (pCdmManager->IsDemo() && cApp.GetLicenceCheck())
-            {
-                pCwmsRuntime->setWindowTitle(qstrCaption + " Demo");
-            }
-            else
-            {
-                pCwmsRuntime->setWindowTitle(qstrCaption);
-            }
-
-            pCwmsRuntime->SetApplication(cApp);
-            pCwmsRuntime->FillWidget();
-            pCwmsRuntime->show();
+            cApp.SetObject(pCdmObject);
+            CwmsContext::CreateContext(pCdmObject);
+            CwmsguiApplicationServices::InstallFunctionsAndPlugins();
+            CwmsRuntime::Execute(cApp, nullptr);
         }
     }
 }

@@ -2059,35 +2059,7 @@ void CwmsAdminMainWindowIf::ExecuteApplicationSlot()
 
             if (cApp.IsValid())
             {
-                QString qstrMain = cApp.GetMain();
-
-                if (!qstrMain.isEmpty())
-                {
-                    CwmsInitApplication::StartMainFunction(qstrMain);
-                }
-
-
-                CdmObject* pMainWindow = cApp.GetMainWindow();
-
-                if (pMainWindow)
-                {
-                    CwmsFormUserDefined cForm(pMainWindow);
-                    CwmsFormUserDefinedExecutor cExecutor;
-                    cExecutor.ExecuteUserDefinedFormMisc(cForm, nullptr);
-                }
-                else
-                {
-                    if (m_pRuntime)
-                    {
-                        DELPTR(m_pRuntime)
-                    }
-
-                    m_pRuntime = new CwmsRuntime(this);
-                    m_pRuntime->SetApplication(cApp);
-                    m_pRuntime->show();
-                    m_pRuntime->FillWidget();
-                    m_pRuntime->SetLogoutOnExit(false);
-                }
+                CwmsRuntime::Execute(cApp, this);
             }
         }
     }

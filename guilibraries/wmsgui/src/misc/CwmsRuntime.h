@@ -1,16 +1,3 @@
-/******************************************************************************
- ** WOGRA technologies Gmbh & Co KG Modul Information
- ** Modulename: CwmsRuntime.h
- ** Started Implementation: 2012/08/30
- ** Description:
- **
- ** implements the runtime for wms apps
- **
- ** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
- ** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
- **(C) copyright by WOGRA technologies GmbH & Co KG All rights reserved
- *****************************************************************************/
-
 #ifndef CWMSRUNTIME_H
 #define CWMSRUNTIME_H
 
@@ -40,6 +27,7 @@ class WMSGUI_API CwmsRuntime : public QMainWindow, public CwmsRuntimeBase, publi
    Q_OBJECT
 
 private:
+   static QList<CwmsRuntime*> m_qlRuntime;
    CwmsApplication m_cApp;
    CwmsApplicationModule m_cDefaultModule;
    CwmsApplicationModule m_cCurrentModule;
@@ -51,8 +39,8 @@ private:
    QToolBar* m_pqCurrentModuleToolbar;
 
 public:
-   CwmsRuntime( QWidget* p_pqwParent);
-   virtual ~CwmsRuntime( );
+   CwmsRuntime(QWidget* p_pqwParent);
+   virtual ~CwmsRuntime();
    void SetApplication(CwmsApplication p_cApp);
    void FillWidget();
    void SetCurrentModuleMenu(QMenu* p_pMenu);
@@ -61,12 +49,14 @@ public:
    QWidget* GetMainWidget();
    CwmsApplication GetApplication();
    void AddToolBar(QToolBar* p_pToolBar);
+   static CwmsRuntime* Execute(CwmsApplication cApp, QWidget *parent);
+
 
 public slots:
    void LdapSettingsSlot();
+
 protected:
    void closeEvent(QCloseEvent* p_pqCloseEvent);
-
 
 private:
    void FillModules();
@@ -74,14 +64,14 @@ private:
 
 
 private slots:
-   void ClientSettingsSlot( );
-   void HelpSlot( );
+   void ClientSettingsSlot();
+   void HelpSlot();
    void InfoSlot();
    void UserManagerSlot();
    void EditActionTriggeredSlot();
-   void ChangePasswordSlot( );
-   void LanguageSlot( );
-   void SmtpSlot( );
+   void ChangePasswordSlot();
+   void LanguageSlot();
+   void SmtpSlot();
    void PluginsSlot();
 
 };
