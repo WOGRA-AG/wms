@@ -80,4 +80,6 @@ include::sql.adoc[]
 
 include::utilities.adoc[]
 
-include::scriptablemodel.adoc[]  
+include::scriptablemodel.adoc[]
+
+include::ui.adoc[]  
