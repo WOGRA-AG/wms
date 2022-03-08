@@ -16,7 +16,7 @@ class CdmClass;
 class CsaObjectContainer;
 class CsaClass;
 class CsaObject;
-
+class CwmsScriptableModel;
 
 /* 
  * This class implements ui calls for the script environment.
@@ -44,6 +44,7 @@ public slots:
     void editPrintingTemplate(CsaObject *p_pCdmObject, QWidget *parent);
     void editPrintingTemplate(CsaObjectContainer *p_pContainer, QWidget *parent);
     void createPrintingTemplate(QWidget *parent);
+    void addModelToItemView(CwmsScriptableModel *p_pModel, QAbstractItemView *p_pItemView);
 };
 
 #endif // CWMSSCRIPTABLEUI_H

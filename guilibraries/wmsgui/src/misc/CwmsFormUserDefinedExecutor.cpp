@@ -155,17 +155,31 @@ void CwmsFormUserDefinedExecutor::InitForm(CwmsFormUserDefined &p_Form, QWidget*
 {
     QString qstrCode = p_Form.GetUICode();
 
+
     if (!qstrCode.isEmpty())
     {
+        BuildFunctionCode(qstrCode, p_Form);
         IdmExecutorEngine* pEngine = GetEngine();
         CsaFactory* pFactory = GetFactory();
 
         if (CHKPTR(pEngine) && CHKPTR(pFactory))
         {
-            pEngine->SetProperty(WMS_FORM, p_pWidget);
+            pEngine->PushContext();
+            pEngine->SetProperty(p_Form.GetName(), p_pWidget);
             pEngine->SetProperty(WMS_CURRENT_OBJECT, pFactory->createScriptObject(p_pObject));
             pEngine->Evaluate(qstrCode, p_Form.GetName());
+            pEngine->PopContext();
         }
+    }
+}
+
+void CwmsFormUserDefinedExecutor::BuildFunctionCode(QString& p_rqstrCode, CwmsFormUserDefined &p_Form)
+{
+    QString qstrName = p_Form.GetName();
+
+    if (!qstrName.isEmpty())
+    {
+      //  QString qstrHeader = QString (" %1()\n{").arg(qstrName);
     }
 }
 
@@ -180,9 +194,11 @@ void CwmsFormUserDefinedExecutor::InitForm(CwmsFormUserDefined &p_Form, QWidget*
 
         if (CHKPTR(pEngine) && CHKPTR(pFactory))
         {
-            pEngine->SetProperty(WMS_FORM, p_pWidget);
+            pEngine->PushContext();
+            pEngine->SetProperty(p_Form.GetName(), p_pWidget);
             pEngine->SetProperty(WMS_CURRENT_CONTAINER, pFactory->createScriptObject(p_pContainer));
             pEngine->Evaluate(qstrCode, p_Form.GetName());
+            pEngine->PopContext();
         }
     }
 
@@ -198,8 +214,10 @@ void CwmsFormUserDefinedExecutor::InitForm(CwmsFormUserDefined &p_Form, QWidget*
 
         if (CHKPTR(pEngine))
         {
-            pEngine->SetProperty(WMS_FORM, p_pWidget);
+            pEngine->PushContext();
+            pEngine->SetProperty(p_Form.GetName(), p_pWidget);
             pEngine->Evaluate(qstrCode, p_Form.GetName());
+            pEngine->PopContext();
         }
     }
 }

@@ -16,6 +16,7 @@
 #include <CwmsExportSettingsIf.h>
 #include <CwmsFormUserDefined.h>
 #include <CwmsImport.h>
+#include <CwmsScriptableModel.h>
 
 // own Includes
 #include "CwmsJournalViewer.h"
@@ -245,4 +246,12 @@ QObject* CwmsScriptableUi::selectClass(QWidget* parent)
     }
 
     return nullptr;
+}
+
+void CwmsScriptableUi::addModelToItemView(CwmsScriptableModel* p_pModel, QAbstractItemView* p_pItemView)
+{
+    if (CHKPTR(p_pModel), p_pItemView)
+    {
+        p_pItemView->setModel(p_pModel->generateItemModel());
+    }
 }

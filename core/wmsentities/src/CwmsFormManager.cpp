@@ -935,7 +935,7 @@ QString CwmsFormManager::GetClassUri(CdmModelElement* p_pElement)
 QString CwmsFormManager::GenerateWqlByClassUri(QString qstrClassUri, CdmObjectContainer* pContainer)
 {
     QString qstrWql;
-    qstrWql = QString("select UI_Code from \"%1\" where Class_Uri = \"%2\"")
+    qstrWql = QString("select from \"%1\" where Class_Uri = \"%2\"")
             .arg(pContainer->GetKeyname())
             .arg(qstrClassUri);
     return qstrWql;
@@ -945,7 +945,7 @@ QString CwmsFormManager::GenerateWqlByName(QString p_qstrName, CdmObjectContaine
 {
     CwmsbtPlattformInformation platformInfo;
     QString qstrWql;
-    qstrWql = QString("select UI_Code from \"%1\" where Name = \"%2\"")
+    qstrWql = QString("select from \"%1\" where Name = \"%2\"")
             .arg(pContainer->GetKeyname())
             .arg(p_qstrName);
     return qstrWql;

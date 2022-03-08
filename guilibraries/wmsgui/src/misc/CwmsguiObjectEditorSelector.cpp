@@ -117,7 +117,7 @@ void CwmsguiObjectEditorSelector::InstallObjectEditorDescriptor(IwmsObjectEditor
    }
 }
 
-void CwmsguiObjectEditorSelector::InstallObjectListEditorDescriptor(IwmsObjectListEditorDescriptor* p_pDescriptor)
+void CwmsguiObjectEditorSelector::InstallContainerEditorDescriptor(IwmsObjectListEditorDescriptor* p_pDescriptor)
 {
    if (CHKPTR(p_pDescriptor))
    {

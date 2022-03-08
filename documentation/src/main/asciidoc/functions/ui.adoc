@@ -24,4 +24,5 @@ ToDo Documentation:
     void editPrintingTemplate(CsaObject *p_pCdmObject, QWidget *parent);
     void editPrintingTemplate(CsaObjectContainer *p_pContainer, QWidget *parent);
     void createPrintingTemplate(QWidget *parent);
+    addModelToItemView(CwmsScriptableModel* p_pModel, QAbstractItemView* p_pItemView)
 ----
