@@ -137,12 +137,11 @@ void CwmsScriptableUi::openHistory(CsaObjectContainer* p_pContainer, QWidget* pa
     }
 }
 
-void CwmsScriptableUi::openHistory(QObject* p_pCdmObject, QObject* parent)
+void CwmsScriptableUi::openHistory(CsaObject* pObject, QWidget* parent)
 {
-    auto pObject = dynamic_cast<CsaObject*>(p_pCdmObject);
     if (pObject)
     {
-        CwmsJournalViewer* pViewer = new CwmsJournalViewer(dynamic_cast<QWidget*>(parent));
+        CwmsJournalViewer* pViewer = new CwmsJournalViewer(parent);
         pViewer->FillDialog(pObject->getInternals());
         pViewer->exec();
         DELPTR(pViewer);
@@ -161,7 +160,7 @@ QObject* CwmsScriptableUi::selectObject(CsaObjectContainer* p_pContainer, QWidge
     return nullptr;
 }
 
-QObject* CwmsScriptableUi::selectObjectList(CsaClass* p_pCdmClass, QWidget* parent)
+QObject* CwmsScriptableUi::selectContainer(CsaClass* p_pCdmClass, QWidget* parent)
 {
     auto pContainer = CwmsContainerSelectionIf::GetObjectContainer(p_pCdmClass->getInternals(), parent);
 

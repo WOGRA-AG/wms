@@ -935,7 +935,7 @@ QString CwmsFormManager::GetClassUri(CdmModelElement* p_pElement)
 QString CwmsFormManager::GenerateWqlByClassUri(QString qstrClassUri, CdmObjectContainer* pContainer)
 {
     QString qstrWql;
-    qstrWql = QString("select UI_Code from \"%1\" where and(Class_Uri = \"%2\")")
+    qstrWql = QString("select UI_Code from \"%1\" where Class_Uri = \"%2\"")
             .arg(pContainer->GetKeyname())
             .arg(qstrClassUri);
     return qstrWql;
@@ -945,26 +945,9 @@ QString CwmsFormManager::GenerateWqlByName(QString p_qstrName, CdmObjectContaine
 {
     CwmsbtPlattformInformation platformInfo;
     QString qstrWql;
-
-    if (platformInfo.isDesktop())
-    {
-        qstrWql = QString("select UI_Code from \"%1\" where and(Desktop_Form = true, Name = \"%2\")")
-                .arg(pContainer->GetKeyname())
-                .arg(p_qstrName);
-    }
-    else if (platformInfo.isMobile())
-    {
-        qstrWql = QString("select UI_Code from \"%1\" where and(Mobile_Form = true, Name = \"%2\")")
-                .arg(pContainer->GetKeyname())
-                .arg(p_qstrName);
-    }
-    else if (platformInfo.isTablet())
-    {
-        qstrWql = QString("select UI_Code from \"%1\" where and(Tablet_Form = true, Name = \"%2\")")
-                .arg(pContainer->GetKeyname())
-                .arg(p_qstrName);
-    }
-
+    qstrWql = QString("select UI_Code from \"%1\" where Name = \"%2\"")
+            .arg(pContainer->GetKeyname())
+            .arg(p_qstrName);
     return qstrWql;
 }
 

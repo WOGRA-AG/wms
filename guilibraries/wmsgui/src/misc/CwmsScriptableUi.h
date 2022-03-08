@@ -29,7 +29,7 @@ public:
     virtual ~CwmsScriptableUi( );
 public slots:
     QObject* selectObject(CsaObjectContainer *p_pContainer, QWidget *parent);
-    QObject* selectObjectList(CsaClass *p_pCdmClass, QWidget *parent);
+    QObject* selectContainer(CsaClass *p_pCdmClass, QWidget *parent);
     QObject* selectClass(QWidget *parent);
     void openUi(QString p_qstrName, CsaObject *p_pCdmObject, QWidget *parent);
     void openUi(QString p_qstrName, CsaObjectContainer *p_pContainer, QWidget *parent);
@@ -38,9 +38,9 @@ public slots:
     void openUi(CsaObjectContainer *p_pContainer, QWidget *parent);
     void openSearch(CsaObjectContainer *p_pContainer, QWidget *parent);
     void openImport(CsaObjectContainer *p_pContainer, QWidget *parent);
-    void openExport(CsaObjectContainer* p_pContainer, QWidget *parent);
+    void openExport(CsaObjectContainer *p_pContainer, QWidget *parent);
     void openHistory(CsaObjectContainer *p_pContainer, QWidget *parent);
-    void openHistory(QObject *p_pCdmObject, QObject *parent);
+    void openHistory(CsaObject *p_pContainer, QWidget *parent);
     void editPrintingTemplate(CsaObject *p_pCdmObject, QWidget *parent);
     void editPrintingTemplate(CsaObjectContainer *p_pContainer, QWidget *parent);
     void createPrintingTemplate(QWidget *parent);
