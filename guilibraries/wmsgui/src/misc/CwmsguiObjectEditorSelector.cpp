@@ -1,16 +1,3 @@
-/******************************************************************************
- ** WOGRA technologies GmbH & Co. KG Modul Information
- ** Modulename: CwmsguiObjectEditorSelector.cpp
- ** Started Implementation: 2011/07/14
- ** Description:
- **
- ** this class choses the right editor for editing a given object.
- **
- ** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
- ** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. 
- **(C) copyright by WOGRA technologies GmbH & Co. KG All rights reserved
- *****************************************************************************/
-
 // System and QT Includes
 #include <QQuickWindow>
 
@@ -45,20 +32,10 @@
 
 CwmsguiObjectEditorSelector* CwmsguiObjectEditorSelector::m_pSelector = nullptr;
 
-/** +-=---------------------------------------------------------Di 14. Aug 16:11:01 2012----------*
- * @method  CwmsguiObjectEditorSelector::CwmsguiObjectEditorSelector // public                    *
- * @return                                                   //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Di 14. Aug 16:11:01 2012----------*/
 CwmsguiObjectEditorSelector::CwmsguiObjectEditorSelector()
 {
 }
 
-/** +-=---------------------------------------------------------Di 14. Aug 16:11:08 2012----------*
- * @method  CwmsguiObjectEditorSelector::~CwmsguiObjectEditorSelector // public, virtual          *
- * @return  void                                             //                                   *
- * @comment The Destructor of Class CwmsguiObjectEditorSelector                                   *
- *----------------last changed: --------------------------------Di 14. Aug 16:11:08 2012----------*/
 CwmsguiObjectEditorSelector::~CwmsguiObjectEditorSelector()
 {
 }
@@ -78,13 +55,6 @@ CwmsguiObjectEditorSelector* CwmsguiObjectEditorSelector::GetSelector()
    return m_pSelector;
 }
 
-/** +-=---------------------------------------------------------Do 14. Jul 15:47:22 2011----------*
- * @method  CwmsguiObjectEditorSelector::Create              // public, static                    *
- * @return  bool                                             //                                   *
- * @param   CdmObjectAdaptor& p_CdmObjectAdaptor             //                                   *
- * @param   QWidget* p_pqwParent                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Do 14. Jul 15:47:22 2011----------*/
 bool CwmsguiObjectEditorSelector::Create(CdmObjectAdaptor& p_CdmObjectAdaptor, QWidget* p_pqwParent)
 {
    bool bRet = false;
@@ -99,13 +69,6 @@ bool CwmsguiObjectEditorSelector::Create(CdmObjectAdaptor& p_CdmObjectAdaptor, Q
    return bRet;
 }
 
-/** +-=---------------------------------------------------------Do 14. Jul 15:47:57 2011----------*
- * @method  CwmsguiObjectEditorSelector::Create              // public, static                    *
- * @return  bool                                             //                                   *
- * @param   CdmObject* p_pCdmObject                          //                                   *
- * @param   QWidget* p_pqwParent                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Do 14. Jul 15:47:57 2011----------*/
 bool CwmsguiObjectEditorSelector::Create(CdmObject* p_pCdmObject, QWidget* p_pqwParent)
 {
    bool bRet = false;
@@ -120,13 +83,6 @@ bool CwmsguiObjectEditorSelector::Create(CdmObject* p_pCdmObject, QWidget* p_pqw
    return bRet;
 }
 
-/** +-=---------------------------------------------------------Do 14. Jul 15:49:14 2011----------*
- * @method  CwmsguiObjectEditorSelector::View                // public, static                    *
- * @return  bool                                             //                                   *
- * @param   CdmObjectAdaptor p_CdmObjectAdaptor              //                                   *
- * @param   QWidget* p_pqwParent                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Do 14. Jul 15:49:14 2011----------*/
 bool CwmsguiObjectEditorSelector::View(CdmObjectAdaptor p_CdmObjectAdaptor, QWidget* p_pqwParent)
 {
    bool bRet = false;
@@ -141,12 +97,6 @@ bool CwmsguiObjectEditorSelector::View(CdmObjectAdaptor p_CdmObjectAdaptor, QWid
    return bRet;
 }
 
-/** +-=---------------------------------------------------------Mo 17. Dez 10:09:31 2012----------*
- * @method  CwmsguiObjectEditorSelector::InstallObjectEditorDescriptor // public, static          *
- * @return  void                                             //                                   *
- * @param   IwmsObjectEditorDescriptor* p_pDescriptor        //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mo 17. Dez 10:09:31 2012----------*/
 void CwmsguiObjectEditorSelector::InstallObjectEditorDescriptor(IwmsObjectEditorDescriptor* p_pDescriptor)
 {
    if (CHKPTR(p_pDescriptor))
@@ -167,12 +117,6 @@ void CwmsguiObjectEditorSelector::InstallObjectEditorDescriptor(IwmsObjectEditor
    }
 }
 
-/** +-=---------------------------------------------------------Mo 17. Dez 10:09:02 2012----------*
- * @method  CwmsguiObjectEditorSelector::InstallObjectListEditorDescriptor // public, static      *
- * @return  void                                             //                                   *
- * @param   IwmsObjectListEditorDescriptor* p_pDescriptor    //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mo 17. Dez 10:09:02 2012----------*/
 void CwmsguiObjectEditorSelector::InstallObjectListEditorDescriptor(IwmsObjectListEditorDescriptor* p_pDescriptor)
 {
    if (CHKPTR(p_pDescriptor))
@@ -187,13 +131,6 @@ void CwmsguiObjectEditorSelector::InstallObjectListEditorDescriptor(IwmsObjectLi
    }
 }
 
-/** +-=---------------------------------------------------------Do 14. Jul 15:49:56 2011----------*
- * @method  CwmsguiObjectEditorSelector::View                // public, static                    *
- * @return  bool                                             //                                   *
- * @param   CdmObject* p_pCdmObject                          //                                   *
- * @param   QWidget* p_pqwParent                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Do 14. Jul 15:49:56 2011----------*/
 bool CwmsguiObjectEditorSelector::View(CdmObject* p_pCdmObject, QWidget* p_pqwParent)
 {
    bool bRet = true;
@@ -208,13 +145,6 @@ bool CwmsguiObjectEditorSelector::View(CdmObject* p_pCdmObject, QWidget* p_pqwPa
    return bRet;
 }
 
-/** +-=---------------------------------------------------------Mo 17. Dez 10:14:51 2012----------*
- * @method  CwmsguiObjectEditorSelector::View                // public, static                    *
- * @return  bool                                             //                                   *
- * @param   CdmObjectContainer* p_pContainer                  //                                   *
- * @param   QWidget* p_pqwParent                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mo 17. Dez 10:14:51 2012----------*/
 bool CwmsguiObjectEditorSelector::View(CdmObjectContainer* p_pContainer, QWidget* p_pqwParent)
 {
    bool bRet = true;
@@ -229,13 +159,6 @@ bool CwmsguiObjectEditorSelector::View(CdmObjectContainer* p_pContainer, QWidget
    return bRet;
 }
 
-/** +-=---------------------------------------------------------Do 14. Jul 15:50:25 2011----------*
- * @method  CwmsguiObjectEditorSelector::Edit                // public, static                    *
- * @return  bool                                             //                                   *
- * @param   CdmObjectAdaptor p_CdmObjectAdaptor              //                                   *
- * @param   QWidget* p_pqwParent                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Do 14. Jul 15:50:25 2011----------*/
 bool CwmsguiObjectEditorSelector::Edit(CdmObjectAdaptor p_CdmObjectAdaptor, QWidget* p_pqwParent)
 {
    bool bRet = false;
@@ -250,13 +173,6 @@ bool CwmsguiObjectEditorSelector::Edit(CdmObjectAdaptor p_CdmObjectAdaptor, QWid
    return bRet;
 }
 
-/** +-=---------------------------------------------------------Do 14. Jul 15:51:08 2011----------*
- * @method  CwmsguiObjectEditorSelector::Edit                // public, static                    *
- * @return  bool                                             //                                   *
- * @param   CdmObject* p_pCdmObject                          //                                   *
- * @param   QWidget* p_pqwParent                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Do 14. Jul 15:51:08 2011----------*/
 bool CwmsguiObjectEditorSelector::Edit(CdmObject* p_pCdmObject, QWidget* p_pqwParent)
 {
    bool bRet = false;
@@ -270,13 +186,6 @@ bool CwmsguiObjectEditorSelector::Edit(CdmObject* p_pCdmObject, QWidget* p_pqwPa
    return bRet;
 }
 
-/** +-=---------------------------------------------------------Mo 17. Dez 10:13:48 2012----------*
- * @method  CwmsguiObjectEditorSelector::Edit                // public, static                    *
- * @return  bool                                             //                                   *
- * @param   CdmObjectContainer* p_pContainer                  //                                   *
- * @param   QWidget* p_pqwParent                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mo 17. Dez 10:13:48 2012----------*/
 bool CwmsguiObjectEditorSelector::Edit(CdmObjectContainer* p_pContainer, QWidget* p_pqwParent)
 {
    bool bRet = false;
@@ -291,14 +200,6 @@ bool CwmsguiObjectEditorSelector::Edit(CdmObjectContainer* p_pContainer, QWidget
    return bRet;
 }
 
-/** +-=---------------------------------------------------------Mo 17. Dez 10:12:04 2012----------*
- * @method  CwmsguiObjectEditorSelector::DisplayObjectListEditor // protected, virtual            *
- * @return  bool                                             //                                   *
- * @param   CdmObjectContainer* p_pContainer                  //                                   *
- * @param   EwmsGuiDisplayMode p_eDisplayMode                //                                   *
- * @param   QWidget* p_pqwParent                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mo 17. Dez 10:12:04 2012----------*/
 bool CwmsguiObjectEditorSelector::DisplayContainerEditor(CdmObjectContainer* p_pContainer,
                                                           EwmsGuiDisplayMode p_eDisplayMode,
                                                           QWidget* p_pqwParent)
@@ -340,14 +241,6 @@ bool CwmsguiObjectEditorSelector::DisplayContainerEditor(CdmObjectContainer* p_p
    return bRet;
 }
 
-/** +-=---------------------------------------------------------Do 14. Jul 15:51:50 2011----------*
- * @method  CwmsguiObjectEditorSelector::DisplayObjectEditor // protected, virtual                *
- * @return  bool                                             //                                   *
- * @param   CdmObject* p_pCdmObject                          //                                   *
- * @param   EwmsGuiDisplayMode p_eDisplayMode                //                                   *
- * @param   QWidget* p_pqwParent                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Do 14. Jul 15:51:50 2011----------*/
 bool CwmsguiObjectEditorSelector::DisplayObjectEditor(CdmObject* p_pCdmObject,
                                                       EwmsGuiDisplayMode p_eDisplayMode,
                                                       QWidget* p_pqwParent)
@@ -400,12 +293,6 @@ bool CwmsguiObjectEditorSelector::DisplayObjectEditor(CdmObject* p_pCdmObject,
    return bRet;
 }
 
-/** +-=---------------------------------------------------------Fr 14. Dez 11:24:58 2012----------*
- * @method  CwmsguiObjectEditorSelector::HasConfiguredObjectEditor // private                     *
- * @return  bool                                             //                                   *
- * @param   CdmObject* p_pCdmObject                          //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Fr 14. Dez 11:24:58 2012----------*/
 bool CwmsguiObjectEditorSelector::HasConfiguredObjectEditor(CdmObject* p_pCdmObject)
 {
    bool bRet = false;
@@ -419,14 +306,6 @@ bool CwmsguiObjectEditorSelector::HasConfiguredObjectEditor(CdmObject* p_pCdmObj
    return bRet;   
 }
 
-/** +-=---------------------------------------------------------Fr 14. Dez 11:21:20 2012----------*
- * @method  CwmsguiObjectEditorSelector::DisplayConfiguredObjectEditor // private                 *
- * @return  bool                                             //                                   *
- * @param   CdmObject* p_pCdmObject                          //                                   *
- * @param   EwmsGuiDisplayMode p_eDisplayMode                //                                   *
- * @param   QWidget* p_pqwParent                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Fr 14. Dez 11:21:20 2012----------*/
 bool CwmsguiObjectEditorSelector::DisplayConfiguredObjectEditor(CdmObject* p_pCdmObject,
                                                                 EwmsGuiDisplayMode p_eDisplayMode,
                                                                 QWidget* p_pqwParent)
@@ -494,14 +373,6 @@ bool CwmsguiObjectEditorSelector::DisplayConfiguredObjectEditor(CdmObject* p_pCd
    return bRet;  
 }
 
-/** +-=---------------------------------------------------------Fr 14. Dez 11:19:03 2012----------*
- * @method  CwmsguiObjectEditorSelector::DisplayDefaultObjectEditor // private                    *
- * @return  bool                                             //                                   *
- * @param   CdmObject* p_pCdmObject                          //                                   *
- * @param   EwmsGuiDisplayMode p_eDisplayMode                //                                   *
- * @param   QWidget* p_pqwParent                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Fr 14. Dez 11:19:03 2012----------*/
 bool CwmsguiObjectEditorSelector::DisplayDefaultObjectEditor(CdmObject* p_pCdmObject,
                                                              EwmsGuiDisplayMode p_eDisplayMode,
                                                              QWidget* p_pqwParent)

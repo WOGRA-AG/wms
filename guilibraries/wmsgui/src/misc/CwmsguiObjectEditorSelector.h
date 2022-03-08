@@ -1,16 +1,3 @@
-/******************************************************************************
- ** WOGRA technologies Gmbh & Co KG Modul Information
- ** Modulename: CwmsguiObjectEditorSelector.h
- ** Started Implementation: 2011/07/14
- ** Description:
- ** 
- ** this class choses the right editor for editing a given object.
- **
- ** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
- ** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. 
- **(C) copyright by WOGRA technologies GmbH & Co KG All rights reserved
- *****************************************************************************/ 
-
 #ifndef CWMSGUIOBJECTEDITORSELECTOR_H
 #define CWMSGUIOBJECTEDITORSELECTOR_H
 
@@ -61,74 +48,20 @@ class WMSGUI_API CwmsguiObjectEditorSelector
     virtual ~CwmsguiObjectEditorSelector();
 
    protected:
-   /** +-=---------------------------------------------------------Do 14. Jul 10:58:15 2011-------*
-    * @method  CwmsguiObjectEditorSelector::GetSelector      // protected, static                 *
-    * @return  CwmsguiObjectEditorSelector*                  //                                   *
-    * @comment                                                                                    *
-    *----------------last changed: -----------------------------Do 14. Jul 10:58:15 2011----------*/
     static CwmsguiObjectEditorSelector* GetSelector();
 
    public:
-   /** +-=---------------------------------------------------------Do 14. Jul 15:47:57 2011-------*
-    * @method  CwmsguiObjectEditorSelector::Create           // public, static                    *
-    * @return  bool                                          //                                   *
-    * @param   CdmObject* p_pCdmObject                       //                                   *
-    * @param   QWidget* p_pqwParent                          //                                   *
-    * @comment                                                                                    *
-    *----------------last changed: -----------------------------Do 14. Jul 15:47:57 2011----------*/
     static bool Create(CdmObject* p_pCdmObject, QWidget* p_pqwParent);
-
-   public:
-   /** +-=---------------------------------------------------------Do 14. Jul 15:49:56 2011-------*
-    * @method  CwmsguiObjectEditorSelector::View             // public, static                    *
-    * @return  bool                                          //                                   *
-    * @param   CdmObject* p_pCdmObject                       //                                   *
-    * @param   QWidget* p_pqwParent                          //                                   *
-    * @comment                                                                                    *
-    *----------------last changed: -----------------------------Do 14. Jul 15:49:56 2011----------*/
     static bool View(CdmObject* p_pCdmObject, QWidget* p_pqwParent);
-
-   public:
-   /** +-=---------------------------------------------------------Do 14. Jul 15:51:08 2011-------*
-    * @method  CwmsguiObjectEditorSelector::Edit             // public, static                    *
-    * @return  bool                                          //                                   *
-    * @param   CdmObject* p_pCdmObject                       //                                   *
-    * @param   QWidget* p_pqwParent                          //                                   *
-    * @comment                                                                                    *
-    *----------------last changed: -----------------------------Do 14. Jul 15:51:08 2011----------*/
     static bool Edit(CdmObject* p_pCdmObject, QWidget* p_pqwParent);
 
    protected:
-   /** +-=---------------------------------------------------------Do 14. Jul 15:51:50 2011-------*
-    * @method  CwmsguiObjectEditorSelector::DisplayObjectEditor // protected, virtual             *
-    * @return  bool                                          //                                   *
-    * @param   CdmObject* p_pCdmObject                       //                                   *
-    * @param   EwmsGuiDisplayMode p_eDisplayMode             //                                   *
-    * @param   QWidget* p_pqwParent                          //                                   *
-    * @comment                                                                                    *
-    *----------------last changed: -----------------------------Do 14. Jul 15:51:50 2011----------*/
     virtual bool DisplayObjectEditor(CdmObject* p_pCdmObject,
                                      EwmsGuiDisplayMode p_eDisplayMode,
                                      QWidget* p_pqwParent);
 
    public:
-   /** +-=---------------------------------------------------------Do 14. Jul 15:47:22 2011-------*
-    * @method  CwmsguiObjectEditorSelector::Create           // public, static                    *
-    * @return  bool                                          //                                   *
-    * @param   CdmObjectAdaptor& p_CdmObjectAdaptor          //                                   *
-    * @param   QWidget* p_pqwParent                          //                                   *
-    * @comment                                                                                    *
-    *----------------last changed: -----------------------------Do 14. Jul 15:47:22 2011----------*/
     static bool Create(CdmObjectAdaptor& p_CdmObjectAdaptor, QWidget* p_pqwParent);
-
-   public:
-   /** +-=---------------------------------------------------------Do 14. Jul 15:49:14 2011-------*
-    * @method  CwmsguiObjectEditorSelector::View             // public, static                    *
-    * @return  bool                                          //                                   *
-    * @param   CdmObjectAdaptor p_CdmObjectAdaptor           //                                   *
-    * @param   QWidget* p_pqwParent                          //                                   *
-    * @comment                                                                                    *
-    *----------------last changed: -----------------------------Do 14. Jul 15:49:14 2011----------*/
     static bool View(CdmObjectAdaptor p_CdmObjectAdaptor, QWidget* p_pqwParent);
 
    public:

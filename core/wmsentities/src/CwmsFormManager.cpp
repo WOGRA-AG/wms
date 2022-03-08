@@ -934,28 +934,10 @@ QString CwmsFormManager::GetClassUri(CdmModelElement* p_pElement)
 
 QString CwmsFormManager::GenerateWqlByClassUri(QString qstrClassUri, CdmObjectContainer* pContainer)
 {
-    CwmsbtPlattformInformation platformInfo;
     QString qstrWql;
-
-    if (platformInfo.isDesktop())
-    {
-        qstrWql = QString("select UI_Code from \"%1\" where and(Desktop_Form = true, Class_Uri = \"%2\")")
-                .arg(pContainer->GetKeyname())
-                .arg(qstrClassUri);
-    }
-    else if (platformInfo.isMobile())
-    {
-        qstrWql = QString("select UI_Code from \"%1\" where and(Mobile_Form = true, Class_Uri = \"%2\")")
-                .arg(pContainer->GetKeyname())
-                .arg(qstrClassUri);
-    }
-    else if (platformInfo.isTablet())
-    {
-        qstrWql = QString("select UI_Code from \"%1\" where and(Tablet_Form = true, Class_Uri = \"%2\")")
-                .arg(pContainer->GetKeyname())
-                .arg(qstrClassUri);
-    }
-
+    qstrWql = QString("select UI_Code from \"%1\" where and(Class_Uri = \"%2\")")
+            .arg(pContainer->GetKeyname())
+            .arg(qstrClassUri);
     return qstrWql;
 }
 
