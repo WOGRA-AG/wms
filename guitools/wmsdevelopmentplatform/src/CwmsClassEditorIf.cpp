@@ -262,13 +262,7 @@ void CwmsClassEditorIf::FillBaseData()
         m_pqleKeyname->setReadOnly(true);
         m_pqchbImmutable->setChecked(m_rpCdmClass->IsImmutable());
         m_pqchbSingleton->setChecked(m_rpCdmClass->IsSingleton());
-        m_pqrbEventClass->setChecked(m_rpCdmClass->IsEventClass());
-        m_pqrbEventSourcing->setChecked(m_rpCdmClass->IsEventSourcingActive());
 
-        if(!m_pqrbEventClass->isChecked() || !m_pqrbEventSourcing->isChecked())
-        {
-            m_pqrbDefault->setChecked(true);
-        }
         m_pqleLastChangeDate->setText(m_rpCdmClass->GetLastChange().toString());
         m_pqleLastChanger->setText(QString::number(m_rpCdmClass->GetModifierId()));
         m_pqteComment->setPlainText(m_rpCdmClass->GetComment());
