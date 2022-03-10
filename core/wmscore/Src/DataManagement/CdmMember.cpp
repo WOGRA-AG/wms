@@ -793,6 +793,8 @@ bool CdmMember::IsDisplayMember() const
         case eDmValueCounter:
         case eDmValueUser:
         case eDmValueEnum:
+        case eDmValueObjectRef:
+        case eDmValueBinaryDocument:
             bRet = true;
             break;
         default:

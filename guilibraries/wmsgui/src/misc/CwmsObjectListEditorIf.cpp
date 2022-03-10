@@ -29,7 +29,7 @@ CwmsObjectListEditorIf::CwmsObjectListEditorIf(CdmObjectContainer* p_pContainer,
    }
 }
 
-CwmsObjectListEditorIf::~CwmsObjectListEditorIf(  )
+CwmsObjectListEditorIf::~CwmsObjectListEditorIf()
 {
 }
 
@@ -87,7 +87,7 @@ CwmsObjectListEditorWidgetIf* CwmsObjectListEditorIf::GetContainerEditorWidgetIf
    return m_pCwmsObjectListListView;
 }
 
-void CwmsObjectListEditorIf::CloseClickedSlot(  )
+void CwmsObjectListEditorIf::CloseClickedSlot()
 {
    accept();
 }

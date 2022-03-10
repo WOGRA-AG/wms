@@ -260,54 +260,7 @@ void CwmsSearchWindow::AddResultMembers()
    }
    else
    {
-      CdmObjectContainer* pContainer = m_pCwmsSearchWidget->GetObjectList();
-
-      if (CHKPTR(pContainer))
-      {
-         const CdmClass* pCdmClass = pContainer->GetClass();
-
-         if (CHKPTR(pCdmClass))
-         {
-            QVector<QString> qvSequence = pCdmClass->GetMemberSequence();
-
-            for (int iCounter = 0; iCounter < qvSequence.count(); ++iCounter)
-            {
-               QString qstrMember = qvSequence[iCounter];
-               const CdmMember* pCdmMember = pCdmClass->FindMember(qstrMember);
-
-               if (pCdmMember) // can be nullptr if sequence has entries which are already deleted
-               {
-                  if (pCdmMember->GetAccessMode() != eDmMemberAccessPrivate)
-                  {
-                     const CdmClassGroup* pCdmGroup = pCdmMember->GetGroup();
-
-                     if (pCdmGroup)
-                     {
-                        CdmRights& cRights = (const_cast<CdmClassGroup*>(pCdmGroup))->GetRights();
-
-                        if (!cRights.HasCurrentUserReadAccess())
-                        {
-                           continue;
-                        }
-                     }
-
-                     CdmRights& cRights = (const_cast<CdmMember*>(pCdmMember))->GetRights();
-
-                     if (cRights.HasCurrentUserReadAccess())
-                     {
-                        if (pCdmMember->GetValueType() != eDmValueContainerRef &&
-                           pCdmMember->GetValueType() != eDmValueObjectRef &&
-                           pCdmMember->GetValueType() != eDmValueBinaryDocument &&
-                           pCdmMember->GetValueType() != eDmValueFormula )
-                        {
-                           m_pCdmQuery->AddResultElement(pCdmMember->GetKeyname());
-                        }
-                     }
-                  }
-               }
-            }
-         }
-      }
+       m_pCdmQuery->AddAllMembers();
    }
 }
 

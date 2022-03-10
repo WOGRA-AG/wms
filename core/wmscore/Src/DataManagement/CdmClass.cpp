@@ -3704,7 +3704,7 @@ void CdmClass::SetIsEventClass(bool p_bIsEventClass)
 
 bool CdmClass::IsEventClass() const
 {
-    return GetConfigItem("IsEventClass").toBool();
+    return false;
 }
 
 void CdmClass::SetEventSourcingActive(bool p_bEventSourcingActive)
@@ -3716,7 +3716,7 @@ void CdmClass::SetEventSourcingActive(bool p_bEventSourcingActive)
 bool CdmClass::IsEventSourcingActive() const
 {
 
-    return GetConfigItem("IsEventSourcingActive").toBool();
+    return false;
 }
 
 void CdmClass::SetCreateEventClass(QString p_qstrCreateEvent)

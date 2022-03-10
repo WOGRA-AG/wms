@@ -185,6 +185,36 @@ void CwmsObjectListEditorWidgetIf::AddColumn(QString p_qstrColumn)
 
     if (pModel != nullptr && CHKPTR(pModel->GetQuery()))
     {
+        auto pClass = pModel->GetQuery()->GetClass();
+
+        if (CHKPTR(pClass))
+        {
+            auto pMember = pClass->FindMember(p_qstrColumn);
+
+            if (CHKPTR(pMember))
+            {
+                if (pMember->GetValueType() == eDmValueObjectRef)
+                {
+                    auto pClassRef = pMember->GetClassReferencePtr();
+
+                    if (pClassRef)
+                    {
+                        auto qstrCaptionMember = pClassRef->GetCaptionMemberKeyname();
+
+                        if (!qstrCaptionMember.isEmpty())
+                        {
+                            p_qstrColumn += "."+qstrCaptionMember;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                ERR("Member not found: "+ p_qstrColumn);
+                return;
+            }
+        }
+
         pModel->GetQuery()->AddResultElement(p_qstrColumn);
     }
 }

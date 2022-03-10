@@ -337,8 +337,27 @@ void CdmQuery::AddAllMembers()
                     {
                         if (pCdmMember->IsDisplayMember())
                         {
-                            AddResultElement(pCdmMember->GetKeyname());
-                            ++iMemberCount;
+                            if (pCdmMember->GetValueType() == eDmValueObjectRef)
+                            {
+                                auto pClassRef = pCdmMember->GetClassReferencePtr();
+
+                                if (pClassRef)
+                                {
+                                    auto qstrCaptionMember = pClassRef->GetCaptionMemberKeyname();
+
+                                    if (!qstrCaptionMember.isEmpty())
+                                    {
+                                        QString qstrMember = pCdmMember->GetKeyname()+ "." + qstrCaptionMember;
+                                        AddResultElement(qstrMember);
+                                        ++iMemberCount;
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                AddResultElement(pCdmMember->GetKeyname());
+                                ++iMemberCount;
+                            }
                         }
                     }
                 }
