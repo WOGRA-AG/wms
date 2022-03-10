@@ -52,6 +52,7 @@ private:
     void AddObjectHeader();
 
     void ClearItems();
+    void AddCommonHeaders(QStringList &qstrlHeader);
 private slots:
     void RefreshClickedSlot( );
 

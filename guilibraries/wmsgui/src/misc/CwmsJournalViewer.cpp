@@ -172,12 +172,18 @@ void CwmsJournalViewer::FillDialog(CdmObject* p_pCdmObject)
     }
 }
 
+void CwmsJournalViewer::AddCommonHeaders(QStringList& qstrlHeader)
+{
+    qstrlHeader.append(tr("Anwender"));
+    qstrlHeader.append(tr("Zeitpunkt"));
+    qstrlHeader.append(tr("Änderungsart"));
+
+}
+
 void CwmsJournalViewer::AddDbHeader()
 {
     QStringList qstrlHeader;
-    qstrlHeader.append(tr("Anwender"));
-    qstrlHeader.append(tr("Zeitpunkt"));
-    qstrlHeader.append(QStringLiteral("Änderungsart"));
+    AddCommonHeaders(qstrlHeader);
     qstrlHeader.append(tr("Container"));
     qstrlHeader.append(tr("Objekt"));
     qstrlHeader.append(tr("Variable"));
@@ -188,9 +194,7 @@ void CwmsJournalViewer::AddDbHeader()
 void CwmsJournalViewer::AddContainerHeader()
 {
     QStringList qstrlHeader;
-    qstrlHeader.append(tr("Anwender"));
-    qstrlHeader.append(tr("Zeitpunkt"));
-    qstrlHeader.append(QStringLiteral("Änderungsart"));
+    AddCommonHeaders(qstrlHeader);
     qstrlHeader.append(tr("Objekt"));
     qstrlHeader.append(tr("Variable"));
     qstrlHeader.append(tr("Wert"));
@@ -201,9 +205,7 @@ void CwmsJournalViewer::AddContainerHeader()
 void CwmsJournalViewer::AddObjectHeader()
 {
     QStringList qstrlHeader;
-    qstrlHeader.append(tr("Anwender"));
-    qstrlHeader.append(tr("Zeitpunkt"));
-    qstrlHeader.append(QStringLiteral("Änderungsart"));
+    AddCommonHeaders(qstrlHeader);
     qstrlHeader.append(tr("Variable"));
     qstrlHeader.append(tr("Wert"));
     m_pqtwJournal->setHeaderLabels(qstrlHeader);
