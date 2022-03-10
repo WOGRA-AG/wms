@@ -85,6 +85,18 @@ void CwmsFormManager::CheckFormDataStructure()
                     pClass->Commit();
                 }
             }
+
+            pClass = pCdmClassManager->FindClassByKeyname("Technical_Form_ObjectList");
+
+            if (pClass)
+            {
+                if(!pClass->FindMember("SaveAsCsv_Enabled"))
+                {
+                    UpdateTechnicalFormContainerClass(pClass);
+                    pClass->UpdateVersion();
+                    pClass->Commit();
+                }
+            }
         }
     }
 }
@@ -901,6 +913,30 @@ void CwmsFormManager::UpdateUserdefinedUiClass(CdmClass* p_pClass)
         {
             pCdmMember->SetCaption(tr("Script Code"));
             pCdmMember->SetComment(tr("Der Scriptcode, der verwendet wird um Logik in das UI zu bringen."));
+            pCdmMember->SetMemberAccess(eDmMemberAccessPublic);
+        }
+    }
+}
+
+void CwmsFormManager::UpdateTechnicalFormContainerClass(CdmClass* p_pClass)
+{
+    if (CHKPTR(p_pClass))
+    {
+        auto pCdmMember = p_pClass->CreateMember("SaveAsCsv_Enabled", eDmValueBool, false,0);
+
+        if (CHKPTR(pCdmMember))
+        {
+            pCdmMember->SetCaption(tr("CSV Speichern aktiv"));
+            pCdmMember->SetComment(tr("Kennzeichen ob das Speichern einer CSV möglich sein soll."));
+            pCdmMember->SetMemberAccess(eDmMemberAccessPublic);
+        }
+
+        pCdmMember = p_pClass->CreateMember("Copy_Enabled", eDmValueBool, false,0);
+
+        if (CHKPTR(pCdmMember))
+        {
+            pCdmMember->SetCaption(tr("Kopieren aktiv"));
+            pCdmMember->SetComment(tr("Kennzeichen ob das Kopieren möglich sein soll."));
             pCdmMember->SetMemberAccess(eDmMemberAccessPublic);
         }
     }
