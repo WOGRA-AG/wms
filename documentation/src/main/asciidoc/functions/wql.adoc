@@ -44,119 +44,131 @@ Class for reading result data from an excuted qurey.
 ===== Function Reference
 [source, java]
 ----
-   bool containsGrouping();
+bool containsGrouping();
 ----
 
 returns if the requested query has a group by part.
 
 [source, java]
 ----
-   WmsObject getObjectAt(int p_iIndex);
+WmsObject getObjectAt(int row);
 ----   
 
-[source, java]
-----
-   int64 getObjectIdAt(int p_iIndex);
-----
+returns the object which represents the result set at position index
 
 [source, java]
 ----
-   String getResultAsStringAt(int p_iIndex);
+int getObjectIdAt(int row);
 ----
+
+returns the object behind the given result row.
 
 [source, java]
 ----
-   var getResultAt(QModelIndex& p_index);
+String getResultAsStringAt(int row);
 ----
+
+returns a complete row of the result as string.
  
 [source, java]
 ----   
-   var getResultAt(QString p_qstrKeyname, int p_iPos);
+var getResultAt(String p_qstrKeyname, int row);
 ----   
+
+returns the result of the given 
    
 [source, java]
 ----   
-   var getResultAt(int p_iColumn, int p_iRow);
+var getResultAt(int column, int row);
 ----
+
+returns the result at given column and row.
+
+be careful to other frameworks we use here column row and not row column. We will add function which works like other frameworks.
 
 [source, java]
 ----   
-   int getRowPosOfObjectInResultTree(int64 p_lObjectId);
+int getRowPosOfObjectInResultTree(int objectId);
 ----
+
+returns the rowpos of the given object in the result tree or -1 if it was not found.
 
 [source, java]
 ----   
-   bool isObjectInResultTree(int64 p_lObejctId);
+bool isObjectInResultTree(int objectId);
 ----
+
+is the container of the query a tree structure this function returns true.
 
 [source, java]
 ----   
-   void addGroupByElement(QString p_qstrElement);
+WmsObject getFirstResultObject();
 ----
+
+returns the object from the first result.
 
 [source, java]
 ----   
-   WmsObject getFirstResultObject();
+int execute();
 ----
+
+executes the query again.
 
 [source, java]
 ----   
-   int execute();
+void clear();
 ----
+clears the result.
 
 [source, java]
 ----   
-   void clear();
+WmsObjectCcontainer getContainer();
 ----
+returns the container of the query. Returns null if it is a class query.
 
 [source, java]
 ----   
-   WmsObjectCcontainer getContainer();
+Array getResultList();
 ----
+returns the list of results.
+
+[source, java]
+----
+bool containsResultObject(WmsObject object);
+----
+searches for the given object in the result object and returns if it was found or not.
 
 [source, java]
 ----   
-   void setContainerId(qint64 p_lId);
+bool containsResultObject(int objectId);
 ----
 
+searches for the given object id in the result object and returns if it was found or not.
 
 [source, java]
 ----   
-   const QVariantList getResultList();
+int getResultCount();
 ----
 
-
-[source, java]
-----
-   bool containsResultObject(WmsObject p_pObject);
-----
+returns the number of results in the resultobject.
 
 [source, java]
 ----   
-   bool containsResultObject(int64 p_lObjectId);
+int getColumnCount();
 ----
+
+returns the number of columns in the resultobject.
 
 [source, java]
 ----   
-   int getResultCount();
+QString getKeynameAt(int column);
 ----
+
+returns the member keyname of the column.
 
 [source, java]
 ----   
-   int getColumnCount();
-----
-
-[source, java]
-----   
-   QString getKeynameAt(int p_iSection);
-----
-
-[source, java]
-----   
-   QVector<QString> getResultElements();
-----
-
-[source, java]
-----   
-   QString getResultAsDisplayStringAt(int p_iColumn, int p_iRow);
+String getResultAsDisplayStringAt(int column, int row);
 ----  
+
+returns the result in from system ressources read format.
