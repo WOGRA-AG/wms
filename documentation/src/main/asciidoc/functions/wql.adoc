@@ -1,4 +1,4 @@
-==== Wql
+==== Wql function reference
 
 Class for creating data requests and evaluation results. How you can build WQL's is described in the WQL section.
 
@@ -17,7 +17,7 @@ executes an wql and returns the result object. if the result object is null, an 
 
 ===== Return value
 
-*return* The WqlResultObject which can be used like in the sample.
+*return* The WqlResultObject which can be used like in the sample. If the wql query is invalid null will returned.
 
 ===== Example
 
@@ -39,38 +39,124 @@ if (result != null) {
 ----
 
 ==== WqlResultObject
-Class for readiing result data from an excuted qurey.
+Class for reading result data from an excuted qurey.
 
 ===== Function Reference
-todo
-
+[source, java]
+----
    bool containsGrouping();
-   
-   
+----
+
+returns if the requested query has a group by part.
+
+[source, java]
+----
    WmsObject getObjectAt(int p_iIndex);
-   
-   
+----   
+
+[source, java]
+----
    int64 getObjectIdAt(int p_iIndex);
-   
+----
+
+[source, java]
+----
    String getResultAsStringAt(int p_iIndex);
-   
+----
+
+[source, java]
+----
    var getResultAt(QModelIndex& p_index);
+----
+ 
+[source, java]
+----   
    var getResultAt(QString p_qstrKeyname, int p_iPos);
+----   
+   
+[source, java]
+----   
    var getResultAt(int p_iColumn, int p_iRow);
+----
+
+[source, java]
+----   
    int getRowPosOfObjectInResultTree(int64 p_lObjectId);
+----
+
+[source, java]
+----   
    bool isObjectInResultTree(int64 p_lObejctId);
+----
+
+[source, java]
+----   
    void addGroupByElement(QString p_qstrElement);
+----
+
+[source, java]
+----   
    WmsObject getFirstResultObject();
+----
+
+[source, java]
+----   
    int execute();
+----
+
+[source, java]
+----   
    void clear();
+----
+
+[source, java]
+----   
    WmsObjectCcontainer getContainer();
+----
+
+[source, java]
+----   
    void setContainerId(qint64 p_lId);
+----
+
+
+[source, java]
+----   
    const QVariantList getResultList();
+----
+
+
+[source, java]
+----
    bool containsResultObject(WmsObject p_pObject);
+----
+
+[source, java]
+----   
    bool containsResultObject(int64 p_lObjectId);
+----
+
+[source, java]
+----   
    int getResultCount();
+----
+
+[source, java]
+----   
    int getColumnCount();
+----
+
+[source, java]
+----   
    QString getKeynameAt(int p_iSection);
+----
+
+[source, java]
+----   
    QVector<QString> getResultElements();
+----
+
+[source, java]
+----   
    QString getResultAsDisplayStringAt(int p_iColumn, int p_iRow);
-  
+----  
