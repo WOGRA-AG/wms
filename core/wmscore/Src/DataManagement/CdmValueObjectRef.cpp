@@ -233,10 +233,6 @@ CdmObject* CdmValueObjectRef::GetObject()
                   m_bObjectConnected = true;
                }
             }
-            else
-            {
-               ERR("ObjectList but no object stored in this objectref!!!");
-            }
          }
          else
          {
