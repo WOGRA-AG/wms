@@ -237,7 +237,11 @@ QString CdmExecutorPreProcessor::PreProcessFunction(CdmClassMethod* p_pMethod,
 {
     QString qstrCode = GenerateScriptCode(p_pMethod);
     QString qstrMethodName = GenerateMethodName(p_pMethod);
-    PrepareObjects(p_rEngine, p_pCdmBase);
+
+    if (p_pCdmBase)
+    {
+        PrepareObjects(p_rEngine, p_pCdmBase);
+    }
 
     if (p_pCdmBase || p_pMethod->IsStatic())
     {
