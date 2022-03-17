@@ -54,11 +54,6 @@ CdmExecutorFormula::CdmExecutorFormula(CdmExecutor* p_pExecutor)
 {
 }
 
-/** +-=---------------------------------------------------------Mi 19. Sep 14:18:59 2012----------*
- * @method  CdmExecutorFormula::~CdmExecutorFormula                        // public, virtual                   *
- * @return  void                                             //                                   *
- * @comment The Destructor of Class CdmExecutorFormula                                                   *
- *----------------last changed: --------------------------------Mi 19. Sep 14:18:59 2012----------*/
 CdmExecutorFormula::~CdmExecutorFormula()
 {
 }
