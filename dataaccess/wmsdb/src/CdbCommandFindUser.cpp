@@ -323,10 +323,6 @@ void CdbCommandFindUser::EncryptAllPasswords()
             }
         }
     }
-    else
-    {
-        ERR("Old Databaseversion this version will not work with this version of WMS.");
-    }
 }
 
 int CdbCommandFindUser::FindUserByIdentityKey()
