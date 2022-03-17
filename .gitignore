@@ -75,3 +75,4 @@ thirdparty/antlr/antlr4-cpp-runtime-4.7.2-source/files_all.txt
 thirdparty/antlr/antlr4-cpp-runtime-4.7.2-source/files.txt
 clitools/wmsdatainterface/project/compile.txt
 *.qrc
+guilibraries/wmsgui/src/misc/Thumbs.db
