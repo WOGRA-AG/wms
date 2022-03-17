@@ -1,16 +1,3 @@
-/******************************************************************************
- ** WOGRA technologies GmbH & Co. KG Modul Information
- ** Modulename: CdmExecutor.cpp
- ** Started Implementation: 2012/09/19
- ** Description:
- **
- ** Implements the executor for functions and validations in Objects
- **
- ** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
- ** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. 
- **(C) copyright by WOGRA technologies GmbH & Co. KG All rights reserved
- *****************************************************************************/
-
 // System and QT Includes
 #include <QScriptSyntaxCheckResult>
 #include <QScriptProgram>
@@ -133,6 +120,10 @@ QVariant CdmExecutor::ExecuteFunction(CdmClassMethod* p_pMethod,
        {
            pFunction->ActivateDebugger();
        }
+       else
+       {
+           CdmMessageManager::StartAsyncMessageCollection();
+       }
 
        pFunction->setAskForParametersAllowed(p_bAskForParams);
 
@@ -151,6 +142,10 @@ QVariant CdmExecutor::ExecuteFunction(CdmClassMethod* p_pMethod,
        if (p_bDebug)
        {
            pFunction->DetachDebugger();
+       }
+       else
+       {
+           CdmMessageManager::EndAndShowAsyncMessageCollection();
        }
     }
 

@@ -16,10 +16,8 @@
 #include "IwmsPluginInterface.h"
 #include "CdmDataProvider.h"
 #include "CdmSessionManager.h"
-#include "CdmMessageManager.h"
 #include "CdmLogging.h"
 #include "CdmObject.h"
-#include "CdmMessageManager.h"
 #include "CdmValue.h"
 #include "CdmValueBool.h"
 #include "CdmValueInt.h"
@@ -437,9 +435,7 @@ QVariant CdmExecutorFunction::Execute(CdmClassMethod* p_pMethod,
 {
    SYNCHRONIZED;
    QVariant qvValue;
-   CdmMessageManager::StartAsyncMessageCollection();
 
-   
    if (CHKPTR(p_pMethod))
    {
       IdmExecutorEngine* pEngine = GetOrCreateEngine();
@@ -512,7 +508,6 @@ QVariant CdmExecutorFunction::Execute(CdmClassMethod* p_pMethod,
       }
    }
 
-   CdmMessageManager::EndAndShowAsyncMessageCollection();
    return qvValue;
 }
 
