@@ -1,13 +1,3 @@
-/******************************************************************************
- ** WOGRA Middleware Server Communication Module
- **
- ** @Author Wolfgang GraÃŸhof
- **
- ** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
- ** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
- **(C) copyright by WOGRA technologies All rights reserved
- ******************************************************************************/
-
 // System and QT Includes
 #include <qstring.h>
 #include <qdatetime.h>
