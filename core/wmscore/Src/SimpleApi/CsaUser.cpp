@@ -129,7 +129,7 @@ QVariantList CsaUser::getGroups()
 
     for(; qllIt != qllItEnd; ++qllIt)
     {
-        CsaLocatedElement* pElement = getFactory()->createScriptObject(*qllIt);
+        CsaLocatedElement* pElement = dynamic_cast<CsaFactory*> (getFactory())->createScriptObject(*qllIt);
         qlGroups.append(QVariant::fromValue(pElement));
     }
 

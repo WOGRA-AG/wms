@@ -1,13 +1,3 @@
-/******************************************************************************
- ** WOGRA Middleware Server Data Manager Module
- **
- ** @Author Wolfgang Graßhof
- **
- ** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
- ** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
- **(C) copyright by WOGRA technologies All rights reserved
- ******************************************************************************/
-
 // System and QT Includes
 #include <QList>
 
@@ -41,7 +31,7 @@ int CsaManager::getSessionId()
 QObject *CsaManager::getCurrentUser()
 {
     CumUser* pUser = const_cast<CumUser*> (m_rpManager->GetUser());
-    return getFactory()->createScriptObject(pUser);
+    return dynamic_cast<CsaFactory*> (getFactory())->createScriptObject(pUser);
 }
 
 
@@ -75,7 +65,7 @@ QObject* CsaManager::getUserByLogin(QString pLoginName)
         CumUser* cumUser = pManager->FindUserByLogin(pLoginName);
         if (CHKPTR(cumUser))
         {
-            qUser = getFactory()->createScriptObject(cumUser);
+            qUser = dynamic_cast<CsaFactory*> (getFactory())->createScriptObject(cumUser);
         }
     }
     return qUser;
@@ -90,7 +80,7 @@ QObject* CsaManager::getUsergroupByName(QString pGroupName)
         CumUserGroup* cumUserGroup = pManager->FindUserGroupByName(pGroupName);
         if (CHKPTR(cumUserGroup))
         {
-            qUserGroup = getFactory()->createScriptObject(cumUserGroup);
+            qUserGroup = dynamic_cast<CsaFactory*> (getFactory())->createScriptObject(cumUserGroup);
         }
     }
     return qUserGroup;

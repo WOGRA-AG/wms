@@ -195,22 +195,22 @@ CsaLocatedElement* CsaFactory::createScriptObjectInternal(CdmLocatedElement* p_p
             }
             else if (p_pElement->IsScheme())
             {
-                pElement = getScheme();
+                pElement = dynamic_cast<CsaScheme*> (getScheme());
                 bNew = false;
             }
             else if (p_pElement->IsContainerManager())
             {
-                pElement = getContainerManager();
+                pElement = dynamic_cast<CsaContainerManager*> (getContainerManager());
                 bNew = false;
             }
             else if (p_pElement->IsClassManager())
             {
-                pElement = getClassManager();
+                pElement = dynamic_cast<CsaClassManager*> (getClassManager());
                 bNew = false;
             }
             else if (p_pElement->IsDataProvider())
             {
-                pElement = getManager();
+                pElement = dynamic_cast<CsaManager*> (getManager());
                 bNew = false;
             }
 
@@ -262,7 +262,7 @@ void CsaFactory::addObjectForGarbageCollection(QObject* p_pObject)
     m_qlGarbageColectionObjects.append(p_pObject);
 }
 
-CsaContainerManager *CsaFactory::getContainerManager()
+QObject *CsaFactory::getContainerManager()
 {
     if (!m_pContainerManager)
     {
@@ -275,7 +275,7 @@ CsaContainerManager *CsaFactory::getContainerManager()
     return m_pContainerManager;
 }
 
-CsaManager *CsaFactory::getManager()
+QObject *CsaFactory::getManager()
 {
     if (!m_pManager)
     {
@@ -303,7 +303,7 @@ void CsaFactory::setEngine(IdmExecutorEngine *p_pEngine)
 }
 
 
-CsaClassManager *CsaFactory::getClassManager()
+QObject *CsaFactory::getClassManager()
 {
     if (!m_pClassManager)
     {
@@ -317,7 +317,7 @@ CsaClassManager *CsaFactory::getClassManager()
 }
 
 
-CsaScheme *CsaFactory::getScheme()
+QObject *CsaFactory::getScheme()
 {
     if (!m_pScheme)
     {
@@ -334,7 +334,7 @@ CsaScheme *CsaFactory::getScheme()
     return m_pScheme;
 }
 
-CsaQuery* CsaFactory::createQuery(QString p_qstrWQl)
+QObject *CsaFactory::createQuery(QString p_qstrWQl)
 {
    CsaQuery* pQuery = nullptr;
    CdmQueryEnhanced* pQueryInternal = static_cast<CdmQueryEnhanced*>(CdmQueryBuilder::BuildQuery(p_qstrWQl));
@@ -349,7 +349,7 @@ CsaQuery* CsaFactory::createQuery(QString p_qstrWQl)
    return pQuery;
 }
 
-CsaQuery* CsaFactory::createQuery(CdmQuery* p_pQuery)
+QObject *CsaFactory::createQuery(CdmQuery* p_pQuery)
 {
    CsaQuery* pQuery = nullptr;
 
@@ -366,13 +366,13 @@ CsaQuery* CsaFactory::createQuery(CdmQuery* p_pQuery)
 QObject* CsaFactory::findObjectById(int pOlId, int pId)
 {
    CsaObject* pObject = nullptr;
-   QObject* pObjObjectContainer = getContainerManager()->findEmptyContainerById(pOlId);
+   QObject* pObjObjectContainer = dynamic_cast<CsaContainerManager*> (getContainerManager())->findEmptyContainerById(pOlId);
    if(CHKPTR(pObjObjectContainer)){
-       CsaObjectContainer* pObjectContainer = static_cast<CsaObjectContainer*> (pObjObjectContainer);
+       CsaObjectContainer* pObjectContainer = dynamic_cast<CsaObjectContainer*> (pObjObjectContainer);
        if (CHKPTR(pObjectContainer)) {
            QObject* pObjObject = pObjectContainer->findObjectById(pId);
            if(CHKPTR(pObjObject)){
-             pObject = static_cast<CsaObject*> (pObjObject);
+             pObject = dynamic_cast<CsaObject*> (pObjObject);
            }
        }
    }

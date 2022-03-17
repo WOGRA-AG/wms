@@ -1,16 +1,3 @@
-/******************************************************************************
- ** WOGRA technologies GmbH & Co. KG Modul Information
- ** Modulename: CwmsScriptablePrinter.cpp
- ** Started Implementation: 2012/11/13
- ** Description:
- **
- **
- **
- ** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
- ** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. 
- **(C) copyright by WOGRA technologies GmbH & Co. KG All rights reserved
- *****************************************************************************/
-
 // System and QT Includes
 
 // WMS Includes
@@ -31,30 +18,14 @@
 #include "CwmsScriptablePrinter.h"
 
 
-/** +-=---------------------------------------------------------Di 13. Nov 11:35:33 2012----------*
- * @method  CwmsScriptablePrinter::CwmsScriptablePrinter     // public                            *
- * @return                                                   //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Di 13. Nov 11:35:33 2012----------*/
 CwmsScriptablePrinter::CwmsScriptablePrinter()
 {
 }
 
-/** +-=---------------------------------------------------------Di 13. Nov 11:35:41 2012----------*
- * @method  CwmsScriptablePrinter::~CwmsScriptablePrinter    // public, virtual                   *
- * @return  void                                             //                                   *
- * @comment The Destructor of Class CwmsScriptablePrinter                                         *
- *----------------last changed: --------------------------------Di 13. Nov 11:35:41 2012----------*/
 CwmsScriptablePrinter::~CwmsScriptablePrinter()
 {
 }
 
-/** +-=---------------------------------------------------------Di 13. Nov 11:35:59 2012----------*
- * @method  CwmsScriptablePrinter::Print                     // public, slots                     *
- * @return  void                                             //                                   *
- * @param   CsaObject* p_pCsaObject                          //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Di 13. Nov 11:35:59 2012----------*/
 void CwmsScriptablePrinter::print(CsaObject* p_pCsaObject)
 {
    if (CHKPTR(p_pCsaObject))
@@ -299,7 +270,7 @@ void CwmsScriptablePrinter::print(CsaObjectContainer* p_pList)
       if (!qstrTemplate.isEmpty())
       {
          CwmsPrintingTemplate cTemplate = cReportManager.GetReport(qstrTemplate);
-         CsaFactory* pFactory = p_pList->getFactory();
+         CsaFactory* pFactory = dynamic_cast<CsaFactory*> (p_pList->getFactory());
          print(p_pList, static_cast<CsaObject*>(pFactory->createScriptObject(cTemplate.GetObject())));
       }
    }
@@ -352,7 +323,7 @@ QString CwmsScriptablePrinter::printPdfToBase64(CsaObjectContainer* p_pList)
       if (!qstrTemplate.isEmpty())
       {
          CwmsPrintingTemplate cTemplate = cReportManager.GetReport(qstrTemplate);
-         CsaFactory* pFactory = p_pList->getFactory();
+         CsaFactory* pFactory = dynamic_cast<CsaFactory*> (p_pList->getFactory());
          qba = printPdfToBase64(p_pList, static_cast<CsaObject*>(pFactory->createScriptObject(cTemplate.GetObject())));
       }
    }
@@ -487,7 +458,7 @@ void CwmsScriptablePrinter::print(CdmQueryEnhanced* pQuery, CwmsReportManager &c
    }
 
    CwmsPrintingTemplate cTemplate = cReportManager.GetReport(qstrTemplate);
-   CsaFactory* pFactory = p_pCsaObject->getFactory();
+   CsaFactory* pFactory = dynamic_cast<CsaFactory*> (p_pCsaObject->getFactory());
 
    CdmObject* pTemplateObject = cTemplate.GetObject();
 
@@ -535,7 +506,7 @@ QString CwmsScriptablePrinter::printPdfToBase64(CdmQueryEnhanced* pQuery, CwmsRe
    CwmsPrintingTemplate cTemplate = cReportManager.GetReport(qstrTemplate);
    if (cTemplate.IsValid())
    {
-        CsaFactory* pFactory = p_pCsaObject->getFactory();
+        CsaFactory* pFactory = dynamic_cast<CsaFactory*> (p_pCsaObject->getFactory());
         CsaObject* pCsaTemplateObject =
                 static_cast<CsaObject*>(pFactory->createScriptObject(cTemplate.GetObject()));
         qba = printPdfToBase64(p_pCsaObject, pCsaTemplateObject);
@@ -546,4 +517,3 @@ QString CwmsScriptablePrinter::printPdfToBase64(CdmQueryEnhanced* pQuery, CwmsRe
     }
    return qba;
 }
-

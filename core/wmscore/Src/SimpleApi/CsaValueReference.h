@@ -8,25 +8,26 @@ class CdmValue;
 class CsaValueReference : public CsaLocatedElement
 {
     Q_OBJECT
+
+    friend class CsaObject;
+
 private:
     CdmValue* m_rpValue;
-public:
+
+private:
     CsaValueReference(CdmValue* p_pRef);
     virtual ~CsaValueReference();
 
+public:
     CdmValue *getInternals();
+    virtual QVariant getDetailedVariant();
+
 public slots:
     QVariant get();
     void set(QObject* p_pObject);
     QVariant getValueReference(); // deprecated
     void setValueReference(QObject *p_pObject);// deprecated
     virtual bool isReference();
-
-    // CsaLocatedElement interface
-public:
-    virtual QVariant getDetailedVariant();
-
-
 };
 
 #endif // CSAVALUEREFERENCE_H

@@ -46,7 +46,7 @@ QObject *CsaQuery::getObjectAt(int p_iIndex)
 
    if (pObjectInternal)
    {
-      CsaFactory* pFactory = getFactory();
+      CsaFactory* pFactory = dynamic_cast<CsaFactory*> (getFactory());
 
       if (CHKPTR(pFactory))
       {
@@ -110,7 +110,7 @@ QObject* CsaQuery::getFirstResultObject()
 
    if (pObjectInternal)
    {
-      CsaFactory* pFactory = getFactory();
+      CsaFactory* pFactory = dynamic_cast<CsaFactory*> (getFactory());
 
       if (CHKPTR(pFactory))
       {
@@ -143,7 +143,7 @@ QObject *CsaQuery::getContainer()
 
    if (pContainerInternal)
    {
-      CsaFactory* pFactory = getFactory();
+      CsaFactory* pFactory = dynamic_cast<CsaFactory*> (getFactory());
 
       if (CHKPTR(pFactory))
       {
@@ -159,7 +159,7 @@ QObject *CsaQuery::getClass()
     CsaClass* pClass = nullptr;
 
     CdmClass* pClassInternal = const_cast<CdmClass*>(m_pQuery->GetClass());
-    CsaFactory* pFactory = getFactory();
+    CsaFactory* pFactory = dynamic_cast<CsaFactory*> (getFactory());
 
     if (pClassInternal)
     {

@@ -39,7 +39,7 @@ QVariant CsaValueReference::get()
 
            if (pObject)
            {
-               qvValue.setValue(getFactory()->createScriptObject(pObject));
+               qvValue.setValue(dynamic_cast<CsaFactory*> (getFactory())->createScriptObject(pObject));
            }
        }
        else if (pCdmValue->GetValueType() == eDmValueContainerRef)
@@ -48,7 +48,7 @@ QVariant CsaValueReference::get()
 
            if (pContainer)
            {
-               qvValue.setValue(getFactory()->createScriptObject(pContainer));
+               qvValue.setValue(dynamic_cast<CsaFactory*> (getFactory())->createScriptObject(pContainer));
            }
        }
     }

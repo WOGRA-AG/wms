@@ -1,13 +1,3 @@
-/******************************************************************************
- ** WOGRA Middleware Server Data Manager Module
- **
- ** @Author Wolfgang Graßhof
- **
- ** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
- ** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
- **(C) copyright by WOGRA technologies All rights reserved
- ******************************************************************************/
-
 // System and QT Includes
 
 #include "wmsdefines.h"
@@ -35,7 +25,7 @@ CsaClassManager::~CsaClassManager()
 QObject* CsaClassManager::findClass(QString p_qstrKeyname)
 {
     CdmClass* pClass = getInternals()->FindClassByKeyname(p_qstrKeyname);
-    return getFactory()->createScriptObject(pClass);
+    return dynamic_cast<CsaFactory*> (getFactory())->createScriptObject(pClass);
 }
 
 QVariantList CsaClassManager::getClassList()
@@ -47,13 +37,13 @@ QVariantList CsaClassManager::getClassList()
     QList<CdmClass*>::iterator qllIt = qllClasses.begin();
     QList<CdmClass*>::iterator qllItEnd = qllClasses.end();
 
-    CsaFactory* pFactory = getFactory();
+    CsaFactory* pFactory = dynamic_cast<CsaFactory*> (getFactory());
 
     if (CHKPTR(pFactory))
     {
         for(; qllIt != qllItEnd; ++qllIt)
         {
-            CsaLocatedElement* pElement = getFactory()->createScriptObject(*qllIt);
+            CsaLocatedElement* pElement = dynamic_cast<CsaFactory*> (getFactory())->createScriptObject(*qllIt);
 
             if (pElement)
             {
@@ -90,14 +80,14 @@ QVariant CsaClassManager::getDetailedVariant()
         QList<CdmClass*>::iterator qllIt = qllClasses.begin();
         QList<CdmClass*>::iterator qllItEnd = qllClasses.end();
 
-        CsaFactory* pFactory = getFactory();
+        CsaFactory* pFactory = dynamic_cast<CsaFactory*> (getFactory());
         QVariantList qvlClasses;
 
         if (CHKPTR(pFactory))
         {
             for(; qllIt != qllItEnd; ++qllIt)
             {
-                CsaClass* pElement = dynamic_cast<CsaClass*> (getFactory()->createScriptObject(*qllIt));
+                CsaClass* pElement = dynamic_cast<CsaClass*> (dynamic_cast<CsaFactory*> (getFactory())->createScriptObject(*qllIt));
 
                 if (pElement)
                 {

@@ -155,7 +155,8 @@ void CsraUtilities::executeQuery(CsaFactory* p_pFactory, QString p_qstrQuery, Cw
 {
     if (CHKPTR(p_pFactory))
     {
-        CsaQuery* pQuery = p_pFactory->createQuery(p_qstrQuery);
+        CsaQuery* pQuery =  dynamic_cast<CsaQuery*> (p_pFactory->createQuery(p_qstrQuery));
+
         if (CHKPTR(pQuery))
         {
             pQuery->execute();
@@ -176,7 +177,7 @@ void CsraUtilities::createAndExecuteQuery(CsaObjectContainer* p_pContainer, CwsH
     if (CHKPTR(p_pContainer))
     {
         QString qstrQuery = generateWql(p_pContainer->getInternals());
-        executeQuery(p_pContainer->getFactory(), qstrQuery, p_pResponse, qvm);
+        executeQuery(dynamic_cast<CsaFactory*> (p_pContainer->getFactory()), qstrQuery, p_pResponse, qvm);
     }
 }
 
@@ -185,6 +186,6 @@ void CsraUtilities::createAndExecuteQuery(CsaObjectContainer* p_pContainer, CwsH
     if (CHKPTR(p_pContainer))
     {
         QString qstrQuery = generateWql(p_pContainer->getInternals(), p_iFrom, p_iTo);
-        executeQuery(p_pContainer->getFactory(), qstrQuery, p_pResponse, qvm);
+        executeQuery(dynamic_cast<CsaFactory*> (p_pContainer->getFactory()), qstrQuery, p_pResponse, qvm);
     }
 }

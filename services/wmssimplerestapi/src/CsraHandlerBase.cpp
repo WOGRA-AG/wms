@@ -138,7 +138,7 @@ QVariant CsraHandlerBase::handleGetCommonCommandsRequest(CsaLocatedElement* p_pE
 
         if (!qstrWql.isEmpty())
         {
-            CsraUtilities::executeQuery(p_pElement->getFactory(), qstrWql, p_pResponse, qvm);
+            CsraUtilities::executeQuery(dynamic_cast<CsaFactory*> (p_pElement->getFactory()), qstrWql, p_pResponse, qvm);
         }
         else
         {

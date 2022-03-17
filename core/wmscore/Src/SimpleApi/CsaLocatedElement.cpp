@@ -80,7 +80,7 @@ QObject* CsaLocatedElement::getScheme()
    return nullptr;
 }
 
-CsaFactory* CsaLocatedElement::getFactory()
+QObject *CsaLocatedElement::getFactory()
 {
    return m_rpFactory;
 }

@@ -1,13 +1,3 @@
-/******************************************************************************
- ** WOGRA Middleware Server Data Manager Module
- **
- ** @Author Wolfgang Graßhof
- **
- ** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
- ** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
- **(C) copyright by WOGRA technologies All rights reserved
- ******************************************************************************/
-
 // System and QT Includes
 #include <QScriptEngine>
 
@@ -38,17 +28,17 @@ CsaObjectContainer::~CsaObjectContainer()
 
 QObject *CsaObjectContainer::findObjectById(int p_iId)
 {
-    return getFactory()->createScriptObject(getInternals()->FindObjectById(p_iId));
+    return dynamic_cast<CsaFactory*> (getFactory())->createScriptObject(getInternals()->FindObjectById(p_iId));
 }
 
 QObject *CsaObjectContainer::findObjectByKeyname(QString qstr_Keyname)
 {
-    return getFactory()->createScriptObject(getInternals()->FindObjectByKeyname(qstr_Keyname));
+    return dynamic_cast<CsaFactory*> (getFactory())->createScriptObject(getInternals()->FindObjectByKeyname(qstr_Keyname));
 }
 
 QObject *CsaObjectContainer::copyObject(CsaObject *p_pObject)
 {
-   return getFactory()->createScriptObject(getInternals()->CopyObject(p_pObject->getInternals()));
+   return dynamic_cast<CsaFactory*> (getFactory())->createScriptObject(getInternals()->CopyObject(p_pObject->getInternals()));
 }
 
 QObject *CsaObjectContainer::createObject()
@@ -57,7 +47,7 @@ QObject *CsaObjectContainer::createObject()
 
    if (pObject)
    {
-      return getFactory()->createScriptObject(pObject);
+      return dynamic_cast<CsaFactory*> (getFactory())->createScriptObject(pObject);
    }
    else
    {
@@ -72,7 +62,7 @@ QObject *CsaObjectContainer::createObject(QString p_qstrKeyname)
 
    if (pObject)
    {
-      return getFactory()->createScriptObject(pObject);
+      return dynamic_cast<CsaFactory*> (getFactory())->createScriptObject(pObject);
    }
    else
    {
@@ -110,7 +100,7 @@ QVariantList CsaObjectContainer::getObjectList()
    for(; qllIt != qllItEnd; ++qllIt)
    {
       CdmObject* pObject = *qllIt;
-      CsaLocatedElement* csaObject = getFactory()->createScriptObject(pObject);
+      CsaLocatedElement* csaObject = dynamic_cast<CsaFactory*> (getFactory())->createScriptObject(pObject);
       QVariant qvObject;
       qvObject.setValue(csaObject);
       INFO("Object Content: " + qvObject.toString());
@@ -153,7 +143,7 @@ bool CsaObjectContainer::hasOwner()
 
 QObject *CsaObjectContainer::getOwner()
 {
-   return static_cast<CsaObject*> (getFactory()->createScriptObject(getInternals()->GetOwner()));
+   return static_cast<CsaObject*> (dynamic_cast<CsaFactory*> (getFactory())->createScriptObject(getInternals()->GetOwner()));
 }
 
 void CsaObjectContainer::loadContainerComplete()
@@ -204,7 +194,7 @@ QVariant CsaObjectContainer::getDetailedVariant()
 
       if (CHKPTR(pClass))
       {
-         CsaClass* pCsaClass = dynamic_cast<CsaClass*> (getFactory()->createScriptObject(const_cast<CdmClass*>(pClass)));
+         CsaClass* pCsaClass = dynamic_cast<CsaClass*> (dynamic_cast<CsaFactory*> (getFactory())->createScriptObject(const_cast<CdmClass*>(pClass)));
 
          if (CHKPTR(pCsaClass))
          {

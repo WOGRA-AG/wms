@@ -39,7 +39,7 @@ QObject* CwmsScriptableWql::execute(QString p_qstrWql)
 
    if (pFactory)
    {
-      pQuery = pFactory->createQuery(p_qstrWql);
+      pQuery = dynamic_cast<CsaQuery*> (pFactory->createQuery(p_qstrWql));
 
       if (CHKPTR(pQuery))
       {

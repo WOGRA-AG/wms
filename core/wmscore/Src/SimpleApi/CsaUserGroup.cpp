@@ -1,13 +1,3 @@
-/******************************************************************************
- ** WOGRA Middleware Server Data Manager Module
- **
- ** @Author Wolfgang Graßhof
- **
- ** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
- ** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
- **(C) copyright by WOGRA technologies All rights reserved
- ******************************************************************************/
-
 // System and QT Includes
 
 // own Includes
@@ -36,7 +26,7 @@ QVariantList CsaUserGroup::getUsers()
 
     for(; qllIt != qllItEnd; ++qllIt)
     {
-        CsaLocatedElement* pElement = getFactory()->createScriptObject(*qllIt);
+        CsaLocatedElement* pElement = dynamic_cast<CsaFactory*> (getFactory())->createScriptObject(*qllIt);
         qlUsers.append(QVariant::fromValue(pElement));
     }
 

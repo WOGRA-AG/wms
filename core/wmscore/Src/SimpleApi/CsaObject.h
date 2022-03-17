@@ -1,13 +1,3 @@
-/******************************************************************************
- ** WOGRA Middleware Server Data Manager Module
- **
- ** @Author Wolfgang Graßhof
- **
- ** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
- ** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
- **(C) copyright by WOGRA technologies All rights reserved
- ******************************************************************************/
-
 #ifndef CSCRIPTOBJECT
 #define CSCRIPTOBJECT
 
@@ -81,7 +71,6 @@ public slots:
         virtual QVariantMap getObjectGraphVariant(bool p_bFollowNonOwnerObjectlist, bool p_bFollowNonOwnerObject, QStringList p_qstrExcludedKeynames, int p_iMaxDepth, int p_iMaxObjects);
         bool hasCurrentUserWriteAccess();
         bool hasCurrentUserReadAccess();
-
         void setValuePrimitive(QString p_qstrKeyname, QVariant p_Value);
         void setValueReference(QString p_qstrKeyname, QObject* p_pRef);
         int commit();
@@ -104,9 +93,11 @@ public slots:
         bool isModified();
         void setImmutable(bool p_bImmutable);
         void deleteObjectOnDb();
+
 protected:
         virtual bool eventFilter(QObject *obj, QEvent *event);
         virtual void setFactory(CsaFactory *p_pFactory);
+
 private slots:
         void ValueChangedSlot(CdmValue *p_pCdmValue);
 };

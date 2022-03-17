@@ -1,13 +1,3 @@
-/******************************************************************************
- ** WOGRA Middleware Server Data Manager Module
- **
- ** @Author Wolfgang Graßhof
- **
- ** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
- ** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
- **(C) copyright by WOGRA technologies All rights reserved
- ******************************************************************************/
-
 // System and QT Includes
 #include <QString>
 
@@ -43,7 +33,7 @@ QObject* CsaContainerManager::createContainer(CsaClass *p_pClass)
 
 QObject* CsaContainerManager::findContainerById(int p_iId)
 {
-    return getFactory()->createScriptObject(getInternals()->FindContainerById(p_iId));
+    return dynamic_cast<CsaFactory*> (getFactory())->createScriptObject(getInternals()->FindContainerById(p_iId));
 }
 
 QObject* CsaContainerManager::findContainerByKeyname(QString p_qstrKeyname)
@@ -52,7 +42,7 @@ QObject* CsaContainerManager::findContainerByKeyname(QString p_qstrKeyname)
 
     if (CHKPTR(pContainerManager))
     {
-        return getFactory()->createScriptObject(getInternals()->FindContainerByKeyname(p_qstrKeyname));
+        return dynamic_cast<CsaFactory*> (getFactory())->createScriptObject(getInternals()->FindContainerByKeyname(p_qstrKeyname));
     }
 
     return nullptr;
@@ -60,12 +50,12 @@ QObject* CsaContainerManager::findContainerByKeyname(QString p_qstrKeyname)
 
 QObject* CsaContainerManager::findEmptyContainerById(int p_iId)
 {
-    return getFactory()->createScriptObject(getInternals()->FindEmptyContainerById(p_iId));
+    return dynamic_cast<CsaFactory*> (getFactory())->createScriptObject(getInternals()->FindEmptyContainerById(p_iId));
 }
 
 QObject* CsaContainerManager::findEmptyContainerByKeyname(QString p_qstrKeyname)
 {
-    return getFactory()->createScriptObject(getInternals()->FindEmptyContainerByKeyname(p_qstrKeyname));
+    return dynamic_cast<CsaFactory*> (getFactory())->createScriptObject(getInternals()->FindEmptyContainerByKeyname(p_qstrKeyname));
 }
 
 QObject* CsaContainerManager::createContainer(QString p_qstrClassKeyname)
@@ -92,14 +82,14 @@ QObject* CsaContainerManager::createContainer(QString p_qstrKeyname, QString p_q
             if(getInternals()->CreateContainer(pdmClass, p_qstrKeyname) > 0)
             {
                 CdmObjectContainer* pInternalContainer = getInternals()->FindContainerByKeyname(p_qstrKeyname);
-                pContainer = getFactory()->createScriptObject(pInternalContainer);
+                pContainer = dynamic_cast<CsaFactory*> (getFactory())->createScriptObject(pInternalContainer);
             }
         }
     }
     else
     {
         QString qstrError = "Class with name " + p_qstrClassKeyname + " not found. Can not create container.";
-        getFactory()->throwError(qstrError);
+        dynamic_cast<CsaFactory*> (getFactory())->throwError(qstrError);
 
     }
 
@@ -116,7 +106,7 @@ QObject* CsaContainerManager::createContainer(QString p_qstrKeyname, CsaClass *p
         if (getInternals()->CreateContainer(pClass, p_qstrKeyname) > 0)
         {
             CdmObjectContainer* pInternalContainer = getInternals()->FindContainerByKeyname(p_qstrKeyname);
-            pContainer = getFactory()->createScriptObject(pInternalContainer);
+            pContainer = dynamic_cast<CsaFactory*> (getFactory())->createScriptObject(pInternalContainer);
         }
     }
 
@@ -130,7 +120,7 @@ QObject* CsaContainerManager::copyContainer(CsaObjectContainer *p_pContainer, bo
 
     if (CHKPTR(pInternalContainer))
     {
-        pContainer = getFactory()->createScriptObject(pInternalContainer);
+        pContainer = dynamic_cast<CsaFactory*> (getFactory())->createScriptObject(pInternalContainer);
     }
 
     return pContainer;
@@ -156,7 +146,7 @@ QObject* CsaContainerManager::reloadContainerComplete(CsaObjectContainer *p_pCon
 {
     CdmObjectContainer* pContainer = p_pContainer->getInternals();
     getInternals()->ReloadContainerComplete(pContainer);
-    return getFactory()->createScriptObject(pContainer);
+    return dynamic_cast<CsaFactory*> (getFactory())->createScriptObject(pContainer);
 }
 
 void CsaContainerManager::removeContainerLocal(CsaObjectContainer *p_pContainer)

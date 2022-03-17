@@ -12,7 +12,7 @@ class CsaFactory;
 class IsaLocatedElement
 {
 public slots:
-    virtual CsaFactory* getFactory() = 0;
+    virtual QObject* getFactory() = 0;
     virtual QObject* getManager() = 0;
     virtual QObject* getContainerManager() = 0;
     virtual QObject* getClassManager() = 0;

@@ -61,27 +61,28 @@ public:
     CsaFactory(IdmExecutorEngine* p_pEngine);
     virtual ~CsaFactory();
     CsaLocatedElement* createThisScriptObject(CdmObject* p_pElement);
-    CsaScheme* getScheme();
+
     void createFormulaScriptObject(CdmObject *p_pCdmObject);
     void throwError(QString p_qstrException);
     IdmExecutorEngine *getEngine();
     void setEngine(IdmExecutorEngine* p_pEngine);
+    CsaLocatedElement* createScriptObject(CdmLocatedElement* p_pElement);
+    QObject *createQuery(CdmQuery *p_pQuery);
+    CsaResultObject *createResultObject();
 
     static CsaObjectContainer *convertContainer(CdmObjectContainer *p_pContainer, CsaFactory *p_pFactory);
     static CsaObject *convertObject(CdmObject *p_pObject, CsaFactory *p_pFactory);
     static CsaFactory* getCurrentFunctionFactory();
-
-    CsaResultObject *createResultObject();
     static QVariant convertToResultVariant(const QVariant &p_rQVariant);
     static QVariant convertToResultVariantForSubMethodCalls(const QVariant &p_rQVariant);
+
 public slots:
-    CsaLocatedElement* createScriptObject(CdmLocatedElement* p_pElement);
-    CsaClassManager* getClassManager();
-    CsaContainerManager* getContainerManager();
-    CsaManager* getManager();
-    CsaQuery* createQuery(QString p_qstrWQl);
+    QObject* getClassManager();
+    QObject* getContainerManager();
+    QObject* getManager();
+    QObject* createQuery(QString p_qstrWQl);
+    QObject* getScheme();
     void collectGarbage();
-    CsaQuery *createQuery(CdmQuery *p_pQuery);
     QObject *findObjectById(int pOlId, int pId);
     void addObjectForGarbageCollection(QObject *p_pObject);
     QStringList getArguments();

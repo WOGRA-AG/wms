@@ -1,17 +1,4 @@
-﻿/******************************************************************************
- ** WOGRA technologies Gmbh & Co KG Modul Information
- ** Modulename: CwmsScriptableWql.h
- ** Started Implementation: 2012/11/09
- ** Description:
- ** 
- ** implements the script interface for js methods using wql
- **
- ** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
- ** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. 
- **(C) copyright by WOGRA technologies GmbH & Co KG All rights reserved
- *****************************************************************************/ 
-
-#ifndef CWMSSCRIPTABLEWQL_H
+﻿#ifndef CWMSSCRIPTABLEWQL_H
 #define CWMSSCRIPTABLEWQL_H
 
 #ifdef WURZELBLA

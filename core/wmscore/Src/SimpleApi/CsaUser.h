@@ -24,6 +24,7 @@ private:
 
 public:
     CumUser* getInternals();
+    virtual QVariant getDetailedVariant();
 
 public slots:
     int getId();
@@ -34,15 +35,6 @@ public slots:
     bool isActive();
     bool isAdmin();
     QVariantList getGroups();
-
-
-
-
-
-    // CsaLocatedElement interface
-public:
-    virtual QVariant getDetailedVariant();
-
 };
 
 #endif //

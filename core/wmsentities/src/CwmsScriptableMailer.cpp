@@ -1,17 +1,4 @@
-﻿/******************************************************************************
- ** WOGRA technologies GmbH & Co. KG Modul Information
- ** Modulename: CwmsScriptableMailer.cpp
- ** Started Implementation: 2012/11/09
- ** Description:
- **
- ** implements the script interface for js methods using mails
- **
- ** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
- ** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. 
- **(C) copyright by WOGRA technologies GmbH & Co. KG All rights reserved
- *****************************************************************************/
-
-// System and QT Includes
+﻿// System and QT Includes
 
 // WMS Includes
 #include "CdmLogging.h"

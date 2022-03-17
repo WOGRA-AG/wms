@@ -1,13 +1,3 @@
-/******************************************************************************
- ** WOGRA Middleware Server Data Manager Module
- **
- ** @Author Wolfgang Graßhof
- **
- ** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
- ** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
- **(C) copyright by WOGRA technologies All rights reserved
- ******************************************************************************/
-
 // System and QT Includes
 #include <QScriptValue>
 #include <QEvent>
@@ -136,7 +126,7 @@ void CsaObject::addValuesAsProperties()
                 {
                     QVariant qvValueObject;
                     CsaValueReference* pRef = new CsaValueReference(pCdmValue);
-                    pRef->setFactory(getFactory());
+                    pRef->setFactory(dynamic_cast<CsaFactory*> (getFactory()));
                     m_qlReferences.append(pRef); // for garbage collection
                     INFO("Value " + qstrKeyname + "(" + qstrValueType + ") is a container or object and will be added is QObject.");
                     qvValueObject.setValue(pRef);
@@ -167,7 +157,7 @@ void CsaObject::addFunctionsToObject()
                 QVariant qvMethod;
                 CsaFunction* pFunction = new CsaFunction(this, qmIt.key());
                 pFunction->setElement(pMethod);
-                pFunction->setFactory(getFactory());
+                pFunction->setFactory(dynamic_cast<CsaFactory*> (getFactory()));
                 qvMethod.setValue(pFunction);
                 m_qlFunctions.append(pFunction);
                 setProperty(qmIt.key().toUtf8(), qvMethod);
@@ -213,7 +203,7 @@ QObject *CsaObject::getValueUser(QString p_qstrKeyname)
         {
             if (pValue->GetValueType() == eDmValueUser)
             {
-                pObject = getFactory()->createScriptObject(((CdmValueUser*)pValue)->GetUser());
+                pObject = dynamic_cast<CsaFactory*> (getFactory())->createScriptObject(((CdmValueUser*)pValue)->GetUser());
             }
         }
     }
@@ -274,11 +264,11 @@ QObject *CsaObject::getValueReference(QString p_qstrKeyname)
         {
             if (pValue->GetValueType() == eDmValueObjectRef)
             {
-                pObject = getFactory()->createScriptObject(((CdmValueObjectRef*)pValue)->GetObject());
+                pObject = dynamic_cast<CsaFactory*> (getFactory())->createScriptObject(((CdmValueObjectRef*)pValue)->GetObject());
             }
             else if (pValue->GetValueType() == eDmValueContainerRef)
             {
-                pObject = getFactory()->createScriptObject(((CdmValueContainerRef*)pValue)->GetContainer());
+                pObject = dynamic_cast<CsaFactory*> (getFactory())->createScriptObject(((CdmValueContainerRef*)pValue)->GetContainer());
             }
         }
     }
@@ -332,7 +322,7 @@ QObject *CsaObject::getContainer()
 {
     if (CHKPTR(getInternals()))
     {
-        return getFactory()->createScriptObject(getInternals()->GetObjectContainer());
+        return dynamic_cast<CsaFactory*> (getFactory())->createScriptObject(getInternals()->GetObjectContainer());
     }
     else
     {
@@ -751,7 +741,7 @@ QVariant CsaObject::getDetailedVariant()
 
         if (CHKPTR(pClass))
         {
-           CsaClass* pCsaClass = dynamic_cast<CsaClass*> (getFactory()->createScriptObject(const_cast<CdmClass*>(pClass)));
+           CsaClass* pCsaClass = dynamic_cast<CsaClass*> (dynamic_cast<CsaFactory*> (getFactory())->createScriptObject(const_cast<CdmClass*>(pClass)));
 
            if (CHKPTR(pCsaClass))
            {
@@ -1022,7 +1012,7 @@ bool CsaObject::hasOwner(QString qstrObjectKeyname)
 
 QObject *CsaObject::getOwner()
 {
-    return static_cast<CsaObject*> (getFactory()->createScriptObject(getInternals()->GetOwner()));
+    return static_cast<CsaObject*> (dynamic_cast<CsaFactory*> (getFactory())->createScriptObject(getInternals()->GetOwner()));
 }
 
 QObject *CsaObject::getOwner(QString qstrObjectKeyname)
@@ -1045,7 +1035,7 @@ void CsaObject::setImmutable(bool p_bImmutable)
 QObject *CsaObject::getClass()
 {
     CsaLocatedElement* pClass = nullptr;
-    CsaFactory* pFactory = getFactory();
+    CsaFactory* pFactory = dynamic_cast<CsaFactory*> (getFactory());
 
     if (CHKPTR(pFactory))
     {

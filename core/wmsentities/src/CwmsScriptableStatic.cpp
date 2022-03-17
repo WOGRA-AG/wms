@@ -1,6 +1,3 @@
-
-
-
 // WMS Includes
 #include "CdmLogging.h"
 #include "CdmClass.h"

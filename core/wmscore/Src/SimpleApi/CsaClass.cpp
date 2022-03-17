@@ -1,13 +1,3 @@
-/******************************************************************************
- ** WOGRA Middleware Server Data Manager Module
- **
- ** @Author Wolfgang Graßhof
- **
- ** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
- ** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
- **(C) copyright by WOGRA technologies All rights reserved
- ******************************************************************************/
-
 // System and QT Includes
 
 // WMS Commons Includes
@@ -46,7 +36,7 @@ CsaClass::~CsaClass()
 
 QObject* CsaClass::findMember(QString p_qstrKeyname)
 {
-   return getFactory()->createScriptObject(const_cast<CdmMember*>(getInternals()->FindMember(p_qstrKeyname)));
+   return dynamic_cast<CsaFactory*> (getFactory())->createScriptObject(const_cast<CdmMember*>(getInternals()->FindMember(p_qstrKeyname)));
 }
 
 QVariantList CsaClass::getMembers()
@@ -60,7 +50,7 @@ QVariantList CsaClass::getMembers()
 
    for (; qIt != qItEnd; ++qIt)
    {
-      CsaLocatedElement* pElement = getFactory()->createScriptObject(const_cast<CdmMember*>(qIt.value()));
+      CsaLocatedElement* pElement = dynamic_cast<CsaFactory*> (getFactory())->createScriptObject(const_cast<CdmMember*>(qIt.value()));
       if (pElement)
       {
          qlMembers.append(QVariant::fromValue(pElement));
@@ -82,7 +72,7 @@ QVariantList CsaClass::getBaseClasses()
    {
       CdmClassManager* pClassManager = getInternals()->GetClassManager();
       CdmClass* pClass = pClassManager->FindClassById(qIt.key());
-      CsaLocatedElement* pElement = getFactory()->createScriptObject(pClass);
+      CsaLocatedElement* pElement = dynamic_cast<CsaFactory*> (getFactory())->createScriptObject(pClass);
 
       if (pElement)
       {
@@ -139,7 +129,7 @@ QObject* CsaClass::getSingletonObject()
 
    if (pObject)
    {
-      return getFactory()->createScriptObject(pObject);
+      return dynamic_cast<CsaFactory*> (getFactory())->createScriptObject(pObject);
    }
 
    return nullptr;
@@ -189,7 +179,7 @@ void CsaClass::addMembersToVariant(CdmClass* pClass, QVariantMap& qvm)
            pMember->GetAccessMode() == eDmMemberAccessProtected) &&
           pMember->GetRights().HasCurrentUserReadAccess())
       {
-         CsaMember* pMember = dynamic_cast<CsaMember*> (getFactory()->createScriptObject(qlMembers[iPos]));
+         CsaMember* pMember = dynamic_cast<CsaMember*> (dynamic_cast<CsaFactory*> (getFactory())->createScriptObject(qlMembers[iPos]));
          cTime.finishedTask("Created Member Script Object " + QString::number(iPos));
 
          if (pMember)
@@ -216,7 +206,7 @@ void CsaClass::addBaseClassesToVariant(CdmClass* pClass, CdmClassManager* pClass
 
       if (CHKPTR(pBaseClass))
       {
-         CsaClass* pClass = dynamic_cast<CsaClass*> (getFactory()->createScriptObject(pBaseClass));
+         CsaClass* pClass = dynamic_cast<CsaClass*> (dynamic_cast<CsaFactory*> (dynamic_cast<CsaFactory*> (getFactory()))->createScriptObject(pBaseClass));
          qvlBaseClasses.append(pClass->getRoughVariant());
       }
    }

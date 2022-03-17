@@ -1,13 +1,3 @@
-/******************************************************************************
- ** WOGRA Middleware Server Data Manager Module
- **
- ** @Author Wolfgang Graßhof
- **
- ** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
- ** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
- **(C) copyright by WOGRA technologies All rights reserved
- ******************************************************************************/
-
 #ifndef CSCRIPTVALUE
 #define CSCRIPTVALUE
 
@@ -74,7 +64,6 @@ public slots:
     virtual QVariantList getListDoubles();
     virtual QVariantList getListStrings();
     virtual QVariant getValueReference();
-
     bool removeListValue(QString p_qstrValue);
     bool addListValue(QString p_qstrValue);
     void setValueBool(bool p_bValue);
@@ -85,7 +74,6 @@ public slots:
     void setValueTime(QTime p_qtTime);
     void setSelectionValue(int p_iId);
     void setValueReference(QObject *p_pObject);
-
     bool removeDictValue(QString p_qstrKey);
     bool InsertDictValue(QString p_qstrKey, QString p_qstrValue);
     bool hasCurrentUserReadAccess();

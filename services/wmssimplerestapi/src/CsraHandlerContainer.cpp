@@ -113,7 +113,7 @@ void CsraHandlerContainer::createObject(CsaLocatedElement *p_pElement, CwsHttpRe
                     QVariantMap qVariant = cCdmObjectAdaptor.GetVariantGraph(false, false, QStringList(), 1, 1);
                     qVariant.remove(WMS_PROCESSED_OBJECTS);
                     qvm.insert(WMS_SIMPLE_REST_DATA, qVariant);
-                    CsaLocatedElement* pElement = p_pElement->getFactory()->createScriptObject(pObject);
+                    CsaLocatedElement* pElement = dynamic_cast<CsaFactory*> (p_pElement->getFactory())->createScriptObject(pObject);
                     QVariantList qvlLinks = generateLinkRestSection(pElement).toList();
                     qvm.insert(WMS_LINKS, qvlLinks);
                     qvm.insert(WMS_SUCCESS, WMS_TRUE);

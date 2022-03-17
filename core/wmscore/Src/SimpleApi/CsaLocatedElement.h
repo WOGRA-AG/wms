@@ -1,13 +1,3 @@
-/******************************************************************************
- ** WOGRA Middleware Server Data Manager Module
- **
- ** @Author Wolfgang Graßhof
- **
- ** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
- ** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
- **(C) copyright by WOGRA technologies All rights reserved
- ******************************************************************************/
-
 #ifndef CSALOCATEDELEMENT_H
 #define CSALOCATEDELEMENT_H
 
@@ -47,7 +37,7 @@ protected:
     QVariant generateLinkMap(QString qstrLinkName, QString qstrLink);
 
 public slots:
-    virtual CsaFactory* getFactory();
+    virtual QObject* getFactory();
     virtual QObject* getManager();
     virtual QObject* getContainerManager();
     virtual QObject* getClassManager();
@@ -59,8 +49,8 @@ public slots:
     virtual bool isObject();
     virtual bool isModelElement();
     virtual bool isReference();
-
     virtual QString getUri() const;
+
 public:
     IdmExecutorEngine* getEngine();
     virtual void setFactory(CsaFactory* p_pFactory);

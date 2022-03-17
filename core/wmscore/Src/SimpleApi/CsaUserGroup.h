@@ -1,13 +1,3 @@
-/******************************************************************************
- ** WOGRA Middleware Server Data Manager Module
- **
- ** @Author Wolfgang Graßhof
- **
- ** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
- ** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
- **(C) copyright by WOGRA technologies All rights reserved
- ******************************************************************************/
-
 #ifndef CSCRIPTUSERGROUP
 #define CSCRIPTUSERGROUP
 
@@ -33,16 +23,12 @@ class WMSMANAGER_API CsaUserGroup : public CsaLocatedElement
 
     public:
     CumUserGroup* getInternals();
+    virtual QVariant getDetailedVariant();
 
     public slots:
     int getId();
     QString getName();
     QVariantList getUsers();
-
-    // CsaLocatedElement interface
-public:
-    virtual QVariant getDetailedVariant();
-
 };
 
 #endif //

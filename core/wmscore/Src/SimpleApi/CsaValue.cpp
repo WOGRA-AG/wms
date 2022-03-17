@@ -1,13 +1,3 @@
-/******************************************************************************
- ** WOGRA Middleware Server Data Manager Module
- **
- ** @Author Wolfgang Graßhof
- **
- ** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
- ** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
- **(C) copyright by WOGRA technologies All rights reserved
- ******************************************************************************/
-
 // System and QT Includes
 
 // WMS Commons Includes
@@ -79,7 +69,7 @@ QVariant CsaValue::getValueReference()
 
           if (pObject)
           {
-              qvValue.setValue(getFactory()->createScriptObject(pObject));
+              qvValue.setValue(dynamic_cast<CsaFactory*> (getFactory())->createScriptObject(pObject));
           }
        }
        else if (pCdmValue->GetValueType() == eDmValueContainerRef)
@@ -88,7 +78,7 @@ QVariant CsaValue::getValueReference()
 
           if (pContainer)
           {
-              qvValue.setValue(getFactory()->createScriptObject(pContainer));
+              qvValue.setValue(dynamic_cast<CsaFactory*> (getFactory())->createScriptObject(pContainer));
           }
        }
     }
@@ -327,7 +317,7 @@ void CsaValue::openBinDoc()
 
 QObject *CsaValue::getMember()
 {
-   return getFactory()->createScriptObject(const_cast<CdmMember*>(getInternals()->GetMember()));
+   return dynamic_cast<CsaFactory*> (getFactory())->createScriptObject(const_cast<CdmMember*>(getInternals()->GetMember()));
 }
 
 bool CsaValue::isReadOnly()
@@ -744,7 +734,7 @@ bool CsaValue::hasCurrentUserReadAccess()
 
         if (CHKPTR(pObject))
         {
-            CsaObject* pCsaObject = dynamic_cast<CsaObject*>(getFactory()->createScriptObject(pObject));
+            CsaObject* pCsaObject = dynamic_cast<CsaObject*>(dynamic_cast<CsaFactory*> (getFactory())->createScriptObject(pObject));
 
             if (CHKPTR(pCsaObject) && pCsaObject->hasCurrentUserReadAccess())
             {
@@ -777,7 +767,7 @@ bool CsaValue::hasCurrentUserWriteAccess()
 
         if (CHKPTR(pObject))
         {
-            CsaObject* pCsaObject = dynamic_cast<CsaObject*>(getFactory()->createScriptObject(pObject));
+            CsaObject* pCsaObject = dynamic_cast<CsaObject*>(dynamic_cast<CsaFactory*> (getFactory())->createScriptObject(pObject));
 
             if (CHKPTR(pCsaObject) && pCsaObject->hasCurrentUserWriteAccess())
             {
@@ -1022,7 +1012,7 @@ QVariantList CsaValue::getListObjects()
          static_cast<CdmValueListObjects*>(pValue)->GetList(qllValues);
          QList<CdmObject*>::iterator qllIt = qllValues.begin();
          QList<CdmObject*>::iterator qllItEnd = qllValues.end();
-         CsaFactory* pFactory = getFactory();
+         CsaFactory* pFactory = dynamic_cast<CsaFactory*> (getFactory());
 
          if (CHKPTR(pFactory))
          {
