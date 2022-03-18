@@ -64,7 +64,6 @@ QVariant CdmExecutorFormula::EvaluateFormula(const CdmObject* p_pCdmObject, QStr
 
    if (CHKPTR(p_pCdmObject))
    {
-
      CreateEngine();
      IdmExecutorEngine* pEngine = GetEngine();
 
