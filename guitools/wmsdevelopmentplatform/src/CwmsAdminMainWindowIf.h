@@ -275,7 +275,6 @@ private:
     QMdiSubWindow* FindSubWindowByUri(QString p_qstrUri);
     bool FindAndSetSubWindow(QString p_qstrUri);
     QTreeWidgetItem* GetSelectedItem();
-    void FillObjectLists(CdmClass* p_pCdmClass, QTreeWidgetItem* p_pqtwClass);
     void FillClasses(CdmClassManager* p_pCdmClassManager);
     void FillViews();
     void FillReports();

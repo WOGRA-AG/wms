@@ -657,11 +657,6 @@ void CwmsAdminMainWindowIf::FillClasses(CdmClassManager* p_pCdmClassManager)
     }
 }
 
-void CwmsAdminMainWindowIf::FillObjectLists(CdmClass* p_pCdmClass, QTreeWidgetItem* p_pqtwClass)
-{
-    CwmsObjectContainerDataFiller::FillObjectContainersToClass(p_pCdmClass, p_pqtwClass, CONTAINER_DISPLAY_LIMIT);
-}
-
 void CwmsAdminMainWindowIf::SchemeContentSelectedSlot()
 {
     BODY_TRY
@@ -3558,7 +3553,11 @@ void CwmsAdminMainWindowIf::EditSingleton()
                     {
                         CwmsguiObjectEditorIf editor(pObject, this);
                         editor.FillDialog();
-                        editor.exec();
+                        if (editor.exec() == QDialog::Accepted)
+                        {
+                            pObject->Commit();
+                        }
+
                     }
                 }
             }
