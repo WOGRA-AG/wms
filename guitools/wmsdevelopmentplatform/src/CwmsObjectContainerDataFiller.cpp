@@ -83,6 +83,7 @@ void CwmsObjectContainerDataFiller::FillAllObjectContainersToView(QTreeWidget* p
             }
 
             CwmsTreeWidgetHelper::ResizeColumnsToContent(p_pTree);
+            p_pTree->sortByColumn(0, Qt::AscendingOrder);
 
         }
     }
