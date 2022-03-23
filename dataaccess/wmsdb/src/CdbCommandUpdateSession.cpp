@@ -42,8 +42,6 @@ int CdbCommandUpdateSession::Execute()
                 .arg(m_qstrBaseAuth);
     }
 
-
-
     return GetDataAccess()->ExecuteQuery(qstrUpdate, cQuery);
 }
 

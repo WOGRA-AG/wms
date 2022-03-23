@@ -3,6 +3,7 @@ PRECOMPILED_HEADER = precompile.h
 HEADERS += \
     $$PWD/../src/CwmsQueryModelExportCsv.h \
     $$PWD/../src/CwmsScriptableModel.h \
+    ../src/CwmsObjectLocker.h \
     $$PWD/precompile.h \
     ../src/CwmsFormBase.h \
     ../src/CwmsFormManager.h \
@@ -94,7 +95,6 @@ HEADERS += \
     $$PWD/../src/CwmsFormInteractiveComponent.h \
     $$PWD/../src/CdmQueryModel.h
 
-SOURCES +=
 
 contains(DEFINES, WMS_LDAP) {
     SOURCES += ../src/CwmsLdapUtilities.h
@@ -203,6 +203,12 @@ win32{
 else:linux{
     SOURCES += ../src/CwmsLdapFunctionalitiesLinux.cpp
 }
+
+HEADERS += \
+    ../src/CwmsObjectLocker.h
+
+SOURCES += \
+    ../src/CwmsObjectLocker.cpp
 
 contains(DEFINES, WMS_LDAP) {
     SOURCES += ../src/CwmsLdapUtilities.cpp

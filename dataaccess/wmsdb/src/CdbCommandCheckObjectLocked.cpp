@@ -28,43 +28,22 @@ int CdbCommandCheckObjectLocked::Execute()
     QString qstrQuery;
 
     // asking table if this object is inserted
-    qstrQuery = QString("select SessionId from WMS_DM_LOCKEDOBJECT where ObjectId = %1")
-                        .arg(m_lObjectId);
+    qstrQuery = QString("SELECT ses.SessionId FROM wogra.wms_dm_lockedobject lo inner join wms_um_session ses on lo.SessionId = ses.SessionId "
+                        "where lo.objectid = %1 and ses.SessionId <> %2 and ses.State = 1;")
+                        .arg(m_lObjectId)
+                        .arg(m_lSessionId);
 
     if(GetDataAccess()->ExecuteQuery(qstrQuery, cQSqlQuery) > 0)
     {
        cQSqlQuery.first();
+
        if(cQSqlQuery.isValid())
        {
-         qint64 lSessionId = cQSqlQuery.value(0).toInt();
+          qint64 lSessionId = cQSqlQuery.value(0).toInt();
           INFO("Object with ID" + QString::number(m_lObjectId) +
-               " is locked by session " + QString::number(m_lSessionId));
-
-          if(lSessionId == m_lSessionId)
-          {
-             lRet = EC(eDmFalse);
-             INFO("Object is locked by the same user, so it plays no role if this object is locked or not, he has all rigths.");
-          }
-          else
-          {
-             // Check if locking session is valid
-             qstrQuery = QString ("select State from WMS_UM_SESSION where SessionId = %1").arg(lSessionId);
-
-             if(GetDataAccess()->ExecuteQuery(qstrQuery, cQSqlQuery) > 0)
-             {
-                cQSqlQuery.first();
-
-                if(cQSqlQuery.isValid())
-                {
-                   lRet = cQSqlQuery.value(0).toBool();
-                }
-                else
-                {
-                   lRet = EC(eDmFalse);
-                }
-             }
-          }
-       }
+               " is locked by session " + QString::number(lSessionId));
+          lRet = EC(eDmTrue);
+        }
        else
        {
           lRet = EC(eDmFalse);

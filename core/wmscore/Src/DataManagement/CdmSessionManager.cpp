@@ -162,6 +162,7 @@ int CdmSessionManager::CreateNewSession(QString p_qstrLogin,
     if(SUCCESSFULL(iSessionId))
     {
         AddSessionToThreadContext(pSession);
+        SessionGarbageCollection();
     }
     else
     {
@@ -404,17 +405,14 @@ void CdmSessionManager::SessionGarbageCollection()
             m_qmSessionManagerAuth.remove(qlSessionBaseAuthsToRemove[iCounter]);
         }
 
-        CdmDataProvider* pManager = GetDataProvider();
 
-        if (CHKPTR(pManager))
+        IdmDataAccess* pDataAccess = GetDataAccess();
+
+        if (CHKPTR(pDataAccess))
         {
-            IdmDataAccess* pDataAccess = GetDataAccess();
-
-            if (CHKPTR(pDataAccess))
-            {
-                pDataAccess->SessionTimeoutCheck(m_iSessionTimeoutMinutes);
-            }
+            pDataAccess->SessionTimeoutCheck(m_iSessionTimeoutMinutes);
         }
+
 
         m_bCollectSessionGarbage = false;
     }
