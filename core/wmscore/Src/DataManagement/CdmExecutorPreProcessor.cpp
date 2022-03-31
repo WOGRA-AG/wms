@@ -214,7 +214,7 @@ void CdmExecutorPreProcessor::PrepareObjects(IdmExecutorEngine& p_rEngine, CdmMo
         {
             CdmObject* pObject = dynamic_cast<CdmObject*>(p_pCdmBase);
 
-            if (CHKPTR(pObject))
+            if (pObject)
             {
 
                 if (pRuntime->NeedsCurrentThisObjectUpdate(pObject))
