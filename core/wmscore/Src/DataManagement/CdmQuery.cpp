@@ -411,31 +411,28 @@ void CdmQuery::AddResultElement(QString p_qstrKeyname, EdmQueryResultElementMode
     }
     else
     {
-        //if (!m_qmResultElements.contains(p_qstrKeyname))
-        {
-            const CdmClass* pClass = GetClass();
+        const CdmClass* pClass = GetClass();
 
-            if (pClass)
+        if (pClass)
+        {
+            if (p_eDmMode == eDmQueryResultElementModeCount || pClass->FindMember(p_qstrKeyname))
             {
-                if (p_eDmMode == eDmQueryResultElementModeCount || pClass->FindMember(p_qstrKeyname))
-                {
-                    CdmQueryResultElement* pCdmResultElement = new CdmQueryResultElement(p_qstrKeyname,
-                                                                                         p_eDmMode,
-                                                                                         this);
-                    m_qmResultElements.insert(p_qstrKeyname, pCdmResultElement);
-                    m_qlResultElementsPos.append(pCdmResultElement);
-                    m_qvAddedSequence.append(p_qstrKeyname);
-                }
-                else
-                {
-                    ERR("Invalid member-keyname in query with keyname: " + p_qstrKeyname)
-                }
+                CdmQueryResultElement* pCdmResultElement = new CdmQueryResultElement(p_qstrKeyname,
+                                                                                     p_eDmMode,
+                                                                                     this);
+                m_qmResultElements.insert(p_qstrKeyname, pCdmResultElement);
+                m_qlResultElementsPos.append(pCdmResultElement);
+                m_qvAddedSequence.append(p_qstrKeyname);
             }
             else
             {
-                ERR("Class or objectcontainer for query not found")
-                m_bValid = false;
+                ERR("Invalid member-keyname in query with keyname: " + p_qstrKeyname)
             }
+        }
+        else
+        {
+            ERR("Class or objectcontainer for query not found")
+            m_bValid = false;
         }
     }
 }
@@ -1478,8 +1475,8 @@ void CdmQuery::AddResultToColumnInRow(int p_iColumn, int p_iRow, QVariant& p_rqv
     }
     else
     {
-        //pResult = CdmQueryResultObject::FindOrCreateResultObject(p_lObjectId, p_lContainerId, m_pRoot, this);
         GetChildAtRow(p_iRow);
+
         if (!pResult)
         {
             pResult = CdmQueryResultObject::CreateResultObject(this, m_pRoot, -1, -1, -1);
@@ -1588,6 +1585,26 @@ void CdmQuery::AddDatabaseCommand(QString p_qstrCommand)
     }
 
     m_qstrDatabaseCommand += p_qstrCommand;
+}
+
+bool CdmQuery::IsAggregationQuery() const
+{
+    if (HasResultElements())
+    {
+        QMap<QString, CdmQueryResultElement*>::ConstIterator qmIt;
+
+        for (qmIt = m_qmResultElements.begin(); qmIt != m_qmResultElements.end(); ++qmIt)
+        {
+            CdmQueryResultElement* pResultElement = qmIt.value();
+
+            if (CHKPTR(pResultElement) && pResultElement->GetMode() != eDmQueryResultElementModeNone)
+            {
+                return true;
+            }
+        }
+    }
+
+    return false;
 }
 
 const CdmMember* CdmQuery::FindMemberByKeyname(QString p_qstrKeyname) const

@@ -152,6 +152,9 @@ qint64 CdbQueryEnhancedDoubleRequest::ExecuteQuery(QSqlQuery& cQSqlQuery)
 
     if(lRet > 0)
     {
+        qint64 lObjectId = 0;
+        qint64 lContainerId = 0;
+
         if(cQSqlQuery.first())
         {
             int iRowCount = 0;
@@ -165,8 +168,16 @@ qint64 CdbQueryEnhancedDoubleRequest::ExecuteQuery(QSqlQuery& cQSqlQuery)
                 }
                 else
                 {
-                    qint64 lObjectId = cQSqlQuery.value(iColumnCount).toInt();
-                    qint64 lContainerId = cQSqlQuery.value(iColumnCount + 1).toInt();
+
+                    if (!m_rpCdmQuery->IsAggregationQuery())
+                    {
+                        lObjectId = cQSqlQuery.value(iColumnCount).toInt();
+                        lContainerId = cQSqlQuery.value(iColumnCount + 1).toInt();
+                    }
+                    else
+                    {
+                        lObjectId--;
+                    }
 
                     for (int iCounter = 0; iCounter < iColumnCount; ++iCounter)
                     {
@@ -180,7 +191,6 @@ qint64 CdbQueryEnhancedDoubleRequest::ExecuteQuery(QSqlQuery& cQSqlQuery)
             while(cQSqlQuery.next());
         }
     }
-
 
     return lRet;
 }
@@ -199,44 +209,54 @@ QString CdbQueryEnhancedDoubleRequest::ConcatenateQueries(QVector<QString> &p_qv
                                                           QMap<QString, QString> &p_qmSubQueries)
 {
     QString qstrSql = CreateHead(p_qvKeynames);
-    QMapIterator<QString, QString> qmIt(p_qmSubQueries);
-    QString qstrFirstKey;
-    bool bFirst = true;
 
-    while (qmIt.hasNext())
+    if (!qstrSql.isEmpty())
     {
-        qmIt.next();
-        QString qstrSqlPart;
-        QString qstrSubQuery = qmIt.value();
+        QMapIterator<QString, QString> qmIt(p_qmSubQueries);
+        QString qstrFirstKey;
+        bool bFirst = true;
 
-        if (bFirst)
+        while (qmIt.hasNext())
         {
-            qstrFirstKey = qmIt.key();
-            qstrSqlPart += qstrFirstKey + ".objectid, " + qstrFirstKey + ".objectlistid FROM ";
+            qmIt.next();
+            QString qstrSqlPart;
+            QString qstrSubQuery = qmIt.value();
 
-            if (!qstrSubQuery.startsWith("("))
+            if (bFirst)
             {
-                qstrSqlPart +=  "(";
+                qstrFirstKey = qmIt.key();
+
+                if (!m_rpCdmQuery->IsAggregationQuery())
+                {
+                    qstrSqlPart += QString(", %1.objectid, %1.objectlistid").arg(qstrFirstKey);
+                }
+
+                qstrSqlPart += " FROM ";
+
+                if (!qstrSubQuery.startsWith("("))
+                {
+                    qstrSqlPart +=  "(";
+                }
+
+                qstrSqlPart += qstrSubQuery + " ";
+            }
+            else
+            {
+                qstrSqlPart = " left join ";
+                if (!qstrSubQuery.startsWith("("))
+                {
+                    qstrSqlPart +=  "(";
+                }
+                qstrSqlPart +=  qstrSubQuery + " on " + qmIt.key() + ".objectid = " + qstrFirstKey + ".objectid";
             }
 
-            qstrSqlPart += qstrSubQuery + " ";
-        }
-        else
-        {
-            qstrSqlPart = " left join ";
-            if (!qstrSubQuery.startsWith("("))
-            {
-                qstrSqlPart +=  "(";
-            }
-            qstrSqlPart +=  qstrSubQuery + " on " + qmIt.key() + ".objectid = " + qstrFirstKey + ".objectid";
+            qstrSql += qstrSqlPart;
+            bFirst = false;
         }
 
-        qstrSql += qstrSqlPart;
-        bFirst = false;
+        AddGroupByToSql(qstrSql);
+        AddOrderByToSql(qstrSql);
     }
-
-    AddGroupByToSql(qstrSql);
-    AddOrderByToSql(qstrSql);
     return qstrSql;
 }
 
@@ -317,18 +337,25 @@ QString CdbQueryEnhancedDoubleRequest::CreateHead(QVector<QString> &p_qvKeynames
         QString qstrKeyname = p_qvKeynames.at(i);
         QString qstrTemplate = GetSQlFunction(i);
         QString qstrKeynameSave = m_qmKeynamesSave.value(qstrKeyname);
+
         if (!qstrTemplate.contains(RESULT_MEMBER_PLACEHOLDER))
         {
-            qstrHead += qstrTemplate + ", ";
+            qstrHead += qstrTemplate;
         }
         else if (!qstrKeynameSave.isEmpty())
         {
             qstrHead += qstrTemplate.replace(RESULT_MEMBER_PLACEHOLDER, qstrKeynameSave);
-            qstrHead += ", ";
+
         }
         else
         {
             ERR("Failed to select " + qstrKeyname);
+            return "";
+        }
+
+        if (i+1 < p_qvKeynames.size())
+        {
+            qstrHead += ", ";
         }
     }
 

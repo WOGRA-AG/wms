@@ -74,7 +74,7 @@ protected:
     /*
      * This member is the id of the referencing objectlist.
      */
-   qint64 m_lContainerId;
+    qint64 m_lContainerId;
 
     /*
      * The class which is the base for the query
@@ -84,7 +84,7 @@ protected:
     /*
      * The classid which is the base for the query
      */
-   qint64 m_lClassId;
+    qint64 m_lClassId;
 
     /*
      * Limit configuration in query
@@ -165,12 +165,12 @@ public:
     QVariant GetResultAt(QString p_qstrKeyname, int p_iPos) const;
     QVariant GetResultAt(const QModelIndex &p_Index) const;
     QString GetResultAsStringAt(int p_iRow) const;
-   qint64 GetObjectIdAt(int p_iPos) const;
+    qint64 GetObjectIdAt(int p_iPos) const;
     CdmObject* GetFirstResultObject() const;
     CdmObject* GetObjectAt(int p_iPos) const;
     CdmObject *GetResultObjectAt(int p_iPos) const;
-   qint64 GetObjectListIdAt(int p_iPos) const;
-   qint64 GetContainerIdAt(int p_iRow) const;
+    qint64 GetObjectListIdAt(int p_iPos) const;
+    qint64 GetContainerIdAt(int p_iRow) const;
     int GetRowPosOfObjectInResultTree(qint64 p_lObjectId) const;
     bool IsObjectInResultTree(qint64 p_lObejctId) const;
     bool ContainsResultObject(qint64 p_lObjectId) const;
@@ -185,6 +185,8 @@ public:
     QVariant GetColumnTooltip(QString p_qstrKeyname) const;
     QString GetDatabaseCommand() const;
     void AddDatabaseCommand(QString p_qstrCommand);
+    bool IsAggregationQuery() const;
+
 public slots:
     int Execute();
     void Clear();
@@ -197,9 +199,9 @@ public slots:
     void GetResultElementList(QString p_qstrKeyname, QVector<QVariant> &p_rqllResults) const;
     int CountQueryiedChildren(qint64 p_lParentId) const;
     QList<CdmObject*> GetChildList(qint64 lParentId) const;
-   qint64 GetParentObjectId(const QModelIndex &p_rqIndex) const;
+    qint64 GetParentObjectId(const QModelIndex &p_rqIndex) const;
     CdmObject* GetChildAt(qint64 p_lParentId, int p_iRow);
-   qint64 GetPositionObjectId(qint64 p_lParentId, int p_iPosition);
+    qint64 GetPositionObjectId(qint64 p_lParentId, int p_iPosition);
     int GetResultCount() const;
     bool HasResultElements() const;
     CdmQueryResultObject* GetRootElement() const;
@@ -213,13 +215,13 @@ public slots:
     void SetContainer(CdmObjectContainer* p_pContainer);
     CdmObjectContainer* GetContainer() const;
     void SetContainerId(qint64 p_lId);
-   qint64 GetContainerId() const;
+    qint64 GetContainerId() const;
     void SetClass(CdmClass *p_pClass);
     const CdmClass* GetClass() const;
     void SetClassId(qint64 p_lId);
-   qint64 GetClassId() const;
+    qint64 GetClassId() const;
+    void SetQueryCaseInsensitive(bool bInsensitive);
 
-   void SetQueryCaseInsensitive(bool bInsensitive);
 private:
     int ExecuteDb();
     bool IsExecuted() const;

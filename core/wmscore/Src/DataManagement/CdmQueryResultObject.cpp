@@ -553,7 +553,7 @@ qint64 CdmQueryResultObject::GetObjectParentId(qint64 p_lObjectId,qint64 p_lCont
         {
             CdmContainerManager* pContainerManager = pManager->GetContainerManager();
 
-            if (CHKPTR(pContainerManager))
+            if (CHKPTR(pContainerManager) && p_lContainerId > 0)
             {
                 pContainer = pContainerManager->FindEmptyContainerById(p_lContainerId);
             }
