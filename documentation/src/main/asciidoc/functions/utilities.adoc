@@ -9,7 +9,7 @@ Class for utilities functions you sometimes need.
 convertFromByteArrayToBase64
 ----
 
-starts the Workflow
+converts data from a bytearray to a base64 string.
 
 *Arguments*
 
@@ -20,7 +20,7 @@ ByteArray: the data which should be converted to a base64 string.
 ===== Sample
 
 [source, java]
-----utl
+----
 utilites.convertFromByteArrayToBase64(bytearray);
 ----
 
@@ -45,16 +45,36 @@ utilites.convertFromBase64ToByteArray(base64String);
 
 ToDo Documentation:
 
+[source, java]
+----
 WmsModel *createEmptyModel();
+----
 
+[source, java]
+----
 void deleteModel(QObject *p_pModel);
+----
 
+[source, java]
+----
 String formatDoubleValueToLocaleString(double p_dValue, int p_iDecimalPlaces);
+----
 
+[source, java]
+----
 String formatIntValueToLocaleString(int p_iValue);
+----
 
+[source, java]
+----
 Date getDateFromIsoString(String p_qstrIsoDate);
+----
 
+[source, java]
+----
 String formatIsoDateToLocaleDate(String p_qstrIsoDate);
-    
+----    
+[source, java]
+----
 String fromDateToIsoString(Date p_qdDate);
+----
