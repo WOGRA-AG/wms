@@ -1,14 +1,4 @@
-﻿/******************************************************************************
- ** WOGRA Middleware Server Data Manager Module
- **
- ** @Author Wolfgang Graßhof
- **
- ** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
- ** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
- **(C) copyright by WOGRA technologies All rights reserved
- ******************************************************************************/
-
-#ifndef CDMOBJECTFACTORY_H
+﻿#ifndef CDMOBJECTFACTORY_H
 #define CDMOBJECTFACTORY_H
 
 // System and QT Includes
@@ -70,6 +60,7 @@ public:
     void Commit();
     CdmObject* CreateObject(QString p_qstrCaption);
     void ReloadContainerComplete() const;
+
 protected:
     virtual void ObjectDeletedEvent(qint64 p_lObjectId);
     virtual void ObjectCreatedEvent(qint64 p_lObjectId);
