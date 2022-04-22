@@ -41,10 +41,10 @@ private:
     int m_iRowToRemove;
     QMap<QString,QString> m_qmDisplayHeader;
     QMap<int, IwmsViewProxy*> m_qmViewProxy;
-
     IdmHandleDisplayData *m_pIdmDisplayHandler;
 
-
+protected:
+    CdmQuery* m_pCdmQuery;
 
 public:
     CdmQueryModel(QObject* p)
@@ -53,7 +53,7 @@ public:
           m_iRowToRemove(0),
           m_pCdmQuery(nullptr){}
     CdmQueryModel();
-    virtual ~CdmQueryModel( );
+    virtual ~CdmQueryModel();
 
     QModelIndex parent(const QModelIndex & index) const;
     QList<CdmObject *> GetObjects(QAbstractItemView *p_pqItemView);
@@ -98,7 +98,7 @@ public slots:
 protected:
     virtual void sort(int p_iColumn, Qt::SortOrder p_eSortOrder);
     virtual void ObjectCommitedEvent(qint64 p_lObjectId);
-    CdmQuery* m_pCdmQuery;
+
 
 protected slots:
     void UpdateSlot( );
