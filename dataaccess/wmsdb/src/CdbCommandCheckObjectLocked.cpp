@@ -28,8 +28,8 @@ int CdbCommandCheckObjectLocked::Execute()
     QString qstrQuery;
 
     // asking table if this object is inserted
-    qstrQuery = QString("SELECT ses.SessionId FROM wogra.wms_dm_lockedobject lo inner join wms_um_session ses on lo.SessionId = ses.SessionId "
-                        "where lo.objectid = %1 and ses.SessionId <> %2 and ses.State = 1;")
+    qstrQuery = QString("SELECT ses.SessionId FROM WMS_DM_LOCKEDOBJECT lo inner join WMS_UM_SESSION ses on lo.SessionId = ses.SessionId "
+                        "where lo.objectid = %1 and ses.SessionId <> %2 and ses.State = 1")
                         .arg(m_lObjectId)
                         .arg(m_lSessionId);
 
