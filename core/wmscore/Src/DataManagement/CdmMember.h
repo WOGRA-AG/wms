@@ -49,20 +49,20 @@ private:
     /*
         * The Value size, is used for strings
         */
-   qint64        m_lSize;
+    qint64        m_lSize;
     /*
         * Used for ObjectLists and ObjectListRefs
         */
-   qint64        m_lReference;
+    qint64        m_lReference;
     /*
         * Used for Counter Values to set the value on which the counter has to start.
         */
-   qint64        m_lCounterStart;
+    qint64        m_lCounterStart;
 
     /*
         * Is used for referencing the class, the member belongs to
         */
-   qint64        m_lClassId;
+    qint64        m_lClassId;
 
     /*
         * This shows if a value of this member must have a value or not
@@ -142,11 +142,11 @@ private:
 
 private:
     CdmMember(qint64 p_lDbId,
-             qint64 p_lId,
+              qint64 p_lId,
               QString p_qstrKeyname,
               EdmValueType p_eDmValue,
               bool p_bMust,
-             qint64 p_lSize);
+              qint64 p_lSize);
     CdmMember(QDomElement& p_rqDomElement);
     CdmMember(QVariantMap& p_qMember,qint64 p_lClassId);
     virtual ~CdmMember();
@@ -227,14 +227,14 @@ public:
     void SetEnabledCheck(QString p_qstrRendered);
     void SetRenderedCheck(QString p_qstrRendered);
     void SetClassReference(CdmClass *p_pClass);
-   qint64 GetSize() const;
+    qint64 GetSize() const;
     EdmValueType GetValueType() const;
-   qint64 GetClassId() const;
+    qint64 GetClassId() const;
     QString GetComment() const;
     QString GenerateDocument();
     QString GetValueTypeAsString() const;
-   qint64 GetClassReference() const;
-   qint64 GetCounterStart() const;
+    qint64 GetClassReference() const;
+    qint64 GetCounterStart() const;
     bool IsOwner() const;
     bool IsUnique() const;
     bool IsSystemMember() const;

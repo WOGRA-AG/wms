@@ -1,7 +1,4 @@
-﻿// System and QT Includes
-
-
-
+﻿
 // own Includes
 #include "CdmDataProvider.h"
 #include "CdmSessionManager.h"
