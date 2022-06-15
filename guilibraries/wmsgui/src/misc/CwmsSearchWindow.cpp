@@ -62,6 +62,16 @@ void CwmsSearchWindow::FillDialog(CdmObjectContainer* p_pContainer)
    }
 }
 
+void CwmsSearchWindow::FillDialog(CdmClass* p_pClass)
+{
+   if (CHKPTR(p_pClass))
+   {
+      connect(m_pCwmsSearchWidget, SIGNAL(SearchSignal()), this, SLOT(SearchSlot()));
+      m_pCwmsSearchWidget->SetClass(p_pClass);
+      m_pCwmsSearchWidget->FillWidget();
+   }
+}
+
 void CwmsSearchWindow::SetEditVisibility(bool p_bVisible)
 {
     if (!p_bVisible)

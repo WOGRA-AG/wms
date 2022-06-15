@@ -43,48 +43,21 @@ class WMSGUI_API CwmsSearchWindowDlg : public QDialog, public Ui::CwmsSearchWind
 
 
    public:
-   /** +-=---------------------------------------------------------Di 18. Sep 10:21:33 2012-------*
-    * @method  CwmsSearchWindowDlg::CwmsSearchWindowDlg      // public                            *
-    * @return                                                //                                   *
-    * @param   QWidget* p_pqwParent                          //                                   *
-    * @comment                                                                                    *
-    *----------------last changed: -----------------------------Di 18. Sep 10:21:33 2012----------*/
     CwmsSearchWindowDlg( QWidget* p_pqwParent);
-
-   public:
-   /** +-=---------------------------------------------------------Di 18. Sep 10:21:43 2012-------*
-    * @method  CwmsSearchWindowDlg::~CwmsSearchWindowDlg     // public, virtual                   *
-    * @return  void                                          //                                   *
-    * @comment The Destructor of Class CwmsSearchWindow                                           *
-    *----------------last changed: -----------------------------Di 18. Sep 10:21:43 2012----------*/
     virtual ~CwmsSearchWindowDlg( );
-
-   public:
-   /** +-=---------------------------------------------------------Di 18. Sep 10:21:53 2012-------*
-    * @method  CwmsSearchWindowDlg::AddSearchMember          // public                            *
-    * @return  void                                          //                                   *
-    * @param   QString p_qstrSearchMember                    //                                   *
-    * @comment                                                                                    *
-    *----------------last changed: -----------------------------Di 18. Sep 10:21:53 2012----------*/
     void AddSearchMember(QString p_qstrSearchMember);
-
-   public:
-   /** +-=---------------------------------------------------------Di 18. Sep 10:22:52 2012-------*
-    * @method  CwmsSearchWindowDlg::FillDialog               // public                            *
-    * @return  void                                          //                                   *
-    * @param   CdmObjectContainer* p_pContainer               //                                   *
-    * @comment                                                                                    *
-    *----------------last changed: -----------------------------Di 18. Sep 10:22:52 2012----------*/
     void FillDialog(CdmObjectContainer* p_pContainer);
-
-    static CdmObject* FindObject(CdmObjectContainer* p_pContainer, QWidget *parent);
     void AddResultMembers(QString p_qstrMember);
     void SetPrintVisibility(bool p_bVisible);
     void SetExportVisibility(bool p_bVisible);
     void SetImportVisibility(bool p_bVisible);
     void SetDeleteVisibility(bool p_bVisible);
     void SetEditVisibility(bool p_bVisible);
+
     static QList<CdmObject *> FindObjects(CdmObjectContainer *p_pContainer, QWidget *parent);
+    static CdmObject *FindObject(CdmClass *p_pClass, QWidget *parent);
+    static CdmObject* FindObject(CdmObjectContainer* p_pContainer, QWidget *parent);
+    void FillDialog(CdmClass *p_pClass);
 };
 
 #endif // CWMSSEARCHWINDOW_H

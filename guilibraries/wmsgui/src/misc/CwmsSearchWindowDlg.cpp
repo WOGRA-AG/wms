@@ -66,10 +66,28 @@ void CwmsSearchWindowDlg::FillDialog(CdmObjectContainer* p_pContainer)
    m_pSearchWindow->FillDialog(p_pContainer);
 }
 
+void CwmsSearchWindowDlg::FillDialog(CdmClass* p_pClass)
+{
+   m_pSearchWindow->FillDialog(p_pClass);
+}
+
 CdmObject* CwmsSearchWindowDlg::FindObject(CdmObjectContainer* p_pContainer, QWidget* parent)
 {
     CwmsSearchWindowDlg cSearch(parent);
     cSearch.FillDialog(p_pContainer);
+
+    if (cSearch.exec() == QDialog::Accepted)
+    {
+        return cSearch.m_pSearchWindow->GetSelectedObject();
+    }
+
+    return nullptr;
+}
+
+CdmObject* CwmsSearchWindowDlg::FindObject(CdmClass* p_pClass, QWidget* parent)
+{
+    CwmsSearchWindowDlg cSearch(parent);
+    cSearch.FillDialog(p_pClass);
 
     if (cSearch.exec() == QDialog::Accepted)
     {

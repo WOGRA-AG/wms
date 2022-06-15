@@ -58,6 +58,7 @@ public:
     void SaveAsCsvClickedSlot();
 
     QList<CdmObject *> GetSelectedObjects();
+    void FillDialog(CdmClass *p_pClass);
 public slots:
     void DeleteClickedSlot();
     void NewClickedSlot();
