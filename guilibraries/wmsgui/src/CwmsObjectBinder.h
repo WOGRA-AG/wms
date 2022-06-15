@@ -69,6 +69,7 @@ private:
     bool IsReadOnly(CdmValue *p_pValue);
     bool IsAccessible(CdmValue *p_pValue);
     bool IsChangeable(CdmValue *p_pValue);
+    CdmObject *SearchValueObject(CdmValueObjectRef *p_pValue, QString qstrValue);
 public:
     CwmsObjectBinder(CdmObject* p_pObject);
     virtual ~CwmsObjectBinder();

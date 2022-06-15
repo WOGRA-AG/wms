@@ -10,6 +10,7 @@
 #include <QComboBox>
 #include <QDateTimeEdit>
 #include <QLabel>
+#include <CwmsSearchWindowDlg.h>
 
 
 #include "CdmLogging.h"
@@ -1300,6 +1301,15 @@ void CwmsObjectBinder::FillData(CdmValueObjectRef *p_pValue, QWidget *p_pWidget)
         {
             FillLabelData(p_pValue, dynamic_cast<QLabel*>(p_pWidget));
         }
+        else if (qstrWidgetType == "QLineEdit")
+        {
+            auto pEdit = dynamic_cast<QLineEdit*>(p_pWidget);
+
+            if(CHKPTR(pEdit))
+            {
+                pEdit->setText(p_pValue->GetDisplayString());
+            }
+        }
         else if(qstrWidgetType == "QComboBox" || qstrWidgetType == "CwmsObjectChoiceComboBox")
         {
             auto pEdit = dynamic_cast<QComboBox*>(p_pWidget);
@@ -1934,6 +1944,57 @@ void CwmsObjectBinder::SaveData(CdmValueObjectRef *p_pValue, QWidget *p_pWidget)
                 auto pEdit = GetSelectedObject(p_pWidget, p_pValue->GetKeyname());
                 p_pValue->SetValue(pEdit);
             }
+            else if (qstrWidgetType == "QLineEdit")
+            {
+                auto pEdit = dynamic_cast<QLineEdit*>(p_pWidget);
+
+                if (CHKPTR(pEdit))
+                {
+                    auto qstrValue = pEdit->text();
+
+                    if (!qstrValue.isEmpty())
+                    {
+                        auto pValue = SearchValueObject(p_pValue, qstrValue);
+                        p_pValue->SetValue(pValue);
+                    }
+                    else
+                    {
+                        p_pValue->SetValue(nullptr);
+                    }
+                }
+            }
         }
     }
+}
+
+CdmObject* CwmsObjectBinder::SearchValueObject(CdmValueObjectRef *p_pValue, QString qstrValue)
+{
+    if (CHKPTR(p_pValue) && !qstrValue.isEmpty())
+    {
+        auto pClass = p_pValue->GetClass();
+
+        if (CHKPTR(pClass))
+        {
+            QString qstrCaptionMember = pClass->GetCaptionMemberKeyname();
+            // first step, check if there is a unique result.
+            QString qstrWql = QString("SELECT FROM \"%1.class\" where %2 like \"%%3%\"")
+                    .arg(pClass->GetKeyname())
+                    .arg(qstrCaptionMember)
+                    .arg(qstrValue);
+
+            QScopedPointer<CdmQuery> pQuery(CdmQueryBuilder::ExecuteQuery(qstrWql));
+            int iCount = pQuery->GetResultCount();
+
+            if (iCount == 1)
+            {
+                return pQuery->GetResultObjectAt(0);
+            }
+            else // not unique or no result, open search dialog to find the right object
+            {
+                return CwmsSearchWindowDlg::FindObject(pClass, nullptr);
+            }
+        }
+    }
+
+    return nullptr;
 }
