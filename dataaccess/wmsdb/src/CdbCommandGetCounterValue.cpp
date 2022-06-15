@@ -43,7 +43,7 @@ qint64 CdbCommandGetCounterValue::GetCounterValue(qint64 p_lObjectListId,
    QSqlQuery cQSqlQuery;
    QString qstrQuery;
 
-   qstrQuery = QString("select max(val) + 1 from v_value_counter where objectlistid = %1 and memberid = %2")
+   qstrQuery = QString("select max(val) + 1 from V_VALUE_COUNTER where objectlistid = %1 and memberid = %2")
                         .arg(p_lObjectListId)
                         .arg(p_lMemberId);
 
