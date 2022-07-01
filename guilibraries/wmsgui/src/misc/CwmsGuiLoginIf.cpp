@@ -111,10 +111,6 @@ bool CwmsGuiLoginIf::Login(QString p_qstrApplicationName,
                     MSG_INFO(("Login fehlgeschlagen"), ("Login fehlgeschlagen. Zu viele Fehlversuche die Anwendung wird beendet."));
                     break;
                 }
-                //                else
-                //                {
-                //                    MSG_INFO(("Fehler bei der Authentifizierung"), ("Ungültiger Benutzername oder falsches Passwort"));
-                //                }
             }
         }
         else
@@ -124,7 +120,7 @@ bool CwmsGuiLoginIf::Login(QString p_qstrApplicationName,
     }
 
     DELPTR(pCwmsLoginIf)
-            return bRet;
+    return bRet;
 }
 
 bool CwmsGuiLoginIf::TryLogin(QString p_qstrLogin, QString p_qstrPassword, QString p_qstrApplicationName, CwmsGuiLoginIf* pCwmsLoginIf)
