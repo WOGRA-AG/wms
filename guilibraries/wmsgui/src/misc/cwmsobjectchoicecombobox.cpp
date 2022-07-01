@@ -584,5 +584,5 @@ void CwmsObjectChoiceComboBox::ObjectDeletedEvent(qint64)
 
 void CwmsObjectChoiceComboBox::ObjectCommitedEvent(qint64)
 {
-   Refresh();
+   //Refresh();
 }
