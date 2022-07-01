@@ -39,6 +39,7 @@ public:
     static bool CreateArchive(QString p_rArchiveFileName, QString p_qstrOutPath, QStringList p_qstrlFileNamesForArchive);
     static QString TeaserText(const QString &p_rqstrText, int p_iLength, const QString &p_rqstrTruncateHint);
     static bool IsFileWritable(QString qstrFilename);
+    static double Round(double p_dValue, int p_iDecimalPlaces);
 };
 
 #endif // CWMSUTILITIES_H

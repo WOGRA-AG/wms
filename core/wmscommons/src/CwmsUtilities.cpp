@@ -1034,3 +1034,9 @@ bool CwmsUtilities::IsFileWritable(QString qstrFilename)
     return bRet;
 }
 
+double  CwmsUtilities::Round(double p_dValue, int p_iDecimalPlaces)
+{
+    double dPow = pow(10, p_iDecimalPlaces);
+    double dRet = floor(p_dValue * dPow + 0.5) * pow(10, -p_iDecimalPlaces);
+    return dRet;
+}
