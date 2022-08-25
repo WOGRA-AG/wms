@@ -488,7 +488,7 @@ void CwmsObjectBinder::FillData(CdmValueDouble* p_pValue, QWidget* p_pWidget)
                 {
                     pEdit->setAlignment(Qt::AlignRight);
                     QLocale loc;
-                    pEdit->setText(loc.toString(static_cast<int>(p_pValue->GetValue())));
+                    pEdit->setText(loc.toString(static_cast<double>(p_pValue->GetValue())));
 
                     if (IsReadOnly(p_pValue))
                     {
