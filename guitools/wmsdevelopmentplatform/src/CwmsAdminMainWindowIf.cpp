@@ -143,7 +143,6 @@ CwmsAdminMainWindowIf::CwmsAdminMainWindowIf(QWidget* parent)
       m_rpqCurrentWidget(nullptr),
       m_pScriptEnvironment(nullptr)
 {
-    //m_pqdwWorkflows->hide();
     CwmsApplicationServices::InstallTranslationFiles();
     setupUi(this);
     m_pqpbClearFilter->setVisible(false);
@@ -1231,20 +1230,18 @@ CdmObjectContainer* CwmsAdminMainWindowIf::GetContainerFromItem(QTreeWidgetItem*
 {
     CdmObjectContainer* pContainer = nullptr;
     CdmDataProvider* pCdmManager = CdmSessionManager::GetDataProvider();
-    QString qstrDbName = m_pqcbDatabases->currentText();
 
-    if (p_pItem && !qstrDbName.isEmpty())
+    if (p_pItem)
     {
-
         EwmsTreeItemType eType = static_cast<EwmsTreeItemType>(p_pItem->data(1, Qt::UserRole).toInt());
 
         if (eType == eWmsTreeItemTypeContainer) // a objectlist is marked
         {
-            QString qstrKeyname = p_pItem->text(0);
+            qint64 qstrKeyname = p_pItem->data(0, Qt::UserRole).toLongLong();
 
             if (CHKPTR(pCdmManager))
             {
-                pContainer = pCdmManager->GetObjectContainer(qstrDbName, qstrKeyname);
+                pContainer = pCdmManager->GetObjectContainer(qstrKeyname);
             }
         }
     }
