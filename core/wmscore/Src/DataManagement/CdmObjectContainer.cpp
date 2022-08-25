@@ -319,6 +319,7 @@ void CdmObjectContainer::CopyObjects(CdmObjectContainer* p_pContainerSource)
 
     if(CHKPTR(p_pContainerSource))
     {
+        p_pContainerSource->Refresh();
         CdmObject* pCdmObject = nullptr;
 
         QMap<qint64,CdmObject*>::iterator iIt = p_pContainerSource->m_qmObjects.begin();
@@ -358,7 +359,7 @@ void CdmObjectContainer::CopyObjects(CdmObjectContainer* p_pContainerSource)
         }
         else
         {
-            SetInvalid();
+            //SetInvalid();
             ERR("Copying Objectlist failed!");
         }
     }
