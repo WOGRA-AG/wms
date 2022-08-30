@@ -113,7 +113,6 @@ void CoedtwBinaryDocument::ValueChangedSlotByUser()
 			m_rpqleCaption->setText(m_pqleFilename->text());
 		}
 	}
-    setEventClassValue();
 }
 
 /** +-=---------------------------------------------------------Wed Dec 10 16:51:25 2003----------*

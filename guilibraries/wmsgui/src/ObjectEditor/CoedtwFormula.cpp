@@ -128,7 +128,6 @@ void CoedtwFormula::ValueChangedSlotByUser()
    {
       SetValue(m_rpCdmValue);
    }
-   setEventClassValue();
 }
 
 /** +-=---------------------------------------------------------Di 28. Aug 14:25:42 2012----------*

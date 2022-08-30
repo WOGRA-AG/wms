@@ -160,7 +160,6 @@ void CoedtwEnum::ValueChangedSlotByUser()
    {
       ((CdmValueEnum*)m_rpCdmValue)->SetValue(m_pqcbComboBox->currentIndex() - 1);
    }
-   setEventClassValue();
 }
 
 /** +-=---------------------------------------------------------Di 28. Aug 14:38:21 2012----------*

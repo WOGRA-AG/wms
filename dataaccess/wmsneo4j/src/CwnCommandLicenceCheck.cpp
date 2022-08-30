@@ -91,6 +91,9 @@ int CwnCommandLicenceCheck::CountMaxLicences(QString p_qstrApplication,
                                         int& p_iModules,
                                         QString p_qstrVersion)
 {
+    Q_UNUSED(p_bDemo)
+    Q_UNUSED(p_iModules)
+    Q_UNUSED(p_qstrVersion)
    int iRet = 0;
 
    QString qstrQuery = QString("select Licensee, LicenseKey from WMS_UM_LICENSEKEY "

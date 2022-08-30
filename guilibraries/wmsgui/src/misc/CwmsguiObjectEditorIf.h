@@ -41,7 +41,6 @@ public:
     CwmsguiObjectEditorIf(CdmObject* p_pCdmObject, QWidget* parent = NULL);
     virtual ~CwmsguiObjectEditorIf();
     void FillDialog();
-    void FillEventDialog();
     void AddHiddenValue(QString p_qstrValue);
     void AddReadOnlyValue(QString p_qstrValue);
     void AddObjectRefData(QString p_qstrValue, QString p_qstrObjectList, QString p_qstrDisplayValue);

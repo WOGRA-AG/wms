@@ -51,7 +51,6 @@ public:
     void SetProxy(QString p_qstrWql);
     void GetSelectionEdit(QHBoxLayout* pqLayout, QWidget* pqWidget);
     void GetComboBoxEdit(QWidget *pqWidget, QHBoxLayout *pqLayout);
-    void SetEventValueInTab(CdmValue *pCdmValue, CdmObject *pEventObject);
     virtual void SetReadOnly(  );
     virtual void SetEditable();
     void SetContainer(  QString p_qstrObjectList, QString p_qstrVisibleKeyname );

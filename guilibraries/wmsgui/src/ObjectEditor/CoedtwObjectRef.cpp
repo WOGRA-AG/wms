@@ -248,32 +248,6 @@ void CoedtwObjectRef::SetValue(CdmValue* p_pCdmValue)
    }
 }
 
-void CoedtwObjectRef::SetEventValueInTab(CdmValue *pCdmValue, CdmObject *pEventObject)
-{
-    if(pCdmValue)
-    {
-        if(m_pqleObject)
-        {
-            m_pqleObject->setText(pCdmValue->GetDisplayString());
-        }
-        else if (m_pqcbObjectChoice)
-        {
-            ((CdmValueObjectRef*)pCdmValue)->GetReferenceObjectFromEvent(pEventObject);
-            m_pqcbObjectChoice->SetCurrentObjectId(((CdmValueObjectRef*)pCdmValue)->GetValue());
-        }
-        else if (m_pObjectEditor)
-        {
-            CdmObject *pCdmObject = ((CdmValueObjectRef*)pCdmValue)->GetReferenceObjectFromEvent(pEventObject);
-
-            if (CHKPTR(pCdmObject))
-            {
-                m_pObjectEditor->SetObject(pCdmObject);
-                m_pObjectEditor->FillObjectEditor();
-            }
-        }
-    }
-}
-
 void CoedtwObjectRef::setEventClassValue()
 {
     //not needed here
@@ -286,7 +260,6 @@ void CoedtwObjectRef::ValueChangedSlotByUser()
       CdmObject* pCdmObject = m_pqcbObjectChoice->GetSelectedObject();
       ((CdmValueObjectRef*)m_rpCdmValue)->SetValue(pCdmObject);
    }
-   setEventClassValue();
 }
 
 void CoedtwObjectRef::EditClickedSlot()

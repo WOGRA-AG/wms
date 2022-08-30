@@ -119,7 +119,6 @@ void CoedtwTime::ValueChangedSlotByUser(  )
          m_rpqleCaption->setText(m_pqdeTime->time().toString());
       }
    }
-   setEventClassValue();
 }
 
 /** +-=---------------------------------------------------------Thu Dec 11 14:47:39 2003----------*

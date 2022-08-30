@@ -135,7 +135,6 @@ void CoedtwDate::ValueChangedSlotByUser()
          }
       }
    }
-   setEventClassValue();
 }
 
 /** +-=---------------------------------------------------------Thu Dec 11 14:45:43 2003----------*

@@ -86,5 +86,6 @@ CumUser* CwnCommandLogin::GetUser()
 }
 void CwnCommandLogin::interpretAnswer(QVariant &Ret)
 {
+    Q_UNUSED(Ret)
     //Nothing to do;
 }

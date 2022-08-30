@@ -61,20 +61,6 @@ void CwmsguiObjectEditorIf::FillDialog()
    }
 }
 
-void CwmsguiObjectEditorIf::FillEventDialog()
-{
-    CdmClass *pEventClass = m_rpCdmObject->GetClass();
-
-    m_pCoeObjectEditor->SetObject(m_rpCdmObject);
-    m_pCoeObjectEditor->FillObjectEventEditor(pEventClass, GetObjectEventMode());
-
-    if (CHKPTR(pEventClass))
-    {
-       setWindowTitle(m_rpCdmObject->GetCaption() + " - " + m_rpCdmObject->GetKeyname());
-       m_pqlArticleType->setText(pEventClass->GetCaption() + " " + tr("ansehen"));
-    }
-}
-
 void CwmsguiObjectEditorIf::SetSortedList(QStringList p_qstrlSorting)
 {
    m_pCoeObjectEditor->SetSortedList(p_qstrlSorting);

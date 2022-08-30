@@ -228,7 +228,6 @@ void CoedtwCharacterDocument::ValueChangedSlotByUser(  )
    {
       ((CdmValueCharacterDocument*)m_rpCdmValue)->SetValue(m_pTextEdit->GetText());
    }
-   setEventClassValue();
 }
 
 /** +-=---------------------------------------------------------Fri Dec 12 10:35:07 2003----------*

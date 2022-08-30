@@ -22,9 +22,7 @@ void CwiCommandCounterValue::Execute()
     if (CHKPTR(m_rpData))
     {
         CdmDataProvider* pCdmManager = CdmSessionManager::GetDataProvider();
-       qint64 lDbId = m_rpData->GetValue("DatabaseId").toInt();
-       qint64 lObjectListId = m_rpData->GetValue("ObjectListId").toInt();
-       qint64 lValueId = m_rpData->GetValue("ValueId").toInt();
+        qint64 lObjectListId = m_rpData->GetValue("ObjectListId").toInt();
         QString qstrKeyname = m_rpData->GetValue("Keyname").toString();
 
         if (pCdmManager)

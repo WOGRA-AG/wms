@@ -123,7 +123,6 @@ void CoedtwInteger::ValueChangedSlotByUser(  )
            m_rpqleCaption->setText(m_pleEdit->text());
         }
     }
-   setEventClassValue();
 }
 
 /** +-=---------------------------------------------------------Fri Dec 12 10:35:46 2003----------*

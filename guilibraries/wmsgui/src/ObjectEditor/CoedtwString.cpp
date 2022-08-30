@@ -158,7 +158,6 @@ void CoedtwString::ValueChangedSlotByUser()
          m_rpqleCaption->setText(m_pqleEdit->text());
       }
    }
-   setEventClassValue();
 }
 
 void CoedtwString::SetReadOnly()

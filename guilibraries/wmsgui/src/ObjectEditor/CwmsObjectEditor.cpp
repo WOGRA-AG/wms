@@ -207,44 +207,6 @@ void CwmsObjectEditor::FillObjectEditor(  )
     }
 }
 
-void CwmsObjectEditor::FillObjectEventEditor(CdmClass *pEventClass, QString eventType)
-{
-    if(eventType == UPDATE)
-    {
-        m_bIsUpdateEvent = true;
-    }
-    else
-    {
-        m_bIsUpdateEvent = false;
-    }
-    CdmClassManager *pClassManager = GetObject()->GetClassManager();
-
-    if(CHKPTR(pClassManager))
-    {
-        if(GetObject())
-        {
-            if(!GetObject()->IsDeleted())
-            {
-                BuildWidget(pEventClass);
-            }
-        }
-    }
-}
-
-void CwmsObjectEditor::BuildWidget(CdmClass *pClass)
-{
-    m_qlAddedMembers.clear();
-
-    if (GetObject())
-    {
-        FillGroups(pClass);
-    }
-    else
-    {
-        m_pqwContainter = nullptr;
-    }
-}
-
 void CwmsObjectEditor::BuildWidget()
 {
     m_qlAddedMembers.clear();
@@ -257,37 +219,6 @@ void CwmsObjectEditor::BuildWidget()
     {
         m_pqwContainter = nullptr;
     }
-}
-
-void CwmsObjectEditor::FillGroups(CdmClass *pClass)
-{
-    CdmObject* pCdmObject = GetObject();
-    CdmClass* pCdmClass = pCdmObject->GetClass();
-
-    if (CHKPTR(pCdmClass))
-    {
-        if (pCdmClass->HasGroups())
-        {
-            AddGroupsToListWidget();
-
-            if (m_pqlwGroups->count() <= 1)
-            {
-                if (m_pqlwGroups->count() == 1)
-                {
-                    QListWidgetItem* pItem = m_pqlwGroups->item(0);
-                    pItem->setSelected(true);
-                }
-
-                m_pqgbGroups->hide();
-            }
-        }
-        else
-        {
-            m_pqgbGroups->hide();
-        }
-    }
-
-    GroupChangedSlot(pClass);
 }
 
 void CwmsObjectEditor::FillGroups()
@@ -389,7 +320,7 @@ void CwmsObjectEditor::AddGroupsToListWidget()
 void CwmsObjectEditor::BuildContainerWidget()
 {
     DELPTR(m_pqwContainter)
-    m_pqwContainter = new QWidget(m_pqfData);
+            m_pqwContainter = new QWidget(m_pqfData);
     m_pqfData->setWidget(m_pqwContainter);
 }
 
@@ -477,43 +408,6 @@ void CwmsObjectEditor::GetParentWidgetAndLayout(CdmClassGroup* p_pGroup,
     }
 }
 
-void CwmsObjectEditor::GetParentWidgetAndEventLayout(CdmClassGroup* p_pGroup,
-                                                     QWidget*& p_rpWidget,
-                                                     QFormLayout*& p_rpLayout,
-                                                     QTabWidget*& p_rpTab,
-                                                     CdmClass *pEventClass)
-{
-    BuildContainerWidget();
-    int iTabs = 0;
-    if (p_pGroup)
-    {
-        iTabs = CountAdditionalTabs(p_pGroup);
-    }
-    else
-    {
-        iTabs = CountAditionalTabsforNoneGroupMembers(pEventClass);
-    }
-
-    if (iTabs == 0)
-    {
-        p_rpWidget = m_pqwContainter;
-        p_rpLayout = new QFormLayout(p_rpWidget);
-        p_rpLayout->setSpacing(3);
-        p_rpLayout->setContentsMargins(3,3,3,3);
-    }
-    else
-    {
-        p_rpTab = new QTabWidget(m_pqwContainter);
-        QVBoxLayout* pqLayout = new QVBoxLayout(m_pqwContainter);
-        pqLayout->setContentsMargins(3,3,3,3);
-        pqLayout->addWidget(p_rpTab);
-        p_rpWidget = new QWidget(nullptr);
-        p_rpTab->addTab(p_rpWidget, tr("Stammdaten"));
-        p_rpLayout = new QFormLayout(p_rpWidget);
-        p_rpLayout->setSpacing(3);
-    }
-}
-
 void CwmsObjectEditor::FillMembers(QList<CdmClassGroup*>& p_qlGroups)
 {
     if (p_qlGroups.count() > 0)
@@ -576,30 +470,6 @@ void CwmsObjectEditor::AddMember(CdmMember* p_pCdmMember,
     }
 }
 
-void CwmsObjectEditor::AddEventClassMember(CdmMember* p_pCdmMember,
-                                           QWidget* p_pqMain,
-                                           QFormLayout* p_pLayout,
-                                           QTabWidget* p_pqTab, CdmObject *pCdmEventObject)
-{
-    if (!m_qlAddedMembers.contains(p_pCdmMember->GetKeyname()))
-    {
-        CdmRights& cCdmRights = p_pCdmMember->GetRights();
-
-        if (cCdmRights.HasCurrentUserReadAccess() || cCdmRights.HasCurrentUserWriteAccess())
-        {
-            if (NeedsMemberTab(p_pCdmMember))
-            {
-                AddEventClassMemberInTab(p_pCdmMember->GetKeyname(), p_pqTab, pCdmEventObject);
-            }
-            else
-            {
-                AddEventClassMemberInFormLayout(p_pCdmMember->GetKeyname(), p_pqMain,
-                                                                   p_pLayout, pCdmEventObject);
-            }
-        }
-    }
-}
-
 void CwmsObjectEditor::FillMembers()
 {
     QWidget* pParentWidget = nullptr;
@@ -621,39 +491,6 @@ void CwmsObjectEditor::FillMembers()
                 !pCdmMember->GetGroup())
         {
             AddMember(pCdmMember, pParentWidget, pLayout, pqTab);
-        }
-    }
-
-    if (pLayout->count() == 0 && pqTab)
-    {
-        pqTab->removeTab(0);
-    }
-}
-
-void CwmsObjectEditor::FillMembers(CdmClass *pEventClass)
-{
-    QWidget *pParentWidget = nullptr;
-    QTabWidget* pqTab = nullptr;
-    QFormLayout* pLayout = nullptr;
-    GetParentWidgetAndEventLayout(nullptr, pParentWidget, pLayout, pqTab, pEventClass);
-
-    QList<qint64> qvlMembers         = getEventClassMemberList(pEventClass);
-    QList<qint64>::iterator qvlIt    = qvlMembers.begin();
-    QList<qint64>::iterator qvlItEnd = qvlMembers.end();
-
-    if(!qvlMembers.isEmpty())
-    {
-        for (; qvlIt != qvlItEnd; ++qvlIt)
-        {
-            int iMemberId = *qvlIt;
-            CdmMember* pCdmMember = GetMemberById(iMemberId, pEventClass);
-
-            if (pCdmMember &&
-                    pCdmMember->GetAccessMode() != eDmMemberAccessPrivate &&
-                    !pCdmMember->GetGroup())
-            {
-                    AddEventClassMember(pCdmMember, pParentWidget, pLayout, pqTab, GetObject());
-            }
         }
     }
 
@@ -710,28 +547,6 @@ int CwmsObjectEditor::CountAditionalTabsforNoneGroupMembers()
         }
     }
 
-    return iRet;
-}
-
-int CwmsObjectEditor::CountAditionalTabsforNoneGroupMembers(CdmClass *pEventClass)
-{
-    int iRet = 0;
-    QMap<qint64, CdmMember*> qmMemberMap;
-    pEventClass->GetMemberMap(qmMemberMap);
-
-    QMap<qint64,CdmMember*>::iterator qmIt = qmMemberMap.begin();
-    QMap<qint64,CdmMember*>::iterator qmItEnd = qmMemberMap.end();
-    for(; qmIt != qmItEnd; ++qmIt)
-    {
-        CdmMember *pCdmEventMember = qmIt.value();
-        if(CHKPTR(pCdmEventMember))
-        {
-            if(NeedsMemberTab(pCdmEventMember))
-            {
-                ++iRet;
-            }
-        }
-    }
     return iRet;
 }
 
@@ -842,31 +657,6 @@ void CwmsObjectEditor::GetGroupList(QListWidgetItem* pItem, QList<CdmClassGroup*
     }
 }
 
-void CwmsObjectEditor::GroupChangedSlot(CdmClass *pClass)
-{
-    m_qlAddedMembers.clear();
-    QListWidgetItem* pItem = CwmsListWidgetHelper::GetSelectedItem(m_pqlwGroups);
-
-    if (pItem)
-    {
-        QList<CdmClassGroup*> qlGroups;
-        GetGroupList(pItem,qlGroups);
-
-        if (qlGroups.count() > 0)
-        {
-            FillMembers(qlGroups);
-        }
-        else
-        {
-            FillMembers();
-        }
-    }
-    else
-    {
-        FillMembers();
-    }
-}
-
 void CwmsObjectEditor::AddMemberInFormLayout(QString p_qstrKeyname,
                                              QWidget* p_qwParent,
                                              QFormLayout* p_qLayout)
@@ -876,21 +666,6 @@ void CwmsObjectEditor::AddMemberInFormLayout(QString p_qstrKeyname,
     if (CHKPTR(pCdmValue))
     {
         CreateMemberUi(pCdmValue, p_qwParent, p_qLayout);
-    }
-
-    m_qlAddedMembers.append(p_qstrKeyname);
-}
-
-void CwmsObjectEditor::AddEventClassMemberInFormLayout(QString p_qstrKeyname,
-                                                       QWidget* p_qwParent,
-                                                       QFormLayout* p_qLayout,
-                                                       CdmObject *pCdmEventObject)
-{
-    CdmValue* pCdmValue = m_cCdmObjectAdaptor.GetEventValue(p_qstrKeyname, pCdmEventObject);
-
-    if (CHKPTR(pCdmValue))
-    {
-        CreateEventMemberUi(pCdmValue, p_qwParent, p_qLayout, pCdmEventObject);
     }
 
     m_qlAddedMembers.append(p_qstrKeyname);
@@ -907,26 +682,6 @@ void CwmsObjectEditor::AddMemberInTab(QString p_qstrKeyname, QTabWidget* p_qwPar
         QVBoxLayout* pqLayout = new QVBoxLayout(pqwWidget);
 
         if (!CreateTabMemberUi(pCdmValue, pqwWidget, pqLayout))
-        {
-            DELPTR(pqwWidget)
-        }
-    }
-
-    m_qlAddedMembers.append(p_qstrKeyname);
-}
-
-void CwmsObjectEditor::AddEventClassMemberInTab(QString p_qstrKeyname, QTabWidget* p_qwParent, CdmObject *pCdmEventObject)
-{
-    CdmValue* pCdmValue = m_cCdmObjectAdaptor.GetEventValue(p_qstrKeyname, pCdmEventObject);
-
-    if (CHKPTR(pCdmValue))
-    {
-        QWidget* pqwWidget = new QWidget(nullptr);
-        int iTabIndex = p_qwParent->addTab(pqwWidget, p_qstrKeyname);
-        p_qwParent->setTabText(iTabIndex, p_qstrKeyname);
-        QVBoxLayout* pqLayout = new QVBoxLayout(pqwWidget);
-
-        if(!CreateEventTabMemberUi(pCdmValue, pqwWidget, pqLayout, pCdmEventObject))
         {
             DELPTR(pqwWidget)
         }
@@ -997,63 +752,14 @@ bool CwmsObjectEditor::CreateTabMemberUi(CdmValue* p_pCdmValue,
     return bRet;
 }
 
-bool CwmsObjectEditor::CreateEventTabMemberUi(CdmValue* p_pCdmValue,
-                                              QWidget* p_pqfParent,
-                                              QVBoxLayout* p_qLayout,
-                                              CdmObject *pEventObject)
-{
-    bool bRet = false;
-
-    if(CHKPTR(p_pCdmValue))
-    {
-        const CdmMember *pCdmMember = p_pCdmValue->GetEventMember(pEventObject);
-        if(!FindInHiddenList(p_pCdmValue))
-        {
-            CoeValueWidget* pCoeValueWidget = CoeValueWidget::CreateEventValueWidget(p_pCdmValue, p_pqfParent, pEventObject);
-            m_pCoeValueWidget = pCoeValueWidget;
-
-            if(m_pCoeValueWidget)
-            {
-
-                EdmValueType edmValueType = p_pCdmValue->GetEvenValueType(pEventObject);
-                if(edmValueType == eDmValueObjectRef)
-                {
-                    m_pCoeValueWidget->CreateTabWidget(p_pqfParent, p_qLayout);
-                    CheckEditable(pCdmMember, m_pCoeValueWidget);
-                    m_pCoeValueWidget->SetEventValueInTab(p_pCdmValue, pEventObject);
-                }
-                else
-                {
-                    m_pCoeValueWidget->CreateTabWidget(p_pqfParent, p_qLayout);
-                    CheckEditable(pCdmMember, m_pCoeValueWidget);
-                    m_pCoeValueWidget->SetValue(p_pCdmValue);
-                }
-                bRet = true;
-            }
-        }
-    }
-    return bRet;
-}
-
 void CwmsObjectEditor::CheckReadOnly(const CdmMember* p_pCdmMeber, CoeValueWidget* p_pWidget)
 {
     if (CHKPTR(p_pWidget) && CHKPTR(p_pCdmMeber))
     {
-        CdmClass *pClass = p_pCdmMeber->GetClass();
-
-        //If EventSourcing is active, Member has to be read-only
-        if(pClass->IsEventSourcingActive())
+        if (IsReadOnly(p_pCdmMeber))
         {
             INFO("Member in ReadOnlyList will be set ReadOnly: " + p_pCdmMeber->GetKeyname())
-            p_pWidget->SetReadOnly();
-        }
-        else
-        {
-            if (IsReadOnly(p_pCdmMeber))
-            {
-                INFO("Member in ReadOnlyList will be set ReadOnly: " + p_pCdmMeber->GetKeyname())
-                p_pWidget->SetReadOnly();
-            }
+                    p_pWidget->SetReadOnly();
         }
     }
 }
@@ -1065,7 +771,7 @@ void CwmsObjectEditor::CheckEditable(const CdmMember* p_pCdmMeber, CoeValueWidge
         if(IsReadOnly(p_pCdmMeber))
         {
             INFO("Member in ReadOnlyList will be set Editable: " + p_pCdmMeber->GetKeyname())
-            p_pWidget->SetEditable();
+                    p_pWidget->SetEditable();
         }
     }
 }
@@ -1134,78 +840,12 @@ void CwmsObjectEditor::CreateMemberUi(CdmValue* p_pCdmValue,
     }
 }
 
-void CwmsObjectEditor::CreateEventMemberUi(CdmValue* p_pCdmValue,
-                                           QWidget* p_pqfParent,
-                                           QFormLayout* p_qLayout,
-                                           CdmObject *pEventObject)
-{
-
-    if (CHKPTR(p_pCdmValue))
-    {
-        const CdmObject *pCdmEventObject = const_cast<CdmObject*>(pEventObject);
-        const CdmMember* pCdmMember = p_pCdmValue->GetEventMember(pCdmEventObject);
-
-        if (!FindInHiddenList(p_pCdmValue))
-        {
-            CoeValueWidget* pCoeValueWidget = CoeValueWidget::CreateEventValueWidget(p_pCdmValue, p_pqfParent, pCdmEventObject);
-            m_pCoeValueWidget = pCoeValueWidget;
-
-            if(CHKPTR(m_pCoeValueWidget))
-            {
-                // set the displaytype if needed
-                if(m_qmDisplayType.contains(p_pCdmValue->GetKeyname()))
-                {
-                    m_pCoeValueWidget->SetDisplayType(m_qmDisplayType[p_pCdmValue->GetKeyname()]);
-                }
-
-                // set the objectlist in case of object ref and combobox displayvalue
-                if(p_pCdmValue->GetValueType() == eDmValueObjectRef)
-                {
-                    if(m_qmObjectRefs.contains(p_pCdmValue->GetKeyname()))
-                    {
-                        TStringPair tStringPair = m_qmObjectRefs[p_pCdmValue->GetKeyname()];
-                        QString qstrKey = tStringPair.first;
-                        qstrKey = qstrKey.simplified();
-
-                        if (!qstrKey.startsWith("select "))
-                        {
-                            ((CoedtwObjectRef*)m_pCoeValueWidget)->SetContainer(tStringPair.first, tStringPair.second);
-                        }
-                        else
-                        {
-                            ((CoedtwObjectRef*)m_pCoeValueWidget)->SetProxy(tStringPair.first);
-                        }
-
-                        if (m_qmProxies.contains(p_pCdmValue->GetKeyname()))
-                        {
-                            ((CoedtwObjectRef*)m_pCoeValueWidget)->SetProxy(m_qmProxies[p_pCdmValue->GetKeyname()]);
-                        }
-                    }
-
-                    if (!m_bShowEditButton)
-                    {
-                        ((CoedtwObjectRef*)m_pCoeValueWidget)->HideEditButton();
-                    }
-                }
-
-                // creating the widget
-                m_pCoeValueWidget->CreateEventWidget(p_qLayout, p_pqfParent);
-                CheckEditable(pCdmMember, m_pCoeValueWidget);
-            }
-        }
-        else
-        {
-            INFO("Member in HiddenList will not be shown: " + p_pCdmValue->GetKeyname())
-        }
-    }
-}
-
-void CwmsObjectEditor::CaptionChangedSlot(  const QString & p_qstrCaption )
+void CwmsObjectEditor::CaptionChangedSlot(const QString & p_qstrCaption)
 {
     GetObject()->SetCaption(p_qstrCaption);
 }
 
-QList<qint64> CwmsObjectEditor::GetSortMemberList(  )
+QList<qint64> CwmsObjectEditor::GetSortMemberList()
 {
     QList<qint64> qvlMembers;
 
@@ -1231,7 +871,7 @@ QList<qint64> CwmsObjectEditor::GetSortMemberList(  )
 
                     if (pCdmMember)
                     {
-                       qint64 lMemberId = pCdmMember->GetId();
+                        qint64 lMemberId = pCdmMember->GetId();
                         qvlMembers.append(lMemberId);
                     }
                 }
@@ -1258,57 +898,6 @@ QList<qint64> CwmsObjectEditor::GetSortMemberList(  )
     return qvlMembers;
 }
 
-QList<qint64> CwmsObjectEditor::getEventClassMemberList(CdmClass *pClass)
-{
-    QList<qint64> qvlMembers;
-
-    if(m_qstrlEventClassMembers.isEmpty())
-    {
-        if(CHKPTR(pClass))
-        {
-            QVector<QString> qvSequence = pClass->GetMemberSequence();
-
-            if(qvSequence.isEmpty())
-            {
-                QMap<qint64,CdmMember*> qmMembers;
-                pClass->GetMemberMap(qmMembers);
-
-                QMap<qint64, CdmMember*>::iterator qmIt = qmMembers.begin();
-                QMap<qint64, CdmMember*>::iterator qmItEnd = qmMembers.end();
-
-                for(; qmIt != qmItEnd; ++qmIt)
-                {
-                    CdmMember *pMember = qmIt.value();
-
-                    if(pMember)
-                    {
-                       qint64 lMemberId = pMember->GetId();
-                        qvlMembers.append(lMemberId);
-                    }
-                }
-            }
-            else
-            {
-                for(int iCounter = 0; iCounter < qvSequence.count(); ++iCounter)
-                {
-                    const CdmMember *pMember = pClass->FindMember(qvSequence[iCounter]);
-
-                    if(pMember)
-                    {
-                        qvlMembers.append(pMember->GetId());
-                    }
-                }
-            }
-        }
-    }
-    else
-    {
-        qvlMembers = getEventClassMemberListFromStringList(pClass);
-    }
-
-    return qvlMembers;
-}
-
 QList<qint64> CwmsObjectEditor::GetSortedMemberListFromStringList(  )
 {
     QList<qint64> qvlMembers;
@@ -1322,7 +911,7 @@ QList<qint64> CwmsObjectEditor::GetSortedMemberListFromStringList(  )
 
         if(CHKPTR(pCdmValue))
         {
-           qint64 lMemberId = pCdmValue->GetMemberId();
+            qint64 lMemberId = pCdmValue->GetMemberId();
             qvlMembers.append(lMemberId);
         }
     }
@@ -1330,26 +919,7 @@ QList<qint64> CwmsObjectEditor::GetSortedMemberListFromStringList(  )
     return qvlMembers;
 }
 
-QList<qint64> CwmsObjectEditor::getEventClassMemberListFromStringList(CdmClass *pClass)
-{
-    QList<qint64> qvlMembers;
-
-    QStringList::Iterator qstrIt = m_qstrlEventClassMembers.begin();
-    QStringList::Iterator qstrItEnd = m_qstrlEventClassMembers.end();
-
-    for(; qstrIt != qstrItEnd; ++qstrIt)
-    {
-        const CdmMember *pMember = pClass->FindMember(*qstrIt);
-        if(pMember)
-        {
-           qint64 lMemberId = pMember->GetId();
-            qvlMembers.append(lMemberId);
-        }
-    }
-    return qvlMembers;
-}
-
-CdmValue* CwmsObjectEditor::FindValueByMemberId( qint64 p_lMemberId )
+CdmValue* CwmsObjectEditor::FindValueByMemberId(qint64 p_lMemberId)
 {
     CdmValue* pCdmValueRet = nullptr;
     QMap<QString, CdmValue*> qmValues;
@@ -1584,14 +1154,7 @@ void CwmsObjectEditor::SetFormConfiguration(CdmObject* p_pObject)
         CdmClass *pCdmObjectClass = p_pObject->GetClass();
         if(CHKPTR(pCdmObjectClass))
         {
-            if(pCdmObjectClass->IsEventSourcingActive())
-            {
-                SetReadOnly(false);
-            }
-            else
-            {
-                SetReadOnly(cForm.GetReadOnly());
-            }
+            SetReadOnly(cForm.GetReadOnly());
 
             SetCaptionValue(cForm.GetCaptionValue());
             //QMap<QString, QString> qmDefaults = cForm.GetDefaultValues();
@@ -1756,11 +1319,6 @@ void CwmsObjectEditor::FunctionClickedSlot()
         }
     }
 
-    if(GetObject()->GetClass()->IsEventSourcingActive())
-    {
-        GroupChangedSlot(GetObject()->GetClass()); // updates the data in current displayed group
-    }
-
     GroupChangedSlot(); // updates the data in current displayed group
     QApplication::restoreOverrideCursor();
     CdmMessageManager::EndAndShowAsyncMessageCollection();
@@ -1774,46 +1332,6 @@ void CwmsObjectEditor::ResetClickedSlot()
     if (CHKPTR(pObject))
     {
         pObject->Refresh();
-
-        if(pObject->GetClass()->IsEventSourcingActive())
-        {
-            GroupChangedSlot(GetObject()->GetClass()); // updates the data in current displayed group
-        }
-
         GroupChangedSlot(); // updates the data in current displayed group
     }
-}
-
-void CwmsObjectEditor::setIsObjectEventEditor(bool bIsObjEEditor)
-{
-    m_bIsObjEventEditor = bIsObjEEditor;
-}
-
-bool CwmsObjectEditor::getIsObjectEventEditor()
-{
-    return m_bIsObjEventEditor;
-}
-
-bool CwmsObjectEditor::checkEventMode(QString qstr_checkEventMode)
-{
-    return checkForEventMode(qstr_checkEventMode);
-}
-
-bool CwmsObjectEditor::checkForEventMode(QString qstr_checkEventMode)
-{
-    if(qstr_checkEventMode == NEW || qstr_checkEventMode == DELETE)
-    {
-        m_bIsUpdateEvent = false;
-    }
-    else if(qstr_checkEventMode == UPDATE)
-    {
-        m_bIsUpdateEvent = true;
-    }
-    m_bCheckEventMode = true;
-    return m_bCheckEventMode;
-}
-
-QList<CdmValue*> CwmsObjectEditor::getEventClassMemberValues() const
-{
-    return m_pCoeValueWidget->getEventClassValues();
 }

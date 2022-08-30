@@ -91,7 +91,6 @@ void CoedtwBool::ValueChangedSlotByUser(  )
    {
       ((CdmValueBool*)m_rpCdmValue)->SetValue(m_pqchbCheckbox->isChecked());
    }
-   setEventClassValue();
 }
 
 /** +-=---------------------------------------------------------Wed Dec 10 16:51:12 2003----------*

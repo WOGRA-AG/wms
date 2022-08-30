@@ -378,26 +378,6 @@ void CoeValueWidget::CreateWidget(QFormLayout* p_qLayout, QWidget* p_pqwParent)
    SetValue(m_rpCdmValue);
 }
 
-void CoeValueWidget::CreateEventWidget(QFormLayout* p_qLayout, QWidget* p_pqwParent)
-{
-    QWidget* pqLabel = CreateCaptionLabel(p_pqwParent);
-    QWidget* pqEdit = GetEditWidget(p_pqwParent);
-
-    if (pqLabel && pqEdit)
-    {
-       p_qLayout->addRow(pqLabel, pqEdit);
-
-       if (CHKPTR(m_rpCdmMember))
-       {
-          pqLabel->setToolTip(m_rpCdmMember->GetComment());
-          pqEdit->setToolTip(m_rpCdmMember->GetComment());
-       }
-    }
-
-    p_qLayout->setMargin(6);
-    setEventClassValue();
-}
-
 bool CoeValueWidget::CreateTabWidget(QWidget* p_pqwParent, QVBoxLayout* p_pqlLayout)
 {
 
@@ -475,16 +455,6 @@ void CoeValueWidget::SetValue(CdmValue* )
 void CoeValueWidget::setEventClassValue()
 {
     //overwritten in classes!
-}
-
-void CoeValueWidget::SetEventValueInTab(CdmValue *pCdmValue, CdmObject *pEventObject)
-{
-    //overwritten in CoedtwObjectRef
-}
-
-QList<CdmValue *> CoeValueWidget::getEventClassValues() const
-{
-    return m_qlEventClassValues;
 }
 
 void CoeValueWidget::SetReadOnly()

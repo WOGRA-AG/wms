@@ -18,50 +18,49 @@ CwiCommandLockObject::~CwiCommandLockObject()
 
 void CwiCommandLockObject::Execute()
 {
-   qint64 lObjectId = m_rpData->GetValue("ObjectId").toInt();
-   qint64 lObjectListId = m_rpData->GetValue("ObjectListId").toInt();
-   qint64 lDbId = m_rpData->GetValue("DatabaseId").toInt();
+    qint64 lObjectId = m_rpData->GetValue("ObjectId").toInt();
+    qint64 lObjectListId = m_rpData->GetValue("ObjectListId").toInt();
 
     CdmDataProvider* pCdmManager = CdmSessionManager::GetDataProvider();
 
     if (pCdmManager)
     {
-       IdmDataAccess* pDataAccess = pCdmManager->GetDataAccess();
-       bool bSuccess = false;
+        IdmDataAccess* pDataAccess = pCdmManager->GetDataAccess();
+        bool bSuccess = false;
 
-       CdmContainerManager* pContainerManager = pCdmManager->GetContainerManager();
+        CdmContainerManager* pContainerManager = pCdmManager->GetContainerManager();
 
-       if (CHKPTR(pContainerManager))
-       {
-           CdmObject* pObject = pContainerManager->FindObject(lObjectListId, lObjectId);
+        if (CHKPTR(pContainerManager))
+        {
+            CdmObject* pObject = pContainerManager->FindObject(lObjectListId, lObjectId);
 
-           if (CHKPTR(pObject))
-           {
-               pDataAccess->LockObject(pObject, bSuccess);
+            if (CHKPTR(pObject))
+            {
+                pDataAccess->LockObject(pObject, bSuccess);
 
-               if (bSuccess)
-               {
-                  GetResultContainer(m_rpData,
-                                               1,
-                                               "Object locked!",
-                                               eWmscomMessageServerityInfo);
-               }
-               else
-               {
-                  GetResultContainer(m_rpData,
-                                               -5000,
-                                               "Could not lock object on db!",
-                                               eWmscomMessageServerityError);
-               }
-           }
-       }
+                if (bSuccess)
+                {
+                    GetResultContainer(m_rpData,
+                                       1,
+                                       "Object locked!",
+                                       eWmscomMessageServerityInfo);
+                }
+                else
+                {
+                    GetResultContainer(m_rpData,
+                                       -5000,
+                                       "Could not lock object on db!",
+                                       eWmscomMessageServerityError);
+                }
+            }
+        }
     }
     else
     {
-       GetResultContainer(m_rpData,
-                          -5000,
-                          "Session not found",
-                          eWmscomMessageServerityFatal);
+        GetResultContainer(m_rpData,
+                           -5000,
+                           "Session not found",
+                           eWmscomMessageServerityFatal);
     }
 }
 

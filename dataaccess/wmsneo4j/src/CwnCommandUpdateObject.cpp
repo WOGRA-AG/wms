@@ -846,7 +846,7 @@ void CwnCommandUpdateObject::UpdateCounter(CdmValueCounter* p_pCdmCounter, QStri
         qstrQuery += QString("SET v.val=toInt(\'%1\') REMOVE v.filetype, v.filename RETURN id(v), v.type").arg(p_pCdmCounter->GetValue());
 
         counterValueList.append(p_pCdmCounter);
-        counterAdded +=true;
+        counterAdded = true;
         payload += addJsonCommand(qstrQuery);
     }
     else

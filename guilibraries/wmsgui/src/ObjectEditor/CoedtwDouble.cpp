@@ -268,7 +268,6 @@ void CoedtwDouble::ValueChangedSlotByUser(  )
          m_rpqleCaption->setText(m_pqleEdit->text());
       }
    }
-   setEventClassValue();
 }
 
 /** +-=---------------------------------------------------------Fri Dec 12 10:35:37 2003----------*

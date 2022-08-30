@@ -89,17 +89,10 @@ public:
     void AddHiddenValue(  QString p_qstrKeyname );
     void AddReadOnlyValue(  QString p_qstrKeyname );
     void FillObjectEditor(  );
-    void FillObjectEventEditor(CdmClass *pEventClass, QString eventType);
     CwmsObjectEditor( QWidget* p_pqwParent = nullptr);
     void SetReadOnly(  bool p_bReadOnly );
     void SetFormConfiguration(CdmObject* p_pObject);
-    void setIsObjectEventEditor(bool bIsObjEEditor);
-    bool getIsObjectEventEditor();
-    QList<CdmValue *> getEventClassMemberValues() const;
-    bool checkEventMode(QString qstr_checkEventMode);
-    void GetParentWidgetAndEventLayout(CdmClassGroup *p_pGroup, QWidget *&p_rpWidget, QFormLayout *&p_rpLayout, QTabWidget *&p_rpTab, CdmClass *pEventClass);
     QList<qint64> GetSortMemberList(  );
-    QList<qint64> getEventClassMemberList(CdmClass *pClass);
     void SetSortedList(  QStringList p_qstrlistSortedMembers );
     void AddObjectRefData(QString p_qstrValue,
                           QString p_qstrObjectListKeyname,
@@ -107,7 +100,6 @@ public:
 
     void SetDisplayType(QString p_qstrValue, EdmStringDisplayType p_EoeDisplayType);
     QList<qint64> GetSortedMemberListFromStringList();
-    QList<qint64> getEventClassMemberListFromStringList(CdmClass *pClass);
     void SetCaptionValue(QString p_qstrValue);
     void SetShowEditButton(bool p_bShow);
     bool ShowEditButton();
@@ -131,14 +123,10 @@ public slots:
 
 private:
     void FillMembers();
-    void FillMembers(CdmClass *pEventClass);
     void AddMemberInFormLayout(QString p_qstrKeyname, QWidget* p_qwParent, QFormLayout* p_qLayout);
-    void AddEventClassMemberInFormLayout(QString p_qstrKeyname, QWidget* p_qwParent, QFormLayout* p_qLayout, CdmObject *pCdmEventObject);
     void CreateMemberUi(CdmValue* p_pCdmValue, QWidget* p_pqfParent, QFormLayout* p_qLayout);
-    void FillGroups(CdmClass *pClass);
     void FillGroups();
     bool IsReadOnly(  );
-    void BuildWidget(CdmClass *pClass);
     void BuildWidget();
     bool FindInHiddenList(  CdmValue* p_pCdmValue );
     bool IsReadOnly(const CdmMember* p_pCdmMember);
@@ -157,7 +145,6 @@ private:
     CdmMember* GetMemberById(qint64 p_lId);
     CdmMember* GetMemberById(qint64 p_lId, CdmClass *pClass);
     void AddMemberInTab(QString p_qstrKeyname, QTabWidget* p_qwParent);
-    void AddEventClassMemberInTab(QString p_qstrKeyname, QTabWidget* p_qwParent, CdmObject *pCdmEventObject);
     bool CreateTabMemberUi(CdmValue* p_pCdmValue, QWidget* p_pqfParent, QVBoxLayout* p_qLayout);
     void FillMembers(QList<CdmClassGroup *> &p_qlGroups);
     void AddMember(CdmMember* p_pCdmMember,
@@ -165,17 +152,9 @@ private:
                    QFormLayout* p_pLayout,
                    QTabWidget* p_pqTab);
 
-    void AddEventClassMember(CdmMember* p_pCdmMember,
-                             QWidget* p_pqMain,
-                             QFormLayout* p_pLayout,
-                             QTabWidget* p_pqTab, CdmObject *pCdmEventObject);
     void CheckReadOnly(const CdmMember* p_pCdmMeber, CoeValueWidget* p_pWidget);
     void AddFunctions();
-    void CreateEventMemberUi(CdmValue *p_pCdmValue, QWidget *p_pqfParent, QFormLayout *p_qLayout, CdmObject *pEventObject);
-    bool CreateEventTabMemberUi(CdmValue *p_pCdmValue, QWidget *p_pqfParent, QVBoxLayout *p_qLayout, CdmObject *pEventObject);
     void CheckEditable(const CdmMember *p_pCdmMeber, CoeValueWidget *p_pWidget);
-    bool checkForEventMode(QString qstr_checkEventMode);
-    int CountAditionalTabsforNoneGroupMembers(CdmClass *pEventClass);
     void GetGroupList(QListWidgetItem *pItem, QList<CdmClassGroup *> &p_rqlGroups);
 
 private slots:
@@ -183,7 +162,6 @@ private slots:
     void JournalClickedSlot( );
     void PrintClickedSlot( );
     void GroupChangedSlot();
-    void GroupChangedSlot(CdmClass* pClass);
     void FunctionClickedSlot( );
 
 };

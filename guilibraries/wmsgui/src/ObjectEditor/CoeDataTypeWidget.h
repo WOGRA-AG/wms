@@ -48,7 +48,6 @@ public:
     virtual void SetReadOnly(  );
     virtual void SetEditable();
     void CreateWidget(QFormLayout* p_qLayout, QWidget* p_pqwParent);
-    void CreateEventWidget(QFormLayout* p_qLayout, QWidget* p_pqwParent);
     void SetDisplayType(EdmStringDisplayType p_eOeDisplayType);
     void SetCaptionLineEdit(QLineEdit* p_pqleCaption);
     static CoeValueWidget* CreateSearchValueWidget(const CdmMember* p_pCdmMember,
@@ -62,8 +61,6 @@ public:
     bool CreateTabWidget(QWidget* p_pqwParent, QVBoxLayout* p_pqlLayout);
     virtual QWidget* GetTabEditWidget(QWidget* p_pqwParent);
     virtual void setEventClassValue();
-    virtual void SetEventValueInTab(CdmValue *pCdmValue, CdmObject *pEventObject);
-    QList<CdmValue*> getEventClassValues() const;
 
     static CoeValueWidget *CreateEventValueWidget(CdmValue *p_pCdmEventValue, QWidget *p_pqwParent, const CdmObject *p_EventObject);
 public slots:

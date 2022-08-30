@@ -342,15 +342,7 @@ bool CwmsguiObjectEditorSelector::DisplayConfiguredObjectEditor(CdmObject* p_pCd
        }
        
        pCoeObjectEditor->SetFormConfiguration(cObject.GetObject());
-       if(pCdmClass->IsEventSourcingActive())
-       {
-           pCoeObjectEditor->FillEventDialog();
-       }
-        else
-       {
-           pCoeObjectEditor->FillDialog();
-       }
-       
+       pCoeObjectEditor->FillDialog();
 
        if (pCoeObjectEditor->exec() != QDialog::Accepted)
        {
@@ -386,65 +378,30 @@ bool CwmsguiObjectEditorSelector::DisplayDefaultObjectEditor(CdmObject* p_pCdmOb
        CdmObjectAdaptor cObject(p_pCdmObject);
       pCoeObjectEditor->SetCaptionValue(pCdmClass->GetCaptionMemberKeyname());
 
-      if(pCdmClass->IsEventSourcingActive()|| pCdmClass->IsEventClass())
+      if(p_eDisplayMode == eWmsGuiDisplayModeRead)
       {
-          if(p_eDisplayMode == eWmsGuiDisplayModeNew)
-          {
-              pCoeObjectEditor->SetObjectEventMode(WMS_NEW);
-          }
-          else if(p_eDisplayMode == eWmsGuiDisplayModeRead)
-          {
-              pCoeObjectEditor->SetObjectEventMode(WMS_DELETE);
-          }
-          else if(p_eDisplayMode ==  eWmsGuiDisplayModeWrite)
-          {
-              pCoeObjectEditor->SetObjectEventMode(WMS_UPDATE);
-          }
-
-          pCoeObjectEditor->FillEventDialog();
-
-          if (pCoeObjectEditor->exec() != QDialog::Accepted)
-          {
-             if (p_eDisplayMode == eWmsGuiDisplayModeNew)
-             {
-                 cObject.SetDeleted();
-             }
-             else
-             {
-                 cObject.Refresh();
-             }
-          }
-          else
-          {
-              bRet = true;
-          }
+          pCoeObjectEditor->SetReadOnly();
+      }
+      pCoeObjectEditor->FillDialog();
+      if (pCoeObjectEditor->exec() != QDialog::Accepted)
+      {
+         if (p_eDisplayMode == eWmsGuiDisplayModeNew)
+         {
+             cObject.SetDeleted();
+         }
+         else
+         {
+             cObject.Refresh();
+         }
       }
       else
       {
-          if(p_eDisplayMode == eWmsGuiDisplayModeRead)
-          {
-              pCoeObjectEditor->SetReadOnly();
-          }
-          pCoeObjectEditor->FillDialog();
-          if (pCoeObjectEditor->exec() != QDialog::Accepted)
-          {
-             if (p_eDisplayMode == eWmsGuiDisplayModeNew)
-             {
-                 cObject.SetDeleted();
-             }
-             else
-             {
-                 cObject.Refresh();
-             }
-          }
-          else
-          {
-              bRet = true;
-          }
-
-          cObject.CommitObject();
+          bRet = true;
       }
+
+      cObject.CommitObject();
    }
+
    DELPTR(pCoeObjectEditor);
    return bRet;
 }

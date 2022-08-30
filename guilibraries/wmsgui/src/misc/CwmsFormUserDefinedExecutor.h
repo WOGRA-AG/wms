@@ -28,7 +28,6 @@ private:
     void ShowUi(CwmsFormUserDefined &p_Form, QWidget *p_pWidget);
     IdmExecutorEngine *GetEngine();
     CsaFactory *GetFactory();
-    void BuildFunctionCode(QString &p_rqstrCode, CwmsFormUserDefined &p_Form);
 };
 
 #endif // CWMSFORMUSERDEFINEDEXECUTOR_H

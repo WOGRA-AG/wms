@@ -116,7 +116,6 @@ void CoedtwUser::setEventClassValue()
 
 void CoedtwUser::ValueChangedSlotByUser()
 {
-    setEventClassValue();
 }
 
 void CoedtwUser::SetReadOnly()

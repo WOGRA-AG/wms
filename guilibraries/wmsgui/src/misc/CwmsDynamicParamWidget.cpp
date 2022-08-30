@@ -27,7 +27,7 @@ CwmsDynamicParamWidget::~CwmsDynamicParamWidget()
 
 void CwmsDynamicParamWidget::CreateWidget()
 {
-    auto layout = CreateLayoutAndLabel();
+    CreateLayoutAndLabel();
 
     switch(m_eType)
     {

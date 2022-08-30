@@ -635,6 +635,7 @@ void CwmsScriptingEnvironment::NewItem(QTreeWidgetItem* p_pItem)
 
 void CwmsScriptingEnvironment::NewLibrary(QTreeWidgetItem* p_pItem)
 {
+    Q_UNUSED(p_pItem)
 //    CwmsFormManager cFormManager;
 //    CdmObjectContainer* pContainer = cFormManager.GetFormLibrary();
 
@@ -1098,6 +1099,8 @@ void CwmsScriptingEnvironment::EditLibrarySlot(QTreeWidgetItem* p_pItem)
 
 void CwmsScriptingEnvironment::EditLibrarySlot(CdmObject* p_pObject, QTreeWidgetItem* p_pItem)
 {
+    Q_UNUSED(p_pObject)
+    Q_UNUSED(p_pItem)
 //    if (CHKPTR(p_pObject))
 //    {
 //        if (!FindAndSetSubWindow(p_pObject->GetUriInternal()))

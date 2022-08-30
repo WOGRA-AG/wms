@@ -21,6 +21,8 @@ CwnLoginManager::~CwnLoginManager()
 
 qint64 CwnLoginManager::Login(QString p_qstrApplication, QString p_qstrLogin, QString p_qstrPassword, CumUser*& p_rpCumUser, bool& p_bDemo, int& p_iModules, QString& p_qstrVersion)
 {
+    Q_UNUSED(p_bDemo)
+    Q_UNUSED(p_iModules)
     CwnCommandLogin loginSessionCheck(p_qstrApplication,p_qstrVersion,p_qstrLogin,p_qstrPassword,m_rpCwnDataAccess,m_rpCwnUserManager);
 
    qint64 Ret=loginSessionCheck.Run();

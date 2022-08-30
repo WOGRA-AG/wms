@@ -423,7 +423,7 @@ void CwmsObjectBinder::FillData(CdmValueFloat* p_pValue, QWidget* p_pWidget)
                 {
                     pEdit->setAlignment(Qt::AlignRight);
                     QLocale loc;
-                    pEdit->setText(loc.toString(static_cast<int>(p_pValue->GetValue())));
+                    pEdit->setText(loc.toString(p_pValue->GetValue()));
 
                     if (IsReadOnly(p_pValue))
                     {
@@ -488,12 +488,23 @@ void CwmsObjectBinder::FillData(CdmValueDouble* p_pValue, QWidget* p_pWidget)
                 {
                     pEdit->setAlignment(Qt::AlignRight);
                     QLocale loc;
-                    pEdit->setText(loc.toString(static_cast<double>(p_pValue->GetValue())));
+                    int iDecimals = 2;
+                    QString qstrValue;
 
-                    if (IsReadOnly(p_pValue))
+                    if (IsReadOnly(p_pValue) || pEdit->isReadOnly())
                     {
                         pEdit->setReadOnly(true);
+                        iDecimals = p_pValue->GetMember()->GetDecimalCountOutput();
+                        qstrValue = loc.toString(p_pValue->GetValue(), 'f', iDecimals);
+                        qstrValue = p_pValue->GetMember()->GetPrefix() + qstrValue + p_pValue->GetMember()->GetSuffix();
                     }
+                    else
+                    {
+                        iDecimals = p_pValue->GetMember()->GetDecimalCountInput();
+                        qstrValue = loc.toString(p_pValue->GetValue(), 'f', iDecimals);
+                    }
+
+                    pEdit->setText(qstrValue);
                 }
                 else
                 {
@@ -509,14 +520,18 @@ void CwmsObjectBinder::FillData(CdmValueDouble* p_pValue, QWidget* p_pWidget)
             {
                 if (CHKPTR(pEdit))
                 {
+                    pEdit->setDecimals(p_pValue->GetMember()->GetDecimalCountInput());
+                    pEdit->setSuffix(p_pValue->GetMember()->GetSuffix());
+                    pEdit->setPrefix(p_pValue->GetMember()->GetPrefix());
                     pEdit->setMaximum(10000000);
                     pEdit->setMinimum(-10000000);
                     pEdit->setValue(p_pValue->GetValue());
-                }
 
-                if (IsReadOnly(p_pValue))
-                {
-                    pEdit->setEnabled(false);
+                    if (IsReadOnly(p_pValue))
+                    {
+                        pEdit->setDecimals(p_pValue->GetMember()->GetDecimalCountOutput());
+                        pEdit->setEnabled(false);
+                    }
                 }
             }
             else

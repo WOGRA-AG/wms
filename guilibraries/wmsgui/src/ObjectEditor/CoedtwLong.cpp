@@ -117,5 +117,4 @@ void CoedtwLong::ValueChangedSlotByUser(  )
    {
       m_rpqleCaption->setText(m_pleEdit->text());
    }
-   setEventClassValue();
 }
