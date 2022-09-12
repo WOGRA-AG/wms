@@ -70,7 +70,7 @@ QVariant CwmsTreeCompletionModel::data(const QModelIndex &index, int role) const
 Qt::ItemFlags CwmsTreeCompletionModel::flags(const QModelIndex &index) const
 {
     if (!index.isValid())
-        return 0;
+        return Qt::NoItemFlags;
 
     return QAbstractItemModel::flags(index);
 }
@@ -254,6 +254,7 @@ void CwmsTreeCompletionModel::addMembersToModel(const CdmClass* p_pClass, CwmsTr
 
 void CwmsTreeCompletionModel::addMethodsToModel(const CdmClass* p_pClass, CwmsTreeCompletionItem *parent, CwmsTreeCompletionItem* pClassItem)
 {
+    Q_UNUSED(parent)
     QMap<QString, CdmClassMethod*> qmMethods = const_cast<CdmClass*>(p_pClass)->GetAllMethods();
     QMap<QString, CdmClassMethod*>::iterator qmMethodIt = qmMethods.begin();
     QMap<QString, CdmClassMethod*>::iterator qmItMethodEnd = qmMethods.end();
