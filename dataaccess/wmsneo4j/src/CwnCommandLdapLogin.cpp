@@ -180,6 +180,7 @@ bool CwnCommandLdapLogin::CheckValid()
 
 void CwnCommandLdapLogin::interpretAnswer(QVariant& Ret)
 {
+    Q_UNUSED(Ret)
     //Not needed;
 }
 

@@ -466,8 +466,6 @@ bool CwnCommandGetClass::interpretAnswerForPackageLoad(QVariantList &dataList){
 
 void CwnCommandGetClass::interpretAnswer(QVariant &Ret)
 {
-    //qDebug() << answer;
-    bool bRet = true;
     CwmsJson json;
     QString qstrJson;
     qstrJson.append(answer);
