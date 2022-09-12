@@ -762,7 +762,6 @@ void CwmsbtSmtpClient::NextAction(const QString p_qstrResponse)
  *----------------last changed: --------------------------------Mi 31. Okt 12:20:53 2012----------*/
 void CwmsbtSmtpClient::ConnectedSlot(QMailTransport::EncryptType p_eEncryptType)
 {
-#ifndef ANDROID
    if (m_rpIslSmtpConfiguration->GetSmtpEncryption() == p_eEncryptType) 
    {
        QString qstrSignal = tr("Verbunden");
@@ -780,7 +779,6 @@ void CwmsbtSmtpClient::ConnectedSlot(QMailTransport::EncryptType p_eEncryptType)
    }
 
 #endif //
-#endif //
 }
 
 /** +-=---------------------------------------------------------Sa 9. Jan 12:59:06 2010-----------*
@@ -792,7 +790,6 @@ void CwmsbtSmtpClient::ConnectedSlot(QMailTransport::EncryptType p_eEncryptType)
  *----------------last changed: --------------------------------Sa 9. Jan 12:59:06 2010-----------*/
 void CwmsbtSmtpClient::SendCommand(const char *data, int p_iLength)
 {
-#ifndef ANDROID
    if (p_iLength == -1)
    {
       p_iLength = ::strlen(data);
@@ -803,7 +800,6 @@ void CwmsbtSmtpClient::SendCommand(const char *data, int p_iLength)
    out.writeRawData("\r\n", 2);
 
    ++m_iOutstandingResponses;
-#endif //
 }
 
 /** +-=---------------------------------------------------------Sa 9. Jan 13:00:54 2010-----------*
