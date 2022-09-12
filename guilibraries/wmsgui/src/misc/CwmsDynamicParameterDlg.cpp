@@ -54,12 +54,24 @@ QVariantList CwmsDynamicParameterDlg::GetInputList()
 
 QVariantList CwmsDynamicParameterDlg::AskForFunctionParams(QList<CdmClassMethodParameter>& p_qlParameters, QWidget* parent)
 {
+    auto pCursor = QApplication::overrideCursor();
+
+    if (pCursor)
+    {
+        QApplication::restoreOverrideCursor();
+    }
+
     QList<QPair<QString, EdmValueType>> qlInput = ConvertClassParametersToInputParameters(p_qlParameters);
     QVariantList qvlParams;
 
     if (qlInput.count() > 0)
     {
         qvlParams = GetParamValues(qlInput, parent);
+    }
+
+    if (pCursor)
+    {
+        QApplication::setOverrideCursor(*pCursor);
     }
 
     return qvlParams;
@@ -84,7 +96,7 @@ QList<QPair<QString, EdmValueType>> CwmsDynamicParameterDlg::ConvertClassParamet
 
 QVariantList CwmsDynamicParameterDlg::AskForMemberParams(QList<CdmMember *> &p_qlParameters, QWidget* parent)
 {
-    QList<QPair<QString, EdmValueType>> qlInput = ConvertMembberParametersToInputParameters(p_qlParameters);
+    QList<QPair<QString, EdmValueType>> qlInput = ConvertMemberParametersToInputParameters(p_qlParameters);
 
     if (qlInput.count() > 0)
     {
@@ -94,7 +106,7 @@ QVariantList CwmsDynamicParameterDlg::AskForMemberParams(QList<CdmMember *> &p_q
     return QVariantList();
 }
 
-QList<QPair<QString, EdmValueType>> CwmsDynamicParameterDlg::ConvertMembberParametersToInputParameters(QList<CdmMember *> &p_qlParameters)
+QList<QPair<QString, EdmValueType>> CwmsDynamicParameterDlg::ConvertMemberParametersToInputParameters(QList<CdmMember *> &p_qlParameters)
 {
     QList<QPair<QString, EdmValueType>> qlResult;
 

@@ -30,7 +30,7 @@ public:
 private:
 
     static QList<QPair<QString, EdmValueType>> ConvertClassParametersToInputParameters(QList<CdmClassMethodParameter> &p_qlParameters);
-    static QList<QPair<QString, EdmValueType>> ConvertMembberParametersToInputParameters(QList<CdmMember *> &p_qlParameters);
+    static QList<QPair<QString, EdmValueType>> ConvertMemberParametersToInputParameters(QList<CdmMember *> &p_qlParameters);
     static QVariantList GetParamValues(QList<QPair<QString, EdmValueType> > &p_qlParameters, QWidget *parent);
 };
 
