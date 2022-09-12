@@ -77,6 +77,8 @@ public:
     bool HasRightConfigured(int p_lUserBaseId) const;
     void AddRight(CumAccessor *p_pAccessor, EdmRight p_eRight);
 
+    bool HasUserExplicitReadAccess(const CumUser *pUser) const;
+    bool HasCurrentUserExplicitReadAccess() const;
 public slots:
     bool HasReadAccess( int p_iUserBaseId) const;
     bool HasWriteAccess( int p_iUserBaseId) const;

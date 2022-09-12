@@ -270,18 +270,48 @@ bool CdmRights::HasCurrentUserReadAccess() const
             }
             else
             {
-               EdmRight eDmRight = FindRight(pCumUser);
-
-               if (eDmRight != eDmRightNone)
-               {
-                  bRet = true;
-               }
+               bRet = HasUserExplicitReadAccess(pCumUser);
             }
          }
       }
    }
 
    return bRet;
+}
+
+bool CdmRights::HasCurrentUserExplicitReadAccess() const
+{
+    bool bRet = false;
+    CdmDataProvider* pCdmManager = CdmSessionManager::GetDataProvider();
+
+    if (CHKPTR(pCdmManager))
+    {
+       const CumUser* pCumUser = pCdmManager->GetUser();
+
+       if (CHKPTR(pCumUser))
+       {
+         bRet = HasUserExplicitReadAccess(pCumUser);
+       }
+    }
+
+    return bRet;
+}
+
+bool CdmRights::HasUserExplicitReadAccess(const CumUser* pUser) const
+{
+    bool bRet = false;
+
+       if (CHKPTR(pUser))
+       {
+         EdmRight eDmRight = FindRight(pUser);
+
+         if (eDmRight != eDmRightNone)
+         {
+            bRet = true;
+         }
+    }
+
+    return bRet;
 }
 
 EdmRight CdmRights::FindRight(const CumUser* p_pCumUser) const

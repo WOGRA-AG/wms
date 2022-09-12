@@ -358,7 +358,7 @@ bool CwmsApplication::HasApplicationRight()
 
    if (CHKPTR(pContainer))
    {
-      bRet = pContainer->CheckReadAccess();
+      bRet = pContainer->CheckExplicitReadAccess();
    }
 
    return bRet;

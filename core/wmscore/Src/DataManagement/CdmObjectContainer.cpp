@@ -983,6 +983,11 @@ bool CdmObjectContainer::CheckReadAccess() const
     return m_cCdmRights.HasCurrentUserReadAccess();
 }
 
+bool CdmObjectContainer::CheckExplicitReadAccess() const
+{
+    return m_cCdmRights.HasCurrentUserExplicitReadAccess();
+}
+
 bool CdmObjectContainer::CheckWriteAccess() const
 {
     return m_cCdmRights.HasCurrentUserWriteAccess();

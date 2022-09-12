@@ -154,6 +154,7 @@ public:
     // Use method only if you know what you do
     void TriggerObjectCommittedEventAfterDbReload();
 
+    bool CheckExplicitReadAccess() const;
 private:
     void CopyRights(CdmObjectContainer* p_pCdmSourceObjectList);
     void LoadChildrenObjects(const QList<qint64>& p_rqvlObjectIds);
