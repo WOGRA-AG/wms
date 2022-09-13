@@ -73,7 +73,8 @@ private:
 public:
     CwmsObjectBinder(CdmObject* p_pObject);
     virtual ~CwmsObjectBinder();
-    void BindValue(QString p_qstrValue, QWidget* p_pqwWidget);
+    void BindValue(QWidget* p_pqwWidget);
+    void BindValue(QString p_qstrValue, QWidget *p_pqwWidget);
     void FillData();
     void RefreshValue(QString& p_qstrMemberName);
     void SaveData();
@@ -84,6 +85,7 @@ public:
     CdmObject *GetSelectedObject(QWidget *p_pWidget, QString p_qstrKeyname);
     void UpdateDataWithoutCommit();
     void CommitChanges();
+    void BindWidgetHierarchy(QWidget *p_pqwWidget);
 };
 
 #endif // CWMSOBJECTBINDER_H

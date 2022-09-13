@@ -84,6 +84,39 @@ void CwmsObjectBinder::SetObject(CdmObject *p_pObject)
     m_cObjectAdaptor.SetObject(p_pObject);
 }
 
+void CwmsObjectBinder::BindWidgetHierarchy(QWidget *p_pqwWidget)
+{
+    if (CHKPTR(p_pqwWidget))
+    {
+        const QObjectList chilWidgets = p_pqwWidget->children();
+
+        for (int pos = 0; pos < chilWidgets.count(); ++pos)
+        {
+            auto pWidget = dynamic_cast<QWidget*>(chilWidgets.value(pos));
+
+            if (pWidget)
+            {
+                if (pWidget->children().count() > 0)
+                {
+                    BindWidgetHierarchy(pWidget);
+                }
+                else
+                {
+                    BindValue(pWidget);
+                }
+            }
+        }
+    }
+}
+
+void CwmsObjectBinder::BindValue(QWidget *p_pqwWidget)
+{
+    if (CHKPTR(p_pqwWidget) && !p_pqwWidget->objectName().isEmpty())
+    {
+        BindValue(p_pqwWidget->objectName(), p_pqwWidget);
+    }
+}
+
 void CwmsObjectBinder::BindValue(QString p_qstrValue, QWidget *p_pqwWidget)
 {
     if (m_cObjectAdaptor.GetValue(p_qstrValue) != nullptr && p_pqwWidget != nullptr)
@@ -92,7 +125,7 @@ void CwmsObjectBinder::BindValue(QString p_qstrValue, QWidget *p_pqwWidget)
     }
     else
     {
-        ERR("Value " + p_qstrValue + " not found or Widget is null");
+        WARNING("Value " + p_qstrValue + " not found or Widget is null");
     }
 }
 
@@ -127,7 +160,7 @@ void CwmsObjectBinder::FillData(QString p_qstrValue, QWidget *p_pqwWidget)
     {
         CdmValue* pValue = m_cObjectAdaptor.GetValue(p_qstrValue);
 
-        if (CHKPTR(pValue))
+        if (pValue)
         {
             switch (pValue->GetValueType())
             {
