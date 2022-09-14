@@ -7,13 +7,13 @@
     <x>0</x>
     <y>0</y>
     <width>469</width>
-    <height>311</height>
+    <height>651</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Klasse auswählen</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout_2">
+  <layout class="QGridLayout" name="gridLayout_2">
    <property name="leftMargin">
     <number>3</number>
    </property>
@@ -26,7 +26,10 @@
    <property name="bottomMargin">
     <number>3</number>
    </property>
-   <item>
+   <property name="spacing">
+    <number>6</number>
+   </property>
+   <item row="0" column="0">
     <widget class="QLabel" name="m_pqlArticleType">
      <property name="minimumSize">
       <size>
@@ -69,25 +72,23 @@ p, li { white-space: pre-wrap; }
      </property>
     </widget>
    </item>
-   <item>
+   <item row="1" column="0">
     <widget class="QGroupBox" name="groupBox">
      <property name="title">
       <string>Klassen</string>
      </property>
-     <layout class="QVBoxLayout" name="verticalLayout">
-      <property name="leftMargin">
-       <number>3</number>
-      </property>
-      <property name="topMargin">
-       <number>3</number>
-      </property>
-      <property name="rightMargin">
-       <number>3</number>
-      </property>
-      <property name="bottomMargin">
-       <number>3</number>
-      </property>
-      <item>
+     <layout class="QGridLayout" name="gridLayout">
+      <item row="0" column="0">
+       <widget class="QLabel" name="label">
+        <property name="text">
+         <string>Filter</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLineEdit" name="m_pqleFilter"/>
+      </item>
+      <item row="1" column="0" colspan="2">
        <widget class="QTreeWidget" name="m_pqlvClasses">
         <property name="sortingEnabled">
          <bool>true</bool>
@@ -110,7 +111,7 @@ p, li { white-space: pre-wrap; }
      </layout>
     </widget>
    </item>
-   <item>
+   <item row="2" column="0">
     <layout class="QHBoxLayout">
      <item>
       <widget class="QCheckBox" name="m_pqchbShowTechnicalClasses">
@@ -141,7 +142,7 @@ p, li { white-space: pre-wrap; }
         <string/>
        </property>
        <property name="icon">
-        <iconset resource="../../../WMSadmin/resources/emresources.qrc">
+        <iconset resource="wmsgui.qrc">
          <normaloff>:/icons/cancel24.png</normaloff>:/icons/cancel24.png</iconset>
        </property>
        <property name="iconSize">
@@ -158,7 +159,7 @@ p, li { white-space: pre-wrap; }
         <string/>
        </property>
        <property name="icon">
-        <iconset resource="../../../WMSadmin/resources/emresources.qrc">
+        <iconset resource="wmsgui.qrc">
          <normaloff>:/icons/ok24.png</normaloff>:/icons/ok24.png</iconset>
        </property>
        <property name="iconSize">
@@ -179,7 +180,7 @@ p, li { white-space: pre-wrap; }
   <tabstop>m_pqpbOk</tabstop>
  </tabstops>
  <resources>
-  <include location="../../../WMSadmin/resources/emresources.qrc"/>
+  <include location="wmsgui.qrc"/>
  </resources>
  <connections>
   <connection>
@@ -189,8 +190,8 @@ p, li { white-space: pre-wrap; }
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>290</x>
-     <y>305</y>
+     <x>422</x>
+     <y>646</y>
     </hint>
     <hint type="destinationlabel">
      <x>20</x>
@@ -205,8 +206,8 @@ p, li { white-space: pre-wrap; }
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>332</x>
-     <y>305</y>
+     <x>464</x>
+     <y>646</y>
     </hint>
     <hint type="destinationlabel">
      <x>20</x>
@@ -237,8 +238,8 @@ p, li { white-space: pre-wrap; }
    <slot>ShowTechnicalClassesClickedSlot()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>98</x>
-     <y>292</y>
+     <x>102</x>
+     <y>640</y>
     </hint>
     <hint type="destinationlabel">
      <x>135</x>
@@ -246,8 +247,25 @@ p, li { white-space: pre-wrap; }
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>m_pqleFilter</sender>
+   <signal>textChanged(QString)</signal>
+   <receiver>CwmsClassSelectionDlg</receiver>
+   <slot>FilterClassesSlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>381</x>
+     <y>75</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>693</x>
+     <y>107</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>ShowTechnicalClassesClickedSlot()</slot>
+  <slot>FilterClassesSlot()</slot>
  </slots>
 </ui>

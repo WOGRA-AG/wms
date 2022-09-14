@@ -1,16 +1,3 @@
-/******************************************************************************
- ** WOGRA Solutions Modul Information
- ** Modulename: CwmsClassSelectionIf.cpp
- ** Started Implementation: 2008/05/19
- ** Description:
- ** 
- ** the gui of the class selection
- **
- ** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
- ** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. 
- **(C) copyright by WOGRA Solutions All rights reserved
- *****************************************************************************/ 
-
 // System and QT Includes
 #include <QList>
 
@@ -27,12 +14,6 @@
 #include "CwmsTreeWidgetHelper.h"
 #include "CwmsClassSelectionIf.h"
 
-/** +-=---------------------------------------------------------Mi 5. Sep 15:22:49 2012-----------*
- * @method  CwmsClassSelectionIf::CwmsClassSelectionIf       // public                            *
- * @return                                                   //                                   *
- * @param   QWidget* parent = nullptr                           //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mi 5. Sep 15:22:49 2012-----------*/
 CwmsClassSelectionIf::CwmsClassSelectionIf(QWidget* parent)
    : QDialog(parent),
    m_bShowAbstractClasses(true)
@@ -40,20 +21,10 @@ CwmsClassSelectionIf::CwmsClassSelectionIf(QWidget* parent)
    setupUi(this);
 }
 
-/** +-=---------------------------------------------------------Mo 19. Mai 20:25:09 2008----------*
- * @method  CwmsClassSelectionIf::~CwmsClassSelectionIf      // public, virtual                   *
- * @return  void                                             //                                   *
- * @comment The Destructor of Class CwmsClassSelectionIf                                          *
- *----------------last changed: --------------------------------Mo 19. Mai 20:25:09 2008----------*/
 CwmsClassSelectionIf::~CwmsClassSelectionIf()
 {
 }
 
-/** +-=---------------------------------------------------------So 30. Dez 11:31:21 2012----------*
- * @method  CwmsClassSelectionIf::FillDialog                 // public                            *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------So 30. Dez 11:31:21 2012----------*/
 void CwmsClassSelectionIf::FillDialog(bool p_bShowAbstractClasses)
 {
    m_bShowAbstractClasses = p_bShowAbstractClasses;
@@ -108,21 +79,11 @@ void CwmsClassSelectionIf::FillDialog(bool p_bShowAbstractClasses)
    }
 }
 
-/** +-=---------------------------------------------------------So 30. Dez 11:41:16 2012----------*
- * @method  CwmsClassSelectionIf::ShowTechnicalClassesClickedSlot // private, slots               *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------So 30. Dez 11:41:16 2012----------*/
 void CwmsClassSelectionIf::ShowTechnicalClassesClickedSlot()
 {
    FillDialog(m_bShowAbstractClasses);
 }
 
-/** +-=---------------------------------------------------------Mo 19. Mai 20:30:46 2008----------*
- * @method  CwmsClassSelectionIf::GetSelectedClass           // public                            *
- * @return qint64                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mo 19. Mai 20:30:46 2008----------*/
 qint64 CwmsClassSelectionIf::GetSelectedClass()
 {
   qint64 lRet = 0;
@@ -137,12 +98,36 @@ qint64 CwmsClassSelectionIf::GetSelectedClass()
    return lRet;
 }
 
-/** +-=---------------------------------------------------------Mo 3. Sep 18:25:35 2012-----------*
- * @method  CwmsClassSelectionIf::GetClass                   // public, static                    *
- * @return  CdmClass*                                        //                                   *
- * @param   QWidget* p_pqwParent                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mo 3. Sep 18:25:35 2012-----------*/
+void CwmsClassSelectionIf::FilterClassesSlot()
+{
+    QString qstrFilter = m_pqleFilter->text();
+    for (int counter = 0; counter < m_pqlvClasses->topLevelItemCount(); ++counter)
+    {
+        QTreeWidgetItem* pItem =  m_pqlvClasses->topLevelItem(counter);
+
+        if (CHKPTR(pItem))
+        {
+            if (qstrFilter.isEmpty())
+            {
+                pItem->setHidden(false);
+            }
+            else
+            {
+                QString qstrView = pItem->text(0).toUpper();
+
+                if (qstrView.contains(qstrFilter.toUpper()))
+                {
+                    pItem->setHidden(false);
+                }
+                else
+                {
+                    pItem->setHidden(true);
+                }
+            }
+        }
+    }
+}
+
 CdmClass* CwmsClassSelectionIf::GetClass(QWidget* p_pqwParent, bool p_bShowAbstractClasses)
 {
    CdmClass* pCdmClass = nullptr;
