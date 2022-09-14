@@ -489,31 +489,31 @@ void CwmsMiscDataFiller::FillViews(QTreeWidgetItem* p_pParent)
 void CwmsMiscDataFiller::FilterTreeWidgetsUnderRootElement(QString p_qstrFilter, QTreeWidget* p_pTreeWidget)
 {
     QString qstrFilter = p_qstrFilter;
-    QTreeWidgetItem* pitem = p_pTreeWidget->topLevelItem(0);
+    QTreeWidgetItem* pRootItem = p_pTreeWidget->topLevelItem(0);
 
-    if (CHKPTR(pitem))
+    if (CHKPTR(pRootItem))
     {
-        for (int counter = 0; counter < pitem->childCount(); ++counter)
+        for (int counter = 0; counter < pRootItem->childCount(); ++counter)
         {
-            QTreeWidgetItem* pItem = pitem->child(counter);
+            QTreeWidgetItem* pTopLevelItem = pRootItem->child(counter);
 
-            if (CHKPTR(pItem))
+            if (CHKPTR(pTopLevelItem))
             {
                 if (qstrFilter.isEmpty())
                 {
-                    pItem->setHidden(false);
+                    pTopLevelItem->setHidden(false);
                 }
                 else
                 {
-                    QString qstrView = pItem->text(0).toUpper();
+                    QString qstrView = pTopLevelItem->text(0).toUpper();
 
                     if (qstrView.contains(qstrFilter.toUpper()))
                     {
-                        pItem->setHidden(false);
+                        pTopLevelItem->setHidden(false);
                     }
                     else
                     {
-                        pItem->setHidden(true);
+                        pTopLevelItem->setHidden(true);
                     }
                 }
             }
