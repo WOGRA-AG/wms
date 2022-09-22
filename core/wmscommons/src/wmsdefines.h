@@ -6,7 +6,7 @@
 #define WMS_LIB_VERSION "3.5.4"
 #define WMS_LIB_VERSION_MAJOR "3"
 #define WMS_LIB_VERSION_MINOR "5"
-#define WMS_LIB_VERSION_BUGFIX "4"
+#define WMS_LIB_VERSION_BUGFIX "19"
 
 
 #define WMS_OBJECT "Object"
@@ -93,6 +93,7 @@
 #define WMS_TECHNICAL_SERVER "Technical_Server"
 #define WMS_WORKFLOW "Workflow"
 #define WMS_PERMANENT "Permanent"
+#define WMS_PLUGINS "plugins"
 #define WMS_MAP "Map"
 #define WMS_LISTENTRIES "ListEntries"
 #define WMS_ENTRY "Entry"
