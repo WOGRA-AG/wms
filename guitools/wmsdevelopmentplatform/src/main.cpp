@@ -32,7 +32,7 @@ int main(int argc, char ** argv)
    QApplication qApplication(argc, argv);   
    // CwmsContext will be created after login
    new CwmsMessenger(nullptr, nullptr);
-   QString qstrVersion = g_qstrMajor + "." + g_qstrMinor + "." + g_qstrRelease;
+   QString qstrVersion = g_qstrMajor + "." + g_qstrMinor + "." + g_qstrRelease + " " + g_qstrBuilt;
    qApplication.setApplicationName("WMS Development Platform");
    qApplication.setApplicationVersion(qstrVersion);
    qApplication.setOrganizationDomain("www.wogra.com");
