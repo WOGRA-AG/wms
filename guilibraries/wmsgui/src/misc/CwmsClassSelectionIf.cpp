@@ -2,6 +2,7 @@
 #include <QList>
 
 // WMS Includes
+#include "wmsdefines.h"
 #include "CdmClass.h"
 #include "CdmScheme.h"
 #include "CdmLogging.h"
@@ -160,8 +161,8 @@ bool CwmsClassSelectionIf::IsTechnicalClass(CdmClass* p_pClass)
    if (CHKPTR(p_pClass))
    {
       QString qstrKeyname = p_pClass->GetKeyname();
-      if (qstrKeyname.startsWith("Technical") ||
-            qstrKeyname.startsWith("Workflow"))
+      if (qstrKeyname.startsWith(WMS_TECHNICAL) ||
+            qstrKeyname.startsWith(WMS_WORKFLOW))
       {
          bRet = true;
       }
@@ -182,5 +183,5 @@ bool CwmsClassSelectionIf::IsTechnicalClass(CdmClass* p_pClass)
 
 bool CwmsClassSelectionIf::IsTechnicalPackage(CdmPackage* p_pPackage)
 {
-    return (p_pPackage->GetPackageString().startsWith("Technical") || p_pPackage->GetPackageString().startsWith("plugins"));
+    return (p_pPackage->GetPackageString().startsWith(WMS_TECHNICAL) || p_pPackage->GetPackageString().startsWith(WMS_PLUGINS));
 }
