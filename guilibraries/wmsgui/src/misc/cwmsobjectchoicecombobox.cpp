@@ -230,6 +230,7 @@ void CwmsObjectChoiceComboBox::SetContainerAndDisplayValueByWql(QString qstrWql)
 
 void CwmsObjectChoiceComboBox::FillWidget(CdmQuery& p_rcCdmQuery)
 {
+    SetContainer(p_rcCdmQuery.GetContainer());
     ClearEntries();
    //int iIndex = 0;
    m_qmEntries.insert("-", 0);

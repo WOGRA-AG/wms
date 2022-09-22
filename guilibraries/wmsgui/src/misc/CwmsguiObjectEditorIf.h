@@ -59,9 +59,6 @@ protected slots:
     void OKClickedSlot();
 
 private:
-    int workOffEvents();
-    void IterateOverSubscribersAndExecuteFunction(QList<CdmClassMethod *> ql_Subscribers, QVariantList qvlParameters);
-    QVariantList saveEventAndReturnJSFunctionParameters(IdmEventStoreManager *p_EventStoreManager, CdmObject *p_EventObject);
     CdmObjectContainer *findValueObjectContainer();
     CdmObjectContainer *getValueObjectContainer();
 
