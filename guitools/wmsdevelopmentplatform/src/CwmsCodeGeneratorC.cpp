@@ -1,17 +1,4 @@
-﻿/******************************************************************************
- ** WOGRA technologies GmbH & Co. KG Modul Information
- ** Modulename: CwmsCodeGeneratorC.cpp
- ** Started Implementation: 2011/11/09
- ** Description:
- **
- ** This class generates c++ interface code for classes.
- **
- ** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
- ** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. 
- **(C) copyright by WOGRA technologies GmbH & Co. KG All rights reserved
- *****************************************************************************/
-
-// System and QT Includes
+﻿// System and QT Includes
 #include <QFile>
 #include <QFileInfo>
 #include <QTextStream>
@@ -29,14 +16,6 @@
 #include "CwmsCodeGeneratorC.h"
 
 
-/** +-=---------------------------------------------------------Mo 21. Nov 15:14:00 2011----------*
- * @method  CwmsCodeGeneratorC::CwmsCodeGeneratorC           // public                            *
- * @return                                                   //                                   *
- * @param   CdmClass* p_pCdmClass                            //                                   *
- * @param   QString p_qstrClassName                          //                                   *
- * @param   QString p_qstrFilename                           //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mo 21. Nov 15:14:00 2011----------*/
 CwmsCodeGeneratorC::CwmsCodeGeneratorC(CdmClass* p_pCdmClass,
                                        QString p_qstrClassName,
                                        QString p_qstrFilename)
@@ -51,88 +30,41 @@ CwmsCodeGeneratorC::CwmsCodeGeneratorC(CdmClass* p_pCdmClass,
 {
 }
 
-/** +-=---------------------------------------------------------Mi 9. Nov 14:35:38 2011-----------*
- * @method  CwmsCodeGeneratorC::~CwmsCodeGeneratorC          // public, virtual                   *
- * @return  void                                             //                                   *
- * @comment The Destructor of Class CwmsCodeGeneratorC                                            *
- *----------------last changed: --------------------------------Mi 9. Nov 14:35:38 2011-----------*/
 CwmsCodeGeneratorC::~CwmsCodeGeneratorC()
 {
    
 }
 
-/** +-=---------------------------------------------------------Fr 2. Dez 15:47:35 2011-----------*
- * @method  CwmsCodeGeneratorC::SetGenerateTestCode          // public                            *
- * @return  void                                             //                                   *
- * @param   bool p_bGenerate                                 //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Fr 2. Dez 15:47:35 2011-----------*/
 void CwmsCodeGeneratorC::SetGenerateTestCode(bool p_bGenerate)
 {
    m_bGenerateTestCode = p_bGenerate;
 }
 
-/** +-=---------------------------------------------------------Mi 6. Jun 10:40:21 2012-----------*
- * @method  CwmsCodeGeneratorC::SetGenerateBusinessLogicCode // public                            *
- * @return  void                                             //                                   *
- * @param   bool p_bGenerate                                 //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mi 6. Jun 10:40:21 2012-----------*/
 void CwmsCodeGeneratorC::SetGenerateBusinessLogicCode(bool p_bGenerate)
 {
    m_bGenerateBusinessLogicClass = p_bGenerate;
 }
 
-/** +-=---------------------------------------------------------Mi 6. Jun 10:42:40 2012-----------*
- * @method  CwmsCodeGeneratorC::SetGenerateTempClassCode     // public                            *
- * @return  void                                             //                                   *
- * @param   bool p_bGenerate                                 //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mi 6. Jun 10:42:40 2012-----------*/
 void CwmsCodeGeneratorC::SetGenerateTempClassCode(bool p_bGenerate)
 {
    m_bGenerateTempClass = p_bGenerate;
 }
 
-/** +-=---------------------------------------------------------Mi 6. Jun 10:43:12 2012-----------*
- * @method  CwmsCodeGeneratorC::SetGenerateWebInterfaceCode  // public                            *
- * @return  void                                             //                                   *
- * @param   bool p_bGenerate                                 //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mi 6. Jun 10:43:12 2012-----------*/
 void CwmsCodeGeneratorC::SetGenerateWebInterfaceCode(bool p_bGenerate)
 {
    m_bGenerateWebInterface = p_bGenerate;
 }
 
-/** +-=---------------------------------------------------------Fr 8. Jun 10:20:24 2012-----------*
- * @method  CwmsCodeGeneratorC::SetWebInterfaceClassName     // public                            *
- * @return  void                                             //                                   *
- * @param   QString p_qstrClassName                          //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Fr 8. Jun 10:20:24 2012-----------*/
 void CwmsCodeGeneratorC::SetWebInterfaceClassName(QString p_qstrClassName)
 {
    m_qstrWebInterfaceClassName = p_qstrClassName;
 }
 
-/** +-=---------------------------------------------------------Fr 8. Jun 10:20:47 2012-----------*
- * @method  CwmsCodeGeneratorC::SetWebInterfaceObjectListName // public                           *
- * @return  void                                             //                                   *
- * @param   QString p_qstrOLName                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Fr 8. Jun 10:20:47 2012-----------*/
 void CwmsCodeGeneratorC::SetWebInterfaceObjectListName(QString p_qstrOLName)
 {
    m_qstrWebInterfaceOLKeyname = p_qstrOLName;
 }
 
-/** +-=---------------------------------------------------------Mi 9. Nov 19:17:25 2011-----------*
- * @method  CwmsCodeGeneratorC::SetCreateBaseClassMemberFunctions // public                       *
- * @return  void                                             //                                   *
- * @param   bool p_bCreate                                   //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mi 9. Nov 19:17:25 2011-----------*/
 void CwmsCodeGeneratorC::SetCreateBaseClassMemberFunctions(bool p_bCreate)
 {
    if (!m_rpCdmClass->IsAbstract())
@@ -141,22 +73,11 @@ void CwmsCodeGeneratorC::SetCreateBaseClassMemberFunctions(bool p_bCreate)
    }
 }
 
-/** +-=---------------------------------------------------------Fr 18. Nov 15:30:30 2011----------*
- * @method  CwmsCodeGeneratorC::SetGenerateStandardObjectList // public                           *
- * @return  void                                             //                                   *
- * @param   bool p_bStandard                                 //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Fr 18. Nov 15:30:30 2011----------*/
 void CwmsCodeGeneratorC::SetGenerateStandardObjectList(bool p_bStandard)
 {
    m_bGenerateStandardObjectList = p_bStandard;
 }
 
-/** +-=---------------------------------------------------------Mo 21. Nov 15:15:07 2011----------*
- * @method  CwmsCodeGeneratorC::GenerateCode                 // public                            *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mo 21. Nov 15:15:07 2011----------*/
 void CwmsCodeGeneratorC::GenerateCode()
 {
    if (!m_qstrFilename.isEmpty() && !m_qstrClassName.isEmpty())
@@ -211,12 +132,6 @@ void CwmsCodeGeneratorC::GenerateCode()
    }
 }
 
-
-/** +-=---------------------------------------------------------Mo 21. Nov 15:15:45 2011----------*
- * @method  CwmsCodeGeneratorC::GenerateCodeP                // private                           *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mo 21. Nov 15:15:45 2011----------*/
 void CwmsCodeGeneratorC::GenerateCodeP()
 {
    if (CHKPTR(m_rpCdmClass))
@@ -254,11 +169,6 @@ void CwmsCodeGeneratorC::GenerateCodeP()
    }
 }
 
-/** +-=---------------------------------------------------------Mo 21. Nov 15:16:19 2011----------*
- * @method  CwmsCodeGeneratorC::GeneratesConstructors        // private                           *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mo 21. Nov 15:16:19 2011----------*/
 void CwmsCodeGeneratorC::GeneratesConstructors()
 {
    GenerateDefaultConstructorSource();
@@ -267,15 +177,6 @@ void CwmsCodeGeneratorC::GeneratesConstructors()
    GenerateParameterConstructorHeader();
 }
 
-/** +-=---------------------------------------------------------Mi 9. Nov 15:16:17 2011-----------*
- * @method  CwmsCodeGeneratorC::GenerateMethodInHeader       // private                           *
- * @return  void                                             //                                   *
- * @param   QString p_qstrMethodName                         //                                   *
- * @param   EdmMemberAccess p_eAccessType                    //                                   *
- * @param   EdmValue p_eReturnValue                          //                                   *
- * @param   EwmsCodeGenerationMethodType p_eType             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mi 9. Nov 15:16:17 2011-----------*/
 void CwmsCodeGeneratorC::GenerateMethodInHeader(QString p_qstrMethodName,
                                                 EdmMemberAccess p_eAccessType,
                                                 EdmValueType p_eReturnValue,
@@ -291,14 +192,6 @@ void CwmsCodeGeneratorC::GenerateMethodInHeader(QString p_qstrMethodName,
    }
 }
 
-/** +-=---------------------------------------------------------Mo 21. Nov 15:16:46 2011----------*
- * @method  CwmsCodeGeneratorC::GenerateMethodInSource       // private                           *
- * @return  void                                             //                                   *
- * @param   QString p_qstrMethodName                         //                                   *
- * @param   EdmValue p_eReturnValue                          //                                   *
- * @param   EwmsCodeGenerationMethodType p_eType             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mo 21. Nov 15:16:46 2011----------*/
 void CwmsCodeGeneratorC::GenerateMethodInSource(QString p_qstrMethodName,
                                                 EdmValueType p_eReturnValue,
                                                 EwmsCodeGenerationMethodType p_eType)
@@ -313,13 +206,6 @@ void CwmsCodeGeneratorC::GenerateMethodInSource(QString p_qstrMethodName,
    }
 }
 
-/** +-=---------------------------------------------------------Mo 21. Nov 15:17:04 2011----------*
- * @method  CwmsCodeGeneratorC::GenerateSetterSource         // private                           *
- * @return  void                                             //                                   *
- * @param   QString p_qstrMember                             //                                   *
- * @param   EdmValue p_eReturnValue                          //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mo 21. Nov 15:17:04 2011----------*/
 void CwmsCodeGeneratorC::GenerateSetterSource(QString p_qstrMember, EdmValueType p_eReturnValue)
 {
    if (CheckSetterMethod(p_eReturnValue))
@@ -332,13 +218,6 @@ void CwmsCodeGeneratorC::GenerateSetterSource(QString p_qstrMember, EdmValueType
    }
 }
 
-/** +-=---------------------------------------------------------Mi 9. Nov 17:43:54 2011-----------*
- * @method  CwmsCodeGeneratorC::GenerateSetterCode           // private                           *
- * @return  QString                                          //                                   *
- * @param   EdmValue p_eReturnValue                          //                                   *
- * @param   QString p_qstrMember                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mi 9. Nov 17:43:54 2011-----------*/
 QString CwmsCodeGeneratorC::GenerateSetterCode(EdmValueType p_eReturnValue, QString p_qstrMember)
 {
    QString qstrRet = AddIndent(1);
@@ -434,13 +313,6 @@ QString CwmsCodeGeneratorC::GenerateSetterCode(EdmValueType p_eReturnValue, QStr
    return qstrRet + "\n";
 }
 
-/** +-=---------------------------------------------------------Mo 21. Nov 15:17:44 2011----------*
- * @method  CwmsCodeGeneratorC::GenerateGetterSource         // private                           *
- * @return  void                                             //                                   *
- * @param   QString p_qstrMember                             //                                   *
- * @param   EdmValue p_eReturnValue                          //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mo 21. Nov 15:17:44 2011----------*/
 void CwmsCodeGeneratorC::GenerateGetterSource(QString p_qstrMember, EdmValueType p_eReturnValue)
 {
    if (CheckGetterMethod(p_eReturnValue))
@@ -453,13 +325,6 @@ void CwmsCodeGeneratorC::GenerateGetterSource(QString p_qstrMember, EdmValueType
    }
 }
 
-/** +-=---------------------------------------------------------Mi 9. Nov 16:56:21 2011-----------*
- * @method  CwmsCodeGeneratorC::GenerateGetterCode           // private                           *
- * @return  QString                                          //                                   *
- * @param   EdmValue p_eDmValue                              //                                   *
- * @param   QString p_qstrMember                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mi 9. Nov 16:56:21 2011-----------*/
 QString CwmsCodeGeneratorC::GenerateGetterCode(EdmValueType p_eDmValue, QString p_qstrMember)
 {
    QString qstrRet;
@@ -557,15 +422,6 @@ QString CwmsCodeGeneratorC::GenerateGetterCode(EdmValueType p_eDmValue, QString 
    return qstrRet + "\n";
 }
 
-
-/** +-=---------------------------------------------------------Mi 9. Nov 16:33:12 2011-----------*
- * @method  CwmsCodeGeneratorC::GenerateSetterHeader         // private                           *
- * @return  void                                             //                                   *
- * @param   QString p_qstrMethodName                         //                                   *
- * @param   EdmMemberAccess p_eAccessType                    //                                   *
- * @param   EdmValue p_eReturnValue                          //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mi 9. Nov 16:33:12 2011-----------*/
 void CwmsCodeGeneratorC::GenerateSetterHeader(QString p_qstrMethodName,
                                               EdmMemberAccess p_eAccessType,
                                               EdmValueType p_eReturnValue)
@@ -596,14 +452,6 @@ void CwmsCodeGeneratorC::GenerateSetterHeader(QString p_qstrMethodName,
    m_qstrHeader += qstrMethod;
 }
 
-/** +-=---------------------------------------------------------Mi 9. Nov 16:33:17 2011-----------*
- * @method  CwmsCodeGeneratorC::GenerateGetterHeader         // private                           *
- * @return  void                                             //                                   *
- * @param   QString p_qstrMethodName                         //                                   *
- * @param   EdmMemberAccess p_eAccessType                    //                                   *
- * @param   EdmValue p_eReturnValue                          //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mi 9. Nov 16:33:17 2011-----------*/
 void CwmsCodeGeneratorC::GenerateGetterHeader(QString p_qstrMethodName,
                                               EdmMemberAccess p_eAccessType,
                                               EdmValueType p_eReturnValue)
@@ -634,11 +482,6 @@ void CwmsCodeGeneratorC::GenerateGetterHeader(QString p_qstrMethodName,
    m_qstrHeader += qstrMethod;
 }
 
-/** +-=---------------------------------------------------------Mo 21. Nov 15:18:34 2011----------*
- * @method  CwmsCodeGeneratorC::GenerateDestructorHeader     // private                           *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mo 21. Nov 15:18:34 2011----------*/
 void CwmsCodeGeneratorC::GenerateDestructorHeader()
 {
    m_qstrHeader += AddIndent(1);
@@ -647,11 +490,6 @@ void CwmsCodeGeneratorC::GenerateDestructorHeader()
    m_qstrHeader += "virtual ~" + m_qstrClassName + "();\n";
 }
 
-/** +-=---------------------------------------------------------Mo 21. Nov 15:18:47 2011----------*
- * @method  CwmsCodeGeneratorC::GenerateDestructorSource     // private                           *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mo 21. Nov 15:18:47 2011----------*/
 void CwmsCodeGeneratorC::GenerateDestructorSource()
 {
    m_qstrSource += m_qstrClassName + "::~" + m_qstrClassName + "()\n";
@@ -659,11 +497,6 @@ void CwmsCodeGeneratorC::GenerateDestructorSource()
    m_qstrSource += "}\n\n";
 }
 
-/** +-=---------------------------------------------------------Mo 21. Nov 15:19:01 2011----------*
- * @method  CwmsCodeGeneratorC::GenerateDefaultConstructorSource // private                       *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mo 21. Nov 15:19:01 2011----------*/
 void CwmsCodeGeneratorC::GenerateDefaultConstructorSource()
 {
    m_qstrSource += m_qstrClassName + "::" + m_qstrClassName + "()\n";
@@ -699,11 +532,6 @@ void CwmsCodeGeneratorC::GenerateDefaultConstructorSource()
    m_qstrSource += "}\n\n";
 }
 
-/** +-=---------------------------------------------------------Mo 21. Nov 15:19:24 2011----------*
- * @method  CwmsCodeGeneratorC::GenerateDefaultConstructorHeader // private                       *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mo 21. Nov 15:19:24 2011----------*/
 void CwmsCodeGeneratorC::GenerateDefaultConstructorHeader()
 {
    m_qstrHeader += AddIndent(1);
@@ -712,11 +540,6 @@ void CwmsCodeGeneratorC::GenerateDefaultConstructorHeader()
    m_qstrHeader += m_qstrClassName + "();\n";
 }
 
-/** +-=---------------------------------------------------------Mo 21. Nov 15:19:37 2011----------*
- * @method  CwmsCodeGeneratorC::GenerateParameterConstructorSource // private                     *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mo 21. Nov 15:19:37 2011----------*/
 void CwmsCodeGeneratorC::GenerateParameterConstructorSource()
 {
    m_qstrSource += m_qstrClassName + "::" + m_qstrClassName + "(CdmObject* p_pCdmObject)\n";
@@ -753,11 +576,6 @@ void CwmsCodeGeneratorC::GenerateParameterConstructorSource()
    m_qstrSource += "}\n\n";
 }
 
-/** +-=---------------------------------------------------------Di 22. Nov 18:53:46 2011----------*
- * @method  CwmsCodeGeneratorC::GenerateParameterConstructorHeader // private                     *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *--------.힐Ȯ-----last changed: --------------------------------Di 22. Nov 18:53:46 2011----------*/
 void CwmsCodeGeneratorC::GenerateParameterConstructorHeader()
 {
    m_qstrHeader += AddIndent(1);
@@ -766,22 +584,12 @@ void CwmsCodeGeneratorC::GenerateParameterConstructorHeader()
    m_qstrHeader += m_qstrClassName + "(CdmObject* p_pCdmObject);\n";
 }
 
-/** +-=---------------------------------------------------------Mo 21. Nov 15:20:10 2011----------*
- * @method  CwmsCodeGeneratorC::GenerateDestructors          // private                           *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mo 21. Nov 15:20:10 2011----------*/
 void CwmsCodeGeneratorC::GenerateDestructors()
 {
    GenerateDestructorSource();
    GenerateDestructorHeader();
 }
 
-/** +-=---------------------------------------------------------Mo 21. Nov 15:20:24 2011----------*
- * @method  CwmsCodeGeneratorC::GeneratesMemberAccess        // private                           *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mo 21. Nov 15:20:24 2011----------*/
 void CwmsCodeGeneratorC::GeneratesMemberAccess()
 {
    if (m_bCreateBaseClassMemberFunctions)
@@ -794,11 +602,6 @@ void CwmsCodeGeneratorC::GeneratesMemberAccess()
    }
 }
 
-/** +-=---------------------------------------------------------Mo 21. Nov 15:20:41 2011----------*
- * @method  CwmsCodeGeneratorC::GenerateClassMembersAccess   // private                           *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mo 21. Nov 15:20:41 2011----------*/
 void CwmsCodeGeneratorC::GenerateClassMembersAccess()
 {
    if (CHKPTR(m_rpCdmClass))
@@ -815,11 +618,6 @@ void CwmsCodeGeneratorC::GenerateClassMembersAccess()
    }
 }
 
-/** +-=---------------------------------------------------------Mo 21. Nov 15:21:06 2011----------*
- * @method  CwmsCodeGeneratorC::GenerateAllMembersAccess     // private                           *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mo 21. Nov 15:21:06 2011----------*/
 void CwmsCodeGeneratorC::GenerateAllMembersAccess()
 {
    if (CHKPTR(m_rpCdmClass))
@@ -836,12 +634,6 @@ void CwmsCodeGeneratorC::GenerateAllMembersAccess()
    }
 }
 
-/** +-=---------------------------------------------------------Mo 21. Nov 15:21:23 2011----------*
- * @method  CwmsCodeGeneratorC::GenerateMemberAccess         // private                           *
- * @return  void                                             //                                   *
- * @param   CdmMember* p_pCdmMember                          //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mo 21. Nov 15:21:23 2011----------*/
 void CwmsCodeGeneratorC::GenerateMemberAccess(CdmMember* p_pCdmMember)
 {
    if (CHKPTR(p_pCdmMember))
@@ -866,11 +658,6 @@ void CwmsCodeGeneratorC::GenerateMemberAccess(CdmMember* p_pCdmMember)
    }
 }
 
-/** +-=---------------------------------------------------------Mo 21. Nov 15:22:38 2011----------*
- * @method  CwmsCodeGeneratorC::GenerateCreateMethod         // private                           *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mo 21. Nov 15:22:38 2011----------*/
 void CwmsCodeGeneratorC::GenerateCreateMethod()
 {
    if (!m_qstrWebInterfaceOLKeyname.isEmpty())
@@ -886,22 +673,12 @@ void CwmsCodeGeneratorC::GenerateCreateMethod()
    
 }
 
-/** +-=---------------------------------------------------------Mo 21. Nov 15:22:50 2011----------*
- * @method  CwmsCodeGeneratorC::GenerateDeleteMethod         // private                           *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mo 21. Nov 15:22:50 2011----------*/
 void CwmsCodeGeneratorC::GenerateDeleteMethod()
 {
    GenerateDeleteMethodSource();
    GenerateDeleteMethodHeader();
 }
 
-/** +-=---------------------------------------------------------Mo 21. Nov 15:23:16 2011----------*
- * @method  CwmsCodeGeneratorC::GenerateDeleteMethodSource   // private                           *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mo 21. Nov 15:23:16 2011----------*/
 void CwmsCodeGeneratorC::GenerateDeleteMethodSource()
 {
    QString qstrParameter = "c" + m_qstrClassName;
@@ -926,11 +703,6 @@ void CwmsCodeGeneratorC::GenerateDeleteMethodSource()
    m_qstrSource += "}\n";
 }
 
-/** +-=---------------------------------------------------------Mo 21. Nov 15:23:44 2011----------*
- * @method  CwmsCodeGeneratorC::GenerateDeleteMethodHeader   // private                           *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mo 21. Nov 15:23:44 2011----------*/
 void CwmsCodeGeneratorC::GenerateDeleteMethodHeader()
 {
    m_qstrHeader += AddIndent(1);
@@ -939,11 +711,6 @@ void CwmsCodeGeneratorC::GenerateDeleteMethodHeader()
    m_qstrHeader += "static bool Delete(" + m_qstrClassName + " c" + m_qstrClassName + ");\n";
 }
 
-/** +-=---------------------------------------------------------Mo 21. Nov 15:24:03 2011----------*
- * @method  CwmsCodeGeneratorC::GenerateCreateMethodSource   // private                           *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mo 21. Nov 15:24:03 2011----------*/
 void CwmsCodeGeneratorC::GenerateCreateMethodSource()
 {
    m_qstrSource += m_qstrClassName + " " + m_qstrClassName + "::Create(CdmObjectContainer* p_pContainer)\n";
@@ -965,11 +732,6 @@ void CwmsCodeGeneratorC::GenerateCreateMethodSource()
    m_qstrSource += "}\n";
 }
 
-/** +-=---------------------------------------------------------Mo 21. Nov 15:24:33 2011----------*
- * @method  CwmsCodeGeneratorC::GenerateCreateMethodHeader   // private                           *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mo 21. Nov 15:24:33 2011----------*/
 void CwmsCodeGeneratorC::GenerateCreateMethodHeader()
 {
    m_qstrHeader += AddIndent(1);
@@ -978,11 +740,6 @@ void CwmsCodeGeneratorC::GenerateCreateMethodHeader()
    m_qstrHeader += "static " + m_qstrClassName + " Create(CdmObjectContainer* p_pContainer);\n";
 }
 
-/** +-=---------------------------------------------------------Fr 8. Jun 16:51:54 2012-----------*
- * @method  CwmsCodeGeneratorC::GenerateCreateMethodSourceWithoutParameter // private             *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Fr 8. Jun 16:51:54 2012-----------*/
 void CwmsCodeGeneratorC::GenerateCreateMethodSourceWithoutParameter()
 {
 
@@ -1007,11 +764,6 @@ void CwmsCodeGeneratorC::GenerateCreateMethodSourceWithoutParameter()
    m_qstrSource += "}\n";
 }
 
-/** +-=---------------------------------------------------------Fr 8. Jun 16:52:11 2012-----------*
- * @method  CwmsCodeGeneratorC::GenerateCreateMethodHeaderWithoutParameter // private             *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Fr 8. Jun 16:52:11 2012-----------*/
 void CwmsCodeGeneratorC::GenerateCreateMethodHeaderWithoutParameter()
 {
    m_qstrHeader += AddIndent(1);
@@ -1022,11 +774,6 @@ void CwmsCodeGeneratorC::GenerateCreateMethodHeaderWithoutParameter()
 
 
 
-/** +-=---------------------------------------------------------Mo 21. Nov 15:24:55 2011----------*
- * @method  CwmsCodeGeneratorC::GenerateStandardObjectList   // private                           *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mo 21. Nov 15:24:55 2011----------*/
 void CwmsCodeGeneratorC::GenerateStandardObjectList()
 {
    QString qstrObjListName = GenerateStandardObjectListKeyname();
@@ -1035,11 +782,6 @@ void CwmsCodeGeneratorC::GenerateStandardObjectList()
    GenerateStandardObjectListHeader();
 }
 
-/** +-=---------------------------------------------------------Fr 8. Jun 10:18:09 2012-----------*
- * @method  CwmsCodeGeneratorC::GenerateStandardObjectListKeyname // private                      *
- * @return  QString                                          //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Fr 8. Jun 10:18:09 2012-----------*/
 QString CwmsCodeGeneratorC::GenerateStandardObjectListKeyname()
 {
    QString qstrObjListName = m_rpCdmClass->GetKeyname();
@@ -1058,12 +800,6 @@ QString CwmsCodeGeneratorC::GenerateStandardObjectListKeyname()
    return qstrObjListName;
 }
 
-/** +-=---------------------------------------------------------Mo 21. Nov 15:25:24 2011----------*
- * @method  CwmsCodeGeneratorC::GenerateStandardObjectListSource // private                       *
- * @return  void                                             //                                   *
- * @param   QString p_qstrObjListName                        //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mo 21. Nov 15:25:24 2011----------*/
 void CwmsCodeGeneratorC::GenerateStandardObjectListSource(QString p_qstrObjListName)
 {
    m_qstrSource += GenerateMethodHeadSource("CdmObjectContainer*", m_qstrClassName, "GetContainer", "");
@@ -1071,13 +807,13 @@ void CwmsCodeGeneratorC::GenerateStandardObjectListSource(QString p_qstrObjListN
    m_qstrSource += AddIndent(1);
    m_qstrSource += "CdmObjectContainer* pContainer = nullptr;\n\n";
    m_qstrSource += AddIndent(1);
-   m_qstrSource += "CdmManager* pCdmManager = CdmSessionManager::GetManager();\n\n";
+   m_qstrSource += "auto pCdmDataProvider = CdmSessionManager::GetDataProvider();\n\n";
    m_qstrSource += AddIndent(1);
-   m_qstrSource += "if (CHKPTR(pCdmManager))\n";
+   m_qstrSource += "if (CHKPTR(pCdmDataProvider))\n";
    m_qstrSource += AddIndent(1);
    m_qstrSource += "{\n";
    m_qstrSource += AddIndent(2);
-   m_qstrSource += "pContainer = pCdmManager->GetContainer(\"" + p_qstrObjListName + "\");\n";
+   m_qstrSource += "pContainer = pCdmDataProvider->GetObjectContainer(\"" + p_qstrObjListName + "\");\n";
    m_qstrSource += AddIndent(1);
    m_qstrSource += "}\n\n";
    m_qstrSource += AddIndent(1);
@@ -1085,17 +821,17 @@ void CwmsCodeGeneratorC::GenerateStandardObjectListSource(QString p_qstrObjListN
    m_qstrSource += AddIndent(1);
    m_qstrSource += "{\n";
    m_qstrSource += AddIndent(2);
-   m_qstrSource += "CdmContainerManager* pCdmOLManager = pCdmManager->GetContainerManager(pCdmManager->GetCurrentDatabase());\n\n";
+   m_qstrSource += "auto pCdmContainerManager = pCdmDataProvider->GetContainerManager();\n\n";
    m_qstrSource += AddIndent(2);
-   m_qstrSource += "if (CHKPTR(pCdmOLManager))\n";
+   m_qstrSource += "if (CHKPTR(pCdmContainerManager))\n";
    m_qstrSource += AddIndent(2);
    m_qstrSource += "{\n";
    m_qstrSource += AddIndent(3);
    m_qstrSource += "QString qstrKeyname = \"" + p_qstrObjListName + "\";\n";
    m_qstrSource += AddIndent(3);
-   m_qstrSource += "pCdmOLManager->CreateContainer(\"" + m_rpCdmClass->GetKeyname() + "\", qstrKeyname, \"Standard\", \"\");\n";
+   m_qstrSource += "pCdmContainerManager->CreateContainer(\"" + m_rpCdmClass->GetKeyname() + "\", qstrKeyname, \"Standard\", \"\");\n";
    m_qstrSource += AddIndent(3);
-   m_qstrSource += "pContainer = pCdmManager->GetContainer(\"" + p_qstrObjListName + "\");\n";
+   m_qstrSource += "pContainer = pCdmDataProvider->GetObjectContainer(\"" + p_qstrObjListName + "\");\n";
    m_qstrSource += AddIndent(2);
    m_qstrSource += "}\n";
    m_qstrSource += AddIndent(1);
@@ -1105,11 +841,6 @@ void CwmsCodeGeneratorC::GenerateStandardObjectListSource(QString p_qstrObjListN
    m_qstrSource += "}\n";
 }
 
-/** +-=---------------------------------------------------------Mo 21. Nov 15:25:52 2011----------*
- * @method  CwmsCodeGeneratorC::GenerateStandardObjectListHeader // private                       *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mo 21. Nov 15:25:52 2011----------*/
 void CwmsCodeGeneratorC::GenerateStandardObjectListHeader()
 {
    m_qstrHeader += AddIndent(1);

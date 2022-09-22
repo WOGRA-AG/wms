@@ -1,17 +1,4 @@
-﻿/******************************************************************************
- ** WOGRA technologies GmbH & Co. KG Modul Information
- ** Modulename: CwmsCodeGeneratorBase.cpp
- ** Started Implementation: 2012/07/13
- ** Description:
- **
- ** Implements the language independent base class for code generation
- **
- ** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
- ** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. 
- **(C) copyright by WOGRA technologies GmbH & Co. KG All rights reserved
- *****************************************************************************/
-
-// System and QT Includes
+﻿// System and QT Includes
 #include <QFile>
 #include <QTextStream>
 
@@ -22,31 +9,14 @@
 #include "CwmsCodeGeneratorBase.h"
 
 
-/** +-=---------------------------------------------------------Fr 13. Jul 09:44:00 2012----------*
- * @method  CwmsCodeGeneratorBase::CwmsCodeGeneratorBase     // public                            *
- * @return                                                   //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Fr 13. Jul 09:44:00 2012----------*/
 CwmsCodeGeneratorBase::CwmsCodeGeneratorBase()
 {
 }
 
-/** +-=---------------------------------------------------------Fr 13. Jul 09:44:09 2012----------*
- * @method  CwmsCodeGeneratorBase::~CwmsCodeGeneratorBase    // public, virtual                   *
- * @return  void                                             //                                   *
- * @comment The Destructor of Class CwmsCodeGeneratorBase                                         *
- *----------------last changed: --------------------------------Fr 13. Jul 09:44:09 2012----------*/
 CwmsCodeGeneratorBase::~CwmsCodeGeneratorBase()
 {
 }
 
-/** +-=---------------------------------------------------------Fr 13. Jul 09:44:35 2012----------*
- * @method  CwmsCodeGeneratorBase::SaveFile                  // protected                         *
- * @return  void                                             //                                   *
- * @param   QString p_qstrFilename                           //                                   *
- * @param   QString p_qstrContent                            //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Fr 13. Jul 09:44:35 2012----------*/
 void CwmsCodeGeneratorBase::SaveFile(QString p_qstrFilename, QString p_qstrContent)
 {
    QFile qFile(p_qstrFilename);
@@ -59,12 +29,6 @@ void CwmsCodeGeneratorBase::SaveFile(QString p_qstrFilename, QString p_qstrConte
    }
 }
 
-/** +-=---------------------------------------------------------Mo 23. Jul 10:24:05 2012----------*
- * @method  CwmsCodeGeneratorBase::GenerateCodeMemberName    // protected                         *
- * @return  QString                                          //                                   *
- * @param   QString p_qstrMember                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mo 23. Jul 10:24:05 2012----------*/
 QString CwmsCodeGeneratorBase::GenerateCodeMemberName(QString p_qstrMember)
 {
    QString qstrRet;
@@ -75,12 +39,6 @@ QString CwmsCodeGeneratorBase::GenerateCodeMemberName(QString p_qstrMember)
    return qstrRet;
 }
 
-/** +-=---------------------------------------------------------Fr 13. Jul 09:50:11 2012----------*
- * @method  CwmsCodeGeneratorBase::AddIndent                 // protected                         *
- * @return  QString                                          //                                   *
- * @param   int p_iIndentStage                               //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Fr 13. Jul 09:50:11 2012----------*/
 QString CwmsCodeGeneratorBase::AddIndent(int p_iIndentStage)
 {
    QString qstrIndent;
@@ -94,12 +52,6 @@ QString CwmsCodeGeneratorBase::AddIndent(int p_iIndentStage)
    return qstrIndent;
 }
 
-/** +-=---------------------------------------------------------Fr 13. Jul 13:23:20 2012----------*
- * @method  CwmsCodeGeneratorBase::CheckSetterMethod         // protected                         *
- * @return  bool                                             //                                   *
- * @param   EdmValue p_eDmValue                              //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Fr 13. Jul 13:23:20 2012----------*/
 bool CwmsCodeGeneratorBase::CheckSetterMethod(EdmValueType p_eDmValue)
 {
    bool bRet = false;
@@ -144,12 +96,6 @@ bool CwmsCodeGeneratorBase::CheckSetterMethod(EdmValueType p_eDmValue)
    return bRet;
 }
 
-/** +-=---------------------------------------------------------Fr 13. Jul 13:36:21 2012----------*
- * @method  CwmsCodeGeneratorBase::CheckGetterMethod         // protected                         *
- * @return  bool                                             //                                   *
- * @param   EdmValue p_eDmValue                              //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Fr 13. Jul 13:36:21 2012----------*/
 bool CwmsCodeGeneratorBase::CheckGetterMethod(EdmValueType p_eDmValue)
 {
    bool bRet = false;
@@ -195,14 +141,6 @@ bool CwmsCodeGeneratorBase::CheckGetterMethod(EdmValueType p_eDmValue)
    return bRet;
 }
 
-/** +-=---------------------------------------------------------Mi 18. Jul 08:42:40 2012----------*
- * @method  CwmsCodeGeneratorBase::GetClassMembers           // protected                         *
- * @return  void                                             //                                   *
- * @param   CdmClass* p_pCdmClass                            //                                   *
- * @param   bool p_bIncludeBaseClassMembers                  //                                   *
- * @param   QMap<qint64, CdmMember*>& p_rqmMembers             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mi 18. Jul 08:42:40 2012----------*/
 void CwmsCodeGeneratorBase::GetClassMembers(CdmClass* p_pCdmClass,
                                             bool p_bIncludeBaseClassMembers,
                                             QMap<qint64,
