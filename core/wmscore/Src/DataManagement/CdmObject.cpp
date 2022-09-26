@@ -645,23 +645,19 @@ bool CdmObject::IsExactTypeOf(QString p_qstrClassName) const
 
 bool CdmObject::IsTypeOf(CdmClass* p_pClass) const
 {
-    bool bRet = false;
+    bool bRet = true;
 
-    if (CHKPTR(p_pClass))
+    if (p_pClass)
     {
         CdmClass* pCdmClass = GetClass();
 
         if (CHKPTR(pCdmClass))
         {
-            if (pCdmClass->IsInherited(p_pClass) > 0)
+            if (pCdmClass->IsInherited(p_pClass) <= 0)
             {
-                bRet = true;
+                bRet = false;
             }
         }
-    }
-    else
-    {
-        bRet = true;
     }
 
     return bRet;
