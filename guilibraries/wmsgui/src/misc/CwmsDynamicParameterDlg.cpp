@@ -54,12 +54,7 @@ QVariantList CwmsDynamicParameterDlg::GetInputList()
 
 QVariantList CwmsDynamicParameterDlg::AskForFunctionParams(QList<CdmClassMethodParameter>& p_qlParameters, QWidget* parent)
 {
-    auto pCursor = QApplication::overrideCursor();
-
-    if (pCursor)
-    {
-        QApplication::restoreOverrideCursor();
-    }
+    QApplication::setOverrideCursor(QCursor(Qt::ArrowCursor));
 
     QList<QPair<QString, EdmValueType>> qlInput = ConvertClassParametersToInputParameters(p_qlParameters);
     QVariantList qvlParams;
@@ -69,11 +64,7 @@ QVariantList CwmsDynamicParameterDlg::AskForFunctionParams(QList<CdmClassMethodP
         qvlParams = GetParamValues(qlInput, parent);
     }
 
-    if (pCursor)
-    {
-        QApplication::setOverrideCursor(*pCursor);
-    }
-
+    QApplication::restoreOverrideCursor();
     return qvlParams;
 }
 
