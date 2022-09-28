@@ -1233,7 +1233,6 @@ int CdmObject::GetValue(const QString& p_rqstrKeyname, QDateTime& p_rqdtValue)
             {
                 p_rqdtValue = dynamic_cast<CdmValueDateTime*> (pCdmValue)->GetValue();
                 iRet = EC(eDmOk);
-                QString qstr = p_rqdtValue.toString();
             }
             else
             {
