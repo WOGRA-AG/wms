@@ -52,8 +52,6 @@ include::rights.adoc[]
 
 include::user_interfaces.adoc[]
 
-include::workflows.adoc[]
-
 include::deployment.adoc[]
 
 include::logging.adoc[]
