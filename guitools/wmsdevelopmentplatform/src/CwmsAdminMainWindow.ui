@@ -80,7 +80,7 @@
      <x>0</x>
      <y>0</y>
      <width>1071</width>
-     <height>22</height>
+     <height>20</height>
     </rect>
    </property>
    <widget class="QMenu" name="m_qmFile">
@@ -3014,38 +3014,6 @@
     <hint type="destinationlabel">
      <x>535</x>
      <y>583</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>m_pqaReplayEvents</sender>
-   <signal>triggered()</signal>
-   <receiver>CwmsAdminMainWindow</receiver>
-   <slot>ReplayEventsClickedSlot()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>-1</x>
-     <y>-1</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>-2</x>
-     <y>8</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>m_pqaDeleteAllExistingEvents</sender>
-   <signal>triggered()</signal>
-   <receiver>CwmsAdminMainWindow</receiver>
-   <slot>DeleteAllEventsClickedSlot()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>-1</x>
-     <y>-1</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>147</x>
-     <y>-10</y>
     </hint>
    </hints>
   </connection>

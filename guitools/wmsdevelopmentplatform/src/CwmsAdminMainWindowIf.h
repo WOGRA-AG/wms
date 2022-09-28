@@ -142,8 +142,6 @@ public slots:
     void NewInteractiveComponentFormSlot();
     void EditInteractiveComponentFormSlot();
     void DeleteInteractiveComponentFormSlot();
-    void ReplayEventsClickedSlot();
-    void DeleteAllEventsClickedSlot();
     void LogoutAndExitSlot();
     void RefreshViewsClickedSlot();
     void ClassFilterEnterPressedSlot();
@@ -265,9 +263,6 @@ private:
     void OpenObjectContainerEditor(CdmObjectContainer* p_pContainer);
     CdmClassManager *GetCurrentClassManager();
     CdmPackage *GetSelectedPackage();
-    void SubscribeEventMethods(CdmClassManager *pCdmClassManager);
-    void setEventStoreManager();
-    IdmEventStoreManager *getEventStoreManager();
     void ClearEditor();
     void OpenApplicationEditor(CwmsApplication& p_rApp);
     QMdiSubWindow* AddMdiWindow(QWidget* p_pWidget);

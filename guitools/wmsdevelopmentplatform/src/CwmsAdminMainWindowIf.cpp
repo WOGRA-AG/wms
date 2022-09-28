@@ -147,6 +147,7 @@ CwmsAdminMainWindowIf::CwmsAdminMainWindowIf(QWidget* parent)
     setupUi(this);
     m_pqpbClearFilter->setVisible(false);
     m_pqaLicenceManager->setVisible(false);
+    m_pqaNewWorkflow->setVisible(false);
     RestoreWindowsSlot();
     QSettings settings("WOGRA", "WMS");
     settings.beginGroup("wms_dp");
@@ -156,11 +157,11 @@ CwmsAdminMainWindowIf::CwmsAdminMainWindowIf(QWidget* parent)
     CreateErrorDlg();
     FillDialog();
     AddContextMenus();
+    DELPTR(m_pqdwWorkflows);
     CwmsServerSchemeManager cServerSchemeManager;
     cServerSchemeManager.CheckServerScheme();
     connect(CwmsContext::GetContext(), SIGNAL(ApplicationShutdownSignal()), this, SLOT(close()));
     connect(m_pqaLogoutExit, SIGNAL(triggered()), this, SLOT(LogoutAndExitSlot()));
-    setEventStoreManager();
 }
 
 CwmsAdminMainWindowIf::~CwmsAdminMainWindowIf()
@@ -208,10 +209,10 @@ void CwmsAdminMainWindowIf::AddContextMenus()
 
     m_pqlvData->setContextMenuPolicy(Qt::CustomContextMenu);
 
-    connect(m_pqlvWorkflows, SIGNAL(customContextMenuRequested(const QPoint &)),
-            this, SLOT(CustomContextMenuSlot(const QPoint &)));
+//    connect(m_pqlvWorkflows, SIGNAL(customContextMenuRequested(const QPoint &)),
+//            this, SLOT(CustomContextMenuSlot(const QPoint &)));
 
-    m_pqlvWorkflows->setContextMenuPolicy(Qt::CustomContextMenu);
+//    m_pqlvWorkflows->setContextMenuPolicy(Qt::CustomContextMenu);
 }
 
 void CwmsAdminMainWindowIf::ModelTreeWidgetExpandedSlot()
@@ -431,7 +432,7 @@ void CwmsAdminMainWindowIf::ClearEditor()
     }
 
     m_pqlvUis->clear();
-    m_pqlvWorkflows->clear();
+    //m_pqlvWorkflows->clear();
     m_pqlvViews->clear();
     m_pqcbLanguage->clear();
 }
@@ -515,7 +516,6 @@ void CwmsAdminMainWindowIf::FillSchemeContent(QString p_qstrDbName)
             }
         }
 
-        SubscribeEventMethods(pCdmClassManager);
     }
 
     EnableActionOnContext();
@@ -524,34 +524,6 @@ void CwmsAdminMainWindowIf::FillSchemeContent(QString p_qstrDbName)
     CdmMessageManager::EndAndShowAsyncMessageCollection();
 }
 
-void CwmsAdminMainWindowIf::SubscribeEventMethods(CdmClassManager *pCdmClassManager)
-{
-    QList<CdmClass*> qlClasses;
-    pCdmClassManager->GetClassList(qlClasses);
-
-    QList<CdmClass*>::iterator qlItStart = qlClasses.begin();
-    QList<CdmClass*>::iterator qlItEnd = qlClasses.end();
-
-    for(; qlItStart != qlItEnd; ++qlItStart)
-    {
-        CdmClass *pClass = (*qlItStart);
-        CdmClassMethod *pClassMethod = pClass->GetMethod("onDomainEvent");
-        if(pClassMethod)
-        {
-            if(pClassMethod->IsStatic())
-            {
-                if(!getEventStoreManager()->getSubscribers().contains(pClassMethod))
-                {
-                    getEventStoreManager()->subscribe(pClassMethod);
-                }
-            }
-        }
-        else
-        {
-            WARNING("ClassMethod is nullptr.")
-        }
-    }
-}
 
 void CwmsAdminMainWindowIf::FillLanguages()
 {
@@ -586,8 +558,9 @@ void CwmsAdminMainWindowIf::FillViews()
 
 void CwmsAdminMainWindowIf::FillWorkflows()
 {
-    CwmsMiscDataFiller::FillWorkflows(m_pqlvWorkflows);
-    CwmsTreeWidgetHelper::ResizeColumnsToContent(m_pqlvWorkflows);
+//    CwmsMiscDataFiller::FillWorkflows(m_pqlvWorkflows);
+//    CwmsTreeWidgetHelper::ResizeColumnsToContent(m_pqlvWorkflows);
+    DELPTR(m_pqdwWorkflows);
 }
 
 void CwmsAdminMainWindowIf::RefreshClasses()
@@ -3569,115 +3542,10 @@ void CwmsAdminMainWindowIf::DataSearchClickedSlot()
     cDlg.exec();
 }
 
-void CwmsAdminMainWindowIf::ReplayEventsClickedSlot()
-{
-    BODY_TRY
-            CdmExecutor* pExecutor = CdmExecutor::GetExecutor();
-    QList<CdmClassMethod*> qlSubscribers = getEventStoreManager()->getSubscribers();
-
-    if (!qlSubscribers.isEmpty())
-    {
-        IdmEventIterator* pEventIterator = getEventStoreManager()->getEventIterator();
-
-        if (CHKPTR(pEventIterator))
-        {
-            QList<CdmClassMethod*>::iterator ql_ItStart = qlSubscribers.begin();
-            QList<CdmClassMethod*>::iterator ql_ItEnd = qlSubscribers.end();
-            QVariantList qvlParameters;
-
-            for ( ; ql_ItStart != ql_ItEnd; ++ql_ItStart)
-            {
-                while (pEventIterator->hasNext())
-                {
-                    CdmClassMethod *pClassMethod = (*ql_ItStart);
-                    QObject *pEventDtoObject = pEventIterator->next();
-                    QVariant qvEventDto = QVariant::fromValue<QObject*>(pEventDtoObject);
-                    qvlParameters.append(qvEventDto);
-                    QVariant qvFunction = pExecutor->GetFunction()->ExecuteFunctionStatic(pClassMethod, qvlParameters);
-                    qvlParameters.clear();
-                }
-
-                if (!pEventIterator->hasNext())
-                {
-                    QObject *pEventDtoObject = pEventIterator->next();
-                    QVariant qvEventDto = QVariant::fromValue<QObject*>(pEventDtoObject);
-                    qvlParameters.append(qvEventDto);
-                    QVariant qvFunction = pExecutor->GetFunction()->ExecuteFunctionStatic((*ql_ItStart), qvlParameters);
-                    qvlParameters.clear();
-                    pEventIterator->setBacktoFirstElement();
-                }
-            }
-        }
-
-        MSG_INFO("Replay beendet", "Alle Events wurden erfolgreich erneut abgespielt.");
-    }
-    else
-    {
-        ERR("No Subscribers found. Replaying Events is not available!")
-    }
-    BODY_CATCH
-}
-
-void CwmsAdminMainWindowIf::DeleteAllEventsClickedSlot()
-{
-    BODY_TRY
-            CdmSessionManager *pSessionManager = CdmSessionManager::GetSessionManager();
-
-    if (CHKPTR(pSessionManager))
-    {
-        CdmSession* pSession = pSessionManager->FindSession();
-
-        if (CHKPTR(pSession)                    &&
-                CHKPTR(pSession->GetDataProvider()) &&
-                CHKPTR(pSession->GetDataProvider()->GetCurrentScheme()))
-        {
-            int iDBId = pSession->GetDataProvider()->GetCurrentScheme()->GetId();
-
-            if (CdmMessageManager::Ask(tr("Wollen Sie alle bisherigen Events wirklich löschen?"),
-                                       tr("Sie können dann nicht mehr auf alte Events zugreifen.")))
-            {
-                int iRet = getEventStoreManager()->deleteAllExistingEventsByDatabaseId(iDBId);
-
-                if (iRet > 0)
-                {
-                    MSG_INFO("Events gelöscht", "Die Events wurden erfolgreich gelöscht.");
-                }
-            }
-            else
-            {
-                MSG_INFO("Löschen abgelehnt", "Die Events wurden nicht gelöscht.");
-            }
-        }
-    }
-    BODY_CATCH
-}
-
-void CwmsAdminMainWindowIf::setEventStoreManager()
-{
-    BODY_TRY
-            CdmSessionManager* pSessionManager = CdmSessionManager::GetSessionManager();
-
-    if (pSessionManager)
-    {
-        CdmSession* pSession = pSessionManager->FindSession();
-
-        if (pSession)
-        {
-            m_pEventStoreManager = pSession->getEventStoreManager();
-        }
-    }
-    BODY_CATCH
-}
-
-IdmEventStoreManager *CwmsAdminMainWindowIf::getEventStoreManager()
-{
-    return m_pEventStoreManager;
-}
-
 void CwmsAdminMainWindowIf::LogoutAndExitSlot()
 {
     BODY_TRY
-            CwmsLogout* pLogout = new CwmsLogout();
+    CwmsLogout* pLogout = new CwmsLogout();
 
     if (pLogout->Logout())
     {
