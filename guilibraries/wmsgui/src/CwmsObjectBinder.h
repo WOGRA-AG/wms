@@ -32,6 +32,25 @@ private:
     QMap<QWidget*,QString> m_qmBindings;
     bool m_bUseLableForCaption;
 
+public:
+    CwmsObjectBinder(CdmObject* p_pObject);
+    virtual ~CwmsObjectBinder();
+    void BindValue(QWidget* p_pqwWidget);
+    void BindValue(QString p_qstrValue, QWidget *p_pqwWidget);
+    void FillData();
+    void RefreshValue(QString& p_qstrMemberName);
+    void SaveData();
+    void SetUseLabelForCaption(bool p_bFlag);
+    bool GetUseLabelForCaption();
+    CdmObject* GetObject();
+    void SetObject(CdmObject* p_pObject);
+    CdmObject *GetSelectedObject(QWidget *p_pWidget, QString p_qstrKeyname);
+    void UpdateDataWithoutCommit();
+    void CommitChanges();
+    void BindWidgetHierarchy(QWidget *p_pqwWidget);
+    static CdmObject *SearchValueObject(CdmValueObjectRef *p_pValue, QString qstrValue);
+
+private:
     void FillData(QString p_qstrValue, QWidget *p_pqwWidget);
     void FillData(CdmValueInt *p_pValue, QWidget *p_pWidget);
     void FillData(CdmValueLong *p_pValue, QWidget *p_pWidget);
@@ -69,23 +88,7 @@ private:
     bool IsReadOnly(CdmValue *p_pValue);
     bool IsAccessible(CdmValue *p_pValue);
     bool IsChangeable(CdmValue *p_pValue);
-    CdmObject *SearchValueObject(CdmValueObjectRef *p_pValue, QString qstrValue);
-public:
-    CwmsObjectBinder(CdmObject* p_pObject);
-    virtual ~CwmsObjectBinder();
-    void BindValue(QWidget* p_pqwWidget);
-    void BindValue(QString p_qstrValue, QWidget *p_pqwWidget);
-    void FillData();
-    void RefreshValue(QString& p_qstrMemberName);
-    void SaveData();
-    void SetUseLabelForCaption(bool p_bFlag);
-    bool GetUseLabelForCaption();
-    CdmObject* GetObject();
-    void SetObject(CdmObject* p_pObject);
-    CdmObject *GetSelectedObject(QWidget *p_pWidget, QString p_qstrKeyname);
-    void UpdateDataWithoutCommit();
-    void CommitChanges();
-    void BindWidgetHierarchy(QWidget *p_pqwWidget);
+
 };
 
 #endif // CWMSOBJECTBINDER_H
