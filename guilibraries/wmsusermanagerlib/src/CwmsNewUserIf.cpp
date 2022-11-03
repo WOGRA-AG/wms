@@ -1,4 +1,4 @@
-﻿// Header is missing impl started on 25.1.2005
+// Header is missing impl started on 25.1.2005
 
 
 

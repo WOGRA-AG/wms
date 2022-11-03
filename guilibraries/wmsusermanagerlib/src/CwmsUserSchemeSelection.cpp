@@ -1,4 +1,4 @@
-﻿/******************************************************************************
+/******************************************************************************
  ** WOGRA technologies Modul Information
  ** Modulename: CbgMandatorSelectionIf.cpp
  ** Started Implementation: 14.7.2006

@@ -1,4 +1,4 @@
-﻿/******************************************************************************
+/******************************************************************************
  ** WOGRA technologies Gmbh & Co KG Modul Information
  ** Modulename: wmsusermanagerglobal.h
  ** Started Implementation: 2011/09/06

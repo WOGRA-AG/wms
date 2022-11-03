@@ -1,4 +1,4 @@
-﻿// impl started on 27.1.2005
+// impl started on 27.1.2005
 
 #ifndef CWMSUSERCHOICEIF_H
 #define CWMSUSERCHOICEIF_H

@@ -1,4 +1,4 @@
-﻿// Header is missing impl started on 27.1.2005
+// Header is missing impl started on 27.1.2005
 
 #ifndef CwmsUserGroupChoiceIf_H
 #define CwmsUserGroupChoiceIf_H

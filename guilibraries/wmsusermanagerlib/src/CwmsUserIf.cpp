@@ -1,14 +1,9 @@
-﻿// Headder is missing impl started on 25.1.2005
-
-
-
 // System and QT Includes
 #include <qlineedit.h>
 #include <qcheckbox.h>
 
 // WMS Commons
 #include "wmsdefines.h"
-
 
 // own Includes
 #include "CdmLogging.h"
@@ -22,7 +17,6 @@
 #include "CwmsPasswordIf.h"
 #include "CwmsUserSchemeSelection.h"
 #include "CwmsUserIf.h"
-
 
 CwmsUserIf::CwmsUserIf(CumUser* p_pCumUser, QWidget* p_pqwParent)
     : QWidget(p_pqwParent),
@@ -98,21 +92,17 @@ void CwmsUserIf::FillDialog()
     }
 }
 
-/** +-=---------------------------------------------------------Di 25. Jan 20:23:17 2005----------*
- * @method  CwmsUserIf::ChangePasswordClickedSlot            // private, slots                    *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Di 25. Jan 20:23:17 2005----------*/
-void CwmsUserIf::ChangePasswordClickedSlot(  )
+void CwmsUserIf::ChangePasswordClickedSlot()
 {
     if(CwmsPasswordIf::ChangePassword(m_rpCumUser, this))
     {
-        MSG_INFO(("Passwort wurde geändert"),
-                                       ("Das Passwort wurde erfolgreich geändert."));
+        MSG_INFO("Passwort wurde geändert",
+                 "Das Passwort wurde erfolgreich geändert.");
     }
     else
     {
-        MSG_CRIT("Fehler bei der Passwortänderung", "Das Passwort konnte nicht geändert werden.");
+        MSG_CRIT("Fehler bei der Passwortänderung",
+                 "Das Passwort konnte nicht geändert werden.");
     }
 }
 
@@ -196,7 +186,7 @@ void CwmsUserIf::RemoveGroup()
     }
 }
 
-void CwmsUserIf::UpdateCLickedSlot(  )
+void CwmsUserIf::UpdateCLickedSlot()
 {
     if(m_rpCumUser)
     {
@@ -224,7 +214,8 @@ void CwmsUserIf::UpdateCLickedSlot(  )
                                                ("Der Benutzer wurde erfolgreich gespeichert."));
             }
             else
-            {//reset User and GUI fields
+            {
+                //reset User and GUI fields
                 MSG_CRIT("Benutzer kann nicht gespeichert werden", "Login und E-Mail müssen eindeutig sein.");
                 m_pqchbAdmin->setChecked(bOldIsAdmin);
                 m_pqleLogin->setText(qstrOldLogin);
@@ -232,13 +223,6 @@ void CwmsUserIf::UpdateCLickedSlot(  )
                 m_pqleSurname->setText(qstrOldFirstName);
                 m_pqchbActive->setChecked(bOldIsActive);
                 m_pqleEmail->setText(qstrOldMail);
-
-                bOldIsAdmin = false;
-                bOldIsActive = false;
-                qstrOldFirstName = "";
-                qstrOldLastName = "";
-                qstrOldLogin = "";
-                qstrOldMail = "";
             }
         }
     }

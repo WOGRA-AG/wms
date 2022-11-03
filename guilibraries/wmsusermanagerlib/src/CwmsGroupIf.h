@@ -1,4 +1,4 @@
-﻿/******************************************************************************
+/******************************************************************************
 ** WOGRA technologies GmbH & Co. KG Modul Information
 ** Modulename: CwmsGroupIf.cpp
 ** Started Implementation: 2005/01/26

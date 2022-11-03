@@ -1,4 +1,4 @@
-﻿// Header is missing impl started on 22.01.2005
+// Header is missing impl started on 22.01.2005
 
 
 #ifndef CWMSUSERMANAGERIF_H

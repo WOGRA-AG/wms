@@ -1,4 +1,4 @@
-﻿// System and QT includes
+// System and QT includes
 
 
 // WMS Includes
