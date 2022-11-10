@@ -1106,9 +1106,10 @@ CdmObject* CdmObjectContainer::CopyObject(const CdmObject* p_pCdmObject)
     if(CHKPTR(p_pCdmObject))
     {
         // using copy constructor
-       qint64 lNewObjectId = GetNewObjectId();
+        qint64 lNewObjectId = GetNewObjectId();
 
         pCdmCopiedObject = new CdmObject(*p_pCdmObject, lNewObjectId);
+        pCdmCopiedObject->SetNew();
         pCdmCopiedObject->SetObjectContainer(this);
         AddObject(pCdmCopiedObject);
         Commit();
