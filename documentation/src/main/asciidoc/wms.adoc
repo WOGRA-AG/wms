@@ -1,8 +1,5 @@
 
 
-link:mission.adoc[Mission]
-
-
 link:installation.adoc[Installation]
 
 link:tutorial.adoc[Tutorial]
