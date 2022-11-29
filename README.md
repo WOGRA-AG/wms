@@ -1,7 +1,4 @@
-# wms
-WOGRA Modelling System
-
-[Documentation](https://github.com/WOGRA-AG/wms/blob/main/documentation/src/main/asciidoc/wms.adoc)
+# wms WOGRA Modelling System
 
 == Mission of WMS
 
@@ -18,3 +15,7 @@ Since 2011 we use WMS for developing desktop solutions for our customers and the
 == Declarative Development
 
 With WMS, most of coding is declarative. That means that no code is generated or compiled. You interact with wizards and property sheets. If business logic or complex ui are needed, you can write functions of code using object oriented JavaScript. Declarative code yields fewer differences between developers and this consistency makes WMS applications easy to maintain and manage.
+
+== Documentation
+[Documentation](https://github.com/WOGRA-AG/wms/blob/main/documentation/src/main/asciidoc/wms.adoc)
+
