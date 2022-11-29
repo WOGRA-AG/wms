@@ -8,8 +8,6 @@ link:wmsdevelopment.adoc[WMS Development]
 
 link:runtimes.adoc[Runtimes]
 
-link:wms_server.adoc[WMS Server]
-
 link:plugins.adoc[Plugins]
 
 link:cli.adoc[Command Line Tools]
