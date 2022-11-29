@@ -3,7 +3,7 @@
 
 WOGRA developed WMS to be faster and better in developing software. The aim was to develop a tool which makes software development much faster and is easy to use, powerful enough to fulfill the requirements of our customers and delivers a great user experience. At the moment we target the desktop platform for windows, but it should be compilable on Linux and MacOS as well (not tested).
 
-We developed a modelling tool for data structure (with persistence), data export and import tools, user managers and UI development. This tool is called the WMS Development Platform. To provide each platform with our developed software we developed a runtime which is available for each platform. To make development of methods and functions as simple as possible we integrated JavaScript with additional object oriented features in WMS. 
+We developed a modelling tool for data structure (with persistence), data export and import tools, user managers and UI development. This tool is called the WMS Development Platform. To provide each platform with our developed software we developed a runtime which can run on each desktop platform. To make development of methods and functions as simple as possible we integrated JavaScript with additional object oriented features in WMS. 
 
 Another requirement to WMS is that it must be open for enhancements. So we added a powerful plugin mechanism which makes it
 possible to develop new data access plugins (e.g. for databases, webservices, nosql and so on) user interfaces and functional
