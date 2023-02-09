@@ -1,8 +1,5 @@
 
 
-link:mission.adoc[Mission]
-
-
 link:installation.adoc[Installation]
 
 link:tutorial.adoc[Tutorial]
@@ -10,8 +7,6 @@ link:tutorial.adoc[Tutorial]
 link:wmsdevelopment.adoc[WMS Development]
 
 link:runtimes.adoc[Runtimes]
-
-link:wms_server.adoc[WMS Server]
 
 link:plugins.adoc[Plugins]
 

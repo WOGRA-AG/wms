@@ -2,14 +2,10 @@
 
 In WMS we don't want to reinvent the wheel. So we uses great, reliable frameworks to develop software which fulfills our requirements to 100%.
 
-WMS consists of many libraries which are mostly developed in C++ with the mutliplatform library Qt. So we are able to bring our software on all platforms we need. Our webfrontend is developed in Java using Vaadin as framework to get a great user experience in web applications. For interpreting WQL we are using ANTLR. As source code repository we are using svn and for software development we are using Qt Creator, Visual Studio and Eclipse. For designing UI's in WMSDP you can use QML which belongs to the qt-project.
+WMS consists of many libraries which are mostly developed in C++ with the mutliplatform library Qt. So we are able to bring our software on all platforms we need. For interpreting WQL we are using ANTLR. For software development we are using Qt Creator and Visual Studio 64 Bit Compiler. For designing UI's in WMSDP you can use Qt Designer which belongs to the qt-project.
 
 **Links**
 
 http://qt-project.org/[Qt]   
-
-https://vaadin.com/[Vaadin] 
-
-https://spring.io/[Spring]   
 
 http://www.antlr.org/[ANTLR] 

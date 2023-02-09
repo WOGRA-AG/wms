@@ -33,36 +33,12 @@ The runtimes are native programs, which interprets your models, user interfaces 
 
 There are several command line parameters for running wmsruntime on desktop.
 
-==== Simulation Mode
-
-You can simulate a specific device on desktop such as android mobile phone or tablet or ios Mobile or tablet. following simulations modes can be used:
-
-* iOsMobile
-* iOsTablet
-* AndroidMobile
-* AndroidTablet
-* OthersMobile
-* OthersTablet
-* NonGuiApp
-
-Sample:
-
-----
-wmsruntime simmode=AndroidMobile
-----
-
 ==== Application Name
 
 You can add the application name you wish to run with your application. you can easily start it with
 
 ----
 wmsruntime MyApp
-----
-
-Sample with Simulation mode:
-
-----
-wmsruntime simmode=AndroidTablet MyApp
 ----
 
 ==== Running non GUI Apps
@@ -75,24 +51,9 @@ Sample call for non gui apps:
 wmsruntime simmode=NonGuiApp login="<login>" password = "<password>" scheme="<scheme>" app="<application name>"
 ----
 
-Is one of these arguments are missung the start of the application fails.
-
-
+Is one of these arguments are missing the start of the application fails.
 
 **Note:**
 
 An unknown parameter will always be interpreted as application name. If you add more than one simulation mode as command line
 parameter, the last one wins. 
-
-=== Mobile Runtimes
-
-TODO
-
-=== Tablet Runtimes
-
-TODO
-
-=== Web Runtime
-
-TODO
-  

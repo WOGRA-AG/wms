@@ -5,12 +5,11 @@ application with WMS. It can only be started by user with Administrator privileg
     
 === Proceeding for developing WMS Applications
 
-With WMS you will a 3 step proceeding is advised for successful implementation of applications.
+With WMS  a 3 step proceeding is advised for successful implementation of applications.
 
 ==== 1. Step Modeling the Application
 
-Modeling means that you define the object oriented class- and data structure of your application. First of all you define your classes in a scheme with members, base classes and groups. Have you finished this task the next step is to define which containers are needed to start your application. If you finished your modeling, you already can use this structure for demonstration purposes. Keep in mind every minute you invest in your class structure and data model, saves you a lot of
-time in development, testing and bug fixing. In WMS you have the possibility to document your structures. To each class, member and container you are able to add documentation. Use this to make your approaches understandable for the future and to generate system documentation.
+Modeling means that you define the object oriented class- and data structure of your application. First of all you define your classes in a scheme with members, base classes and groups. Have you finished this task the next step is to define which containers are needed to start your application. If you finished your modeling, you already can use this structure for demonstration purposes. Keep in mind every minute you invest in your class structure and data model, saves you a lot of time in development, testing and bug fixing. In WMS you have the possibility to document your structures. To each class, member and container you are able to add documentation. Use this to make your approaches understandable for the future and to generate system documentation.
 
 ==== 2. Step Implementing the validations and business logic
 
@@ -18,11 +17,9 @@ you can begin to implement your business logic and validation code. Validation w
 
 ==== 3. Step define and design the user interfaces and application
 
-WMS offers with QML a great possibility to implement beautiful responsive user interfaces for desktop, tablet and mobile
-devices. Additionally there are multiple generic dialogs integrated, which can be used for simple purposes or for demonstrators. If you want to implement a Web interface you have to use Vaadin to implement the user interfaces for the web. If you have finished your definitions and designs. add the application in the WMS Development Platform and you have your running application and can test it.
+WMS offers with QtDesigner a great possibility to implement responsive user interfaces for desktop. Additionally there are multiple generic dialogs integrated, which can be used for simple purposes or for demonstrators. If you have finished your definitions and designs add the application in the WMS Development Platform and you have your running application and you can test it.
 
-Of course you don't have to wait until business logic is developed. You can start with defining and designing your user
-interfaces if the model is finished.
+Of course you don't have to wait until business logic is developed. You can start with defining and designing your user interfaces if the model is finished.
 
 ==== And Then???
 
