@@ -47,7 +47,6 @@
       <font>
        <family>MS Shell Dlg 2</family>
        <pointsize>15</pointsize>
-       <weight>50</weight>
        <italic>false</italic>
        <bold>false</bold>
        <underline>false</underline>
@@ -78,6 +77,18 @@ p, li { white-space: pre-wrap; }
       <string>Klassen</string>
      </property>
      <layout class="QGridLayout" name="gridLayout">
+      <property name="leftMargin">
+       <number>3</number>
+      </property>
+      <property name="topMargin">
+       <number>3</number>
+      </property>
+      <property name="rightMargin">
+       <number>3</number>
+      </property>
+      <property name="bottomMargin">
+       <number>3</number>
+      </property>
       <item row="0" column="0">
        <widget class="QLabel" name="label">
         <property name="text">
@@ -98,12 +109,12 @@ p, li { white-space: pre-wrap; }
         </property>
         <column>
          <property name="text">
-          <string>Name</string>
+          <string>Schlüssel</string>
          </property>
         </column>
         <column>
          <property name="text">
-          <string>Schlüssel</string>
+          <string>Name</string>
          </property>
         </column>
        </widget>

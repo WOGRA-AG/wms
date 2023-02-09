@@ -76,6 +76,7 @@ void CwmsClassSelectionIf::FillDialog(bool p_bShowAbstractClasses)
          }
 
          m_pqlvClasses->sortItems(0, Qt::AscendingOrder);
+         CwmsTreeWidgetHelper::ResizeColumnsToContent(m_pqlvClasses);
       }
    }
 }
