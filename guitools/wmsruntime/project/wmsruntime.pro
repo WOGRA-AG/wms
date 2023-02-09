@@ -4,11 +4,11 @@ QT += core script widgets gui qml quick sql network scripttools xml
 
 win32{
    WMS_ARCH = mingw32
-   RC_FILE = $$OUT_PWD/wmsruntime.rc
+   RC_FILE = ./wmsruntime.rc
 }
 else:macx{
    WMS_ARCH = macx
-   ICON = $$OUT_PWD/wmsruntime.icns
+   ICON = ./wmsruntime.icns
 }
 else:ios{
    WMS_ARCH = ios

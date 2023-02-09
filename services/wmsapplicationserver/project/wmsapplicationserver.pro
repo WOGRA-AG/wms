@@ -4,11 +4,11 @@ config+= console qt
 
 win32{
    WMS_ARCH = mingw32
-   RC_FILE = $$OUT_PWD/logo.rc
+   RC_FILE = ./logo.rc
 }
 else:macx{
    WMS_ARCH = macx
-   ICON = $$OUT_PWD/wmsserver.icns
+   ICON = ./wmsserver.icns
 }
 else:ios{
    WMS_ARCH = ios
