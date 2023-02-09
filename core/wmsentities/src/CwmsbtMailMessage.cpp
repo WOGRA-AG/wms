@@ -1,17 +1,4 @@
-﻿/******************************************************************************
- ** WOGRA technologies GmbH & Co KG Modul Information
- ** Modulename: CwmsbtMailMessage.cpp
- ** Started Implementation: 2010/01/09
- ** Description:
- ** 
- ** Implements the Class for defining a message
- **
- ** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
- ** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. 
- **(C) copyright by WOGRA technologies GmbH & Co KG All rights reserved
- *****************************************************************************/ 
-
-// System and QT Includes
+﻿// System and QT Includes
 #include <QDateTime>
 #include <QThread>
 #include <QStringList>
@@ -27,12 +14,6 @@
 #include "CwmsbtMailMessage.h"
 
 
-/** +-=---------------------------------------------------------Sa 9. Jan 11:39:25 2010-----------*
- * @method  CwmsbtMailMessage::CwmsbtMailMessage                   // public                            *
- * @return                                                   //                                   *
- * @param   IwmsbtSmtpConfiguration* p_cCslSmtpConfiguration    //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Sa 9. Jan 11:39:25 2010-----------*/
 CwmsbtMailMessage::CwmsbtMailMessage(IwmsbtSmtpConfiguration* p_cCslSmtpConfiguration)
 : m_pCslSmtpClient(nullptr),
   m_pIslSmtpConfiguration(p_cCslSmtpConfiguration),
@@ -41,11 +22,6 @@ CwmsbtMailMessage::CwmsbtMailMessage(IwmsbtSmtpConfiguration* p_cCslSmtpConfigur
 {
 }
 
-/** +-=---------------------------------------------------------Sa 9. Jan 10:55:33 2010-----------*
- * @method  CwmsbtMailMessage::~CwmsbtMailMessage                  // public, virtual                   *
- * @return  void                                             //                                   *
- * @comment The Destructor of Class CwmsbtMailMessage                                                *
- *----------------last changed: --------------------------------Sa 9. Jan 10:55:33 2010-----------*/
 CwmsbtMailMessage::~CwmsbtMailMessage()
 {
    if (m_pCslSmtpClient)
@@ -59,12 +35,6 @@ CwmsbtMailMessage::~CwmsbtMailMessage()
    }
 }
 
-/** +-=---------------------------------------------------------Mi 21. Nov 15:08:08 2012----------*
- * @method  CwmsbtMailMessage::AddRecipients                 // public, slots                     *
- * @return  void                                             //                                   *
- * @param   QString& p_qstrRecipient                         //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mi 21. Nov 15:08:08 2012----------*/
 void CwmsbtMailMessage::AddRecipients(QString& p_qstrRecipient)
 {
 
@@ -86,24 +56,12 @@ void CwmsbtMailMessage::AddRecipients(QStringList& p_qstrRecipient)
     }
 }
 
-/** +-=---------------------------------------------------------Mi 21. Nov 15:08:14 2012----------*
- * @method  CwmsbtMailMessage::AddCopy                       // public, slots                     *
- * @return  void                                             //                                   *
- * @param   QString p_qstrCopy                               //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mi 21. Nov 15:08:14 2012----------*/
 void CwmsbtMailMessage::AddCopy(QString p_qstrCopy)
 {
 
    m_qvlCopies.append(p_qstrCopy);
 }
 
-/** +-=---------------------------------------------------------Mi 21. Nov 15:08:21 2012----------*
- * @method  CwmsbtMailMessage::AddBlindCopy                  // public, slots                     *
- * @return  void                                             //                                   *
- * @param   QString p_qstrBlindCopy                          //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mi 21. Nov 15:08:21 2012----------*/
 void CwmsbtMailMessage::AddBlindCopy(QString p_qstrBlindCopy)
 {
 
@@ -129,57 +87,29 @@ void CwmsbtMailMessage::AddAttachment(QString p_qstrFilename, QString p_qstrBase
     m_qlAttachments << QPair<QString,QString>(p_qstrFilename, p_qstrBase64Data);
 }
 
-
-/** +-=---------------------------------------------------------Mi 21. Nov 15:08:28 2012----------*
- * @method  CwmsbtMailMessage::SetSubject                    // public, slots                     *
- * @return  void                                             //                                   *
- * @param   QString p_qstrSubject                            //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mi 21. Nov 15:08:28 2012----------*/
 void CwmsbtMailMessage::SetSubject(QString p_qstrSubject)
 {
    m_qstrSubject = p_qstrSubject;
 }
 
-/** +-=---------------------------------------------------------Mi 21. Nov 15:08:35 2012----------*
- * @method  CwmsbtMailMessage::GetSubject                    // public, slots                     *
- * @return  QString                                          //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mi 21. Nov 15:08:35 2012----------*/
 QString CwmsbtMailMessage::GetSubject()
 {
 
    return m_qstrSubject;
 }
 
-/** +-=---------------------------------------------------------Mi 21. Nov 15:08:42 2012----------*
- * @method  CwmsbtMailMessage::SetBody                       // public, slots                     *
- * @return  void                                             //                                   *
- * @param   QString p_qstrBody                               //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mi 21. Nov 15:08:42 2012----------*/
 void CwmsbtMailMessage::SetBody(QString p_qstrBody)
 {
 
    m_qstrBody = p_qstrBody;
 }
 
-/** +-=---------------------------------------------------------Mi 21. Nov 15:08:48 2012----------*
- * @method  CwmsbtMailMessage::GetBody                       // public, slots                     *
- * @return  QString                                          //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mi 21. Nov 15:08:48 2012----------*/
 QString CwmsbtMailMessage::GetBody()
 {
 
    return m_qstrBody;
 }
 
-/** +-=---------------------------------------------------------Sa 9. Jan 11:36:20 2010-----------*
- * @method  CwmsbtMailMessage::CreateMessage                    // public                            *
- * @return  QString                                          //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Sa 9. Jan 11:36:20 2010-----------*/
 QString CwmsbtMailMessage::CreateMessage()
 {
    QString qstrMessage;
@@ -231,11 +161,6 @@ QString CwmsbtMailMessage::CreateMessage()
    return qstrMessage;
 }
 
-/** +-=---------------------------------------------------------Do 4. Okt 14:33:27 2012-----------*
- * @method  CwmsbtMailMessage::ExtractDayOfWeek                 // private                           *
- * @return  QString                                          //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Do 4. Okt 14:33:27 2012-----------*/
 QString CwmsbtMailMessage::ExtractDayOfWeek()
 {
    QString qstrRet;
@@ -268,11 +193,6 @@ QString CwmsbtMailMessage::ExtractDayOfWeek()
    return qstrRet;
 }
 
-/** +-=---------------------------------------------------------Do 4. Okt 14:36:26 2012-----------*
- * @method  CwmsbtMailMessage::ExtractMonthOfYear               // private                           *
- * @return  QString                                          //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Do 4. Okt 14:36:26 2012-----------*/
 QString CwmsbtMailMessage::ExtractMonthOfYear()
 {
    QString qstrRet;
@@ -320,19 +240,14 @@ QString CwmsbtMailMessage::ExtractMonthOfYear()
    return qstrRet;
 }
 
-/** +-=---------------------------------------------------------Sa 9. Jan 16:00:27 2010-----------*
- * @method  CwmsbtMailMessage::CreateHead                       // private                           *
- * @return  QString                                          //                                   *
- * @param   bool p_bAddBCC = false                           //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Sa 9. Jan 16:00:27 2010-----------*/
 QString CwmsbtMailMessage::CreateHead(bool p_bAddBCC)
 {
    QString qstrMessage;
 
    if (m_pIslSmtpConfiguration)
    {
-      QString qstrDate = ExtractDayOfWeek() + ", " + QString::number(QDate::currentDate().day()) + " " +  ExtractMonthOfYear() + " " + QDateTime::currentDateTime().toUTC().toString("yyyy hh:mm:ss +0000");
+      QString qstrDate = ExtractDayOfWeek() + ", " + QString::number(QDate::currentDate().day()) + " " +
+                         ExtractMonthOfYear() + " " + QDateTime::currentDateTime().toUTC().toString("yyyy hh:mm:ss +0000");
       qstrMessage += "Date: " + qstrDate + "\r\n";
       qstrMessage += "From: " + RetrieveSender() + "\r\n";
       qstrMessage += GetRecipientsAsString();
@@ -347,11 +262,6 @@ QString CwmsbtMailMessage::CreateHead(bool p_bAddBCC)
    return qstrMessage;
 }
 
-/** +-=---------------------------------------------------------Sa 9. Jan 11:01:31 2010-----------*
- * @method  CwmsbtMailMessage::GetRecipientsAsString            // private                           *
- * @return  QString                                          //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Sa 9. Jan 11:01:31 2010-----------*/
 QString CwmsbtMailMessage::GetRecipientsAsString()
 {
    QString qstrMessage;
@@ -360,21 +270,11 @@ QString CwmsbtMailMessage::GetRecipientsAsString()
    return qstrMessage;
 }
 
-/** +-=---------------------------------------------------------Sa 9. Jan 14:54:10 2010-----------*
- * @method  CwmsbtMailMessage::GetRecipients                    // public                            *
- * @return  QList<QString>&                            //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Sa 9. Jan 14:54:10 2010-----------*/
 QList<QString>& CwmsbtMailMessage::GetRecipients()
 {
    return m_qvlRecipients;
 }
 
-/** +-=---------------------------------------------------------Sa 9. Jan 11:07:35 2010-----------*
- * @method  CwmsbtMailMessage::GetCopiesAsString                // private                           *
- * @return  QString                                          //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Sa 9. Jan 11:07:35 2010-----------*/
 QString CwmsbtMailMessage::GetCopiesAsString()
 {
    QString qstrMessage;
@@ -383,11 +283,6 @@ QString CwmsbtMailMessage::GetCopiesAsString()
    return qstrMessage;
 }
 
-/** +-=---------------------------------------------------------Sa 9. Jan 11:08:59 2010-----------*
- * @method  CwmsbtMailMessage::GetBlindCopiesAsString           // private                           *
- * @return  QString                                          //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Sa 9. Jan 11:08:59 2010-----------*/
 QString CwmsbtMailMessage::GetBlindCopiesAsString()
 {
    QString qstrMessage;
@@ -396,12 +291,6 @@ QString CwmsbtMailMessage::GetBlindCopiesAsString()
    return qstrMessage;
 }
 
-/** +-=---------------------------------------------------------Sa 9. Jan 11:06:00 2010-----------*
- * @method  CwmsbtMailMessage::GetMailAddressesAsString         // private                           *
- * @return  QString                                          //                                   *
- * @param   QList<QString>& p_rqllAddresses            //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Sa 9. Jan 11:06:00 2010-----------*/
 QString CwmsbtMailMessage::GetMailAddressesAsString(QList<QString>& p_rqllAddresses)
 {
    QString qstrMailAddresses;
@@ -421,23 +310,11 @@ QString CwmsbtMailMessage::GetMailAddressesAsString(QList<QString>& p_rqllAddres
    return qstrMailAddresses;
 }
 
-/** +-=---------------------------------------------------------Sa 9. Jan 14:41:58 2010-----------*
- * @method  CwmsbtMailMessage::GetRecipientsAsStringList        // public                            *
- * @return  QStringList                                      //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Sa 9. Jan 14:41:58 2010-----------*/
 QStringList CwmsbtMailMessage::GetRecipientsAsStringList()
 {
    return GetMailAddressesAsStringList("RCPT TO:", m_qvlAllRecipients);
 }
 
-/** +-=---------------------------------------------------------Sa 9. Jan 14:40:36 2010-----------*
- * @method  CwmsbtMailMessage::GetMailAddressesAsStringList     // private                           *
- * @return  QStringList                                      //                                   *
- * @param   QString p_qstrPreString                          //                                   *
- * @param   QList<QString>& p_rqllAddresses            //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Sa 9. Jan 14:40:36 2010-----------*/
 QStringList CwmsbtMailMessage::GetMailAddressesAsStringList(QString p_qstrPreString,
                                                          QList<QString>& p_rqllAddresses)
 {
@@ -459,22 +336,11 @@ QStringList CwmsbtMailMessage::GetMailAddressesAsStringList(QString p_qstrPreStr
    return qstrMailAddresses;
 }
 
-/** +-=---------------------------------------------------------Sa 9. Jan 12:14:56 2010-----------*
- * @method  CwmsbtMailMessage::GetMailSize                      // public                            *
- * @return  int                                              //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Sa 9. Jan 12:14:56 2010-----------*/
 int CwmsbtMailMessage::GetMailSize()
 {
    return CreateMessage().length();
 }
 
-/** +-=---------------------------------------------------------So 10. Jan 13:06:31 2010----------*
- * @method  CwmsbtMailMessage::ToRfc2822                        // public                            *
- * @return  void                                             //                                   *
- * @param   QDataStream& p_qdsOut                            //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------So 10. Jan 13:06:31 2010----------*/
 void CwmsbtMailMessage::ToRfc2822(QDataStream& p_qdsOut)
 {
    QString qstrMail = CreateMessage();
@@ -483,11 +349,6 @@ void CwmsbtMailMessage::ToRfc2822(QDataStream& p_qdsOut)
    p_qdsOut.writeRawData(bytes, iLength);
 }
 
-/** +-=---------------------------------------------------------Mi 21. Nov 15:09:54 2012----------*
- * @method  CwmsbtMailMessage::SendMessage                   // public, slots                     *
- * @return  bool                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mi 21. Nov 15:09:54 2012----------*/
 bool CwmsbtMailMessage::SendMessage()
 {
    if (m_pIslSmtpConfiguration)
@@ -513,11 +374,6 @@ IwmsbtSmtpConfiguration* CwmsbtMailMessage::getSmtpConfigurations()
 }
 
 
-/** +-=---------------------------------------------------------So 10. Jan 11:47:36 2010----------*
- * @method  CwmsbtMailMessage::BuildAllRecipients               // private                           *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------So 10. Jan 11:47:36 2010----------*/
 void CwmsbtMailMessage::BuildAllRecipients()
 {
    m_qvlAllRecipients += m_qvlRecipients;
@@ -525,21 +381,11 @@ void CwmsbtMailMessage::BuildAllRecipients()
    m_qvlAllRecipients += m_qvlBlindCopies;
 }
 
-/** +-=---------------------------------------------------------So 10. Jan 11:48:08 2010----------*
- * @method  CwmsbtMailMessage::GetAllRecipients                 // public                            *
- * @return  QList<QString>                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------So 10. Jan 11:48:08 2010----------*/
 QList<QString> CwmsbtMailMessage::GetAllRecipients()
 {
    return m_qvlAllRecipients;
 }
 
-/** +-=---------------------------------------------------------Sa 9. Jan 11:15:47 2010-----------*
- * @method  CwmsbtMailMessage::CheckMail                        // private                           *
- * @return  bool                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Sa 9. Jan 11:15:47 2010-----------*/
 bool CwmsbtMailMessage::CheckMail()
 {
    bool bRet = false;
@@ -568,11 +414,6 @@ bool CwmsbtMailMessage::CheckMail()
    return bRet;
 }
 
-/** +-=---------------------------------------------------------Sa 9. Jan 11:30:18 2010-----------*
- * @method  CwmsbtMailMessage::HasRecipients                    // private                           *
- * @return  bool                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Sa 9. Jan 11:30:18 2010-----------*/
 bool CwmsbtMailMessage::HasRecipients()
 {
    bool bRet = false;
@@ -585,12 +426,6 @@ bool CwmsbtMailMessage::HasRecipients()
    return bRet;
 }
 
-/** +-=---------------------------------------------------------So 10. Jan 13:26:55 2010----------*
- * @method  CwmsbtMailMessage::MessageTransmittedSlot           // private, slots                    *
- * @return  void                                             //                                   *
- * @param   bool p_bSuccess                                  //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------So 10. Jan 13:26:55 2010----------*/
 void CwmsbtMailMessage::MessageTransmittedSlot(bool p_bSuccess)
 {
     m_bMessageSent = true;
