@@ -28,6 +28,7 @@ class QStatusBar;
 #define MSG_ENC(a) QString(a)
 #define MSG_DEC(a) QString(a)
 #define MSG_ENC_UTF(a) QString(a)
+#define MSG_ASYNC_COLLECTOR CdmMessageManagerAsyncCollector()
 
 //#define MSG_CRIT(a,b) CdmMessageManager::critical(QString::fromUtf8(a), QString::fromUtf8(b))
 //#define MSG_WARN(a,b) CdmMessageManager::warning(QString::fromUtf8(a), QString::fromUtf8(b))
@@ -68,6 +69,20 @@ private:
     static QString GetLoadFile(QString p_qstrMessage, QString p_qstrPathToOpen = "", QString p_qstrFilter = "");
     static QString GetSaveFile(QString p_qstrMessage, QString p_qstrPathToOpen = "", QString p_qstrFilter = "");
     static QVariantList AskForParameters(QList<CdmClassMethodParameter> &p_qlParameters);
+};
+
+class WMSMANAGER_API CdmMessageManagerAsyncCollector
+{
+    public:
+        CdmMessageManagerAsyncCollector()
+        {
+            CdmMessageManager::StartAsyncMessageCollection();
+        }
+
+        ~CdmMessageManagerAsyncCollector()
+        {
+            CdmMessageManager::EndAndShowAsyncMessageCollection();
+        }
 };
 
 #endif //
