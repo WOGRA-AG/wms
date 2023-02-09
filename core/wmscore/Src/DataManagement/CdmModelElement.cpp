@@ -1,15 +1,3 @@
-/******************************************************************************
- ** WOGRA Middleware Server Communication Module
- **
- ** @Author Wolfgang Graßhof 
- **
- ** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
- ** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. 
- **(C) copyright by WOGRA technologies All rights reserved
- ******************************************************************************/
-
-
-
 // System and QT Includes
 #include <QUuid>
 #include <QString>
@@ -28,15 +16,6 @@
 
 #include "CumUser.h"
 
-/** +-=---------------------------------------------------------Fr 12. Aug 00:30:46 2005----------*
- * @method  CdmModelElement::CdmModelElement                                 // public                            *
- * @return                                                   //                                   *
- * @param  qint64 p_lDatabaseId                               //                                   *
- * @param  qint64 p_lId                                       //                                   *
- * @param   QString p_qstrKeyname                            //                                   *
- * @param   QString p_qstrCaption = ""                       //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Fr 12. Aug 00:30:46 2005----------*/
 CdmModelElement::CdmModelElement( qint64 p_lDatabaseId,qint64 p_lId, QString p_qstrKeyname, QString p_qstrCaption )
 : CdmModelElementBase(p_lDatabaseId),
    m_lId(p_lId),
@@ -68,12 +47,6 @@ CdmModelElement::CdmModelElement( qint64 p_lDatabaseId,qint64 p_lId, QString p_q
    }
 }
 
-/** +-=---------------------------------------------------------Fr 12. Aug 00:30:51 2005----------*
- * @method  CdmModelElement::CdmModelElement                                 // public                            *
- * @return                                                   //                                   *
- * @param   QDomElement& p_rqDomElement                      //                                   *
- * @comment This method creates a base object with xml information                                *
- *----------------last changed: --------------------------------Fr 12. Aug 00:30:51 2005----------*/
 CdmModelElement::CdmModelElement(  QDomElement& p_rqDomElement )
 : CdmModelElementBase(-1),
    m_lId(-1),
@@ -102,12 +75,6 @@ CdmModelElement::CdmModelElement(  QDomElement& p_rqDomElement )
    m_bNew = true;
 }
 
-/** +-=---------------------------------------------------------So 15. Apr 13:08:14 2012----------*
- * @method  CdmModelElement::CdmModelElement                                 // public                            *
- * @return                                                   //                                   *
- * @param   QVariant p_qvVariant                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------So 15. Apr 13:08:14 2012----------*/
 CdmModelElement::CdmModelElement(QVariant p_qvVariant)
 : CdmModelElementBase(-1),
   m_lId(-1),
@@ -139,22 +106,11 @@ CdmModelElement::CdmModelElement()
 {
 }
 
-/** +-=---------------------------------------------------------Sa 20. Aug 12:35:45 2005----------*
- * @method  CdmModelElement::~CdmModelElement                                // public, virtual                   *
- * @return  void                                             //                                   *
- * @comment The Destructor of Class CdmModelElement                                                       *
- *----------------last changed: --------------------------------Sa 20. Aug 12:35:45 2005----------*/
 CdmModelElement::~CdmModelElement(  )
 {
    // nothing to do
 }
 
-/** +-=---------------------------------------------------------Mo 3. Dez 14:56:50 2012-----------*
- * @method  CdmModelElement::SetVariant                      // protected, virtual                *
- * @return  void                                             //                                   *
- * @param   QVariantMap& p_rqvHash                          //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mo 3. Dez 14:56:50 2012-----------*/
 void CdmModelElement::SetVariant(QVariantMap& p_rqvHash)
 {
    SYNCHRONIZED_WRITE;
@@ -190,12 +146,6 @@ void CdmModelElement::SetVariant(QVariantMap& p_rqvHash)
    }
 }
 
-/** +-=---------------------------------------------------------Mo 3. Dez 14:56:57 2012-----------*
- * @method  CdmModelElement::Deploy                          // protected, virtual                *
- * @return  void                                             //                                   *
- * @param   QVariantMap& p_rqvHash                          //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mo 3. Dez 14:56:57 2012-----------*/
 void CdmModelElement::Deploy(QVariantMap& p_rqvHash)
 {
    SYNCHRONIZED_WRITE;
@@ -211,45 +161,18 @@ void CdmModelElement::Deploy(QVariantMap& p_rqvHash)
    {
       m_lSchemeId = GetSchemeId();
    }
-
-
-//   QVariantMap qvChangeInfo = p_rqvHash[WMS_CHANGEINFO].toMap();
-
-//   m_bModified = true;
-//   //m_bNew = true;
-//   m_bDeleted = false;
-//   m_lModifierId = GetUserId();
-//   m_lCreatorId = GetUserId();
-//   m_qdtLastChange = QDateTime::currentDateTime();
 }
 
-/** +-=---------------------------------------------------------Fr 12. Aug 00:31:19 2005----------*
- * @method  CdmModelElement::SetId                           // private                           *
- * @return  void                                             //                                   *
- * @param  qint64 p_lId                                       //                                   *
- * @comment sets the Id of this base object.                                                      *
- *----------------last changed: --------------------------------Fr 12. Aug 00:31:19 2005----------*/
 void CdmModelElement::SetId(qint64 p_lId)
 {
    m_lId = p_lId;
 }
 
-
-/** +-=---------------------------------------------------------Mo 19. Nov 15:45:35 2012----------*
- * @method  CdmModelElement::GetId                           // public, const, slots              *
- * @return qint64                                             //                                   *
- * @comment returns the Id of this base object.                                                   *
- *----------------last changed: --------------------------------Mo 19. Nov 15:45:35 2012----------*/
 qint64 CdmModelElement::GetId() const
 {
    return m_lId.load();
 }
 
-/** +-=---------------------------------------------------------Fr 13. Sep 13:12:51 2013----------*
- * @method  CdmModelElement::GetKeyname                      // public, const, virtual, slots     *
- * @return  QString                                          //                                   *
- * @comment returns the Keyname of this base object.                                              *
- *----------------last changed: --------------------------------Fr 13. Sep 13:12:51 2013----------*/
 QString CdmModelElement::GetKeyname() const
 {
     SYNCHRONIZED_READ;
@@ -262,58 +185,30 @@ QString CdmModelElement::GetOriginalKeyname() const
    return m_qstrOriginalKeyname;
 }
 
-/** +-=---------------------------------------------------------Fr 12. Aug 00:31:35 2005----------*
- * @method  CdmModelElement::GetLastChange                           // public, const                     *
- * @return  QDateTime                                        //                                   *
- * @comment returns the DateTime of the last change in this object.                               *
- *----------------last changed: --------------------------------Fr 12. Aug 00:31:35 2005----------*/
 QDateTime CdmModelElement::GetLastChange(  ) const
 {
     SYNCHRONIZED_READ;
    return m_qdtLastChange;
 }
 
-/** +-=---------------------------------------------------------Sa 9. Feb 11:45:45 2013-----------*
- * @method  CdmModelElement::GetLastChange                   // public, const                     *
- * @return  void                                             //                                   *
- * @param   double& p_dLastChange                            //                                   *
- * @comment This method returns the last change date time in a double                             *
- *----------------last changed: --------------------------------Sa 9. Feb 11:45:45 2013-----------*/
 void CdmModelElement::GetLastChange(double& p_dLastChange) const
 {
     SYNCHRONIZED_READ;
    p_dLastChange = ChangeDateTimeToDouble(m_qdtLastChange);
 }
 
-/** +-=---------------------------------------------------------Fr 12. Aug 00:31:41 2005----------*
- * @method  CdmModelElement::SetLastChange                           // public                            *
- * @return  void                                             //                                   *
- * @param   QDateTime& p_qdDateTime                          //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Fr 12. Aug 00:31:41 2005----------*/
-void CdmModelElement::SetLastChange(  QDateTime& p_qdDateTime )
+void CdmModelElement::SetLastChange(QDateTime& p_qdDateTime)
 {
     SYNCHRONIZED_WRITE;
    m_qdtLastChange = p_qdDateTime;
 }
 
-/** +-=---------------------------------------------------------Fr 12. Aug 00:31:45 2005----------*
- * @method  CdmModelElement::SetLastChange                           // public                            *
- * @return  void                                             //                                   *
- * @param   double p_dLastChanged                            //                                   *
- * @comment This method sets the lastchanged date time with a double                              *
- *----------------last changed: --------------------------------Fr 12. Aug 00:31:45 2005----------*/
 void CdmModelElement::SetLastChange(  double p_dLastChanged )
 {
     SYNCHRONIZED_WRITE;
    m_qdtLastChange = ChangeDoubleToDateTime(p_dLastChanged);
 }
 
-/** +-=---------------------------------------------------------Fr 17. Aug 15:09:01 2012----------*
- * @method  CdmModelElement::SetModified                             // public, virtual                   *
- * @return  void                                             //                                   *
- * @comment This method will be called if the object has been modified.                           *
- *----------------last changed: --------------------------------Fr 17. Aug 15:09:01 2012----------*/
 void CdmModelElement::SetModified()
 {
    SYNCHRONIZED_WRITE;
@@ -322,116 +217,57 @@ void CdmModelElement::SetModified()
    m_lModifierId = GetUserId();
 }
 
-/** +-=---------------------------------------------------------Sa 9. Feb 11:45:59 2013-----------*
- * @method  CdmModelElement::IsValid                         // public, const, virtual, slots     *
- * @return  bool                                             //                                   *
- * @comment This method returns if this object is a valid object or not.                          *
- *----------------last changed: --------------------------------Sa 9. Feb 11:45:59 2013-----------*/
 bool CdmModelElement::IsValid() const
 {
    return m_bValid.load();
 }
 
-/** +-=---------------------------------------------------------Fr 12. Aug 00:32:23 2005----------*
- * @method  CdmModelElement::SetInvalid                              // protected                         *
- * @return  void                                             //                                   *
- * @comment This method sets this object as invalid object. This is only possibled to set from    *
- *          derived classes.                                                                      *
- *----------------last changed: --------------------------------Fr 12. Aug 00:32:23 2005----------*/
 void CdmModelElement::SetInvalid(  )
 {
    m_bValid = false;
 }
 
-/** +-=---------------------------------------------------------Fr 12. Aug 00:32:26 2005----------*
- * @method  CdmModelElement::SetValid                                // protected                         *
- * @return  void                                             //                                   *
- * @comment This method sets the Base Object valid.                                               *
- *----------------last changed: --------------------------------Fr 12. Aug 00:32:26 2005----------*/
 void CdmModelElement::SetValid(  )
 {
    m_bValid = true;
 }
 
-/** +-=---------------------------------------------------------Do 9. Mai 18:30:18 2013-----------*
- * @method  CdmModelElement::SetDeleted                      // protected, virtual                *
- * @return  void                                             //                                   *
- * @comment This method sets this base object deleted.                                            *
- *----------------last changed: --------------------------------Do 9. Mai 18:30:18 2013-----------*/
 void CdmModelElement::SetDeleted()
 {
    m_bDeleted = true;
 }
 
-/** +-=---------------------------------------------------------Do 9. Mai 18:29:46 2013-----------*
- * @method  CdmModelElement::IsDeleted                       // public, const, virtual, slots     *
- * @return  bool                                             //                                   *
- * @comment This emthod returns if this base object is deleted.                                   *
- *----------------last changed: --------------------------------Do 9. Mai 18:29:46 2013-----------*/
 bool CdmModelElement::IsDeleted() const
 {
    return m_bDeleted;
 }
 
-/** +-=---------------------------------------------------------Do 9. Mai 18:30:03 2013-----------*
- * @method  CdmModelElement::IsModified                      // public, const, virtual, slots     *
- * @return  bool                                             //                                   *
- * @comment returns if an object is modified or not.                                              *
- *----------------last changed: --------------------------------Do 9. Mai 18:30:03 2013-----------*/
 bool CdmModelElement::IsModified() const
 {
 
    return m_bModified;
 }
 
-/** +-=---------------------------------------------------------Fr 12. Aug 00:33:00 2005----------*
- * @method  CdmModelElement::SetCreatorId                            // public                            *
- * @return  void                                             //                                   *
- * @param  qint64 p_lUserId                                   //                                   *
- * @comment This method sets the creator of this object.                                          *
- *----------------last changed: --------------------------------Fr 12. Aug 00:33:00 2005----------*/
 void CdmModelElement::SetCreatorId( qint64 p_lUserId )
 {
    m_lCreatorId = p_lUserId;
 }
 
-/** +-=---------------------------------------------------------Fr 12. Aug 00:33:03 2005----------*
- * @method  CdmModelElement::GetCreatorId                            // public, const                     *
- * @return qint64                                             //                                   *
- * @comment returns the Id of the creator or nullptr if the system has created this object.          *
- *----------------last changed: --------------------------------Fr 12. Aug 00:33:03 2005----------*/
 qint64 CdmModelElement::GetCreatorId(  ) const
 {
    return m_lCreatorId.load();
 }
 
-/** +-=---------------------------------------------------------Fr 12. Aug 00:33:06 2005----------*
- * @method  CdmModelElement::SetModifierId                           // public                            *
- * @return  void                                             //                                   *
- * @param  qint64 p_lUserId                                   //                                   *
- * @comment Sets the Modifier Id.                                                                 *
- *----------------last changed: --------------------------------Fr 12. Aug 00:33:06 2005----------*/
 void CdmModelElement::SetModifierId( qint64 p_lUserId )
 {
    m_lModifierId = p_lUserId;
 }
 
-/** +-=---------------------------------------------------------Mo 19. Nov 15:49:09 2012----------*
- * @method  CdmModelElement::GetModifierId                           // public, const, slots              *
- * @return qint64                                             //                                   *
- * @comment returns the id of the modifier or 0 for system modifier.                              *
- *----------------last changed: --------------------------------Mo 19. Nov 15:49:09 2012----------*/
 qint64 CdmModelElement::GetModifierId() const
 {
    return m_lModifierId.load();
 }
 
-/** +-=---------------------------------------------------------Fr 13. Sep 13:13:07 2013----------*
- * @method  CdmModelElement::SetKeyname                      // protected, virtual                *
- * @return  void                                             //                                   *
- * @param   QString p_qstrKeyname                            //                                   *
- * @comment sets the keyname of this baseobject.                                                  *
- *----------------last changed: --------------------------------Fr 13. Sep 13:13:07 2013----------*/
 void CdmModelElement::SetKeyname(QString p_qstrKeyname)
 {
     SYNCHRONIZED_WRITE;
@@ -455,45 +291,23 @@ void CdmModelElement::SetKeyname(QString p_qstrKeyname)
    }
 }
 
-/** +-=---------------------------------------------------------Mo 20. Jul 21:03:11 2009----------*
- * @method  CdmModelElement::SetNew                                  // protected, virtual                *
- * @return  void                                             //                                   *
- * @comment This method sets the new flag on this base object.                                    *
- *----------------last changed: --------------------------------Mo 20. Jul 21:03:11 2009----------*/
 void CdmModelElement::SetNew()
 {
    m_bNew = true;
    m_lCreatorId = GetUserId();
 }
 
-/** +-=---------------------------------------------------------Mo 19. Nov 15:49:20 2012----------*
- * @method  CdmModelElement::IsNew                                   // public, const, slots              *
- * @return  bool                                             //                                   *
- * @comment returns if this base object is new.                                                   *
- *----------------last changed: --------------------------------Mo 19. Nov 15:49:20 2012----------*/
 bool CdmModelElement::IsNew() const
 {
    return m_bNew;
 }
 
-/** +-=---------------------------------------------------------Fr 12. Aug 00:33:36 2005----------*
- * @method  CdmModelElement::ResetNewModified                        // public, virtual                   *
- * @return  void                                             //                                   *
- * @comment This method resets the new and modified value at this base object. This is needed     *
- *          for after updating this object.                                                       *
- *----------------last changed: --------------------------------Fr 12. Aug 00:33:36 2005----------*/
 void CdmModelElement::ResetNewModified(  )
 {
    m_bNew      = false;
    m_bModified = false;
 }
 
-/** +-=---------------------------------------------------------Mo 19. Nov 15:49:33 2012----------*
- * @method  CdmModelElement::SetCaption                              // public, slots                     *
- * @return  void                                             //                                   *
- * @param   QString p_qstrCaption                            //                                   *
- * @comment This method sets the caption of this baseobject.                                      *
- *----------------last changed: --------------------------------Mo 19. Nov 15:49:33 2012----------*/
 void CdmModelElement::SetCaption(QString p_qstrCaption)
 {
     SYNCHRONIZED_WRITE;
@@ -501,11 +315,6 @@ void CdmModelElement::SetCaption(QString p_qstrCaption)
    SetModified();
 }
 
-/** +-=---------------------------------------------------------Sa 9. Feb 11:46:45 2013-----------*
- * @method  CdmModelElement::GetCaption                      // public, const, virtual, slots     *
- * @return  QString                                          //                                   *
- * @comment This method returns the caption of this object.                                       *
- *----------------last changed: --------------------------------Sa 9. Feb 11:46:45 2013-----------*/
 QString CdmModelElement::GetCaption() const
 {
     SYNCHRONIZED_READ;
@@ -519,13 +328,6 @@ QString CdmModelElement::GetCaption() const
    return qstrRet;
 }
 
-/** +-=---------------------------------------------------------Sa 9. Feb 11:47:12 2013-----------*
- * @method  CdmModelElement::ChangeDateToLong                // public, static                    *
- * @return qint64                                             //                                   *
- * @param   const QDate p_qdDate                             //                                   *
- * @comment This method changes a date to a qint64 value. This qint64 value means the number of       *
- *          days since 1.1.1900.                                                                  *
- *----------------last changed: --------------------------------Sa 9. Feb 11:47:12 2013-----------*/
 qint64 CdmModelElement::ChangeDateToLong(const QDate p_qdDate)
 {
   qint64 lRet = 0;
@@ -535,12 +337,6 @@ qint64 CdmModelElement::ChangeDateToLong(const QDate p_qdDate)
    return lRet;
 }
 
-/** +-=---------------------------------------------------------Fr 12. Aug 00:34:21 2005----------*
- * @method  CdmModelElement::ChangeLongToDate                        // public, static                    *
- * @return  QDate                                            //                                   *
- * @param  qint64 p_lDate                                     //                                   *
- * @comment This method converts a qint64 value whixh contains the number of days sind 1.1.1970 to a valid qdate.*
- *----------------last changed: --------------------------------Fr 12. Aug 00:34:21 2005----------*/
 QDate CdmModelElement::ChangeLongToDate( qint64 p_lDate )
 {
    QDate qdDate(1900,1,1);
@@ -550,12 +346,6 @@ QDate CdmModelElement::ChangeLongToDate( qint64 p_lDate )
    return qdDate;
 }
 
-/** +-=---------------------------------------------------------Fr 12. Aug 00:34:23 2005----------*
- * @method  CdmModelElement::ChangeTimeToDouble                      // public, static                    *
- * @return  double                                           //                                   *
- * @param   QTime p_qtTime                                   //                                   *
- * @comment This method changes a qtime to a double. The double is a percentage value of the complete day.*
- *----------------last changed: --------------------------------Fr 12. Aug 00:34:23 2005----------*/
 double CdmModelElement::ChangeTimeToDouble(  QTime p_qtTime )
 {
    double dRet =0.0;
@@ -566,12 +356,6 @@ double CdmModelElement::ChangeTimeToDouble(  QTime p_qtTime )
    return dRet;
 }
 
-/** +-=---------------------------------------------------------Fr 12. Aug 00:34:26 2005----------*
- * @method  CdmModelElement::ChangeDoubleToTime                      // public, static                    *
- * @return  QTime                                            //                                   *
- * @param   double p_dTime                                   //                                   *
- * @comment This method changes a percentage double value to a time value.                        *
- *----------------last changed: --------------------------------Fr 12. Aug 00:34:26 2005----------*/
 QTime CdmModelElement::ChangeDoubleToTime(  double p_dTime )
 {
    QTime qtTime(0,0,0,0);
@@ -582,13 +366,6 @@ QTime CdmModelElement::ChangeDoubleToTime(  double p_dTime )
    return qtTime;
 }
 
-/** +-=---------------------------------------------------------So 10. Feb 18:25:16 2013----------*
- * @method  CdmModelElement::ChangeDateTimeToDouble          // public, const                     *
- * @return  double                                           //                                   *
- * @param   QDateTime p_qdtDateTime                          //                                   *
- * @comment This method changes a qdatetime value to a double. It uses the definition of the      *
- *          ChangeDateToLong and ChangeTimeToDouble methods.                                      *
- *----------------last changed: --------------------------------So 10. Feb 18:25:16 2013----------*/
 double CdmModelElement::ChangeDateTimeToDouble(QDateTime p_qdtDateTime) const
 {
   qint64 lDate = ChangeDateToLong(p_qdtDateTime.date());
@@ -597,12 +374,6 @@ double CdmModelElement::ChangeDateTimeToDouble(QDateTime p_qdtDateTime) const
    return dTime + lDate;
 }
 
-/** +-=---------------------------------------------------------Fr 12. Aug 00:34:32 2005----------*
- * @method  CdmModelElement::ChangeDoubleToDateTime                  // public, static                    *
- * @return  QDateTime                                        //                                   *
- * @param   double p_dDateTime                               //                                   *
- * @comment This method changes a double value to a qdatetime value.                              *
- *----------------last changed: --------------------------------Fr 12. Aug 00:34:32 2005----------*/
 QDateTime CdmModelElement::ChangeDoubleToDateTime(  double p_dDateTime )
 {
    QDateTime qdtDateTime;
@@ -618,12 +389,6 @@ QDateTime CdmModelElement::ChangeDoubleToDateTime(  double p_dDateTime )
    return qdtDateTime;
 }
 
-/** +-=---------------------------------------------------------Fr 12. Aug 00:34:42 2005----------*
-* @method  CdmModelElement::ChangeBoolToString                      // public, static                    *
-* @return  QString                                          //                                   *
-* @param   bool p_bValue                                    //                                   *
-* @comment                                                                                       *
-*----------------last changed: --------------------------------Fr 12. Aug 00:34:42 2005----------*/
 QString CdmModelElement::ChangeBoolToString(bool p_bValue)
 {
    QString qstrRet = "Unknown";
@@ -639,12 +404,6 @@ QString CdmModelElement::ChangeBoolToString(bool p_bValue)
    return qstrRet;
 }
 
-/** +-=---------------------------------------------------------Fr 12. Aug 00:34:45 2005----------*
-* @method  CdmModelElement::ChangeStringToBool                      // public, static                    *
-* @return  bool                                             //                                   *
-* @param   QString p_qstrBool                               //                                   *
-* @comment                                                                                       *
-*----------------last changed: --------------------------------Fr 12. Aug 00:34:45 2005----------*/
 bool CdmModelElement::ChangeStringToBool(QString p_qstrBool)
 {
    bool bRet = false;
@@ -657,12 +416,6 @@ bool CdmModelElement::ChangeStringToBool(QString p_qstrBool)
    return bRet;
 }
 
-/** +-=---------------------------------------------------------Sa 9. Feb 11:47:50 2013-----------*
- * @method  CdmModelElement::XmlExportBase                   // protected, const                  *
- * @return  void                                             //                                   *
- * @param   QDomElement& p_rqdeBase                          //                                   *
- * @comment exports the database to a xml file.                                                   *
- *----------------last changed: --------------------------------Sa 9. Feb 11:47:50 2013-----------*/
 void CdmModelElement::XmlExportBase(QDomElement& p_rqdeBase) const
 {
    SYNCHRONIZED_READ;
@@ -680,12 +433,6 @@ void CdmModelElement::XmlExportBase(QDomElement& p_rqdeBase) const
    p_rqdeBase.setAttribute(WMS_URI,       GetUriInternal());
 }
 
-/** +-=---------------------------------------------------------Fr 12. Aug 00:34:39 2005----------*
- * @method  CdmModelElement::XmlImportBase                           // protected                         *
- * @return  void                                             //                                   *
- * @param   QDomElement& p_rqDomElement                      //                                   *
- * @comment This method imports the basedata of this base object from xml to object.              *
- *----------------last changed: --------------------------------Fr 12. Aug 00:34:39 2005----------*/
 void CdmModelElement::XmlImportBase(  QDomElement& p_rqDomElement )
 {
     SYNCHRONIZED_WRITE;
@@ -704,13 +451,6 @@ void CdmModelElement::XmlImportBase(  QDomElement& p_rqDomElement )
    m_bModified = true;
 }
 
-
-
-/** +-=---------------------------------------------------------Sa 9. Feb 11:48:08 2013-----------*
- * @method  CdmModelElement::GetInfo                         // public, const, virtual, slots     *
- * @return  QString                                          //                                   *
- * @comment returns the info to the current object.                                               *
- *----------------last changed: --------------------------------Sa 9. Feb 11:48:08 2013-----------*/
 QString CdmModelElement::GetInfo() const
 {
     SYNCHRONIZED_READ;
@@ -761,11 +501,6 @@ QString CdmModelElement::GetInfo() const
    return qstrRet;
 }
 
-/** +-=---------------------------------------------------------Sa 9. Feb 11:48:21 2013-----------*
- * @method  CdmModelElement::GetVariant                      // public, const, virtual            *
- * @return  QVariant                                         //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Sa 9. Feb 11:48:21 2013-----------*/
 QVariant CdmModelElement::GetVariant() const
 {
    SYNCHRONIZED_READ;
@@ -779,13 +514,6 @@ QVariant CdmModelElement::GetVariant() const
    return qmVariant;
 }
 
-
-/** +-=---------------------------------------------------------Mi 12. Sep 15:22:13 2012----------*
- * @method  CdmModelElement::GetDisplayTypeAsString                  // public, static                    *
- * @return  QString                                          //                                   *
- * @param   EdmStringDisplayType p_eType                     //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mi 12. Sep 15:22:13 2012----------*/
 QString CdmModelElement::GetDisplayTypeAsString(EdmStringDisplayType p_eType)
 {
    QString qstrRet;
@@ -857,24 +585,17 @@ QString CdmModelElement::GetUriType() const
     return qstrType;
 }
 
-/** +-=---------------------------------------------------------Sa 9. Feb 11:48:48 2013-----------*
- * @method  CdmModelElement::GetUri                          // public, const, virtual, slots     *
- * @return  QString                                          //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Sa 9. Feb 11:48:48 2013-----------*/
 QString CdmModelElement::GetUri() const
 {
    QString qstrType = GetUriType();
    return CreateUri(qstrType, GetKeyname());
 }
 
-
 QString CdmModelElement::GetUriInternal() const
 {
     QString qstrType = GetUriType();
     return CreateUriPath(qstrType, GetKeyname(), "", "");
 }
-
 
 QString CdmModelElement::GenerateKeyname() const
 {
