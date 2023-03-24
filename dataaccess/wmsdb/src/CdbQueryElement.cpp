@@ -13,7 +13,6 @@
 #include "CdmLogging.h"
 #include "CdmClass.h"
 #include "CdmQueryElement.h"
-#include "CdmDataAccessHelper.h"
 
 // WMS Includes
 #include "CdbDataAccess.h"
@@ -184,8 +183,6 @@ QString CdbQueryElement::GenerateAndQuery()
     if (m_qvlChilds.count() > 0)
     {
         int iCounter = 1;
-
-
         QList<CdbQueryElement*>::iterator qvlIt = m_qvlChilds.begin();
         QList<CdbQueryElement*>::iterator qvlItEnd = m_qvlChilds.end();
 
