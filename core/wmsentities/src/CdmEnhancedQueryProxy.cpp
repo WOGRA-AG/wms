@@ -52,9 +52,9 @@ void CdmEnhancedQueryProxy::Execute()
 
     if (pQuery != nullptr)
     {
-        QString qstrWql = CdmQueryBuilder::BuildString(pQuery);
         pQuery->SetContainer(GetContainer());
         pQuery->SetOrderBy(m_qstrOrderBy, m_bOrderbyModeAsc);
+        QString qstrWql = CdmQueryBuilder::BuildString(pQuery);
         CdmQueryModel::Execute();
     }
 }

@@ -187,6 +187,7 @@ public:
     void AddDatabaseCommand(QString p_qstrCommand);
     bool IsAggregationQuery() const;
 
+    void ResetOrderBy();
 public slots:
     int Execute();
     void Clear();

@@ -587,28 +587,23 @@ void CdmQuery::SetSorting(int p_iColumn, Qt::SortOrder p_eSortOrder)
             }
         }
     }
-    else
-    {
-        if (p_eSortOrder == Qt::AscendingOrder)
-        {
-            m_bOrderAsc = true;
-        }
-        else
-        {
-            m_bOrderAsc = false;
-        }
-    }
+}
+
+void CdmQuery::ResetOrderBy()
+{
+     m_qstrlOrderBy.clear();
 }
 
 void CdmQuery::SetOrderBy(QStringList &p_qstrOrderBy, bool p_bAsc)
 {
+    ResetOrderBy();
     m_qstrlOrderBy = p_qstrOrderBy;
     m_bOrderAsc = p_bAsc;
 }
 
 void CdmQuery::AddOrderBy(QString p_qstrOrderBy, bool p_bAsc)
 {
-    m_qstrlOrderBy.clear();
+    ResetOrderBy();
     m_qstrlOrderBy.append(p_qstrOrderBy);
     m_bOrderAsc = p_bAsc;
 }
