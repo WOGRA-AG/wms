@@ -16,13 +16,10 @@
 #include "CdmMessageManager.h"
 #include "CdmClass.h"
 #include "CdmClassMethod.h"
-#include "CdmClassGroup.h"
 #include "CdmMember.h"
 #include "CdmValue.h"
-#include "CdmEnhancedQueryProxy.h"
 #include "CdmObject.h"
 #include "CdmQueryEnhanced.h"
-#include "CdmQueryBuilder.h"
 #include "CdmObjectContainer.h"
 #include "CdmLogging.h"
 #include "CdmDataProvider.h"
@@ -32,8 +29,6 @@
 #include "CdmObjectContainer.h"
 #include "CdmExecutor.h"
 #include "CdmExecutorFunction.h"
-
-#include "CumUser.h"
 
 // own Includes
 #include "CwmsExportFileWriter.h"

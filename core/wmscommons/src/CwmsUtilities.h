@@ -2,7 +2,7 @@
 #define CWMSUTILITIES_H
 
 // System and Qt Includes
-#include	 <QDate>
+#include <QDate>
 
 // Own Includes
 #include "wmscommons.h"
