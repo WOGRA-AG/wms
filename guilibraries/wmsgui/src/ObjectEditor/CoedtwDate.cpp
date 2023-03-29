@@ -1,15 +1,4 @@
-﻿/******************************************************************************
- ** WOGRA Middleware Server Data Manager Module
- **
- ** @Author Wolfgang Graßhof 
- **
- ** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
- ** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. 
- **(C) copyright by WOGRA technologies All rights reserved
- ******************************************************************************/
-
-
-// System and QT Includes
+﻿// System and QT Includes
 #include <QDateEdit>
 #include <QComboBox>
 #include <QLabel>
@@ -22,14 +11,6 @@
 #include "CoedtwDate.h"
 
 
-
-/** +-=---------------------------------------------------------Mi 22. Aug 11:01:51 2012----------*
- * @method  CoedtwDate::CoedtwDate                           // public                            *
- * @return                                                   //                                   *
- * @param   CdmValue* p_pCdmValue                            //                                   *
- * @param   QWidget* p_pqwParent = nullptr                      //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mi 22. Aug 11:01:51 2012----------*/
 CoedtwDate::CoedtwDate(CdmValue* p_pCdmValue, QWidget* p_pqwParent)
    : CoeValueWidget(p_pCdmValue, p_pqwParent),
    m_pqdeDate(nullptr),
@@ -57,14 +38,6 @@ CoedtwDate::CoedtwDate(const CdmObject *pEventObject, CdmValue* p_pCdmValue, QWi
 
 }
 
-/** +-=---------------------------------------------------------Mo 8. Sep 19:21:33 2008-----------*
- * @method  CoedtwDate::CoedtwDate                           // public                            *
- * @return                                                   //                                   *
- * @param   CdmMember* p_pCdmMember                          //                                   *
- * @param   QString p_qstrKeyname                            //                                   *
- * @param   QWidget* p_pqwParent = nullptr                      //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mo 8. Sep 19:21:33 2008-----------*/
 CoedtwDate::CoedtwDate(CdmMember* p_pCdmMember, QString p_qstrKeyname, QWidget* p_pqwParent)
    : CoeValueWidget(p_pCdmMember, p_qstrKeyname, p_pqwParent),
   m_pqdeDate(nullptr),
@@ -77,25 +50,13 @@ CoedtwDate::CoedtwDate(CdmMember* p_pCdmMember, QString p_qstrKeyname, QWidget* 
 {
 }
 
-/** +-=---------------------------------------------------------Thu Dec 11 14:33:11 2003----------*
- * @method  CoedtwDate::~CoedtwDate                          // public, virtual                   *
- * @return  void                                             //                                   *
- * @comment The Destructor of Class CoedtwBinaryDocument                                          *
- *---------------------------------------------------------------Thu Dec 11 14:33:11 2003---------*/
-CoedtwDate::~CoedtwDate(  )
+CoedtwDate::~CoedtwDate()
 {
    // nothing todo qt does it for us :-)
 }
 
-/** +-=---------------------------------------------------------Mi 22. Aug 14:31:21 2012----------*
- * @method  CoedtwDate::GetEditWidget                        // public                            *
- * @return  QWidget*                                         //                                   *
- * @param   QWidget* p_pqwParent                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mi 22. Aug 14:31:21 2012----------*/
 QWidget* CoedtwDate::GetEditWidget(QWidget* p_pqwParent)
 {
-
    m_pqdeDate = new QDateEdit(p_pqwParent);
    m_pqdeDate->setMinimumDate(QDate(1800,1,1));
    m_pqdeDate->setSpecialValueText("--.--.----");
@@ -104,11 +65,6 @@ QWidget* CoedtwDate::GetEditWidget(QWidget* p_pqwParent)
    return m_pqdeDate;
 }
 
-/** +-=---------------------------------------------------------Thu Dec 11 14:45:40 2003----------*
- * @method  CoedtwDate::ValueChangedSlot                     // private, slots                    *
- * @return  void                                             //                                   *
- * @comment This slot will be called if the value has changed.                                    *
- *---------------------------------------------------------------Thu Dec 11 14:45:40 2003---------*/
 void CoedtwDate::ValueChangedSlotByUser()
 {
    if ( m_pqdeDate && m_rpCdmValue)
@@ -137,12 +93,6 @@ void CoedtwDate::ValueChangedSlotByUser()
    }
 }
 
-/** +-=---------------------------------------------------------Thu Dec 11 14:45:43 2003----------*
- * @method  CoedtwDate::SetValue                             // protected, virtual                *
- * @return  void                                             //                                   *
- * @param   CdmValue* p_pCdmValue                      //                                   *
- * @comment This method sets the value in the widget.                                             *
- *---------------------------------------------------------------Thu Dec 11 14:45:43 2003---------*/
 void CoedtwDate::SetValue(CdmValue* p_pCdmValue)
 {
    QDate qdDate;
@@ -190,12 +140,7 @@ void CoedtwDate::setEventClassValue()
     }
 }
 
-/** +-=---------------------------------------------------------Fri Dec 12 10:35:16 2003----------*
- * @method  CoedtwDate::SetReadOnly                          // public, virtual                   *
- * @return  void                                             //                                   *
- * @comment This method sets the current Value widget in ReadOnlymode.                         *
- *---------------------------------------------------------------Fri Dec 12 10:35:16 2003---------*/
-void CoedtwDate::SetReadOnly(  )
+void CoedtwDate::SetReadOnly()
 {
    m_pqdeDate->setEnabled(false);
 }
@@ -205,12 +150,6 @@ void CoedtwDate::SetEditable()
     m_pqdeDate->setEnabled(true);
 }
 
-/** +-=---------------------------------------------------------Mi 22. Aug 14:31:38 2012----------*
- * @method  CoedtwDate::GetSearchWidget                      // public, virtual                   *
- * @return  QWidget*                                         //                                   *
- * @param   QWidget* p_pqwParent                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mi 22. Aug 14:31:38 2012----------*/
 QWidget* CoedtwDate::GetSearchWidget(QWidget* p_pqwParent)
 {
    QWidget* pqwWidget = new QWidget(p_pqwParent);
@@ -248,17 +187,12 @@ QWidget* CoedtwDate::GetSearchWidget(QWidget* p_pqwParent)
    m_pqdDateEditTo->hide();
    RelevantCheckBoxClickedSlot();
 
-   connect(m_pqcbComboBox, SIGNAL(currentIndexChanged), 
-           this, SLOT(CompareComboBoxIndexChangedSlot));
+   connect(m_pqcbComboBox, SIGNAL(currentIndexChanged(int)),
+           this, SLOT(CompareComboBoxIndexChangedSlot(int)));
 
    return pqwWidget;
 }
 
-/** +-=---------------------------------------------------------Di 9. Sep 18:03:49 2008-----------*
- * @method  CoedtwDate::RelevantCheckBoxClickedSlot          // private, slots                    *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Di 9. Sep 18:03:49 2008-----------*/
 void CoedtwDate::RelevantCheckBoxClickedSlot()
 {
    if (m_pqchbRelevant->isChecked())
@@ -279,12 +213,6 @@ void CoedtwDate::RelevantCheckBoxClickedSlot()
    }
 }
 
-/** +-=---------------------------------------------------------Sa 6. Sep 16:12:42 2008-----------*
- * @method  CoedtwDate::CompareComboBoxIndexChangedSlot      // private, slots                    *
- * @return  void                                             //                                   *
- * @param   int p_iIndex                                     //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Sa 6. Sep 16:12:42 2008-----------*/
 void CoedtwDate::CompareComboBoxIndexChangedSlot(int p_iIndex)
 {
    switch(p_iIndex)      
@@ -312,13 +240,6 @@ void CoedtwDate::CompareComboBoxIndexChangedSlot(int p_iIndex)
    }
 }
 
-
-/** +-=---------------------------------------------------------Sa 6. Sep 14:01:45 2008-----------*
- * @method  CoedtwDate::AddQueryElement                      // public, virtual                   *
- * @return  void                                             //                                   *
- * @param   CdmQueryElement* p_pCdmQueryElementParent        //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Sa 6. Sep 14:01:45 2008-----------*/
 void CoedtwDate::AddQueryElement(CdmQueryElement* p_pCdmQueryElementParent)
 {
    if (CHKPTR(p_pCdmQueryElementParent) && m_pqchbRelevant->isChecked())
@@ -341,12 +262,6 @@ void CoedtwDate::AddQueryElement(CdmQueryElement* p_pCdmQueryElementParent)
    }
 }
 
-/** +-=---------------------------------------------------------So 7. Sep 10:07:28 2008-----------*
- * @method  CoedtwDate::AddQueryElementEqual                 // private                           *
- * @return  void                                             //                                   *
- * @param   CdmQueryElement* p_pCdmQueryElementParent        //                                   *
- * @comment an comparison to equality.                                                            *
- *----------------last changed: --------------------------------So 7. Sep 10:07:28 2008-----------*/
 void CoedtwDate::AddQueryElementEqual(CdmQueryElement* p_pCdmQueryElementParent)
 {
    if (CHKPTR(p_pCdmQueryElementParent))
@@ -360,12 +275,6 @@ void CoedtwDate::AddQueryElementEqual(CdmQueryElement* p_pCdmQueryElementParent)
    }
 }
 
-/** +-=---------------------------------------------------------So 7. Sep 10:08:08 2008-----------*
- * @method  CoedtwDate::AddQueryElementFrom                  // private                           *
- * @return  void                                             //                                   *
- * @param   CdmQueryElement* p_pCdmQueryElementParent        //                                   *
- * @comment comparison to from value                                                              *
- *----------------last changed: --------------------------------So 7. Sep 10:08:08 2008-----------*/
 void CoedtwDate::AddQueryElementFrom(CdmQueryElement* p_pCdmQueryElementParent)
 {
    if (CHKPTR(p_pCdmQueryElementParent))
@@ -378,13 +287,6 @@ void CoedtwDate::AddQueryElementFrom(CdmQueryElement* p_pCdmQueryElementParent)
    }
 }
 
-/** +-=---------------------------------------------------------So 7. Sep 10:30:13 2008-----------*
- * @method  CoedtwDate::AddQueryElementTo                    // private                           *
- * @return  void                                             //                                   *
- * @param   CdmQueryElement* p_pCdmQueryElementParent        //                                   *
- * @param   bool p_bUseFromEdit = true                       //                                   *
- * @comment comparison to to value                                                                *
- *----------------last changed: --------------------------------So 7. Sep 10:30:13 2008-----------*/
 void CoedtwDate::AddQueryElementTo(CdmQueryElement* p_pCdmQueryElementParent, bool p_bUseFromEdit)
 {
    if (CHKPTR(p_pCdmQueryElementParent))
@@ -405,12 +307,6 @@ void CoedtwDate::AddQueryElementTo(CdmQueryElement* p_pCdmQueryElementParent, bo
    }
 }
 
-/** +-=---------------------------------------------------------So 7. Sep 10:09:02 2008-----------*
- * @method  CoedtwDate::AddQueryElementFromTo                // private                           *
- * @return  void                                             //                                   *
- * @param   CdmQueryElement* p_pCdmQueryElementParent        //                                   *
- * @comment comparisonbetween from and to value.                                                  *
- *----------------last changed: --------------------------------So 7. Sep 10:09:02 2008-----------*/
 void CoedtwDate::AddQueryElementFromTo(CdmQueryElement* p_pCdmQueryElementParent)
 {
    if (CHKPTR(p_pCdmQueryElementParent))
@@ -424,12 +320,6 @@ void CoedtwDate::AddQueryElementFromTo(CdmQueryElement* p_pCdmQueryElementParent
    }
 }
 
-/** +-=---------------------------------------------------------Mi 10. Sep 20:26:19 2008----------*
- * @method  CoedtwDate::SetSearchDeaultValue                 // public, virtual                   *
- * @return  void                                             //                                   *
- * @param   QString p_qstrDefault                            //                                   *
- * @comment This method sets the search default value in a searchwidget.                          *
- *----------------last changed: --------------------------------Mi 10. Sep 20:26:19 2008----------*/
 void CoedtwDate::SetSearchDeaultValue(QString p_qstrDefault)
 {
    QDate qdDate = QDate::fromString(p_qstrDefault);
