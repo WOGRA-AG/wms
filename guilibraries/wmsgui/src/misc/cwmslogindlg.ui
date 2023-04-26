@@ -55,7 +55,6 @@
       <font>
        <family>MS Shell Dlg 2</family>
        <pointsize>18</pointsize>
-       <weight>50</weight>
        <italic>false</italic>
        <bold>false</bold>
       </font>
@@ -78,7 +77,7 @@ font: 18pt &quot;MS Shell Dlg 2&quot;;</string>
    <item>
     <widget class="QLabel" name="textLabel1">
      <property name="text">
-      <string>Benutzername</string>
+      <string>User</string>
      </property>
      <property name="wordWrap">
       <bool>false</bool>
@@ -91,7 +90,7 @@ font: 18pt &quot;MS Shell Dlg 2&quot;;</string>
    <item>
     <widget class="QLabel" name="textLabel2">
      <property name="text">
-      <string>Passwort</string>
+      <string>Password</string>
      </property>
      <property name="wordWrap">
       <bool>false</bool>
@@ -108,7 +107,7 @@ font: 18pt &quot;MS Shell Dlg 2&quot;;</string>
    <item>
     <widget class="QCheckBox" name="m_pqchbStoreLogin">
      <property name="text">
-      <string>Benutzername speichern</string>
+      <string>stay loggedin</string>
      </property>
     </widget>
    </item>
