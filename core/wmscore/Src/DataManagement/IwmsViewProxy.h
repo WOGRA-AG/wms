@@ -1,17 +1,4 @@
-﻿/******************************************************************************
- ** WOGRA technologies Gmbh & Co KG Modul Information
- ** Modulename: IwmsViewProxy.h
- ** Started Implementation: 2013/06/25
- ** Description:
- ** 
- ** interface for view proxies
- **
- ** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
- ** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. 
- **(C) copyright by WOGRA technologies GmbH & Co KG All rights reserved
- *****************************************************************************/ 
-
-#ifndef IWMSVIEWPROXY_H
+﻿#ifndef IWMSVIEWPROXY_H
 #define IWMSVIEWPROXY_H
 
 #ifdef WURZELBLA
@@ -31,12 +18,13 @@
 
 
 /* 
- * This interface defines the view proxy
+ * This interface defines the view proxy which handles view options for one specific column
+ * If you need the same handling over multiple columns use IdmHandleDisplayData instead.
  */
 class IwmsViewProxy
 {
    public:
-      virtual ~IwmsViewProxy(){}
+     virtual ~IwmsViewProxy(){};
       virtual QVariant data(int p_iRole, QVariant p_qvValue) = 0;
 
 };

@@ -5,16 +5,9 @@
 
 // WMS Manager Includes
 #include "CdmLogging.h"
-#include "CdmDataProvider.h"
 #include "CdmObject.h"
-#include "CdmSessionManager.h"
-#include "CdmContainerManager.h"
-#include "CdmContainerAdaptor.h"
-#include "CdmQueryEnhanced.h"
 #include "CdmObjectContainer.h"
-#include "CdmClass.h"
 #include "CdmQueryBuilder.h"
-#include "CdmMember.h"
 #include "CdmEnhancedQueryProxy.h"
 
 CdmEnhancedQueryProxy::CdmEnhancedQueryProxy()

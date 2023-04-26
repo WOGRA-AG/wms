@@ -5,7 +5,6 @@
 
 // own Includes
 #include "CdmLoggingAdaptor.h"
-#include "CdmDataProvider.h"
  #include "CdmSessionManager.h"
 #include "CdmLogging.h"
 

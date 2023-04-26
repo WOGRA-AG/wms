@@ -8,16 +8,13 @@
 #include "CdmQueryEnhanced.h"
 #include "CdmClass.h"
 #include "CdmMember.h"
-#include "CdmQueryElement.h"
 #include "CdmDataAccessHelper.h"
-#include "CdmObjectContainer.h"
 #include "CdmClass.h"
 
 // Own Includes
 #include "CdbQuery.h"
 #include "CdbDataStructureHelper.h"
 #include "CdbDataAccess.h"
-#include "CdbQueryElement.h"
 #include "CdbQueryEnhancedDoubleRequest.h"
 
 #define RESULT_MEMBER_PLACEHOLDER "$RESULT_MEMBERS"
@@ -157,7 +154,6 @@ qint64 CdbQueryEnhancedDoubleRequest::ExecuteQuery(QSqlQuery& cQSqlQuery)
 
         if(cQSqlQuery.first())
         {
-            int iRowCount = 0;
             int iColumnCount = m_rpCdmQuery->GetColumnCount();
             do
             {
@@ -184,8 +180,6 @@ qint64 CdbQueryEnhancedDoubleRequest::ExecuteQuery(QSqlQuery& cQSqlQuery)
                         QVariant qVariant = cQSqlQuery.value(iCounter);
                         CdmDataAccessHelper::SetQueryEnhancedResult(m_rpCdmQuery, iCounter, qVariant, lObjectId, lContainerId);
                     }
-
-                    ++iRowCount;
                 }
             }
             while(cQSqlQuery.next());

@@ -4,6 +4,9 @@
 #include <QVariant>
 #include <QModelIndex>
 
+
+// this handler is able to handle view options over multi columns
+// if you need handling o8f one specific column use IwmsViewProxy
 class IdmHandleDisplayData
 {
 public:

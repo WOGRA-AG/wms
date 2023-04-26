@@ -248,7 +248,7 @@ public:
 private:
 
     CdmLogging();
-    ~CdmLogging(  );
+    ~CdmLogging();
 
     void AddAdaptorP(CdmLoggingAdaptor* p_pCdmErrorAdaptor);
     void RemoveAdaptorP(CdmLoggingAdaptor* p_pCdmErrorAdaptor);

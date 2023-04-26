@@ -8,8 +8,6 @@
 #include "CdmLogging.h"
 
 // own Includes
-#include "CwmsTimeMeassurement.h"
-#include "CdmScheme.h"
 #include "CdmModelElement.h"
 #include "CdmClass.h"
 #include "CdmClassGroup.h"
@@ -236,12 +234,6 @@ int CdmQuery::EvaluateComplexity() const
     return iRet;
 }
 
-/** +-=---------------------------------------------------------Di 20. Nov 10:55:12 2012----------*
- * @method  CdmQuery::Execute                                // public, slots                     *
- * @return  int                                              //                                   *
- * @comment This method call executes the query and fills the result list with correct            *
- *          results.                                                                              *
- *----------------last changed: --------------------------------Di 20. Nov 10:55:12 2012----------*/
 int CdmQuery::Execute()
 {
     int iRet = EC(eDmWqlError);
@@ -272,11 +264,6 @@ void CdmQuery::Clear()
     m_bOrderAsc = true;
 }
 
-/** +-=---------------------------------------------------------Di 20. Nov 10:55:00 2012----------*
- * @method  CdmQuery::Clear                                  // public, slots                     *
- * @return  void                                             //                                   *
- * @comment Clears the child elements of the query.                                               *
- *----------------last changed: --------------------------------Di 20. Nov 10:55:00 2012----------*/
 void CdmQuery::ClearAll()
 {
     ClearResults();
@@ -499,14 +486,6 @@ void CdmQuery::DeleteResultElements()
     m_qvAddedSequence.clear();
 }
 
-
-
-/** +-=---------------------------------------------------------Di 20. Nov 10:59:04 2012----------*
- * @method  CdmQuery::SetQueryElement                        // public                            *
- * @return  void                                             //                                   *
- * @param   CdmQueryElement* p_pCdmQueryElement              // change of ownership!!!!!!!!       *
- * @comment This method sets a query element in the query. The query element will be deleted      *
- *----------------last changed: --------------------------------Di 20. Nov 10:59:04 2012----------*/
 void CdmQuery::SetQueryElement(CdmQueryElement* p_pCdmQueryElement)
 {
     m_pCdmQueryElement = p_pCdmQueryElement;
@@ -613,11 +592,6 @@ QStringList CdmQuery::GetOrderBy() const
     return m_qstrlOrderBy;
 }
 
-/** +-=---------------------------------------------------------So 10. Feb 10:05:04 2013----------*
- * @method  CdmQuery::GetOrderMode                           // public, const, slots              *
- * @return  bool                                             //                                   *
- * @comment returns the order mode true = Asc, false = Desc.                                      *
- *----------------last changed: --------------------------------So 10. Feb 10:05:04 2013----------*/
 bool CdmQuery::GetOrderMode() const
 {
     return m_bOrderAsc;
