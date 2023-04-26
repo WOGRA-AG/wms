@@ -161,7 +161,7 @@ bool CwmsSearchWidgetIf::IsMemberSearchable(CdmMember* p_pCdmMember)
    {
       EdmValueType eDmValueType = p_pCdmMember->GetValueType();
 
-      if (eDmValueType == eDmValueObjectRef        ||
+      if (eDmValueType == eDmValueObjectRef        || // TODO: remove and make search possible
           eDmValueType == eDmValueBinaryDocument   ||
           eDmValueType == eDmValueDictIntDouble    ||
           eDmValueType == eDmValueDictIntInt       ||
@@ -174,8 +174,7 @@ bool CwmsSearchWidgetIf::IsMemberSearchable(CdmMember* p_pCdmMember)
           eDmValueType == eDmValueListInt          ||
           eDmValueType == eDmValueListObjects      ||
           eDmValueType == eDmValueListString       ||
-          eDmValueType == eDmValueContainerRef     ||
-          eDmValueType == eDmValueObjectRef        ||
+          eDmValueType == eDmValueContainerRef     || // TODO: remove and make search possible
           eDmValueType == eDmValueObjectTree)
       {
          bRet = false;
