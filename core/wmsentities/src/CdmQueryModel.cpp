@@ -5,18 +5,13 @@
 
 // Own Includes
 #include "CdmLogging.h"
-#include "CdmDataProvider.h"
-#include "CdmSessionManager.h"
-#include "CdmContainerManager.h"
 #include "CdmQueryEnhanced.h"
 #include "CdmQueryResultObject.h"
 #include "CdmQueryBuilder.h"
 #include "CdmObjectContainer.h"
 #include "CdmClass.h"
-#include "CdmClassGroup.h"
 #include "CdmMember.h"
 #include "CdmObject.h"
-#include "CdmEnhancedQueryProxy.h"
 #include "CdmQueryModel.h"
 
 // defines
@@ -34,7 +29,23 @@ CdmQueryModel::CdmQueryModel()
 
 CdmQueryModel::~CdmQueryModel()
 {
-    DELPTR(m_pCdmQuery)
+    DELPTR(m_pCdmQuery);
+    DELPTR(m_pIdmDisplayHandler);
+    DeleteProxies();
+}
+
+void CdmQueryModel::DeleteProxies()
+{
+    QMapIterator<int,IwmsViewProxy*> qmIt(m_qmViewProxy);
+
+    while (qmIt.hasNext())
+    {
+        qmIt.next();
+        auto pProxy = qmIt.value();
+        DELPTR(pProxy)
+    }
+
+    m_qmViewProxy.clear();
 }
 
 int CdmQueryModel::rowCount() const
@@ -393,11 +404,9 @@ QVariant CdmQueryModel::headerData(int p_iSection, Qt::Orientation p_iOrientatio
         {
             if (p_iOrientation == Qt::Horizontal)
             {
-                QString qstrKeyname = m_pCdmQuery->GetKeynameAt(p_iSection);
-
-                if (m_qmDisplayHeader.contains(qstrKeyname))
+                if (m_qmDisplayHeader.contains(p_iSection))
                 {
-                    qVariant = m_qmDisplayHeader[qstrKeyname];
+                    qVariant = m_qmDisplayHeader[p_iSection];
                 }
                 else
                 {
@@ -412,6 +421,8 @@ QVariant CdmQueryModel::headerData(int p_iSection, Qt::Orientation p_iOrientatio
                             pCdmClass = pContainer->GetClass();
                         }
                     }
+
+                    QString qstrKeyname = m_pCdmQuery->GetKeynameAt(p_iSection);
 
                     if (pCdmClass)
                     {
@@ -441,9 +452,9 @@ QVariant CdmQueryModel::headerData(int p_iSection, Qt::Orientation p_iOrientatio
     return qVariant;
 }
 
-void CdmQueryModel::AddDisplayHeader(QString p_qstrKeyname, QString p_qstrDisplayString)
+void CdmQueryModel::AddDisplayHeader(int p_iColumn, QString p_qstrDisplayString)
 {
-    m_qmDisplayHeader.insert(p_qstrKeyname, p_qstrDisplayString);
+    m_qmDisplayHeader.insert(p_iColumn, p_qstrDisplayString);
 }
 
 void CdmQueryModel::Execute(QString p_qstrQuery)
@@ -454,10 +465,6 @@ void CdmQueryModel::Execute(QString p_qstrQuery)
     {
         pCdmQuery->setParent(this);
         Execute(pCdmQuery);
-    }
-    else
-    {
-        //ERR("No enhanced query. Can not be executed in query model.");
     }
 }
 

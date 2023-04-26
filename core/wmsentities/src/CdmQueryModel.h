@@ -39,7 +39,7 @@ private:
     QTimer m_qtTimer;
     int m_iRowToInsert;
     int m_iRowToRemove;
-    QMap<QString,QString> m_qmDisplayHeader;
+    QMap<int,QString> m_qmDisplayHeader;
     QMap<int, IwmsViewProxy*> m_qmViewProxy;
     IdmHandleDisplayData *m_pIdmDisplayHandler;
 
@@ -92,7 +92,7 @@ public slots:
     void SetProxy(CdmQueryModel *p_pProxy);
     virtual CdmObjectContainer* GetContainer() const;
     virtual void SetContainer(CdmObjectContainer* p_pList);
-    void AddDisplayHeader(QString p_qstrKeyname, QString p_qstrDisplayString);
+    void AddDisplayHeader(int p_iColumn, QString p_qstrDisplayString);
     void Clear();
 
 protected:
@@ -110,6 +110,7 @@ private:
     QModelIndexList getSelection(QAbstractItemView* p_pqItemView, QModelIndex p_Index);
     const CdmMember *FindMemberByKeyname(QString p_qstrKeyname) const;
 
+    void DeleteProxies();
 signals:
     void UpdateSignal();
 };
