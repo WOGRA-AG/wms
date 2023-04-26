@@ -89,7 +89,7 @@ public:
     void HideJournalButton();
     void HideExportButton();
     void HideImportButton();
-    void AddDisplayHeader(QString p_qstrColumn, QString p_qstrHeader);
+    void AddDisplayHeader(int p_qstrColumn, QString p_qstrHeader);
     void HideRefreshButton();
     void HideCopyButton();
     void HideSaveAsCsvButton();

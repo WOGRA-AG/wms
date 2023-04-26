@@ -214,13 +214,13 @@ void CwmsObjectListEditorWidgetIf::AddColumn(QString p_qstrColumn)
     }
 }
 
-void CwmsObjectListEditorWidgetIf::AddDisplayHeader(QString p_qstrColumn, QString p_qstrHeader)
+void CwmsObjectListEditorWidgetIf::AddDisplayHeader(int p_iColumn, QString p_qstrHeader)
 {
     auto pModel = dynamic_cast<CdmQueryModel*>(m_pModel);
 
     if (pModel != nullptr)
     {
-        pModel->AddDisplayHeader(p_qstrColumn, p_qstrHeader);
+        pModel->AddDisplayHeader(p_iColumn, p_qstrHeader);
     }
 }
 
