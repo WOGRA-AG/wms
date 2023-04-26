@@ -5,7 +5,6 @@
 
 
 // own Includes
-#include "CdmObjectContainer.h"
 #include "CdmLogging.h"
 #include "CdmQuery.h"
 #include "CdmQueryElement.h"
@@ -15,7 +14,6 @@
 
 // WMS ODBC Includes
 #include "CdbDataStructureHelper.h"
-#include "CdbObjectAccess.h"
 #include "CdbDataAccess.h"
 #include "CdbQueryEnhancedDefault.h"
 #include "CdbQueryEnhancedDoubleRequest.h"
@@ -140,8 +138,18 @@ qint64 CdbQuery::ExecuteSqlQuery(QMap<qint64,qint64>& p_rqllResults, QString qst
             {
                 do // reading each objectid
                 {
-                    int iObjectId = cQSqlQuery.value(0).toInt();
-                    int iContainerId = cQSqlQuery.value(1).toInt();
+                    int iObjectId = 0;
+                    int iContainerId = 0;
+
+                    if (!m_rpCdmQuery->IsAggregationQuery())
+                    {
+                        iObjectId = cQSqlQuery.value(0).toInt();
+                        iContainerId = cQSqlQuery.value(1).toInt();
+                    }
+                    else
+                    {
+                        iObjectId = cQSqlQuery.value(0).toInt();
+                    }
 
                     if(!p_rqllResults.contains(iObjectId))
                     {
