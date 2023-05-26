@@ -1,60 +1,11 @@
-
-
-== Installation Guide
-
-=== Windows
-
-1. Download the “full standalone windows package” zip file from the Download Area of wms-project.com.
-2. Unzip the file 3.  Run **wmsStartServers.exe** (Ports can be configured in config.properties)
-3.  Now you can * Run “Wms Development Platform.exe” (the WMS IDE) or
-  * Run “Wms Runtime” (the Start-Application of your Apps) or * Open
-“Open WebWms in Browser.exe” (the Web-Application of your Apps) 5.
-Login with login = “admin” and password = “admin”
-
-=== Mac OS
-
-Running WMS from Qt Creator:
-
-1.  Open project in Qt Creator
-2.  Go to **Projects** > **Build Settings** tab. Deselect **Shadow build** option
-3.  Build project
-4.  Go to **Projects** > **Run Settings** tab. Set path to wms libraries by adding new a **run environment** variable:
-**DYLD_LIBRARY_PATH** = /path/to/bin/mac/release
-5.  Copy **dataaccess** folder from /path/to/bin/mac/release to
-/path/to/bin/mac/release/wmsapp.app/Contents/MacOS (only has to be
-done once)
-6.  Run project
-
-Deploying WMS for Mac:
-
-1. Extend Terminal **PATH** variable with path to **macdeployqt** (e.g.. path/to/Qt/5.4/clang_64/bin)
-2. Copy all dylibs directly (no subfolders) from path/to/release to /usr/lib
-3. It's recommended to do the next steps on a copy of the release folder
-4. In Terminal run **macdeployqt wmsapp.app -qmldir=/path/to/wms/wmstools/wmsqml/src** (inside the release folder copy)
-    a.  If no error occurs: App should be working
-    b.  If error “ERROR: no file at path/to/lib” occurs
-        *   Add required libraries to given paths
-        *   Create new copy of release folder > repeat step 4.
-5.  Qt has copied and linked libraries to wmsapp.app. For further information on mac deployment see http://doc.qt.io/qt-5/osx-deployment.html[Qt OS X deployment documentation].
-
-=== Linux
-
-Unzip the download file and copy the created directory on the place
-you want it. change the rights for the executables with chmod 755.
-
-We compiled the files files with SuSE Linux. All dependencies will be
-displayed here in the future. If you have trouble with the
-executables, download the source code and compile it by yourself.
-
 === Compiling WMS
 
 Requirements:
 
-* Qt Library 5.7 or higher
+* Qt Library 5.15.2 or higher
 * GCC (Linux, Unix)
 * MinGW or VisualStudio 2012 or higher (Windows)
 * XCode, Clang (MacOS)
-* LDAP libraries
 
 ==== Compiling with Qt-Creator
 
@@ -83,52 +34,6 @@ file the database scheme must be created in the file. WMS will check this and af
 ==== RDB Plugin
 
 After starting the WMS Development Platform the login dialog appears. When the login dialog is open click on the “client settings” button on the left side at the bottom of the login dialog. It opens a new dialog in which you can define the dataaccess plugin you want to use. Add a new DataAccess configuration with the "New" Button. It opens the configuration dialog. Here you can set the name of your configuration and select you plugin. Select here the "Relational Database Access" plugin. Below the selection you can configure your dataaccess to the relational database. Make sure that in the WMS root directory (where the WMS App are) the driver of the database is copied (for mysql or maria db it is libmysql). In the WMS directory you will find the sql script for MySQL or Maria DB to create the database structure. open your db editor and execute it. If you need a sqls cript for other databases please contact us, we can provide you with MSSQL, PostgreSQL and Oracle scripts. After executing the script on DB you can login to WMS with user and password "admin".
-
-==== Webbrowser Rich Client
-
-===== Requirements:
-
-http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html[Java JDK 1.8]  
-
-http://www.eclipse.org/downloads/[Eclipse]  
-
-http://eclipse.org/m2e/[Maven Plugin] if not pre-installed with Eclipse  
-
-http://wordpress.wms-project.com/?ddownload=377[Source Code]  
-
-WMS-Server installed and running
-
-After setting up the development environment import the projects in Eclipse with Maven Import.
-
-image::images/maven_import.png[]
-
-
-Afterwards you can run the Maven install command on the projects in the given order.
-
-image::images/maven_install.png[]
-
-
-[source,java]
-----
- 1. wms.frontend.json2emf         
- 2. wms.gui_elements.frontend.vaadin
- 3. wms.webwms.vaadin7
- 4. wms.server.frontend.vaadin
-----
-
-Now you can run the project “wms.webwms.vaadin7” with the Maven Run Command witch execution is similar to Maven install.  If you were confronted with some build failures during the “Run” process, maybe you want to skip the “J-Unit Tests” in your first attempt. For this purpose you have to configure your Maven Run Command, witch is described here:
-
-image::images/maven_run.png[]
-
-After both, the Client-Server and the WMS Background-Server, are successfully running, you are able to access the webclient with your favorite Browser on port:8080 with the login Information (username:“admin”, password:”admin”).
-
-image::images/wms_login.png[]
-
-=== WMS Server Installation
-
-The WMS Server is a HTTP Rest Server and gives your clients access over the internet or the local network without connecting direct to the database.
-
-include::wms_server.adoc[]
 
 === Known Issues while installing or running WMS the first time
 
