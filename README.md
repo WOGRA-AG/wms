@@ -1,4 +1,4 @@
-# wms WOGRA Modelling System
+# WMS WOGRA Modelling System
 
 ## Mission of WMS
 
