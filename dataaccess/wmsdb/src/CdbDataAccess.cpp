@@ -1,12 +1,3 @@
-/******************************************************************************
- ** WOGRA Middleware Server Data Manager Module
- **
- ** @Author Wolfgang Gra�hof
- **
- ** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
- ** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
- **(C) copyright by WOGRA technologies All rights reserved
- ******************************************************************************/
 
 // System and QT Includes
 #include <qsqldatabase.h>
@@ -32,13 +23,11 @@
 #include "CumUserGroup.h"
 #include "CumUser.h"
 #include "CdmObject.h"
-#include "CdmMessageManager.h"
 #include "CdmLogging.h"
 #include "CdmDataProvider.h"
 #include "CdmContainerManager.h"
 #include "CdmModelElement.h"
 #include "CdmDataProvider.h"
-#include "CdmSettings.h"
 #include "CdmJournalItem.h"
 #include "CdmValue.h"
 #include "CdmSessionManager.h"
@@ -52,7 +41,7 @@
 
 #define KEEP_ALIVE_INTERVALL_MINUTES 5
 
-CdbDataAccess::CdbDataAccess(  )
+CdbDataAccess::CdbDataAccess()
     : QObject(nullptr),
       m_pCdbUserManager(nullptr),
       m_pCdbLoginManager(nullptr),
@@ -68,7 +57,7 @@ CdbDataAccess::CdbDataAccess(  )
 {
 }
 
-CdbDataAccess::~CdbDataAccess(  )
+CdbDataAccess::~CdbDataAccess()
 {
     DELPTR(m_pCdbDbAccess);
     DELPTR(m_pCdbUserManager);
@@ -373,7 +362,7 @@ int CdbDataAccess::LoadEmptyObjectContainer(qint64 p_lDataBaseId,
 
     if(CHKPTR(m_pCdbObjectAccess))
     {
-        lRet = m_pCdbObjectAccess->LoadEmptyObjectList(p_lDataBaseId, p_qstrKeyname, p_pContainer);
+        lRet = m_pCdbObjectAccess->LoadEmptyContainer(p_lDataBaseId, p_qstrKeyname, p_pContainer);
     }
     else
     {
@@ -394,7 +383,7 @@ int CdbDataAccess::LoadEmptyObjectContainer(qint64 p_lDataBaseId,
 
     if(CHKPTR(m_pCdbObjectAccess))
     {
-        lRet = m_pCdbObjectAccess->LoadEmptyObjectList(p_lDataBaseId, p_lId, p_pContainer);
+        lRet = m_pCdbObjectAccess->LoadEmptyContainer(p_lDataBaseId, p_lId, p_pContainer);
     }
     else
     {
@@ -414,7 +403,7 @@ qint64 CdbDataAccess::GetNewContainerId(qint64 p_lClassId)
 
     if(CHKPTR(m_pCdbObjectAccess))
     {
-        lRet = m_pCdbObjectAccess->GetNewObjectListId(p_lClassId, CdmSessionManager::GetSessionManager()->GetCurrentSessionId());
+        lRet = m_pCdbObjectAccess->GetNewContainerId(p_lClassId, CdmSessionManager::GetSessionManager()->GetCurrentSessionId());
     }
     else
     {
@@ -490,7 +479,7 @@ int CdbDataAccess::UpdateObjectContainer(CdmObjectContainer*& p_pContainer)
 
     if(CHKPTR(m_pCdbObjectAccess))
     {
-        lRet = m_pCdbObjectAccess->UpdateObjectList(p_pContainer, CdmSessionManager::GetSessionManager()->GetCurrentSessionId());
+        lRet = m_pCdbObjectAccess->UpdateContainer(p_pContainer, CdmSessionManager::GetSessionManager()->GetCurrentSessionId());
     }
     else
     {
@@ -886,7 +875,7 @@ int CdbDataAccess::GetContainerList(qint64 p_lDbId,
 
     if (CHKPTR(m_pCdbObjectAccess))
     {
-        lRet = m_pCdbObjectAccess->GetObjectListsList(p_lDbId, p_lClassId, p_rqmObjectListsLList);
+        lRet = m_pCdbObjectAccess->GetContainerList(p_lDbId, p_lClassId, p_rqmObjectListsLList);
     }
     else
     {
@@ -962,7 +951,7 @@ int CdbDataAccess::ExistObjectContainer(qint64 p_lDbId, QString p_qstrObjectList
 
     if(CHKPTR(m_pCdbObjectAccess))
     {
-        lRet = m_pCdbObjectAccess->ExistObjectList(p_lDbId, p_qstrObjectListKeyname);
+        lRet = m_pCdbObjectAccess->ExistContainer(p_lDbId, p_qstrObjectListKeyname);
     }
     else
     {
@@ -1234,7 +1223,7 @@ qint64 CdbDataAccess::GetSchemeList(QList<QString>& p_qvlDatabases)
 
     if(CHKPTR(m_pCdbDbAccess))
     {
-        m_pCdbDbAccess->GetDatabaseList(p_qvlDatabases);
+        m_pCdbDbAccess->GetSchemeList(p_qvlDatabases);
     }
     else
     {
@@ -1253,7 +1242,7 @@ qint64 CdbDataAccess::UpdateScheme(CdmScheme* p_pCdmDatabase)
 
     if(CHKPTR(m_pCdbDbAccess) && CHKPTR(p_pCdmDatabase))
     {
-        lRet = m_pCdbDbAccess->UpdateDatabase(p_pCdmDatabase);
+        lRet = m_pCdbDbAccess->UpdateScheme(p_pCdmDatabase);
     }
     else
     {
@@ -1387,7 +1376,7 @@ qint64 CdbDataAccess::RefreshObjectContainer(CdmObjectContainer* p_pCdmObject)
 
     if(CHKPTR(m_pCdbObjectAccess))
     {
-        lRet = m_pCdbObjectAccess->RefreshObjectList(p_pCdmObject);
+        lRet = m_pCdbObjectAccess->RefreshContainer(p_pCdmObject);
     }
 
     INFO("RefreshObjectList Call finished");
