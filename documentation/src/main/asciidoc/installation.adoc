@@ -2,7 +2,7 @@
 
 Requirements:
 
-* Qt Library 5.15.2 or higher
+* Qt Library 5.15.2 or higher (no Qt6 support at the moment)
 * GCC (Linux, Unix)
 * MinGW or VisualStudio 2012 or higher (Windows)
 * XCode, Clang (MacOS)
