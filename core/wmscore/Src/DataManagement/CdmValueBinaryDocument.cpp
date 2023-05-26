@@ -380,10 +380,10 @@ void CdmValueBinaryDocument::SetVariant(QVariantMap& p_rqvHash)
 QVariant CdmValueBinaryDocument::GetValueVariant() const
 {
    QVariantMap pMap;
-   pMap.insert("Filename", GetFilename());
-   pMap.insert("Filetype", GetFileType());
+   pMap.insert(WMS_FILENAME, GetFilename());
+   pMap.insert(WMS_FILETYPE, GetFileType());
    //The value is not returned
-   pMap.insert("Value", "-1");
+   pMap.insert(WMS_VALUE, "-1");
    return pMap;
 }
 
