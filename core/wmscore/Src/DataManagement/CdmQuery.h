@@ -92,6 +92,8 @@ protected:
     int m_iResultStart;
     int m_iMaxResults;
 
+    int m_iExecutionMode;
+
     /*
      *  Members for grouping
      */
@@ -188,6 +190,9 @@ public:
     bool IsAggregationQuery() const;
 
     void ResetOrderBy();
+    bool IsSimpleCountQUery() const;
+    void SetExecutionMode(int p_iMode);
+    int GetExecutionMode();
 public slots:
     int Execute();
     void Clear();

@@ -1,16 +1,3 @@
-/******************************************************************************
- ** WOGRA technologies GmbH & Co. KG Modul Information
- ** Modulename: CwmsQueryEditor.cpp
- ** Started Implementation: 2012/07/26
- ** Description:
- **
- ** Implements the ui of the queryeditor
- **
- ** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
- ** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
- **(C) copyright by WOGRA technologies GmbH & Co. KG All rights reserved
- *****************************************************************************/
-
 // System and QT Includes
 #include <QFile>
 #include <QMenu>
@@ -30,7 +17,6 @@
 #include "CdmLogging.h"
 #include "CdmObjectContainer.h"
 #include "CdmClass.h"
-#include "CdmQueryBuilder.h"
 #include "CdmQueryElement.h"
 #include "CdmQueryEnhanced.h"
 #include "CdmObject.h"
@@ -42,8 +28,6 @@
 // own Includes
 #include <CwmsQueryModelExportCsv.h>
 #include "CwmsguiObjectEditorSelector.h"
-#include "CwmsTreeWidgetHelper.h"
-#include "jshighlighter.h"
 #include "CwmsView.h"
 #include "CwmsViewEditor.h"
 #include "CwmsQueryEditor.h"
@@ -63,6 +47,11 @@ CwmsQueryEditor::CwmsQueryEditor(QWidget* p_pqwParent)
     QStringList qstrlSystemVariables = CdmSystemVariables::GetSystemVariables();
     m_pqcbSystemVariables->addItems(qstrlSystemVariables);
     m_pqteEditor->clear();
+
+    m_pqcbExecutionMode->addItem("Standard", -1);
+    m_pqcbExecutionMode->addItem("Einzelner DB Aufruf", 0);
+    m_pqcbExecutionMode->addItem("Mehrere DB Aufrufe", 1);
+
 }
 
 CwmsQueryEditor::~CwmsQueryEditor()
@@ -80,6 +69,7 @@ void CwmsQueryEditor::ExecuteClickedSlot()
     qstrQuery = qstrQuery.replace("\n", " ");
     CwmsErrorCollector cErrorCollector;
     CdmLogging::AddAdaptor(&cErrorCollector);
+    m_cCdmModel.SetExecutionMode(m_pqcbExecutionMode->currentData().toInt());
 
     if (m_pqsbMaxResults->isEnabled() && m_pqsbMaxResults->value() > 0)
     {

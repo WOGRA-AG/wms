@@ -44,7 +44,6 @@
       <font>
        <family>MS Shell Dlg 2</family>
        <pointsize>15</pointsize>
-       <weight>50</weight>
        <italic>false</italic>
        <bold>false</bold>
        <underline>false</underline>
@@ -104,11 +103,68 @@ p, li { white-space: pre-wrap; }
          </property>
         </widget>
        </item>
-       <item row="1" column="3">
-        <widget class="QComboBox" name="m_pqcbSystemVariables"/>
+       <item row="1" column="1">
+        <widget class="QPushButton" name="m_pqpbClearEditor">
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset resource="wmsgui.qrc">
+           <normaloff>:/icons/delete24.png</normaloff>:/icons/delete24.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>24</width>
+           <height>24</height>
+          </size>
+         </property>
+        </widget>
        </item>
-       <item row="0" column="0" colspan="7">
-        <widget class="JSEdit" name="m_pqteEditor"/>
+       <item row="1" column="2">
+        <widget class="QPushButton" name="m_pqpbSaveWql">
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset resource="wmsgui.qrc">
+           <normaloff>:/icons/save24.png</normaloff>:/icons/save24.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>24</width>
+           <height>24</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="8">
+        <spacer name="horizontalSpacer">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="1" column="5">
+        <widget class="QSpinBox" name="m_pqsbMaxResults">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="maximum">
+          <number>50000</number>
+         </property>
+         <property name="singleStep">
+          <number>1000</number>
+         </property>
+         <property name="value">
+          <number>5000</number>
+         </property>
+        </widget>
        </item>
        <item row="1" column="0">
         <widget class="QPushButton" name="m_pqpbExecute">
@@ -133,66 +189,19 @@ p, li { white-space: pre-wrap; }
          </property>
         </widget>
        </item>
-       <item row="1" column="2">
-        <widget class="QPushButton" name="m_pqpbSaveWql">
-         <property name="text">
-          <string/>
-         </property>
-         <property name="icon">
-          <iconset resource="wmsgui.qrc">
-           <normaloff>:/icons/save24.png</normaloff>:/icons/save24.png</iconset>
-         </property>
-         <property name="iconSize">
-          <size>
-           <width>24</width>
-           <height>24</height>
-          </size>
-         </property>
-        </widget>
+       <item row="1" column="3">
+        <widget class="QComboBox" name="m_pqcbSystemVariables"/>
+       </item>
+       <item row="1" column="7">
+        <widget class="QComboBox" name="m_pqcbExecutionMode"/>
+       </item>
+       <item row="0" column="0" colspan="9">
+        <widget class="JSEdit" name="m_pqteEditor"/>
        </item>
        <item row="1" column="6">
-        <spacer name="horizontalSpacer">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>40</width>
-           <height>20</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item row="1" column="1">
-        <widget class="QPushButton" name="m_pqpbClearEditor">
+        <widget class="QLabel" name="label_4">
          <property name="text">
-          <string/>
-         </property>
-         <property name="icon">
-          <iconset resource="wmsgui.qrc">
-           <normaloff>:/icons/delete24.png</normaloff>:/icons/delete24.png</iconset>
-         </property>
-         <property name="iconSize">
-          <size>
-           <width>24</width>
-           <height>24</height>
-          </size>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="5">
-        <widget class="QSpinBox" name="m_pqsbMaxResults">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
-         <property name="maximum">
-          <number>50000</number>
-         </property>
-         <property name="singleStep">
-          <number>1000</number>
-         </property>
-         <property name="value">
-          <number>5000</number>
+          <string>Ausführungsmodus</string>
          </property>
         </widget>
        </item>

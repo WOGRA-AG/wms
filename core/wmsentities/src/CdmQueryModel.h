@@ -42,6 +42,7 @@ private:
     QMap<int,QString> m_qmDisplayHeader;
     QMap<int, IwmsViewProxy*> m_qmViewProxy;
     IdmHandleDisplayData *m_pIdmDisplayHandler;
+    int m_iExecutionMode;
 
 protected:
     CdmQuery* m_pCdmQuery;
@@ -73,6 +74,7 @@ public:
     virtual QVariant data(int p_iRow, QString p_qstrColumnName, int p_iRole = Qt::DisplayRole) const;
     virtual QVariant data(int p_iRow, int p_iColumn, int p_iRole = Qt::DisplayRole) const;
     virtual QHash<int, QByteArray> roleNames() const;
+    void SetExecutionMode(int p_iMode);
 
 public slots:
     CdmObject* GetObject(QAbstractItemView* p_pqItemView);

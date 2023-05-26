@@ -38,6 +38,7 @@ CdmQuery::CdmQuery(QObject* parent)
   m_lClassId(0),
   m_iResultStart(0),
   m_iMaxResults(0),
+  m_iExecutionMode(-1),
   m_qlGroupBy(),
   m_qstrlOrderBy(),
   m_bOrderAsc(true),
@@ -73,10 +74,22 @@ CdmQuery::CdmQuery(const CdmQuery &p_rQuery, QObject* parent)
    SetVariant(qvHash);
 }
 
-CdmQuery::~CdmQuery(  )
+CdmQuery::~CdmQuery()
 {
     ClearAll();
     DELPTR(m_pRoot)
+}
+
+// support depends on DBAccess implementation
+// the DB Access to read the execution mode
+void CdmQuery::SetExecutionMode(int p_iMode)
+{
+    m_iExecutionMode = p_iMode;
+}
+
+int CdmQuery::GetExecutionMode()
+{
+    return m_iExecutionMode;
 }
 
 void CdmQuery::SetVariant(QVariantMap &p_rqvHash)
@@ -470,6 +483,11 @@ CdmQueryResultElement* CdmQuery::GetResultElement(QString &p_qstrKeyname) const
 QVector<QString> CdmQuery::GetResultElements() const
 {
     return m_qvAddedSequence;
+}
+
+bool CdmQuery::IsSimpleCountQUery() const
+{
+    return (m_qvAddedSequence.count() == 1 && m_qvAddedSequence[0].toLower() == "count");
 }
 
 void CdmQuery::DeleteResultElements()

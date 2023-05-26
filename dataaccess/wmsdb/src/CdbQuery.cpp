@@ -24,9 +24,8 @@
 CdbQuery::CdbQuery(CdbDataAccess* p_pCdbDataAccess, CdmQuery* p_pCdmQuery)
     : m_rpCdbDataAccess(p_pCdbDataAccess),
       m_rpCdmQuery(p_pCdmQuery),
-      m_eExecutionMode(eDbQueryEnhancedExecutionModeDoubleRequest)
+      m_eDbQueryEnhancedExecutionMode(eDbQueryEnhancedExecutionModeDoubleRequest)
 {
-
 }
 
 
@@ -35,6 +34,24 @@ CdbQuery::~CdbQuery()
     // nothing to do at the moment :-)
 }
 
+void CdbQuery::SetExecutionMode(int p_eMode)
+{
+    if (IsExecutionModeValid(p_eMode))
+    {
+        m_eDbQueryEnhancedExecutionMode = static_cast<EdbQueryEnhanceExecutionMode> (p_eMode);
+    }
+    else
+    {
+        INFO("Invalid ExecutionMode requested. Using default mode.");
+    }
+}
+
+bool CdbQuery::IsExecutionModeValid(int p_eMode)
+{
+    return (p_eMode >= 0 && p_eMode < eDbQueryEnhancedExecutionModeInvalid);
+}
+
+
 qint64 CdbQuery::ExecuteEnhanced()
 {
    qint64 lRet = CdmLogging::eDmUnknownDBQueryError;
@@ -42,13 +59,15 @@ qint64 CdbQuery::ExecuteEnhanced()
     if(CHKPTR(m_rpCdbDataAccess) &&
             CHKPTR(m_rpCdmQuery))
     {
-        if (m_eExecutionMode == eDbQueryEnhancedExecutionModeDefault)
+        SetExecutionMode(m_rpCdmQuery->GetExecutionMode());
+
+        if (m_eDbQueryEnhancedExecutionMode == eDbQueryEnhancedExecutionModeSingleRequest)
         {
             m_rpCdmQuery->AddDatabaseCommand("Mode: eDbQueryEnhancedExecutionModeDefault");
             CdbQueryEnhancedDefault cCdbQuery((CdmQueryEnhanced*)m_rpCdmQuery, m_rpCdbDataAccess);
             lRet = cCdbQuery.Execute();
         }
-        else if (m_eExecutionMode == eDbQueryEnhancedExecutionModeDoubleRequest)
+        else if (m_eDbQueryEnhancedExecutionMode == eDbQueryEnhancedExecutionModeDoubleRequest)
         {
             m_rpCdmQuery->AddDatabaseCommand("Mode: eDbQueryEnhancedExecutionModeDoubleRequest");
             CdbQueryEnhancedDoubleRequest cCdbQuery((CdmQueryEnhanced*)m_rpCdmQuery, m_rpCdbDataAccess);
@@ -67,7 +86,7 @@ bool CdbQuery::IsEnhancedQuery()
     {
         QVector<QString> qvElements = m_rpCdmQuery->GetResultElements();
 
-        if (qvElements.count() > 1 || qvElements[0].toLower() != "count")
+        if (qvElements.count() > 1 || !m_rpCdmQuery->IsSimpleCountQUery())
         {
             bRet = true;
         }
@@ -141,7 +160,7 @@ qint64 CdbQuery::ExecuteSqlQuery(QMap<qint64,qint64>& p_rqllResults, QString qst
                     int iObjectId = 0;
                     int iContainerId = 0;
 
-                    if (!m_rpCdmQuery->IsAggregationQuery())
+                    if (!m_rpCdmQuery->IsSimpleCountQUery())
                     {
                         iObjectId = cQSqlQuery.value(0).toInt();
                         iContainerId = cQSqlQuery.value(1).toInt();
@@ -163,21 +182,6 @@ qint64 CdbQuery::ExecuteSqlQuery(QMap<qint64,qint64>& p_rqllResults, QString qst
     else
     {
         lRet = 2;
-    }
-
-    return lRet;
-}
-
-qint64 CdbQuery::ExecuteObjectListQuery(QMap<qint64,qint64>& p_rqllResults)
-{
-   qint64 lRet = CdmLogging::eDmUnknownDBQueryError;
-   qint64 lObjectListId = m_rpCdmQuery->GetContainerId();
-   qint64 lClassId = m_rpCdmQuery->GetClassId();
-
-    if (lObjectListId > 0 || lClassId > 0)
-    {
-        QString qstrSql = GenerateSql();
-        lRet = ExecuteSqlQuery(p_rqllResults, qstrSql);
     }
 
     return lRet;
@@ -207,8 +211,6 @@ QString CdbQuery::GenerateSql()
 QString CdbQuery::GenerateQuerySql()
 {
     QString qstrRet;
-
-
 
     if(CHKPTR(m_rpCdbDataAccess) &&
             CHKPTR(m_rpCdmQuery))

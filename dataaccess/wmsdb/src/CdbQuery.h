@@ -17,8 +17,9 @@ class CdmQueryElement;
 
 enum EdbQueryEnhanceExecutionMode
 {
-    eDbQueryEnhancedExecutionModeDefault,
-    eDbQueryEnhancedExecutionModeDoubleRequest
+    eDbQueryEnhancedExecutionModeSingleRequest,
+    eDbQueryEnhancedExecutionModeDoubleRequest,
+    eDbQueryEnhancedExecutionModeInvalid
 };
 
 /*
@@ -30,7 +31,7 @@ private:
 
     CdbDataAccess* m_rpCdbDataAccess;
     CdmQuery*        m_rpCdmQuery;
-    EdbQueryEnhanceExecutionMode m_eExecutionMode;
+    EdbQueryEnhanceExecutionMode m_eDbQueryEnhancedExecutionMode;
 
 
 
@@ -46,6 +47,7 @@ public:
     virtual QString GenerateSql();
     qint64 Execute();
 
+    void SetExecutionMode(int p_eMode);
 private:
     void SortResults(QString& p_qstrQuery);
     QString CreateStringFromResultList(QMap<qint64,qint64>& p_rqvlResults);
@@ -55,11 +57,11 @@ private:
                                  int& p_iMemberId,
                                  int& p_iObjectRefClassId);
     qint64 ExecuteEnhanced();
-    qint64 ExecuteObjectListQuery(QMap<qint64,qint64>& p_rqllResults);
     bool IsQueryElementValid(CdmQueryElement *p_pElement);
     qint64 ExecuteSqlQuery(QMap<qint64,qint64>& p_rqllResults, QString qstrSql);
 
     bool IsEnhancedQuery();
+    bool IsExecutionModeValid(int p_eMode);
 };
 
 #endif //

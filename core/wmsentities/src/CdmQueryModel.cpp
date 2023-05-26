@@ -22,6 +22,7 @@ CdmQueryModel::CdmQueryModel()
       m_iRowToInsert(0),
       m_iRowToRemove(0),
       m_pIdmDisplayHandler(nullptr),
+      m_iExecutionMode(-1),
       m_pCdmQuery(nullptr)
 {
     m_pCdmQuery = new CdmQueryEnhanced(this);
@@ -58,6 +59,11 @@ int CdmQueryModel::rowCount() const
     }
 
     return iRet;
+}
+
+void CdmQueryModel::SetExecutionMode(int p_iMode)
+{
+    m_iExecutionMode = p_iMode;
 }
 
 int CdmQueryModel::rowCount(const QModelIndex & p_rParent) const
@@ -517,6 +523,7 @@ void CdmQueryModel::Execute()
             SetContainer(m_pCdmQuery->GetContainer());
         }
 
+        m_pCdmQuery->SetExecutionMode(m_iExecutionMode);
         m_pCdmQuery->Execute();
         endResetModel();
     }
