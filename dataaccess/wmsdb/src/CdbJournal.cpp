@@ -43,8 +43,10 @@ qint64 CdbJournal::ValueModified(CdmValue* p_pCdmValue)
   qint64 lRet = CdmLogging::eDmObjectAccessError;
 
    BODY_TRY
-   if (CHKPTR(p_pCdmValue) && (p_pCdmValue->GetValueType() != eDmValueBinaryDocument))
+   if (CHKPTR(p_pCdmValue))
    {
+
+
       QSqlQuery cQSqlQuery(m_rpCdbDataAccess->GetDbInterface()->GetSqlDatabase());
 
       cQSqlQuery.prepare("insert into WMS_JOURNAL (UserId, SessionId, DatabaseId, DateTime, ChangeMode, ObjectListId, ObjectId, `Member`, DisplayValue, Json_Changes) values"
@@ -62,10 +64,7 @@ qint64 CdbJournal::ValueModified(CdmValue* p_pCdmValue)
 
       lRet = m_rpCdbDataAccess->ExecuteQuery(cQSqlQuery);
    }
-   else if (CHKPTR(p_pCdmValue) && (p_pCdmValue->GetValueType() == eDmValueBinaryDocument))
-   {
-      lRet = CdmLogging::eDmOk;
-   }
+
    BODY_CATCH
 
    return lRet;
