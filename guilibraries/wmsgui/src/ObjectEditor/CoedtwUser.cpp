@@ -162,7 +162,8 @@ void CoedtwUser::ClearClickedSlot()
    }
 }
 
-void CoedtwUser::openNewWindow(){
+void CoedtwUser::openNewWindow()
+{
     m_lCurrentUserId = CwmsUserChoiceIf::GetUserSelection(nullptr);
 
     if (m_lCurrentUserId > 0)
