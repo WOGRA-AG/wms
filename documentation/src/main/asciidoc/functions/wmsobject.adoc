@@ -5,7 +5,7 @@ The WmsObject are created objects. WMS injects the Member properties of the obje
 *Baseclasses* WmsModelElement
 
 [source, java]
-----
+---- 
 WmsValue findValue(String keyname)
 ----
 
@@ -160,97 +160,192 @@ WMSValue findValue(String p_qstrKeyname);
 ----
 WmsClass getClass();
 ----
-
+[source, java]
+----
 Value getValuePrimitive(QString p_qstrKeyname);
-
+----
+[source, java]
+----
 WmsValueObjectRef getValueReference(QString p_qstrKeyname);
-
+----
+[source, java]
+----
 DateTime getValueDateTime(QString p_qstrKeyname) const;
-
+----
+[source, java]
+----
 DateTime getValueDate(QString p_qstrKeyname) const;
-
+----
+[source, java]
+----
 DateTime getValueTime(QString p_qstrKeyname) const;
-
+----
+[source, java]
+----
 String getValueString(QString p_qstrKeyname) const;
-
+----
+[source, java]
+----
 WmsObjectContainer getContainer();
-
+----
+[source, java]
+----
 WmsUser getValueUser(QString p_qstrKeyname);
-
+----
+[source, java]
+----
 Double getValueDouble(QString p_qstrKeyname) const;
-
+----
+[source, java]
+----
 Long getValueLong(QString p_qstrKeyname) const;
-
+----
+[source, java]
+----
 Int getValueInt(QString p_qstrKeyname) const;
-
+----
+[source, java]
+----
 Bool getValueBool(QString p_qstrKeyname) const;
-
+----
+[source, java]
+----
 Float getValueFloat(QString p_qstrKeyname) const;
-
+----
+[source, java]
+----
 String getJson();
-
+----
+[source, java]
+----
 Value execute(QString p_qstrMethod, Value p_qArg1 = null, Value p_qArg2 = null, Value p_qArg3 = null, Value p_qArg4 = null, Value p_qArg5 = null, Value p_qArg6 = null, Value p_qArg7 = null, Value p_qArg8 = null, Value p_qArg9 = null, Value p_qArg10 = null, Value p_qArg11 = null, Value p_qArg12 = null, Value p_qArg13 = null, Value p_qArg14 = null, Value p_qArg15 = null);
-
+----
+[source, java]
+----
 Value execute(QString p_qstrFunctionName, QJSValue p_qlArguments);
-
+----
+[source, java]
+----
 String getValueDisplayString(QString p_qstrKeyname);
-
+----
+[source, java]
+----
 Bool hasOwner();
-
+----
+[source, java]
+----
 Bool hasOwner(QString qstrObjectKeyname);        
-
+----
+[source, java]
+----
 WmsObject getOwner();
-
+----
+[source, java]
+----
 WmsObject getOwner(QString qstrObjectKeyname);
-
+----
+[source, java]
+----
 Bool isImmutable();
-
+----
+[source, java]
+----
 JSON getObjectGraphVariant(bool p_bFollowNonOwnerObjectlist, bool p_bFollowNonOwnerObject, QStringList p_qstrExcludedKeynames, int p_iMaxDepth, int p_iMaxObjects);
-
+----
+[source, java]
+----
 Bool hasCurrentUserWriteAccess();
-
+----
+[source, java]
+----
 Bool hasCurrentUserReadAccess();
-
- void setValuePrimitive(String p_qstrKeyname, Value p_Value);
-
+----
+[source, java]
+----
+void setValuePrimitive(String p_qstrKeyname, Value p_Value);
+----
+[source, java]
+----
 void setValueReference(String p_qstrKeyname, WmsObject p_pRef);
-        
+----
+[source, java]
+----
 Int commit();
-
+----
+[source, java]
+----
 void refreshObject();
-
+----
+[source, java]
+----
 void setValueUser(QString p_qstrKeyname, WmsUser p_pRef);
-
+----
+[source, java]
+----
 void setValueString(String p_qstrKeyname, String p_qstrValue);
-
+----
+[source, java]
+----
 void setValueDate(QString p_qstrKeyname, QDate p_qdDate);
-
+----
+[source, java]
+----
 void setValueDateTime(QString p_qstrKeyname, QDateTime p_qdtDateTime);
-
+----
+[source, java]
+----
 void setValueTime(QString p_qqstrkeyname, QTime p_qtTime);
-
+----
+[source, java]
+----
 void setValueFloat(QString p_qstrKeyname, float p_fValue);
-
+----
+[source, java]
+----
 void setValueDouble(QString p_qstrKeyname, double p_dValue);
-
+----
+[source, java]
+----
 void setValueInt(QString p_qstrKeyname, int p_iValue);
-
+----
+[source, java]
+----
 void setValueLong(QString p_qstrKeyname,qint64 p_lValue);
+----
+[source, java]
+----
 
 void setValueBool(QString p_qstrKeyname, bool p_bValue);
-
+----
+[source, java]
+----
 void addValueListObjectItem(QString p_qstrKeyname, QObject* p_qObject);
-
+----
+[source, java]
+----
 void removeValueListObjectItem(QString p_qstrKeyname, QObject* p_qObject);
-
+----
+[source, java]
+----
 void setValueBinaryDocument(QString p_qstrKeyname, QString p_qstrFilename, QString p_qstrFiletype, QString p_qstrBase64);
-
+----
+[source, java]
+----
 void setDeleted();
-
+----
+[source, java]
+----
 Bool isDeleted();
-
+----
+[source, java]
+----
 Bool isModified();
-
+----
+[source, java]
+----
 void setImmutable(bool p_bImmutable);
-
+----
+[source, java]
+----
 void deleteObjectOnDb();
+----
