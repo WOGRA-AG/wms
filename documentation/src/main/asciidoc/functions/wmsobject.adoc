@@ -166,7 +166,7 @@ Value getValuePrimitive(QString p_qstrKeyname);
 ----
 [source, java]
 ----
-WmsValueObjectRef getValueReference(QString p_qstrKeyname);
+WmsObject getValueReference(QString p_qstrKeyname);
 ----
 [source, java]
 ----
