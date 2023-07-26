@@ -1,7 +1,6 @@
 // WMS Includes
 #include "wmsdefines.h"
 #include "CdmMessageManager.h"
-#include "CdmDataProvider.h"
 #include "CdmSessionManager.h"
 #include "CdmLogging.h"
 
@@ -34,7 +33,7 @@ CwmsGuiLoginIf::CwmsGuiLoginIf(QString p_qstrAppliactionName, QWidget* p_pqwPare
 
     p_qstrAppliactionName = p_qstrAppliactionName.replace(QStringLiteral("_"), QStringLiteral(" "));
     m_pqlApplicationInfo->setText(p_qstrAppliactionName);
-    setWindowTitle(p_qstrAppliactionName + " Anmeldung");
+    setWindowTitle(p_qstrAppliactionName + " Login");
 
     if (m_pqchbStoreLogin->isChecked())
     {
@@ -108,7 +107,7 @@ bool CwmsGuiLoginIf::Login(QString p_qstrApplicationName,
             {
                 if (iTrials > iMaxTrials)
                 {
-                    MSG_INFO(("Login fehlgeschlagen"), ("Login fehlgeschlagen. Zu viele Fehlversuche die Anwendung wird beendet."));
+                    MSG_INFO(("Login failed"), ("Login failed. Too many trials. Application quits."));
                     break;
                 }
             }

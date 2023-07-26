@@ -1,17 +1,4 @@
-﻿/******************************************************************************
- ** WOGRA technologies GmbH & Co. KG Modul Information
- ** Modulename: CwmsScriptableWql.cpp
- ** Started Implementation: 2012/11/13
- ** Description:
- **
- **
- **
- ** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
- ** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. 
- **(C) copyright by WOGRA technologies GmbH & Co. KG All rights reserved
- *****************************************************************************/
-
-// System and QT Includes
+﻿// System and QT Includes
 #include <QObject>
 
 
@@ -19,9 +6,6 @@
 #include "CdmLogging.h"
 #include "CsaQuery.h"
 #include "CsaFactory.h"
-#include "CdmQueryBuilder.h"
-#include "CdmQuery.h"
-#include "CdmQueryEnhanced.h"
 #include "CwmsScriptableWql.h"
 
 CwmsScriptableWql::CwmsScriptableWql()

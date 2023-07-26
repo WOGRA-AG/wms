@@ -33,7 +33,7 @@ CoedtwUser::CoedtwUser(const CdmObject *pEventObject, CdmValue* p_pCdmValue, QWi
     m_pqleUser = nullptr;
 }
 
-CoedtwUser::CoedtwUser(CdmMember* p_pCdmMember, QString p_qstrKeyname, QWidget* p_pqwParent)
+CoedtwUser::CoedtwUser(const CdmMember *p_pCdmMember, QString p_qstrKeyname, QWidget* p_pqwParent)
     : CoeValueWidget(p_pCdmMember, p_qstrKeyname, p_pqwParent),
       m_lCurrentUserId(0)
 {

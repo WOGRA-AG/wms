@@ -15,7 +15,7 @@ CwmsObjectListEditorIf::CwmsObjectListEditorIf(CdmObjectContainer* p_pContainer,
 : QDialog(parent)
 {
    setupUi(this);
-   m_pCwmsObjectListListView->SetContainer(p_pContainer);
+   m_pCwmsContainerWidget->SetContainer(p_pContainer);
 
    if (p_pContainer)
    {
@@ -27,10 +27,19 @@ CwmsObjectListEditorIf::~CwmsObjectListEditorIf()
 {
 }
 
-void CwmsObjectListEditorIf::SetModel(CdmQueryModel* p_pModel)
+void CwmsObjectListEditorIf::SetQuery(QString p_qstrWql)
 {
-    m_pCwmsObjectListListView->SetModel(p_pModel);
+    m_pCwmsContainerWidget->SetQuery(p_qstrWql);
+    //SetCaptionThroughModel(m_pCwmsObjectListListView->GetModel());
+}
 
+CwmsObjectListEditorWidgetIf* CwmsObjectListEditorIf::GetWidget()
+{
+    return m_pCwmsContainerWidget;
+}
+
+void CwmsObjectListEditorIf::SetCaptionThroughModel(CdmQueryModel* p_pModel)
+{
     if (p_pModel)
     {
         auto pContainer = p_pModel->GetContainer();
@@ -51,9 +60,15 @@ void CwmsObjectListEditorIf::SetModel(CdmQueryModel* p_pModel)
     }
 }
 
+void CwmsObjectListEditorIf::SetModel(CdmQueryModel* p_pModel)
+{
+    m_pCwmsContainerWidget->SetModel(p_pModel);
+    SetCaptionThroughModel(p_pModel);
+}
+
 void CwmsObjectListEditorIf::SetContainer(CdmObjectContainer* p_pContainer)
 {
-   m_pCwmsObjectListListView->SetContainer(p_pContainer);
+   m_pCwmsContainerWidget->SetContainer(p_pContainer);
 
    if (p_pContainer)
    {
@@ -63,22 +78,22 @@ void CwmsObjectListEditorIf::SetContainer(CdmObjectContainer* p_pContainer)
 
 void CwmsObjectListEditorIf::AddColumn(QString p_qstrColumn)
 {
-   m_pCwmsObjectListListView->AddColumn(p_qstrColumn);
+   m_pCwmsContainerWidget->AddColumn(p_qstrColumn);
 }
 
 void CwmsObjectListEditorIf::FillDialog()
 {
-   m_pCwmsObjectListListView->FillDialog();
+   m_pCwmsContainerWidget->FillDialog();
 }
 
 QTreeView* CwmsObjectListEditorIf::GetListView()
 {
-   return m_pCwmsObjectListListView->GetListView();
+   return m_pCwmsContainerWidget->GetListView();
 }
 
 CwmsObjectListEditorWidgetIf* CwmsObjectListEditorIf::GetContainerEditorWidgetIf()
 {
-   return m_pCwmsObjectListListView;
+   return m_pCwmsContainerWidget;
 }
 
 void CwmsObjectListEditorIf::CloseClickedSlot()
@@ -90,35 +105,35 @@ void CwmsObjectListEditorIf::SetDefaultValueForNewObject(QString p_qstrValueName
                                                          QString p_qstrValue,
                                                          QString p_qstrValue2)
 {
-   m_pCwmsObjectListListView->SetDefaultValueForNewObject(p_qstrValueName, p_qstrValue, p_qstrValue2);
+   m_pCwmsContainerWidget->SetDefaultValueForNewObject(p_qstrValueName, p_qstrValue, p_qstrValue2);
 }
 
 void CwmsObjectListEditorIf::ClearMenu()
 {
-   m_pCwmsObjectListListView->ClearMenu();
+   m_pCwmsContainerWidget->ClearMenu();
 }
 
 void CwmsObjectListEditorIf::AddPopupItem(QString p_qstrItem)
 {
-   m_pCwmsObjectListListView->AddPopupItem(p_qstrItem);
+   m_pCwmsContainerWidget->AddPopupItem(p_qstrItem);
 }
 
 void CwmsObjectListEditorIf::NewClickedSlot()
 {
-   m_pCwmsObjectListListView->NewClickedSlot();
+   m_pCwmsContainerWidget->NewClickedSlot();
 }
 
 void CwmsObjectListEditorIf::EditClickedSlot()
 {
-   m_pCwmsObjectListListView->EditClickedSlot();
+   m_pCwmsContainerWidget->EditClickedSlot();
 }
 
 void CwmsObjectListEditorIf::DeleteClickedSlot()
 {
-   m_pCwmsObjectListListView->DeleteClicekdSlot();
+   m_pCwmsContainerWidget->DeleteClicekdSlot();
 }
 
 CdmObjectContainer* CwmsObjectListEditorIf::GetObjectList()
 {
-   return m_pCwmsObjectListListView->GetContainer();
+   return m_pCwmsContainerWidget->GetContainer();
 }

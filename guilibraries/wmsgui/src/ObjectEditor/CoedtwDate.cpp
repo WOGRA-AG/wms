@@ -38,7 +38,7 @@ CoedtwDate::CoedtwDate(const CdmObject *pEventObject, CdmValue* p_pCdmValue, QWi
 
 }
 
-CoedtwDate::CoedtwDate(CdmMember* p_pCdmMember, QString p_qstrKeyname, QWidget* p_pqwParent)
+CoedtwDate::CoedtwDate(const CdmMember *p_pCdmMember, QString p_qstrKeyname, QWidget* p_pqwParent)
    : CoeValueWidget(p_pCdmMember, p_qstrKeyname, p_pqwParent),
   m_pqdeDate(nullptr),
   m_pqcbComboBox(nullptr),

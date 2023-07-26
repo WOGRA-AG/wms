@@ -1,15 +1,4 @@
-﻿/******************************************************************************
- ** WOGRA Middleware Server Data Manager Module
- **
- ** @Author Wolfgang Graßhof 
- **
- ** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
- ** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. 
- **(C) copyright by WOGRA technologies All rights reserved
- ******************************************************************************/
-
-
-// System and QT Includes
+﻿// System and QT Includes
 #include <QComboBox>
 #include <QLineEdit>
 
@@ -23,14 +12,6 @@
 #include "CoedtwUserGroup.h"
 #include "CwmsUserGroupChoiceIf.h"
 
-
-/** +-=---------------------------------------------------------Di 28. Aug 15:33:23 2012----------*
- * @method  CoedtwUserGroup::CoedtwUserGroup                 // public, virtual                   *
- * @return                                                   //                                   *
- * @param   CdmValue* p_pCdmValue                            //                                   *
- * @param   QWidget* p_pqwParent = nullptr                      //                                   *
- * @comment The Constructor for valueediting.                                                     *
- *----------------last changed: --------------------------------Di 28. Aug 15:33:23 2012----------*/
 CoedtwUserGroup::CoedtwUserGroup(CdmValue* p_pCdmValue, QWidget* p_pqwParent)
    : CoeValueWidget(p_pCdmValue, p_pqwParent),
      m_lCurrentGroupId(0)
@@ -47,15 +28,7 @@ CoedtwUserGroup::CoedtwUserGroup(const CdmObject *pEventObject, CdmValue* p_pCdm
      m_qleGroup = nullptr;
  }
 
-/** +-=---------------------------------------------------------Di 28. Aug 15:33:31 2012----------*
- * @method  CoedtwUserGroup::CoedtwUserGroup                 // public, virtual                   *
- * @return                                                   //                                   *
- * @param   CdmMember* p_pCdmMember                          //                                   *
- * @param   QString p_qstrKeyname                            //                                   *
- * @param   QWidget* p_pqwParent = nullptr                      //                                   *
- * @comment The Constuctor for searching.                                                         *
- *----------------last changed: --------------------------------Di 28. Aug 15:33:31 2012----------*/
-CoedtwUserGroup::CoedtwUserGroup(CdmMember* p_pCdmMember,
+CoedtwUserGroup::CoedtwUserGroup(const CdmMember *p_pCdmMember,
                                  QString p_qstrKeyname,
                                  QWidget* p_pqwParent)
    : CoeValueWidget(p_pCdmMember, p_qstrKeyname, p_pqwParent) ,
@@ -63,25 +36,13 @@ CoedtwUserGroup::CoedtwUserGroup(CdmMember* p_pCdmMember,
 {
    m_pqbButton = nullptr;
    m_qleGroup = nullptr;
-
 }
 
-/** +-=---------------------------------------------------------Di 28. Aug 15:33:41 2012----------*
- * @method  CoedtwUserGroup::~CoedtwUserGroup                // public, virtual                   *
- * @return  void                                             //                                   *
- * @comment The Destructor of Class CoedtwBinaryDocument                                          *
- *----------------last changed: --------------------------------Di 28. Aug 15:33:41 2012----------*/
 CoedtwUserGroup::~CoedtwUserGroup()
 {
    // nothing to do
 }
 
-/** +-=---------------------------------------------------------Di 28. Aug 15:33:48 2012----------*
- * @method  CoedtwUserGroup::GetEditWidget                   // public                            *
- * @return  QWidget*                                         //                                   *
- * @param   QWidget* p_pqwParent                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Di 28. Aug 15:33:48 2012----------*/
 QWidget* CoedtwUserGroup::GetEditWidget(QWidget* p_pqwParent)
 {
    QWidget* pqWidget = new QWidget(p_pqwParent);
@@ -95,12 +56,6 @@ QWidget* CoedtwUserGroup::GetEditWidget(QWidget* p_pqwParent)
    return pqWidget;
 }
 
-/** +-=---------------------------------------------------------Di 28. Aug 15:33:57 2012----------*
- * @method  CoedtwUserGroup::SetValue                        // protected, virtual                *
- * @return  void                                             //                                   *
- * @param   CdmValue* p_pCdmValue                            //                                   *
- * @comment This method sets the value in the widget.                                             *
- *----------------last changed: --------------------------------Di 28. Aug 15:33:57 2012----------*/
 void CoedtwUserGroup::SetValue(CdmValue* p_pCdmValue)
 {
    if (m_qleGroup && p_pCdmValue)
@@ -142,20 +97,10 @@ void CoedtwUserGroup::setEventClassValue()
     }
 }
 
-/** +-=---------------------------------------------------------Di 28. Aug 15:34:14 2012----------*
- * @method  CoedtwUserGroup::ValueChangedSlot                // private, slots                    *
- * @return  void                                             //                                   *
- * @comment This slot will be called if the value has changed.                                    *
- *----------------last changed: --------------------------------Di 28. Aug 15:34:14 2012----------*/
 void CoedtwUserGroup::ValueChangedSlotByUser()
 {
 }
 
-/** +-=---------------------------------------------------------Di 28. Aug 15:34:24 2012----------*
- * @method  CoedtwUserGroup::SetReadOnly                     // public, virtual                   *
- * @return  void                                             //                                   *
- * @comment This method sets the current Value widget in ReadOnlymode.                            *
- *----------------last changed: --------------------------------Di 28. Aug 15:34:24 2012----------*/
 void CoedtwUserGroup::SetReadOnly()
 {
    m_pqbButton->hide();
@@ -166,23 +111,11 @@ void CoedtwUserGroup::SetEditable()
     m_pqbButton->show();
 }
 
-/** +-=---------------------------------------------------------Di 28. Aug 15:34:34 2012----------*
- * @method  CoedtwUserGroup::GetSearchWidget                 // public, virtual                   *
- * @return  QWidget*                                         //                                   *
- * @param   QWidget* p_pqwParent                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Di 28. Aug 15:34:34 2012----------*/
 QWidget* CoedtwUserGroup::GetSearchWidget(QWidget* p_pqwParent)
 {
    return GetEditWidget(p_pqwParent);
 }
 
-/** +-=---------------------------------------------------------Di 28. Aug 15:34:41 2012----------*
- * @method  CoedtwUserGroup::AddQueryElement                 // public, virtual                   *
- * @return  void                                             //                                   *
- * @param   CdmQueryElement* p_pCdmQueryElementParent        //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Di 28. Aug 15:34:41 2012----------*/
 void CoedtwUserGroup::AddQueryElement(CdmQueryElement* p_pCdmQueryElementParent)
 {
    if (CHKPTR(p_pCdmQueryElementParent) && m_lCurrentGroupId > 0)

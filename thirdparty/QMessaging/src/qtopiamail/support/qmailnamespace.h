@@ -116,4 +116,4 @@ namespace QMail
 
 }
 
-#endif //
+#endif

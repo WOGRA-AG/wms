@@ -41,7 +41,7 @@ private:
 public:
     CoeValueWidget(CdmValue* p_pCdmValue, QWidget* p_pqwParent = nullptr);
     CoeValueWidget(const CdmObject *pCdmEventObject, CdmValue *p_pCdmValue, QWidget *p_pqwParent = nullptr);
-    CoeValueWidget(CdmMember* p_pCdmMember, QString p_qstrKeyname, QWidget* p_pqwParent = nullptr);
+    CoeValueWidget(const CdmMember *p_pCdmMember, QString p_qstrKeyname, QWidget* p_pqwParent = nullptr);
     virtual ~CoeValueWidget();
     virtual QWidget* GetEditWidget(QWidget* p_pqwParent)= 0;
     static CoeValueWidget* CreateValueWidget(CdmValue* p_pCdmValue, QWidget* p_pqwParent);
@@ -62,7 +62,6 @@ public:
     virtual QWidget* GetTabEditWidget(QWidget* p_pqwParent);
     virtual void setEventClassValue();
 
-    static CoeValueWidget *CreateEventValueWidget(CdmValue *p_pCdmEventValue, QWidget *p_pqwParent, const CdmObject *p_EventObject);
 public slots:
     virtual void ValueChangedSlotByUser();
     virtual void SetValue(CdmValue* p_pCdmValue);

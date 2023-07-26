@@ -1,17 +1,4 @@
-﻿/******************************************************************************
- ** WOGRA technologies GmbH & Co KG Modul Information
- ** Modulename: CwmsbtSmtpClient.cpp
- ** Started Implementation: 2010/01/09
- ** Description:
- ** 
- ** This class implements the smtp client for sending mails via smtp
- **
- ** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
- ** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. 
- **(C) copyright by WOGRA technologies GmbH & Co KG All rights reserved
- *****************************************************************************/ 
-
-// System and QT Includes
+﻿// System and QT Includes
 #include <QtNetwork/QHostAddress>
 
 // Own Includes
@@ -25,13 +12,6 @@
 #define QT_NO_OPENSSL
 
 
-/** +-=---------------------------------------------------------Sa 9. Jan 12:02:34 2010-----------*
- * @method  CwmsbtSmtpClient::CwmsbtSmtpClient                     // public                            *
- * @return                                                   //                                   *
- * @param   IwmsbtSmtpConfiguration* p_pIslConfig               //                                   *
- * @param   CwmsbtMailMessage* p_pCwmsbtMailMessage                //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Sa 9. Jan 12:02:34 2010-----------*/
 CwmsbtSmtpClient::CwmsbtSmtpClient(IwmsbtSmtpConfiguration* p_pIslConfig, CwmsbtMailMessage* p_pCwmsbtMailMessage)
 : m_rpIslSmtpConfiguration(p_pIslConfig),
   m_rpCwmsbtMailMessage(p_pCwmsbtMailMessage),
@@ -48,21 +28,11 @@ CwmsbtSmtpClient::CwmsbtSmtpClient(IwmsbtSmtpConfiguration* p_pIslConfig, Cwmsbt
 {
 }
 
-/** +-=---------------------------------------------------------Sa 9. Jan 11:54:13 2010-----------*
- * @method  CwmsbtSmtpClient::~CwmsbtSmtpClient                    // public, virtual                   *
- * @return  void                                             //                                   *
- * @comment The Destructor of Class CwmsbtSmtpClient                                                 *
- *----------------last changed: --------------------------------Sa 9. Jan 11:54:13 2010-----------*/
 CwmsbtSmtpClient::~CwmsbtSmtpClient()
 {
    // nothing to do here ;-)
 }
 
-/** +-=---------------------------------------------------------So 10. Jan 13:26:21 2010----------*
- * @method  CwmsbtSmtpClient::SendMail                          // public                            *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------So 10. Jan 13:26:21 2010----------*/
 void CwmsbtSmtpClient::SendMail()
 {
    if (m_bSending) 
@@ -108,26 +78,13 @@ void CwmsbtSmtpClient::SendMail()
 }
 
 
-
-
-/** +-=---------------------------------------------------------Sa 9. Jan 12:23:37 2010-----------*
- * @method  CwmsbtSmtpClient::ReadyReadSlot                     // private, slots                    *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Sa 9. Jan 12:23:37 2010-----------*/
 void CwmsbtSmtpClient::ReadyReadSlot()
 {
    IncomingData();
 }
 
-/** +-=---------------------------------------------------------Sa 9. Jan 12:46:34 2010-----------*
- * @method  CwmsbtSmtpClient::IncomingData                      // private                           *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Sa 9. Jan 12:46:34 2010-----------*/
 void CwmsbtSmtpClient::IncomingData()
 {
-#ifndef ANDROID
    while (m_pqMailTransport->canReadLine()) 
    {
       QString qstrResponse = m_pqMailTransport->readLine();
@@ -150,16 +107,8 @@ void CwmsbtSmtpClient::IncomingData()
          NextAction(qstrResponse);
       }
    }
-#endif //
 }
 
-/** +-=---------------------------------------------------------Sa 9. Jan 13:06:35 2010-----------*
- * @method  CwmsbtSmtpClient::InitAction                        // private                           *
- * @return  void                                             //                                   *
- * @param   uint p_uiResponseCode                            //                                   *
- * @param   QString p_qstrResponse                           //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Sa 9. Jan 13:06:35 2010-----------*/
 void CwmsbtSmtpClient::InitAction(uint p_uiResponseCode, QString p_qstrResponse)
 {
    if (p_uiResponseCode == 220) 
@@ -177,13 +126,6 @@ void CwmsbtSmtpClient::InitAction(uint p_uiResponseCode, QString p_qstrResponse)
    } 
 }
 
-/** +-=---------------------------------------------------------Sa 9. Jan 13:06:46 2010-----------*
- * @method  CwmsbtSmtpClient::HeloAction                        // private                           *
- * @return  void                                             //                                   *
- * @param   uint p_uiResponseCode                            //                                   *
- * @param   QString p_qstrResponse                           //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Sa 9. Jan 13:06:46 2010-----------*/
 void CwmsbtSmtpClient::HeloAction(uint p_uiResponseCode, QString p_qstrResponse)
 {
    if (p_uiResponseCode == 500) 
@@ -213,12 +155,6 @@ void CwmsbtSmtpClient::HeloAction(uint p_uiResponseCode, QString p_qstrResponse)
    }
 }
 
-/** +-=---------------------------------------------------------Sa 9. Jan 13:08:25 2010-----------*
- * @method  CwmsbtSmtpClient::ExtractDomainName                 // private                           *
- * @return  void                                             //                                   *
- * @param   QString p_qstrResponse                           //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Sa 9. Jan 13:08:25 2010-----------*/
 void CwmsbtSmtpClient::ExtractDomainName(QString p_qstrResponse)
 {
    if (m_qbaDomainName.isEmpty()) 
@@ -236,13 +172,6 @@ void CwmsbtSmtpClient::ExtractDomainName(QString p_qstrResponse)
    }
 }
 
-/** +-=---------------------------------------------------------Sa 9. Jan 13:11:33 2010-----------*
- * @method  CwmsbtSmtpClient::ExtensionAction                   // private                           *
- * @return  void                                             //                                   *
- * @param   uint p_uiResponseCode                            //                                   *
- * @param   QString p_qstrResponse                           //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Sa 9. Jan 13:11:33 2010-----------*/
 void CwmsbtSmtpClient::ExtensionAction(uint p_uiResponseCode, QString p_qstrResponse)
 {
    if (p_uiResponseCode == 250) 
@@ -266,13 +195,6 @@ void CwmsbtSmtpClient::ExtensionAction(uint p_uiResponseCode, QString p_qstrResp
    } 
 }
 
-/** +-=---------------------------------------------------------Sa 9. Jan 13:24:20 2010-----------*
- * @method  CwmsbtSmtpClient::StartTlsAction                    // private                           *
- * @return  void                                             //                                   *
- * @param   uint p_uiResponseCode                            //                                   *
- * @param   QString p_qstrResponse                           //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Sa 9. Jan 13:24:20 2010-----------*/
 void CwmsbtSmtpClient::StartTlsAction(uint p_uiResponseCode, QString p_qstrResponse)
 {
     Q_UNUSED(p_uiResponseCode);
@@ -296,13 +218,6 @@ void CwmsbtSmtpClient::StartTlsAction(uint p_uiResponseCode, QString p_qstrRespo
    }
 }
 
-/** +-=---------------------------------------------------------Sa 9. Jan 13:26:53 2010-----------*
- * @method  CwmsbtSmtpClient::TlsAction                         // private                           *
- * @return  void                                             //                                   *
- * @param   uint p_uiResponseCode                            //                                   *
- * @param   QString p_qstrResponse                           //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Sa 9. Jan 13:26:53 2010-----------*/
 void CwmsbtSmtpClient::TlsAction(uint p_uiResponseCode, QString p_qstrResponse)
 {
    if (p_uiResponseCode == 220) 
@@ -318,13 +233,6 @@ void CwmsbtSmtpClient::TlsAction(uint p_uiResponseCode, QString p_qstrResponse)
    }
 }
 
-/** +-=---------------------------------------------------------Sa 9. Jan 13:29:22 2010-----------*
- * @method  CwmsbtSmtpClient::ConnectedAction                   // private                           *
- * @return  void                                             //                                   *
- * @param   uint p_uiResponseCode                            //                                   *
- * @param   QString p_qstrResponse                           //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Sa 9. Jan 13:29:22 2010-----------*/
 void CwmsbtSmtpClient::ConnectedAction(uint p_uiResponseCode, QString p_qstrResponse)
 {
     Q_UNUSED(p_uiResponseCode);
@@ -364,13 +272,6 @@ void CwmsbtSmtpClient::ConnectedAction(uint p_uiResponseCode, QString p_qstrResp
    }
 }
 
-/** +-=---------------------------------------------------------Sa 9. Jan 14:13:45 2010-----------*
- * @method  CwmsbtSmtpClient::AuthenticatingAction              // private                           *
- * @return  void                                             //                                   *
- * @param   uint p_uiResponseCode                            //                                   *
- * @param   QString p_qstrResponse                           //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Sa 9. Jan 14:13:45 2010-----------*/
 void CwmsbtSmtpClient::AuthenticatingAction(uint p_uiResponseCode, QString p_qstrResponse)
 {
    if (p_uiResponseCode == 334) 
@@ -397,13 +298,6 @@ void CwmsbtSmtpClient::AuthenticatingAction(uint p_uiResponseCode, QString p_qst
    }
 }
 
-/** +-=---------------------------------------------------------Sa 9. Jan 14:33:18 2010-----------*
- * @method  CwmsbtSmtpClient::AuthenticatedAction               // private                           *
- * @return  void                                             //                                   *
- * @param   uint p_uiResponseCode                            //                                   *
- * @param   QString p_qstrResponse                           //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Sa 9. Jan 14:33:18 2010-----------*/
 void CwmsbtSmtpClient::AuthenticatedAction(uint p_uiResponseCode, QString p_qstrResponse)
 {
     Q_UNUSED(p_uiResponseCode);
@@ -421,13 +315,6 @@ void CwmsbtSmtpClient::AuthenticatedAction(uint p_uiResponseCode, QString p_qstr
    NextAction(QString());
 }
 
-/** +-=---------------------------------------------------------Sa 9. Jan 14:35:20 2010-----------*
-* @method  CwmsbtSmtpClient::MetaDataAction                    // private                           *
-* @return  void                                             //                                   *
-* @param   uint p_uiResponseCode                            //                                   *
-* @param   QString p_qstrResponse                           //                                   *
-* @comment                                                                                       *
-*----------------last changed: --------------------------------Sa 9. Jan 14:35:20 2010-----------*/
 void CwmsbtSmtpClient::MetaDataAction(uint p_uiResponseCode, QString p_qstrResponse)
 {
     Q_UNUSED(p_uiResponseCode);
@@ -452,14 +339,6 @@ void CwmsbtSmtpClient::MetaDataAction(uint p_uiResponseCode, QString p_qstrRespo
    }
 }
 
-
-/** +-=---------------------------------------------------------Sa 9. Jan 14:45:00 2010-----------*
-* @method  CwmsbtSmtpClient::FromAction                        // private                           *
-* @return  void                                             //                                   *
-* @param   uint p_uiResponseCode                            //                                   *
-* @param   QString p_qstrResponse                           //                                   *
-* @comment                                                                                       *
-*----------------last changed: --------------------------------Sa 9. Jan 14:45:00 2010-----------*/
 void CwmsbtSmtpClient::FromAction(uint p_uiResponseCode, QString p_qstrResponse)
 {
     Q_UNUSED(p_uiResponseCode);
@@ -471,13 +350,6 @@ void CwmsbtSmtpClient::FromAction(uint p_uiResponseCode, QString p_qstrResponse)
    emit UpdateStatusSignal(qstrStatusSignal);
 }
 
-/** +-=---------------------------------------------------------So 10. Jan 13:04:36 2010----------*
- * @method  CwmsbtSmtpClient::RcvAction                         // private                           *
- * @return  void                                             //                                   *
- * @param   uint p_uiResponseCode                            //                                   *
- * @param   QString p_qstrResponse                           //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------So 10. Jan 13:04:36 2010----------*/
 void CwmsbtSmtpClient::RcvAction(uint p_uiResponseCode, QString p_qstrResponse)
 {
    if (p_uiResponseCode == 250) 
@@ -499,16 +371,8 @@ void CwmsbtSmtpClient::RcvAction(uint p_uiResponseCode, QString p_qstrResponse)
    } 
 }
 
-/** +-=---------------------------------------------------------So 10. Jan 13:04:51 2010----------*
- * @method  CwmsbtSmtpClient::MRcvAction                        // private                           *
- * @return  void                                             //                                   *
- * @param   uint p_uiResponseCode                            //                                   *
- * @param   QString p_qstrResponse                           //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------So 10. Jan 13:04:51 2010----------*/
 void CwmsbtSmtpClient::MRcvAction(uint p_uiResponseCode, QString p_qstrResponse)
 {
-
    if ((p_uiResponseCode == 250) || (p_uiResponseCode == 251)) 
    {
       m_qlIt++;
@@ -529,24 +393,12 @@ void CwmsbtSmtpClient::MRcvAction(uint p_uiResponseCode, QString p_qstrResponse)
    }
 }
 
-/** +-=---------------------------------------------------------Sa 9. Jan 15:01:15 2010-----------*
- * @method  CwmsbtSmtpClient::PrepareDataAction                 // private                           *
- * @return  void                                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Sa 9. Jan 15:01:15 2010-----------*/
 void CwmsbtSmtpClient::PrepareDataAction()
 {
    m_eSlStatus = Data;
    NextAction(QString());
 }
 
-/** +-=---------------------------------------------------------So 10. Jan 13:05:02 2010----------*
- * @method  CwmsbtSmtpClient::BodyAction                        // private                           *
- * @return  void                                             //                                   *
- * @param   uint p_uiResponseCode                            //                                   *
- * @param   QString p_qstrResponse                           //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------So 10. Jan 13:05:02 2010----------*/
 void CwmsbtSmtpClient::BodyAction(uint p_uiResponseCode, QString p_qstrResponse)
 {
    if (p_uiResponseCode == 354) 
@@ -566,12 +418,6 @@ void CwmsbtSmtpClient::BodyAction(uint p_uiResponseCode, QString p_qstrResponse)
    }
 }
 
-/** +-=---------------------------------------------------------So 10. Jan 12:08:15 2010----------*
- * @method  CwmsbtSmtpClient::ChunkAction                       // private                           *
- * @return  void                                             //                                   *
- * @param   uint p_uiResponseCode                            //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------So 10. Jan 12:08:15 2010----------*/
 void CwmsbtSmtpClient::ChunkAction(uint p_uiResponseCode)
 {
     Q_UNUSED(p_uiResponseCode);
@@ -581,13 +427,6 @@ void CwmsbtSmtpClient::ChunkAction(uint p_uiResponseCode)
    NextAction("");
 }
 
-/** +-=---------------------------------------------------------So 10. Jan 13:05:14 2010----------*
- * @method  CwmsbtSmtpClient::SentAction                        // private                           *
- * @return  void                                             //                                   *
- * @param   uint p_uiResponseCode                            //                                   *
- * @param   QString p_qstrResponse                           //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------So 10. Jan 13:05:14 2010----------*/
 void CwmsbtSmtpClient::SentAction(uint p_uiResponseCode, QString p_qstrResponse)
 {
    // The last send operation is complete
@@ -602,12 +441,6 @@ void CwmsbtSmtpClient::SentAction(uint p_uiResponseCode, QString p_qstrResponse)
    }
 }
 
-/** +-=---------------------------------------------------------So 10. Jan 12:21:42 2010----------*
- * @method  CwmsbtSmtpClient::QuitAction                        // private                           *
- * @return  void                                             //                                   *
- * @param   uint p_uiResponseCode                            //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------So 10. Jan 12:21:42 2010----------*/
 void CwmsbtSmtpClient::QuitAction(uint p_uiResponseCode)
 {
     Q_UNUSED(p_uiResponseCode);
@@ -625,12 +458,6 @@ void CwmsbtSmtpClient::QuitAction(uint p_uiResponseCode)
 
 }
 
-/** +-=---------------------------------------------------------So 10. Jan 12:24:23 2010----------*
- * @method  CwmsbtSmtpClient::NextAction                        // private                           *
- * @return  void                                             //                                   *
- * @param   const QString p_qstrResponse                     //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------So 10. Jan 12:24:23 2010----------*/
 void CwmsbtSmtpClient::NextAction(const QString p_qstrResponse)
 {
    uint uiResponseCode(0);
@@ -753,13 +580,6 @@ void CwmsbtSmtpClient::NextAction(const QString p_qstrResponse)
    }
 }
 
-
-/** +-=---------------------------------------------------------Mi 31. Okt 12:20:53 2012----------*
- * @method  CwmsbtSmtpClient::ConnectedSlot                  // private, slots                    *
- * @return  void                                             //                                   *
- * @param   EncryptType p_eEncryptType                       //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mi 31. Okt 12:20:53 2012----------*/
 void CwmsbtSmtpClient::ConnectedSlot(QMailTransport::EncryptType p_eEncryptType)
 {
    if (m_rpIslSmtpConfiguration->GetSmtpEncryption() == p_eEncryptType) 
@@ -781,13 +601,6 @@ void CwmsbtSmtpClient::ConnectedSlot(QMailTransport::EncryptType p_eEncryptType)
 #endif //
 }
 
-/** +-=---------------------------------------------------------Sa 9. Jan 12:59:06 2010-----------*
- * @method  CwmsbtSmtpClient::SendCommand                       // private                           *
- * @return  void                                             //                                   *
- * @param   const char *data                                 //                                   *
- * @param   int p_iLength                                    //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Sa 9. Jan 12:59:06 2010-----------*/
 void CwmsbtSmtpClient::SendCommand(const char *data, int p_iLength)
 {
    if (p_iLength == -1)
@@ -802,34 +615,16 @@ void CwmsbtSmtpClient::SendCommand(const char *data, int p_iLength)
    ++m_iOutstandingResponses;
 }
 
-/** +-=---------------------------------------------------------Sa 9. Jan 13:00:54 2010-----------*
- * @method  CwmsbtSmtpClient::SendCommand                       // private                           *
- * @return  void                                             //                                   *
- * @param   const QString& p_qtrCommand                      //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Sa 9. Jan 13:00:54 2010-----------*/
 void CwmsbtSmtpClient::SendCommand(const QString& p_qtrCommand)
 {
    SendCommand(p_qtrCommand.toLocal8Bit());
 }
 
-/** +-=---------------------------------------------------------Sa 9. Jan 13:01:38 2010-----------*
- * @method  CwmsbtSmtpClient::SendCommand                       // private                           *
- * @return  void                                             //                                   *
- * @param   const QByteArray & p_rComand                     //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Sa 9. Jan 13:01:38 2010-----------*/
 void CwmsbtSmtpClient::SendCommand(const QByteArray & p_rComand)
 {
    SendCommand(p_rComand.data(), p_rComand.length());
 }
 
-/** +-=---------------------------------------------------------So 10. Jan 12:59:04 2010----------*
- * @method  CwmsbtSmtpClient::SendCommands                      // private                           *
- * @return  void                                             //                                   *
- * @param   const QStringList& p_rqstrlCommands              //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------So 10. Jan 12:59:04 2010----------*/
 void CwmsbtSmtpClient::SendCommands(const QStringList& p_rqstrlCommands)
 {
    foreach (const QString &cmd, p_rqstrlCommands)
@@ -838,27 +633,12 @@ void CwmsbtSmtpClient::SendCommands(const QStringList& p_rqstrlCommands)
    }
 }
 
-/** +-=---------------------------------------------------------Sa 9. Jan 12:25:05 2010-----------*
- * @method  CwmsbtSmtpClient::SentSlot                          // private, slots                    *
- * @return  void                                             //                                   *
- * @param   qint64 p_iSent                                   //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Sa 9. Jan 12:25:05 2010-----------*/
 void CwmsbtSmtpClient::SentSlot(qint64 p_iSent)
 {
    m_uiSentLength += p_iSent;
    emit ProgressChangedSignal(m_uiSentLength, m_uiMessageLength);
 }
 
-
-
-/** +-=---------------------------------------------------------Sa 9. Jan 12:26:23 2010-----------*
- * @method  CwmsbtSmtpClient::TransportErrorSlot                // private, slots                    *
- * @return  void                                             //                                   *
- * @param   int p_iErrorCode                                 //                                   *
- * @param   QString p_qstrErrorMessage                       //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Sa 9. Jan 12:26:23 2010-----------*/
 void CwmsbtSmtpClient::TransportErrorSlot(int p_iErrorCode, QString p_qstrErrorMessage)
 {
    QString qstrMessage = tr("Fehlercode: ") + QString::number(p_iErrorCode) 
@@ -866,26 +646,3 @@ void CwmsbtSmtpClient::TransportErrorSlot(int p_iErrorCode, QString p_qstrErrorM
 
   MSG_CRIT("Senden nicht möglich", qstrMessage.toUtf8());
 }
-
-/** +-=---------------------------------------------------------Sa 9. Jan 12:45:25 2010-----------*
- * @method  CwmsbtSmtpClient::ProgressChangedSignal             // private, signals                  *
- * @return  void                                             //                                   *
- * @param   int p_iSentSize                                  //                                   *
- * @param   int p_iCompleteSize                              //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Sa 9. Jan 12:45:25 2010-----------*/
-
-/** +-=---------------------------------------------------------Sa 9. Jan 12:36:06 2010-----------*
- * @method  CwmsbtSmtpClient::UpdateStatusSignal                // private, signals                  *
- * @return  void                                             //                                   *
- * @param   QString& p_qstrStatus                            //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Sa 9. Jan 12:36:06 2010-----------*/
-
-/** +-=---------------------------------------------------------So 10. Jan 12:17:35 2010----------*
- * @method  CwmsbtSmtpClient::MessageTransmittedSignal          // private, signals                  *
- * @return  void                                             //                                   *
- * @param   bool p_bSuccess                                  //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------So 10. Jan 12:17:35 2010----------*/
-

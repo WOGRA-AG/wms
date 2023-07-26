@@ -31,12 +31,13 @@ private:
 public:
     CoedtwDate(CdmValue* p_pCdmValue, QWidget* p_pqwParent = nullptr);
     CoedtwDate(const CdmObject *pEventObject, CdmValue* p_pCdmValue, QWidget* p_pqwParent = nullptr);
+    CoedtwDate(const CdmMember* p_pCdmMember, QString p_qstrKeyname, QWidget* p_pqwParent = nullptr);
     virtual ~CoedtwDate();
     QWidget* GetEditWidget(QWidget* p_pqwParent);
     virtual void SetSearchDeaultValue(QString p_qstrDefault);
     virtual void SetReadOnly(  );
     virtual void SetEditable();
-    CoedtwDate(CdmMember* p_pCdmMember, QString p_qstrKeyname, QWidget* p_pqwParent = nullptr);
+
     virtual QWidget* GetSearchWidget(QWidget* p_pqwParent);
     virtual void AddQueryElement(CdmQueryElement* p_pCdmQueryElementParent);
 

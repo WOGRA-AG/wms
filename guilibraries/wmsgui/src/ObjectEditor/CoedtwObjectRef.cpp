@@ -7,7 +7,6 @@
 #include "CdmMessageManager.h"
 #include "CdmDataProvider.h"
 #include "CdmMember.h"
-#include "CdmEnhancedQueryProxy.h"
 #include "CdmSessionManager.h"
 #include "CdmLogging.h"
 #include "CdmValueObjectRef.h"
@@ -34,9 +33,25 @@ CoedtwObjectRef::CoedtwObjectRef(CdmValue* p_pCdmValue, QWidget* p_pqwParent)
       m_pqleObject(nullptr),
       m_bShowEditButton(true),
       m_pCwmsProxy(nullptr),
-      m_pObjectEditor(nullptr)
+      m_pObjectEditor(nullptr),
+      m_lObjectId(0)
 {
     // nothing todo
+}
+
+CoedtwObjectRef::CoedtwObjectRef(const CdmMember *p_pCdmMember, QString p_qstrKeyname, QWidget* p_pqwParent)
+    : CoeValueWidget(p_pCdmMember, p_qstrKeyname, p_pqwParent),
+      m_pqcbObjectChoice(nullptr),
+      m_pqpbSelect(nullptr),
+      m_pqpbEdit(nullptr),
+      m_pqpbClear(nullptr),
+      m_bProxyCreatedByThis(false),
+      m_pqleObject(nullptr),
+      m_bShowEditButton(true),
+      m_pCwmsProxy(nullptr),
+      m_pObjectEditor(nullptr),
+      m_lObjectId(0)
+{
 }
 
 CoedtwObjectRef::CoedtwObjectRef(const CdmObject *pEventObject, CdmValue* p_pCdmValue, QWidget* p_pqwParent)
@@ -49,7 +64,8 @@ CoedtwObjectRef::CoedtwObjectRef(const CdmObject *pEventObject, CdmValue* p_pCdm
       m_pqleObject(nullptr),
       m_bShowEditButton(true),
       m_pCwmsProxy(nullptr),
-      m_pObjectEditor(nullptr)
+      m_pObjectEditor(nullptr),
+      m_lObjectId(0)
 {
 
 }
@@ -189,7 +205,7 @@ QWidget* CoedtwObjectRef::GetEditWidget(QWidget* p_pqwParent)
     QWidget* pqWidget = new QWidget(p_pqwParent);
     QHBoxLayout* pqLayout = new QHBoxLayout(pqWidget);
 
-    if(CHKPTR(m_rpCdmValue))
+    if(m_rpCdmValue)
     {
         CdmContainerManager* pCdmOLManager = m_rpCdmValue->GetContainerManager();
 
@@ -220,11 +236,12 @@ QWidget* CoedtwObjectRef::GetEditWidget(QWidget* p_pqwParent)
             }
         }
     }
-
-
+    else if (m_rpCdmMember)
+    {
+        GetSelectionEdit(pqLayout, pqWidget);
+    }
 
     pqLayout->setMargin(0);
-
     return pqWidget;
 }
 
@@ -292,7 +309,16 @@ void CoedtwObjectRef::EditClickedSlot()
 
 void CoedtwObjectRef::ChooseClickedSlot()
 {
-    const CdmMember* pCdmMember = m_rpCdmValue->GetMember();
+    const CdmMember* pCdmMember = nullptr;
+
+    if (m_rpCdmValue)
+    {
+        pCdmMember = m_rpCdmValue->GetMember();
+    }
+    else
+    {
+        pCdmMember= m_rpCdmMember;
+    }
 
     if (CHKPTR(pCdmMember))
     {
@@ -310,7 +336,15 @@ void CoedtwObjectRef::ChooseClickedSlot()
 
             if(pCdmObject)
             {
-                ((CdmValueObjectRef*)m_rpCdmValue)->SetValue(pCdmObject);
+                if (m_rpCdmValue)
+                {
+                    ((CdmValueObjectRef*)m_rpCdmValue)->SetValue(pCdmObject);
+                }
+                else
+                {
+                    m_lObjectId = pCdmObject->GetId();
+                }
+
                 m_pqleObject->setText(pCdmObject->GetCaption());
             }
         }
@@ -319,16 +353,22 @@ void CoedtwObjectRef::ChooseClickedSlot()
 
 void CoedtwObjectRef::ClearClickedSlot()
 {
-    if(CHKPTR(m_rpCdmValue))
+    if(m_rpCdmValue)
     {
         const CdmMember* pCdmMember = m_rpCdmValue->GetMember();
 
         if(CHKPTR(pCdmMember))
         {
             ((CdmValueObjectRef*)m_rpCdmValue)->SetValue(nullptr);
-            m_pqleObject->setText("");
+
         }
     }
+    else
+    {
+        m_lObjectId = 0;
+    }
+
+    m_pqleObject->setText("");
 }
 
 CdmObjectContainer* CoedtwObjectRef::GetSingleObjectList()
@@ -451,4 +491,33 @@ void CoedtwObjectRef::SetContainer(QString p_qstrObjectList, QString p_qstrVisib
 {
     m_qstrObjectList = p_qstrObjectList;
     m_qstrVisibleKeyname = p_qstrVisibleKeyname;
+}
+
+
+QWidget* CoedtwObjectRef::GetSearchWidget(QWidget* p_pqwParent)
+{
+    m_bShowEditButton = false;
+    auto pWidget = GetEditWidget(p_pqwParent);
+    return pWidget;
+}
+
+void CoedtwObjectRef::AddQueryElement(CdmQueryElement* p_pCdmQueryElementParent)
+{
+    if (CHKPTR(p_pCdmQueryElementParent))
+    {
+        if (m_lObjectId > 0)
+        {
+            CdmQueryElement* pCdmQueryElement = new CdmQueryElement(p_pCdmQueryElementParent->GetQuery(),
+                                                                    eDmQueryElementTypeCompare,
+                                                                    eDmQueryCompareTypeEqual);
+
+            pCdmQueryElement->SetComparisonValue(m_qstrKeyname, m_lObjectId);
+            p_pCdmQueryElementParent->AddChild(pCdmQueryElement);
+        }
+    }
+}
+
+void CoedtwObjectRef::SetSearchDeaultValue(QString p_qstrDefault)
+{
+    m_pqleObject->setText(p_qstrDefault);
 }

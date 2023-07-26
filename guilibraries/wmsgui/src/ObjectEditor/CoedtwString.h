@@ -25,11 +25,11 @@ private:
 public:
     CoedtwString(CdmValue* p_pCdmValue, QWidget* p_pqwParent = NULL);
     CoedtwString(const CdmObject *pCdmEventObject, CdmValue *p_pCdmValue, QWidget *p_pqwParent = NULL);
+    CoedtwString(const CdmMember* p_pCdmMember, QString p_qstrKeyname, QWidget* p_pqwParent = NULL);
     virtual ~CoedtwString();
     QWidget* GetEditWidget(QWidget* p_pqwParent);
     virtual void SetReadOnly();
     virtual void SetEditable();
-    CoedtwString(CdmMember* p_pCdmMember, QString p_qstrKeyname, QWidget* p_pqwParent = NULL);
     virtual QWidget* GetSearchWidget(QWidget* p_pqwParent);
     virtual void AddQueryElement(CdmQueryElement* p_pCdmQueryElementParent);
     virtual void SetSearchDeaultValue(QString p_qstrDefault);

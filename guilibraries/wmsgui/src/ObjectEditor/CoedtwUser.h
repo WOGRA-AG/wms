@@ -26,7 +26,7 @@ private:
 public:
     CoedtwUser( CdmValue* p_pCdmValue, QWidget* p_pqwParent = NULL);
     CoedtwUser(const CdmObject *pEventObject, CdmValue* p_pCdmValue, QWidget* p_pqwParent = NULL);
-    CoedtwUser( CdmMember* p_pCdmMember, QString p_qstrKeyname, QWidget* p_pqwParent = NULL);
+    CoedtwUser(const CdmMember* p_pCdmMember, QString p_qstrKeyname, QWidget* p_pqwParent = NULL);
     virtual ~CoedtwUser( );
     QWidget* GetEditWidget(QWidget* p_pqwParent);
     virtual void SetReadOnly();

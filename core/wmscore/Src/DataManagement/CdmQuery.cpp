@@ -24,6 +24,8 @@
 static int HIGHCOMPLEXITY = 14;
 
 
+
+
 CdmQuery::CdmQuery(QObject* parent)
 : QObject(parent),
   m_qmResultElements(),
@@ -895,7 +897,7 @@ QString CdmQuery::GetKeynameAt(int p_iSection) const
     }
     else
     {
-        qstrName = "Object Data";
+        qstrName = OBJECT_DATA;
     }
 
     return qstrName;

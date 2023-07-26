@@ -32,7 +32,8 @@ private:
 public:
     CoedtwDateTime(CdmValue* p_pCdmValue, QWidget* p_pqwParent = NULL);
     CoedtwDateTime(const CdmObject* pEventObject, CdmValue* p_pCdmValue, QWidget* p_pqwParent = nullptr);
-    CoedtwDateTime(CdmMember* p_pCdmMember, QString p_qstrKeyname, QWidget* p_pqwParent = nullptr);virtual ~CoedtwDateTime();
+    CoedtwDateTime(const CdmMember* p_pCdmMember, QString p_qstrKeyname, QWidget* p_pqwParent = nullptr);
+    virtual ~CoedtwDateTime();
     QWidget* GetEditWidget(QWidget* p_pqwParent);
     virtual void SetReadOnly();
     virtual void SetEditable();

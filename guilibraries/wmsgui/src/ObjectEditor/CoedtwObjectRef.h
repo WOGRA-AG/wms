@@ -38,9 +38,11 @@ private:
     CwmsObjectEditor* m_pObjectEditor;
     QString m_qstrObjectList;
     QString m_qstrVisibleKeyname;
+    qint64 m_lObjectId;
 
 public:
     CoedtwObjectRef( CdmValue* p_pCdmValue, QWidget* p_pqwParent = NULL);
+    CoedtwObjectRef(const CdmMember *p_pCdmMember, QString p_qstrKeyname, QWidget *p_pqwParent);
     CoedtwObjectRef(const CdmObject *pEventObject, CdmValue* p_pCdmValue, QWidget* p_pqwParent = NULL);
     virtual ~CoedtwObjectRef(  );
     QWidget* GetEditWidget(QWidget* p_pqwParent);
@@ -55,6 +57,9 @@ public:
     virtual void SetEditable();
     void SetContainer(  QString p_qstrObjectList, QString p_qstrVisibleKeyname );
 
+    QWidget *GetSearchWidget(QWidget *p_pqwParent);
+    void AddQueryElement(CdmQueryElement *p_pCdmQueryElementParent);
+    void SetSearchDeaultValue(QString p_qstrDefault);
 protected slots:
     virtual void SetValue(  CdmValue* p_pCdmValue );
     void setEventClassValue();

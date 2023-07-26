@@ -43,6 +43,8 @@ public:
     void FillDialog();
     CwmsObjectListEditorWidgetIf* GetContainerEditorWidgetIf();
 
+    void SetQuery(QString p_qstrWql);
+    CwmsObjectListEditorWidgetIf *GetWidget();
 public slots:
     void DeleteClickedSlot();
     void NewClickedSlot();
@@ -50,6 +52,8 @@ public slots:
 
 private slots:
     void CloseClickedSlot();
+private:
+    void SetCaptionThroughModel(CdmQueryModel *p_pModel);
 };
 
 #endif //

@@ -1,15 +1,3 @@
-/******************************************************************************
- ** WOGRA Middleware Server Data Manager Module
- **
- ** @Author Wolfgang Graßhof 
- **
- ** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
- ** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. 
- **(C) copyright by WOGRA technologies All rights reserved
- ******************************************************************************/
-
-
-
 // System and QT Includes
 #include <qlayout.h>
 #include <qlineedit.h>
@@ -34,50 +22,44 @@
 #include "CwmsObjectListEditorIf.h"
 #include "CwmsObjectListSelectionIf.h"
 
-
-/** +-=---------------------------------------------------------Mi 22. Aug 11:00:02 2012----------*
- * @method  CoedtwContainerRef::CoedtwContainerRef         // public                            *
- * @return                                                   //                                   *
- * @param   CdmValue* p_pCdmValue                            //                                   *
- * @param   QWidget* p_pqwParent = nullptr                      //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mi 22. Aug 11:00:02 2012----------*/
 CoedtwContainerRef::CoedtwContainerRef(CdmValue* p_pCdmValue, QWidget* p_pqwParent)
-: CoeValueWidget(p_pCdmValue, p_pqwParent)   
+: CoeValueWidget(p_pCdmValue, p_pqwParent),
+  m_pqleEdit(nullptr),
+  m_pqpbChange(nullptr),
+  m_pqpbClear(nullptr),
+  m_pqpbView(nullptr),
+  m_pObjectListEditor(nullptr),
+  m_lContainerId(0)
 {
-   m_pObjectListEditor = nullptr;
-   m_pqleEdit          = nullptr;
-   m_pqpbChange        = nullptr;
-   m_pqpbView          = nullptr;
-   m_pqhbLayout        = nullptr;
 }
 
 CoedtwContainerRef::CoedtwContainerRef(const CdmObject *pEventObject, CdmValue* p_pCdmValue, QWidget* p_pqwParent)
-    : CoeValueWidget(pEventObject, p_pCdmValue, p_pqwParent)
+    : CoeValueWidget(pEventObject, p_pCdmValue, p_pqwParent),
+      m_pqleEdit(nullptr),
+      m_pqpbChange(nullptr),
+      m_pqpbClear(nullptr),
+      m_pqpbView(nullptr),
+      m_pObjectListEditor(nullptr),
+      m_lContainerId(0)
 {
-    m_pObjectListEditor = nullptr;
-    m_pqleEdit          = nullptr;
-    m_pqpbChange        = nullptr;
-    m_pqpbView          = nullptr;
-    m_pqhbLayout        = nullptr;
 }
 
-/** +-=---------------------------------------------------------Mon Dec 8 16:47:52 2003-----------*
- * @method  CoedtwContainerRef::~CoedtwContainerRef        // public, virtual                   *
- * @return  void                                             //                                   *
- * @comment The Destructor of Class CoedtwBinaryDocument                                          *
- *---------------------------------------------------------------Mon Dec 8 16:47:52 2003----------*/
-CoedtwContainerRef::~CoedtwContainerRef(  )
+CoedtwContainerRef::CoedtwContainerRef(const CdmMember *p_pCdmMember, QString p_qstrKeyname, QWidget* p_pqwParent)
+   : CoeValueWidget(p_pCdmMember, p_qstrKeyname, p_pqwParent),
+     m_pqleEdit(nullptr),
+     m_pqpbChange(nullptr),
+     m_pqpbClear(nullptr),
+     m_pqpbView(nullptr),
+     m_pObjectListEditor(nullptr),
+     m_lContainerId(0)
+{
+}
+
+CoedtwContainerRef::~CoedtwContainerRef()
 {
    // nothing todo qt does it all for us.
 }
 
-/** +-=---------------------------------------------------------Mo 5. Nov 11:36:28 2012-----------*
- * @method  CoedtwContainerRef::GetTabEditWidget            // public, virtual                   *
- * @return  QWidget*                                         //                                   *
- * @param   QWidget* p_pqwParent                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mo 5. Nov 11:36:28 2012-----------*/
 QWidget* CoedtwContainerRef::GetTabEditWidget(QWidget* p_pqwParent)
 {
    if (!m_pObjectListEditor)
@@ -88,12 +70,6 @@ QWidget* CoedtwContainerRef::GetTabEditWidget(QWidget* p_pqwParent)
    return m_pObjectListEditor;
 }
 
-/** +-=---------------------------------------------------------Mi 22. Aug 14:37:10 2012----------*
- * @method  CoedtwContainerRef::GetEditWidget               // public                            *
- * @return  QWidget*                                         //                                   *
- * @param   QWidget* p_pqwParent                             //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------Mi 22. Aug 14:37:10 2012----------*/
 QWidget* CoedtwContainerRef::GetEditWidget(QWidget* p_pqwParent)
 {
    QWidget* pqwParent = new QWidget(p_pqwParent);
@@ -102,7 +78,7 @@ QWidget* CoedtwContainerRef::GetEditWidget(QWidget* p_pqwParent)
    m_pqleEdit->setReadOnly(true);
    pqLayout->addWidget(m_pqleEdit);
    
-   if(!m_rpCdmValue->IsOwner())
+   if(m_rpCdmValue && !m_rpCdmValue->IsOwner())
    {
       m_pqpbChange = new QPushButton(pqwParent);
       m_pqpbChange->setText(tr("Auswählen"));
@@ -128,12 +104,6 @@ QWidget* CoedtwContainerRef::GetEditWidget(QWidget* p_pqwParent)
    return pqwParent;
 }
 
-/** +-=---------------------------------------------------------Mo 5. Nov 11:46:29 2012-----------*
- * @method  CoedtwContainerRef::SetValue                    // protected, virtual                *
- * @return  void                                             //                                   *
- * @param   CdmValue* p_pCdmValue                            //                                   *
- * @comment This method sets the value in the widget.                                             *
- *----------------last changed: --------------------------------Mo 5. Nov 11:46:29 2012-----------*/
 void CoedtwContainerRef::SetValue(CdmValue* p_pCdmValue)
 {
    if (CHKPTR(p_pCdmValue))
@@ -200,45 +170,54 @@ void CoedtwContainerRef::setEventClassValue()
     }
 }
 
-/** +-=---------------------------------------------------------Wed Dec 10 16:52:30 2003----------*
- * @method  CoedtwContainerRef::ValueChangedSlot            // private, slots                    *
- * @return  void                                             //                                   *
- * @comment This slot will be called if the value has changed.                                    *
- *---------------------------------------------------------------Wed Dec 10 16:52:30 2003---------*/
-void CoedtwContainerRef::ValueChangedSlotByUser(  )
+void CoedtwContainerRef::ValueChangedSlotByUser()
 {
    // nothing to do here
 }
 
-/** +-=---------------------------------------------------------Thu Dec 11 13:14:43 2003----------*
- * @method  CoedtwContainerRef::ChangeClickedSlot           // private, slots                    *
- * @return  void                                             //                                   *
- * @comment This slot will be called if the user wan to change the objectlistref.                 *
- *---------------------------------------------------------------Thu Dec 11 13:14:43 2003---------*/
-void CoedtwContainerRef::ChangeClickedSlot(  )
+void CoedtwContainerRef::ChangeClickedSlot()
 {
-   if(CHKPTR(m_rpCdmValue))
+    const CdmMember* pCdmMember = nullptr;
+
+   if(m_rpCdmValue)
    {
-      const CdmMember* pCdmMember = m_rpCdmValue->GetMember();
+      pCdmMember = m_rpCdmValue->GetMember();
+   }
+   else if (m_rpCdmMember != nullptr)
+   {
+       pCdmMember = m_rpCdmMember;
+   }
 
-      if(CHKPTR(pCdmMember))
-      {
-         CdmObjectContainer* pContainer = CwmsContainerSelectionIf::GetObjectContainer(m_rpCdmValue->GetSchemeId(), 
-                                                                                  pCdmMember->GetClassReference(), 
-                                                                                  nullptr);
+  if(CHKPTR(pCdmMember))
+  {
+     auto pContainer =
+             CwmsContainerSelectionIf::GetObjectContainer(pCdmMember->GetSchemeId(),
+                                                          pCdmMember->GetClassReference(),
+                                                          nullptr);
 
-         if(pContainer)
+     if(pContainer)
+     {
+         m_lContainerId = pContainer->GetId();
+
+         if (m_rpCdmValue)
          {
             ((CdmValueContainerRef*)m_rpCdmValue)->SetValue(pContainer);
             SetValue(m_rpCdmValue);
          }
-      }
-   }
+         else
+         {
+             m_pqleEdit->setText(pContainer->GetCaption());
+         }
+     }
+  }
+
 }
 
 void CoedtwContainerRef::ClearClickedSlot()
 {
-   if(CHKPTR(m_rpCdmValue))
+    m_lContainerId = 0;
+
+   if(m_rpCdmValue)
    {
       const CdmMember* pCdmMember = m_rpCdmValue->GetMember();
 
@@ -248,14 +227,14 @@ void CoedtwContainerRef::ClearClickedSlot()
         SetValue(m_rpCdmValue);
       }
    }
+   else
+   {
+       m_lContainerId = 0;
+       m_pqleEdit->setText("");
+   }
 }
 
-/** +-=---------------------------------------------------------So 8. Jan 12:36:35 2006-----------*
- * @method  CoedtwContainerRef::EditClickedSlot             // private, slots                    *
- * @return  void                                             //                                   *
- * @comment This slot will be called if the user wants to view the obejctlist.                    *
- *----------------last changed: Wolfgang Graßhof----------------So 8. Jan 12:36:35 2006-----------*/
-void CoedtwContainerRef::EditClickedSlot(  )
+void CoedtwContainerRef::EditClickedSlot()
 {
    if(CHKPTR(m_rpCdmValue))
    {
@@ -298,12 +277,7 @@ void CoedtwContainerRef::EditClickedSlot(  )
    }
 }
 
-/** +-=---------------------------------------------------------Fri Dec 12 10:35:57 2003----------*
- * @method  CoedtwContainerRef::SetReadOnly                 // public, virtual                   *
- * @return  void                                             //                                   *
- * @comment This method sets the current Value widget in ReadOnlymode.                            *
- *---------------------------------------------------------------Fri Dec 12 10:35:57 2003---------*/
-void CoedtwContainerRef::SetReadOnly(  )
+void CoedtwContainerRef::SetReadOnly()
 {
    if (m_pqpbChange)
    {
@@ -327,4 +301,32 @@ void CoedtwContainerRef::SetEditable()
     {
        m_pObjectListEditor->SetReadOnly(false);
     }
+}
+
+QWidget* CoedtwContainerRef::GetSearchWidget(QWidget* p_pqwParent)
+{
+   auto pWidget = GetEditWidget(p_pqwParent);
+   m_pqpbView->hide();
+   return pWidget;
+}
+
+void CoedtwContainerRef::AddQueryElement(CdmQueryElement* p_pCdmQueryElementParent)
+{
+   if (CHKPTR(p_pCdmQueryElementParent))
+   {
+      if (m_lContainerId > 0)
+      {
+         CdmQueryElement* pCdmQueryElement = new CdmQueryElement(p_pCdmQueryElementParent->GetQuery(),
+                                                                 eDmQueryElementTypeCompare,
+                                                                 eDmQueryCompareTypeEqual);
+
+         pCdmQueryElement->SetComparisonValue(m_qstrKeyname, m_lContainerId);
+         p_pCdmQueryElementParent->AddChild(pCdmQueryElement);
+      }
+   }
+}
+
+void CoedtwContainerRef::SetSearchDeaultValue(QString p_qstrDefault)
+{
+   m_pqleEdit->setText(p_qstrDefault);
 }

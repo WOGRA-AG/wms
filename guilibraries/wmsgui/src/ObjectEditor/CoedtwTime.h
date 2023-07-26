@@ -31,12 +31,13 @@ private:
 public:
     CoedtwTime(CdmValue* p_pCdmValue, QWidget* p_pqwParent = NULL);
     CoedtwTime(const CdmObject* pEventObject, CdmValue* p_pCdmValue, QWidget* p_pqwParent = NULL);
+    CoedtwTime(const CdmMember* p_pCdmMember, QString p_qstrKeyname, QWidget* p_pqwParent = NULL);
     virtual ~CoedtwTime();
     QWidget* GetEditWidget(QWidget* p_pqwParent);
     virtual void SetSearchDeaultValue(QString p_qstrDefault);
     virtual void SetReadOnly();
     virtual void SetEditable();
-    CoedtwTime( CdmMember* p_pCdmMember, QString p_qstrKeyname, QWidget* p_pqwParent = NULL);
+
     virtual QWidget* GetSearchWidget(QWidget* p_pqwParent);
     virtual void AddQueryElement(CdmQueryElement* p_pCdmQueryElementParent);
 

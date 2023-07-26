@@ -24,7 +24,7 @@ class CdmClass;
 
 // defines
 #define SCOPED_QUERY(a,b) QScopedPointer<CdmQuery> a(CdmQueryBuilder::ExecuteQuery(b));
-
+#define OBJECT_DATA "Object Data"
 /*
  * This class implements the queries for finding
  * datas to an objectlist.

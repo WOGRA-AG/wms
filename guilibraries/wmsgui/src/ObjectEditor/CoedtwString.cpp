@@ -44,7 +44,7 @@ CoedtwString::CoedtwString(const CdmObject *pCdmEventObject, CdmValue *p_pCdmVal
          }
 }
 
-CoedtwString::CoedtwString(CdmMember* p_pCdmMember, QString p_qstrKeyname, QWidget* p_pqwParent)
+CoedtwString::CoedtwString(const CdmMember *p_pCdmMember, QString p_qstrKeyname, QWidget* p_pqwParent)
    : CoeValueWidget(p_pCdmMember, p_qstrKeyname, p_pqwParent)   
 {
    m_pqleEdit = nullptr;

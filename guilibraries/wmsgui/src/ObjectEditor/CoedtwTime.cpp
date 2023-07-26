@@ -39,7 +39,7 @@ CoedtwTime::CoedtwTime(const CdmObject* pEventObject, CdmValue* p_pCdmValue, QWi
 
 }
 
-CoedtwTime::CoedtwTime(CdmMember* p_pCdmMember, QString p_qstrKeyname, QWidget* p_pqwParent)
+CoedtwTime::CoedtwTime(const CdmMember *p_pCdmMember, QString p_qstrKeyname, QWidget* p_pqwParent)
 : CoeValueWidget(p_pCdmMember, p_qstrKeyname, p_pqwParent),
   m_pqdeTime(nullptr),
   m_pqcbComboBox(nullptr),

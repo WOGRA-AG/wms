@@ -65,7 +65,7 @@ void CdmEnhancedQueryProxy::sort(int p_iColumn, Qt::SortOrder p_eSortOrder)
 
         QString qstrColKeyname(m_pCdmQuery->GetKeynameAt(p_iColumn));
 
-        if (!qstrColKeyname.isEmpty())
+        if (!qstrColKeyname.isEmpty() && qstrColKeyname != OBJECT_DATA)
         {
             m_qstrOrderBy.append(qstrColKeyname);
         }
