@@ -44,7 +44,6 @@
 #include "CwmsHelp.h"
 #include "CwmsReportManager.h"
 #include "CwmsPrintingTemplate.h"
-#include "IwmsPrinting.h"
 #include "CwmsTreeWidgetHelper.h"
 #include "CwmsguiObjectEditorSelector.h"
 #include "CwmsObjectListEditorWidgetIf.h"

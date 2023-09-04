@@ -9,7 +9,6 @@
 #include "wmsgui.h"
 #include "CdmModelElement.h"
 #include "ui_cwmsguiobjecteditor.h"
-#include "IdmEventStoreManager.h"
 
 // defines
 #ifndef NEW

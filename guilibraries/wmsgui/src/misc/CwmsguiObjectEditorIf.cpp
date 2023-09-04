@@ -6,22 +6,10 @@
 #include "CdmLogging.h"
 #include "CdmObject.h"
 #include "CdmClass.h"
-#include "CdmQueryEnhanced.h"
-#include "CdmDataProvider.h"
-#include "CdmValue.h"
-#include "CdmContainerManager.h"
 #include "CdmObjectContainer.h"
-#include "CdmSessionManager.h"
-#include "CdmSession.h"
-#include "CwmsJson.h"
 #include "CdmExecutor.h"
-#include "CdmExecutorFunction.h"
-
-// WMSBASETOOLS Includes
-#include "CwmsbtSessionManager.h"
 
 // own Includes
-#include "CwmsJournalViewer.h"
 #include "CwmsguiValidator.h"
 #include "CwmsguiObjectEditorIf.h"
 
