@@ -106,7 +106,7 @@ QString CwmsQueryModelExportCsv::ExportHeader(QAbstractItemModel& p_rModel)
     QString qstrHeader;
     int iColumnCount = p_rModel.columnCount();
 
-    qstrHeader = p_rModel.headerData(0, Qt::Vertical, Qt::DisplayRole).toString();
+    qstrHeader = "Index";//p_rModel.headerData(0, Qt::Vertical, Qt::DisplayRole).toString();
 
     if (!qstrHeader.isEmpty())
     {
