@@ -30,6 +30,7 @@ class WMSGUI_API CwmsObjectBinder
 private:
     CdmObjectAdaptor m_cObjectAdaptor;
     QMap<QWidget*,QString> m_qmBindings;
+    QMap<QString, QString> m_qmContainerBindings;
     bool m_bUseLableForCaption;
 
 public:
@@ -37,6 +38,7 @@ public:
     virtual ~CwmsObjectBinder();
     void BindValue(QWidget* p_pqwWidget);
     void BindValue(QString p_qstrValue, QWidget *p_pqwWidget);
+    void BindValue(QString p_qstrValue, QWidget *p_pqwWidget, QString p_qstrContainer);
     void FillData();
     void RefreshValue(QString& p_qstrMemberName);
     void SaveData();

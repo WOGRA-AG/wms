@@ -22,13 +22,11 @@
 #include "CumUser.h"
 #include "CumUserGroup.h"
 #include "CdmValue.h"
-#include "CdmValueBinaryDocument.h"
 #include "CdmValueCharacterDocument.h"
 #include "CdmValueFloat.h"
 #include "CdmValueBool.h"
 #include "CdmValueCounter.h"
 #include "CdmValueDate.h"
-#include "CdmJournalItem.h"
 #include "CdmValueDateTime.h"
 #include "CdmValueDouble.h"
 #include "CdmValueInt.h"
@@ -48,6 +46,7 @@
 #include "CdmQueryBuilder.h"
 
 #include "CwmsObjectBinder.h"
+#include "cwmsobjectchoicecombobox.h"
 
 #define WMS_NO_RIGHTS "keine Berechtigung"
 
@@ -122,6 +121,19 @@ void CwmsObjectBinder::BindValue(QString p_qstrValue, QWidget *p_pqwWidget)
     if (m_cObjectAdaptor.GetValue(p_qstrValue) != nullptr && p_pqwWidget != nullptr)
     {
         m_qmBindings.insert(p_pqwWidget, p_qstrValue);
+    }
+    else
+    {
+        WARNING("Value " + p_qstrValue + " not found or Widget is null");
+    }
+}
+
+void CwmsObjectBinder::BindValue(QString p_qstrValue, QWidget *p_pqwWidget, QString p_qstrContainer)
+{
+    if (m_cObjectAdaptor.GetValue(p_qstrValue) != nullptr && p_pqwWidget != nullptr)
+    {
+        m_qmBindings.insert(p_pqwWidget, p_qstrValue);
+        m_qmContainerBindings.insert(p_qstrValue, p_qstrContainer);
     }
     else
     {
@@ -1334,7 +1346,7 @@ void CwmsObjectBinder::FillData(CdmValueUserGroup* p_pValue, QWidget* p_pWidget)
         }
         else
         {
-            ERR(QString("Unsupported Widget Type %1 for Value %2").arg(qstrWidgetType).arg(p_pValue->GetKeyname()));
+            ERR(QString("Unsupported Widget Type %1 for Value %2").arg(qstrWidgetType, p_pValue->GetKeyname()));
         }
     }
 }
@@ -1361,14 +1373,25 @@ void CwmsObjectBinder::FillData(CdmValueObjectRef *p_pValue, QWidget *p_pWidget)
         else if(qstrWidgetType == "QComboBox" || qstrWidgetType == "CwmsObjectChoiceComboBox")
         {
             auto pEdit = dynamic_cast<QComboBox*>(p_pWidget);
+
             if(CHKPTR(pEdit))
             {
                 pEdit->addItem("-", "");
 
-                QString qstrWql = QString("SELECT FROM \"%1.class\"").arg(p_pValue->GetClass()->GetKeyname());
+                QString qstrWql;
+
+                if (m_qmContainerBindings.contains(p_pValue->GetKeyname()))
+                {
+                    qstrWql = QString("SELECT FROM \"%1\"").arg(m_qmContainerBindings[p_pValue->GetKeyname()]);
+                }
+                else
+                {
+                    qstrWql = QString("SELECT FROM \"%1.class\"").arg(p_pValue->GetClass()->GetKeyname());
+                }
 
                 QScopedPointer<CdmQuery> pQuery(CdmQueryBuilder::ExecuteQuery(qstrWql));
                 int lCount = pQuery->GetResultCount();
+
                 for(int i = 0; i < lCount; i++)
                 {
                     CdmObject *pObject = pQuery->GetObjectAt(i);
@@ -1973,6 +1996,15 @@ CdmObject* CwmsObjectBinder::GetSelectedObject(QWidget* p_pWidget, QString p_qst
                     }
                 }
             }
+            else if(qstrWidgetType == "CwmsObjectChoiceComboBox")
+            {
+                auto pEdit = dynamic_cast<CwmsObjectChoiceComboBox*>(p_pWidget);
+
+                if (CHKPTR(pEdit))
+                {
+                    pObject = pEdit->GetSelectedObject();
+                }
+            }
         }
     }
 
@@ -1987,7 +2019,7 @@ void CwmsObjectBinder::SaveData(CdmValueObjectRef *p_pValue, QWidget *p_pWidget)
         {
             QString qstrWidgetType = p_pWidget->metaObject()->className();
 
-            if (qstrWidgetType == "QComboBox")
+            if (qstrWidgetType == "QComboBox" || qstrWidgetType == "CwmsObjectChoiceComboBox")
             {
                 auto pEdit = GetSelectedObject(p_pWidget, p_pValue->GetKeyname());
                 p_pValue->SetValue(pEdit);
@@ -2026,9 +2058,7 @@ CdmObject* CwmsObjectBinder::SearchValueObject(CdmValueObjectRef *p_pValue, QStr
             QString qstrCaptionMember = pClass->GetCaptionMemberKeyname();
             // first step, check if there is a unique result.
             QString qstrWql = QString("SELECT FROM \"%1.class\" where %2 like \"%%3%\"")
-                    .arg(pClass->GetKeyname())
-                    .arg(qstrCaptionMember)
-                    .arg(qstrValue);
+                    .arg(pClass->GetKeyname(), qstrCaptionMember, qstrValue);
 
             QScopedPointer<CdmQuery> pQuery(CdmQueryBuilder::ExecuteQuery(qstrWql));
             int iCount = pQuery->GetResultCount();
