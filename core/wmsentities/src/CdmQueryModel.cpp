@@ -315,7 +315,7 @@ QModelIndexList CdmQueryModel::getSelection(QAbstractItemView* p_pqItemView, QMo
     {
         QItemSelectionModel* pQItemSelectionModel = p_pqItemView->selectionModel();
 
-        if (CHKPTR(pQItemSelectionModel))
+        if (pQItemSelectionModel)
         {
             for (int row = 0; row < rowCount(p_Index); ++row)
             {
