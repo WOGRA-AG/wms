@@ -12,7 +12,7 @@
 
 // Own Includes
 #include "datamanager.h"
-#include "CdmQueryEnhanced.h"
+#include "CdmQuery.h"
 #include "CdmQueryElement.h"
 
 

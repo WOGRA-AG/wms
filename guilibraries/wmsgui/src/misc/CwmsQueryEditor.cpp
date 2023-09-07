@@ -18,7 +18,7 @@
 #include "CdmObjectContainer.h"
 #include "CdmClass.h"
 #include "CdmQueryElement.h"
-#include "CdmQueryEnhanced.h"
+#include "CdmQuery.h"
 #include "CdmObject.h"
 
 // Basetools includes

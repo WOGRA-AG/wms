@@ -29,7 +29,7 @@
 #include "CdmClass.h"
 #include "CdmObjectContainer.h"
 #include "CdmLogging.h"
-#include "CdmQueryEnhanced.h"
+#include "CdmQuery.h"
 #include "CdmQueryBuilder.h"
 #include "CdmMessageManager.h"
 
@@ -261,7 +261,7 @@ void CwmsReportManager::GetClassesWithReports(QStringList& p_rqlClasses)
 {
     CwmsPrintingTemplate cPrintingTemplate;
     QString qstrQuery = "select Class from TechnicalReports";
-    CdmQueryEnhanced* pQuery = (CdmQueryEnhanced*)CdmQueryBuilder::ExecuteQuery(qstrQuery);
+    CdmQuery* pQuery = CdmQueryBuilder::ExecuteQuery(qstrQuery);
 
     if (pQuery)
     {
@@ -283,29 +283,29 @@ void CwmsReportManager::GetClassesWithReports(QStringList& p_rqlClasses)
 
 /** +-=---------------------------------------------------------Mi 20. Feb 16:21:19 2013----------*
  * @method  CwmsReportManager::GetReportsByClassKeyname      // public                            *
- * @return  CdmQueryEnhanced*                                //                                   *
+ * @return  CdmQuery*                                //                                   *
  * @param   QString p_qstrKeyname                            //                                   *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------Mi 20. Feb 16:21:19 2013----------*/
-CdmQueryEnhanced* CwmsReportManager::GetReportsByClassKeyname(QString p_qstrKeyname)
+CdmQuery* CwmsReportManager::GetReportsByClassKeyname(QString p_qstrKeyname)
 {
     QString qstrQuery = "select Name, Language, Type, Default from TechnicalReports where Class = \"" + p_qstrKeyname + "\"";
-    CdmQueryEnhanced* pQuery = (CdmQueryEnhanced*)CdmQueryBuilder::ExecuteQuery(qstrQuery);
+    CdmQuery* pQuery = CdmQueryBuilder::ExecuteQuery(qstrQuery);
     return pQuery;
 }
 
 /** +-=---------------------------------------------------------Mi 20. Feb 16:22:09 2013----------*
  * @method  CwmsReportManager::GetReportsByClassKeyname      // public                            *
- * @return  CdmQueryEnhanced*                                //                                   *
+ * @return  CdmQuery*                                //                                   *
  * @param   QString p_qstrKeyname                            //                                   *
  * @param   EwmsTemplateType p_eType                         //                                   *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------Mi 20. Feb 16:22:09 2013----------*/
-CdmQueryEnhanced* CwmsReportManager::GetReportsByClassKeyname(QString p_qstrKeyname,
+CdmQuery* CwmsReportManager::GetReportsByClassKeyname(QString p_qstrKeyname,
                                                               EwmsTemplateType p_eType)
 {
     CdmDataProvider* pCdmManager = CdmSessionManager::GetDataProvider();
-    CdmQueryEnhanced* pQuery = nullptr;
+    CdmQuery* pQuery = nullptr;
 
     if (pCdmManager)
     {
@@ -326,18 +326,18 @@ CdmQueryEnhanced* CwmsReportManager::GetReportsByClassKeyname(QString p_qstrKeyn
                     .arg(p_eType);
         }
 
-        pQuery = (CdmQueryEnhanced*)CdmQueryBuilder::ExecuteQuery(qstrQuery);
+        pQuery = (CdmQuery*)CdmQueryBuilder::ExecuteQuery(qstrQuery);
     }
 
     return pQuery;
 }
 
-CdmQueryEnhanced* CwmsReportManager::GetReportsByClassKeynameAndLanguage(QString p_qstrKeyname,
+CdmQuery* CwmsReportManager::GetReportsByClassKeynameAndLanguage(QString p_qstrKeyname,
                                                                          EwmsTemplateType p_eType,
                                                                          QString p_qstrLanguage)
 {
     CdmDataProvider* pCdmManager = CdmSessionManager::GetDataProvider();
-    CdmQueryEnhanced* pQuery = nullptr;
+    CdmQuery* pQuery = nullptr;
 
     if (pCdmManager)
     {
@@ -347,7 +347,7 @@ CdmQueryEnhanced* CwmsReportManager::GetReportsByClassKeynameAndLanguage(QString
                 .arg(p_eType)
                 .arg(p_qstrLanguage);
 
-        pQuery = (CdmQueryEnhanced*)CdmQueryBuilder::ExecuteQuery(qstrQuery);
+        pQuery = (CdmQuery*)CdmQueryBuilder::ExecuteQuery(qstrQuery);
     }
 
     return pQuery;
@@ -712,7 +712,7 @@ void CwmsReportManager::PrintDefaultForContainer(CdmObjectContainer* p_pContaine
 {
     CwmsReportManager cReportManager;
     QString qstrTemplate;
-    CdmQueryEnhanced* pQuery = nullptr;
+    CdmQuery* pQuery = nullptr;
 
     const CdmClass* pClass = p_pContainer->GetClass();
 
@@ -783,7 +783,7 @@ void CwmsReportManager::PrintDefaultForObject(CdmObject* p_pObject)
 {
     CwmsReportManager cReportManager;
     QString qstrTemplate;
-    CdmQueryEnhanced* pQuery = nullptr;
+    CdmQuery* pQuery = nullptr;
 
     const CdmClass* pClass = p_pObject->GetClass();
 

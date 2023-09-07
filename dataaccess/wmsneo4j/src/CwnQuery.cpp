@@ -1,7 +1,7 @@
 #include "CwnQuery.h"
 #include "CwnQueryElement.h"
 
-#include "CdmQueryEnhanced.h"
+#include "CdmQuery.h"
 #include "CdmQuery.h"
 #include "CdmClass.h"
 #include "CdmMember.h"
@@ -313,7 +313,7 @@ void CwnQuery::interpretAnswer(QVariant &Ret)
                 //DEPRICATED GROUP BY WILL REPLACE THIS IF CLAUSE
                 //if(m_rpCdmQuery->ContainsGrouping())
                 //{
-                //    CdmQueryEnhanced* pQueryEnhanced = dynamic_cast<CdmQueryEnhanced*>(m_rpCdmQuery);
+                //    CdmQuery* pQueryEnhanced = dynamic_cast<CdmQuery*>(m_rpCdmQuery);
                 //    CdmDataAccessHelper::SetQueryEnhancedResult(pQueryEnhanced, 0, rowList->at(0).toInt(), -1, -1);
                 //}
 
@@ -342,7 +342,7 @@ void CwnQuery::interpretAnswer(QVariant &Ret)
                     QVariant qVariant;
                     //qDebug() << qVariant;
 
-                    CdmQueryEnhanced* pQueryEnhanced = dynamic_cast<CdmQueryEnhanced*>(m_rpCdmQuery);
+                    CdmQuery* pQueryEnhanced = dynamic_cast<CdmQuery*>(m_rpCdmQuery);
 
                     QString keyname;
                     if(m_rpCdmQuery->ContainsGrouping())

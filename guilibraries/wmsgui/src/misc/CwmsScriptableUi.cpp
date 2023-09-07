@@ -9,7 +9,7 @@
 #include "CsaObject.h"
 #include "CsaObjectContainer.h"
 #include "CdmObjectContainer.h"
-#include "CdmQueryEnhanced.h"
+#include "CdmQuery.h"
 
 // WMS Entities Includes
 #include <CwmsExportSettings.h>

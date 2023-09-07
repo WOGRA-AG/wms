@@ -4,7 +4,7 @@
 #include <QString>
 #include <QScopedPointer>
 
-#include "CdmQueryEnhanced.h"
+#include "CdmQuery.h"
 
 #include "basetools.h"
 
@@ -16,7 +16,7 @@ private:
     QString m_qstrDateFormat;
     QMap<QString,QString> m_qmHeaderMapping;
     QMap<QString,int> m_qmMaxFieldLength;
-    QScopedPointer<CdmQueryEnhanced> m_pQuery;
+    QScopedPointer<CdmQuery> m_pQuery;
     CdmObjectContainer* m_rpContainer;
     int m_iDecimalPlaces;
 

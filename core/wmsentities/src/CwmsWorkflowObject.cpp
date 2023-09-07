@@ -5,7 +5,7 @@
 #include "CdmMessageManager.h"
 #include "CdmClass.h"
 #include "CdmLogging.h"
-#include "CdmQueryEnhanced.h"
+#include "CdmQuery.h"
 #include "CdmQueryBuilder.h"
 #include "CdmObjectContainer.h"
 #include "CdmDataProvider.h"

@@ -34,7 +34,7 @@
  * @return                                                   //                                   *
  * @param  qint64 p_lObjectId                                 //                                   *
  * @param   CdmQueryResultObject* p_pParent                  //                                   *
- * @param   CdmQueryEnhanced* p_pQuery                       //                                   *
+ * @param   CdmQuery* p_pQuery                       //                                   *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------Mo 15. Okt 08:44:50 2012----------*/
 CdmQueryResultObject::CdmQueryResultObject(qint64 p_lObjectId,
@@ -455,7 +455,7 @@ CdmObject* CdmQueryResultObject::GetObject()
 /** +-=---------------------------------------------------------Mo 15. Okt 08:47:25 2012----------*
  * @method  CdmQueryResultObject::CreateResultObject         // public, static                    *
  * @return  CdmQueryResultObject*                            //                                   *
- * @param   CdmQueryEnhanced* p_pQuery                       //                                   *
+ * @param   CdmQuery* p_pQuery                       //                                   *
  * @param   CdmQueryResultObject* p_pRoot                    //                                   *
  * @param  qint64 p_lObjectId                                 //                                   *
  * @param  qint64 p_lParentId                                 //                                   *
@@ -506,7 +506,7 @@ CdmQueryResultObject* CdmQueryResultObject::CreateResultObject(CdmQuery* p_pQuer
  * @return  CdmQueryResultObject*                            //                                   *
  * @param  qint64 p_lObjectId                                 //                                   *
  * @param   CdmQueryResultObject* p_pRoot                    //                                   *
- * @param   CdmQueryEnhanced* p_pQuery                       //                                   *
+ * @param   CdmQuery* p_pQuery                       //                                   *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------Mo 15. Okt 10:17:00 2012----------*/
 CdmQueryResultObject* CdmQueryResultObject::FindOrCreateResultObject(qint64 p_lObjectId,
@@ -537,7 +537,7 @@ CdmQueryResultObject* CdmQueryResultObject::FindOrCreateResultObject(qint64 p_lO
  * @method  CdmQueryResultObject::GetObjectParentId          // private, static                   *
  * @return qint64                                             //                                   *
  * @param  qint64 p_lObjectId                                 //                                   *
- * @param   CdmQueryEnhanced* p_pQuery                       //                                   *
+ * @param   CdmQuery* p_pQuery                       //                                   *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------Mo 15. Okt 10:17:38 2012----------*/
 qint64 CdmQueryResultObject::GetObjectParentId(qint64 p_lObjectId,qint64 p_lContainerId, CdmQuery* p_pQuery)

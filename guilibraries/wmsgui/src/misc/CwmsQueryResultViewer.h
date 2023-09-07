@@ -37,7 +37,7 @@ class WMSGUI_API CwmsQueryResultViewer : public QWidget, public Ui::CwmsQueryRes
     CwmsQueryResultViewer( QWidget* p_pqwParent);
     virtual ~CwmsQueryResultViewer( );
     void SetQuery(QString p_qstrQuery);
-    void SetQuery(CdmQueryEnhanced* p_pQuery);
+    void SetQuery(CdmQuery* p_pQuery);
     void SetModel(QAbstractItemModel *p_pModel);
     void SetView(CwmsView p_pView);
 public slots:

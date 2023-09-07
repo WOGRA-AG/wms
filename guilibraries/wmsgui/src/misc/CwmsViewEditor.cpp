@@ -6,7 +6,7 @@
 #include "CdmLogging.h"
 #include "CdmQuery.h"
 #include "CdmObjectContainer.h"
-#include "CdmQueryEnhanced.h"
+#include "CdmQuery.h"
 #include "CdmQueryBuilder.h"
 
 // own Includes
@@ -57,7 +57,7 @@ void CwmsViewEditor::CurrentTabChangedSlot()
 
       if (qstrWql.toUpper().startsWith("SELECT"))
       {
-         CdmQueryEnhanced* pCdmQuery = (CdmQueryEnhanced*)CdmQueryBuilder::BuildQuery(qstrWql);
+         CdmQuery* pCdmQuery = (CdmQuery*)CdmQueryBuilder::BuildQuery(qstrWql);
 
          if (pCdmQuery)
          {
@@ -96,7 +96,7 @@ bool CwmsViewEditor::Validate()
        {
            if (CdmQuery::IsWql(qstrWql))
            {
-               CdmQueryEnhanced* pCdmQuery = (CdmQueryEnhanced*)CdmQueryBuilder::BuildQuery(qstrWql);
+               CdmQuery* pCdmQuery = (CdmQuery*)CdmQueryBuilder::BuildQuery(qstrWql);
 
                if (pCdmQuery)
                {
@@ -167,7 +167,7 @@ void CwmsViewEditor::SaveData()
 
       if (m_cView.IsWql())
       {
-          CdmQueryEnhanced* pCdmQuery = (CdmQueryEnhanced*)CdmQueryBuilder::BuildQuery(m_cView.GetViewCommand());
+          CdmQuery* pCdmQuery = (CdmQuery*)CdmQueryBuilder::BuildQuery(m_cView.GetViewCommand());
 
           if (pCdmQuery)
           {

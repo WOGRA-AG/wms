@@ -16,7 +16,7 @@
 
 // Forwards
 class CdmQueryElement;
-class CdmQueryEnhanced;
+class CdmQuery;
 
 // TypeDefs
 
@@ -29,7 +29,7 @@ class WMSGUI_API CwmsQueryEditor : public QWidget, public Ui::CwmsQueryEditorWid
     Q_OBJECT
 
 private:
-    CdmQueryEnhanced* m_pCdmQuery;
+    CdmQuery* m_pCdmQuery;
     CdmQueryModel m_cCdmModel;
 
 public:

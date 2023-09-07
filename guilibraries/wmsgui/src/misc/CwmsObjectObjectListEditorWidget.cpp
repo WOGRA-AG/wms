@@ -16,7 +16,7 @@
 
 
 // WMS Includes
-#include "CdmQueryEnhanced.h"
+#include "CdmQuery.h"
 #include "CdmQueryBuilder.h"
 #include "CdmLogging.h"
 #include "CdmValue.h"
@@ -123,7 +123,7 @@ void CwmsObjectContainerEditorWidget::SetView(CwmsView p_cCwmsView)
 {
    if (p_cCwmsView.IsValid())
    {
-      m_pCdmQuery = (CdmQueryEnhanced*)CdmQueryBuilder::BuildQuery(p_cCwmsView.GetViewCommand());
+      m_pCdmQuery = (CdmQuery*)CdmQueryBuilder::BuildQuery(p_cCwmsView.GetViewCommand());
    }
 }
 
@@ -160,7 +160,7 @@ void CwmsObjectContainerEditorWidget::SetModule(CwmsApplicationModule p_cModule)
 
             if (pContainer)
             {
-               m_pCdmQuery = new CdmQueryEnhanced();
+               m_pCdmQuery = new CdmQuery();
                m_pCdmQuery->SetContainer(pContainer);
 
                QList<QString>::iterator qllIt = qllDisplayMembers.begin();

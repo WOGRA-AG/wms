@@ -5,7 +5,7 @@
 
 // WMS Includes
 #include "CdmLogging.h"
-#include "CdmQueryEnhanced.h"
+#include "CdmQuery.h"
 #include "CdmClass.h"
 #include "CdmMember.h"
 #include "CdmDataAccessHelper.h"
@@ -27,9 +27,9 @@
 #define OBJECT_QUERY_PLACHOLDER "$OBJ"
 #define WHERE_OBJREF_CONDITION_PLACEHOLDER "$WHERE"
 
-CdbQueryEnhancedDoubleRequest::CdbQueryEnhancedDoubleRequest(CdmQueryEnhanced* p_pCdmQueryEnhanced,
+CdbQueryEnhancedDoubleRequest::CdbQueryEnhancedDoubleRequest(CdmQuery* p_pCdmQuery,
                                                              CdbDataAccess* p_pCdbDataAccess)
-    : m_rpCdmQuery(p_pCdmQueryEnhanced),
+    : m_rpCdmQuery(p_pCdmQuery),
       m_rpCdbDataAccess(p_pCdbDataAccess),
       m_iKeynameCount(0),
       m_qmKeynames(),

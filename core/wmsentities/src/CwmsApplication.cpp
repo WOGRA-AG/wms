@@ -6,7 +6,7 @@
 #include "CdmLogging.h"
 #include "CdmObjectContainer.h"
 #include "CdmContainerManager.h"
-#include "CdmQueryEnhanced.h"
+#include "CdmQuery.h"
 #include "CdmQueryBuilder.h"
 #include "CdmObject.h"
 #include "CdmDataProvider.h"
@@ -288,7 +288,7 @@ bool CwmsApplication::Delete(CwmsApplication cCwmsApplication)
 QString CwmsApplication::GetCurrentUserLanguage()
 {
    QString qstrLanguage;
-   CdmQueryEnhanced* pCdmQuery = CreateQuery();
+   CdmQuery* pCdmQuery = CreateQuery();
 
    if (pCdmQuery && pCdmQuery->GetResultCount() > 0)
    {
@@ -307,7 +307,7 @@ void CwmsApplication::SetCurrentUserLanguage(QString p_qstrqsLanguage)
    if (CHKPTR(pContainer))
    {
      qint64 lObjectId;
-      CdmQueryEnhanced* pCdmQuery = CreateQuery();
+      CdmQuery* pCdmQuery = CreateQuery();
 
       if (pCdmQuery && pCdmQuery->GetResultCount() > 0)
       {
@@ -333,9 +333,9 @@ void CwmsApplication::SetCurrentUserLanguage(QString p_qstrqsLanguage)
    }
 }
 
-CdmQueryEnhanced* CwmsApplication::CreateQuery()
+CdmQuery* CwmsApplication::CreateQuery()
 {
-   CdmQueryEnhanced* pCdmQuery = nullptr;
+   CdmQuery* pCdmQuery = nullptr;
    CdmObjectContainer* pContainer = GetUserLanguages();
 
    if (CHKPTR(pContainer))
@@ -344,7 +344,7 @@ CdmQueryEnhanced* CwmsApplication::CreateQuery()
          pContainer->GetKeyname() + 
          "\" where User = " + QString::number(pContainer->GetUserId());
 
-      pCdmQuery = (CdmQueryEnhanced*)CdmQueryBuilder::ExecuteQuery(qstrWql);
+      pCdmQuery = CdmQueryBuilder::ExecuteQuery(qstrWql);
    }
 
    return pCdmQuery;
@@ -375,7 +375,7 @@ QStringList CwmsApplication::GetModuleList()
                QString("select Name, Default, Position from \"%1\" where Active = true order by Position")
                 .arg(pContainer->GetKeyname());
 
-       CdmQueryEnhanced* pCdmQuery = (CdmQueryEnhanced*)CdmQueryBuilder::ExecuteQuery(qstrWql);
+       CdmQuery* pCdmQuery = CdmQueryBuilder::ExecuteQuery(qstrWql);
        int iResultCount = pCdmQuery->GetResultCount();
 
        for (int iCounter = 0; iCounter < iResultCount; ++iCounter)
@@ -475,7 +475,7 @@ CdmObject* CwmsApplication::LoadDefaultModule()
    CdmObject* pDefaultModule = 0;
 
    QString qstrWql = "select  from \"" + GetModulesContainerName() + "\" where and(Default = true, Active = true)";
-   CdmQuery* pCdmQuery = (CdmQueryEnhanced*)CdmQueryBuilder::ExecuteQuery(qstrWql);
+   CdmQuery* pCdmQuery = CdmQueryBuilder::ExecuteQuery(qstrWql);
    int iResultCount = pCdmQuery->GetResultCount();
 
    if (iResultCount > 0)

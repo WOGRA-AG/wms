@@ -18,7 +18,7 @@
 // WMS Includes
 #include "CdmObject.h"
 #include "CdmObjectContainer.h"
-#include "CdmQueryEnhanced.h"
+#include "CdmQuery.h"
 #include "CdmClassManager.h"
 #include "CdmClass.h"
 #include "CdmClassMethod.h"

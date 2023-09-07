@@ -119,10 +119,10 @@ class CwmsMiscDataFiller : public QObject
     * @method  CwmsMiscDataFiller::FillReports               // private, static                   *
     * @return  void                                          //                                   *
     * @param   QTreeWidgetItem* p_pParent                    //                                   *
-    * @param   CdmQueryEnhanced* pQuery                      //                                   *
+    * @param   CdmQuery* pQuery                      //                                   *
     * @comment                                                                                    *
     *----------------last changed: -----------------------------Fr 20. Sep 16:33:03 2013----------*/
-    static void FillReports(QTreeWidgetItem* p_pParent, CdmQueryEnhanced* pQuery);
+    static void FillReports(QTreeWidgetItem* p_pParent, CdmQuery* pQuery);
 
    public:
    /** +-=---------------------------------------------------------Fr 20. Sep 16:34:35 2013-------*

@@ -15,7 +15,7 @@
 
 
 // Forwards
-class CdmQueryEnhanced;
+class CdmQuery;
 class CdbDataAccess;
 class CdmMember;
 
@@ -29,7 +29,7 @@ class CdmMember;
 class CdbQueryEnhancedDefault
 {
 private:
-    CdmQueryEnhanced* m_rpCdmQuery;
+    CdmQuery* m_rpCdmQuery;
     CdbDataAccess* m_rpCdbDataAccess;
     int m_iKeynameCount;
     QMap<QString, int> m_qmKeynames;
@@ -38,7 +38,7 @@ private:
     QMultiMap<int, QPair<QList<const CdmMember*>, QList<const CdmMember*>>> m_qmmObjectRefMembers;
 
 public:
-    CdbQueryEnhancedDefault(CdmQueryEnhanced* p_pCdmQueryEnhanced, CdbDataAccess* p_pCdbDataAccess);
+    CdbQueryEnhancedDefault(CdmQuery* p_pCdmQuery, CdbDataAccess* p_pCdbDataAccess);
     virtual ~CdbQueryEnhancedDefault( );
    qint64 Execute();
     virtual QString GenerateSql();

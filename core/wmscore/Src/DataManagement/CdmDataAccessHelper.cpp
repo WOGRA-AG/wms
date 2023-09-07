@@ -34,7 +34,7 @@
 #include "CdmClassManager.h"
 #include "CdmClass.h"
 #include "CdmQuery.h"
-#include "CdmQueryEnhanced.h"
+#include "CdmQuery.h"
 #include "CdmQueryElement.h"
 #include "CdmValue.h"
 #include "CdmDataAccessHelper.h"

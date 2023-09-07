@@ -12,7 +12,7 @@
 #include "wmsdefines.h"
 #include "CdmLogging.h"
 #include "CdmScheme.h"
-#include "CdmQueryEnhanced.h"
+#include "CdmQuery.h"
 #include "CdmQueryBuilder.h"
 #include "CdmExecutor.h"
 #include "CdmObject.h"
@@ -223,7 +223,7 @@ void CwmsPluginManager::LoadPrintingPlugin()
                 .arg(pContainer->GetKeyname())
                 .arg(eWmsPluginTypePrinting);
 
-        QScopedPointer<CdmQueryEnhanced> pQuery(dynamic_cast<CdmQueryEnhanced*>(CdmQueryBuilder::ExecuteQuery(qstrWql, pContainer)));
+        QScopedPointer<CdmQuery> pQuery(CdmQueryBuilder::ExecuteQuery(qstrWql, pContainer));
 
         if (CHKPTR(pQuery))
         {
@@ -387,7 +387,7 @@ void CwmsPluginManager::InstallFunctionPlugins(CdmObjectContainer* pContainer, Q
                 .arg(pContainer->GetKeyname())
                 .arg(eWmsPluginTypeFunction);
 
-        CdmQueryEnhanced* pQuery = static_cast<CdmQueryEnhanced*>(CdmQueryBuilder::ExecuteQuery(qstrWql, pContainer));
+        CdmQuery* pQuery = CdmQueryBuilder::ExecuteQuery(qstrWql, pContainer);
 
         if (CHKPTR(pQuery))
         {

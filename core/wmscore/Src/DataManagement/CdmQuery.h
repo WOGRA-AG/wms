@@ -24,6 +24,7 @@ class CdmClass;
 
 // defines
 #define SCOPED_QUERY(a,b) QScopedPointer<CdmQuery> a(CdmQueryBuilder::ExecuteQuery(b));
+#define SCOPED_ENHANCE_QUERY(a,b) QScopedPointer<CdmQuery> a(dynamic_cast<CdmQuery*>(CdmQueryBuilder::ExecuteQuery(b)));
 #define OBJECT_DATA "Object Data"
 /*
  * This class implements the queries for finding

@@ -20,7 +20,7 @@
 
 // Forwards
 class CdmObjectContainer;
-class CdmQueryEnhanced;
+class CdmQuery;
 
 // Enumerations
 

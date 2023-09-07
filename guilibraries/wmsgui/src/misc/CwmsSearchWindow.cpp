@@ -239,7 +239,7 @@ void CwmsSearchWindow::SearchSlot()
 {
     QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
     QTime qStart = QTime::currentTime();
-   m_pCdmQuery = new CdmQueryEnhanced();
+   m_pCdmQuery = new CdmQuery();
    m_pCwmsSearchWidget->CreateQuery(*m_pCdmQuery);
    AddResultMembers();
    // change of ownership of m_pCdmQuery
@@ -362,7 +362,7 @@ void CwmsSearchWindow::Print()
    CwmsReportManager cReportManager;  
    QString qstrTemplate;
    CdmObjectContainer* pList = m_pCdmQuery->GetContainer();
-   CdmQueryEnhanced* pQuery = nullptr;
+   CdmQuery* pQuery = nullptr;
 
    if (CHKPTR(pList))
    {

@@ -64,13 +64,13 @@ qint64 CdbQuery::ExecuteEnhanced()
         if (m_eDbQueryEnhancedExecutionMode == eDbQueryEnhancedExecutionModeSingleRequest)
         {
             m_rpCdmQuery->AddDatabaseCommand("Mode: eDbQueryEnhancedExecutionModeDefault");
-            CdbQueryEnhancedDefault cCdbQuery((CdmQueryEnhanced*)m_rpCdmQuery, m_rpCdbDataAccess);
+            CdbQueryEnhancedDefault cCdbQuery((CdmQuery*)m_rpCdmQuery, m_rpCdbDataAccess);
             lRet = cCdbQuery.Execute();
         }
         else if (m_eDbQueryEnhancedExecutionMode == eDbQueryEnhancedExecutionModeDoubleRequest)
         {
             m_rpCdmQuery->AddDatabaseCommand("Mode: eDbQueryEnhancedExecutionModeDoubleRequest");
-            CdbQueryEnhancedDoubleRequest cCdbQuery((CdmQueryEnhanced*)m_rpCdmQuery, m_rpCdbDataAccess);
+            CdbQueryEnhancedDoubleRequest cCdbQuery((CdmQuery*)m_rpCdmQuery, m_rpCdbDataAccess);
             lRet = cCdbQuery.Execute();
         }
     }
@@ -196,7 +196,7 @@ QString CdbQuery::GenerateSql()
     {
         if (m_rpCdmQuery->HasResultElements())
         {
-            CdbQueryEnhancedDefault cCdbQueryEnhanced((CdmQueryEnhanced*)m_rpCdmQuery, m_rpCdbDataAccess);
+            CdbQueryEnhancedDefault cCdbQueryEnhanced((CdmQuery*)m_rpCdmQuery, m_rpCdbDataAccess);
             qstrRet = cCdbQueryEnhanced.GenerateSql();
         }
         else

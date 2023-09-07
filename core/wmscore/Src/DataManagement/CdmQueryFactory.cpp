@@ -5,13 +5,12 @@
 // System and QT Includes
 
 // WMS Commons Includes
-#include "CwmsTimeMeassurement.h"
 #include "CwmsUtilities.h"
 
 // antlr4::Lexer::emit() : Avoid conflict with emit keyword
 #undef emit
 // own Includes
-#include "antlr4-runtime.h"
+//#include "antlr4-runtime.h"
 #include "WmsQL1Lexer.h"
 #include "WmsQL1Parser.h"
 #include "CdmAntlrErrorListener.h"
@@ -19,7 +18,7 @@
 #include "CdmSessionManager.h"
 #include "CdmDataProvider.h"
 #include "CdmQuery.h"
-#include "CdmQueryEnhanced.h"
+#include "CdmQuery.h"
 #include "CdmQueryElement.h"
 #include "CdmQueryFactory.h"
 
@@ -375,29 +374,11 @@ bool CdmQueryFactory::CheckQueryPointer(bool p_bEnhanced)
 
     if (m_pCdmQuery)
     {
-        if (p_bEnhanced)
-        {
-            CdmQueryEnhanced* newQuery = dynamic_cast<CdmQueryEnhanced*>(m_pCdmQuery);
-            if (!newQuery)
-            {
-                newQuery = new CdmQueryEnhanced(*m_pCdmQuery);
-                DELPTR(m_pCdmQuery);
-                m_pCdmQuery = newQuery;
-            }
-        }
-
         bRet = m_pCdmQuery->IsValid();
     }
     else
     {
-        if (p_bEnhanced)
-        {
-            m_pCdmQuery = new CdmQueryEnhanced();
-        }
-        else
-        {
-            m_pCdmQuery = new CdmQuery();
-        }
+        m_pCdmQuery = new CdmQuery();
 
         if (m_rpContainer)
         {

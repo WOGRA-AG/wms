@@ -5,7 +5,6 @@
 
 // Own Includes
 #include "CdmLogging.h"
-#include "CdmQueryEnhanced.h"
 #include "CdmQueryResultObject.h"
 #include "CdmQueryBuilder.h"
 #include "CdmObjectContainer.h"
@@ -25,7 +24,7 @@ CdmQueryModel::CdmQueryModel()
       m_iExecutionMode(-1),
       m_pCdmQuery(nullptr)
 {
-    m_pCdmQuery = new CdmQueryEnhanced(this);
+    m_pCdmQuery = new CdmQuery(this);
 }
 
 CdmQueryModel::~CdmQueryModel()

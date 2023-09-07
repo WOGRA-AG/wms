@@ -429,7 +429,7 @@ QStringList CwmsImExportManager::LoadConfigurationNames(qint64 p_lClassId,
       QString qstrWql;
       qstrWql = "select Name from \"" + p_pObjectList->GetKeyname() + "\" where ClassId = " + QString::number(p_lClassId);
 
-      CdmQueryEnhanced* pQuery = (CdmQueryEnhanced*)CdmQueryBuilder::ExecuteQuery(qstrWql);
+      CdmQuery* pQuery = CdmQueryBuilder::ExecuteQuery(qstrWql);
 
       if (CHKPTR(pQuery))
       {
@@ -460,7 +460,7 @@ QMap<QString, QString> CwmsImExportManager::LoadConfigurations(qint64 p_lClassId
       QString qstrWql;
       qstrWql = "select Name, Configuration from \"" + p_pObjectList->GetKeyname() + "\" where ClassId = " + QString::number(p_lClassId);
 
-      CdmQueryEnhanced* pQuery = (CdmQueryEnhanced*)CdmQueryBuilder::ExecuteQuery(qstrWql);
+      CdmQuery* pQuery = CdmQueryBuilder::ExecuteQuery(qstrWql);
 
       if (CHKPTR(pQuery))
       {
@@ -494,7 +494,7 @@ QString CwmsImExportManager::GetConfiguration(QString p_qstrName,
       QString qstrWql;
       qstrWql = "select Configuration from \"" + p_pObjectList->GetKeyname() + "\" where and(ClassId = " + QString::number(p_lClassId)+ ", Name = \"" + p_qstrName + "\")";
 
-      CdmQueryEnhanced* pQuery = (CdmQueryEnhanced*)CdmQueryBuilder::ExecuteQuery(qstrWql);
+      CdmQuery* pQuery = CdmQueryBuilder::ExecuteQuery(qstrWql);
 
       if (CHKPTR(pQuery))
       {

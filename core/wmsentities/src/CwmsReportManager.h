@@ -119,21 +119,21 @@ class BASETOOLS_API CwmsReportManager : public QObject
    public:
    /** +-=---------------------------------------------------------Mi 20. Feb 16:21:19 2013-------*
     * @method  CwmsReportManager::GetReportsByClassKeyname   // public                            *
-    * @return  CdmQueryEnhanced*                             //                                   *
+    * @return  CdmQuery*                             //                                   *
     * @param   QString p_qstrKeyname                         //                                   *
     * @comment                                                                                    *
     *----------------last changed: -----------------------------Mi 20. Feb 16:21:19 2013----------*/
-    CdmQueryEnhanced* GetReportsByClassKeyname(QString p_qstrKeyname);
+    CdmQuery* GetReportsByClassKeyname(QString p_qstrKeyname);
 
    public:
    /** +-=---------------------------------------------------------Mi 20. Feb 16:22:09 2013-------*
     * @method  CwmsReportManager::GetReportsByClassKeyname   // public                            *
-    * @return  CdmQueryEnhanced*                             //                                   *
+    * @return  CdmQuery*                             //                                   *
     * @param   QString p_qstrKeyname                         //                                   *
     * @param   EwmsTemplateType p_eType                      //                                   *
     * @comment                                                                                    *
     *----------------last changed: -----------------------------Mi 20. Feb 16:22:09 2013----------*/
-    CdmQueryEnhanced* GetReportsByClassKeyname(QString p_qstrKeyname, EwmsTemplateType p_eType);
+    CdmQuery* GetReportsByClassKeyname(QString p_qstrKeyname, EwmsTemplateType p_eType);
 
    public:
    /** +-=---------------------------------------------------------Di 26. Feb 15:57:00 2013-------*
@@ -213,7 +213,7 @@ public:
     static void LoadReportEngine();
     static void LoadPlugin(QString p_qstrFileName);
     static void RemovePlugin(QString p_qstrName);
-    CdmQueryEnhanced *GetReportsByClassKeynameAndLanguage(QString p_qstrKeyname, EwmsTemplateType p_eType, QString p_qstrLanguage);
+    CdmQuery *GetReportsByClassKeynameAndLanguage(QString p_qstrKeyname, EwmsTemplateType p_eType, QString p_qstrLanguage);
     static void PrintDefaultForContainer(CdmObjectContainer *p_pContainer);
     static void PrintDefaultForObject(CdmObject *p_pObject);
     static void Print(CdmObject *p_pCdmTemplateObject, CdmObjectContainer *p_pContainer);

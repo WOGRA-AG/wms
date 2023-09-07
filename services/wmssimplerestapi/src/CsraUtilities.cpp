@@ -19,29 +19,29 @@
 // Own Includes
 #include "CsraUtilities.h"
 
-CdmQueryEnhanced* CsraUtilities::buildAndExecuteQuery(const CdmClass* p_pClass, CdmObjectContainer* p_pContainer, QString& qstrCondition)
+CdmQuery* CsraUtilities::buildAndExecuteQuery(const CdmClass* p_pClass, CdmObjectContainer* p_pContainer, QString& qstrCondition)
 {
     QString qstrQuery = generateWql(p_pClass, p_pContainer, qstrCondition);
-    return dynamic_cast<CdmQueryEnhanced*> (CdmQueryBuilder::ExecuteQuery(qstrQuery));
+    return dynamic_cast<CdmQuery*> (CdmQueryBuilder::ExecuteQuery(qstrQuery));
 }
 
-CdmQueryEnhanced* CsraUtilities::buildAndExecuteQuery(const CdmClass* p_pClass, CdmObjectContainer* p_pContainer)
+CdmQuery* CsraUtilities::buildAndExecuteQuery(const CdmClass* p_pClass, CdmObjectContainer* p_pContainer)
 {
     QString qstrQuery = generateWql(p_pClass, p_pContainer, "");
-    return dynamic_cast<CdmQueryEnhanced*> (CdmQueryBuilder::ExecuteQuery(qstrQuery));
+    return dynamic_cast<CdmQuery*> (CdmQueryBuilder::ExecuteQuery(qstrQuery));
 }
 
-CdmQueryEnhanced* CsraUtilities::buildAndExecuteQuery(const CdmClass* p_pClass, CdmObjectContainer* p_pContainer, int p_iFrom, int p_iTo)
+CdmQuery* CsraUtilities::buildAndExecuteQuery(const CdmClass* p_pClass, CdmObjectContainer* p_pContainer, int p_iFrom, int p_iTo)
 {
     QString qstrCondition;
     QString qstrQuery = generateWql(p_pClass, p_pContainer, qstrCondition, p_iFrom, p_iTo);
-    return dynamic_cast<CdmQueryEnhanced*> (CdmQueryBuilder::ExecuteQuery(qstrQuery));
+    return dynamic_cast<CdmQuery*> (CdmQueryBuilder::ExecuteQuery(qstrQuery));
 }
 
-CdmQueryEnhanced* CsraUtilities::buildAndExecuteQuery(const CdmClass* p_pClass, CdmObjectContainer* p_pContainer, QString& qstrCondition, int p_iFrom, int p_iTo)
+CdmQuery* CsraUtilities::buildAndExecuteQuery(const CdmClass* p_pClass, CdmObjectContainer* p_pContainer, QString& qstrCondition, int p_iFrom, int p_iTo)
 {
     QString qstrQuery = generateWql(p_pClass, p_pContainer, qstrCondition, p_iFrom, p_iTo);
-    return dynamic_cast<CdmQueryEnhanced*> (CdmQueryBuilder::ExecuteQuery(qstrQuery));
+    return dynamic_cast<CdmQuery*> (CdmQueryBuilder::ExecuteQuery(qstrQuery));
 }
 
 QString CsraUtilities::generateWql(const CdmClass* p_pClass, CdmObjectContainer* p_pContainer, int p_iFrom, int p_iTo)

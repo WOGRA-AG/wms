@@ -16,7 +16,7 @@
 #include "CdmClassMethod.h"
 #include "CdmClass.h"
 #include "CdmQueryBuilder.h"
-#include "CdmQueryEnhanced.h"
+#include "CdmQuery.h"
 #include "CdmMessageManager.h"
 #include <CdmLogging.h>
 #include <CdmObject.h>

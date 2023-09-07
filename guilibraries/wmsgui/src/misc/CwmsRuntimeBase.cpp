@@ -21,7 +21,7 @@
 // WMS Includes
 #include "CdmExecutor.h"
 #include "CdmExecutorAddOnManager.h"
-#include "CdmQueryEnhanced.h"
+#include "CdmQuery.h"
 #include "CdmQueryBuilder.h"
 #include "CdmMessageManager.h"
 #include "CdmScheme.h"

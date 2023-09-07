@@ -21,7 +21,7 @@
 #include "CdmObject.h"
 #include "CdmScheme.h"
 #include "CdmQuery.h"
-#include "CdmQueryEnhanced.h"
+#include "CdmQuery.h"
 #include "CdmContainerManager.h"
 #include "CdmClass.h"
 #include "CdmSession.h"

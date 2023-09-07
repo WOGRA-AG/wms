@@ -29,7 +29,7 @@
 #include "CdmClassGroup.h"
 #include "CdmClassMethod.h"
 #include "CdmMember.h"
-#include "CdmQueryEnhanced.h"
+#include "CdmQuery.h"
 #include "CdmSessionManager.h"
 #include "CdmPackage.h"
 #include "CumUser.h"

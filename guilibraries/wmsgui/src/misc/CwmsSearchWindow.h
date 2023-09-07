@@ -10,7 +10,7 @@
 #include <QList>
 
 // WMS Includes
-#include "CdmQueryEnhanced.h"
+#include "CdmQuery.h"
 #include "CdmQueryModel.h"
 
 // Own Includes
@@ -35,7 +35,7 @@ class WMSGUI_API CwmsSearchWindow : public QWidget, public Ui::CwmsSearchWindowC
     Q_OBJECT
 
 private:
-    CdmQueryEnhanced* m_pCdmQuery;
+    CdmQuery* m_pCdmQuery;
     CdmQueryModel m_CdmModel;
     CdmObject* m_rpCdmPrintingTemplate;
     QList<QString> m_qllResultMembers;

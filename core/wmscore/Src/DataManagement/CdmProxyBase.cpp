@@ -96,7 +96,7 @@ bool CdmProxyBase::Check(CdmObject*)
 
 /** +-=---------------------------------------------------------Di 25. Sep 16:04:31 2012----------*
  * @method  CdmProxyBase::GetQuery                           // public, p virtual                 *
- * @return  CdmQueryEnhanced*                                //                                   *
+ * @return  CdmQuery*                                //                                   *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------Di 25. Sep 16:04:31 2012----------*/
 

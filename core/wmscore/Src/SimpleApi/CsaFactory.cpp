@@ -16,7 +16,7 @@
 // own Includes
 #include "CdmExecutor.h"
 #include "CdmExecutorFunction.h"
-#include "CdmQueryEnhanced.h"
+#include "CdmQuery.h"
 #include "CdmQueryBuilder.h"
 #include "CdmModelElement.h"
 #include "CdmLocatedElement.h"
@@ -337,7 +337,7 @@ QObject *CsaFactory::getScheme()
 QObject *CsaFactory::createQuery(QString p_qstrWQl)
 {
    CsaQuery* pQuery = nullptr;
-   CdmQueryEnhanced* pQueryInternal = static_cast<CdmQueryEnhanced*>(CdmQueryBuilder::BuildQuery(p_qstrWQl));
+   CdmQuery* pQueryInternal = CdmQueryBuilder::BuildQuery(p_qstrWQl);
 
    if (CHKPTR(pQueryInternal))
    {

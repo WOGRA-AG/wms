@@ -7,7 +7,7 @@
 #include <CwmsFormUserDefinedExecutor.h>
 
 // WMS Includes
-#include "CdmQueryEnhanced.h"
+#include "CdmQuery.h"
 #include "CdmQueryBuilder.h"
 #include "CdmMessageManager.h"
 #include "CdmScheme.h"
@@ -90,7 +90,7 @@ void CwmsRuntime::FillModules()
    if (CHKPTR(pContainer))
    {
       QString qstrWql = "select Name, Default, Position from \"" + pContainer->GetKeyname() + "\" where Active = true order by Position";
-      CdmQueryEnhanced* pCdmQuery = (CdmQueryEnhanced*)CdmQueryBuilder::ExecuteQuery(qstrWql);
+      CdmQuery* pCdmQuery = (CdmQuery*)CdmQueryBuilder::ExecuteQuery(qstrWql);
 
       int iResultCount = pCdmQuery->GetResultCount();
 

@@ -1,42 +1,22 @@
-﻿/******************************************************************************
- ** WOGRA Middleware Server Communication Module
- **
- ** @Author Wolfgang Graßhof 
- **
- ** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
- ** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. 
- **(C) copyright by WOGRA technologies All rights reserved
- ******************************************************************************/
-
-
-// System and QT Includes
+﻿// System and QT Includes
 #include <QString>
 #include <QVariant>
 #include <QDomDocument>
 #include <QList>
 
 // WMS Commons Includes
-#include "CwmsUtilities.h"
 
 // own Includes
 #include "CdmModelElement.h"
 #include "CdmObjectContainer.h"
-#include "CdmContainerManager.h"
 #include "CdmDataProvider.h"
  #include "CdmSessionManager.h"
 #include "CdmClass.h"
 #include "CdmMember.h"
-#include "CdmObject.h"
 #include "CdmLogging.h"
 #include "CdmQuery.h"
 #include "CdmQueryElement.h"
 #include "CdmQueryBuilder.h"
-#include "CdmValue.h"
-#include "CdmValueString.h"
-#include "CdmValueLong.h"
-#include "CdmValueInt.h"
-#include "CdmValueCounter.h"
-#include "CdmValueObjectRef.h"
 
 
 
@@ -991,13 +971,6 @@ QString CdmQueryElement::CompareTypeToString(EdmQueryCompareType p_eDmQueryCompa
     return qstrRet;
 }
 
-/** +-=---------------------------------------------------------So 10. Feb 10:08:44 2013----------*
- * @method  CdmQueryElement::XmlExport                       // public, const                     *
- * @return  void                                             //                                   *
- * @param   QDomDocument& p_rqdDomDocument                   //                                   *
- * @param   QDomElement& p_rqdeElement                       //                                   *
- * @comment                                                                                       *
- *----------------last changed: --------------------------------So 10. Feb 10:08:44 2013----------*/
 void CdmQueryElement::XmlExport(QDomDocument& p_rqdDomDocument, QDomElement& p_rqdeElement) const
 {
     QString qstrElementType;
@@ -1085,13 +1058,7 @@ void CdmQueryElement::XmlExport(QDomDocument& p_rqdDomDocument, QDomElement& p_r
    }
 }
 
-/** +-=---------------------------------------------------------Sa 20. Aug 10:58:02 2005----------*
- * @method  CdmQueryElement::XmlImport                       // private                           *
- * @return  void                                             //                                   *
- * @param   QDomElement& p_rqDomElement                      //                                   *
- * @comment imports xml datas.                                                                    *
- *----------------last changed: --------------------------------Sa 20. Aug 10:58:02 2005----------*/
-void CdmQueryElement::XmlImport(  QDomElement& p_rqDomElement )
+void CdmQueryElement::XmlImport(QDomElement& p_rqDomElement)
 {
    QString qstrElementType = p_rqDomElement.attribute("ElementType","");
 
@@ -1162,12 +1129,6 @@ void CdmQueryElement::XmlImport(  QDomElement& p_rqDomElement )
    }
 }
 
-/** +-=---------------------------------------------------------Sa 20. Aug 10:57:47 2005----------*
- * @method  CdmQueryElement::XmlImportChilds                 // private                           *
- * @return  void                                             //                                   *
- * @param   QDomElement& p_rqDomElement                      //                                   *
- * @comment This method imports the child queryelements from xml.                                 *
- *----------------last changed: --------------------------------Sa 20. Aug 10:57:47 2005----------*/
 void CdmQueryElement::XmlImportChilds(  QDomElement& p_rqDomElement )
 {
    QDomNode qDomNode = p_rqDomElement.firstChild();

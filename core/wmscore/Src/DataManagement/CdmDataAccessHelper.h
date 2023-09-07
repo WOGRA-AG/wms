@@ -44,7 +44,7 @@ class CdmJournalItem;
 class QVariant;
 class QSqlDatabase;
 class CdmPackage;
-class CdmQueryEnhanced;
+class CdmQuery;
 
 /*
  * This is the helper class for the dataaccesses like
@@ -456,7 +456,7 @@ static QDate GetLicenceExpirationDate(  QString p_qstrLicenceKey );
    /** +-=---------------------------------------------------------Mo 15. Okt 10:32:42 2012-------*
     * @method  CdmDataAccessHelper::SetQueryEnhancedResult         // public                            *
     * @return  void                                          //                                   *
-    * @param   CdmQueryEnhanced* p_pCdmQuery                 //                                   *
+    * @param   CdmQuery* p_pCdmQuery                 //                                   *
     * @param   int p_iColumn                                 //                                   *
     * @param   QVariant p_qvValue                            //                                   *
     * @param  qint64 p_lObjectId                              //                                   *

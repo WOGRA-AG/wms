@@ -28,7 +28,7 @@
 
 
 // Forwards
-class CdmQueryEnhanced;
+class CdmQuery;
 class CftlDataAccess;
 
 // Enumerations
@@ -40,7 +40,7 @@ class CftlDataAccess;
 class CftlCommandlQueryEnhanced
 {
    private:
-      CdmQueryEnhanced* m_rpCdmQuery;
+      CdmQuery* m_rpCdmQuery;
       CftlDataAccess* m_rpCftlDataAccess;
       int m_iKeynameCount;
       QMap<QString, int> m_qmKeynames;
@@ -50,11 +50,11 @@ class CftlCommandlQueryEnhanced
    /** +-=---------------------------------------------------------Do 11. Nov 14:13:25 2010-------*
     * @method  CftlQueryEnhanced::CftlQueryEnhanced        // public                            *
     * @return                                                //                                   *
-    * @param   CdmQueryEnhanced* p_pCdmQueryEnhanced         //                                   *
+    * @param   CdmQuery* p_pCdmQuery         //                                   *
     * @param   CftlDataAccess* p_pCftlDataAccess           //                                   *
     * @comment                                                                                    *
     *----------------last changed: -----------------------------Do 11. Nov 14:13:25 2010----------*/
-    CftlCommandlQueryEnhanced( CdmQueryEnhanced* p_pCdmQueryEnhanced, CftlDataAccess* p_pCftlDataAccess);
+    CftlCommandlQueryEnhanced( CdmQuery* p_pCdmQuery, CftlDataAccess* p_pCftlDataAccess);
 
    public:
    /** +-=---------------------------------------------------------Do 11. Nov 09:40:12 2010-------*

@@ -6,7 +6,7 @@
 #include "QVariantList"
 
 // Forwards
-class CdmQueryEnhanced;
+class CdmQuery;
 class CdmObjectContainer;
 class CsaObjectContainer;
 class CdmClass;
@@ -24,10 +24,10 @@ public:
     static QString generateWql(const CdmClass *p_pClass, CdmObjectContainer *p_pContainer);
     static QString generateWql(const CdmClass *p_pClass, CdmObjectContainer *p_pContainer, QString &qstrCondition, int p_iFrom, int p_iTo);
     static QString generateWql(const CdmClass *p_pClass, CdmObjectContainer *p_pContainer, int p_iFrom, int p_iTo);
-    static CdmQueryEnhanced *buildAndExecuteQuery(const CdmClass *p_pClass, CdmObjectContainer *p_pContainer, QString &qstrCondition, int p_iFrom, int p_iTo);
-    static CdmQueryEnhanced *buildAndExecuteQuery(const CdmClass *p_pClass, CdmObjectContainer *p_pContainer, int p_iFrom, int p_iTo);
-    static CdmQueryEnhanced *buildAndExecuteQuery(const CdmClass *p_pClass, CdmObjectContainer *p_pContainer);
-    static CdmQueryEnhanced *buildAndExecuteQuery(const CdmClass *p_pClass, CdmObjectContainer *p_pContainer, QString& qstrCondition);
+    static CdmQuery *buildAndExecuteQuery(const CdmClass *p_pClass, CdmObjectContainer *p_pContainer, QString &qstrCondition, int p_iFrom, int p_iTo);
+    static CdmQuery *buildAndExecuteQuery(const CdmClass *p_pClass, CdmObjectContainer *p_pContainer, int p_iFrom, int p_iTo);
+    static CdmQuery *buildAndExecuteQuery(const CdmClass *p_pClass, CdmObjectContainer *p_pContainer);
+    static CdmQuery *buildAndExecuteQuery(const CdmClass *p_pClass, CdmObjectContainer *p_pContainer, QString& qstrCondition);
     static void executeQuery(CsaFactory* p_pFactory, QString p_qstrQuery, CwsHttpResponse* p_pResponse, QVariantMap& qvm);
     static QString generateWql(CdmObjectContainer *p_pContainer);
     static QString generateWql(CdmObjectContainer *p_pContainer, int p_iFrom, int p_iTo);

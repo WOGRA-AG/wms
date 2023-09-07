@@ -17,7 +17,7 @@
 // Forwards
 class CsaObject;
 class CsaObjectContainer;
-class CdmQueryEnhanced;
+class CdmQuery;
 
 // TypeDefs
 
@@ -50,8 +50,8 @@ public slots:
     QString printPdfToBase64(CsaObject *p_pCsaObject);
 
 private:
-    void print(CdmQueryEnhanced* pQuery, CwmsReportManager &cReportManager, CsaObject* p_pCsaObject);
-    QString printPdfToBase64(CdmQueryEnhanced *pQuery, CwmsReportManager &cReportManager, CsaObject *p_pCsaObject);
+    void print(CdmQuery* pQuery, CwmsReportManager &cReportManager, CsaObject* p_pCsaObject);
+    QString printPdfToBase64(CdmQuery *pQuery, CwmsReportManager &cReportManager, CsaObject *p_pCsaObject);
 };
 
 #endif // CWMSSCRIPTABLEPRINTER_H

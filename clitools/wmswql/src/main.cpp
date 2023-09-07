@@ -17,7 +17,7 @@
 #include "CdmDataProvider.h"
 #include "CdmMessageManager.h"
 #include "CdmQueryBuilder.h"
-#include "CdmQueryEnhanced.h"
+#include "CdmQuery.h"
 #include "CdmSessionManager.h"
 #include "CdmExecutor.h"
 #include "CdmScheme.h"

@@ -32,7 +32,7 @@
 #include "CdmClassGroup.h"
 #include "CdmClass.h"
 #include "CdmClassMethod.h"
-#include "CdmQueryEnhanced.h"
+#include "CdmQuery.h"
 #include "CdmQueryBuilder.h"
 #include "CdmScheme.h"
 #include "CdmContainerManager.h"

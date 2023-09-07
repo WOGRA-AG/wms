@@ -83,7 +83,7 @@ public:
     static CdmObject* GetApplication(QString p_qstrApplication);
 
 private:
-    CdmQueryEnhanced* CreateQuery();
+    CdmQuery* CreateQuery();
 
 };
 #endif //

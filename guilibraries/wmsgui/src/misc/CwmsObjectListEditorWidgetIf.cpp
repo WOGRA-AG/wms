@@ -19,7 +19,7 @@
 #include "CdmMember.h"
 #include "CdmValue.h"
 #include "CdmObject.h"
-#include "CdmQueryEnhanced.h"
+#include "CdmQuery.h"
 #include "CdmObjectContainer.h"
 #include "CdmLogging.h"
 #include "CdmDataProvider.h"
@@ -256,7 +256,7 @@ void CwmsObjectListEditorWidgetIf::FillDialog()
 
                 m_pqpbPrint->hide();
                 CwmsReportManager cReportManager;
-                CdmQueryEnhanced* pQuery = nullptr;
+                CdmQuery* pQuery = nullptr;
                 const CdmClass* pClass = pModel->GetClass();
 
                 if (CHKPTR(pClass))

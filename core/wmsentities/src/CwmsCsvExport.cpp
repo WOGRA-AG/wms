@@ -11,7 +11,7 @@
 
 CwmsCsvExport::CwmsCsvExport(QString p_qstrFilename, QString p_qstrQuery)
     : m_qstrFileName(p_qstrFilename),
-      m_pQuery(dynamic_cast<CdmQueryEnhanced*> (CdmQueryBuilder::ExecuteQuery(p_qstrQuery))),
+      m_pQuery(CdmQueryBuilder::ExecuteQuery(p_qstrQuery)),
       m_rpContainer(NULL),
       m_iDecimalPlaces(2)
 {

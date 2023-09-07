@@ -1015,8 +1015,7 @@ CdmObject* CwmsFormManager::GetUserDefinedUiForClassUri(QString p_qstrClassUri)
     if (CHKPTR(pContainer) && !p_qstrClassUri.isEmpty())
     {
         QString qstrWql = GenerateWqlByClassUri(p_qstrClassUri, pContainer);
-        CdmQueryEnhanced* pQuery =
-                (CdmQueryEnhanced*)CdmQueryBuilder::ExecuteQuery(qstrWql);
+        CdmQuery* pQuery = CdmQueryBuilder::ExecuteQuery(qstrWql);
 
         if (CHKPTR(pQuery))
         {
@@ -1054,8 +1053,7 @@ CdmObject* CwmsFormManager::GetUserDefinedUi(QString p_qstrName)
     if (CHKPTR(pContainer))
     {
         QString qstrWql = GenerateWqlByName(p_qstrName, pContainer);
-        CdmQueryEnhanced* pQuery =
-                (CdmQueryEnhanced*)CdmQueryBuilder::ExecuteQuery(qstrWql);
+        CdmQuery* pQuery = CdmQueryBuilder::ExecuteQuery(qstrWql);
 
         if (CHKPTR(pQuery))
         {
@@ -1083,8 +1081,7 @@ QString CwmsFormManager::GetWmsLibrary(QString p_qstrName, QString p_qstrVersion
     if (CHKPTR(pContainer))
     {
         QString qstrWql = GenerateLibraryWql(p_qstrName, p_qstrVersion, pContainer);
-        CdmQueryEnhanced* pQuery =
-                (CdmQueryEnhanced*)CdmQueryBuilder::ExecuteQuery(qstrWql);
+        CdmQuery* pQuery = CdmQueryBuilder::ExecuteQuery(qstrWql);
 
         if (CHKPTR(pQuery))
         {

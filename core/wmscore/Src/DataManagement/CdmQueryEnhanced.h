@@ -1,9 +1,5 @@
-﻿#ifndef CDMQUERYENHANCED_H
-#define CDMQUERYENHANCED_H
-
-#ifdef WURZELBLA
-#define slots
-#endif //
+﻿#ifndef CdmQuery_H
+#define CdmQuery_H
 
 // System and QT Includes
 
@@ -18,7 +14,7 @@
 // Enumerations
 
 // defines
-#define SCOPED_ENHANCE_QUERY(a,b) QScopedPointer<CdmQueryEnhanced> a(dynamic_cast<CdmQueryEnhanced*>(CdmQueryBuilder::ExecuteQuery(b)));
+
 
 /* 
  * This class implements the enhanced query for reading single values.

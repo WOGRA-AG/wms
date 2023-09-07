@@ -14,7 +14,7 @@
 #include "CdmScheme.h"
 #include "CdmDataProvider.h"
 #include "CdmQueryBuilder.h"
-#include "CdmQueryEnhanced.h"
+#include "CdmQuery.h"
 #include "CdmSessionManager.h"
 
 // WMS GUI INcludes
@@ -106,7 +106,7 @@ void CwmsMiscDataFiller::FillLibraries(QTreeWidgetItem* p_pItem)
    if (pContainer)
    {
       QString qstrWql = QString("select Name, Version from \"%1\"").arg(pContainer->GetKeyname());
-      CdmQueryEnhanced* pQuery = (CdmQueryEnhanced*)CdmQueryBuilder::ExecuteQuery(qstrWql);
+      CdmQuery* pQuery = (CdmQuery*)CdmQueryBuilder::ExecuteQuery(qstrWql);
 
       if (CHKPTR(pQuery))
       {
@@ -134,7 +134,7 @@ void CwmsMiscDataFiller::FillResources(QTreeWidgetItem* p_pItem)
    if (CHKPTR(pContainer))
    {
       QString qstrWql = QString("select Name, Type from \"%1\"").arg(pContainer->GetKeyname());
-      CdmQueryEnhanced* pQuery = (CdmQueryEnhanced*)CdmQueryBuilder::ExecuteQuery(qstrWql);
+      CdmQuery* pQuery = (CdmQuery*)CdmQueryBuilder::ExecuteQuery(qstrWql);
 
       if (CHKPTR(pQuery))
       {
@@ -158,7 +158,7 @@ void CwmsMiscDataFiller::FillInteractiveComponents(QTreeWidgetItem* p_pItem)
    if (CHKPTR(pContainer))
    {
       QString qstrWql = QString("select Name from \"%1\"").arg(pContainer->GetKeyname());
-      CdmQueryEnhanced* pQuery = (CdmQueryEnhanced*)CdmQueryBuilder::ExecuteQuery(qstrWql);
+      CdmQuery* pQuery = (CdmQuery*)CdmQueryBuilder::ExecuteQuery(qstrWql);
 
       if (CHKPTR(pQuery))
       {
@@ -260,7 +260,7 @@ void CwmsMiscDataFiller::FillForms(QTreeWidgetItem* p_pItem,
          {
             QString qstrWql = "select Name, Class_Uri from \"" + p_qstrObjectList + "\"";
 
-            CdmQueryEnhanced* pQuery = (CdmQueryEnhanced*)CdmQueryBuilder::ExecuteQuery(qstrWql);
+            CdmQuery* pQuery = (CdmQuery*)CdmQueryBuilder::ExecuteQuery(qstrWql);
 
             if (pQuery)
             {
@@ -359,7 +359,7 @@ void CwmsMiscDataFiller::FillReports(QTreeWidgetItem* pParent, CdmClass* p_pClas
       pqlviClass->setData(0, Qt::UserRole, p_pClass->GetId());
       pqlviClass->setData(1, Qt::UserRole, eWmsTreeItemTypeClass);
 
-      CdmQueryEnhanced* pQuery = cManager.GetReportsByClassKeyname(p_pClass->GetFullQualifiedName());
+      CdmQuery* pQuery = cManager.GetReportsByClassKeyname(p_pClass->GetFullQualifiedName());
 
       if (pQuery && pQuery->GetResultCount() > 0)
       {  
@@ -375,10 +375,10 @@ void CwmsMiscDataFiller::FillReports(QTreeWidgetItem* pParent, CdmClass* p_pClas
  * @method  CwmsMiscDataFiller::FillReports                  // private, static                   *
  * @return  void                                             //                                   *
  * @param   QTreeWidgetItem* p_pParent                       //                                   *
- * @param   CdmQueryEnhanced* pQuery                         //                                   *
+ * @param   CdmQuery* pQuery                         //                                   *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------Fr 20. Sep 16:33:03 2013----------*/
-void CwmsMiscDataFiller::FillReports(QTreeWidgetItem* p_pParent, CdmQueryEnhanced* pQuery)
+void CwmsMiscDataFiller::FillReports(QTreeWidgetItem* p_pParent, CdmQuery* pQuery)
 {
    QTreeWidgetItem* pqlviList = new QTreeWidgetItem(p_pParent);
    pqlviList->setText(0, QObject::tr("Objektcontainer"));

@@ -9,7 +9,7 @@
 #include "CsaObject.h"
 #include "CdmScheme.h"
 #include "CsaObjectContainer.h"
-#include "CdmQueryEnhanced.h"
+#include "CdmQuery.h"
 
 // own Includes
 #include "CwmsReportManager.h"
@@ -32,7 +32,7 @@ void CwmsScriptablePrinter::print(CsaObject* p_pCsaObject)
    {
       CwmsReportManager cReportManager;  
       QString qstrTemplate;
-      CdmQueryEnhanced* pQuery = nullptr;
+      CdmQuery* pQuery = nullptr;
 
       const CdmClass* pClass = p_pCsaObject->getInternals()->GetClass();
 
@@ -54,7 +54,7 @@ QString CwmsScriptablePrinter::printPdfToBase64(CsaObject* p_pCsaObject)
    {
       CwmsReportManager cReportManager;
       QString qstrTemplate;
-      CdmQueryEnhanced* pQuery = nullptr;
+      CdmQuery* pQuery = nullptr;
 
       const CdmClass* pClass = p_pCsaObject->getInternals()->GetClass();
 
@@ -82,7 +82,7 @@ void CwmsScriptablePrinter::printInLanguage(CsaObject* p_pCsaObject, QString p_q
             if (CHKPTR(p_pCsaObject))
             {
                    CwmsReportManager cReportManager;
-                   CdmQueryEnhanced* pQuery = nullptr;
+                   CdmQuery* pQuery = nullptr;
 
                    const CdmClass* pClass = p_pCsaObject->getInternals()->GetClass();
 
@@ -109,7 +109,7 @@ QString CwmsScriptablePrinter::printInLanguagePdfToBase64(CsaObject* p_pCsaObjec
        if (CHKPTR(pScheme))
        {
            CwmsReportManager cReportManager;
-           CdmQueryEnhanced* pQuery = nullptr;
+           CdmQuery* pQuery = nullptr;
 
            const CdmClass* pClass = p_pCsaObject->getInternals()->GetClass();
 
@@ -230,7 +230,7 @@ void CwmsScriptablePrinter::print(CsaObjectContainer* p_pList)
    {
       CwmsReportManager cReportManager;  
       QString qstrTemplate;
-      CdmQueryEnhanced* pQuery = nullptr;
+      CdmQuery* pQuery = nullptr;
       
       const CdmClass* pClass = p_pList->getInternals()->GetClass();
 
@@ -283,7 +283,7 @@ QString CwmsScriptablePrinter::printPdfToBase64(CsaObjectContainer* p_pList)
    {
       CwmsReportManager cReportManager;
       QString qstrTemplate;
-      CdmQueryEnhanced* pQuery = nullptr;
+      CdmQuery* pQuery = nullptr;
 
       const CdmClass* pClass = p_pList->getInternals()->GetClass();
 
@@ -427,7 +427,7 @@ QString CwmsScriptablePrinter::printPdfToBase64(CsaObjectContainer* p_pList, QSt
    return qba;
 }
 
-void CwmsScriptablePrinter::print(CdmQueryEnhanced* pQuery, CwmsReportManager &cReportManager, CsaObject* p_pCsaObject)
+void CwmsScriptablePrinter::print(CdmQuery* pQuery, CwmsReportManager &cReportManager, CsaObject* p_pCsaObject)
 {
    QString qstrTemplate;
    if (pQuery)
@@ -472,7 +472,7 @@ void CwmsScriptablePrinter::print(CdmQueryEnhanced* pQuery, CwmsReportManager &c
    }
 }
 
-QString CwmsScriptablePrinter::printPdfToBase64(CdmQueryEnhanced* pQuery, CwmsReportManager &cReportManager, CsaObject* p_pCsaObject)
+QString CwmsScriptablePrinter::printPdfToBase64(CdmQuery* pQuery, CwmsReportManager &cReportManager, CsaObject* p_pCsaObject)
 {
     QString qba;
    QString qstrTemplate;

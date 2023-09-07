@@ -31,7 +31,7 @@
 
 // Forwards
 class CwmsRuntime;
-class CdmQueryEnhanced;
+class CdmQuery;
 
 // TypeDefs
 
@@ -46,7 +46,7 @@ class WMSGUI_API CwmsObjectContainerEditorWidget : public QWidget, public Ui::Cw
    private:
       QString m_qstrKeyname;
       QString m_qstrEditorWql;
-      CdmQueryEnhanced* m_pCdmQuery;
+      CdmQuery* m_pCdmQuery;
       CdmQueryModel m_cModel;
 
    public:

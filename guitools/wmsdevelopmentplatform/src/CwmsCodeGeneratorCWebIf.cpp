@@ -76,7 +76,7 @@ void CwmsCodeGeneratorCWebIf::GenerateCodeP()
    if (CHKPTR(m_rpCdmClass))
    {
       // Source Includes
-      AddSourceInclude("CdmQueryEnhanced.h");
+      AddSourceInclude("CdmQuery.h");
       AddSourceInclude("CdmObject.h");
       AddSourceInclude("CdmObjectContainer.h");
       AddSourceInclude("CwmscomData.h");

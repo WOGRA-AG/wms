@@ -26,7 +26,7 @@
 #include "CdmClass.h"
 #include "CdmClassGroup.h"
 #include "CdmMember.h"
-#include "CdmQueryEnhanced.h"
+#include "CdmQuery.h"
 #include "CdmSessionManager.h"
 #include "CumUser.h"
 #include "CumUserGroup.h"

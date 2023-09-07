@@ -15,7 +15,7 @@
 
 
 // Forwards
-class CdmQueryEnhanced;
+class CdmQuery;
 class CdbDataAccess;
 class CdmMember;
 
@@ -29,7 +29,7 @@ class CdmMember;
 class CdbQueryEnhancedDoubleRequest
 {
 private:
-    CdmQueryEnhanced* m_rpCdmQuery;
+    CdmQuery* m_rpCdmQuery;
     CdbDataAccess* m_rpCdbDataAccess;
     int m_iKeynameCount;
     QMap<QString, int> m_qmKeynames;
@@ -39,7 +39,7 @@ private:
 
 
 public:
-    CdbQueryEnhancedDoubleRequest(CdmQueryEnhanced* p_pCdmQueryEnhanced, CdbDataAccess* p_pCdbDataAccess);
+    CdbQueryEnhancedDoubleRequest(CdmQuery* p_pCdmQuery, CdbDataAccess* p_pCdbDataAccess);
     virtual ~CdbQueryEnhancedDoubleRequest( );
    qint64 Execute();
     virtual QString GenerateSql(QStringList &qvlObjects);

@@ -28,7 +28,7 @@
 #include "CdmClass.h"
 #include "CdmClassGroup.h"
 #include "CdmMember.h"
-#include "CdmQueryEnhanced.h"
+#include "CdmQuery.h"
 #include "CdmQueryModel.h"
 #include "CdmSessionManager.h"
 #include "CumUser.h"
@@ -1023,7 +1023,7 @@ void CwtQuery::QueryEnhancedWithOneSelectMember()
             .arg(MEMBER_INT_KEYNAME)
             .arg(TEST_CONTAINER_NAME_ALL_MEMBERS);
     cTime.finishedTask("Created Query");
-    QScopedPointer<CdmQueryEnhanced> pQuery(dynamic_cast<CdmQueryEnhanced*>(CdmQueryBuilder::ExecuteQuery(qstrWql)));
+    QScopedPointer<CdmQuery> pQuery(dynamic_cast<CdmQuery*>(CdmQueryBuilder::ExecuteQuery(qstrWql)));
     cTime.finishedTask("Executed Query");
     QVERIFY(!pQuery.isNull());
     QVERIFY(pQuery->GetResultCount() == 1);
@@ -1041,7 +1041,7 @@ void CwtQuery::QueryEnhancedWithTwoSelectMember()
             .arg(MEMBER_STRING_KEYNAME)
             .arg(TEST_CONTAINER_NAME_ALL_MEMBERS);
     cTime.finishedTask("Created Query");
-    QScopedPointer<CdmQueryEnhanced> pQuery(dynamic_cast<CdmQueryEnhanced*>(CdmQueryBuilder::ExecuteQuery(qstrWql)));
+    QScopedPointer<CdmQuery> pQuery(dynamic_cast<CdmQuery*>(CdmQueryBuilder::ExecuteQuery(qstrWql)));
     cTime.finishedTask("Executed Query");
     QVERIFY(!pQuery.isNull());
     QVERIFY(pQuery->GetResultCount() == 1);
@@ -1062,7 +1062,7 @@ void CwtQuery::QueryEnhancedWithSum()
             .arg(MEMBER_INT_KEYNAME)
             .arg(TEST_CONTAINER_NAME_ALL_MEMBERS);
     cTime.finishedTask("Created Query");
-    QScopedPointer<CdmQueryEnhanced> pQuery(dynamic_cast<CdmQueryEnhanced*>(CdmQueryBuilder::ExecuteQuery(qstrWql)));
+    QScopedPointer<CdmQuery> pQuery(dynamic_cast<CdmQuery*>(CdmQueryBuilder::ExecuteQuery(qstrWql)));
     cTime.finishedTask("Executed Query");
     QVERIFY(!pQuery.isNull());
     QVERIFY(pQuery->GetResultCount() == 1);
@@ -1081,7 +1081,7 @@ void CwtQuery::QueryEnhancedWithAvg()
             .arg(MEMBER_INT_KEYNAME)
             .arg(TEST_CONTAINER_NAME_ALL_MEMBERS);
     cTime.finishedTask("Created Query");
-    QScopedPointer<CdmQueryEnhanced> pQuery(dynamic_cast<CdmQueryEnhanced*>(CdmQueryBuilder::ExecuteQuery(qstrWql)));
+    QScopedPointer<CdmQuery> pQuery(dynamic_cast<CdmQuery*>(CdmQueryBuilder::ExecuteQuery(qstrWql)));
     cTime.finishedTask("Executed Query");
     QVERIFY(!pQuery.isNull());
     QVERIFY(pQuery->GetResultCount() == 1);
@@ -1100,7 +1100,7 @@ void CwtQuery::QueryEnhancedWithMax()
             .arg(MEMBER_INT_KEYNAME)
             .arg(TEST_CONTAINER_NAME_ALL_MEMBERS);
     cTime.finishedTask("Created Query");
-    QScopedPointer<CdmQueryEnhanced> pQuery(dynamic_cast<CdmQueryEnhanced*>(CdmQueryBuilder::ExecuteQuery(qstrWql)));
+    QScopedPointer<CdmQuery> pQuery(dynamic_cast<CdmQuery*>(CdmQueryBuilder::ExecuteQuery(qstrWql)));
     cTime.finishedTask("Executed Query");
     QVERIFY(!pQuery.isNull());
     QVERIFY(pQuery->GetResultCount() == 1);
@@ -1119,7 +1119,7 @@ void CwtQuery::QueryEnhancedWithMin()
             .arg(MEMBER_INT_KEYNAME)
             .arg(TEST_CONTAINER_NAME_ALL_MEMBERS);
     cTime.finishedTask("Created Query");
-    QScopedPointer<CdmQueryEnhanced> pQuery(dynamic_cast<CdmQueryEnhanced*>(CdmQueryBuilder::ExecuteQuery(qstrWql)));
+    QScopedPointer<CdmQuery> pQuery(dynamic_cast<CdmQuery*>(CdmQueryBuilder::ExecuteQuery(qstrWql)));
     cTime.finishedTask("Executed Query");
     QVERIFY(!pQuery.isNull());
     QVERIFY(pQuery->GetResultCount() == 1);
@@ -1137,7 +1137,7 @@ void CwtQuery::QueryEnhancedWithCount()
     QString qstrWql = QString("select count(*) from %2")
             .arg(TEST_CONTAINER_NAME_ALL_MEMBERS);
     cTime.finishedTask("Created Query");
-    QScopedPointer<CdmQueryEnhanced> pQuery(dynamic_cast<CdmQueryEnhanced*>(CdmQueryBuilder::ExecuteQuery(qstrWql)));
+    QScopedPointer<CdmQuery> pQuery(dynamic_cast<CdmQuery*>(CdmQueryBuilder::ExecuteQuery(qstrWql)));
     cTime.finishedTask("Executed Query");
     QVERIFY(!pQuery.isNull());
     QVERIFY(pQuery->GetResultCount() == 1);
@@ -1198,7 +1198,7 @@ void CwtQuery::QueryEnhancedWithOneReferenceInSelect()
             .arg(TEST_CONTAINER_NAME_REF);
     cTime.finishedTask("Created Query");
 
-    QScopedPointer<CdmQueryEnhanced> pQuery(dynamic_cast<CdmQueryEnhanced*>(CdmQueryBuilder::ExecuteQuery(qstrWql)));
+    QScopedPointer<CdmQuery> pQuery(dynamic_cast<CdmQuery*>(CdmQueryBuilder::ExecuteQuery(qstrWql)));
     cTime.finishedTask("Executed Query");
     QVERIFY(!pQuery.isNull());
     QVERIFY(pQuery->GetResultCount() == 2);
@@ -1221,7 +1221,7 @@ void CwtQuery::QueryEnhancedWithOneReferenceInSelectSum()
             .arg(TEST_CONTAINER_NAME_REF);
     cTime.finishedTask("Created Query");
 
-    QScopedPointer<CdmQueryEnhanced> pQuery(dynamic_cast<CdmQueryEnhanced*>(CdmQueryBuilder::ExecuteQuery(qstrWql)));
+    QScopedPointer<CdmQuery> pQuery(dynamic_cast<CdmQuery*>(CdmQueryBuilder::ExecuteQuery(qstrWql)));
     cTime.finishedTask("Executed Query");
     QVERIFY(!pQuery.isNull());
     QVERIFY(pQuery->GetResultCount() == 1);
@@ -1244,7 +1244,7 @@ void CwtQuery::QueryEnhancedWithOneReferenceInSelectAvg()
             .arg(TEST_CONTAINER_NAME_REF);
     cTime.finishedTask("Created Query");
 
-    QScopedPointer<CdmQueryEnhanced> pQuery(dynamic_cast<CdmQueryEnhanced*>(CdmQueryBuilder::ExecuteQuery(qstrWql)));
+    QScopedPointer<CdmQuery> pQuery(dynamic_cast<CdmQuery*>(CdmQueryBuilder::ExecuteQuery(qstrWql)));
     cTime.finishedTask("Executed Query");
     QVERIFY(!pQuery.isNull());
     QVERIFY(pQuery->GetResultCount() == 1);
@@ -1266,7 +1266,7 @@ void CwtQuery::QueryEnhancedWithOneReferenceInSelectMin()
             .arg(TEST_CONTAINER_NAME_REF);
     cTime.finishedTask("Created Query");
 
-    QScopedPointer<CdmQueryEnhanced> pQuery(dynamic_cast<CdmQueryEnhanced*>(CdmQueryBuilder::ExecuteQuery(qstrWql)));
+    QScopedPointer<CdmQuery> pQuery(dynamic_cast<CdmQuery*>(CdmQueryBuilder::ExecuteQuery(qstrWql)));
     cTime.finishedTask("Executed Query");
     QVERIFY(!pQuery.isNull());
     QVERIFY(pQuery->GetResultCount() == 1);
@@ -1287,7 +1287,7 @@ void CwtQuery::QueryEnhancedWithOneReferenceInSelectMax()
             .arg(TEST_CONTAINER_NAME_REF);
     cTime.finishedTask("Created Query");
 
-    QScopedPointer<CdmQueryEnhanced> pQuery(dynamic_cast<CdmQueryEnhanced*>(CdmQueryBuilder::ExecuteQuery(qstrWql)));
+    QScopedPointer<CdmQuery> pQuery(dynamic_cast<CdmQuery*>(CdmQueryBuilder::ExecuteQuery(qstrWql)));
     cTime.finishedTask("Executed Query");
     QVERIFY(!pQuery.isNull());
     QVERIFY(pQuery->GetResultCount() == 1);
@@ -1309,7 +1309,7 @@ void CwtQuery::QueryEnhancedWithOneReferenceInSelectCount()
             .arg(TEST_CONTAINER_NAME_REF);
     cTime.finishedTask("Created Query");
 
-    QScopedPointer<CdmQueryEnhanced> pQuery(dynamic_cast<CdmQueryEnhanced*>(CdmQueryBuilder::ExecuteQuery(qstrWql)));
+    QScopedPointer<CdmQuery> pQuery(dynamic_cast<CdmQuery*>(CdmQueryBuilder::ExecuteQuery(qstrWql)));
     cTime.finishedTask("Executed Query");
     QVERIFY(!pQuery.isNull());
     QVERIFY(pQuery->GetResultCount() == 1);
@@ -1331,7 +1331,7 @@ void CwtQuery::QueryEnhancedWithOneReferenceInSelectWithClass()
             .arg(TEST_CLASS_NAME_REF);
     cTime.finishedTask("Created Query");
 
-    QScopedPointer<CdmQueryEnhanced> pQuery(dynamic_cast<CdmQueryEnhanced*>(CdmQueryBuilder::ExecuteQuery(qstrWql)));
+    QScopedPointer<CdmQuery> pQuery(dynamic_cast<CdmQuery*>(CdmQueryBuilder::ExecuteQuery(qstrWql)));
     cTime.finishedTask("Executed Query");
     QVERIFY(!pQuery.isNull());
     QVERIFY(pQuery->GetResultCount() == 2);
@@ -1354,7 +1354,7 @@ void CwtQuery::QueryEnhancedWithSumReferenceInSelectWithClass()
             .arg(TEST_CLASS_NAME_REF);
     cTime.finishedTask("Created Query");
 
-    QScopedPointer<CdmQueryEnhanced> pQuery(dynamic_cast<CdmQueryEnhanced*>(CdmQueryBuilder::ExecuteQuery(qstrWql)));
+    QScopedPointer<CdmQuery> pQuery(dynamic_cast<CdmQuery*>(CdmQueryBuilder::ExecuteQuery(qstrWql)));
     cTime.finishedTask("Executed Query");
     QVERIFY(!pQuery.isNull());
     QVERIFY(pQuery->GetResultCount() == 1);
@@ -1376,7 +1376,7 @@ void CwtQuery::QueryEnhancedWithAvgReferenceInSelectWithClass()
             .arg(TEST_CLASS_NAME_REF);
     cTime.finishedTask("Created Query");
 
-    QScopedPointer<CdmQueryEnhanced> pQuery(dynamic_cast<CdmQueryEnhanced*>(CdmQueryBuilder::ExecuteQuery(qstrWql)));
+    QScopedPointer<CdmQuery> pQuery(dynamic_cast<CdmQuery*>(CdmQueryBuilder::ExecuteQuery(qstrWql)));
     cTime.finishedTask("Executed Query");
     QVERIFY(!pQuery.isNull());
     QVERIFY(pQuery->GetResultCount() == 1);
@@ -1398,7 +1398,7 @@ void CwtQuery::QueryEnhancedWithMinReferenceInSelectWithClass()
             .arg(TEST_CLASS_NAME_REF);
     cTime.finishedTask("Created Query");
 
-    QScopedPointer<CdmQueryEnhanced> pQuery(dynamic_cast<CdmQueryEnhanced*>(CdmQueryBuilder::ExecuteQuery(qstrWql)));
+    QScopedPointer<CdmQuery> pQuery(dynamic_cast<CdmQuery*>(CdmQueryBuilder::ExecuteQuery(qstrWql)));
     cTime.finishedTask("Executed Query");
     QVERIFY(!pQuery.isNull());
     QVERIFY(pQuery->GetResultCount() == 1);
@@ -1420,7 +1420,7 @@ void CwtQuery::QueryEnhancedWithMaxReferenceInSelectWithClass()
             .arg(TEST_CLASS_NAME_REF);
     cTime.finishedTask("Created Query");
 
-    QScopedPointer<CdmQueryEnhanced> pQuery(dynamic_cast<CdmQueryEnhanced*>(CdmQueryBuilder::ExecuteQuery(qstrWql)));
+    QScopedPointer<CdmQuery> pQuery(dynamic_cast<CdmQuery*>(CdmQueryBuilder::ExecuteQuery(qstrWql)));
     cTime.finishedTask("Executed Query");
     QVERIFY(!pQuery.isNull());
     QVERIFY(pQuery->GetResultCount() == 1);
@@ -1442,7 +1442,7 @@ void CwtQuery::QueryEnhancedWithCountReferenceInSelectWithClass()
             .arg(TEST_CLASS_NAME_REF);
     cTime.finishedTask("Created Query");
 
-    QScopedPointer<CdmQueryEnhanced> pQuery(dynamic_cast<CdmQueryEnhanced*>(CdmQueryBuilder::ExecuteQuery(qstrWql)));
+    QScopedPointer<CdmQuery> pQuery(dynamic_cast<CdmQuery*>(CdmQueryBuilder::ExecuteQuery(qstrWql)));
     cTime.finishedTask("Executed Query");
     QVERIFY(!pQuery.isNull());
     QVERIFY(pQuery->GetResultCount() == 1);
@@ -1466,7 +1466,7 @@ void CwtQuery::QueryEnhancedWithTwoReferencesInSelect()
             .arg(TEST_CONTAINER_NAME_REF);
     cTime.finishedTask("Created Query");
 
-    QScopedPointer<CdmQueryEnhanced> pQuery(dynamic_cast<CdmQueryEnhanced*>(CdmQueryBuilder::ExecuteQuery(qstrWql)));
+    QScopedPointer<CdmQuery> pQuery(dynamic_cast<CdmQuery*>(CdmQueryBuilder::ExecuteQuery(qstrWql)));
     cTime.finishedTask("Executed Query");
     QVERIFY(!pQuery.isNull());
     QVERIFY(pQuery->GetResultCount() == 2);
@@ -1491,7 +1491,7 @@ void CwtQuery::QueryEnhancedWithMixedReferencesAndNoReferenecesInSelect()
             .arg(TEST_CONTAINER_NAME_REF);
     cTime.finishedTask("Created Query");
 
-    QScopedPointer<CdmQueryEnhanced> pQuery(dynamic_cast<CdmQueryEnhanced*>(CdmQueryBuilder::ExecuteQuery(qstrWql)));
+    QScopedPointer<CdmQuery> pQuery(dynamic_cast<CdmQuery*>(CdmQueryBuilder::ExecuteQuery(qstrWql)));
     cTime.finishedTask("Executed Query");
     QVERIFY(!pQuery.isNull());
     QVERIFY(pQuery->GetResultCount() == 2);
@@ -1517,7 +1517,7 @@ void CwtQuery::EnhancedQueryWithoutConditionWithGroupBy()
             .arg(TEST_CONTAINER_NAME_REF);
     cTime.finishedTask("Created Query");
 
-    QScopedPointer<CdmQueryEnhanced> pQuery(dynamic_cast<CdmQueryEnhanced*>(CdmQueryBuilder::ExecuteQuery(qstrWql)));
+    QScopedPointer<CdmQuery> pQuery(dynamic_cast<CdmQuery*>(CdmQueryBuilder::ExecuteQuery(qstrWql)));
     cTime.finishedTask("Executed Query");
     QVERIFY(!pQuery.isNull());
     QVERIFY(pQuery->GetResultCount() == 1);
@@ -1543,7 +1543,7 @@ void CwtQuery::QueryEnhancedWithMixedReferencesAndNoReferenecesInSelectWithSimpl
             .arg(VALUE_INT);
     cTime.finishedTask("Created Query");
 
-    QScopedPointer<CdmQueryEnhanced> pQuery(dynamic_cast<CdmQueryEnhanced*>(CdmQueryBuilder::ExecuteQuery(qstrWql)));
+    QScopedPointer<CdmQuery> pQuery(dynamic_cast<CdmQuery*>(CdmQueryBuilder::ExecuteQuery(qstrWql)));
     cTime.finishedTask("Executed Query");
     QVERIFY(!pQuery.isNull());
     QVERIFY(pQuery->GetResultCount() == 2);
@@ -1570,7 +1570,7 @@ void CwtQuery::QueryEnhancedWithMixedReferencesAndNoReferenecesInSelectWithAndWh
             .arg(VALUE_STRING);
     cTime.finishedTask("Created Query");
 
-    QScopedPointer<CdmQueryEnhanced> pQuery(dynamic_cast<CdmQueryEnhanced*>(CdmQueryBuilder::ExecuteQuery(qstrWql)));
+    QScopedPointer<CdmQuery> pQuery(dynamic_cast<CdmQuery*>(CdmQueryBuilder::ExecuteQuery(qstrWql)));
     cTime.finishedTask("Executed Query");
     QVERIFY(!pQuery.isNull());
     QVERIFY(pQuery->GetResultCount() == 2);
@@ -1597,7 +1597,7 @@ void CwtQuery::QueryEnhancedWithMixedReferencesAndNoReferenecesInSelectWithOrWhe
             .arg(VALUE_STRING);
     cTime.finishedTask("Created Query");
 
-    QScopedPointer<CdmQueryEnhanced> pQuery(dynamic_cast<CdmQueryEnhanced*>(CdmQueryBuilder::ExecuteQuery(qstrWql)));
+    QScopedPointer<CdmQuery> pQuery(dynamic_cast<CdmQuery*>(CdmQueryBuilder::ExecuteQuery(qstrWql)));
     cTime.finishedTask("Executed Query");
     QVERIFY(!pQuery.isNull());
     QVERIFY(pQuery->GetResultCount() == 2);
@@ -1624,7 +1624,7 @@ void CwtQuery::QueryEnhancedWithMixedReferencesAndNoReferenecesInSelectWithAndWh
             .arg(VALUE_STRING);
     cTime.finishedTask("Created Query");
 
-    QScopedPointer<CdmQueryEnhanced> pQuery(dynamic_cast<CdmQueryEnhanced*>(CdmQueryBuilder::ExecuteQuery(qstrWql)));
+    QScopedPointer<CdmQuery> pQuery(dynamic_cast<CdmQuery*>(CdmQueryBuilder::ExecuteQuery(qstrWql)));
     cTime.finishedTask("Executed Query");
     QVERIFY(!pQuery.isNull());
     QVERIFY(pQuery->GetResultCount() == 0);
@@ -1649,7 +1649,7 @@ void CwtQuery::QueryEnhancedWithMixedReferencesAndNoReferenecesInSelectWithOrWhe
             .arg(VALUE_STRING);
     cTime.finishedTask("Created Query");
 
-    QScopedPointer<CdmQueryEnhanced> pQuery(dynamic_cast<CdmQueryEnhanced*>(CdmQueryBuilder::ExecuteQuery(qstrWql)));
+    QScopedPointer<CdmQuery> pQuery(dynamic_cast<CdmQuery*>(CdmQueryBuilder::ExecuteQuery(qstrWql)));
     cTime.finishedTask("Executed Query");
     QVERIFY(!pQuery.isNull());
     QVERIFY(pQuery->GetResultCount() == 2);
@@ -1676,7 +1676,7 @@ void CwtQuery::QueryEnhancedWithMixedReferencesAndNoReferenecesInSelectWithOrWhe
             .arg("hjhjk");
     cTime.finishedTask("Created Query");
 
-    QScopedPointer<CdmQueryEnhanced> pQuery(dynamic_cast<CdmQueryEnhanced*>(CdmQueryBuilder::ExecuteQuery(qstrWql)));
+    QScopedPointer<CdmQuery> pQuery(dynamic_cast<CdmQuery*>(CdmQueryBuilder::ExecuteQuery(qstrWql)));
     cTime.finishedTask("Executed Query");
     QVERIFY(!pQuery.isNull());
     QVERIFY(pQuery->GetResultCount() == 0);
@@ -1700,7 +1700,7 @@ void CwtQuery::QueryEnhancedWithMixedReferenceChainsAndNoReferenecesInSelect()
             .arg(TEST_CONTAINER_NAME_REF_REF);
     cTime.finishedTask("Created Query");
 
-    QScopedPointer<CdmQueryEnhanced> pQuery(dynamic_cast<CdmQueryEnhanced*>(CdmQueryBuilder::ExecuteQuery(qstrWql)));
+    QScopedPointer<CdmQuery> pQuery(dynamic_cast<CdmQuery*>(CdmQueryBuilder::ExecuteQuery(qstrWql)));
     cTime.finishedTask("Executed Query");
     QVERIFY(!pQuery.isNull());
     QVERIFY(pQuery->GetResultCount() == 2);
@@ -1726,7 +1726,7 @@ void CwtQuery::QueryEnhancedWithMixedReferenceChainsAndReferenecesInSelect()
             .arg(TEST_CONTAINER_NAME_REF_REF);
     cTime.finishedTask("Created Query");
 
-    QScopedPointer<CdmQueryEnhanced> pQuery(dynamic_cast<CdmQueryEnhanced*>(CdmQueryBuilder::ExecuteQuery(qstrWql)));
+    QScopedPointer<CdmQuery> pQuery(dynamic_cast<CdmQuery*>(CdmQueryBuilder::ExecuteQuery(qstrWql)));
     cTime.finishedTask("Executed Query");
     QVERIFY(!pQuery.isNull());
     QVERIFY(pQuery->GetResultCount() == 2);
@@ -1797,7 +1797,7 @@ void CwtQuery::QueryEnhancedWithReferenceReferenceChainInSelect()
             .arg(TEST_CONTAINER_NAME_REF_REF);
     cTime.finishedTask("Created Query");
 
-    QScopedPointer<CdmQueryEnhanced> pQuery(dynamic_cast<CdmQueryEnhanced*>(CdmQueryBuilder::ExecuteQuery(qstrWql)));
+    QScopedPointer<CdmQuery> pQuery(dynamic_cast<CdmQuery*>(CdmQueryBuilder::ExecuteQuery(qstrWql)));
     cTime.finishedTask("Executed Query");
     QVERIFY(!pQuery.isNull());
     QVERIFY(pQuery->GetResultCount() == 1);

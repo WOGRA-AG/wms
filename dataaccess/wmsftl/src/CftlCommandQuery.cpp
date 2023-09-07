@@ -24,7 +24,7 @@
 #include "CdmClass.h"
 #include "CdmMember.h"
 #include "CdmQueryElement.h"
-#include "CdmQueryEnhanced.h"
+#include "CdmQuery.h"
 #include "CdmDataAccessHelper.h"
 
 // WMS ODBC Includes
@@ -84,11 +84,11 @@ qint64 CftlCommandQuery::ExecuteQueryP()
     QString qstrSql = GenerateSql();
     QSqlQuery cQSqlQuery;
     int iColumnCount = 0;
-    CdmQueryEnhanced* pQuery = nullptr;
+    CdmQuery* pQuery = nullptr;
 
     if (m_rpCdmQuery->HasResultElements())
     {
-        pQuery = dynamic_cast<CdmQueryEnhanced*>(m_rpCdmQuery);
+        pQuery = dynamic_cast<CdmQuery*>(m_rpCdmQuery);
 
         if (CHKPTR(pQuery))
         {
@@ -144,7 +144,7 @@ bool CftlCommandQuery::IsObjectNeededInResult()
 {
     if (m_rpCdmQuery->HasResultElements())
     {
-        CdmQueryEnhanced* pQuery = dynamic_cast<CdmQueryEnhanced*>(m_rpCdmQuery);
+        CdmQuery* pQuery = dynamic_cast<CdmQuery*>(m_rpCdmQuery);
 
         if (pQuery)
         {
@@ -350,7 +350,7 @@ QString CftlCommandQuery::AddSelectMembers()
 
     if (m_rpCdmQuery->HasResultElements())
     {
-        CdmQueryEnhanced* pQuery = dynamic_cast<CdmQueryEnhanced*>(m_rpCdmQuery);
+        CdmQuery* pQuery = dynamic_cast<CdmQuery*>(m_rpCdmQuery);
 
         if (CHKPTR(pQuery))
         {
@@ -551,7 +551,7 @@ QString CftlCommandQuery::GetJoinsAsString()
     return qstrJoins;
 }
 
-QString CftlCommandQuery::GetMemberFieldName(QString p_qstrKeyname, CdmQueryEnhanced* pQuery)
+QString CftlCommandQuery::GetMemberFieldName(QString p_qstrKeyname, CdmQuery* pQuery)
 {
    QString qstrRet;
 
@@ -606,7 +606,7 @@ void CftlCommandQuery::AddFunctionToSelectMember(CdmQueryResultElement* pCdmResu
     }
 }
 
-QString CftlCommandQuery::GetReferenceMemberFieldName(QString p_qstrKeyname, CdmQueryEnhanced* pQuery)
+QString CftlCommandQuery::GetReferenceMemberFieldName(QString p_qstrKeyname, CdmQuery* pQuery)
 {
    QString qstrRet;
 

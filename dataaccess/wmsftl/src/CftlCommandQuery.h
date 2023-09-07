@@ -48,9 +48,9 @@ private:
     QString GenerateClassQuery();
 
     QString AddSelectMembers();
-    QString GetMemberFieldName(QString p_qstrKeyname, CdmQueryEnhanced* pQuery);
+    QString GetMemberFieldName(QString p_qstrKeyname, CdmQuery* pQuery);
     bool IsObjectNeededInResult();
-    QString GetReferenceMemberFieldName(QString p_qstrKeyname, CdmQueryEnhanced *pQuery);
+    QString GetReferenceMemberFieldName(QString p_qstrKeyname, CdmQuery *pQuery);
     void AddFunctionToSelectMember(CdmQueryResultElement* pCdmResultElement, QString& qstrRet);
 public:
     CftlCommandQuery(CftlDataAccess* p_pCdbDataAccess, CdmQuery* p_pCdmQuery);

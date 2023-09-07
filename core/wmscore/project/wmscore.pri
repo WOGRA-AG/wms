@@ -52,7 +52,7 @@ HEADERS += \
     ../Src/DataManagement/CdmQuery.h \
     ../Src/DataManagement/CdmQueryBuilder.h \
     ../Src/DataManagement/CdmQueryElement.h \
-    ../Src/DataManagement/CdmQueryEnhanced.h \
+    ../Src/DataManagement/CdmQuery.h \
     ../Src/DataManagement/CdmQueryResultElement.h \
     ../Src/DataManagement/CdmQueryResultObject.h \
     ../Src/DataManagement/CdmRights.h \
@@ -185,7 +185,7 @@ SOURCES += ../Src/DataManagement/CdmValueBinaryDocument.cpp \
     ../Src/DataManagement/CdmQuery.cpp \
     ../Src/DataManagement/CdmQueryBuilder.cpp \
     ../Src/DataManagement/CdmQueryElement.cpp \
-    ../Src/DataManagement/CdmQueryEnhanced.cpp \
+    ../Src/DataManagement/CdmQuery.cpp \
     ../Src/DataManagement/CdmQueryResultElement.cpp \
     ../Src/DataManagement/CdmQueryResultObject.cpp \
     ../Src/DataManagement/CdmRights.cpp \

@@ -1,9 +1,6 @@
-// System and QT Includes
-#include <QStringList>
+
 
 // Own Includes
-#include "wmsdefines.h"
-#include "CdmLogging.h"
 #include "CdmQueryEnhanced.h"
 
 

@@ -3,7 +3,7 @@
 #include "CdmContainerManager.h"
 #include "CdmObjectContainer.h"
 #include "CdmClass.h"
-#include "CdmQueryEnhanced.h"
+#include "CdmQuery.h"
 #include "CwmsReportManager.h"
 
 
@@ -34,7 +34,7 @@ void CwiCommandPrintContainer::Execute()
 
       if (CHKPTR(pClass))
       {
-         CdmQueryEnhanced* pQuery = nullptr;
+         CdmQuery* pQuery = nullptr;
 
          if (lObjectId <= 0)
          {

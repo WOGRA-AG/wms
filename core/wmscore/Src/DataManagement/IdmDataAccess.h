@@ -42,7 +42,7 @@ class CdmClassManager;
 class CdmJournalItem;
 class QVariant;
 class QSqlDatabase;
-class CdmQueryEnhanced;
+class CdmQuery;
 class CdmSession;
 
 /*

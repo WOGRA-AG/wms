@@ -21,7 +21,7 @@
 #include "CdmObjectContainer.h"
 #include "CdmContainerManager.h"
 #include "CdmQueryBuilder.h"
-#include "CdmQueryEnhanced.h"
+#include "CdmQuery.h"
 
 // own Includes
 #include "CwmsTranslator.h"
@@ -58,7 +58,7 @@ void CwmsTranslator::LoadTranslations(CwmsApplication p_cApp)
                            pCdmList->GetKeyname() + "\" where Language = \"" +
                            qstrLanguage + "\"";
 
-         CdmQueryEnhanced* pCdmQuery = (CdmQueryEnhanced*)CdmQueryBuilder::ExecuteQuery(qstrWql);
+         CdmQuery* pCdmQuery = (CdmQuery*)CdmQueryBuilder::ExecuteQuery(qstrWql);
 
          if (pCdmQuery)
          {

@@ -12,7 +12,6 @@
 class CsaObjectContainer;
 class CsaObject;
 class CsaScheme;
-class CdmQueryEnhanced;
 class CdmQuery;
 
 

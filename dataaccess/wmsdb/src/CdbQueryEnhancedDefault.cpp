@@ -5,7 +5,7 @@
 
 // WMS Includes
 #include "CdmLogging.h"
-#include "CdmQueryEnhanced.h"
+#include "CdmQuery.h"
 #include "CdmClass.h"
 #include "CdmMember.h"
 #include "CdmQueryElement.h"
@@ -31,9 +31,9 @@
 
 static int MaxObjectIdComplexity = 5;
 
-CdbQueryEnhancedDefault::CdbQueryEnhancedDefault(CdmQueryEnhanced* p_pCdmQueryEnhanced,
+CdbQueryEnhancedDefault::CdbQueryEnhancedDefault(CdmQuery* p_pCdmQuery,
                                          CdbDataAccess* p_pCdbDataAccess)
-    : m_rpCdmQuery(p_pCdmQueryEnhanced),
+    : m_rpCdmQuery(p_pCdmQuery),
       m_rpCdbDataAccess(p_pCdbDataAccess),
       m_iKeynameCount(0),
       m_qmKeynames(),

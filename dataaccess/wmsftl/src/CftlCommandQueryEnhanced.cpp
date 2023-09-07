@@ -16,7 +16,7 @@
 
 // WMS Includes
 #include "CdmLogging.h"
-#include "CdmQueryEnhanced.h"
+#include "CdmQuery.h"
 #include "CdmClass.h"
 #include "CdmMember.h"
 #include "CdmQueryElement.h"
@@ -33,13 +33,13 @@
 /** +-=---------------------------------------------------------Do 11. Nov 14:13:25 2010----------*
  * @method  CftlQueryEnhanced::CftlQueryEnhanced           // public                            *
  * @return                                                   //                                   *
- * @param   CdmQueryEnhanced* p_pCdmQueryEnhanced            //                                   *
+ * @param   CdmQuery* p_pCdmQuery            //                                   *
  * @param   CftlDataAccess* p_pCftlDataAccess              //                                   *
  * @comment                                                                                       *
  *----------------last changed: --------------------------------Do 11. Nov 14:13:25 2010----------*/
-CftlCommandlQueryEnhanced::CftlCommandlQueryEnhanced(CdmQueryEnhanced* p_pCdmQueryEnhanced,
+CftlCommandlQueryEnhanced::CftlCommandlQueryEnhanced(CdmQuery* p_pCdmQuery,
                                        CftlDataAccess* p_pCftlDataAccess)
-: m_rpCdmQuery(p_pCdmQueryEnhanced),
+: m_rpCdmQuery(p_pCdmQuery),
   m_rpCftlDataAccess(p_pCftlDataAccess),
   m_iKeynameCount(0)
 {

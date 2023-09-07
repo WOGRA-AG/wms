@@ -11,7 +11,7 @@
 #include "CdmSessionManager.h"
 #include "CdmValue.h"
 #include "CdmClass.h"
-#include "CdmQueryEnhanced.h"
+#include "CdmQuery.h"
 #include "CdmQueryBuilder.h"
 
 
@@ -109,7 +109,7 @@ void CwmsObjectChoiceComboBox::SetContainerAndDisplayValue(CdmObjectContainer* p
       }
       else
       {
-         CdmQueryEnhanced cCdmQuery;
+         CdmQuery cCdmQuery;
          cCdmQuery.DeleteResultElements();
          cCdmQuery.SetContainer(p_pContainer);
 
@@ -209,7 +209,7 @@ void CwmsObjectChoiceComboBox::SetContainerAndDisplayValueByWql(QString qstrWql)
 {
     if(!qstrWql.isEmpty())
     {
-       QScopedPointer<CdmQueryEnhanced> pQuery(dynamic_cast<CdmQueryEnhanced*> (CdmQueryBuilder::ExecuteQuery(qstrWql)));
+       QScopedPointer<CdmQuery> pQuery(dynamic_cast<CdmQuery*> (CdmQueryBuilder::ExecuteQuery(qstrWql)));
 
        if (CHKPTR(pQuery))
        {

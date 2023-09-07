@@ -1,16 +1,12 @@
 // System and Qt Includes
 
-// WMS Commons Includes
-#include "wmsdefines.h"
-
 // own Includes
-#include "CdmQueryEnhanced.h"
+#include "CdmQuery.h"
 #include "CdmClass.h"
 #include "CdmMember.h"
 #include "CdmObject.h"
 #include "CdmObjectContainer.h"
 #include "CsaObject.h"
-#include "CsaModelElement.h"
 #include "CsaClass.h"
 #include "CsaObjectContainer.h"
 #include "CsaFactory.h"
@@ -20,7 +16,7 @@
 CsaQuery::CsaQuery()
 : m_pQuery(nullptr)
 {
-   m_pQuery = new CdmQueryEnhanced(this);
+   m_pQuery = new CdmQuery(this);
    m_pQuery->setParent(this);
 }
 
@@ -253,7 +249,7 @@ QVariant CsaQuery::getDetailedVariant()
 {
     if (m_pQuery->HasResultElements())
     {
-      return dynamic_cast<CdmQueryEnhanced*>(m_pQuery)->GetResultElementsAsVariant();
+      return m_pQuery->GetResultElementsAsVariant();
     }
     else
     {

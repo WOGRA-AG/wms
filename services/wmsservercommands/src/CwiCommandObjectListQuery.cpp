@@ -1,6 +1,6 @@
 #include "CwiCommandObjectListQuery.h"
 #include "CdmQuery.h"
-#include "CdmQueryEnhanced.h"
+#include "CdmQuery.h"
 
 
 
@@ -26,7 +26,7 @@ void CwiCommandObjectListQuery::Execute()
 
        if (qvHash["EnhancedQuery"].toBool())
        {
-          pCdmQuery = new CdmQueryEnhanced(qvHash);
+          pCdmQuery = new CdmQuery(qvHash);
        }
        else
        {

@@ -5,7 +5,7 @@
 
 //WMS Core Includes
 #include "CdmLogging.h"
-#include "CdmQueryEnhanced.h"
+#include "CdmQuery.h"
 #include "CdmClass.h"
 #include "CdmContainerManager.h"
 #include "CdmObjectContainer.h"

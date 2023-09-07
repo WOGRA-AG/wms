@@ -23,7 +23,7 @@
 #include "CdmObject.h"
 #include "CdmObjectContainer.h"
 #include "CdmQueryBuilder.h"
-#include "CdmQueryEnhanced.h"
+#include "CdmQuery.h"
 #include "CdmContainerManager.h"
 #include "CdmSessionManager.h"
 
@@ -679,7 +679,7 @@ QStringList CwmsApplicationManager::GetApplicationList()
 
    QString qstrWql = "select Name from TechnicalApplications";
 
-   CdmQueryEnhanced* pQuery = (CdmQueryEnhanced*)CdmQueryBuilder::ExecuteQuery(qstrWql);
+   CdmQuery* pQuery = CdmQueryBuilder::ExecuteQuery(qstrWql);
 
    if (pQuery)
    {

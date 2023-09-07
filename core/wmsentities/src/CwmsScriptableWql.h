@@ -16,7 +16,7 @@
 
 // Forwards
 class CdmQuery;
-class CdmQueryEnhanced;
+class CdmQuery;
 
 
 // TypeDefs

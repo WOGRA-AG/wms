@@ -3,7 +3,7 @@
 
 // WMS Includes
 #include "CdmLogging.h"
-#include "CdmQueryEnhanced.h"
+#include "CdmQuery.h"
 
 #include "CwmsView.h"
 #include "CwmsQueryModelExportCsv.h"
@@ -35,7 +35,7 @@ void CwmsQueryResultViewer::SetQuery(QString p_qstrQuery)
     CwmsTreeWidgetHelper::ResizeColumnsToContent(m_pqtwResult);
 }
 
-void CwmsQueryResultViewer::SetQuery(CdmQueryEnhanced* p_pQuery)
+void CwmsQueryResultViewer::SetQuery(CdmQuery* p_pQuery)
 {
     DELPTR(m_pModel)
     m_pModel = new CdmQueryModel();

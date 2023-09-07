@@ -368,7 +368,7 @@ void CwmsApplicationModuleEditor::SaveData(bool p_bNew)
         if (p_bNew)
         {
             QString qstrWql ("select max(Position) from \""+ m_cModule.GetObject()->GetObjectContainer()->GetKeyname() + "\"");
-            CdmQueryEnhanced* pQuery = static_cast<CdmQueryEnhanced*>(CdmQueryBuilder::ExecuteQuery(qstrWql));
+            CdmQuery* pQuery = static_cast<CdmQuery*>(CdmQueryBuilder::ExecuteQuery(qstrWql));
 
             if (CHKPTR(pQuery))
             {

@@ -21,7 +21,7 @@
 // System and QT Includes
 
 // WMS Includes
-#include "CdmQueryEnhanced.h"
+#include "CdmQuery.h"
 #include "CdmQueryModel.h"
 
 // Own Includes
